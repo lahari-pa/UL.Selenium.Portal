@@ -1,4 +1,4 @@
-@Shared
+﻿@Shared
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:DistributorRequestUPCSection
@@ -645,31 +645,97 @@ Scenario: [57983] Lubricant, Multi-Purpose, Not for Personal Use (RU000674) 4L
 Scenario: [57985] Footwear or Leather Care Product - Aerosol (RU000744) - Testing New Flow Update
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Footwear or Leather Care Product - Aerosol
-	Then I save the product information as: TestCase57985
-	Then I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-	Then I call Shared Step 213391(Physical and Chemical Properties (Applicable Only to Flow 6-A Type of Products) - Primary Physical State (AEROSOL ONLY) / Secondary Physical State (ANY)):
-		| Section                    | do not have exact data | Value                                                                                                 |
-		| Primary Physical State     |                        | Aerosol                                                                                               |
-		| Primary State Options      |                        | Aerosol |
-		| Secondary Physical State   |                        | Solid spray                                                                                           |
-		| pH                         |  Yes                   | Not tested/Unknown                                                                                    |
-		| has a flammable propellant |                        | This product is classified as a D001 Hazardous Waste under RCRA (as per Section 13 or 15 of the SDS). |
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| CASNumber	     | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| 1174921-73-3   | 37.5    | false               | false       |            |
-		| 106-97-8       | 25.5    | false               | false       |            |
-		| 74-98-6        | 25.5    | false               | false       |            |
-		| 141-78-6       | 11.5    | false               | false       |            |
-	Then I call Shared Step 57571b (Enter Regulatory Information - Not Prop 65):
-		| TSCA																		                  | Prop 65 |
-		| This product is subject to and complies with TSCA chemical Inventory listing requirements.  | No      |
-	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
-	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
-	Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)
-		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |
-		| No                                       | 75                    | 15                         | Yes            |
+
+	 # ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+    Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
+
+	# ====== And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Footwear or Leather Care Product - Aerosol ====== #
+    And I should see the The Product Page
+    And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Footwear or Leather Care Product - Aerosol
+    And In the Product Section, set the option in section: 'Type of Product (select)' to: Footwear or Leather Care Product - Aerosol
+    And in the The Product page I click Continue
+    Then I save the product information as: TestCase57985
+	Then I generate a random UPC number and save as: UPC57985
+
+	# ====== Given I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue) ====== #
+	# ====== | Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale | ====== #
+	# ====== | No                                                             | No                           | No                     | No                  | ====== #
+	And I should see the Product Information Page
+	And In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
+	And In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
+	And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	And In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	And in the Product Information page I click Continue
+
+	# ====== Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path) ====== #
+    Given In the Regulatory Documents to Provide Section, set the option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+    Given in the Regulatory Documents to Provide page I click Continue
+
+    # ====== Then I call Shared Step 213391(Physical and Chemical Properties (Applicable Only to Flow 6-A Type of Products) - Primary Physical State (AEROSOL ONLY) / Secondary Physical State (ANY)): ====== #
+	# ====== 	| Section                    | do not have exact data | Value                                                                                                 | ====== #
+	# ====== 	| Primary Physical State     |                        | Aerosol                                                                                               | ====== #
+	# ====== 	| Primary State Options      |                        | Aerosol                                                                                               | ====== #
+	# ====== 	| Secondary Physical State   |                        | Solid spray                                                                                           | ====== #
+	# ====== 	| pH                         |  Yes                   | Not tested/Unknown                                                                                    | ====== #
+	# ====== 	| has a flammable propellant |                        | This product is classified as a D001 Hazardous Waste under RCRA (as per Section 13 or 15 of the SDS). | ====== #
+	And I should see the Physical and Chemical Properties Page
+    And In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Aerosol
+    And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid spray
+	And In the Physical and Chemical Properties Section, for section: 'pH' select the checkbox option: 'I do not have exact pH data available to me'
+	And In the Physical and Chemical Properties Section, set the option in section: 'pH' to: Not tested/Unknown
+	And In the Physical and Chemical Properties Section, set the option in section: 'When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then' to: This product is classified as a D001 Hazardous Waste under RCRA (as per Section 13 or 15 of the SDS).
+	And in the Physical and Chemical Properties page I click Continue
+
+	# ====== And I call Shared Step 57570 (Enter Ingredients) and add the following ingredients: ====== #
+    # ======		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName | ====== #
+    # ======		| Acetic Acid  | 100      | false               | false       |            | ====== #
+    And I should see the Ingredients Page
+    When in the Ingredients page I click Continue
+    Then I should see the ingredients error message
+    Then In the Ingredients section, add the following ingredients:
+    		| SearchType | SearchValue | SearchText    | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+    		| CAS number | 1174921-73-3 | 1174921-73-3 | 37.5    | False               | false         | false       |
+			| CAS number | 106-97-8     | 106-97-8     | 25.5    | False               | false         | false       |
+			| CAS number | 74-98-6      | 74-98-6      | 25.5    | False               | false         | false       |
+			| CAS number | 141-78-6     | 141-78-6     | 11.5    | False               | false         | false       |
+    And in the Ingredients page I click Continue
+
+	# ====== Then I call Shared Step 57571b (Enter Regulatory Information - Not Prop 65): ====== #
+	# ====== 	| TSCA																		                  | Prop 65 | ====== #
+	# ====== 	| This product is subject to and complies with TSCA chemical Inventory listing requirements.  | No      | ====== #
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Given In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Given In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Given in the Inventory Status, Prop 65 (US) page I click Continue
+
+	# ====== Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path) ====== #
+    Then I should see the Transportation Details 1 Page
+    Given In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Yes
+    Given In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: DOT
+    Given In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping with limited quantity
+    Given in the Transportation Details 1 page I click Continue
+
+	# ====== Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path) ====== #
+    Then I should see the U. S. Department of Transportation (DOT) Classification Page
+    And In the International Marine (IMDG) Classification Section, set the option in section: 'UN Number': to: UN1950
+    And In the International Marine (IMDG) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
+    And In the International Marine (IMDG) Classification Section, set the option in section: 'Technical Name (if applicable)': to: My Safe Product
+    And In the International Marine (IMDG) Classification Section, set the option in section: 'Hazard Class (select)': to: 2.1
+    And In the International Marine (IMDG) Classification Section, set the option in section: 'Packing Group': to: None
+    Given in the U. S. Department of Transportation (DOT) Classification page I click Continue
+
+	# ====== Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)  ====== #
+	# ====== 		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |  ====== #
+	# ====== 		| No                                       | 2                     | 2                          | Yes           |  ====== #
+	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.': to: No
+	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB': to: 75
+	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule': to: 15
+	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?': to: Yes
+	Given I click continue
 	Then I confirm that I see the following CARB value: 75
 	Then I confirm that I see the following OTC Model Rule value: 15
 	And I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
@@ -683,22 +749,59 @@ Scenario: [57985] Footwear or Leather Care Product - Aerosol (RU000744) - Testin
 	| Footwear or Leather Care Product - Aerosol | 75                   | CARB limit           |
 	And The VOC Summary page contains the statement with the text: Does not exceed the limits specified in the California Consumer Products Regulation
 	And The VOC Summary page contains the statement with the text: Does not exceed the limits specified by the Ozone Transport Commission
+
 	Then I call Shared Step 57801 (Confirm VOC Summary step shown and VOC analysis date is shown - Happy Path)
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
-	Then I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
-	Given I call Shared Step 60567 (Upload Product Label only)
+	Given In the Volatile Organic Compound Summary Section, for 'Your acknowledgement of this registration includes that your product..' set 'Yes, I Acknowledge'
+	Given in the Volatile Organic Compound Summary page I click Continue
+
+	# ====== Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path) ====== #
+	Given in the Retailer page I click Continue
+
+	# ====== Given I call Shared Step 60567 (Upload Product Label only) ====== #
+	Given In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Given in the New Product page I click Continue
+
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
-	Given I call Shared Step 221015 (Summary Tab - Product's Data Verification When Request to Author is NOT Selected in the Regulatory Documents to Provide Page (Applies Only to Footwear or Leather Care Product Aerosol (RU000744))
-	| Section                                    | Value                                                                                                                                                                                |
-	| Type of Product                            | Footwear or Leather Care Product - Aerosol                                                                                                                                           |
-	| FIFRA 25(b) Exempt						 | Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial) |
-	| UN Number                                  | UN1950                                                                                                                                                                               |
-	| Proper Shipping Name                       | Aerosols                                                                                                                                                                             |
-	| Hazard Class                               | 2.1                                                                                                                                                                                  |
-	| Packing Group                              | None                                                                                                                                                                                 |
-	| CARB									     | 75                                                                                                                                                                                   |
-	| OTC Model Rule							 | 15                                                                                                                                                                                   |
+
+	Given In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
+	Given In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
+	Given In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
+	Given In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
+	Given In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor' to: Orange
+	Given In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor Threshold' to: No data available
+	Given In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Product's Dispensing Method' select option: Aerosol
+	Given In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Partition Coefficient' enter text: 41.3005
+	Then in the Safety Data Sheet Authoring - Additional Data (Optional) page I click Continue
+
+	# ====== And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comments Text ====== #
+    And I should see the Optional Comments Page
+    And I enter the following into the comments field: Comments Text
+    Then in the Optional Comments page I click Continue
+
+	# ====== Given I call Shared Step 221015 (Summary Tab - Product's Data Verification When Request to Author is NOT Selected in the Regulatory Documents to Provide Page (Applies Only to Footwear or Leather Care Product Aerosol (RU000744)) ====== #
+	# ====== | Section                                    | Value                                                                                                                                                                                | ====== #
+	# ====== | Type of Product                            | Footwear or Leather Care Product - Aerosol                                                                                                                                           | ====== #
+	# ====== | FIFRA 25(b) Exempt						  | Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial) | ====== #
+	# ====== | UN Number                                  | UN1950                                                                                                                                                                               | ====== #
+	# ====== | Proper Shipping Name                       | Aerosols                                                                                                                                                                             | ====== #
+	# ====== | Hazard Class                               | 2.1                                                                                                                                                                                  | ====== #
+	# ====== | Packing Group                              | None                                                                                                                                                                                 | ====== #
+	# ====== | CARB									      | 75                                                                                                                                                                                   | ====== #
+	# ====== | OTC Model Rule							  | 15                                                                                                                                                                                   | ====== #
+	Given I should see the Data Acceptance Page
+	Given In the Data Acceptance Section, click 'Summary' button
+	Given I switch to the tab with Data Summary page
+	Given In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Footwear or Leather Care Product - Aerosol
+	Given In the Summary Page, the 'FIFRA 25(b) Exempt' section should be showing the following value: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
+	Given In the Summary Page, the 'UN Number' section should be showing the following value: UN1950
+	Given In the Summary Page, the 'Proper Shipping Name' section should be showing the following value: Aerosols
+	Given In the Summary Page, the 'Hazard Class' section should be showing the following value: 2.1
+	Given In the Summary Page, the 'Packing Group' section should be showing the following value: None
+	Given In the Summary Page, the 'CARB' section should be showing the following value: 75
+	Given In the Summary Page, the 'OTC Model Rule' section should be showing the following value: 15
+	Given I close the tab with Data Summary page
+    Given I should see the Data Acceptance Page
+
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57985
 
 @TestCase:57988
