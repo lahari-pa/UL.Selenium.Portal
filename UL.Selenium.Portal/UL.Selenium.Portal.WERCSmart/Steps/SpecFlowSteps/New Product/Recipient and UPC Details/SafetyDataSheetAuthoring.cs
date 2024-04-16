@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient_and_UPC_Details
 {
@@ -80,7 +81,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			new Steps_Prototype().SetTheSectionOptionTo(section, text);
 		}
 
-	
+		[StepDefinition(@"In the Safety Data Sheet Authoring - Additional Data \(Optional\), for the section: 'Product's Dispensing Method' select option: (Aerosol|Bag-On-Value|Pump|None of the Above/Not Applicable)")]
+		public void EnterProductDispensingMethod(string option)
+		{
+			string section = "Product's Dispensing Method";
+			new StepsNewProduct().SetTheSectionOptionTo("Product's Dispensing Method", option);
+		}
+
 
 
 	}

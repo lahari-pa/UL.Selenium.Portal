@@ -1,4 +1,4 @@
-@Shared
+﻿@Shared
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:DistributorRequestUPCSection
@@ -687,8 +687,8 @@ Scenario: [57985] Footwear or Leather Care Product - Aerosol (RU000744) - Testin
     And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid spray
 	And In the Physical and Chemical Properties Section, for section: 'pH' select the checkbox option: 'I do not have exact pH data available to me'
 	And In the Physical and Chemical Properties Section, set the option in section: 'pH' to: Not tested/Unknown
-	And In the Physical and Chemical Properties Section, set the option in section: 'When the product has a flammable propellant, or contains ingredients with a flash point below 60?C then' to: This product is classified as a D001 Hazardous Waste under RCRA (as per Section 13 or 15 of the SDS).
-    And in the Physical and Chemical Properties page I click Continue
+	And In the Physical and Chemical Properties Section, set the option in section: 'When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then' to: This product is classified as a D001 Hazardous Waste under RCRA (as per Section 13 or 15 of the SDS).
+	And in the Physical and Chemical Properties page I click Continue
 
 	# ====== And I call Shared Step 57570 (Enter Ingredients) and add the following ingredients: ====== #
     # ======		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName | ====== #
@@ -697,11 +697,11 @@ Scenario: [57985] Footwear or Leather Care Product - Aerosol (RU000744) - Testin
     When in the Ingredients page I click Continue
     Then I should see the ingredients error message
     Then In the Ingredients section, add the following ingredients:
-    		| SearchType     | SearchValue | SearchText    | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-    		| component name | 1174921-73-3 | 1174921-73-3 | 37.5    | False               | false         | false       |
-			| component name | 106-97-8     | 106-97-8     | 25.5    | False               | false         | false       |
-			| component name | 74-98-6      | 74-98-6      | 25.5    | False               | false         | false       |
-			| component name | 141-78-6     | 141-78-6     | 11.5    | False               | false         | false       |
+    		| SearchType | SearchValue | SearchText    | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+    		| CAS number | 1174921-73-3 | 1174921-73-3 | 37.5    | False               | false         | false       |
+			| CAS number | 106-97-8     | 106-97-8     | 25.5    | False               | false         | false       |
+			| CAS number | 74-98-6      | 74-98-6      | 25.5    | False               | false         | false       |
+			| CAS number | 141-78-6     | 141-78-6     | 11.5    | False               | false         | false       |
     And in the Ingredients page I click Continue
 
 	# ====== Then I call Shared Step 57571b (Enter Regulatory Information - Not Prop 65): ====== #
@@ -735,6 +735,7 @@ Scenario: [57985] Footwear or Leather Care Product - Aerosol (RU000744) - Testin
 	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB': to: 75
 	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule': to: 15
 	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?': to: Yes
+	Given I click continue
 	Then I confirm that I see the following CARB value: 75
 	Then I confirm that I see the following OTC Model Rule value: 15
 	And I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
@@ -750,6 +751,8 @@ Scenario: [57985] Footwear or Leather Care Product - Aerosol (RU000744) - Testin
 	And The VOC Summary page contains the statement with the text: Does not exceed the limits specified by the Ozone Transport Commission
 
 	Then I call Shared Step 57801 (Confirm VOC Summary step shown and VOC analysis date is shown - Happy Path)
+	Given In the Volatile Organic Compound Summary Section, for 'Your acknowledgement of this registration includes that your product..' set 'Yes, I Acknowledge'
+	Given in the Volatile Organic Compound Summary page I click Continue
 
 	# ====== Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path) ====== #
 	Given in the Retailer page I click Continue
@@ -759,6 +762,16 @@ Scenario: [57985] Footwear or Leather Care Product - Aerosol (RU000744) - Testin
 	Given in the New Product page I click Continue
 
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+
+	Given In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
+	Given In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
+	Given In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
+	Given In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
+	Given In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor' to: Orange
+	Given In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor Threshold' to: No data available
+	Given In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Product's Dispensing Method' select option: Aerosol
+	Given In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Partition Coefficient' enter text: 41.3005
+	Then in the Safety Data Sheet Authoring - Additional Data (Optional) page I click Continue
 
 	# ====== And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comments Text ====== #
     And I should see the Optional Comments Page
