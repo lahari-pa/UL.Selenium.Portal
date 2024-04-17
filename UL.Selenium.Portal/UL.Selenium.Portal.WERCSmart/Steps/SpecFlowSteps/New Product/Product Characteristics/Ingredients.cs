@@ -12,10 +12,10 @@ using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
-
+(@"In the Ingredients page, I (should|should not) see the following ingredients error messag
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {
-	[Binding, Scope(Tag = "Ingredients")]
+	[Binding, Scope(Tag = "Ingredients ")]
 	class Ingredients
 	{
 		[StepDefinition(@"In the Ingredients Section, set the option in section: 'Ingredient Reference Number (Optional) to: (.*)")]
@@ -382,14 +382,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			this.IngredientsModalIsIsNotDisplayed("is not");
 			Report.StartSubStep($"In the Ingredients Section ingredients table, confirm row with {searchType}: {searchText} is not displayed");
 			this.IngredientsTableRowIsIsNotDisplayed(searchType, searchText, "is not");
-		}
-
-		[StepDefinition(@"In the Ingredients page, I (should|should not) see the following ingredients error message")]
-		public void IngredientsTableAddFollowingIngredients(string shouldOrShouldNot)
-		{
-			StepsIngredients stepsIngredients = new StepsIngredients();
-			Report.StartSubStep($"Then I check if the error message is showing");
-			stepsIngredients.IngredientsErrorMessageShowing(shouldOrShouldNot);
 		}
 
 			/// Copy and paste the following tables to create the table structure as needed 
