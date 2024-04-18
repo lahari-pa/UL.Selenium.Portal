@@ -17,6 +17,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ProductIncludesBattery
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
+@RegulatoryDocumentsToProvide
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOC_Summary
 @PhysicalAndChemicalProp
@@ -907,10 +908,11 @@ Scenario: [57991] Glue sticks for glue guns- (RU000300) - 4S
 	Given I upload PDF document to Upload SDS (Optional) field
     Given in the Regulatory Documents to Provide page I click Continue
 
-	# ====== Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue) ====== #
+	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
     And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
 	And In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	And In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	And in the Physical and Chemical Properties page I click Continue
 
 	# ====== And I call Shared Step 57570 (Enter Ingredients) and add the following ingredients: ====== #
