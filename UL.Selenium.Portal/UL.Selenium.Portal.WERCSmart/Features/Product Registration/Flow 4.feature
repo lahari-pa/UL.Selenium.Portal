@@ -16,6 +16,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ElectronicEquipment
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ProductIncludesBattery
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOC_Summary
 @PhysicalAndChemicalProp
@@ -942,7 +943,7 @@ Scenario: [57990] Footwear or Leather Care Product - Solid (RU000745)
 
 	# ====== And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comments Text ====== #
     And I should see the Optional Comments Page
-    And I enter the following into the comments field: Comments Text
+    And In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: Comments Text
     Then in the Optional Comments page I click Continue
 
 	# ====== Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Footwear or Leather Care Product - Solid ====== #
