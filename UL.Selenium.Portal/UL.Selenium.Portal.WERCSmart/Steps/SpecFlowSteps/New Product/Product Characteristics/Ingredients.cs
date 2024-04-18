@@ -12,10 +12,10 @@ using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
-(@"In the Ingredients page, I (should|should not) see the following ingredients error messag
+
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {
-	[Binding, Scope(Tag = "Ingredients ")]
+	[Binding, Scope(Tag = "Ingredients")]
 	class Ingredients
 	{
 		[StepDefinition(@"In the Ingredients Section, set the option in section: 'Ingredient Reference Number (Optional) to: (.*)")]
