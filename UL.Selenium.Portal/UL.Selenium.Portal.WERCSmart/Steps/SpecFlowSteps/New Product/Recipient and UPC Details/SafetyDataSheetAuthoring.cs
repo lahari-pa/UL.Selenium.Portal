@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient_and_UPC_Details
 {
@@ -18,14 +19,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 
-
 		[StepDefinition(@"In the Safety Data Sheet Authoring - Additional Data \(Optional\), for the section: 'Autoignition Temperature \(°C\)' enter text: (.*)")]
 		public void EnterAutoignitionTemperature(string text)
 		{
 			string section = "Autoignition Temperature (°C)";
 			new Steps_Prototype().SetTheSectionOptionTo(section, text);
 		}
-
 
 		[StepDefinition(@"In the Safety Data Sheet Authoring - Additional Data \(Optional\), for the section: 'Minimum Ignition Energy \(mJ\)' enter text: (.*)")]
 		public void EnterMiniumIgnitionEngergy(string text)
@@ -82,7 +81,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			new Steps_Prototype().SetTheSectionOptionTo(section, text);
 		}
 
-	
+		[StepDefinition(@"In the Safety Data Sheet Authoring - Additional Data \(Optional\), for the section: 'Product's Dispensing Method' select option: (Aerosol|Bag-On-Value|Pump|None of the Above/Not Applicable)")]
+		public void EnterProductDispensingMethod(string option)
+		{
+			string section = "Product's Dispensing Method";
+			new StepsNewProduct().SetTheSectionOptionTo("Product's Dispensing Method", option);
+		}
+
 
 
 	}

@@ -1,4 +1,4 @@
-@Shared
+﻿@Shared
 @LandingPage
 @Login
 @Homepage
@@ -190,7 +190,7 @@ Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU0
 	And I should see the Ingredients Page
 	When in the Ingredients page I click Continue
 	Then I should see the ingredients error message
-	And The ingredients error message should be showing: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
+	And The ingredients error message should be showing: Formulation must total or exceed 100%.
     Then In the Ingredients section, add the following ingredients:
 		| SearchType     | SearchText | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
 		| component name | Butane      |  100    | false                | false        |   Water    |
@@ -215,12 +215,8 @@ Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU0
 	And In the International Marine (IMDG) Classification Section, set the option in section: 'Technical Name (if applicable)': to: My Safe Product
 	And In the International Marine (IMDG) Classification Section, set the option in section: 'Hazard Class (select)': to: 2
 	And In the International Marine (IMDG) Classification Section, set the option in section: 'Packing Group': to: None
+	Given In the International Marine (IMDG) Classification Section, set the option in section: 'Product has a boiling point of <=35⁰C and flash point of >60⁰C. Packing Group selected is not consistent with this data. Verify the data and transportation packing group. If problem persists, please contact Support.': to: Based on defined viscosity parameters, this product is classified as PG III.
 	Given in the International Marine (IMDG) Classification page I click Continue
-
-		# ====== And I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path) ====== #
-	Given I should see the Transportation Details 2 Page
-	And In the Transportation Details 2 Section, set the option in section: 'International Shipping when DOT Exemption taken?': to: I do not ship internationally and I do not know the classification
-	Given in the Transportation Details 2 page I click Continue
 
 		# ====== Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens ====== #
 	Given I should see the Retailer Page
@@ -237,9 +233,6 @@ Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU0
 
     Given I upload PDF document to Upload SDS (Optional) field
 	Then in the Additional Documents To Provide page I click Continue
-	# Additional Documents to Provide Page
-	And I should see the Additional Documents to Provide Page
-	Then in the Additional Documents to Provide page I click Continue
 
 	# Optional Reports and Documents Available for Purchase Page
 	# ====== Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment:Comment Text ====== #
@@ -248,10 +241,11 @@ Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU0
 	Then in the Optional Comments page I click Continue
 
 	# ====== Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Seasonings, Spices or Flavoring for Food - Salts (Liquid) ====== #
-    Given I should see the Data Acceptance Page
+	 Given I should see the Data Acceptance Page
 	Given I click the Summary button in the Data Acceptance window
 	Given I switch to the Data Summary page
 	Given Type of Product (select) should be showing the following option: Seasonings, Spices or Flavoring for Food - Salts (Liquid)
+	Given I close the Data Summary Tab
     Given I should see the Data Acceptance Page
 
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60738

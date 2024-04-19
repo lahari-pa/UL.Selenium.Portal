@@ -127,7 +127,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		{
 			string section = "Flash Point Testing Method Used";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
-			GeneralUtilities.Wait_for_load_finish();
 		}
 
 
