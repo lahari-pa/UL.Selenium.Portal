@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
+using UL.Automation.WebDriver.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {
@@ -16,6 +17,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			string section = "UN Number";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+			Delay.Seconds(10);
 		}
 		[StepDefinition(@"In the International Marine \(IMDG\) Classification Section, set the option in section: 'Proper Shipping Name': to: (.*)")]
 		public void SetProperShippingNameIMDG(string option)
