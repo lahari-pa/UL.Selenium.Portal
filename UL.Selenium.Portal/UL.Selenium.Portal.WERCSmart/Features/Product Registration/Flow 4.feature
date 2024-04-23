@@ -1160,12 +1160,7 @@ Scenario: [57991] Glue sticks for glue guns- (RU000300) - 4S
 	# ====== Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC57991, container type: Plastic Container and size: 13.2 ====== #
 	And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
-	Then I add the following into the UPC Fields
-	| Field         | Value               |
-	| UPCNumber     | saved as UPC57991   |
-	| ContainerType | Plastic Container   |
-	| Size          | 13.2                |
-    
+	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC57991 enter Size: 13.2 and enter Container Type: Plastic Container 
 	Given I should see following container type from the drop down list
 	|Container Type|
 	|Cardboard|
