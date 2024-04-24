@@ -9,6 +9,7 @@ using UL.Automation.WebDriver.Classes;
 using TReVor.Core.Classes.Software;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.ProductTemplate;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using TReVor.Core.Classes.Software.Vault;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.Product_Template
 {
@@ -49,8 +50,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.Product_Template
 		public void ProductTemplateLoginToAccount(string alias)
 		{
 			Report.UseSubSteps = true;
-			//SoftwareCredentialBasic user = TReVor.Integrations.Classes.TReVorSettings.Credentials.GetCredential(alias);
-			SoftwareCredentialBasic user = TReVor.Integrations.Classes.TReVorSettings.VaultRecords.GetCredential(alias).ToSoftwareCredentialBasic();
+			CredentialVaultRecord user = TReVor.Integrations.Classes.TReVorSettings.VaultRecords.GetCredential(alias);
 			if (user == null)
 			{
 				Report.Failure($"Failed to find a user with alias: {alias}!");

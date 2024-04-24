@@ -14,10 +14,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ProductTemplate
 	{
 		#region Page Objects
 		protected override By ContainerElementLocator => By.XPath(@"//body[.//form[contains(@action,'WSProductTemplating')]]");
-		private IWebElement UserNameInput => this.ContainerElement.FindElement(By.Id("UserName"));
-		private IWebElement PasswordInput => this.ContainerElement.FindElement(By.Id("Password"));
-		private IWebElement PasswordResetLink => this.ContainerElement.FindElement(By.LinkText("Reset"));
-		private IWebElement NextButton => this.ContainerElement.FindElement(By.XPath(".//button[normalize-space(text())='Next']"));
+		private IWebElement UserNameInput => this.FindElement(By.Id("UserName"));
+		private IWebElement PasswordInput => this.FindElement(By.Id("Password"));
+		private IWebElement PasswordResetLink => this.FindElement(By.LinkText("Reset"));
+		private IWebElement NextButton => this.FindElement(By.XPath(".//button[normalize-space(text())='Next']"));
 		#endregion
 
 		#region Methods
