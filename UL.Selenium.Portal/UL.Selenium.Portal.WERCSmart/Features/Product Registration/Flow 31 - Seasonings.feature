@@ -192,6 +192,8 @@ Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU0
 		| CAS number | 84775-51-9  | 2       | false               | false         | Cumin, Extract     |
 		| CAS number | 84929-41-9  | 12      | false               | false         | Pepper (piper)     |
 	And in the Ingredients page I click Continue
+	Given In the Ingredients Section, I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
+	Given In the Ingredients Section, In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
 	#Given I Confirm the following error message is not visible " ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding."
 
 	Given I should see the Inventory Status, Prop 65 (US) Page
