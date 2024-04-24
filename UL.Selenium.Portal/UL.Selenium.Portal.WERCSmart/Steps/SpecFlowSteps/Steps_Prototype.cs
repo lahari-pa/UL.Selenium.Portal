@@ -495,6 +495,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsFalse(newProductpage.TableExists(tableName), $"Failed to confirm '{tableName}' table does not exist", $"Successsfully confirmed '{tableName}' table does not exist");
 			}
 		}
+
+
+		[StepDefinition(@"Click the following button in the popup video: (.*) I click the (.*) button")]
+		public void ClickTheFollowingButtonInThePopupView(string popupTitle, string buttonTitle)
+		{
+			Ingredients ingredientsObject = new Ingredients();
+			Report.IsTrue(ingredientsObject.ClickTheFollowingButtonInThePopupView(popupTitle, buttonTitle), $"Failed to click the {buttonTitle} button", $"Successfully clicked the {buttonTitle} button");
+			//Delay.Seconds(5);
+			Delay.Seconds(1);
+		}
+
+		[StepDefinition(@"I confirm the checkbox with the following text: (.*)")]
+		public void CheckACheckboxWithTheFollowingText(string text)
+		{
+			Report.IsTrue(new Ingredients().CheckACheckboxWithTheFollowingText(text),
+					$"Failed to check checkbox with the following text: '{text}'!",
+					$"Successfully checked checkbox with the following text: '{text}'!");
+			new Ingredients().CheckACheckboxWithTheFollowingText(text);
+		}
+
 		[StepDefinition(@"I confirm the checkbox with description: (.*) (should|should not) be displayed")]
 		public void IConfirmCheckboxWithDescriptionIsDisplayed(string description, string condition)
 		{
