@@ -149,7 +149,8 @@ Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU0
 
 	# ====== Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Seasonings, Spices or Flavoring for Food - Salts (Liquid) ====== #
 	Given I should see the The Product Page
-	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Seasonings, Spices or Flavoring for Food - Salts (Liquid)
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to:  Seasonings, Spices or Flavoring for Food - Salts - Solid60738
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Seasonings, Spices or Flavoring for Food - Salts - Solid
  	Given in the The Product page I click Continue
     Then I save the product information as: TestCase60738
 
