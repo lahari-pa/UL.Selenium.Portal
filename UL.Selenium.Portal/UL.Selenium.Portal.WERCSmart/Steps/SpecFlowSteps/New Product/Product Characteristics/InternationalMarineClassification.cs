@@ -17,7 +17,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			string section = "UN Number";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
-			Delay.Seconds(10);
 		}
 		[StepDefinition(@"In the International Marine \(IMDG\) Classification Section, set the option in section: 'Proper Shipping Name': to: (.*)")]
 		public void SetProperShippingNameIMDG(string option)
