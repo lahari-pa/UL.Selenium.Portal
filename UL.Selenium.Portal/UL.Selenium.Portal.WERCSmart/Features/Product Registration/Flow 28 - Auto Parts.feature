@@ -42,6 +42,7 @@ Scenario: [60673] Gasoline Container, Portable - RU001419
 
 	# ====== And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Food Item Dispensed by Compressed Gas - Dairy Topping ====== #
 	Given I should see the The Product Page
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Gasoline Container, Portable_#60673
 	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Gasoline Container, Portable
  	Given in the The Product page I click Continue
     Then I save the product information as: TestCase60673
