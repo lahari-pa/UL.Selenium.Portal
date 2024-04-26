@@ -84,6 +84,7 @@ Scenario: [60724] Condiments, Sauces - RU001454
 
 	# ====== Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Condiments, Sauces ====== #
 	Given I should see the The Product Page
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Condiments, Sauces_#60724
 	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Condiments, Sauces
 	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase60724
@@ -171,6 +172,7 @@ Scenario: [60723] Jelly, Jam or Preserves - RU001456
 
 		# ====== Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Condiments, Sauces ====== #
 	Given I should see the The Product Page
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Condiments, Sauces_#60723
 	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Condiments, Sauces
 	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase60723
