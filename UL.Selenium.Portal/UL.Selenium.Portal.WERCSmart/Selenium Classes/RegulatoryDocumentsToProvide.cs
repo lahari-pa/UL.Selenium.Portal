@@ -77,6 +77,35 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit
 			return (outMessage.Length < 1);
 		}
 
-		
+		public bool EnterWHMISSDSDocumentDate(string text)
+		{
+			try
+			{
+				IWebElement el = this.ContainerElement.FindElement(By.XPath(".//label[text()='WHMIS SDS Document Date']/../following-sibling::div//input"), 2);
+
+				if (el != null)
+				{
+					el.EnterText(text);
+					el.SendKeys(Keys.Enter);
+					return el.GetAttribute("value") == text;
+				}
+
+				return false;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+
+		}
+
+		public bool CheckRegulatoryDocumentsConfirmationBox()
+		{
+			var el = this.ContainerElement.FindElement(By.XPath(".//div[@class='checkbox']//input[//span[contains(text(),'I confirm I am providing the most current Safety Data Sheet (SDS), Article Information Sheet (AIS) and/or Product Label for this registration.')]]"), 2);
+			bool clicked = el.TryClick();
+			bool isChecked = el.Checked();
+			return clicked && isChecked;
+
+		}
 	}
 }

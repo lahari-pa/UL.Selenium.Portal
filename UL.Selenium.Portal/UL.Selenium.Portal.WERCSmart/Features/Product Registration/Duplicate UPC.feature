@@ -22,6 +22,8 @@
 @ProductSetUp
 @ForwardProductRegistration
 @run_DuplicateUPC
+@StepsPrototype
+
 Feature: Duplicate UPC
 
 
@@ -338,8 +340,9 @@ Scenario: [91798] Duplicate UPC is not permitted within WERCSmart system - New P
 		| saved as UPC91801_2 | Cardboard      | 32   | 32       |                          | 4A: steel box         |
 	Given I click continue
 	Then I should see the following error text displayed in the UPC screen: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review.
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase91798
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase91798
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase91798
 @TestCase:91800
 Scenario: [91800] Duplicate UPC is not permitted within account - Forward Product registration - Case UPC
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

@@ -22,6 +22,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 @GTINAndUPC
 @run_Flow15
+@StepsPrototype
 
 Feature: Flow 15
 
@@ -196,4 +197,6 @@ Scenario: [58759] Servers, Small-Scale - RU001183
 	Given I should see the Data Acceptance Page
 
 	Given I navigate to the home page
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58759
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58759
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase58759

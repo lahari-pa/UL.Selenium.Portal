@@ -19,6 +19,8 @@
 @Studio_Header
 @Studio
 @DeleteActiveProducts
+@StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
 Feature: Ingredients
 (Suite ID: 64740)
 
@@ -64,8 +66,9 @@ Scenario: [71985] Sorting Cas Number/ Chemical Name Ingredient page
 		| Wood chips   |
 		| Clothianidin |
 		| RED 4        |
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71985
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71985
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase71985
 @TestCase:71987
 Scenario: [71987] Sorting Percent on Ingredient page
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -93,8 +96,9 @@ Scenario: [71987] Sorting Percent on Ingredient page
 		| Wood chips   |
 		| Clothianidin |
 		| RED 4        |
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71987
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71987
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase71987
 @TestCase:65469
 Scenario: [65469] Ingredients - Select Publicly Disclosed check box - un-check Publicly Disclosed check box- Trade secret is active
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -111,7 +115,9 @@ Scenario: [65469] Ingredients - Select Publicly Disclosed check box - un-check P
 	Then for ingredient: Water the Trade Secret field is enabled
 	Then in the Ingredients page I click Continue
 	And I should see the Inventory Status, Prop 65 (US) Page
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65469
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65469
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase65469
 
 @TestCase:65470
 Scenario: [65470] Ingredients - Select Trade Secret check box - Un-check Trade Secret check box - Publicly Disclosed & Public Name are active
@@ -132,7 +138,10 @@ Scenario: [65470] Ingredients - Select Trade Secret check box - Un-check Trade S
 	Then for ingredient: Water I confirm the Public Name selectbox contains names for selection
 	Then in the Ingredients page I click Continue
 	And I should see the Inventory Status, Prop 65 (US) Page
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65470
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65470
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase65470
+
 
 #CLF - this is basically the same as 65470
 @TestCase:65459
@@ -151,8 +160,9 @@ Scenario: [65459] Ingredients - Select Trade Secret check box - Publicly Disclos
 	Then for ingredient: Water the Public Name field is disabled
 	Then in the Ingredients page I click Continue
 	And I should see the Inventory Status, Prop 65 (US) Page
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65459
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65459
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase65459
 @TestCase:65451
 Scenario: [65451] Ingredients - Select Publicly Disclosed check box - Public Name is required, trade secret is not required
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -172,8 +182,9 @@ Scenario: [65451] Ingredients - Select Publicly Disclosed check box - Public Nam
 	Then for ingredient: Water I select Public Name: Water
 	Then in the Ingredients page I click Continue
 	And I should see the Inventory Status, Prop 65 (US) Page
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65451
-	
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65451
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase65451
 @TestCase:65448
 Scenario: [65448] Ingredients - Publicly Disclosed, Trade secret and Public Name are not required fields
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -193,8 +204,9 @@ Scenario: [65448] Ingredients - Publicly Disclosed, Trade secret and Public Name
 		| Public Name         | select   |
 	Then in the Ingredients page I click Continue
 	And I should see the Inventory Status, Prop 65 (US) Page
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65448
-
+#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65448
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase65448
 @TestCase:63321
 Scenario: [63321] Product Ingredients contains a third party component that requires updating for public disclosure
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -212,8 +224,9 @@ Scenario: [63321] Product Ingredients contains a third party component that requ
 	Then in the Ingredients page I click Continue
 	Then a Warning popup dialog should appear with the message: Your product contains a 3rd-Party Formula that may need Data Tier Consent, or if Consent has been accepted by the Formulator, has no ingredients that are indicated to be Public. A notification has been provided to the Formulator to revisit their registration and resubmit if necessary. You may continue with your registration. Should the 3rd-Party Formula be revised, your registration will be updated accordingly and revised scoring will occur. No action is required from you.
 	And I should see the Inventory Status, Prop 65 (US) Page
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63321
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63321
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase63321
 
 @TestCase:71291
 Scenario: [71291] Product Ingredients contains a third party component that requires updating for public disclosure
@@ -237,8 +250,9 @@ Scenario: [71291] Product Ingredients contains a third party component that requ
 	Then on the Neonicotinoid Warning Page I should see a link with text: EPA website which links to page: https://www.epa.gov/pollinator-protection/epa-actions-protect-pollinators
 	Then in the Neonicotinoid Warning page I click Continue
 	And I should see the Inventory Status, Prop 65 (US) Page
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71291
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71291
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase71291
 @TestCase:74142
 Scenario: [74142] Pop up that Informs the regulations the components are associated
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -256,7 +270,9 @@ Scenario: [74142] Pop up that Informs the regulations the components are associa
 	Given I confirm that a list of regulations associated with the component is displayed
 	Given I close the Regulatory List window
 	Given I navigate to the home page
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74142
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74142
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase74142
 
 @TestCase:69796
 Scenario: [69796] Aerosol Warning Message on Ingredient page
@@ -287,7 +303,9 @@ Scenario: [69796] Aerosol Warning Message on Ingredient page
 	Given In the New Product page I click tab: Product Characteristics
 	And I click the page heading: Ingredients
 	Then I should not see an error message: Formulation must total or exceed 100%.
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase69796
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase69796
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase69796
 
 @TestCase:80728
 Scenario: [80728] Ingredients - Transparency Ratio - FRAGRANCE component - included in Denominator, not included in Numerator
@@ -309,13 +327,18 @@ Scenario: [80728] Ingredients - Transparency Ratio - FRAGRANCE component - inclu
 	Then I click the Publicly Disclosed checkbox for ingredient saved as: shared79436
 	And I verify the Transparency Score displays 0%
 	Given I navigate to the home page
-	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase80728
-
+	#And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase80728
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase80728
 @TestCase:80720
 Scenario: [80720] Ingredients - Transparency Ratio - FLAVOR component - included in Denominator, not included in Numerator
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase80720
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
@@ -332,7 +355,10 @@ Scenario: [80720] Ingredients - Transparency Ratio - FLAVOR component - included
 	Given I click the Publicly Disclosed checkbox for ingredient saved as: shared79431
 	And I verify the Transparency Score displays 0%
 	Given I navigate to the home page
-	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase80720
+	#And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase80720
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase80720
+
 
 # Assigned to Paulina Mata
 # Created by Paulina Mata
@@ -585,7 +611,11 @@ Scenario: [110368] Ingredients- Filtered Ingredient Appears on Top of Filter Opt
 @TestCase:95487
 Scenario: [95487] Formulation Screen - Ingredients Staying
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase95487
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
@@ -644,7 +674,9 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 		| Name   |
 		| Water  |
 		| Butane |
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase95487
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase95487
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase95487
 
 
 
@@ -705,7 +737,9 @@ Scenario: [133335] Formulation Screen FIFRA and LOLI Validation Message
 	Then I confirm there is a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
 	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
 	Given I click the Home navigation icon
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase133335
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase133335
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase133335
 
 
 #Remove from regression: 2023/05
@@ -798,7 +832,11 @@ Scenario: [133610] Formulation Screen:  Attestation Reset on Data Change
 Scenario: [158853] Ingredient Identifier
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then the WERCSmart homepage should load
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase158853
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
@@ -896,7 +934,11 @@ Scenario: [209549] Ingredient Table - Sum of Ingredients: Decimal Place Maximum 
 @TestCase:207581
 Scenario: [207581] Oven Cleaner - Pump Spray - (RU000798) - New Flow Testing
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Oven Cleaner - Pump Sprays
 	Then I save the product information as: TestCase207581
 	Given I call Shared Step 118138a Product Information - US, Pesticide No, No OSHA, No DSV, No CA Cleaning ,No PL, No GNFR Without Child question

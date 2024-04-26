@@ -13,6 +13,7 @@
 @StepsPrototype
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
 
 Feature: Flow 18
 
@@ -54,7 +55,11 @@ Scenario: [60116] Anti-Static Product - Aerosol - RU000656
 @TestCase:208099
 Scenario: [208099] Fabric Softener - Single-Use Dryer Product Only (RU000808)
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Fabric Softener - Single Use Dryer Product Only
 	Then I save the product information as: TestCase208099
 	Given I call Shared Step 208116 Product Information - FIFRA 25(b) Product Not a Pesticide, US (SOLD), NO (OSHA), NO (DSV), YES (CA RTK), NO (PL), NO (GNFR)
@@ -73,8 +78,9 @@ Scenario: [208099] Fabric Softener - Single-Use Dryer Product Only (RU000808)
 		| Option |
 		| Yes    |
 		| No     |
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase208099
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase208099
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase208099
 
 # Created by Saikiran Chittampally
 @TestCase:207582
@@ -147,8 +153,9 @@ Scenario: [207582] Personal Fragrance product (more than 20% fragrance) - Liquid
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	Given in the Optional Comments page I click Continue
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Personal Fragrance Product (more than 20% fragrance) - Liquid
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase207582
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase207582
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase207582
 # Created by Saikiran Chittampally
 @TestCase:207584
 Scenario: [207584] Personal Fragrance product (20% or less fragrance) - Liquid - Canada Only (RU000755) - New Flow Testing
@@ -212,5 +219,6 @@ Scenario: [207584] Personal Fragrance product (20% or less fragrance) - Liquid -
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	Given in the Optional Comments page I click Continue
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Personal Fragrance Product (20% or less fragrance) - Liquid
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase207584
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase207584
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase207584

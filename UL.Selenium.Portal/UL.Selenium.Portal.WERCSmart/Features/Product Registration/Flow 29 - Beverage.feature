@@ -107,8 +107,9 @@ Scenario: [60694] Alcoholic Beverages - Wine - RU001418 - (More than 24% but Les
 	Then In the International Marine (IMDG) Classification Section, verify section: 'Packing Group (select)' contains value: III
 	Then in the International Marine (IMDG) Classification page, I click Continue
 	Then I should be on the Retailer Page
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60694
-	
+#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60694
+   	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase60694	
 @ignore
 #Removed from regression 2024/03
 #Retailers section needs to be confirmed!
@@ -119,7 +120,11 @@ Scenario: [60695] Juice and Juice Drinks - RU001413
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC60695
 	Given I delete all products with UPC Number: saved as UPC60695
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Juice and Juice Drinks
 	Then I save the product information as: TestCase60695
 	Given I call Shared Step 69687 (Product Information - US, No(PL))
@@ -429,8 +434,9 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then In the Summary Page, click the View button for section: OSHA SDS
 	Then In the Summary Page, after clicking 'View' button I confirm pdf file is downloaded
 	Then I close the tab with Data Summary page
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase92943
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase92943
+ 	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase92943
 	@TestCase:216709
 	Scenario: [216709] Container Types -Primary Physical State Liquid - Wine - RU001418
 

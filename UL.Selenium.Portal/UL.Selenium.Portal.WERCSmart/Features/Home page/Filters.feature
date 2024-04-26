@@ -20,6 +20,8 @@
 @PaymentMethods
 @ProductSetUp
 @CreateProducts
+@StepsPrototype
+
 
 Feature: Filters
 
@@ -37,8 +39,9 @@ Scenario: [68388] More Filters - Brand
 	And I click the page heading: The Product
 	# step accepts '~saved as...' and will fetch the value from context
 	Then Product Line or Brand (optional) should be showing the value: ~saved as BrandName68388
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase68388
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase68388
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase68388
 
 @tfs_design
 @ignore

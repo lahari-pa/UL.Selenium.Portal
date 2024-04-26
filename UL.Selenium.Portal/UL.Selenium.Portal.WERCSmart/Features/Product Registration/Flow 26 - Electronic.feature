@@ -105,4 +105,6 @@ Scenario:  [60671] Computer (Combination of Monitor & Desktop) - RU001177
 	Given I close the Data Summary Tab
     Given I should see the Data Acceptance Page
 
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60671
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60671
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase60671

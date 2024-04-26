@@ -192,6 +192,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 			new Steps_Prototype().CheckOptionsInSection(condition, displayed, section, table);
 		}
 
+		[StepDefinition(@"In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: (Product is packaged in a gas cylinder \(e.g., whip cream\)|Liquid|Solid|Gas|Aerosol)")]
+		public void CheckOptionsInPrimaryPhysicalStateSection(string option)
+		{
+			string section = "Primary Physical State";
+			new Steps_Prototype().CheckingFieldInputIsCorrect(section, option);
+		}
 
 
 	}

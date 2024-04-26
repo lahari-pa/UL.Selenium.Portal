@@ -171,7 +171,11 @@ Scenario: [58606] Medicinal Liquids - RU001188
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC58606
 	Given I delete all products with UPC Number: saved as UPC58606
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Medicinal Liquids (cough medicine, eye drops, ear drops, nasal spray and inhalers)
 	Then I save the product information as: TestCase58606
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)

@@ -7,6 +7,7 @@
 @NewProduct
 @ProductGrid
 @DataSummarySheet
+@StepsPrototype
 @wercsmart
 @RetailPartners
 @SubEnrollment
@@ -87,4 +88,6 @@ Scenario: [60673] Gasoline Container, Portable - RU001419
 	Given I close the tab with Data Summary page
 	Given I should see the Data Acceptance Page
 
-    Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60673
+   # Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60673
+   	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase60673

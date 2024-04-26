@@ -12,10 +12,10 @@
 @run_RetailerSelection
 @UPC
 @PaymentMethods
-@@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ToxicityCharacteristicLeachingProcedureTCLP
 @StepsPrototype
-
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
 Feature: Retailer Selection
 
 @ignore
@@ -96,7 +96,9 @@ Scenario: [78937] Select Retailers - Select All
 	Given I save all retailers in the Select Retailers window in alphabetical order as: AllSelectRetailers78937
 	Given I click Done in the Select Retailers popup
 	Then the selected retailers on the Retailer page should match the retailer list saved as AllSelectRetailers78937
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78937
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78937
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase78937
 
 @ignore
 @TestCase:85276
@@ -200,8 +202,9 @@ Scenario: [136057] Select Retailers - Removing Retailer(s) Selected
 	And I click the 'Add' button
 	And I confirm that retailer "CV" is not present under the 'Destination Retailers' column in the UPC table
 	And I confirm that retailer "DG" is not present under the 'Destination Retailers' column in the UPC table
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase1234
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase1234
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase1234
 @TestCase:133311
 Scenario: [133311] Retailer Private Label List Appear in Alphabetical Order
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -234,8 +237,9 @@ Scenario: [125130] Canadian Tire Available for Selection for Articles
 	Then I click continue
 	Given I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase125130
-
+#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase125130
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase125130
 @TestCase:128920
 Scenario: [128920] Electronics - Dollar Tree/Family Dollar Retailers Available for Selection
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -278,19 +282,30 @@ Scenario: [128920] Electronics - Dollar Tree/Family Dollar Retailers Available f
 		| Dollar Tree Stores, Inc. / Greenbrier International, Inc |
 		| Family Dollar                                            |
 		| No Retailer/No UPC Product							   |
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128920
-
+#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128920
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase128920
 @TestCase:128769
 Scenario: [128769] Battery Product - Dollar Tree/ Family Dollar Retailers Available for Selection
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC59273
 	Given I delete all products with UPC Number: saved as UPC59273
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alkaline battery
 	Then I save the product information as: TestCase59273
-	Given I should see the Product Information Page
-	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+	#Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+	Then I should be on the Product Information Page
+	And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No 
+	And In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page, I click Continue
+
 	Given Primary Physical State should be showing the value: Solid
 	Given I set the Secondary Physical State option to: Solid
 	Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
@@ -315,8 +330,9 @@ Scenario: [128769] Battery Product - Dollar Tree/ Family Dollar Retailers Availa
 		| Dollar Tree Stores, Inc. / Greenbrier International, Inc |
 		| Family Dollar                                            |
 		| No Retailer/No UPC Product							   |
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59273
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59273
+		Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase59273
 
 # Created by Saikiran Chittampally
 @TestCase:181979
@@ -368,7 +384,9 @@ Scenario: [181979] Single Retailer Checkbox Checks
 	Given I click 'Add Retailers' in the Retailers page
 	Given I confirm when I select the retailer: Staples the retailers cannot be selected, checkboxes appear grayed out with red crossed out circle
 	Given I click Done in the Select Retailers popup
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase181979
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase181979
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase181979
 
 	
 # Created by Saikiran Chittampally

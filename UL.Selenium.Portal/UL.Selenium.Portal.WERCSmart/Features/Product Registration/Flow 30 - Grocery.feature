@@ -3,6 +3,7 @@
 @Login
 @Homepage
 @Signup
+@StepsPrototype
 @wercsmart
 @NewProduct
 @ProductGrid
@@ -151,8 +152,9 @@ Scenario: [60724] Condiments, Sauces - RU001454
 	Given I close the Data Summary Tab
     Given I should see the Data Acceptance Page
 
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60724
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60724
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase60724
 
 
 @TestCase:60723
@@ -238,8 +240,9 @@ Scenario: [60723] Jelly, Jam or Preserves - RU001456
 	Given I close the Data Summary Tab
     Given I should see the Data Acceptance Page
 
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60723
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60723
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase60723
 @ignore
 @tfs_design
 @TestCase:60722

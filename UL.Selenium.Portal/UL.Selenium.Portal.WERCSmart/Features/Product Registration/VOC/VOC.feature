@@ -10,13 +10,19 @@
 @RetailPartners
 @NewProduct
 @run_voc
+@StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
 Feature: VOC
 
 @test74626
 @TestCase:74626
 Scenario: [74626] VOC - Show state collection when state table has a value
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide - Fogger
 	Then I save the product information as: TestCase74626
 	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
@@ -48,13 +54,18 @@ Scenario: [74626] VOC - Show state collection when state table has a value
 		| Utah            | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
 		| Virginia        | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
 		| Vermont         | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74626
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74626
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase74626
 @TestCase:56475
 Scenario: [56475] VOC checks for Fabric Softener - single Use dryer product (RU000808)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Fabric Softener - Single Use Dryer Product Only
 	Then I save the product information as: TestCase56475
 	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
@@ -107,8 +118,9 @@ Scenario: [56475] VOC checks for Fabric Softener - single Use dryer product (RU0
 		| Goggles                       | 500                      | 45                      | 15.0      | Black      | Odorless | No data available | 5                     |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Fabric Softener - Single Use Dryer Product Only
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56475
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56475
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase56475
 @TestCase:56477
 Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -234,7 +246,11 @@ Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 Scenario: [56481] VOC checks for Oven Cleaner - pump sprays (RU000798) - CARB and OTC
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Oven Cleaner - Pump Sprays
 	Then I save the product information as: TestCase56481
 	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
@@ -296,8 +312,9 @@ Given I call Shared Step 60567 (Upload Product Label only)
 	Then The Data Acceptance page should appear
 	Then In the Data Acceptance page I select Agreed
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Oven Cleaner - Pump Sprays
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56481
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56481
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase56481
 @TestCase:56483
 Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -587,8 +604,9 @@ Given I call Shared Step 60567 (Upload Product Label only)
 		| Goggles                       | 200                      | 25                      | 12.2      | Black      | Odorless | No data available | 5                     |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 74992. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Personal Fragrance Product (more than 20% fragrance) - Liquid
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56476
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56476
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase56476
 	
 
 @TestCase:73503

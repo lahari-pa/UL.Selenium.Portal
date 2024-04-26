@@ -7,6 +7,7 @@
 @NewProduct
 @ProductGrid
 @DataSummarySheet
+@StepsPrototype
 @wercsmart
 @RetailPartners
 @run_VOCFlow19
@@ -39,8 +40,9 @@ Scenario: [62730] VOC - Flow 19 - Dilution ration - Sold = 50, Used = 45 limit c
 		| Based on the type of product, this must comply with the most restrictive VOC limit. |
 		| Exceeds the limits specified in the California Consumer Products Regulation         |
 		| Exceeds the limits specified by the Ozone Transport Commission                      |
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase62730
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase62730
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase62730
 #Remove from regression: 2023/05
 @ignore
 @TestCase:62728
@@ -139,8 +141,9 @@ Scenario: [62708] VOC - Flow 19 - Dilution - Limits checking - Sold = 1 Used = 2
 		| Does not exceed the limits specified in the California Consumer Products Regulation                                                          |
 		| Does not exceed the limits specified by the Ozone Transport Commission                                                                       |
 		| Based on your previous selections, the product has the following intended use: The OTC Model Rule and CARB limits for this intended use are: |
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase62708
-
+#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase62708
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase62708
 @TestCase:56478
 Scenario: [56478] VOC - CARB and OTC for Flow 19 products - Concentrate/dilution = No to Dilution checking warning message shown
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -160,4 +163,6 @@ Scenario: [56478] VOC - CARB and OTC for Flow 19 products - Concentrate/dilution
 	Given I set the Product label specifies a dilution ratio which results in a final VOC concentration for the product during use field to: No
 	Then For the VOC page I should see the following error: Please be sure you have selected the correct product type. For further questions, please contact Support.
 	Given in the VOC page I click Continue
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56478
+#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56478
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase56478

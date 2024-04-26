@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 {
@@ -25,13 +26,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		public void SelectBatteriesAreConsideredArticlesUnderGlobalHarmonizedStandards(string option)
 		{
 			string section = "Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats.";
-			new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 		[StepDefinition(@"In the Regulatory Documents to Provide Section, set the radio option in section: 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: (I certify that I have a WHMIS-Compliant Safety Data Sheet \(SDS\) for this product.|I need a WHMIS-Compliant bilingual Safety Data Sheet \(SDS\) authored for this product.|I don't need a WHMIS Compliant SDS)")]
 		public void SelectWHMIS(string option)
 		{
 			string section = "WHMIS-compliant Safety Data Sheet, English and French-Canadian";
-			new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 		[StepDefinition(@"In the Regulatory Documents to Provide Section, upload file in section: 'I have an Article Information Sheet \(AIS\), Technical Data Sheet \(TDS\), Battery Data Sheet \(BDS\) to provide.'")]
 		public void UploadFileForAIS()
@@ -54,6 +55,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string pdfFile = "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf";
 			new Steps_Prototype().UploadPDFFile(section, pdfFile);
 		}
+
+		[StepDefinition(@"In the Regulatory Documents to Provide Section, for section 'Dual-Language WHMIS SDS, in French Canadian and English': enter WHMIS SDS Docmument Date: (.*)")]
+		public void EnterTextWHMISSDSDocmumentDate(string date)
+		{
+			new RegulatoryDocumentsToProvide().EnterWHMISSDSDocumentDate(date);
+		}
+
 		[StepDefinition(@"In the Regulatory Documents to Provide Section, upload file in section: 'Label in both French and English'")]
 		public void UploadFileForLabelInBothFrenchAndEnglish()
 		{
@@ -65,7 +73,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		public void SelectOSHACompliantSafetyDataSheet(string option)
 		{
 			string section = "OSHA-compliant Safety Data Sheet, English";
-			new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 		[StepDefinition(@"In the Regulatory Documents to Provide Section, upload file in section: 'Upload UN38.3 Test Document \(Required\)'")]
 		public void UploadFileForUN383TestDocument()

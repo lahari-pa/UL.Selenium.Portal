@@ -124,7 +124,13 @@ Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Cas
     Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lithium Ion Battery
     Then I save the product information as: TestCase87650
 	Given I call Shared Step 65493 (Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
-	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+#	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+	Then I should be on the Physical and Chemical Properties Page
+	And In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	And In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then in the Physical and Chemical Properties page, I click Continue
+
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName      | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Lithium hydroxide  | 6.7     | false               | false       |            |
@@ -223,8 +229,9 @@ Scenario: [87676] UPC - Case Pack can be removed from new product
 	And In the list of UPCs I should not see case pack indicatior for UPC: saved as UPC876761
 	Given I navigate to the landing page
 	Given I log in with the account saved in TReVor as: ProductAccount
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87676
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87676
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase87676
 @TestCase:87685
 Scenario: [87685] UPC - Case Pack & Regular UPC present in Product - Process to Complete
 	#Given I login into the WERCSmart Portal - Administrator Role
@@ -516,8 +523,9 @@ Then I confirm the Size field is below the Container field
 Then I confirm the Quantity field is below the Size field
 Then I click continue
 Given I should see the Regulatory Documents Page
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87718
-
+#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87718
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase87718
 
 
 
@@ -544,8 +552,9 @@ Then I confirm the case dropdown with the following UPC: saved as UPC87818 shoul
 Then I select the case UPC dropdown arrow to expand the UPC saved as: UPC87818
 Then I confirm the Individual UPC field is shown in the Universal Product Code (UPC) Page
 Then I confirm Individual UPC field does not display any options
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87818
-
+#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87818
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase87818
 
 
 @ignore
@@ -601,8 +610,9 @@ Scenario: [112487] Case Pack UPC: Transportation Option Selected Stays the Same 
 	Given I Change the Transportation option from the dropdown to: 4B: aluminum box
 	Given I click on the arrow next to the UPC data
 	Given I confirm that the transportation option: 4B: aluminum box that was selected is still the same
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase112487
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase112487
+		Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase112487
 		# Created by Saikiran Chittampally
 	@TestCase:163564
 Scenario: [163564] SHA Automation - Create a Chalk Product and Submit thru Completed Status

@@ -25,6 +25,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOC_OzoneTransportCommission
 @run_Flow24_Deodorant
+@StepsPrototype
 Feature: Flow 24 - Deodorant
 
 @ignore
@@ -34,7 +35,11 @@ Scenario: [60617] Deodorant - Non-Aerosol - RU000760(Liquid)
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC60617
 	Given I delete all products with UPC Number: saved as UPC60617
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Non-aerosol
 	Then I save the product information as: TestCase60617
 	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
@@ -241,4 +246,6 @@ Given In the VOC - Ozone Transport Commission Section, set the option in section
 And In the VOC - Ozone Transport Commission Section, set the option in section: MVOC (medium volatile organic compound) content as weight percentage of the total formulation should be showing the error message: Invalid number. 2 decimal places allowed
 Given In the VOC - Ozone Transport Commission Section, set the option in section: 'MVOC (medium volatile organic compound) content as weight percentage of the total formulation': to: 12.34
 
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestProduct
+#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestProduct
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestProduct
