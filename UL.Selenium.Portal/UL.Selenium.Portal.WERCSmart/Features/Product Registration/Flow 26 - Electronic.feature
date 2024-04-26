@@ -45,6 +45,7 @@ Scenario:  [60671] Computer (Combination of Monitor & Desktop) - RU001177
 
 	# ====== And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Computer (Combination of Monitor & Desktop) ====== #
 	Given I should see the The Product Page
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Computer (Combination of Monitor & Desktop)_#60671
 	Given I set 'Type of Product' to: Computer (Combination of Monitor & Desktop)
 	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase60671

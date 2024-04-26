@@ -651,12 +651,32 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[StepDefinition(@"I navigate to the URL: (.*)")]
 		public void NavigateToTheUrl(string url)
 		{
-			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Navigate to URL: " + url);
+			Report.StartStep($"{Report.Details.StepIndex} - Navigate to URL: {url}");
 			try
 			{
-				Report.Info("Navigating to the URL: " + url);
+				Report.Info($"Navigating to the URL: {url}");
 				SeleniumWebDriver.CurrentDriver.Navigate().GoToUrl(url);
-				Report.Success("Successfully navigated to the URL: " + url + "!");
+				Report.Success($"Successfully navigated to the URL: {url}!");
+				Report.Screenshot();
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
+		[StepDefinition(@"I navigate to the URL saved in TReVor as: (.*)")]
+		public void NavigateToTheTReVorUrl(string trevorVar)
+		{
+			string url = TReVor.Integrations.Classes.TReVorSettings.VaultRecords.GetVariable(trevorVar).Value;
+			
+			Report.StartStep($"{Report.Details.StepIndex} - Navigate to URL: {url}");
+			try
+			{
+				Report.Info($"Navigating to the URL: {url}");
+				SeleniumWebDriver.CurrentDriver.Navigate().GoToUrl(url);
+				Report.Success($"Successfully navigated to the URL: {url}!");
 				Report.Screenshot();
 			}
 			catch (Exception ex)
