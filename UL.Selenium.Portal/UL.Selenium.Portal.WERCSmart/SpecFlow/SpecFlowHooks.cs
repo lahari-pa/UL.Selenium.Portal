@@ -26,6 +26,7 @@ namespace UL.Selenium.Portal.WERCSmart.SpecFlow
 		public void RunOnlyInStagingLogic(IObjectContainer container)
 		{
 			this.PerformBranchSkipLogic(container, "QA-Integration");
+			this.PerformBranchSkipLogic(container, "QA-Integration-New");
 		}
 		private void PerformBranchSkipLogic(IObjectContainer container, string targetBranchName)
 		{
