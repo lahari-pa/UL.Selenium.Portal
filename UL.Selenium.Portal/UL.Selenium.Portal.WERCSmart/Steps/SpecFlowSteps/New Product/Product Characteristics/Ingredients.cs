@@ -18,6 +18,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 	[Binding, Scope(Tag = "Ingredients")]
 	class Ingredients
 	{
+
+		[StepDefinition(@"In the Ingredients Section, In the popup view with the following title: (.*) I click the (.*) button")]
+		public void ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton(string popupTitle, string buttonTitle)
+		{
+			new Steps_Prototype().ClickTheFollowingButtonInThePopupView(popupTitle, buttonTitle);
+			Delay.Seconds(1);
+		}
+
+		[StepDefinition(@"In the Ingredients Section, I confirm I check the checkbox in the popup view with the following text: (.*)")]
+		public void ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingText(string text)
+		{
+			new Steps_Prototype().CheckACheckboxWithTheFollowingText(text);
+		}
+
 		[StepDefinition(@"In the Ingredients Section, set the option in section: 'Ingredient Reference Number (Optional) to: (.*)")]
 		public void LiquidCoreProductSelectYesOrNo(string option)
 		{
