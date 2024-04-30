@@ -89,11 +89,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit
 					el.SendKeys(Keys.Enter);
 					return el.GetAttribute("value") == text;
 				}
-
+				Report.Error("Error locating Web Element!");
 				return false;
 			}
 			catch (Exception)
 			{
+				Report.Error("Error locating Web Element!"); 
 				return false;
 			}
 

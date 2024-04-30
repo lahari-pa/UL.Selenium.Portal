@@ -46,7 +46,7 @@ Scenario: [59273] Alkaline Battery - RU000344
 	
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alkaline battery
 	Then I should be on the The Product Page
-	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Alkaline battery
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Alkaline battery_#59273
 	And In the Product Section, set the option in section: 'Type of Product (select)' to: Alkaline battery
 	Then in the The Product page, I click Continue
 
