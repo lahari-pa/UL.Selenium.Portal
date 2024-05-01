@@ -28,7 +28,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string section = "For Air transport (IATA), indicate the classification";
 			new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
 		}
-		[StepDefinition(@"In the Lithium Battery Transportation Section, set the radio option in section: 'For Canada's Transportation of Dangerous Goods \(TDG\), indicate the classification': to: (Fully-regulated dangerous goods: UN3091, Lithium metal batteries contained in equipment, 9|Fully-regulated dangerous goods: UN3481, Lithium ion batteries packed with equipment, 9|Fully-regulated dangerous goods: UN3480, Lithium ion batteries, 9	|Fully-regulated dangerous goods: UN3481, Lithium ion batteries contained in equipment, 9|Meets the requirements of TDG special provision 34 to be transported as non-dangerous goods.|None of the above\/Not intended for shipment in Canada)")]
+		[StepDefinition(@"In the Lithium Battery Transportation Section, set the radio option in section: 'For Canada's Transportation of Dangerous Goods \(TDG\), indicate the classification': to: (Fully-regulated dangerous goods: UN3091, Lithium metal batteries contained in equipment, 9|Fully-regulated dangerous goods: UN3091, Lithium metal batteries packed with equipment, 9|Fully-regulated dangerous goods: UN3480, Lithium ion batteries, 9	|Fully-regulated dangerous goods: UN3481, Lithium ion batteries contained in equipment, 9|Meets the requirements of TDG special provision 34 to be transported as non-dangerous goods.|None of the above\/Not intended for shipment in Canada)")]
 		public void SelectTDG(string option)
 		{
 			string section = "For Canada's Transportation of Dangerous Goods (TDG), indicate the classification";
@@ -38,6 +38,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		public void LithiumBatteryTransportationTextInAlertMessage(string condition)
 		{
 			string alertText = "Need help? Regulatory services are included in Premium Subscription. Upgrade now!";
+			new Steps_Prototype().AlertMessageDisplayed(condition, alertText);
+		}
+		[StepDefinition(@"In the Lithium Battery Transportation Section, the text message (should|should not) be displayed with text: 'Confirm that this product is manufactured in a facility that meets criteria outline in IATA 3.9.2.6€.'")]
+		public void LithiumBatteryTransportationTextMessage(string condition)
+		{
+			string alertText = "Confirm that this product is manufactured in a facility that meets criteria outline in IATA 3.9.2.6€.";
 			new Steps_Prototype().AlertMessageDisplayed(condition, alertText);
 		}
 	}

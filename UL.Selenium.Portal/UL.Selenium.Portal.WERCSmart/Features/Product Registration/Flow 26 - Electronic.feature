@@ -10,10 +10,24 @@
 @wercsmart
 @RetailPartners
 @SubEnrollment
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:Product
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@PhysicalAndChemicalProp
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ToxicityCharacteristicLeachingProcedureTCLP
+@StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ElectronicEquipment
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ProductIncludesBattery
+@GTINAndUPC
 @run_Flow26_Electronic
 
 Feature: [64732] Flow 26 - Electronic
-
 
 @TestCase:60671
 Scenario: [60671] Computer (Combination of Monitor & Desktop) - RU001177
@@ -42,3 +56,6 @@ Scenario: [60671] Computer (Combination of Monitor & Desktop) - RU001177
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Computer (Combination of Monitor & Desktop)
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60671
 
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60671
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase60671

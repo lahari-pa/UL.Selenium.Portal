@@ -10,6 +10,10 @@
 @wercsmart
 @RetailPartners
 @run_Flow18
+@StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
 
 Feature: Flow 18
 
@@ -17,70 +21,45 @@ Feature: Flow 18
 @tfsdesign
 @TestCase:60116
 Scenario: [60116] Anti-Static Product - Aerosol - RU000656
-
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-
-Then The home screen should load
-
-Given I generate a random UPC number and save as: UPC60116
-
-Given I delete all products with UPC Number: saved as UPC60116
-
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Anti-Static Product - Aerosol
-
-Then I save the product information as: TestCase60116
-
-Given I call Shared Step 60310 (Product Information - Without Child question)
-
-Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
-
-
-Given I click continue
-
-Then I should see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
-
-Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
-
-Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-
-Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
-
-Given I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
-
-Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
-
-Given I call Shared Step 60468 (VOC - CARB only required - enter value - Continue - Happy Path)
-
-Given I click continue
-
-Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples
-
-Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60116, container type: Aerosol Can and size: 1
-
-Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-
-Given I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
-
-And in the Optional Reports and Documents Available for Purchase page I click Continue
-
-Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
-| Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
-
-Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 60116. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
-
-Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Anti-Static Product - Aerosol
-
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60116
-
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Then The home screen should load
+	Given I generate a random UPC number and save as: UPC60116
+	Given I delete all products with UPC Number: saved as UPC60116
+	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Anti-Static Product - Aerosol
+	Then I save the product information as: TestCase60116
+	Given I call Shared Step 60310 (Product Information - Without Child question)
+	Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
+	Given I click continue
+	Then I should see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
+	Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
+	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+	Given I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
+	Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
+	Given I call Shared Step 60468 (VOC - CARB only required - enter value - Continue - Happy Path)
+	Given I click continue
+	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples
+	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60116, container type: Aerosol Can and size: 1
+	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
+	And in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
+		| Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
+	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 60116. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Anti-Static Product - Aerosol
+	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60116
 
 # Created by Saikiran Chittampally
 @TestCase:208099
 Scenario: [208099] Fabric Softener - Single-Use Dryer Product Only (RU000808)
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Fabric Softener - Single Use Dryer Product Only
 	Then I save the product information as: TestCase208099
 	Given I call Shared Step 208116 Product Information - FIFRA 25(b) Product Not a Pesticide, US (SOLD), NO (OSHA), NO (DSV), YES (CA RTK), NO (PL), NO (GNFR)
@@ -99,17 +78,27 @@ Scenario: [208099] Fabric Softener - Single-Use Dryer Product Only (RU000808)
 		| Option |
 		| Yes    |
 		| No     |
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase208099
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase208099
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase208099
 
 # Created by Saikiran Chittampally
 @TestCase:207582
 Scenario: [207582] Personal Fragrance product (more than 20% fragrance) - Liquid (RU000756) - New Flow Testing
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Personal Fragrance Product (more than 20% fragrance) - Liquid
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Personal Fragrance Product (more than 20% fragrance) - Liquid
+	Then I should see the The Product Page
+	Then In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Personal Fragrance Product (more than 20% fragrance) - Liquid
+	Then In the Product Section, set the option in section: 'Type of Product (select)' to: Personal Fragrance Product (more than 20% fragrance) - Liquid
+	Then in the The Product page, I click Continue
+
 	Then I save the product information as: TestCase207582
-	Given I call Shared Step 57798 (Product Information- Pesticide, Canada Only - No to everything else, Continue)
+	#Given I call Shared Step 57798 (Product Information- Pesticide, Canada Only - No to everything else, Continue)
+	Then I should see the Product Information Page
+	Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
+	Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to not select: Canada
+
 	Given I call Shared Step 70675 (Physical and Chemical Properties - Liquid Only - With Water Solubility - Enter all data - Continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Propane
 	Given I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
@@ -164,8 +153,9 @@ Scenario: [207582] Personal Fragrance product (more than 20% fragrance) - Liquid
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	Given in the Optional Comments page I click Continue
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Personal Fragrance Product (more than 20% fragrance) - Liquid
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase207582
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase207582
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase207582
 # Created by Saikiran Chittampally
 @TestCase:207584
 Scenario: [207584] Personal Fragrance product (20% or less fragrance) - Liquid - Canada Only (RU000755) - New Flow Testing
@@ -229,5 +219,6 @@ Scenario: [207584] Personal Fragrance product (20% or less fragrance) - Liquid -
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	Given in the Optional Comments page I click Continue
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Personal Fragrance Product (20% or less fragrance) - Liquid
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase207584
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase207584
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase207584

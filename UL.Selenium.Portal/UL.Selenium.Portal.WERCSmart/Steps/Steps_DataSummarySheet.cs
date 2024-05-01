@@ -121,12 +121,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ShouldBeShowingFollowing(string section, string option)
 		{
 			var dataSummarySheet = new DataSummary();
-
-			List<string> found = dataSummarySheet.GetInfoForSectionOption(section, option);
-
+			string found = dataSummarySheet.GetInfoForSectionOption(section, option);
 			Report.IsTrue(found.Contains(option),
-					"option was not as expected! Expected: " + option + " in section: " + section + " but got: " + string.Join(",", found),
-					"option was showing: " + option + " in section: " + section);
+					$"option was not as expected! Expected: {option} in section: {section} but got: {found}",
+					$"option was showing: {option} in section: {section}");
 
 			//Report.IsTrue(found.Contains(option), "Failed to find the option: " + option + "!", "Successfully found the option: " + option + "!", false, false);
 		}

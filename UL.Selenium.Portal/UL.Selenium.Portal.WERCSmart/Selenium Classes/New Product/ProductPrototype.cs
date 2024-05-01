@@ -84,7 +84,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 	{
 		#region Page Objects
 		private string _label;
-		protected override By ContainerElementLocator => By.XPath($"//div[contains(@class,'form-group')][.//label[@class='control-label'][text()='{_label}']]");
+		protected override By ContainerElementLocator => By.XPath($@"//div[contains(@class,'form-group')][.//label[@class='control-label'][text()=""{_label}""]]");
 		private IWebElement Option(string optionLabel) => this.FindElement(By.XPath($".//div[@class='radio' or @class='checkbox'][.//*[text()='{optionLabel}']]//input[@type='radio' or @type='checkbox']"), 1);
 		#endregion
 
@@ -121,6 +121,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				isSelected = this.OptionClick(optionLabel);
 			}
 			return isSelected;
+		}
+
+		public bool OptionSetSelect(bool selected, string optionLabel)
+		{
+			bool isSelected = this.OptionSelected(optionLabel);
+			if (isSelected != selected)
+			{
+				isSelected = this.OptionClick(optionLabel);
+			}
+			return this.OptionSelected(optionLabel) == selected;
 		}
 		#endregion
 

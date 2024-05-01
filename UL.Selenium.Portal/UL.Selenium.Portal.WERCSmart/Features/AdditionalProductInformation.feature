@@ -13,6 +13,8 @@
 @SHA
 @UPC
 @run_AdditionalProductInformation
+@StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
 
 Feature: Product Information
 
@@ -27,9 +29,11 @@ And I should see the Product Information Page
 And I should see following statement: Select countries the product may be sold in
 And I should see following statement: Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)
 And I should see following statement: Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31352
-
-
+#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31352
+Then I navigate to the Home Page
+Then In the Product Grid, delete the product saved as: TestCase31352
+#Removed from regression 2024/03
+@ignore
 @TestCase:31359
 Scenario: [31359] Product Information - validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -42,7 +46,8 @@ And Product has been classified using OSHA (US) Globally Harmonized Standards (G
 And Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. should be showing the error messages: This is a required field.
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31359
 
-
+#Removed from regression 2024/03
+@ignore
 @TestCase:85242
 Scenario: [85242] Product Information with marketed child question- navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -57,7 +62,8 @@ And I should see following statement: Product has been classified using OSHA (US
 And I should see following statement: Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85242
 
-
+#Removed from regression 2024/03
+@ignore
 @TestCase:85244
 Scenario: [85244] Product Information with marketed child question- validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -71,7 +77,8 @@ And Product has been classified using OSHA (US) Globally Harmonized Standards (G
 And Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. should be showing the error messages: This is a required field.
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85244
 
-
+#Removed from regression 2024/03
+@ignore
 @TestCase:85367
 Scenario: [85367] Which one best describes your product question- navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -106,7 +113,8 @@ And Product has been classified using OSHA (US) Globally Harmonized Standards (G
 And Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. should be showing the error messages: This is a required field.
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85368
 
-
+#Removed from regression 2024/03
+@ignore
 @TestCase:85488
 Scenario: [85488] Private Label and Goods Not for Resale question - navigation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -120,8 +128,8 @@ And I should see following statement: Product is a Retailer's Private Label or B
 And I should see following statement: Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85488
 
-
-
+#Removed from regression 2024/03
+@ignore
 @TestCase:85489
 Scenario: [85489] Private Label and Goods Not for Resale question - validation
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -178,7 +186,11 @@ Scenario: [211384] Product Information Screen - General Validation for N, P, K, 
 	Then The home screen should load
 	Then I click the Add Product icon in the Navigation Pane
 	And the Product Editor page should be loaded
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Plant Food
 	Then I save the product information as: TestCase211384
 	Given I should see the Product Information Page
@@ -230,7 +242,11 @@ Scenario: [217076] Product Information Screen - Error Messages for NPK and Slow 
 	Then the WERCSmart homepage should load
 	Then I click the Add Product icon in the Navigation Pane
 	And the Product Editor page should be loaded
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
 	Then I save the product information as: TestCase217076
 	Given I should see the Product Information Page
@@ -272,7 +288,11 @@ Scenario: [213920] Product Information Screen - Warning Message >= 50% for NPK P
 	Then The home screen should load
 	Then I click the Add Product icon in the Navigation Pane
 	And the Product Editor page should be loaded
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
 	Then I save the product information as: TestCase213920
 	Given I should see the Product Information Page
@@ -311,7 +331,11 @@ Scenario: [213919] Product Information Screen - Warning Message < 50% for NPK Pr
 	Then The home screen should load
 	Then I click the Add Product icon in the Navigation Pane
 	And the Product Editor page should be loaded
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Soil Conditioner (no VOC or Pesticide)
 	Then I save the product information as: TestCase213919
 	Given I should see the Product Information Page

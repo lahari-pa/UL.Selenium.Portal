@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
+using UL.Automation.WebDriver.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {
@@ -102,5 +103,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			new Steps_Prototype().AlertMessageDisplayed(condition, alertText);
 		}
 
+		[StepDefinition(@"In the VOC - Ozone Transport Commission Section, set the option in section: HVOC \(high volatile organic compound\) content as weight percent of the total formulation (should|should not) be showing the error message: (.*)")]
+		public void HVOCSectionDisplayingErrorMessage(string condition, string alertText)
+		{
+			string section = "HVOC (high volatile organic compound) content as weight percent of the total formulation";
+			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, condition, alertText);
+		}
+
+		[StepDefinition(@"In the VOC - Ozone Transport Commission Section, set the option in section: MVOC \(medium volatile organic compound\) content as weight percentage of the total formulation (should|should not) be showing the error message: (.*)")]
+		public void MVOCSectionDisplayingErrorMessage(string condition, string alertText)
+		{
+			string section = "MVOC (medium volatile organic compound) content as weight percentage of the total formulation";
+			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, condition, alertText);
+		}
 	}
 }

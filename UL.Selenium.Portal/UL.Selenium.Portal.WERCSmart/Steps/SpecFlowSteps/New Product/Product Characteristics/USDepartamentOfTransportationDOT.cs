@@ -95,6 +95,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string section = "Packing Group (select)";
 			new Steps_Prototype().CheckingFieldInputIsCorrect(section, value);
 		}
+
+		[StepDefinition(@"In the U. S. Department of Transportation \(DOT\) Classification Section, verify that the section: 'UN Number' is highlighted in red indicating an error")]
+		public void CheckUNSectionsWithRedError()
+		{
+			string section = "UN Number";
+			new Steps_Prototype().SectionIsHighlightedInRedIndicatingAnError(section);
+		}
+
+		[StepDefinition(@"In the U. S. Department of Transportation \(DOT\) Classification Section, the section: 'UN Number' (should|should not) be showing error message: (.*)")]
+		public void CheckUNSectionsWithErrorMessages(string condition ,string message)
+		{
+			string section = "UN Number";
+			new Steps_Prototype().ErrorMessagesAreShowingForItem(section,condition,message);
+		}
+
 	}
-	
+
 }

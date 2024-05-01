@@ -9,8 +9,10 @@
 @DataSummarySheet
 @wercsmart
 @RetailPartners
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 @run_Flow25
-
+@StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
 Feature: Flow 25
 
 @TestCase:60642
@@ -24,13 +26,21 @@ Given I generate a random UPC number and save as: UPC60642
 
 Given I delete all products with UPC Number: saved as UPC60642
 
-Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+Then I click the Add Product icon in the Navigation Pane
+Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Then in the New Product page, I click Continue
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Engine Parts and Components with Battery Included
 
 Then I save the product information as: TestCase60642
 
-Given I call Shared Step 60935 (Product Information - US - Direct Ship - Private Label Only)
+#Given I call Shared Step 60935 (Product Information - US - Direct Ship - Private Label Only)
+	Given I should see the Product Information Page
+	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
+	Given In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Given in the Product Information page I click Continue
 
 Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
@@ -54,10 +64,12 @@ Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the co
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Engine Parts and Components with Battery Included
 
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60642
+#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60642
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase60642
 
-
-
+@ignore
+#Removed from regression 2024/03
 @TestCase:60643
 Scenario: [60643] Cameras / Camcorders w/Battery - RU000932
 
@@ -69,7 +81,10 @@ Given I generate a random UPC number and save as: UPC60643
 
 Given I delete all products with UPC Number: saved as UPC60643
 
-Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+Then I click the Add Product icon in the Navigation Pane
+Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Then in the New Product page, I click Continue
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Camera w/Battery
 

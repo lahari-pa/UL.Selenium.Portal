@@ -33,6 +33,8 @@ Feature: PDPlusFailures
 
 #This feature is used to hold copies of scenarios that fail / often fail in PD+. If a scenario found in this feature and has been passing consistently, feel free to remove it from the feature file.
 
+#Removed from regression 2024/03
+@ignore
 Scenario: [PDPlusFailure] 86452 | Account has Partial Stewardship Data
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -72,8 +74,8 @@ Scenario: [PDPlusFailure] 86452 | Account has Partial Stewardship Data
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase86452 and its status is: Completed
 
 	
-
-
+#Removed from regression 2024/03
+@ignore
 @ScenarioId:10579
 Scenario: [PDPlusFailure] 42196 | Flow 12
 	
@@ -248,8 +250,8 @@ Scenario: [PDPlusFailure] 87914 | Product Create and Process to Completed
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87914)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87914 and its status is: Completed
 
-
-
+#Removed from regression 2024/03
+@ignore
 @ScenarioId:10493
 Scenario: [75335c] Create a new simple product (Chalk) and submit thru to Completed status (NGHS only)	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account) (Removed Steps Updated)
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)

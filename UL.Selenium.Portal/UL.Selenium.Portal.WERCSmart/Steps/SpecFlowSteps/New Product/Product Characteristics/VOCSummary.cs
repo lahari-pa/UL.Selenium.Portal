@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
+using UL.Automation.Reporting.Functions;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {
@@ -44,7 +46,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		[StepDefinition(@"In the Volatile Organic Compound Summary Section, confirm that I see todays 'VOC Analysis Date'")]
 		public void VOCAnalsisDate()
 		{
-			new Steps_Prototype().ThenIConfirmThatISeeTodaysVOCAnalysisDate();
+			string date = DateTime.Now.ToString("MM/dd/yyyy");
+			var newProductpage = new NewProduct();
+			string found = newProductpage.GetValueVOCSummary("VOC Analysis");
+
+			Report.IsTrue(found.Trim() == date.Trim(),
+				$"date was not as expected! Expected: {date}, but found: {found}!",
+				$"statement was showing: {date}, as expected!");
 		}
 		[StepDefinition(@"In the Volatile Organic Compound Summary Section, confirm that I see the following 'VOC content in g/L, including water and exempt compounds' value: (.*)")]
 		public void VOCContentingLIncludingWater(string value)

@@ -23,21 +23,27 @@
 @ForwardProductRegistration
 @ProductSetUp
 @ViewUpcs
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 @run_UPC
-
+@StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
 Feature: UPC
 
-Background:
-	Given I verify the following users exist and if not I create them using SHAUser
-		| username    | FirstName | LastName   | Role         | EmailAddress                |
-		| SHAQAAuto29 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+#Background:
+#	Given I verify the following users exist and if not I create them using SHAUser
+#		| username    | FirstName | LastName   | Role         | EmailAddress                |
+#		| SHAQAAuto29 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 
 @TestCase:87584
 Scenario: [87584] Physical State = Solid, UPC step - Size shows as Size (Weight Ounces)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase87584
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
@@ -54,13 +60,18 @@ Scenario: [87584] Physical State = Solid, UPC step - Size shows as Size (Weight 
 	Then I should not see the following UPC options:
 		| Option                       |
 		| Size (Fluid Ounces)          |
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87584
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87584
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase87584
 @TestCase:87587
 Scenario: [87587] Physical State = Liquid, UPC step - Size shows as Size (Fluid Ounces)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble solution
 	Then I save the product information as: TestCase87587
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
@@ -77,13 +88,18 @@ Scenario: [87587] Physical State = Liquid, UPC step - Size shows as Size (Fluid 
 	Then I should not see the following UPC options:
 		| Option               |
 		| Size (Weight Ounces) |
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87587
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87587
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase87587
 @TestCase:87588
 Scenario: [87588] Physical State = Aerosol, UPC step - Size shows as Size (Fluid Ounces)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Aerosol
 	Then I save the product information as: TestCase87588
 	Given I call Shared Step 60310 (Product Information - Without Child question)
@@ -106,13 +122,18 @@ Scenario: [87588] Physical State = Aerosol, UPC step - Size shows as Size (Fluid
 	Then I should not see the following UPC options:
 		| Option               |
 		| Size (Weight Ounces) |
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87588
-
+#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87588
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase87588
 @TestCase:87593
 Scenario: [87593] Physical State = GAS, UPC step - Size shows as Size (Fluid Ounces)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Compressed gas
 	Then I save the product information as: TestCase87593
 	Given I call Shared Step 60310 (Product Information - Without Child question)
@@ -133,15 +154,20 @@ Scenario: [87593] Physical State = GAS, UPC step - Size shows as Size (Fluid Oun
 	Then I should not see the following UPC options:
 		| Option               |
 		| Size (Weight Ounces) |
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87593
-
+#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87593
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase87593
 #Remove from regression: 2023/05
 @ignore
 @TestCase:87596
 Scenario: [87596] Create BCP (Camera with battery) -  UPC step - Size shows as Weight (Ounces)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Camera w/Battery
 	Then I save the product information as: TestCase87596
 	Given I call Shared Step 70393 (Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
@@ -166,10 +192,20 @@ Scenario: [87596] Create BCP (Camera with battery) -  UPC step - Size shows as W
 Scenario: [87597] Create Electronic - UPC Step - Size shows as Size (Weight Ounces)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Answering machine, No battery included
 	Then I save the product information as: TestCase87597
-	Given I call Shared Step 60935 Product Information - US - Direct Ship - Private Label Only
+	#Given I call Shared Step 60935 Product Information - US - Direct Ship - Private Label Only
+	Given I should see the Product Information Page
+	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
+	Given In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Given in the Product Information page I click Continue
+
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 	And I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
@@ -181,8 +217,9 @@ Scenario: [87597] Create Electronic - UPC Step - Size shows as Size (Weight Ounc
 	Then I should not see the following UPC options:
 		| Option               |
 		| Size (Fluid Ounces)  |
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87597
-
+#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87597
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase87597
 #Remove from regression: 2023/05
 @ignore
 @TestCase:87595
@@ -194,7 +231,11 @@ Scenario: [87595] Kit - UPC Page - Size shows as Weight (Ounces)
 	Then The home screen should load
 	Given I filter the products by: Accepted by Retailers
 	Given I save the list of Product IDs displayed on the page as: ProductInProgressList87595
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Hair Color Kit
 	Then I save the product information as: TestCase87595
 	Given I call Shared Step 60648 (Product Information - US, No (Direct Ship), No (PL), No (GNFR))
@@ -282,8 +323,9 @@ Scenario: [87825] Summary Shows Case UPC Data
 		| saved as UPC87825  |                   | Paper bag      | 2             |          |               | AM        |
 	And I close the window that opened
 	And I navigate to the home page
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87825
-
+#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87825
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase87825
 #Remove from regression: 2023/05
 @ignore
 @TestCase:96071
@@ -605,8 +647,9 @@ Scenario: [87628] Universal Product Code (UPC) Step - Add Casepack - Case UPC fi
 	Given in the Universal Product Code (UPC) page I click Continue
 	Then I check if the Regulatory Documents page is shown
 	Then I navigate to the home page
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87628
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87628
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase87628
 #Remove from regression: 2023/05
 @tfs_design
 #Remove from regression: 2023/05
@@ -694,8 +737,9 @@ Scenario: [87598]- Universal Product Code (UPC) Step - Add Casepack - fields req
 		| Container Type         |
 		| Transportation Options |
 	Then I confirm no error is shown below the Individual UPC contained in the Case Pack field
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87598
-
+#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87598
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase87598
 @TestCase:115334
 Scenario: [115334] Target - Add UPC - DPCI - is no longer required
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -1025,8 +1069,9 @@ Scenario: [156789] UPC Screen - Internal SKU field - Check field parameters and 
 	Given I call Shared Step 163416 (Enter Universal Product Code (UPC) - Battery - Confirm SKU - No Package Type - Do Not Click Continue) for UPC saved as: UPC156789 with container type: Metal Container size: 40.0 and SKU: 123456
 	Given In the Universal Product Code (UPC) page I click Save
 	Then I check for the appropriate alert: Only 8 to 12 letters and/or numbers allowed
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase156789
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase156789
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase156789
 @TestCase:90001
 Scenario: [90001] Labels for Input Fields in UPC Screen
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)

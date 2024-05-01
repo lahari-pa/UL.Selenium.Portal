@@ -12,6 +12,9 @@
 @run_Flow2
 @Steps_Flow2A
 @UPC
+@StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+
 Feature: Flow 2
 
 #Remove from regression: 2023/05
@@ -115,8 +118,9 @@ Scenario: [57439] Anti-Transpirant (RU000992) 2-L
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Anti-Transpirant
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57439
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57439
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase57439
 @TestCase:57646
 Scenario: [57646] Plant Growth regulator (Liquid or Solid) (RU000291) 2-L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -149,8 +153,11 @@ Scenario: [57646] Plant Growth regulator (Liquid or Solid) (RU000291) 2-L
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Plant Growth regulator (Liquid or Solid)
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57646
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57646
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase57646
+#Removed from regression 2024/03
+@ignore
 @TestCase:57648
 Scenario: [57648] Trap and/or Bait Station - (RU000208) - 4S
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -208,7 +215,9 @@ Scenario: [57649] Cosmetics (RU000034) 2LS - 2L
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Cosmetics
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57649
+#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57649
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase57649
 
 #Remove from regression: 2023/05
 @ignore
@@ -274,7 +283,10 @@ Scenario: [57731] Aquarium maintenance chemicals (RU000327) - 2LS - 2S
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Aquarium maintenance chemicals
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57731
+#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57731
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase57731
+
 
 #Remove from regression: 2023/05
 @ignore
@@ -394,7 +406,9 @@ Scenario: [57647] Insecticide-Flying Bug-Moth Proofing Product containing <98% P
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Insecticide-Flying Bug-Moth Proofing Product containing >98% Para-Dichlorobenzene
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57647
+#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57647
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase57647
 
 
 	# Created by Saikiran Chittampally
@@ -406,7 +420,11 @@ Scenario: [63666] New Product - Food/ Nutritional Drug Fact Panel Questions
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC63666
 	Given I delete all products with UPC Number: saved as UPC63666
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Pet Shampoo
 	Then I save the product information as: TestCase63666
 	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
@@ -422,7 +440,9 @@ Scenario: [63666] New Product - Food/ Nutritional Drug Fact Panel Questions
 	Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63666
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63666
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase63666
 
 	#Executed in Staging Environment
 	# Created by Saikiran Chittampally
@@ -431,7 +451,11 @@ Scenario: [217787] Container Types - Primary Physical State Liquid - Dishwashing
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC217787
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Liquid Dishwashing Soap
 	Then I save the product information as: TestCase217787
 	Given I call Shared Step 217788 (Product Information - not Pesticide, US only, select Yes for JSON Question - Happy Path)
@@ -479,4 +503,6 @@ Scenario: [217787] Container Types - Primary Physical State Liquid - Dishwashing
 	| Plastic Container              |
 	| Vial - Medical                 |
 	Given I click continue
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase217787
+#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase217787
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase217787

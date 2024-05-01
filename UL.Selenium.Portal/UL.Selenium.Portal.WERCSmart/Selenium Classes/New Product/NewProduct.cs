@@ -22,6 +22,7 @@ using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Chrome;
 using System.Net.NetworkInformation;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
@@ -3623,7 +3624,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public IWebElement StandaloneCheckbox(string description)
 		{
-			IWebElement el = this.ContainerElement.FindElement(By.XPath($@".//div[@class='checkbox' and (.//span[contains(text(),""{description}"")])]/label/input"), 2);
+			IWebElement el = this.ContainerElement.FindElement(By.XPath($@".//div[@class='checkbox' and (.//span[contains(text(),""{description}"")])]/label/input | .//div[span[text() = '{description}']]/input"), 2);
 			if (el == null)
 			{
 				Report.Info($"Could not find checkbox with description: '{description}'");
@@ -3864,7 +3865,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				string xPath = @"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),""" + value + @""") and (./preceding-sibling::input[@type='radio'])]";
+				string xPath = @"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and text() = """ + value + @""" and (./preceding-sibling::input[@type='radio'])]";
 				IWebElement el;
 				if (section == "Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.")
 				{
@@ -5941,7 +5942,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool CheckTextOnThePage(string[] correctText)
 		{
 
-			List<IWebElement> displayedText = this.ContainerElement.FindElements(By.XPath("//div[@data-bind='html: description, attr: { class: msgClass }']"), 2).ToList();
+			List<IWebElement> displayedText = this.ContainerElement.FindElements(By.XPath("//div[@data-bind='html: description, attr: { class: msgClass }'] | //div[@data-bind='html: description']"), 2).ToList();
 			bool result = true;
 			foreach (IWebElement element in displayedText)
 			{
@@ -6013,6 +6014,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return skuField.Text.Length == 0;
 		}
 
+		public bool ClearTextBox(string placeholderValue)
+		{
+			IWebElement textbox = this.ContainerElement.FindElement(By.XPath($@".//input[@type='text' and @placeholder='{placeholderValue}']")); 
+			return textbox.ClearTextBox(); 
+		}
+
+		public bool ConfirmTextboxDisplayed(string placeholderValue)
+		{
+			IWebElement textbox = this.ContainerElement.FindElement(By.XPath($@".//input[@type='text' and @placeholder='{placeholderValue}']"));
+			return textbox != null;
+		}
 	}
 
 	public class ProductInformation

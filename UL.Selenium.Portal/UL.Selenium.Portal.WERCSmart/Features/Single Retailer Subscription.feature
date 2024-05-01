@@ -21,8 +21,9 @@
 @SupplierAccounts
 @SubEnrollmentNew
 @SubEnrollment
-
-
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@StepsPrototype
+@PhysicalAndChemicalProp
 Feature: Single Retailer Subscription
 
 @TestCase:200502
@@ -126,52 +127,52 @@ And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registratio
 And I enter the text: saved as Product200434 in the 'Search by WPS ID or Product Name' field
 And In the Foward Product Registration Screen I should not see product: saved as Product200434
 
+#Removed from regression 2024/04
+@ignore
 @TestCase:200449
-
 Scenario: [200449] Single Retailer - Not Available for Forwarding
-
-Given I log in with the account saved in TReVor as: SingleRetailerAccount
-Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
-Then I save the product information as: Product200449
-Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Formaldehyde
-Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-Then I call Shared Step 183893 (Single Retailer - Retailer Screen - Select retailer)
-| Retailer |
-| Amazon   |
-Then I generate a random UPC number and save as: UPC200449
-And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC200449, container type: any and size: 20
-And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-And in the Additional Documents to Provide page I click Continue
-And in the Optional Reports and Documents Available for Purchase page I click Continue
-And I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
-| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
-And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: text
-And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-And If purchase details are showing click confirm order
-And In the Thank You screen I click Home
-Then I call Shared Step 65080 (Login to Studio and Open SHA manager)
-And In the SHA manager grid I see the WPS ID I have saved as product: Product200449 and if status is Submitted, I change status to Assigned, then confirm status is Assigned
-And I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: Product200449)
-And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: Product200449)
-And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: Product200449)
-And I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: Product200449
-And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: Product200449)
-And I call Shared Step 59066 (Go to SHA Manager)
-And I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: Product200449)
-And I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: Product200449) for
-| Retailer |
-| Amazon   |
-And I navigate to the landing page
-Given I log in with the account saved in TReVor as: SingleRetailerAccount
-And I search for the product saved as: Product200449
-And I click Row Actions for the first product returned
-And I should not see the following Actions options
-| Option             |
-| Archive Retailers  |
+	Given I log in with the account saved in TReVor as: SingleRetailerAccount
+	Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save the product information as: Product200449
+	Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Formaldehyde
+	Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I call Shared Step 183893 (Single Retailer - Retailer Screen - Select retailer)
+		| Retailer |
+		| Amazon   |
+	Then I generate a random UPC number and save as: UPC200449
+	And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC200449, container type: any and size: 20
+	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	And in the Additional Documents to Provide page I click Continue
+	And in the Optional Reports and Documents Available for Purchase page I click Continue
+	And I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
+		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
+	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: text
+	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	And If purchase details are showing click confirm order
+	And In the Thank You screen I click Home
+	Then I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And In the SHA manager grid I see the WPS ID I have saved as product: Product200449 and if status is Submitted, I change status to Assigned, then confirm status is Assigned
+	And I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: Product200449)
+	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: Product200449)
+	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: Product200449)
+	And I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: Product200449
+	And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: Product200449)
+	And I call Shared Step 59066 (Go to SHA Manager)
+	And I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: Product200449)
+	And I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: Product200449) for
+		| Retailer |
+		| Amazon   |
+	And I navigate to the landing page
+	Given I log in with the account saved in TReVor as: SingleRetailerAccount
+	And I search for the product saved as: Product200449
+	And I click Row Actions for the first product returned
+	And I should not see the following Actions options
+		| Option             |
+		| Archive Retailers  |
 
 @TestCase:184385
 
@@ -252,8 +253,21 @@ Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alkaline Battery
 Then I save the product information as: TestCase182705
-Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
-Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+#Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+	Then I should be on the Product Information Page
+	And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No 
+	And In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page, I click Continue
+
+#Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+	Then I should be on the Physical and Chemical Properties Page
+	And In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	And In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then in the Physical and Chemical Properties page, I click Continue
+
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Water      | 100     | false               | false       |            |

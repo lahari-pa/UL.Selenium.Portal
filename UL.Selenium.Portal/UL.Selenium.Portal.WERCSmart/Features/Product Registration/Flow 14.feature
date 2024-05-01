@@ -10,6 +10,8 @@
 @wercsmart
 @RetailPartners
 @run_Flow14
+@StepsPrototype
+
 Feature: Flow 14
 
 
@@ -44,7 +46,9 @@ Scenario: [58736] Sanitizer Wipes for Use on Domesticated Animals (Solid)- RU001
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
 		| Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58736. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58736
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58736
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase58736
 
 @TestCase:58738
 Scenario: [58738] Sanitizer Wipes for Use on Domesticated Animals (Liquid)- RU001240
@@ -85,4 +89,6 @@ Scenario: [58738] Sanitizer Wipes for Use on Domesticated Animals (Liquid)- RU00
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
 		| Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58738. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58738
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58738
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase58738

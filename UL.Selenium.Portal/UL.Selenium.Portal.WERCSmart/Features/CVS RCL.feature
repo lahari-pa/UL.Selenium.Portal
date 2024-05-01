@@ -10,6 +10,10 @@
 @wercsmart
 @RetailPartners
 @run_CVSRCL
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 
 Feature: CVS RCL
 
@@ -19,7 +23,11 @@ Scenario: [74208] CVS merchandising category and verification
 	Then The home screen should load
 	#Given I save the UPC number 050428290231 as: UPC74208
 	#Given I delete all products with UPC Number: saved as UPC74208
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
 	Then I save the product information as: TestCase74208
 	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
@@ -97,15 +105,20 @@ Scenario: [74208] CVS merchandising category and verification
 		| Other                     |
 	Given I click continue
 	Then What is the CVS merchandising category for this product? should be showing the error messages: This is a required field.
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74208
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74208
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase74208
 @TestCase:74253
 Scenario: [74253] CVS marketed or labeled for infants question and verification
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	#Given I save the UPC number 050428156483 as: UPC74253
 	#Given I delete all products with UPC Number: saved as UPC74253
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
 	Then I save the product information as: TestCase74253
 	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
@@ -123,8 +136,9 @@ Scenario: [74253] CVS marketed or labeled for infants question and verification
 	Then the question: Is this product specifically designed, marketed or labeled for infants, babies, or children? is displayed at position: 4
 	Given I click continue
 	Then Is this product specifically designed, marketed or labeled for infants, babies, or children? should be showing the error messages: This is a required field.
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74253
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74253
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase74253
 @ignore
 @TestCase:74254
 Scenario: [74254] CVS topically used product and verification
@@ -132,7 +146,11 @@ Scenario: [74254] CVS topically used product and verification
 	Then The home screen should load
 	#Given I save the UPC number 050428285367 as: UPC74254
 	#Given I delete all products with UPC Number: saved as UPC74254
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
 	Then I save the product information as: TestCase74254
 	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
@@ -159,7 +177,11 @@ Scenario: [74255] CVS microbeads product and verification
 	Then The home screen should load
 	#Given I save the UPC number 050428285367 as: UPC74255
 	#Given I delete all products with UPC Number: saved as UPC74255
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
 	Then I save the product information as: TestCase74255
 	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
@@ -179,15 +201,20 @@ Scenario: [74255] CVS microbeads product and verification
 	Then the question: Product contains microbeads is displayed at position: 6
 	Given I click continue
 	Then Product contains microbeads should be showing the error messages: This is a required field.
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74255
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74255
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase74255
 @TestCase:74256
 Scenario: [74256] CVS Refer to your Product Label and verification
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	#Given I save the UPC number 050428290231 as: UPC74256
 	#Given I delete all products with UPC Number: saved as UPC74256
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
 	Then I save the product information as: TestCase74256
 	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
@@ -216,15 +243,20 @@ Scenario: [74256] CVS Refer to your Product Label and verification
 		| None of the Above                           |
 	Given I click continue
 	#Then Refer to your Product Label. Select the options that appear on the label. should be showing the error messages: This is a required field.
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74256
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74256
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase74256
 @TestCase:74257
 Scenario: [74257] CVS product intended to be rinsed off after use and verification
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	#Given I save the UPC number 050428290231 as: UPC74257
 	#Given I delete all products with UPC Number: saved as UPC74257
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
 	Then I save the product information as: TestCase74257
 	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
@@ -245,7 +277,9 @@ Scenario: [74257] CVS product intended to be rinsed off after use and verificati
 	Then the question: Is this product intended to be rinsed off after use? is displayed at position: 7
 	Given I click continue
 	Then Is this product intended to be rinsed off after use? should be showing the error messages: This is a required field.
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74257
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74257
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase74257
 
 @TestCase:74259
 Scenario: [74259] CVS product intended to be ingested and verification
@@ -253,7 +287,11 @@ Scenario: [74259] CVS product intended to be ingested and verification
 	Then The home screen should load
 	#Given I save the UPC number 050428290231 as: UPC74259
 	#Given I delete all products with UPC Number: saved as UPC74259
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
 	Then I save the product information as: TestCase74259
 	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
@@ -276,7 +314,9 @@ Scenario: [74259] CVS product intended to be ingested and verification
 	Then the question: Is this product intended to be ingested? is displayed at position: 9
 	Given I click continue
 	Then Is this product intended to be ingested? should be showing the error messages: This is a required field.
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74259
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74259
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase74259
 
 @TestCase:74260
 Scenario: [74260] CVS Is this product a personal care sanitizer and verification
@@ -284,7 +324,11 @@ Scenario: [74260] CVS Is this product a personal care sanitizer and verification
 	Then The home screen should load
 	#Given I save the UPC number 050428290231 as: UPC74260
 	#Given I delete all products with UPC Number: saved as UPC74260
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
 	Then I save the product information as: TestCase74260
 	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
@@ -308,8 +352,9 @@ Scenario: [74260] CVS Is this product a personal care sanitizer and verification
 	Then the question: Is this product a personal care sanitizer, wash, or cleanser (e.g., Hand, Body, Facial)? is displayed at position: 10
 	Given I click continue
 	Then Is this product a personal care sanitizer, wash, or cleanser (e.g., Hand, Body, Facial)? should be showing the error messages: This is a required field.
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74260
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74260
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase74260
 @TestCase:74188
 Scenario: [74188] CVS Store Brand Associations and verification
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -323,7 +368,11 @@ Scenario: [74188] CVS Store Brand Associations and verification
 	Given I navigate to the home page
 	Given I save the UPC number 050428290231 as: UPC74188
 	Given I delete all products with UPC Number: saved as UPC74188
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
 	Then I save the product information as: TestCase74188
 	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
@@ -380,7 +429,9 @@ Scenario: [74188] CVS Store Brand Associations and verification
 		| Other                                              |
 	Given I click continue
 	Then What is the CVS Store Brand associated to this product? should be showing the error messages: This is a required field.
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74188
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74188
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase74188
 
 @ignore
 @TestCase:74207
@@ -396,7 +447,11 @@ Scenario: [74207] Product Development Manager (PDM) and verification
 	Given I navigate to the home page
 	#Given I save the UPC number 050428290231 as: UPC74207
 	#Given I delete all products with UPC Number: saved as UPC74207
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
 	Then I save the product information as: TestCase74207
 	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
@@ -415,6 +470,8 @@ Scenario: [74207] Product Development Manager (PDM) and verification
 	Then Who is the Product Development Manager (PDM) for this product? should be showing the error messages: This is a required field.
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74207
 
+#Removed from regression 2024/04
+@ignore
 @TestCase:74270
 Scenario: [74270] CVS RCL - Page should not show if Product does NOT have CVS Selected but has an eligible UPC
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -428,7 +485,11 @@ Scenario: [74270] CVS RCL - Page should not show if Product does NOT have CVS Se
 	Given I navigate to the home page
 	#Given I save the UPC number 050428075661 as: UPC74270
 	#Given I delete all products with UPC Number: saved as UPC74270
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
 	Then I save the product information as: TestCase74270
 	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
@@ -445,6 +506,8 @@ Scenario: [74270] CVS RCL - Page should not show if Product does NOT have CVS Se
 	And I should see the Regulatory Documents to Provide Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74270
 
+#Removed from regression 2024/04
+@ignore
 @TestCase:74272
 Scenario: [74272] CVS RCL - Page is NOT shown if Product has CVS selected with a UPC that does not start 050428
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -459,7 +522,11 @@ Scenario: [74272] CVS RCL - Page is NOT shown if Product has CVS selected with a
 	#Given I save the UPC number 0043396824430 as: UPC74272
 	#Given I delete all products with UPC Number: saved as UPC74272
 	Given I generate a random UPC number and save as: UPC74272
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
 	Then I save the product information as: TestCase74272
 	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
@@ -488,7 +555,11 @@ Scenario: [74261] CVS Brand Registration section and validation
 	Given I navigate to the home page
 	#Given I save the UPC number 050428075661 as: UPC74261
 	#Given I delete all products with UPC Number: saved as UPC74261
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
 	Then I save the product information as: TestCase74261
 	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
@@ -509,8 +580,9 @@ Scenario: [74261] CVS Brand Registration section and validation
 	Given I click continue
 	Then I should see an error message: This is a required field.
 	Then The alert message is displayed with text: Contact your CVS Product Development Manager with any questions.
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74261
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74261
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase74261
 @TestCase:74278
 Scenario: [74278] CVS Brand Registration section and Data Tier validation
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -549,4 +621,6 @@ Scenario: [74278] CVS Brand Registration section and Data Tier validation
 	Then I click Row Actions for the first product returned
 	Then I click on the Row Action: Edit
 	Then I should see the CVS Page
-	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74278
+	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74278
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase74278

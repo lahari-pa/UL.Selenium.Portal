@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenQA.Selenium.DevTools.V108.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,12 +11,27 @@ using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {
 	[Binding, Scope(Tag = "Ingredients")]
 	class Ingredients
 	{
+
+		[StepDefinition(@"In the Ingredients Section, In the popup view with the following title: (.*) I click the (.*) button")]
+		public void ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton(string popupTitle, string buttonTitle)
+		{
+			new Steps_Prototype().ClickTheFollowingButtonInThePopupView(popupTitle, buttonTitle);
+			Delay.Seconds(1);
+		}
+
+		[StepDefinition(@"In the Ingredients Section, I confirm I check the checkbox in the popup view with the following text: (.*)")]
+		public void ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingText(string text)
+		{
+			new Steps_Prototype().CheckACheckboxWithTheFollowingText(text);
+		}
+
 		[StepDefinition(@"In the Ingredients Section, set the option in section: 'Ingredient Reference Number (Optional) to: (.*)")]
 		public void LiquidCoreProductSelectYesOrNo(string option)
 		{
@@ -382,11 +398,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			this.IngredientsTableRowIsIsNotDisplayed(searchType, searchText, "is not");
 		}
 
-
-		/// Copy and paste the following tables to create the table structure as needed 
-		///| SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-		///
-		/// | SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Active Ingredient? | Public Name |
+			/// Copy and paste the following tables to create the table structure as needed 
+			///| SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+			///
+			/// | SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Active Ingredient? | Public Name |
 		[StepDefinition(@"In the Ingredients section, add the following ingredients:")]
 		public void IngredientsTableAddFollowingIngredients(Table inputTable)
 		{
@@ -406,26 +421,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			{
 				string[] searchTypes = new string[] { "component name", "CAS number" };
 				Report.IsTrue(searchTypes.Contains(inputRow["SearchType"]),$"Failure, '{inputRow["SearchType"]}' is not a valid search type ('component name' or 'CAS number').",$"Success, '{inputRow["SearchType"]}' is a valid search type.");
-				Report.StartSubStep($"In the Ingredients section, add component with {inputRow["SearchType"]}: {inputRow["SearchText"]}");
-				this.IngredientsTableAddIngredientBy(inputRow["SearchType"], inputRow["SearchText"]);
-				Report.StartSubStep($"In the Ingredients Table row with {inputRow["SearchType"]}: {inputRow["SearchText"]}, in 'Percent' column text input enter: {inputRow["Percent"]}");
-				this.IngredientsTableRowEnterPercent(inputRow["SearchType"], inputRow["SearchText"], "Percent", inputRow["Percent"]);
+				Report.StartSubStep($"In the Ingredients section, add component with {inputRow["SearchType"]}: {inputRow["SearchValue"]}");
+				this.IngredientsTableAddIngredientBy(inputRow["SearchType"], inputRow["SearchValue"]);
+				Report.StartSubStep($"In the Ingredients Table row with {inputRow["SearchType"]}: {inputRow["SearchValue"]}, in 'Percent' column text input enter: {inputRow["Percent"]}");
+				this.IngredientsTableRowEnterPercent(inputRow["SearchType"], inputRow["SearchValue"], "Percent", inputRow["Percent"]);
 				if (inputRow["Publicly Disclosed?"] == "True")
 				{
-					Report.StartSubStep($"In the Ingredients Table row with {inputRow["SearchType"]}: {inputRow["SearchText"]}, in 'Publicly Disclosed?' column set checkbox to checked");
-					this.IngredientsTableRowCheckUncheckCheckBox(inputRow["SearchType"], inputRow["SearchText"], "Publicly Disclosed?", "checked");
-					Report.StartSubStep($"Then In the Ingredients Table row with {inputRow["SearchType"]}: {inputRow["SearchText"]}, in 'Public Name' column select option {inputRow["Public Name"]}");
-					this.IngredientsTableRowSelectOptionSelect(inputRow["SearchType"], inputRow["SearchText"], "Public Name", inputRow["Public Name"]);
+					Report.StartSubStep($"In the Ingredients Table row with {inputRow["SearchType"]}: {inputRow["SearchValue"]}, in 'Publicly Disclosed?' column set checkbox to checked");
+					this.IngredientsTableRowCheckUncheckCheckBox(inputRow["SearchType"], inputRow["SearchValue"], "Publicly Disclosed?", "checked");
+					Report.StartSubStep($"Then In the Ingredients Table row with {inputRow["SearchType"]}: {inputRow["SearchValue"]}, in 'Public Name' column select option {inputRow["Public Name"]}");
+					this.IngredientsTableRowSelectOptionSelect(inputRow["SearchType"], inputRow["SearchValue"], "Public Name", inputRow["Public Name"]);
 				}
 				if (inputRow["Trade Secret?"] == "True")
 				{
-					Report.StartSubStep($"In the Ingredients Table row with {inputRow["SearchType"]}: {inputRow["SearchText"]}, in 'Trade Secret?' column set checkbox to checked");
-					this.IngredientsTableRowCheckUncheckCheckBox(inputRow["SearchType"], inputRow["SearchText"], "Trade Secret?", "checked");
+					Report.StartSubStep($"In the Ingredients Table row with {inputRow["SearchType"]}: {inputRow["SearchValue"]}, in 'Trade Secret?' column set checkbox to checked");
+					this.IngredientsTableRowCheckUncheckCheckBox(inputRow["SearchType"], inputRow["SearchValue"], "Trade Secret?", "checked");
 				}
 				if(inputTable.ContainsColumn("Active Ingredient?") && inputRow["Active Ingredient"] == "True")
 				{
-					Report.StartSubStep($"In the Ingredients Table row with {inputRow["SearchType"]}: {inputRow["SearchText"]}, in 'Active Ingredient?' column set checkbox to checked");
-					this.IngredientsTableRowCheckUncheckCheckBox(inputRow["SearchType"], inputRow["SearchText"], "Active Ingredient?", "checked");
+					Report.StartSubStep($"In the Ingredients Table row with {inputRow["SearchType"]}: {inputRow["SearchValue"]}, in 'Active Ingredient?' column set checkbox to checked");
+					this.IngredientsTableRowCheckUncheckCheckBox(inputRow["SearchType"], inputRow["SearchValue"], "Active Ingredient?", "checked");
 				}
 			}
 		}

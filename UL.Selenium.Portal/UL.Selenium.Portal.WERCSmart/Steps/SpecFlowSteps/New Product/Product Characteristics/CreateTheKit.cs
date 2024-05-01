@@ -4,17 +4,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
+using UL.Automation.Reporting.Functions;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {
 	[Binding, Scope(Tag = "Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:CreateTheKit")]
-	class CreateTheKit
+	class CreateTheKitSteps
 	{
 		[StepDefinition(@"In the Create the Kit page add product: (.*)")]
 
-		public void SelectProductCreateTheKit(string productName)
+		public void SelectProductCreateTheKit(string product)
 		{
-			new Steps_Prototype().CreateTheKitAddProduct(productName);
+			CreateTheKit createTheKit = new CreateTheKit();
+			SearchBoxPrototype searchBoxPrototype = new SearchBoxPrototype();
+			if (Report.IsTrue(createTheKit.SearchInputExists(), $"Failed to find the search input in the 'Create the Kit' page", "Successfully found the search input in the 'Create the Kit' page"))
+			{
+				Report.IsTrue(createTheKit.SearchInputClick(), $"Failed to click in search input", "Successfully clicked in search input");
+			}
+			if (Report.IsTrue(searchBoxPrototype.SearchInputExists(), $"Failed to find the search input in the 'Create the Kit' page", "Successfully found the search input in the 'Create the Kit' page"))
+			{
+				Report.IsTrue(searchBoxPrototype.SearchInputEnterText(product), "Failed to enter text in search input", "Successfully entered text in search input");
+			}
+			Report.IsTrue(searchBoxPrototype.SearchResultsExists(), "Failed to find search results", "Successfully found search results");
+			var homePage = new Selenium_Classes.ChooseGoodGuide.ChooseGoodGuide_Homepage();
+			homePage.WaitLoading();
+			Report.IsTrue(searchBoxPrototype.SearchComponentGet(product).Click(), $"Failed to select {product} in the 'Create the Kit' page", $"Successfully selected {product} in the 'Create the Kit' page");
 		}
 
 	}

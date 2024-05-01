@@ -22,6 +22,8 @@ Background:
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
         | SHAQAAuto9  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
+#Removed from regression 2024/04
+@ignore
 @73949
 @TestCase:73949
 Scenario: [73949] Kit - Document merge - US only

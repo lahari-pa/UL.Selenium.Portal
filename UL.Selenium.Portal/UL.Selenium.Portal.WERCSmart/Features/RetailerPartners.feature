@@ -9,6 +9,7 @@
 @run_RetailerPartners
 Feature: Retailer Partners
 
+#Removed from regression 2024/04
 @ignore
 @TestCase:56881
 Scenario: [56881] Retailer Partners - Main Page layout (existing supplier)
@@ -144,6 +145,8 @@ Scenario: [56981] Retailer & You - layout
 	And The pie chart footer text should contain: % of your product portfolio is associated with Walgreens
 
 #BLOCKED because requires database access
+#Removed from regression 2024/04
+@ignore
 @TestCase:56982
 Scenario: [56982] Retailer & You - validation of information shown
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -181,6 +184,8 @@ Scenario: [56911] Retailer Detail Page - Your Supplier ID - Add New Supplier ID 
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
+#Removed from regression 2024/04
+@ignore
 @TestCase:56927
 Scenario: [56927] What are the Data Usage Tiers? - Tier 1: Regulatory Compliance - wording check
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -195,6 +200,8 @@ Scenario: [56927] What are the Data Usage Tiers? - Tier 1: Regulatory Compliance
 	And I close the Data Tier Details popup
 	And I navigate to the home page
 
+#Removed from regression 2024/04
+@ignore
 @TestCase:56929
 Scenario: [56929] What are the Data Usage Tiers? - Tier 2: Chemical Program Support - wording check
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -218,6 +225,8 @@ Scenario: [56929] What are the Data Usage Tiers? - Tier 2: Chemical Program Supp
 	And I close the Data Tier Details popup
 	And I navigate to the home page
 
+#Removed from regression 2024/04
+@ignore
 @TestCase:56931
 Scenario: [56931] What are the Data Usage Tiers? - Tier 3: Supplemental Reports - wording check
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -253,6 +262,8 @@ Scenario: [56933] What are the Data Usage Tiers? - Tier 4: Public Disclosure Opt
 	And I close the Data Tier Details popup
 	And I navigate to the home page
 
+#Removed from regression 2024/04
+@ignore
 @TestCase:56925
 Scenario: [56925] My Data & Recipients - General layout checks
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -269,6 +280,8 @@ Scenario: [56925] My Data & Recipients - General layout checks
 	And I should not be able to edit Tier Tier 1
 	And I navigate to the home page
 
+#Removed from regression 2024/04
+@ignore
 @TestCase:56926
 Scenario: [56926] My Data & Recipients - What are the Data Usage Tiers - tab/headings
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -398,6 +411,7 @@ Scenario: [56914] Retailer Detail Page - Retailer requires Supplier ID and Data 
 	And The pie chart should be showing on the retailer details page
 	And The pie chart footer text should contain: % of your product portfolio is associated with Wal-Mart/SAM'S CLUB
 
+#Removed from regression 2024/04
 @ignore
 @TestCase:56928
 Scenario: [56928] What are the Data Usage Tiers? - Tier 1: Regulatory Compliance - Download PDF
@@ -418,7 +432,7 @@ Scenario: [56928] What are the Data Usage Tiers? - Tier 1: Regulatory Compliance
 	#Then I confirm a new window opens displaying the document url: Data_Tier_Disclosure_12_01_2017
 	And I close the Data Tier Details popup
 
-
+#Removed from regression 2024/04
 @ignore
 @TestCase:56930
 Scenario: [56930] What are the Data Usage Tiers - Tier 2: Chemical Program Support - Download PDF
@@ -438,7 +452,7 @@ Scenario: [56930] What are the Data Usage Tiers - Tier 2: Chemical Program Suppo
 	And I close the Terms Use tab
 	And I close the Data Tier Details popup
 
-
+#Removed from regression 2024/04
 @ignore
 @TestCase:56932
 Scenario: [56932] What are the Data Usage Tiers - Tier 3: Supplemental Reports (Internal Business Use Only) - Download PDF
@@ -458,6 +472,7 @@ Scenario: [56932] What are the Data Usage Tiers - Tier 3: Supplemental Reports (
 	And I close the Terms Use tab
 	And I close the Data Tier Details popup
 
+#Removed from regression 2024/04
 @ignore
 @TestCase:56934
 Scenario: [56934] What are the Data Usage Tiers - Tier 4: Public Disclosure Options - Download PDF

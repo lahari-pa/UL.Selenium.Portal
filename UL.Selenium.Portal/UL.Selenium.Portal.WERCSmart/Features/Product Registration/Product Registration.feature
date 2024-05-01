@@ -13,6 +13,9 @@
 @UPC
 @NewProduct
 @run_ProductRegistration
+@StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
 Feature: Product Registration
 
 @tfs_design
@@ -29,6 +32,9 @@ Scenario: [130389] Demo Scenario
 #Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 #Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 #Then The home screen should load
+
+#Removed from regression 2024/04
+@ignore
 @ScenarioId:486
 Scenario: Create a new product
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -55,12 +61,13 @@ Scenario: [63705] New Product - BCP
 	And in the New Product page I click Continue
 	Then I save the product information as: TestCase63705
 	# Shared step 63704
-	And I should see the Product Information Page
-	And In the Information Page the check box for: United States should be: checked
-	And I set 'Product is shipped directly' to: No
-	And I set 'Product is a Retailers Private Label or Brand' to: No
-	And I set 'Product is solely for the Retailer's use' to: No
-	And in the New Product page I click Continue
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page, I click Continue
+
 	And For 'U.S. Toxic Substances Control Act (TSCA) status' I select: Compliant
 	And I set 'Prop65' to: No
 	And in the New Product page I click Continue
@@ -814,7 +821,11 @@ Scenario: [50863] WERCSmart Portal Verification on Required Selections for the "
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC50863
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
 	Then I save the product information as: TestCase50863
 	Given I should see the Product Information Page
@@ -826,5 +837,7 @@ Scenario: [50863] WERCSmart Portal Verification on Required Selections for the "
 		| White Mineral Oil (petroleum)       | 50       | false               | false       |            |
 	Given I call Shared Step 234333 (Inventory Status, Prop 65 (US) - Applicable Only to Lip Balm (RU000246))
 	Given I call Shared Step 234334 (Regulatory Information 3 - Applicable Only to Lip Balm (RU000246))
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase50863
+#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase50863
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase50863
 

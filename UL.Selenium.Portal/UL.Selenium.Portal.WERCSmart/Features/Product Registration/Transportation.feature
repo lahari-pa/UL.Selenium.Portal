@@ -13,6 +13,7 @@
 @SHA
 @CreateProducts
 @Studio
+@StepsPrototype
 @ProductSetUp
 @run_Transportation
 
@@ -544,4 +545,6 @@ Then I call Shared Step 126160 (U.S. Department of Transportation (DOT) Classifi
 Then in page U. S. Department of Transportation (DOT) Classification I should see no errors
 And I click the page heading: U. S. Department of Transportation (DOT) Classification
 And For the lighter, provide the DOT Approval Number (LAA) should be showing the value: 123
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase126286
+#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase126286
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase126286

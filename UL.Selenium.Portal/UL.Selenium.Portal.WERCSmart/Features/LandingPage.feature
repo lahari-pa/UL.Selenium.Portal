@@ -8,6 +8,8 @@ Feature: Landing Page
 
 #does not work in staging as of 09-17-2018
 #added comment
+#Removed from regression 2024/04
+@ignore
 @TestCase:50769
 Scenario: [50769] Navigation
 	Then I should see the following menu options in the header:
@@ -22,6 +24,8 @@ Scenario: [50769] Navigation
 	Given I select the Subscription link
 	Then I confirm I am taken to the Subscription page
 
+#Removed from regression 2024/04
+@ignore
 @singlerun
 @TestCase:50770
 Scenario: [50770] Sign Up Link
@@ -34,15 +38,17 @@ Scenario: [50770] Sign Up Link
 Scenario: [59830] TimeOut Feature
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
 	Then the WERCSmart homepage should load
-Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
+	Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
 	Then Click Yes on the inactivity popup
-Then I confirm the Inactivity pop is closed
+	Then I confirm the Inactivity pop is closed
 	And the WERCSmart homepage should load
-Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
+	Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
 	Then Click No on the inactivity popup
 	And the landing page should load
 
 #verify the wait time is 15 min for each click on popup (yes/no)
+#Removed from regression 2024/04
+@ignore
 @tfsdesign
 @TestCase:50772
 Scenario: [50772] Get Started Now Button
@@ -50,6 +56,8 @@ Scenario: [50772] Get Started Now Button
 	Then the login page should appear
 
 #does not work in staging as of 09-17-2018
+#Removed from regression 2024/04
+@ignore
 @tfsdesign
 @TestCase:50775
 Scenario: [50775] Terms of Use

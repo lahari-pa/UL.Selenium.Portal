@@ -14,6 +14,8 @@
 @SHA
 @run_Flow8
 @Studio
+@StepsPrototype
+
 Feature: Flow 8
 
 @TestCase:57295
@@ -44,7 +46,9 @@ Scenario: [57295] Absorbent solid - Automotive(RU000939) - 8-S
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Absorbent Solid
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57295
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57295
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase57295
 
 @TestCase:57332
 Scenario: [57332] Automotive Accessories containing Gel (Seat Cushions, etc) - 8-S
@@ -73,8 +77,9 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Automotive Accessories containing Gel (Seat Cushions, etc.)
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57332
-
+#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57332
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase57332
 #Remove from regression: 2023/05
 @ignore
 @TestCase:58184
@@ -135,8 +140,9 @@ Scenario: [58187] Matches (RU000317) - 8-S
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Matches
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58187
-
+#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58187
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase58187
 #check RU number and name
 @TestCase:58293
 Scenario: [58293] Engines for Model Rockets(RU000338) - 8-S
@@ -166,8 +172,9 @@ Scenario: [58293] Engines for Model Rockets(RU000338) - 8-S
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Engines for Model Rockets
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58293
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58293
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase58293
 @TestCase:58297
 Scenario: [58297] Fireworks (RU000330) - 8-S
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -194,8 +201,9 @@ Scenario: [58297] Fireworks (RU000330) - 8-S
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Fireworks
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58297
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58297
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase58297
 #duplicate-
 #Scenario: [57088] Engine (motor) oil for Auto or Boat
 #
@@ -269,8 +277,9 @@ Scenario: [58104] Fabric Dye - Liquid or Solid - 8-L
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Fabric Dye - Liquid or Solid
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58104
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58104
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase58104
 @tfs_design
 #Remove from regression: 2023/05
 @ignore
@@ -332,8 +341,9 @@ Scenario: [58210] Antibiotic, Liquid or Cream, Non-Aerosol - 8-L
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Antibiotic, Liquid or Cream, Non-Aerosol
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58210
-
+#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58210
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase58210
 #Remove from regression: 2023/05
 @ignore
 @TestCase:58282
@@ -393,8 +403,9 @@ Scenario: [58285] Toothpaste - Whitening (RU001359) - 8-L
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Toothpaste - Whitening
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58285
-
+#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58285
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase58285
 #Remove from regression: 2023/05
 @ignore
 @TestCase:58390
@@ -453,8 +464,9 @@ Scenario: [58401] Correction Fluid(RU000201) - 8L
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Correction fluid
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58401
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58401
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase58401
 @TestCase:57339
 Scenario: [57339] Craft Kits containing Glues and Paints - Crafts - 8-All - 8L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -483,8 +495,9 @@ Scenario: [57339] Craft Kits containing Glues and Paints - Crafts - 8-All - 8L
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Craft kits containing paints and glues
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57339
-
+#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57339
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase57339
 #Remove from regression: 2023/05
 @ignore
 @TestCase:58810
@@ -577,7 +590,9 @@ Scenario: [57088] Engine (motor) oil for Auto or Boat - 8L
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Engine (motor) oil for Auto or Boat
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57088
+#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57088
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase57088
 
 @TestCase:57709
 Scenario: [57709] Training aid repellant (RU000326) - 8LS -8L
@@ -605,8 +620,9 @@ Scenario: [57709] Training aid repellant (RU000326) - 8LS -8L
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Training aid repellant
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57709
-
+#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57709
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase57709
 @tfs_design
 #Remove from regression: 2023/05
 @ignore
@@ -768,7 +784,9 @@ Scenario: [128744] Ammunition - DOT Exceptions Saved
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 128742 (Transportation Details - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 	Given I call Shared Step (Transportation Details - Confirm DOT Exceptions saved - Continue - Happy Path)
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128744
+#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128744
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase128744
 
 	@ignore
 #Removed from regression 2023/11
