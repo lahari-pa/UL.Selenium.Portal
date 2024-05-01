@@ -6,6 +6,7 @@
 @wercsmart
 @NewProduct
 @ProductGrid
+@StepsPrototype
 @DataSummarySheet
 @wercsmart
 @RetailPartners
@@ -149,8 +150,9 @@ Given Type of Product (select) should be showing the following option: Food Item
 Given I close the Data Summary Tab
 Given I should see the Data Acceptance Page
 
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60774
-
+#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60774
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase60774
 @TestCase:60775
 Scenario: [60775] Cooking Oil, Non-Aerosol - RU000942
 
@@ -276,4 +278,6 @@ Given Type of Product (select) should be showing the following option: Food Item
 Given I close the Data Summary Tab
 Given I should see the Data Acceptance Page
 
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60775
+#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60775
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase60775

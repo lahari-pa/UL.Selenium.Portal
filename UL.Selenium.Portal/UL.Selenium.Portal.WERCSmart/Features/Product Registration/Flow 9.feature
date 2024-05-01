@@ -12,6 +12,8 @@
 @RetailPartners
 @run_Flow9
 @UPC
+@StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
 Feature: Flow 9
 
 @TestCase:58072
@@ -20,7 +22,11 @@ Scenario: [58072] Baby/Infant/Adult Care/Cleansing Wipes - RU000248
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC58072
 	Given I delete all products with UPC Number: saved as UPC58072
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Baby/infant/Adult Care/Cleansing Wipes
 	Then I save the product information as: TestCase58072
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
@@ -46,14 +52,19 @@ Scenario: [58072] Baby/Infant/Adult Care/Cleansing Wipes - RU000248
 		| Gloves                        | 150                      | 25.0                    | 11.2      | White      | Floral | No data available | 10                    |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58072. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Baby/infant/Adult Care/Cleansing Wipes
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58072
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58072
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase58072
 @newproductstepstest
 @TestCase:58098
 Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase58098
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
@@ -68,15 +79,20 @@ Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 	Given I click the Trade Secret checkbox for ingredient: Aqua
 	Given I click the Publicly Disclosed checkbox for ingredient: Aqua
 	Given I confirm there are 1 Publicly Disclosed ingredients in the Total section
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58098
-	
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58098
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase58098	
 @TestCase:58078
 Scenario: [58078] Energy or Nutritional Bars - RU000618
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC58078
 	Given I delete all products with UPC Number: saved as UPC58078
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Energy or Nutritional Bars
 	Then I save the product information as: TestCase58078
 	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
@@ -133,7 +149,11 @@ Scenario: [58073] Footwear - Gel Insert - RU000854
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC58073
 	Given I delete all products with UPC Number: saved as UPC58073
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Footwear - Gel Insert
 	Then I save the product information as: TestCase58073
 	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
@@ -154,8 +174,9 @@ Scenario: [58073] Footwear - Gel Insert - RU000854
 		| Gloves                        | 800                      | 99                      | 60        | Clear      | Odorless | No data available | 11.2                  |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58073. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Footwear - Gel Insert
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58073
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58073
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase58073	
 @TestCase:63325
 Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking SDS step shows only product label and Additional documents to provide shows SDS as optional)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -187,8 +208,9 @@ Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking S
 		| Toxicity Characteristic Leaching Procedure (TCLP) |
 	Given I click Continue and should not see an error message
 	Then I should see the Optional Reports and Documents Available for Purchase Page
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63325
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63325
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase63325	
 @TestCase:58091
 Scenario: [58091] Latex Gloves - RU000151
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -257,7 +279,11 @@ Scenario: [58089] Nutritional Supplements for Domesticated Animals - RU001239
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC58089
 	Given I delete all products with UPC Number: saved as UPC58089
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nutritional Supplements for Domesticated Animals
 	Then I save the product information as: TestCase58089
 	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
@@ -285,7 +311,11 @@ Scenario: [58089] Nutritional Supplements for Domesticated Animals - RU001239
 Scenario: [58097] Ingredient Search in Registration
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Paint balls
 	Then I save the product information as: TestCase58097
 	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
@@ -308,7 +338,11 @@ Scenario: [58094] Suppository, Laxative, Stool-Softener - RU000944
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC58094
 	Given I delete all products with UPC Number: saved as UPC58094
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Suppository, Laxative, Stool-Softener
 	Then I save the product information as: TestCase58094
 	# Missing from TFS test case
@@ -371,7 +405,11 @@ Scenario: [58604] Condom - RU000937
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC58604
 	Given I delete all products with UPC Number: saved as UPC58604
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Condom with or without Spermicide
 	Then I save the product information as: TestCase58604
 	Given I call Shared Step 60310 (Product Information - Without Child question)
@@ -392,8 +430,9 @@ Scenario: [58604] Condom - RU000937
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58604. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Condom with or without Spermicide
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58604
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58604
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase58604	
 # Ignore execution in QA-Integration Environment as SHA Automation is set to OFF
 # Created by Saikiran Chittampally
 @OnlyInStaging
@@ -402,7 +441,11 @@ Scenario: [213910] WERCSmart Portal and SHA Manager Test Flow for Product Type: 
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC213910
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Grass Seed
 	Then I save the product information as: TestCase213910
 	Given I should see the Product Information Page
@@ -475,7 +518,11 @@ Scenario: [213905] WERCSmart Portal and SHA Manager Test Flow for Product Type: 
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC213905
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): FERTILIZER
 	Then I save the product information as: TestCase213905
 	Given I should see the Product Information Page

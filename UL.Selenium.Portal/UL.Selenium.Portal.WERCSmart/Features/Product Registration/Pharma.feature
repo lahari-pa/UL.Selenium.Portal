@@ -7,6 +7,7 @@
 @NewProduct
 @RetailPartners
 @Pharma
+@StepsPrototype
 @DocumentAcceptance
 @UPC
 @run_Pharma
@@ -99,8 +100,9 @@ Scenario: [127870] Pharma - Tablet or Capsule Count Field is Available for Solid
 	Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 	Then I click continue
 	Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127870, container type: Plastic Container, capsule count: 50 and size: 1
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127870
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127870
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase127870	
 @TestCase:127970
 Scenario: [127970] Pharma - Regulatory Documents to Provide and Additional Documents to Provide
 	Given I log in with the account saved in TReVor as: PharmaAccount
@@ -236,8 +238,9 @@ Scenario: [127847] Pharma - Tablet or Capsule Count Field is Available for Solid
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127847, container type: Plastic Container and size: 1
 #Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127847, container type: Plastic Container, capsule count: 50 and size: 1
 	When I click continue
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127847
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127847
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase127847	
 
 
 
@@ -279,8 +282,9 @@ Scenario: [127854] Pharma - Tablet or Capsule Count Field is Available for Solid
 	Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127854, container type: Plastic Container, capsule count: 50 and size: 1
 	When I click continue
 	When I click continue
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127854
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127854
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase127854	
 
 
 
@@ -324,8 +328,9 @@ Scenario: [127791] Pharma - Retailer Default
 	Then I click continue
 	Given I click the 'Add' button
 	And I confirm that retailer "WM" is present under the 'Destination Retailers' column in the UPC table
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127791
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127791
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase127791
 
 
 
@@ -382,7 +387,9 @@ And In the Purchase Summary screen I confirm the Purchase Summary header is disp
 Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 Then In the Purchase Summary screen I click Confirm Order
 Then In the Thank You screen I click Home
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127847
+#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127847
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase127847
 
 
 

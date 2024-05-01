@@ -60,8 +60,9 @@ Given I add the following CA Cleaning ingredients:
 		| Water         | 100     | false               | true        | AQUA           | AQUA1       | Fragrance           | Fragrance Component           | true  | true      |
 Then I click continue
 And I should see the Waste Classification Data Page
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139531
-
+#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139531
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase139531
 
 
 

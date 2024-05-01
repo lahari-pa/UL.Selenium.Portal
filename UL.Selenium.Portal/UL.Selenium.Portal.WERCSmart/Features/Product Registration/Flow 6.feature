@@ -23,6 +23,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 @run_Flow6
+@StepsPrototype
 
 Feature: Flow 6
 
@@ -83,8 +84,10 @@ Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the co
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Insecticide - Crawling Bug - Aerosol
 
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78731
+#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78731
 
+Then I navigate to the Home Page
+Then In the Product Grid, delete the product saved as: TestCase78731
 @ignore
 @TestCase:57711
 Scenario: [57711] Antifungal - Aerosol (RU000050) - 6A
@@ -190,8 +193,9 @@ Scenario: [57647] Insecticide-Flying Bug-Moth Proofing Product containing <98% P
 		| Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58736. !"�$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Insecticide-Flying Bug-Moth Proofing Product containing >98% Para-Dichlorobenzene
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87914
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87914
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase87914
 
 # Created by Saikiran Chittampally
 # Test case can be found at the following paths:
@@ -417,5 +421,6 @@ Scenario: [57986] Footwear or Leather Care Product - All other forms - (RU000746
 	Given I close the tab with Data Summary page
     Given I should see the Data Acceptance Page
 
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57986
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57986
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase57986

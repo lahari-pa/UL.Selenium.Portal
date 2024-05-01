@@ -33,6 +33,7 @@
 @GTINAndUPC
 @run_Flow22
 @NewProduct
+@StepsPrototype
 Feature: Flow 22
 
 @tfsdesign
@@ -65,7 +66,9 @@ Scenario: [60544] Weld-Through Primer - Aerosol - RU001050
 		| Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 60544. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Weld-Through Primer - Aerosol
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60544
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60544
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase60544
 
 
 @TestCase:60545
@@ -108,8 +111,9 @@ Scenario: [60545] Photograph Coating - Aerosol - RU001067
 		| Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 60545. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Photograph Coating - Aerosol
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60545
-
+#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60545
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase60545
 #Removed from regression 2024/03
 @ignore
 @TestCase:60546
@@ -255,5 +259,6 @@ Scenario: [60547] Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol 
 	Given I close the Data Summary Tab
     Given I should see the Data Acceptance Page
 
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60547
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60547
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase60547
