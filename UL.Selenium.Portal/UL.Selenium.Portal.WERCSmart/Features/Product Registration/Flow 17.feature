@@ -13,6 +13,9 @@
 @RegulatoryDocsToProvide
 @ignore
 @run_Flow17
+@StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@PhysicalAndChemicalProp
 Feature: Flow 17
 
 #Remove from regression: 2023/05
@@ -24,7 +27,11 @@ Scenario: [60017] Lithium Primary/Metal Batteries - RU000612
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC60017
 	Given I delete all products with UPC Number: saved as UPC60017
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lithium Primary/Metal Batteries
 	Then I save the product information as: TestCase60017
 	Given I call Shared Step 65493 (Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
@@ -66,7 +73,13 @@ Scenario: [60018] Lithium Ion Battery - RU000345
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lithium Ion Battery
 	Then I save the product information as: TestCase60018
 	Given I call Shared Step 65493 (Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
-	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+	#Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+	Then I should be on the Physical and Chemical Properties Page
+	And In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	And In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then in the Physical and Chemical Properties page, I click Continue
+
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName      | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Lithium hydroxide  | 6.7     | false               | false       |            |
@@ -93,8 +106,9 @@ Scenario: [60018] Lithium Ion Battery - RU000345
 		| Gloves                        | 650                      | 0.400                   | 1.005     | Black      | Acidic | No data available | 7.388                 |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 60018. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lithium Ion Battery
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60018
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60018
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase60018
 @TestCase:104222
 Scenario: [104222] Lithium Battery UN38.3 Regulatory Documents to Provide
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -103,7 +117,13 @@ Scenario: [104222] Lithium Battery UN38.3 Regulatory Documents to Provide
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lithium Primary/Metal Batteries
 	Then I save the product information as: TestCase104222
 	Given I call Shared Step 65493 (Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
-	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+	#Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+	Then I should be on the Physical and Chemical Properties Page
+	And In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	And In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then in the Physical and Chemical Properties page, I click Continue
+
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName      | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Lithium hydroxide  | 6.7     | false               | false       |            |
@@ -143,8 +163,9 @@ Scenario: [104222] Lithium Battery UN38.3 Regulatory Documents to Provide
 	Then In the Regulatory Documents to Provide Page I check that the input field with label: Upload UN38.3 Test Document (Required) is shown as Green
 	Given I click continue
 	Given I should see the Additional Documents to Provide Page
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase104222
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase104222
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase104222
 @TestCase:104227
 Scenario: [104227] Lithium Battery UN38.3 Summary Page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -153,7 +174,13 @@ Scenario: [104227] Lithium Battery UN38.3 Summary Page
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lithium Primary/Metal Batteries
 	Then I save the product information as: TestCase104227
 	Given I call Shared Step 65493 (Product Information - US only - Battery is packaged for Retail Sales - No to everything else - Continue)
-	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+#	Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+	Then I should be on the Physical and Chemical Properties Page
+	And In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	And In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then in the Physical and Chemical Properties page, I click Continue	
+
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName      | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Lithium hydroxide  | 6.7     | false               | false       |            |
@@ -199,8 +226,9 @@ Scenario: [104227] Lithium Battery UN38.3 Summary Page
 	#Then I confirm a new window opens displaying the document url: ProductDocument
 	#Given I close the window that opened
 	And I switch to Data Acceptance page
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase104227
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase104227
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase104227
 #Remove from regression: 2023/05
 @tfs_design
 @ignore

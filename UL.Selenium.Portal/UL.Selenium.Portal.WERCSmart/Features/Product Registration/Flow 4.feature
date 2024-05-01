@@ -25,6 +25,7 @@
 @LandingPage
 @Login
 @Homepage
+@StepsPrototype
 @Signup
 @wercsmart
 @NewProduct
@@ -162,8 +163,9 @@ Scenario: [57950] Conditioner - Leave In (RU001272) 4-L
 	Given I close the tab with Data Summary page
     Given I should see the Data Acceptance Page
 	#Your acknowledgement of this registration includes tha
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57950
-
+#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57950
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase57950
 @ignore
 @TestCase:57922
 Scenario: [57922] Odor Remover/Eliminator - Aerosol (RU001086) - 4A
@@ -292,8 +294,9 @@ Scenario: [57927] Floor Wax - Wood (RU000790) 4LS - 4S
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Floor Wax - Wood
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57927
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57927
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase57927
 @ignore
 @TestCase:57931
 Scenario: [57931] Hair Styling Product - Mousse (RU000669) - 4A
@@ -479,8 +482,9 @@ Scenario: [57952] Hair Styling Gel- (RU000749) 4LS - 4S
 	Given I close the tab with Data Summary page
     Given I should see the Data Acceptance Page
 	#Your acknowledgement of this registration includes tha
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57952
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57952
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase57952
 @TestCase:57958
 Scenario: [57958] Adhesive - Aerosol Web Spray (RU000909) - 4A
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -509,8 +513,9 @@ Scenario: [57958] Adhesive - Aerosol Web Spray (RU000909) - 4A
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Adhesive - Aerosol Web Spray
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57958
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57958
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase57958
 @ignore
 @TestCase:57977
 Scenario: [57977] Adhesive (Spray, Special Purpose): Polyolefin and Laminate Repair/Edgebanding(RU000912) - 4AL - 4A
@@ -707,8 +712,9 @@ Scenario: [57982] Bonding agent (RU000023) - 4All - 4G
 	Given I close the tab with Data Summary page
     Given I should see the Data Acceptance Page
 
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57982
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57982
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase57982
 @TestCase:57983
 Scenario: [57983] Lubricant, Multi-Purpose, Not for Personal Use (RU000674) 4L
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -741,8 +747,9 @@ Scenario: [57983] Lubricant, Multi-Purpose, Not for Personal Use (RU000674) 4L
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lubricant, Multi-Purpose, Not for Personal Use
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57983
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57983
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase57983
 @OnlyInStaging
 @TestCase:57985
 Scenario: [57985] Footwear or Leather Care Product - Aerosol (RU000744) - Testing New Flow Update
@@ -905,8 +912,9 @@ Scenario: [57985] Footwear or Leather Care Product - Aerosol (RU000744) - Testin
 	Given I close the tab with Data Summary page
     Given I should see the Data Acceptance Page
 
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57985
-
+#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57985
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase57985
 @TestCase:57988
 Scenario: [57988] Anti-Static Product - Non-Aerosol (RU000667) 4-L
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -932,8 +940,9 @@ Scenario: [57988] Anti-Static Product - Non-Aerosol (RU000667) 4-L
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Anti-Static Product - Non-Aerosol
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57988
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57988
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase57988
 
 @TestCase:57990
 Scenario: [57990] Footwear or Leather Care Product - Solid (RU000745)
@@ -1057,8 +1066,9 @@ Scenario: [57990] Footwear or Leather Care Product - Solid (RU000745)
     Given I should see the Data Acceptance Page
 	#Your acknowledgement of this registration includes tha
 
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57990
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57990
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase57990
 @TestCase:57991
 Scenario: [57991] Glue sticks for glue guns- (RU000300) - 4S
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -1200,3 +1210,7 @@ Scenario: [57991] Glue sticks for glue guns- (RU000300) - 4S
     Given I should see the Data Acceptance Page
 	#Your acknowledgement of this registration includes tha
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57991
+	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Glue sticks for glue guns
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57991
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase57991

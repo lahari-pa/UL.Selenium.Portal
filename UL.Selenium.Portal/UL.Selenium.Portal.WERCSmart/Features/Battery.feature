@@ -6,7 +6,8 @@
 @UPC
 @Homepage
 @run_Battery
-
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@StepsPrototype
 Feature: Battery
 
 @ignore

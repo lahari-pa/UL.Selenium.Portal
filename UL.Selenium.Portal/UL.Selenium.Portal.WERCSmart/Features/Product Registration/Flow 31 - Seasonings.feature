@@ -8,6 +8,7 @@
 @ProductGrid
 @DataSummarySheet
 @wercsmart
+@StepsPrototype
 @RetailPartners
 @SubEnrollment
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
@@ -127,8 +128,9 @@ And in the Ingredients page I click Continue
 	Given I close the Data Summary Tab
     Given I should see the Data Acceptance Page
 
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60737
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60737
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase60737
 @TestCase:60738
 Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU001246
 	# ====== Logging in as the correct user ====== #
@@ -230,4 +232,6 @@ Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU0
 	Given I close the Data Summary Tab
     Given I should see the Data Acceptance Page
 
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60738
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60738
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase60738
