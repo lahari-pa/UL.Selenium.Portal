@@ -526,7 +526,7 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 
 	# ====== Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Seasonings, Spices or Flavoring for Food - Salts (Liquid) ====== #
 	Given I should see the The Product Page
-		And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk_#TestCase91077
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk_#TestCase91077
 	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
  	Given in the The Product page I click Continue
     Then I save the product information as: TestCase91077
@@ -540,10 +540,6 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 	And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	And in the Product Information page I click Continue
-
-	And I should see the Regulatory Documents to Provide Page
-	Given In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
-	Then in the Regulatory Documents to Provide page I click Continue
 
 	# ====== And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue) ====== #
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
