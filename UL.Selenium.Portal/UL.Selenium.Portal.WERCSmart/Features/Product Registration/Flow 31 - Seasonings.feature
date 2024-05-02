@@ -163,11 +163,6 @@ Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU0
 	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Given In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Given in the Product Information page I click Continue
-
-		# Regulatory Documents to Provide Page
-	And I should see the Regulatory Documents to Provide Page
-	And In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
-    Then in the Regulatory Documents to Provide page I click Continue
 	
 		# ====== Given I call Shared Step 60741 (Select Primary Physical Property - Solid - With Ingredients) ====== #
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
@@ -214,6 +209,11 @@ Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU0
 	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
 	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC60738 enter Size: 20 and enter Container Type: any
 	Given in the Universal Product Code (UPC) page I click Continue
+
+	# Regulatory Documents to Provide Page
+	And I should see the Regulatory Documents to Provide Page
+	And In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+    Then in the Regulatory Documents to Provide page I click Continue
 
     Given I upload PDF document to Upload SDS (Optional) field
 	Then in the Additional Documents To Provide page I click Continue
