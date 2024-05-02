@@ -101,9 +101,6 @@ Scenario: [60724] Condiments, Sauces - RU001454
 	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Given in the Product Information page I click Continue
 
-	Given In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
-	Given in the Regulatory Documents To Provide page I click Continue
-
 	# ====== Given I call Shared Step 60747 (Select Primary Physical Property - Liquid - With Ingredients) ====== #
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
@@ -138,6 +135,9 @@ Scenario: [60724] Condiments, Sauces - RU001454
 	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
 	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC60724 enter Size: 20 and enter Container Type: Glass Container
 	Given in the Universal Product Code (UPC) page I click Continue
+
+	Given In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Given in the Regulatory Documents To Provide page I click Continue
 
 	# ====== Given I call Shared Step 60567 (Upload Product Label only) ====== #
 	Given I upload PDF document to Upload SDS (Optional) field
@@ -190,9 +190,6 @@ Scenario: [60723] Jelly, Jam or Preserves - RU001456
 	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Given in the Product Information page I click Continue
 
-	Given In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
-	Given in the Regulatory Documents To Provide page I click Continue
-
 		# ====== Given I call Shared Step 60747 (Select Primary Physical Property - Liquid - With Ingredients) ====== #
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
@@ -228,6 +225,9 @@ Scenario: [60723] Jelly, Jam or Preserves - RU001456
 	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
 	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC60723 enter Size: 20 and enter Container Type: Glass Container
 	Given in the Universal Product Code (UPC) page I click Continue
+
+	Given In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Given in the Regulatory Documents To Provide page I click Continue
 
 	Given I upload PDF document to Upload SDS (Optional) field
 	Given I upload PDF document to Flash Point Testing Report field
