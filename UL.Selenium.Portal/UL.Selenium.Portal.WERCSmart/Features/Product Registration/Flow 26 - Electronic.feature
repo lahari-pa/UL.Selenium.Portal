@@ -25,13 +25,17 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ElectronicEquipment
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ProductIncludesBattery
 @GTINAndUPC
+@ProductTemplateLogin
+@ProductTemplateSideNavBar
 @run_Flow26_Electronic
 
 Feature: [64732] Flow 26 - Electronic
 
 @TestCase:60671
 Scenario: [60671] Computer (Combination of Monitor & Desktop) - RU001177
-
+Then I navigate to the URL saved in TReVor as: Product Template URL
+	Then In the Product Template Login page, log in with account saved in TReVor as: SHAUser
+	Then In the Side Navigation Bar, click the 'Create Products From Templates' link
 
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
