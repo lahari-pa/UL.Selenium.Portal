@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NPOI.POIFS.Crypt.Dsig;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -163,5 +164,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string alertText = "STOP! When selecting authoring of a Safety Data Sheet (SDS) for Canada, you need to provide your Canada address. Please go to the My Account area, and update this information in My Company. You can then resume your registration set up.";
 			new Steps_Prototype().AlertMessageDisplayed(condition, alertText);
 		}
+
+		[StepDefinition(@"In the Regulatory Documents to Provide Section, for section: 'Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet \(SDS\) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats.': the following options (should|should not) be (displayed|displayed exclusively):")]
+		public void CheckOptionsForSectionBatteriesAreArticlesGlobalHarmonizedStandards(string condition, string displayed, Table table)
+		{
+			string section = "Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats.";
+			new Steps_Prototype().CheckOptionsInSection(condition, displayed, section, table);
+		}
+
+		[StepDefinition(@"In the Regulatory Documents to Provide Section, for section: 'WHMIS-compliant Safety Data Sheet, English and French-Canadian': the following options (should|should not) be (displayed|displayed exclusively):")]
+		public void CheckOptionsForSectionWHMISCompliantSafetyDataSheet(string condition, string displayed, Table table)
+		{
+			string section = "WHMIS-compliant Safety Data Sheet, English and French-Canadian";
+			new Steps_Prototype().CheckOptionsInSection(condition, displayed, section, table);
+		}
+
+
+
 	}
 }
