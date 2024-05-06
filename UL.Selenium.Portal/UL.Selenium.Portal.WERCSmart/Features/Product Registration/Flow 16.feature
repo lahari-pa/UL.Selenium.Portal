@@ -103,11 +103,18 @@ Scenario: [59273] Alkaline Battery - RU000344
 	Then I should be on the Regulatory Documents to Provide Page
 	And In the Regulatory Documents to Provide Section, I confirm text 'Battery registrations are made available within WERCSmart for selection while registering a Battery-Containing Product...' should be displayed
 	And In the Regulatory Documents to Provide Section, upload file in section: 'I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide.'
-	And In the Regulatory Documents to Provide Section, set the radio option in section: 'Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS. When providing an SDS it must be both U.S. and Canada formats.' to: I certify that I have an OSHA-Compliant Safety Data Sheet (SDS) for this product.
-	And In the Regulatory Documents to Provide Section, upload file in section: 'OSHA SDS'
-	And In the Regulatory Documents to Provide Section, set the radio option in section: 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: I certify that I have a WHMIS-Compliant Safety Data Sheet (SDS) for this product.
-	And In the Regulatory Documents to Provide Section, upload file in section: 'Dual-Language WHMIS SDS, in French Canadian and English'
-	And In the Regulatory Documents to Provide Section, for section 'Dual-Language WHMIS SDS, in French Canadian and English': enter WHMIS SDS Docmument Date: 2024-06-27
+	And In the Regulatory Documents to Provide Section, for section: 'Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats.': the following options should be displayed exclusively:
+	| Option                                                                           |
+	| I certify that I have an OSHA-Compliant Safety Data Sheet (SDS) for this product. |
+	| I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.       |
+	| I don't need an OSHA-Compliant Safety Data Sheet (SDS) document for this product. |
+	And In the Regulatory Documents to Provide Section, set the radio option in section: 'Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS. When providing an SDS it must be both U.S. and Canada formats.' to: I don't need an OSHA-Compliant Safety Data Sheet (SDS) document for this product.
+	And In the Regulatory Documents to Provide Section, for section: 'WHMIS-compliant Safety Data Sheet, English and French-Canadian': the following options should be displayed exclusively:
+	| Option                                                                                |
+	| I certify that I have a WHMIS-Compliant Safety Data Sheet (SDS) for this product.     |
+	| I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product. |
+	| I don't need a WHMIS Compliant SDS                                                    |
+	And In the Regulatory Documents to Provide Section, set the radio option in section: 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: I don't need a WHMIS Compliant SDS
 	And In the Regulatory Documents to Provide Section, upload file in section: 'Label in both French and English'
 	Then in the Regulatory Documents to Provide page, I click Continue
 
@@ -708,15 +715,12 @@ Scenario: [110324] Alkaline Battery - Check Regulatory Documents To Provide Erro
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC110324
-	Given I delete all products with UPC Number: saved as UPC110324
+	Then In the Product Grid, delete all products with UPC Number: saved as UPC110324
+
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nickel Metal Hydride (NiMH) Battery
-	Then In the Product Grid, delete all products with UPC Number: saved as UPC110324
-	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nickel Metal Hydride (NiMH) Battery
 	Then I should be on the The Product Page
@@ -724,10 +728,22 @@ Scenario: [110324] Alkaline Battery - Check Regulatory Documents To Provide Erro
 	And In the Product Section, set the option in section: 'Type of Product (select)' to: Nickel Metal Hydride (NiMH) Battery
 	Then in the The Product page, I click Continue
 
-	Then I save the product information as: TestCase59273
-
+	Then I save the product information as: TestCase110324
+	
 	#Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+	Then I should be on the Product Information Page
+	And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No 
+	And In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page, I click Continue
+
 	#Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+	Then I should be on the Physical and Chemical Properties Page
+	And In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	And In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then in the Physical and Chemical Properties page, I click Continue
 
 	#Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 	#	|   CASNumber         | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -771,57 +787,27 @@ Scenario: [110324] Alkaline Battery - Check Regulatory Documents To Provide Erro
 	Then I should be on the Regulatory Documents to Provide Page
 	And In the Regulatory Documents to Provide Section, I confirm text 'Battery registrations are made available within WERCSmart for selection while registering a Battery-Containing Product...' should be displayed
 	And In the Regulatory Documents to Provide Section, upload file in section: 'I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide.'
+	And In the Regulatory Documents to Provide Section, for section: 'Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats.': the following options should be displayed exclusively:
+	| Option                                                                           |
+	| I certify that I have an OSHA-Compliant Safety Data Sheet (SDS) for this product. |
+	| I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.       |
+	| I don't need an OSHA-Compliant Safety Data Sheet (SDS) document for this product. |
 	And In the Regulatory Documents to Provide Section, set the radio option in section: 'Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS. When providing an SDS it must be both U.S. and Canada formats.' to: I don't need an OSHA-Compliant Safety Data Sheet (SDS) document for this product.
-	And In the Regulatory Documents to Provide Section, upload file in section: 'OSHA SDS'
+	And In the Regulatory Documents to Provide Section, for section: 'WHMIS-compliant Safety Data Sheet, English and French-Canadian': the following options should be displayed exclusively:
+	| Option                                                                                |
+	| I certify that I have a WHMIS-Compliant Safety Data Sheet (SDS) for this product.     |
+	| I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product. |
+	| I don't need a WHMIS Compliant SDS                                                    |
 	And In the Regulatory Documents to Provide Section, set the radio option in section: 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: I don't need a WHMIS Compliant SDS
-	And In the Regulatory Documents to Provide Section, upload file in section: 'Dual-Language WHMIS SDS, in French Canadian and English'
-	And In the Regulatory Documents to Provide Section, for section 'Dual-Language WHMIS SDS, in French Canadian and English': enter WHMIS SDS Docmument Date: 2024-06-27
 	And In the Regulatory Documents to Provide Section, upload file in section: 'Label in both French and English'
 	Then in the Regulatory Documents to Provide page, I click Continue
 
-
-	#Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
-	Then I should be on the Product Information Page
-	And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No 
-	And In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
-	And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
-	And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
-	Then in the Product Information page, I click Continue
-
-	#Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	Then I should be on the Physical and Chemical Properties Page
-	And In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
-	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
-	And In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
-	Then in the Physical and Chemical Properties page, I click Continue
-
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		|   CASNumber         | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| 7439-89-6           | 30      | false               | false       |            |
-		| 12054-48-7          | 45      | false               | false       |            |
-		| 7440-50-8           | 13      | false               | false       |            |
-		| 1310-58-3           | 12      | false               | false       |            |
-	And I should see the Formulation > Batteries Page
-	Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
-	Given I click continue
-	Given I call Shared Step 214541 (Waste Classification Data - Applicable Only to Nickel Metal Hydride (NiMH) Battery (RU000373))
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: The Home Depot
-	Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC110324 with container type: Plastic Container size: 75.0 and quantity: 2
-	Given I should see the Regulatory Documents to Provide Page
-	Given In Regulatory Documents to Provide I see text:Battery registrations are made available within WERCSmart for selection while registering a Battery-Containing Product. The Battery registration must comply with regulatory requirements in all regions served by the WERCSmart solution. You must provide a technical document or an SDS for both Canada and the US with a bilingual product label. Lithium Battery registrations must also provide the UN38.3 Testing Document.
-	Given I click the browse button for label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf	
-	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
-	Given I set the WHMIS-compliant Safety Data Sheet option to: I don't need a WHMIS Compliant SDS
-	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-	Given I click continue
-
 	Then in the Additional Documents to Provide page, I click Continue
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59273
 
-	Given I should see the Additional Documents to Provide Page
-	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59273
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase110324
 	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase59273
+	Then In the Product Grid, delete the product saved as: TestCase110324
+
 @TestCase:122366
 Scenario:[122366] Battery Containing Product (BCP) (Transportation override at UPC level- New Feature)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
