@@ -450,42 +450,6 @@ Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulat
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase84528
 
-# Assigned to Paulina Mata
-# Created by Paulina Mata
-# Test case can be found at the following paths:
-# NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Ingredients
-#Remove from regression: 2023/05
-@ignore
-@TestCase:81711
-Scenario: [81711] Ingredients - Informational Message for Fragrance and Flavor Ingredients
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	# Temporarily using this product type instead of 'Soap (Bar, Liquid)' because of bug #88838
-	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Medicated Lotion or Soap
-	And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-	And I enter text: FRAGRANCE in the component search box
-	And I select the component search result with CAS matching text: FRAGRANCE and save ingredient as: FragranceIngredient81711
-	And I confirm that a 'Screenability Alert' button is displayed under ingredient saved as: FragranceIngredient81711 with hover over text: You have included a generic ingredient in your product (CAS beginning with RR). Be aware that this may impact regulatory, chemical policy or product qualification assessments conducted on this product. Some of these assessments require that every ingredient in a formulation be screened against a list of chemicals (e.g., California Right-to-Know Regulations), and generic ingredient names provide no information about their specific chemical constituents. To prevent issues with assessment results provided to Retailers, the best practice is to avoid the use of generic ingredients and either (i) add the specific ingredients of the generic directly into your primary formula or (ii) request that the 3rd Party Supplier providing your generic ingredient register the ingredient in WERCSmart as a 3rd-Party Formula Registration. You can then add the 3rd-Party Ingredient to your product ingredients. Using the 3rd-Party Formula registration process allows your product’s full formulation to be screened while retaining protections for a 3rd-Party Supplier’s Confidential Business Information (CBI). The identity of a specific ingredient is only disclosed if required by regulation, or if the 3rd-Party has indicated an ingredient in their formula is publicly disclosed.
-	And I enter text: FRAGRANCE in the component search box
-	And I select the component search result with CAS matching text: RR and save ingredient as: FragranceRRIngredient81711
-	And I confirm that a 'Screenability Alert' button is displayed under ingredient saved as: FragranceRRIngredient81711 with hover over text: You have included a generic ingredient in your product (CAS beginning with RR). Be aware that this may impact regulatory, chemical policy or product qualification assessments conducted on this product. Some of these assessments require that every ingredient in a formulation be screened against a list of chemicals (e.g., California Right-to-Know Regulations), and generic ingredient names provide no information about their specific chemical constituents. To prevent issues with assessment results provided to Retailers, the best practice is to avoid the use of generic ingredients and either (i) add the specific ingredients of the generic directly into your primary formula or (ii) request that the 3rd Party Supplier providing your generic ingredient register the ingredient in WERCSmart as a 3rd-Party Formula Registration. You can then add the 3rd-Party Ingredient to your product ingredients. Using the 3rd-Party Formula registration process allows your product’s full formulation to be screened while retaining protections for a 3rd-Party Supplier’s Confidential Business Information (CBI). The identity of a specific ingredient is only disclosed if required by regulation, or if the 3rd-Party has indicated an ingredient in their formula is publicly disclosed.
-	And I enter text: Flavor in the component search box
-	And I select the component search result with CAS matching text: FLAVOR and save ingredient as: FlavorIngredient81711
-	And I confirm that a 'Screenability Alert' button is displayed under ingredient saved as: FlavorIngredient81711 with hover over text: You have included a generic ingredient in your product (CAS beginning with RR). Be aware that this may impact regulatory, chemical policy or product qualification assessments conducted on this product. Some of these assessments require that every ingredient in a formulation be screened against a list of chemicals (e.g., California Right-to-Know Regulations), and generic ingredient names provide no information about their specific chemical constituents. To prevent issues with assessment results provided to Retailers, the best practice is to avoid the use of generic ingredients and either (i) add the specific ingredients of the generic directly into your primary formula or (ii) request that the 3rd Party Supplier providing your generic ingredient register the ingredient in WERCSmart as a 3rd-Party Formula Registration. You can then add the 3rd-Party Ingredient to your product ingredients. Using the 3rd-Party Formula registration process allows your product’s full formulation to be screened while retaining protections for a 3rd-Party Supplier’s Confidential Business Information (CBI). The identity of a specific ingredient is only disclosed if required by regulation, or if the 3rd-Party has indicated an ingredient in their formula is publicly disclosed.
-	And I enter text: Flavor in the component search box
-	And I select the component search result with CAS matching text: RR and save ingredient as: FlavorRRIngredient81711
-	And I confirm that a 'Screenability Alert' button is displayed under ingredient saved as: FlavorRRIngredient81711 with hover over text: You have included a generic ingredient in your product (CAS beginning with RR). Be aware that this may impact regulatory, chemical policy or product qualification assessments conducted on this product. Some of these assessments require that every ingredient in a formulation be screened against a list of chemicals (e.g., California Right-to-Know Regulations), and generic ingredient names provide no information about their specific chemical constituents. To prevent issues with assessment results provided to Retailers, the best practice is to avoid the use of generic ingredients and either (i) add the specific ingredients of the generic directly into your primary formula or (ii) request that the 3rd Party Supplier providing your generic ingredient register the ingredient in WERCSmart as a 3rd-Party Formula Registration. You can then add the 3rd-Party Ingredient to your product ingredients. Using the 3rd-Party Formula registration process allows your product’s full formulation to be screened while retaining protections for a 3rd-Party Supplier’s Confidential Business Information (CBI). The identity of a specific ingredient is only disclosed if required by regulation, or if the 3rd-Party has indicated an ingredient in their formula is publicly disclosed.
-	And I enter text: N/A in the component search box
-	And I select the component search result with CAS matching text: N/A and save ingredient as: NAIngredient81711
-	And I confirm that the 'Screenability Alert' button is not displayed under ingredient saved as: NAIngredient81711
-	And I click on the Screenability Alert button under ingredient saved as: FragranceIngredient81711
-	And I confirm a 'Screenability Alert' popover element is open under ingredient saved as: FragranceIngredient81711
-	And I move the mouse pointer by an offset of 50 in x and 50 in y
-	And I confirm a 'Screenability Alert' popover element is open under ingredient saved as: FragranceIngredient81711
-	And I navigate to the home page
-	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase81711
-
 @TestCase:80800
 Scenario: [80800] Ingredients - Transparency Ratio - Regular component
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -740,92 +704,6 @@ Scenario: [133335] Formulation Screen FIFRA and LOLI Validation Message
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase133335
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase133335
-
-
-#Remove from regression: 2023/05
-@ignore
-@TestCase:133610
-Scenario: [133610] Formulation Screen:  Attestation Reset on Data Change
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57561a (The Product - Enter Product Name: TRAP AND/OR BAIT STATION TEST PRODUCT and select Type of Product): Trap and/or Bait Station
-	And I see the following sections
-		| Section                                                              |
-		| Which best describes your product, including when FIFRA 25(b) Exempt |
-	Given I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
-	Then I set the value 'FIFRAPopupExpected' to be: true
-	Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
-	Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
-	Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No
-	Given I set the Product is a Retailer's Private Label or Brand option to: No
-	Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
-	Then I click continue
-
-	Given I set the Primary Physical State option to: Solid
-	Given I set the Secondary Physical State option to: Solid
-	Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-	Then I click continue
-	Then I add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Glutens, corn | 100     | false               | false       |            |
-	Then I click continue
-	Then I confirm there is a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
-	Then I confirm the table in the popup view has following column data
-		| CAS Number | Name          | Active or Inert |
-		| 66071-96-3 | Glutens, corn | Active          |
-	Given I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
-	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
-	And I should see the Waste Classification Data Page
-	When In the New Product page I click tab: Product Type
-	And I click the page heading: The Product
-	And I should see the The Product Page
-	And I set 'Product Name' to: RESET PRODUCT
-	And I set 'Type of Product' to: Charcoal
-	Then I save the product information as: TestCase133610
-	Then I click continue
-	And I should see the Product Information Page
-	And I do not see the following sections
-		| Section                                                              |
-		| Which best describes your product, including when FIFRA 25(b) Exempt |
-	And I see the following sections
-		| Section                                     |
-		| Select countries the product may be sold in |
-	Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
-	Given I set the Product is a Retailer's Private Label or Brand option to: No
-	Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
-	Then I click continue
-	Given I set the Primary Physical State option to: Solid
-	Given I set the Secondary Physical State option to: Solid
-	Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-	Given I set the Select the best Water Solubility description option to: Soluble in water
-	Then I click continue
-	And I should see the Ingredients Page
-	Then I click the 'x' button for component number 1
-	Given I click: YES in the 'Remove Component from My Ingredients' pop up
-	Then I add the following ingredients:
-		| ComponentName      | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| MICONAZOLE NITRATE | 100     | false               | false       |            |
-	Then I click continue
-	Then I confirm there is not a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
-	And I should see the Waste Classification Data Page
-	And I click the page heading: Ingredients
-	And I should see the Ingredients Page
-	Then I click the 'x' button for component number 1
-	Given I click: YES in the 'Remove Component from My Ingredients' pop up
-	Then I add the following ingredients:
-		| ComponentName    | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Glutens, corn    | 50      | false               | false       |            |
-		| Oils, peppermint | 50      | false               | false       |            |
-	Then I click continue
-	Then I confirm there is a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
-	Then I confirm the table in the popup view has following column data
-		| CAS Number | Name             | Active or Inert |
-		| 66071-96-3 | Glutens, corn    | Active          |
-		| 8006-90-4  | Oils, peppermint | Active          |
-	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Go back button
-	Then I save the product information as: TestCase133610
-	Then I click the Home navigation icon
-	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase133610
 
 # Created by Saikiran Chittampally
 @TestCase:158853
