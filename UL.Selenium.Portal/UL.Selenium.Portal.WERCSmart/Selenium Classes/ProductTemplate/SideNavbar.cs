@@ -39,7 +39,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ProductTemplate
 		public bool NavLinkItemClick(string linkTitle)
 		{
 			Report.Info($"Attempting to click Navigation List item '{linkTitle}'.");
-			return this.NavLinkList.Where(x => string.Equals(x.Text, linkTitle)).First().TryClick();
+			return this.NavLinkList.Where(x => string.Equals(x.Text, linkTitle)).FirstOrDefault()?.TryClick()??false;
 		}
 		#endregion
 	}
