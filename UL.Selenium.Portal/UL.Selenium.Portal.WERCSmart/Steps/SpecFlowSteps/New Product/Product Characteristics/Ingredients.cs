@@ -408,7 +408,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.UseSubSteps = true;
 			IngredientsTable ingredientsTable = new IngredientsTable();
 			SearchBoxPrototype searchBox = new SearchBoxPrototype();
-			List<string> requiredColumns = new List<string> { "SearchType", "SearchValue", "Percent", "Publicly Disclosed?", "Trade Secret?", "Public Name" };
+			List<string> requiredColumns = new List<string> { "SearchType", "SearchValue", "Percent", "Publicly Disclosed?", "Trade Secret?", "Public Name"};
 			requiredColumns.ForEach(requiredColumn =>
 			{
 				if(!inputTable.ContainsColumn(requiredColumn))
