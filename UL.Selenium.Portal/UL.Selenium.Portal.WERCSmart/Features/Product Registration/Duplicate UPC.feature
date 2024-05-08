@@ -436,7 +436,7 @@ Scenario: [91741] Duplicate UPC is not permitted within account - New Product re
 
 	# ====== Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Seasonings, Spices or Flavoring for Food - Salts (Liquid) ====== #
 	Given I should see the The Product Page
-	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk_#TestCase91741
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk_#91741
 	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
  	Given in the The Product page I click Continue
     Then I save the product information as: TestCase91741
