@@ -3865,7 +3865,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				string xPath = string.Format(@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),'{0}')]) and contains(text(),'{1}') and (./preceding-sibling::input[@type='radio'])]", section, value);
+				string xPath = string.Format($"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),'{section}')]) and contains(text(),'{value}') and (./preceding-sibling::input[@type='radio'])]");
 				IWebElement el;
 
 				if (section == "Select the type of product to create" && value == "Create a New Registration")
