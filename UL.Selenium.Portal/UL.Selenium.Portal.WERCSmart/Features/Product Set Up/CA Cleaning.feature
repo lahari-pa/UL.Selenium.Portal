@@ -142,7 +142,7 @@ Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account
 
 	# ====== Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach ====== #
 	Given I should see the The Product Page
-	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bleach_#TestCase139387
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bleach_#139387
 	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Bleach
  	Given in the The Product page I click Continue
     Then I save the product information as: TestCase139387
@@ -176,18 +176,18 @@ Given In the California Cleaning Product Disclosure Section, set the option in s
 Given In the California Cleaning Product Disclosure Section, set the option in section: 'Select the product's GTIN Brick Code' to: [10000424] Laundry Detergents
 Given I click continue
 
-Then In the Ingredients section, add the following CA ingredients:
-		| SearchType      | SearchValue | Percent | Publicly Disclosed | Trade Secret | Public Name | Ingredient Type |
-		| component name  | Water       | 10      | True                 | false      | Water       | Fragrance       |
+Then In the Ingredients section, add the following ingredients:
+		| SearchType      | SearchValue | Percent | Publicly Disclosed?  | Trade Secret? | Public Name | Ingredient Type |
+		| component name  | Water       | 10      | True                 | false         | Water       | Fragrance       |
 Given I click continue
 And In the Ingredients section, I confirm I see the error message types in the popup with the following title: California Cleaning Right to Know
 | Percent |
 Given In the Ingredients section, I click the close button for the CA Cleaning Ingredients Popup
 Given In the Ingredients Table row with component name: Water, click remove button
 Given In displayed modal, click Yes footer button
-Then In the Ingredients section, add the following CA ingredients:
-		| SearchType      | SearchValue | Percent | Publicly Disclosed   | Trade Secret | Public Name | Ingredient Type |
-		| component name  | Water       | 100     | True                 | false        | Water       | Fragrance       |
+Then In the Ingredients section, add the following ingredients:
+		| SearchType      | SearchValue | Percent | Publicly Disclosed?  | Trade Secret? | Public Name | Ingredient Type |
+		| component name  | Water       | 100     | True                 | false         | Water       | Fragrance       |
 Then I click continue
 And I should see the Inventory Status, Prop 65 (US) Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139387
