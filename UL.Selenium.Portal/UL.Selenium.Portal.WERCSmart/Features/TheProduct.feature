@@ -13,18 +13,6 @@
 @run_TheProduct
 Feature: The Product
 
-#Remove from regression: 2023/05
-@ignore
-@TestCase:31346
-Scenario: [31346] The Product navigation
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Then The home screen should load
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	And I should see the The Product Page
-	And I should see following statement: Product Name as it a appears on the Package Label, Container or Safety Data Sheet (SDS)
-	And I should see following statement: Product Line or Brand (optional)
-	And I should see following statement: Type of Product (select)
-
 #Removed from regression 2024/03
 @ignore
 @TestCase:31347
@@ -193,48 +181,3 @@ Scenario: [84639] Product Name - can contain special characters - : character te
 	And I call Shared Step 103904 - Validate Product Name can contain character: :
 	Then I save the product information as: TestCase84639
 	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase84639
-
-#Remove from regression: 2023/04
-@ignore
-@TestCase:84640
-Scenario: [84640] Product Name - can not contain special characters - ; character testing
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	And I set 'Type of Product' to: Bubble solution
-	Then I call Shared Step 104068 Validate Product Name can not contain special characters: ;
-
-#Remove from regression: 2023/04
-@ignore
-@TestCase:84641
-Scenario: [84641] Product Name - can not contain special characters - < character testing
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	And I set 'Type of Product' to: Bubble solution
-	Then I call Shared Step 104068 Validate Product Name can not contain special characters: <
-
-#Remove from regression: 2023/04
-@ignore
-@TestCase:84642
-Scenario: [84642] Product Name - can not contain special characters - > character testing
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	And I set 'Type of Product' to: Bubble solution
-	Then I call Shared Step 104068 Validate Product Name can not contain special characters: >
-
-#Remove from regression: 2023/04
-@ignore
-@TestCase:84631
-Scenario: [84631] Product Name - can not contain special characters - ! character testing
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	And I set 'Type of Product' to: Bubble solution
-	Then I call Shared Step 104068 Validate Product Name can not contain special characters: !
-
-#Remove from regression: 2023/04
-@ignore
-@TestCase:84632
-Scenario: [84632] Product Name - can not contain special characters - * character testing
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	And I set 'Type of Product' to: Bubble solution
-	Then I call Shared Step 104068 Validate Product Name can not contain special characters: *

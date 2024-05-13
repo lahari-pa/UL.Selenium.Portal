@@ -66,7 +66,7 @@ Scenario: [57950] Conditioner - Leave In (RU001272) 4-L
 	And in the Product Information page I click Continue
 
 	# ====== Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path) ====== #
-    Given In the Regulatory Documents to Provide Section, set the option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Given In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
     Given in the Regulatory Documents to Provide page I click Continue
 
 	# ====== Given I call Shared Step 73629 (Physical and Chemical Properties - Liquid - select any options(enter pH, boiling point, flash point)) ====== #
@@ -392,7 +392,7 @@ Scenario: [57952] Hair Styling Gel- (RU000749) 4LS - 4S
 	And in the Product Information page I click Continue
 
 	# ====== Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path) ====== #
-	Given In the Regulatory Documents to Provide Section, set the option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Given In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
 	Given in the Regulatory Documents to Provide page I click Continue
 
 	# ====== Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue) ====== #
@@ -579,7 +579,7 @@ Scenario: [57982] Bonding agent (RU000023) - 4All - 4G
 	And in the Product Information page I click Continue
 
 	# ====== Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path) ====== #
-    Given In the Regulatory Documents to Provide Section, set the option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Given In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
     Given in the Regulatory Documents to Provide page I click Continue
 
 	# ====== Then I call Shared Step 214644(Physical and Chemical Properties - Applicable Only to Bonding Agent (RU000023)) ====== #
@@ -782,7 +782,7 @@ Scenario: [57985] Footwear or Leather Care Product - Aerosol (RU000744) - Testin
 	And in the Product Information page I click Continue
 
 	# ====== Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path) ====== #
-    Given In the Regulatory Documents to Provide Section, set the option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Given In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
     Given in the Regulatory Documents to Provide page I click Continue
 
     # ====== Then I call Shared Step 213391(Physical and Chemical Properties (Applicable Only to Flow 6-A Type of Products) - Primary Physical State (AEROSOL ONLY) / Secondary Physical State (ANY)): ====== #
@@ -973,7 +973,7 @@ Scenario: [57990] Footwear or Leather Care Product - Solid (RU000745)
 	And in the Product Information page I click Continue
 
 	# ====== Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path) ====== #
-    Given In the Regulatory Documents to Provide Section, set the option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Given In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
     Given in the Regulatory Documents to Provide page I click Continue
 
 	# ====== Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue) ====== #
@@ -1099,7 +1099,7 @@ Scenario: [57991] Glue sticks for glue guns- (RU000300) - 4S
 	And in the Product Information page I click Continue
 
 	# ====== Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path) ====== #
-    Given In the Regulatory Documents to Provide Section, set the option in section: 'OSHA-compliant Safety Data Sheet, English' to: Yes, I certify that I have an OSHA-compliant SDS for this product and would like to upload it.
+	Given In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Yes, I certify that I have an OSHA-compliant SDS for this product and would like to upload it.
 	Given I upload PDF document to Upload SDS (Optional) field
     Given in the Regulatory Documents to Provide page I click Continue
 

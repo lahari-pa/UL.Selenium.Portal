@@ -425,21 +425,67 @@ Scenario: [91800] Duplicate UPC is not permitted within account - Forward Produc
 
 @TestCase:91741
 Scenario: [91741] Duplicate UPC is not permitted within account - New Product registration - Case UPC
+	Given I find an existing UPC number in trevor account saved as: ProductAccount using feature context: ExistingUPC_ProductAccount_1
 	Given I navigate to the landing page
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
-	Then I save the product information as: TestCase91741
-    And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
-	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
+
+	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
+
+	# ====== Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Seasonings, Spices or Flavoring for Food - Salts (Liquid) ====== #
+	Given I should see the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk_#91741
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
+ 	Given in the The Product page I click Continue
+    Then I save the product information as: TestCase91741
+
+	# ====== And I call Shared Step 62678 (Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path) ====== #
+	And I should see the Product Information Page
+	And In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	And In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
+	And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	And In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	And in the Product Information page I click Continue
+
+	# ====== And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue) ====== #
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Bonded, fibrous glass web
+	Given In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Given in the Physical and Chemical Properties page I click Continue
+
+	# ====== And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water ====== #
+	And I should see the Ingredients Page
+	When in the Ingredients page I click Continue
+	Then I should see the ingredients error message
+	And The ingredients error message should be showing: Formulation must total or exceed 100%.
+    Then In the Ingredients section, add the following ingredients:
+		| SearchType     | SearchValue | SearchText | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+        | component name | Water       | Water      | 100     | False               | false         | false       |
+	And in the Ingredients page I click Continue
+
+	# ====== And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path) ====== #
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Given In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Given In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Given in the Inventory Status, Prop 65 (US) page I click Continue
+
+	# ====== And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue) ====== #
+	Given I should see the Retailer Page
+	Given In the Retailer Section, click 'Add Retailers' button
+	Given In the Select Retailers window, select retailer: Target
+	Given In the Select Retailers window, click 'Done' button
+	Given in the Retailer page I click Continue
+
 	Then I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	And in the UPC Window, I click the Add Casepack button
 	Given I add the following into the UPC case fields
-		| UPC Number                            | Container Type | Size | Quantity | Individual Upc Case Pack | Transportation Option							  |
-		| saved as ExistingUPC_ProductAccount_1 | Cardboard      | 1    | 1        |                          | 1A1:  non-removable head steel drum               |
+		| UPC Number                            | Container Type | Size | Quantity | Individual Upc Case Pack | Transportation Option |
+		| saved as ExistingUPC_ProductAccount_1 | Cardboard      | 1    | 1        |                          | <first> |
 	Given I click 'Select all' under Destination Retailers in the UPC page
 	Given I click continue
 	And I should see a list style form error with text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. UPCs:
@@ -455,7 +501,13 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 	And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
-	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+
+	# ====== And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path) ====== #
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Given In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Given In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Given in the Inventory Status, Prop 65 (US) page I click Continue
+
 	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
 	And I click Sample File link and verify the Upload UPC form and save it as test91100
 		| UPC           | Name   | Quantity | Size | Internal SKU | US: Part Number | US: Item Number | GP: Part Number | SP: Part Number | TG: DPCI    | HD: OMSID | CT: Item Number   | Green Good Housekeeping | Green Seal | EPA Safer Choice | Cradle to Cradle | UL Ecologo | EWG Verified | Green Tick | Madesafe | NSF Sustainability Certified |
@@ -464,7 +516,8 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 		| 978959000000  | Saco 3 | 3        | 102  |              | 12AC67          | 1003            | 3333            | C0003           | 111-22-0003 | 100000003 | 123-1234,123-1232 |                         |            | Yes              |                  |            |              |            |          |                              |
 		| 688267000000  | Saco 4 | 4        | 103  | KS956AG      | 12AD89          | 1004            | 4444            | D0004           | 111-22-0004 | 100000004 | 123-1234,123-1233 |                         |            |                  | Yes              |            |              |            | Yes      |                              |
 		| 854911000000  | Saco 5 | 5        | 104  | KS957AT      | 12AF00          | 1005            | 5555            | E0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |                         |            |                  |                  | Yes        |              |            |          |                              |
-	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
+	#And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
+	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I click the following option in the bottom menu: Search
 	Given I save the username for TReVor test user: ProductAccount to context as: AccountUsername
 	Given In SHA Manager ProductSearch page I run search:
@@ -521,14 +574,59 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 	Given I find an existing UPC number in trevor account saved as: ProductAccount using feature context: ExistingUPC_ProductAccount_1
 	Given I navigate to the landing page
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
-	Then I save the product information as: TestCase91077
-	And I call Shared Step 62678 (Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
-	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
-	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
+
+	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
+
+	# ====== Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Seasonings, Spices or Flavoring for Food - Salts (Liquid) ====== #
+	Given I should see the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk_#91077
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
+ 	Given in the The Product page I click Continue
+    Then I save the product information as: TestCase91077
+
+	# ====== And I call Shared Step 62678 (Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path) ====== #
+	And I should see the Product Information Page
+	And In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	And In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
+	And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	And In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	And in the Product Information page I click Continue
+
+	# ====== And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue) ====== #
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Bonded, fibrous glass web
+	Given In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Given in the Physical and Chemical Properties page I click Continue
+
+	# ====== And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water ====== #
+	And I should see the Ingredients Page
+	When in the Ingredients page I click Continue
+	Then I should see the ingredients error message
+	And The ingredients error message should be showing: Formulation must total or exceed 100%.
+    Then In the Ingredients section, add the following ingredients:
+		| SearchType     | SearchValue | SearchText | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+        | component name | Water       | Water      | 100     | False               | false         | false       |
+	And in the Ingredients page I click Continue
+
+	# ====== And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path) ====== #
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Given In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Given In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Given in the Inventory Status, Prop 65 (US) page I click Continue
+
+	# ====== And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue) ====== #
+	Given I should see the Retailer Page
+	Given In the Retailer Section, click 'Add Retailers' button
+	Given In the Select Retailers window, select retailer: Target
+	Given In the Select Retailers window, click 'Done' button
+	Given in the Retailer page I click Continue
+
 	Then I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	Given I click the 'Add' button
 	Given I add the following into the UPC Fields

@@ -75,6 +75,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Canadian Tire\New Product Registration\" />
     <Folder Include="Features\SHA Manager\" />
     <Folder Include="Steps\SpecFlowSteps\New Product\Recipient and UPC Details\" />
   </ItemGroup>
