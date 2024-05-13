@@ -14,7 +14,16 @@
 @UPC
 @StepsPrototype
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
-
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
+@PhysicalAndChemicalProp
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:CaliforniaCleaningProductDisclosure
+@Ingredients
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ECOLOGO
+@GTINAndUPC
 Feature: Flow 2
 
 #Remove from regression: 2023/05
@@ -448,7 +457,8 @@ Scenario: [63666] New Product - Food/ Nutritional Drug Fact Panel Questions
 	# Created by Saikiran Chittampally
 @TestCase:217787
 Scenario: [217787] Container Types - Primary Physical State Liquid - Dishwashing Soap - RU000610
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC217787
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -456,45 +466,106 @@ Scenario: [217787] Container Types - Primary Physical State Liquid - Dishwashing
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Liquid Dishwashing Soap
+	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Liquid Dishwashing Soap
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Liquid Dishwashing Soap_#217787
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Liquid Dishwashing Soap
+	Then in the The Product page, I click Continue
+
 	Then I save the product information as: TestCase217787
-	Given I call Shared Step 217788 (Product Information - not Pesticide, US only, select Yes for JSON Question - Happy Path)
-	Given I call Shared Step 217789 (Physical and Chemical Properties - Physical Property - Liquid )
-	Given I call Shared Step 217792 California Cleaning Product Disclosure - Manufacturer
-	Then I add the following ingredients:
-		| ComponentName                                       | Percent | PublicallyDisclosed | TradeSecret | PublicName                                          |
-		| Sodium laureth sulfate                              | 20      | true                | false       | Sodium Laureth Sulfate                              |
-		| Ammonium laureth sulfate                            | 20      | true                | false       | Ammonium Laureth Sulfate                            |
-		| Dodecylbenzene sulfonic acid                        | 5       | true                | false       | Dodecylbenzene Sulfonic Acid                        |
-		| D-Glucopyranose, oligomeric, decyl octyl glycosides | 5       | true                | false       | D-Glucopyranose, oligomeric, decyl octyl glycosides |
-		| Sodium hydroxide                                    | 1       | true                | false       | Sodium hydroxide                                    |
-		| Water                                               | 49      | true                | false       | Water                                               |
-	Given On the Ingredients page for the Ingredient: Sodium laureth sulfate I add Ingredient Type: Intentionally Added and Functional Purpose:
-	|Functional Purpose|
-	|Antifungal Agent|
-	Given On the Ingredients page for the Ingredient: Ammonium laureth sulfate I add Ingredient Type: Intentionally Added and Functional Purpose:
-	|Functional Purpose|
-	|Antimicrobial Agent|
-	Given On the Ingredients page for the Ingredient: Dodecylbenzene sulfonic acid I add Ingredient Type: Intentionally Added and Functional Purpose:
-	|Functional Purpose|
-	|Deodorizing Agent|
-	Given On the Ingredients page for the Ingredient: D-Glucopyranose, oligomeric, decyl octyl glycosides I add Ingredient Type: Intentionally Added and Functional Purpose:
-	|Functional Purpose|
-	|Preservative|
-	Given On the Ingredients page for the Ingredient: Sodium hydroxide I add Ingredient Type: Intentionally Added and Functional Purpose:
-	|Functional Purpose|
-	|Deodorizing Agent|
-	Given On the Ingredients page for the Ingredient: Water I add Ingredient Type: Intentionally Added and Functional Purpose:
-	|Functional Purpose|
-	|Diluent|
-	Given I click continue
-	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	And I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
-	And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Target
-	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC217787, container type: Plastic Container and size: 8.6 do not click continue
-	Given I should see following container type from the drop down list
-	|Container Type|
+
+	#Given I call Shared Step 217788 (Product Information - not Pesticide, US only, select Yes for JSON Question - Happy Path)
+	Then I should be on the Product Information Page
+	And In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
+	And In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	And In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	And In the Product Information Section, set the option in section: 'Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.' to: Yes
+	And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page, I click Continue
+
+	#Given I call Shared Step 217789 (Physical and Chemical Properties - Physical Property - Liquid )
+	Then I should be on the Physical and Chemical Properties Page
+	And In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Liquid
+	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
+	And In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 0.1
+	And In the Physical and Chemical Properties Section, for section: 'pH' enter text: 6
+	And In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: 100
+	And In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: 100
+	And In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Not applicable/available
+	And In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Miscible
+	Then in the Physical and Chemical Properties page, I click Continue
+
+	#Given I call Shared Step 217792 California Cleaning Product Disclosure - Manufacturer
+	Then I should be on the California Cleaning Product Disclosure Page 
+	And In the California Cleaning Product Disclosure Section, set the radio option in section: 'Who is publicly identified on the product label as responsible for the product?': to: Manufacturer
+	And In the California Cleaning Product Disclosure Section, set the option in section: 'Who is the Final Domestic Distributor (if any) of the product?' to: Target
+	And In the California Cleaning Product Disclosure Section, set the option in section: 'Is your identity, as the Manufacturer of this product, Confidential Business Information (CBI)?' to: No
+	And In the California Cleaning Product Disclosure Section, set the option in section: 'Select the product's GTIN Brick Code' to: Cleaning Aids
+	Then in the California Cleaning Product Disclosure page, I click Continue
+
+	Then I should be on the Ingredients Page
+	And In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue                                         | Percent | Publicly Disclosed? | Trade Secret? | Public Name                                         |
+	| component name | Sodium laureth sulfate                              | 20      | true                | false         | Sodium Laureth Sulfate                              |
+	| component name | Ammonium laureth sulfate                            | 20      | true                | false         | Ammonium Laureth Sulfate                            |
+	| component name | Dodecylbenzene sulfonic acid                        | 5       | true                | false         | Dodecylbenzene Sulfonic Acid                        |
+	| component name | D-Glucopyranose, oligomeric, decyl octyl glycosides | 5       | true                | false         | D-Glucopyranose, oligomeric, decyl octyl glycosides |
+	| component name | Sodium hydroxide                                    | 1       | true                | false         | Sodium hydroxide                                    |
+	| component name | Water                                               | 49      | true                | false         | Water                                               |
+	And In the Ingredients Section ingredients table, for Ingredient: Sodium laureth sulfate add Ingredient Type: Intentionally Added and Functional Purpose:
+	| Functional Purpose |
+	| Antifungal Agent   |
+	And In the Ingredients Section ingredients table, for Ingredient: Ammonium laureth sulfate add Ingredient Type: Intentionally Added and Functional Purpose:
+	| Functional Purpose  |
+	| Antimicrobial Agent |
+	And In the Ingredients Section ingredients table, for Ingredient: Dodecylbenzene sulfonic acid add Ingredient Type: Intentionally Added and Functional Purpose:
+	| Functional Purpose  |
+	| Deodorizing Agent   |
+	And In the Ingredients Section ingredients table, for Ingredient: D-Glucopyranose, oligomeric, decyl octyl glycosides add Ingredient Type: Intentionally Added and Functional Purpose:
+	| Functional Purpose |
+	| Preservative       |
+	And In the Ingredients Section ingredients table, for Ingredient: Sodium hydroxide add Ingredient Type: Intentionally Added and Functional Purpose:
+	| Functional Purpose |
+	| Deodorizing Agent  |
+	And In the Ingredients Section ingredients table, for Ingredient: Water add Ingredient Type: Intentionally Added and Functional Purpose:
+	| Functional Purpose |
+	| Diluent            |
+	Then in the Ingredients page, I click Continue
+	#And In the Ingredients Section, I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
+	#And In the Ingredients Section, In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
+
+	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I should be on the Inventory Status, Prop 65 (US) Page
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+
+	#And I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+	Then I should be on the Transportation Details 1 Page
+	And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
+	Then in the Transportation Details 1 page, I click Continue
+
+	# -- bellow step does not appear in tfs test case but is present on the screen 5/10/24 -- 
+	#And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+	Then I should be on the ECOLOGO Readiness Page
+	And In the ECOLOGO Readiness Section, set the option in section: 'Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment...': to: Not at this time
+	Then in the ECOLOGO Readiness page, I click Continue
+
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Target
+	Then I should be on the Retailer Page
+	And In the Retailer Section, click 'Add Retailers' button
+	And In the Select Retailers window, select retailer: Target
+	And In the Select Retailers window, click 'Done' button
+	Then in the Retailer page, I click Continue
+
+	#Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC217787, container type: Plastic Container and size: 8.6 do not click continue
+	Then I should be on the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	And In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	And In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: 711969119824 enter Size: 8.6 and enter Container Type: Plastic Container
+	And In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, the following container types should be displayed from the drop down list:
+	| Container Type                 |
 	| Coated or Laminated Paperboard |
 	| Full Syringe - Medical         |
 	| Glass Container                |
@@ -502,7 +573,9 @@ Scenario: [217787] Container Types - Primary Physical State Liquid - Dishwashing
 	| Metal Cylinder                 |
 	| Plastic Container              |
 	| Vial - Medical                 |
-	Given I click continue
+	And In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, an error message should not be displayed
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page, I click Continue
+
 #	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase217787
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase217787

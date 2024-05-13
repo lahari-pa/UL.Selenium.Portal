@@ -816,21 +816,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-
-		[StepDefinition(@"I should not see any error messages on the page")]
-		public void NoErrorMessages()
+		[StepDefinition(@"I (should|should not) see any error messages on the page")]
+		public void NoErrorMessages(string condition)
 		{
 			var NewProduct = new NewProduct();
 
 			List<string> errors = NewProduct.ErrorMessagesText;
-			if (!errors.Any())
+			if (condition == "should")
 			{
-				Report.Success("As expected, the error message was not showing.");
-				Report.Screenshot();
-				return;
+				if (!errors.Any())
+				{
+					Report.Success("As expected, the error message was not showing.");
+					Report.Screenshot();
+					return;
+				}
 			}
-			Report.Failure($"Error message was showing when it wasn't expected to! Error(s): {string.Join(", ", errors)}");
-			Report.Screenshot();
+			else if (condition == "should not")
+			{
+				Report.Failure($"Error message was showing when it wasn't expected to! Error(s): {string.Join(", ", errors)}");
+				Report.Screenshot();
+			}
 		}	
 	}
 }

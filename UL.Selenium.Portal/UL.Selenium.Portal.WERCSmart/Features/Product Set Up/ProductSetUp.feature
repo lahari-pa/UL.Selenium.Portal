@@ -15,6 +15,8 @@
 @Studio
 @ProductSetUp
 @run_ProductSetUp
+@StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ECOLOGO
 Feature:  Product set up and process to specific statuses (Suite ID: 75359)
 
 Background:
@@ -44,7 +46,11 @@ Scenario: [80089] Create product with Publicly Disclosed Ingredients (bleach) - 
 	Then in the Ingredients page I click Continue
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
-	Then If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+	#Then If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+	Then I should be on the ECOLOGO Readiness Page
+	And In the ECOLOGO Readiness Section, set the option in section: 'Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment...': to: Not at this time
+	Then in the ECOLOGO Readiness page, I click Continue
+
 	And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	And I should see the Additional Documents to Provide Page

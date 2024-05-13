@@ -24,6 +24,7 @@
 @StepsPrototype
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails2
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ECOLOGO
 
 Feature: Flash Point, testing method and Transportation (Suite ID: 74116)
 
@@ -130,7 +131,10 @@ Then I should not see any error messages on the page
 
 #And I You may see the Ecologo Readiness step depending on your subscription level - if the step is shown use the shared step below, if not skip to step 28
 #review updates steps for bellow 
-And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+#And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+Then I should be on the ECOLOGO Readiness Page
+And In the ECOLOGO Readiness Section, set the option in section: 'Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment...': to: Not at this time
+Then in the ECOLOGO Readiness page, I click Continue
 
 #And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 Then I should be on the Retailer Page
@@ -273,7 +277,10 @@ And I should not see any error messages on the page
 
 #And I You may see the Ecologo Readiness step depending on your subscription level - if the step is shown use the shared step below, if not skip to step 28
 #review updates steps for bellow 
-And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+#And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+Then I should be on the ECOLOGO Readiness Page
+And In the ECOLOGO Readiness Section, set the option in section: 'Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment...': to: Not at this time
+Then in the ECOLOGO Readiness page, I click Continue
 
 #And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 Then I should be on the Retailer Page
@@ -396,7 +403,10 @@ And In the Transportation Details 2 Section, set the option in section: 'Interna
 Then in the Transportation Details 2 page, I click Continue
 
 #And I You may see the Ecologo Readiness step depending on your subscription level - if the step is shown use the shared step below, if not skip to step 23
-And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+#And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+Then I should be on the ECOLOGO Readiness Page
+And In the ECOLOGO Readiness Section, set the option in section: 'Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment...': to: Not at this time
+Then in the ECOLOGO Readiness page, I click Continue
 
 #And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 Then I should be on the Retailer Page
@@ -538,7 +548,10 @@ Then in the U. S. Department of Transportation (DOT) Classification page, I clic
 And I should not see any error messages on the page
 
 #And I You may see the Ecologo Readiness step depending on your subscription level - if the step is shown use the shared step below, if not skip to step 28
-And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+#And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+Then I should be on the ECOLOGO Readiness Page
+And In the ECOLOGO Readiness Section, set the option in section: 'Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment...': to: Not at this time
+Then in the ECOLOGO Readiness page, I click Continue
 
 #And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 Then I should be on the Retailer Page
@@ -681,7 +694,10 @@ Then in the U. S. Department of Transportation (DOT) Classification page, I clic
 And I should not see any error messages on the page
 
 #And I You may see the Ecologo Readiness step depending on your subscription level - if the step is shown use the shared step below, if not skip to step 28
-And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+#And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+Then I should be on the ECOLOGO Readiness Page
+And In the ECOLOGO Readiness Section, set the option in section: 'Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment...': to: Not at this time
+Then in the ECOLOGO Readiness page, I click Continue
 
 #And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 Then I should be on the Retailer Page
@@ -824,7 +840,10 @@ Then in the U. S. Department of Transportation (DOT) Classification page, I clic
 And I should not see any error messages on the page
 
 #And I You may see the Ecologo Readiness step depending on your subscription level - if the step is shown use the shared step below, if not skip to step 28
-And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+#And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+Then I should be on the ECOLOGO Readiness Page
+And In the ECOLOGO Readiness Section, set the option in section: 'Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment...': to: Not at this time
+Then in the ECOLOGO Readiness page, I click Continue
 
 #And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 Then I should be on the Retailer Page
@@ -946,7 +965,10 @@ Then in the Transportation Details 2 page, I click Continue
 And I should not see any error messages on the page
 
 #And I You may see the Ecologo Readiness step depending on your subscription level - if the step is shown use the shared step below, if not skip to step 24
-And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+#And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+Then I should be on the ECOLOGO Readiness Page
+And In the ECOLOGO Readiness Section, set the option in section: 'Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment...': to: Not at this time
+Then in the ECOLOGO Readiness page, I click Continue
 
 #And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 Then I should be on the Retailer Page
@@ -1085,7 +1107,10 @@ Then in the U. S. Department of Transportation (DOT) Classification page, I clic
 And I should not see any error messages on the page
 
 #And I You may see the Ecologo Readiness step depending on your subscription level - if the step is shown use the shared step below, if not skip to step 28
-And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+#And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+Then I should be on the ECOLOGO Readiness Page
+And In the ECOLOGO Readiness Section, set the option in section: 'Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment...': to: Not at this time
+Then in the ECOLOGO Readiness page, I click Continue
 
 #And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 Then I should be on the Retailer Page
@@ -1224,7 +1249,10 @@ Then in the U. S. Department of Transportation (DOT) Classification page, I clic
 And I should not see any error messages on the page
 
 #And I You may see the Ecologo readiness step depending on your subscription.  If you see the Ecologo step use the shared step below.  If you do not see it skip to step 29
-And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+#And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+Then I should be on the ECOLOGO Readiness Page
+And In the ECOLOGO Readiness Section, set the option in section: 'Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment...': to: Not at this time
+Then in the ECOLOGO Readiness page, I click Continue
 
 #And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 Then I should be on the Regulatory Documents to Provide Page
@@ -1356,7 +1384,11 @@ Then in the U. S. Department of Transportation (DOT) Classification page, I clic
 And I should not see any error messages on the page
 
 #And I You may see the Ecologo readiness step depending on your subscription.  If you see the Ecologo step use the shared step below.  If you do not see it skip to step 29
-And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+#And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+Then I should be on the ECOLOGO Readiness Page
+And In the ECOLOGO Readiness Section, set the option in section: 'Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment...': to: Not at this time
+Then in the ECOLOGO Readiness page, I click Continue
+
 #And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 Then I should be on the Regulatory Documents to Provide Page
 And In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
@@ -1490,7 +1522,10 @@ Then in the U. S. Department of Transportation (DOT) Classification page, I clic
 And I should not see any error messages on the page
 
 #And I You may see the Ecologo readiness step depending on your subscription.  If you see the Ecologo step use the shared step below.  If you do not see it skip to step 29
-And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+#And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+Then I should be on the ECOLOGO Readiness Page
+And In the ECOLOGO Readiness Section, set the option in section: 'Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment...': to: Not at this time
+Then in the ECOLOGO Readiness page, I click Continue
 
 #And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 Then I should be on the Regulatory Documents to Provide Page
@@ -1625,7 +1660,11 @@ Then in the U. S. Department of Transportation (DOT) Classification page, I clic
 And I should not see any error messages on the page
 
 #And I You may see the Ecologo readiness step depending on your subscription.  If you see the Ecologo step use the shared step below.  If you do not see it skip to step 29
-And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+#And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+Then I should be on the ECOLOGO Readiness Page
+And In the ECOLOGO Readiness Section, set the option in section: 'Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment...': to: Not at this time
+Then in the ECOLOGO Readiness page, I click Continue
+
 #And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 Then I should be on the Regulatory Documents to Provide Page
 And In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
@@ -1758,7 +1797,11 @@ Then in the U. S. Department of Transportation (DOT) Classification page, I clic
 And I should not see any error messages on the page
 
 #And I You may see the Ecologo readiness step depending on your subscription.  If you see the Ecologo step use the shared step below.  If you do not see it skip to step 29
-And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+#And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+Then I should be on the ECOLOGO Readiness Page
+And In the ECOLOGO Readiness Section, set the option in section: 'Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment...': to: Not at this time
+Then in the ECOLOGO Readiness page, I click Continue
+
 #And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 Then I should be on the Regulatory Documents to Provide Page
 And In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
@@ -1888,7 +1931,11 @@ Then in the U. S. Department of Transportation (DOT) Classification page, I clic
 And I should not see any error messages on the page
 
 #And I You may see the Ecologo readiness step depending on your subscription.  If you see the Ecologo step use the shared step below.  If you do not see it skip to step 29
-And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+#And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+Then I should be on the ECOLOGO Readiness Page
+And In the ECOLOGO Readiness Section, set the option in section: 'Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment...': to: Not at this time
+Then in the ECOLOGO Readiness page, I click Continue
+
 #And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 Then I should be on the Regulatory Documents to Provide Page
 And In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
