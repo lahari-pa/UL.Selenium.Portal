@@ -20,7 +20,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 @StepsPrototype
 @run_Subscription
-
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 Feature: Subscription
 
 #@ignore
@@ -60,7 +60,13 @@ Scenario: [63297] Add subscription to a new supplier through data entry
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
-	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I should be on the Inventory Status, Prop 65 (US) Page
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+
+
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given in the Additional Documents to Provide page I click Continue
@@ -883,7 +889,12 @@ Scenario: [63224] Upgrade subscription through data entry
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
-	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+#	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I should be on the Inventory Status, Prop 65 (US) Page
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given in the Additional Documents to Provide page I click Continue

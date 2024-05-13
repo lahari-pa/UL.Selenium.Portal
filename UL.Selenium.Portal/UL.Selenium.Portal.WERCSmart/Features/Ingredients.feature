@@ -22,6 +22,8 @@
 @StepsPrototype
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ECOLOGO
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+
 Feature: Ingredients
 (Suite ID: 64740)
 
@@ -735,7 +737,12 @@ Scenario: [158853] Ingredient Identifier
 	Then In the Ingredient Reference Number field I enter the following text: test 123 @#
 	Then I click continue
 	And I should see the Inventory Status, Prop 65 (US) Page
-	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I should be on the Inventory Status, Prop 65 (US) Page
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+
 	Given I call Shared Step 150905 (Retailer - NR selected by default)
 	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given in the Additional Documents to Provide page I click Continue
@@ -779,7 +786,12 @@ Scenario: [209549] Ingredient Table - Sum of Ingredients: Decimal Place Maximum 
 	And I click the page heading: Ingredients
 	Then I confirm the total percent of these five ingredients is 105.82258 %
 	And I click continue
-	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I should be on the Inventory Status, Prop 65 (US) Page
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 		| Retailer  |
 		| Walgreens |
@@ -828,7 +840,12 @@ Scenario: [207581] Oven Cleaner - Pump Spray - (RU000798) - New Flow Testing
 		| 7732-18-5     | 90      | true                | false       | Water                  |
 		| 1310-73-2     | 5       | true                | false       | Sodium hydroxide       |
 		| 151-21-3      | 5       | true                | false       | Sodium lauryl sulphate |
-	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I should be on the Inventory Status, Prop 65 (US) Page
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+
 	Then I should see the Pesticide Details - U.S. Page
 	And I see the following sections
 		| Section                                                                  |

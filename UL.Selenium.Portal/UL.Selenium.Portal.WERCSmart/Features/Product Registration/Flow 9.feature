@@ -14,6 +14,8 @@
 @UPC
 @StepsPrototype
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
 Feature: Flow 9
 
 @TestCase:58072
@@ -294,7 +296,12 @@ Scenario: [58089] Nutritional Supplements for Domesticated Animals - RU001239
 		| Vitamin A     | 10      | false               | false       |            |
 		| Citric acid   | 25      | false               | false       |            |
 	# Added in 57637 to make test run. Ask Wercs testers
-	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I should be on the Inventory Status, Prop 65 (US) Page
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+
 	Given I call Shared Step 132473 (Regulatory Information 3 - Nutritional Category)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Petco
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58089, container type: Plastic Container and size: 100
@@ -471,7 +478,11 @@ Scenario: [213910] WERCSmart Portal and SHA Manager Test Flow for Product Type: 
 		| Quartz            | 5       | false               | false       |            |
 	Given I click continue
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-	And I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+#	And I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+	Then I should be on the Transportation Details 1 Page
+	And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
+	Then in the Transportation Details 1 page, I click Continue
+
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Wal-Mart/SAM'S CLUB	
 	Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 	Then I click continue
@@ -548,7 +559,11 @@ Scenario: [213905] WERCSmart Portal and SHA Manager Test Flow for Product Type: 
 		| 14797-55-8            | 16.3       | false               | false       |            |
 	Given I click continue
 	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-	And I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+#	And I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+	Then I should be on the Transportation Details 1 Page
+	And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
+	Then in the Transportation Details 1 page, I click Continue
+
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Wal-Mart/SAM'S CLUB	
 	Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 	Then I click continue

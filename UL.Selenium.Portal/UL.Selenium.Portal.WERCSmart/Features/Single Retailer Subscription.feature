@@ -24,6 +24,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 @StepsPrototype
 @PhysicalAndChemicalProp
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 Feature: Single Retailer Subscription
 
 @TestCase:200502
@@ -239,7 +240,12 @@ Then I save the product information as: TestCase181949
 Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
-Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I should be on the Inventory Status, Prop 65 (US) Page
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+
 Then I should see the Retailer Page
 Then I confirm if the single retailer checkbox is displayed on the retailer page
 Then I confirm the message on retailers page : Single-Retailer subscription permits the registration to be part of an annual subscription that permits only one (1) active retailer + "No Retailer" to be associated to a product registration. The Single-Retailer registration is not permitted to have more than ten (10) active GTIN/UPCs associated. Single-Retailer subscription is a discounted annual rate. You may convert, at a future time, the registration to a Tiered Subscription (formula, enhanced, article) and your annual amount will be pro-rated.
@@ -300,7 +306,13 @@ Then I save the product information as: TestCase182824
 Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
-Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I should be on the Inventory Status, Prop 65 (US) Page
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+
+
 Then I call Shared Step 183893 (Single Retailer - Retailer Screen - Select retailer)
 | Retailer |
 | Amazon   |

@@ -12,6 +12,7 @@
 @run_LithiumBatteryTransportInformation
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ToxicityCharacteristicLeachingProcedureTCLP
 @StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 Feature: Lithium Battery Transport Information
 
 
@@ -190,7 +191,12 @@ Scenario: [65523] BCP - Contains Lithium Primary packaged with the product - Lit
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Camera w/Battery
 	Then I save the product information as: TestCase65523	
 	Given I call Shared Step 159304 (Product Information - US, No(Child), No (DSV), No (PLP))
-	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I should be on the Inventory Status, Prop 65 (US) Page
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+
 	Then I should see the Product Includes Battery Page
 	Given I set the Indicate how battery is packaged option to: The battery is shipped with but not included in my product
 	Given I add the following batteries:

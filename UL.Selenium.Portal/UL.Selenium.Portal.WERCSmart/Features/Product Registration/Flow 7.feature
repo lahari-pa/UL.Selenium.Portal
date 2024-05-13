@@ -10,6 +10,8 @@
 @wercsmart
 @RetailPartners
 @run_Flow7
+@StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 Feature: Flow 7
 
 @TestCase:57863
@@ -25,7 +27,12 @@ Scenario: [57863] Flow 7 - ABS Welding (RU000868)
 	Given I call Shared Step 73748 (Product Information - US only - No to GHS - No to shipped supplier - No to Private Label - No to Sold to retailer)
 	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Ketone
-	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+#	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I should be on the Inventory Status, Prop 65 (US) Page
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+
 	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Given I call Shared Step 57508 (VOC SCAQMD/Canada - Yes Low Solid, Yes apply to all States - Continue - Happy Path)
 	Given I call Shared Step 57801 (Confirm VOC Summary step shown, Confirm VOC analysis date is shown - Happy Path)
@@ -65,7 +72,12 @@ Scenario: [57905] Flow 7 - Automotive Coating - SCAQMD Any other coating type (R
 	Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Polymethyl acrylate
 	# Wrong step. CEPA question is displayed because previous step set the countries sold in to only Canada
-	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I should be on the Inventory Status, Prop 65 (US) Page
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+
 	#Given I call Shared Step 57590 (Enter Pesticide Data - United States (with EPA number))
 	#Given I confirm that there is data populated in the Expiration Date Column for some States
 	#And I confirm the 'Is Kelly Data' field is marked with a check for every State containing data in 'Expiration Date'
@@ -114,7 +126,12 @@ Scenario: [63623] Flow 7 - Grout (RU001548) - has its own SCAQMD limit
 	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Polymethyl acrylate
-	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I should be on the Inventory Status, Prop 65 (US) Page
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+
 	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Given I call Shared Step 57794 (Confirm VOC (SCAQMD) step title, Confirm ACP question shown  - Select No - Happy Path)
 	Given I set the Product is a Low Solid option to: Yes

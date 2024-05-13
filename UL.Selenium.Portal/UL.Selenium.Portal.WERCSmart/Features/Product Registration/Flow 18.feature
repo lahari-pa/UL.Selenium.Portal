@@ -14,6 +14,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 
 Feature: Flow 18
 
@@ -69,7 +70,12 @@ Scenario: [208099] Fabric Softener - Single-Use Dryer Product Only (RU000808)
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName     | IngredientType | FunctionalPurpose             | Clean | Certified |
 		| Water         | 100     | true               | false       | AQUA           | Fragrance      |  |   |       |
 	Then I click continue
-	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I should be on the Inventory Status, Prop 65 (US) Page
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+
 	Then I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
 	Then I see the following questions
 		| Section                                                                                                                                        |

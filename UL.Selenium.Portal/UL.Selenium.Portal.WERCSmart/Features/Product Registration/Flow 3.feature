@@ -10,6 +10,9 @@
 @wercsmart
 @RetailPartners
 @run_Flow3
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+@StepsPrototype
+
 Feature: Flow 3
 
 @TestCase:74992
@@ -25,7 +28,12 @@ Scenario: [74992] RU Baby/Infant/Adult Care/Cleansing Wipes
 	Given I call Shared Step 74995 (Liquid Core product - Select Yes - Continue)
     Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
-	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I should be on the Inventory Status, Prop 65 (US) Page
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)

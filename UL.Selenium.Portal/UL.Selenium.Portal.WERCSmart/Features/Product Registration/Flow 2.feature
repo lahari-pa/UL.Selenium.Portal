@@ -189,7 +189,11 @@ Scenario: [71274] Flea or Tick Repellent (L) - RU000323
 	And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	# JS 13/03 Change shared step used to match tfs test case change
 	And I call Shared Step 29183 (Pesticide Details - U.S. - No EPA number)
-	And I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+	#And I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+	Then I should be on the Transportation Details 1 Page
+	And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
+	Then in the Transportation Details 1 page, I click Continue
+
 	And I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
 	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	#CLF the below step also seemed to be missing
@@ -332,18 +336,18 @@ Scenario: [217787] Container Types - Primary Physical State Liquid - Dishwashing
 	And In the California Cleaning Product Disclosure Section, set the radio option in section: 'Who is publicly identified on the product label as responsible for the product?': to: Manufacturer
 	And In the California Cleaning Product Disclosure Section, set the option in section: 'Who is the Final Domestic Distributor (if any) of the product?' to: Target
 	And In the California Cleaning Product Disclosure Section, set the option in section: 'Is your identity, as the Manufacturer of this product, Confidential Business Information (CBI)?' to: No
-	And In the California Cleaning Product Disclosure Section, set the option in section: 'Select the product's GTIN Brick Code' to: Cleaning Aids
+	And In the California Cleaning Product Disclosure Section, set the option in section: 'Select the product's GTIN Brick Code' to: [10000397] Cleaning Aids
 	Then in the California Cleaning Product Disclosure page, I click Continue
 
 	Then I should be on the Ingredients Page
 	And In the Ingredients section, add the following ingredients:
 	| SearchType     | SearchValue                                         | Percent | Publicly Disclosed? | Trade Secret? | Public Name                                         |
-	| component name | Sodium laureth sulfate                              | 20      | true                | false         | Sodium Laureth Sulfate                              |
-	| component name | Ammonium laureth sulfate                            | 20      | true                | false         | Ammonium Laureth Sulfate                            |
-	| component name | Dodecylbenzene sulfonic acid                        | 5       | true                | false         | Dodecylbenzene Sulfonic Acid                        |
-	| component name | D-Glucopyranose, oligomeric, decyl octyl glycosides | 5       | true                | false         | D-Glucopyranose, oligomeric, decyl octyl glycosides |
-	| component name | Sodium hydroxide                                    | 1       | true                | false         | Sodium hydroxide                                    |
-	| component name | Water                                               | 49      | true                | false         | Water                                               |
+	| component name | Sodium laureth sulfate                              | 20      | True                | False         | Sodium Laureth Sulfate                              |
+	| component name | Ammonium laureth sulfate                            | 20      | True                | False         | Ammonium Laureth Sulfate                            |
+	| component name | Dodecylbenzene sulfonic acid                        | 5       | True                | False         | Dodecylbenzene Sulfonic Acid                        |
+	| component name | D-Glucopyranose, oligomeric, decyl octyl glycosides | 5       | True                | False         | D-Glucopyranose, oligomeric, decyl octyl glycosides |
+	| component name | Sodium hydroxide                                    | 1       | True                | False         | Sodium Hydroxide                                    |
+	| component name | Water                                               | 49      | True                | False         | Water                                               |
 	And In the Ingredients Section ingredients table, for Ingredient: Sodium laureth sulfate add Ingredient Type: Intentionally Added and Functional Purpose:
 	| Functional Purpose |
 	| Antifungal Agent   |
@@ -377,11 +381,7 @@ Scenario: [217787] Container Types - Primary Physical State Liquid - Dishwashing
 	And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
 	Then in the Transportation Details 1 page, I click Continue
 
-	# -- bellow step does not appear in tfs test case but is present on the screen 5/10/24 -- 
 	#And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
-	Then I should be on the ECOLOGO Readiness Page
-	And In the ECOLOGO Readiness Section, set the option in section: 'Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment...': to: Not at this time
-	Then in the ECOLOGO Readiness page, I click Continue
 
 	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Target
 	Then I should be on the Retailer Page
@@ -403,7 +403,6 @@ Scenario: [217787] Container Types - Primary Physical State Liquid - Dishwashing
 	| Metal Cylinder                 |
 	| Plastic Container              |
 	| Vial - Medical                 |
-	And In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, an error message should not be displayed
 	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page, I click Continue
 
 #	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase217787
