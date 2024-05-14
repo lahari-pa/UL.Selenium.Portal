@@ -24,6 +24,7 @@
 @run_Timeout
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 @PhysicalAndChemicalProp
+@Ingredients
 
 Feature: Timeout
 

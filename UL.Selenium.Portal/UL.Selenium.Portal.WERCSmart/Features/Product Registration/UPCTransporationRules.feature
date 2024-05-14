@@ -29,6 +29,7 @@
 @ViewUpcs
 @Solutions
 @run_UPCTransporationRules
+@Ingredients
 
 Feature: UPCTransporationRules
 

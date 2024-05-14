@@ -12,6 +12,7 @@
 @run_Flow7
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
+@Ingredients
 
 Feature: Flow 7
 

@@ -11,6 +11,8 @@
 @wercsmart
 @RetailPartners
 @run_VOCFlow19
+@Ingredients
+
 Feature: VOC - Flow 19 Dilution - validation of limits (Suite ID: 64747)
 
 @TestCase:62730
