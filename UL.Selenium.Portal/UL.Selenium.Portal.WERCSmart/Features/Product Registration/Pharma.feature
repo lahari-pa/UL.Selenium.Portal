@@ -11,6 +11,8 @@
 @DocumentAcceptance
 @UPC
 @run_Pharma
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
+
 Feature: Pharma
 
 @TestCase:128085
@@ -61,7 +63,11 @@ Scenario: [128085] Pharma - Prescription Pharmaceutical - Aerosol Product
 	When I click continue
 	Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	When I click continue
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 	And I navigate to the home page
@@ -141,7 +147,11 @@ Scenario: [127970] Pharma - Regulatory Documents to Provide and Additional Docum
 		| Option                       |
 		| Safety Data Sheet (Optional) |
 	Then in the Additional Documents to Provide page I click Continue
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 	And I navigate to the home page
@@ -186,7 +196,11 @@ When I click continue
 Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 When I click continue
 When I click continue
-Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 And I navigate to the home page
@@ -382,7 +396,11 @@ Then I check for the following options in the Additonal Documents to Provide sec
 When I click continue
 Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 When I click continue
-Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 Then In the Purchase Summary screen I click Confirm Order
@@ -437,7 +455,11 @@ And I call Shared Step 60567 (Upload Product Label only) for section: Upload Ful
 When I click continue
 Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 When I click continue
-Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 Then In the Subscription Issue screen I confirm the following statement is shown: This order cannot be processed due to an issue with your subscription. You may need to upgrade to process this registration.
 And I navigate to the home page
 
@@ -479,7 +501,11 @@ Then I check for the following options in the Additonal Documents to Provide sec
 | Safety Data Sheet (Optional) |
 Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Safety Data Sheet and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 Then I click continue
-Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 And I navigate to the home page
@@ -519,7 +545,11 @@ And I click Save in The Product Page
 Given I call Shared Step (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 And I click Save in The Product Page
 And I click the page heading: Data Acceptance
-Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 And I navigate to the home page

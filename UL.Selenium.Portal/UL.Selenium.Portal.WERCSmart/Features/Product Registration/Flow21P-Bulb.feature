@@ -12,6 +12,7 @@
 @run_Flow16
 @UPC
 @PaymentMethods
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 
 Feature: Flow21P-Bulb
 
@@ -47,7 +48,11 @@ Then I call Shared Step 214662 (Summary Tab - Data Verification - Applicable Onl
 	| FIFRA 25(b) Exempt                                   | Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)  |
 	| Container Type                                       | Plastic Container |
 	| Retailers                                            | HD                |
-Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 Then In the Thank You screen I click Home
 Then For product saved as: TestCase209162 the status is: Assessment in Progress

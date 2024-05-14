@@ -11,6 +11,8 @@
 @RetailPartners
 @run_Flow14
 @StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 
 Feature: Flow 14
 
@@ -39,13 +41,21 @@ Scenario: [58736] Sanitizer Wipes for Use on Domesticated Animals (Solid)- RU001
 	Given I call Shared Step 34455 (U. S. Department of Transportation (DOT) Classification - Enter all valid data)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples
     Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58736, container type: Cardboard and size: 33
-    Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+    #Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 	Given I call Shared Step 60931 (Additional Documents to Provide - Exemption - Special Permit - Product Label)
 	And in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
 		| Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58736. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58736. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58736
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase58736
@@ -78,7 +88,11 @@ Scenario: [58738] Sanitizer Wipes for Use on Domesticated Animals (Liquid)- RU00
 	Given I call Shared Step 34455 (U. S. Department of Transportation (DOT) Classification - Enter all valid data)
 	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
     Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58738, container type: Cardboard and size: 33
-    Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+    #Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 	Given I call Shared Step 60931 (Additional Documents to Provide - Exemption - Special Permit - Product Label)
 	And I should see the Optional Reports and Documents Available for Purchase Page
 	
@@ -88,7 +102,11 @@ Scenario: [58738] Sanitizer Wipes for Use on Domesticated Animals (Liquid)- RU00
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
 		| Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58738. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58738. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58738
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase58738

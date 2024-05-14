@@ -85,7 +85,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 		public void EnterProductDispensingMethod(string option)
 		{
 			string section = "Product's Dispensing Method";
-			new StepsNewProduct().SetTheSectionOptionTo("Product's Dispensing Method", option);
+			new StepsNewProduct().SetTheSectionOptionTo(section, option);
 		}
 
 

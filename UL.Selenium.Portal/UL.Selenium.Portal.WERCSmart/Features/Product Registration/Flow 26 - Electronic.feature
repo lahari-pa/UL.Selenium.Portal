@@ -57,7 +57,11 @@ Scenario: [60671] Computer (Combination of Monitor & Desktop) - RU001177
 	Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
 	Given I call Shared Step 58189 Answer Electronic Equipment questions - With Cathode Ray - No to all
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Computer (Combination of Monitor & Desktop)
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60671
 
