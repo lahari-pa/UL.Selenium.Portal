@@ -14,7 +14,9 @@
 @ProductSetUp
 @run_AccHasFullStwdData
 @UPC
-
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 
 Feature: AccHasFullStwdData
 
