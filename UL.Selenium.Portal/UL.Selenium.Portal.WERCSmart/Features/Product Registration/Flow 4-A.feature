@@ -10,6 +10,9 @@
 @wercsmart
 @RetailPartners
 @run_Flow4A
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
+
 Feature: Flow 4-A
 
 ## Changed to Engine Degreaser - Aerosol from Air Freshener-Dual Purpose/Disinfectant-Aerosol 06/18/2019
@@ -35,12 +38,20 @@ Scenario: [74825] Flow 4-A - Engine Degreaser - Aerosol - RU000647
 	And I should see the Volatile Organic Compound Summary Page
 	And I click continue
 	And I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
-	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	#And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 	And I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
 	And I click continue
 	And I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
 		| Gloves                        | 340                      | 12                      | 20.5      | Clear      | Odorless | No data available | 5.0                   | Aerosol                     |
-	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
+	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
 	Then In the Data Acceptance page I select Agreed
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74825

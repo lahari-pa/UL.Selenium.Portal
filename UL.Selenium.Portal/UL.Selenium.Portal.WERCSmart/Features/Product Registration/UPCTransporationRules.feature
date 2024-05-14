@@ -50,7 +50,13 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	And I set the Flash Point Testing Method Used field to: Closed cup method
 	And I set the Select the best Water Solubility description field to: Insoluble
 	And I click continue
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
+	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page
 	And The following options should be displayed exclusively for section: Product is Regulated for Transport
@@ -88,7 +94,13 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 
 
-		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Dimethoxyethane
+		#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Dimethoxyethane
+		Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Dimethoxyethane       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
 		#Transportation Details Page
@@ -200,7 +212,13 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	And I set the Flash Point Testing Method Used field to: Closed cup method
 	And I set the Select the best Water Solubility description field to: Insoluble
 	And I click continue
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
+	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page
 	And I set the Product is Regulated for Transport field to: Yes
@@ -234,7 +252,13 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		Then I save the product information as: Mode1S21
 		Then I call Shared Step 143418 (Product Information - Pesticide= Not considered, Fertilizer=NO, SOLD=US, everything else = No - Continue)
 		And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Dimethoxyethane
+		#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Dimethoxyethane
+		Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Dimethoxyenthane       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
 		#Transportation Details Page
@@ -344,7 +368,13 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	And I set the Flash Point Testing Method Used field to: Closed cup method
 	And I set the Select the best Water Solubility description field to: Insoluble
 	And I click continue
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
+	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page
 	And I set the Product is Regulated for Transport field to: Yes
@@ -382,7 +412,13 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	And I set the Flash Point Testing Method Used field to: Closed cup method
 	And I set the Select the best Water Solubility description field to: Insoluble
 	And I click continue
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
+	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page
 	And I set the Product is Regulated for Transport field to: Yes
@@ -417,7 +453,13 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 	And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 
 
-		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Dimethoxyethane
+		#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Dimethoxyethane
+		Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Dimethoxyethane       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
 		#Transportation Details Page
@@ -475,7 +517,13 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 
 
-		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Dimethoxyethane
+		#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Dimethoxyethane
+		Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Dimethoxyethane       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
 		#Transportation Details Page
@@ -546,7 +594,13 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I set the Flash Point Testing Method Used field to: Closed cup method
 		And I set the Select the best Water Solubility description field to: Insoluble
 		And I click continue
-		And I call Shared Step 29181 (Ingredients - add any chemical) with name: 1-Pentene
+		#And I call Shared Step 29181 (Ingredients - add any chemical) with name: 1-Pentene
+		Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | 1-Pentene       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 		And I should see the Transportation Details 1 Page
 		And The following options should be displayed exclusively for section: Product is Regulated for Transport
@@ -663,7 +717,13 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 
 
-		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Dimethoxyethane
+		#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Dimethoxyethane
+		Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Dimethoxyethane       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 
 		#Transportation Details Page
@@ -813,7 +873,13 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I set the Flash Point Testing Method Used field to: Closed cup method
 		And I set the Select the best Water Solubility description field to: Insoluble
 		And I click continue
-		And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
+		#And I call Shared Step 29181 (Ingredients - add any chemical) with name: water
+		Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 		And I should see the Transportation Details 1 Page
 		And The following options should be displayed exclusively for section: Product is Regulated for Transport
@@ -901,7 +967,13 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		And I set the Flash Point Testing Method Used field to: Closed cup method
 		And I set the Select the best Water Solubility description field to: Insoluble
 		And I click continue
-		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzaldehyde
+		#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzaldehyde
+		Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Benzaldehyde       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 		And I should see the Transportation Details 1 Page
 		And The following options should be displayed exclusively for section: Product is Regulated for Transport
@@ -1031,7 +1103,13 @@ Scenario: [122292] UPC Transportation Error - Mode 4/5 - 21
 		And I set the Flash Point Testing Method Used field to: Closed cup method
 		And I set the Select the best Water Solubility description field to: Insoluble
 		And I click continue
-		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Acridine
+		#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Acridine
+		Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Acridine       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 		And I should see the Transportation Details 1 Page
 		And The following options should be displayed exclusively for section: Product is Regulated for Transport
@@ -1096,7 +1174,13 @@ Scenario: [122293] UPC Transportation Error - Mode 4/5 - 34
 		And I set the Flash Point Testing Method Used field to: Closed cup method
 		And I set the Select the best Water Solubility description field to: Insoluble
 		And I click continue
-		And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzaldehyde
+		#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzaldehyde
+		Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Benzaldehyde       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 		And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 		And I should see the Transportation Details 1 Page
 		And The following options should be displayed exclusively for section: Product is Regulated for Transport

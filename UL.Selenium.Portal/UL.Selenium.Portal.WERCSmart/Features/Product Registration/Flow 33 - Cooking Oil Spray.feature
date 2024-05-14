@@ -10,9 +10,10 @@
 @wercsmart
 @RetailPartners
 @PhysicalAndChemicalProp
-@@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
 @run_Flow33_CookingOilSpray
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 
 Feature: Flow 33 - Cooking Oil Spray
 
@@ -66,6 +67,10 @@ Scenario: [69577] Cooking Oil Spray - Aerosol
 	And I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	And I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
 	And I click continue
-	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Test 69577
+	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Test 69577
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Cooking Oil Spray - Aerosol
 	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase69577

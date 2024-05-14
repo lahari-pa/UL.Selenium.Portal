@@ -65,7 +65,11 @@ Scenario: [60725] Baked Goods, Crackers - RU001449
 	And I should see the Optional Reports and Documents Available for Purchase Page
 	Then in the Optional Reports and Documents Available for Purchase page I click Continue
 	And I wait 300 seconds for the Comments Page to load
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Baked Goods, Crackers
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60725
 
@@ -140,7 +144,7 @@ Scenario: [60724] Condiments, Sauces - RU001454
 	Given I upload PDF document to Flash Point Testing Report field
 	Then in the Additional Documents To Provide page I click Continue
 
-	# ====== I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text ====== #
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Then in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: Comment Text
 	Then in the Optional Comments page I click Continue
@@ -229,7 +233,7 @@ Scenario: [60723] Jelly, Jam or Preserves - RU001456
 	Given I upload PDF document to Flash Point Testing Report field
 	Then in the Additional Documents To Provide page I click Continue
 
-		# ====== I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text ====== #
+		#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Then in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: Comment Text
 	Then in the Optional Comments page I click Continue
@@ -271,7 +275,11 @@ Scenario: [60722] Nut Butters - RU001455
 	# Optional Reports and Documents Available for Purchase Page
 	And I should see the Optional Reports and Documents Available for Purchase Page
 	Then in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Nut Butters
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60722
 
@@ -289,7 +297,12 @@ Scenario: [73041] Cereals - RU001448 - Retailers associated Walgreens
 	Then I save the product information as: TestCase73041
 	Given I call Shared Step 74123 (Product Information - Grocery - US - Random Country - No(PL))
 	Given I call Shared Step 60741 (Select Primary Physical Property - Solid - With Ingredients)
-	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+	#And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page I click Continue
+
 	Then I click 'Add Retailers' in the Retailers page
 	Then In the 'Select retailers' window I should see the following retailers:
 		| Retailer                   |	

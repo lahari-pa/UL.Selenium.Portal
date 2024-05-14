@@ -29,6 +29,10 @@
 @ViewUpcs
 @Solutions
 @run_UPCTransportation
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
+
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 
 Feature: UPCTransportation
@@ -45,7 +49,13 @@ Scenario: [122305] UPC Transportation options are present if product-level optio
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
           | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
           | 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Dispersible                                  | 2                |
-	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Chlorine       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
 	Given I set the Product is Regulated for Transport field to: Yes
@@ -83,7 +93,13 @@ Scenario: [122382] UPC Transportation - UPC Reset Popup
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
         | 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Dispersible                                  | 2                |
-	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Chlorine       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
 	Given I set the Product is Regulated for Transport field to: Yes
@@ -152,7 +168,13 @@ Scenario: [122428] UPC Transportation - Forwarding
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
 		| 2                          | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Dispersible                                  | 2                |
-	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Chlorine       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
 	Given I set the Product is Regulated for Transport field to: Yes
@@ -181,14 +203,26 @@ Scenario: [122428] UPC Transportation - Forwarding
 	Then I click Done on Select Retailers window
 	Then I click continue
 	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC122428, container type: Plastic Container and size: 12 click continue
-	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor     | Odor Threshold    | Partition Coefficient | Personal Protection Equipment | Viscosity |
 		| Black      | 300                      | 1.005                   | Odorless | No data available | 10                    | Mask                          | 20        |
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	Given If purchase details are showing click confirm order
 	Given I wait for 5 seconds
 	Given I navigate to the home page
@@ -244,7 +278,13 @@ Scenario: [122940] UPC Transporation - Data Entry - Exceptions
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
 		| 66                         | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Dispersible                                  | 66               |
-	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Chlorine       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 #	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should be on the Inventory Status, Prop 65 (US) Page
 	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
@@ -278,7 +318,13 @@ Scenario: [122971] UPC Transportation - Data Entry - Upgrading to Fully Regulate
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
 		| 66                         | 55                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Dispersible                                  | 66               |
-	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Chlorine       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
 	Given I set the Product is Regulated for Transport field to: Yes
@@ -298,13 +344,21 @@ Scenario: [122971] UPC Transportation - Data Entry - Upgrading to Fully Regulate
 	Given At the UPC level, I set DOT to Shipping fully regulated
 	Given At the UPC level, I set IATA to Shipping fully regulated
 	Given I click continue
-	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor     | Odor Threshold    | Partition Coefficient | Personal Protection Equipment | Viscosity |
 		| Black      | 300                      | 1.005                   | Odorless | No data available | 10                    | Mask                          | 20        |
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
 	Given I click the Summary button in the Data Acceptance window
 	Given I switch to the Data Summary page
 	Given In the section 'Select all modes of transport that you've classified the product for', I see DOT listed at Shipping with limited quantity
@@ -328,7 +382,13 @@ Scenario: [122984] UPC Transportation - Forwarding - iRules - Edit UPC
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
 		| 66                         | 66                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Dispersible                                  | 66               |
-	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Chlorine       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
 	Given I set the Product is Regulated for Transport field to: Yes
@@ -342,14 +402,26 @@ Scenario: [122984] UPC Transportation - Forwarding - iRules - Edit UPC
 	Given I click Done on Select Retailers window
 	Given I click continue
 	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC122984, container type: Plastic Container and size: 12 click continue
-	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor     | Odor Threshold    | Partition Coefficient | Personal Protection Equipment | Viscosity |
 		| Black      | 300                      | 1.005                   | Odorless | No data available | 10                    | Mask                          | 20        |
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	Given If purchase details are showing click confirm order
 	Given I navigate to the home page
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
@@ -387,7 +459,13 @@ Scenario: [123125] UPC Transportation - Forwarding - iRules - Add UPC
 	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
 		| 66                         | 66                       | Closed cup method               | 6  | Liquid                 | Liquid                   | Dispersible                                  | 66               |
-	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Chlorine       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
 	Given I set the Product is Regulated for Transport field to: Yes
@@ -401,14 +479,26 @@ Scenario: [123125] UPC Transportation - Forwarding - iRules - Add UPC
 	Given I click Done on Select Retailers window
 	Given I click continue
 	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC123125, container type: Plastic Container and size: 12 click continue
-	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor     | Odor Threshold    | Partition Coefficient | Personal Protection Equipment | Viscosity |
 		| Black      | 300                      | 1.005                   | Odorless | No data available | 10                    | Mask                          | 20        |
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	Given If purchase details are showing click confirm order
 	Given I navigate to the home page
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
@@ -455,7 +545,13 @@ Scenario: [123436] UPC Transportation - Recertification - Transportation Details
 	And I set the Flash Point Testing Method Used option to: Closed cup method
 	And I set the Select the best Water Solubility description option to: Insoluble
 	And I click continue
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzene
+	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzene
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Benzene       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page
 	And I set the Product is Regulated for Transport field to: Yes
@@ -475,7 +571,11 @@ Scenario: [123436] UPC Transportation - Recertification - Transportation Details
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
 		| saved as RandomUPC91076 | Plastic Container | 1    |      |          |
 	Given I click continue
-	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	#And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 	And I should see the Additional Documents to Provide Page
 	And I click continue
 	And I should see the Optional Reports and Documents Available for Purchase Page
@@ -483,9 +583,17 @@ Scenario: [123436] UPC Transportation - Recertification - Transportation Details
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
-	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
+	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Fertilizer
-	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 	And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
@@ -515,7 +623,11 @@ Scenario: [123436] UPC Transportation - Recertification - Transportation Details
 	And I click continue
 	And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	And I click continue
-	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 	And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
 
@@ -541,7 +653,13 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	And I set the Flash Point Testing Method Used option to: Closed cup method
 	And I set the Select the best Water Solubility description option to: Insoluble
 	And I click continue
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzene
+	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzene
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Benzene       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page
 	And I set the Product is Regulated for Transport field to: Yes
@@ -560,7 +678,11 @@ Given I log in with the account saved in TReVor as: ProductAccount
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
 		| saved as RandomUPC91076 | Plastic Container | 1    |      |          |
 	Given I click continue
-	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	#And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 	And I should see the Additional Documents to Provide Page
 	And I click continue
 	And I should see the Optional Reports and Documents Available for Purchase Page
@@ -568,9 +690,17 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
-	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
+	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Fertilizer
-	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 	And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
@@ -612,7 +742,13 @@ Scenario: [125536] UPC transportation - Recertification - Upgrade and Downgrade 
 	And I set the Flash Point Testing Method Used option to: Closed cup method
 	And I set the Select the best Water Solubility description option to: Insoluble
 	And I click continue
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzene
+	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzene
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Benzene       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page
 	And I set the Product is Regulated for Transport field to: Yes
@@ -633,7 +769,11 @@ Scenario: [125536] UPC transportation - Recertification - Upgrade and Downgrade 
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
 		| saved as RandomUPC91076 | Plastic Container | 1    |      |          |
 	Given I click continue
-	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	#And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 	And I should see the Additional Documents to Provide Page
 	And I click continue
 	And I should see the Optional Reports and Documents Available for Purchase Page
@@ -641,9 +781,17 @@ Scenario: [125536] UPC transportation - Recertification - Upgrade and Downgrade 
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
-	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
+	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Fertilizer
-	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 	And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
@@ -689,7 +837,13 @@ Scenario: [125702] UPC transportation - Recertification - Upgrade and Downgrade 
 	And I set the Flash Point Testing Method Used option to: Closed cup method
 	And I set the Select the best Water Solubility description option to: Insoluble
 	And I click continue
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzene
+	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzene
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Benzene       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page
 	And I set the Product is Regulated for Transport field to: Yes
@@ -711,7 +865,11 @@ Scenario: [125702] UPC transportation - Recertification - Upgrade and Downgrade 
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
 		| saved as RandomUPC91076 | Plastic Container | 1    |      |          |
 	Given I click continue
-	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	#And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 	And I should see the Additional Documents to Provide Page
 	And I click continue
 	And I should see the Optional Reports and Documents Available for Purchase Page
@@ -719,9 +877,17 @@ Scenario: [125702] UPC transportation - Recertification - Upgrade and Downgrade 
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
-	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
+	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Fertilizer
-	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 	And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
@@ -760,7 +926,13 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	And I set the Flash Point Testing Method Used option to: Closed cup method
 	And I set the Select the best Water Solubility description option to: Insoluble
 	And I click continue
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzene
+	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzene
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Benzene       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page
 	And I set the Product is Regulated for Transport field to: Yes
@@ -781,7 +953,11 @@ Given I log in with the account saved in TReVor as: ProductAccount
 		| UPC Number              | Container Type    | Size | DPCI | Quantity |
 		| saved as RandomUPC91076 | Plastic Container | 1    |      |          |
 	Given I click continue
-	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	#And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 	And I should see the Additional Documents to Provide Page
 	And I click continue
 	And I should see the Optional Reports and Documents Available for Purchase Page
@@ -789,9 +965,17 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
-	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
+	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Fertilizer
-	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 	And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
