@@ -12,6 +12,7 @@
 @run_VOCSCAQMD
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 @PhysicalAndChemicalProp
+@Ingredients
 
 Feature: VOC - SCAQMD (Suite ID: 64748)
 

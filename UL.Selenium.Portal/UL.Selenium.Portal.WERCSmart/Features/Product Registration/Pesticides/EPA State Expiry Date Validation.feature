@@ -13,6 +13,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 @PhysicalAndChemicalProp
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
+@Ingredients
 
 Feature:  EPA State Expiry Date Validation (Suite ID: 56545)
 
