@@ -219,7 +219,7 @@ Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU0
 	Then in the Additional Documents To Provide page I click Continue
 
 	# Optional Reports and Documents Available for Purchase Page
-	# ====== Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment:Comment Text ====== #
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment:Comment Text
 	Then in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: Comment Text
 	Then in the Optional Comments page I click Continue

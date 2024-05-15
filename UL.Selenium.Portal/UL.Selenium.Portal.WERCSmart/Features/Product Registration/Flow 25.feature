@@ -13,6 +13,8 @@
 @run_Flow25
 @StepsPrototype
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
+
 Feature: Flow 25
 
 @TestCase:60642
@@ -60,7 +62,10 @@ Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Conti
 
 Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60642, container type: Cardboard and size: 33
 
-Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 60642. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 60642. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Engine Parts and Components with Battery Included
 
@@ -108,7 +113,10 @@ Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Conti
 
 Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60643, container type: Cardboard and size: 33
 
-Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 60643. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 60643. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
 
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Camera w/Battery
 

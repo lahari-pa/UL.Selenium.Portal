@@ -582,11 +582,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 			}
 			List<string> showing = new NewProduct().SelectedOptionsForSection(section);
-			Report.Info("Value(s) showing were: " + string.Join(", ", showing));
+			Report.Info($"Value(s) showing were: {string.Join(", ", showing)}");
 			var expected = value.Split('|').Select(x => x.Trim()).ToList();
 			foreach (string expec in expected)
 			{
-				Report.IsTrue(showing.Contains(expec), $"Failed to find the selected value: {expec} in the section: {section}!", string.Format("Successfully found {0} in section: {1}", expec, section), false, false);
+				Report.IsTrue(showing.Contains(expec), $"Failed to find the selected value: {expec} in the section: {section}!", $"Successfully found {expec} in section: {section}", false, false);
 			}
 			Report.Screenshot();
 		}

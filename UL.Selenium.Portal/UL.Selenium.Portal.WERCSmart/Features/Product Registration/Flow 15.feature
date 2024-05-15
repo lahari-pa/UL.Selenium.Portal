@@ -23,6 +23,7 @@
 @GTINAndUPC
 @run_Flow15
 @StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 
 Feature: Flow 15
 
@@ -92,7 +93,7 @@ Scenario: [58760] Light Bulbs - Light Emitting Diodes (LED) - RU000948
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
-	# ====== And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comments Field Text ====== #
+	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comments Field Text
 	And I should see the Optional Comments Page
 	And In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: User added Comments Text 58760. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Then in the Optional Comments page I click Continue
@@ -183,7 +184,7 @@ Scenario: [58759] Servers, Small-Scale - RU001183
 	#Given in the Additional Documents to Provide page I click Continue
 	#Given in the Other Product Document Uploads page I click Continue
 
-	# ====== And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58759. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.) ====== #
+	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58759. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	And I should see the Optional Comments Page
 	And I enter the following into the comments field: User added Comments Text 58759. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Then in the Comments page I click Continue

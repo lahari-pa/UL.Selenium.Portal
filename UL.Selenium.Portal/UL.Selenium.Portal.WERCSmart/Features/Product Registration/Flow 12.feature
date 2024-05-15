@@ -198,7 +198,11 @@ Scenario: [42196] 3rd party > Recertification - with check for editing of Public
 	And In the Data Summary window the second component should have Public Name: saved as publicName and Publicly Disclosed: Yes
 	And I close the Data Summary tab
 	And I should see the Data Acceptance Page
-	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	Given If purchase details are showing click confirm order
 	#Scenario: test
 	#Given I save to context name: TestCase42196 and value: 1548654
