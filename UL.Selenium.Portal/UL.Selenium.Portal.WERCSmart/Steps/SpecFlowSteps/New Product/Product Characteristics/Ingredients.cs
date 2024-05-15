@@ -408,7 +408,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.UseSubSteps = true;
 			IngredientsTable ingredientsTable = new IngredientsTable();
 			SearchBoxPrototype searchBox = new SearchBoxPrototype();
-			List<string> requiredColumns = new List<string> { "SearchType", "SearchValue", "Percent", "Publicly Disclosed?", "Trade Secret?", "Public Name" };
+			List<string> requiredColumns = new List<string> { "SearchType", "SearchValue", "Percent", "Publicly Disclosed?", "Trade Secret?", "Public Name"};
 			requiredColumns.ForEach(requiredColumn =>
 			{
 				if(!inputTable.ContainsColumn(requiredColumn))
@@ -431,6 +431,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 					this.IngredientsTableRowCheckUncheckCheckBox(inputRow["SearchType"], inputRow["SearchValue"], "Publicly Disclosed?", "checked");
 					Report.StartSubStep($"Then In the Ingredients Table row with {inputRow["SearchType"]}: {inputRow["SearchValue"]}, in 'Public Name' column select option {inputRow["Public Name"]}");
 					this.IngredientsTableRowSelectOptionSelect(inputRow["SearchType"], inputRow["SearchValue"], "Public Name", inputRow["Public Name"]);
+					if (inputRow["Ingredient Type"] != null)
+					{
+						Report.StartSubStep($"Then In the Ingredients Table row with {inputRow["SearchType"]}: {inputRow["SearchValue"]}, in 'Ingredient Type' column select option {inputRow["Ingredient Type"]}");
+						this.IngredientsTableRowSelectOptionSelect(inputRow["SearchType"], inputRow["SearchValue"], "Ingredient Type", inputRow["Ingredient Type"]);
+					}
 				}
 				if (inputRow["Trade Secret?"] == "True")
 				{
@@ -443,6 +448,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 					this.IngredientsTableRowCheckUncheckCheckBox(inputRow["SearchType"], inputRow["SearchValue"], "Active Ingredient?", "checked");
 				}
 			}
+		}
+
+		[StepDefinition(@"In the Ingredients section, I confirm I see the error message types in the popup with the following title: (.*)")]
+		public void ThenIConfirmISeeTheTwoErrorMessagesInThePopupWithTheFollowingTitleCaliforniaCleaningRightToKnow(string popupTitle, Table table)
+		{
+			var newProductIngredients = new Steps_Prototype();
+			newProductIngredients.ThenIConfirmISeeTheTwoErrorMessagesInThePopupWithTheFollowingTitleCaliforniaCleaningRightToKnow(popupTitle, table);
+		}
+
+		[StepDefinition(@"In the Ingredients section, I click the close button for the CA Cleaning Ingredients Popup")]
+		public void ThenIClickTheCloseButtonForThePopupWithTheFollowingTitleCaliforniaCleaningRightToKnow()
+		{
+			var newProductIngredients = new Steps_Prototype();
+			newProductIngredients.ThenIClickTheCloseButtonForThePopupWithTheFollowingTitleCaliforniaCleaningRightToKnow();
 		}
 		#endregion
 	}

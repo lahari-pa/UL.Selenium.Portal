@@ -831,7 +831,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			Report.Failure($"Error message was showing when it wasn't expected to! Error(s): {string.Join(", ", errors)}");
 			Report.Screenshot();
-		}	
+		}
+
+		[StepDefinition(@"I confirm I see the error message types in the popup with the following titles: (.*)")]
+		public void ThenIConfirmISeeTheTwoErrorMessagesInThePopupWithTheFollowingTitleCaliforniaCleaningRightToKnow(string popupTitle, Table table)
+		{
+			var newProductIngredients = new Ingredients();
+			Report.IsTrue(newProductIngredients.CheckForTwoErrorMessagesInPopupWithTitle(table, popupTitle), "Failed to find all the error messages in popup with title " + popupTitle, "Successfully found all the error messages in popup with title " + popupTitle);
+		}
+
+		[StepDefinition(@"I click close button for the CA Cleaning Ingredients Popup")]
+		public void ThenIClickTheCloseButtonForThePopupWithTheFollowingTitleCaliforniaCleaningRightToKnow()
+		{
+			var newProductIngredients = new Ingredients();
+			Report.IsTrue(newProductIngredients.CloseCACleaningIngredientsPopupWindow(), "Failed to click close button for popup", "Successfully clicked close button for popup");
+		}
 	}
 }
 
