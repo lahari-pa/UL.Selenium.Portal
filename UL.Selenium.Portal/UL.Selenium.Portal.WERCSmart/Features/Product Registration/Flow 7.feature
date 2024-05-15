@@ -16,6 +16,8 @@
 
 @StepsPrototype
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+
+
 Feature: Flow 7
 
 @TestCase:57863

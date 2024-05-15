@@ -42,6 +42,7 @@ Scenario: [74208] CVS merchandising category and verification
 	| component name | Water       | 100     |                     |               |             |
 	Then in the Ingredients page I click Continue
 
+
 	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should be on the Inventory Status, Prop 65 (US) Page
 	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
