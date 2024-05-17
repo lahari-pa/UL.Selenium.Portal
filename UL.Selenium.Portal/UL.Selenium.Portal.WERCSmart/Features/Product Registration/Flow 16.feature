@@ -30,7 +30,9 @@
 @Ingredients
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
-
+@SafetyDataSheetAuthoring
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
+@AdditionalDocsContactInfo
 Feature: Flow 16
 
 @TestCase:59273
@@ -183,15 +185,27 @@ Scenario: [59274] Battery Containing Mercury - RU000729
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59274
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase59274
+
 @TestCase:59276
 Scenario: [59276] Lead Acid Battery - No Acid Included - RU001225
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC59276
-	Given I delete all products with UPC Number: saved as UPC59276
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lead Acid Battery - No Acid Included
+	Then In the Product Grid, delete all products with UPC Number: saved as UPC59276
+
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lead Acid Battery - No Acid Included
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Lead Acid Battery - No Acid Included_#59276
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Lead Acid Battery - No Acid Included
+	Then in the The Product page, I click Continue
+
 	Then I save the product information as: TestCase59276
+
 	#Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Then I should be on the Product Information Page
 	And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No 
@@ -207,35 +221,86 @@ Scenario: [59276] Lead Acid Battery - No Acid Included - RU001225
 	And In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
 	Then in the Physical and Chemical Properties page, I click Continue
 
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Lead sulfate  | 50      | false               | false       |            |
-		| Aqua          | 50      | false               | false       |            |
-	And I should see the Formulation > Batteries Page
-	Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
-	Given I click continue
-	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
-	Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59276 with container type: Metal Container size: 40.0 and quantity: 100
+	#Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Lead sulfate  | 50      | false               | false       |            |
+	#	| Aqua          | 50      | false               | false       |            |
+	Then I should be on the Ingredients Page
+	And In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     | False               | False         |             |
+	Then in the Ingredients page, I click Continue
+
+	Then I should be on the Formulation > Batteries Page
+	And In the Formulation > Batteries Section, set the radio option in section: 'Consent to Tier 2.1, 2.2, 4.2 Data Uses': to: Granted
+	Then in the Formulation > Batteries page, I click Continue
+
+	#Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+	Then I should be on the Inventory Status, Prop 65 (US) Page
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is exempt from TSCA chemical Inventory listing requirements.
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'Canadian Environmental Protection Act (CEPA) status' to: Compliant with Domestic Substances List (DSL)
+	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No 
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
+	Then I should be on the Retailer Page
+	And In the Retailer Section, click 'Add Retailers' button
+	And In the Select Retailers window, select retailer: Walgreens
+	And In the Select Retailers window, click 'Done' button
+	Then in the Retailer page, I click Continue
+
+	#Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59276 with container type: Metal Container size: 40.0 and quantity: 100
+	Then I should be on the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	And In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	And In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC59276 enter Size: 40.0 enter Container Type: Metal Container and enter Quantity: 100
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page, I click Continue
+
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	Given I should see the Regulatory Documents to Provide Page
-	Given I click the browse button for label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
-	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-	Given I click continue
-	Given in the Additional Documents to Provide page I click Continue
-	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
-	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
-		| Gloves                        | 230                      | 55.4                    | 33.3      | Black      | Acidic | No data available | 1.44                  |
+	Then I should be on the Regulatory Documents to Provide Page
+	And In the Regulatory Documents to Provide Section, upload file in section: 'I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide.'
+	And In the Regulatory Documents to Provide Section, set the radio option in section: 'Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS. When providing an SDS it must be both U.S. and Canada formats.' to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
+	And In the Regulatory Documents to Provide Section, set the radio option in section: 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
+	And In the Regulatory Documents to Provide Section, upload file in section: 'Label in both French and English'
+	Then in the Regulatory Documents to Provide page, I click Continue
+
+	Then in the Additional Documents to Provide page, I click Continue
+	Then in the Optional Reports and Documents Available for Purchase page, I click Continue
+
+	#And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
+	Then I should be on the Additional Documents -> Contact Information Page
+	And In the Additional Documents -> Contact Information section, for section: 'Manufacturer Name' enter text: Manufacturer
+	And In the Additional Documents -> Contact Information section, for section: 'Address' enter text: Address
+	And In the Additional Documents -> Contact Information section, for section: 'Phone' enter text: Phone
+	And In the Additional Documents -> Contact Information section, for section: 'Emergency Phone' enter text: Emergency Phone
+	Then in the Additional Documents -> Contact Information page, I click Continue
+
+#	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+#		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
+#		| Gloves                        | 230                      | 55.4                    | 33.3      | Black      | Acidic | No data available | 1.44                  |
+	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 230
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 55.4
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 33.3
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Black
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor' to: Acidic
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor Threshold' to: No data available
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Partition Coefficient' enter text: 1.44
+	Then in the Safety Data Sheet Authoring - Additional Data (Optional) page, I click Continue
+
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 59276. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I should see the Optional Comments Page
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
 	Then in the Optional Comments page I click Continue
 
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lead Acid Battery - No Acid Included
+	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lead Acid Battery - No Acid Included
+	Then I should be on the Data Acceptance Page
+	And In the Data Acceptance Section, click 'Summary' button
+	And I switch to the tab with Data Summary page
+	And In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Lead Acid Battery - No Acid Included
+	And I close the tab with Data Summary page
+	Then I should be on the Data Acceptance Page
+
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59276
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase59276
