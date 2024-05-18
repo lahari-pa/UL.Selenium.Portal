@@ -12,6 +12,7 @@
 @SafetyDataSheetAuthoring
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 @Ingredients
+@AdditionalDocsContactInfo
 
 Feature: Batteries
 
@@ -178,7 +179,14 @@ Scenario: [97495] Stand alone Nickel-Cadmium Battery
 	Then I should see the Retailer Page
 	Then in the Retailer page, I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
+#	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
+	Then I should be on the Additional Documents -> Contact Information Page
+	And In the Additional Documents -> Contact Information section, for section: 'Manufacturer Name' enter text: Manufacturer
+	And In the Additional Documents -> Contact Information section, for section: 'Address' enter text: Address
+	And In the Additional Documents -> Contact Information section, for section: 'Phone' enter text: Phone
+	And In the Additional Documents -> Contact Information section, for section: 'Emergency Phone' enter text: Emergency Phone
+	Then in the Additional Documents -> Contact Information page, I click Continue
+
 	#And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 	#	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 	#	| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
@@ -188,9 +196,9 @@ Scenario: [97495] Stand alone Nickel-Cadmium Battery
 	When In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 200
 	When In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 1.005
 	When In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 20
-	When In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to:Blue
+	When In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Blue
 	When In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor' to: Odorless
-	When In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor Threshold' to:No data available
+	When In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor Threshold' to: No data available
 	When In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Partition Coefficient' enter text: 10
 	And I click continue
 	#And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
@@ -252,7 +260,14 @@ Scenario: [97494] Stand alone Nickel Metal Hydride Battery
 	Then I should see the Retailer Page
 	Then in the Retailer page, I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
+#	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
+	Then I should be on the Additional Documents -> Contact Information Page
+	And In the Additional Documents -> Contact Information section, for section: 'Manufacturer Name' enter text: Manufacturer
+	And In the Additional Documents -> Contact Information section, for section: 'Address' enter text: Address
+	And In the Additional Documents -> Contact Information section, for section: 'Phone' enter text: Phone
+	And In the Additional Documents -> Contact Information section, for section: 'Emergency Phone' enter text: Emergency Phone
+	Then in the Additional Documents -> Contact Information page, I click Continue
+
 	#And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 	#	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 	#	| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
@@ -261,9 +276,9 @@ Scenario: [97494] Stand alone Nickel Metal Hydride Battery
 	When In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 300
 	When In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 1.005
 	When In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 20
-	When In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to:Black
+	When In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Black
 	When In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor' to: Odorless
-	When In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor Threshold' to:No data available
+	When In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor Threshold' to: No data available
 	When In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Partition Coefficient' enter text: 10
 	And I click continue
 	#And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)

@@ -27,13 +27,21 @@
 @MyMessages
 @Portal_ShaManager
 @run_Advanced_Reporting
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
+
 Feature: Advanced Reporting
 
 @ScenarioId:1513
 Scenario: [105329] PM Monthly Status Report - Target
 	Given I generate a random UPC number and save as: UPC105329
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Shampoo (Liquid)
 	Then I save the product information as: TestCase105329
 	And I call Shared Step 62678 (Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
@@ -43,7 +51,13 @@ Scenario: [105329] PM Monthly Status Report - Target
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	And I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 	And I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Target
+#	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Target
+	Then I should be on the Retailer Page
+	And In the Retailer Section, click 'Add Retailers' button
+	And In the Select Retailers window, select retailer: Target
+	And In the Select Retailers window, click 'Done' button
+	Then in the Retailer page, I click Continue
+
 	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC105329, container type: Plastic Container and size: 2 do not click continue
 	And In the Destination Retailers input field I input the value: 123-11-1234,125-22-1254,123-33-2589
 	And I click continue

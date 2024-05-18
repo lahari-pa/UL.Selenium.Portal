@@ -20,7 +20,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 @Ingredients
-
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
 Feature: Transportation
 
 
@@ -587,7 +587,11 @@ And I click alias subsection option TDGCP and confirm data as:
 Scenario: [126286] Transportation Details DOT - UN1057 Prompts the 'For the Lighter, Provide the DOT Approval Number' Field
 
 Given I call Shared Step 67284 (Login into WERCSmart Portal - Visual Automation Account)
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): LIGHTER FLUID
 Given I generate a random UPC number and save as: UPC126286
 Then I save the product information as: TestCase126286

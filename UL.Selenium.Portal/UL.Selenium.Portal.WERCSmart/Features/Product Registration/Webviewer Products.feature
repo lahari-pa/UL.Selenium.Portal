@@ -21,7 +21,8 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 @Ingredients
-
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@StepsPrototype
 Feature: Webviewer Products
 
 #Want to run feature using the config point that forces test end on first failure
@@ -36,7 +37,11 @@ Scenario: [146792] US Only, BCP - PLP = No, Authoring requested, Contains test B
 
 
 Given I Login into WERCSmart Portal - WebViewers Account
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 Given I generate a random UPC number and save as: UPC146792
 #In 57561a enter the name for final product run to be "Test Case 146792 - BCP, PLP No, Authoring requested, contains test batteries"
 Then I call Shared Step 57561a (The Product - Enter Product Name: Carbon Monoxide Detectors Test Product and select Type of Product): Carbon monoxide detectors
@@ -127,7 +132,11 @@ Scenario: [120814] WERCSmart product - Submitted to SHA, Status = Submitted
 
 # This test case is for loading WS products to be used in RPS testing.  As such it should not be included in any regression tests.
 Given I Login into WERCSmart Portal - WebViewers Account
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 Given I call Shared Step 57561b (The Product - Enter Product Name: TC 120814 - For RPS - Submitted status and select Type of Product): Chalk and add a Random Identifier
 Given I generate a random UPC number and save as: UPC120814
 Then I save the product information as: TestCase120814
@@ -287,7 +296,10 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 Scenario: [144975] US Only, PLP = No, GenDoc = 1, Doc Accepted = No (User rejects published SDS and uploads his own)
 #Login to WS as supplier with feed to Web viewers
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
 Given I generate a random UPC number and save as: UPC144975
 #In 57561b enter the name for final product run to be "Test Case 144975 - US Only, PLP No, GenDoc 1, DocAccept - User uploads own SDS"
 Then I call Shared Step 57561b (The Product - Enter Product Name: Chalk Test Product 144975 and select Type of Product): Chalk and add a Random Identifier
@@ -393,7 +405,11 @@ Scenario: [144979] US Only, PLP = No, GenDoc = 0, User uploads own SDS on submis
 
 #Login to WS as supplier with feed to Web viewers
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 Given I generate a random UPC number and save as: UPC144979
 #In 57561b enter the name for final product run to be "Test Case 144979 - US only, PLP No, GenDoc 0, User uploads own SDS"
 Then I call Shared Step 57561b (The Product - Enter Product Name: Chalk Test Product 144979 and select Type of Product): Chalk and add a Random Identifier
@@ -474,7 +490,10 @@ Scenario: [144981] US Only, PLP = Yes, PLP Upload allowed = Yes, GenDoc = 1, Ali
 #Login to WS as supplier with feed to Web viewers
 
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue 
 Given I generate a random UPC number and save as: UPC144981
 #In 57561b enter the name for final product run to be "For WVs TC 144981 - US Only, PLP Yes, PLP Upload allowed Yes, GenDoc 1, Alias published Yes"
 Then I call Shared Step 57561b (The Product - Enter Product Name: Chalk Test Product 144981 and select Type of Product): Chalk and add a Random Identifier
@@ -552,7 +571,10 @@ Then I Update the TestUser: Webviewer Products to include the name of the produc
 Scenario: [144984] US Only, PLP = Yes, PLP Upload allowed = Yes, GenDoc = 1, Alias published = No
 #Login to WS as supplier with feed to Web viewers
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
 Given I generate a random UPC number and save as: UPC144984
 #In 57561b enter the name for final product run to be "For WVs TC 144984 - US Only, PLP Yes, PLP Upload allowed Yes, GenDoc 1, Alias published No"
 Then I call Shared Step 57561b (The Product - Enter Product Name: Chalk Test Product 144981 and select Type of Product): Chalk and add a Random Identifier
@@ -630,7 +652,10 @@ Then I Update the TestUser: Webviewer Products to include the name of the produc
 Scenario: [144992] US Only, PLP = Yes, PLP Upload allowed = Yes, GenDoc = 0, Processed to Complete
 #Login to WS as supplier with feed to Web viewers
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
 Given I generate a random UPC number and save as: UPC144992
 #In 57561b enter the name for final product run to be "For WVs TC 144992 - US Only, PLP Yes, PLP Upload allowed Yes, GenDoc 0, User Uploads own SDS on submission"
 Then I call Shared Step 57561b (The Product - Enter Product Name: Chalk Test Product 144992 and select Type of Product): Chalk and add a Random Identifier
@@ -697,7 +722,11 @@ Then I Update the TestUser: Webviewer Products to include the name of the produc
 Scenario: [145074] US Only, Label Only Product - Label Uploaded - process to Complete
 #Login to WS as supplier with feed to Web viewers
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 Given I generate a random UPC number and save as: UPC145074
 #In 57561b enter the name for final product run to be "For WVs TC 145074 - Us Only - Label product - Label uploaded "
 Then I call Shared Step 57561b (The Product - Enter Product Name: Nutritional Supplement - Liquid Test Product 145074 and select Type of Product): Nutritional Supplement - Liquid and add a Random Identifier
@@ -800,7 +829,10 @@ Scenario: [120815] WERCSmart product - Submitted to SHA, Status = Assigned
 
 # This test case is for loading WS products to be used in RPS testing.  As such it should not be included in any regression tests.
 Given I Login into WERCSmart Portal - WebViewers Account
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
 Then I call Shared Step 57561b (The Product - Enter Product Name: TC 120815 - for RPS - Assigned Status and select Type of Product): Chalk and add a Random Identifier
 Given I generate a random UPC number and save as: UPC120815
 Then I save the product information as: TestCase120815
@@ -910,7 +942,11 @@ Scenario: [145793] Canada Only, PLP = Yes, PLP Upload allowed = Yes, GenDocCA = 
 
 # This test case is for loading WS products to be used in Webviewer testing.  As such it should not be included in any regression tests.
 Given I login into the WERCSmart Portal - WebViewers Account
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 # In the shared step below select Chalk as your product type. If running this test case for the first time in an environment after a database refresh and the product name is not present in the database please use the product name:  For WVs Test case 145793 - Canada Only, PLP Yes, PLP Upload allowed Yes, Gen
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 Given I generate a random UPC number and save as: UPC145793
@@ -973,7 +1009,10 @@ Scenario: [120811] WERCSmart product - Submitted to SHA, rejected, Status = New
 
 # This test case is for loading WS products to be used in RPS testing.  As such it should not be included in any regression tests.
 Given I Login into WERCSmart Portal - WebViewers Account
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
 Then I call Shared Step 57561b (The Product - Enter Product Name: TC 120811 - For RPS - Submitted to SHA and rejected, Status is New and select Type of Product): Chalk and add a Random Identifier
 Given I generate a random UPC number and save as: UPC120811
 Then I save the product information as: TestCase120811
@@ -1121,7 +1160,10 @@ Scenario: [145743] Canada Only, PLP = Yes, PLP Upload allowed = Yes, GenDocCA = 
 
 # This test case is for loading WS products to be used in Webviewer testing.  As such it should not be included in any regression tests.
 Given I login into the WERCSmart Portal - WebViewers Account
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
 # In the shared step below select Chalk as your product type. If running this test case for the first time in an environment after a database refresh and the product name is not present in the database please use the product name: For WVs Test case 145743 - Canada Only, PLP Yes, PLP Upload allowed Yes, GenDocCA 1, Alias published Yes
 Given I call Shared Step 57561b (The Product - Enter Product Name: TC 145743 - For RPS - Submitted status and select Type of Product): Chalk and add a Random Identifier
 
@@ -1193,7 +1235,10 @@ Scenario: [145783] Canada Only, PLP = Yes, PLP Upload allowed = Yes, GenDocCA = 
 
 # This test case is for loading WS products to be used in Webviewer testing.  As such it should not be included in any regression tests.
 Given I login into the WERCSmart Portal - WebViewers Account
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
 # In the shared step below select Chalk as your product type. If running this test case for the first time in an environment after a database refresh and the product name is not present in the database please use the product name: For WVs TC 145783 - Canada Only, PLP Yes, PLP Upload allowed Yes, GenDocCA 1, Alias published No
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 Given I generate a random UPC number and save as: UPC145783
@@ -1260,7 +1305,10 @@ Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Comple
 Scenario: [120816] WERCSmart product - Submitted to SHA, Status = Accepted
 
 Given I Login into WERCSmart Portal - WebViewers Account
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
 Then I call Shared Step 57561b (The Product - Enter Product Name: TC 120816 - for RPS - Status Accepted and select Type of Product): Chalk and add a Random Identifier
 Given I generate a random UPC number and save as: UPC120816
 Then I save the product information as: TestCase120816
@@ -1328,7 +1376,10 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 @TestCase:120817
 Scenario: [120817] WERCSmart product - Submitted to SHA, Status = Completed
 Given I Login into WERCSmart Portal - WebViewers Account
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
 Then I call Shared Step 57561b (The Product - Enter Product Name: TC 210817 - For RPS - Completed Status and select Type of Product): Chalk and add a Random Identifier
 Given I generate a random UPC number and save as: UPC120815
 Then I save the product information as: TestCase120817
@@ -1400,8 +1451,11 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 Scenario: [120848] WERCSmart product - Submitted to SHA, Status = Suspended (Safety Data Sheet (SDS) or Label Mismatch due to 3rd-Party Formula)
 
 	Given I Login into WERCSmart Portal - WebViewers Account
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I call Shared Step 57561b (The Product - Enter Product Name: TC 120848 - For RPS - Suspended Status - Formula - Document Issue and select Type of Product): Chalk and add a Random Identifier
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+Then I call Shared Step 57561b (The Product - Enter Product Name: TC 120848 - For RPS - Suspended Status - Formula - Document Issue and select Type of Product): Chalk and add a Random Identifier
 	Then I save the product information as: TestCase120848
 	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I should see the Physical and Chemical Properties Page
@@ -1499,7 +1553,10 @@ And I Close the Product Recertification History pop up
 Scenario: [120820] WERCSmart product - Submitted to SHA, Status = Cancelled
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
 Given I generate a random UPC number and save as: UPC120820
 Then I save the product information as: TestCase120820
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
@@ -1569,8 +1626,11 @@ Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Cancelled Statu
 @TestCase:126691
 Scenario: [126691] WERCSmart product - Pesticide - processed from New to Suspended-Pesiticde
 Given I Login into WERCSmart Portal - WebViewers Account
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I call Shared Step 57561b (The Product - Enter Product Name: TC 126691 - For RPS - Status is Suspended-Pesticide and select Type of Product): Chalk and add a Random Identifier
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+Then I call Shared Step 57561b (The Product - Enter Product Name: TC 126691 - For RPS - Status is Suspended-Pesticide and select Type of Product): Chalk and add a Random Identifier
 	Then I save the product information as: TestCase126691
 	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I should see the Physical and Chemical Properties Page
@@ -1637,8 +1697,11 @@ Given I call Shared Step 57408 (Create a New Registration via Register New Produ
 @TestCase:121986
 Scenario: [121986] WERCSmart product - Fails CVS Audit (Palm oil) from New thru to Status = Completed
 Given I Login into WERCSmart Portal - WebViewers Account
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I call Shared Step 57561b (The Product - Enter Product Name: TC 121986 - for RPS - Fails CVS Audit Palm oil and select Type of Product): Chalk and add a Random Identifier
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+Then I call Shared Step 57561b (The Product - Enter Product Name: TC 121986 - for RPS - Fails CVS Audit Palm oil and select Type of Product): Chalk and add a Random Identifier
 	Then I save the product information as: TestCase121986
 	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I should see the Physical and Chemical Properties Page

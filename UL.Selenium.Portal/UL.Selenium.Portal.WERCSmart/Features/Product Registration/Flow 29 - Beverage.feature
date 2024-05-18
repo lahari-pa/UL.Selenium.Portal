@@ -137,7 +137,13 @@ Scenario: [60695] Juice and Juice Drinks - RU001413
 	Then In the 'Select retailers' window I should not see the following retailers:
 		| Retailer |
 		| Autozone |
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
+	Then I should be on the Retailer Page
+	And In the Retailer Section, click 'Add Retailers' button
+	And In the Select Retailers window, select retailer: Walgreens
+	And In the Select Retailers window, click 'Done' button
+	Then in the Retailer page, I click Continue
+
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60695, container type: Plastic Container and size: 3.5
 	Then I should see the Additional Documents to Provide Page
 	Given in the Additional Documents to Provide page I click Continue

@@ -19,6 +19,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 @Ingredients
+@AdditionalDocsContactInfo
 
 Feature: Pesticides
 
@@ -460,7 +461,14 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	Then in the Additional Documents to Provide page I click Continue
 	Then I should see the Optional Reports and Documents Available for Purchase Page
 	Then in the Optional Reports and Documents Available for Purchase page I click Continue
-	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
+#	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
+	Then I should be on the Additional Documents -> Contact Information Page
+	And In the Additional Documents -> Contact Information section, for section: 'Manufacturer Name' enter text: Manufacturer
+	And In the Additional Documents -> Contact Information section, for section: 'Address' enter text: Address
+	And In the Additional Documents -> Contact Information section, for section: 'Phone' enter text: Phone
+	And In the Additional Documents -> Contact Information section, for section: 'Emergency Phone' enter text: Emergency Phone
+	Then in the Additional Documents -> Contact Information page, I click Continue
+
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
@@ -1113,7 +1121,11 @@ Scenario: [132756] Canadian Province Pesticide Options
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I generate a random UPC number and save as: RandomUPC
 	Given I delete all products with UPC Number: RandomUPC
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
 	Given I save the product information as: TestCase
 	Given I call Shared Step 140562 (Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, No CA Cleaning - Continue - Happy Path)

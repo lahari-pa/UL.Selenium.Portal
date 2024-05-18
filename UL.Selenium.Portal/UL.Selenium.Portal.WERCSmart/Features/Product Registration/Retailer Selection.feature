@@ -22,6 +22,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 @Ingredients
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 
 Feature: Retailer Selection
 
@@ -88,7 +89,11 @@ Scenario: [78936] Select Retailers - Show Logo Tile View
 Scenario: [78937] Select Retailers - Select All
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase78937
 	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
@@ -182,7 +187,11 @@ Scenario: [96708] Beverage RU - No Walmart
 @TestCase:136057
 Scenario: [136057] Select Retailers - Removing Retailer(s) Selected
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): chalk
 	Then I save the product information as: TestCase1234
 	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
@@ -260,7 +269,11 @@ Scenario: [136057] Select Retailers - Removing Retailer(s) Selected
 @TestCase:133311
 Scenario: [133311] Retailer Private Label List Appear in Alphabetical Order
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): chalk
 	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
@@ -293,7 +306,11 @@ Scenario: [133311] Retailer Private Label List Appear in Alphabetical Order
 @TestCase:125130
 Scenario: [125130] Canadian Tire Available for Selection for Articles
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Candy, Chewing Gum
 	Then I save the product information as: TestCase125130
 	And Select countries the product may be sold in should be showing the value: United States
@@ -301,7 +318,13 @@ Scenario: [125130] Canadian Tire Available for Selection for Articles
 	Given I set the Product is a Retailer's Private Label or Brand option to exactly match: No
 	Then I click continue
 	Given I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
+#	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
+	Then I should be on the Retailer Page
+	And In the Retailer Section, click 'Add Retailers' button
+	And In the Select Retailers window, select retailer: Canadian Tire
+	And In the Select Retailers window, click 'Done' button
+	Then in the Retailer page, I click Continue
+
 #	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase125130
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase125130
@@ -309,7 +332,11 @@ Scenario: [125130] Canadian Tire Available for Selection for Articles
 Scenario: [128920] Electronics - Dollar Tree/Family Dollar Retailers Available for Selection
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Stereo Equipment / Radio, Not Portable, No Battery Included
 	Then I save the product information as: TestCase128920
 	#Given I call Shared Step 60935 Product Information - US - Direct Ship - Private Label Only
@@ -383,7 +410,13 @@ Scenario: [128769] Battery Product - Dollar Tree/ Family Dollar Retailers Availa
 	Given I should see the Formulation > Batteries Page
 	Then I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses option to: Granted
 	Given I click continue
-	Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+	#Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+	Then I should be on the Inventory Status, Prop 65 (US) Page
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is exempt from TSCA chemical Inventory listing requirements.
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'Canadian Environmental Protection Act (CEPA) status' to: Compliant with Domestic Substances List (DSL)
+	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No 
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+
 	Given I click 'Add Retailers' in the Retailers page
 	Given I select the following retailers in the Select Retailers popup list view:
 		| Retailer                                                 |
@@ -404,7 +437,11 @@ Scenario: [128769] Battery Product - Dollar Tree/ Family Dollar Retailers Availa
 Scenario: [181979] Single Retailer Checkbox Checks
 
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase181979
 	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
@@ -482,7 +519,11 @@ Scenario: [181979] Single Retailer Checkbox Checks
 Scenario: [183582] Behaviors and Restrictions on Duplicate UPCs 
 Given I log in with the account saved in TReVor as: SingleRetailerAccount
 Then The home screen should load
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 Given I generate a random UPC number and save as: UPC183582
 Then I save the product information as: TestCase183582
@@ -528,7 +569,11 @@ Given I should see the Data Acceptance Page
 	Then In the Data Acceptance Section, click 'Accept' button
 
 Given In the Thank You screen I click Home
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 #Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 Given I should see the Product Information Page
@@ -571,7 +616,11 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 Scenario: [184381] My Retail Partners: Data Tier Consent - Hover Messaging 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 Given I generate a random UPC number and save as: UPC184381
 Then I save the product information as: TestCase184381
@@ -640,7 +689,11 @@ Then The home screen should load
 Scenario: [184567] My Products - Single Retailer: Indicator and Hover Message / And "Kit Registrations" removed from Additional Programs
 Given I log in with the account saved in TReVor as: SingleRetailerAccount
 Then The home screen should load
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 Given I generate a random UPC number and save as: UPC184567
 Then I save the product information as: TC184567

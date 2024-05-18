@@ -27,6 +27,8 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 @Ingredients
+@StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
 
 Feature: BulkActions
 
@@ -623,7 +625,11 @@ Scenario:[93366] My Products - Bulk Actions Multiple Deletion of Registrations
 @TestCase:88826
 Scenario:[88826] Delete Products > Product Not yet submitted
     Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase88826
 	Then I generate a random UPC number and save as: UPC88826

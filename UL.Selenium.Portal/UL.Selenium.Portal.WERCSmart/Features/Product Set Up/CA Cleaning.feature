@@ -229,7 +229,11 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 @TestCase:139205
 Scenario: [139205] CA Cleaning - Ingredient Validation Upon Continue or Save
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
 	Then I save the product information as: TestCase139205
 	Given I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)

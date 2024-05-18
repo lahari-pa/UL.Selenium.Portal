@@ -14,6 +14,7 @@
 @StepsPrototype
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 
 Feature: Flow 25
 
@@ -58,7 +59,13 @@ Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCL
 
 Given I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
 
-Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Genuine Parts
+#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Genuine Parts
+	Then I should be on the Retailer Page
+	And In the Retailer Section, click 'Add Retailers' button
+	And In the Select Retailers window, select retailer: Genuine Parts
+	And In the Select Retailers window, click 'Done' button
+	Then in the Retailer page, I click Continue
+
 
 Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60642, container type: Cardboard and size: 33
 

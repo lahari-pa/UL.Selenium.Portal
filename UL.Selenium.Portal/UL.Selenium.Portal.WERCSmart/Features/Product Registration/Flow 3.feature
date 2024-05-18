@@ -16,7 +16,8 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 @Ingredients
-
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@StepsPrototype
 Feature: Flow 3
 
 @TestCase:74992
@@ -25,7 +26,11 @@ Scenario: [74992] RU Baby/Infant/Adult Care/Cleansing Wipes
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC74992
 	Given I delete all products with UPC Number: saved as UPC74992
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Baby/Infant/Adult Care/Cleansing Wipes
 	Then I save the product information as: TestCase74992
     #Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
