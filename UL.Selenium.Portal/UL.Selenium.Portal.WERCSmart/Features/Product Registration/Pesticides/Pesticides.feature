@@ -62,7 +62,8 @@ Scenario: [62775] Pesticides - Validation of Which one best describes your produ
 #Removed from regression 2023/11
 @TestCase:62849
 Scenario: [62849] Pesticide - Manually entered date not altered by refresh from Kelly
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
@@ -216,7 +217,10 @@ Scenario: [56547] Pesiticde Data - EPA registration - Active Ingredient informat
 @TestCase:57512
 Scenario: [57512] Pesticide question shows in Product Information for Flow 2L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
 	Given I save the product information as: TestCase57512
 	And I call Shared Step 56799 (Confirm Product Information shows Pesticide question and its radio buttons)
@@ -229,7 +233,10 @@ Scenario: [57512] Pesticide question shows in Product Information for Flow 2L
 @TestCase:57516
 Scenario: [57516] Pesticide question shows in Product Information for Flow 2-LS
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Fertilizer
 	Given I save the product information as: TestCase57516
 	And I call Shared Step 56799 (Confirm Product Information shows Pesticide question and its radio buttons)
@@ -242,7 +249,10 @@ Scenario: [57516] Pesticide question shows in Product Information for Flow 2-LS
 @TestCase:57520
 Scenario: [57520] Pesticide question shows in Product Information for Flow 2-LS-B
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Animal Deterrent - Non-Aerosol
 	Given I save the product information as: TestCase57520
 	And I call Shared Step 56799 (Confirm Product Information shows Pesticide question and its radio buttons)
@@ -255,7 +265,10 @@ Scenario: [57520] Pesticide question shows in Product Information for Flow 2-LS-
 @TestCase:57522
 Scenario: [57522] Pesticide question shows in Product Information for Flow 2-S
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mulch with Pesticide
 	Given I save the product information as: TestCase57522
 	And I call Shared Step 56799 (Confirm Product Information shows Pesticide question and its radio buttons)
@@ -268,7 +281,10 @@ Scenario: [57522] Pesticide question shows in Product Information for Flow 2-S
 @TestCase:57527
 Scenario: [57527] Pesticide question shows in Product Information for Flow 6-A
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Disinfectant (Aerosol)
 	Given I save the product information as: TestCase57527
 	And I call Shared Step 56799 (Confirm Product Information shows Pesticide question and its radio buttons)
@@ -281,7 +297,10 @@ Scenario: [57527] Pesticide question shows in Product Information for Flow 6-A
 @TestCase:57529
 Scenario: [57529] Pesticide question shows in Product Information for Flow 6-AG
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide - Fogger
 	Given I save the product information as: TestCase57529
 	And I call Shared Step 56799 (Confirm Product Information shows Pesticide question and its radio buttons)
@@ -294,7 +313,10 @@ Scenario: [57529] Pesticide question shows in Product Information for Flow 6-AG
 @TestCase:57533
 Scenario: [57533] Pesticide question shows in Product Information for Flow 6-All
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide - Flea and Tick
 	Given I save the product information as: TestCase57533
 	And I call Shared Step 56799 (Confirm Product Information shows Pesticide question and its radio buttons)
@@ -307,7 +329,10 @@ Scenario: [57533] Pesticide question shows in Product Information for Flow 6-All
 @TestCase:57534
 Scenario: [57534] Pesticide question shows in Product Information for Flow 6-LS
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bathroom and Tile Cleaner - Non-aerosol
 	Given I save the product information as: TestCase57534
 	And I call Shared Step 56799 (Confirm Product Information shows Pesticide question and its radio buttons)
@@ -320,7 +345,10 @@ Scenario: [57534] Pesticide question shows in Product Information for Flow 6-LS
 @TestCase:57546
 Scenario: [57546] Pesticide question shows in Product Information for Flow 2-A
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Algicide - Aerosol
 	Given I save the product information as: TestCase57546
 	And I call Shared Step 56799 (Confirm Product Information shows Pesticide question and its radio buttons)
@@ -333,7 +361,10 @@ Scenario: [57546] Pesticide question shows in Product Information for Flow 2-A
 @TestCase:66344
 Scenario: [66344] Pesticide question shows in Product Information for 3-Pest
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wipes, Disinfecting
 	Given I save the product information as: TestCase66344
     Given I call Shared Step 105379 Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
@@ -355,7 +386,10 @@ Scenario: [66344] Pesticide question shows in Product Information for 3-Pest
 @TestCase:66345
 Scenario: [66345] Pesticide question shows in Product Information for Flow3-VOCSCA
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wood Finishing Cloth with Stain
 	Given I save the product information as: TestCase66345
 	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
@@ -377,7 +411,10 @@ Scenario: [66345] Pesticide question shows in Product Information for Flow3-VOCS
 @TestCase:56500
 Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
 	Given I save the product information as: TestCase56500
     Given I call Shared Step 140562 (Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, No CA Cleaning - Continue - Happy Path)
@@ -479,7 +516,10 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 @TestCase:56541
 Scenario: [56541] Pesticide Data - United States - EPA Registered - Data returned from call to Kelly API (done)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with pest control
 	Given I save the product information as: TestCase56541
 	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
@@ -1062,9 +1102,13 @@ Scenario: [62848] Pesticide Details - EPA Expiration Date is refresh from Kelly 
 #Removed from regression 2023/11
 @TestCase:121120
 Scenario:[121120] Pesticide - New Radio Icon Option
-    Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC121120
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with pest control
 	Then I save the product information as: TestCase121120
 	Given I call Shared Step 105379 Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
@@ -1113,7 +1157,10 @@ Scenario: [132756] Canadian Province Pesticide Options
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I generate a random UPC number and save as: RandomUPC
 	Given I delete all products with UPC Number: RandomUPC
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
 	Given I save the product information as: TestCase
 	Given I call Shared Step 140562 (Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, No CA Cleaning - Continue - Happy Path)

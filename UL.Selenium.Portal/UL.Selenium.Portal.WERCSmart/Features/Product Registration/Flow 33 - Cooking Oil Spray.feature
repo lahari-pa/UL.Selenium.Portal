@@ -21,7 +21,8 @@ Feature: Flow 33 - Cooking Oil Spray
 @TestCase:69577
 Scenario: [69577] Cooking Oil Spray - Aerosol
 	Given I generate a random UPC number and save as: UPC69577
-	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Cooking Oil Spray - Aerosol
 	#Given I call Shared Step 60756 (Product Information with Country and every option)

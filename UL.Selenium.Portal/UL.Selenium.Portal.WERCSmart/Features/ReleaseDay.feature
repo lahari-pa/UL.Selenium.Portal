@@ -26,6 +26,8 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 @Ingredients
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 
 Feature: Release Day
 
@@ -44,7 +46,8 @@ And I call Shared Step 83242 (SHA - Submitted or Assigned product - Reject Submi
 And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75142)
 And In the SHA manager grid I see the WPS ID I have saved as product: TestCase75142 and its status is: New
 Given I navigate to the landing page
-And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I log in with the account saved in TReVor as: ProductAccount
 Then I filter for the product saved as: TestCase75142
 And I edit the product saved as: TestCase75142
 Given In the New Product page I click tab: Review and Submit
@@ -68,8 +71,12 @@ And In the SHA manager grid I see the WPS ID I have saved as product: TestCase75
 @ignore
 @TestCase:99052
 Scenario: [99052] UPC Validation of duplicate and Buffered zero duplicate not allowed
-Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+Given I log in with the account saved in TReVor as: ProductAccount
+# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+Given I click the Add Product icon in the Navigation Pane
+Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Given in the New Product page I click Continue
 # I In the shared step below select "Chalk" as you Product Type
 # I Make a note of the WPS ID shown at the top of the screen
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk

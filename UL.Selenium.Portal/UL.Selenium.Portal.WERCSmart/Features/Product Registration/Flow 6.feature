@@ -38,7 +38,10 @@ Given I generate a random UPC number and save as: UPC78731
 
 Given I delete all products with UPC Number: saved as UPC78731
 
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide - Crawling Bug - Aerosol
 
@@ -106,8 +109,10 @@ Given I generate a random UPC number and save as: UPC57711
 
 Given I delete all products with UPC Number: saved as UPC57711
 
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-
+# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Antifungal - Aerosol
 
 Then I save the product information as: TestCase57711
@@ -179,7 +184,10 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 @TestCase:57647
 Scenario: [57647] Insecticide-Flying Bug-Moth Proofing Product containing <98% Para-Dichlorobenzene - (RU001000) - 2S
     Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide-Flying Bug-Moth Proofing Product containing >98% Para-Dichlorobenzene
 	Then I generate a random UPC number and save as: UPC87914
 	Then I save the product information as: TestCase87914
@@ -233,7 +241,10 @@ Scenario: [57134] Insecticide - Flea and Tick (RU001407) - Aerosol - PESTICIDE w
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I generate a random UPC number and save as: UPC57134
 	Given I delete all products with UPC Number: saved as UPC57134
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide - Flea and Tick
 	Then I save the product information as: TestCase57134
 	Given I call Shared Step 101692 Product Information - Pesticide Question - Happy Path
@@ -293,7 +304,10 @@ Scenario: [208260]  Insecticide - Flea and Tick (RU001407) - Aerosol - PESTICIDE
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I generate a random UPC number and save as: UPC208260
 	Given I delete all products with UPC Number: saved as UPC208260
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide - Flea and Tick
 	Then I save the product information as: TestCase208260
 	Given I call Shared Step 101692 Product Information - Pesticide Question - Happy Path

@@ -13,6 +13,8 @@
 @StepsPrototype
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 
 Feature: Flow 14
 
@@ -23,7 +25,10 @@ Scenario: [58736] Sanitizer Wipes for Use on Domesticated Animals (Solid)- RU001
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC58736
 	Given I delete all products with UPC Number: saved as UPC58736
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Sanitizer Wipes for Use on Domesticated Animals
 	Then I save the product information as: TestCase58736
     Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
@@ -66,7 +71,10 @@ Scenario: [58738] Sanitizer Wipes for Use on Domesticated Animals (Liquid)- RU00
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC58738
 	Given I delete all products with UPC Number: saved as UPC58738
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Sanitizer for Use on Domesticated Animals
 	Then I save the product information as: TestCase58738
 	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)

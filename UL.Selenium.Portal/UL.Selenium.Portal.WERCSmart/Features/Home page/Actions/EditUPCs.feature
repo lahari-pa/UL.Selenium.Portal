@@ -25,6 +25,8 @@
 @PhysicalAndChemicalProp
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @Ingredients
 
 Feature: EditUPCs
@@ -52,7 +54,8 @@ Scenario: [56220] My Products grid Actions - Edit UPCs
 Scenario: [64528] Edit UPCs - Click Link check status in SHA
 	Given I create a product and take to completed using Test Case 75335 Using SHA Account: SHAQAAuto1 and save as: ProductSetup64528
 	Given I navigate to the landing page
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	And I search for the product saved as: ProductSetup64528
 	And I click Row Actions for the first product returned
 	Then I click on the Row Action: Edit UPCs
@@ -67,15 +70,16 @@ Scenario: [64528] Edit UPCs - Click Link check status in SHA
 		| saved as ProductSetup64528 | 2.0 UPC Update         | true   |
 	Given I Close the Product Recertification History pop up
 	Given I navigate to the landing page
-	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 #Remove from regression: 2023/04
 @ignore
 @TestCase:64529
 Scenario: [64529] Edit UPCs - Home - Actions links should show Process UPC Update and Remove UPC Update
 	Given I create a product and take to completed using Test Case 75335 Using SHA Account: SHAQAAuto1 and save as: ProductSetup64529
 	Given I navigate to the landing page
-	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	And I search for the product saved as: ProductSetup64529
 	And I click Row Actions for the first product returned
 	Then I click on the Row Action: Edit UPCs
@@ -90,7 +94,8 @@ Scenario: [64529] Edit UPCs - Home - Actions links should show Process UPC Updat
 		| saved as ProductSetup64529 | 2.0 UPC Update         | true   |
 	Given I Close the Product Recertification History pop up
 	Given I navigate to the landing page
-	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	And I search for the product saved as: ProductSetup64529
 	And I click Row Actions for the first product returned
 	And I should see the following Actions options
@@ -134,7 +139,8 @@ Scenario: [64530] Process UPC Update
 Scenario: [64531] Remove UPC Update - Cancel
 	Given I create a product and take to completed using Test Case 75335 Using SHA Account: SHAQAAuto1 and save as: ProductSetup64531
 	Given I navigate to the landing page
-	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	And I search for the product saved as: ProductSetup64531
 	And I click Row Actions for the first product returned
 	Then I click on the Row Action: Edit UPCs
@@ -150,7 +156,8 @@ Scenario: [64531] Remove UPC Update - Cancel
 		| saved as ProductSetup64531 | 2.0 UPC Update         | true   |
 	Given I Close the Product Recertification History pop up
 	Given I navigate to the landing page
-	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	And I search for the product saved as: ProductSetup64531
 	And I click Row Actions for the first product returned
 	Then I click on the Row Action: Remove UPC Update
@@ -172,7 +179,8 @@ Scenario: [64531] Remove UPC Update - Cancel
 Scenario: [64532] Remove UPC Update - Remove
 	Given I create a product and take to completed using Test Case 75335 Using SHA Account: SHAQAAuto1 and save as: ProductSetup64532
 	Given I navigate to the landing page
-	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	And I search for the product saved as: ProductSetup64532
 	And I click Row Actions for the first product returned
 	Then I click on the Row Action: Edit UPCs
@@ -189,7 +197,8 @@ Scenario: [64532] Remove UPC Update - Remove
 		| saved as ProductSetup64532 | 2.0 UPC Update         | true   |
 	Given I Close the Product Recertification History pop up
 	Given I navigate to the landing page
-	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	And I search for the product saved as: ProductSetup64532
 	And I click Row Actions for the first product returned
 	Then I click on the Row Action: Remove UPC Update
@@ -217,7 +226,8 @@ Scenario: [112568] Edit - Product rejected from submitted in SHA - Message is di
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase75142)
 	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase75142 and its status is: New
 	Given I navigate to the landing page
-	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then I filter for the product saved as: TestCase75142
 	And I edit the product saved as: TestCase75142
 	Then I confirm the Rejected Registration popup displays the warning: Please be aware that rejected registrations will not permit any changes to the Safety Data Sheet (SDS) option. Upon rejection, if you want to change your Safety Data Sheet selection (i.e. Select Authoring instead of providing a Document, you will need to DELETE the rejected registration and create a new registration to submit, with your proper selection.
@@ -233,10 +243,14 @@ Scenario: [112568] Edit - Product rejected from submitted in SHA - Message is di
 #Removed from regression 2023/11
 @TestCase:120790
   Scenario:[120790] "U" for UPC Update for Submitted Status
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC120790
 	Given I generate a random UPC number and save as: UPC120790B
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase120790
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)

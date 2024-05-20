@@ -35,7 +35,8 @@ Scenario: [58753] Hair Color Kit - RU000724
 	Given I create a product for a Kit and force it to completed using Test Case 75335 Using SHA Account: SHAQAAuto19 and save as: 58753_KitProduct2
 	Given I navigate to the landing page
 	Given I generate a random UPC number and save as: UPC58753
-	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	#And I In the shared step below use any of the kit product types - these areCosmetic Products in a kit (RU000777)Hair Care kit (RU000723)Hair Color Kit (RU000724)Emergency Road kit (RU000718)Automotive Care Products (RU000124)Personal Care kit (RU001034)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Hair Color Kit

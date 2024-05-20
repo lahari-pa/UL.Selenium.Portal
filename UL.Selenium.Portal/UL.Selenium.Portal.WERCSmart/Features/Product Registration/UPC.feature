@@ -358,7 +358,8 @@ Scenario: [87825] Summary Shows Case UPC Data
 @TestCase:95988
 Scenario: [95988] Mass Upload UPCs Floating
 	Then I generate: 20 random UPC numbers and save them starting with: RandomUPC
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
 	Then I save the product information as: TestCase95988
@@ -373,7 +374,12 @@ Scenario: [95988] Mass Upload UPCs Floating
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page I click Continue
 
-	And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+# ====== Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP) ====== #
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Bonded, fibrous glass web
+	Given In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Given I click continue
 	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: soap
 	Given I should see the Ingredients Page
 	Then In the Ingredients section, add the following ingredients:
@@ -438,7 +444,8 @@ Scenario: [95988] Mass Upload UPCs Floating
 
 @TestCase:109516
 Scenario: [109516] Archive Retailer should Archive UPC
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC109516
 	Given I generate a random UPC number and save as: UPC109516_2
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -522,7 +529,8 @@ Scenario: [109516] Archive Retailer should Archive UPC
 	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109516 and its status is: Completed
 
 	Given I navigate to the landing page
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	And I filter for the product saved as: TestCase109516
 	And I click Row Actions for the first product returned
 	And I click on the Row Action: Archive Retailers
@@ -539,7 +547,8 @@ Scenario: [109516] Archive Retailer should Archive UPC
 
 @TestCase:101023
 Scenario: [101023] UPC Step - Add Part Number
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase105352
@@ -599,7 +608,8 @@ Scenario: [101023] UPC Step - Add Part Number
 
 @TestCase:87628
 Scenario: [87628] Universal Product Code (UPC) Step - Add Casepack - Case UPC field validation
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then the WERCSmart homepage should load
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
@@ -653,7 +663,8 @@ Scenario: [87628] Universal Product Code (UPC) Step - Add Casepack - Case UPC fi
 
 @TestCase:87598
 Scenario: [87598]- Universal Product Code (UPC) Step - Add Casepack - fields required
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase87598
@@ -698,7 +709,8 @@ Scenario: [87598]- Universal Product Code (UPC) Step - Add Casepack - fields req
 
 @TestCase:115334
 Scenario: [115334] Target - Add UPC - DPCI - is no longer required
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase115334
@@ -748,7 +760,8 @@ Scenario: [115334] Target - Add UPC - DPCI - is no longer required
 
 @TestCase:115330
 Scenario: [115330] Target - Bulk UPC - DPCI - is no longer required
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase115330
@@ -825,8 +838,8 @@ Scenario: [115330] Target - Bulk UPC - DPCI - is no longer required
 
 @TestCase:156789
 Scenario: [156789] UPC Screen - Internal SKU field - Check field parameters and ensure is optional
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	Given I generate a random UPC number and save as: UPC156789
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount	Given I generate a random UPC number and save as: UPC156789
 	Then Generate a random SKU number (12 random digits) and save as: RandomSKU_1
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
@@ -881,7 +894,8 @@ Scenario: [156789] UPC Screen - Internal SKU field - Check field parameters and 
 
 @TestCase:90001
 Scenario: [90001] Labels for Input Fields in UPC Screen
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase90001
@@ -971,7 +985,8 @@ Scenario: [90001] Labels for Input Fields in UPC Screen
 
 @TestCase:90002
 	Scenario: [90002] Label for Input File for Canadian Tire
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase90002
