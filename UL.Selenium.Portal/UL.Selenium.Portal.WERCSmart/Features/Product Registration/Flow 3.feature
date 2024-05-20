@@ -28,7 +28,7 @@ Scenario: [74992] RU Baby/Infant/Adult Care/Cleansing Wipes
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC74992
 	Given I delete all products with UPC Number: saved as UPC74992
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue

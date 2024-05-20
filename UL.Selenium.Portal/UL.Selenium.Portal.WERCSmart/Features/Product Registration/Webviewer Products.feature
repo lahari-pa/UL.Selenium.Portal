@@ -38,7 +38,7 @@ Scenario: [146792] US Only, BCP - PLP = No, Authoring requested, Contains test B
 
 
 Given I Login into WERCSmart Portal - WebViewers Account
-# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I click the Add Product icon in the Navigation Pane
 Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 Given in the New Product page I click Continue
@@ -47,7 +47,7 @@ Given I generate a random UPC number and save as: UPC146792
 Then I call Shared Step 57561a (The Product - Enter Product Name: Carbon Monoxide Detectors Test Product and select Type of Product): Carbon monoxide detectors
 Then I save the product information as: TestCase146792
 Given I call Shared Step 65511 (Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path (use in a BCP))
-# ====== Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP) ====== #
+#Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
 Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Bonded, fibrous glass web
 Given In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
@@ -137,7 +137,7 @@ Scenario: [120814] WERCSmart product - Submitted to SHA, Status = Submitted
 
 # This test case is for loading WS products to be used in RPS testing.  As such it should not be included in any regression tests.
 Given I Login into WERCSmart Portal - WebViewers Account
-# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I click the Add Product icon in the Navigation Pane
 Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 Given in the New Product page I click Continue
@@ -205,7 +205,7 @@ Scenario: [144967] US Only, PLP = No, GenDoc = 1, Doc Accepted = Yes
 #Login to WS as supplier with feed to Web viewers
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -305,7 +305,7 @@ Scenario: [144975] US Only, PLP = No, GenDoc = 1, Doc Accepted = No (User reject
 #Login to WS as supplier with feed to Web viewers
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -416,7 +416,7 @@ Scenario: [144979] US Only, PLP = No, GenDoc = 0, User uploads own SDS on submis
 #Login to WS as supplier with feed to Web viewers
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccountGiven
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -501,7 +501,7 @@ Scenario: [144981] US Only, PLP = Yes, PLP Upload allowed = Yes, GenDoc = 1, Ali
 
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -583,7 +583,7 @@ Scenario: [144984] US Only, PLP = Yes, PLP Upload allowed = Yes, GenDoc = 1, Ali
 	#Login to WS as supplier with feed to Web viewers
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -665,7 +665,7 @@ Scenario: [144992] US Only, PLP = Yes, PLP Upload allowed = Yes, GenDoc = 0, Pro
 #Login to WS as supplier with feed to Web viewers
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -842,7 +842,7 @@ Scenario: [120815] WERCSmart product - Submitted to SHA, Status = Assigned
 
 # This test case is for loading WS products to be used in RPS testing.  As such it should not be included in any regression tests.
 Given I Login into WERCSmart Portal - WebViewers Account
-# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I click the Add Product icon in the Navigation Pane
 Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 Given in the New Product page I click Continue
@@ -955,7 +955,7 @@ Scenario: [145793] Canada Only, PLP = Yes, PLP Upload allowed = Yes, GenDocCA = 
 
 # This test case is for loading WS products to be used in Webviewer testing.  As such it should not be included in any regression tests.
 Given I login into the WERCSmart Portal - WebViewers Account
-# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I click the Add Product icon in the Navigation Pane
 Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 Given in the New Product page I click Continue
@@ -1021,7 +1021,7 @@ Scenario: [120811] WERCSmart product - Submitted to SHA, rejected, Status = New
 
 # This test case is for loading WS products to be used in RPS testing.  As such it should not be included in any regression tests.
 Given I Login into WERCSmart Portal - WebViewers Account
-# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I click the Add Product icon in the Navigation Pane
 Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 Given in the New Product page I click Continue
@@ -1172,7 +1172,7 @@ Scenario: [145743] Canada Only, PLP = Yes, PLP Upload allowed = Yes, GenDocCA = 
 
 # This test case is for loading WS products to be used in Webviewer testing.  As such it should not be included in any regression tests.
 Given I login into the WERCSmart Portal - WebViewers Account
-# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I click the Add Product icon in the Navigation Pane
 Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 Given in the New Product page I click Continue
@@ -1246,8 +1246,8 @@ Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Comple
 Scenario: [145783] Canada Only, PLP = Yes, PLP Upload allowed = Yes, GenDocCA = 1, Alias published = No
 
 # This test case is for loading WS products to be used in Webviewer testing.  As such it should not be included in any regression tests.
-Given I login into the WERCSmart Portal - WebViewers Account
-# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	Given I login into the WERCSmart Portal - WebViewers Account
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -1317,7 +1317,7 @@ Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Comple
 Scenario: [120816] WERCSmart product - Submitted to SHA, Status = Accepted
 
 Given I Login into WERCSmart Portal - WebViewers Account
-# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -1388,7 +1388,7 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 @TestCase:120817
 Scenario: [120817] WERCSmart product - Submitted to SHA, Status = Completed
 Given I Login into WERCSmart Portal - WebViewers Account
-# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I click the Add Product icon in the Navigation Pane
 Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 Given in the New Product page I click Continue
@@ -1463,7 +1463,7 @@ Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase
 Scenario: [120848] WERCSmart product - Submitted to SHA, Status = Suspended (Safety Data Sheet (SDS) or Label Mismatch due to 3rd-Party Formula)
 
 	Given I Login into WERCSmart Portal - WebViewers Account
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -1565,7 +1565,7 @@ And I Close the Product Recertification History pop up
 Scenario: [120820] WERCSmart product - Submitted to SHA, Status = Cancelled
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I click the Add Product icon in the Navigation Pane
 Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 Given in the New Product page I click Continue
@@ -1638,7 +1638,7 @@ Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Cancelled Statu
 @TestCase:126691
 Scenario: [126691] WERCSmart product - Pesticide - processed from New to Suspended-Pesiticde
 Given I Login into WERCSmart Portal - WebViewers Account
-# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -1709,7 +1709,7 @@ Given I Login into WERCSmart Portal - WebViewers Account
 @TestCase:121986
 Scenario: [121986] WERCSmart product - Fails CVS Audit (Palm oil) from New thru to Status = Completed
 Given I Login into WERCSmart Portal - WebViewers Account
-# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue

@@ -37,14 +37,14 @@ Scenario: [80089] Create product with Publicly Disclosed Ingredients (bleach) - 
 	Given I log in with the account saved in TReVor as: ProductAccount
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 	Then I save the product information as: TestCase80089
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-# ====== Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP) ====== #
+#Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP
 Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
 Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Bonded, fibrous glass web
 Given In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
@@ -200,7 +200,7 @@ Scenario: [84507] Recertification > Process recertification > Process multiple p
 @TestCase:100969
 	Scenario: [100969] RU = Chalk, Sold = Canada, has retailer, Uploaded SDS, SHA status = Submitted
 	Given I log in with the account saved in TReVor as: CanadaHasAddressPackaging
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue

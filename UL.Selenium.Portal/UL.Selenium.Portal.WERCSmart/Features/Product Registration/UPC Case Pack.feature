@@ -51,7 +51,7 @@ Scenario: [87640] UPC - Case Pack Only Present in product
 	#Given I login into the WERCSmart Portal - Administrator Role
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87640
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -123,7 +123,7 @@ Scenario: [87643] UPC - Case Pack & regular UPC present in product
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87643
 	Given I generate a random UPC number and save as: UPC876431
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -199,7 +199,7 @@ Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Cas
 	Given I generate a random UPC number and save as: UPC876502
 	Given I generate a random UPC number and save as: UPC876503
 	Given I generate a random UPC number and save as: UPC876504
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -281,7 +281,7 @@ Scenario: [87676] UPC - Case Pack can be removed from new product
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87676
 	Given I generate a random UPC number and save as: UPC876761
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -368,7 +368,7 @@ Scenario: [87685] UPC - Case Pack & Regular UPC present in Product - Process to 
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87685
 	Given I generate a random UPC number and save as: UPC876851
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -457,7 +457,7 @@ Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 	#Given I login into the WERCSmart Portal - Administrator Role
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87686
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -597,7 +597,7 @@ Scenario: [87835] View UPCs shows Case UPC Data
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC87835
 	Given I generate a random UPC number and save as: UPC87835-2
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -670,7 +670,7 @@ Scenario: [87835] View UPCs shows Case UPC Data
 	Scenario: [87631] Universal Product Code (UPC) Step - Add Casepack - Size (Weight Ounces) field validation
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -735,7 +735,7 @@ And I call Shared Step 42214 (Delete a Product from the Product grid) to delete 
 Scenario: [87633] Universal Product Code (UPC) Step - Add Casepack - Size (Weight Ounces) field validation
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -790,7 +790,7 @@ And I call Shared Step 42214 (Delete a Product from the Product grid) to delete 
 Scenario: [87718] Universal Product Code (UPC) Step - Collapsed View of Case UPC
 #Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I log in with the account saved in TReVor as: ProductAccount
-# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I click the Add Product icon in the Navigation Pane
 Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 Given in the New Product page I click Continue
@@ -832,7 +832,7 @@ Given I should see the Regulatory Documents Page
 Scenario: [87818] UPC - Case UPC - Individual UPC contained in the Case Pack drop down - none available for selection
 #Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I log in with the account saved in TReVor as: ProductAccount
-# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I click the Add Product icon in the Navigation Pane
 Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 Given in the New Product page I click Continue
@@ -874,7 +874,7 @@ Then I confirm Individual UPC field does not display any options
 Scenario: [87821] UPC - Case UPC - Individual UPC contained in the Case Pack drop down - with UPC available for selection
 #Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I log in with the account saved in TReVor as: ProductAccount
-# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I click the Add Product icon in the Navigation Pane
 Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 Given in the New Product page I click Continue
@@ -927,7 +927,7 @@ Scenario: [112487] Case Pack UPC: Transportation Option Selected Stays the Same 
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC112487
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -983,7 +983,7 @@ Scenario: [112487] Case Pack UPC: Transportation Option Selected Stays the Same 
 Scenario: [163564] SHA Automation - Create a Chalk Product and Submit thru Completed Status
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I generate a random UPC number and save as: UPC163564
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -1052,7 +1052,7 @@ Scenario: [163564] SHA Automation - Create a Chalk Product and Submit thru Compl
 Scenario: [209159] UPC Assessment Details - Edit UPC updates - the Added column shows current date
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC209159A
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -1147,7 +1147,7 @@ Scenario: [119633] Case Pack UPC: UPC Becomes Archived, Case UPC Becomes Archive
 	Given I generate a random UPC number and save as: UPC119633
 	Given I generate a random UPC number and save as: UPC1196331
 	Given I generate a random UPC number and save as: UPC1196332
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue

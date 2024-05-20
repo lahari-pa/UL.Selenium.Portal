@@ -36,7 +36,7 @@ Scenario: [105329] PM Monthly Status Report - Target
 	Given I generate a random UPC number and save as: UPC105329
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -153,7 +153,7 @@ Scenario: [78452] Retailer Products in Recertification Report
 Scenario: [87182] 3rd Party Formula Use in Registrations
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -970,7 +970,7 @@ Scenario:[113706] UPC Data Expansion: UPC Name Required on new product registrat
 	Given I generate a random UPC number and save as: UPC113706
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I delete all products with UPC Number: saved as UPC113706
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -1006,7 +1006,7 @@ Scenario:[114216] TR (Transparency Value) - Display as Percentage
 	Given I generate a random UPC number and save as: UPC114216
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I delete all products with UPC Number: saved as UPC114216
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -1050,8 +1050,7 @@ Scenario:[114216] TR (Transparency Value) - Display as Percentage
 
 Scenario: [118221] UPC Details for Registration - Specific Retailer - DOT Packing Group Data
 	Given I log in with the account saved in TReVor as: ProductAccount
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
-	Given I click the Add Product icon in the Navigation Pane
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer

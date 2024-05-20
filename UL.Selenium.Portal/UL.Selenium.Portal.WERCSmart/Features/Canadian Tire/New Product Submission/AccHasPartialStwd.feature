@@ -39,7 +39,7 @@ Scenario: [86114] Create a new simple product SOLD = US and Canada, PL = Yes, Re
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC86114
 	#Given I delete all products with UPC Number: saved as UPC86114
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -112,7 +112,7 @@ Scenario: [86114] Create a new simple product SOLD = US and Canada, PL = Yes, Re
 Scenario: [86115] Create a new product SOLD = US and Canada, PL = No, Retailer NOT Canadian Tire (Chalk) and submit thru to Completed status
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC86115
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -190,7 +190,7 @@ Scenario: [86115] Create a new product SOLD = US and Canada, PL = No, Retailer N
 @TestCase:86452
 Scenario: [86452] Create a new product SOLD = Canada, Private Label = Yes, NR product - Submission and process thru to completed
 	Given I log in with the account saved in TReVor as: ProductAccount
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -249,7 +249,7 @@ Scenario: [86452] Create a new product SOLD = Canada, Private Label = Yes, NR pr
 @TestCase:86117
 Scenario: [86117] Create a new product SOLD = Canada only , PL = No, NR product and submit thru to Completed status (HGHS only)
 	Given I log in with the account saved in TReVor as: ProductAccount
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -310,7 +310,7 @@ Scenario: [86117] Create a new product SOLD = Canada only , PL = No, NR product 
 Scenario: [86116] Create a new product SOLD = Canada, Private Label = Yes, CT retailer product - Submission and process thru to completed
 	Given I generate a random UPC number and save as: UPC86116
 	Given I log in with the account saved in TReVor as: ProductAccount
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -380,7 +380,7 @@ Scenario: [86116] Create a new product SOLD = Canada, Private Label = Yes, CT re
 Scenario: [86454] Create a new product SOLD = Canada only , PL = No, CT Retailer product - submit thru to Completed status (HGHS only)
 	Given I generate a random UPC number and save as: UPC86454
 	Given I log in with the account saved in TReVor as: ProductAccount
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -459,7 +459,7 @@ Scenario: [86455] Create a new simple product SOLD = US and Canada, PL = Yes, Ca
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC86455
 	#Given I delete all products with UPC Number: saved as UPC86418
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -536,7 +536,7 @@ Scenario: [86455] Create a new simple product SOLD = US and Canada, PL = Yes, Ca
 Scenario: [86458] Create a new simple product SOLD = US and Canada, PL = No, Canadian Tire retailer product (Chalk) and submit thru to Completed status
 	Given I generate a random UPC number and save as: UPC86458
 	Given I log in with the account saved in TReVor as: ProductAccount
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue

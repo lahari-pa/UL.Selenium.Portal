@@ -287,7 +287,7 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	Given I generate a random UPC number and save as: UPC78048
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -351,7 +351,7 @@ Scenario:[93366] My Products - Bulk Actions Multiple Deletion of Registrations
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I generate a random UPC number and save as: UPC93366a
 	Given I delete all products with UPC Number: saved as UPC93366a
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -398,7 +398,7 @@ Scenario:[93366] My Products - Bulk Actions Multiple Deletion of Registrations
 	And I navigate to the home page
 	Given I generate a random UPC number and save as: UPC93366b
 	Given I delete all products with UPC Number: saved as UPC93366b
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -450,7 +450,7 @@ Scenario:[93366] My Products - Bulk Actions Multiple Deletion of Registrations
 	And I navigate to the home page
 	Given I generate a random UPC number and save as: UPC93366c
 	Given I delete all products with UPC Number: saved as UPC93366c
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -502,7 +502,7 @@ Scenario:[93366] My Products - Bulk Actions Multiple Deletion of Registrations
 	And I navigate to the home page
 	Given I generate a random UPC number and save as: UPC93366d
 	Given I delete all products with UPC Number: saved as UPC93366d
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -554,7 +554,7 @@ Scenario:[93366] My Products - Bulk Actions Multiple Deletion of Registrations
 	And I navigate to the home page
 	Given I generate a random UPC number and save as: UPC93366e
 	Given I delete all products with UPC Number: saved as UPC93366e
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -651,7 +651,7 @@ Scenario:[93366] My Products - Bulk Actions Multiple Deletion of Registrations
 Scenario:[88826] Delete Products > Product Not yet submitted
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue

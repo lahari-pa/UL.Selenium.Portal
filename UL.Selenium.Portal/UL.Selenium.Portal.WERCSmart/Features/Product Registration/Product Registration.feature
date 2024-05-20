@@ -34,7 +34,7 @@ Feature: Product Registration
 Scenario: [130389] Demo Scenario
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -142,7 +142,7 @@ Scenario: [63724] Add New product - Single Battery Product
 	# DPCI: 087-06-680
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I generate a random UPC number and save as: UPC63724
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -280,7 +280,7 @@ Scenario: [65392] Ecologo Readiness - Question wording and validation of respons
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 	Then The home screen should load
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -702,7 +702,7 @@ Scenario: [128754] BCP Product - Family Dollar and Dollar Tree Retailers Availab
 @TestCase:127767
 Scenario: [127767] Register a Cleaning Supplies - Bleach Product Type for a verification of the Products in Scope Report for Bed Bath and Beyond
 	Then I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -759,7 +759,7 @@ Scenario: [127767] Register a Cleaning Supplies - Bleach Product Type for a veri
 @TestCase:128144
 Scenario: [128144] Login Behavior for Products NOT in Scope for Bed Bath and Beyond
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -808,7 +808,7 @@ Scenario: [128144] Login Behavior for Products NOT in Scope for Bed Bath and Bey
 @TestCase:128140
 Scenario: [128140] Data Tier Expansion for BBB - Products in Scope Report - Nutritional Supplement - Nutritional Supplement - Solid
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue

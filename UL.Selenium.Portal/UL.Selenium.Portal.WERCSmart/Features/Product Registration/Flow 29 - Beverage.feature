@@ -167,7 +167,7 @@ Scenario: [60695] Juice and Juice Drinks - RU001413
 Scenario: [73085] Wine - RU001418 - Walgreens and No Retailer only for Retailers
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -209,7 +209,7 @@ Scenario: [73085] Wine - RU001418 - Walgreens and No Retailer only for Retailers
 Scenario: [144468] Alcoholic Beverages - Beer - RU001417 - Complete Flow Check, With DOT Exception
 
 Given I log in with the account saved in TReVor as: ProductAccount
-# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I click the Add Product icon in the Navigation Pane
 Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 Given in the New Product page I click Continue

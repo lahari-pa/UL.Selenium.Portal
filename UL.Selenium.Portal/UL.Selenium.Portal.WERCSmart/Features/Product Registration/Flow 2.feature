@@ -33,7 +33,7 @@ Scenario: [57439] Anti-Transpirant (RU000992) 2-L
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC57439
 	Given I delete all products with UPC Number: saved as UPC57439
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -112,7 +112,7 @@ Scenario: [57646] Plant Growth regulator (Liquid or Solid) (RU000291) 2-L
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC57646
 	Given I delete all products with UPC Number: saved as UPC57646
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -192,7 +192,7 @@ Scenario: [57646] Plant Growth regulator (Liquid or Solid) (RU000291) 2-L
 Scenario: [57649] Cosmetics (RU000034) 2LS - 2L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -251,7 +251,7 @@ Scenario: [57731] Aquarium maintenance chemicals (RU000327) - 2LS - 2S
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC57731
 	Given I delete all products with UPC Number: saved as UPC57731
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -267,7 +267,7 @@ Scenario: [57731] Aquarium maintenance chemicals (RU000327) - 2LS - 2S
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page I click Continue
 
-# ====== Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP) ====== #
+#Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
 Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Bonded, fibrous glass web
 Given In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
@@ -338,7 +338,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 @TestCase:71274
 Scenario: [71274] Flea or Tick Repellent (L) - RU000323
 	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -407,7 +407,7 @@ Scenario: [57647] Insecticide-Flying Bug-Moth Proofing Product containing <98% P
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC57647
 	Given I delete all products with UPC Number: saved as UPC57647
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
