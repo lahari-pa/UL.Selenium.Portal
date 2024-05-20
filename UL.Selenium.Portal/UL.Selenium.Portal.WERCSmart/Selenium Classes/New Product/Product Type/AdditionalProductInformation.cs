@@ -142,8 +142,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 		public bool RetailersPrivateLabelOrBrand {
 			get
 			{
-				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("Private Label or Brand"))
+				IWebElement selectOption = this.ContainerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product"))
 					.FindElements(By.XPath("../following-sibling::div//label"), 2).FirstOrDefault(x => !x.GetCssValue("background-color").Contains("255, 255, 255"));
 
 				if (selectOption != null)
@@ -171,8 +171,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 					valueToSet = "No";
 				}
 
-				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
-					.FirstOrDefault(x => x.Text.Contains("Private Label or Brand"))
+				IWebElement selectOption = this.ContainerElement.FindElements(By.XPath(".//label"), 2)
+					.FirstOrDefault(x => x.Text.Contains("Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product"))
 					.FindElements(By.XPath("../..//label"), 2).FirstOrDefault(x => x.Text == valueToSet);
 				selectOption.Click();
 

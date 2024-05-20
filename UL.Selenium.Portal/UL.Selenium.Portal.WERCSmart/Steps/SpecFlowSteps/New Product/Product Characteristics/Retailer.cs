@@ -19,7 +19,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		public void SelectRetailers(string retailer)
 		{
 			var selectRetailers = new SelectRetailers();
-			Report.IsFalse(selectRetailers.SelectRetailer(retailer), $"Successfully selected retailer: {retailer}", $"Failed to select retailer: {retailer}!");
+			Report.IsTrue(selectRetailers.SelectRetailer(retailer), $"Failed to select retailer: {retailer}!", $"Successfully selected retailer: {retailer}");
 		}
 		[StepDefinition(@"In the Retailer Section, click 'Add Retailers' button")]
 		public void ClickAddRetailers()
@@ -123,6 +123,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			}
 			new Steps_Prototype().AnAlertIsDisplayedWithTheMessage("should not", "Are you sure want to cancel ?");
 
+		}
+		[StepDefinition(@"In the Retailer Section (is|is not) selected retailer: (.*)")]
+		public void SelectedRetailersShouldBe(string is_isnot, string  retailer)
+		{
+			var actualRetailers = new Retailer().SelectedRetailers();
+			bool expected = is_isnot == "is";
+			Report.IsTrue(actualRetailers.Contains(retailer) == expected, $"Failure, the selected retailer {(expected ? "is not" : "is")} added.", $"Success, the selected retailer {is_isnot} added.");
+			
 		}
 	}
 }

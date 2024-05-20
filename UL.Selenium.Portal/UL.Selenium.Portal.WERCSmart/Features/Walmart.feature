@@ -11,14 +11,21 @@
 @RetailPartners
 @ProductSetUp
 @ForwardProductRegistration
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 @run_Walmart
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@PhysicalAndChemicalProp
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+
 Feature: Walmart
 
 
-Background:
-	Given I verify the following users exist and if not I create them using SHAUser
-		| username    | FirstName | LastName   | Role         | EmailAddress                |
-		| SHAQAAuto31 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+#Background:
+#	Given I verify the following users exist and if not I create them using SHAUser
+#		| username    | FirstName | LastName   | Role         | EmailAddress                |
+#		| SHAQAAuto31 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 @tfs_design
 @ignore
@@ -32,11 +39,24 @@ Scenario: [73917] Walmart Affiliates When Registering Data for the First Time
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Candle and/or Wax
 	Then I save the product information as: TestCase73917
 	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| 7647-14-5     | 100     | false               | false       |            |
-	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page I click Continue
+
 	# Not currently showing Reg 3 page - requires specific product type or ingredient present?
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	Then the 'Select Retailers' window appears
@@ -68,7 +88,13 @@ Scenario: [74133] Walmart Product Type Electronics
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Electronic Equipment with Circuit Board Only
 	Then I save the product information as: TestCase74133
-And I call Shared Step 60935 (Product Information - US - Direct Ship - Private Label Only)
+	#And I call Shared Step 60935 (Product Information - US - Direct Ship - Private Label Only)
+	Given I should see the Product Information Page
+	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
+	Given In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Given in the Product Information page I click Continue
+
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 	And I should see the Electronic Equipment Page
@@ -90,14 +116,27 @@ Scenario: [74017] Walmart Affiliates when Adding a UPC
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
 	Then I save the product information as: TestCase74017
-		Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
 
 	Given I call Shared Step 77711 (Product Characteristics - Primary (L/S), 2nd - any, Enter Gravity, pH, Boiling Point, Flash Point, Flash Point Test - any, Water - any)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Glycerol      | 50      | false               | false       |            |
 		| Palm oil      | 50      | false               | false       |            |
-	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page I click Continue
+
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	Then the 'Select Retailers' window appears
 	Given In the 'Select Retailers' window I select the retailer: Jet
@@ -127,7 +166,12 @@ Scenario: [73919] Walmart Affiliates when Direct Ship Vendor is set to YES
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Glycerol      | 50      | false               | false       |            |
 		| Palm oil      | 50      | false               | false       |            |
-	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page I click Continue
+
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	Then the 'Select Retailers' window appears
 	Given I select any Walmart Affiliate automatically selects all from that group, then 'Wal-Mart/SAM'S CLUB' is displayed on the retailers page
@@ -185,17 +229,30 @@ Scenario: [63684] Walmart Private label product
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Cocoa butter  | 100     | false               | false       |            |
-	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page I click Continue
+
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	Given I call Shared Step 65181 (Retailer Association - Add Private Label Information and Select Vendor ID) and select the retailer: Wal-Mart/SAM'S CLUB and enter the name: Holiday Time and select Vendor id: random
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC63684, container type: Plastic Container and size: 3.6
-	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 		| Apron                         | 550                      | 63.625                  | 33.333    | Brown      | Banana | No data available | 30                    |
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58079. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58079. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Pet shampoo
 	Given I navigate to the home page
 	Given I search for the product saved as: TestCase63684
@@ -210,8 +267,13 @@ Scenario: [96705] Light Bulbs - No Walmart
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Light Bulbs - Light Emitting Diodes (LED)
 	Then I save the product information as: TestCase96705
 	Then I call Shared Step 90477 - Product Information - US, (NO) Retailer's PL
-	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-    Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
+	#And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page I click Continue
+
+	Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 	Then In the 'Select retailers' window I should not see the following retailers:
 		| Retailer            |
 		| Wal-Mart/SAM'S CLUB |

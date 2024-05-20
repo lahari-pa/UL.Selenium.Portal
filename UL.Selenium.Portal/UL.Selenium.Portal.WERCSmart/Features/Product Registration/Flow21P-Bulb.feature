@@ -12,6 +12,8 @@
 @run_Flow16
 @UPC
 @PaymentMethods
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 
 Feature: Flow21P-Bulb
 
@@ -34,7 +36,13 @@ Given I set the Product has an Environmental Protection Agency (EPA) Registratio
 Given I set the Product has a State Registration option to: No
 And I set the Select the applicable exemption option to: Device based products - Exempt from EPA Registration
 Then in the Pesticide Details - U.S. page I click Continue
-Then I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: The Home Depot
+#Then I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: The Home Depot
+Given I should see the Retailer Page
+	Then In the Retailer Section, click 'Add Retailers' button
+	Then In the Select Retailers window, select retailer: The Home Depot
+	Then In the Select Retailers window, click 'Done' button
+	Then in the Retailer page I click Continue
+
 Then I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC209162, container type: Plastic Container and size: 18
 Then I confirm that retailer "HD" is present under the 'Destination Retailers' column in the UPC table
 Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
@@ -47,7 +55,11 @@ Then I call Shared Step 214662 (Summary Tab - Data Verification - Applicable Onl
 	| FIFRA 25(b) Exempt                                   | Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)  |
 	| Container Type                                       | Plastic Container |
 	| Retailers                                            | HD                |
-Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 Then In the Thank You screen I click Home
 Then For product saved as: TestCase209162 the status is: Assessment in Progress

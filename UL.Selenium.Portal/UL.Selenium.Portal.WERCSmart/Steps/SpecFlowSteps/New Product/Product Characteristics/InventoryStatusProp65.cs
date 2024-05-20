@@ -25,6 +25,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 				string section = "Canadian Environmental Protection Act (CEPA) status";
 				new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
 			}
+
 			[StepDefinition(@"In the Inventory Status, Prop 65 \(US\) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 \(commonly known as California Proposition 65\)\?' to: (Yes|No)")]
 			public void SelectProp65(string option)
 			{
@@ -94,6 +95,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 				string section = "If the product carries a custom warning, please provide the exact text that is being used:";
 				new Steps_Prototype().SetTheSectionOptionTo(section, option);
 			}
+
+
+			[StepDefinition(@"In the Inventory Status, Prop 65 \(US\) Section, the following sections (should only|should|should not) be displayed:")]
+			public void CheckSectionsDisplayedInventoryStatusPage(string condition , Table sections)
+			{
+				
+				new Steps_Prototype().CheckDisplayedSections(condition, sections);
+			}
+
 
 		}
 	}

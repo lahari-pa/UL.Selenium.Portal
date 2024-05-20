@@ -13,6 +13,18 @@
 @UPC
 @NewProduct
 @run_ProductRegistration
+@StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@PhysicalAndChemicalProp
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
+@Ingredients
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
+
 Feature: Product Registration
 
 @tfs_design
@@ -29,6 +41,9 @@ Scenario: [130389] Demo Scenario
 #Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 #Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 #Then The home screen should load
+
+#Removed from regression 2024/04
+@ignore
 @ScenarioId:486
 Scenario: Create a new product
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -55,12 +70,13 @@ Scenario: [63705] New Product - BCP
 	And in the New Product page I click Continue
 	Then I save the product information as: TestCase63705
 	# Shared step 63704
-	And I should see the Product Information Page
-	And In the Information Page the check box for: United States should be: checked
-	And I set 'Product is shipped directly' to: No
-	And I set 'Product is a Retailers Private Label or Brand' to: No
-	And I set 'Product is solely for the Retailer's use' to: No
-	And in the New Product page I click Continue
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page, I click Continue
+
 	And For 'U.S. Toxic Substances Control Act (TSCA) status' I select: Compliant
 	And I set 'Prop65' to: No
 	And in the New Product page I click Continue
@@ -527,7 +543,12 @@ Scenario: [122123] Sustainability Screen - Descriptions, Icons and Indicators
 	Then I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
 	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
 	And I call Shared Step 79507 (Formulation > 3rd Party - Accept formulation - Grant Tier 2 - Continue)
-	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	#And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page I click Continue
+
 	And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
 	And I should see the Additional Documents to Provide Page
 	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate (Perfumery Products) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
@@ -587,7 +608,10 @@ Scenario: [122123] Sustainability Screen - Descriptions, Icons and Indicators
 	Then I check if the retailer modal is displaying the following text: Walmart requires suppliers of private label formulated products in the following categories to grant Tier 2.1, Tier 2.2 and Tier 4.2 permissions: Artists/Hobby, Automotive Care, Battery-Containing Products, Cleaning Supplies, Grocery, Health & Beauty, Home Improvement, Kit, Lawn and Garden, Miscellaneous, Nutritional Supplements, OTC - Over the Counter, Pet Care, Pharmacy, Sporting Goods, Stationery and Toys.
 	Then I close the retailer modal
 	Then in the Sustainability Information page I click Continue
-	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
 
 
 @TestCase:122261
@@ -610,7 +634,12 @@ Scenario: [122123] Sustainability Screen - Descriptions, Icons and Indicators
 	Then The Formulation 3rd Party Step is shown
     Then I call Shared Step 79507 (Formulation > 3rd Party - Accept formulation - Grant Tier 2 - Continue)
 	When I click continue
-	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	#And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page I click Continue
+
 	And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
 	And I should see the Additional Documents to Provide Page
 	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate (Perfumery Products) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
@@ -633,7 +662,12 @@ Scenario: [128754] BCP Product - Family Dollar and Dollar Tree Retailers Availab
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Camera w/Battery
 	Then I save the product information as: TestCase128754
 	Given I call Shared Step 70393 (Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
-	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+	#And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page I click Continue
+
 	Given I call Shared Step 48367 (Product Includes Battery > any type)
 		| Battery Type | Quantity of Batteries to Operate Product | Manufacturer | Quantity of Batteries per Package |
 		| Alkaline     | 6                                        | <any>        | 6                                 |
@@ -679,14 +713,26 @@ Scenario: [127767] Register a Cleaning Supplies - Bleach Product Type for a veri
 	Then In the 'Select Retailers' window I select the retailer: Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)
 	Given I click continue
 	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC804879551225, container type: Plastic Container and size: 3.5
-	Then I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	#Then I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 	Given I click continue
 	Given I click continue
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: «comments»
-	Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: «comments»
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	Then I call Shared Step 130558 (Go to Retail Partners - Select Bed Bath and Beyond)
 	Then I click the Products in Scope button and confirm that a file is produced called BB_Report_DataUsageTier_<Date>.xlsx and save as Products in Scope Report for BBB
 	Then I confirm the excel file saved as: Products in Scope Report for BBB contains the following data: Cleaning Supplies Product for BBB
@@ -715,7 +761,13 @@ Scenario: [128144] Login Behavior for Products NOT in Scope for Bed Bath and Bey
 		| 61789-31-9 | Fatty Acids, coco, sodium salts | 100     |                     |            |             |
 	And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)
+	Given I should see the Retailer Page
+	Then In the Retailer Section, click 'Add Retailers' button
+	Then In the Select Retailers window, select retailer: Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)
+	Then In the Select Retailers window, click 'Done' button
+	Then in the Retailer page I click Continue
+
 	And I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128144, container type: Plastic Container and size: 6.2 do not click continue
 	Then I click continue
 	Given I call Shared Step 78868 - Regulatory Documents to Provide - US and Canada - Request authoring for both
@@ -748,7 +800,13 @@ Scenario: [128140] Data Tier Expansion for BBB - Products in Scope Report - Nutr
 		| 56-85-9   | L-Glutamine   | 100     |                     |            |             |
 	And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Given I call Shared Step 132473 (Regulatory Information 3 - Nutritional Category)
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)
+	Given I should see the Retailer Page
+	Then In the Retailer Section, click 'Add Retailers' button
+	Then In the Select Retailers window, select retailer: Bed Bath and Beyond (including Harmon, Buy Buy Baby, and Christmas Tree Shops)
+	Then In the Select Retailers window, click 'Done' button
+	Then in the Retailer page I click Continue
+
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128140, container type: Plastic Container and size: 6.2
 	Given I call Shared Step 60567 (Upload Product Label only)
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
@@ -769,9 +827,28 @@ Scenario: [147446] WM - Authoring option ONLY available
 	Given I generate a random UPC number and save as: UPC147446
 	Given I save the product information as: testcase147446
 	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
-	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
-	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
+	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
+	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page I click Continue
+
 	Given I call Shared Step 65181 (Retailer Association - Add Private Label Information and Select Vendor ID) and select the retailer: Wal-Mart/SAM'S CLUB and enter the name: Allswell and select Vendor id: random
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC147446, container type: Plastic Container and size: 2
 	And I see the following sections
@@ -793,9 +870,28 @@ Scenario: [147447] Sears - Authoring option ONLY available
 	Given I generate a random UPC number and save as: UPC147447
 	Given I save the product information as: testcase147447
 	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
-	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
-	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
+	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
+	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page I click Continue
+
 	Given I call Shared Step 69682 (Retailer Association - Add Private Label Information) and select the retailer: Sears/K-Mart and enter the name: TestBrand
 	Given In the Retailers tab, I select the first Vendor option for retailer: Sears/K-Mart
 	Given I click continue
@@ -814,7 +910,11 @@ Scenario: [50863] WERCSmart Portal Verification on Required Selections for the "
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC50863
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
 	Then I save the product information as: TestCase50863
 	Given I should see the Product Information Page
@@ -826,5 +926,7 @@ Scenario: [50863] WERCSmart Portal Verification on Required Selections for the "
 		| White Mineral Oil (petroleum)       | 50       | false               | false       |            |
 	Given I call Shared Step 234333 (Inventory Status, Prop 65 (US) - Applicable Only to Lip Balm (RU000246))
 	Given I call Shared Step 234334 (Regulatory Information 3 - Applicable Only to Lip Balm (RU000246))
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase50863
+#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase50863
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase50863
 

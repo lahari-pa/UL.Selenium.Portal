@@ -21,7 +21,13 @@
 @SupplierAccounts
 @SubEnrollmentNew
 @SubEnrollment
-
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@StepsPrototype
+@PhysicalAndChemicalProp
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
+@Ingredients
 
 Feature: Single Retailer Subscription
 
@@ -89,23 +95,58 @@ Given I log in with the account saved in TReVor as: SingleRetailerAccount
 Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 Then I save the product information as: Product200434
-Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Formaldehyde
+#Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
+#Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
+#Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Formaldehyde
+Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Formaldehyde       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Then I call Shared Step 183893 (Single Retailer - Retailer Screen - Select retailer)
 | Retailer |
 | Amazon   |
 Then I generate a random UPC number and save as: UPC200434
 And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC200434, container type: any and size: 20
-And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+#And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 And in the Additional Documents to Provide page I click Continue
 And in the Optional Reports and Documents Available for Purchase page I click Continue
 And I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
-And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: text
-And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: text
+Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+#And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 And If purchase details are showing click confirm order
 And In the Thank You screen I click Home
 Then I call Shared Step 65080 (Login to Studio and Open SHA manager)
@@ -126,52 +167,87 @@ And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registratio
 And I enter the text: saved as Product200434 in the 'Search by WPS ID or Product Name' field
 And In the Foward Product Registration Screen I should not see product: saved as Product200434
 
+#Removed from regression 2024/04
+@ignore
 @TestCase:200449
-
 Scenario: [200449] Single Retailer - Not Available for Forwarding
+	Given I log in with the account saved in TReVor as: SingleRetailerAccount
+	Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save the product information as: Product200449
+	#Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
 
-Given I log in with the account saved in TReVor as: SingleRetailerAccount
-Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
-Then I save the product information as: Product200449
-Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Formaldehyde
-Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-Then I call Shared Step 183893 (Single Retailer - Retailer Screen - Select retailer)
-| Retailer |
-| Amazon   |
-Then I generate a random UPC number and save as: UPC200449
-And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC200449, container type: any and size: 20
-And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-And in the Additional Documents to Provide page I click Continue
-And in the Optional Reports and Documents Available for Purchase page I click Continue
-And I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
-| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
-And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: text
-And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-And If purchase details are showing click confirm order
-And In the Thank You screen I click Home
-Then I call Shared Step 65080 (Login to Studio and Open SHA manager)
-And In the SHA manager grid I see the WPS ID I have saved as product: Product200449 and if status is Submitted, I change status to Assigned, then confirm status is Assigned
-And I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: Product200449)
-And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: Product200449)
-And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: Product200449)
-And I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: Product200449
-And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: Product200449)
-And I call Shared Step 59066 (Go to SHA Manager)
-And I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: Product200449)
-And I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: Product200449) for
-| Retailer |
-| Amazon   |
-And I navigate to the landing page
-Given I log in with the account saved in TReVor as: SingleRetailerAccount
-And I search for the product saved as: Product200449
-And I click Row Actions for the first product returned
-And I should not see the following Actions options
-| Option             |
-| Archive Retailers  |
+	#Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
+	#Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Formaldehyde
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Formaldehyde       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
+	Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I call Shared Step 183893 (Single Retailer - Retailer Screen - Select retailer)
+		| Retailer |
+		| Amazon   |
+	Then I generate a random UPC number and save as: UPC200449
+	And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC200449, container type: any and size: 20
+	#And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
+	And in the Additional Documents to Provide page I click Continue
+	And in the Optional Reports and Documents Available for Purchase page I click Continue
+	And I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
+		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
+	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: text
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
+	And If purchase details are showing click confirm order
+	And In the Thank You screen I click Home
+	Then I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	And In the SHA manager grid I see the WPS ID I have saved as product: Product200449 and if status is Submitted, I change status to Assigned, then confirm status is Assigned
+	And I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: Product200449)
+	And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: Product200449)
+	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: Product200449)
+	And I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: Product200449
+	And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: Product200449)
+	And I call Shared Step 59066 (Go to SHA Manager)
+	And I call Shared Step 49841 (SHA - Search for exact WPS ID in Accepted Status for saved as: Product200449)
+	And I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: Product200449) for
+		| Retailer |
+		| Amazon   |
+	And I navigate to the landing page
+	Given I log in with the account saved in TReVor as: SingleRetailerAccount
+	And I search for the product saved as: Product200449
+	And I click Row Actions for the first product returned
+	And I should not see the following Actions options
+		| Option             |
+		| Archive Retailers  |
 
 @TestCase:184385
 
@@ -181,9 +257,32 @@ Given I log in with the account saved in TReVor as: DoubleSubscriptionAccount
 Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 Then I save the product information as: Product184385SRS
-Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+#Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
+#Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
+#Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Then I call Shared Step 183893 (Single Retailer - Retailer Screen - Select retailer)
 | Retailer   |
@@ -193,16 +292,47 @@ Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Containe
 Then I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 Then in the Additional Documents to Provide page I click Continue
 Then in the Optional Reports and Documents Available for Purchase page I click Continue
-Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: text
-Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: text
+Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+#Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 Then If purchase details are showing click confirm order
 Then In the Thank You screen I click Home
 Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 Then I save the product information as: Product184385T
-Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+#Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
+#Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
+#Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Then I click the single retailer checkbox
 Then I confirm if the Single Retailer Checkbox is not selected
@@ -214,8 +344,16 @@ Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Containe
 Then I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 Then in the Additional Documents to Provide page I click Continue
 Then in the Optional Reports and Documents Available for Purchase page I click Continue
-Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: text
-Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: text
+Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+#Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 Then If purchase details are showing click confirm order
 Then In the Thank You screen I click Home
 Then I click the Retail Partners icon in the Navigation Pane
@@ -235,9 +373,32 @@ Given I log in with the account saved in TReVor as: SingleRetailerAccount
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 Then I save the product information as: TestCase181949
-Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
+#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
+#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Then I should see the Retailer Page
 Then I confirm if the single retailer checkbox is displayed on the retailer page
@@ -252,8 +413,21 @@ Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alkaline Battery
 Then I save the product information as: TestCase182705
-Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
-Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+#Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+	Then I should be on the Product Information Page
+	And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No 
+	And In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page, I click Continue
+
+#Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+	Then I should be on the Physical and Chemical Properties Page
+	And In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	And In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then in the Physical and Chemical Properties page, I click Continue
+
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Water      | 100     | false               | false       |            |
@@ -283,9 +457,32 @@ Given I generate a random UPC number and save as: UPC1828248
 Given I generate a random UPC number and save as: UPC1828249
 Given I generate a random UPC number and save as: UPC1828240
 Then I save the product information as: TestCase182824
-Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
+#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
+#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Then I call Shared Step 183893 (Single Retailer - Retailer Screen - Select retailer)
 | Retailer |
@@ -355,9 +552,32 @@ Then In the Subscription Information screen I verify section Submitted is presen
 Then I get the count of products in section Submitted and save as: ProductsCount
 Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
-Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+#Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
+#Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
+#Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Then I call Shared Step 183893 (Single Retailer - Retailer Screen - Select retailer)
 | Retailer   |
@@ -367,8 +587,16 @@ Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Containe
 Then I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 Then in the Additional Documents to Provide page I click Continue
 Then in the Optional Reports and Documents Available for Purchase page I click Continue
-Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: text
-Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: text
+Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+#Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 Then If purchase details are showing click confirm order
 Then In the Thank You screen I click Home
 Then I navigate to the MyAccount page
@@ -569,9 +797,32 @@ Then the WERCSmart homepage should load
 Then I should see username for user saved as: TC202549 in the right corner
 Then I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
-Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+#Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
+#Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
+#Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 Then I call Shared Step 57503 (Inventory Status, Prop 65 (US) - TSCA(Any Option) - Prop 65 (NO) - Continue - Happy Path)
 Then I confirm if the single retailer checkbox is displayed on the retailer page
 Then I confirm if the Single Retailer Checkbox is selected
@@ -582,8 +833,16 @@ Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Containe
 Then I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 Then in the Additional Documents to Provide page I click Continue
 Then in the Optional reports and Documents Available for Purchase page I click Continue
-Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
-Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+#Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 Then the Subscription Enrollment page should load
 Then I confirm the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section does exist
 Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section, I confirm the Tiered Subscription Options heading does exist
@@ -611,9 +870,32 @@ Then I click the Home icon in the Navigation Pane
 Then I generate a random UPC number and save as: UPC202549.2
 Then I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
-Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+#Then I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
+#Then I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
+#Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Then I confirm if the single retailer checkbox is displayed on the retailer page
 Then I confirm if the Single Retailer Checkbox is selected
@@ -624,8 +906,16 @@ Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Containe
 Then I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 Then in the Additional Documents to Provide page I click Continue
 Then in the Optional reports and Documents Available for Purchase page I click Continue
-Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
-Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+#Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Formulated Products panel, I confrim the selector displays: None
 Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Enhanced Articles panel, I confrim the selector displays: None
 Then In the Select your desired range of Formulated, Articles, Enhanced Articles or Single Retailer Products section Articles panel, I confrim the selector displays: None

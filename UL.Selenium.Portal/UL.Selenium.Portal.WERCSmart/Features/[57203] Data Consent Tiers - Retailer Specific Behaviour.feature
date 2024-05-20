@@ -16,13 +16,15 @@ Feature: [57203] Data Consent Tiers - Retailer Specific Behavior
 #Background:
 #Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 #Then I click the Retail Partners icon in the Navigation Pane
+#Removed from regression 2024/04
+@ignore
 @TestCase:57206
 Scenario: [57206] Retailer specific - CVS
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Then I click the Retail Partners icon in the Navigation Pane
 	When I select the retailer: CVS
-	Then I confirm that there is a section labeled: CVS
+	#Then I confirm that there is a section labeled: CVS
 	And I confirm that under the pie chart I see the label: % of your product portfolio is associated with CVS
 	And I confirm that: CVS requires suppliers of formulated products in the following categories to grant Tier 2.1, Tier 2.2 and Tier 4.1 permissions: Artists/Hobby, Automotive Care, Cleaning Supplies, Health & Beauty, Home Improvement, Lawn and Garden, Miscellaneous, Nutritional Supplements, Over-the-Counter (OTC), Pet Care, Photography, Sporting Goods, Stationery and Pharmacy is showing under the Data Consent Tiers heading
 	When I click the More Information hyperlink
@@ -35,25 +37,8 @@ Scenario: [57206] Retailer specific - CVS
 	And I click the back arrow next to CVS
 	Then I should see the Retail Partners page
 
-@tfs_design
+#Removed from regression 2024/04
 @ignore
-@CostcoRemoval
-#Obsolete test case after costco removal (4/30/2020)
-@TestCase:57211
-Scenario: [57211] Retailer specific - Costco
-	Given I log in with the account saved in TReVor as: ProductAccount
-	Then The home screen should load
-	Then I click the Retail Partners icon in the Navigation Pane
-	When I select the retailer: Costco
-	And I confirm that: Costco requests suppliers of Cleaning, Health & Beauty, Automotive Care, and Lawn & Garden products to grant Tier 2.1 and Tier 2.2 consent. is showing under the Data Consent Tiers heading
-	When I click the More Information hyperlink
-	Then I check that the current URL contains: https://www.costco.com/sustainability-environment.html
-	And I close the window that opened
-	#When I click the Products in Scope button and confirm that an html file is produced called Report_DataUsageTier_*.htm and save as CostcoHTMLFile
-	#And I confirm the html file saved as CostcoHTMLFile can be opened and contains text: Unable to generate report since no records were found
-	Then I click the Products in Scope button and confirm that an excel file is produced called CO_Report_DataUsageTier_<Date>.xlsx and save as CostcoExcelFile
-	And I confirm the excel file saved as CostcoExcelFile can be opened and contains data
-
 @TestCase:57214
 Scenario: [57214] Retailer specific - Dollar Tree
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -65,6 +50,8 @@ Scenario: [57214] Retailer specific - Dollar Tree
 	When I click the Products in Scope button and confirm that an excel file is produced called DT_Report_DataUsageTier_<Date>.xlsx and save as DollarTreeExcelFile
 	And I confirm the excel file saved as DollarTreeExcelFile can be opened and contains data
 
+#Removed from regression 2024/04
+@ignore
 @TestCase:57218
 Scenario: [57218] Retailer specific - Family Dollar
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -91,6 +78,8 @@ Scenario: [57221] Retailer specific - Target
 	When I click the Products in Scope button and confirm that an excel file is produced called TG_Report_DataUsageTier_<Date>.xlsx and save as TargetExcelFile
 	And I confirm the excel file saved as TargetExcelFile can be opened and contains data
 
+#Removed from regression 2024/04
+@ignore
 @TestCase:57223
 Scenario: [57223] Retailer specific - Walgreens
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -119,6 +108,8 @@ Scenario: [57225] Retailer specific - Walmart
 	When I click the Products in Scope button and confirm that an excel file is produced called WM_Report_DataUsageTier_<Date>.xlsx and save as WalmartExcelFile
 	And I confirm the excel file saved as WalmartExcelFile can be opened and contains data
 
+#Removed from regression 2024/04
+@ignore
 @TestCase:57229
 Scenario: [57229] Retailer specific - Canadian Tire
 	Given I log in with the account saved in TReVor as: ProductAccount

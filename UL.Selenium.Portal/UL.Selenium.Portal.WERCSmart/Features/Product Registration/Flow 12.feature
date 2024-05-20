@@ -12,13 +12,26 @@
 @SHA
 @run_Flow12
 @MyAccount
+@StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
+@Ingredients
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Formulation3rdParty
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+@Product:WERCSmart_Account:Distributor_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryInformation2
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:FormulationNames
+@Product:WERCSmart_Account:Distributor_Page:NewProducts_Tab:ProductCharacteristics_Section:RestrictUse
+@Product:WERCSmart_Page:NewProducts_Tab:RewiewAndSubmit_Section:OptionalComments
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
+@ProductGrid
 
 Feature: Flow 12
 
-Background:
-Given I verify the following users exist and if not I create them using SHAUser
-		| username    | FirstName | LastName   | Role         | EmailAddress                |
-		| SHAQAAuto9  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+#Background:
+#Given I verify the following users exist and if not I create them using SHAUser
+#		| SHAQAAuto9  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 #Scenario: [58430] Mixture, Blend, Formulation, Solution - RU000722
 #
@@ -29,133 +42,108 @@ Given I verify the following users exist and if not I create them using SHAUser
 ## NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Flow 12 - 3rd Party
 @TestCase:58430
 Scenario: [58430] Mixture, Blend, Formulation, Solution - RU000722
-	Given I log in with the account saved in TReVor as: ProductAccount
-	Given I click on My Account
-	Then I create a new email address
-	Then I create a new user with the following information and set the password from the admin account: ProductAccount
-		| User Name | Title | Role | Phone Number | Email Address | Confirm Email | Country Code | Country        |
-		| User      | Mr    | User | 123-456-7889 | Saved         | Saved         | empty        | United Kingdom |    
-	Then I logout
-	Then I log in as the user saved as: NewUser
-	Then If terms of use page appears I accept
-	And I enter the following into the Security Questions window for user saved as: NewUser
-	And I enter the pin for user saved as: NewUser
-	When In the new user form I click on Next
-	Then In the new user form I click on Success
-	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	And I call Shared Step 82831 (The Product - Enter Product Name and Select Type of Product: Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party)
-	Then I save the product information as: TestCase58430
-	And I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName  | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| 7647-14-5      | 33.33   | false               | false       |            |
-		| Copper sulfate | 11.67   | false               | false       |            |
-		| Nitric acid    | 55      | false               | false       |            |
-	And I call Shared Step 48948 (Formulation > 3rd Party - Select all)
-	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-	And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
-	And I click continue
-	#Then I check that the input field with label: Formula Name for the WERCSmart Ingredient Directory has the following text: Raw material
-	And I should see following statement: Provide the name(s) to be used to identify the formula
-	Then I set the Formula Name for the WERCSmart Ingredient Directory field to: -
-	Then I set the Formula Name for the WERCSmart Ingredient Directory field to: Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party
-	And I should see following statement: Provide Public Name(s) of the formula you're registering. This will be available to the Supplier to select for your ingredient when the ingredient is indicated to be Publicly Available. Public Names are typically on a products label, website or other information available to the general public.
-	And I should see following statement: Public Name 1
-	And I should see following statement: Public Name 2
-	And I should see following statement: Public Name 3
-	And I should see following statement: For ingredients used in cleaning products its Business-to-Consumer name must comply with the requirements of the California Cleaning Product Right to Know Act. Manufacturer must use a name that is only as generic as necessary to protect the confidential identity of the ingredient. In developing the generic name, the manufacturer must use the generic name framework provided by the Federal Environmental Protection Agency (EPA) guidance for the Toxic Substances Control Act (TSCA) Confidential Inventory.
-	And I should see following statement: Business to Consumer Name
-	Then I check that the input field with label: Business to Consumer Name has the following placeholder: Business-to-Consumer Name (Generic Ingredient Name)
-	Then I set the Business to Consumer Name field to: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )
-	Then I click continue 
-	And Business to Consumer Name should be showing the error messages: Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )
-	Then I set the Business to Consumer Name field to: Test
-	And Business to Consumer Name should not be showing the error messages: Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + )
-	And I click continue
-	And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
-	And I should see the Sustainability Page
-	Given in the Sustainability page I click Continue
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58605. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
-	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party
-	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58430
 
-#Remove from regression: 2023/04
-@ignore
-@TestCase:58605
-Scenario: [58605] Suppository (no laxative) -  RU001151
-	Given I log in with the account saved in TReVor as: ProductAccount
-	Then The home screen should load
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Suppository, Medicinal
-	Then I save the product information as: TestCase58605
-	#Given I call Shared Step 37857 (Enter Physical Property - Solid)
-	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue)
-	#Given I check the new page has loaded with no required field error. Navigating from: Product Information to: Ingredients
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Glycerin      | 30      | false               | false       |            |
-		| Glucose       | 30      | false               | false       |            |
-		| Aqua          | 40      | false               | false       |            |
-	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65
-	Then I call Shared Step 132427 (Waste Classification Data- For OTC Products)
-	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
-	#Given I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
-	Given I call Shared Step 60567 (Upload Product Label only)
-	Given in the Additional Documents to Provide page I click Continue
-	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58605. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Suppository, Medicinal
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58605
-
-#Remove from regression: 2023/04
-@ignore
-@TestCase:58606
-Scenario: [58606] Medicinal Liquids - RU001188
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	Given I generate a random UPC number and save as: UPC58606
-	Given I delete all products with UPC Number: saved as UPC58606
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Medicinal Liquids (cough medicine, eye drops, ear drops, nasal spray and inhalers)
-	Then I save the product information as: TestCase58606
-	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	Given I call Shared Step 70675 (Physical and Chemical Properties - Liquid Only - With Water Solubility - Enter all data - Continue)
-	#Given I check the new page has loaded with no required field error. Navigating from: Product Information to: Ingredients
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Ethanol       | 20      | false               | false       |            |
-		| Paracetamol   | 5       | false               | false       |            |
-		| Aqua          | 50      | false               | false       |            |
-		| Guaifenesin   | 25      | false               | false       |            |
-	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-	Then I call Shared Step 132427 (Waste Classification Data- For OTC Products)
-	#Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
-	Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
-	Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
-	#Given I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
-	# Regulatory Documents to Provide page is showing
-	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	Given I call Shared Step 60567 (Upload Product Label only)
-	#Given I call Shared Step 60567 (Upload Product Label only) : UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-	Given in the Additional Documents to Provide page I click Continue
-	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
-		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58606. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Medicinal Liquids (cough medicine, eye drops, ear drops, nasal spray and inhalers)
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58606
+
+	#And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
+	#And I call Shared Step 82831 (The Product - Enter Product Name and Select Type of Product: Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party)
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party
+	Then in the The Product page, I click Continue
+
+	Then I save the product information as: TestCase58430
+
+	#And I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	#	| ComponentName  | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| 7647-14-5      | 33.33   | false               | false       |            |
+	#	| Copper sulfate | 11.67   | false               | false       |            |
+	#	| Nitric acid    | 55      | false               | false       |            |
+	Then I should be on the Ingredients Page
+	And In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue		| Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water        	| 100     | False               | False         |             |
+	Then in the Ingredients page, I click Continue
+
+	#And I call Shared Step 48948 (Formulation > 3rd Party - Select all)
+	Then I should be on the Formulation > 3rd Party Page
+	And In the Formulation > 3rdParty Section, set the radio option in section: 'By clicking Accept, I certify the formulation information entered is complete and accurate': to: Accept
+	And In the Formulation > 3rdParty Section, set the radio option in section: 'Consent to Tier 2.1, 2.2, 4.2 Data Uses': to: Granted
+	Then in the Formulation > 3rd Party page, I click Continue
+
+	#And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Then I should be on the Inventory Status, Prop 65 (US) Page
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+
+	#And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
+	Then I should be on the Regulatory Information 2 Page
+	And In the Regulatory Information 2 Section, set the option in section: 'Product contains microbeads' to: No
+	Then in the Regulatory Information 2 page, I click Continue
+
+	Then in the Additional Documents to Provide page, I click Continue
+
+	Then I should be on the Formulation Names Page
+	And In the Formulation Names section, for section: 'Formula Name for the WERCSmart Ingredient Directory' confirm that the textbox field is populated with: Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party
+	And In the Formulation Names section, for section: 'Formula Name for the WERCSmart Ingredient Directory' clear the textbox field
+	And in the Formulation Names page, I click Continue
+	Then In the Formulation Names section, the section: 'Formula Name for the WERCSmart Ingredient Directory' should display an error message: This is a required field.
+	And In the Formulation Names section, for section: 'Formula Name for the WERCSmart Ingredient Directory' enter text: Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party
+	And In the Formulation Names section, confirm that the full text for section: 'Provide Public Name(s) of the formula you're registering.' is displayed
+	And In the Formulation Names section, for section: 'Provide Public Name(s) of the formula you're registering.' confirm that the textbox option: Public Name 1 displays the shadow text: Public Name 1
+	And In the Formulation Names section, for section: 'Provide Public Name(s) of the formula you're registering.' confirm that the textbox option: Public Name 2 displays the shadow text: Public Name 2
+	And In the Formulation Names section, for section: 'Provide Public Name(s) of the formula you're registering.' confirm that the textbox option: Public Name 3 displays the shadow text: Public Name 3
+	And In the Formulation Names section, confirm that the full text for section: 'Business to Consumer Name' is displayed
+	And In the Formulation Names section, for section: 'Business to Consumer Name' confirm that the textbox displays the shadow text: Business-to-Consumer Name (Generic Ingredient Name)
+	And In the Formulation Names section, for section: 'Business to Consumer Name' enter text: ={};
+	And In the Formulation Names section, the section: 'Business to Consumer Name' should display an error message: Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + ® ™)
+	And In the Formulation Names section, for section: 'Business to Consumer Name' enter text: test
+	And In the Formulation Names section, the section: 'Business to Consumer Name' should not display an error message: Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + ® ™)
+	Then in the Formulation Names page, I click Continue
+	
+	#And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
+	Then I should be on the Restrict Use Page
+	And In the Restrict Use Section, set the option in section: 'Do you want to restrict searchable access to your registered formula?': to: Restrict
+	And In the Restrict Use Section, I enter the text of Access Code field to: 12345678
+	Then in the Restrict Use page, I click Continue
+
+	Then I should be on the Sustainability Page
+	Then in the Sustainability page, I click Continue
+
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58605. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Then I should be on the Optional Comments Page
+	And In the Optional Comments Section, in 'Provide any additional comments or information about the product that you want the Assessment Team to know.' enter comment test comment
+	Then in the Optional Comments page, I click Continue
+
+	#And I call Shared Step 73956 (Go to Summary and verify data) with product type: Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party
+	Then I should be on the Data Acceptance Page
+	And In the Data Acceptance Section, click 'Summary' button
+	And I switch to the tab with Data Summary page
+	And In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party
+	And I close the tab with Data Summary page
+	Then I should be on the Data Acceptance Page
+
+	#And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58430
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase58430
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\Obsolete
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Flow 12 - 3rd Party
+
+#Removed from regression 2024/03
 @ProductSetUp
 @42196
 @TestCase:42196
+@ignore
 Scenario: [42196] 3rd party > Recertification - with check for editing of Public disclosure setting and other Ingredients page validation
 	#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I call Shared Step 67038 (Login into WERCSmart Portal - ULSC Role)
@@ -210,7 +198,11 @@ Scenario: [42196] 3rd party > Recertification - with check for editing of Public
 	And In the Data Summary window the second component should have Public Name: saved as publicName and Publicly Disclosed: Yes
 	And I close the Data Summary tab
 	And I should see the Data Acceptance Page
-	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	Given If purchase details are showing click confirm order
 	#Scenario: test
 	#Given I save to context name: TestCase42196 and value: 1548654

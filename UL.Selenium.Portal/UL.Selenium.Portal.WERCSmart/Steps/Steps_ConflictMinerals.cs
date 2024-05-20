@@ -188,7 +188,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"the (.*) Verification page should load")]
-		[StepDefinition(@"the (.*) Verification page should load")]
+		//[StepDefinition(@"the (.*) Verification page should load")]
 		public void ThenTheConflictMineralsVerificationPageShouldLoad(string dummyTitle)
 		{
 			Report.IsTrue(new ConflictMinerals().WaitForEnterVerificationCodePage(120),
@@ -196,7 +196,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[StepDefinition(@"the (.*) terms of use page should load")]
-		[StepDefinition(@"the (.*) terms of use page should load")]
+		//[StepDefinition(@"the (.*) terms of use page should load")]
 		public void ThenTheConflictMineralsTermsOfUsePageShouldLoad(string dummyTitle)
 		{
 			var thisConflictMinerals = new ConflictMinerals();

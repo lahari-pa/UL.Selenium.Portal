@@ -7,9 +7,13 @@
 @NewProduct
 @RetailPartners
 @Pharma
+@StepsPrototype
 @DocumentAcceptance
 @UPC
 @run_Pharma
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
+@LiquidCoreProduct
+
 Feature: Pharma
 
 @TestCase:128085
@@ -60,7 +64,11 @@ Scenario: [128085] Pharma - Prescription Pharmaceutical - Aerosol Product
 	When I click continue
 	Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	When I click continue
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 	And I navigate to the home page
@@ -99,8 +107,9 @@ Scenario: [127870] Pharma - Tablet or Capsule Count Field is Available for Solid
 	Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 	Then I click continue
 	Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127870, container type: Plastic Container, capsule count: 50 and size: 1
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127870
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127870
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase127870	
 @TestCase:127970
 Scenario: [127970] Pharma - Regulatory Documents to Provide and Additional Documents to Provide
 	Given I log in with the account saved in TReVor as: PharmaAccount
@@ -139,7 +148,11 @@ Scenario: [127970] Pharma - Regulatory Documents to Provide and Additional Docum
 		| Option                       |
 		| Safety Data Sheet (Optional) |
 	Then in the Additional Documents to Provide page I click Continue
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 	And I navigate to the home page
@@ -184,7 +197,11 @@ When I click continue
 Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 When I click continue
 When I click continue
-Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 And I navigate to the home page
@@ -236,8 +253,9 @@ Scenario: [127847] Pharma - Tablet or Capsule Count Field is Available for Solid
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127847, container type: Plastic Container and size: 1
 #Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127847, container type: Plastic Container, capsule count: 50 and size: 1
 	When I click continue
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127847
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127847
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase127847	
 
 
 
@@ -279,8 +297,9 @@ Scenario: [127854] Pharma - Tablet or Capsule Count Field is Available for Solid
 	Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127854, container type: Plastic Container, capsule count: 50 and size: 1
 	When I click continue
 	When I click continue
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127854
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127854
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase127854	
 
 
 
@@ -324,8 +343,9 @@ Scenario: [127791] Pharma - Retailer Default
 	Then I click continue
 	Given I click the 'Add' button
 	And I confirm that retailer "WM" is present under the 'Destination Retailers' column in the UPC table
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127791
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127791
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase127791
 
 
 
@@ -347,7 +367,11 @@ Then I click continue
 Then I click continue
 Given I fill all empty fields in the SPL Information screen
 Then I click continue
-Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
+#Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
+Given I should see the Liquid Core Product Page
+	Then In the Liquid Core Product Section, set the option in section: 'Is there a free liquid in the Product's container that is 10ml or greater?' to: No
+	Then in the Liquid Core Product page I click Continue
+
 And I set the Secondary Physical State to be: Solid
 And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
 And I set the Select the best Water Solubility description to be: Dispersible
@@ -377,12 +401,18 @@ Then I check for the following options in the Additonal Documents to Provide sec
 When I click continue
 Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 When I click continue
-Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 Then In the Purchase Summary screen I click Confirm Order
 Then In the Thank You screen I click Home
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127847
+#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127847
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase127847
 
 
 
@@ -430,7 +460,11 @@ And I call Shared Step 60567 (Upload Product Label only) for section: Upload Ful
 When I click continue
 Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 When I click continue
-Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 Then In the Subscription Issue screen I confirm the following statement is shown: This order cannot be processed due to an issue with your subscription. You may need to upgrade to process this registration.
 And I navigate to the home page
 
@@ -472,7 +506,11 @@ Then I check for the following options in the Additonal Documents to Provide sec
 | Safety Data Sheet (Optional) |
 Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Safety Data Sheet and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 Then I click continue
-Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 And I navigate to the home page
@@ -512,7 +550,11 @@ And I click Save in The Product Page
 Given I call Shared Step (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 And I click Save in The Product Page
 And I click the page heading: Data Acceptance
-Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 And I navigate to the home page

@@ -21,6 +21,14 @@
 @UPC
 @DeleteActiveProducts
 @run_BulkActions
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@PhysicalAndChemicalProp
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
+@Ingredients
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+
 Feature: BulkActions
 
 Background:
@@ -285,7 +293,12 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	And I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Aqua          | 100     | false               | false       |            |
-	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	#And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page I click Continue
+
 	And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	And I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 	And I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
@@ -297,8 +310,16 @@ Scenario: [78048] Forwarding to Walmart - Without Authoring
 	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	And I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
 	And I click continue
-	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
-	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	And I navigate to the home page
 	And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
 	And I enter the text: saved as TestCase78048 in the 'Search by WPS ID or Product Name' field
@@ -328,21 +349,43 @@ Scenario:[93366] My Products - Bulk Actions Multiple Deletion of Registrations
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase93366a
 	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
-	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	#And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
+	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Sodium hydroxide       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue
 		| Retailer       |
 		| CVS            |
 		| Dollar General |
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC93366a, container type: Metal Container and size: 40
-	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	#And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test comment
+	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test comment
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
 	And I navigate to the home page
 	Given I generate a random UPC number and save as: UPC93366b
 	Given I delete all products with UPC Number: saved as UPC93366b
@@ -350,22 +393,48 @@ Scenario:[93366] My Products - Bulk Actions Multiple Deletion of Registrations
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase93366b
 	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
-	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	#And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
+	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Sodium hydroxide       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue
 		| Retailer       |
 		| CVS            |
 		| Dollar General |
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC93366b, container type: Metal Container and size: 40
-	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	#And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test comment
-	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test comment
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	And I navigate to the home page
 	Given I generate a random UPC number and save as: UPC93366c
 	Given I delete all products with UPC Number: saved as UPC93366c
@@ -373,22 +442,48 @@ Scenario:[93366] My Products - Bulk Actions Multiple Deletion of Registrations
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase93366c
 	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
-	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	#And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
+	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Sodium hydroxide       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue
 		| Retailer       |
 		| CVS            |
 		| Dollar General |
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC93366c, container type: Metal Container and size: 40
-	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	#And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test comment
-	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test comment
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	And I navigate to the home page
 	Given I generate a random UPC number and save as: UPC93366d
 	Given I delete all products with UPC Number: saved as UPC93366d
@@ -396,22 +491,48 @@ Scenario:[93366] My Products - Bulk Actions Multiple Deletion of Registrations
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase93366d
 	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
-	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	#And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
+	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Sodium hydroxide       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue
 		| Retailer       |
 		| CVS            |
 		| Dollar General |
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC93366d, container type: Metal Container and size: 40
-	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	#And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test comment
-	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test comment
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	And I navigate to the home page
 	Given I generate a random UPC number and save as: UPC93366e
 	Given I delete all products with UPC Number: saved as UPC93366e
@@ -419,22 +540,48 @@ Scenario:[93366] My Products - Bulk Actions Multiple Deletion of Registrations
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase93366e
 	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
-	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	#And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
+	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Sodium hydroxide       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue
 		| Retailer       |
 		| CVS            |
 		| Dollar General |
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC93366e, container type: Metal Container and size: 40
-	And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	#And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test comment
-	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test comment
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	And I navigate to the home page
 	Given I click Bulk Actions in the Products Grid
 	And I click Delete Products in the Bulk Actions window
@@ -486,14 +633,41 @@ Scenario:[88826] Delete Products > Product Not yet submitted
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase88826
 	Then I generate a random UPC number and save as: UPC88826
-	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
+	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
+	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	And I call Shared Step 57503 (Inventory Status, Prop 65 (US) - TSCA(Any Option) - Prop 65 (NO) - Continue - Happy Path)
 	And In the 'Select Retailers' window I select the retailer: CVS
 	And I click continue
 	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC88826, container type: Plastic Container and size: 12 click continue
-	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 	Then in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I navigate to the home page

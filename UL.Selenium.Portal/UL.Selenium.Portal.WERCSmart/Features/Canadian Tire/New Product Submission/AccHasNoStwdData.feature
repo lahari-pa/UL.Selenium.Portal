@@ -13,6 +13,14 @@
 @SHA
 @UPC
 @run_AccHasNoStwdData
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@PhysicalAndChemicalProp
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
+@Ingredients
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
+
 Feature: Account has No Stewardship Data
 
 
@@ -31,9 +39,23 @@ Scenario: [86121] Create a new simple product SOLD = US and Canada, PL = Yes, Re
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase86121
-And I call Shared Step 85284 - Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue
-	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	And I call Shared Step 85284 - Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue
+	#And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
+	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	And I call Shared Step  (Select Retailers Amazon and enter additional requirements field - Indicate full name of product, as sold via this retailer)
 	And I call Shared Step 75702 - UPC - Add UPC, Container type, Size and Package type (no retailer data needed) - Continue for UPC: saved as UPC86121, container type: Metal Container and size: 40
@@ -45,8 +67,16 @@ And I call Shared Step 85284 - Product Information - US & Canada, Child (No), OS
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	Given If purchase details are showing click confirm order
 	#Scenario: Test
 	#Given I save to context name: TestCase86121 and value: 1506402
@@ -80,10 +110,30 @@ Scenario: [86122] Create a new product SOLD = US and Canada, PL = No, Retailer N
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase86122
 	And I call Shared Step 62678 (Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
-	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	#And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
+	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+	Given I should see the Retailer Page
+	Then In the Retailer Section, click 'Add Retailers' button
+	Then In the Select Retailers window, select retailer: Amazon
+	Then In the Select Retailers window, click 'Done' button
+	Then in the Retailer page I click Continue
+
 	And I call Shared Step 75702 - UPC - Add UPC, Container type, Size and Package type (no retailer data needed) - Continue for UPC: saved as UPC86122, container type: Metal Container and size: 40
 	Given I call Shared Step 78868 - Regulatory Documents to Provide - US and Canada - Request authoring for both
 	Given in the Additional Documents to Provide page I click Continue
@@ -92,8 +142,16 @@ Scenario: [86122] Create a new product SOLD = US and Canada, PL = No, Retailer N
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 57863. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	Given If purchase details are showing click confirm order
 	#Scenario: Test
 	#Given I save to context name: TestCase86122 and value: 1558253
@@ -126,7 +184,15 @@ Scenario: [86123] Create a new product SOLD = Canada, Private Label = Yes, NR pr
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Crayon
 	Then I save the product information as: TestCase86123
 	And I call Shared Step 85730 - Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
-	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	#And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
 	And I call Shared Step 29181c (Ingredients - add any chemical - For Canada Only) with name: Water
 	And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 	Given I call Shared Step 86163 - Retailer - Canada Only & PL, Select No Retailer, Add PL, Continue
@@ -137,8 +203,16 @@ Scenario: [86123] Create a new product SOLD = Canada, Private Label = Yes, NR pr
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	Given If purchase details are showing click confirm order
 	#Scenario: Test
 	#Given I save to context name: TestCase86121 and value: 1506402
@@ -165,7 +239,15 @@ Scenario: [86124] Create a new product SOLD = Canada only , PL = No, NR product 
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Crayon
 	Then I save the product information as: TestCase86124
 	And I call Shared Step 78879 - Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP (NO), GNFR (NO), Continue
-	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	#And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
 	And I call Shared Step 29181c (Ingredients - add any chemical - For Canada Only) with name: Water
 	And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
@@ -176,8 +258,16 @@ Scenario: [86124] Create a new product SOLD = Canada only , PL = No, NR product 
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	Given If purchase details are showing click confirm order
 	#Scenario: Test
 	#Given I save to context name: TestCase86124 and value: 1506402
@@ -208,7 +298,15 @@ Scenario: [86416] Create a new product SOLD = Canada, Private Label = Yes, CT re
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Crayon
 	Then I save the product information as: TestCase86416
 	And I call Shared Step 85730 - Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
-	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	#And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
 	And I call Shared Step 29181c (Ingredients - add any chemical - For Canada Only) with name: Water
 	And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
 	And I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue
@@ -222,8 +320,16 @@ Scenario: [86416] Create a new product SOLD = Canada, Private Label = Yes, CT re
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	Given If purchase details are showing click confirm order
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86416)
@@ -258,12 +364,26 @@ Scenario: [86417] Create a new product SOLD = Canada only , PL = No, CT Retailer
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Crayon
 	Then I save the product information as: TestCase86417
 	And I call Shared Step 62678 (Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
-		And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	#And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
 	And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
+	Given I should see the Retailer Page
+	Then In the Retailer Section, click 'Add Retailers' button
+	Then In the Select Retailers window, select retailer: Canadian Tire
+	Then In the Select Retailers window, click 'Done' button
+	Then in the Retailer page I click Continue
+
 	And I call Shared Step 75702 - UPC - Add UPC, Container type, Size and Package type (no retailer data needed) - Continue for UPC: saved as UPC86417, container type: Metal Container and size: 40
 	And I call Shared Step 78868 - Regulatory Documents to Provide - US and Canada - Request authoring for both
 	Then in the Additional Documents to Provide page I click Continue
@@ -272,8 +392,16 @@ Scenario: [86417] Create a new product SOLD = Canada only , PL = No, CT Retailer
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	Given If purchase details are showing click confirm order
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86417)
@@ -309,8 +437,22 @@ Scenario: [86418] Create a new simple product SOLD = US and Canada, PL = Yes, Ca
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase86418
 	And I call Shared Step 85284 - Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue
-And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	#And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
+	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Sodium hydroxide       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	And I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue
 		| Retailer      |
@@ -324,8 +466,16 @@ And I call Shared Step 26897 (Physical and Chemical Properties - Solid only avai
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: awesome product
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: awesome product
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	Given If purchase details are showing click confirm order
 	#Scenario: Test
 	#Given I save to context name: TestCase86121 and value: 1506402
@@ -363,12 +513,26 @@ Scenario: [86419] Create a new simple product SOLD = US and Canada, PL = No, Can
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Crayon
 	Then I save the product information as: TestCase86419
 	And I call Shared Step 62678 (Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
-	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	#And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
 	And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
+	Given I should see the Retailer Page
+	Then In the Retailer Section, click 'Add Retailers' button
+	Then In the Select Retailers window, select retailer: Canadian Tire
+	Then In the Select Retailers window, click 'Done' button
+	Then in the Retailer page I click Continue
+
 	And I call Shared Step 75702 - UPC - Add UPC, Container type, Size and Package type (no retailer data needed) - Continue for UPC: saved as UPC86419, container type: Metal Container and size: 40
 	And I call Shared Step 78868 - Regulatory Documents to Provide - US and Canada - Request authoring for both
 	Then in the Additional Documents to Provide page I click Continue
@@ -377,8 +541,16 @@ Scenario: [86419] Create a new simple product SOLD = US and Canada, PL = No, Can
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	Given If purchase details are showing click confirm order
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase86419)

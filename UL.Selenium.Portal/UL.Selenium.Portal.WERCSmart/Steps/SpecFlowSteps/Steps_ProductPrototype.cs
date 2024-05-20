@@ -42,9 +42,33 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			ProductPrototype productPrototype = new ProductPrototype(section);
 			if(Report.IsTrue(productPrototype != null,$"Failure, '{section}' section does not exist.",$"Success, '{section}' section exists."))
 			{
-				if (Report.IsTrue(productPrototype.OptionExists(option),$"Failure, '{option}' radio option does not exist.",$"Success, '{option}' radio option exists."))
+				if (Report.IsTrue(productPrototype.OptionExists(option),$"Failure, '{option}' option does not exist.",$"Success, '{option}' option exists."))
 				{
 					Report.IsTrue(productPrototype.OptionSelect(option),$"Failure, failed to select '{option}' option.",$"Success, selected '{option}' option.");
+				}
+			}
+		}
+		[StepDefinition(@"In section: (.*), verify option: (.*) (is|is not) displayed")]
+		public void InSectionVerifyOption(string section, string option, string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			ProductPrototype productPrototype = new ProductPrototype(section);
+			if (Report.IsTrue(productPrototype != null, $"Failure, '{section}' section does not exist.", $"Success, '{section}' section exists."))
+			{
+				Report.IsTrue(productPrototype.OptionExists(option) == expected, $"Failure, '{option}' option {(expected ? "is not" : "is")} displayed for section {section}.", $"Success, '{option}' option {is_isnot} displayed for section {section}.");			
+			}
+		}
+
+		[StepDefinition(@"In section: (.*), set option: (.*) so it (is|is not) selected")]
+		public void InSectionSetOptionIsIsNotSelected(string section, string option, string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			ProductPrototype productPrototype = new ProductPrototype(section);
+			if (Report.IsTrue(productPrototype != null, $"Failure, '{section}' section does not exist.", $"Success, '{section}' section exists."))
+			{
+				if (Report.IsTrue(productPrototype.OptionExists(option), $"Failure, '{option}' radio option does not exist.", $"Success, '{option}' radio option exists."))
+				{
+					Report.IsTrue(productPrototype.OptionSetSelect(expected, option), $"Failure, failed to set '{option}' option so it {is_isnot} selected.", $"Success, set '{option}' option so it {is_isnot} selected.");
 				}
 			}
 		}
@@ -91,7 +115,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		}
 
 		[StepDefinition(@"In section: (.*), click search text box")]
-		public void InSectionEnterSearchText(string section)
+		public void InSectionClickSearchText(string section)
 		{
 			ProductPrototype productPrototype = new ProductPrototype(section);
 			SearchBoxPrototype searchBoxPrototype = new SearchBoxPrototype();
@@ -147,6 +171,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			if (Report.IsTrue(productPrototype != null, $"Failure, '{section}' section does not exist.", $"Success, '{section}' section exists."))
 			{
 				Report.IsTrue(productPrototype.ErrorMessageExists(errorMessage) == expected, $"Failure, '{errorMessage}' error message {(expected ? "is not" : "is")} displayed.", $"Success, '{errorMessage}' error message {is_isnot} displayed.");
+			}
+		}
+		[StepDefinition(@"The (.*) question (is|is not) displayed")]
+		public void ThenInThePageIShouldOrShouldNotSeeQuestion(string question, string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			Report.IsTrue(new ProductPrototype(question).WaitForContainerToBeVisible() == expected,
+				$"Failure, question {question} {(expected ? "is not" : "is")} displayed", $"Success, question {question} {is_isnot} displayed.");
+		}
+
+		[StepDefinition(@"Expand the (.*) panel")]
+		public void ExpandPanel(string panelLabel)
+		{
+			PanelPrototype panelPrototype = new PanelPrototype(panelLabel);
+			if (Report.IsTrue(panelPrototype.PanelExpandButtonExists(),$"Failure, '{panelLabel}' panel does not exist.",$"Success, '{panelLabel}' panel exists."))
+			{
+				Report.IsTrue(panelPrototype.PanelExpandButtonClick(), $"Failure, failed to click '{panelLabel}' panel.", $"Success, clicked '{panelLabel}' panel.");
+				//Report.IsTrue(!panelPrototype.PanelExpandButtonExists(), $"Failure, failed to expand '{panelLabel}' panel.", $"Success, expanded '{panelLabel}' panel.");
 			}
 		}
 	}

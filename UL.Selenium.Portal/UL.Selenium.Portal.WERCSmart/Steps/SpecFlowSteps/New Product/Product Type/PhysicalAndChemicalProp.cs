@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
+using UL.Automation.WebDriver.Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Type
 {
@@ -11,7 +13,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 	 class PhysicalAndChemicalProp
 	{
 
-		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: (Product is packaged in a gas cylinder \(e.g.- whip cream\)|Liquid|Solid|Gas|Aerosol)")]
+		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: (Product is packaged in a gas cylinder \(e.g., whip cream\)|Liquid|Solid|Gas|Aerosol)")]
 		public void SelectPrimaryPhsicalState(string option)
 		{
 			string section = "Primary Physical State";
@@ -52,9 +54,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'pH' select the checkbox option: 'I do not have exact pH data available to me'")]
 		public void SelectCheckboxForPH()
 		{
-			string section = "pH";
+			string section = "check";
 			string text = "I do not have exact pH data available to me";
-			new Steps_Prototype().SetTheSectionOptionTo(section, text);
+			new Steps_Prototype().ICheckTheCheckboxWithDescription(section, text);
 		}
 
 		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'pH' to: (<= 2|2.1 - 3.9|4 - 6.9|7 \(Neutral\)|7.1 - 9.9|10 - 12.4|>= 12.5|Not tested/Unknown)")]
@@ -65,10 +67,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		}
 
 
-		[StepDefinition(@"In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water- will this produce a solution with a pH <= 2 or a pH >= 12.5\?' set the option to: (Yes|No)")]
+		[StepDefinition(@"In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5\?' set the option to: (Yes|No)")]
 		public void SelectProductContainsMicrobeads(string option)
 		{
-			string section = "When mixed with an equal amount of water- will this produce a solution with a pH <= 2 or a pH >= 12.5?";
+			string section = "When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 
@@ -80,13 +82,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 			new Steps_Prototype().SetTheSectionOptionTo(section, text);
 		}
 
-
-		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' select the checkbox option: 'I do not have exact Boiling Point data available to me'")]
+		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Boiling Point \(in Celsius\)' select the checkbox option: 'I do not have exact Boiling Point data available to me'")]
 		public void SelectCheckboxForBoilingPoint()
 		{
-			string section = "Boiling Point (in Celsius)";
+			string section = "check";
 			string text = "I do not have exact Boiling Point data available to me";
-			new Steps_Prototype().SetTheSectionOptionTo(section, text);
+			new Steps_Prototype().ICheckTheCheckboxWithDescription(section, text);
 		}
 
 		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Boiling Point \(in Celsius\)' to: (<= 20C \(68F\)|20.1C \(68.1F\) - 35C \(95F\)|>35C \(95F\) - 37.7C \(99.9F\)|> 37.7C \(99.9F\)|Not tested/Unknown)")]
@@ -105,12 +106,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		}
 
 
-		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' select the checkbox option: 'I do not have exact Flash Point data available to me'")]
+		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Flash Point \(in Celsius\)' select the checkbox option: 'I do not have exact Flash Point data available to me'")]
 		public void SelectCheckboxForFlashPoint()
 		{
-			string section = "Flash Point (in Celsius)";
+			string section = "check";
 			string text = "I do not have exact Flash Point data available to me";
-			new Steps_Prototype().SetTheSectionOptionTo(section, text);
+			new Steps_Prototype().ICheckTheCheckboxWithDescription(section, text);
 		}
 
 		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Flash Point \(in Celsius\)' to: (<23C|>=23C and <38C|>=38C and <=60C|>60C and <=93C|>=93C and <=815C|Not Tested/Unknown|None, No Flash Point)")]
@@ -137,8 +138,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		}
 
 
-		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then' to:
-		(This product is classified as a D001 Hazardous Waste under RCRA \(as per Section 13 or 15 of the SDS\).|This product is classified as a D003 Hazardous Waste under RCRA.|This product is not classified as D001 or D003 Hazardous Waste under RCRA)")]
+		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then' to: (This product is classified as a D001 Hazardous Waste under RCRA \(as per Section 13 or 15 of the SDS\).|This product is classified as a D003 Hazardous Waste under RCRA.|This product is not classified as D001 or D003 Hazardous Waste under RCRA)")]
 		public void SelectHazardousWaste(string option)
 		{
 			string section = "When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then";
@@ -154,8 +154,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		}
 
 
-		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Product is manufactured in a facility that processes, or contains' to:
-		(Dairy or products containing dairy or milk|Eggs or products containing eggs|Wheat or products containing wheat|Peanuts or products containing peanuts|Tree nuts or products containing tree nuts|Soybeans or products containing soybeans|Shellfish or Crustaceans|None of the Above)")]
+		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Product is manufactured in a facility that processes, or contains' to: (Dairy or products containing dairy or milk|Eggs or products containing eggs|Wheat or products containing wheat|Peanuts or products containing peanuts|Tree nuts or products containing tree nuts|Soybeans or products containing soybeans|Shellfish or Crustaceans|None of the Above)")]
 		public void SelectIngredientsFacilityProcesses(string option)
 		{
 			string section = "Product is manufactured in a facility that processes, or contains";
@@ -179,17 +178,74 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		}
 
 
-		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Product contains the following artificial dye\(s\)' to:
-		(FD&C Blue No. 1|FD&C Blue No. 2|FD&C Green No. 3|Orange B|FD&C Yellow No. 5|Citrus Red No. 2|FD&C Red No. 2|FD&C Red No. 3|FD&C Red No. 40|FD&C Yellow No. 6|None of the Above)")]
+		[StepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Product contains the following artificial dye\(s\)' to: (FD&C Blue No. 1|FD&C Blue No. 2|FD&C Green No. 3|Orange B|FD&C Yellow No. 5|Citrus Red No. 2|FD&C Red No. 2|FD&C Red No. 3|FD&C Red No. 40|FD&C Yellow No. 6|None of the Above)")]
 		public void SelectArtificalDyes(string option)
 		{
 			string section = "Product contains the following artificial dye(s)";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 
+		[StepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Flash Point Testing Method Used': the following options (should|should not) be (displayed|displayed exclusively):")]
+		public void CheckOptionsInFlashPointTestingMethodSection(string condition, string displayed, Table table)
+		{
+			string section = "Flash Point Testing Method Used";
+			new Steps_Prototype().CheckOptionsInSection(condition, displayed, section, table);
+		}
 
+		[StepDefinition(@"In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: (Product is packaged in a gas cylinder \(e.g., whip cream\)|Liquid|Solid|Gas|Aerosol)")]
+		public void CheckOptionsInPrimaryPhysicalStateSection(string option)
+		{
+			string section = "Primary Physical State";
+			new Steps_Prototype().CheckingFieldInputIsCorrect(section, option);
+		}
 
+		[StepDefinition(@"In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option (is|is not) selected: (Product is packaged in a gas cylinder \(e.g., whip cream\)|Liquid|Solid|Gas|Aerosol)")]
+		public void ConfirmOptionSelectedInPrimaryPhysicalStateSection(string is_isnot, string option)
+		{
+			string section = "Primary Physical State";
+			new Steps_ProductPrototype().InSectionConfirmOptionIsIsNotSelected(section, option, is_isnot);
+		}
 
+		[StepDefinition(@"In the Physical and Chemical Properties Section, the confirm section: 'Secondary Physical State' (is|is not) displayed")]
+		public void ConfirmSecondaryPhysicalStateIsIsNotDisplayed(string is_isnot)
+		{
+			string section = "Secondary Physical State";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
 
+		[StepDefinition(@"In the Physical and Chemical Properties Section, the confirm section: 'When mixed with an equal amount of water, will this produce a solution with a pH <=2 or a pH >=12.5\?' (is|is not) displayed")]
+		public void ConfirmWhenMixedWithWaterPhIsIsNotDisplayed(string is_isnot)
+		{
+			string section = "When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
+
+		[StepDefinition(@"In the Physical and Chemical Properties Section, the confirm section: 'Relative Density' (is|is not) displayed")]
+		public void ConfirmRelativeDensityIsIsNotDisplayed(string is_isnot)
+		{
+			string section = "Relative Density";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
+
+		[StepDefinition(@"In the Physical and Chemical Properties Section, the confirm section: 'pH' (is|is not) displayed")]
+		public void ConfirmpHIsIsNotDisplayed(string is_isnot)
+		{
+			string section = "pH";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
+
+		[StepDefinition(@"In the Physical and Chemical Properties Section, the confirm section: 'Boiling Point \(in Celsius\)' (is|is not) displayed")]
+		public void ConfirmBoilingPointIsIsNotDisplayed(string is_isnot)
+		{
+			string section = "Boiling Point (in Celsius)";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
+
+		[StepDefinition(@"In the Physical and Chemical Properties Section, the confirm section: 'Flash Point \(in Celsius\)' (is|is not) displayed")]
+		public void ConfirmFlashPointIsIsNotDisplayed(string is_isnot)
+		{
+			string section = "Flash Point (in Celsius)";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
 	}
 }

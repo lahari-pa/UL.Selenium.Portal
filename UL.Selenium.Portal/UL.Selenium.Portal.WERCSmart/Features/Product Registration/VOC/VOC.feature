@@ -10,21 +10,62 @@
 @RetailPartners
 @NewProduct
 @run_voc
+@StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@PhysicalAndChemicalProp
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
+@Ingredients
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:PesticideDetailsUS
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
+
 Feature: VOC
 
 @test74626
 @TestCase:74626
 Scenario: [74626] VOC - Show state collection when state table has a value
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide - Fogger
 	Then I save the product information as: TestCase74626
-	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
 	Then I call Shared Step 57454 (Physical and Chemical Properties - Aerosol & Gas available - Select Aerosol - Continue - Happy Path)
 	Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
-	And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
-	Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
-	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+	#And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page I click Continue
+
+	#Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
+	Given I should see the Pesticide Details - U.S. Page
+	Then In the Pesticide Details - U.S. Section, in 'Product has an Environmental Protection Agency (EPA) Registration Number' enter No
+	Then In the Pesticide Details - U.S. Section, in 'Product has a State Registration' enter No
+	Then In the Pesticide Details - U.S. Section, in 'Select the applicable exemption' enter Food Based Pesticides - Exempt from EPA Registration
+	Then in the Pesticide Details - U.S. page I click Continue
+
+	#Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+	Given I should see the Transportation Details 1 Page
+	Then In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Yes
+	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: DOT
+	Then In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping with limited quantity
+	Then in the Transportation Details 1 page I click Continue
+
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 	Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)
 		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |
@@ -48,18 +89,37 @@ Scenario: [74626] VOC - Show state collection when state table has a value
 		| Utah            | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
 		| Virginia        | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
 		| Vermont         | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74626
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74626
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase74626
 @TestCase:56475
 Scenario: [56475] VOC checks for Fabric Softener - single Use dryer product (RU000808)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Fabric Softener - Single Use Dryer Product Only
 	Then I save the product information as: TestCase56475
 	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Formaldehyde
+	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
+	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Formaldehyde
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Formaldehyde       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
 	Then I see the following questions
@@ -89,7 +149,11 @@ Scenario: [56475] VOC checks for Fabric Softener - single Use dryer product (RU0
 	# Shared 57712
 	Given If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
-	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 	Then I should see the Additional Documents to Provide Page
 	Then I see the following sections
 		| Section                                           |
@@ -105,10 +169,15 @@ Scenario: [56475] VOC checks for Fabric Softener - single Use dryer product (RU0
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Goggles                       | 500                      | 45                      | 15.0      | Black      | Odorless | No data available | 5                     |
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Fabric Softener - Single Use Dryer Product Only
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56475
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
 
+	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Fabric Softener - Single Use Dryer Product Only
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56475
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase56475
 @TestCase:56477
 Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -234,12 +303,22 @@ Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 Scenario: [56481] VOC checks for Oven Cleaner - pump sprays (RU000798) - CARB and OTC
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Oven Cleaner - Pump Sprays
 	Then I save the product information as: TestCase56481
 	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
-	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Formaldehyde
+	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Formaldehyde
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Formaldehyde       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 	Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
@@ -278,7 +357,11 @@ Scenario: [56481] VOC checks for Oven Cleaner - pump sprays (RU000798) - CARB an
 	# If your supplier account is on Premium subscription you will see the Ecologo step - perform the Shared Step below if you do, if not skip to step 43
 	Given If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
-	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 	Then I should see the Additional Documents to Provide Page
 	Then I see the following sections
 		| Section                    |
@@ -292,12 +375,17 @@ Given I call Shared Step 60567 (Upload Product Label only)
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 100                      | 250                     | 1200      | Black      | Odorless | No data available | 50                    |
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 74992. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 74992. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
 	Then The Data Acceptance page should appear
 	Then In the Data Acceptance page I select Agreed
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Oven Cleaner - Pump Sprays
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56481
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56481
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase56481
 @TestCase:56483
 Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -545,7 +633,13 @@ Scenario: [56476] VOC checks for Personal Fragrance product
 	Then I save the product information as: TestCase56476
 	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I call Shared Step 70675 (Physical and Chemical Properties - Liquid Only - With Water Solubility - Enter all data - Continue)
-	Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Acetone
+	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Acetone
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Acetone       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 	Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
@@ -571,7 +665,11 @@ Scenario: [56476] VOC checks for Personal Fragrance product
 	Given in the New Product page I click Continue
 	Given If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
-	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 	Then I should see the Additional Documents to Provide Page
 	Then I see the following sections
 		| Section                    |
@@ -585,10 +683,15 @@ Given I call Shared Step 60567 (Upload Product Label only)
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Goggles                       | 200                      | 25                      | 12.2      | Black      | Odorless | No data available | 5                     |
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 74992. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Personal Fragrance Product (more than 20% fragrance) - Liquid
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56476
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 74992. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
 
+	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Personal Fragrance Product (more than 20% fragrance) - Liquid
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56476
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase56476
 	
 
 @TestCase:73503
@@ -598,14 +701,35 @@ Scenario: [73503] VOC - ACP Plan = Yes and CARB Value Above Limit for RU - VOC R
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide - Fogger
 	Then I save the product information as: TestCase73503
-	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
 	And I call Shared Step 57532 (Physical and Chemical Properties - Aerosol & Gas available - Select Gas - Continue - Happy Path)
 	And I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| 7647-14-5     | 100     | false               | false       |            |
 	And I call Shared Step 48360 - Regulatory - Test TSCA and PROP65 - Continue
-	And I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
-	And I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+	#And I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
+	Given I should see the Pesticide Details - U.S. Page
+	Then In the Pesticide Details - U.S. Section, in 'Product has an Environmental Protection Agency (EPA) Registration Number' enter No
+	Then In the Pesticide Details - U.S. Section, in 'Product has a State Registration' enter No
+	Then In the Pesticide Details - U.S. Section, in 'Select the applicable exemption' enter Food Based Pesticides - Exempt from EPA Registration
+	Then in the Pesticide Details - U.S. page I click Continue
+
+	#And I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+	Given I should see the Transportation Details 1 Page
+	Then In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Yes
+	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: DOT
+	Then In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping with limited quantity
+	Then in the Transportation Details 1 page I click Continue
+
 	And I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 	And I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
     And I set the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. option to: Yes

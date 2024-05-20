@@ -13,8 +13,15 @@
 @SHA
 @CreateProducts
 @Studio
+@StepsPrototype
 @ProductSetUp
 @run_Transportation
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
+@Ingredients
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
 
 Feature: Transportation
 
@@ -38,7 +45,13 @@ Then I save the product information as: TestCase65702
 And I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 | Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 | Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
-And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
 And I set the Product is Regulated for Transport field to: Yes
@@ -69,7 +82,13 @@ Given I generate a random UPC number and save as: UPC65703
 Then I save the product information as: TestCase65703
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 And I call Shared Step 84554 (Physical and Chemical Properties - Liquid & Solid - Enter all data - Continue - Happy Path)
-And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
 And I set the Product is Regulated for Transport field to: Yes
@@ -100,7 +119,13 @@ Given I generate a random UPC number and save as: UPC65706
 Then I save the product information as: TestCase65706
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 And I call Shared Step 84554 (Physical and Chemical Properties - Liquid & Solid - Enter all data - Continue - Happy Path)
-And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
 And I set the Product is Regulated for Transport field to: Yes
@@ -131,7 +156,13 @@ Given I generate a random UPC number and save as: UPC65754
 Then I save the product information as: TestCase65754
 	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
 And I set the Product is Regulated for Transport field to: Yes
@@ -181,7 +212,13 @@ Then I save the product information as: TestCase65940
 And I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 | Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 | Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
-And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
 And I set the Product is Regulated for Transport field to: Yes
@@ -229,7 +266,13 @@ Then I save the product information as: TestCase65944
 And I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
 | Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 | Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
-And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Chlorine       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
 And I set the Product is Regulated for Transport field to: Yes
@@ -304,7 +347,13 @@ And I set the Flash Point (in Celsius) option to: 23
 And I set the Flash Point Testing Method Used option to: Closed cup method
 And I set the Select the best Water Solubility description option to: Insoluble
 And I click continue
-And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzene
+#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Benzene
+Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Benzene       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 And I should see the Transportation Details 1 Page
 And I set the Product is Regulated for Transport field to: Yes
@@ -378,7 +427,11 @@ And I confirm that: II is not the only option for section: Packing Group (select
 And I click continue
 
 And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
-And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+#And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 And I should see the Additional Documents to Provide Page
 And I click continue
 And I should see the Optional Reports and Documents Available for Purchase Page
@@ -386,9 +439,17 @@ And I click continue
 And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 | Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 | Gloves                        | 120                      | 4                       | 10.0      | Black      | Odorless | No data available | 1                     |
-And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
+#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
+Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
 And I call Shared Step 73956 (Go to Summary and verify data) with product type: Fertilizer
-And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+#And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
 
@@ -538,10 +599,23 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | CASNumber  | ComponentName                                                               | Percent | PublicallyDisclosed | PublicName | TradeSecret |
 | 68410-97-9 | Distillates, petroleum, light distillate hydrotreating process, low-boiling | 70      |                     |            |             |
 | 64742-49-0 | Naphtha, petroleum, hydrotreated light                                      | 30      |                     |            |             |
-Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+Given I should see the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page I click Continue
+
+#Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+Given I should see the Transportation Details 1 Page
+	Then In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Yes
+	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: DOT
+	Then In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping with limited quantity
+	Then in the Transportation Details 1 page I click Continue
+
 Then I call Shared Step 126160 (U.S. Department of Transportation (DOT) Classification - Enter UN1057 - Lighter Fluid)
 Then in page U. S. Department of Transportation (DOT) Classification I should see no errors
 And I click the page heading: U. S. Department of Transportation (DOT) Classification
 And For the lighter, provide the DOT Approval Number (LAA) should be showing the value: 123
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase126286
+#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase126286
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase126286

@@ -27,6 +27,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
+using static NPOI.HSSF.Util.HSSFColor;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -139,7 +140,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenICallSharedStepSelectPrimaryPhysicalProperty_Liquid_WithIngredients()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
-
+			
 			MyStepsNewProduct.GivenIShouldSeeXPage("Physical and Chemical Properties");
 
 			MyStepsNewProduct.SetTheSectionOptionTo("Primary Physical State", "Liquid");
@@ -183,7 +184,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(1);
 			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "United States");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer", "No");
-			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product", "No");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
 		}
 
@@ -255,7 +256,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				MyStepsNewProduct.SetTheSectionOptionTo("Select the product's Country of Origin", "United Kingdom");
 			}
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is shipped directly by supplier to the consumer", "No");
-			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product", "No");
 			MyStepsNewProduct.SetTheSectionOptionTo("Product is sold to the Retailer solely for the Retailer's use",
 				"No");
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
@@ -2375,8 +2376,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				MyNewProduct.SetTheSectionOptionTo("Cleaning products must comply with California's Cleaning Product Right to Know Act.",
 					"Yes");
 			}
-			Report.StartSubStep("I set the Product is a Retailer's Private Label or Brand field to: No");
-			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			Report.StartSubStep("I set the Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product", "No");
 			Report.StartSubStep(
 				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(
@@ -2895,7 +2896,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I only the following sections");
 			Report.Info("Checking that the questions relating to: Private Label, GNR are now visble");
 			MyNewProductSteps.CheckDisplayedSections("see", tableSecond);
-			Report.StartSubStep("I set the Product is a Retailer's Private Label or Brand option to: No");
+			Report.StartSubStep("I set the Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product to: No");
 			MyNewProductSteps.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
 			Report.StartSubStep(
 				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No");
@@ -3193,7 +3194,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I should see the Product Information Page");
 			MyNewProductSteps.GivenIShouldSeeXPage("Product Information");
 			var tableFirst = new Table("Section");
-			tableFirst.AddRow("Select countries the product may be sold in");
+			tableFirst.AddRow("Retailers will be selling my product at their store locations in (select either or both)");
 			tableFirst.AddRow(
 				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)");
 			tableFirst.AddRow(
@@ -3204,11 +3205,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Checking that the only visible questions relate to: Child, OSHA, Direct Shipping");
 			MyNewProductSteps.CheckDisplayedSections("only see", tableFirst);
 			Report.StartSubStep(
-				"Select countries the product may be sold in should be showing the value: United States");
-			MyNewProductSteps.CheckingFieldInputIsCorrect("Select countries the product may be sold in",
+				"Retailers will be selling my product at their store locations in (select either or both) should be showing the value: United States");
+			MyNewProductSteps.CheckingFieldInputIsCorrect("Retailers will be selling my product at their store locations in (select either or both)",
 				"United States");
-			Report.StartSubStep("I set the Select countries the product may be sold in option to: Canada");
-			MyNewProductSteps.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
+			Report.StartSubStep("I set the Retailers will be selling my product at their store locations in (select either or both): Canada");
+			MyNewProductSteps.SetTheSectionOptionTo("Retailers will be selling my product at their store locations in (select either or both)", "Canada");
 			Report.StartSubStep(
 				"I set the Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under) option to: No");
 			MyNewProductSteps.SetTheSectionOptionTo(
@@ -3224,14 +3225,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
 				"No");
 			var tableSecond = new Table("Section");
-			tableSecond.AddRow("Product is a Retailer's Private Label or Brand");
+			tableSecond.AddRow("Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product");
 			tableSecond.AddRow(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)");
 			Report.StartSubStep("I only the following sections");
 			Report.Info("Checking that the questions relating to: Private Label, GNR are now visble");
 			MyNewProductSteps.CheckDisplayedSections("see", tableSecond);
-			Report.StartSubStep("I set the Product is a Retailer's Private Label or Brand option to: No");
-			MyNewProductSteps.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			Report.StartSubStep("I set the Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product option to: No");
+			MyNewProductSteps.SetTheSectionOptionTo("Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product", "No");
 
 
 			Report.StartSubStep(
@@ -3465,8 +3466,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.SetTheSectionOptionTo(
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
 				"No");
-			Report.StartSubStep("I set the Product is a Retailer's Private Label or Brand field to: No");
-			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			Report.StartSubStep("I set the Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product", "No");
 			//Report.StartStep(
 			//	"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
 			//MyNewProduct.SetTheSectionOptionTo(
@@ -4102,8 +4103,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.",
 				"No");
-			Report.StartSubStep("I set the Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product field to: No");
-			MyStepsNewProduct.SetTheSectionOptionTo("Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ", "No");
+			Report.StartSubStep("I set the Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product to: No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product", "No");
 			Report.StartSubStep(
 				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
 			MyStepsNewProduct.SetTheSectionOptionTo(
@@ -10635,13 +10636,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var MyNewProduct = new NewProduct();
 			var MyStepsNewProduct = new StepsNewProduct();
-			List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Select countries the product may be sold in");
+			List<string> countrySold = MyNewProduct.SelectedOptionsForSection("Retailers will be selling my product at their store locations in (select either or both)");
 			if (countrySold.Contains("United States"))
 			{
-				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
+				MyNewProduct.ClickCheckbox("Retailers will be selling my product at their store locations in (select either or both)", "United States");
 			}
 
-			MyStepsNewProduct.SetTheSectionOptionTo("Select countries the product may be sold in", "Canada");
+			MyStepsNewProduct.SetTheSectionOptionTo("Retailers will be selling my product at their store locations in (select either or both)", "Canada");
 
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)", "No");
@@ -10651,11 +10652,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns",
 				"No");
-			MyStepsNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			MyStepsNewProduct.SetTheSectionOptionTo("Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product", "No");
 			MyStepsNewProduct.SetTheSectionOptionTo(
 				"Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)",
 				"No");
-			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("New Product");
+			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
 		[StepDefinition(
@@ -11240,7 +11241,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsProductInformation.SetProductHasBeenClassifiedOSHATo("No");
 			Report.StartSubStep("I set 'Product is shipped directly' to No");
 			stepsProductInformation.SetProductIsShippedDirectlyTo("No");
-			Report.StartSubStep("I set 'Is Retailers Private Brand' to No'");
+			Report.StartSubStep("I set 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to No'");
 			stepsProductInformation.SetProductIsRetailersPrivateLabelOrBrandTo("No");
 			Report.StartSubStep("I set 'Solely for the retailers use' to No'");
 			stepsProductInformation.SetProductIsSolelyForTheRetailersUseTo("No");
@@ -15558,8 +15559,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				MyNewProduct.SetTheSectionOptionTo("Cleaning products must comply with California's Cleaning Product Right to Know Act.",
 					"Yes");
 			}
-			Report.StartSubStep("I set the Product is a Retailer's Private Label or Brand field to: No");
-			MyNewProduct.SetTheSectionOptionTo("Product is a Retailer's Private Label or Brand", "No");
+			Report.StartSubStep("I set the Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product to: No");
+			MyNewProduct.SetTheSectionOptionTo("Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product", "No");
 			Report.StartSubStep(
 				"I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) field to: No");
 			MyNewProduct.SetTheSectionOptionTo(

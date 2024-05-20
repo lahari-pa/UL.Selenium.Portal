@@ -1,10 +1,12 @@
-﻿using System;
+﻿using NPOI.SS.Formula.Functions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
@@ -41,5 +43,42 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		{
 			Report.IsTrue(new ProductIncludesBattery().SetBatteriesSearchSelectOption("Manufacturer", value), $"Failed to enter {value} in Manufacturer field", $"Succesfully entered {value} in Manufacturer field");
 		}
+
+		[StepDefinition(@"In the Product Includes Battery Section enter the values in the table:")]
+		public void GivenICallSharedProductIncludesBatteryAnyType(Table table)
+		{
+			try
+			{
+				foreach (TableRow thisRow in table.Rows)
+				{
+					if (table.ContainsColumn("Battery Type"))
+					{
+						this.EnterBatterySelectInformation($"{thisRow["Battery Type"]}", "Battery Type");
+					}
+					if(table.ContainsColumn("Grams Lithium"))
+					{
+						this.EnterBatterySelectInformation($"{thisRow["Grams Lithium"]}", "Grams Lithium");
+					}
+					if (table.ContainsColumn("Manufacturer"))
+					{
+						this.EnterBatteryManufacturer($"{thisRow["Manufacturer"]}");
+					}
+					if (table.ContainsColumn("Quantity of Batteries per Package"))
+					{
+						this.EnterBatteryInputInformation($"{thisRow["Quantity of Batteries per Package"]}", "Quantity of Batteries per Package");
+					}
+					if (table.ContainsColumn("Quantity of Batteries to Operate Product"))
+					{
+						this.EnterBatteryInputInformation($"{thisRow["Quantity of Batteries to Operate Product"]}", "Quantity of Batteries to Operate Product");
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				Report.Failure(ex.Message);
+				throw;
+			}
+		}
+
 	}
 }

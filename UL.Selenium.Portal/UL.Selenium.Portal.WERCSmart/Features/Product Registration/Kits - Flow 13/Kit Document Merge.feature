@@ -14,6 +14,9 @@
 @SummaryPage
 @ProductSetUp
 @run_KitsFlow13DocumentMerge
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
+
 Feature: Kit Document Merge
 
 
@@ -22,6 +25,8 @@ Background:
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
         | SHAQAAuto9  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
+#Removed from regression 2024/04
+@ignore
 @73949
 @TestCase:73949
 Scenario: [73949] Kit - Document merge - US only
@@ -43,8 +48,16 @@ Scenario: [73949] Kit - Document merge - US only
 	And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	And I should see the Additional Documents to Provide Page
 	And I click continue
-	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
-	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	And If purchase details are showing click confirm order
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase73949)
@@ -102,8 +115,16 @@ Scenario: [73950] Kit Document merge - Canada only
 	And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	And I should see the Additional Documents to Provide Page
 	And I click continue
-	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: yrdy
-	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: yrdy
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	And If purchase details are showing click confirm order
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto15 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase73950)

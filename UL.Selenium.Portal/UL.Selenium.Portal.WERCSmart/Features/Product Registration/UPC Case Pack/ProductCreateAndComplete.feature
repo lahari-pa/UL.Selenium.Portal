@@ -23,6 +23,17 @@
 @ForwardProductRegistration
 @ProductSetUp
 @run_ProductCreateAndComplete
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@PhysicalAndChemicalProp
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
+@Ingredients
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
+@ignore
+
 Feature: Product Create and Process to Completed
 
 
@@ -39,16 +50,36 @@ Scenario: [87913] Create Electronic (Answering machine, no battery included) - W
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Answering machine, No battery included
 	Then I save the product information as: TestCase87913
-	Then I call Shared Step 60935 Product Information - US - Direct Ship - Private Label Only
+	#Then I call Shared Step 60935 Product Information - US - Direct Ship - Private Label Only
+	Given I should see the Product Information Page
+	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
+	Given In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Given in the Product Information page I click Continue
+
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 	And I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+	Given I should see the Retailer Page
+	Then In the Retailer Section, click 'Add Retailers' button
+	Then In the Select Retailers window, select retailer: Amazon
+	Then In the Select Retailers window, click 'Done' button
+	Then in the Retailer page I click Continue
+
 	Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC87913, container type: Paper bag and size: 2 and Quantity: 4 and Transportation option: random
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	Given If purchase details are showing click confirm order
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto18 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87913)
@@ -82,17 +113,36 @@ Scenario: [87914] Create BCP (Camera with battery) -  with Case UPC - process to
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Camera w/Battery
 	Then I save the product information as: TestCase87914
 	Given I call Shared Step 70393 (Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
-	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page I click Continue
+
 	Given I call Shared Step 48367 (Product Includes Battery > any type)
 		| Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product |
 		| Alkaline     | <any>        | 6                               | 6                                  |
 	Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 	#Given I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
 	Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+	Given I should see the Retailer Page
+	Then In the Retailer Section, click 'Add Retailers' button
+	Then In the Select Retailers window, select retailer: Amazon
+	Then In the Select Retailers window, click 'Done' button
+	Then in the Retailer page I click Continue
+
 	Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC87914, container type: Paper bag and size: 2 and Quantity: 4 and Transportation option: random
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	Given If purchase details are showing click confirm order
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto18 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87914)
@@ -137,10 +187,24 @@ Scenario: [87915] Create kit (Hair Care Kit) - with Case UPC -  process to compl
 	#And I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 	#And I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
 	And I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+	Given I should see the Retailer Page
+	Then In the Retailer Section, click 'Add Retailers' button
+	Then In the Select Retailers window, select retailer: Amazon
+	Then In the Select Retailers window, click 'Done' button
+	Then in the Retailer page I click Continue
+
 	Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC87915, container type: Paper bag and size: 2 and Quantity: 4 and Transportation option: <First>
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	Given If purchase details are showing click confirm order
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto18 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87915)
@@ -179,19 +243,48 @@ Scenario: [87916] Create Gas (Compressed Gas) - With Case UPC - Process to Compl
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Cocoa butter  | 100     | false               | false       |            |
-	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page I click Continue
+
+	#Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+	Given I should see the Transportation Details 1 Page
+	Then In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Yes
+	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: DOT
+	Then In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping with limited quantity
+	Then in the Transportation Details 1 page I click Continue
+
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+	Given I should see the Retailer Page
+	Then In the Retailer Section, click 'Add Retailers' button
+	Then In the Select Retailers window, select retailer: Amazon
+	Then In the Select Retailers window, click 'Done' button
+	Then in the Retailer page I click Continue
+
 	Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC87916, container type: <first> and size: 2 and Quantity: 4 and Transportation option: <first>
-	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	Given If purchase details are showing click confirm order
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto18 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87916)
@@ -248,26 +341,55 @@ Scenario: [87917] Create Aerosol (Deodorant - Aerosol) - with Case UPC - process
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
 	Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
 	#Then I should not see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
-	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page I click Continue
+
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
-	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+	#Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+	Given I should see the Transportation Details 1 Page
+	Then In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Yes
+	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: DOT
+	Then In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping with limited quantity
+	Then in the Transportation Details 1 page I click Continue
+
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 	#Given I call Shared Step 49621 (Volatile Organic Compounds (VOC) for OTC and CARB - No)
 	Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
 	Given I call Shared Step 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Path)
 	Given I click continue
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+	Given I should see the Retailer Page
+	Then In the Retailer Section, click 'Add Retailers' button
+	Then In the Select Retailers window, select retailer: Amazon
+	Then In the Select Retailers window, click 'Done' button
+	Then in the Retailer page I click Continue
+
 	Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC87917, container type: Aerosol Can and size: 2 and Quantity: 4 and Transportation option: 4A: steel box
 	#Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87917, container type: Aerosol Can and size: 33
-	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 	Given I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
 	And in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
 		| Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 60619. !"�$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 60619. !"�$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Deodorant - Aerosol
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	Given If purchase details are showing click confirm order
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto18 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87917)
@@ -301,20 +423,53 @@ Scenario: [87922] Create Liquid (Bubble Solution) with Case UPC - Process to Com
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
 	Then I save the product information as: TestCase87922
-		Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
 	And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Chlorine       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
-    Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC87922, container type: Cardboard and size: 2 and Quantity: 4 and Transportation option: 4A: steel box
-	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+	Given I should see the Retailer Page
+	Then In the Retailer Section, click 'Add Retailers' button
+	Then In the Select Retailers window, select retailer: Amazon
+	Then In the Select Retailers window, click 'Done' button
+	Then in the Retailer page I click Continue
+
+	Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC87922, container type: Cardboard and size: 2 and Quantity: 4 and Transportation option: 4A: steel box
+	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	Given If purchase details are showing click confirm order
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto18 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87922)
@@ -348,21 +503,62 @@ Scenario: [87923] Create Solid (Chalk) - with Case UPC - Process to Completed
 	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase87923
-		Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
+	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
 	#And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Chlorine       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+	Given I should see the Retailer Page
+	Then In the Retailer Section, click 'Add Retailers' button
+	Then In the Select Retailers window, select retailer: Amazon
+	Then In the Select Retailers window, click 'Done' button
+	Then in the Retailer page I click Continue
+
 	Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC87923, container type: Paper bag and size: 2 and Quantity: 4 and Transportation option: 4A: steel box
-	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
 		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	Given If purchase details are showing click confirm order
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto18 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87923)
@@ -419,8 +615,16 @@ Scenario: [118139] CA Cleaning - Process Product to Completed
 	Given I click the browse button for label: Product Label and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Given in the Additional Documents to Provide page I click Continue
 	Given I click continue
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	Given I call Shared Step 54796 (Purchase Summary)
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto18 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase118139)

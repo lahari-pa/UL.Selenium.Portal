@@ -14,7 +14,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	{
 
 		[StepDefinition(@"I go to the WERCSmart Log in")]
-		[StepDefinition(@"I go to the WERCSmart Log in")]
 		[StepDefinition(@"I click the login button")]
 		[StepDefinition(@"\[WERCSmart] I go to the WERCSmart Log in")]
 		public void ClickTheLoginButton()

@@ -10,15 +10,19 @@
 @wercsmart
 @RetailPartners
 @run_LithiumBatteryTransportInformation
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ToxicityCharacteristicLeachingProcedureTCLP
+@StepsPrototype
 Feature: Lithium Battery Transport Information
 
 
 
-Background:
-	Given I verify the following users exist and if not I create them using SHAUser
-		| username    | FirstName | LastName   | Role         | EmailAddress                |
-		| SHAQAAuto16 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+#Background:
+#	Given I verify the following users exist and if not I create them using SHAUser
+#		| username    | FirstName | LastName   | Role         | EmailAddress                |
+#		| SHAQAAuto16 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
+#Removed from regression 2024/03
+@ignore
 @TestCase:65512
 Scenario: [65512] BCP - Contains Lithium Ion installed in product - Lithium Battery Transportation step - question wording and validation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -37,7 +41,20 @@ Scenario: [65512] BCP - Contains Lithium Ion installed in product - Lithium Batt
 		| Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product | Saved As            |
 		| Lithium Ion  | <any>        | 10                                | 10                                       | lithiumbattery65512 |
 	Given I continue to the next screen in the product registration
-	Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
+	#Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
+	Given I should see the Toxicity Characteristic Leaching Procedure (TCLP) Page
+	And In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the option in section: 'Product has had TCLP testing; Report is available' to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Lead': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Mercury': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Silver': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Cadmium': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Chromium': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Barium': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Arsenic': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Selenium': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Copper': to: No
+	Given in the Toxicity Characteristic Leaching Procedure (TCLP) page, I click Continue
+
 	Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 	Then I should see the Lithium Battery Transportation Page
 	And I see the following sections
@@ -86,72 +103,6 @@ Scenario: [65512] BCP - Contains Lithium Ion installed in product - Lithium Batt
 	Then The home screen should load
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65512
 
-#Remove from regression: 2023/05
-@ignore
-@TestCase:65516
-Scenario: [65516] BCP - Contains Lithium Ion packaged with product - Lithium Battery Transportation step - question wording and validation
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Then The home screen should load
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Camera w/Battery
-	Then I save the product information as: TestCase65516	
-	Given I call Shared Step 159304 (Product Information - US, No(Child), No (DSV), No (PLP))
-	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	Then I should see the Product Includes Battery Page
-	Given I set the Indicate how battery is packaged option to: The battery is shipped with but not included in my product
-	Given I add the following batteries:
-		| Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product | Saved As            |
-		| Lithium Ion  | <any>        | 10                                | 10                                       | lithiumbattery65516 |
-	Given I continue to the next screen in the product registration
-	Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
-	Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
-	Then I should see the Lithium Battery Transportation Page
-	And I see the following sections
-		| Section                                                                            |
-		| For U.S. Department of Transportation (DOT), indicate the transport classification |
-	And I should see a total of 3 radio buttons for the section: For U.S. Department of Transportation (DOT), indicate the transport classification
-	And The following radio buttons should be displayed for section: For U.S. Department of Transportation (DOT), indicate the transport classification
-		| Button                                                                                                                |
-		| Meets the requirements of 49CFR173.185(c)(iv) to be transported as non-dangerous goods for road and rail              |
-		| Meets the requirements of 49CFR173.185(c)(i) to be transported as non-dangerous goods for road, rail, air, and vessel |
-		| Fully-regulated dangerous goods: UN3481, Lithium ion batteries packed with equipment, 9                               |
-	And The alert message is displayed with text: Need help? Regulatory services are included in Premium Subscription. Upgrade now!
-	And I see the following sections
-		| Section                                                  |
-		| For Marine transport (IMDG), indicate the classification |
-	And I should see a total of 3 radio buttons for the section: For Marine transport (IMDG), indicate the classification
-	And The following radio buttons should be displayed for section: For Marine transport (IMDG), indicate the classification
-		| Button                                                                                    |
-		| Meets requirements of IMDG Special Provision 188 to be transported as non-dangerous goods |
-		| Fully-regulated dangerous goods: UN3481, Lithium ion batteries packed with equipment, 9   |
-		| None of the above/Not intended for shipment under IMDG                                    |
-	And I see the following sections
-		| Section                                               |
-		| For Air transport (IATA), indicate the classification |
-	And I should see a total of 3 radio buttons for the section: For Air transport (IATA), indicate the classification
-	And The following radio buttons should be displayed for section: For Air transport (IATA), indicate the classification
-		| Button                                                 |
-		| Section I                                              |
-		| Section II                                             |
-		| None of the above/Not intended for shipment under IATA |
-	And I see the following sections
-		| Section                                                                           |
-		| For Canada's Transportation of Dangerous Goods (TDG), indicate the classification |
-	And I should see a total of 3 radio buttons for the section: For Canada's Transportation of Dangerous Goods (TDG), indicate the classification
-	And The following radio buttons should be displayed for section: For Canada's Transportation of Dangerous Goods (TDG), indicate the classification
-		| Button                                                                                       |
-		| Meets the requirements of TDG special provision 34 to be transported as non-dangerous goods. |
-		| Fully-regulated dangerous goods: UN3481, Lithium ion batteries packed with equipment, 9      |
-		| None of the above/Not intended for shipment in Canada                                        |
-	Given I click continue
-	Then For U.S. Department of Transportation (DOT), indicate the transport classification should be showing the error messages: This is a required field.
-	Then For Marine transport (IMDG), indicate the classification should be showing the error messages: This is a required field.
-	Then For Air transport (IATA), indicate the classification should be showing the error messages: This is a required field.
-	Then For Canada's Transportation of Dangerous Goods (TDG), indicate the classification should be showing the error messages: This is a required field.
-	Given I navigate to the home page
-	Then The home screen should load
-	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65516
-
 #removed from regression: 2023/06
 @ignore
 @TestCase:65520
@@ -169,7 +120,20 @@ Scenario: [65520] BCP - Contains Lithium Primary installed in product - Lithium 
 		| Battery Type    | Manufacturer                                                 | Quantity of Batteries per Package | Quantity of Batteries to Operate Product | Saved As            |
 		| Lithium Primary |Pau Lithium Primary Battery by The WERCS LTD (WPS ID 1549664) | 10                                | 10                                       | lithiumbattery65520 |
 	Given I continue to the next screen in the product registration
-	Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
+	#Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
+	Given I should see the Toxicity Characteristic Leaching Procedure (TCLP) Page
+	And In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the option in section: 'Product has had TCLP testing; Report is available' to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Lead': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Mercury': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Silver': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Cadmium': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Chromium': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Barium': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Arsenic': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Selenium': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Copper': to: No
+	Given in the Toxicity Characteristic Leaching Procedure (TCLP) page, I click Continue
+
 	Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 	Then I should see the Lithium Battery Transportation Page
 	And I see the following sections
@@ -233,7 +197,20 @@ Scenario: [65523] BCP - Contains Lithium Primary packaged with the product - Lit
 		| Battery Type    | Manufacturer                                                 | Quantity of Batteries per Package | Quantity of Batteries to Operate Product | Saved As |
 		| Lithium Primary |Pau Lithium Primary Battery by The WERCS LTD (WPS ID 1549664) | 10                                | 10                                       | lithiumbattery65520 |
 	Given I continue to the next screen in the product registration
-	Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
+	#Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
+	Given I should see the Toxicity Characteristic Leaching Procedure (TCLP) Page
+	And In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the option in section: 'Product has had TCLP testing; Report is available' to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Lead': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Mercury': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Silver': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Cadmium': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Chromium': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Barium': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Arsenic': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Selenium': to: No
+	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Copper': to: No
+	Given in the Toxicity Characteristic Leaching Procedure (TCLP) page, I click Continue
+
 	Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 	Then I should see the Lithium Battery Transportation Page
 	And I see the following sections

@@ -26,15 +26,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 				"Successfully set Product is solely for the Retailer's use: " + noOrYes);
 		}
 
-		[StepDefinition(@"I set 'Product is a Retailers Private Label or Brand' to: (No|Yes)")]
+		[StepDefinition(@"I set 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand)' to: (No|Yes)")]
 		public void SetProductIsRetailersPrivateLabelOrBrandTo(string noOrYes)
 		{
 			Report.IsTrue(this.AdditionalProductInformation.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded", "Product type tab is loaded.");
 			bool expected = (noOrYes == "Yes");
 			this.AdditionalProductInformation.RetailersPrivateLabelOrBrand = expected;
 			Report.IsTrue(this.AdditionalProductInformation.RetailersPrivateLabelOrBrand == expected,
-				"Failed to set Product is retailers private label or brand: " + noOrYes,
-				"Successfully set Product is retailers private label or brand: " + noOrYes);
+				$"Failed to set Product is sold as a Retailer's Own Brand (Private Label, Store Brand) : { noOrYes }",
+				$"Successfully set Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product: { noOrYes }");
 		}
 
 		[StepDefinition(@"I set 'Product is shipped directly' to: (No|Yes)")]

@@ -19,6 +19,15 @@
 @Studio_Header
 @Studio
 @DeleteActiveProducts
+@StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@PhysicalAndChemicalProp
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
+@Ingredients
+
 Feature: Ingredients
 (Suite ID: 64740)
 
@@ -30,7 +39,16 @@ Scenario: [71985] Sorting Cas Number/ Chemical Name Ingredient page
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mulch with Pesticide
 	Then I save the product information as: TestCase71985
-	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
 	And I set the Secondary Physical State option to: Solid
 	And I set the When mixed with an equal amount of water field to: No
 	Then in the Physical and Chemical Properties page I click Continue
@@ -64,15 +82,25 @@ Scenario: [71985] Sorting Cas Number/ Chemical Name Ingredient page
 		| Wood chips   |
 		| Clothianidin |
 		| RED 4        |
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71985
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71985
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase71985
 @TestCase:71987
 Scenario: [71987] Sorting Percent on Ingredient page
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mulch with Pesticide
 	Then I save the product information as: TestCase71987
-	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
 	And I set the Secondary Physical State option to: Solid
 	And I set the When mixed with an equal amount of water field to: No
 	Then in the Physical and Chemical Properties page I click Continue
@@ -93,8 +121,9 @@ Scenario: [71987] Sorting Percent on Ingredient page
 		| Wood chips   |
 		| Clothianidin |
 		| RED 4        |
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71987
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71987
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase71987
 @TestCase:65469
 Scenario: [65469] Ingredients - Select Publicly Disclosed check box - un-check Publicly Disclosed check box- Trade secret is active
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -111,7 +140,9 @@ Scenario: [65469] Ingredients - Select Publicly Disclosed check box - un-check P
 	Then for ingredient: Water the Trade Secret field is enabled
 	Then in the Ingredients page I click Continue
 	And I should see the Inventory Status, Prop 65 (US) Page
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65469
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65469
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase65469
 
 @TestCase:65470
 Scenario: [65470] Ingredients - Select Trade Secret check box - Un-check Trade Secret check box - Publicly Disclosed & Public Name are active
@@ -132,7 +163,10 @@ Scenario: [65470] Ingredients - Select Trade Secret check box - Un-check Trade S
 	Then for ingredient: Water I confirm the Public Name selectbox contains names for selection
 	Then in the Ingredients page I click Continue
 	And I should see the Inventory Status, Prop 65 (US) Page
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65470
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65470
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase65470
+
 
 #CLF - this is basically the same as 65470
 @TestCase:65459
@@ -151,8 +185,9 @@ Scenario: [65459] Ingredients - Select Trade Secret check box - Publicly Disclos
 	Then for ingredient: Water the Public Name field is disabled
 	Then in the Ingredients page I click Continue
 	And I should see the Inventory Status, Prop 65 (US) Page
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65459
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65459
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase65459
 @TestCase:65451
 Scenario: [65451] Ingredients - Select Publicly Disclosed check box - Public Name is required, trade secret is not required
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -172,15 +207,25 @@ Scenario: [65451] Ingredients - Select Publicly Disclosed check box - Public Nam
 	Then for ingredient: Water I select Public Name: Water
 	Then in the Ingredients page I click Continue
 	And I should see the Inventory Status, Prop 65 (US) Page
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65451
-	
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65451
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase65451
 @TestCase:65448
 Scenario: [65448] Ingredients - Publicly Disclosed, Trade secret and Public Name are not required fields
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
 	Then I save the product information as: TestCase65448
-	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
 	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -193,8 +238,9 @@ Scenario: [65448] Ingredients - Publicly Disclosed, Trade secret and Public Name
 		| Public Name         | select   |
 	Then in the Ingredients page I click Continue
 	And I should see the Inventory Status, Prop 65 (US) Page
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65448
-
+#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65448
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase65448
 @TestCase:63321
 Scenario: [63321] Product Ingredients contains a third party component that requires updating for public disclosure
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -212,8 +258,9 @@ Scenario: [63321] Product Ingredients contains a third party component that requ
 	Then in the Ingredients page I click Continue
 	Then a Warning popup dialog should appear with the message: Your product contains a 3rd-Party Formula that may need Data Tier Consent, or if Consent has been accepted by the Formulator, has no ingredients that are indicated to be Public. A notification has been provided to the Formulator to revisit their registration and resubmit if necessary. You may continue with your registration. Should the 3rd-Party Formula be revised, your registration will be updated accordingly and revised scoring will occur. No action is required from you.
 	And I should see the Inventory Status, Prop 65 (US) Page
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63321
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63321
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase63321
 
 @TestCase:71291
 Scenario: [71291] Product Ingredients contains a third party component that requires updating for public disclosure
@@ -222,7 +269,16 @@ Scenario: [71291] Product Ingredients contains a third party component that requ
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mulch with Pesticide
 	Then I save the product information as: TestCase71291
-	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
 	And I set the Secondary Physical State option to: Solid
 	And I set the When mixed with an equal amount of water field to: No
 	Then in the Physical and Chemical Properties page I click Continue
@@ -237,8 +293,9 @@ Scenario: [71291] Product Ingredients contains a third party component that requ
 	Then on the Neonicotinoid Warning Page I should see a link with text: EPA website which links to page: https://www.epa.gov/pollinator-protection/epa-actions-protect-pollinators
 	Then in the Neonicotinoid Warning page I click Continue
 	And I should see the Inventory Status, Prop 65 (US) Page
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71291
-
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71291
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase71291
 @TestCase:74142
 Scenario: [74142] Pop up that Informs the regulations the components are associated
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -256,7 +313,9 @@ Scenario: [74142] Pop up that Informs the regulations the components are associa
 	Given I confirm that a list of regulations associated with the component is displayed
 	Given I close the Regulatory List window
 	Given I navigate to the home page
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74142
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74142
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase74142
 
 @TestCase:69796
 Scenario: [69796] Aerosol Warning Message on Ingredient page
@@ -287,7 +346,9 @@ Scenario: [69796] Aerosol Warning Message on Ingredient page
 	Given In the New Product page I click tab: Product Characteristics
 	And I click the page heading: Ingredients
 	Then I should not see an error message: Formulation must total or exceed 100%.
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase69796
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase69796
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase69796
 
 @TestCase:80728
 Scenario: [80728] Ingredients - Transparency Ratio - FRAGRANCE component - included in Denominator, not included in Numerator
@@ -296,8 +357,25 @@ Scenario: [80728] Ingredients - Transparency Ratio - FRAGRANCE component - inclu
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase80728
-	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
+	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
 	Then I should see the Ingredients Page
 	And I verify the Transparency Score displays 0%
 	And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger
@@ -309,18 +387,40 @@ Scenario: [80728] Ingredients - Transparency Ratio - FRAGRANCE component - inclu
 	Then I click the Publicly Disclosed checkbox for ingredient saved as: shared79436
 	And I verify the Transparency Score displays 0%
 	Given I navigate to the home page
-	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase80728
-
+	#And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase80728
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase80728
 @TestCase:80720
 Scenario: [80720] Ingredients - Transparency Ratio - FLAVOR component - included in Denominator, not included in Numerator
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase80720
-	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
 	Then I should see the Physical and Chemical Properties Page
-	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
 	Then I should see the Ingredients Page
 	And I verify the Transparency Score displays 0%
 	And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger
@@ -332,7 +432,10 @@ Scenario: [80720] Ingredients - Transparency Ratio - FLAVOR component - included
 	Given I click the Publicly Disclosed checkbox for ingredient saved as: shared79431
 	And I verify the Transparency Score displays 0%
 	Given I navigate to the home page
-	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase80720
+	#And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase80720
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase80720
+
 
 # Assigned to Paulina Mata
 # Created by Paulina Mata
@@ -343,8 +446,25 @@ Scenario: [87301] Ingredients - Selecting a Public Label Name Automatically Init
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
-	And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	#And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
+	#And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName    | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Sodium hydroxide | 33      | false               | false       |            |
@@ -379,7 +499,16 @@ Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulat
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Soap (Bar, Liquid) for Body
 	Then I save the product information as: TestCase84528
-	And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	#And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
 	And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 	#And I Start typing in the component box
 	#And I Add as many random ingredients as possible
@@ -424,42 +553,6 @@ Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulat
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase84528
 
-# Assigned to Paulina Mata
-# Created by Paulina Mata
-# Test case can be found at the following paths:
-# NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Ingredients
-#Remove from regression: 2023/05
-@ignore
-@TestCase:81711
-Scenario: [81711] Ingredients - Informational Message for Fragrance and Flavor Ingredients
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	# Temporarily using this product type instead of 'Soap (Bar, Liquid)' because of bug #88838
-	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Medicated Lotion or Soap
-	And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-	And I enter text: FRAGRANCE in the component search box
-	And I select the component search result with CAS matching text: FRAGRANCE and save ingredient as: FragranceIngredient81711
-	And I confirm that a 'Screenability Alert' button is displayed under ingredient saved as: FragranceIngredient81711 with hover over text: You have included a generic ingredient in your product (CAS beginning with RR). Be aware that this may impact regulatory, chemical policy or product qualification assessments conducted on this product. Some of these assessments require that every ingredient in a formulation be screened against a list of chemicals (e.g., California Right-to-Know Regulations), and generic ingredient names provide no information about their specific chemical constituents. To prevent issues with assessment results provided to Retailers, the best practice is to avoid the use of generic ingredients and either (i) add the specific ingredients of the generic directly into your primary formula or (ii) request that the 3rd Party Supplier providing your generic ingredient register the ingredient in WERCSmart as a 3rd-Party Formula Registration. You can then add the 3rd-Party Ingredient to your product ingredients. Using the 3rd-Party Formula registration process allows your product’s full formulation to be screened while retaining protections for a 3rd-Party Supplier’s Confidential Business Information (CBI). The identity of a specific ingredient is only disclosed if required by regulation, or if the 3rd-Party has indicated an ingredient in their formula is publicly disclosed.
-	And I enter text: FRAGRANCE in the component search box
-	And I select the component search result with CAS matching text: RR and save ingredient as: FragranceRRIngredient81711
-	And I confirm that a 'Screenability Alert' button is displayed under ingredient saved as: FragranceRRIngredient81711 with hover over text: You have included a generic ingredient in your product (CAS beginning with RR). Be aware that this may impact regulatory, chemical policy or product qualification assessments conducted on this product. Some of these assessments require that every ingredient in a formulation be screened against a list of chemicals (e.g., California Right-to-Know Regulations), and generic ingredient names provide no information about their specific chemical constituents. To prevent issues with assessment results provided to Retailers, the best practice is to avoid the use of generic ingredients and either (i) add the specific ingredients of the generic directly into your primary formula or (ii) request that the 3rd Party Supplier providing your generic ingredient register the ingredient in WERCSmart as a 3rd-Party Formula Registration. You can then add the 3rd-Party Ingredient to your product ingredients. Using the 3rd-Party Formula registration process allows your product’s full formulation to be screened while retaining protections for a 3rd-Party Supplier’s Confidential Business Information (CBI). The identity of a specific ingredient is only disclosed if required by regulation, or if the 3rd-Party has indicated an ingredient in their formula is publicly disclosed.
-	And I enter text: Flavor in the component search box
-	And I select the component search result with CAS matching text: FLAVOR and save ingredient as: FlavorIngredient81711
-	And I confirm that a 'Screenability Alert' button is displayed under ingredient saved as: FlavorIngredient81711 with hover over text: You have included a generic ingredient in your product (CAS beginning with RR). Be aware that this may impact regulatory, chemical policy or product qualification assessments conducted on this product. Some of these assessments require that every ingredient in a formulation be screened against a list of chemicals (e.g., California Right-to-Know Regulations), and generic ingredient names provide no information about their specific chemical constituents. To prevent issues with assessment results provided to Retailers, the best practice is to avoid the use of generic ingredients and either (i) add the specific ingredients of the generic directly into your primary formula or (ii) request that the 3rd Party Supplier providing your generic ingredient register the ingredient in WERCSmart as a 3rd-Party Formula Registration. You can then add the 3rd-Party Ingredient to your product ingredients. Using the 3rd-Party Formula registration process allows your product’s full formulation to be screened while retaining protections for a 3rd-Party Supplier’s Confidential Business Information (CBI). The identity of a specific ingredient is only disclosed if required by regulation, or if the 3rd-Party has indicated an ingredient in their formula is publicly disclosed.
-	And I enter text: Flavor in the component search box
-	And I select the component search result with CAS matching text: RR and save ingredient as: FlavorRRIngredient81711
-	And I confirm that a 'Screenability Alert' button is displayed under ingredient saved as: FlavorRRIngredient81711 with hover over text: You have included a generic ingredient in your product (CAS beginning with RR). Be aware that this may impact regulatory, chemical policy or product qualification assessments conducted on this product. Some of these assessments require that every ingredient in a formulation be screened against a list of chemicals (e.g., California Right-to-Know Regulations), and generic ingredient names provide no information about their specific chemical constituents. To prevent issues with assessment results provided to Retailers, the best practice is to avoid the use of generic ingredients and either (i) add the specific ingredients of the generic directly into your primary formula or (ii) request that the 3rd Party Supplier providing your generic ingredient register the ingredient in WERCSmart as a 3rd-Party Formula Registration. You can then add the 3rd-Party Ingredient to your product ingredients. Using the 3rd-Party Formula registration process allows your product’s full formulation to be screened while retaining protections for a 3rd-Party Supplier’s Confidential Business Information (CBI). The identity of a specific ingredient is only disclosed if required by regulation, or if the 3rd-Party has indicated an ingredient in their formula is publicly disclosed.
-	And I enter text: N/A in the component search box
-	And I select the component search result with CAS matching text: N/A and save ingredient as: NAIngredient81711
-	And I confirm that the 'Screenability Alert' button is not displayed under ingredient saved as: NAIngredient81711
-	And I click on the Screenability Alert button under ingredient saved as: FragranceIngredient81711
-	And I confirm a 'Screenability Alert' popover element is open under ingredient saved as: FragranceIngredient81711
-	And I move the mouse pointer by an offset of 50 in x and 50 in y
-	And I confirm a 'Screenability Alert' popover element is open under ingredient saved as: FragranceIngredient81711
-	And I navigate to the home page
-	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase81711
-
 @TestCase:80800
 Scenario: [80800] Ingredients - Transparency Ratio - Regular component
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -467,7 +560,15 @@ Scenario: [80800] Ingredients - Transparency Ratio - Regular component
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase80800
 	And I call Shared Step 85284 - Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue
-	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	#And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
 	And I verify the Transparency Score displays 0%
 	And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger
 	And call Shared Step 80090 - Ingredients - Add non-generic chemical, set to publicly Disclosed, select public name and save ingredient as: TestCase80800Component
@@ -488,8 +589,25 @@ Scenario: [109230] Ingredients - Proper ingredients and percentages are showing 
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase109230
-	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
+	#And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName        |
 		| Water         | 100     | true                | false       | Aqua (Water, Eau) |
@@ -514,7 +632,11 @@ Scenario: [109230] Ingredients - Proper ingredients and percentages are showing 
 	And I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	And in the Additional Documents to Provide page I click Continue
 	And in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
 	Given I click the Summary button in the Data Acceptance window
 	Then I switch to the Data Summary page
 	And In the Data Summary page, I confirm that the Ingredients table matches the following:
@@ -576,8 +698,25 @@ Scenario: [110368] Ingredients- Filtered Ingredient Appears on Top of Filter Opt
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase110368
-	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
+	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
 	Then I enter: Formaldehyde as my ingredient in the Ingredients page, and check that the top option on the filter matches my ingredient		
 	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase110368
 
@@ -585,10 +724,23 @@ Scenario: [110368] Ingredients- Filtered Ingredient Appears on Top of Filter Opt
 @TestCase:95487
 Scenario: [95487] Formulation Screen - Ingredients Staying
 	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase95487
-	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
 	Given I call Shared Step 37857 (Enter Physical Property - Solid) with the following inputs:
 		| Secondary Physical State | Water Solubility |
 		| Flaked                   | Soluble in water |
@@ -644,7 +796,9 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 		| Name   |
 		| Water  |
 		| Butane |
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase95487
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase95487
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase95487
 
 
 
@@ -705,106 +859,49 @@ Scenario: [133335] Formulation Screen FIFRA and LOLI Validation Message
 	Then I confirm there is a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
 	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
 	Given I click the Home navigation icon
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase133335
-
-
-#Remove from regression: 2023/05
-@ignore
-@TestCase:133610
-Scenario: [133610] Formulation Screen:  Attestation Reset on Data Change
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57561a (The Product - Enter Product Name: TRAP AND/OR BAIT STATION TEST PRODUCT and select Type of Product): Trap and/or Bait Station
-	And I see the following sections
-		| Section                                                              |
-		| Which best describes your product, including when FIFRA 25(b) Exempt |
-	Given I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
-	Then I set the value 'FIFRAPopupExpected' to be: true
-	Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
-	Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
-	Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No
-	Given I set the Product is a Retailer's Private Label or Brand option to: No
-	Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
-	Then I click continue
-
-	Given I set the Primary Physical State option to: Solid
-	Given I set the Secondary Physical State option to: Solid
-	Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-	Then I click continue
-	Then I add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Glutens, corn | 100     | false               | false       |            |
-	Then I click continue
-	Then I confirm there is a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
-	Then I confirm the table in the popup view has following column data
-		| CAS Number | Name          | Active or Inert |
-		| 66071-96-3 | Glutens, corn | Active          |
-	Given I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
-	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
-	And I should see the Waste Classification Data Page
-	When In the New Product page I click tab: Product Type
-	And I click the page heading: The Product
-	And I should see the The Product Page
-	And I set 'Product Name' to: RESET PRODUCT
-	And I set 'Type of Product' to: Charcoal
-	Then I save the product information as: TestCase133610
-	Then I click continue
-	And I should see the Product Information Page
-	And I do not see the following sections
-		| Section                                                              |
-		| Which best describes your product, including when FIFRA 25(b) Exempt |
-	And I see the following sections
-		| Section                                     |
-		| Select countries the product may be sold in |
-	Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
-	Given I set the Product is a Retailer's Private Label or Brand option to: No
-	Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
-	Then I click continue
-	Given I set the Primary Physical State option to: Solid
-	Given I set the Secondary Physical State option to: Solid
-	Given I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-	Given I set the Select the best Water Solubility description option to: Soluble in water
-	Then I click continue
-	And I should see the Ingredients Page
-	Then I click the 'x' button for component number 1
-	Given I click: YES in the 'Remove Component from My Ingredients' pop up
-	Then I add the following ingredients:
-		| ComponentName      | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| MICONAZOLE NITRATE | 100     | false               | false       |            |
-	Then I click continue
-	Then I confirm there is not a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
-	And I should see the Waste Classification Data Page
-	And I click the page heading: Ingredients
-	And I should see the Ingredients Page
-	Then I click the 'x' button for component number 1
-	Given I click: YES in the 'Remove Component from My Ingredients' pop up
-	Then I add the following ingredients:
-		| ComponentName    | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Glutens, corn    | 50      | false               | false       |            |
-		| Oils, peppermint | 50      | false               | false       |            |
-	Then I click continue
-	Then I confirm there is a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
-	Then I confirm the table in the popup view has following column data
-		| CAS Number | Name             | Active or Inert |
-		| 66071-96-3 | Glutens, corn    | Active          |
-		| 8006-90-4  | Oils, peppermint | Active          |
-	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Go back button
-	Then I save the product information as: TestCase133610
-	Then I click the Home navigation icon
-	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase133610
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase133335
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase133335
 
 # Created by Saikiran Chittampally
 @TestCase:158853
 Scenario: [158853] Ingredient Identifier
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then the WERCSmart homepage should load
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase158853
-	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
+	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
 	Given In the Ingredients screen, I ensure that there is a field called: Ingredient Reference Number (Optional)
-	Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	#Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	And I should see the Inventory Status, Prop 65 (US) Page
 	And I click the page heading: Ingredients
 	And I should see the Ingredients Page
@@ -820,7 +917,11 @@ Scenario: [158853] Ingredient Identifier
 	And I should see the Inventory Status, Prop 65 (US) Page
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 150905 (Retailer - NR selected by default)
-	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
@@ -831,7 +932,11 @@ Scenario: [158853] Ingredient Identifier
 	Then I switch to the Data Summary page
 	Given In the Data Summary page, I ensure that the value test 123 @# shown under the field Ingredient Reference Number (Optional) displays as it was keyed on the Ingredients page
 	Given I close the browser tab with the Summary page
-	Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	Then In the Purchase Summary screen I click Confirm Order
 	Then In the Thank You screen I click Home
 	Then the WERCSmart homepage should load
@@ -849,7 +954,15 @@ Scenario: [209549] Ingredient Table - Sum of Ingredients: Decimal Place Maximum 
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase209549
 	Given I call Shared Step 59680a (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
 	And I should see the Ingredients Page
 	Then I add the following ingredients:
 		| ComponentName | Percent  | PublicallyDisclosed | TradeSecret | PublicName |
@@ -867,14 +980,22 @@ Scenario: [209549] Ingredient Table - Sum of Ingredients: Decimal Place Maximum 
 		| Retailer  |
 		| Walgreens |
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC209549, container type: Metal Container and size: 1
-	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
 	Given in the Optional Comments page I click Continue
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 	And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
 	And I navigate to the home page
@@ -896,7 +1017,11 @@ Scenario: [209549] Ingredient Table - Sum of Ingredients: Decimal Place Maximum 
 @TestCase:207581
 Scenario: [207581] Oven Cleaner - Pump Spray - (RU000798) - New Flow Testing
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Oven Cleaner - Pump Sprays
 	Then I save the product information as: TestCase207581
 	Given I call Shared Step 118138a Product Information - US, Pesticide No, No OSHA, No DSV, No CA Cleaning ,No PL, No GNFR Without Child question
@@ -984,7 +1109,11 @@ Scenario: [207581] Oven Cleaner - Pump Spray - (RU000798) - New Flow Testing
 	And I click continue
 	And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
 	Given I call Shared Step 150905 (Retailer - NR selected by default)
-	Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
 	Then I should see the Additional Documents to Provide Page
 	Then I click continue
 	Then Volatile Organic Compounds should be showing the error messages: Document is required: VOC Exemption Letter

@@ -1,20 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32126.315
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34601.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UL.Selenium.Portal.ShaManager", "UL.Selenium.Portal.ShaManager\UL.Selenium.Portal.ShaManager.csproj", "{5430DB30-4599-46DB-B1DA-7EDE579C0D81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UL.Selenium.Portal.ShaManager", "UL.Selenium.Portal.ShaManager\UL.Selenium.Portal.ShaManager.csproj", "{5430DB30-4599-46DB-B1DA-7EDE579C0D81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UL.Selenium.Portal.ULSC", "UL.Selenium.Portal.ULSC\UL.Selenium.Portal.ULSC.csproj", "{67F4348A-046A-4C0E-A229-ABBC9045E5E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UL.Selenium.Portal.ULSC", "UL.Selenium.Portal.ULSC\UL.Selenium.Portal.ULSC.csproj", "{67F4348A-046A-4C0E-A229-ABBC9045E5E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UL.Selenium.Portal.WERCSmart", "UL.Selenium.Portal.WERCSmart\UL.Selenium.Portal.WERCSmart.csproj", "{0244AA85-2C15-420D-A151-2E72ED04A5DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UL.Selenium.Portal.WERCSmart", "UL.Selenium.Portal.WERCSmart\UL.Selenium.Portal.WERCSmart.csproj", "{0244AA85-2C15-420D-A151-2E72ED04A5DC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{491387EC-405B-4158-9575-1FA54477E179}"
 	ProjectSection(SolutionItems) = preProject
 		NuGet.Config = NuGet.Config
+		..\.azuredevops\pull_request_template\branches\QA.md = ..\.azuredevops\pull_request_template\branches\QA.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UL.Selenium.Portal.RPS", "UL.Selenium.Portal.RPS\UL.Selenium.Portal.RPS.csproj", "{D5E1C2C3-F49C-447F-A90F-B8C3ED729051}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UL.Selenium.Portal.RPS", "UL.Selenium.Portal.RPS\UL.Selenium.Portal.RPS.csproj", "{D5E1C2C3-F49C-447F-A90F-B8C3ED729051}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

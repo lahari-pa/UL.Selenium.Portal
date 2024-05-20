@@ -28,7 +28,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string section = "For Air transport (IATA), indicate the classification";
 			new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
 		}
-		[StepDefinition(@"In the Lithium Battery Transportation Section, set the radio option in section: 'For Canada's Transportation of Dangerous Goods \(TDG\), indicate the classification': to: (Fully-regulated dangerous goods: UN3091, Lithium metal batteries contained in equipment, 9|Fully-regulated dangerous goods: UN3481, Lithium ion batteries packed with equipment, 9|Fully-regulated dangerous goods: UN3480, Lithium ion batteries, 9	|Fully-regulated dangerous goods: UN3481, Lithium ion batteries contained in equipment, 9|Meets the requirements of TDG special provision 34 to be transported as non-dangerous goods.|None of the above\/Not intended for shipment in Canada)")]
+		[StepDefinition(@"In the Lithium Battery Transportation Section, set the radio option in section: 'For Canada's Transportation of Dangerous Goods \(TDG\), indicate the classification': to: (Fully-regulated dangerous goods: UN3091, Lithium metal batteries contained in equipment, 9|Fully-regulated dangerous goods: UN3091, Lithium metal batteries packed with equipment, 9|Fully-regulated dangerous goods: UN3480, Lithium ion batteries, 9	|Fully-regulated dangerous goods: UN3481, Lithium ion batteries contained in equipment, 9|Meets the requirements of TDG special provision 34 to be transported as non-dangerous goods.|None of the above\/Not intended for shipment in Canada)")]
 		public void SelectTDG(string option)
 		{
 			string section = "For Canada's Transportation of Dangerous Goods (TDG), indicate the classification";

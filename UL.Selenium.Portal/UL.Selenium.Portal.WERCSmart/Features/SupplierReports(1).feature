@@ -16,6 +16,14 @@
 @ProductSetUp
 @UPC
 @run_SupplierReports1
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@PhysicalAndChemicalProp
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
+@Ingredients
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
+
 Feature: Supplier Reports 1
 
 Background:
@@ -232,9 +240,32 @@ Scenario: [108254] UPC Report for All Products with Retailer - Create new produc
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase108254Chalk
-	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
+	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
+	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Chlorine       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And In the 'Select Retailers' window I select the retailer: Walgreens
 	And I click continue
@@ -246,8 +277,16 @@ Scenario: [108254] UPC Report for All Products with Retailer - Create new produc
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	Given If purchase details are showing click confirm order
 	#Create an article product - lightbulb
 	Given I navigate to the home page
@@ -258,12 +297,26 @@ Scenario: [108254] UPC Report for All Products with Retailer - Create new produc
 	Given I call Shared Step 69687 (Product Information - US, No(PL))
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
+	Given I should see the Retailer Page
+	Then In the Retailer Section, click 'Add Retailers' button
+	Then In the Select Retailers window, select retailer: Walgreens
+	Then In the Select Retailers window, click 'Done' button
+	Then in the Retailer page I click Continue
+
 	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC108254Lightbulb, container type: Plastic Container and size: 12 click continue
 	Then in the Additional Documents to Provide page I click Continue
 	Then in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	Given If purchase details are showing click confirm order
 	#Create an enhanced article product - Lithium BCP (Camera w/ Battery)
 	Given I navigate to the home page
@@ -272,7 +325,12 @@ Scenario: [108254] UPC Report for All Products with Retailer - Create new produc
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Camera w/Battery
 	Then I save the product information as: TestCase108254BCP
 	And I call Shared Step 70393 (Product Information - With marketed for use by a Child - Direct Ship - Private Label questions only)
-	And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	#And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page I click Continue
+
 	Given I set the Indicate how battery is packaged option to: The battery is shipped with but not included in my product
 	Given I add the following batteries:
 		| Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product | Saved As       |
@@ -281,10 +339,24 @@ Scenario: [108254] UPC Report for All Products with Retailer - Create new produc
 	And I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 	And I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 	Given I call Shared Step 60096 (Lithium Battery Transportation)
-	And I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
+	#And I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
+	Given I should see the Retailer Page
+	Then In the Retailer Section, click 'Add Retailers' button
+	Then In the Select Retailers window, select retailer: Walgreens
+	Then In the Select Retailers window, click 'Done' button
+	Then in the Retailer page I click Continue
+
 	And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC108254BCP, container type: Plastic Container and size: 32
-	And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
-	And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	Given If purchase details are showing click confirm order
 	#Begin steps to get report and verify data
 	Given I navigate to the home page

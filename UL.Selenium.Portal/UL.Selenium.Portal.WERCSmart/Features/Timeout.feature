@@ -22,6 +22,11 @@
 @ProductSetUp
 @ForwardProductRegistration
 @run_Timeout
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@PhysicalAndChemicalProp
+@Ingredients
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
+
 Feature: Timeout
 
 @Timeout1
@@ -34,11 +39,40 @@ Scenario: [Timeout Test] Mass Upload File Popup, Inactivity Popup can be interac
 	And I set 'Type of Product' to: Chalk
 	Then I save the product information as: TestCase82536
 	And I click continue
-	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
+	#And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
+	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	And I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+	#And I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+	Given I should see the Retailer Page
+	Then In the Retailer Section, click 'Add Retailers' button
+	Then In the Select Retailers window, select retailer: Amazon
+	Then In the Select Retailers window, click 'Done' button
+	Then in the Retailer page I click Continue
+
 	And I click continue
 	And I click Sample File link and verify the Upload UPC form and save it as test82536 with data:
 		| UPC           | Name   | Quantity | Size | Internal SKU | US: Part Number | US: Item Number | GP: Part Number | SP: Part Number | TG: DPCI    | HD: OMSID | CT: Item Number   | Green Good Housekeeping | Green Seal | EPA Safer Choice | Cradle to Cradle | UL Ecologo | EWG Verified | Green Tick | Madesafe | NSF Sustainability Certified |
@@ -73,11 +107,40 @@ Scenario: [Timeout Test] Mass Upload File Popup, TimeoutFeature Works Correctly
 	And I set 'Type of Product' to: Chalk
 	Then I save the product information as: TestCase82536
 	And I click continue
-	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
+	#And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
+	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	And I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+	#And I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+	Given I should see the Retailer Page
+	Then In the Retailer Section, click 'Add Retailers' button
+	Then In the Select Retailers window, select retailer: Amazon
+	Then In the Select Retailers window, click 'Done' button
+	Then in the Retailer page I click Continue
+
 	And I click continue
 	And I click Sample File link and verify the Upload UPC form and save it as test82536 with data:
 		| UPC           | Name   | Quantity | Size | Internal SKU | US: Part Number | US: Item Number | GP: Part Number | SP: Part Number | TG: DPCI    | HD: OMSID | CT: Item Number   | Green Good Housekeeping | Green Seal | EPA Safer Choice | Cradle to Cradle | UL Ecologo | EWG Verified | Green Tick | Madesafe | NSF Sustainability Certified |
@@ -101,6 +164,8 @@ Scenario: [Timeout Test] Mass Upload File Popup, TimeoutFeature Works Correctly
 #Then I wait for 960 seconds
 #And the landing page should load
 
+#Removed from regression 2024/03
+@ignore
 @Timeout3
 @ScenarioId:1439
 Scenario: [Timeout Test] Warning Alert- Inactivity popup- Inactivity Popup can be interacted with
@@ -110,8 +175,8 @@ Scenario: [Timeout Test] Warning Alert- Inactivity popup- Inactivity Popup can b
 	Then Click Yes on the inactivity popup
 	Then I confirm the Inactivity pop is closed
 
-
-
+#Removed from regression 2024/03
+@ignore
 @Timeout4
 @ScenarioId:1437
 Scenario: [Timeout Test] Warning Alert- Inactivity popup- TimeoutFeature Works Correctly
@@ -122,8 +187,10 @@ Scenario: [Timeout Test] Warning Alert- Inactivity popup- TimeoutFeature Works C
 #Given I confirm the Inactivity popup is displayed after waiting 15 minutes accurate to the nearest 2 minutes
 #Then I Look for an Alert every minute for: 4 minutes and when an alert is found I wait for the landing page for: 20 minutes
 
+#Removed from regression 2024/03
 @Timeout5
 @ScenarioId:1435
+@ignore
 Scenario: [Timeout Test] Add Casepack Popup- Inactivity popup-Inactivity Popup can be interacted with
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then I click the following option in the bottom menu: Search
@@ -155,6 +222,8 @@ Scenario: [Timeout Test] Add Casepack Popup- Inactivity popup-Inactivity Popup c
 	Then Click Yes on the inactivity popup
 	Then I confirm the Inactivity pop is closed
 
+#Removed from regression 2024/03
+@ignore
 @Timeout6
 @ScenarioId:1436
 Scenario: [Timeout Test] Add Casepack Popup- Inactivity popup- TimeoutFeature Works Correctly

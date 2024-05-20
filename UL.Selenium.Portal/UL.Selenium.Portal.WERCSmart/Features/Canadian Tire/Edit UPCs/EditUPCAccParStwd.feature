@@ -21,6 +21,8 @@
 @SHA
 @ForwardProductRegistration
 @ProductSetUp
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
+
 Feature: Edit UPC Account has partial Stewardship information
 
 Background:
@@ -45,7 +47,11 @@ Scenario: [86257] Edit UPC - Product SOLD = Canada only, PL = Yes, Retailer = Ca
 	Given I call Shared Step 87337 (Edit UPC - data - Click Save) for UPC as: saved as UPC86257, container type: Cardboard and size: 2 and packaging type: Package Type
 	And I Select a package type from the drop down list
 	And I click Save in The Product Page
-	Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
 	#Given In the Data Acceptance page I click on the Accept button
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto2 and Open SHA manager)
 

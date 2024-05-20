@@ -21,6 +21,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ToxicityCharacteristicLeachingProcedureTCLP
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ElectronicEquipment
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 
 @Steps_ProductPrototype
 
@@ -54,7 +55,7 @@ Scenario: [84109] Create Electronic - process to Completed (Answering machine, n
 	And I should see the Product Information Page
 	And In the Product Information Section, set the option in section: 'Select countries the product may be sold in' to: United States
 	And In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
-	And In the Product Information Section, set the option in section: 'Product is a Retailer's Private Label or Brand' to: No
+	And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	And in the Product Information page I click Continue
 	#And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I should see the Inventory Status, Prop 65 (US) Page
