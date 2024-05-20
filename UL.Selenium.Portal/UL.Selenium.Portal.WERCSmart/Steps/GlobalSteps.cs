@@ -11,12 +11,12 @@ using System.Threading;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
+using UL.Automation.ReqnrollHelpers.Classes;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
+using Reqnroll;
+using Reqnroll.Assist;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
@@ -32,6 +32,7 @@ using UL.Automation.TReVor.Classes;
 using ReportDetails = UL.Automation.Reporting.Classes.ReportDetails;
 using Mailosaur;
 using TReVor.Core.Classes.Software.Vault;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.Utilities;
 using UL.Selenium.Portal.WERCSmart.Helpers;
 using UL.Selenium.Portal.WERCSmart.Classes.Configuration;
@@ -64,13 +65,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I login as the administrator")]
+		[RegexStepDefinition(@"I login as the administrator")]
 		public void GivenILoginAsTheAdministrator()
 		{
 			this.LoginToAccount("ProductAccount");
 		}
 
-		[StepDefinition(@"I Login into WERCSmart Portal - Admin Role - (WERCs Visual Account|WERCs Premium Subscription Account|WERCs Product Account|WERCs ULSC Account|NoPLProducts Account|Password Reset|WERCs Web Viewers)")]
+		[RegexStepDefinition(@"I Login into WERCSmart Portal - Admin Role - (WERCs Visual Account|WERCs Premium Subscription Account|WERCs Product Account|WERCs ULSC Account|NoPLProducts Account|Password Reset|WERCs Web Viewers)")]
 		public void LoginToWERCSmartAdmin(string type)
 		{
 			switch (type)
@@ -99,7 +100,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I retrieve the email address for account: (.*) and save as: (.*)")]
+		[RegexStepDefinition(@"I retrieve the email address for account: (.*) and save as: (.*)")]
 		public void IRetrieveTheEmailAddressForAccount(string type, string saveAs)
 		{
 			string email = "";
@@ -132,8 +133,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I login into the WERCSmart Portal - (data consent Account|Division Account|Administrator Role|Canada has all data account|WebViewers Account)")]
-		[StepDefinition(@"I Login into WERCSmart Portal - (data consent Account|Division Account|Administrator Role|Canada has all data account|WebViewers Account)")]
+		[RegexStepDefinition(@"I login into the WERCSmart Portal - (data consent Account|Division Account|Administrator Role|Canada has all data account|WebViewers Account)")]
+		[RegexStepDefinition(@"I Login into WERCSmart Portal - (data consent Account|Division Account|Administrator Role|Canada has all data account|WebViewers Account)")]
 		public void LoginToWERCSmart(string type)
 		{
 			//if alredy logged in, logout
@@ -162,7 +163,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I log in with the (subscription|without subscription) without products account")]
+		[RegexStepDefinition(@"I log in with the (subscription|without subscription) without products account")]
 		public void LoginWithSubscriptionType(string type)
 		{
 			switch (type)
@@ -176,13 +177,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I log in with the account saved in TReVor as: (.*)")]
+		[RegexStepDefinition(@"I log in with the account saved in TReVor as: (.*)")]
 		public void ILogInWithTheAccountSavedInTrevorAs(string accountSavedAs)
 		{
 			this.LoginToAccount(accountSavedAs);
 		}
 
-		[StepDefinition(@"The home screen should load")]
+		[RegexStepDefinition(@"The home screen should load")]
 		public void ThenTheHomeScreenShouldLoad()
 		{
 			var selHomepage = new Homepage();
@@ -228,7 +229,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		/// <summary>
 		/// Requires a user object of type User (WercSmart.Classes.User) not TestUser (TReVor)
 		/// </summary>
-		[StepDefinition(@"I log in as the user saved as: (.*)")]
+		[RegexStepDefinition(@"I log in as the user saved as: (.*)")]
 		public void LoginToCurrentNewUser(string savedAs)
 		{
 			//var newUser = (User)Context.GetFromContext(savedAs);
@@ -247,7 +248,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new Login().WaitForContainerToBeInvisible(), "Did not redirect from Log in page!");
 		}
 
-		[StepDefinition(@"I log in with email: (.*) and password: (.*)")]
+		[RegexStepDefinition(@"I log in with email: (.*) and password: (.*)")]
 		// requires the user to be on the landing page
 		public void GivenILogInWithEmailXAndPasswordY(string username, string password)
 		{
@@ -328,7 +329,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Report.Failure("Failed to log in!");
 		}
 
-		[StepDefinition(@"I attempt to log in with email: (.*) and password: (.*)")]
+		[RegexStepDefinition(@"I attempt to log in with email: (.*) and password: (.*)")]
 		// only do one attempt - used for reset passwords
 		public void AttemptToLoginWithEmailAndPassword(string email, string password)
 		{
@@ -420,24 +421,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			return Report.IsTrue(selLogin.Click_Login(), "Failed to click the log in button");
 		}
 
-		[StepDefinition(@"I logout")]
+		[RegexStepDefinition(@"I logout")]
 		public void GivenILogout()
 		{
 			var thisTopMenuBar = new TopMenuBar();
 			Report.IsTrue(thisTopMenuBar.ClickSignOut(), "Failed to click sign out", "Successfully clicked sign out");
 		}
 
-		[StepDefinition(@"I create a new email address and save as: (.*)")]
+		[RegexStepDefinition(@"I create a new email address and save as: (.*)")]
 		public void GivenICreateANewEmailAddressAndSaveAs(string saveAs)
 		{
 			string myDate = System.DateTime.Now.ToString("HHmmddMMyy");
 
 			string myEmail = MailosaurHelpers.DefaultMailbox.CreateEmail(myDate);
-			UL.Automation.SpecFlow.Classes.Context.AddToContext(saveAs, myEmail);
+			UL.Automation.ReqnrollHelpers.Classes.Context.AddToContext(saveAs, myEmail);
 			Report.Info("Saved email: " + myEmail);
 		}
 
-		[StepDefinition(@"If not already created, I create a user: (.*) with the following parameters:")]
+		[RegexStepDefinition(@"If not already created, I create a user: (.*) with the following parameters:")]
 		public void GivenIfNotAlreadyCreatedICreateAUserXWithTheFollowingParameters(string savedAs, Table parameters)
 		{
 			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + "- If not already created, I create a user: '" + savedAs + "'");
@@ -456,7 +457,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					WERCSmartUser account = parameters.CreateInstance<WERCSmartUser>();
 					account.Email = MailosaurHelpers.DefaultMailbox.CreateEmail(account.Email);
 					account.Identifier = savedAs;
-					UL.Automation.SpecFlow.Classes.Context.AddToContext(savedAs, account, true);
+					UL.Automation.ReqnrollHelpers.Classes.Context.AddToContext(savedAs, account, true);
 					Report.Success("Account details saved!");
 
 					var mySignUp = new StepsSignup();
@@ -494,7 +495,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I wait for (.*) seconds")]
+		[RegexStepDefinition(@"I wait for (.*) seconds")]
 		public void WhenIWaitForSeconds(int seconds)
 		{
 			for (int i = 0; i < seconds; i++)
@@ -509,7 +510,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Waited for: " + seconds + " seconds");
 		}
 
-		[StepDefinition(@"I scroll to the (top|bottom) of the page")]
+		[RegexStepDefinition(@"I scroll to the (top|bottom) of the page")]
 		public void ThenIScrollToTheOfThePage(string location)
 		{
 			Report.Info("Attempting to scroll to the " + location + " of the page");
@@ -530,7 +531,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Success("Scrolled to the " + location + " of the page!");
 		}
 
-		[StepDefinition(@"I navigate to the landing page")]
+		[RegexStepDefinition(@"I navigate to the landing page")]
 		public void NavigateToLandingPage()
 		{
 			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Navigate to landing page");
@@ -652,7 +653,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I navigate to the URL: (.*)")]
+		[RegexStepDefinition(@"I navigate to the URL: (.*)")]
 		public void NavigateToTheUrl(string url)
 		{
 			Report.StartStep($"{Report.Details.StepIndex} - Navigate to URL: {url}");
@@ -670,7 +671,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I navigate to the URL saved in TReVor as: (.*)")]
+		[RegexStepDefinition(@"I navigate to the URL saved in TReVor as: (.*)")]
 		public void NavigateToTheTReVorUrl(string trevorVar)
 		{
 			string url = TReVor.Integrations.Classes.TReVorSettings.VaultRecords.GetVariable(trevorVar).Value;
@@ -690,7 +691,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I check that the current URL contains: (.*)")]
+		[RegexStepDefinition(@"I check that the current URL contains: (.*)")]
 		public void CurrentUrlContains(string url)
 		{
 			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Checking that the current URL contains: " + url);
@@ -711,14 +712,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I close the window that opened")]
+		[RegexStepDefinition(@"I close the window that opened")]
 		public void ThenCloseTheWindowThatOpened()
 		{
 			Delay.Seconds(5);
 			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Closing current window");
 			try
 			{
-				object mainWindowHandle = UL.Automation.SpecFlow.Classes.Context.GetFromContext("MainWindowHandle");
+				object mainWindowHandle = UL.Automation.ReqnrollHelpers.Classes.Context.GetFromContext("MainWindowHandle");
 
 				if (mainWindowHandle == null)
 				{
@@ -739,7 +740,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"UNDER DEVELOPMENT")]
+		[RegexStepDefinition(@"UNDER DEVELOPMENT")]
 		public void Underdevelopment()
 		{
 			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - UNDER DEVELOPMENT");
@@ -762,13 +763,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I save the current emails in the inbox for address saved as: (.*)")]
+		[RegexStepDefinition(@"I save the current emails in the inbox for address saved as: (.*)")]
 		public void GivenISaveTheCurrentEmailsInTheInboxForRandom(string savedas)
 		{
 			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + "- I save the current emails in this inbox so I can locate the new one when it arrives");
 			try
 			{
-				string emailAddress = UL.Automation.SpecFlow.Classes.Context.GetFromContext(savedas).ToString();
+				string emailAddress = UL.Automation.ReqnrollHelpers.Classes.Context.GetFromContext(savedas).ToString();
 				Report.Info("Storing inbox for address: " + emailAddress);
 				MailosaurHelpers.DefaultMailbox.StoreCurrentInbox(emailAddress);
 				Report.Success("Inbox stored successfully!");
@@ -780,7 +781,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition("I Save the email for the TReVor: (.*) Test user as: (.*)")]
+		[RegexStepDefinition("I Save the email for the TReVor: (.*) Test user as: (.*)")]
 		public void ISaveTheEmailForTheTReVorTestUserAs(string userSavedAs, string emailSaveAs)
 		{
 
@@ -811,14 +812,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		/// </summary>
 		/// <param name="createdEmail"></param>
 		/// <param name="savedAs"></param>
-		[StepDefinition(@"I create an email (.*) and save it as (.*)")]
+		[RegexStepDefinition(@"I create an email (.*) and save it as (.*)")]
 		public void CreateAndSaveNewEmailAddress(string createdEmail, string savedAs)
 		{
 			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + "- I created an email and saved to use in other locations");
 			try
 			{
 				string email = MailosaurHelpers.DefaultMailbox.CreateEmail(createdEmail);
-				UL.Automation.SpecFlow.Classes.Context.AddToContext(savedAs, email);
+				UL.Automation.ReqnrollHelpers.Classes.Context.AddToContext(savedAs, email);
 				Report.Info("Email address created: " + email);
 			}
 			catch (Exception ex)
@@ -829,7 +830,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I create a new email address")]
+		[RegexStepDefinition(@"I create a new email address")]
 		public void ThenICreateANewEmailAddress()
 		{
 			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " I create a new email address");
@@ -860,7 +861,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I create a new random email address")]
+		[RegexStepDefinition(@"I create a new random email address")]
 		public void ThenICreateANewRandomEmailAddress()
 		{
 			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " I create a new email address");
@@ -883,13 +884,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		//[StepDefinition(@"in the received email I should see the title: (.*)")]
+		//[RegexStepDefinition(@"in the received email I should see the title: (.*)")]
 		//public void ThenInTheReceivedEmailIShouldSeeTheTitleWERCSmartPasswordReset(string expectedTitle)
 		//{
 
 		//}
 
-		[StepDefinition(@"there (should|should not) be a new email for email Address saved as: (.*) from: (.*) with the title: (.*)")]
+		[RegexStepDefinition(@"there (should|should not) be a new email for email Address saved as: (.*) from: (.*) with the title: (.*)")]
 		public void ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle(string shouldOrNot, string savedAs, string emailFrom, string title)
 		{
 			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Checking whether there is a new email for email Address: " + savedAs + " from " + emailFrom + " with title: " + title);
@@ -903,12 +904,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				string email = string.Empty;
 				if (savedAs == "ForgotPW_SecQs")
 				{
-					var user = (WERCSmartUser)UL.Automation.SpecFlow.Classes.Context.GetFromContext(savedAs);
+					var user = (WERCSmartUser)UL.Automation.ReqnrollHelpers.Classes.Context.GetFromContext(savedAs);
 					email = user.Email;
 				}
 				else
 				{
-					email = UL.Automation.SpecFlow.Classes.Context.GetFromContext(savedAs).ToString();
+					email = UL.Automation.ReqnrollHelpers.Classes.Context.GetFromContext(savedAs).ToString();
 				}
 				Delay.Seconds(10);
 
@@ -962,7 +963,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"For product saved as: (.*) there (should|should not) be a new email for email Address (saved|saved in TReVor) as: (.*) from: (.*) with the title: (.*)")]
+		[RegexStepDefinition(@"For product saved as: (.*) there (should|should not) be a new email for email Address (saved|saved in TReVor) as: (.*) from: (.*) with the title: (.*)")]
 		public void ThenForProductSavedAsThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle(string productSavedAs, string shouldOrNot, string inTReVor,string savedAs, string emailFrom, string title)
 		{
 			Report.StartStep(Report.Details.StepIndex + " - Checking whether there is a new email for email Address: " + savedAs + " from " + emailFrom + " with title: " + title);
@@ -988,12 +989,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					
 					if (savedAs == "ForgotPW_SecQs")
 					{
-						var user = (WERCSmartUser)UL.Automation.SpecFlow.Classes.Context.GetFromContext(savedAs);
+						var user = (WERCSmartUser)UL.Automation.ReqnrollHelpers.Classes.Context.GetFromContext(savedAs);
 						email = user.Email;
 					}
-					else if (UL.Automation.SpecFlow.Classes.Context.Contains(savedAs))
+					else if (UL.Automation.ReqnrollHelpers.Classes.Context.Contains(savedAs))
 					{
-						email = UL.Automation.SpecFlow.Classes.Context.GetFromContext(savedAs).ToString();
+						email = UL.Automation.ReqnrollHelpers.Classes.Context.GetFromContext(savedAs).ToString();
 					}
 					else
 					{
@@ -1076,7 +1077,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		/// Asserting text in body of email
 		/// </summary>
 		/// <param name="bodyText"></param>
-		[StepDefinition(@"For product saved as: (.*) the html of the email should show: (.*)")]
+		[RegexStepDefinition(@"For product saved as: (.*) the html of the email should show: (.*)")]
 		public void ThenTheHTMLOfTheEmailShouldShow(string productSavedAs, string bodyText)
 		{
 			Report.StartStep(Report.Details.StepIndex + "- Checking body text of email");
@@ -1151,7 +1152,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"the html of the email should show: (.*)")]
+		[RegexStepDefinition(@"the html of the email should show: (.*)")]
 		public void ThenTheHTMLOfTheEmailShouldShow(string bodyText)
 		{
 			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + "- Checking body text of email");
@@ -1198,7 +1199,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"the body of the email should show: (.*)")]
+		[RegexStepDefinition(@"the body of the email should show: (.*)")]
 		public void ThenTheBodyOfTheEmailShouldShow(string bodyText)
 		{
 			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + "- Checking body text of email");
@@ -1229,7 +1230,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		/// Asserting text in body of email
 		/// </summary>
 		/// <param name="bodyText"></param>
-		[StepDefinition(@"the body of the email should contain: (.*)")]
+		[RegexStepDefinition(@"the body of the email should contain: (.*)")]
 		public void ThenTheBodyOfTheEmailShouldContainX(string bodyText)
 		{
 			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + "- Checking body text of email");
@@ -1254,7 +1255,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		/// <summary>
 		/// Back button click in the browser
 		/// </summary>
-		[StepDefinition(@"I click the back button in the browser")]
+		[RegexStepDefinition(@"I click the back button in the browser")]
 		public void GivenIClickOnBackButtonInBrowser()
 		{
 			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " " + MethodBase.GetCurrentMethod().Name);
@@ -1273,7 +1274,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		/// Switching to a new tab in the chrome browser
 		/// </summary>
 		/// <param name="url"></param>
-		[StepDefinition(@"I switch to the tab: (.*)")]
+		[RegexStepDefinition(@"I switch to the tab: (.*)")]
 		public void SwitchToTheTab(string url)
 		{
 			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Switch to Tab: " + url);
@@ -1281,7 +1282,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Switch to Tab: " + url);
 				string currentHandle = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
-				UL.Automation.SpecFlow.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
+				UL.Automation.ReqnrollHelpers.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
 				System.Collections.ObjectModel.ReadOnlyCollection<string> allHandles = SeleniumWebDriver.CurrentDriver.WindowHandles;
 				foreach (string handle in allHandles)
 				{
@@ -1303,24 +1304,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
-		[StepDefinition(@"I open the new tab in browser")]
+		[RegexStepDefinition(@"I open the new tab in browser")]
 		public void OpenNewTab()
 		{
 			Report.Info("Open the new tab in browser");
 			SeleniumWebDriver.CurrentDriver.SwitchTo().NewWindow(WindowType.Tab);
 		}
 
-		[StepDefinition(@"I save the current window as: (.*)")]
+		[RegexStepDefinition(@"I save the current window as: (.*)")]
 		public void SaveTheCurrentWindowAs(string savedAs)
 		{
 			string currentHandle = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
-			UL.Automation.SpecFlow.Classes.Context.AddToContext(savedAs, currentHandle);
+			UL.Automation.ReqnrollHelpers.Classes.Context.AddToContext(savedAs, currentHandle);
 		}
 
-		[StepDefinition(@"I close the window saved as: (.*)")]
+		[RegexStepDefinition(@"I close the window saved as: (.*)")]
 		public void SwitchBackToMainWindow(string savedAs)
 		{
-			string handleToClose = UL.Automation.SpecFlow.Classes.Context.GetFromContext(savedAs)?.ToString();
+			string handleToClose = UL.Automation.ReqnrollHelpers.Classes.Context.GetFromContext(savedAs)?.ToString();
 			if (handleToClose == null)
 			{
 				Report.Failure("Unable to find window saved as: " + savedAs + " in context to close!");
@@ -1341,11 +1342,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I switch to the Data Summary page")]
+		[RegexStepDefinition(@"I switch to the Data Summary page")]
 		public void SwitchToDataSumaryTab()
 		{
 			string currentHandle = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
-			UL.Automation.SpecFlow.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
+			UL.Automation.ReqnrollHelpers.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
 			System.Collections.ObjectModel.ReadOnlyCollection<string> allHandles = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			foreach (string handle in allHandles)
 			{
@@ -1362,11 +1363,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I switch to Data Acceptance page")]
+		[RegexStepDefinition(@"I switch to Data Acceptance page")]
 		public void ThenISwitchToDataAcceptancePage()
 		{
 			string currentHandle = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
-			UL.Automation.SpecFlow.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
+			UL.Automation.ReqnrollHelpers.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
 			ReadOnlyCollection<string> allHandles = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			foreach (string handle in allHandles)
 			{
@@ -1380,16 +1381,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Failure("Failed to find the correct tab!");
 		}
 		
-		[StepDefinition(@"I close the Data Summary Tab")]
+		[RegexStepDefinition(@"I close the Data Summary Tab")]
 		public void CloseDataSummaryTab()
 		{
 			string currentHandle = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
-			string mainHandle = UL.Automation.SpecFlow.Classes.Context.GetFromContext("MainWindowHandle").ToString();
+			string mainHandle = UL.Automation.ReqnrollHelpers.Classes.Context.GetFromContext("MainWindowHandle").ToString();
 			SeleniumWebDriver.CurrentDriver.Close();
 			SeleniumWebDriver.CurrentDriver.SwitchTo().Window(mainHandle);
 		}
 		
-		[StepDefinition(@"If a modal dialog opens I skip it")]
+		[RegexStepDefinition(@"If a modal dialog opens I skip it")]
 		public void GivenIfAModalDialogOpensISkipIt()
 		{
 			var thisModalDialog = new ModalDialog();
@@ -1400,7 +1401,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"If a modal dialog opens I close it")]
+		[RegexStepDefinition(@"If a modal dialog opens I close it")]
 		public void GivenIfAModalDialogOpensICloseIt()
 		{
 			var thisModalDialog = new ModalDialog();
@@ -1411,7 +1412,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I wait for a modal dialog to open")]
+		[RegexStepDefinition(@"I wait for a modal dialog to open")]
 		public void WaitForAModalDialogToOpen()
 		{
 			var thisModalDialog = new ModalDialog();
@@ -1426,7 +1427,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			}
 		}
-		[StepDefinition(@"in the modal dialog I click the ""(.*)"" button")]
+		[RegexStepDefinition(@"in the modal dialog I click the ""(.*)"" button")]
 		public void GivenInTheModalDialogIClickButton(string button)
 		{
 
@@ -1434,7 +1435,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$@"Failed to click ""{button}"" button",
 				$@"Successfully clicked the ""{button}"" button");
 		}
-		[StepDefinition(@"In the popup with the following title: (.*) I click the (.*) button")]
+		[RegexStepDefinition(@"In the popup with the following title: (.*) I click the (.*) button")]
 		public void ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton(string popupTitle, string buttonTitle)
 		{
 			Report.IsTrue(new ModalDialog().ClickTheButtonInThePopupView(popupTitle, buttonTitle), "Failed to click the " + buttonTitle + " button", "Successfully clicked the " + buttonTitle + " button");
@@ -1442,7 +1443,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(1);
 		}
 
-		[StepDefinition(@"I click the Terms of Use link in the footer")]
+		[RegexStepDefinition(@"I click the Terms of Use link in the footer")]
 		public void ClickTermsOfUseFooter()
 		{
 			Report.IsTrue(new Homepage().ClickTermsOfUse(),
@@ -1450,11 +1451,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked the Terms Of Use link");
 		}
 
-		[StepDefinition(@"I confirm the WERCSmart Terms of Use page opened in a new tab and navigate to it")]
+		[RegexStepDefinition(@"I confirm the WERCSmart Terms of Use page opened in a new tab and navigate to it")]
 		public void SwitchToTermsOfUseTab()
 		{
 			string currentHandle = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
-			UL.Automation.SpecFlow.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
+			UL.Automation.ReqnrollHelpers.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
 			ReadOnlyCollection<string> allHandles = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			foreach (string handle in allHandles)
 			{
@@ -1471,7 +1472,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition("I (accept|dismiss) the alert pop up")]
+		[RegexStepDefinition("I (accept|dismiss) the alert pop up")]
 		public void ConfirmThealertPopup(string action)
 		{
 			SeleniumWebDriver.CurrentDriver.WaitForAlert();
@@ -1489,16 +1490,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I delete Products with the UPC number if one has been created for this test")]
+		[RegexStepDefinition(@"I delete Products with the UPC number if one has been created for this test")]
 		public void DeleteProductWithUPCNumberIfOneHasBeenGenerated()
 		{
 			if (WercSmartSettings.TestCaseId != 0 && Context.GetFromContext($"UPC{WercSmartSettings.TestCaseId}") != null)
 			{
-				new StepsProductGrid().DeleteAllProductsMatchingCriteria("UPC Number", UL.Automation.SpecFlow.Classes.Context.GetFromContext($"UPC{WercSmartSettings.TestCaseId}").ToString());
+				new StepsProductGrid().DeleteAllProductsMatchingCriteria("UPC Number", UL.Automation.ReqnrollHelpers.Classes.Context.GetFromContext($"UPC{WercSmartSettings.TestCaseId}").ToString());
 			}
 		}
 
-		[StepDefinition("I save the TReVor test user: (.*) to context as 'TReVorTestUser'")]
+		[RegexStepDefinition("I save the TReVor test user: (.*) to context as 'TReVorTestUser'")]
 		public void ISaveTheWercSmartUserStoredInTrevorAs(string savedAs)
 		{
 			TReVorTestUsers user = TestUsers.GetUserSavedAs(savedAs);
@@ -1507,10 +1508,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure("Failed to find a user stored in TReVor: " + savedAs);
 				return;
 			}
-			UL.Automation.SpecFlow.Classes.Context.AddToContext("TReVorTestUser", new User { Password = user.Password, Email = user.Username });
+			UL.Automation.ReqnrollHelpers.Classes.Context.AddToContext("TReVorTestUser", new User { Password = user.Password, Email = user.Username });
 		}
 
-		[StepDefinition(@"I save to context name: (.*) and value: (.*)")]
+		[RegexStepDefinition(@"I save to context name: (.*) and value: (.*)")]
 		public void GivenISaveToContextNameAndValue(string name, string value)
 		{
 			var newProductInformation = new ProductInformation {
@@ -1520,13 +1521,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(name, newProductInformation);
 		}
 
-		[StepDefinition(@"I add to context name: (.*) and value: (.*)")]
+		[RegexStepDefinition(@"I add to context name: (.*) and value: (.*)")]
 		public void GivenIAddToContextNameAndValue(string name, string value)
 		{
 			Context.AddToContext(name, value);
 		}
 
-		[StepDefinition(@"I check alert text contains (.*) and dismiss")]
+		[RegexStepDefinition(@"I check alert text contains (.*) and dismiss")]
 		public void GivenICheckAlertTextContainsXAndDismiss(string searchText)
 		{
 			//Putting this in because standard get alert functionality does not work in this page.
@@ -1578,13 +1579,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I save to context name: (.*) and string value: (.*)")]
+		[RegexStepDefinition(@"I save to context name: (.*) and string value: (.*)")]
 		public void GivenISaveToContextNameAndStringValue(string name, string value)
 		{
-			UL.Automation.SpecFlow.Classes.Context.AddToContext(name, value);
+			UL.Automation.ReqnrollHelpers.Classes.Context.AddToContext(name, value);
 		}
 
-		[StepDefinition(@"I move the mouse pointer by an offset of (.*) in x and (.*) in y")]
+		[RegexStepDefinition(@"I move the mouse pointer by an offset of (.*) in x and (.*) in y")]
 		public void MoveMousePointerByOffset(string offsetX, string offsetY)
 		{
 			if (!int.TryParse(offsetX, out int offsetXNum))
@@ -1603,26 +1604,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Action performed");
 		}
 
-		//[StepDefinition(@"I get the list of CVS UPC numbers from upcitemdb.com and save as: (.*)")]
+		//[RegexStepDefinition(@"I get the list of CVS UPC numbers from upcitemdb.com and save as: (.*)")]
 		//public void GetTheListOfCvsUpcNumbers(string savedAs)
 		//{
 
 		//}
 
-		[StepDefinition(@"I close the current tab")]
+		[RegexStepDefinition(@"I close the current tab")]
 		public void GivenICloseTheCurrentTab()
 		{
 			Delay.Seconds(5);
 			SeleniumWebDriver.CurrentDriver.CloseTabWithURL(SeleniumWebDriver.CurrentDriver.GetActiveTabURL());
 		}
 
-		[StepDefinition(@"I close the current window")]
+		[RegexStepDefinition(@"I close the current window")]
 		public void CloseCurrentWindow()
 		{
 			SeleniumWebDriver.CurrentDriver.Quit();
 		}
 
-		[StepDefinition(@"I confirm (.*) tab (does|does not) exist")]
+		[RegexStepDefinition(@"I confirm (.*) tab (does|does not) exist")]
 		public void ConfirmTabDoesDoesNotExist(string tabURL, string does_doesnot)
 		{
 			bool expected = does_doesnot == "does";
@@ -1630,14 +1631,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(urlList.Contains(tabURL) == expected, $"Failure, '{tabURL}' {(expected ? "does not" : "does")} exist.", $"Success, '{tabURL}' {does_doesnot} exist.");
 		}
 
-		[StepDefinition(@"I close the (.*) tab")]
+		[RegexStepDefinition(@"I close the (.*) tab")]
 		public void CloseTab(string tabURL)
 		{
 			Report.IsTrue(SeleniumWebDriver.CurrentDriver.CloseTabWithURL(tabURL), $"Failure, failed to close '{tabURL}' tab.", $"Success, closed '{tabURL}' tab.");
 		}
 		
 
-		[StepDefinition(@"I switch to the tab with title: (.*)")]
+		[RegexStepDefinition(@"I switch to the tab with title: (.*)")]
 		public void SwitchToTabWithTitle(string title)
 		{
 			string currentHandle = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
@@ -1669,7 +1670,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			throw new Exception("Failed to find window with title: " + title);
 		}
 
-		[StepDefinition(@"I confirm Discontinue Product popup contains correct text with product Id saved as: (.*)")]
+		[RegexStepDefinition(@"I confirm Discontinue Product popup contains correct text with product Id saved as: (.*)")]
 		public void ThenIConfirmDiscontinueProductPopupContainsCorrectTextWithProductIdSavedAsTestCase(string savedAs)
 		{
 			var modal = new ModalDialog();
@@ -1681,7 +1682,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I confirm that I see the following text in the modal window popup: (.*)")]
+		[RegexStepDefinition(@"I confirm that I see the following text in the modal window popup: (.*)")]
 		public void IConfirmThatISeeTheFollowingTextInTheModalWindow(string text)
 		{
 			var modal = new ModalDialog();
@@ -1690,7 +1691,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"Successfully found text '{text}' in modal window.");
 		}
 
-		[StepDefinition(@"I check that the alert displayed contains text: (.*)")]
+		[RegexStepDefinition(@"I check that the alert displayed contains text: (.*)")]
 		public void ICheckThatTheAlertDisplayedContainsText(string expected)
 		{
 			if (SeleniumWebDriver.CurrentDriver.IsAlertPresent())
@@ -1704,7 +1705,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I save the username for TReVor test user: (.*) to context as: (.*)")]
+		[RegexStepDefinition(@"I save the username for TReVor test user: (.*) to context as: (.*)")]
 		public void SaveUsernameOfTrevorUser(string trevorSavedAs, string usernameSavedAs)
 		{
 			TReVorTestUsers user = TestUsers.GetUserSavedAs(trevorSavedAs);
@@ -1715,7 +1716,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I check alert text contains either: (.*) or: (.*) and dismiss")]
+		[RegexStepDefinition(@"I check alert text contains either: (.*) or: (.*) and dismiss")]
 		public void GivenICheckAlertTextContainsEitherXOrYAndDismiss(string searchTextMain, string searchTextAlternative)
 		{
 			//Putting this in because standard get alert functionality does not work in this page.
@@ -1765,7 +1766,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition("I find an existing UPC number in trevor account saved as: (.*) using feature context: (.*)")]
+		[RegexStepDefinition("I find an existing UPC number in trevor account saved as: (.*) using feature context: (.*)")]
 		public void FindExistingUpcNumberInTrevorAccountUsingFeatureContext(string trevorSavedAs, string upcSavedAs)
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1807,7 +1808,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Failure("Failed to get an existing UPC!");
 		}
 
-		[StepDefinition(@"I Look for an Alert every minute for a max of: (.*) minutes and when an alert is found I wait for the landing page for a max of: (.*) minutes")]
+		[RegexStepDefinition(@"I Look for an Alert every minute for a max of: (.*) minutes and when an alert is found I wait for the landing page for a max of: (.*) minutes")]
 		public void LookForAlertForXMinutesAndWaitForLandingPageForY(int alertWaitMinutes, int landingPageWaitMinutes)
 		{
 
@@ -1859,7 +1860,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I Look for an Alert every minute for a max of: (.*) minutes")]
+		[RegexStepDefinition(@"I Look for an Alert every minute for a max of: (.*) minutes")]
 		public void LookForAlertForXMinutes(int alertWaitMinutes)
 		{
 
@@ -1890,7 +1891,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I Look for an Alert for a max: (.*) minutes")]
+		[RegexStepDefinition(@"I Look for an Alert for a max: (.*) minutes")]
 		public void LookForAlertForXMinutesTotal(int alertWaitMinutes)
 		{
 
@@ -1910,7 +1911,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I Look for an Alert for a max: (.*) Seconds")]
+		[RegexStepDefinition(@"I Look for an Alert for a max: (.*) Seconds")]
 		public void LookForAlertForXSecondsTotal(int alertWaitSeconds)
 		{
 
@@ -1931,7 +1932,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I Look for the Landing Page every minute for a max of: (.*) minutes")]
+		[RegexStepDefinition(@"I Look for the Landing Page every minute for a max of: (.*) minutes")]
 		public void LookForLandingPageForXMinutes(int landingPageWaitMinutes)
 		{
 			bool landingPageAppeared = false;
@@ -1958,7 +1959,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I Look for the Landing Page for: (.*) minutes")]
+		[RegexStepDefinition(@"I Look for the Landing Page for: (.*) minutes")]
 		public void LookForLandingPageForXMinutesTotal(int landingPageWaitMinutes)
 		{
 			bool landingPageAppeared = false;
@@ -1976,7 +1977,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I Look for an Alert every minute for: (.*) minutes and when an alert is found I wait for the landing page for: (.*) minutes")]
+		[RegexStepDefinition(@"I Look for an Alert every minute for: (.*) minutes and when an alert is found I wait for the landing page for: (.*) minutes")]
 		public void LookForAlertForXMinutesAndWaitForLandingPageForYTotal(int alertWaitMinutes, int landingPageWaitMinutes)
 		{
 
@@ -2011,7 +2012,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I close the current window and switch to the main window in Studio")]
+		[RegexStepDefinition(@"I close the current window and switch to the main window in Studio")]
 		public void IClosetheCurrentWindowAndSwitchToMainWindowInStudio()
 		{
 			Report.Screenshot();
@@ -2035,7 +2036,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition("I Check that both an alert and inactivity prompt are on screen")]
+		[RegexStepDefinition("I Check that both an alert and inactivity prompt are on screen")]
 		public void ICheckThatBothAnAlertAndInactivityPromptAreOnScreen()
 		{
 			bool bothOnSceen = true;
@@ -2062,7 +2063,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I confirm the Inactivity popup is displayed after waiting (.*) minutes accurate to the nearest (.*) minutes")]
+		[RegexStepDefinition(@"I confirm the Inactivity popup is displayed after waiting (.*) minutes accurate to the nearest (.*) minutes")]
 		public void ConfirmTheUnsavedChangesAlertDisplayedAfterWait(int expectedWait, int marginOfError)
 		{
 			// check if popup wasn't displayed after 'expected wait + margin' (test upper limit)
@@ -2078,7 +2079,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The Inactivity popup loaded within the expected time frame. It was loaded after: " + actualWait / 60 + " minutes");
 		}
 
-		[StepDefinition(@"I Check there should be a new suspension notification email for user: (.*) for the Product saved as: (.*) with the suspension subject of: (.*) and check it does not contain text from the table:")]
+		[RegexStepDefinition(@"I Check there should be a new suspension notification email for user: (.*) for the Product saved as: (.*) with the suspension subject of: (.*) and check it does not contain text from the table:")]
 		public void ICheckThereIsANewEmailForUserXFromYAndSpecificTitle(string emailSavedAs, string productSavedAs, string subject, Table stringTable)
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2095,7 +2096,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//do 2 x checks for the 2 differnt bullet points of the blurp text or one string and find format that works (e.g white space removal etc)
 		}
 
-		[StepDefinition(@"the text of the email should not show: (.*)")]
+		[RegexStepDefinition(@"the text of the email should not show: (.*)")]
 		public void ThenTheTextOfTheEmailShouldNotShow(Table stringTable)
 		{
 			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + "- Checking body text of email");
@@ -2124,7 +2125,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"the text of the email should show: (.*)")]
+		[RegexStepDefinition(@"the text of the email should show: (.*)")]
 		public void ThenTheTextOfTheEmailShouldShow(string bodyText)
 		{
 			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + "- Checking body text of email");
@@ -2145,36 +2146,36 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I create a upc number for CVS")]
+		[RegexStepDefinition(@"I create a upc number for CVS")]
 		public void CreateCVSUPC()
 		{
 			string upc = new UpcFunctions().GeneratePrefixedUPCForRetailer("CVS");
 		}
 
-		[StepDefinition(@"I Wait for a modal popup to appear")]
+		[RegexStepDefinition(@"I Wait for a modal popup to appear")]
 		public void IWaitForModalPopupToBeVisible()
 		{
 			Report.IsTrue(new ModalDialog().WaitForContainerToBeVisible(30), "The Modal did not appear", "The modal appeared");
 		}
-		[StepDefinition(@"I Wait for a modal popup to disappear")]
+		[RegexStepDefinition(@"I Wait for a modal popup to disappear")]
 		public void IWaitForModalPopupToBeInVisible(int timeout = 30)
 		{
 			Report.IsTrue(new ModalDialog().WaitForContainerToBeInvisible(timeout), "The Modal was still showing", "The modal was gone");
 		}
 
-		[StepDefinition(@"I save the following text: (.*) as (.*)")]
+		[RegexStepDefinition(@"I save the following text: (.*) as (.*)")]
 		public void SaveTextToContextAs(string text, string savedAs)
 		{
 			Context.AddToContext(savedAs, text);
 		}
 
-		[StepDefinition(@"I Delete the file with name: (.*) from the downloads folder")]
+		[RegexStepDefinition(@"I Delete the file with name: (.*) from the downloads folder")]
 		public void DeleteFileFromDownloadsFolder(string fileName)
 		{
 			Report.IsTrue(GeneralUtilities.DeleteFileFromDownloadsFolder(fileName), "", "");
 		}
 
-		[StepDefinition(@"I Delete the directory and its contents with name: (.*) from the downloads folder")]
+		[RegexStepDefinition(@"I Delete the directory and its contents with name: (.*) from the downloads folder")]
 		public void DeleteDirectoryAndItsContentsFromDownloadsFolder(string directoryName)
 		{
 			string rootFolder = @"" + KnownFolders.GetPath(KnownFolder.Downloads) + "\\" + directoryName + "\\";
@@ -2189,7 +2190,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I save the product ID: (.*) to a context under type 'ProductInformation' as: (.*)")]
+		[RegexStepDefinition(@"I save the product ID: (.*) to a context under type 'ProductInformation' as: (.*)")]
 		public void SaveProductIDAsProductInformationNamed(string prodID, string savedAs)
 		{
 			var createdProduct = new ProductInformation();
@@ -2197,7 +2198,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(savedAs, createdProduct);
 		}
 
-		[StepDefinition(@"Saving the product ID: (.*) and Name: (.*) to a context under type 'ProductInformation' as: (.*)")]
+		[RegexStepDefinition(@"Saving the product ID: (.*) and Name: (.*) to a context under type 'ProductInformation' as: (.*)")]
 		public void SaveProductIDAndNameAsProductInformationNamed(string prodID, string prodName, string savedAs)
 		{
 			var createdProduct = new ProductInformation();
@@ -2206,7 +2207,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(savedAs, createdProduct);
 		}
 
-		[StepDefinition(@"I confirm that a file is produced called (.*) and save as (.*)")]
+		[RegexStepDefinition(@"I confirm that a file is produced called (.*) and save as (.*)")]
 		public void ConfirmFileAppearsInDownloadsFolder(string file, string savedAs)
 		{
 			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Confirm File is downloaded with name: " + file);
@@ -2232,7 +2233,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I delete the file saved as (.*)")]
+		[RegexStepDefinition(@"I delete the file saved as (.*)")]
 		public void DeleteFileSavedAs(string savedAs)
 		{
 			string file = Context.GetFromContext(savedAs)?.ToString() ?? "";
@@ -2245,7 +2246,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			File.Delete(file);
 		}
 
-		[StepDefinition(@"I Check that the file saved as: (.*) contains text")]
+		[RegexStepDefinition(@"I Check that the file saved as: (.*) contains text")]
 		public void CheckThatFileSavedAsContainsText(string fileSavedAs)
 		{
 			Delay.Seconds(3);
@@ -2261,7 +2262,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(pdfText!=null, "PDF does not contains text","PDF does contain text");		
 		}
 
-		[StepDefinition(@"I Check that the pdf file saved as: (.*) contains the text: (.*)")]
+		[RegexStepDefinition(@"I Check that the pdf file saved as: (.*) contains the text: (.*)")]
 		public void CheckThatPDFFileSavedAsContainsX(string fileSavedAs,string searchText)
 		{
 			Delay.Seconds(3);
@@ -2278,14 +2279,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I save the current window handle to context as: (.*)")]
+		[RegexStepDefinition(@"I save the current window handle to context as: (.*)")]
 		public void SaveTheCurrentWindowHandleToContextAs(string saveAs)
 		{
 			string currentHandle = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
 			Context.AddToContext(saveAs, currentHandle);		
 		}
 
-		[StepDefinition(@"I switch to the window with handle saved as: (.*)")]
+		[RegexStepDefinition(@"I switch to the window with handle saved as: (.*)")]
 		public void SwitchToTheWindowWithHandleSavedAs(string savedAs)
 		{
 			string handle = (string)Context.GetFromContext(savedAs);
@@ -2293,7 +2294,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(2);
 		}
 
-		[StepDefinition(@"I close All the current windows")]
+		[RegexStepDefinition(@"I close All the current windows")]
 		public void CloseAllTheCurrentWindows()
 		{
 			
@@ -2309,7 +2310,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I close All the current windows except the Main Window")]
+		[RegexStepDefinition(@"I close All the current windows except the Main Window")]
 		public void CloseAllTheCurrentWindowsExceptTheMainWindow()
 		{
 
@@ -2335,7 +2336,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"An alert is displayed with the message: (.*)")]
+		[RegexStepDefinition(@"An alert is displayed with the message: (.*)")]
 		public void AnAlertIsDisplayedWithTheMessage(string message)
 		{
 			if (SeleniumWebDriver.CurrentDriver.IsAlertPresent())
@@ -2350,7 +2351,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I Update the TestUser: (.*) to include the name of the product saved as: (.*)")]
+		[RegexStepDefinition(@"I Update the TestUser: (.*) to include the name of the product saved as: (.*)")]
 		public void UpdateTestVariableWithProductName(string testVariable, string savedAs)
 		{
 			ProductInformation myProduct = (ProductInformation)Context.GetFromContext(savedAs);
@@ -2364,11 +2365,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I confirm the UPC Retailer and Feed page opened in a new tab and navigate to it")]
+		[RegexStepDefinition(@"I confirm the UPC Retailer and Feed page opened in a new tab and navigate to it")]
 		public void SwitchToUPCRetailerAndFeedTab()
 		{
 			string currentHandle = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
-			UL.Automation.SpecFlow.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
+			UL.Automation.ReqnrollHelpers.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
 			ReadOnlyCollection<string> allHandles = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			foreach (string handle in allHandles)
 			{
@@ -2388,7 +2389,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		//The below is a studio tab switching step
-		[StepDefinition(@"I switch to the '(.*)' tab")]
+		[RegexStepDefinition(@"I switch to the '(.*)' tab")]
 		public void WhenISwitchToTheTab(string tabName)
 		{
 			GeneralUtilities.SwitchToDefaultContent();
@@ -2407,7 +2408,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"the Security Manager page should load")]
+		[RegexStepDefinition(@"the Security Manager page should load")]
 		public void ThenTheSecurityManagerPageShouldLoad()
 		{
 			SecurityManager sm = new SecurityManager();
@@ -2415,7 +2416,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(sm.WaitForContainerToBeVisible(), "Failed, could not find the Security Manager page.", "Successfully found the Security Manager page.", true);
 		}
 
-		[StepDefinition(@"the Rule Writer page should load")]
+		[RegexStepDefinition(@"the Rule Writer page should load")]
 		public void ThenTheRuleWriterPageShouldLoad()
 		{
 			RuleWriter rw = new RuleWriter();
@@ -2426,7 +2427,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 		}
 
-		[StepDefinition(@"the Rule Writer page should be loaded")]
+		[RegexStepDefinition(@"the Rule Writer page should be loaded")]
 		public void ThenTheRuleWriterPageShouldBeLoaded()
 		{
 			RuleWriter rw = new RuleWriter();
@@ -2435,7 +2436,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"the Material Management Dashboard page should load")]
+		[RegexStepDefinition(@"the Material Management Dashboard page should load")]
 		public void ThenTheDashboardPageShouldLoad()
 		{
 			DashboardPage dashboardPage = new DashboardPage();
@@ -2450,7 +2451,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(dashboardPage.WaitForContainerToBeVisible(timeout: 30), "Failed to find the Dashboard page", "Successfully found the Dashboard page.", true);
 		}
 
-		[StepDefinition(@"the '(.*)' window (should|should not) load")]
+		[RegexStepDefinition(@"the '(.*)' window (should|should not) load")]
 		public void ThenTheWindowShouldLoad(string windowName, string shouldOrShouldNot)
 		{
 			windowName = GeneralUtilities.ReplaceWithContext(windowName);
@@ -2466,7 +2467,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I switch to the '(.*)' window")]
+		[RegexStepDefinition(@"I switch to the '(.*)' window")]
 		public void GivenISwitchToTheWindow(string windowName)
 		{
 			windowName = GeneralUtilities.ReplaceWithContext(windowName);
@@ -2474,7 +2475,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I close the '(.*)' window")]
+		[RegexStepDefinition(@"I close the '(.*)' window")]
 		public void ThenCloseTheSpecifiedWindow(string windowName)
 		{
 			try
@@ -2504,7 +2505,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I verify the following users exist and if not I create them using (.*)")]
+		[RegexStepDefinition(@"I verify the following users exist and if not I create them using (.*)")]
 		public void WhenIVerifyTheFollowingUsersExist(string savedAs, Table table)
 		{
 			Report.UseSubSteps = true;
@@ -3064,7 +3065,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info($"Finished setting the Feature SHA user");
 		}
 
-		[StepDefinition(@"I Create SHA processing Rules for the accounts listed in the table:")]
+		[RegexStepDefinition(@"I Create SHA processing Rules for the accounts listed in the table:")]
 		public void ICreateProcessingRulesForSHAAccountsListed(Table table)
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -3208,7 +3209,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"I Create SHA processing Rules for the account: (.*)")]
+		[RegexStepDefinition(@"I Create SHA processing Rules for the account: (.*)")]
 		public void ICreateProcessingRulesForSHAAccount(string userAcc)
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -3326,7 +3327,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I Create SHA processing Rules for the single account: (.*)")]
+		[RegexStepDefinition(@"I Create SHA processing Rules for the single account: (.*)")]
 		public void ICreateProcessingRulesForSingleSHAAccount(string shaAccName)
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -3470,7 +3471,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I check for SHA processing Rule for the account: (.*)")]
+		[RegexStepDefinition(@"I check for SHA processing Rule for the account: (.*)")]
 		public void ICheckForSHARuleForAccount(string userAcc)
 		{
 			Report.UseSubSteps = true;
@@ -3563,7 +3564,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I check for SHA processing Rule for the account: (.*)")]
+		[RegexStepDefinition(@"I check for SHA processing Rule for the account: (.*)")]
 		public bool ICheckForSHARuleForAccountOnly(string userAcc)
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -3626,7 +3627,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I set the value 'FIFRAPopupExpected' to be: (.*)")]
+		[RegexStepDefinition(@"I set the value 'FIFRAPopupExpected' to be: (.*)")]
 		public void ISetTagFIFRAPopupExpectedToBeX(bool expected)
 		{
 
@@ -3655,7 +3656,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I Get the (first|middle|last) 5 Digits of the UPC Number Saved as: (.*), and save them as: (.*)")]
+		[RegexStepDefinition(@"I Get the (first|middle|last) 5 Digits of the UPC Number Saved as: (.*), and save them as: (.*)")]
 		public void Get5DigitsFromUPCAndSaveAs(string pattern, string upcSavedAs,string editedUpcSavedAs)
 		{
 			if(!Context.Contains(upcSavedAs))

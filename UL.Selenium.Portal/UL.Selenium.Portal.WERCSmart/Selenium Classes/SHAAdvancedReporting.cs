@@ -7,10 +7,10 @@ using UL.Automation.WebDriver.Extensions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using UL.Automation.SpecFlow.Classes;
+using UL.Automation.ReqnrollHelpers.Classes;
 using System.Collections.ObjectModel;
 using System;
-using TechTalk.SpecFlow;
+using Reqnroll;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {

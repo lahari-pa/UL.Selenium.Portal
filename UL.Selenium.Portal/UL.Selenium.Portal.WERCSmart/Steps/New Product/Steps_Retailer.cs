@@ -3,9 +3,10 @@ using System.IO;
 using System.Linq;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
-using TechTalk.SpecFlow;
+using UL.Automation.ReqnrollHelpers.Classes;
+using Reqnroll;
 using UL.Automation.Reporting;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
@@ -13,7 +14,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 	[Binding, Scope(Tag = "NewProduct")]
 	class Steps_Retailer
 	{
-		[StepDefinition(@"the selected retailers on the Retailer page should match the retailer list saved as (.*)")]
+		[RegexStepDefinition(@"the selected retailers on the Retailer page should match the retailer list saved as (.*)")]
 		public void SelectedRetailersOnRetailerPageShouldMatchSavedAs(string savedAs)
 		{
 			var retailerList = (List<string>)Context.GetFromContext(savedAs);
@@ -34,7 +35,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"The selected retailers on the Retailer page (should|should not) be:")]
+		[RegexStepDefinition(@"The selected retailers on the Retailer page (should|should not) be:")]
 		public void SelectedRetailersShouldBe(string shouldOrShouldNot, Table retailers)
 		{
 			var expectedRetailers = new List<string>();
@@ -52,25 +53,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I confirm the following retailer cannot be deselected in Retailer Table: (.*)")]
+		[RegexStepDefinition(@"I confirm the following retailer cannot be deselected in Retailer Table: (.*)")]
 		public void ConfirmRetailerCannotBeDeselectedInRetailersTable(string retailer)
 		{
 			var actualRetailers = new Retailer();
 			actualRetailers.ConfirmRetailerCannotBeDeselectedInRetailersTable(retailer);
 		}
-		[StepDefinition(@"I confirm the following retailer cannot be deselected in Selected Retailer Popup: (.*)")]
+		[RegexStepDefinition(@"I confirm the following retailer cannot be deselected in Selected Retailer Popup: (.*)")]
 		public void ConfirmRetailerCannotBeDeselectedInSelectRetailersPopup(string retailer)
 		{
 			var actualRetailers = new Retailer();
 			actualRetailers.ConfirmRetailerCannotBeDeselectedInSelectRetailersPopup(retailer);
 		}
-		[StepDefinition(@"I click 'Add Retailers' in the Retailers page")]
+		[RegexStepDefinition(@"I click 'Add Retailers' in the Retailers page")]
 		public void ClickAddRetailers()
 		{
 			Report.IsTrue(new Retailer().ClickAddRetailers(), "Failed to click Add Retailers in the Retailers page", "Clicked Add Retailers in the Retailers page");
 		}
 
-		[StepDefinition(@"I select any Walmart Affiliate automatically selects all from that group, then 'Wal-Mart/SAM'S CLUB' is displayed on the retailers page")]
+		[RegexStepDefinition(@"I select any Walmart Affiliate automatically selects all from that group, then 'Wal-Mart/SAM'S CLUB' is displayed on the retailers page")]
 		public void SelectWalmartAffiliate_SelectsAll_WalMartSAMsClub()
 		{
 			var retailerInfo = new List<KeyValuePair<string, string>>
@@ -138,26 +139,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			new SelectRetailers().ClickClose();
 		}
 
-		[StepDefinition(@"In the Retailers tab, I select Private Label name as: (.*)")]
+		[RegexStepDefinition(@"In the Retailers tab, I select Private Label name as: (.*)")]
 		public void ISelectPrivateLabelName(string option)
 		{
 			Report.IsTrue(new Retailer().SelectPrivateLabelName(option), "Failed to set the Private label name to be: " + option,
 				"Successfully set private label name to be: " + option);
 		}
 
-		[StepDefinition(@"In the Retailers tab, I enter Private Label name as: (.*)")]
+		[RegexStepDefinition(@"In the Retailers tab, I enter Private Label name as: (.*)")]
 		public void IEnterPrivateLabelName(string option)
 		{
 			Report.IsTrue(new Retailer().EnterPrivateLabelName(option), "Failed to set the Private label name to be: " + option, "Successfully set private label name to be: " + option);
 		}
 
-		[StepDefinition(@"In the Retailers tab, for the retailer: (.*) I choose Private Label name: (.*)")]
+		[RegexStepDefinition(@"In the Retailers tab, for the retailer: (.*) I choose Private Label name: (.*)")]
 		public void ForRetailerIChoosePrivateLabelName(string retailer, string option)
 		{
 			Report.IsTrue(new Retailer().ChoosePrivateLabelName(option, retailer), "Failed to set the Private label name to be: " + option + " for retailer: " + retailer, "Successfully set private label name to be: " + option + " for retailer: " + retailer);
 		}
 
-		[StepDefinition(@"In the Retailers tab, for (.*) retailer, I confirm '(.*)' private label (does|does not) exist")]
+		[RegexStepDefinition(@"In the Retailers tab, for (.*) retailer, I confirm '(.*)' private label (does|does not) exist")]
 		public void RetailerPrivateLabelDoesDoesNotExist(string retailer, string option, string doesDoesNot)
 		{
 			bool expected = doesDoesNot == "does";
@@ -165,27 +166,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(rt.RetailerPrivateLabelOptionExists(retailer, option) == expected,$"Failure, for {retailer} retailer, '{option}' private label {(expected?"does not":"does")} exist.",$"Success, {retailer} retailer {option} private label {doesDoesNot} exist.");
 		}
 
-		[StepDefinition(@"In the Retailers tab, for (.*) retailer, I select '(.*)' private label option")]
+		[RegexStepDefinition(@"In the Retailers tab, for (.*) retailer, I select '(.*)' private label option")]
 		public void RetailerPrivateLabelSelect(string retailer, string option)
 		{
 			Retailer rt = new Retailer();
 			Report.IsTrue(rt.RetailerPrivateLabelOptionSelect(retailer, option), $"Failure, failed to select for {retailer} retailer, '{option}' private label option.", $"Success, successfully selected {retailer} retailer {option} private label option.");
 		}
 
-		[StepDefinition(@"In the Retailers tab, for the retailer: (.*) I enter Private Label name: (.*)")]
+		[RegexStepDefinition(@"In the Retailers tab, for the retailer: (.*) I enter Private Label name: (.*)")]
 		public void ForRetailerIEnterPrivateLabelName(string retailer, string option)
 		{
 			Report.IsTrue(new Retailer().EnterPrivateLabelName(option, retailer), "Failed to set the Private label name to be: " + option + " for retailer: " + retailer, "Successfully set private label name to be: " + option + " for retailer: " + retailer);
 		}
 
-		[StepDefinition(@"In the Retailers tab, I select Vendor id as: (.*)")]
+		[RegexStepDefinition(@"In the Retailers tab, I select Vendor id as: (.*)")]
 		public void ISelectVendorId(string option)
 		{
 			Report.IsTrue(new Retailer().SelectVendorId(option), "Failed to set the vendor id to be: " + option,
 				"Successfully set vendor id to be: " + option);
 		}
 
-		[StepDefinition(@"In the Retailers tab, for retailer: (.*) I select Vendor id as: (.*)")]
+		[RegexStepDefinition(@"In the Retailers tab, for retailer: (.*) I select Vendor id as: (.*)")]
 		public void ISelectVendorIdForRetailer(string retailer, string option)
 		{
 			Report.IsTrue(new Retailer().SelectVendorId(option, retailer),
@@ -193,7 +194,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully set vendor id to be: " + option + " for retailer: " + retailer);
 		}
 
-		[StepDefinition(@"In the Retailers tab, I select the first Vendor option for retailer: (.*)")]
+		[RegexStepDefinition(@"In the Retailers tab, I select the first Vendor option for retailer: (.*)")]
 		public void ISelectFirstVendorIdForRetailer(string retailer)
 		{
 			Report.IsTrue(new Retailer().SelectVendorId("", retailer, true),
@@ -201,7 +202,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully set the first vendor option for retailer: " + retailer);
 		}
 
-		[StepDefinition(@"In the Retailers tab, I select the first Vendor option")]
+		[RegexStepDefinition(@"In the Retailers tab, I select the first Vendor option")]
 		public void ISelectFirstVendorId()
 		{
 			Report.IsTrue(new Retailer().SelectVendorId("", true),
@@ -209,7 +210,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully set the first vendor option");
 		}
 
-		[StepDefinition(@"On the Retailer page I delete the following retailers:")]
+		[RegexStepDefinition(@"On the Retailer page I delete the following retailers:")]
 		public void DeleteRetailers(Table table)
 		{
 			var selRetailer = new Retailer();
@@ -228,7 +229,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully deleted the selected retailers");
 		}
 
-		[StepDefinition(@"I should (see|not see) the following retailers:")]
+		[RegexStepDefinition(@"I should (see|not see) the following retailers:")]
 		public void ShouldSeeRetailers(string condition, Table expected)
 		{
 			var selRetailer = new Retailer();
@@ -257,7 +258,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"If the UPCs Warning popup is displayed I click (.*)")]
+		[RegexStepDefinition(@"If the UPCs Warning popup is displayed I click (.*)")]
 		public void IfISeeUpcWarningPopupClick(string choice)
 		{
 			var noRetailerWarning = new NoRetailerWarningPopup();
@@ -271,7 +272,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I click continue then if the 'UPCs Warning' popup is displayed I click 'OK'")]
+		[RegexStepDefinition(@"I click continue then if the 'UPCs Warning' popup is displayed I click 'OK'")]
 		public void ClickContinueDismissNoUpcPopup()
 		{
 			Report.UseSubSteps = true;
@@ -281,21 +282,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			this.IfISeeUpcWarningPopupClick("Ok");
 		}
 
-		[StepDefinition(@"I confirm I see error messages for the following retailers")]
+		[RegexStepDefinition(@"I confirm I see error messages for the following retailers")]
 		public void ThenIConfirmISeeErrorMessagesForTheFollowingRetailers(Table table)
 		{
 			SelectRetailers SelectRetailersObject = new SelectRetailers();
 			SelectRetailersObject.CheckIfRetailersInTableDisplayErrorMessage(table);
 		}
 		
-		[StepDefinition(@"I confirm the following retailers are showing in the Retailer page")]
+		[RegexStepDefinition(@"I confirm the following retailers are showing in the Retailer page")]
 		public void ThenIConfirmTheFollowingRetailersAreShowingInTheRetailerPage(Table table)
 		{
 			Retailer RetailersObject = new Retailer();
 			Report.IsTrue(RetailersObject.CheckForTheFollowingRetailersInRetailerPage(table), "Failed to find all retailers", "Successfully found all retailers");
 		}
 
-		[StepDefinition(@"On The Retailer Screen, I enter 'This Private Label' as the full name of the product for every retailer selected")]
+		[RegexStepDefinition(@"On The Retailer Screen, I enter 'This Private Label' as the full name of the product for every retailer selected")]
 		public void OnTheRetailerScreenIEnterTheProductNameAsFullNameOfProductForEveryRetailer()
 		{
 

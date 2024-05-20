@@ -2,9 +2,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
-using TechTalk.SpecFlow;
+using UL.Automation.ReqnrollHelpers.Classes;
+using Reqnroll;
 using UL.Automation.Reporting;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide;
@@ -14,7 +15,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding, Scope(Tag = "MyIngredients")]
 	class Steps_MyIngredients
 	{
-		[StepDefinition(@"I enter the text: (.*) into the My Ingredients search field")]
+		[RegexStepDefinition(@"I enter the text: (.*) into the My Ingredients search field")]
 		public void EnterTextInSearch(string value)
 		{
 			Report.IsTrue(new MyIngredients().EnterTextSearch(value),
@@ -22,7 +23,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully entered search term: " + value + " in My Ingredients search");
 		}
 
-		[StepDefinition(@"I select the smart search result with name: (.*) and CAS: (.*)")]
+		[RegexStepDefinition(@"I select the smart search result with name: (.*) and CAS: (.*)")]
 		public void SelectSearchResult(string name, string cas)
 		{
 			Report.IsTrue(new MyIngredients().ClickSearchResult(name, cas),
@@ -31,7 +32,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(10);
 		}
 
-		[StepDefinition(@"I add the following ingredients and save them to context as: (.*)")]
+		[RegexStepDefinition(@"I add the following ingredients and save them to context as: (.*)")]
 		public void AddIngredientItems(string savedAs, Table ingredients)
 		{
 			ReportSettings.UseSubSteps = true;
@@ -55,7 +56,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(savedAs, ingredientsContext);
 		}
 
-		[StepDefinition(@"I click Save in the My Ingredients tab")]
+		[RegexStepDefinition(@"I click Save in the My Ingredients tab")]
 		public void ClickSaveMyIngredients()
 		{
 			Report.IsTrue(new MyIngredients().ClickSave(),
@@ -63,14 +64,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked Save in the My Ingredients tab");
 			GeneralUtilities.Wait_for_load_finish();
 		}
-		[StepDefinition(@"I save the current list of ingredients in My Library to context as: (.*)")]
+		[RegexStepDefinition(@"I save the current list of ingredients in My Library to context as: (.*)")]
 		public void AddMyIngredientsToContext(string savedAs)
 		{
 			Context.AddToContext(savedAs, new MyIngredients().IngredientsLibrary());
 		}
 
 		// Note pre-requisite is saving list of ingredients to Context prior to searching - AddMyIngredientsToContext()
-		[StepDefinition(@"I save the ingredient I added in My Library to context as: (.*)")]
+		[RegexStepDefinition(@"I save the ingredient I added in My Library to context as: (.*)")]
 		public void AddNewIngredientToContext(string savedAs)
 		{
 			var selMyIngredients = new MyIngredients();
@@ -119,7 +120,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Failure("Attempted to add the new ingredient to context, but the list of ingredients has not increased by 1");
 		}
 
-		[StepDefinition("I remove My Ingredient in My Library saved as: (.*)")]
+		[RegexStepDefinition("I remove My Ingredient in My Library saved as: (.*)")]
 		public void RemoveIngredientIAddedToMyLibraryFromContext(string savedAs)
 		{
 			if (Context.GetFromContext("My_Ingredient_" + savedAs) == null)
@@ -132,7 +133,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new MyIngredientsModal().WaitForContainerToBeVisible(30);			
 		}
 
-		[StepDefinition(@"I confirm the component name in the delete product popup matches the ingredient saved as: (.*)")]
+		[RegexStepDefinition(@"I confirm the component name in the delete product popup matches the ingredient saved as: (.*)")]
 		public void DeleteMyIngredientDialogComponentNameMatchesLastAdded(string savedAs)
 		{
 			if (Context.GetFromContext("My_Ingredient_" + savedAs) == null)
@@ -147,7 +148,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The 'Remove Component from My Ingredients' dialog message contained the Chemical name: " + savedIngredient.ChemicalName + " as expected");
 		}
 
-		[StepDefinition("I click: (YES|NO) in the 'Remove Component from My Ingredients' pop up")]
+		[RegexStepDefinition("I click: (YES|NO) in the 'Remove Component from My Ingredients' pop up")]
 		public void ClickOptionInRemoveComponentDialog(string option)
 		{
 			Delay.Seconds(2);
@@ -156,7 +157,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked button: " + option + " in the 'Remove Component from My Ingredients' pop up");
 		}
 
-		[StepDefinition("I confirm My Ingredient saved as: (.*) in My Library has been removed from the grid")]
+		[RegexStepDefinition("I confirm My Ingredient saved as: (.*) in My Library has been removed from the grid")]
 		public void ConfirmIngredientHasBeenRemoved(string savedAs)
 		{
 			if (Context.GetFromContext("My_Ingredient_" + savedAs) == null)
@@ -174,7 +175,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The removed ingredient: " + savedIngredient.ChemicalName + " was no longer showing in the ingredients grid at position: " + savedIngredient.Index + " as expected");
 		}
 
-		[StepDefinition(@"I click the (Trade Secret|Publicly Disclosed) checkbox for My Ingredient saved as: (.*)")]
+		[RegexStepDefinition(@"I click the (Trade Secret|Publicly Disclosed) checkbox for My Ingredient saved as: (.*)")]
 		public void SelectTradeSecretCheckbox(string checkbox, string savedAs)
 		{
 			if (Context.GetFromContext("My_Ingredient_" + savedAs) == null)
@@ -214,7 +215,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Failure("The checkbox paramater must be either Trade Secret or Publicly Disclosed");
 		}
 
-		[StepDefinition(@"I set the Public Name to be: (.*) for My Ingredient saved as: (.*)")]
+		[RegexStepDefinition(@"I set the Public Name to be: (.*) for My Ingredient saved as: (.*)")]
 		public void SetPublicNameForIngredient(string publicName, string savedAs)
 		{
 			if (Context.GetFromContext("My_Ingredient_" + savedAs) == null)
@@ -233,7 +234,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext("My_Ingredient_" + savedAs, ingredient);
 		}
 
-		[StepDefinition(@"I (select|deselect) the ingredient in My Library at index: (.*) from ingredients saved as: (.*)")]
+		[RegexStepDefinition(@"I (select|deselect) the ingredient in My Library at index: (.*) from ingredients saved as: (.*)")]
 		public void SelectIngredientMyLibrary(string select, string index, string savedAs)
 		{
 			if (Context.GetFromContext(savedAs) == null)
@@ -254,7 +255,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The selected checkbox was successfully " + select + "ed.");
 		}
 
-		[StepDefinition(@"I edit the ingredients: (.*) and save the edited ingredients to context as: (.*)")]
+		[RegexStepDefinition(@"I edit the ingredients: (.*) and save the edited ingredients to context as: (.*)")]
 		public void EditMyLibraryIngredients(string savedAs, string savedAsEdit, Table ingredientFields)
 		{
 			if (Context.GetFromContext(savedAs) == null)
@@ -328,7 +329,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(savedAsEdit, contextList);
 		}
 
-		[StepDefinition(@"I confirm that all changes in edited ingredients: (.*) were saved")]
+		[RegexStepDefinition(@"I confirm that all changes in edited ingredients: (.*) were saved")]
 		public void EditedIngredientsWereSaved(string savedAs)
 		{
 			if (Context.GetFromContext(savedAs) == null)
@@ -373,7 +374,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I remove all ingredients in the list saved as: (.*)")]
+		[RegexStepDefinition(@"I remove all ingredients in the list saved as: (.*)")]
 		public void DeleteIngredientsInContextList(string savedAs)
 		{
 			ReportSettings.UseSubSteps = true;
@@ -399,7 +400,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked the YES button in the Remove Ingredients pop up");
 		}
 
-		[StepDefinition(@"I click the (Next|Previous) button in the My Ingredients grid navigation")]
+		[RegexStepDefinition(@"I click the (Next|Previous) button in the My Ingredients grid navigation")]
 		public void ClickNavigationButton(string navOption)
 		{
 			Report.IsTrue(new MyIngredients().Navigation(navOption),
@@ -407,7 +408,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked the " + navOption + " navigation button in the My Ingredients tab");
 		}
 
-		[StepDefinition(@"I confirm the navigation button is enabled in the My Ingredients grid")]
+		[RegexStepDefinition(@"I confirm the navigation button is enabled in the My Ingredients grid")]
 		public void NaviageionOptionsEnabled()
 		{
 			Report.IsFalse(new MyIngredients().NextDisabled(),
@@ -415,7 +416,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The Next navigation button was enabled in the My Ingredients tab as expected");
 		}
 
-		[StepDefinition(@"I confirm the current active page number in the My Ingredients grid is: (.*)")]
+		[RegexStepDefinition(@"I confirm the current active page number in the My Ingredients grid is: (.*)")]
 		public void ConfirmPageNumber(string expectedPage)
 		{
 			string actualPage = new MyIngredients().GetPage("current").ToString();
@@ -424,7 +425,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The current active page matched the expected value: " + actualPage);
 		}
 
-		[StepDefinition(@"I confirm the ingredients for page (.*) saved as: (.*) are displayed")]
+		[RegexStepDefinition(@"I confirm the ingredients for page (.*) saved as: (.*) are displayed")]
 		public void IngredientsPageIsDisplayed(string page, string savedAs)
 		{
 			if (Context.GetFromContext(savedAs) == null)
@@ -446,13 +447,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click page number: (.*) in the My Ingredients grid navigation")]
+		[RegexStepDefinition(@"I click page number: (.*) in the My Ingredients grid navigation")]
 		public void ClickPageNumber(string page)
 		{
 			Report.IsTrue(new MyIngredients().ClickPage(page), "Failed to click page number: " + page, "Successfully clicked page number: " + page);
 		}
 
-		[StepDefinition(@"I confirm that the smart search results contain a chemical with CAS: (.*) and Name: (.*)")]
+		[RegexStepDefinition(@"I confirm that the smart search results contain a chemical with CAS: (.*) and Name: (.*)")]
 		public void SmartSearchResultsContainChemical(string cas, string name)
 		{
 			List<MyIngredients.SearchResult> searchResults = new MyIngredients().SearchResults();
@@ -461,14 +462,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"There was a search result with CAS: " + cas + " and name: " + name + " returned as expected");
 		}
 
-		[StepDefinition(@"The Formulation 3rd Party Step is shown")]
+		[RegexStepDefinition(@"The Formulation 3rd Party Step is shown")]
 		public void TheFormulationThirdPartyStepIsShown()
 		{
 			var thisNewProduct = new NewProduct();
 			Report.IsTrue(thisNewProduct.ThirdPartyScreenAppears(), "The third party screen has not appeared", "The third party step is shown as expected");
 		}
 
-		[StepDefinition(@"In the Formulation 3rd Party screen I set Accept to (true|false)")]
+		[RegexStepDefinition(@"In the Formulation 3rd Party screen I set Accept to (true|false)")]
 		public void InTheFormulationThirdPartySCreenISetAcceptTo(string trueOrFalse)
 		{
 			var thisNewProduct = new NewProduct();
@@ -484,7 +485,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In the Formulation 3rd Party screen I set (.*) to (.*)")]
+		[RegexStepDefinition(@"In the Formulation 3rd Party screen I set (.*) to (.*)")]
 		public void InTheFormulationThirdPartySCreenISetFieldTo(string field, string value)
 		{
 			var thisNewProduct = new NewProduct();
@@ -501,7 +502,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In the Formulation 3rd Party screen I set Granted to (true|false)")]
+		[RegexStepDefinition(@"In the Formulation 3rd Party screen I set Granted to (true|false)")]
 		public void InTheFormulationThirdPartySCreenISetGrantedTo(string trueOrFalse)
 		{
 			var thisNewProduct = new NewProduct();
@@ -517,7 +518,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In the Formulation 3rd Party screen I set Decline to (true|false)")]
+		[RegexStepDefinition(@"In the Formulation 3rd Party screen I set Decline to (true|false)")]
 		public void InTheFormulationThirdPartySCreenISetDeclinedTo(string trueOrFalse)
 		{
 			var thisNewProduct = new NewProduct();
@@ -533,7 +534,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I check the current page is the Ingredients page")]
+		[RegexStepDefinition(@"I check the current page is the Ingredients page")]
 		public void ICheckTheCurrentPageIsTheIngredientsPage()
 		{
 			//string panelTitle= new NewProduct().PanelTitle;
@@ -541,7 +542,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 		}
 
-		[StepDefinition(@"I ensure that there are enough Ingredients in the My Ingredients page to enable pagination")]
+		[RegexStepDefinition(@"I ensure that there are enough Ingredients in the My Ingredients page to enable pagination")]
 		public void ThenIEnsureThatThereAreEnoughIngredientsInTheMyIngredietnsPageToEnablePagination()
 		{
 			var myIngredients = new MyIngredients();

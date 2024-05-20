@@ -1,7 +1,7 @@
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
-using TechTalk.SpecFlow;
+using UL.Automation.ReqnrollHelpers.Classes;
+using Reqnroll;
 using System.Collections.Generic;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
@@ -9,13 +9,14 @@ using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps;
 using UL.Automation.Reporting;
+using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "CreateProducts")]
-	class Steps_CreateProduct : TechTalk.SpecFlow.Steps
+	class Steps_CreateProduct
 	{
-		[StepDefinition(@"I create an electronic product for ItemSync and save it as: (.*), with UPC: (.*)")]
+		[RegexStepDefinition(@"I create an electronic product for ItemSync and save it as: (.*), with UPC: (.*)")]
 		public void GivenICreateAnElectronicProductForItemSyncPartOne(string saveAs)
 		{
 			ReportSettings.UseSubSteps = true;
@@ -46,7 +47,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			// Product is created
 		}
 
-		[StepDefinition(@"I move the product saved as (.*) created for ItemSync from Submitted to Completed")]
+		[RegexStepDefinition(@"I move the product saved as (.*) created for ItemSync from Submitted to Completed")]
 		public void GivenICreateAnElectronicProductForItemSyncPartTwo(string saveAs)
 		{
 			ReportSettings.UseSubSteps = true;
@@ -83,7 +84,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(saveAs, "Completed");
 		}
 
-		[StepDefinition(@"I create an electronic product and save it as: (.*)")]
+		[RegexStepDefinition(@"I create an electronic product and save it as: (.*)")]
 		public void GivenICreateAnElectronicProductAndSaveItAs(string saveAs)
 		{
 			ReportSettings.UseSubSteps = true;
@@ -173,7 +174,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I create a Forced to Completed electronic product and save it as: (.*)")]
+		[RegexStepDefinition(@"I create a Forced to Completed electronic product and save it as: (.*)")]
 		public void GivenIForceCreateAnElectronicProductAndSaveItAs(string saveAs)
 		{
 			ReportSettings.UseSubSteps = true;
@@ -245,7 +246,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I create a kit component in completed status")]
+		[RegexStepDefinition(@"I create a kit component in completed status")]
 		public void CreateKitComponentInCompletedStatus()
 		{
 
@@ -257,7 +258,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		/// retailer = Walmart/ SAM's club
 		/// Saves product information (id) as: Kit_{savedAs}
 		/// </summary>
-		[StepDefinition(@"I create a Kit product and save details as: Kit_(.*)")]
+		[RegexStepDefinition(@"I create a Kit product and save details as: Kit_(.*)")]
 		public void CreateAKitProduct(string savedAs)
 		{
 			if (Context.Contains($"Kit_{savedAs}"))
@@ -348,7 +349,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I search for product by name: (.*) and save the first grid item as: (.*)")]
+		[RegexStepDefinition(@"I search for product by name: (.*) and save the first grid item as: (.*)")]
 		public void SearchProductAndSave(string name, string savedAs)
 		{
 			ReportSettings.UseSubSteps = true;
@@ -382,7 +383,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			selProdGrid.ProductIdField = string.Empty;
 		}
-		[StepDefinition(@"I create a Product using Test Case 85965 \(SOLD = US only, PL = Yes, Completed status for 1 or more retailers\)")]
+		[RegexStepDefinition(@"I create a Product using Test Case 85965 \(SOLD = US only, PL = Yes, Completed status for 1 or more retailers\)")]
 		public void CreateProductUsing85965()
 		{
 			ReportSettings.UseSubSteps = true;
@@ -488,7 +489,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I create a Completed product using Test Case 86187 \(SOLD = US and Canada, PL = Yes, Canadian Tire Retailer Product\)")]
+		[RegexStepDefinition(@"I create a Completed product using Test Case 86187 \(SOLD = US and Canada, PL = Yes, Canadian Tire Retailer Product\)")]
 		public void CreateProductUsing86187()
 		{
 			ReportSettings.UseSubSteps = true;
@@ -582,7 +583,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I create a Completed product using Test Case 86187 and SHA account saved as: (.*) \(SOLD = US and Canada, PL = Yes, Canadian Tire Retailer Product\)")]
+		[RegexStepDefinition(@"I create a Completed product using Test Case 86187 and SHA account saved as: (.*) \(SOLD = US and Canada, PL = Yes, Canadian Tire Retailer Product\)")]
 		public void CreateProductUsing86187AndShaAccount(string shaAcc)
 		{
 			ReportSettings.UseSubSteps = true;
@@ -677,7 +678,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"I create a product and force it into Completed using Test Case 86187 and SHA account saved as: (.*) \(SOLD = US and Canada, PL = Yes, Canadian Tire Retailer Product\)")]
+		[RegexStepDefinition(@"I create a product and force it into Completed using Test Case 86187 and SHA account saved as: (.*) \(SOLD = US and Canada, PL = Yes, Canadian Tire Retailer Product\)")]
 		public void CreateForcedProductUsing86187AndShaAccount(string shaAcc)
 		{
 			ReportSettings.UseSubSteps = true;
@@ -767,7 +768,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"For CVS I create a product of type: Health & Beauty \(RUCC0392\), save it as: (.*) and leave it in New Status")]
+		[RegexStepDefinition(@"For CVS I create a product of type: Health & Beauty \(RUCC0392\), save it as: (.*) and leave it in New Status")]
 		public void ForCVSICreateProductOfTypeHealthBeautyAndLeaveAsNew(string savedAs)
 		{
 			ReportSettings.UseSubSteps = true;
@@ -806,7 +807,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
 		}
 
-		[StepDefinition(@"For CVS I create a product of type: Toys \(RUCC0388\), save it as: (.*) and leave it in New Status")]
+		[RegexStepDefinition(@"For CVS I create a product of type: Toys \(RUCC0388\), save it as: (.*) and leave it in New Status")]
 		public void ForCVSICreateProductOfTypeToysAndLeaveAsNew(string savedAs)
 		{
 			var sharedSteps = new Steps_Shared();
@@ -851,7 +852,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"For CVS I create a product of type: Artist Supply \(RUCC0384\), save it as: (.*) and leave it in New Status")]
+		[RegexStepDefinition(@"For CVS I create a product of type: Artist Supply \(RUCC0384\), save it as: (.*) and leave it in New Status")]
 		public void ForCVSICreateProductOfTypeArtistSupplyAndLeaveAsNew(string savedAs)
 		{
 			var sharedSteps = new Steps_Shared();
@@ -900,7 +901,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"For CVS I create a product of type: Cleaning Supply \(RUCC0397\), save it as: (.*) and leave it in New Status")]
+		[RegexStepDefinition(@"For CVS I create a product of type: Cleaning Supply \(RUCC0397\), save it as: (.*) and leave it in New Status")]
 		public void ForCVSICreateProductOfTypeCleaningSupplyAndLeaveAsNew(string savedAs)
 		{
 			var sharedSteps = new Steps_Shared();
@@ -955,7 +956,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"For CVS I create a product of type: Home Improvement \(RUCC0394\), save it as: (.*) and leave it in New Status")]
+		[RegexStepDefinition(@"For CVS I create a product of type: Home Improvement \(RUCC0394\), save it as: (.*) and leave it in New Status")]
 		public void ForCVSICreateProductOfTypeHomeImprovmentAndLeaveAsNew(string savedAs)
 		{
 
@@ -987,7 +988,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		}
-		[StepDefinition(@"For CVS I create a product of type: Lawn & Garden \(RUCC0395\), save it as: (.*) and leave it in New Status")]
+		[RegexStepDefinition(@"For CVS I create a product of type: Lawn & Garden \(RUCC0395\), save it as: (.*) and leave it in New Status")]
 		public void ForCVSICreateProductOfTypeLawnGardenAndLeaveAsNew(string savedAs)
 		{
 			var sharedSteps = new Steps_Shared();
@@ -1041,7 +1042,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		}
-		[StepDefinition(@"For CVS I create a product of type: Miscellaneous \(RUCC0400\), save it as: (.*) and leave it in New Status")]
+		[RegexStepDefinition(@"For CVS I create a product of type: Miscellaneous \(RUCC0400\), save it as: (.*) and leave it in New Status")]
 		public void ForCVSICreateProductOfTypeMiscAndLeaveAsNew(string savedAs)
 		{
 			var sharedSteps = new Steps_Shared();
@@ -1080,7 +1081,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new GlobalSteps().ThenTheHomeScreenShouldLoad();
 
 		}
-		[StepDefinition(@"For CVS I create a product of type: Nutritional \(RUCC0592\), save it as: (.*) and leave it in New Status")]
+		[RegexStepDefinition(@"For CVS I create a product of type: Nutritional \(RUCC0592\), save it as: (.*) and leave it in New Status")]
 		public void ForCVSICreateProductOfTypeNutritionalAndLeaveAsNew(string savedAs)
 		{
 			var sharedSteps = new Steps_Shared();
@@ -1120,7 +1121,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		}
-		[StepDefinition(@"For CVS I create a product of type: Over-the-Counter \(RUCC1002\), save it as: (.*) and leave it in New Status")]
+		[RegexStepDefinition(@"For CVS I create a product of type: Over-the-Counter \(RUCC1002\), save it as: (.*) and leave it in New Status")]
 		public void ForCVSICreateProductOfTypeOTCAndLeaveAsNew(string savedAs)
 		{
 			var sharedSteps = new Steps_Shared();
@@ -1157,7 +1158,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"For CVS I create a product of type: Pet Care \(RUCC0387\), save it as: (.*) and leave it in New Status")]
+		[RegexStepDefinition(@"For CVS I create a product of type: Pet Care \(RUCC0387\), save it as: (.*) and leave it in New Status")]
 		public void ForCVSICreateProductOfTypePetCareAndLeaveAsNew(string savedAs)
 		{
 			var sharedSteps = new Steps_Shared();
@@ -1206,7 +1207,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"For CVS I create a product of type: Photography \(RUCC0735\), save it as: (.*) and leave it in New Status")]
+		[RegexStepDefinition(@"For CVS I create a product of type: Photography \(RUCC0735\), save it as: (.*) and leave it in New Status")]
 		public void ForCVSICreateProductOfTypePhotographyAndLeaveAsNew(string savedAs)
 		{
 			var sharedSteps = new Steps_Shared();
@@ -1246,7 +1247,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"For CVS I create a product of type: Sporting Goods \(RUCC0386\), save it as: (.*) and leave it in New Status")]
+		[RegexStepDefinition(@"For CVS I create a product of type: Sporting Goods \(RUCC0386\), save it as: (.*) and leave it in New Status")]
 		public void ForCVSICreateProductOfTypeSportingGoodsAndLeaveAsNew(string savedAs)
 		{
 			var sharedSteps = new Steps_Shared();
@@ -1301,7 +1302,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"For CVS I create a product of type: Stationery \(RUCC0385\), save it as: (.*) and leave it in New Status")]
+		[RegexStepDefinition(@"For CVS I create a product of type: Stationery \(RUCC0385\), save it as: (.*) and leave it in New Status")]
 		public void ForCVSICreateProductOfTypeStationeryAndLeaveAsNew(string savedAs)
 
 		{
@@ -1333,7 +1334,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"For CVS I create a product of type: Battery \(RUCC0733\), save it as: (.*) and leave it in New Status")]
+		[RegexStepDefinition(@"For CVS I create a product of type: Battery \(RUCC0733\), save it as: (.*) and leave it in New Status")]
 		public void ForCVSICreateProductOfTypeBatteryAndLeaveAsNew(string savedAs)
 
 		{
@@ -1375,7 +1376,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"For CVS I create a product of type: Grocery \(RUCC0389\), save it as: (.*) and leave it in New Status")]
+		[RegexStepDefinition(@"For CVS I create a product of type: Grocery \(RUCC0389\), save it as: (.*) and leave it in New Status")]
 		public void ForCVSICreateProductOfTypeGroceryAndLeaveAsNew(string savedAs)
 
 		{
@@ -1408,7 +1409,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		//[StepDefinition(@"For CVS I create a product of type: Pharmacy \(RUCC0393\), save it as: (.*) and leave it in New Status")]
+		//[RegexStepDefinition(@"For CVS I create a product of type: Pharmacy \(RUCC0393\), save it as: (.*) and leave it in New Status")]
 		//public void ForCVSICreateProductOfTypePharmacyAndLeaveAsNew(string savedAs)
 
 		//{
@@ -1446,7 +1447,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		//}
 
-		[StepDefinition(@"For CVS I create a product of type: Pharmacy \(RUCC0393\), save it as: (.*) and leave it in New Status")]
+		[RegexStepDefinition(@"For CVS I create a product of type: Pharmacy \(RUCC0393\), save it as: (.*) and leave it in New Status")]
 		public void ForCVSICreateProductOfTypePharmacyAndLeaveAsNew(string savedAs)
 
 		{
@@ -1490,7 +1491,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I create a CA Cleaning Compliant product, select ingredient type and functional purpose then save it as: (.*) and progress it to submitted")]
+		[RegexStepDefinition(@"I create a CA Cleaning Compliant product, select ingredient type and functional purpose then save it as: (.*) and progress it to submitted")]
 		public void CreateCACleaningCompliantProductSelectIngredientTypeAndFunctionalPurposeAndProgressToSubmitted(string savedAs)
 		{
 			var sharedSteps = new Steps_Shared();
@@ -1634,7 +1635,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In the Product Information Screen I answer the questions as follows - US only - No to GHS - No to shipped supplier - Yes to CA Cleaning - No to Private Label - No to Sold to retailer\)")]
+		[RegexStepDefinition(@"In the Product Information Screen I answer the questions as follows - US only - No to GHS - No to shipped supplier - Yes to CA Cleaning - No to Private Label - No to Sold to retailer\)")]
 		public void ProductInformation_YesToCACleaning()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
@@ -1690,7 +1691,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 		}
 
-		[StepDefinition(@"In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details")]
+		[RegexStepDefinition(@"In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details")]
 		public void InTheCACleaningProductDisclosureScreenChooseHappyPath()
 		{
 			var MyStepsNewProduct = new StepsNewProduct();
@@ -1730,7 +1731,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"CVS Pharmacy - No, Later Date")]
+		[RegexStepDefinition(@"CVS Pharmacy - No, Later Date")]
 		public void SharedCVSPharmacy_YesIWishToContinue()
 		{
 			ReportSettings.UseSubSteps = true;
@@ -1746,7 +1747,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selNewProductSteps.ClickContinue();
 		}		
 
-		[StepDefinition(@"For Staples I create a product of RUCC Stationery and progress it to the UPC screen")]
+		[RegexStepDefinition(@"For Staples I create a product of RUCC Stationery and progress it to the UPC screen")]
 		public void ForStaplesICreateANewStationeryProductAndProgressItToTheUPCScreen()
 
 		{
@@ -1772,7 +1773,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I create a Chalk product for Canadian Tire and Proccess it through to Accepted")]
+		[RegexStepDefinition(@"I create a Chalk product for Canadian Tire and Proccess it through to Accepted")]
 		public void CreateAcceptedProductCanadianTire()
 		{
 			ReportSettings.UseSubSteps = true;
@@ -1869,7 +1870,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I create a Chalk product for Amazon and Proccess it through to Accepted")]
+		[RegexStepDefinition(@"I create a Chalk product for Amazon and Proccess it through to Accepted")]
 		public void CreateAcceptedProductAmazon()
 		{
 			ReportSettings.UseSubSteps = true;
@@ -1906,7 +1907,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			Report.StartStep("I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for");
 
-			var retailerTable = new TechTalk.SpecFlow.Table("Retailer");
+			var retailerTable = new Table("Retailer");
 			retailerTable.AddRow("Amazon");
 
 			sharedSteps.GivenICallSharedStep75146Retailer_SelectOneOrMoreRetailersThatDoNotRequireVendorIDOrAdditionalUPCInformationClickDoneClickContinue(retailerTable);
@@ -1970,7 +1971,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I create a Chalk product for Amazon and Proccess it through to Accepted Using Sha Account: (.*)")]
+		[RegexStepDefinition(@"I create a Chalk product for Amazon and Proccess it through to Accepted Using Sha Account: (.*)")]
 		public void CreateAcceptedProductAmazonusingShaAccount(string shaAccount)
 		{
 			ReportSettings.UseSubSteps = true;
@@ -2007,7 +2008,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			Report.StartStep("I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for");
 
-			var retailerTable = new TechTalk.SpecFlow.Table("Retailer");
+			var retailerTable = new Table("Retailer");
 			retailerTable.AddRow("Amazon");
 
 			sharedSteps.GivenICallSharedStep75146Retailer_SelectOneOrMoreRetailersThatDoNotRequireVendorIDOrAdditionalUPCInformationClickDoneClickContinue(retailerTable);
@@ -2073,7 +2074,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"I create a Chalk product for Amazon and Force it into to Completed Using Sha Account: (.*)")]
+		[RegexStepDefinition(@"I create a Chalk product for Amazon and Force it into to Completed Using Sha Account: (.*)")]
 		public void CreateForcedCompletedProductAmazonusingShaAccount(string shaAccount)
 		{
 			ReportSettings.UseSubSteps = true;
@@ -2110,7 +2111,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			Report.StartStep("I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for");
 
-			var retailerTable = new TechTalk.SpecFlow.Table("Retailer");
+			var retailerTable = new Table("Retailer");
 			retailerTable.AddRow("Amazon");
 
 			sharedSteps.GivenICallSharedStep75146Retailer_SelectOneOrMoreRetailersThatDoNotRequireVendorIDOrAdditionalUPCInformationClickDoneClickContinue(retailerTable);
@@ -2171,7 +2172,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I Search the Products Grid for the kit product with name: (.*), and create the kit if it is not found")]
+		[RegexStepDefinition(@"I Search the Products Grid for the kit product with name: (.*), and create the kit if it is not found")]
 		public void SearchProductsGridForKitByNameAndCreateIfNotFound(string name)
 		{
 			new StepsProductGrid().WhenIFilterTheProductsByNotYetSubmitted("Assessment in Progress");

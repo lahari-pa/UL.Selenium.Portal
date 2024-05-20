@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using UL.Automation.Reporting.Functions;
-using TechTalk.SpecFlow;
+using Reqnroll;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
@@ -12,7 +13,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 	[Binding, Scope(Tag = "NewProduct")]
 	class Steps_PesticideDetailsUS
 	{
-		[StepDefinition(@"I add the EPA registration number: (.*)")]
+		[RegexStepDefinition(@"I add the EPA registration number: (.*)")]
 		public void IAddTheEPARegistrationNumber(string epaNumber)
 		{
 			// New EPA rows are always added to the top of the stack, so check if top row has any data before entering the test value
@@ -46,7 +47,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition("I confirm data for EPA Registration: (.*) is complete")]
+		[RegexStepDefinition("I confirm data for EPA Registration: (.*) is complete")]
 		public void ConfirmDataForEPARegistrationIsComplete(string epaNumber)
 		{
 			var epaRegistrations = new PesticideDetailsUS().EPARegistrationData;
@@ -96,14 +97,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I confirm the EPA Registration Table is empty")]
+		[RegexStepDefinition(@"I confirm the EPA Registration Table is empty")]
 		public void ConfirmEPATableIsEmpty()
 		{
 			var displayedEPARegistrations = new PesticideDetailsUS().EPARegistrationData;
 			Report.IsTrue(displayedEPARegistrations.Count == 0, "There were rows in the EPA Table when it was expected to be empty", "The EPA Table was empty as expected, with a row count of 0");
 		}
 
-		[StepDefinition(@"I confirm the EPA Registration Table contains a total of (.*) rows")]
+		[RegexStepDefinition(@"I confirm the EPA Registration Table contains a total of (.*) rows")]
 		public void ConfirmEPARegistrationRowCount(string count)
 		{
 			if (!int.TryParse(count, out var expectedCount))
@@ -117,7 +118,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"The actual EPA Registration row count was: " + actualCount + " as expected.");
 		}
 
-		[StepDefinition(@"I click Remove for the item on the first EPA Registration Table row")]
+		[RegexStepDefinition(@"I click Remove for the item on the first EPA Registration Table row")]
 		public void RemoveFirstEPARegistration()
 		{
 			//Report.IsTrue(new PesticideDetailsUS().RemoveEPATopRow(), "Failed to click 'Remove' on the top row of the EPA table", "Successfully clicked 'Remove' on the top row of the EPA table");
@@ -140,7 +141,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I click Add Row in the EPA Registration Table")]
+		[RegexStepDefinition(@"I click Add Row in the EPA Registration Table")]
 		public void ClickAddRowEPATable()
 		{
 			Report.IsTrue(new PesticideDetailsUS().ClickAddRow(),
@@ -148,7 +149,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully clicked Add Row in the EPA Table");
 		}
 
-		[StepDefinition(@"I confirm the EPA Registration table contains the heading: (.*)")]
+		[RegexStepDefinition(@"I confirm the EPA Registration table contains the heading: (.*)")]
 		public void EPATableHeadingExpected(string expectedHeading)
 		{
 			var actualHeading = new NewProduct().TableHeading();
@@ -157,7 +158,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"The table heading matched the expected text: " + expectedHeading);
 		}
 
-		[StepDefinition(@"I confirm the EPA Pesticide Registration table is (shown|not shown)")]
+		[RegexStepDefinition(@"I confirm the EPA Pesticide Registration table is (shown|not shown)")]
 		public void EPAPesticideTableIsShownOrNot(string shown)
 		{
 			var selNewProduct = new NewProduct();
@@ -171,7 +172,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I confirm the following columns are displayed in the EPA Registration table")]
+		[RegexStepDefinition(@"I confirm the following columns are displayed in the EPA Registration table")]
 		public void ConfirmDisplayedColumnsInEPATable(Table columns)
 		{
 			var expectedColumns = new List<string>();

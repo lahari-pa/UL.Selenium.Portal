@@ -18,9 +18,10 @@ using UL.Selenium.Portal.WERCSmart.Steps;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
-using TechTalk.SpecFlow;
+using Reqnroll;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
+using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
@@ -28,7 +29,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 	class Steps_Pharma
 	{
 
-		[StepDefinition(@"I check for the following options in the Additonal Documents to Provide section")]
+		[RegexStepDefinition(@"I check for the following options in the Additonal Documents to Provide section")]
 		public void ThenICheckForTheFollowingOptionsInTheAdditonalDocumentsToProvideSection(Table table)
 		{
 			Pharma pharmaObject = new Pharma();
@@ -41,14 +42,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I fill all empty fields in the SPL Information screen")]
+		[RegexStepDefinition(@"I fill all empty fields in the SPL Information screen")]
 		public void GivenIFillAllEmmptyFieldsInTheSPLInformationScreen()
 		{
 			Pharma pharmaObject = new Pharma();
 			Report.IsTrue(pharmaObject.CheckAndFillEmptyFieldsInSPLInformationScreen(), "Failed to fill in all empty fields", "Successfully filled in all empty fields");
 		}
 
-		[StepDefinition(@"I fill all empty fields in the Pharma Ingredients screen")]
+		[RegexStepDefinition(@"I fill all empty fields in the Pharma Ingredients screen")]
 		public void GivenIFillAllEmptyFieldsInThePharmaIngredientsScreen()
 		{ 
 			Pharma pharmaObject = new Pharma();
@@ -57,7 +58,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 
 
-		[StepDefinition(@"I enter the NDC number: (.*)")]
+		[RegexStepDefinition(@"I enter the NDC number: (.*)")]
 		public void GivenIEnterNDC(string number)
 		{
 			Pharma pharmaObject = new Pharma();
@@ -70,7 +71,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
-		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains the following product name: '(.*)'")]
+		[RegexStepDefinition(@"I confirm that the excel file saved as: (.*) contains the following product name: '(.*)'")]
 		public bool ThenIConfirmThatTheExcelFileSavedAsProductsInScopeReportForBBBContainsTheFollowingProductName(string fileName, string productName)
 		{
 

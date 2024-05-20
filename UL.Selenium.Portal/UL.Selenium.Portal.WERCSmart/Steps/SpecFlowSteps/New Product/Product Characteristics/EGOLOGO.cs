@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TechTalk.SpecFlow;
+using Reqnroll;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {
 	[Binding, Scope(Tag = "Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ECOLOGO")]
 	internal class EGOLOGO
 	{
-		[StepDefinition(@"I enter the text of Take advantage of Premium Subscription benefits field to: (.*)")]
+		[RegexStepDefinition(@"I enter the text of Take advantage of Premium Subscription benefits field to: (.*)")]
 		public void GivenEnterTakedvantageOfPremiumSubscriptionBenefitsValue(string value)
 		{
 			Report.Info($"I set the text of Take advantage of Premium Subscription benefits field to: {value}");

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using UL.Automation.Reporting.Functions;
-using TechTalk.SpecFlow;
-using UL.Automation.SpecFlow.Classes;
+using Reqnroll;
+using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 using UL.Automation.WebDriver.Classes;
@@ -16,7 +17,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 	{
 		private ProductIncludesBattery ProductIncludesBattery => new ProductIncludesBattery();
 
-		[StepDefinition(@"For 'Indicate how battery is packaged' I select: (.*)")]
+		[RegexStepDefinition(@"For 'Indicate how battery is packaged' I select: (.*)")]
 		public void ForIndicateHowBatteryIsPackagedISelect(string option)
 		{
 			Report.IsTrue(this.ProductIncludesBattery.WaitForTab(NewProduct.Tab.ProductCharacteristics), "Product characteristics has not loaded","Product characteristics tab is loaded.");
@@ -30,7 +31,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		/// It saves the manufacturer to context as battery_manufacturer1, battery_manufacturer2 according to the order they were added (table row number)
 		/// </summary>
 		/// <param name="table"></param>
-		[StepDefinition(@"I add the following batteries:")]
+		[RegexStepDefinition(@"I add the following batteries:")]
 		// Requires a table with the headings: | Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product | Saved As |
 		public void AddTheFollowingBatteries(Table table)
 		{
@@ -62,7 +63,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				{
 					// add a table row for each battery in the list and enters data into each column
 					Report.Info("Adding the following batteries:");
-					SpecFlowReporting.Table(table);
+					ReqnrollReporting.Table(table);
 					this.ProductIncludesBattery.Batteries = listOfBatteries;
 					Report.Info("Removing empty battery rows");
 					this.ProductIncludesBattery.DeleteEmptyBatteryRows();

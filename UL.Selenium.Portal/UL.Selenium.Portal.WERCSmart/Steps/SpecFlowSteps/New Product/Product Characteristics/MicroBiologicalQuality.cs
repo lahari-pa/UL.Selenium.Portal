@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TechTalk.SpecFlow;
+using Reqnroll;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {
@@ -13,7 +14,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 	internal class MicroBiologicalQuality
 	{
 
-		[StepDefinition(@"I enter the text of Product designed for Age Group field to: (.*)")]
+		[RegexStepDefinition(@"I enter the text of Product designed for Age Group field to: (.*)")]
 		public void GivenEnterProductDesignedForAgeGroupValue(string value)
 		{
 			Report.Info($"I set the text of Product designed for Age Group field to: {value}");
@@ -21,7 +22,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			selNewProduct.SetTheSectionOptionTo("Product designed for Age Group", value);
 		}
 
-		[StepDefinition(@"I enter the text of Did any organisms survive the US Pharmacopia Microbiological Testing field to: (.*)")]
+		[RegexStepDefinition(@"I enter the text of Did any organisms survive the US Pharmacopia Microbiological Testing field to: (.*)")]
 		public void GivenEnterDidAnyOrganismsSurviveTheUSPharmacopiaMicrobiologicalTestingValue(string value)
 		{
 			Report.Info($"I set the text of Did any organisms survive the US Pharmacopia Microbiological Testing field to: {value}");
@@ -29,7 +30,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			selNewProduct.SetTheSectionOptionTo("Did any organisms survive the US Pharmacopia Microbiological Testing?", value);
 		}
 
-		[StepDefinition(@"I enter the text of If so- which micro-organisms survived field to: (.*)")]
+		[RegexStepDefinition(@"I enter the text of If so- which micro-organisms survived field to: (.*)")]
 		public void GivenEnterIfSoWhichMicroOrganismsSurvivedValue(string value)
 		{
 			Report.Info($"I set the text of If so- which micro-organisms survived field to: {value}");

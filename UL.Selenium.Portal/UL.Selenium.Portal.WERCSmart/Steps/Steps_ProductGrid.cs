@@ -4,13 +4,14 @@ using System.Linq;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
-using TechTalk.SpecFlow;
+using UL.Automation.ReqnrollHelpers.Classes;
+using Reqnroll;
 using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Automation.Reporting.Classes;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -18,7 +19,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding, Scope(Tag = "ProductGrid")]
 	public class StepsProductGrid
 	{
-		[StepDefinition(@"I should see an option for (More Filters|Product ID/Name|Bulk Actions)")]
+		[RegexStepDefinition(@"I should see an option for (More Filters|Product ID/Name|Bulk Actions)")]
 		public void GivenIShouldSeeAnOptionFor(string field)
 		{
 			Report.StartStep(Report.Details.StepIndex + $" - Checking that option {field} is present");
@@ -48,7 +49,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"the Product Grid should have the following headers:")]
+		[RegexStepDefinition(@"the Product Grid should have the following headers:")]
 		public void GivenTheProductGridShouldHaveTheFollowingHeaders(Table table)
 		{
 			Report.StartStep(Report.Details.StepIndex + " - Checking Product Grid Headers");
@@ -67,7 +68,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I can navigate between pages using the pagniation buttons at the bottom of the grid")]
+		[RegexStepDefinition(@"I can navigate between pages using the pagniation buttons at the bottom of the grid")]
 		public void GivenICanNavigateBetweenPagesUsingThePagniationButtonsAtTheBottomOfTheGrid()
 		{
 			Report.StartStep(Report.Details.StepIndex + " - Checking Pagniation");
@@ -95,7 +96,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I search for the first product in the table")]
+		[RegexStepDefinition(@"I search for the first product in the table")]
 		public void GivenISearchForTheFirstProductInTheTable()
 		{
 			Report.StartStep(Report.Details.StepIndex + " - Searching for First Product In Grid");
@@ -119,8 +120,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I filter for the product saved as: (.*)")]
-		[StepDefinition(@"I search for the product saved as: (.*)")]
+		[RegexStepDefinition(@"I filter for the product saved as: (.*)")]
+		[RegexStepDefinition(@"I search for the product saved as: (.*)")]
 		public void GivenISearchForTheProductSavedAs(string savedAs)
 		{
 			Delay.Seconds(30);
@@ -200,8 +201,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I filter for the product with SKU saved as: (.*)")]
-		[StepDefinition(@"I search for the product with SKU saved as: (.*)")]
+		[RegexStepDefinition(@"I filter for the product with SKU saved as: (.*)")]
+		[RegexStepDefinition(@"I search for the product with SKU saved as: (.*)")]
 		public void GivenISearchForTheProductWithSKUSavedAs(string savedAs)
 		{
 			Report.StartStep(Report.Details.StepIndex + " - Searching for Product Saved as " + savedAs);
@@ -257,7 +258,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the follow product doesn't exist in the product grid: (.*)")]
+		[RegexStepDefinition(@"I confirm the follow product doesn't exist in the product grid: (.*)")]
 		public void GivenISearchForTheProductSavedAsAndConfirmItDoesNotExist(string savedAs)
 		{
 			Report.StartStep(Report.Details.StepIndex + " - Searching for Product Saved as " + savedAs);
@@ -325,7 +326,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I search for the product: (.*)")]
+		[RegexStepDefinition(@"I search for the product: (.*)")]
 		public void SearchForTheProduct(string product)
 		{
 			Report.Info("Searching for product with ID: '" + product + "'");
@@ -337,7 +338,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I confirm that the product returned has the same name as the product saved as: (.*)")]
+		[RegexStepDefinition(@"I confirm that the product returned has the same name as the product saved as: (.*)")]
 		public void ConfirmThatProductHasSameName(string savedAs)
 		{
 			if (!Context.Contains(savedAs))
@@ -395,7 +396,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully found matching name '" + name + "'.");
 		}
 
-		[StepDefinition(@"I confirm that the product returned has the retailer: (.*)")]
+		[RegexStepDefinition(@"I confirm that the product returned has the retailer: (.*)")]
 		public void ConfirmThatProductHasRetailer(string retailer)
 		{
 			var selProdGrid = new ProductsGrid();
@@ -403,7 +404,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully found retailer '" + retailer + "' on first product returned.");
 		}
 
-		[StepDefinition(@"I clear the Search Criteria")]
+		[RegexStepDefinition(@"I clear the Search Criteria")]
 		public void ClearSearchCriteria()
 		{
 			var selProdGrid = new ProductsGrid();
@@ -421,7 +422,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I confirm the Delete Dialog")]
+		[RegexStepDefinition(@"I confirm the Delete Dialog")]
 		public void ConfirmDeleteDialog()
 		{
 			var selDeleteConfirm = new DeleteDialog();
@@ -431,7 +432,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-		[StepDefinition(@"I cancel the Delete Dialog")]
+		[RegexStepDefinition(@"I cancel the Delete Dialog")]
 		public void CancelDeleteDialog()
 		{
 			var selDeleteConfirm = new DeleteDialog();
@@ -441,7 +442,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-		[StepDefinition(@"I (should|should not) see the product returned in the search results")]
+		[RegexStepDefinition(@"I (should|should not) see the product returned in the search results")]
 		public void ThenIShouldSeeTheProductReturnedInTheSearchResults(string shouldOrNot)
 		{
 			Report.Info("Correct product " + shouldOrNot + " be returned in the search grid");
@@ -457,7 +458,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(selProdGrid.GetIdInFirstGridRow() == searchedId, "ID returned was not the same as that searched for!", "ID returned was the same as that searched for");
 		}
 
-		[StepDefinition(@"I should only see one product in the grid, with Product ID matching that saved as: (.*)")]
+		[RegexStepDefinition(@"I should only see one product in the grid, with Product ID matching that saved as: (.*)")]
 		public void IShouldOnlySeeOneProductWithUPC(string savedAs)
 		{
 			var selProductsGrid = new ProductsGrid();
@@ -505,7 +506,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Product with ID: " + id + " was the only result returned as expected");
 		}
 
-		[StepDefinition(@"I (should|should not) see products in the Product Grid")]
+		[RegexStepDefinition(@"I (should|should not) see products in the Product Grid")]
 		public void ProductsPresentInGrid(string shouldOrNot)
 		{
 			Report.Info("Products " + shouldOrNot + " be returned in the search grid");
@@ -516,7 +517,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Results grid " + (productsExpected ? "was" : "was not") + " showing products, as expected!");
 		}
 
-		[StepDefinition(@"I filter the products by: (All|Not Yet Submitted|Assessment in Progress|Sending to Retailers|Accepted by Retailers|Needs Your Attention)")]
+		[RegexStepDefinition(@"I filter the products by: (All|Not Yet Submitted|Assessment in Progress|Sending to Retailers|Accepted by Retailers|Needs Your Attention)")]
 		public void WhenIFilterTheProductsByNotYetSubmitted(string filter)
 		{
 			Report.Info("Filtering Product Grid by " + filter);
@@ -524,7 +525,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(selProdGrid.ClickStatusFilter(filter), "Failed to click filter option: '" + filter + "'", "Successfully filtered grid by: '" + filter + "'");
 		}
 
-		[StepDefinition(@"I save the ProductID and Name of the first Product in the grid as: (.*)")]
+		[RegexStepDefinition(@"I save the ProductID and Name of the first Product in the grid as: (.*)")]
 		public void SaveFirstProductInGrid(string savedAs)
 		{
 			Report.Info("Saving Product ID and Name of First Product as " + savedAs);
@@ -534,8 +535,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Success("Got the first Product in Grid (ID: " + productElement.ProductId + ") and saved to: " + savedAs);
 		}
 
-		[StepDefinition(@"I click Row Actions for the first product returned")]
-		[StepDefinition(@"I click Row Actions for the most recent product returned")]
+		[RegexStepDefinition(@"I click Row Actions for the first product returned")]
+		[RegexStepDefinition(@"I click Row Actions for the most recent product returned")]
 		public void WhenIClickRowActionsForTheFirstProductReturned()
 		{
 			Report.StartStep(Report.Details.StepIndex + " - Clicking 'Row Actions' for first product returned");
@@ -562,7 +563,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click Row Actions for product saved as: (.*)")]
+		[RegexStepDefinition(@"I click Row Actions for product saved as: (.*)")]
 		public void IClickRowActionsForTheProductSavedAs(string savedAs)
 		{
 			Report.StartStep(Report.Details.StepIndex + " - Clicking 'Row Actions' for product saved as " + savedAs + ".");
@@ -587,7 +588,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click on the Row Action: (.*)")]
+		[RegexStepDefinition(@"I click on the Row Action: (.*)")]
 		public void ClickRowAction(string action)
 		{
 			Report.StartStep(Report.Details.StepIndex + " - Clicking on Row Action: " + action);
@@ -609,7 +610,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(10);
 		}
 
-		[StepDefinition(@"I should (see|only see|not see) the following Actions options")]
+		[RegexStepDefinition(@"I should (see|only see|not see) the following Actions options")]
 		public void ThenIShouldSeeTheFollowingOptions(string seeCondition, Table table)
 		{
 			Report.Info("Checking Row Actions");
@@ -653,7 +654,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I verify text in Transfer to Tiered Subscription popup contains Product ID saved as: (.*)")]
+		[RegexStepDefinition(@"I verify text in Transfer to Tiered Subscription popup contains Product ID saved as: (.*)")]
 		public void ThenIVerifyTextInTransferToTieredSubscriptionPopupContainsProductIDSavedAsFirstProduct(string savedAs)
 		{
 			var product = (ProductGridItem)Context.GetFromContext(savedAs);
@@ -665,7 +666,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I click Bulk Actions in the Products Grid")]
+		[RegexStepDefinition(@"I click Bulk Actions in the Products Grid")]
 		public void GivenIClickBulkActionsInTheProductsGrid()
 		{
 			Report.StartStep(Report.Details.StepIndex + " - Clicking Bulk Actions in Products Grid");
@@ -684,7 +685,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I should see a popup with header Bulk Actions")]
+		[RegexStepDefinition(@"I should see a popup with header Bulk Actions")]
 		public void ThenIShouldSeeAPopupWithHeaderBulkActions()
 		{
 			Report.StartStep(Report.Details.StepIndex + " - Checking Bulk Actions popup appears");
@@ -702,7 +703,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I should see the following options available in the Bulk Actions window")]
+		[RegexStepDefinition(@"I should see the following options available in the Bulk Actions window")]
 		public void ThenIShouldSeeTheFollowingOptionsAvailableInTheBulkActionsWindow(Table table)
 		{
 			Report.StartStep(Report.Details.StepIndex + " - Checking Bulk Actions Options");
@@ -718,7 +719,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click (Forward Product Registration|Sync Products|Accept Documents|Download Reports|Delete Products) in the Bulk Actions window")]
+		[RegexStepDefinition(@"I click (Forward Product Registration|Sync Products|Accept Documents|Download Reports|Delete Products) in the Bulk Actions window")]
 		public void GivenIClickForwardProductRegistrationInTheBulkActionsWindow(string option)
 		{
 			Report.Info("Clicking " + option + " in the Bulk Actions window");
@@ -731,7 +732,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		/// <summary>
 		/// Clicking the x to close the Bulk Actions popup
 		/// </summary>
-		[StepDefinition(@"I click on the close button on Bulk Actions")]
+		[RegexStepDefinition(@"I click on the close button on Bulk Actions")]
 		public void ClickCloseOnBulkActions()
 		{
 			Report.StartStep(Report.Details.StepIndex + " - I click the close button");
@@ -744,7 +745,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		/// <summary>
 		/// Clicking the cancel on the uslc sync popup
 		/// </summary>
-		[StepDefinition(@"I click on the cancel button on the ULSC Sync popup")]
+		[RegexStepDefinition(@"I click on the cancel button on the ULSC Sync popup")]
 		public void ClickCancelUlscSyncPopup()
 		{
 			Report.StartStep(Report.Details.StepIndex + " - I click the cancel button");
@@ -758,7 +759,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		/// This is to verify the title of the page
 		/// </summary>
 		/// <param name="headerExpected"></param>
-		[StepDefinition(@"I should see the header: (.*) on the Sync Products to ULSC window")]
+		[RegexStepDefinition(@"I should see the header: (.*) on the Sync Products to ULSC window")]
 		public void CorrectHeaderShowing(string headerExpected)
 		{
 			Report.StartStep(Report.Details.StepIndex + " - Sync Products to ULSC window should appear");
@@ -780,7 +781,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition("I generate a unique UPC number and save as: (.*)")]
+		[RegexStepDefinition("I generate a unique UPC number and save as: (.*)")]
 		public void GenerateUniqueUpcNumber(string savedAs)
 		{
 			var grid = new ProductsGrid();
@@ -812,7 +813,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Failure("Failed to generate a unique UPC number after 5 attempts!");
 		}
 
-		[StepDefinition(@"I generate a random UPC number and save as: (.*) and (keep|delete) duplicate UPC products")]
+		[RegexStepDefinition(@"I generate a random UPC number and save as: (.*) and (keep|delete) duplicate UPC products")]
 		public void GivenIGenerateARandomUPCNumberAndSaveAs(string savedAs, string keepOrDelete)
 		{
 			bool delete = keepOrDelete == "delete";
@@ -826,7 +827,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I generate a random UPC number and save as: (.*)")]
+		[RegexStepDefinition(@"I generate a random UPC number and save as: (.*)")]
 		public void GivenIGenerateARandomUPCNumberAndSaveAs(string savedAs)
 		{
 			//string uPCNo = new UpcFunctions().GenerateUPC();
@@ -839,7 +840,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"Generate a random SKU number \(12 random digits\) and save as: (.*)")]
+		[RegexStepDefinition(@"Generate a random SKU number \(12 random digits\) and save as: (.*)")]
 		public void ThenGenerateARandomSKUNumberRandomDigitsAndSaveAsRandomSKU_(string savedAs)
 		{
 			//string uPCNo = new UpcFunctions().GenerateUPC();
@@ -851,7 +852,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(1);
 		}
 
-		[StepDefinition(@"I generate a random Product ID and save as: (.*)")]
+		[RegexStepDefinition(@"I generate a random Product ID and save as: (.*)")]
 		public void GivenIGenerateARandomProductIDAndSaveAs(string savedAs)
 		{
 			//string uPCNo = new UpcFunctions().GenerateUPC();
@@ -863,7 +864,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(1);
 		}
 
-		[StepDefinition(@"I generate a random Ingredient ID and save as: (.*)")]
+		[RegexStepDefinition(@"I generate a random Ingredient ID and save as: (.*)")]
 		public void GivenIGenerateARandomIngredientIDAndSaveAs(string savedAs)
 		{
 			//string uPCNo = new UpcFunctions().GenerateUPC();
@@ -875,7 +876,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(1);
 		}
 
-		[StepDefinition(@"I generate (.*) random UPC numbers and save all to list named: (.*)")]
+		[RegexStepDefinition(@"I generate (.*) random UPC numbers and save all to list named: (.*)")]
 		public void GivenIGenerateXRandomUPCNumbersAndSaveAs(int x, string savedAs)
 		{
 			var listOfUPCs = new List<string>();
@@ -888,14 +889,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(savedAs, listOfUPCs);
 		}
 
-		[StepDefinition(@"I create a new excel document called (.*) and save as (.*)")]
+		[RegexStepDefinition(@"I create a new excel document called (.*) and save as (.*)")]
 		public void ICreateANewExcelDocumentCalledAndSaveAs(string excelName, string saveAs)
 		{
 			var excel = ExcelFunctions.CreateSpreadsheet(excelName);
 			Context.AddToContext(saveAs, excel);
 		}
 
-		[StepDefinition(@"I save the list of UPCs saved as (.*) to excel spreadsheet saved as (.*)")]
+		[RegexStepDefinition(@"I save the list of UPCs saved as (.*) to excel spreadsheet saved as (.*)")]
 		public void ISaveTheListOfUPCsSavedAsToExcelSpreadsheetSavedAs(string listSavedAs, string excelSavedAs)
 		{
 			var listOfUPCs = (List<string>)Context.GetFromContext(listSavedAs);
@@ -909,7 +910,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I delete all products in contextual list of UPCs: (.*)")]
+		[RegexStepDefinition(@"I delete all products in contextual list of UPCs: (.*)")]
 		public void IDeleteAllProductsInContextualListOfUPCs(string savedAs)
 		{
 			var listOfUPCs = (List<string>)Context.GetFromContext(savedAs);
@@ -919,7 +920,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I delete all products with (UPC Number): (.*)")]
+		[RegexStepDefinition(@"I delete all products with (UPC Number): (.*)")]
 		public void DeleteAllProductsMatchingCriteria(string option, string value)
 		{
 			var productGrid = new ProductsGrid();
@@ -959,7 +960,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I delete the product: (.*)")]
+		[RegexStepDefinition(@"I delete the product: (.*)")]
 		public void ThenIDeleteTheProduct(string savedas)
 		{
 			Report.Info("Attempting to get product from context");
@@ -998,7 +999,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		//confirm method
-		[StepDefinition(@"I confirm the product: (.*)")]
+		[RegexStepDefinition(@"I confirm the product: (.*)")]
 		public void ThenIConfirmTheProduct(string savedas)
 		{
 			Report.Info("Attempting to get product from context");
@@ -1033,7 +1034,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"The current page in the products grid is: (.*)")]
+		[RegexStepDefinition(@"The current page in the products grid is: (.*)")]
 		public void CurrentPageProductsGrid(string expectedPage)
 		{
 			string currentPage = new ProductsGrid().ActivePage();
@@ -1042,7 +1043,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The current page in the products grid matched the expected page");
 		}
 
-		[StepDefinition(@"I click (next|previous|...) in the products grid")]
+		[RegexStepDefinition(@"I click (next|previous|...) in the products grid")]
 		public void NavigateInProductsGrid(string navOption)
 		{
 			Report.IsTrue(new ProductsGrid().GridNavigation(navOption),
@@ -1050,7 +1051,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully navigated in the products grid with action: " + navOption);
 		}
 
-		[StepDefinition(@"I should see the products grid navigation input with up and down arrows")]
+		[RegexStepDefinition(@"I should see the products grid navigation input with up and down arrows")]
 		public void PageInputNumber()
 		{
 			Report.IsTrue(new ProductsGrid().GridNavigationInputDisplayed(),
@@ -1058,7 +1059,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The products grid page navigation number input was visible as expected");
 		}
 
-		[StepDefinition(@"I type the number (.*) into the products grid page navigation box and press the enter key")]
+		[RegexStepDefinition(@"I type the number (.*) into the products grid page navigation box and press the enter key")]
 		public void TypeNumberGridNavigationInputAndPressEnter(string pageNum)
 		{
 			var selProductsGrid = new ProductsGrid();
@@ -1068,7 +1069,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selProductsGrid.KeyToGridNavigationInput("enter");
 		}
 
-		[StepDefinition(@"I enter the (up|down) arrow into the products grid page navigation input then the correct page is shown")]
+		[RegexStepDefinition(@"I enter the (up|down) arrow into the products grid page navigation input then the correct page is shown")]
 		public void EnterArrowUserGridNavigationBox(string direction)
 		{
 			var selProductsGrid = new ProductsGrid();
@@ -1094,7 +1095,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					iteration, direction, pageNavigationValue));
 		}
 
-		[StepDefinition(@"I click More Filters in the products grid")]
+		[RegexStepDefinition(@"I click More Filters in the products grid")]
 		public void ClickMoreFilters()
 		{
 			Delay.Seconds(4);
@@ -1103,7 +1104,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked 'More Filters' in the products grid");
 		}
 
-		[StepDefinition(@"I select the (.*) option in the (Brand|Retailer|Additional Programs) More Filters drop down")]
+		[RegexStepDefinition(@"I select the (.*) option in the (Brand|Retailer|Additional Programs) More Filters drop down")]
 		public void SetMoreFilterOption(string option, string filter)
 		{
 			var selMoreFilters = new MoreFilters();
@@ -1135,7 +1136,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I select the More Filters - Brand saved as: (.*) by ID")]
+		[RegexStepDefinition(@"I select the More Filters - Brand saved as: (.*) by ID")]
 		public void SelectMoreFiltersBrandSavedAs(string savedAs)
 		{
 			var selMoreFilters = new MoreFilters();
@@ -1148,7 +1149,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-		[StepDefinition(@"I edit the product with ID: (.*)")]
+		[RegexStepDefinition(@"I edit the product with ID: (.*)")]
 		public void EditFirstProductForRetailer(string id)
 		{
 			var selProductsGrid = new ProductsGrid {
@@ -1160,7 +1161,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-		[StepDefinition(@"I edit the first product in results")]
+		[RegexStepDefinition(@"I edit the first product in results")]
 		public void EditFirstProductInResults()
 		{
 			var selProductsGrid = new ProductsGrid();
@@ -1170,7 +1171,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-		[StepDefinition(@"A Summary page should open in a new browser tab")]
+		[RegexStepDefinition(@"A Summary page should open in a new browser tab")]
 		public void ThenASummaryPageShouldOpenInANewBrowserTab()
 		{
 			var OpenBrowsers =
@@ -1199,7 +1200,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I should not seen an Accept button")]
+		[RegexStepDefinition(@"I should not seen an Accept button")]
 		public void ThenIShouldNotSeenAnAcceptButton()
 		{
 			var thisSummaryPage = new SummaryPage();
@@ -1207,7 +1208,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Accept button is not showing");
 		}
 
-		[StepDefinition(@"I close the browser tab with the Summary page")]
+		[RegexStepDefinition(@"I close the browser tab with the Summary page")]
 		public void GivenICloseTheBrowserTabWithTheSummaryPage()
 		{
 			var OpenBrowsers =
@@ -1237,7 +1238,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Failure("Did not find Summary page to close");
 		}
 
-		[StepDefinition(@"I save the number of items in the pie chart")]
+		[RegexStepDefinition(@"I save the number of items in the pie chart")]
 		public void GivenISaveTheNumberOfItemsInThePieChart()
 		{
 			var myHomepage = new Homepage();
@@ -1247,7 +1248,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Current product count is: " + currentProductCount.ToString());
 		}
 
-		[StepDefinition(@"the number of items in the pie chart should be one less than the figure I saved")]
+		[RegexStepDefinition(@"the number of items in the pie chart should be one less than the figure I saved")]
 		public void ThenTheNumberOfItemsInThePieChartShouldBeOneLessThanTheFigureISaved()
 		{
 			var myHomepage = new Homepage();
@@ -1260,28 +1261,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				" is one less than saved count");
 		}
 
-		[StepDefinition(@"I should see the header: Document Acceptance on the Document Acceptance window")]
+		[RegexStepDefinition(@"I should see the header: Document Acceptance on the Document Acceptance window")]
 		public void GivenIShouldSeeTheHeaderDocumentAcceptanceOnTheDocumentAcceptanceWindow()
 		{
 			Report.IsTrue(new DocumentAcceptance().WaitForContainerToBeVisible(),
 				"Document Acceptance page is not showing as expected.", "Document Acceptance page is showing");
 		}
 
-		[StepDefinition(@"I should see the header: Delete Active Products on the Delete Active Product window")]
+		[RegexStepDefinition(@"I should see the header: Delete Active Products on the Delete Active Product window")]
 		public void GivenIShouldSeeTheHeaderDeleteActiveProductsOnTheDeleteActiveProductWindow()
 		{
 			Report.IsTrue(new DeleteActiveProducts().WaitForContainerToBeVisible(),
 				"Delete Active Products page is not showing as expected.", "Delete Active Products page is showing");
 		}
 
-		[StepDefinition(@"I should see the header: Message Center on the Message Center window")]
+		[RegexStepDefinition(@"I should see the header: Message Center on the Message Center window")]
 		public void ThenIShouldSeeTheHeaderMessageCenterOnTheMessageCenterWindow()
 		{
 			Report.IsTrue(new MessageCenter().WaitForContainerToBeVisible(),
 				"Message centre page is not showing as expected.", "Message centre page is showing");
 		}
 
-		[StepDefinition(@"I click Row Actions for the first product not in the 'Needs Your Attention' status")]
+		[RegexStepDefinition(@"I click Row Actions for the first product not in the 'Needs Your Attention' status")]
 		public void ClickRowActionsForTheFirstProductNotNeedsYourAttention()
 		{
 			Report.Info("Getting product ID for first product without the Needs Your Attention status");
@@ -1306,7 +1307,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(selProdGrid.ClickActionsForFirstResultInGrid(), "Failed to click first Action Button!", "Successfully clicked the first Action Button!");
 		}
 
-		[StepDefinition(@"I search for UPC number saved as: (.*)")]
+		[RegexStepDefinition(@"I search for UPC number saved as: (.*)")]
 		public void SearchForUPCSavedAs(string savedAs)
 		{
 			string upc = Context.GetFromContext(savedAs)?.ToString();
@@ -1333,7 +1334,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-		[StepDefinition(@"I enter combinations of More Filters and should see the product ID: (.*) only for the correct combinations")]
+		[RegexStepDefinition(@"I enter combinations of More Filters and should see the product ID: (.*) only for the correct combinations")]
 		public void EnterCombinationsOfMoreFilters(string id, Table moreFilters)
 		{
 			var test = Context.GetFromContext(id);
@@ -1541,7 +1542,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the product exists with Product ID: (.*) and Name: (.*)")]
+		[RegexStepDefinition(@"I confirm the product exists with Product ID: (.*) and Name: (.*)")]
 		public void ProductExistsWithIDAndName(string id, string name)
 		{
 			var result = Context.GetFromContext(id);
@@ -1564,7 +1565,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-		[StepDefinition(@"I enter combinations of Status and More Filters and should see the product ID: (.*) only for the correct combinations")]
+		[RegexStepDefinition(@"I enter combinations of Status and More Filters and should see the product ID: (.*) only for the correct combinations")]
 		public void EnterCombinationsOfStatusAndMoreFilters(string id, Table statusAndFilters)
 		{
 			var test = Context.GetFromContext(id);
@@ -1645,7 +1646,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"the 'More Filters' options (are|are not) displayed")]
+		[RegexStepDefinition(@"the 'More Filters' options (are|are not) displayed")]
 		public void TheMoreFiltersOptionsDisplayed(string displayed)
 		{
 			if (displayed == "are")
@@ -1662,7 +1663,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I should see the following options for the (Retailer|Brand|Additional Programs) filter")]
+		[RegexStepDefinition(@"I should see the following options for the (Retailer|Brand|Additional Programs) filter")]
 		public void ShouldSeeTheFollowingOptionsMoreFilters(string filter, Table table)
 		{
 			List<string> displayedOptions = new MoreFilters().Options(filter);
@@ -1676,7 +1677,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I confirm retailers list based on environment")]
+		[RegexStepDefinition(@"I confirm retailers list based on environment")]
 		public void SeeFollowingOptionsMoreFilters()
 		{
 			if (TReVorSettings.SoftwareBranch == "Development")
@@ -1684,7 +1685,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.UseSubSteps = true;
 				var MyNewProduct = new StepsProductGrid();
 				Report.StartSubStep("I should only see the following retailers");
-				var productTable = new TechTalk.SpecFlow.Table(new string[] {
+				var productTable = new Table(new string[] {
 				"Option"
 			});
 				productTable.AddRow(new string[] {
@@ -1847,7 +1848,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.UseSubSteps = true;
 				var MyNewProduct = new StepsProductGrid();
 				Report.StartSubStep("I should only see the following retailers");
-				var productTable = new TechTalk.SpecFlow.Table(new string[] {
+				var productTable = new Table(new string[] {
 				"Option"
 			});
 				productTable.AddRow(new string[] {
@@ -2010,7 +2011,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.UseSubSteps = true;
 				var MyNewProduct = new StepsProductGrid();
 				Report.StartSubStep("I should only see the following retailers");
-				var productTable = new TechTalk.SpecFlow.Table(new string[] {
+				var productTable = new Table(new string[] {
 				"Option"
 			});
 				productTable.AddRow(new string[] {
@@ -2173,7 +2174,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.UseSubSteps = true;
 				var MyNewProduct = new StepsProductGrid();
 				Report.StartSubStep("I should only see the following retailers");
-				var productTable = new TechTalk.SpecFlow.Table(new string[] {
+				var productTable = new Table(new string[] {
 				"Option"
 			});
 				productTable.AddRow(new string[] {
@@ -2333,7 +2334,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the filter with label: ""(.*)"" is displayed and default option: ""(.*)""")]
+		[RegexStepDefinition(@"I confirm the filter with label: ""(.*)"" is displayed and default option: ""(.*)""")]
 		public void ConfirmFilterDisplayedWithLabelAndDefaultOption(string label, string option)
 		{
 			var selMoreFilters = new MoreFilters();
@@ -2365,7 +2366,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$@"The option for label ""{label}"" matched the expected value: ""{option}""");
 		}
 
-		[StepDefinition(@"I confirm all products in the grid contain either the the text ""(.*)"" or ""All"" under the 'Retailers' column")]
+		[RegexStepDefinition(@"I confirm all products in the grid contain either the the text ""(.*)"" or ""All"" under the 'Retailers' column")]
 		public void ConfirmAllProductsInGridContainTextInRetailersColumn(string retailer)
 		{
 			List<ProductGridItem> allProducts = new ProductsGrid().GetAllProducts();
@@ -2375,7 +2376,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$@"All products in the grid contained either ""{retailer}"" or ""All""");
 		}
 
-		[StepDefinition(@"I click the first instance of Actions - Edit UPC in the products grid")]
+		[RegexStepDefinition(@"I click the first instance of Actions - Edit UPC in the products grid")]
 		public void ClickFirstInstanceOfActionsEditUpcInProductsGrid()
 		{
 			Report.IsTrue(new ProductsGrid().ClickFirstActionsEditUpc(),
@@ -2383,7 +2384,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked Actions - Edit UPC");
 		}
 
-		[StepDefinition(@"I confirm Date Discontinued contains today's date for product saved as: (.*)")]
+		[RegexStepDefinition(@"I confirm Date Discontinued contains today's date for product saved as: (.*)")]
 		public void ThenIConfirmDateDiscontinuedContainsTodaysDateForProductSavedAsTestCase(string savedAs)
 		{
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
@@ -2394,7 +2395,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(getDate==currentDate, "Failed to confirm Date Discontinued contains today's date", "Successfully confirmed Date Discontinued contains today's date");
 		}
 
-		[StepDefinition(@"For product saved as: (.*) the status is: (.*)")]
+		[RegexStepDefinition(@"For product saved as: (.*) the status is: (.*)")]
 		public void GivenForProductSavedAsTestCaseTheStatusIs(string savedAs, string status)
 		{
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
@@ -2412,7 +2413,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(statusColour == status, "Status is not correct. Expected: " + status + " but found: " + statusColour, "Status is as expected");
 		}
 
-		[StepDefinition(@"I confirm the Remove UPC Update popup displays the warning: (.*)")]
+		[RegexStepDefinition(@"I confirm the Remove UPC Update popup displays the warning: (.*)")]
 		public void IConfirmTheRemoveUpcUpdatePopupDisplaysTheWarning(string expectedWarning)
 		{
 
@@ -2435,7 +2436,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$@"The warning: ""{expectedWarning}"" was displayed as expected on the UPC Update popup");
 		}
 
-		[StepDefinition(@"I confirm the Remove UPC Update popup displays the name and ID for product saved as: (.*)")]
+		[RegexStepDefinition(@"I confirm the Remove UPC Update popup displays the name and ID for product saved as: (.*)")]
 		public void IConfirmTheRemoveUpcUpdatePopupDisplaysTheNameAndIDForProductSavedAs(string savedAs)
 		{
 			var removeUpc = new RemoveUpcUpdate();
@@ -2463,7 +2464,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$@"The product name: ""{product.Name}"" and ID: ""{product.Id}"" were displayed as expected on the UPC Update popup");
 		}
 
-		[StepDefinition(@"I confirm the Remove UPC Update popup has closed")]
+		[RegexStepDefinition(@"I confirm the Remove UPC Update popup has closed")]
 		public void IConfirmTheUpcUpdatePopupHasClosed()
 		{
 			var upcUpdate = new RemoveUpcUpdate();
@@ -2476,7 +2477,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click 'All' under Retailers for the first product returned")]
+		[RegexStepDefinition(@"I click 'All' under Retailers for the first product returned")]
 		public void ClickAllRetailersForFirstProduct()
 		{
 			Delay.Seconds(3);
@@ -2485,7 +2486,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked 'All' under Retailers for the first product");
 		}
 
-		[StepDefinition(@"I confirm the Retailers popup is (displayed|not displayed)")]
+		[RegexStepDefinition(@"I confirm the Retailers popup is (displayed|not displayed)")]
 		public void ConfirmRetailerPopupIsDisplayedNotDisplayed(string isDisplayed)
 		{
 			bool displayed = new ProductsGrid().RetailerPopupDisplayed();
@@ -2507,7 +2508,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In The products Grid I Wait for the Retailers Popup to (appear|disappear)")]
+		[RegexStepDefinition(@"In The products Grid I Wait for the Retailers Popup to (appear|disappear)")]
 		public void InTheProductsGridIWaitForRetailersPopupToAppearOrDisappear(string status)
 		{
 
@@ -2525,7 +2526,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click the products grid container")]
+		[RegexStepDefinition(@"I click the products grid container")]
 		public void ClickProductsGridContainer()
 		{
 			Report.Info("Refocus by clicking container element for products grid");
@@ -2533,7 +2534,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I should (see|not see) the Archive Retailers Popup")]
+		[RegexStepDefinition(@"I should (see|not see) the Archive Retailers Popup")]
 		public void GivenIShouldSeeTheArchiveRetailersPopup(string condition)
 		{
 			var thisModalDialog = new ModalDialog();
@@ -2568,7 +2569,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In the Archive Retailers popup, I select the the checkbox next to the the first retailer and save the retailer as: (.*)")]
+		[RegexStepDefinition(@"In the Archive Retailers popup, I select the the checkbox next to the the first retailer and save the retailer as: (.*)")]
 		public void GivenIInTheArchiveRetailersPopupSelectTheTheCheckboxNextToTheRetailerSYouWantToArchive(string savedAs)
 		{
 			var thisModalDialog = new ModalDialog();
@@ -2579,7 +2580,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(savedAs, retailerToArchive);
 		}
 
-		[StepDefinition(@"In the Archive Retailers popup, I select the checkbox next to the retailer (.*)")]
+		[RegexStepDefinition(@"In the Archive Retailers popup, I select the checkbox next to the retailer (.*)")]
 		public void InTheArchiveRetailersPopupSelectTheCheckboxNextToTheRetailer(string retailer)
 		{
 			var thisModalDialog = new ModalDialog();
@@ -2587,7 +2588,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"Successfully selected: { retailer }");
 		}
 
-		[StepDefinition(@"In the Archive Retailers popup click on: (.*)")]
+		[RegexStepDefinition(@"In the Archive Retailers popup click on: (.*)")]
 		public void GivenInTheArchiveRetailersPopupClickOn(string buttonToClick)
 		{
 			var thisModalDialog = new ModalDialog();
@@ -2595,20 +2596,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(3);
 		}
 
-		[StepDefinition(@"I handle the Alert for Archive by answering (Ok|Cancel)")]
+		[RegexStepDefinition(@"I handle the Alert for Archive by answering (Ok|Cancel)")]
 		public void HandleTheAlertForArchiveByAnswering(string response)
 		{
 			Report.IsTrue(new ProductsGrid().ArchiveAlert(response), $"Selected {response} in Archive Alert.", $"Unable to select {response} in Archive alert.");
 			string s = response;
 		}
 
-		[StepDefinition(@"I check that the Alert for Archiving a Retailers shows the text: (.*)")]
+		[RegexStepDefinition(@"I check that the Alert for Archiving a Retailers shows the text: (.*)")]
 		public void CheckArchiveRetailerAlertText(string val)
 		{
 			Report.IsTrue(new ProductsGrid().GetArchiveAlertText() == val, "The alert text did not match", "The alert text was a match", showSuccessScreenshot: false);
 		}
 
-		[StepDefinition(@"I ensure that the check box next to Show Archived Retailers is unselected")]
+		[RegexStepDefinition(@"I ensure that the check box next to Show Archived Retailers is unselected")]
 		public void EnsureShowArchivedRetailersCheckboxIsUnchecked()
 		{
 			var thisProductsGrid = new ProductsGrid();
@@ -2628,7 +2629,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I (Select|Deselect) the check box next to Show Archived Retailers")]
+		[RegexStepDefinition(@"I (Select|Deselect) the check box next to Show Archived Retailers")]
 		public void GivenISelectTheCheckBoxNextToShowArchivedRetailers(string selectOrDeselect)
 		{
 			var thisProductsGrid = new ProductsGrid();
@@ -2647,7 +2648,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I save the ProductID and Name of the first Product in the grid with a retailer as: (.*)")]
+		[RegexStepDefinition(@"I save the ProductID and Name of the first Product in the grid with a retailer as: (.*)")]
 		public void SaveFirstProductInGridWithARetailer(string savedAs)
 		{
 			Report.Info("Saving Product ID and Name of First Product as " + savedAs);
@@ -2668,7 +2669,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I save the ProductID and Name of the first Product in the grid with a retailer as Product Information, saved as: (.*)")]
+		[RegexStepDefinition(@"I save the ProductID and Name of the first Product in the grid with a retailer as Product Information, saved as: (.*)")]
 		public void SaveFirstProductInGridWithARetailerAsProductInformation(string savedAs)
 		{
 			Report.Info("Saving Product ID and Name of First Product as " + savedAs);
@@ -2690,7 +2691,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I check for all items in the grid that the retailers are alphabetically listed")]
+		[RegexStepDefinition(@"I check for all items in the grid that the retailers are alphabetically listed")]
 		public void GivenISaveTheProductIDAndNameOfTheFirstProductInTheGridWithMoreThanOneRetailerAs()
 		{
 
@@ -2713,7 +2714,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I Confirm that two asterisks are visible in the retailer\(s\) saved as: (.*) that are archived icons that display")]
+		[RegexStepDefinition(@"I Confirm that two asterisks are visible in the retailer\(s\) saved as: (.*) that are archived icons that display")]
 		public void GivenIConfirmThatTwoAsterisksAreVisibleInTheRetailerSThatAreArchivedIconsThatDisplay(string savedAs)
 		{
 			if (Context.Contains(savedAs))
@@ -2752,7 +2753,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I Confirm that the retailer\(s\) saved as: (.*) are not displayed for the first product in the grid.")]
+		[RegexStepDefinition(@"I Confirm that the retailer\(s\) saved as: (.*) are not displayed for the first product in the grid.")]
 		public void ConfirmRetailersNotDisplayedForFirstProductInGrid(string savedAs)
 		{
 			if (Context.Contains(savedAs))
@@ -2781,13 +2782,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"I should see the View UPCs page")]
+		[RegexStepDefinition(@"I should see the View UPCs page")]
 		public void WhenIShouldSeeTheViewUPCsPage()
 		{
 			Context.ScenarioContext.Pending();
 		}
 
-		[StepDefinition(@"I should see the Update Registration popup")]
+		[RegexStepDefinition(@"I should see the Update Registration popup")]
 		public void IShouldSeeTheUpdateRegistrationPopup()
 		{
 			var thisModalDialog = new ModalDialog();
@@ -2797,7 +2798,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Update registration is not showing as expected", "Update registration dialog is showing as expected");
 		}
 
-		[StepDefinition(@"In the Update Registration popup I click on button (Cancel|View|Yes|Continue)")]
+		[RegexStepDefinition(@"In the Update Registration popup I click on button (Cancel|View|Yes|Continue)")]
 		public void InUpdateRegistrationPopupIClickButton(string button)
 		{
 			var thisModalDialog = new ModalDialog();
@@ -2808,7 +2809,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(1);
 		}
 
-		[StepDefinition(@"I confirm that the label: '(.*)' is displayed next to the Product Name for the top result in the grid")]
+		[RegexStepDefinition(@"I confirm that the label: '(.*)' is displayed next to the Product Name for the top result in the grid")]
 		public void ConfirmThatTheProductNameLabelIsDisplayed(string label)
 		{
 			Report.Info("Getting first product in the grid");
@@ -2823,25 +2824,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(product.NameLabel == label, $"The '{label}' label was not displayed next to the product name for the top result!", $"The '{label}' label was displayed next to the product name for the top result");
 		}
 
-		[StepDefinition(@"I Confirm the Products shown display the Green Colour Status - which is the Accepted by Retailers")]
+		[RegexStepDefinition(@"I Confirm the Products shown display the Green Colour Status - which is the Accepted by Retailers")]
 		public void GivenIConfirmTheProductsShownAreGreen()
 		{
 			Report.IsTrue(new ProductsGrid().AllRetailersAreShowingStatus("Accepted by Retailers"), "All products are not showing as Accepted By Retailers", "All products are showing as Accepted By Retailers");
 		}
 
-		[StepDefinition(@"I Confirm the Products shown display at least one retailer with the Green Colour Status - which is the Accepted by Retailers")]
+		[RegexStepDefinition(@"I Confirm the Products shown display at least one retailer with the Green Colour Status - which is the Accepted by Retailers")]
 		public void GivenIConfirmTheProductsShownHaveAtLeastOneGreen()
 		{
 			Report.IsTrue(new ProductsGrid().AtLeastOneRetailerPerProductShowingStatus("Accepted by Retailers"), "All products are not showing as Accepted By Retailers for at least one of their retailers", "All products are showing as Accepted By Retailers for at least one of their retailers");
 		}
 
-		[StepDefinition(@"I Confirm the Products shown display the Blue Colour Status - which is the Sending to Retailers")]
+		[RegexStepDefinition(@"I Confirm the Products shown display the Blue Colour Status - which is the Sending to Retailers")]
 		public void GivenIConfirmTheProductsShownAreBlue()
 		{
 			Report.IsTrue(new ProductsGrid().AllRetailersAreShowingStatus("Sending to Retailers"), "All products are not showing as Accepted By Retailers", "All products are showing as Accepted By Retailers");
 		}
 
-		[StepDefinition(@"I edit the product saved as: (.*)")]
+		[RegexStepDefinition(@"I edit the product saved as: (.*)")]
 		public void EditProductSavedAs(string productSavedAs)
 		{
 			var productInformation = (ProductInformation)Context.GetFromContext(productSavedAs);
@@ -2849,7 +2850,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.EditFirstProductForRetailer(editID);
 		}
 
-		[StepDefinition(@"I save the ProductID of the first Product in the grid as: (.*)")]
+		[RegexStepDefinition(@"I save the ProductID of the first Product in the grid as: (.*)")]
 		public void SaveFirstProductIDInGrid(string savedAs)
 		{
 			Report.Info("Saving the ID of First Product as " + savedAs);
@@ -2861,7 +2862,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Success("Got the first Product ID in Grid (ID: " + firstProductID + ") and saved to: " + savedAs);
 		}
 
-		[StepDefinition(@"If my products grid does not contain enough products then I add them until it displays '...' grid navigation option")]
+		[RegexStepDefinition(@"If my products grid does not contain enough products then I add them until it displays '...' grid navigation option")]
 		public void AddProductsInMyProductsGrid()
 		{
 			Report.UseSubSteps = true;
@@ -2892,7 +2893,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure(ex.Message);
 			}
 		}
-		[StepDefinition(@"I generate: (.*) random UPC numbers and save them starting with: (.*)")]
+		[RegexStepDefinition(@"I generate: (.*) random UPC numbers and save them starting with: (.*)")]
 		public void GivenIGenerateXRandomUPCNumberAndSaveAs(int numbersWanted, string savedAs)
 		{
 			int i = 1;
@@ -2908,7 +2909,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I confirm the Rejected Registration popup displays the warning: (.*)")]
+		[RegexStepDefinition(@"I confirm the Rejected Registration popup displays the warning: (.*)")]
 		public void IConfirmTheRejectedRegistrationPopupDisplaysTheWarning(string expectedWarning)
 		{
 			var modalDialog = new ModalDialog();
@@ -2931,7 +2932,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$@"The warning: ""{expectedWarning}"" was displayed as expected on the Rejected Registration popup");
 		}
 
-		[StepDefinition(@"I confirm the Rejected Registration popup has closed")]
+		[RegexStepDefinition(@"I confirm the Rejected Registration popup has closed")]
 		public void IConfirmTheRejectedRegistrationPopupHasClosed()
 		{
 			var modalDialog = new ModalDialog();
@@ -2945,7 +2946,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"in the Rejected Registration modal dialog I click Continue")]
+		[RegexStepDefinition(@"in the Rejected Registration modal dialog I click Continue")]
 		public void GivenInTheModalDialogIClickButton()
 		{
 
@@ -2953,13 +2954,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In the Products Grid I delete All products")]
+		[RegexStepDefinition(@"In the Products Grid I delete All products")]
 		public void InTheProductsGridIDeleteAllProducts()
 		{
 			Report.IsTrue(new ProductsGrid().DeleteAllPresentRows(), "Failed to delete all products!", "All matching products deleted successfully!");
 		}
 
-		[StepDefinition(@"I navigate to the Homepage and then In the Products Grid I delete All products")]
+		[RegexStepDefinition(@"I navigate to the Homepage and then In the Products Grid I delete All products")]
 		public void INavigateToTheHomepageThenInTheProductsGridIDeleteAllProducts()
 		{
 
@@ -2969,7 +2970,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I save the ProductID of the first Product in the grid no in recertification as: (.*)")]
+		[RegexStepDefinition(@"I save the ProductID of the first Product in the grid no in recertification as: (.*)")]
 		public void SaveFirstProductIDInGridNotRecert(string savedAs)
 		{
 			Report.Info("Saving the ID of First Product as " + savedAs);
@@ -2982,7 +2983,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		//[StepDefinition(@"I click the 'Show Only Discontinued Products' checkbox in the 'My Products' grid")]
+		//[RegexStepDefinition(@"I click the 'Show Only Discontinued Products' checkbox in the 'My Products' grid")]
 		public void ThenIClickTheShowOnlyDiscontinuedProductsCheckboxInTheMyProductsGrid()
 		{
 			MoreFilters moreFiltersObject = new MoreFilters();
@@ -2990,14 +2991,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(5);
 		}
 
-		[StepDefinition(@"I confirm that only discontinued products appear in the 'My Products' grid")]
+		[RegexStepDefinition(@"I confirm that only discontinued products appear in the 'My Products' grid")]
 		public void ThenIConfirmThatOnlyDiscontinuedProductsAppearInTheMyProductsGrid()
 		{
 			MoreFilters moreFiltersObject = new MoreFilters();
 			Report.Info("There were " + moreFiltersObject.CheckTheAmountOfProductsInProductsGrid() + " discontinued products displayed");
 		}
 
-		[StepDefinition(@"I confirm that only Single-Retailer products appear in the 'My Products' grid")]
+		[RegexStepDefinition(@"I confirm that only Single-Retailer products appear in the 'My Products' grid")]
 		public void OnlySingleRetailerProductsAppear()
 		{
 			var newProdGrid = new ProductsGrid();
@@ -3007,7 +3008,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click the '(.*)' checkbox in the 'My Products' grid")]
+		[RegexStepDefinition(@"I click the '(.*)' checkbox in the 'My Products' grid")]
 		public void ThenIClickTheCheckboxInTheMyProductsGrid(string checkbox)
 		{
 			MoreFilters moreFiltersObject = new MoreFilters();
@@ -3018,7 +3019,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In Product Grid I confirm if the checkbox (.*) is (selected|not selected)")]
+		[RegexStepDefinition(@"In Product Grid I confirm if the checkbox (.*) is (selected|not selected)")]
 		public void ConfirmCheckboxInProductGridIsSelected(string checkbox, string condition)
 		{
 			MoreFilters moreFiltersObject = new MoreFilters();
@@ -3035,7 +3036,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click the Clear button in the More Filters section")]
+		[RegexStepDefinition(@"I click the Clear button in the More Filters section")]
 		public void ThenIClickClearInTheMyProductsGrid()
 		{
 			MoreFilters moreFiltersObject = new MoreFilters();
@@ -3045,7 +3046,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Delay.Seconds(5);
 			}
 		}
-		[StepDefinition(@"I confirm More Filters section (is|is not) expended")]
+		[RegexStepDefinition(@"I confirm More Filters section (is|is not) expended")]
 		public void ThenIConfirmMoreFiltersSectionIsExpended(string condition)
 		{
 			MoreFilters moreFiltersObject = new MoreFilters();
@@ -3064,7 +3065,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I confirm that all products appear in the 'My Products' grid")]
+		[RegexStepDefinition(@"I confirm that all products appear in the 'My Products' grid")]
 		public void ThenIConfirmThatAllProductsAppearInTheMyProductsGrid()
 		{
 			MoreFilters moreFiltersObject = new MoreFilters();
@@ -3073,7 +3074,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I make sure product saved as: (.*) (should|should not) missing from the product list")]
+		[RegexStepDefinition(@"I make sure product saved as: (.*) (should|should not) missing from the product list")]
 		public void ThenIMakeSureProductSavedAsSelectedProductIsMissingFromTheProductList(string savedAs, string shouldOrShouldNot)
 		{
 			Delay.Seconds(10);
@@ -3092,7 +3093,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I make sure products saved as: (.*) are missing from the product list")]
+		[RegexStepDefinition(@"I make sure products saved as: (.*) are missing from the product list")]
 		public void ThenIMakeSureProductsSavedAsSelectedProductsAreMissingFromTheProductList(string savedAs)
 		{
 			MoreFilters moreFiltersObject = new MoreFilters();
@@ -3105,7 +3106,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"Check popup date productID: (.*) productType: (.*) productAccessCode: (.*)")]
+		[RegexStepDefinition(@"Check popup date productID: (.*) productType: (.*) productAccessCode: (.*)")]
 		public void ThenCheckPopupDate(string productID, string productType, string productAccessCode)
 		{
 
@@ -3172,7 +3173,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I confirm I see the Product ID, Ingredient ID, SKU field above the Product Grid")]
+		[RegexStepDefinition(@"I confirm I see the Product ID, Ingredient ID, SKU field above the Product Grid")]
 		public void IConfirmProductIDIngredientIDSKUFieldIsFound()
 		{
 			var selProductGridMoreFilters = new MoreFilters();
@@ -3182,7 +3183,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"In the Product ID, Ingredient ID, SKU filter field I search for: (.*)")]
+		[RegexStepDefinition(@"In the Product ID, Ingredient ID, SKU filter field I search for: (.*)")]
 		public void GivenInTheProductIDIngredientIDSKUFilterFieldISearchFor(string savedAs)
 		{
 
@@ -3266,7 +3267,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I enter (.*) differnt but valid random filter combinations in the Products Grid and expect to see the product saved as: (.*) each time")]
+		[RegexStepDefinition(@"I enter (.*) differnt but valid random filter combinations in the Products Grid and expect to see the product saved as: (.*) each time")]
 		public void IEnterXValidFilterCombinationsAndSeeExpectedProduct(int totalCombinations, string savedAs)
 		{
 			//Andrew - This step is currently not finished 
@@ -3378,7 +3379,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I create a object of FilterInformation from the table below: and save it as: (.*)")]
+		[RegexStepDefinition(@"I create a object of FilterInformation from the table below: and save it as: (.*)")]
 		public void CreateFilterInformationObjectFromTable(string savedAs, Table table)
 		{
 			MoreFilters.FilterInformation filterInfo = new MoreFilters.FilterInformation();
@@ -3484,7 +3485,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I search the Products grid for the Name: (.*) and save the first grid item ID as: (.*) and UPC as: (.*)")]
+		[RegexStepDefinition(@"I search the Products grid for the Name: (.*) and save the first grid item ID as: (.*) and UPC as: (.*)")]
 		public void SearchProductsGridForProductByNameAndSaveIDAndUPC(string name, string iDSavedAs, string uPCSavedAs)
 		{
 			Report.UseSubSteps = true;
@@ -3523,8 +3524,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I filter for the ingredient saved as: (.*)")]
-		[StepDefinition(@"I search for the ingredient saved as: (.*)")]
+		[RegexStepDefinition(@"I filter for the ingredient saved as: (.*)")]
+		[RegexStepDefinition(@"I search for the ingredient saved as: (.*)")]
 		public void GivenISearchForTheIngredientSavedAs(string savedAs)
 		{
 			Report.StartStep(Report.Details.StepIndex + " - Searching for Ingredient Saved as " + savedAs);
@@ -3592,7 +3593,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm that when hover over on the Single Retailer : (.*) message is showing")]
+		[RegexStepDefinition(@"I confirm that when hover over on the Single Retailer : (.*) message is showing")]
 		public void IConfirmTheMessageForSingleRetailer(string message)
 		{
 			try
@@ -3610,14 +3611,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
-		[StepDefinition(@"I confirm that the indicator Single Retailer RA is showing above No Retailer and Rite Aid")]
+		[RegexStepDefinition(@"I confirm that the indicator Single Retailer RA is showing above No Retailer and Rite Aid")]
 		public void IConfirmForTheIndicatorSingleRetailerRA()
 		{
 			var selMoreFilters = new MoreFilters();
 			Report.IsTrue(selMoreFilters.ConfirmTheIndicatorSingleRetailerRA(), "The indicator Single Retailer RA is not showing above No Retailer and Rite Aid", "The indicator Single Retailer RA is showing above No Retailer and Rite Aid");
 		}
 
-		[StepDefinition(@"I confirm that the indicator Single Retailer RA is not showing under the Retailers column")]
+		[RegexStepDefinition(@"I confirm that the indicator Single Retailer RA is not showing under the Retailers column")]
 		public void ThenIConfirmThatTheIndicatorSingleRetailerRAIsNotShowingUnderTheRetailersColumn()
 		{
 			var selMoreFilters = new MoreFilters();
@@ -3626,7 +3627,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"I Click on the ADDITIONAL PROGRAMS drop down and confirm options should be available under Additional Programs")]
+		[RegexStepDefinition(@"I Click on the ADDITIONAL PROGRAMS drop down and confirm options should be available under Additional Programs")]
 		public void IClickOnAdditionalPrograms()
 		{
 			var selMoreFilters = new MoreFilters();
@@ -3636,7 +3637,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(isStringContained.All(x => (new[] { "None", "California Cleaning SB 258", "California Cosmetic Fragrance/Flavor SB 312", "Distributor Product - Approved", "Distributor Product - Pending Approval", "Distributor Product - Rejected", "Target Sustainability Product Index" }).Contains(x)), "Failed to find the expected option under Additional Programs", "Successfully found the expected options under Additional programs");
 
 		}
-		[StepDefinition(@"In the Archive Retailers popup, I Deselect the checkbox next to the retailer (.*)")]
+		[RegexStepDefinition(@"In the Archive Retailers popup, I Deselect the checkbox next to the retailer (.*)")]
 		public void InTheArchiveRetailersPopupDeSelectTheCheckboxNextToTheRetailer(string retailer)
 		{
 			var thisModalDialog = new ModalDialog();

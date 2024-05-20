@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UL.Automation.Reporting.Functions;
-using TechTalk.SpecFlow;
+using Reqnroll;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 
@@ -15,7 +16,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 	{
 		private AdditionalProductInformation AdditionalProductInformation => new AdditionalProductInformation();
 
-		[StepDefinition(@"I set 'Product is solely for the Retailer's use' to: (No|Yes)")]
+		[RegexStepDefinition(@"I set 'Product is solely for the Retailer's use' to: (No|Yes)")]
 		public void SetProductIsSolelyForTheRetailersUseTo(string noOrYes)
 		{
 			Report.IsTrue(this.AdditionalProductInformation.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded", "Product type tab is loaded.");
@@ -26,7 +27,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 				"Successfully set Product is solely for the Retailer's use: " + noOrYes);
 		}
 
-		[StepDefinition(@"I set 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand)' to: (No|Yes)")]
+		[RegexStepDefinition(@"I set 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand)' to: (No|Yes)")]
 		public void SetProductIsRetailersPrivateLabelOrBrandTo(string noOrYes)
 		{
 			Report.IsTrue(this.AdditionalProductInformation.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded", "Product type tab is loaded.");
@@ -37,7 +38,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 				$"Successfully set Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product: { noOrYes }");
 		}
 
-		[StepDefinition(@"I set 'Product is shipped directly' to: (No|Yes)")]
+		[RegexStepDefinition(@"I set 'Product is shipped directly' to: (No|Yes)")]
 		public void SetProductIsShippedDirectlyTo(string noOrYes)
 		{
 			Report.IsTrue(this.AdditionalProductInformation.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded", "Product type tab is loaded.");
@@ -48,7 +49,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 				"Successfully set product shipped directly value to: " + noOrYes);
 		}
 
-		[StepDefinition(@"I set 'Product has been classified using OSHA' to: (No|Yes)")]
+		[RegexStepDefinition(@"I set 'Product has been classified using OSHA' to: (No|Yes)")]
 		public void SetProductHasBeenClassifiedOSHATo(string noOrYes)
 		{
 			Report.IsTrue(this.AdditionalProductInformation.WaitForTab(NewProduct.Tab.ProductType), "Product Type has not loaded", "Product Type tab is loaded.");
@@ -59,7 +60,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 				"Successfully set product has been classified using OSHA value to: " + noOrYes);
 		}
 
-		[StepDefinition(@"I set 'California's Cleaning Product' to: (No|Yes)")]
+		[RegexStepDefinition(@"I set 'California's Cleaning Product' to: (No|Yes)")]
 		public void SetCaliforniaCleaningProductTo(string noOrYes)
 		{
 			Report.IsTrue(this.AdditionalProductInformation.WaitForTab(NewProduct.Tab.ProductType), "Product Type has not loaded", "Product Type tab is loaded.");
@@ -70,7 +71,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 				"Successfully set California Cleaning value to: " + noOrYes);
 		}
 
-		[StepDefinition(@"In the Information Page the check box for: (.*) should be: (checked|unchecked)")]
+		[RegexStepDefinition(@"In the Information Page the check box for: (.*) should be: (checked|unchecked)")]
 		public void GivenInTheInformationPageTheCheckBoxXShouldBeCheckedOrUnchecked(string country, string checkedOrUnchecked)
 		{
 			Report.IsTrue(this.AdditionalProductInformation.WaitForTab(NewProduct.Tab.ProductType), "Product type has not loaded", "Product type tab is loaded.");

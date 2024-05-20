@@ -1,14 +1,15 @@
 ﻿using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using System;
-using TechTalk.SpecFlow;
+using Reqnroll;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "Studio_Header")]
 	public class Steps_Header
 	{
-		[StepDefinition(@"I click to open the '(.*)' menu and select '(.*)'")]
+		[RegexStepDefinition(@"I click to open the '(.*)' menu and select '(.*)'")]
 		public void WhenIClickToOpenTheMenuAndSelect(string menu, string subItem)
 		{
 			GeneralUtilities.SwitchToDefaultContent();
@@ -17,7 +18,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(topHeader.ClickSubMenu(menu, subItem), $"Failed to click the {subItem} button.", $"Successfully clicked the {subItem} button");
 		}
 
-		[StepDefinition(@"I click to open the '(.*)' menu, and under '(.*)' and select '(.*)'")]
+		[RegexStepDefinition(@"I click to open the '(.*)' menu, and under '(.*)' and select '(.*)'")]
 		public void WhenIClickToOpenTheMenuAndUnderAndSelect(string menu, string subMenu, string subItem)
 		{
 			GeneralUtilities.SwitchToDefaultContent();
@@ -26,7 +27,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(topHeader.ClickTriMenuItem(menu, subMenu, subItem), $"Failed to click the {subItem} button under {subMenu}.", $"Successfully clicked the {subItem} button under {subMenu}.");
 		}
 
-		[StepDefinition(@"I click to open the '(.*)' menu, and under the '(.*)' sub-menu, '(.*)' (should|should not) be available")]
+		[RegexStepDefinition(@"I click to open the '(.*)' menu, and under the '(.*)' sub-menu, '(.*)' (should|should not) be available")]
 		public void WhenIClickToOpenTheMenuAndUnderTheSub_MenuShouldNotBeAvailable(string menu, string subMenu, string item, string shouldOrShouldNot)
 		{
 			GeneralUtilities.SwitchToDefaultContent();
@@ -42,7 +43,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click to open the '(.*)' menu, '(.*)' (should|should not) be available")]
+		[RegexStepDefinition(@"I click to open the '(.*)' menu, '(.*)' (should|should not) be available")]
 		public void WhenIClickToOpenTheMenuShouldNotBeAvailable(string menu, string subMenu, string shouldOrShouldNot)
 		{
 			GeneralUtilities.SwitchToDefaultContent();

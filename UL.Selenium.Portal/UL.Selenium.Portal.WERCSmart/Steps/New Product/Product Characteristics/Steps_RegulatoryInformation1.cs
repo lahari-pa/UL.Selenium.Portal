@@ -1,5 +1,6 @@
 using UL.Automation.Reporting.Functions;
-using TechTalk.SpecFlow;
+using Reqnroll;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 
@@ -10,7 +11,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
 	{
 		private RegulatoryInformation1 RegulatoryInformation1 => new RegulatoryInformation1();
 
-		[StepDefinition(@"For 'U\.S\. Toxic Substances Control Act \(TSCA\) status' I select: (.*)")]
+		[RegexStepDefinition(@"For 'U\.S\. Toxic Substances Control Act \(TSCA\) status' I select: (.*)")]
 		public void SetTSCATo(string option)
 		{
 			Report.IsTrue(this.RegulatoryInformation1.WaitForTab(NewProduct.Tab.ProductCharacteristics), "Product characteristics has not loaded",
@@ -21,7 +22,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
 				$"Successfully set TSCA status: {option}");
 		}
 
-		[StepDefinition(@"For Canadian Environmental Protection Act \(CEPA\) status I select: (.*)")]
+		[RegexStepDefinition(@"For Canadian Environmental Protection Act \(CEPA\) status I select: (.*)")]
 		public void SetCEPATo(string option)
 		{
 			Report.IsTrue(this.RegulatoryInformation1.WaitForTab(NewProduct.Tab.ProductCharacteristics), "Product characteristics has not loaded",
@@ -32,7 +33,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
 				"Successfully set CEPA status: " + option);
 		}
 
-		[StepDefinition(@"I set 'Prop65' to: (No|Yes)")]
+		[RegexStepDefinition(@"I set 'Prop65' to: (No|Yes)")]
 		public void SetProp65ToNoOrYes(string noOrYes)
 		{
 			Report.IsTrue(this.RegulatoryInformation1.WaitForTab(NewProduct.Tab.ProductCharacteristics), "Product characteristics has not loaded",

@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0-windows</TargetFramework>
+    <UseReqnroll>true</UseReqnroll>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,8 +18,6 @@
     <PackageReference Include="UL.Automation.Framework.NUnit" Version="5.2.17" />
     <PackageReference Include="UL.Automation.Reporting.Html" Version="5.2.17" />
     <PackageReference Include="UL.Automation.Reporting.ProgressDialog.WPF" Version="5.2.17" Condition="'$(TargetFramework)' == 'net8.0-windows'" />
-    <PackageReference Include="UL.Automation.SpecFlow" Version="5.2.17" />
-    <PackageReference Include="UL.Automation.SpecFlow.Plugin.NUnit" Version="5.2.17" />
     <PackageReference Include="UL.Automation.TReVor" Version="5.2.17" />
     <PackageReference Include="UL.Automation.Utilities" Version="5.2.17" />
     <PackageReference Include="UL.Automation.Utilities.PDF" Version="5.2.17" />
@@ -32,11 +31,20 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
 
+    <!-- ===== REQNROLL PACKAGE(S) ===== -->
+
+    <PackageReference Include="UL.Automation.Reqnroll" Version="5.2.17" Condition="'$(UseReqnroll)' == 'true'" />
+    <PackageReference Include="UL.Automation.Reqnroll.Plugin.NUnit" Version="5.2.17" Condition="'$(UseReqnroll)' == 'true'" />
+    <PackageReference Include="Reqnroll.NUnit" Version="1.0.1" Condition="'$(UseReqnroll)' == 'true'" />
+    <PackageReference Include="Reqnroll.Tools.MsBuild.Generation" Version="1.0.1" Condition="'$(UseReqnroll)' == 'true'" />
+
     <!-- ===== SPECFLOW PACKAGE(S) ===== -->
 
-    <PackageReference Include="SpecFlow" Version="3.9.74" />
-    <PackageReference Include="SpecFlow.NUnit" Version="3.9.74" />
-    <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.9.74" />
+    <PackageReference Include="UL.Automation.SpecFlow" Version="5.2.17" Condition="'$(UseReqnroll)' == 'false'" />
+    <PackageReference Include="UL.Automation.ReqnrollHelpers.Plugin.NUnit" Version="5.2.17" Condition="'$(UseReqnroll)' == 'false'" />
+    <PackageReference Include="SpecFlow" Version="3.9.74" Condition="'$(UseReqnroll)' == 'false'" />
+    <PackageReference Include="SpecFlow.NUnit" Version="3.9.74" Condition="'$(UseReqnroll)' == 'false'" />
+    <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.9.74" Condition="'$(UseReqnroll)' == 'false'" />
 
     <!-- ===== NUNIT PACKAGE(S) ===== -->
 
@@ -50,19 +58,13 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0" />    
     <PackageReference Include="itext7" Version="8.0.3" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.5" />
-    <!--<PackageReference Include="iTextSharp" Version="5.5.13.3" />-->
-    <!--<PackageReference Include="Wercs.StyleCop.Settings" Version="3.0.10">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>-->
-
   </ItemGroup>
 
   <ItemGroup>
     <None Update="automationSettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="specflow.json">
+    <None Update="reqnroll.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="wercsmartConfig.json">

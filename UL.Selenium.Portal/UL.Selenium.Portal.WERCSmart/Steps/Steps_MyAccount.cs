@@ -5,8 +5,8 @@ using Mailosaur;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
-using TechTalk.SpecFlow;
+using UL.Automation.ReqnrollHelpers.Classes;
+using Reqnroll;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using TReVor.Api.Wrapper.Classes;
@@ -15,6 +15,7 @@ using UL.Automation.TReVor.Classes;
 using UL.Automation.Utilities;
 using System.Text.RegularExpressions;
 using TReVor.Integrations.Classes;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using static NUnit.Framework.Internal.OSPlatform;
 using UL.Automation.Utilities.Mailosaur.Classes;
 using Message = Mailosaur.Models.Message;
@@ -24,7 +25,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding, Scope(Tag = "MyAccount")]
 	class StepsMyAccount
 	{
-		[StepDefinition(@"I should see username for user saved as: (.*) in the right corner")]
+		[RegexStepDefinition(@"I should see username for user saved as: (.*) in the right corner")]
 		public void ThenIShouldSeeUsernameForUserSavedAsInTheRightCorner(string savedAs)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - I should see username: " + savedAs + " in the top right corner");
@@ -50,7 +51,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I should see user name: (.*) in the header next to the user icon")]
+		[RegexStepDefinition(@"I should see user name: (.*) in the header next to the user icon")]
 		public void ThenIShouldSeeUserNameInTheHeaderNextToTheUserIcon(string username)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - I should see username: " + username + " in the top right corner");
@@ -82,7 +83,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I should see a user name in the header next to the user icon")]
+		[RegexStepDefinition(@"I should see a user name in the header next to the user icon")]
 		public void ThenIShouldSeeAUserNameNextToTheUserIcon()
 		{
 			var thisTopMenuBar = new TopMenuBar();
@@ -91,7 +92,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Username should be showing", "Username showing as: " + currentUser);
 		}
 
-		[StepDefinition(@"I should see username: (.*) in the right corner")]
+		[RegexStepDefinition(@"I should see username: (.*) in the right corner")]
 		public void ThenIShouldSeeUsernameInTheRightCorner(string username)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - I should see username: " + username + " in the top right corner");
@@ -109,7 +110,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I should see company username: (.*)")]
+		[RegexStepDefinition(@"I should see company username: (.*)")]
 		public void ThenIShouldSeeCompanyUsername(string companyName)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - I should see company username: " + companyName);
@@ -127,7 +128,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I save the administrator Company Name as: (.*)")]
+		[RegexStepDefinition(@"I save the administrator Company Name as: (.*)")]
 		public void SaveCompanyNameToContext(string savedAs)
 		{
 			var companyName = new MyAccount().GetCompanyName();
@@ -144,7 +145,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(savedAs, companyName);
 		}
 
-		[StepDefinition(@"I navigate to the MyAccount page")]
+		[RegexStepDefinition(@"I navigate to the MyAccount page")]
 		public void GivenINavigateToTheMyAccountPage()
 		{
 			Report.Info("Navigating to the My Account page");
@@ -156,7 +157,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-		[StepDefinition(@"I save all the users in the User Grid")]
+		[RegexStepDefinition(@"I save all the users in the User Grid")]
 		public void GivenISaveAllTheUsersInTheUserGrid()
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - I save all the users in the User Grid");
@@ -173,7 +174,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the User Grid the user saved as: (.*) has been replaced by: (.*)")]
+		[RegexStepDefinition(@"In the User Grid the user saved as: (.*) has been replaced by: (.*)")]
 		public void ThenInTheUserGridTheSavedUserNameHasBeenReplacedBy(string savedAs, string replacedBy)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - In the User Grid the saved user name (" + savedAs + ") has been replaced by: " + replacedBy);
@@ -219,7 +220,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I go to (.*) in User Grid for the current user")]
+		[RegexStepDefinition(@"I go to (.*) in User Grid for the current user")]
 		public void GivenIGoToActionInUserGrid(string action)
 		{
 			Delay.Seconds(1);
@@ -236,7 +237,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-		[StepDefinition(@"I go to (.*) in User Grid for the the user called: (.*)")]
+		[RegexStepDefinition(@"I go to (.*) in User Grid for the the user called: (.*)")]
 		public void GivenIGoToActionInUserGridForGiven(string action, string username)
 		{
 
@@ -252,7 +253,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(1);
 		}
 
-		[StepDefinition(@"In the UserDetails screen I save the current User as: (.*)")]
+		[RegexStepDefinition(@"In the UserDetails screen I save the current User as: (.*)")]
 		public void GivenInTheUserDetailsScreenISaveTheCurrentUserAs(string saveAs)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - In the UserDetails screen I save the current User as: " + saveAs);
@@ -281,7 +282,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the UserDetails page I set Name to be: (.*)")]
+		[RegexStepDefinition(@"In the UserDetails page I set Name to be: (.*)")]
 		public void GivenInTheUserDetailsPageISetNameToBe(string name)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - In the UserDetails page I set Name to be: " + name);
@@ -320,7 +321,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the UserDetails page I click (.*)")]
+		[RegexStepDefinition(@"In the UserDetails page I click (.*)")]
 		public void GivenInTheUserDetailsPageIClick(string buttonToClickText)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - In the UserDetails page I click " + buttonToClickText);
@@ -342,7 +343,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click Save in My Account")]
+		[RegexStepDefinition(@"I click Save in My Account")]
 		public void GivenIClickSaveInMyAccount()
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - I click Save in My Account");
@@ -359,7 +360,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I should see the heading: (.*) on the My Account page")]
+		[RegexStepDefinition(@"I should see the heading: (.*) on the My Account page")]
 		public void CorrectHeadingShowing(string headingExpected)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - I should see the heading " + headingExpected);
@@ -380,7 +381,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I should see the subheading: (.*) on the My Account page")]
+		[RegexStepDefinition(@"I should see the subheading: (.*) on the My Account page")]
 		public void CorrectSubHeadingShowing(string subheadingExpected)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - I should see the heading " + subheadingExpected);
@@ -401,7 +402,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I add a new user with the following information")]
+		[RegexStepDefinition(@"I add a new user with the following information")]
 		public void ThenIAddANewUserWithTheFollowingInformation(Table table)
 		{
 			Report.StartStep($"{Report.Details.StepIndex} - I add a new user with the following information");
@@ -484,7 +485,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the new user is (Not Active|Active)")]
+		[RegexStepDefinition(@"I confirm the new user is (Not Active|Active)")]
 		public void ThenIConfirmTheNewUserIsX(string active)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - I confirm the new user is " + active);
@@ -509,7 +510,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I Select the ... from the Actions column of the account I just created and select (Deactivate|Activate)")]
+		[RegexStepDefinition(@"I Select the ... from the Actions column of the account I just created and select (Deactivate|Activate)")]
 		public void IClickDeactivateFromTheActionsColumn(string activate)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - I select the ... from the Actions column");
@@ -533,7 +534,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I Click approve in dialog")]
+		[RegexStepDefinition(@"I Click approve in dialog")]
 		public void IClickApprove()
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - I click Approve");
@@ -552,7 +553,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I Click close in dialog")]
+		[RegexStepDefinition(@"I Click close in dialog")]
 		public void IClickClose()
 		{
 			Delay.Seconds(3);
@@ -570,7 +571,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click on NEW SUBSCRIPTION")]
+		[RegexStepDefinition(@"I click on NEW SUBSCRIPTION")]
 		public void ThenIClickOnNewSubscription()
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - I click on NEW SUBSCRIPTION");
@@ -588,7 +589,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the My Account page I confirm that the subscription level is: (.*)")]
+		[RegexStepDefinition(@"In the My Account page I confirm that the subscription level is: (.*)")]
 		public void InTheMyAccountPageIConfirmThatTheSubscriptionLevelIs(string savedAs)
 		{
 			string subSavedAs = Context.GetFromContext(savedAs)?.ToString();
@@ -596,7 +597,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully found subscription level '" + subSavedAs + "'.");
 		}
 
-		[StepDefinition(@"In the Subscription Information screen I verify section (.*) is present with product types:")]
+		[RegexStepDefinition(@"In the Subscription Information screen I verify section (.*) is present with product types:")]
 		public void ThenInTheSubscriptionInformationScreenIVerifySectionSubmittedIsPresentWithProductTypes(string sectionName, Table table)
 		{
 			if (Report.IsTrue(new MyAccount_SubscriptionInfo().ProductTypesSectionExists(sectionName), $"Failed to find product types section {sectionName} in the Subscription Information screen", $"Successfully found product types section {sectionName} in the Subscription Information screen"))
@@ -607,7 +608,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 			}
 		}
-		[StepDefinition(@"I get the count of products in section (.*) and save as: (.*)")]
+		[RegexStepDefinition(@"I get the count of products in section (.*) and save as: (.*)")]
 		public void ThenIGetTheCountOfProductsInSectionSubmittedAndSaveAsProductsCount(string sectionName, string savedAs)
 		{
 			if (Report.IsTrue(new MyAccount_SubscriptionInfo().ProductTypesSectionExists(sectionName), $"Failed to find product types section {sectionName} in the Subscription Information screen", $"Successfully found product types section {sectionName} in the Subscription Information screen"))
@@ -619,7 +620,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I verify the products count encreased for type (.*) in section (.*) then was before saved as: (.*)")]
+		[RegexStepDefinition(@"I verify the products count encreased for type (.*) in section (.*) then was before saved as: (.*)")]
 		public void ThenIVerifyTheProductsCountEncreasedForTypeSingleRetailerInSectionSubmittedThenWasBeforeSavedAsProductsCount(string productType, string sectionName, string savedAs)
 		{
 			if (Report.IsTrue(new MyAccount_SubscriptionInfo().ProductTypesSectionExists(sectionName), $"Failed to find product types section {sectionName} in the Subscription Information screen", $"Successfully found product types section {sectionName} in the Subscription Information screen"))
@@ -631,7 +632,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In MyAccount page I verify Subscription section exist with options:")]
+		[RegexStepDefinition(@"In MyAccount page I verify Subscription section exist with options:")]
 		public void ThenInMyAccountPageIVerifySubscriptionSectionExistWithOptions(Table table)
 		{
 			Report.IsTrue(new MyAccount().HeaderExists("Subscription"), $"Failed to confirm Subscription header exists", $"Successfully confirmed the Subscription header exists");
@@ -650,8 +651,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the My Account screen I navigate to the (Company Information|Subscription Information|Payment Methods|Order History|My Library) page")]
-		[StepDefinition(@"In the My Account page I navigate to the (Company Information|Subscription Information|Payment Methods|Order History|My Library) page")]
+		[RegexStepDefinition(@"In the My Account screen I navigate to the (Company Information|Subscription Information|Payment Methods|Order History|My Library) page")]
+		[RegexStepDefinition(@"In the My Account page I navigate to the (Company Information|Subscription Information|Payment Methods|Order History|My Library) page")]
 		public void ThenInTheMyAccountScreenINavigateToTheXPage(string nav_option)
 		{
 			var selMyAccount = new MyAccount();
@@ -660,7 +661,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"Successully Navigated to { nav_option}");
 		}
 
-		[StepDefinition(@"I verify Subscription details on Subscription Information page match with saved as: (.*)")]
+		[RegexStepDefinition(@"I verify Subscription details on Subscription Information page match with saved as: (.*)")]
 		public void ThenIVerifySubscriptionDetailsOnSubscriptionInformationPageMatchWithSavedAsMyAccountSubscription(string savedAs)
 		{
 			Report.IsTrue(new MyAccount().HeaderExists("Subscription"), $"Failed to confirm Subscription header exists", $"Successfully confirmed the Subscription header exists");
@@ -670,7 +671,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the Subscription Information I see option (.*) under (.*) section")]
+		[RegexStepDefinition(@"In the Subscription Information I see option (.*) under (.*) section")]
 		public void ThenInTheSubscriptionInformationISeeOptionSingleRetailerUnderSubmittedSection(string option, string section)
 		{
 			if (Report.IsTrue(new MyAccount_SubscriptionInfo().ProductTypesSectionExists(section), $"Failed to find product types section {section} in the Subscription Information screen", $"Successfully found product types section {section} in the Subscription Information screen"))
@@ -682,7 +683,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the Subscription Information in Subscription History under Subscription Level Status I see option (.*)")]
+		[RegexStepDefinition(@"In the Subscription Information in Subscription History under Subscription Level Status I see option (.*)")]
 		public void ThenInTheSubscriptionInformationInSubscriptionHistoryUnderSubscriptionLevelStatusISeeOptionSingleRetailer(string option)
 		{
 			Report.IsTrue(new MyAccount_SubscriptionInfo().Subscription_Level_Status(option),
@@ -692,7 +693,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"In the Subscription Information screen I confirm the Status has the correct information: (.*) Formulated, (.*) Articles, (.*) Enhanced Articles")]
+		[RegexStepDefinition(@"In the Subscription Information screen I confirm the Status has the correct information: (.*) Formulated, (.*) Articles, (.*) Enhanced Articles")]
 		public void ThenInTheSubscriptionInformationScreenIConfirmTheStatusHasTheCorrectInformationFormulatedArticlesEnhancedArticles(string form_no, string art_no, string en_art_no)
 		{
 			Report.StartSubStep(Report.Details.StepIndex + " - In the Subscription Information screen I confirm the Status has the correct information: " + form_no + " Formulated, " + art_no + " Articles, " + en_art_no + " Enhanced Articles");
@@ -710,7 +711,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the Subscription Information screen I confirm the Subscription History table has the correct information")]
+		[RegexStepDefinition(@"In the Subscription Information screen I confirm the Subscription History table has the correct information")]
 		public void ThenInTheSubscriptionInformationScreenIConfirmTheSubscriptionHistoryTableHasTheCorrectInformation(Table table)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - In the Subscription Information screen I confirm the Subscription History table has the correct information");
@@ -747,7 +748,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the Subscription Information screen I click the Upgrade button")]
+		[RegexStepDefinition(@"In the Subscription Information screen I click the Upgrade button")]
 		public void ThenIClickTheUpgradeButton()
 		{
 			var selMyAccount = new MyAccount_SubscriptionInfo();
@@ -756,7 +757,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"UPGRADE Button Clicked and Subscription Upgrade Page Opened");
 		}
 
-		[StepDefinition(@"In the Order History screen I select (Subscription|WERCSmart)")]
+		[RegexStepDefinition(@"In the Order History screen I select (Subscription|WERCSmart)")]
 		public void ThenInTheOrderHistoryScreenISelectX(string radio_option)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - In the Order History screen I select  " + radio_option);
@@ -773,7 +774,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
-		[StepDefinition(@"In the Order History screen I save first Invoice Number as: (.*)")]
+		[RegexStepDefinition(@"In the Order History screen I save first Invoice Number as: (.*)")]
 		public void ThenInTheOrderHistoryScreenISaveFirstInvoiceNumberAsInvoiceNumber(string savedAs)
 		{
 			var orderHistory = new MyAccount_OrderHistory();
@@ -794,7 +795,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: (.*)")]
+		[RegexStepDefinition(@"In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: (.*)")]
 		public void ThenInTheOrderHistoryScreenIGetTheInvoiceNumberAndDateAndConfirmTheInvoiceEmailHasArrivedForUserSavedAs(string savedAs)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - In the Order History screen I get the Invoice Number and Date and confirm the invoice email has arrived for user saved as: " + savedAs);
@@ -829,13 +830,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click on the option (User Accounts|Division Accounts)")]
+		[RegexStepDefinition(@"I click on the option (User Accounts|Division Accounts)")]
 		public void ClickingOnMyAccountOptionDivisionUserAccounts(string option)
 		{
 			Report.IsTrue(new MyAccount().IClickOnAccountFilter(option), "Failed to click on option: " + option, "Successfully clicked on option: " + option);
 		}
 
-		[StepDefinition(@"I (should|should not) see the Division Accounts grid")]
+		[RegexStepDefinition(@"I (should|should not) see the Division Accounts grid")]
 		public void DivisionsAccountGridIsShowing(string shouldornot)
 		{
 			bool expected = shouldornot == "should";
@@ -843,7 +844,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(showing == expected, "Division area " + (showing ? "was" : "was not") + showing + "!", "Division area " + (showing ? "was" : "was not") + showing + "!");
 		}
 
-		[StepDefinition(@"In the Company Information screen I should see (.*) (Division|User) Accounts")]
+		[RegexStepDefinition(@"In the Company Information screen I should see (.*) (Division|User) Accounts")]
 		public void CompanyInformation_DivisionAccountsShowing(string number, string type)
 		{
 			string showing = new MyAccount_CompanyInfo().ReturnUserOrDivisionAccountsNumber(type);
@@ -851,7 +852,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In Your Company User Accounts the user (.*) is associated with the administrator email address")]
+		[RegexStepDefinition(@"In Your Company User Accounts the user (.*) is associated with the administrator email address")]
 		public void UserIsAssociatedAdminEmail(string user)
 		{
 			Delay.Seconds(2);
@@ -879,7 +880,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					user, adminEmail));
 		}
 
-		[StepDefinition(@"The My Account user grid is currently on page number: (.*)")]
+		[RegexStepDefinition(@"The My Account user grid is currently on page number: (.*)")]
 		public void UserGridIsActiveOnPageNumber(string expectedPage)
 		{
 			var selMyAccount = new MyAccount();
@@ -889,7 +890,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The My Account user grid is on the expected page: " + expectedPage);
 		}
 
-		[StepDefinition(@"I click (next|previous|...) in the My Account user grid")]
+		[RegexStepDefinition(@"I click (next|previous|...) in the My Account user grid")]
 		public void ClickNextPrevInUserGrid(string navOption)
 		{
 			Report.IsTrue(new MyAccount().UserGridNavigation(navOption),
@@ -897,7 +898,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully navigated in the user grid with action: " + navOption);
 		}
 
-		[StepDefinition(@"I add (.*) new users with emails using the following information")]
+		[RegexStepDefinition(@"I add (.*) new users with emails using the following information")]
 		public void AddMultipleUsersWithEmails(string userCount, Table table)
 		{
 			for (int i = 0; i < Convert.ToInt32(userCount); i++)
@@ -970,7 +971,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I see the user grid page navigation input with up and down arrows")]
+		[RegexStepDefinition(@"I see the user grid page navigation input with up and down arrows")]
 		public void PageInputNumber()
 		{
 			Report.IsTrue(new MyAccount().UserGridNavPageInputShowing(),
@@ -978,7 +979,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The user grid page navigation input was visible as expected");
 		}
 
-		[StepDefinition(@"I enter the (up|down) arrow into the user grid page navigation box then the correct page is shown")]
+		[RegexStepDefinition(@"I enter the (up|down) arrow into the user grid page navigation box then the correct page is shown")]
 		public void EnterArrowUserGridNavigationBox(string direction)
 		{
 			var selMyAccount = new MyAccount();
@@ -1003,7 +1004,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					iteration, currentPage, direction, pageNavigationValue));
 		}
 
-		[StepDefinition(@"I type the number (.*) into the user grid page navigation box and press the enter key")]
+		[RegexStepDefinition(@"I type the number (.*) into the user grid page navigation box and press the enter key")]
 		public void TypeNumberUserGridNavigationBoxAndPressEnter(string pageNum)
 		{
 			var selMyAccount = new MyAccount();
@@ -1013,7 +1014,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selMyAccount.KeyToUserGridNavPageInput("enter");
 		}
 
-		[StepDefinition(@"I should see the following tabs in the My Library page")]
+		[RegexStepDefinition(@"I should see the following tabs in the My Library page")]
 		public void TabsShowingInMyLibrary(Table tabs)
 		{
 			var selMyLibrary = new MyAccount_MyLibrary();
@@ -1025,7 +1026,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The displayed tabs matched the list of expected tabs: " + string.Join(", ", tabsDisplayed));
 		}
 
-		[StepDefinition(@"I navigate to the (My Packaging Types|My Brands|My Distributors|My Ingredients) tab in the My Library page")]
+		[RegexStepDefinition(@"I navigate to the (My Packaging Types|My Brands|My Distributors|My Ingredients) tab in the My Library page")]
 		public void ClickTabMyLibrary(string tab)
 		{
 			Report.Info("Clicking the My Library tab with heading: " + tab);
@@ -1034,7 +1035,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully navigated to the :" + tab + " tab");
 		}
 
-		[StepDefinition(@"I confirm the current active tab on the My Library page is: (.*)")]
+		[RegexStepDefinition(@"I confirm the current active tab on the My Library page is: (.*)")]
 
 		public void CurrentActiveTabMyLibrary(string expectedTab)
 		{
@@ -1046,7 +1047,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The current active tab was: '" + activeTab + "' as expected");
 		}
 
-		[StepDefinition(@"I click 'Add New' in the (My Packaging Types|My Brands) section of My Library")]
+		[RegexStepDefinition(@"I click 'Add New' in the (My Packaging Types|My Brands) section of My Library")]
 		public void ClickAddNewMyLibrary(string tab)
 		{
 			if (tab == "My Packaging Types")
@@ -1067,7 +1068,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Failure("Unable to 'Add New' for specified section: " + tab);
 		}
 
-		[StepDefinition(@"In the Company Information page I confirm the Company Information is correct")]
+		[RegexStepDefinition(@"In the Company Information page I confirm the Company Information is correct")]
 		public void ThenInTheCompanyInformationPageIConfirmTheCompanyInformationIsCorrect(Table myTable)
 		{
 			var myCompanyInfo = new MyAccount_CompanyInfo();
@@ -1118,13 +1119,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I close the 'Thank You' user updated dialog")]
+		[RegexStepDefinition(@"I close the 'Thank You' user updated dialog")]
 		public void CloseThankYouUpdated()
 		{
 			Report.IsTrue(new AddUserThankYouDialog().Updated_User_Thank_You_Close(), "Failed to click Close in Thank You pop up", "Successfully clicked Close in the Thank You pop up");
 		}
 
-		[StepDefinition(@"I close the 'Thank You' user added dialog")]
+		[RegexStepDefinition(@"I close the 'Thank You' user added dialog")]
 		public void CloseThankYouCreated()
 		{
 			Report.IsTrue(new AddUserThankYouDialog().Add_User_Thank_You(), "Failed to click Close in Thank You pop up", "Successfully clicked Close in the Thank You pop up");
@@ -1133,13 +1134,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		
 
-		[StepDefinition(@"I click the 'How to Subscribe' link in My Account")]
+		[RegexStepDefinition(@"I click the 'How to Subscribe' link in My Account")]
 		public void ClickHowToSubscribeLinkInMyAccount()
 		{
 			Report.IsTrue(new MyAccount().ClickHowToSubscribeLink(), "Failed to click the 'How to Subscribe' link!", "Successfully clicked the 'How to Subscribe' link");
 		}
 
-		[StepDefinition(@"In the ""(.*)"" WercSmart Solutions article, I click the link for 'To view a video... click here'")]
+		[RegexStepDefinition(@"In the ""(.*)"" WercSmart Solutions article, I click the link for 'To view a video... click here'")]
 		public void InWercSmartSolutionArticleIClickViewVideoHere(string articleHeading)
 		{
 			string displayedArticle = new WercSmartSolutionsArticle().ArticleHeading();
@@ -1149,7 +1150,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm a new tab opens to YouTube with a video titled: (.*)")]
+		[RegexStepDefinition(@"I confirm a new tab opens to YouTube with a video titled: (.*)")]
 		public void ConfirmANewTabOpensToYouTubeWithVideoTitled(string videoTitle)
 		{
 			var selYoutube = new YouTube();
@@ -1178,14 +1179,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I check that there are at least (\d) pages of users\. If not this test will not work\.")]
+		[RegexStepDefinition(@"I check that there are at least (\d) pages of users\. If not this test will not work\.")]
 		public void GivenICheckThatThereAreAtLeastSixPagesOfUsers_IfNotThisTestWillNotWork_(int minPages)
 		{
 			Report.IsTrue(new MyAccount().GetHighestPageNo() > 5,
 				"Can't run this test since we need a page count of 6 or higher", "OK to continue with this test.");
 		}
 
-		[StepDefinition(@"In the Subscription Information screen I confirm status is: (.*)")]
+		[RegexStepDefinition(@"In the Subscription Information screen I confirm status is: (.*)")]
 		public void ThenIConfirmStatus(string status)
 		{
 			var selMyAccount = new MyAccount_SubscriptionInfo();
@@ -1194,7 +1195,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Status is as expected");
 		}
 
-		[StepDefinition(@"In the Subscription Information screen I confirm grace period is: (.*)")]
+		[RegexStepDefinition(@"In the Subscription Information screen I confirm grace period is: (.*)")]
 		public void ThenIConfirmGracePeriod(string gracePeriod)
 		{
 			var selMyAccount = new MyAccount_SubscriptionInfo();
@@ -1204,7 +1205,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"In Stewardship table I select the following options for field: (.*) and stewardship as: (.*) and Issue date: (.*) and Expire Date: (.*)")]
+		[RegexStepDefinition(@"In Stewardship table I select the following options for field: (.*) and stewardship as: (.*) and Issue date: (.*) and Expire Date: (.*)")]
 		public void StewardshipInformation(string field, string options1)
 		{
 			GeneralUtilities.ScrollToBottomOfPage();
@@ -1216,7 +1217,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-		[StepDefinition(@"I add the following in Canada Supplier Address")]
+		[RegexStepDefinition(@"I add the following in Canada Supplier Address")]
 		public void AddCanadaAddress(string options1, string options2, string option3, string options4, string options5, string option6, string option7)
 		{
 			GeneralUtilities.ScrollToBottomOfPage();
@@ -1229,7 +1230,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I update the password for for the selected user in the change user password popup, using the admin password: (.*)")]
+		[RegexStepDefinition(@"I update the password for for the selected user in the change user password popup, using the admin password: (.*)")]
 		public void IUpdateThePasswordForGivenUser(string savedAs)
 		{
 			var adminUser = TestUsers.GetUserSavedAs(savedAs);
@@ -1282,7 +1283,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I reset the password on the newly created user account using the admin password for the account: (.*)")]
+		[RegexStepDefinition(@"I reset the password on the newly created user account using the admin password for the account: (.*)")]
 		public void ResetUserPassword(string savedAs)
 		{
 
@@ -1305,7 +1306,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I create a new user with the following information and set the password from the admin account: (.*)")]
+		[RegexStepDefinition(@"I create a new user with the following information and set the password from the admin account: (.*)")]
 		public void CreateUserAndSetPassword(string savedAs, Table table)
 		{
 
@@ -1313,7 +1314,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.StartStep("I add a new user");
 			Report.Info("Adding user with the following information");
-			SpecFlowReporting.Table(table);
+			ReqnrollReporting.Table(table);
 			this.ThenIAddANewUserWithTheFollowingInformation(table);
 			var adminUser = TestUsers.GetUserSavedAs(savedAs);
 			var allUsers = new MyAccount().UserGrid();
@@ -1356,7 +1357,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"In Stewardship table I select I have no stewardship Numbers")]
+		[RegexStepDefinition(@"In Stewardship table I select I have no stewardship Numbers")]
 		public void ClickIhaveNoStewardshipNumbers()
 		{
 			ReportSettings.UseSubSteps = true;
@@ -1378,7 +1379,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		/// <summary>
 		/// Requires a string parameter saved to context as: CurrentEmail which is called in the add a new user step
 		/// </summary>
-		[StepDefinition(@"I confirm there was an email with title: (.*) sent to the new user and I click the link with text: (.*)")]
+		[RegexStepDefinition(@"I confirm there was an email with title: (.*) sent to the new user and I click the link with text: (.*)")]
 		public void ThenTheEmailShouldContainALinkToSetUpTheWercSmartAccount(string emailTitle, string linkText)
 		{
 			ReportSettings.UseSubSteps = true;
@@ -1416,19 +1417,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			SeleniumBrowser.Navigate(link);
 		}
 
-		[StepDefinition(@"I Select the Active filter")]
+		[RegexStepDefinition(@"I Select the Active filter")]
 		public void ISelectTheActiveFilter()
 		{
 			Report.IsTrue(new MyAccount().IClickOnAccountActiveFilter(), "Failed to select the Active Filter", "Successfully selected the Active Filter");
 		}
 
-		[StepDefinition(@"I Select the Inactive filter")]
+		[RegexStepDefinition(@"I Select the Inactive filter")]
 		public void ISelectTheInActiveFilter()
 		{
 			Report.IsTrue(new MyAccount().IClickOnAccountInActiveFilter(), "Failed to select the Inactive Filter", "Successfully selected the Inactive Filter");
 		}
 
-		[StepDefinition(@"I Confirm that you (See|Don't See) the user you just created in the grid")]
+		[RegexStepDefinition(@"I Confirm that you (See|Don't See) the user you just created in the grid")]
 		public void IConfirmThatYouSeeTheUserJustCreatedInGrid(string presence)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - I confirm that you " + presence + " the new user I just created is in the Gird");
@@ -1458,7 +1459,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In Stewardship table click edit")]
+		[RegexStepDefinition(@"In Stewardship table click edit")]
 		public void StewardshipTableEditClick()
 		{
 			try
@@ -1476,7 +1477,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In Stewardship table I click: (.*)")]
+		[RegexStepDefinition(@"In Stewardship table I click: (.*)")]
 		public void StewardshipSaveorCancel(string option)
 		{
 			try
@@ -1493,7 +1494,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I Create new users in the My Account page via the user Grid until there are atleast: (.*) pages present")]
+		[RegexStepDefinition(@"I Create new users in the My Account page via the user Grid until there are atleast: (.*) pages present")]
 		public void ICreateXNewUsersInTheMyAccountPageViaTheUserGrid(int noPages)
 		{
 			
@@ -1531,7 +1532,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I confirm that I do not see any stewardship information")]
+		[RegexStepDefinition(@"I confirm that I do not see any stewardship information")]
 		public void NoStewardshipData()
 		{
 			try
@@ -1549,28 +1550,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click on the 'Edit' button in Company information in the Stewardship Numbers section")]
+		[RegexStepDefinition(@"I click on the 'Edit' button in Company information in the Stewardship Numbers section")]
 		public void ThenIClickOnTheLink()
 		{
 			MyAccount MyAccountObject = new MyAccount();
 			Report.IsTrue(MyAccountObject.ClickOnEditButtonInCompanyInformationPageInStewardshipNumbersSection(), "Failed to click on 'Edit' button", "Successfully clicked 'Edit' button");
 		}
 
-		[StepDefinition(@"I fill in Stweardship Numbers information")]
+		[RegexStepDefinition(@"I fill in Stweardship Numbers information")]
 		public void ThenIFillInStweardshipNumbersInformation(Table table)
 		{
 			MyAccount MyAccountObject = new MyAccount();
 			Report.IsTrue(MyAccountObject.FillInStewardshipData(table), "Failed to fill in Stewardship table data", "Successfully filled in Stewardship table data");
 		}
 
-		[StepDefinition(@"I save Stewardship Numbers information")]
+		[RegexStepDefinition(@"I save Stewardship Numbers information")]
 		public void ThenISaveStewardshipNumbersInformation()
 		{
 			MyAccount MyAccountObject = new MyAccount();
 			Report.IsTrue(MyAccountObject.ClickSaveButtonForStewardshipNumbers(), "Failed to save Stewardship table data", "Successfully saved Stewardship table data");
 		}
 
-		[StepDefinition(@"I confirm that the data saved in the Stewardshp Numbers section is correct")]
+		[RegexStepDefinition(@"I confirm that the data saved in the Stewardshp Numbers section is correct")]
 		public void ThenIConfirmThatTheDataSavedIsCorrect(Table table)
 		{
 			MyAccount MyAccountObject = new MyAccount();
@@ -1578,49 +1579,49 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I check that a heading with the name: (.*) exists")]
+		[RegexStepDefinition(@"I check that a heading with the name: (.*) exists")]
 		public void ThenICheckThatAHeadingWithTheNameStewardshipNumbersExists(string headingName)
 		{
 			MyAccount MyAccountObject = new MyAccount();
 			Report.IsTrue(MyAccountObject.SearchForHeadingInCompanyInformationPageWithName(headingName), $"Heading with name: { headingName }, was not found", $"Heading with name: { headingName }, was found");
 		}
 
-		[StepDefinition(@"I check if there is a table in the Stewardship Numbers section")]
+		[RegexStepDefinition(@"I check if there is a table in the Stewardship Numbers section")]
 		public void ThenICheckIfThereIsATableInTheStewardshipNumbersSection()
 		{
 			MyAccount MyAccountObject = new MyAccount();
 			Report.IsTrue(MyAccountObject.CheckForTableInCompanyInformationPageInStewardshipNumbersSection(), "Failed to find a table", "Successfully found a table");
 		}
 
-		[StepDefinition(@"I find out how many rows are in the table in the Stewardship Numbers section")]
+		[RegexStepDefinition(@"I find out how many rows are in the table in the Stewardship Numbers section")]
 		public void ThenIFindOutHowManyRowsAreInATable()
 		{
 			MyAccount MyAccountObject = new MyAccount();
 			Report.Info("The nuumber of columns in the table is: " + MyAccountObject.CheckNumberOfColumnsInTableInCompanyInformationPageInStewardshipNumbersSection());
 		}
 
-		[StepDefinition(@"I check if the Stewardship Numbers table columns names match the following column names")]
+		[RegexStepDefinition(@"I check if the Stewardship Numbers table columns names match the following column names")]
 		public void ThenICheckIfColumnNamesMatch(Table table)
 		{
 			MyAccount MyAccountObject = new MyAccount();
 			Report.IsTrue(MyAccountObject.CheckIfColumnNamesMatchInCompanyInformationPageInStewardshipNumbersSection(table), "Column names do not match", "Column names match");
 		}
 
-		[StepDefinition(@"I check if the Stewardship Numbers table province names match the following province names")]
+		[RegexStepDefinition(@"I check if the Stewardship Numbers table province names match the following province names")]
 		public void ThenICheckProvinceNames(Table table)
 		{
 			MyAccount MyAccountObject = new MyAccount();
 			Report.IsTrue(MyAccountObject.CheckProvinceNamesInCompanyInformationPageInStewardshipNumbersSection(table), "Province names do not match", "Province names match");
 		}
 
-		[StepDefinition(@"I check if 'Edit' button exists in the Stewardship Numbers section")]
+		[RegexStepDefinition(@"I check if 'Edit' button exists in the Stewardship Numbers section")]
 		public void ThenICheckIfButtonExistsInTheStewardshipNumbersSection()
 		{
 			MyAccount MyAccountObject = new MyAccount();
 			Report.IsTrue(MyAccountObject.CheckForEditButtonCheckProvinceNamesInCompanyInformationPageInStewardshipNumbersSection(), "Edit button does exist in the Stewardship Numbers section", "Edit button exists in the Stewardship Numbers section");
 		}
 
-		[StepDefinition(@"I add following stewardship information")]
+		[RegexStepDefinition(@"I add following stewardship information")]
 		public void AddStewardshipInformation(Table table)
 		{
 			try
@@ -1641,7 +1642,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I call a Shared Step to create a new password for the account saved as: (.*)")]
+		[RegexStepDefinition(@"I call a Shared Step to create a new password for the account saved as: (.*)")]
 		public void ThenICallSharedStepToCreateANewPassword(string accountSavedAs)
 		{
 			ForgottenPasswordQuestions FP = new ForgottenPasswordQuestions();
@@ -1784,7 +1785,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I pass the following data to the Stweardship Numbers table")]
+		[RegexStepDefinition(@"I pass the following data to the Stweardship Numbers table")]
 		public void ThenPassTableStweardshipNumbersInformation(Table table)
 		{
 			MyAccount MyAccountObject = new MyAccount();
@@ -1792,14 +1793,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(MyAccountObject.FillInStewardshipData(table), "Failed to fill in Stewardship table data", "Successfully filled in Stewardship table data");
 		}
 
-		[StepDefinition(@"I save the Stewardship Numbers data")]
+		[RegexStepDefinition(@"I save the Stewardship Numbers data")]
 		public void ThenISaveTheStewardshipNumbersData()
 		{
 			MyAccount MyAccountObject = new MyAccount();
 			Report.IsTrue(MyAccountObject.ClickSaveButtonForStewardshipNumbers(), "Failed to click save", "Successfully clicked save");
 		}
 
-		[StepDefinition(@"I look for the error: (.*) in the row with the province: (.*)")]
+		[RegexStepDefinition(@"I look for the error: (.*) in the row with the province: (.*)")]
 		public void GivenICallSharedStepMyAccountStewardshipNumbersDateValidation(string error, string province)
 		{
 
@@ -1808,14 +1809,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I search for user with email")]
+		[RegexStepDefinition(@"I search for user with email")]
 		public void ThenISearchForUserWithEmailSaved()
 		{
 			MyAccount MyAccountObject = new MyAccount();
 			Report.IsTrue(MyAccountObject.SearchForUserSavedAs(), "Failed to find user with email", "Successfully found user with email");
 		}
 
-		[StepDefinition(@"I confirm following error message displayed for confirm email text box: (.*)")]
+		[RegexStepDefinition(@"I confirm following error message displayed for confirm email text box: (.*)")]
 		public void ThenIConfirmEmailDoesNotMatchError(string errorMessage)
 		{
 			MyAccount MyAccountObject = new MyAccount();
@@ -1829,7 +1830,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I clear the name and email address fields text")]
+		[RegexStepDefinition(@"I clear the name and email address fields text")]
 		public void ThenIClearNameAndEmailInput()
 		{
 			MyAccount MyAccountObject = new MyAccount();
@@ -1845,7 +1846,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm following error message displayed for email text box: (.*)")]
+		[RegexStepDefinition(@"I confirm following error message displayed for email text box: (.*)")]
 		public void ThenIConfirmEmailAlreadyExistsError(string errorMessage)
 		{
 			MyAccount MyAccountObject = new MyAccount();
@@ -1859,7 +1860,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm following error message displayed for last name input empty text box: (.*)")]
+		[RegexStepDefinition(@"I confirm following error message displayed for last name input empty text box: (.*)")]
 		public void ThenIConfirmLatNameInputEmptyError(string errorMessage)
 		{
 			MyAccount MyAccountObject = new MyAccount();
@@ -1873,7 +1874,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click on Add new User link")]
+		[RegexStepDefinition(@"I click on Add new User link")]
 		public void IClickOnAddNewUserLink()
 		{
 			var selMyAccount = new MyAccount();
@@ -1884,7 +1885,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(5);
 		}
 
-		[StepDefinition(@"I add following new User information")]
+		[RegexStepDefinition(@"I add following new User information")]
 		public void AddUserInformation(Table table)
 		{
 			try
@@ -1914,7 +1915,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
-		[StepDefinition(@"In the dialog I click on Cancel")]
+		[RegexStepDefinition(@"In the dialog I click on Cancel")]
 		public void GivenInThePopupErrorIClickOnCancel()
 		{
 			try
@@ -1929,7 +1930,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I enter new password and confirm password input fields with diff data: (.*) for the account saved as: (.*)")]
+		[RegexStepDefinition(@"I enter new password and confirm password input fields with diff data: (.*) for the account saved as: (.*)")]
 		public void ThenIEnterANewAndConfirmPassword(string diffPassword, string accountSavedAs)
 		{
 			try
@@ -1950,7 +1951,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I Confirm mismatch error message displayed: (.*)")]
+		[RegexStepDefinition(@"I Confirm mismatch error message displayed: (.*)")]
 		public void ThenIConfirmMismatchPasswordErrorMessage(string errMsg)
 		{
 			try
@@ -1971,7 +1972,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
-		[StepDefinition(@"I enter new password for the account saved as: (.*)")]
+		[RegexStepDefinition(@"I enter new password for the account saved as: (.*)")]
 		public void ThenIEnterANewPassword(string accountSavedAs)
 		{
 			try
@@ -1993,7 +1994,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I Confirm following error message displayed: (.*)")]
+		[RegexStepDefinition(@"I Confirm following error message displayed: (.*)")]
 		public void ThenIConfirmPasswordErrorMessage(string errMsg)
 		{
 			try
@@ -2014,7 +2015,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
-		[StepDefinition(@"I Confirm that I see the field : (.*)")]
+		[RegexStepDefinition(@"I Confirm that I see the field : (.*)")]
 		public void ThenInTheOrderHistoryScreenISelect(string value)
 		{
 			Report.StartStep($" In the Order History screen I confirm { value }");
@@ -2031,7 +2032,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I filter with order Number : (.*), (.*)")]
+		[RegexStepDefinition(@"I filter with order Number : (.*), (.*)")]
 		public void IFilterWithOrderNumber(string orderNum, string action)
 		{
 			Report.StartStep($" In the Order Number search text box enter { orderNum }");
@@ -2049,7 +2050,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
-		[StepDefinition(@"I Confirm (.*) results are correct: (.*)")]
+		[RegexStepDefinition(@"I Confirm (.*) results are correct: (.*)")]
 		public void IConfirmInvoiceOrderNumFilterResult(string action, string value)
 		{
 			Report.StartStep($" I confirm Order Number filter working as expected ");
@@ -2077,7 +2078,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
-		[StepDefinition(@"I click view details link")]
+		[RegexStepDefinition(@"I click view details link")]
 		public void IClickViewDetailsLink()
 		{
 			Report.StartStep($" I click the view details link");
@@ -2094,7 +2095,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm (.*) tab is selected by default")]
+		[RegexStepDefinition(@"I confirm (.*) tab is selected by default")]
 		public void ThenIConfirmSelectedTabDisplayed(string value)
 		{
 			Report.StartStep($" I confirm WERCSmart tab displayed by default");
@@ -2102,7 +2103,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(selorderAccount.TabExists(value), $" {value} is not selected by default", $" {value} selected by default");
 		}
 
-		[StepDefinition(@"I confirm following columns displayed")]
+		[RegexStepDefinition(@"I confirm following columns displayed")]
 		public void ThenIConfirmIfColumnNamesMatch(Table table)
 		{
 			Report.StartStep($" I confirm following WERCSmart table columns displayed");
@@ -2117,7 +2118,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I filter Product Name (.*) with action: (.*)")]
+		[RegexStepDefinition(@"I filter Product Name (.*) with action: (.*)")]
 		public void IFilterWithWPSID(string wpsId, string action)
 		{
 			Report.StartStep($" In the WPSID search text box enter { wpsId }");
@@ -2136,7 +2137,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I save Description as: (.*)")]
+		[RegexStepDefinition(@"I save Description as: (.*)")]
 		public void ISaveDescription(string saveAs)
 		{
 			try
@@ -2153,7 +2154,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
-		[StepDefinition(@"I Confirm Product name or wpsId Filter results (.*) are correct : (.*)")]
+		[RegexStepDefinition(@"I Confirm Product name or wpsId Filter results (.*) are correct : (.*)")]
 		public void IConfirmProductNameFilterResult(string value, string text)
 		{
 			try
@@ -2170,7 +2171,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I Confirm Clear Filter returns correct results: (.*)")]
+		[RegexStepDefinition(@"I Confirm Clear Filter returns correct results: (.*)")]
 		public void IConfirmProductNameClearFilter(string value)
 		{
 			try
@@ -2188,7 +2189,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I apply filtering with: (.*) Status")]
+		[RegexStepDefinition(@"I apply filtering with: (.*) Status")]
 		public void IApplyFilterResult(string value)
 		{
 			try
@@ -2203,7 +2204,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm filtered with the completed status")]
+		[RegexStepDefinition(@"I confirm filtered with the completed status")]
 		public void IConfirmFilterByDropdownResultWithSelectedStatus()
 		{
 			try
@@ -2218,7 +2219,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
-		[StepDefinition(@"I click on Filter Button")]
+		[RegexStepDefinition(@"I click on Filter Button")]
 		public void IClickFilterButton()
 		{
 			var selorderAccount = new MyAccount_OrderHistory();

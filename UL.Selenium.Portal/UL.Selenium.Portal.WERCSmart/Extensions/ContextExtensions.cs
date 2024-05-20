@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Reqnroll;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using TReVor.Core.Classes.Software;
 
 namespace UL.Selenium.Portal.WERCSmart.Extensions
 {
 	public static class ContextExtensions
 	{
-		public static int GetTestCaseId(this TechTalk.SpecFlow.ScenarioContext scenarioContext)
+		public static int GetTestCaseId(this ScenarioContext scenarioContext)
 		{
 			int testCaseId = 0;
 			var scenarioTitle = scenarioContext.ScenarioInfo.Title;

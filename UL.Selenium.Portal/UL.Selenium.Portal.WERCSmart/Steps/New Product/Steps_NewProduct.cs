@@ -5,13 +5,11 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
 using UL.Automation.Reporting;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.SpecFlow.Classes;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.TReVor.Classes;
 using UL.Automation.Utilities.Functions;
 using UL.Selenium.Portal.WERCSmart.Classes;
@@ -23,6 +21,8 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit;
 using UL.Automation.Utilities.Helpers;
 using Mailosaur;
+using Reqnroll;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.Utilities.Helpers;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
@@ -32,7 +32,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 	{
 		private static NewProduct NewProduct => new NewProduct();
 
-		[StepDefinition(@"I check if the logo is displayed for the following retailers")]
+		[RegexStepDefinition(@"I check if the logo is displayed for the following retailers")]
 		public void ThenICheckIfTheLogoIsDisplayedForTheFollowingRetailers(Table table)
 		{
 			NewProduct newProductObject = new NewProduct();
@@ -46,7 +46,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
-		[StepDefinition(@"I check if a checkmark image is displayed above the following retailers")]
+		[RegexStepDefinition(@"I check if a checkmark image is displayed above the following retailers")]
 		public void ThenICheckIfACheckmarkImageIsDisplayedAboveTheFollowingRetailers(Table table)
 		{
 			NewProduct newProductObject = new NewProduct();
@@ -59,7 +59,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I check if a yellow triangle image is displayed above the following retailers")]
+		[RegexStepDefinition(@"I check if a yellow triangle image is displayed above the following retailers")]
 		public void ThenICheckIfAYellowTriangleImageIsDisplayedAboveTheFollowingRetailers(Table table)
 		{
 			NewProduct newProductObject = new NewProduct();
@@ -72,7 +72,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I check if a 'Scope' button is displayed below the following retailers")]
+		[RegexStepDefinition(@"I check if a 'Scope' button is displayed below the following retailers")]
 		public void ThenICheckIfAScopeButtonIsDisplayedBelowTheFollowingRetailers(Table table)
 		{
 			NewProduct newProductObject = new NewProduct();
@@ -85,7 +85,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I check if the retailer modal is displayed for the following retailer: (.*)")]
+		[RegexStepDefinition(@"I check if the retailer modal is displayed for the following retailer: (.*)")]
 		public void ThenICheckIfTheRetailerModalIsDisplayedForTheFollowingRetailerCT(string retailer)
 		{
 			NewProduct newProductObject = new NewProduct();
@@ -94,21 +94,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(newProductObject.CheckIfRetailerModalIsDisplayed(), "Failed to display retailer modal", "Successfully displayed retailer modal");
 		}
 
-		[StepDefinition(@"I check if the retailer modal is displaying the following text: (.*)")]
+		[RegexStepDefinition(@"I check if the retailer modal is displaying the following text: (.*)")]
 		public void ThenICheckIfTheRetailerModalIsDisplayingTheFollowingText(string retailerModalText)
 		{
 			NewProduct newProductObject = new NewProduct();
 			Report.IsTrue(newProductObject.CheckRetailerModalText(retailerModalText), "The reatiler modal text did not match", "The retailer modal text did match");
 		}
 
-		[StepDefinition(@"I close the retailer modal")]
+		[RegexStepDefinition(@"I close the retailer modal")]
 		public void ThenICloseTheRetailerModal()
 		{
 			NewProduct newProductObject = new NewProduct();
 			Report.IsTrue(newProductObject.CloseRetailerModal(), "Failed to close retailer modal", "Successfully closed retailer modal");
 		}
 
-		[StepDefinition(@"I hover over the yellow triangle image for retailer: (.*)")]
+		[RegexStepDefinition(@"I hover over the yellow triangle image for retailer: (.*)")]
 		public void ThenIHoverOverTheYellowTriangleImage(string retailer)
 		{
 			NewProduct newProductObject = new NewProduct();
@@ -135,7 +135,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		// * 'Section' is the individual input/ question within a Page [html: 'form-group']
 		//		eg. 'Product name', 'Type of product', pH...
 
-		[StepDefinition(@"In the New Product page I click tab: (Product Type|Physical and Chemical Properties|Product Characteristics|Retailer Association|Recipient and UPC Details|Review and Submit)")]
+		[RegexStepDefinition(@"In the New Product page I click tab: (Product Type|Physical and Chemical Properties|Product Characteristics|Retailer Association|Recipient and UPC Details|Review and Submit)")]
 		public void GivenInTheNewProductPageIClickTab(string tabName)
 		{
 			try
@@ -156,7 +156,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
-		[StepDefinition(@"In the New Product page I (should|should not) be on tab: (Product Type|Product Characteristics|Recipient and UPC Details|Review and Submit)")]
+		[RegexStepDefinition(@"In the New Product page I (should|should not) be on tab: (Product Type|Product Characteristics|Recipient and UPC Details|Review and Submit)")]
 		public void GivenInTheNewProductPageICpmfirmActiveTab(string present, string tabName)
 		{
 			try
@@ -177,7 +177,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I click the page heading: (.*)")]
+		[RegexStepDefinition(@"I click the page heading: (.*)")]
 		public void ClickPageHeading(string section)
 		{
 			Delay.Seconds(10);
@@ -195,13 +195,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			//this.GivenIShouldSeeXPage(section);
 		}
 
-		[StepDefinition(@"the Product Editor page should be loaded")]
+		[RegexStepDefinition(@"the Product Editor page should be loaded")]
 		public void ProductEditorShouldBeLoaded()
 		{
 			Report.IsTrue(NewProduct.WaitForContainerToBeVisible(), "The Product Registration page did not load!", "The Product Registration page loaded successfully!");
 		}
 
-		[StepDefinition(@"I click continue")]
+		[RegexStepDefinition(@"I click continue")]
 		public void ClickContinue()
 		{
 			int i = 0;
@@ -222,7 +222,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			//Report.IsTrue(NewProduct.ClickContinue(), "Failed to click 'Continue'!", "Clicked 'Continue' successfully");
 		}
 
-		[StepDefinition(@"in the (.*) page I click Continue")]
+		[RegexStepDefinition(@"in the (.*) page I click Continue")]
 		public void GivenInTheNewProductPageIClickContinue(string page)
 		{
 			if (!NewProduct.WaitForContainerToBeVisible())
@@ -250,8 +250,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I should see the (.*) Page")]
-		[StepDefinition(@"I should see the (.*) Page for the New Product")]
+		[RegexStepDefinition(@"I should see the (.*) Page")]
+		[RegexStepDefinition(@"I should see the (.*) Page for the New Product")]
 		public void GivenIShouldSeeXPage(string page)
 		{
 			if (NewProduct.WaitForContainerToBeVisible())
@@ -264,7 +264,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
-		[StepDefinition(@"I wait (.*) seconds for the (.*) Page to load")]
+		[RegexStepDefinition(@"I wait (.*) seconds for the (.*) Page to load")]
 		public void IWaitXSecondsForYPageToLoad(int seconds, string page)
 		{
 			if (NewProduct.WaitForContainerToBeVisible())
@@ -276,7 +276,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I should see an error message: (.*)")]
+		[RegexStepDefinition(@"I should see an error message: (.*)")]
 		public void ErrorMessageSpecific(string message)
 		{
 			Report.Info("Checking error message");
@@ -292,34 +292,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				$"Error message was showing: '{message}', as expected");
 		}
 
-		[StepDefinition(@"I should see a list style form error with text: (.*)")]
+		[RegexStepDefinition(@"I should see a list style form error with text: (.*)")]
 		public void ShouldSeeAlistFormError(string error)
 		{
 			var errorActual = new NewProduct().FormError();
 			Report.IsTrue(errorActual.Contains(error), "The expected error was not found! The error text found was: " + errorActual, "Found expected error");
 		}
 
-		[StepDefinition(@"in page (.*) I should see error: (.*)")]
+		[RegexStepDefinition(@"in page (.*) I should see error: (.*)")]
 		public void InPageIShouldSeeError(string page, string error)
 		{
 			Report.Info("Checking error on page: " + page);
 			this.ErrorMessageSpecific(error);
 		}
 
-		[StepDefinition(@"I should not see an error message: (.*)")]
+		[RegexStepDefinition(@"I should not see an error message: (.*)")]
 		public void NotErrorMessageSpecific(string message)
 		{
 			List<string> errors = NewProduct.ErrorMessagesText;
 			Report.IsTrue(!errors.Contains(message), "Error message was showing when it wasn't expected to! Error: " + message, "As expected, the error message was not showing. Error: " + message);
 		}
 
-		[StepDefinition(@"in page (.*) I should see no errors")]
+		[RegexStepDefinition(@"in page (.*) I should see no errors")]
 		public void InPageIShouldSeeNoErrors(string page)
 		{
 			this.NoErrorMessages();
 		}
 
-		[StepDefinition(@"I should not see any error messages")]
+		[RegexStepDefinition(@"I should not see any error messages")]
 		public void NoErrorMessages()
 		{
 			List<string> errors = NewProduct.ErrorMessagesText;
@@ -333,7 +333,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I should see the header (.*)")]
+		[RegexStepDefinition(@"I should see the header (.*)")]
 		public void CorrectHeaderShouldBeShowing(string header)
 		{
 			if (!NewProduct.WaitForContainerToBeVisible())
@@ -346,7 +346,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Header was showing: '" + header + "', as expected!");
 		}
 
-		[StepDefinition(@"I click the (.*) input section in Optional Reports and Documents Available for Purchase and select (.*)")]
+		[RegexStepDefinition(@"I click the (.*) input section in Optional Reports and Documents Available for Purchase and select (.*)")]
 		public void IClickTheInputSectionAndSelect(string section, string selection)
 		{
 			var reports = new OptionalReports();
@@ -355,7 +355,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully selected input '" + selection + "' for section '" + section + "'.");
 		}
 
-		[StepDefinition(@"The total for section (.*) in Optional Reports and Documents Available for Purchase should equal (.*)")]
+		[RegexStepDefinition(@"The total for section (.*) in Optional Reports and Documents Available for Purchase should equal (.*)")]
 		public void TotalForSectionShouldEqual(string section, string value)
 		{
 			var reports = new OptionalReports();
@@ -364,7 +364,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully found correct value '" + value + "' for section '" + section + "'.");
 		}
 
-		[StepDefinition(@"I confirm the document type is: (.*) for section: (.*)")]
+		[RegexStepDefinition(@"I confirm the document type is: (.*) for section: (.*)")]
 		public void ConfirmDocumentTypeForSection(string type, string section)
 		{
 			Report.IsTrue(new NewProduct().GetDocumentTypeForSection(section) == type,
@@ -375,7 +375,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		#endregion
 
 		#region Unsorted steps
-		[StepDefinition(@"the product saved as: (.*) should be visible in editor")]
+		[RegexStepDefinition(@"the product saved as: (.*) should be visible in editor")]
 		public void CorrectProductVisibleInEditor(string savedAs)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - Product saved as " + savedAs + " is visible in editor");
@@ -399,7 +399,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I create a shell product with name (.*) saved as (.*)")]
+		[RegexStepDefinition(@"I create a shell product with name (.*) saved as (.*)")]
 		public void CreateShellProduct(string name, string savedAs)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - Creating shell product with name " + name + ", saved as " + savedAs);
@@ -444,7 +444,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I should see battery manufacturer message: (.*)")]
+		[RegexStepDefinition(@"I should see battery manufacturer message: (.*)")]
 		public void ThenIShouldSeeBatteryManufacturerMessage(string message)
 		{
 			Report.Info("Checking error message");
@@ -456,21 +456,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Warning message was showing: " + message + ", as expected!");
 		}
 
-		[StepDefinition(@"I click Continue and should not see an error message")]
+		[RegexStepDefinition(@"I click Continue and should not see an error message")]
 		public void NoErrorMessagesVisible()
 		{
 			var selNewProduct = new NewProduct();
 			Report.IsTrue(selNewProduct.ClickContinueNoError(), "An error message appeared when it should not", "No error message appeared as expected");
 		}
 
-		[StepDefinition(@"In the Review and Submit tab of the New Product Page for Volatile Organic Compounds I upload pdf file")]
+		[RegexStepDefinition(@"In the Review and Submit tab of the New Product Page for Volatile Organic Compounds I upload pdf file")]
 		public void ThenInTheReviewAndSubmitTabOfTheNewProductPageForVolatileOrganicCompoundsIUploadPdfFile()
 		{
 			var selNewProduct = new NewProduct();
 			Report.IsTrue(selNewProduct.ClickBrowseForVolatileOrganicCompounds(), "Failed to upload ", "Successfully upload ");
 		}
 
-		[StepDefinition(@"I click the browse button for document type: (.*) and for control label: (.*) and upload PDF: (.*)")]
+		[RegexStepDefinition(@"I click the browse button for document type: (.*) and for control label: (.*) and upload PDF: (.*)")]
 		public void UploadPDFFileSectionAndType(string type, string label, string pdfFile)
 		{
 			pdfFile = EmbeddedResourceHelpers.ExtractToFile(pdfFile, out string extractFile) ? extractFile : pdfFile;
@@ -478,21 +478,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
-		[StepDefinition(@"I click the browse button for label: (.*) and upload PDF: (.*)")]
+		[RegexStepDefinition(@"I click the browse button for label: (.*) and upload PDF: (.*)")]
 		public void UploadPDFFile(string label, string pdfFile)
 		{
 			pdfFile = EmbeddedResourceHelpers.ExtractToFile(pdfFile, out string extractFile) ? extractFile : pdfFile;
 			Report.IsTrue(new NewProduct().UploadFileForSection(label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
 		}
 
-		[StepDefinition(@"I click the browse button for document type: (.*) and for control label: (.*) and upload a PDF")]
+		[RegexStepDefinition(@"I click the browse button for document type: (.*) and for control label: (.*) and upload a PDF")]
 		public void UploadPDFFileSectionAndTypeEmbedded(string type, string label)
 		{
 			var pdfFile = EmbeddedResourceHelpers.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf", out string extractFile) ? extractFile : @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf";
 			Report.IsTrue(new NewProduct().UploadFileForSectionAndType(type, label, pdfFile), "Failed to upload PDF file: " + pdfFile, "Successfully uploaded PDF file: " + pdfFile);
 		}
 
-		[StepDefinition(@"I click the browse button for label: (.*) and upload a PDF")]
+		[RegexStepDefinition(@"I click the browse button for label: (.*) and upload a PDF")]
 		public void UploadPDFFileEmbedded(string label, string pdfFile)
 		{
 			pdfFile = EmbeddedResourceHelpers.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf", out string extractFile) ? extractFile : @"UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf";
@@ -506,7 +506,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		//}
 
 
-		[StepDefinition(@"I purchase the following additional documents:")]
+		[RegexStepDefinition(@"I purchase the following additional documents:")]
 		public void ThenIPurchaseTheFollowingAdditionalDocuments(Table table)
 		{
 			foreach (TableRow row in table.Rows)
@@ -517,7 +517,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"the following additional documents should be selected:")]
+		[RegexStepDefinition(@"the following additional documents should be selected:")]
 		public void TheFollowingAdditionalDocumentsShouldBeSelected(Table table)
 		{
 			foreach (TableRow row in table.Rows)
@@ -528,7 +528,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"the following additional documents should be showing as selected:")]
+		[RegexStepDefinition(@"the following additional documents should be showing as selected:")]
 		public void TheFollowingLanguagesShouldBeSelectedCorrectly(Table table)
 		{
 			foreach (TableRow row in table.Rows)
@@ -547,7 +547,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I should see the statement (.*)")]
+		[RegexStepDefinition(@"I should see the statement (.*)")]
 		public void CorrectInitialStatementShouldAppear(string statement)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - I should see the statement " + statement);
@@ -568,7 +568,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I Select the Create a New Registration radio button")]
+		[RegexStepDefinition(@"I Select the Create a New Registration radio button")]
 		public void GivenISelectTheCreateANewRegistrationRadioButton()
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - I Select the Create a New Registration radio button");
@@ -585,7 +585,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I click continue in the new product page - don't wait for loading button spinner")]
+		[RegexStepDefinition(@"I click continue in the new product page - don't wait for loading button spinner")]
 		// Use when expecting a pop up on click continue - we don't need to wait for the timeout on WaitForLoad
 		public void NewProductPageIClickContinueNoSpinnerWait()
 		{
@@ -593,7 +593,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().ClickContinue(false), "Failed to click continue in the new product page!", "Successfully clicked continue in the new product page");
 		}
 
-		[StepDefinition(@"I save the product information as: (.*)")]
+		[RegexStepDefinition(@"I save the product information as: (.*)")]
 		public void SaveProductInformation(string savedas)
 		{
 			ProductInformation prodDetails = new NewProduct().GetCurrentProductInformation();
@@ -604,7 +604,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Success("Product Information saved!");
 		}
 
-		//[StepDefinition(@"I save the product Id as: (.*)")]
+		//[RegexStepDefinition(@"I save the product Id as: (.*)")]
 		//public void SaveProductId(string savedas)
 		//{
 		//	ProductInformation prodDetails = new NewProduct().GetCurrentProductInformation();
@@ -614,7 +614,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		//	Report.Success("Product ID saved!");
 		//}
 
-		[StepDefinition(@"I save the context product information as: (.*) where id is: (.*) and product name is: (.*)")]
+		[RegexStepDefinition(@"I save the context product information as: (.*) where id is: (.*) and product name is: (.*)")]
 		public void GivenISaveTheContextProductInformationAsTestCaseWhereIdIsAndProductNameIsTest(string savedas, string id, string name)
 		{
 			var prodDetails = new ProductInformation() { Id = id, Name = name };
@@ -622,7 +622,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Success("Product Information saved!");
 		}
 
-		[StepDefinition(@"in the Review and Submit tab of the New Product Page for OSHA compliant SDS I select: (.*)")]
+		[RegexStepDefinition(@"in the Review and Submit tab of the New Product Page for OSHA compliant SDS I select: (.*)")]
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForOSHACompliantSDSISelect(string selection)
 		{
 			Report.IsTrue(NewProduct.WaitForTab(NewProduct.Tab.ReviewAndSubmit), "Review and submit has not loaded",
@@ -634,7 +634,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully set OSHA value to: " + selection);
 		}
 
-		[StepDefinition(@"in the Review and Submit tab of the New Product Page for Personal Protection Equipment Recommended I select: (.*)")]
+		[RegexStepDefinition(@"in the Review and Submit tab of the New Product Page for Personal Protection Equipment Recommended I select: (.*)")]
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForPersonalProtectionEquipmentRecommendedISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
@@ -648,7 +648,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully set Personal Protection Equipment Recommended value to: " + selection);
 		}
 
-		[StepDefinition(@"in the Review and Submit tab of the New Product Page for Autoignition I enter: (.*)")]
+		[RegexStepDefinition(@"in the Review and Submit tab of the New Product Page for Autoignition I enter: (.*)")]
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForAutoignitionISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
@@ -659,7 +659,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
-		[StepDefinition(@"in the Review and Submit tab of the New Product Page for Minimum Ignition Energy I enter: (.*)")]
+		[RegexStepDefinition(@"in the Review and Submit tab of the New Product Page for Minimum Ignition Energy I enter: (.*)")]
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForMinimumIgnitionEnergyISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
@@ -670,7 +670,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
-		[StepDefinition(@"in the Review and Submit tab of the New Product Page for Viscosity I enter: (.*)")]
+		[RegexStepDefinition(@"in the Review and Submit tab of the New Product Page for Viscosity I enter: (.*)")]
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForViscosityISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
@@ -681,7 +681,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
-		[StepDefinition(@"in the Review and Submit tab of the New Product Page for Appearance I select: (.*)")]
+		[RegexStepDefinition(@"in the Review and Submit tab of the New Product Page for Appearance I select: (.*)")]
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForAppearanceISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
@@ -695,7 +695,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully set Appearance value to: " + selection);
 		}
 
-		[StepDefinition(@"in the Review and Submit tab of the New Product Page for Odor I select: (.*)")]
+		[RegexStepDefinition(@"in the Review and Submit tab of the New Product Page for Odor I select: (.*)")]
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForOdorISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
@@ -709,7 +709,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully set Odor value to: " + selection);
 		}
 
-		[StepDefinition(@"in the Review and Submit tab of the New Product Page for Odor Threshold I select: (.*)")]
+		[RegexStepDefinition(@"in the Review and Submit tab of the New Product Page for Odor Threshold I select: (.*)")]
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForOdorThresholdISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
@@ -723,7 +723,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully set Odor Threshold value to: " + selection);
 		}
 
-		[StepDefinition(@"in the Review and Submit tab of the New Product Page for Partition Coefficient I enter: (.*)")]
+		[RegexStepDefinition(@"in the Review and Submit tab of the New Product Page for Partition Coefficient I enter: (.*)")]
 		public void GivenInTheReviewAndSubmitTabOfTheNewProductPageForPartitionCoefficientISelect(string selection)
 		{
 			var selNewProduct = new NewProduct();
@@ -734,7 +734,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
-		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, for Product is Regulated for Transport I select: (.*)")]
+		[RegexStepDefinition(@"in the Product Characteristics tab of the New Product Page, for Product is Regulated for Transport I select: (.*)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForProductIsRegulatedForTransportISelect(string selection)
 		{
 			//NewProduct selNewProduct = new NewProduct();
@@ -745,7 +745,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().ProductIsRegulatedForTransport(selection), "Failed to set the Regulated Transport option to: " + selection, "Successfully set the Regulated Transport to: " + selection);
 		}
 
-		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, for Select all modes of transport I select: (.*)")]
+		[RegexStepDefinition(@"in the Product Characteristics tab of the New Product Page, for Select all modes of transport I select: (.*)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForSelectAllModesOfTransportISelect(string selections)
 		{
 			Report.IsTrue(new NewProduct().AllModesOfTransport(selections), "Failed to set option to: " + selections, "Successfully set option to: " + selections);
@@ -754,7 +754,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		/// <summary>
 		/// Enter in Technical Name (if applicable) textbox
 		/// </summary>
-		[StepDefinition(@"In the product Characteristics tab, I enter: (.*) in the Technical Name text field")]
+		[RegexStepDefinition(@"In the product Characteristics tab, I enter: (.*) in the Technical Name text field")]
 		public void GivenInTheProductCharacteristicsTabIEnterInTheTechnicalNameTextField(string text)
 		{
 			Report.IsTrue(new NewProduct().TechnicalName(text), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
@@ -763,26 +763,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		/// <summary>
 		/// Select Proper Shipping Name from dropdown
 		/// </summary>
-		[StepDefinition(@"In the product Characteristics tab, I set the Proper Shipping Name to be: (.*)")]
+		[RegexStepDefinition(@"In the product Characteristics tab, I set the Proper Shipping Name to be: (.*)")]
 		public void GivenInTheProductCharacteristicsTabISetTheProperShippingNameToBe(string option)
 		{
 			Report.IsTrue(new NewProduct().ProperShippingName(option), "Failed to set the option to be: " + option, "Successfully set option to be: " + option);
 		}
 
-		[StepDefinition(@"In the product Characteristics tab, I set Packing Group to be: (.*)")]
+		[RegexStepDefinition(@"In the product Characteristics tab, I set Packing Group to be: (.*)")]
 		public void GivenInTheProductCharacteristicsTabISetPackingGroupToBe(string option)
 		{
 			Report.IsTrue(new NewProduct().PackingGroupSelect(option), "Failed to set the option to be: " + option, "Successfully set option to be: " + option);
 		}
 
-		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, for DOT Exceptions I select: (.*)")]
+		[RegexStepDefinition(@"in the Product Characteristics tab of the New Product Page, for DOT Exceptions I select: (.*)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForDOTExceptionsISelect(string selections)
 		{
 
 			Report.IsTrue(new NewProduct().DotExcemptionIfApplicable(selections), "Failed to set the DOT Excemption option to: " + selections, "Successfully set the Regulated Transport to: " + selections);
 		}
 
-		[StepDefinition(@"In the Product Characteristics tab of the New Product Page, for International Shipping when DOT Exemption taken I select: (.*)")]
+		[RegexStepDefinition(@"In the Product Characteristics tab of the New Product Page, for International Shipping when DOT Exemption taken I select: (.*)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForInternationalShippingWhenDOTExemptionTakenISelect(string selection)
 		{
 			var selNewProduct = new NewProduct {
@@ -792,7 +792,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully selected: " + selection);
 		}
 
-		[StepDefinition(@"I delete UPC: (.*)")]
+		[RegexStepDefinition(@"I delete UPC: (.*)")]
 		public void GivenIDeleteUPC(string upc)
 		{
 			Delay.Seconds(30);
@@ -801,7 +801,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Delay.Seconds(30);
 		}
 
-		[StepDefinition(@"In the list of UPCs I should not see UPC: (.*)")]
+		[RegexStepDefinition(@"In the list of UPCs I should not see UPC: (.*)")]
 		public void ThenInTheListOfUPCsIShouldNotSeeUPCSavedAsUPC(string upc)
 		{
 			var selNewProduct = new NewProduct();
@@ -816,7 +816,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"UPC: " + upc + " has been deleted as expected.");
 		}
 
-		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, for Other DOT Exception I select: (.*)")]
+		[RegexStepDefinition(@"in the Product Characteristics tab of the New Product Page, for Other DOT Exception I select: (.*)")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageForOtherDOTExceptionISelect(string selection)
 		{
 			var selNewProduct = new NewProduct {
@@ -826,7 +826,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully selected: " + selection);
 		}
 
-		[StepDefinition(@"in the Product Characteristics tab of the New Product Page, I enter: (.*) in the Provide Special Permit numbers text field")]
+		[RegexStepDefinition(@"in the Product Characteristics tab of the New Product Page, I enter: (.*) in the Provide Special Permit numbers text field")]
 		public void GivenInTheProductCharacteristicsTabOfTheNewProductPageIEnterInTheProvideSpecialPermitNumbersTextField(string permitNumber)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - In the Product Characteristics tab, I enter: " + permitNumber + " in the Relative Density text field");
@@ -848,7 +848,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		/// <summary>
 		/// select product lable option for Refer to your Product Label. From the options, select those that appear on the Label.
 		/// </summary>
-		[StepDefinition(@"In the Regulatory Inforamtion tab, I select Product Lable as: (.*)")]
+		[RegexStepDefinition(@"In the Regulatory Inforamtion tab, I select Product Lable as: (.*)")]
 		public void GivenInTheRegulatoryInforamtionTabISelectProductLableAs(string selections)
 		{
 			var selNewProduct = new NewProduct();
@@ -871,7 +871,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		/// <summary>
 		/// Confirm Based on your selection, you have verified your product contains VOC with intended uses as follows. The Aerosol Coatings by the CARB VOC compliance limit(s) for the intended use you identified is/are: statement
 		/// </summary>
-		[StepDefinition(@"I confirm that I see the bold VOC-OTC-CARB Compliance Limits statement: (.*)")]
+		[RegexStepDefinition(@"I confirm that I see the bold VOC-OTC-CARB Compliance Limits statement: (.*)")]
 		public void ConfirmISeeTheVOC_OTC_CARB_ComplianceLimitStatement(string statement)
 		{
 
@@ -884,7 +884,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		/// <summary>
 		/// Confirm VOC Analysis Date (Today's Date)
 		/// </summary>
-		[StepDefinition(@"I confirm that I see todays VOC Analysis Date")]
+		[RegexStepDefinition(@"I confirm that I see todays VOC Analysis Date")]
 		public void ThenIConfirmThatISeeTodaysVOCAnalysisDate()
 		{
 			string date = DateTime.Now.ToString("MM/dd/yyyy");
@@ -896,7 +896,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"statement was showing: " + date + ", as expected!");
 		}
 
-		[StepDefinition(@"I confirm that the VOC Analysis Date statement is showing")]
+		[RegexStepDefinition(@"I confirm that the VOC Analysis Date statement is showing")]
 		public void ThenIConfirmThatTheVOCAnalysisDateIsShowing()
 		{
 			string vocDateStatement = new NewProduct().VocAnalysisDateStatement();
@@ -906,7 +906,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		/// <summary>
 		/// Confirm error message for VOC content in grams ozone per gram statement
 		/// </summary>
-		[StepDefinition(@"I confirm that I see the following error message for VOC content in grams ozone per gram: (.*)")]
+		[RegexStepDefinition(@"I confirm that I see the following error message for VOC content in grams ozone per gram: (.*)")]
 		public void ThenIConfirmThatISeeTheFollowingErrorMessageForVOCContentInGramsOzonePerGram(string statement)
 		{
 			var newProductpage = new NewProduct();
@@ -918,7 +918,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 		//JS - consolidated HVOC, CARB etc value steps into one because they were calling identical code
-		[StepDefinition(@"I confirm that I see the following (CARB|MVOC|HVOC|VOC Grams Ozone|OTC Model Rule) value: (.*)")]
+		[RegexStepDefinition(@"I confirm that I see the following (CARB|MVOC|HVOC|VOC Grams Ozone|OTC Model Rule) value: (.*)")]
 		public void ThenIConfirmThatISeeTheFollowingCARBValue(string category, string expectedValue)
 		{
 			var newProductpage = new NewProduct();
@@ -932,7 +932,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		/// <summary>
 		/// Confirm VOC Summary statement text matches expected
 		/// </summary>
-		[StepDefinition(@"I confirm statement: (.*) shows the text: (.*)")]
+		[RegexStepDefinition(@"I confirm statement: (.*) shows the text: (.*)")]
 		public void IConfirmStatementShowsTheText(string category, string value)
 		{
 			var newProductpage = new NewProduct();
@@ -942,7 +942,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Statement was showing: " + value + ", as expected!");
 		}
 
-		[StepDefinition(@"In the Product Characteristics tab of the New Product Page, for Product does not contain more than grams of VOC per use I select: (.*)")]
+		[RegexStepDefinition(@"In the Product Characteristics tab of the New Product Page, for Product does not contain more than grams of VOC per use I select: (.*)")]
 		public void ThenInTheProductCharacteristicsTabOfTheNewProductPageForProductDoesNotContainMoreThanGramsOfVOCPerUseISelect(string option)
 		{
 
@@ -961,13 +961,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		/// <summary>
 		/// Enter in VOC content in grams ozone per gram text field
 		/// </summary>
-		[StepDefinition(@"In the product Characteristics tab, I enter: (.*) in the VOC content in grams ozone per gram text field")]
+		[RegexStepDefinition(@"In the product Characteristics tab, I enter: (.*) in the VOC content in grams ozone per gram text field")]
 		public void ThenInTheProductCharacteristicsTabIEnterInTheVOCContentInGramsOzonePerGramTextField(string option)
 		{
 			Report.IsTrue(new NewProduct().VocContentInGrams(option), "Text: " + option + " was not successfully inputted into the comments field!", "Text: " + option + " was successfully inputted into the comments field!");
 		}
 
-		[StepDefinition(@"In the Product Characteristics tab of the New Product Page, for When the product has a flammable propellant I select: (.*)")]
+		[RegexStepDefinition(@"In the Product Characteristics tab of the New Product Page, for When the product has a flammable propellant I select: (.*)")]
 		public void ThenInTheProductCharacteristicsTabOfTheNewProductPageForWhenTheProductHasAFlammablePropellantISelect(string option)
 		{
 			Report.IsTrue(new NewProduct().ProductHasFlammablePropellant(option), "Failed to set option to be: " + option, "Successfully set the option to be: " + option);
@@ -976,7 +976,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		/// <summary>
 		/// Confirm the ecologo statement
 		/// </summary>
-		[StepDefinition(@"I confirm that I see the following Ecologo statement: (.*)")]
+		[RegexStepDefinition(@"I confirm that I see the following Ecologo statement: (.*)")]
 		public void ThenIConfirmThatISeeTheFollowingEcologoStatement(string statement)
 		{
 			string fullText = new NewProduct().LabelContainsFullText("UL ECOLOGO Readiness Assessment");
@@ -985,14 +985,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Ecologo statement was showing: " + statement + ", as expected!");
 		}
 
-		[StepDefinition(@"I set the water mixture question to: (Yes|No)")]
+		[RegexStepDefinition(@"I set the water mixture question to: (Yes|No)")]
 		public void ThenISetTheWaterMixtureQuestionTo(string option)
 		{
 			new NewProduct().SetWaterSolutionQuestion = (option == "Yes");
 			Report.Success("Set water mixture question to: " + option);
 		}
 
-		[StepDefinition(@"I should see the radio button: (.*)")]
+		[RegexStepDefinition(@"I should see the radio button: (.*)")]
 		public void ShouldSeeTheRadioButton(string button)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - I should see the radio button " + button);
@@ -1013,7 +1013,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I should see the following radio buttons:")]
+		[RegexStepDefinition(@"I should see the following radio buttons:")]
 		public void ShouldSeeTheRadioButton(Table expected)
 		{
 			var selNewProduct = new NewProduct();
@@ -1029,7 +1029,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I should see the following checkbox:")]
+		[RegexStepDefinition(@"I should see the following checkbox:")]
 		public void ShouldSeeCheboxes(Table expected)
 		{
 			var selNewProduct = new NewProduct();
@@ -1045,7 +1045,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I should see (a total of|at least) (.*) radio buttons for the section: (.*)")]
+		[RegexStepDefinition(@"I should see (a total of|at least) (.*) radio buttons for the section: (.*)")]
 		public void RadioButtonCountInSection(string condition, string count, string section)
 		{
 			var selNewProduct = new NewProduct();
@@ -1062,7 +1062,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"The following radio buttons (should|should not) be displayed for section: (.*)")]
+		[RegexStepDefinition(@"The following radio buttons (should|should not) be displayed for section: (.*)")]
 		public void CheckRadioButtonsInSectionAndOrder(string shouldOrNot, string section, Table expected)
 		{
 			var expectedRadioButtons = new List<string>();
@@ -1085,7 +1085,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
-		[StepDefinition(@"The following checkboxes (should|should not) be displayed for section: (.*)")]
+		[RegexStepDefinition(@"The following checkboxes (should|should not) be displayed for section: (.*)")]
 		public void CheckCheboxesInSectionAndOrder(string shouldOrNot, string section, Table expected)
 		{
 			var expectedCheckboxes = new List<string>();
@@ -1107,13 +1107,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
-		[StepDefinition(@"I click the 'Add' button")]
+		[RegexStepDefinition(@"I click the 'Add' button")]
 		public void ThenIClickTheAddUpcButton()
 		{
 			Report.IsTrue((new NewProduct()).ClickAddUpcButton(), "Failed to click the 'Add' button!", "Successfully clicked the 'Add' button");
 		}
 
-		[StepDefinition(@"I enter an intentionally bad UPC with the following fields and save bad UPC as badUPC")]
+		[RegexStepDefinition(@"I enter an intentionally bad UPC with the following fields and save bad UPC as badUPC")]
 		public void ThenIEnterAnIntentionallyBadUPCWithContainerSizeAndContainerTypeCardboard(Table table)
 		{
 			string badUPC = GenerateBadUPC.Generate();
@@ -1123,7 +1123,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
-		[StepDefinition(@"I add the following into the UPC Fields")]
+		[RegexStepDefinition(@"I add the following into the UPC Fields")]
 		public void ThenIAddTheFollowingIntoTheUpcFields(Table table)
 		{
 			UpcInformation upcInfo = table.CreateInstance<UpcInformation>();
@@ -1146,44 +1146,44 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!", "Successfully inputted UPC information!");
 		}
 
-		[StepDefinition(@"I click 'Select all' under Destination Retailers in the UPC page")]
+		[RegexStepDefinition(@"I click 'Select all' under Destination Retailers in the UPC page")]
 		public void ClickSelectAllUnderDestinationRetailers()
 		{
 			Report.IsTrue(new NewProduct().ClickSelectAllDestinationRetailers(), "Failed to click Select All", "Clicked Select All");
 		}
 
-		[StepDefinition(@"the comments field should appear")]
+		[RegexStepDefinition(@"the comments field should appear")]
 		public void ThenTheCommentsFieldShouldAppear()
 		{
 			Report.IsTrue(new NewProduct().CommentsAreaShowing(), "Comments field was not displayed!", "Comments field was displayed, as expected");
 		}
 
-		[StepDefinition(@"I check the Comment error message shows: (.*)")]
+		[RegexStepDefinition(@"I check the Comment error message shows: (.*)")]
 		public void CheckTheCommentErrorMessageShows(string expected)
 		{
 			var np = new NewProduct();
 			Report.IsTrue(np.CommentErrorDisplayed(expected, out string actual), "The error text was " + actual + ", but expected " + expected, "The error text was " + actual + " as expected.");
 		}
 
-		[StepDefinition(@"I append the following into the comments field: (.*)")]
+		[RegexStepDefinition(@"I append the following into the comments field: (.*)")]
 		public void ThenIAppendTheFollowingIntoTheCommentsFieldCommentsFieldText(string text)
 		{
 			Report.IsTrue(new NewProduct().InputCommentAreaText(text, append: true), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
 		}
 
-		[StepDefinition(@"I enter the following into the Other DOT Exception field: (.*)")]
+		[RegexStepDefinition(@"I enter the following into the Other DOT Exception field: (.*)")]
 		public void ThenIEnterTheFollowingIntoTheOtherDOTException(string text)
 		{
 			Report.IsTrue(new NewProduct().InputOtherDotException(text), "Text: " + text + " was not successfully inputted into the Other DOT Exception field!", "Text: " + text + " was successfully inputted into the Other DOT Exception field!");
 		}
 
-		[StepDefinition(@"I enter the following into the comments field: (.*)")]
+		[RegexStepDefinition(@"I enter the following into the comments field: (.*)")]
 		public void ThenIEnterTheFollowingIntoTheCommentsFieldCommentsFieldText(string text)
 		{
 			Report.IsTrue(new NewProduct().InputCommentAreaText(text), "Text: " + text + " was not successfully inputted into the Optional Comments field!", "Text: " + text + " was successfully inputted into the Optional Comments field!");
 		}
 
-		[StepDefinition(@"The remaining characters counter displays: (.*)/(.*)")]
+		[RegexStepDefinition(@"The remaining characters counter displays: (.*)/(.*)")]
 		public void ThenTheRemainingCharactersCounterDisplays(int charRemainExpected, int charMax)
 		{
 			Report.IsTrue(new NewProduct().CommentsCharactersRemaining(charRemainExpected, charMax, out int remainDisplay),
@@ -1207,20 +1207,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
-		[StepDefinition(@"The Data Acceptance page should appear")]
+		[RegexStepDefinition(@"The Data Acceptance page should appear")]
 		public void ThenTheDataAcceptancePageShouldApprear()
 		{
 			Report.IsTrue(new NewProduct().DataAcceptanceScreenAppears(), "Data Acceptance page did not appear!", "As expected, Data Acceptance page loaded successfully!");
 		}
 
-		[StepDefinition(@"I confirm following statement displays under Data Acceptance: (.*)")]
+		[RegexStepDefinition(@"I confirm following statement displays under Data Acceptance: (.*)")]
 		public void ThenIConfirmFollowingStatementDisplaysUnder_(string message)
 		{
 			Report.IsTrue(new NewProduct().CheckDataAcceptanceProblemMessageHasAppeared(message), "Failed to confirm following statement displays under Data Acceptance: " + message, "Succesfully confirmed following statement displays under Data Acceptance: " + message);
 		}
 
 
-		[StepDefinition(@"In the Data Acceptance page I select Agreed")]
+		[RegexStepDefinition(@"In the Data Acceptance page I select Agreed")]
 		public void GivenInTheDataAcceptancePageISelectYesAgreed()
 		{
 			var thisNewProduct = new NewProduct();
@@ -1235,7 +1235,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(thisNewProduct.YesAgreedIsSelected(), "Failed to select Yes Agreed", "Yes Agreed is selected.");
 		}
 
-		[StepDefinition(@"In the Data Acceptance page I click on the Accept button")]
+		[RegexStepDefinition(@"In the Data Acceptance page I click on the Accept button")]
 		public void GivenInTheDataAcceptancePageIClickOnTheAcceptButton()
 		{
 			GeneralUtilities.Wait_for_load_finish();
@@ -1244,7 +1244,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Delay.Seconds(1);
 		}
 
-		[StepDefinition(@"In the Data Acceptance page I see the Accept button")]
+		[RegexStepDefinition(@"In the Data Acceptance page I see the Accept button")]
 		public void GivenInTheDataAcceptancePageISeeTheAcceptButton()
 		{
 			Report.IsTrue(new NewProduct().AcceptButtonDisplayed(),
@@ -1252,27 +1252,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"The Accept button was displayed as expected");
 		}
 
-		[StepDefinition(@"I click the Summary button in the Data Acceptance window")]
+		[RegexStepDefinition(@"I click the Summary button in the Data Acceptance window")]
 		public void GivenIClickTheSummaryButtonInTheDataAcceptanceWindow()
 		{
 			Report.IsTrue(new NewProduct().ClickSummaruButtonInDataAcceptance(), "Failed to click the Summary button!", "Successfully clicked the Summary button!");
 		}
 
-		[StepDefinition(@"I set the radio option in section: (.*) to: (.*)")]
+		[RegexStepDefinition(@"I set the radio option in section: (.*) to: (.*)")]
 		public void SetRadioOptionInSectionTo(string section, string option)
 		{
 			Report.IsTrue(new NewProduct().SelectRadio(section, option), "Failed to select radio option: " + option + " in section: " + section, "Successfully set radio option: " + option);
 		}
 
-		[StepDefinition(@"I verify the error messaging in Regulatory Documents to Provide:")]
+		[RegexStepDefinition(@"I verify the error messaging in Regulatory Documents to Provide:")]
 		public void GivenIVerifyTheErrorMessagingInRegulatoryDocumentsToProvide(Table table)
 		{
 			bool response = new RegulatoryDocumentsToProvide().GetErrorForQuestion(table, out string actualMessage);
 			Report.IsTrue(response, "Found " + actualMessage + " instead of the expected message.", "Found expected message");
 		}
 
-		[StepDefinition(@"I set the (.*) field to: (.*)")]
-		[StepDefinition(@"I set the (.*) option to: (.*)")]
+		[RegexStepDefinition(@"I set the (.*) field to: (.*)")]
+		[RegexStepDefinition(@"I set the (.*) option to: (.*)")]
 		public void SetTheSectionOptionTo(string section, string option)
 		{
 			var thisNewProduct = new NewProduct();
@@ -1301,8 +1301,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I set the (.*) field to exactly match: (.*)")]
-		[StepDefinition(@"I set the (.*) option to exactly match: (.*)")]
+		[RegexStepDefinition(@"I set the (.*) field to exactly match: (.*)")]
+		[RegexStepDefinition(@"I set the (.*) option to exactly match: (.*)")]
 		public void SetTheSectionOptionToExactlyMatch(string section, string option)
 		{
 			var thisNewProduct = new NewProduct();
@@ -1331,7 +1331,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I set the (.*) option to: (.*) and save entry")]
+		[RegexStepDefinition(@"I set the (.*) option to: (.*) and save entry")]
 		public void SetTheSectionOptionToAndSaveEntry(string section, string option)
 		{
 			var thisNewProduct = new NewProduct();
@@ -1349,7 +1349,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 		// JS a solution specifically for Transportation page where you have nested checkbox sections eg. DOT, IATA
-		[StepDefinition(@"I select option: (.*) under section: (.*) and subsection: (.*)")]
+		[RegexStepDefinition(@"I select option: (.*) under section: (.*) and subsection: (.*)")]
 		public void SetTheOptionSubOptionTo(string option, string section, string subSection)
 		{
 			Report.IsTrue(new NewProduct().SetOptionInSectionSubSection(section.Trim(), subSection.Trim(), option.Trim()),
@@ -1357,15 +1357,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				$"Successfully set the input to: '{option}' in section: '{section}' and subection: '{subSection}'");
 		}
 
-		[StepDefinition(@"In the Transportation Details 1 screen, I unselect all transportation options for (DOT|IATA|IMDG|TDG)")]
+		[RegexStepDefinition(@"In the Transportation Details 1 screen, I unselect all transportation options for (DOT|IATA|IMDG|TDG)")]
 		public void InTheTransportationDetails1ScreenIUnselectAllTransportationOptionsFor(string option)
 		{
 			Report.IsTrue(new NewProduct().UnselectTransportationOptions(option), "Failed to unselect Transportation options for " + option + ".",
 				"Successfully unselection Transportation options for " + option + ".");
 		}
 
-		[StepDefinition(@"I (see|only see|do not see) the following questions")]
-		[StepDefinition(@"I (see|only see|do not see) the following sections")]
+		[RegexStepDefinition(@"I (see|only see|do not see) the following questions")]
+		[RegexStepDefinition(@"I (see|only see|do not see) the following sections")]
 		public void CheckDisplayedSections(string condition, Table sections)
 		{
 			Report.Info("Beginning I " + condition + " the following sections");
@@ -1403,7 +1403,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"the question: (.*) is displayed at position: (.*)")]
+		[RegexStepDefinition(@"the question: (.*) is displayed at position: (.*)")]
 		public void CheckDisplayedSections(string section, string position)
 		{
 			var actualSections = new NewProduct().GetDisplayedSections().Select(x => x.Trim()).ToList();
@@ -1418,7 +1418,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"The section: " + section + " was displayed at position: " + position + " as expected");
 		}
 
-		[StepDefinition(@"I select the first option in section: (.*)")]
+		[RegexStepDefinition(@"I select the first option in section: (.*)")]
 		public void SelectFirstOptionInSection(string section)
 		{
 			var myProduct = new NewProduct();
@@ -1427,7 +1427,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
-		[StepDefinition(@"If Section: (.*) is visible, I select the first option")]
+		[RegexStepDefinition(@"If Section: (.*) is visible, I select the first option")]
 		public void IfSectionIsVisibleISelectTheOption(string section, string option)
 		{
 			var myProduct = new NewProduct();
@@ -1443,7 +1443,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		//[StepDefinition(@"I see the following questions")]
+		//[RegexStepDefinition(@"I see the following questions")]
 		//public void CheckDisplayedSectionsContain(Table sections)
 		//{
 		//	var ExpectedSections = new List<string>();
@@ -1455,7 +1455,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		//	Report.IsTrue(ExpectedSections.All(ActualSections.Contains), "The displayed sections: '" + string.Join(",", ActualSections) + "' did not match the expected sections: '" + string.Join(",", ExpectedSections) + "'");
 		//}
 
-		[StepDefinition(@"I check the 'I do not have exact' checkbox for field: (.*)")]
+		[RegexStepDefinition(@"I check the 'I do not have exact' checkbox for field: (.*)")]
 		public void SectExatcDataNotKnown(string section)
 		{
 			string option = "I do not have exact";
@@ -1464,7 +1464,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully set the input to " + option + " in section: " + section);
 		}
 
-		[StepDefinition(@"I set the radio button (.*) for field: (.*)")]
+		[RegexStepDefinition(@"I set the radio button (.*) for field: (.*)")]
 		public void SectRadioButtonInSection(string section, string option)
 		{
 			Report.IsTrue(new NewProduct().SetAdditionalOptionInSection(section, option),
@@ -1472,7 +1472,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				$"Successfully set the input to {option} in section: {section}");
 		}
 
-			[StepDefinition(@"I set the below options for field: (.*)")]
+			[RegexStepDefinition(@"I set the below options for field: (.*)")]
 		public void CheckAvailableOptionsInSection(string section, Table options)
 		{
 			foreach (TableRow row in options.Rows)
@@ -1484,7 +1484,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 		// NB: The error messages should be delimited by the '|' character!
-		[StepDefinition(@"(.*) (should|should not) be showing the error messages: (.*)")]
+		[RegexStepDefinition(@"(.*) (should|should not) be showing the error messages: (.*)")]
 		public void ErrorMessagesAreShowingForItem(string section, string should, string pipeDelimitedErrorMessages)
 		{
 			Delay.Seconds(1);
@@ -1512,7 +1512,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"(.*) (should|should not) be showing the error messages with no special characters: (.*)")]
+		[RegexStepDefinition(@"(.*) (should|should not) be showing the error messages with no special characters: (.*)")]
 		public void ErrorMessagesAreShowingForItemNoSpecialChars(string section, string should, string pipeDelimitedErrorMessages)
 		{
 			Delay.Seconds(1);
@@ -1560,7 +1560,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 		// NB: Multiple values should be delimited by the '|' character!
-		[StepDefinition(@"(.*) should be showing the value: (.*)")]
+		[RegexStepDefinition(@"(.*) should be showing the value: (.*)")]
 		public void CheckingFieldInputIsCorrect(string section, string value)
 		{
 			if (value.StartsWith("~saved as"))
@@ -1582,7 +1582,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I confirm that: (.*) is not the only option for section: (.*)")]
+		[RegexStepDefinition(@"I confirm that: (.*) is not the only option for section: (.*)")]
 		public void ConfirmThatIsNotTheOnlyOptionForSection(string option, string section)
 		{
 			var selNewProduct = new NewProduct();
@@ -1604,7 +1604,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I confirm the VOC limits table has an entry for Regulation: (OTC|CARB)")]
+		[RegexStepDefinition(@"I confirm the VOC limits table has an entry for Regulation: (OTC|CARB)")]
 		public void VOCLimitsTableHasEntryForRegulation(string regulation)
 		{
 			var selNewProduct = new NewProduct();
@@ -1623,7 +1623,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"There was an entry in the VOC limits table for regulation " + regulation + " as expected");
 		}
 
-		[StepDefinition(@"I should see the following Voc Limits present:")]
+		[RegexStepDefinition(@"I should see the following Voc Limits present:")]
 		public void ThenIShouldSeeTheFollowingVocLimitsPresent(Table information)
 		{
 			IEnumerable<VocLimits> expected = information.CreateSet<VocLimits>();
@@ -1653,7 +1653,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I should see the following Voc Limits with units  present:")]
+		[RegexStepDefinition(@"I should see the following Voc Limits with units  present:")]
 		public void VocLimitsWithUnits(Table information)
 		{
 			Delay.Seconds(3);
@@ -1684,7 +1684,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I should see the following Voc percent for each state:")]
+		[RegexStepDefinition(@"I should see the following Voc percent for each state:")]
 		public void ThenIShouldSeeTheFollowingVocPercentForEachState(Table information)
 		{
 			//Delay.Seconds(5 * Delay.SpeedFactor);
@@ -1713,7 +1713,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I should Enter the following Voc percent for each state: (.*)")]
+		[RegexStepDefinition(@"I should Enter the following Voc percent for each state: (.*)")]
 		public void ThenIShouldEnterTheFollowingVocPercentForEachState(string value )
 		{
 			Report.Info("I Enter manually under the 'VOC VALUE' Column a value for each of the listed States");
@@ -1726,7 +1726,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			MyNewProduct.SetTheSectionOptionTo("Your acknowledgement of this registration includes that your product", "Yes, I Acknowledge");
 		}
 
-		[StepDefinition(@"I should see data for States in the 'VOC Content as weight percentage of total formula' table")]
+		[RegexStepDefinition(@"I should see data for States in the 'VOC Content as weight percentage of total formula' table")]
 		public void DataForStatesInVOCContentAsWeightPercentageTable()
 		{
 			var selNewProduct = new NewProduct();
@@ -1739,7 +1739,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		/// <summary>
 		/// Confirm the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule statement
 		/// </summary>
-		[StepDefinition(@"I confirm that I do not see the following VOC Content as defined by OTC Model Rule statement")]
+		[RegexStepDefinition(@"I confirm that I do not see the following VOC Content as defined by OTC Model Rule statement")]
 		public void ThenIconfirmThatIDoNotSeeTheFollowingVOCContentAsDefinedByOTCModelRuleStatement()
 		{
 
@@ -1752,7 +1752,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		/// <summary>
 		/// Confirm the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule statement
 		/// </summary>
-		[StepDefinition(@"I confirm that I see the following VOC Content as defined by OTC Model Rule statement: (.*)")]
+		[RegexStepDefinition(@"I confirm that I see the following VOC Content as defined by OTC Model Rule statement: (.*)")]
 		public void ThenIconfirmThatISeeTheFollowingVOCContentAsDefinedByOTCModelRuleStatement(string statement)
 		{
 
@@ -1765,7 +1765,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		/// <summary>
 		/// Confirm Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB statement
 		/// </summary>
-		[StepDefinition(@"I confirm that I see the following VOC Content as defined by CARB statement: (.*)")]
+		[RegexStepDefinition(@"I confirm that I see the following VOC Content as defined by CARB statement: (.*)")]
 		public void ThenIConfirmThatISeeTheFollowingVOCContentAsDefinedByCARBStatement(string statement)
 		{
 			var newProductpage = new NewProduct();
@@ -1779,7 +1779,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		/// <summary>
 		/// Confirm Verify VOC content is below the threshold of 0.02lb/start of CARB statement
 		/// </summary>
-		[StepDefinition(@"I confirm that I see the following VOC Content below threshold CARB statement: (.*)")]
+		[RegexStepDefinition(@"I confirm that I see the following VOC Content below threshold CARB statement: (.*)")]
 		public void ThenIConfirmThatISeeTheFollowingVOCContentBelowThresholdCARBStatement(string statement)
 		{
 			var newProductpage = new NewProduct();
@@ -1793,7 +1793,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		/// <summary>
 		/// Confirm Verify VOC content is below the threshold of 0.02lb/start of OTC statement
 		/// </summary>
-		[StepDefinition(@"I confirm that I see the following VOC Content below threshold OTC statement: (.*)")]
+		[RegexStepDefinition(@"I confirm that I see the following VOC Content below threshold OTC statement: (.*)")]
 		public void ThenIConfirmThatISeeTheFollowingVOCContentBelowThresholdOTCStatement(string statement)
 		{
 			var newProductpage = new NewProduct();
@@ -1807,7 +1807,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		/// <summary>
 		/// Confirm Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison? statement
 		/// </summary>
-		[StepDefinition(@"I confirm that I see the following VOC percentages entered for all areas statement: (.*)")]
+		[RegexStepDefinition(@"I confirm that I see the following VOC percentages entered for all areas statement: (.*)")]
 		public void ThenIConfirmThatISeeTheFollowingVOCPercentagesEnteredForAllAreasStatement(string statement)
 		{
 			var newProductpage = new NewProduct();
@@ -1821,7 +1821,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		/// <summary>
 		/// Confirm VOC content as weight percentage of total formula, minus exempt compounds, for each of the following states. statement
 		/// </summary>
-		[StepDefinition(@"I confirm that I see the following VOC content as weight percentage for each state statement: (.*)")]
+		[RegexStepDefinition(@"I confirm that I see the following VOC content as weight percentage for each state statement: (.*)")]
 		public void ThenIConfirmThatISeeTheFollowingVOCContentAsWeightPercentageForEachStateStatement(string statement)
 		{
 			var newProductpage = new NewProduct();
@@ -1832,7 +1832,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"statement was showing: " + statement + ", as expected!");
 		}
 
-		[StepDefinition(@"I confirm the Label Information section on the Regulatory Information 3 page contains a link for: (.*)")]
+		[RegexStepDefinition(@"I confirm the Label Information section on the Regulatory Information 3 page contains a link for: (.*)")]
 		public void IConfirmLabelInformationOnRegulatoryInformationPageContains(string labelLink)
 		{
 			var newProductPage = new NewProduct();
@@ -1840,27 +1840,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(labelLinksShowing.Contains(labelLink), "The link with text: '" + labelLink + "' was not found on the Regulatory Information 3 page", "The link with text: '" + labelLink + "' was found on the Regulatory Information 3 page as expected");
 		}
 
-		[StepDefinition(@"I Confirm that the (.*) field is available")]
+		[RegexStepDefinition(@"I Confirm that the (.*) field is available")]
 		public void ConfirmUPCSectionFieldsAvailable(string field)
 		{
 			var selNewProduct = new NewProduct();
 			Report.IsTrue(selNewProduct.UPCSectionFieldsAvailable(field), "Failed to Confirm the'" +field+"' field is available", "I Confirm the '" + field + "' field is available");
 		}
 
-		[StepDefinition(@"I confirm 'Quantity' is visible in the UPC header")]
+		[RegexStepDefinition(@"I confirm 'Quantity' is visible in the UPC header")]
 		public void ConfirmQuantityIsVisibleInUPCHeader()
 		{
 			Report.IsTrue(new NewProduct().GetUPCHeaders().Contains("Quantity"), "The text 'Quantity' did not appear in the UPC header on the Universal Product Code page", "The text 'Quantity' appeared in the UPC header on the Universal Product Code page as expected");
 		}
 
-		[StepDefinition(@"The VOC intended use text is shown: (.*)")]
+		[RegexStepDefinition(@"The VOC intended use text is shown: (.*)")]
 		public void VOCIntendedUseTextMatches(string text)
 		{
 			List<string> displayedStatements = new NewProduct().AllAdditionalStatements();
 			Report.IsTrue(displayedStatements.Contains(text), "The VOC Intended Use text was not as expected: '" + text + "'", "The VOC Intended Use text matched as expected: '" + text + "'");
 		}
 
-		[StepDefinition(@"in the VOC Limits table, the (Use|VOC Compliance Limit|Regulation) column should contain the value: (.*)")]
+		[RegexStepDefinition(@"in the VOC Limits table, the (Use|VOC Compliance Limit|Regulation) column should contain the value: (.*)")]
 		public void VOCLimitsTableContainsUse(string column, string valueExpected)
 		{
 			List<VocLimitsWithUnits> displayed = new NewProduct().GetDisplayedVocLimitsWithUnits();
@@ -1885,21 +1885,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"The VOC content in g/L message shows the value: (.*)")]
+		[RegexStepDefinition(@"The VOC content in g/L message shows the value: (.*)")]
 		public void VOCContentMessageShowsTheValue(string value)
 		{
 			string vocContentValue = new NewProduct().VOCContentInGPerL();
 			Report.IsTrue(vocContentValue.Trim() == value, "The value for VOC content in g/L was not as expected. The value showing is: " + vocContentValue + " The expected value was: " + value, "The VOC content in g/L value was as expected: " + value);
 		}
 
-		[StepDefinition(@"The VOC Summary page contains the statement with the text: (.*)")]
+		[RegexStepDefinition(@"The VOC Summary page contains the statement with the text: (.*)")]
 		public void VOCSummaryContainsStatement(string value)
 		{
 			List<string> statements = new NewProduct().AllAdditionalStatements();
 			Report.IsTrue(statements.Contains(value), "The statement with text: " + value + " was not showing on the VOC Summary page", "The statement with text: " + value + " was showing on the VOC summary page as expected.");
 		}
 
-		[StepDefinition(@"I confirm that statement with text: '(.*)' is not displayed")]
+		[RegexStepDefinition(@"I confirm that statement with text: '(.*)' is not displayed")]
 
 		public void StatementIsNotDisplayed(string statement)
 		{
@@ -1920,7 +1920,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 
 		//Checks a new page has loaded on Continue click. If not, look for 'this is a required field' error. If yes, throw excpt. The test is now out of sync, so further steps will only report junk.
-		[StepDefinition(@"I continue to the next screen in the product registration")]
+		[RegexStepDefinition(@"I continue to the next screen in the product registration")]
 		public void ContinueInTheProductRegistration()
 		{
 			var selNewProduct = new NewProduct();
@@ -1969,7 +1969,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			throw new Exception("New page did not load on Continue.");
 		}
 
-		[StepDefinition(@"The message with text: (.*) is visble on the (.*) page")]
+		[RegexStepDefinition(@"The message with text: (.*) is visble on the (.*) page")]
 		public void MessageVisibleOnPage(string message, string page)
 		{
 			List<string> actualMessages = new NewProduct().AllAdditionalStatements();
@@ -1979,7 +1979,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
-		[StepDefinition(@"I confirm that only 'Active' brands saved in My Library - My Brands appear in the 'Product Line or Brand' drop down")]
+		[RegexStepDefinition(@"I confirm that only 'Active' brands saved in My Library - My Brands appear in the 'Product Line or Brand' drop down")]
 		public void OnlyActiveBrandAppearInProductLineDropDown()
 		{
 			var activeBrands = (List<string>)Context.GetFromContext("Active Brands");
@@ -2006,7 +2006,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
-		[StepDefinition(@"In the Create the kit page I search for and select: (.*)")]
+		[RegexStepDefinition(@"In the Create the kit page I search for and select: (.*)")]
 		public void GivenInTheCreateTheKitPageISearchForAndSelect(string productToAdd)
 		{
 			if (productToAdd.ToLower().Contains("saved as"))
@@ -2029,7 +2029,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
-		[StepDefinition(@"In the Create the kit page I search for and select product saved as: (.*)")]
+		[RegexStepDefinition(@"In the Create the kit page I search for and select product saved as: (.*)")]
 		public void GivenInTheCreateTheKitPageISearchForAndSelectSavedAs(ProductInformation product)
 		{
 			Report.IsTrue(new NewProduct().AddItemToKitByNameAndID(product),
@@ -2037,7 +2037,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully added product: " + product.Id + " to kit.");
 		}
 
-		[StepDefinition(@"In the Create the kit page I search for and select by id product saved as: (.*)")]
+		[RegexStepDefinition(@"In the Create the kit page I search for and select by id product saved as: (.*)")]
 		public void GivenInTheCreateTheKitPageISearchForAndSelectByIdSavedAs(ProductInformation product)
 		{
 			Report.IsTrue(new NewProduct().AddItemToKitByID(product),
@@ -2045,7 +2045,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully added product: " + product.Id + " to kit.");
 		}
 
-		[StepDefinition(@"in the (.*) page I (should|should not) see the (.*) question")]
+		[RegexStepDefinition(@"in the (.*) page I (should|should not) see the (.*) question")]
 		public void ThenInThePageIShouldOrShouldNotSeeQuestion(string page, string shouldOrNot, string question)
 		{
 			var thisNewProduct = new NewProduct();
@@ -2058,7 +2058,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Question is not showing as expected", "Question is showing or not as expected");
 		}
 
-		[StepDefinition(@"a (Danger & Warning|Warning) popup dialog should appear with the message: (.*)")]
+		[RegexStepDefinition(@"a (Danger & Warning|Warning) popup dialog should appear with the message: (.*)")]
 		public void ThenAWarningPopupDialogShouldAppearWithTheMessage(string title, string message)
 		{
 			var thisModalDialog = new ModalDialog();
@@ -2071,7 +2071,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Delay.Seconds(1);
 		}
 
-		[StepDefinition(@"I should see an alert with title: (.*) subtitle: (.*) Text: (.*)")]
+		[RegexStepDefinition(@"I should see an alert with title: (.*) subtitle: (.*) Text: (.*)")]
 		public void ThenIShouldSeeAnAlertWithTitleSubtitleText(string title, string subtitle, string text)
 		{
 			var thisNewProduct = new NewProduct();
@@ -2081,7 +2081,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(thisAlert.Text == text, "Text is not as expected. Expected " + text + " but got: " + thisAlert.Text, "Text matches");
 		}
 
-		[StepDefinition(@"on the Neonicotinoid Warning Page I should see a link with text: (.*) which links to page: (.*)")]
+		[RegexStepDefinition(@"on the Neonicotinoid Warning Page I should see a link with text: (.*) which links to page: (.*)")]
 		public void ThenOnTheNeonicotinoidWarningPageIShouldSeeALinkWithTextWhichLinksToPage(string linkText, string link)
 		{
 			var thisNewProduct = new NewProduct();
@@ -2099,7 +2099,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Delay.Seconds(1);
 		}
 
-		[StepDefinition(@"I click the 'Use My Ingredients' button")]
+		[RegexStepDefinition(@"I click the 'Use My Ingredients' button")]
 		public void ClickUseMyIngredients()
 		{
 			Report.IsTrue(new NewProduct().ClickUseMyIngredients(),
@@ -2108,19 +2108,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-		[StepDefinition(@"I click OK in the My Ingredients dialog")]
+		[RegexStepDefinition(@"I click OK in the My Ingredients dialog")]
 		public void ClickOKMyIngredientsDialog()
 		{
 			Report.IsTrue(new MyIngredientsModal().Click_OK(), "Failed to click OK in the My Ingredients dialog", "Successfully clicked OK in the My Ingredients dialog");
 		}
 
-		[StepDefinition(@"I see the My Ingredients pop up")]
+		[RegexStepDefinition(@"I see the My Ingredients pop up")]
 		public void MyIngredientsDialogAppears()
 		{
 			Report.IsTrue(new MyIngredientsModal().Exists, "The My Ingredients pop up did not appear", "The My Ingredients pop up appeared as expected");
 		}
 
-		[StepDefinition(@"I confirm My Ingredient saved as: (.*) appears in the Use My Ingredients popup")]
+		[RegexStepDefinition(@"I confirm My Ingredient saved as: (.*) appears in the Use My Ingredients popup")]
 		public void MyIngredientsDialogContainsIngredient(string savedAs)
 		{
 			var ingredient = (MyIngredients.IngredientItem)Context.GetFromContext("My_Ingredient_" + savedAs);
@@ -2153,7 +2153,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 					, ingredient.PublicName, ingredient.ChemicalName, ingredient.Index));
 		}
 
-		[StepDefinition(@"Field exists: (.*)")]
+		[RegexStepDefinition(@"Field exists: (.*)")]
 		public void ThenFieldExists(string field)
 		{
 
@@ -2163,7 +2163,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Delay.Seconds(1);
 		}
 
-		[StepDefinition(@"(.*) should not be showing any error messages")]
+		[RegexStepDefinition(@"(.*) should not be showing any error messages")]
 		public void ErrorMessagesShouldNotBeShowingForItem(string section)
 		{
 			Delay.Seconds(1);
@@ -2172,7 +2172,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"As expected, no error messages were showing for section: " + section);
 		}
 
-		[StepDefinition(@"Section: (.*) should be showing an error message")]
+		[RegexStepDefinition(@"Section: (.*) should be showing an error message")]
 		public void ErrorMessagesShouldBeShowingForItem(string section)
 		{
 			Delay.Seconds(1);
@@ -2181,7 +2181,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"As expected, an error message were displayed for section: " + section);
 		}
 
-		[StepDefinition(@"For every field in the table I should (see|not see) the following error: (.*)")]
+		[RegexStepDefinition(@"For every field in the table I should (see|not see) the following error: (.*)")]
 		public void ThenForEveryFieldInTheTableIShouldSeeTheFollowingError(string condition, string expectedError, Table table)
 		{
 			Delay.Seconds(3);
@@ -2201,7 +2201,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"For every field in the table I call Shared Step 56494 expecting error: (.*)")]
+		[RegexStepDefinition(@"For every field in the table I call Shared Step 56494 expecting error: (.*)")]
 		public void ThenForEveryFieldInTheTableICallSharedStep56494ExpecingError(string error, Table table)
 		{
 			var thisStepShared = new Steps_Shared();
@@ -2213,7 +2213,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"The following options (should|should not) be (displayed|displayed exclusively) for section: (.*)")]
+		[RegexStepDefinition(@"The following options (should|should not) be (displayed|displayed exclusively) for section: (.*)")]
 		public void CheckOptionsInSection(string should, string exclusive, string section, Table expected)
 		{
 			var expectedOptions = new List<string>();
@@ -2282,7 +2282,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"The Product Development Manager options should comprise a list containing the domain @CVSHealth.com")]
+		[RegexStepDefinition(@"The Product Development Manager options should comprise a list containing the domain @CVSHealth.com")]
 		public void PDMOptionsShouldContainCVSEmailDomain()
 		{
 			List<string> displayedOptions = new NewProduct().GetAllOptionsForSection("Who is the Product Development Manager (PDM) for this product?");
@@ -2291,7 +2291,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"All options in the PDM drop down contained the domain CVSHealth.com as expected");
 		}
 
-		[StepDefinition(@"in the VOC Summary page I should see the following noneditable statements")]
+		[RegexStepDefinition(@"in the VOC Summary page I should see the following noneditable statements")]
 		public void ThenInTheVOCSummaryPageIShouldSeeTheFollowingNoneditableStatements(Table table)
 		{
 			List<string> VOCSummaryStatements = new NewProduct().GetVOCSummaryStatements();
@@ -2303,14 +2303,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"the VOC concentration question shows a yes and a no button")]
+		[RegexStepDefinition(@"the VOC concentration question shows a yes and a no button")]
 		public void ThenTheVOCConcentrationQuestionShowsAYesAndANoButton()
 		{
 			Report.IsTrue(new NewProduct().VOCConcentrationQuestionHasYesAndNo(), "Expected VOC Concentration to have yes and no",
 				"VOC concentration has yes and no");
 		}
 
-		[StepDefinition(@"For the VOC concentration question field I should see the following error: (.*)")]
+		[RegexStepDefinition(@"For the VOC concentration question field I should see the following error: (.*)")]
 		public void ThenForTheVOCConcentrationQuestionFieldIShouldSeeTheFollowingError(string error)
 		{
 			string actualError = new NewProduct().VOCConcentrationError();
@@ -2322,7 +2322,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Error is showing as expected");
 		}
 
-		[StepDefinition(@"For the VOC page I should see the following error: (.*)")]
+		[RegexStepDefinition(@"For the VOC page I should see the following error: (.*)")]
 		public void ThenForTheVOCPageIShouldSeeTheFollowingError(string error)
 		{
 			List<string> actualErrors = new NewProduct().DisplayedAlerts();
@@ -2334,14 +2334,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Error is showing as expected");
 		}
 
-		[StepDefinition(@"I save the UPC number (.*) as: (.*)")]
+		[RegexStepDefinition(@"I save the UPC number (.*) as: (.*)")]
 		public void SaveUpcNumberAs(string upc, string savedAs)
 		{
 			Context.AddToContext(savedAs, upc);
 			Report.Info("Saved UPC No: " + upc + " saved as: " + savedAs);
 		}
 
-		[StepDefinition(@"I click the dropdown box for section: (.*)")]
+		[RegexStepDefinition(@"I click the dropdown box for section: (.*)")]
 		public void ClickSelectForSection(string section)
 		{
 			Report.IsTrue(new NewProduct().ClickSelectForSection(section),
@@ -2349,7 +2349,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully clicked the drop down for section: " + section);
 		}
 
-		[StepDefinition(@"I should not see the (.*) Page")]
+		[RegexStepDefinition(@"I should not see the (.*) Page")]
 		public void GivenIShouldNotSeeXPage(string page)
 		{
 			var selNewProduct = new NewProduct();
@@ -2358,7 +2358,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				page + " is not showing as expected");
 		}
 
-		[StepDefinition(@"I confirm the page heading shows the CVS Logo with the title 'CVS Own Brand Registration' below the logo")]
+		[RegexStepDefinition(@"I confirm the page heading shows the CVS Logo with the title 'CVS Own Brand Registration' below the logo")]
 		public void CVSOwnBrandRegistrationPageIsDisplayedWithLogo()
 		{
 			ReportSettings.UseSubSteps = true;
@@ -2373,7 +2373,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"The page header was 'CVS Own Brand Registration' as expected");
 		}
 
-		[StepDefinition(@"The displayed message text is comprised of the following paragraphs")]
+		[RegexStepDefinition(@"The displayed message text is comprised of the following paragraphs")]
 		public void MessageTextContainsParagraphs(Table paragraphText)
 		{
 			ReportSettings.UseSubSteps = true;
@@ -2390,7 +2390,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				count++;
 			}
 		}
-		[StepDefinition(@"The alert message (is|is not) displayed with text: (.*)")]
+		[RegexStepDefinition(@"The alert message (is|is not) displayed with text: (.*)")]
 		public void AlertMessageDisplayed(string displayed, string alert)
 		{
 			bool expectDisplayed = false;
@@ -2417,7 +2417,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
-		[StepDefinition(@"If purchase details are showing click confirm order")]
+		[RegexStepDefinition(@"If purchase details are showing click confirm order")]
 		public void GivenIfPurchaseDetailsAreShowingClickConfirmOrder()
 		{			
 			Report.UseSubSteps = true;
@@ -2482,7 +2482,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"In the Purchase Summary page Confirm thank you message is shown if product details is not shown: (.*)")]
+		[RegexStepDefinition(@"In the Purchase Summary page Confirm thank you message is shown if product details is not shown: (.*)")]
 		public void ConfirmThankYouMessageIfProductDetailsNotPresent(string message)
 		{
 			var mySub = new PaymentMethods_Subscription_Billing();
@@ -2512,7 +2512,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
-		[StepDefinition(@"the 'Regulatory List' window opens")]
+		[RegexStepDefinition(@"the 'Regulatory List' window opens")]
 		public void RegulatoryListWindowOpens()
 		{
 			new RegulatoryList().WaitForContainerToBeVisible();
@@ -2526,7 +2526,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(header == "Regulatory List", "The pop up header text was not 'Regulatory List' as expected!", "The pop up header text was 'Regulatory List' as expected");
 		}
 
-		[StepDefinition(@"I confirm that a list of regulations associated with the component is displayed")]
+		[RegexStepDefinition(@"I confirm that a list of regulations associated with the component is displayed")]
 		public void ConfirmListOfRegulationsAssociatedWithComponentDisplayed()
 		{
 			var selRegulatoryList = new RegulatoryList();
@@ -2539,7 +2539,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I close the Regulatory List window")]
+		[RegexStepDefinition(@"I close the Regulatory List window")]
 		public void CloseTheRegulatoryListWindow()
 		{
 			var selRegulatoryList = new RegulatoryList();
@@ -2548,7 +2548,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully closed the Regulatory List pop up");
 		}
 
-		[StepDefinition(@"I confirm the Exceeds/Does not exceed statement is shown and is correct based on inputted (CARB|OTC) value: (.*)")]
+		[RegexStepDefinition(@"I confirm the Exceeds/Does not exceed statement is shown and is correct based on inputted (CARB|OTC) value: (.*)")]
 		public void ConfirmExceedsStatementIsCorrectBasedOnCarb(string carbOtc, string value)
 		{
 			var selNewProduct = new NewProduct();
@@ -2596,7 +2596,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"The " + carbOtc + " exceeds/ does not exceed statement matched the expected phrase");
 		}
 
-		[StepDefinition(@"I confirm the checkbox with description: (.*) is displayed")]
+		[RegexStepDefinition(@"I confirm the checkbox with description: (.*) is displayed")]
 		public void IConfirmCheckboxWithDescriptionIsDisplayed(string description)
 		{
 			Report.IsTrue(new NewProduct().StandaloneCheckbox(description) != null,
@@ -2604,7 +2604,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				$"The checkbox with description: '{description}' was displayed as expected");
 		}
 
-		[StepDefinition(@"I (check|uncheck) the checkbox with description: (.*)")]
+		[RegexStepDefinition(@"I (check|uncheck) the checkbox with description: (.*)")]
 		public void ICheckTheCheckboxWithDescription(string check, string description)
 		{
 			var selNewProduct = new NewProduct();
@@ -2635,7 +2635,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				$"The checkbox is {check}ed as expected");
 		}
 
-		[StepDefinition(@"section: (.*) is highlighed in red indicating an error")]
+		[RegexStepDefinition(@"section: (.*) is highlighed in red indicating an error")]
 		public void SectionIsHighlightedInRedIndicatingAnError(string section)
 		{
 			var selNewProduct = new NewProduct();
@@ -2647,7 +2647,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				$"Section '{section}' colour was red as expected");
 		}
 
-		[StepDefinition(@"I (should|should not) see following statement: (.*)")]
+		[RegexStepDefinition(@"I (should|should not) see following statement: (.*)")]
 		public void SectionStatement(string shouldOrShouldNot, string option)
 		{
 			Report.Info("Checking statement");
@@ -2669,7 +2669,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
-		[StepDefinition(@"I click on the Notice of Adoption Article link")]
+		[RegexStepDefinition(@"I click on the Notice of Adoption Article link")]
 		public void IClickOnTheNoticeOfAdoptionArticleLink()
 		{
 			var selNewProduct = new NewProduct();
@@ -2677,11 +2677,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully clicked Notice of Adoption Article link");
 		}
 
-		[StepDefinition(@"I confirm that a new Notice of Adoption Article tab opens and navigate to it")]
+		[RegexStepDefinition(@"I confirm that a new Notice of Adoption Article tab opens and navigate to it")]
 		public void ConfirmThatANewTabOpensAndNavigateToIt()
 		{
 			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
-			UL.Automation.SpecFlow.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
+			UL.Automation.ReqnrollHelpers.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
 			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
 			foreach (string handle in allHandles)
 			{
@@ -2698,7 +2698,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I close the Notice of Adoption Article tab")]
+		[RegexStepDefinition(@"I close the Notice of Adoption Article tab")]
 		public void ICloseTheNoticeOfAdoptionArticleTab()
 		{
 			List<string> OpenBrowsers = SeleniumBrowser.GetTabURLs();
@@ -2717,13 +2717,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Failure("Did not find Notice of Adoption Article page to close");
 		}
 
-		[StepDefinition(@"I Check the check box for the TDS/BDS current version question")]
+		[RegexStepDefinition(@"I Check the check box for the TDS/BDS current version question")]
 		public void GivenICheckTheCheckBoxForTheTDSBDSCurrentVersionQuestion()
 		{
 			var selNewProduct = new NewProduct();
 		}
 
-		[StepDefinition(@"I confirm the product name: ""(.*)"" is displayed in the header")]
+		[RegexStepDefinition(@"I confirm the product name: ""(.*)"" is displayed in the header")]
 		public void ConfirmTheProductNameIsDisplayedInTheHeader(string name)
 		{
 			string header = NewProduct.HeaderText;
@@ -2741,7 +2741,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				$@"The name displayed in the header matcehd the expected value: ""{name}""");
 		}
 
-		[StepDefinition(@"I confirm that retailer ""(.*)"" (is|is not) present under the 'Destination Retailers' column in the UPC table")]
+		[RegexStepDefinition(@"I confirm that retailer ""(.*)"" (is|is not) present under the 'Destination Retailers' column in the UPC table")]
 		public void ConfirmRetailerIsPresentUnderTheDestinationRetailersColumnUPCTable(string retailer, string isOrIsNot)
 		{
 
@@ -2762,7 +2762,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I click (Save|Cancel) in The Product Page")]
+		[RegexStepDefinition(@"I click (Save|Cancel) in The Product Page")]
 		public void ThenIClickSaveOrCancelInTheProductPage(string saveOrCancel)
 		{
 			var selNewProduct = new NewProduct();
@@ -2782,7 +2782,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
-		[StepDefinition(@"I Change the Secondary Physical State drop down from its current selection to a new selection")]
+		[RegexStepDefinition(@"I Change the Secondary Physical State drop down from its current selection to a new selection")]
 		public void GivenIChangeTheSecondaryPhysicalStateDropDownFromItsCurrentSelectionToANewSelection()
 		{
 			Report.Info("Changing secondary physical state");
@@ -2797,7 +2797,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
-		[StepDefinition(@"I select the first option in the 'Product Line or Brand' drop down and save as Brand{TestCaseId}")]
+		[RegexStepDefinition(@"I select the first option in the 'Product Line or Brand' drop down and save as Brand{TestCaseId}")]
 		public void SelectFirstOptionInBrandDropDown()
 		{
 			if (WercSmartSettings.TestCaseId == 0)
@@ -2825,7 +2825,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Context.AddToContext($"BrandName{WercSmartSettings.TestCaseId}", brand.Name);
 		}
 
-		[StepDefinition(@"Data Acceptance page should not show")]
+		[RegexStepDefinition(@"Data Acceptance page should not show")]
 		public void DataAcceptancePageShouldNotShow()
 		{
 			bool pageHasDisappeared = false;
@@ -2845,7 +2845,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Data acceptance page has gone as expected");
 		}
 
-		[StepDefinition(@"For retailer: (.*) I add additional requirements: (.*)")]
+		[RegexStepDefinition(@"For retailer: (.*) I add additional requirements: (.*)")]
 		public void ThenIAddAdditionaRequirmentsInfoForRetailer(string retailer, string additionalRequirements)
 		{
 			var thisNewProduct = new NewProduct();
@@ -2856,7 +2856,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 		//Item Description
-		[StepDefinition(@"in the Purchase Summary Screen I should see the following:")]
+		[RegexStepDefinition(@"in the Purchase Summary Screen I should see the following:")]
 		public void GivenInThePurchaseSummaryScreenIShouldSeeTheFollowing(Table table)
 		{
 			Delay.Seconds(1);
@@ -2874,7 +2874,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I Confirm (.*) error message is shown below the (.*) field")]
+		[RegexStepDefinition(@"I Confirm (.*) error message is shown below the (.*) field")]
 		public void GivenIConfirmErrorMessageIsShownBelowField(string errorMessage, string field)
 		{
 			List<InputError> errorsList = new NewProduct().GetAllErrors();
@@ -2887,27 +2887,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"An error message is not showing as expected: " + errorMessage, "An error is showing as expected: " + errorMessage);
 		}
 
-		[StepDefinition(@"I enter UPC Number: (.*)")]
+		[RegexStepDefinition(@"I enter UPC Number: (.*)")]
 		public void GivenIEnterUPCNumberSavedAsUPC(string upcNumber)
 		{
 			Delay.Seconds(3);
 			Report.IsTrue(new NewProduct().InputUPCNumber(upcNumber), "Failed to enter upc number", "Entered upc number");
 		}
 
-		[StepDefinition(@"I enter Zero Buffer UPC Number: (.*)")]
+		[RegexStepDefinition(@"I enter Zero Buffer UPC Number: (.*)")]
 		public void GivenIEnterZeroBufferUPCNumberSavedAsUPC(string upcNumber)
 		{
 			Delay.Seconds(3);
 			Report.IsTrue(new NewProduct().InputZeroBufferUPCNumber(upcNumber), "Failed to enter Zero Buffer UPC number", "Entered Zero Buffer UPC number");
 		}
-		[StepDefinition(@"I enter Zero Buffer Duplicate UPC Number: (.*)")]
+		[RegexStepDefinition(@"I enter Zero Buffer Duplicate UPC Number: (.*)")]
 		public void GivenIEnterZeroBufferDuplicateUPCNumberSavedAsUPC(string upcNumber)
 		{
 			Delay.Seconds(3);
 			Report.IsTrue(new NewProduct().InputZeroBufferUPCDuplicateNumber(upcNumber), "Failed to enter Zero Buffer Duplicate UPC number", "Entered Zero Buffer Duplicate UPC number");
 		}
 
-		[StepDefinition(@"I Select a container type from the drop down list")]
+		[RegexStepDefinition(@"I Select a container type from the drop down list")]
 		public void GivenISelectAContainerTypeFromTheDropDownList()
 		{
 			List<string> containerTypes = new NewProduct().GetContainerOptions();
@@ -2923,7 +2923,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Failed to select: " + containerTypes[randomNumber], "Selected: " + containerTypes[randomNumber]);
 		}
 
-		[StepDefinition(@"I (should|should not) see following container type from the drop down list")]
+		[RegexStepDefinition(@"I (should|should not) see following container type from the drop down list")]
 		public void GivenIShouldSeeContainerTypeFromTheDropDownList(string shouldOrNot, Table table)
 		{
 			List<string> containerTypes = new NewProduct().GetContainerOptions();
@@ -2947,33 +2947,33 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I enter Size Value: (.*)")]
+		[RegexStepDefinition(@"I enter Size Value: (.*)")]
 		public void GivenIEnterSizeValue(string size)
 		{
 			Report.IsTrue(new NewProduct().InputUPCSize(size), "Failed to enter size: " + size, "Entered size: " + size);
 		}
 
-		[StepDefinition(@"I delete retailer (.*) from the UPC")]
+		[RegexStepDefinition(@"I delete retailer (.*) from the UPC")]
 		public void IDeleteRetailerFromTheUPC(string retailer)
 		{
 			Report.IsTrue(new UPC().DeleteRetailer(retailer), "Failed to delete retailer " + retailer + ".",
 			"Successfully deleted retailer " + retailer + ".");
 		}
 
-		[StepDefinition(@"I Confirm the Package Type drop down list shows a Packaging type available for selection - Do not select one")]
+		[RegexStepDefinition(@"I Confirm the Package Type drop down list shows a Packaging type available for selection - Do not select one")]
 		public void GivenIConfirmThePackageTypeDropDownListShowsAPackagingTypeAvailableForSelection_DoNotSelectOne()
 		{
 			Report.IsTrue(new NewProduct().GetAllOptionsForUPCPackageType().Count > 0, "There are no packaging types",
 				"Packaging types are showing");
 		}
 
-		[StepDefinition(@"I choose (ok|cancel) in the UPCs Warning modal window")]
+		[RegexStepDefinition(@"I choose (ok|cancel) in the UPCs Warning modal window")]
 		public void ChooseInTheUPCsWarningModalWindow(string choice)
 		{
 			Report.IsTrue(new NoRetailerWarningPopup().ClickChoice(choice), "Clicked " + choice + " in UPCs Warning modal", "Unable to click " + choice + " in UPCs Warning modal");
 		}
 
-		[StepDefinition(@"In the UPC page I (should|should not) see Add new Packaging Type link")]
+		[RegexStepDefinition(@"In the UPC page I (should|should not) see Add new Packaging Type link")]
 		public void GivenInTheUPCPageIShouldSeeAddNewPackagingTypeLink(string shouldOrNot)
 		{
 			List<string> labelLinksShowing = new UPC().UpcPageLinks();
@@ -2991,12 +2991,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"In the Regulatory Documents to Provide Page I check that the input field with label: (.*) is shown as (Red|Green)")]
+		[RegexStepDefinition(@"In the Regulatory Documents to Provide Page I check that the input field with label: (.*) is shown as (Red|Green)")]
 		public void InTheRegulatoryDocumentsToProvidePageICheckThatAllInputFieldsAreRed(string fieldName, string expectedColor)
 		{
 			Report.IsTrue(new NewProduct().CheckInputFieldXIsColor(expectedColor, fieldName), "The input field color was not as expected", "The input field color was as expected");
 		}
-		[StepDefinition(@"I check that the input field with label: (.*) is shown as (Red|Green)")]
+		[RegexStepDefinition(@"I check that the input field with label: (.*) is shown as (Red|Green)")]
 		public void ICheckThatAllInputFieldsAreRed(string fieldName, string expectedColor)
 		{
 			if (Report.IsTrue(new NewProduct().InputFieldExists(fieldName), "Feiled to find Input field", "Successfully found the Input field"))
@@ -3005,13 +3005,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I confirm a warning message is shown above the UPC table that reads: (.*)")]
+		[RegexStepDefinition(@"I confirm a warning message is shown above the UPC table that reads: (.*)")]
 		public void ThenIConfirmAWarningMessageIsShownAboveTheUPCTableThatReads_(string warning)
 		{
 			Report.IsTrue(new NewProduct().CheckWarningMessageHasAppeared(warning), "Failed to confirm a warning message is shown above the UPC table that reads: " + warning, "Successfully confirmed a warning message is shown above the UPC table that reads:" + warning);
 		}
 
-		[StepDefinition(@"In the UPC screen I add a UPC: saved as UPC(.*), container type: (.*) and size: (.*), then I select all certifications")]
+		[RegexStepDefinition(@"In the UPC screen I add a UPC: saved as UPC(.*), container type: (.*) and size: (.*), then I select all certifications")]
 		public void InTheUPCScreenIAddUPCDetailsAndSelectAllCertifications(string upc, string containerType, string size)
 		{
 			ReportSettings.UseSubSteps = true;
@@ -3048,7 +3048,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-		[StepDefinition(@"I set the Product's GTIN Brick Code to: (.*)")]
+		[RegexStepDefinition(@"I set the Product's GTIN Brick Code to: (.*)")]
 		public void ThenISetTheProductsGTINBrickCodeTo(string description)
 		{
 			var thisNewProduct = new NewProduct();
@@ -3056,7 +3056,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(thisNewProduct.ProductGTINBrickCode == description, "Failed to set the Product's GTIN Brick Code to be: " + description, "Successfully set the Product's GTIN Brick Code to be: " + description);
 		}
 
-		[StepDefinition(@"In the Recipient and Product Details tab, I (expand|collapse) the first UPC")]
+		[RegexStepDefinition(@"In the Recipient and Product Details tab, I (expand|collapse) the first UPC")]
 		public void IExpandFirstUPC(string expandOrCollapse)
 		{
 			bool isOpen = new UPC().IsFirstUPCTabOpen();
@@ -3072,7 +3072,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I check that (Item Number|Part Number|DPCI|OMSID) for retailer (.*) UPC item 1 (should|should not) match the UPC Upload document saved in the Table called: (.*)")]
+		[RegexStepDefinition(@"I check that (Item Number|Part Number|DPCI|OMSID) for retailer (.*) UPC item 1 (should|should not) match the UPC Upload document saved in the Table called: (.*)")]
 		public void ICheckNumberForRetailerAgainstUPCUploadTable(string field, string retailer, string present, string tableSavedAs)
 		{
 			bool showing = present == "should";
@@ -3102,7 +3102,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I confirm that (Item Number|Part Number|DPCI|OMSID) label text for retailer (.*) UPC item 1 matches: (.*)")]
+		[RegexStepDefinition(@"I confirm that (Item Number|Part Number|DPCI|OMSID) label text for retailer (.*) UPC item 1 matches: (.*)")]
 		public void IConfirmLabelTextForRetailerMatches(string field, string retailer, string expectedText)
 		{
 			string retailerAbbr = new RetailerAbbreviations().TryConvertToAbbreviation($"{retailer}");
@@ -3110,7 +3110,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(expectedText == fieldValue, $"Failure, expected text for {field}: {expectedText} and actual website text for {field}: {fieldValue} do not match.", $"Success, expected text for {field} and actual website text for {field} match.");
 		}
 
-		[StepDefinition(@"I confirm that (Item Number|Part Number|DPCI|OMSID) for retailer (.*) UPC (should|should not) be required")]
+		[RegexStepDefinition(@"I confirm that (Item Number|Part Number|DPCI|OMSID) for retailer (.*) UPC (should|should not) be required")]
 		public void IConfirmValueForRetailerIsRequired(string field, string retailer, string present)
 		{
 			bool showing = present == "should";
@@ -3119,13 +3119,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(!(showing ^ isRequired), $"Failure, {field} {present} be required but showed the opposite.", $"Success, {field} {present} be required.");
 		}
 
-		[StepDefinition(@"I click the 'Add Part Number' button")]
+		[RegexStepDefinition(@"I click the 'Add Part Number' button")]
 		public void ThenIClickTheAddPartNumber()
 		{
 			Report.IsTrue((new NewProduct()).ClickAddPartNumber(), "Failed to click the 'Add Part Number' button!", "Successfully clicked the 'Add Part Number' button");
 		}
 
-		[StepDefinition(@"In the Product Information - Pesticide shown, US only, Yes to CA Cleaning Disclosure, select No for everything else - Happy Path")]
+		[RegexStepDefinition(@"In the Product Information - Pesticide shown, US only, Yes to CA Cleaning Disclosure, select No for everything else - Happy Path")]
 		public void GivenICallSharedStepAdditionalProductInformation_PesticideShownUSOnlySelectNoForEverythingElse_HappyPath()
 		{
 			ReportSettings.UseSubSteps = true;
@@ -3164,7 +3164,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Product Information");
 		}
 
-		[StepDefinition(@"In the Restict Use page I select Do Not Restrict")]
+		[RegexStepDefinition(@"In the Restict Use page I select Do Not Restrict")]
 		public void DoNotRestrictUse_Restrict()
 		{
 			ReportSettings.UseSubSteps = true;
@@ -3175,37 +3175,37 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var MyStepsNewProduct = new StepsNewProduct();
 			MyStepsNewProduct.GivenInTheNewProductPageIClickContinue("Restrict Use");
 		}
-		[StepDefinition(@"I confirm the UPC table area is shown in red highlight")]
+		[RegexStepDefinition(@"I confirm the UPC table area is shown in red highlight")]
 		public void ThenIConfirmTheUPCTableAreaIsShownInRedHighlight()
 		{
 			Report.IsTrue(new NewProduct().CheckUPCTableIsHighlightedRed(), "Failed to confirm the UPC table area is shown in red highlight", "Successfully confirmed the UPC table area is shown in red highlight");
 		}
 
 
-		[StepDefinition(@"I confirm the UPC Duplicate Warning Icon is visible")]
+		[RegexStepDefinition(@"I confirm the UPC Duplicate Warning Icon is visible")]
 		public void ThenIConfirmTheUPCDuplicateWarningIconIsVisible()
 		{
 			Report.IsTrue(new NewProduct().CheckIfUPCDuplicateWarningAppears(), "Failed to find the UPC Duplicate Warning Messsage!", "Successfully found the UPC Duplicate Warning Message!");
 		}
 
-		[StepDefinition(@"I check that the Select Option warning is visible")]
+		[RegexStepDefinition(@"I check that the Select Option warning is visible")]
 		public void ThenICheckThatTheSelectAtLeastOneOfTheseOptionsWarningIsVisible()
 		{
 			Report.IsTrue(new NewProduct().CheckDataAcceptanceSelectOptionWarningIsVisible(), "Failed to find the Select Option Warning!", "Successfully found the Select Option Warning!");
 		}
-		[StepDefinition(@"I check that the Select Option warning is not visible")]
+		[RegexStepDefinition(@"I check that the Select Option warning is not visible")]
 		public void ThenICheckThatTheSelectAtLeastOneOfTheseOptionsWarningIsNotVisible()
 		{
 			Report.IsTrue(new NewProduct().CheckDataAcceptanceSelectOptionWarningIsNotVisible(), "Failed to not the Select Option Warning!", "Successfully did not find the Select Option Warning!");
 		}
 
-		[StepDefinition(@"I check that there are no error messages present on the Data Acceptance Screen")]
+		[RegexStepDefinition(@"I check that there are no error messages present on the Data Acceptance Screen")]
 		public void ThenICheckThatThereAreNoErrorMessagesPresentOnTheDataAcceptanceScreen()
 		{
 			Report.IsTrue(new NewProduct().CheckFixAllErrorsMessageIsNotVisible(), "Failed to check that there are no error messages present on the Data Acceptance Screen", "Successfully checked that there are no error messages present on the Data Acceptance Screen");
 		}
 
-		[StepDefinition(@"I confirm the email registered: (.*) is populated in the field under the Statement")]
+		[RegexStepDefinition(@"I confirm the email registered: (.*) is populated in the field under the Statement")]
 		public void ThenIConfirmTheEmailRegisteredWERCSmart_ProductsAutomationAccountIsPopulatedInTheFieldUnderTheStatement(string accountSavedAs)
 		{
 			var newProduct = new NewProduct();
@@ -3218,7 +3218,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new NewProduct().CheckEmailAddressAgainstDataAcceptanceEmail(email, dataAcceptanceEmail), "Failed to check user email: " + email + " against: " + dataAcceptanceEmail, "Successfully checked user email: " + email + " against: " + dataAcceptanceEmail);
 		}
 
-		[StepDefinition(@"In Regulatory Documents to Provide I see text:(.*)")]
+		[RegexStepDefinition(@"In Regulatory Documents to Provide I see text:(.*)")]
 
 		public void RegulatoryDocumentsText(string text)
 		{
@@ -3229,25 +3229,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 
 		#endregion
-		[StepDefinition(@"In the California Cleaning Product Disclosure tab, I enter: (.*) in the Final Domestic Distributor")]
+		[RegexStepDefinition(@"In the California Cleaning Product Disclosure tab, I enter: (.*) in the Final Domestic Distributor")]
 		public void GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInFinalDomesticDistributorTextField(string text)
 		{
 			Report.IsTrue(new NewProduct().FinalDomesticDistributor(text), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
 		}
 
-		[StepDefinition(@"In the California Cleaning Product Disclosure tab, I enter: (.*) in the Company's Toll-Free Phone Number")]
+		[RegexStepDefinition(@"In the California Cleaning Product Disclosure tab, I enter: (.*) in the Company's Toll-Free Phone Number")]
 		public void GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInTollFreePhoneNumberTextField(string text)
 		{
 			Report.IsTrue(new NewProduct().CompanyTollFreePhoneNumber(text), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
 		}
 
-		[StepDefinition(@"In the California Cleaning Product Disclosure tab, I enter: (.*) in the Company Web Address")]
+		[RegexStepDefinition(@"In the California Cleaning Product Disclosure tab, I enter: (.*) in the Company Web Address")]
 		public void GivenInTheCaliforniaCleaningProductDisclosureTabIEnterInCompanyWebAddressTextField(string text)
 		{
 			Report.IsTrue(new NewProduct().CompanyWebAddress(text), "Text: " + text + " was not successfully inputted into the comments field!", "Text: " + text + " was successfully inputted into the comments field!");
 		}
 
-		[StepDefinition(@"I check for an error in the following fields in the 'Lithium Battery Transportation' Section")]
+		[RegexStepDefinition(@"I check for an error in the following fields in the 'Lithium Battery Transportation' Section")]
 		public void GivenICheckForAnErrorInTheFollowingFields(Table table)
 		{
 
@@ -3256,13 +3256,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
-		[StepDefinition(@"Data Accpetance Screen shows error with message: (.*)")]
+		[RegexStepDefinition(@"Data Accpetance Screen shows error with message: (.*)")]
 		public void DataAcceptanceScreenShowsError(string expectedError)
 		{
 			Report.IsTrue(new NewProduct().DataAcceptanceShowsAlertX(expectedError), "The expected alert was not found", "The expected alert was found");
 		}
 
-		[StepDefinition(@"I unselect the option: (.*) under section: (.*) and subsection: (.*)")]
+		[RegexStepDefinition(@"I unselect the option: (.*) under section: (.*) and subsection: (.*)")]
 		public void ForTheOptionSubOptionUnselect(string option, string section, string subSection)
 		{
 			Report.IsTrue(new NewProduct().UnsetOptionInSectionSubSection(section.Trim(), subSection.Trim(), option.Trim()),
@@ -3270,7 +3270,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				$"Successfully unset the input to: '{option}' in section: '{section}' and subection: '{subSection}'");
 		}
 
-		[StepDefinition(@"I unselect option: (.*) under section: (.*)")]
+		[RegexStepDefinition(@"I unselect option: (.*) under section: (.*)")]
 		public void ForTheOptionUnselect(string option, string section)
 		{
 			Report.IsTrue(new NewProduct().UnsetOptionInSection(section.Trim(), option.Trim()),
@@ -3285,21 +3285,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(NewProductObject.CheckAlertMessageText(displayedText), "The alert message text did not match", "The alert message text did match");
 		}
 
-		[StepDefinition(@"I check the options in the dropdown menus for the following sections")]
+		[RegexStepDefinition(@"I check the options in the dropdown menus for the following sections")]
 		public void ThenICheckTheOptionsInTheDropdownMenusForTheFollowingSections(Table table)
 		{
 			NewProduct newProductObject = new NewProduct();
 			newProductObject.CheckOptionsInDropDownMenusForTheFollowingSectinons(table);
 		}
 
-		[StepDefinition(@"I (should|shoult not) see the PNK section title in the Product Information with the following text: (.*)")]
+		[RegexStepDefinition(@"I (should|shoult not) see the PNK section title in the Product Information with the following text: (.*)")]
 		public void ThenIShouldSeeThePNKSectionTitleInTheAdditionalProductInformationWithTheFollowingText(string shouldOrShouldNot, string titleText)
 		{
 			NewProduct newProductObject = new NewProduct();
 			newProductObject.CheckForPNKSectionTitleWithText(shouldOrShouldNot, titleText);
 		}
 
-		[StepDefinition(@"in page Pesticide Details - State Registration page I should see no error")]
+		[RegexStepDefinition(@"in page Pesticide Details - State Registration page I should see no error")]
 		public void ThenInPagePesticideDetails_StateRegistrationPageIShouldSeeNoError()
 		{
 			PesticideDetailsState pesticideDetailsStateObject = new PesticideDetailsState();
@@ -3307,7 +3307,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
-		[StepDefinition(@"I set the following data: (.*) for the following state: (.*)")]
+		[RegexStepDefinition(@"I set the following data: (.*) for the following state: (.*)")]
 		public void GivenISetTheFollowingDataErtForTheFollowingStateMA(string date, string state)
 		{
 			PesticideDetailsState pesticideDetailsStateObject = new PesticideDetailsState();
@@ -3315,41 +3315,41 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
-		[StepDefinition(@"I enter the following EPA Pesticide Registration No\.: (.*)")]
+		[RegexStepDefinition(@"I enter the following EPA Pesticide Registration No\.: (.*)")]
 		public void ThenIEnterTheFollowingEPAPesticideRegistrationNo_(string enterText)
 		{
 			PesticideDetailsState pesticideDetailsStateObject = new PesticideDetailsState();
 			Report.IsTrue(pesticideDetailsStateObject.EnterEpaPesticideRegistrationNo(enterText), "Failed to enter text", "Successfully entered text");
 		}
 
-		[StepDefinition(@"I set first VOC option to: 'Yes'")]
+		[RegexStepDefinition(@"I set first VOC option to: 'Yes'")]
 		public void GivenISetFirstVOCOptionToYes1(string yesOrNo)
 		{
 			Ingredients ingredientsObject = new Ingredients();
 			ingredientsObject.SetFirstVOCOption(yesOrNo);
 		}
 
-		[StepDefinition(@"In the Regulatory Documents to Prodivde page, I enter the value: (.*) into the WHMIS SDS Docmument Date Field")]
+		[RegexStepDefinition(@"In the Regulatory Documents to Prodivde page, I enter the value: (.*) into the WHMIS SDS Docmument Date Field")]
 		public void InTheRegualtoryDocumentsToProvidePageIEnterValueIntoWHMISSDSDocumentDateField(string value)
 		{
 			Report.IsTrue(new NewProduct().EnterWHMISSDSDocumentDate(value), "Text: " + value + " was not successfully inputted into the field!", "Text: " + value + " was successfully inputted into the field!");
 
 		}
 
-		[StepDefinition(@"I check that the input field with label: (.*) has the following text: (.*)")]
+		[RegexStepDefinition(@"I check that the input field with label: (.*) has the following text: (.*)")]
 		public void ICheckThatTheInputFieldWithLabelHasTheFollowingText(string fieldName, string text)
 		{
 			Report.IsTrue(new NewProduct().CheckInputFieldText(fieldName, text), "The input field text was not as expected", "The input field text was as expected");
 		}
 
-		[StepDefinition(@"I check that the input field with label: (.*) has the following placeholder: (.*)")]
+		[RegexStepDefinition(@"I check that the input field with label: (.*) has the following placeholder: (.*)")]
 		public void ICheckThatTheInputFieldWithLabelHasTheFollowingPlaceholder(string fieldName, string placeholder)
 		{
 			Report.IsTrue(new NewProduct().CheckInputFieldPlaceholder(fieldName, placeholder), "The input field placeholder was not as expected", "The input field placeholder was as expected");
 		}
 
 
-		[StepDefinition(@"I confirm the Regulatory Information 3 page contains the statement: (.*)")]
+		[RegexStepDefinition(@"I confirm the Regulatory Information 3 page contains the statement: (.*)")]
 		public void IConfirmRegulatoryInformation3PageContainsStatement(string text)
 		{
 			var newProductPage = new NewProduct();
@@ -3359,7 +3359,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(statementtextfound == text, "The text found was not a match", "The text found matched the expected text");
 		}
 
-		[StepDefinition(@"I check the uploaded file name of document type: (.*) and for control label: (.*) matches: (.*)")]
+		[RegexStepDefinition(@"I check the uploaded file name of document type: (.*) and for control label: (.*) matches: (.*)")]
 		public void CheckUploadedFileNameForTypeAndLabel(string type, string label, string filename)
 		{
 
@@ -3367,14 +3367,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
-		[StepDefinition(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet \(SDS\), Article Information Sheet (AIS) and/or Product Label for this registration'")]
+		[RegexStepDefinition(@"In the regulatory documents to provide screen I tick the box next to the question: 'I confirm I am providing the most current Safety Data Sheet \(SDS\), Article Information Sheet (AIS) and/or Product Label for this registration'")]
 		public void SelectConfirmRegulatoryDocumentsConfirmationQuestion()
 		{
 			Report.IsTrue(new NewProduct().CheckRegulatoryDocumentsConfirmationBox(), "Failed to tick the confirmation option", "Successfully ticked the confirmation option");
 
 		}
 
-		[StepDefinition(@"I confirm that the the option: (.*) (.*) checked for the following section: (.*)")]
+		[RegexStepDefinition(@"I confirm that the the option: (.*) (.*) checked for the following section: (.*)")]
 		public void ThenIConfirmThatTheTheOptionCheckedForTheFollowingSection(string option, string isOrIsNot, string section)
 		{
 			var newProductPage = new NewProduct();
@@ -3389,28 +3389,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I confirm that the transportation option: (.*) that was selected is still the same")]
+		[RegexStepDefinition(@"I confirm that the transportation option: (.*) that was selected is still the same")]
 		public void ThenIConfirmThatThatTheTransportationOptionSelectedIsSame(string option)
 		{
 			var newProductPage = new NewProduct();
 			Report.IsTrue(newProductPage.GetTransportationOption(option), "The transportation option " + option + " selected was not same", "The transportation option " + option + " selected was still same");
 			
 		}
-		[StepDefinition(@"I Change the Transportation option from the dropdown to: (.*)")]
+		[RegexStepDefinition(@"I Change the Transportation option from the dropdown to: (.*)")]
 		public void GivenInTheSupplierReportPageInTheSelectRetailerDropdownISelect(string option)
 		{
 			var newProductPage = new NewProduct();
 			Report.IsTrue(newProductPage.SelectTransportationOption(option),
 				"Failed to select transportation option: " + option, "Successfully selected transportation option: " + option);
 		}
-		[StepDefinition(@"I click on the arrow next to the UPC data")]
+		[RegexStepDefinition(@"I click on the arrow next to the UPC data")]
 		public void ThenIClickArrow()
 		{
 			var newProductPage = new NewProduct();
 			Report.IsTrue(newProductPage.ClickArrow(), "Failed to click the arrow next to the UPC data", "Succesfully clicked the arrow next to the UPC data");
 		}
 
-		[StepDefinition(@"I select the case UPC dropdown arrow to (expand|collapse) the UPC saved as: (.*)")]
+		[RegexStepDefinition(@"I select the case UPC dropdown arrow to (expand|collapse) the UPC saved as: (.*)")]
 		public void ThenISelectTheCaseUPCDropdownArrowForUPCSavedAsUPC(string expandOrCollapse, string savedAs)
 		{
 			var newProductPage = new NewProduct();
@@ -3418,7 +3418,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(newProductPage.SelectCaseUPCDropDownArrowForUPC(savedAs, expandOrCollapse), "Failed to select dropdown arrow with the UPC: " + savedAs, "Succesfully selected dropdown arrow with the UPC: " + savedAs);
 		}
 
-		[StepDefinition(@"I confirm the correct UPC: saved as (.*) is displayed in the UPC Number textfield")]
+		[RegexStepDefinition(@"I confirm the correct UPC: saved as (.*) is displayed in the UPC Number textfield")]
 		public void ThenIConfirmTheCorrectUPCSavedAsUPCIsDisplayedInTheUPCNumberTextfield(string savedAs)
 		{
 			var newProductPage = new NewProduct();
@@ -3426,14 +3426,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(newProductPage.ConfirmUPCNumberIsDisplayedInUPCNumberField(savedAs), "Failed to confirm UPC Number field contains UPC: " + savedAs, "Successfully confirmed UPC Number field contains UPC: " + savedAs);
 		}
 
-		[StepDefinition(@"I confirm Individual UPC field does not display any options")]
+		[RegexStepDefinition(@"I confirm Individual UPC field does not display any options")]
 		public void ThenIConfirmIndividualUPCFieldDoesNotDisplayAnyOptions()
 		{
 			var newProductPage = new NewProduct();
 			Report.IsTrue(newProductPage.CheckForOptionsInIndividualUPCField(), "Failed to confirm the Individual UPC field has no options", "Successfully confirmed the Individual UPC field has no options");
 		}
 
-		[StepDefinition(@"I confirm the (UPC|Name|Container|Size|Quantity|Individual UPC|Transport|Package) field is shown in the Universal Product Code \(UPC\) Page")]
+		[RegexStepDefinition(@"I confirm the (UPC|Name|Container|Size|Quantity|Individual UPC|Transport|Package) field is shown in the Universal Product Code \(UPC\) Page")]
 		public void ThenIConfirmTheQuantityFieldIsShownInTheUniversalProductCodeUPCPage(string field)
 		{
 			var newProductPage = new NewProduct();
@@ -3441,7 +3441,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
-		[StepDefinition(@"I confirm the (UPC|Name|Container|Size|Quantity|Individual UPC|Transport|Package) field is below the (UPC|Name|Container|Size|Quantity|Individual UPC|Transport|Package) field")]
+		[RegexStepDefinition(@"I confirm the (UPC|Name|Container|Size|Quantity|Individual UPC|Transport|Package) field is below the (UPC|Name|Container|Size|Quantity|Individual UPC|Transport|Package) field")]
 		public void ThenIConfirmTheContainerTypeFieldIsBelowTheUPCNumberField(string lowerField, string upperField)
 		{
 			var newProductPage = new NewProduct();
@@ -3449,7 +3449,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
-		[StepDefinition(@"I confirm that the truck icon is displaying next to the case UPC: saved as (.*)")]
+		[RegexStepDefinition(@"I confirm that the truck icon is displaying next to the case UPC: saved as (.*)")]
 		public void ThenIConfirmThatTheTruckIconIsDisplayingNextToTheCaseUPCSavedAsUPC(string savedAs)
 		{
 			var newProductPage = new NewProduct();
@@ -3458,7 +3458,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
-		[StepDefinition(@"I check if the case UPC details are collapsed for UPC: saved as (.*)")]
+		[RegexStepDefinition(@"I check if the case UPC details are collapsed for UPC: saved as (.*)")]
 		public void ThenICheckIfTheCaseUPCDetailsAreCollapsedForUPCSavedAsUPC(string savedAs)
 		{
 			var newProductPage = new NewProduct();
@@ -3466,7 +3466,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(newProductPage.ConfirmCaseUPCDetailsAreCollapsedForUPC(savedAs), "Failed to confirm case UPC details are collapsed with the UPC: " + savedAs, "Succesfully confirmed case UPC details are collapsed with the UPC: " + savedAs);
 		}
 
-		[StepDefinition(@"I confirm the case dropdown with the following UPC: saved as (.*) (should|should not) be available for selection")]
+		[RegexStepDefinition(@"I confirm the case dropdown with the following UPC: saved as (.*) (should|should not) be available for selection")]
 		public void ThenIConfirmTheCaseDropdownWithTheFollowingUPCSavedAsUPCIsAvailableForSelection(string savedAs, string shouldOrShouldNot)
 		{
 			var newProductPage = new NewProduct();
@@ -3482,7 +3482,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I confirm a case dropdown contains the following UPC: saved as (.*)")]
+		[RegexStepDefinition(@"I confirm a case dropdown contains the following UPC: saved as (.*)")]
 		public void ThenIConfirmACaseDropdownContainsTheFollowingUPCSavedAsUPC(string savedAs)
 		{
 			var newProductPage = new NewProduct();
@@ -3491,7 +3491,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
-		[StepDefinition(@"I check for a truck icon for UPC: saved as (.*)")]
+		[RegexStepDefinition(@"I check for a truck icon for UPC: saved as (.*)")]
 		public void ThenICheckForATruckIconForUPCSavedAsUPC(string savedAs)
 		{
 			var UPCPage = new UPC();
@@ -3499,28 +3499,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(UPCPage.ConfirmTruckIconIsDisplayedForUPC(savedAs), "Failed to find truck icon for UPC: " + savedAs, "Successfully found truck icon for UPC: " + savedAs);
 		}
 
-		[StepDefinition(@"I confirm the Consent to Tier 2.1, 2.2, 4.2 Data shows the answer: (.*)")]
+		[RegexStepDefinition(@"I confirm the Consent to Tier 2.1, 2.2, 4.2 Data shows the answer: (.*)")]
 		public void GivenIConfirmTheConsentToTierDataShowsTheAnswerAccept(string answer)
 		{
 			var newProductPage = new NewProduct();
 			Report.IsTrue(newProductPage.ConfirmTierDataShowsCorrectAnswer(answer), "Failed to confirm the following answer: " + answer, "Successfully confirmed the following answer: " + answer);
 		}
 
-		[StepDefinition(@"I confirm the Formulation > Batteries displays the correct text")]
+		[RegexStepDefinition(@"I confirm the Formulation > Batteries displays the correct text")]
 		public void GivenIConfirmTheFormulationBatteriesDisplaysTheCorrectText()
 		{
 			var newProductPage = new NewProduct();
 			Report.IsTrue(newProductPage.CheckTextInForumulationBatteriesPage(), "The text in the Formulation > Batteries page displayed the incorrect text", "The text in the Formulation > Batteries page displayed the correct text");
 		}
 
-		[StepDefinition(@"In the Optional Reports and Documents Available for Purchase page, the footer text contains: (.*)")]
+		[RegexStepDefinition(@"In the Optional Reports and Documents Available for Purchase page, the footer text contains: (.*)")]
 		public void InTheOptionalReportsAndDocumentsPageFooterTextContains(string expectedText)
 		{
 			Report.IsTrue(new NewProduct().ConfirmOptionalReportsFooterContains(expectedText), "Failed to find the text", "The text was found");
 
 		}
 
-		[StepDefinition(@"In the regulatory documents to provide screen if I see the question 'I confirm I am providing the most current Safety Data Sheet \(SDS\)' I tick confirm")]
+		[RegexStepDefinition(@"In the regulatory documents to provide screen if I see the question 'I confirm I am providing the most current Safety Data Sheet \(SDS\)' I tick confirm")]
 		public void InTheRegulatoryDocumentsToProvideScreenIfTheConfirmSDSQuestionIsSeenThenGrant()
 		{
 
@@ -3534,7 +3534,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"In the Product Information Page, for the Question 'Select Countries the product may be sold in' I uncheck 'United States' if it is already selected")]
+		[RegexStepDefinition(@"In the Product Information Page, for the Question 'Select Countries the product may be sold in' I uncheck 'United States' if it is already selected")]
 		public void InTheProductInformationPageUnselectUS()
 		{
 			var MyNewProduct = new NewProduct();
@@ -3545,7 +3545,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				MyNewProduct.ClickCheckbox("Select countries the product may be sold in", "United States");
 			}
 		}
-		[StepDefinition(@"In the Additional Documents to Provide screen I upload label for section 'Provide Full Product Label \(required\)'")]
+		[RegexStepDefinition(@"In the Additional Documents to Provide screen I upload label for section 'Provide Full Product Label \(required\)'")]
 		public void GivenICallSharedStepAdditionalDocumentsToProvide_Exemption_VOC_ProductLabel()
 		{
 			ReportSettings.UseSubSteps = true;
@@ -3556,7 +3556,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			MyNewProduct.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
 
-		[StepDefinition(@"I set the Product Identification \(Optional\) field to Proudct ID saved as: (.*)")]
+		[RegexStepDefinition(@"I set the Product Identification \(Optional\) field to Proudct ID saved as: (.*)")]
 		public void GivenISetTheProductIdentificationOptionalFieldToProudctIDSavedAs(string savedAs)
 		{
 			string id = "";
@@ -3573,7 +3573,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I Select a height from the drop down list")]
+		[RegexStepDefinition(@"I Select a height from the drop down list")]
 		public void GivenISelectAHeightFromTheDropDownList()
 		{
 			List<string> HeightList = new NewProduct().GetHeightOptions();
@@ -3589,12 +3589,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Failed to select: " + HeightList[randomNumber], "Selected: " + HeightList[randomNumber]);
 		}
 
-		[StepDefinition(@"I confirm SKU field is blank")]
+		[RegexStepDefinition(@"I confirm SKU field is blank")]
 		public void GivenIConfirmSKUFieldIsBlank()
 		{
 			Report.IsTrue(new NewProduct().ConfirmSKUFieldWasBlank(), "Failed to find the SKU field is blank", "Successfully found the SKU field is blank");
 		}
-		[StepDefinition(@"I click ok")]
+		[RegexStepDefinition(@"I click ok")]
 		public void IClickOK()
 		{
 			var thisModalDialog = new ModalDialog();
