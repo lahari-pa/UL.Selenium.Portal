@@ -22,7 +22,6 @@ using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Chrome;
 using System.Net.NetworkInformation;
-using System.Runtime.InteropServices.WindowsRuntime;
 
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product

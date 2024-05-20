@@ -7,13 +7,7 @@ using UL.Automation.WebDriver.Extensions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-using TechTalk.SpecFlow;
 using UL.Automation.WebDriver.BaseClasses;
-using static System.Windows.Forms.AxHost;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using OpenQA.Selenium.DevTools.V108.DOM;
-using NPOI.SS.Formula.Functions;
-using TechTalk.SpecFlow.CommonModels;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
