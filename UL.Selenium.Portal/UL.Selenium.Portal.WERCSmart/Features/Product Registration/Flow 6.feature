@@ -42,7 +42,10 @@ Given I generate a random UPC number and save as: UPC78731
 
 Given I delete all products with UPC Number: saved as UPC78731
 
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide - Crawling Bug - Aerosol
 
@@ -129,8 +132,10 @@ Given I generate a random UPC number and save as: UPC57711
 
 Given I delete all products with UPC Number: saved as UPC57711
 
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Antifungal - Aerosol
 
 Then I save the product information as: TestCase57711
@@ -215,7 +220,10 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 @TestCase:57647
 Scenario: [57647] Insecticide-Flying Bug-Moth Proofing Product containing <98% Para-Dichlorobenzene - (RU001000) - 2S
     Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide-Flying Bug-Moth Proofing Product containing >98% Para-Dichlorobenzene
 	Then I generate a random UPC number and save as: UPC87914
 	Then I save the product information as: TestCase87914
@@ -309,7 +317,10 @@ Scenario: [57134] Insecticide - Flea and Tick (RU001407) - Aerosol - PESTICIDE w
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I generate a random UPC number and save as: UPC57134
 	Given I delete all products with UPC Number: saved as UPC57134
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide - Flea and Tick
 	Then I save the product information as: TestCase57134
 	Given I call Shared Step 101692 Product Information - Pesticide Question - Happy Path
@@ -385,7 +396,10 @@ Scenario: [208260]  Insecticide - Flea and Tick (RU001407) - Aerosol - PESTICIDE
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I generate a random UPC number and save as: UPC208260
 	Given I delete all products with UPC Number: saved as UPC208260
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide - Flea and Tick
 	Then I save the product information as: TestCase208260
 	Given I call Shared Step 101692 Product Information - Pesticide Question - Happy Path
@@ -456,7 +470,7 @@ Scenario: [57986] Footwear or Leather Care Product - All other forms - (RU000746
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 
-	 # ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
     Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
@@ -527,37 +541,37 @@ Scenario: [57986] Footwear or Leather Care Product - All other forms - (RU000746
 			| component name | Water      |  42    | false                | false        |   Water    |
 	And in the Ingredients page I click Continue
 
-	# ====== I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path) ====== #
+	#I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Inventory Status, Prop 65 (US) Page
 	Given In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
 	Given In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Given in the Inventory Status, Prop 65 (US) page I click Continue
 
-	# ====== Given I call Shared Step 57984 (Transportation Details - All options available - Select Not regulated - Continue - Happy Path) ====== #
+	#Given I call Shared Step 57984 (Transportation Details - All options available - Select Not regulated - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page
 	Given In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
 	And in the Transportation Details 1 page I click Continue
 
-	# ====== Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)  ====== #
-	# ====== 		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |  ====== #
-	# ====== 		| No                                       | 15                     | 15                         | Yes           |  ====== #
+	#Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)
+	#		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states | 
+	#		| No                                       | 15                     | 15                         | Yes           | 
 	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.': to: No
 	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB': to: 15
 	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule': to: 15
 	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?': to: Yes
 	And I click continue
 
-	# ====== Given I call Shared Step 57801 (Confirm VOC Summary step shown and VOC analysis date is shown - Happy Path) ====== #
+	#Given I call Shared Step 57801 (Confirm VOC Summary step shown and VOC analysis date is shown - Happy Path)
 	Given I should see the Volatile Organic Compound Summary Page
 	Given In the Volatile Organic Compound Summary Section, confirm that I see todays 'VOC Analysis Date'
 	Given In the Volatile Organic Compound Summary Section, for 'Your acknowledgement of this registration includes that your product..' set 'Yes, I Acknowledge'
 	Given in the Volatile Organic Compound Summary page I click Continue
 
-	# ====== Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path) ====== #
+	#Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Given I should see the Retailer Page
 	Given in the Retailer page I click Continue
 
-	# ====== Given I call Shared Step 60567 (Upload Product Label only) ====== #
+	#Given I call Shared Step 60567 (Upload Product Label only)
 	Then in the Additional Documents to Provide page I click Continue
 	Given I upload PDF document to Generic Private Label (all sides) field
 	Then in the Additional Documents to Provide page I click Continue
@@ -571,7 +585,7 @@ Scenario: [57986] Footwear or Leather Care Product - All other forms - (RU000746
 	And In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: Comments Field Text
 	Then in the Optional Comments page I click Continue
 
-	# ====== Given I call Shared Step 73956 (Go to Summary and verify data) with product type:  Footwear or Leather Care Product - All other forms ====== #
+	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type:  Footwear or Leather Care Product - All other forms
 	Given I should see the Data Acceptance Page
 	Given In the Data Acceptance Section, click 'Summary' button
 	Given I switch to the tab with Data Summary page

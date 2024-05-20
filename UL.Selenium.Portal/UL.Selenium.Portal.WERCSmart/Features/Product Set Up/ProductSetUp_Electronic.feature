@@ -35,7 +35,8 @@ Feature: ProductSetUp_Electronic
 #@ignore
 @TestCase:84109
 Scenario: [84109] Create Electronic - process to Completed (Answering machine, no battery included)
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	#And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And the WERCSmart homepage should load
 	And I click the Add Product icon in the Navigation Pane
