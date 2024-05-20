@@ -100,7 +100,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		{
 			Report.Info($"I upload PDF document to Provide Full Product Label (required) field");
 			var selNewProduct = new Steps_Prototype();
-			selNewProduct.UploadPDFFile("Provide Full Product Label (required)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			selNewProduct.UploadPDFFile("Please upload a PDF of the product label (full label).", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
 		[StepDefinition(@"I upload PDF document to California Air Resources Board \(CARB\) Executive Order field")]
@@ -116,7 +116,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		{
 			Report.Info($"I upload PDF document to Upload Transportation Exemption Letter or Special Permit  field");
 			var selNewProduct = new Steps_Prototype();
-			selNewProduct.UploadPDFFile("Transportation Exemption Letter or Special Permit", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			selNewProduct.UploadPDFFile("Exemption Letter", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 		[StepDefinition(@"In the Additional Documents to Provide Section, for section (.*) button View (should|should not) exists")]
 		public void InTheAdditionalDocumentsToProviveCheckButtonViewForSection(string section, string condition)

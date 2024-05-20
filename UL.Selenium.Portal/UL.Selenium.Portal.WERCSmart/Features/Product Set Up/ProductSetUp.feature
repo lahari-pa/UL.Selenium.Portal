@@ -22,6 +22,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 
 Feature:  Product set up and process to specific statuses (Suite ID: 75359)
 
@@ -217,7 +218,13 @@ Scenario: [84507] Recertification > Process recertification > Process multiple p
 
 	And I call Shared Step 29181c (Ingredients - add any chemical - For Canada Only) with name: Chlorine
 	And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
+	Given I should see the Retailer Page
+	Then In the Retailer Section, click 'Add Retailers' button
+	Then In the Select Retailers window, select retailer: Canadian Tire
+	Then In the Select Retailers window, click 'Done' button
+	Then in the Retailer page I click Continue
+
 	Given I generate a random UPC number and save as: UPC100969
 	Then I call Shared Step 76738 (Universal Product Code (UPC) - Canada - Package Type) for UPC: saved as UPC100969, container type: Paper bag, size: 2, package type: <First> and Item Number: 111-1111 then click continue
 	Then I call Shared Step 100974 (Regulatory Documents to Provide - Canada only - Upload documents > Continue)
