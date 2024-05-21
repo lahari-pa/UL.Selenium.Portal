@@ -142,31 +142,17 @@ Given I click continue
 Then In the Ingredients section, add component with component name: Water
 Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
 Then In the Ingredients Table row with component name: Water, in Ingredient Type column select option Fragrance
+Then In the Ingredients Table row with component name: Water, in Functional Purpose column delete selected option Fragrance Component
+Then In the Ingredients Table row with component name: Water, in Functional Purpose column select option Abrasive
 Then In the Ingredients Table row with component name: Water, in Trade Secret? column set checkbox to checked
 Then In the Ingredients Table row with component name: Water, in Generic Name column text input enter: 12345
 Given I click continue
 Then I confirm the pop up should be displayed with the heading: California Cleaning Right to Know
 Then In the popup with the following title: California Cleaning Right to Know I click the Close button
-
+Then In the Ingredients Table row with component name: Water, in Functional Purpose column select option Fragrance Component
 Given I click continue
 And I should see the Inventory Status, Prop 65 (US) Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139388
-Given I add the following CA Cleaning ingredients:  
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName     | IngredientType | FunctionalPurpose             | Clean | Certified |
-		| Water         | 100     | false               | false       | AQUA           | Fragrance      | Abrasive, Absorbent, Adhesive | true  | true      |
-Given I click continue
-Then I confirm I see the error message types in the popup with the following title: California Cleaning Right to Know
-| Error                                   |
-| Functional Purpose                      |
-Then I click the close button for the CA Cleaning Ingredients Popup
-Then I click the 'x' button for component number 1
-Given I click: YES in the 'Remove Component from My Ingredients' pop up
-Given I add the following CA Cleaning ingredients:  
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName     | IngredientType | FunctionalPurpose             | Clean | Certified |
-		| Water         | 100     | false               | false       | AQUA           | Fragrance      |  | true  | true      |
-Then I click continue
-And I should see the Waste Classification Data Page
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139534
 
 
 @ignore

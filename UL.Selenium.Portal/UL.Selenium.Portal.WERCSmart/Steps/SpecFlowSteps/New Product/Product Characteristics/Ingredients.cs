@@ -272,6 +272,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(ingredientRow.CellSelectExists(columnLabel), $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column select does not exist.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column select does exist.");
 			Report.IsTrue(ingredientRow.CellSelectOptionSelect(columnLabel, optionLabel), $"Failure, to select {searchType}:'{searchText}' row '{columnLabel}' column select option '{optionLabel}'.", $"Success, selected {searchType}:'{searchText}' row '{columnLabel}' column select option '{optionLabel}'.");
 		}
+		[StepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column delete selected option (.*)")]
+		public void ThenInTheIngredientsTableRowWithComponentNameWaterInFunctionalPurposeColumnDeleteSelectedOptionAbrasive(string searchType, string searchText, string columnLabel, string optionLabel)
+		{
+			string is_isnot = "is";
+			bool expected = is_isnot == "is";
+			IngredientsTable ingredientsTable = new IngredientsTable();
+			Report.IsTrue(ingredientsTable.WaitForContainerToBeVisible(), $"Failure, ingredients table does not exist.", $"Success, ingredients table exists.");
+			Report.IsTrue(!ingredientsTable.IngredientRowList.IsNullOrEmpty(), $"Failure, ingredients table is empty.", $"Success, ingredients table is not empty.");
+			IngredientsTableRow ingredientRow = this.IngredientsRowSearchTypeGet(searchType, searchText);
+			Report.IsTrue(ingredientRow.CellSelectExists(columnLabel), $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column select does not exist.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column select does exist.");
+			if (Report.IsTrue(string.Equals(ingredientRow.CellSelectValue(columnLabel), optionLabel) == expected, $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column select option '{optionLabel}' {(expected ? "is not" : "is")} selected.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column select option '{optionLabel}' {is_isnot} selected."))
+			{
+				Report.IsTrue(ingredientRow.CellDeleteOptionSelected(columnLabel, optionLabel), $"Failure, for {searchType}:'{searchText}' row '{columnLabel}' column delete selected option '{optionLabel}'.", $"Success, for {searchType}:'{searchText}' row '{columnLabel}' column delete selected option '{optionLabel}'.");
+			}
+			else
+			{
+				Report.Success($"Option {optionLabel} was not selected for column {columnLabel}");
+			}
+		}
 
 		[StepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column select confirm (.*) option (is|is not) selected")]
 		public void IngredientsTableRowSelectConfirmOptionIsIsNotSelected(string searchType, string searchText, string columnLabel, string optionLabel, string is_isnot)

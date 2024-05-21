@@ -30,7 +30,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		IWebElement CellButton(string columnTitle, string buttonLabel) => this.RowColumnCell(columnTitle).FindElement(By.XPath($".//a[text() = '{buttonLabel}']"), 1);
 		IWebElement CellErrorMessage(string columnTitle) => this.RowColumnCell(columnTitle).FindElement(By.XPath(".//p[@class='form-error']"), 1);
 		IWebElement CellTextInput(string columnTitle) => this.RowColumnCell(columnTitle).FindElement(By.XPath(".//input[@type='text']"), 1);
-		IWebElement CellSelect(string columnTitle) => this.RowColumnCell(columnTitle).FindElement(By.XPath(".//select[@class='form-control']"), 1);
+		IWebElement CellSelect(string columnTitle) => this.RowColumnCell(columnTitle).FindElement(By.XPath(".//select[contains(@class,'form-control')]"), 1);
+		IWebElement OptionDeleteIcon(string columnTitle, string option) => this.RowColumnCell(columnTitle).FindElement(By.XPath($".//li[text() = '{option}']//span"), 1);
+
 		List<IWebElement> CellSelectOptionList(string columnTitle) => this.CellSelect(columnTitle).FindElements(By.XPath(".//option"), 1).ToList();
 		#endregion
 
@@ -147,6 +149,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 			Report.Info($"Attempting to select '{columnTitle}' column cell '{optionLabel}' select option.");
 			this.CellSelect(columnTitle).Select(optionLabel);
 			return string.Equals(this.CellSelect(columnTitle).GetValue(), optionLabel, StringComparison.InvariantCultureIgnoreCase);	
+		}
+		public bool CellDeleteOptionSelected(string columnTitle, string optionLabel)
+		{
+			Report.Info($"Attempting to delete in '{columnTitle}' column cell selected option '{optionLabel}'.");
+			return this.OptionDeleteIcon(columnTitle, optionLabel).TryClick();
+			 
 		}
 
 		public string CellSelectValue(string columnTitle)
