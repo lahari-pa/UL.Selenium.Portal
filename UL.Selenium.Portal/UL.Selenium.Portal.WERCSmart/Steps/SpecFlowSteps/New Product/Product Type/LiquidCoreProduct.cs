@@ -10,7 +10,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 	[Binding, Scope (Tag = "LiquidCoreProduct")]
 	class LiquidCoreProduct
 	{
-		[StepDefinition(@"In the Liquid Core Product Section, set the option in section: 'Is there a free liquid in the Product's container that is 10ml or greater?' to: (Yes|No)")]
+		[StepDefinition(@"In the Liquid Core Product Section, set the option in section: 'Is there a free liquid in the Product's container that is 10ml or greater\?' to: (Yes|No)")]
 		public void LiquidCoreProductSelectYesOrNo(string option)
 		{
 			string section = "Is there a free liquid in the Product's container that is 10ml or greater?";

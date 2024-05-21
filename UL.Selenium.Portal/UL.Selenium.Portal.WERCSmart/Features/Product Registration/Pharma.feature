@@ -12,6 +12,7 @@
 @UPC
 @run_Pharma
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
+@LiquidCoreProduct
 
 Feature: Pharma
 
@@ -366,7 +367,11 @@ Then I click continue
 Then I click continue
 Given I fill all empty fields in the SPL Information screen
 Then I click continue
-Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
+#Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
+Given I should see the Liquid Core Product Page
+	Then In the Liquid Core Product Section, set the option in section: 'Is there a free liquid in the Product's container that is 10ml or greater?' to: No
+	Then in the Liquid Core Product page I click Continue
+
 And I set the Secondary Physical State to be: Solid
 And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
 And I set the Select the best Water Solubility description to be: Dispersible

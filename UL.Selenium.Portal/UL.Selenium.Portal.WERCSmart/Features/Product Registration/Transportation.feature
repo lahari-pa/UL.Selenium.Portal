@@ -19,8 +19,13 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
+@Ingredients@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @Ingredients
-@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
+
+
 Feature: Transportation
 
 
@@ -35,7 +40,10 @@ Background:
 @TestCase:65702
 Scenario: [65702] Transportation - Confirm Copy information from my U.S. Department of Transportation data check box shows for IATA and is NOT a required field
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I click the Add Product icon in the Navigation Pane
+Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Given in the New Product page I click Continue
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Given I generate a random UPC number and save as: UPC65702
 Then I save the product information as: TestCase65702
@@ -74,7 +82,10 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 @TestCase:65703
 Scenario: [65703] Transportation - Transportation - Confirm Copy information from my U.S. Department of Transportation data check box shows for IMDG and is NOT a required field
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I click the Add Product icon in the Navigation Pane
+Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Given in the New Product page I click Continue
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Given I generate a random UPC number and save as: UPC65703
 Then I save the product information as: TestCase65703
@@ -111,7 +122,10 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 @TestCase:65706
 Scenario: [65706] Transportation - Confirm Copy information from my U.S. Department of Transportation data check box shows for TDG and is NOT a required field
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Given I generate a random UPC number and save as: UPC65706
 Then I save the product information as: TestCase65706
@@ -148,7 +162,10 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 @TestCase:65754
 Scenario: [65754] Transportation - Copy information from my U.S. Department of Transportation data check box &  IATA data
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I click the Add Product icon in the Navigation Pane
+Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Given in the New Product page I click Continue
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Given I generate a random UPC number and save as: UPC65754
 Then I save the product information as: TestCase65754
@@ -202,7 +219,10 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 @TestCase:65940
 Scenario: [65940] Transportation - Copy information from my U.S. Department of Transportation data check box &  IMDG data
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Given I generate a random UPC number and save as: UPC65940
 Then I save the product information as: TestCase65940
@@ -256,7 +276,10 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 @TestCase:65944
 Scenario: [65944] Transportation - Copy information from my U.S. Department of Transportation data check box &  TDG data
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Water
 Given I generate a random UPC number and save as: UPC65944
 Then I save the product information as: TestCase65944
@@ -328,7 +351,10 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 Scenario: [65947] Transportation - Copy information from DOT for all modes - confirm data is shown in WPS Studio correctly
 #Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I log in with the account saved in TReVor as: ProductAccount
-And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
 Then I call Shared Step 143418 (Product Information - Pesticide= Not considered, Fertilizer=NO, SOLD=US, everything else = No - Continue)
 And I should see the Physical and Chemical Properties Page
@@ -587,11 +613,10 @@ And I click alias subsection option TDGCP and confirm data as:
 Scenario: [126286] Transportation Details DOT - UN1057 Prompts the 'For the Lighter, Provide the DOT Approval Number' Field
 
 Given I call Shared Step 67284 (Login into WERCSmart Portal - Visual Automation Account)
-#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
-	Then in the New Product page, I click Continue
-
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): LIGHTER FLUID
 Given I generate a random UPC number and save as: UPC126286
 Then I save the product information as: TestCase126286
@@ -601,8 +626,19 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 | CASNumber  | ComponentName                                                               | Percent | PublicallyDisclosed | PublicName | TradeSecret |
 | 68410-97-9 | Distillates, petroleum, light distillate hydrotreating process, low-boiling | 70      |                     |            |             |
 | 64742-49-0 | Naphtha, petroleum, hydrotreated light                                      | 30      |                     |            |             |
-Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+Given I should see the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page I click Continue
+
+#Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+Given I should see the Transportation Details 1 Page
+	Then In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Yes
+	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: DOT
+	Then In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping with limited quantity
+	Then in the Transportation Details 1 page I click Continue
+
 Then I call Shared Step 126160 (U.S. Department of Transportation (DOT) Classification - Enter UN1057 - Lighter Fluid)
 Then in page U. S. Department of Transportation (DOT) Classification I should see no errors
 And I click the page heading: U. S. Department of Transportation (DOT) Classification
