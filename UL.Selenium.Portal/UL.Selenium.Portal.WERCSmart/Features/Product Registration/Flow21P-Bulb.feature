@@ -13,6 +13,7 @@
 @UPC
 @PaymentMethods
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 
 Feature: Flow21P-Bulb
 
@@ -35,7 +36,13 @@ Given I set the Product has an Environmental Protection Agency (EPA) Registratio
 Given I set the Product has a State Registration option to: No
 And I set the Select the applicable exemption option to: Device based products - Exempt from EPA Registration
 Then in the Pesticide Details - U.S. page I click Continue
-Then I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: The Home Depot
+#Then I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: The Home Depot
+Given I should see the Retailer Page
+	Then In the Retailer Section, click 'Add Retailers' button
+	Then In the Select Retailers window, select retailer: The Home Depot
+	Then In the Select Retailers window, click 'Done' button
+	Then in the Retailer page I click Continue
+
 Then I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC209162, container type: Plastic Container and size: 18
 Then I confirm that retailer "HD" is present under the 'Destination Retailers' column in the UPC table
 Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue

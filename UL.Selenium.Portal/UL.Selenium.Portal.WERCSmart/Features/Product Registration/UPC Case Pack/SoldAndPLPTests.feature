@@ -28,6 +28,9 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 @Ingredients
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 
 Feature: Sold and PLP Tests
 
@@ -74,7 +77,13 @@ Scenario: [87957] Create Solid (Chalk) - with Case UPC - Process to Completed
 	Then in the Ingredients page I click Continue
 
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+	Given I should see the Retailer Page
+	Then In the Retailer Section, click 'Add Retailers' button
+	Then In the Select Retailers window, select retailer: Amazon
+	Then In the Select Retailers window, click 'Done' button
+	Then in the Retailer page I click Continue
+
 	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87957, container type: Paper bag and size: 2 do not click continue
 	Given I call Shared Step 87641(Enter Universal Product Code - case information) for UPC: saved as UPC879571, container type: <first> and size: 2 and Quantity: 4 and Transportation option: <first>
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
@@ -212,7 +221,13 @@ Scenario: [87969] SOLD US & Canada, PL = Yes, Gas (Compressed Gas) - With Case U
 		| Cocoa butter  | 100     | false               | false       |            |
 	And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+	#Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+	Given I should see the Transportation Details 1 Page
+	Then In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Yes
+	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: DOT
+	Then In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping with limited quantity
+	Then in the Transportation Details 1 page I click Continue
+
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	And I call Shared Step 85990 - Retailers - PLP - Select one or more retailer and add PL information - Continue
@@ -334,7 +349,13 @@ Scenario: [88199] SOLD = Canada, PL No, Create BCP (Camera with battery) -  with
 	Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 	#Given I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
 	Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
+	Given I should see the Retailer Page
+	Then In the Retailer Section, click 'Add Retailers' button
+	Then In the Select Retailers window, select retailer: Canadian Tire
+	Then In the Select Retailers window, click 'Done' button
+	Then in the Retailer page I click Continue
+
 	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC88199, container type: Paper bag and size: 2 do not click continue
     Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC881991, container type: Paper bag and size: 2 do not click continue
 	Given I Select a package type from the drop down list

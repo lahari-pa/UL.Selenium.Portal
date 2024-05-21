@@ -48,7 +48,12 @@ Scenario: [60671] Computer (Combination of Monitor & Desktop) - RU001177
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Computer (Combination of Monitor & Desktop)
 	Then I save the product information as: TestCase60671
 	Given I call Shared Step 60935 Product Information - US - Direct Ship - Private Label Only
-	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page I click Continue
+
 	#In the step below, confirm that the following text is visible on the TCLP screen, "Please answer the following question with regards to your product, not the battery contained in your product." on the TCLP screen.
 	#Given I call Shared 48367 Product Includes Battery > any type
 	Given I call Shared Step 48367 (Product Includes Battery > any type)

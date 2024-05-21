@@ -306,7 +306,8 @@ Scenario: [56926] My Data & Recipients - What are the Data Usage Tiers - tab/hea
 @ignore
 @TestCase:57261
 Scenario: [57261] Retailer Detail Page (O'Reilly) - Your Supplier ID - Add New Supplier ID - Save  - DB validation is only for local
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I call Shared Step 57264 (Go To Retail Partners - Select O'Reilly)
 	And I confirm the Retailer Details Page has loaded
 	And I confirm that there is a section labeled: Your Supplier IDs

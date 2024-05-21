@@ -19,6 +19,8 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 @Ingredients
+@LiquidCoreProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:PesticideDetailsUS
 
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
@@ -64,12 +66,22 @@ Scenario: [62775] Pesticides - Validation of Which one best describes your produ
 #Removed from regression 2023/11
 @TestCase:62849
 Scenario: [62849] Pesticide - Manually entered date not altered by refresh from Kelly
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
 	Given I save the product information as: TestCase62849
-	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
 	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I should see the Ingredients Page
@@ -148,7 +160,16 @@ Scenario: [62852] Pesticide - Product Label is required
 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
 	Given I save the product information as: TestCase62852
-	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
 	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I should see the Ingredients Page
@@ -164,8 +185,14 @@ Scenario: [62852] Pesticide - Product Label is required
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
 
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
-    Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
-    Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+    #Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
+	Given I should see the Pesticide Details - U.S. Page
+	Then In the Pesticide Details - U.S. Section, in 'Product has an Environmental Protection Agency (EPA) Registration Number' enter No
+	Then In the Pesticide Details - U.S. Section, in 'Product has a State Registration' enter No
+	Then In the Pesticide Details - U.S. Section, in 'Select the applicable exemption' enter Food Based Pesticides - Exempt from EPA Registration
+	Then in the Pesticide Details - U.S. page I click Continue
+
+	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
@@ -188,14 +215,23 @@ Scenario: [62852] Pesticide - Product Label is required
 Scenario: [56547] Pesiticde Data - EPA registration - Active Ingredient information returned from call to Kelly API
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-#	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
 	Given I save the product information as: TestCase56547
-	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
 	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I should see the Ingredients Page
@@ -228,7 +264,10 @@ Scenario: [56547] Pesiticde Data - EPA registration - Active Ingredient informat
 @TestCase:57512
 Scenario: [57512] Pesticide question shows in Product Information for Flow 2L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
 	Given I save the product information as: TestCase57512
 	And I call Shared Step 56799 (Confirm Product Information shows Pesticide question and its radio buttons)
@@ -241,7 +280,10 @@ Scenario: [57512] Pesticide question shows in Product Information for Flow 2L
 @TestCase:57516
 Scenario: [57516] Pesticide question shows in Product Information for Flow 2-LS
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Fertilizer
 	Given I save the product information as: TestCase57516
 	And I call Shared Step 56799 (Confirm Product Information shows Pesticide question and its radio buttons)
@@ -254,7 +296,10 @@ Scenario: [57516] Pesticide question shows in Product Information for Flow 2-LS
 @TestCase:57520
 Scenario: [57520] Pesticide question shows in Product Information for Flow 2-LS-B
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Animal Deterrent - Non-Aerosol
 	Given I save the product information as: TestCase57520
 	And I call Shared Step 56799 (Confirm Product Information shows Pesticide question and its radio buttons)
@@ -267,7 +312,10 @@ Scenario: [57520] Pesticide question shows in Product Information for Flow 2-LS-
 @TestCase:57522
 Scenario: [57522] Pesticide question shows in Product Information for Flow 2-S
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mulch with Pesticide
 	Given I save the product information as: TestCase57522
 	And I call Shared Step 56799 (Confirm Product Information shows Pesticide question and its radio buttons)
@@ -280,7 +328,10 @@ Scenario: [57522] Pesticide question shows in Product Information for Flow 2-S
 @TestCase:57527
 Scenario: [57527] Pesticide question shows in Product Information for Flow 6-A
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Disinfectant (Aerosol)
 	Given I save the product information as: TestCase57527
 	And I call Shared Step 56799 (Confirm Product Information shows Pesticide question and its radio buttons)
@@ -293,7 +344,10 @@ Scenario: [57527] Pesticide question shows in Product Information for Flow 6-A
 @TestCase:57529
 Scenario: [57529] Pesticide question shows in Product Information for Flow 6-AG
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide - Fogger
 	Given I save the product information as: TestCase57529
 	And I call Shared Step 56799 (Confirm Product Information shows Pesticide question and its radio buttons)
@@ -306,7 +360,10 @@ Scenario: [57529] Pesticide question shows in Product Information for Flow 6-AG
 @TestCase:57533
 Scenario: [57533] Pesticide question shows in Product Information for Flow 6-All
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide - Flea and Tick
 	Given I save the product information as: TestCase57533
 	And I call Shared Step 56799 (Confirm Product Information shows Pesticide question and its radio buttons)
@@ -319,7 +376,10 @@ Scenario: [57533] Pesticide question shows in Product Information for Flow 6-All
 @TestCase:57534
 Scenario: [57534] Pesticide question shows in Product Information for Flow 6-LS
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bathroom and Tile Cleaner - Non-aerosol
 	Given I save the product information as: TestCase57534
 	And I call Shared Step 56799 (Confirm Product Information shows Pesticide question and its radio buttons)
@@ -332,7 +392,10 @@ Scenario: [57534] Pesticide question shows in Product Information for Flow 6-LS
 @TestCase:57546
 Scenario: [57546] Pesticide question shows in Product Information for Flow 2-A
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Algicide - Aerosol
 	Given I save the product information as: TestCase57546
 	And I call Shared Step 56799 (Confirm Product Information shows Pesticide question and its radio buttons)
@@ -345,12 +408,19 @@ Scenario: [57546] Pesticide question shows in Product Information for Flow 2-A
 @TestCase:66344
 Scenario: [66344] Pesticide question shows in Product Information for 3-Pest
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wipes, Disinfecting
 	Given I save the product information as: TestCase66344
     Given I call Shared Step 105379 Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
-	Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
-    #Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	#Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
+	Given I should see the Liquid Core Product Page
+	Then In the Liquid Core Product Section, set the option in section: 'Is there a free liquid in the Product's container that is 10ml or greater?' to: No
+	Then in the Liquid Core Product page I click Continue
+
+	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I should see the Physical and Chemical Properties Page
 	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
 	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
@@ -367,12 +437,28 @@ Scenario: [66344] Pesticide question shows in Product Information for 3-Pest
 @TestCase:66345
 Scenario: [66345] Pesticide question shows in Product Information for Flow3-VOCSCA
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wood Finishing Cloth with Stain
 	Given I save the product information as: TestCase66345
-	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
-	Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
-    #Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
+	#Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
+	Given I should see the Liquid Core Product Page
+	Then In the Liquid Core Product Section, set the option in section: 'Is there a free liquid in the Product's container that is 10ml or greater?' to: No
+	Then in the Liquid Core Product page I click Continue
+
+	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I should see the Physical and Chemical Properties Page
 	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
 	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
@@ -389,7 +475,10 @@ Scenario: [66345] Pesticide question shows in Product Information for Flow3-VOCS
 @TestCase:56500
 Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
 	Given I save the product information as: TestCase56500
     Given I call Shared Step 140562 (Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, No CA Cleaning - Continue - Happy Path)
@@ -491,10 +580,22 @@ Scenario: [56500] Pesticide Data- Canada - validation of questions (updated)
 @TestCase:56541
 Scenario: [56541] Pesticide Data - United States - EPA Registered - Data returned from call to Kelly API (done)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with pest control
 	Given I save the product information as: TestCase56541
-	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
 	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I should see the Ingredients Page
@@ -571,7 +672,16 @@ Scenario: [62778] Pesticide Details - U.S. - Validation of Product has an Enviro
 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
 	Then I save the product information as: TestCase62778
-	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
 	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I should see the Ingredients Page
@@ -620,7 +730,16 @@ Scenario: [62780] Pesticide Details - U.S. - Validation of EPA Registration Numb
 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
 	Then I save the product information as: TestCase62780
-	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
 	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I should see the Ingredients Page
@@ -677,7 +796,16 @@ Scenario: [56577] Pesticide Data - EPA data - Is Kelly Data is updated when user
 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
 	Then I save the product information as: TestCase56577
-	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
 	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I should see the Ingredients Page
@@ -767,7 +895,16 @@ Scenario: [62799] Pesticide Details - State Registration - Manual entry of dates
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
 	Then I save the product information as: TestCase62799
-	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
 	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I should see the Ingredients Page
@@ -865,7 +1002,16 @@ Scenario: [56502] Pesticide Data - United States - EPA Exempt
 	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
-	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
 	And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I should see the Ingredients Page
@@ -944,7 +1090,16 @@ Scenario: [71051] Pesticide Details - EPA Registration number if edited is NOT r
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
 	Then I save the product information as: TestCase71051
-	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
 	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I should see the Ingredients Page
@@ -1020,7 +1175,16 @@ Scenario: [62848] Pesticide Details - EPA Expiration Date is refresh from Kelly 
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
 	Then I save the product information as: TestCase62848
-	Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
 	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I should see the Ingredients Page
@@ -1113,9 +1277,13 @@ Scenario: [62848] Pesticide Details - EPA Expiration Date is refresh from Kelly 
 #Removed from regression 2023/11
 @TestCase:121120
 Scenario:[121120] Pesticide - New Radio Icon Option
-    Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC121120
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with pest control
 	Then I save the product information as: TestCase121120
 	Given I call Shared Step 105379 Product Information - US, Pesticide No, No OSHA, No DSV, No PL, No GNFR Without Child question
@@ -1164,7 +1332,10 @@ Scenario: [132756] Canadian Province Pesticide Options
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I generate a random UPC number and save as: RandomUPC
 	Given I delete all products with UPC Number: RandomUPC
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
 	Given I save the product information as: TestCase
 	Given I call Shared Step 140562 (Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, No CA Cleaning - Continue - Happy Path)

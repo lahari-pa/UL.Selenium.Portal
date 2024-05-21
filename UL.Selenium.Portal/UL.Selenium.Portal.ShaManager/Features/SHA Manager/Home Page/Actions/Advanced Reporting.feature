@@ -27,13 +27,19 @@
 @MyMessages
 @Portal_ShaManager
 @run_Advanced_Reporting
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 Feature: Advanced Reporting
 
 @ScenarioId:1513
 Scenario: [105329] PM Monthly Status Report - Target
 	Given I generate a random UPC number and save as: UPC105329
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Shampoo (Liquid)
 	Then I save the product information as: TestCase105329
 	And I call Shared Step 62678 (Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
@@ -147,7 +153,10 @@ Scenario: [78452] Retailer Products in Recertification Report
 Scenario: [87182] 3rd Party Formula Use in Registrations
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
@@ -961,7 +970,10 @@ Scenario:[113706] UPC Data Expansion: UPC Name Required on new product registrat
 	Given I generate a random UPC number and save as: UPC113706
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I delete all products with UPC Number: saved as UPC113706
-	Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: Product113706
 	And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
@@ -994,7 +1006,10 @@ Scenario:[114216] TR (Transparency Value) - Display as Percentage
 	Given I generate a random UPC number and save as: UPC114216
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I delete all products with UPC Number: saved as UPC114216
-	Then I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: Product114216
 	And I call Shared Step 85284 - Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue
@@ -1035,10 +1050,12 @@ Scenario:[114216] TR (Transparency Value) - Display as Percentage
 
 Scenario: [118221] UPC Details for Registration - Specific Retailer - DOT Packing Group Data
 	Given I log in with the account saved in TReVor as: ProductAccount
-	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
-		And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I should see the Physical and Chemical Properties Page
+	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+	And I should see the Physical and Chemical Properties Page
 	Then I save the product information as: TestCase65947
 	And The following options should be displayed for section: Primary Physical State
 		| Option |

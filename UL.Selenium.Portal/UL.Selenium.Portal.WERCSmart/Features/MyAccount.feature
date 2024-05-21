@@ -37,7 +37,8 @@ Scenario: [61796] Account User Name in Header
 
 @TestCase:63514
 Scenario: [63514] Add and Deactivate a New User from the User Grid
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I click on My Account
 	Then I create a new email address
@@ -85,7 +86,8 @@ Scenario: [65887] Pagination
 
 @TestCase:85258
 Scenario: [85258] My Account - Stewardship Numbers - table display validation
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then the WERCSmart homepage should load
 	Given I call Shared Step 62676 (Go To My Account)
 	And In the My Account page I navigate to the Company Information page
@@ -299,7 +301,8 @@ Scenario: [53694] - User Role - Reset Password
 # Created by Saikiran Chittampally
 	@TestCase:219311
 Scenario: [219311] Add User: Error Messaging Checks
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then the WERCSmart homepage should load
 	Given I click on My Account
 	When I click on Add new User link

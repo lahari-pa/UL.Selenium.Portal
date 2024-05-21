@@ -205,5 +205,47 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 			string section = "Primary Physical State";
 			new Steps_ProductPrototype().InSectionConfirmOptionIsIsNotSelected(section, option, is_isnot);
 		}
+
+		[StepDefinition(@"In the Physical and Chemical Properties Section, the confirm section: 'Secondary Physical State' (is|is not) displayed")]
+		public void ConfirmSecondaryPhysicalStateIsIsNotDisplayed(string is_isnot)
+		{
+			string section = "Secondary Physical State";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
+
+		[StepDefinition(@"In the Physical and Chemical Properties Section, the confirm section: 'When mixed with an equal amount of water, will this produce a solution with a pH <=2 or a pH >=12.5\?' (is|is not) displayed")]
+		public void ConfirmWhenMixedWithWaterPhIsIsNotDisplayed(string is_isnot)
+		{
+			string section = "When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
+
+		[StepDefinition(@"In the Physical and Chemical Properties Section, the confirm section: 'Relative Density' (is|is not) displayed")]
+		public void ConfirmRelativeDensityIsIsNotDisplayed(string is_isnot)
+		{
+			string section = "Relative Density";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
+
+		[StepDefinition(@"In the Physical and Chemical Properties Section, the confirm section: 'pH' (is|is not) displayed")]
+		public void ConfirmpHIsIsNotDisplayed(string is_isnot)
+		{
+			string section = "pH";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
+
+		[StepDefinition(@"In the Physical and Chemical Properties Section, the confirm section: 'Boiling Point \(in Celsius\)' (is|is not) displayed")]
+		public void ConfirmBoilingPointIsIsNotDisplayed(string is_isnot)
+		{
+			string section = "Boiling Point (in Celsius)";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
+
+		[StepDefinition(@"In the Physical and Chemical Properties Section, the confirm section: 'Flash Point \(in Celsius\)' (is|is not) displayed")]
+		public void ConfirmFlashPointIsIsNotDisplayed(string is_isnot)
+		{
+			string section = "Flash Point (in Celsius)";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
 	}
 }

@@ -21,6 +21,9 @@
 @Ingredients
 @PhysicalAndChemicalProp
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 
 Feature: AccHasFullStwdData
 
@@ -41,7 +44,10 @@ Scenario: [86187] Create a new simple product SOLD = US and Canada, PL = Yes, Ca
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC86187
 	Given I delete all products with UPC Number: saved as UPC86187
-	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	#And I In the shared step below select Chalk as your product type
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase86187
@@ -127,7 +133,10 @@ Scenario: [78864] Create a new simple product SOLD = US and Canada, PL = No, (Ch
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC78864
 	Given I delete all products with UPC Number: saved as UPC78864
-	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase78864
 	And I call Shared Step 62678 (Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
@@ -197,7 +206,10 @@ Scenario: [78864] Create a new simple product SOLD = US and Canada, PL = No, (Ch
 Scenario: [85286] Create a new product SOLD = Canada, Private Label = Yes, NR product - Submission and process thru to completed
 	#Given I call Shared Step 85328 - Login to WERCSmart - Canada - Address (Yes), Packaging (Yes), Stewardship (Full)]
 	Given I log in with the account saved in TReVor as: ProductAccount
-	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	#And I In the shared step below use Crayon as your product type
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Crayon
 	Then I save the product information as: TestCase85286
@@ -258,7 +270,10 @@ Scenario: [78865] Create a new product SOLD = Canada only , PL = No, NR product 
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC78865
 	Given I delete all products with UPC Number: saved as UPC78865
-	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase78865
 	And I call Shared Step 78879 - Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP (NO), GNFR (NO), Continue
@@ -323,7 +338,10 @@ Scenario: [86067] Create a new simple product SOLD = US and Canada, PL = Yes, (C
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC86067
 	Given I delete all products with UPC Number: saved as UPC86067
-	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase86067
 	And I call Shared Step 85284 - Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue
@@ -392,7 +410,10 @@ Scenario: [86067] Create a new simple product SOLD = US and Canada, PL = Yes, (C
 Scenario: [86171] Create a new product SOLD = Canada only , PL = No, CT Retailer product - submit thru to Completed status (HGHS only)
 	Given I generate a random UPC number and save as: UPC86171
 	Given I log in with the account saved in TReVor as: ProductAccount
-	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase86171
 	And I call Shared Step 62678 (Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
@@ -409,7 +430,13 @@ Scenario: [86171] Create a new product SOLD = Canada only , PL = No, CT Retailer
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
 	And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
+	Given I should see the Retailer Page
+	Then In the Retailer Section, click 'Add Retailers' button
+	Then In the Select Retailers window, select retailer: Canadian Tire
+	Then In the Select Retailers window, click 'Done' button
+	Then in the Retailer page I click Continue
+
 	And I call Shared Step 75702 - UPC - Add UPC, Container type, Size and Package type (no retailer data needed) - Continue for UPC: saved as UPC86171, container type: Metal Container and size: 40
 	And I call Shared Step 78868 - Regulatory Documents to Provide - US and Canada - Request authoring for both
 	Then in the Additional Documents to Provide page I click Continue
@@ -454,7 +481,10 @@ Scenario: [86171] Create a new product SOLD = Canada only , PL = No, CT Retailer
 Scenario: [86170] Create a new product SOLD = Canada, Private Label = Yes, CT retailer product - Submission and process thru to completed
 	Given I generate a random UPC number and save as: UPC86170
 	Given I login into the WERCSmart Portal - Canada has all data account
-	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Crayon
 	Then I save the product information as: TestCase86170
 	And I call Shared Step 85730 - Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
@@ -514,7 +544,10 @@ Scenario: [86170] Create a new product SOLD = Canada, Private Label = Yes, CT re
 Scenario: [86395] Create a new simple product SOLD = US and Canada, PL = No, Canadian Tire retailer product (Chalk) and submit thru to Completed status
 	Given I generate a random UPC number and save as: UPC86395
 	Given I login into the WERCSmart Portal - Canada has all data account
-	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase86395
 	And I call Shared Step 62678 (Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
@@ -531,7 +564,13 @@ Scenario: [86395] Create a new simple product SOLD = US and Canada, PL = No, Can
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
 	And I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
+	Given I should see the Retailer Page
+	Then In the Retailer Section, click 'Add Retailers' button
+	Then In the Select Retailers window, select retailer: Canadian Tire
+	Then In the Select Retailers window, click 'Done' button
+	Then in the Retailer page I click Continue
+
 	And I call Shared Step 75702 - UPC - Add UPC, Container type, Size and Package type (no retailer data needed) - Continue for UPC: saved as UPC86395, container type: Metal Container and size: 40
 	And I call Shared Step 78868 - Regulatory Documents to Provide - US and Canada - Request authoring for both
 	Then in the Additional Documents to Provide page I click Continue
@@ -571,9 +610,13 @@ Scenario: [86395] Create a new simple product SOLD = US and Canada, PL = No, Can
 @ignore
 @TestCase:120866
 Scenario:[120866] UPC Retailer and Feed
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC120866
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase120866
 	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)

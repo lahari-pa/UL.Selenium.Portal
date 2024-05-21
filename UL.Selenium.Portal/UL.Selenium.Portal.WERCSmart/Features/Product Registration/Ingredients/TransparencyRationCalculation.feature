@@ -35,7 +35,8 @@ Scenario: [80854] Ingredients - Transparency Ratio - Formulated product with 3rd
 	#Given I call Shared Step 80821 - Create a 3rd party product - with Tier 2 approval Specific components for Transparency ratio testing and save as: TestCase80854Component
 	Given I call Shared Step 80821 - Create a 3rd party product - with Tier 2 approval Specific components for Transparency ratio testing using SHA Account: SHAQAAuto27 and save as: TestCase80854Component
 	And I navigate to the landing page
-	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	#Use the shared step below to confirm the Transparency ratio for the third party product you are working with
 	And I call Shared Step 80780 - My Products - Filter for product - View - Note transparency percentage - close summary for product saved as: TestCase80854Component
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))

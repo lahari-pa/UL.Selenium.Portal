@@ -24,6 +24,7 @@
 @StepsPrototype
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails2
+@LiquidCoreProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ECOLOGO
 
 Feature: Flash Point, testing method and Transportation (Suite ID: 74116)

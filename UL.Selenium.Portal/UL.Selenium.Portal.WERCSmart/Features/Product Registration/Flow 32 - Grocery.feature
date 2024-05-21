@@ -117,7 +117,7 @@ And In the International Marine (IMDG) Classification Section, set the option in
 And In the International Marine (IMDG) Classification Section, set the option in section: 'Packing Group': to: None
 Given in the International Marine (IMDG) Classification page I click Continue
 
-	# ====== Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens ====== #
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I should see the Retailer Page
 	Given In the Retailer Section, click 'Add Retailers' button
 	Given In the Select Retailers window, select retailer: Walgreens
@@ -224,7 +224,7 @@ And in the Ingredients page I click Continue
 
 #Given I Confirm the following error message is not visible " ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding."
 
-# ====== Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65) ====== #
+#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 Given I should see the Inventory Status, Prop 65 (US) Page
 Given In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
 Given In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
@@ -245,7 +245,7 @@ And In the International Marine (IMDG) Classification Section, set the option in
 And In the International Marine (IMDG) Classification Section, set the option in section: 'Packing Group': to: None
 Given in the International Marine (IMDG) Classification page I click Continue
 
-	# ====== Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens ====== #
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I should see the Retailer Page
 	Given In the Retailer Section, click 'Add Retailers' button
 	Given In the Select Retailers window, select retailer: Walgreens
