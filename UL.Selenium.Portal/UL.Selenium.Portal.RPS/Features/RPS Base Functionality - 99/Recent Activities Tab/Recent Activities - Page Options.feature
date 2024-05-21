@@ -19,9 +19,9 @@ Feature: Recent Activities - Page Options
 
 @ScenarioId:6982
 Scenario: [98463] Base Functionality - Recent Activities - Page options - (Last Page) >| 
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
 Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then In the recent activities page, I click the label 'Start Date'
 Then I confirm the Recent Activities tab has loaded
@@ -31,22 +31,31 @@ And In the recent activities Page, In the Products table footer I check that the
 
 @ScenarioId:6984
 Scenario: [98464] Base Functionality - Recent Activities - Page options - (Previous Page) <<
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
-Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
-Then I confirm the Recent Activities tab has loaded
-Then In the recent activities page, I click the label 'Start Date'
-Then I confirm the Recent Activities tab has loaded
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
+ Then I confirm the active tab is: <LandingTab>
+ Then I click Accept all Cookies
+Given I click the main tab: Recent Activities
+Then I confirm the Recent Activities tab has loaded  
 And In the recent activities Page, In the Products table footer I click on the Next Page Button
 Then In the recent activities Page, In the Products table footer I check that the current page is: 2
 Then In the recent activities Page, In the Products table footer I click on the Previous Page Button
 And In the recent activities Page, In the Products table footer I check that the current page is: 1
 
+	Examples:
+	| Scenario Name                                                                       | Retailer | LandingTab               |
+	| [#98464a]Base Functionality - Recent Activities - Page options - (Previous Page) << | RPS.LW   | LWLandingtab             |
+	| [#98464b]Base Functionality - Recent Activities - Page options - (Previous Page) << | RPS.CV   | Program Health           |
+#	| [#98464c]Base Functionality - Recent Activities - Page options - (Previous Page) << | RPS.HD   | Program Health           |
+	| [#98464d]Base Functionality - Recent Activities - Page options - (Previous Page) << | RPS.SF   | Program Health           |
+#	| [#98464e]Base Functionality - Recent Activities - Page options - (Previous Page) << | RPS.WM   | Program Health           |
+#	| [#98464f]Base Functionality - Recent Activities - Page options - (Previous Page) << | RPS.PX   | Program Health           |
+ 
+
 @ScenarioId:6985
 Scenario: [98465] Base Functionality - Recent Activities - Page options (First Page)  ||<
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
 Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then In the recent activities page, I click the label 'Start Date'
 Then I confirm the Recent Activities tab has loaded
@@ -58,20 +67,29 @@ And In the recent activities Page, In the Products table footer I check that the
 
 @ScenarioId:6986
 Scenario: [98466] Base Functionality - Recent Activities - Page options (Next Page) >>
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
-Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
-Then I confirm the Recent Activities tab has loaded
-Then In the recent activities page, I click the label 'Start Date'
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
+ Then I confirm the active tab is: <LandingTab>
+ Then I click Accept all Cookies
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 And In the recent activities Page, In the Products table footer I click on the Next Page Button
 Then In the recent activities Page, In the Products table footer I check that the current page is: 2
 
+	Examples:
+	| Scenario Name                                                                  | Retailer | LandingTab               |
+	| [#98466a]Base Functionality - Recent Activities - Page options (Next Page) >> | RPS.LW   | LWLandingtab             |
+	| [#98466b]Base Functionality - Recent Activities - Page options (Next Page) >> | RPS.CV   | Program Health           |
+#	| [#98466c]Base Functionality - Recent Activities - Page options (Next Page) >> | RPS.HD   | Program Health           |
+	| [#98466d]Base Functionality - Recent Activities - Page options (Next Page) >> | RPS.SF   | Program Health           |
+#	| [#98466e]Base Functionality - Recent Activities - Page options (Next Page) >> | RPS.WM   | Program Health           |
+#	| [#98466f]Base Functionality - Recent Activities - Page options (Next Page) >> | RPS.PX   | Program Health           |
+ 
+
 @ScenarioId:6988
 Scenario: [199959] Base Functionality - Recent Activities - Page options - Change number of products per page with reset
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
 Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then In the recent activities page, I click the label 'Start Date'
 Then I confirm the Recent Activities tab has loaded
@@ -91,9 +109,9 @@ Then In the recent activities Page, In the Products table footer I check that th
 
 @ScenarioId:6990
 Scenario: [98462] Base Functionality - Recent Activities - Page options - change page number
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
 Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then In the recent activities page, I click the label 'Start Date'
 Then I confirm the Recent Activities tab has loaded
@@ -101,9 +119,9 @@ Then In the recent activities Page, In the Products table footer I enter the pag
 
 @ScenarioId:6999
 Scenario: [98468] Base Functionality - Recent Activities - Page options - changing page number returns correct results
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
 Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then In the recent activities page, I click the label 'Start Date'
 Then I confirm the Recent Activities tab has loaded

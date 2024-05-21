@@ -13,11 +13,77 @@
 
 Feature: Dashboard Tab
 
+
+
 @ScenarioId:6631
-Scenario: [106525] Base Functionality - Dashboard page - layout
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Scenario: [169081] Dashboard - Supplier Subscription Status Chart 
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CV
 Then I confirm the Home tab has loaded
 Given I click the tab: Dashboard
+And I confirm the active tab is: Dashboard
+Then I confirm the Dashboard tab has loaded
+Then I confirm the following Widgets are displayed:
+| Widget                       |
+| Supplier Subscription Status |
+Then I Confirm that the Graph for the widget: Supplier Subscription Status is a: Pie Chart
+Then In the Supplier Subscription Status widget, I confirm that a legend is not shown
+Then I call Shared Step 70474 (Verify Chart functionality) for widget: Supplier Subscription Status
+Then I call Shared Step 70484 (Chart Drill-down Export) for widget: Supplier Subscription Status
+And I call Shared Step 106194 (RPS Sign out)
+
+Scenario: [169083] Dashboard - Print functionality works with one chart
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CV
+Then I confirm the Home tab has loaded
+Given I click the tab: Dashboard
+Then I confirm the Dashboard tab has loaded
+Then I call Shared Step 106605 (Dashboard - Remove Widget) for widget: RCRA by RU Category
+Then I call Shared Step 106605 (Dashboard - Remove Widget) for widget: RU Category by Supplier
+Then I call Shared Step 106605 (Dashboard - Remove Widget) for widget: RU Category by RU 
+Then I call Shared Step 106605 (Dashboard - Remove Widget) for widget: Product Recertification Status
+Then I call Shared Step 106605 (Dashboard - Remove Widget) for widget: Product Status
+Then I call Shared Step 106605 (Dashboard - Remove Widget) for widget: Product Hold Status
+Then I call Shared Step 106605 (Dashboard - Remove Widget) for widget: Supplier Subscription Status
+Then I click the hamburger icon for widget: Supplier Subscription Status
+Then In the hamburger menu for the widget: Supplier Subscription Status I click the following option: Print chart
+#Issue with automating the print dialogue
+#Print Check: Last chart click the hamburger icon and click print chart. **Confirom print dialogue is open then close.**
+Then I call Shared Step 54484 (Dashboard - Gauge - Reset Dashboard - confrim page refreshes)
+Then In the Dashboard page, I confirm all widgets are shown correctly in their original order:
+| Widget                         |
+| Generic Bucket Code by RU      |
+| RCRA by RU Category            |
+| RU Category by Supplier        |
+| RU Category by RU              |
+| Product Recertification Status |
+| Product Status                 |
+| Product Hold Status            |
+| Supplier Subscription Status   |
+Given I call Shared Step 106194 (RPS Sign out)
+
+@ScenarioId:6631
+Scenario: [169082] Dashboard - Dashboard - Supplier Subscription Status Chart data 
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CV
+Then I confirm the Home tab has loaded
+Given I click the tab: Dashboard
+And I confirm the active tab is: Dashboard
+Then I confirm the Dashboard tab has loaded
+Then I confirm the following Widgets are displayed:
+| Widget                       |
+| Supplier Subscription Status |
+Then I Confirm that the Graph for the widget: Supplier Subscription Status is a: Pie Chart
+Then I select a piece of the pie chart for the widget: Supplier Subscription Status
+
+
+
+
+
+
+
+@ScenarioId:6631
+Scenario: [106525] Base Functionality - Dashboard page - layout
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
+Then I confirm the Home tab has loaded
+Given I click the main tab: Dashboard
 And I confirm the active tab is: Dashboard
 Then I confirm the Dashboard tab has loaded
 Given I confirm the top menu bar is displayed with the logged in username
@@ -37,9 +103,9 @@ Then I confirm there is no page footer shown
 
 @ScenarioId:6632
 Scenario: [70322] Base Functionality - Dashboard - Product Status Chart - ticket open download file missing labels - not being fixed in Azure release
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
 Then I confirm the Home tab has loaded
-Given I click the tab: Dashboard
+Given I click the main tab: Dashboard
 Then I confirm the Dashboard tab has loaded
 Then I confirm the following Widgets are displayed:
 | Widget         |
@@ -53,9 +119,9 @@ And I call Shared Step 106194 (RPS Sign out)
 
 @ScenarioId:6634
 Scenario: [70323] Base Functionality - Dashboard - Product Hold Status Chart - Server error on export
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
 Then I confirm the Home tab has loaded
-Given I click the tab: Dashboard
+Given I click the main tab: Dashboard
 Then I confirm the Dashboard tab has loaded
 Then I confirm the following Widgets are displayed:
 | Widget         |
@@ -69,9 +135,9 @@ And I call Shared Step 106194 (RPS Sign out)
 
 @ScenarioId:6635
 Scenario: [70324] Base Functionality - Dashboard - Supplier Subscription Status Chart - has open ticket not in scope for Azure
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
 Then I confirm the Home tab has loaded
-Given I click the tab: Dashboard
+Given I click the main tab: Dashboard
 Then I confirm the Dashboard tab has loaded
 Then I confirm the following Widgets are displayed:
 | Widget                       |
@@ -84,9 +150,9 @@ And I call Shared Step 106194 (RPS Sign out)
 
 @ScenarioId:6641
 Scenario: [72760] Dashboard - Refresh all widget - has open ticket - not in scope for Azure
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
 Then I confirm the Home tab has loaded
-Given I click the tab: Dashboard
+Given I click the main tab: Dashboard
 Then I confirm the Dashboard tab has loaded
 Then I confirm the following Widgets are displayed:
 | Widget                         |
@@ -134,15 +200,15 @@ Given I call Shared Step 106194 (RPS Sign out)
 @ScenarioId:6649
 @tfs_design
 Scenario: [73078] Base Functionality - Dashboard - Supplier Subscription Status Chart data
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
 Then I confirm the Home tab has loaded
-Given I click the tab: Dashboard
+Given I click the main tab: Dashboard
 Then I confirm the Dashboard tab has loaded
 Then I confirm the following Widgets are displayed:
 | Widget                         |
 | Supplier Subscription Status   |
 Then For the Supplier Subscription Status widget, I save the current titles as: SupplierSubscriptionStatusTitles1 and check that when I click on the section: Subscribed Suppliers that the supplier list view is seen.
-Then I Check that for the widget Supplier Subscription Status, the Suppliers List shows the Following headings:
+Then I Check that for the widget Supplier Subscription Status, the Supplier List shows the Following headings:
 | Headers  |
 | Supplier |
 | Contact  |
@@ -154,9 +220,9 @@ Given I call Shared Step 106194 (RPS Sign out)
 
 @ScenarioId:6662
 Scenario: [73311] Base Functionality - Dashboard - Print functionality works with one chart
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
 Then I confirm the Home tab has loaded
-Given I click the tab: Dashboard
+Given I click the main tab: Dashboard
 Then I confirm the Dashboard tab has loaded
 Then I call Shared Step 106605 (Dashboard - Remove Widget) for widget: RCRA by RU Category
 Then I call Shared Step 106605 (Dashboard - Remove Widget) for widget: RU Category by Supplier
@@ -165,7 +231,6 @@ Then I call Shared Step 106605 (Dashboard - Remove Widget) for widget: Product R
 Then I call Shared Step 106605 (Dashboard - Remove Widget) for widget: Product Status
 Then I call Shared Step 106605 (Dashboard - Remove Widget) for widget: Product Hold Status
 Then I call Shared Step 106605 (Dashboard - Remove Widget) for widget: Supplier Subscription Status
-#Issue with automating the print dialogue
 #Print Check: Last chart click the hamburger icon and click print chart. **Confirom print dialogue is open then close.**
 Then I call Shared Step 54484 (Dashboard - Gauge - Reset Dashboard - confrim page refreshes)
 Then In the Dashboard page, I confirm all widgets are shown correctly in their original order:
@@ -182,9 +247,9 @@ Given I call Shared Step 106194 (RPS Sign out)
 
 @ScenarioId:6664
 Scenario: [74214] Base Functionality - Dashboard - Able to resize chart when there is only one
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
 Then I confirm the Home tab has loaded
-Given I click the tab: Dashboard
+Given I click the main tab: Dashboard
 Then I confirm the Dashboard tab has loaded
 Then I call Shared Step 106605 (Dashboard - Remove Widget) for widget: RCRA by RU Category
 Then I call Shared Step 106605 (Dashboard - Remove Widget) for widget: RU Category by Supplier
@@ -198,9 +263,9 @@ Then I call Shared Step 106605 (Dashboard - Remove Widget) for widget: Supplier 
 
 @ScenarioId:6665
 Scenario: [104896] Base Functionality - Dashboard - Dashboard - Export - Shows data for chart/graph shown
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
 Then I confirm the Home tab has loaded
-Given I click the tab: Dashboard
+Given I click the main tab: Dashboard
 Then I confirm the Dashboard tab has loaded
 Then I confirm the following Widgets are displayed:
 | Widget                    |
@@ -209,9 +274,9 @@ Then I call Shared Step 70484 (Chart Drill-down Export) for widget: Generic Buck
 
 @ScenarioId:6666
 Scenario: [72574] Base Functionality - Dashboard - URL does not show # - has IE11 staging ticket
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
 Then I confirm the Home tab has loaded
-Given I click the tab: Dashboard
+Given I click the main tab: Dashboard
 Then I confirm the Dashboard tab has loaded
 Then I confirm the following Widgets are displayed:
 | Widget                    |
@@ -226,9 +291,9 @@ Given I call Shared Step 106194 (RPS Sign out)
 
 @ScenarioId:6667
 Scenario: [106590] Removing Widgets from the Dashboard and re-adding - has open ticket - not in scope for Azure
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
 Then I confirm the Home tab has loaded
-Given I click the tab: Dashboard
+Given I click the main tab: Dashboard
 Then I confirm the Dashboard tab has loaded
 Then I confirm the following Widgets are displayed:
 | Widget                         |
@@ -261,9 +326,9 @@ Given I call Shared Step 106194 (RPS Sign out)
 
 @ScenarioId:6668
 Scenario: [106592] Resetting the Dashboard
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
 Then I confirm the Home tab has loaded
-Given I click the tab: Dashboard
+Given I click the main tab: Dashboard
 Then I confirm the Dashboard tab has loaded
 Then I confirm the following Widgets are displayed:
 | Widget                         |
@@ -309,9 +374,9 @@ Given I call Shared Step 106194 (RPS Sign out)
 
 @ScenarioId:6669
 Scenario: [70317] Generic Bucket Code by RU Chart
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
 Then I confirm the Home tab has loaded
-Given I click the tab: Dashboard
+Given I click the main tab: Dashboard
 Then I confirm the Dashboard tab has loaded
 Then I confirm the following Widgets are displayed:
 | Widget                         |
@@ -324,9 +389,9 @@ And I call Shared Step 106194 (RPS Sign out)
 
 @ScenarioId:6670
 Scenario: [70319] Base Functionality - Dashboard - RU Category by Supplier Chart - IE11 & Chrome  502 error and very poor performance
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
 Then I confirm the Home tab has loaded
-Given I click the tab: Dashboard
+Given I click the main tab: Dashboard
 Then I confirm the Dashboard tab has loaded
 Then I confirm the following Widgets are displayed:
 | Widget                  |
@@ -339,9 +404,9 @@ And I call Shared Step 106194 (RPS Sign out)
 
 @ScenarioId:6671
 Scenario: [70320] Base Functionality - Dashboard - RU Category by RU Chart - ie11 & Chrome 502 error
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
 Then I confirm the Home tab has loaded
-Given I click the tab: Dashboard
+Given I click the main tab: Dashboard
 Then I confirm the Dashboard tab has loaded
 Then I confirm the following Widgets are displayed:
 | Widget            |
@@ -354,9 +419,9 @@ And I call Shared Step 106194 (RPS Sign out)
 
 @ScenarioId:6672
 Scenario: [70321] Base Functionality - Dashboard - Product Recertification Status Chart
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
 Then I confirm the Home tab has loaded
-Given I click the tab: Dashboard
+Given I click the main tab: Dashboard
 Then I confirm the Dashboard tab has loaded
 Then I confirm the following Widgets are displayed:
 | Widget                         |
@@ -367,24 +432,12 @@ Then I call Shared Step 70474 (Verify Chart functionality) for widget: Product R
 Then I call Shared Step 70484 (Chart Drill-down Export) for widget: Product Recertification Status
 Then I call Shared Step 108597 (Widget data view - Contact Supplier - email verification) for widget: Product Recertification Status
 And I call Shared Step 106194 (RPS Sign out)
-
-@tfs_design
-@ScenarioId:11232
-Scenario: [105031] Base Functionality - Dashboard - Product Hold Status displays active reason - needs thought if SHA does not show all active holds
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
-Then I confirm the Home tab has loaded
-Given I click the tab: Dashboard
-Then I confirm the Dashboard tab has loaded
-Then I confirm the following Widgets are displayed:
-| Widget              |
-| Product Hold Status |
-#This test involves studio/sha, leaving for now to foucs on Automation of RPS elements. 
-
+ 
 @ScenarioId:6673
 Scenario: [109212] Base Functionality - Dashboard - Product Status Chart - Drilled down - Contact Supplier
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
 Then I confirm the Home tab has loaded
-Given I click the tab: Dashboard
+Given I click the main tab: Dashboard
 Then I confirm the Dashboard tab has loaded
 Then I confirm the following Widgets are displayed:
 | Widget         |
@@ -405,15 +458,15 @@ Given I call Shared Step 106194 (RPS Sign out)
 
 @ScenarioId:6675
 Scenario: [109214] Base Functionality - Dashboard - Supplier Subscription Status chart - Drilled down - Contact
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
 Then I confirm the Home tab has loaded
-Given I click the tab: Dashboard
+Given I click the main tab: Dashboard
 Then I confirm the Dashboard tab has loaded
 Then I confirm the following Widgets are displayed:
 | Widget                       |
 | Supplier Subscription Status |
 Then For the Supplier Subscription Status widget, I save the current titles as: SupplierSubscriptionStatusTitles1 and check that when I click on the section: Subscribed Suppliers that the supplier list view is seen.
-Then I Check that for the widget Supplier Subscription Status, the Suppliers List shows the Following headings:
+Then I Check that for the widget Supplier Subscription Status, the Supplier List shows the Following headings:
 | Headers  |
 | Supplier |
 | Contact  |
@@ -424,9 +477,9 @@ Then END OF AUTOMATION: TEST CASE NEEDS MANUAL COMPLETION. Message: Shared Step 
 
 @ScenarioId:6676
 Scenario: [109206] Base Functionality - Dashboard - Generic Bucket Code by RU Chart - Drilled down - PRODUCT INFORMATION
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
 Then I confirm the Home tab has loaded
-Given I click the tab: Dashboard
+Given I click the main tab: Dashboard
 Then I confirm the Dashboard tab has loaded
 Then I confirm the following Widgets are displayed:
 | Widget                         |
@@ -444,9 +497,9 @@ Then I Close the Product Information Popup
 
 @ScenarioId:6677
 Scenario: [109207] Base Functionality - Dashboard - RCRA by RU Category Chart - Drilled down - PRODUCT INFORMATION
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
 Then I confirm the Home tab has loaded
-Given I click the tab: Dashboard
+Given I click the main tab: Dashboard
 Then I confirm the Dashboard tab has loaded
 Then I confirm the following Widgets are displayed:
 | Widget                         |
@@ -463,9 +516,9 @@ Then I call Shared Step 109172 (Product information pop up - Only 1 section expa
 
 @ScenarioId:6678
 Scenario: [109209] Base Functionality - Dashboard - RU Category by Supplier Chart - Drilled down - PRODUCT INFORMATION
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
 Then I confirm the Home tab has loaded
-Given I click the tab: Dashboard
+Given I click the main tab: Dashboard
 Then I confirm the Dashboard tab has loaded
 Then I confirm the following Widgets are displayed:
 | Widget                  |
@@ -482,9 +535,9 @@ Then I call Shared Step 109172 (Product information pop up - Only 1 section expa
 
 @ScenarioId:9728
 Scenario: [109210] Base Functionality - Dashboard - RU Category by RU Chart - Drilled down - PRODUCT INFORMATION
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
 Then I confirm the Home tab has loaded
-Given I click the tab: Dashboard
+Given I click the main tab: Dashboard
 Then I confirm the Dashboard tab has loaded
 Then I confirm the following Widgets are displayed:
 | Widget            |
@@ -501,9 +554,9 @@ Then I call Shared Step 109172 (Product information pop up - Only 1 section expa
 
 @ScenarioId:6680
 Scenario: [109211] Base Functionality - Dashboard- Product Recertification Status Chart - Drilled down - Contact Supplier
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
 Then I confirm the Home tab has loaded
-Given I click the tab: Dashboard
+Given I click the main tab: Dashboard
 Then I confirm the Dashboard tab has loaded
 Then I confirm the following Widgets are displayed:
 | Widget         |

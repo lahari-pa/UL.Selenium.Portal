@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Castle.Core.Internal;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
+using UL.Selenium.Portal.RPS.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using static UL.Selenium.Portal.RPS.Selenium_Classes.RecentActivities;
 
@@ -17,17 +17,17 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
     public class ProductLookUp : SeleniumBaseObject
     {
         #region Page Objects
-        protected override By ContainerElementLocator => By.XPath("//div[@class='container-fluid nopadding']");
+        protected override By ContainerElementLocator => By.XPath("//div[contains(@class, 'container-fluid') or contains(@class,'body-container')]");
 
         private IWebElement SearchBox => FindElement(By.XPath(".//input[@name='lookup']"), 2);
-
-        private IWebElement ProductTable => this.containerElement.FindElement(By.XPath(".//table[@id='tblPLookUpResult']"), 1);
+        private IWebElement ProductLookupSearchBox => FindElement(By.XPath("//input[contains(@data-bind, 'textInput: searchText')]"), 2);
+        private IWebElement ProductTable => ContainerElement.FindElement(By.XPath(".//table[@id='tblPLookUpResult' or @id='dataGrid']"), 1);
         private List<IWebElement> ProductRows => this.ProductTable?.FindElements(By.XPath(".//tbody//tr[not (@class='jqgfirstrow')]"), 1).ToList();
 
 
 
 
-        //Below is taken from recent activities class, will need xpath updates in many areas. Will update when needed. 
+        //Below is taken from recent activities class, will need xpath updates in many areas. Will update when needed.
 
 
 
@@ -37,13 +37,13 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
         private List<IWebElement> OnlyexpandedProductRows => this.ProductTable?.FindElements(By.XPath(".//tbody//tr[not (@id='1') and not (@class='ui-jqgrid-labels') and not (@class='jqgfirstrow') and (contains(@class,'ui-subgrid ui-sg-expanded'))]//div[@class='ui-jqgrid-bdiv']"), 1).ToList();
 
 
-        private IWebElement PageTitle => this.containerElement.FindElement(By.XPath(".//h2"), 2);
+        private IWebElement PageTitle => ContainerElement.FindElement(By.XPath(".//h2"), 2);
 
-        public List<IWebElement> ProductLookUpButtons => this.containerElement.FindElements(By.XPath(".//ul[@class='list-inline']//li"), 2).ToList();
+        public List<IWebElement> ProductLookUpButtons => ContainerElement.FindElements(By.XPath(".//div[@class='col']//button[not(contains(@data-bind,'showSaveReport'))]"), 2).ToList();
 
-        private IWebElement BreadCrumbArea => this.containerElement.FindElement(By.XPath(".//div[@id='pLookUp']/div[2]"), 2);
+        private IWebElement BreadCrumbArea => ContainerElement.FindElement(By.XPath(".//div[@class='filter-breadcrumbs']"), 2);
 
-        private IWebElement TableHeadingRow => this.containerElement.FindElement(By.XPath(".//div[@id='gview_tblNewProducts']//div[@class='ui-jqgrid-hdiv']//tr[@class='ui-jqgrid-labels']"), 2);
+        private IWebElement TableHeadingRow => ContainerElement.FindElement(By.XPath(".//div[@id='gview_tblNewProducts']//div[@class='ui-jqgrid-hdiv']//tr[@class='ui-jqgrid-labels']"), 2);
 
         private List<IWebElement> AllTableHeadings => this.TableHeadingRow.FindElements(By.XPath(".//th[@role='columnheader' and not(contains(@style,'display: none'))]"), 2).ToList();
 
@@ -52,24 +52,26 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
         private List<IWebElement> RowSubHeadings(IWebElement row) => row.FindElements(By.XPath(".//preceding-sibling::div[@class='ui-jqgrid-hdiv']//th[@role='columnheader' and not(contains(@style,'display: none'))]"), 2).ToList();
 
         private IWebElement RowSubHeadingLine(IWebElement row) => row.FindElement(By.XPath(".//preceding-sibling::div[@class='ui-jqgrid-hdiv']"), 2);
-        private IWebElement ProductsTableFooter => this.containerElement.FindElement(By.XPath(".//div[@id='tblNewProductsPager']"), 2);
+        private IWebElement ProductsTableFooter => ContainerElement.FindElement(By.XPath(".//div[@id='tblNewProductsPager']"), 2);
+        private IWebElement PageFooter => ContainerElement.FindElement(By.XPath(".//tfoot"), 2);
         //
-        private IWebElement startDateTag => this.containerElement.FindElement(By.XPath(".//div[@class='col-sm-12']//button[@id='filter_startDate']"), 2);
-        private IWebElement endDateTag => this.containerElement.FindElement(By.XPath(".//div[@class='col-sm-12']//button[@id='filter_endDate']"), 2);
+        private IWebElement startDateTag => ContainerElement.FindElement(By.XPath(".//div[@class='col-sm-12']//button[@id='filter_startDate']"), 2);
+        private IWebElement endDateTag => ContainerElement.FindElement(By.XPath(".//div[@class='col-sm-12']//button[@id='filter_endDate']"), 2);
 
         private IWebElement FindGivenBreadcrumb(string breadcrumb) => this.containerElement.FindElement(By.XPath($".//div[@class='col-sm-12']//button[@id='filter_{breadcrumb}']"), 2);
-        private IWebElement resetDateTag => this.containerElement.FindElement(By.XPath(".//div[@class='col-sm-12']//button[@id='filter_reset']"), 2);
-        private List<IWebElement> AllFilterTags => this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-12']//button[contains(@id,'filter_') and @style='display: inline-block;']"), 2).ToList();
+        private IWebElement resetDateTag => ContainerElement.FindElement(By.XPath(".//div[@class='col-sm-12']//button[@id='filter_reset']"), 2);
+        private List<IWebElement> AllFilterTags => ContainerElement.FindElements(By.XPath(".//div[@class='col-sm-12']//button[contains(@id,'filter_') and @style='display: inline-block;']"), 2).ToList();
 
-        private List<IWebElement> AllOptionButtons => this.containerElement.FindElements(By.XPath(".//ul[@class='list-inline col-md-6']//li"), 2).ToList();
+        private List<IWebElement> AllOptionButtons => ContainerElement.FindElements(By.XPath(".//ul[@class='list-inline col-md-6']//li"), 2).ToList();
 
-        private IWebElement OptionButtonsSection => this.containerElement.FindElement(By.XPath(".//ul[@class='list-inline']"), 2); //Updated PL
+        private IWebElement OptionButtonsSection => ContainerElement.FindElement(By.XPath(".//div[contains(@class,'table-page')]"), 2); //Updated PL
 
-        private IWebElement MoreFiltersOptionButton => this.OptionButtonsSection.FindElement(By.XPath(".//li//button[contains(text(),'More Filters')]"), 2); //Updated PL
-        private IWebElement ResetOptionButton => this.OptionButtonsSection.FindElement(By.XPath(".//li//button[contains(text(),'Select Columns')]"), 2); //Updated PL
-        private IWebElement ExportOptionButton => this.OptionButtonsSection.FindElement(By.XPath(".//li//button[contains(text(),'Reset')]"), 2); //Updated PL
+        private IWebElement MoreFiltersOptionButton => this.ContainerElement.FindElement(By.XPath(".//button[normalize-space(.) = 'More Filters']"), 2); //Updated PL
+        private IWebElement ResetOptionButton => this.ContainerElement.FindElement(By.XPath(".//button[contains(@data-bind,'click: reset')]"), 2); //Updated PL
+        private IWebElement SelectColumnsOptionnButton => this.FindElement(By.XPath(".//button[normalize-space()='Select Columns']"), 2); //Updated PL
+        private IWebElement ExportOptionButton => this.OptionButtonsSection.FindElement(By.XPath(".//div//button[contains(@data-bind,'exportToExcel')]"), 2); //Updated PL
         private IWebElement StatusOptionButton => this.OptionButtonsSection.FindElement(By.XPath(".//li//button[contains(text(),'Export to Excel')]"), 2); //Updated PL
-        private IWebElement CursorTypeElement => this.containerElement.FindElement(By.XPath(".//div[@class='ui-jqgrid-hdiv']"), 2);
+        private IWebElement CursorTypeElement => ContainerElement.FindElement(By.XPath(".//div[@class='ui-jqgrid-hdiv']"), 2);
 
         private IWebElement LastPageButton => ProductsTableFooter.FindElement(By.XPath(".//td[@id='last_tblNewProductsPager' and @title='Last Page']//span[@class='glyphicon glyphicon-step-forward']"), 2);
         private IWebElement NextPageButton => ProductsTableFooter.FindElement(By.XPath(".//td[@id='next_tblNewProductsPager' and @title='Next Page']//span[@class='glyphicon glyphicon-forward']"), 2);
@@ -80,7 +82,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         private IWebElement ItemsPerPageSelector => ProductsTableFooter.FindElement(By.XPath(".//select[@class='ui-pg-selbox form-control']"), 2);
 
-        //private IWebElement GridScrollBar => this.containerElement.FindElement(By.XPath("."), 2);
+        //private IWebElement GridScrollBar => ContainerElement.FindElement(By.XPath("."), 2);
 
         //private IWebElement ScrollUpArrow => this.GridScrollBar.FindElement(By.XPath(".//*[name()='g'][3]"), 2);
 
@@ -93,12 +95,14 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         public bool WaitProductsGridSpinnerFinish()
         {
-            if (this.containerElement.WaitUntilElementVisible(By.XPath(".//div[@id='load_tblPLookUpResult']"), 5) != null)
+            if (ContainerElement.WaitUntilElementVisible(By.XPath(".//div[@id='load_tblPLookUpResult']"), 5) != null)
             {
-                return this.containerElement.WaitUntilElementInvisible(By.XPath(".//div[@id='load_tblPLookUpResult']"), 30);
+                return ContainerElement.WaitUntilElementInvisible(By.XPath(".//div[@id='load_tblPLookUpResult']"), 30);
             }
             return true;
         }
+
+        public bool ProductTableIsPresent() => this.ProductTable.NotNullAndDisplayed();
 
         public void EnterSearchBoxText(string searchText) => this.SearchBox.EnterText(searchText);
         public void EnterSearchBoxTextAndpressEnterKey(string searchText)
@@ -131,6 +135,80 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             return productNumber.Text;
 
         }
+        public string GetSearchedProductInGridByID()
+        {
+            IWebElement productNumber = this.ProductRows.FirstOrDefault()?.FindElement(By.XPath($".//mark"), 1);
+            if (productNumber == null)
+            {
+                Report.Error("The productNumber element was null");
+                return null;
+            }
+            return productNumber.Text;
+
+        }
+
+        public string GetSearchedProductInGridByName()
+        {
+            IWebElement productName = this.ProductRows.FirstOrDefault()?.FindElement(By.XPath($".//td[@aria-describedby='dataGrid_PRODINFO']"), 1);
+            if (productName == null)
+            {
+                Report.Error("The productName element was null");
+                return null;
+            }
+            return productName.Text;
+
+        }
+
+        public List<string> GetSearchedProductInGridByUPCOrWPSIDOrSupplierName()
+        {
+
+            List<IWebElement> productInformation = this.FindElements(By.XPath(".//td[@aria-describedby='dataGrid_PRODINFO']"), 2).ToList();
+            List<string> productInformationStrings = new List<string>();
+            foreach (var number in productInformation)
+            {
+                string upcNumber = number.Text;
+                productInformationStrings.Add(upcNumber);
+            }
+            return productInformationStrings;
+
+
+        }
+
+        public bool SearchMatchWithUPC(string savedAs)
+        {
+            List<string> foundProducts = this.GetSearchedProductInGridByUPCOrWPSIDOrSupplierName();
+            foreach (var product in foundProducts)
+            {
+                product.Contains(savedAs);
+
+            }
+            return true;
+        }
+
+        public string GetSearchedProductInGridByUPC()
+        {
+            IWebElement upcNumber = this.ProductRows.FirstOrDefault()?.FindElement(By.XPath($".//mark"), 1);
+            if (upcNumber == null)
+            {
+                Report.Error("The UPC Number element was null");
+                return null;
+            }
+            return upcNumber.Text;
+
+        }
+
+        public string GetSearchedProductInGridByWPSID()
+        {
+            IWebElement wpsidNumber = this.ProductRows.FirstOrDefault()?.FindElement(By.XPath($".//mark"), 1);
+            if (wpsidNumber == null)
+            {
+                Report.Error("The WPSID Number element was null");
+                return null;
+            }
+            return wpsidNumber.Text;
+
+        }
+
         public bool ClickActionForFirstResultInGrid(string action)
         {
             try
@@ -142,11 +220,11 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             {
                 return false;
             }
-        }       
+        }
 
         public bool WaitForProductsGridToLoad(int timeout = 30)
         {
-            return (this.containerElement.WaitUntilElementVisible(By.XPath(".//table[@id='tblPLookUpResult']"), timeout)) != null;
+            return (ContainerElement.WaitUntilElementVisible(By.XPath(".//table[@id='tblPLookUpResult']"), timeout)) != null;
         }
 
 
@@ -166,7 +244,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         public string GetRecentActivitiesBackgroundColor()
         {
-            IWebElement backgroundEl = this.containerElement.FindElement(By.XPath(".//ancestor::body"));
+            IWebElement backgroundEl = ContainerElement.FindElement(By.XPath(".//ancestor::body"));
             if (backgroundEl == null)
             {
                 Report.Error("The Background El was null");
@@ -178,7 +256,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         public string GetRecentActivitiesTextColor()
         {
-            IWebElement backgroundEl = this.containerElement;
+            IWebElement backgroundEl = ContainerElement;
             if (backgroundEl == null)
             {
                 Report.Error("The Background El was null");
@@ -191,13 +269,13 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         public bool SearchBoxPresent()
         {
-            IWebElement boxEl = this.SearchBox;
+            IWebElement boxEl = this.ProductLookupSearchBox;
             return boxEl != null;
         }
 
         public string SearchBoxPlaceHolderText()
         {
-            string placeholderText = this.SearchBox.GetAttribute("placeholder");
+            string placeholderText = this.ProductLookupSearchBox.GetAttribute("placeholder");
             Report.Info($"Place holder text was: {placeholderText}");
             return placeholderText;
         }
@@ -234,8 +312,6 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             return el.Text.Contains(label);
         }
 
-
-
         public bool ConfirmBreadCrumbAreaContainsStartDatelabel()
         {
             var el = this.BreadCrumbArea;
@@ -268,14 +344,14 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         public string GetHeadingsRowBackgroundColor()
         {
-            IWebElement backgroundEl = this.TableHeadingRow;
-            if (backgroundEl == null)
+        IWebElement TablesHeadingRow = this.FindElement(By.XPath(".//div[@class = 'ui-jqgrid-hdiv ui-state-default ui-corner-top']//tr[@class='ui-jqgrid-labels']"), 2);
+            if (TablesHeadingRow == null)
             {
                 Report.Error("The Background El was null");
                 return null;
             }
 
-            string rbgaCssValue = backgroundEl.GetCssValue("background-color");
+            string rbgaCssValue = TablesHeadingRow.GetCssValue("background-color");
             return rbgaCssValue;
         }
 
@@ -316,12 +392,29 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             var headings = this.NamedTableHeadings;
             List<string> headingStrings = new List<string>();
             foreach (var heading in headings)
-            {
+            {                
                 string currentHeading = heading.Text;
                 string currentHeadingTrimmed = currentHeading.Trim();
                 headingStrings.Add(currentHeadingTrimmed);
             }
             return headingStrings;
+        }
+        public List<string> GetColumnsShownNameListInProductTable()
+        {
+
+            IList<IWebElement> ColumnsShown = this.containerElement.FindElements(By.XPath(".//th[@role='columnheader' and not(contains(@style,'display: none')) and not(@id='tblNewProducts_subgrid')]"), 2);
+            List<string> columnsShownNames = new List<string>();
+            
+            
+            foreach (IWebElement el in ColumnsShown)
+            {
+           
+                columnsShownNames.Add(el.Text.Trim());
+                
+            }
+            columnsShownNames.RemoveAll(t => t == "Actions" || t == "Product Info");
+            return columnsShownNames;
+
         }
 
         public bool SubGridColumnContainsRightFacingArrow()
@@ -520,7 +613,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
         }
         public bool ProductsGridFooterPresent()
         {
-            var footerEl = this.ProductsTableFooter;
+            var footerEl = this.PageFooter;
             return footerEl != null;
         }
 
@@ -1185,11 +1278,11 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                 Report.Error($"Did not find any product rows");
                 return null;
             }
-            string column = "ID";
+            string column = "PRODINFO";
             int i = 1;
             foreach (var row in rows)
             {
-                IWebElement wantedColumn = row.FindElement(By.XPath($".//td[contains(@aria-describedby,'tblNewProducts_{column}')]"), 2);
+                IWebElement wantedColumn = row.FindElement(By.XPath($".//td[contains(@aria-describedby,'dataGrid_PRODINFO')]/span[2]"), 2);
                 if (wantedColumn == null)
                 {
                     Report.Error($"Did not find the element for Column: {column} for row: {i}");
@@ -1385,6 +1478,23 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             return this.ResetOptionButton.TryClick();
         }
 
+        public bool ClickSelectColumnsButton()
+        {
+            if (this.SelectColumnsOptionnButton == null)
+            {
+                return false;
+            }
+
+            return this.SelectColumnsOptionnButton.TryClick();
+        }
+
+        public bool SelectColumnsButtonGraphicExists()
+        {
+            Report.Info($"Attempting to confirm graphic exists on Select Columns Button exists.");
+            IWebElement SelectColumnsButtonGraphic = this.SelectColumnsOptionnButton.FindElement(By.XPath(".//*[local-name()='svg'][contains(@class,'three-columns')]"), 1);
+            return SelectColumnsButtonGraphic != null;
+        }
+
         public string GetExpectedProductsRange()
         {
             int itemsPerPage = this.GetCurrentItemsPerPage();
@@ -1506,179 +1616,662 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             currentPageEl.SendKeys(Keys.Enter);
         }
 
-        #endregion
-
-
-
-        public class MoreFiltersPopup : SeleniumBaseObject
+        public bool CheckAllProductsDoesContainGivenOptionInActionsColumn(string value)
         {
-            #region Page Objects
-            protected override By ContainerElementLocator => By.XPath("//div[@id='moreFiltersModal']//div[@class='modal-dialog']");
-
-            public List<IWebElement> MoreFiltersOptionsElements() => this.containerElement.FindElements(By.XPath(".//a[@class='list-group-item']"), 2).ToList();
-
-            private IWebElement GivenLabelElementInput(string labelText) => this.containerElement.FindElement(By.XPath($".//div[@class='form-group' and .//label[text()='{labelText}']]//div"), 2);
-
-            private IWebElement ParameterSearchBox => this.containerElement.FindElement(By.XPath(".//div[@class='modal-dialog']//div[@class='form-group']//input"), 2);
-
-            public List<IWebElement> CurrentFilterParameters => this.containerElement.FindElements(By.XPath(".//ul//li"), 2).ToList();
-            public IWebElement OKButton => this.containerElement.FindElement(By.XPath(".//div[@class='modal-footer lgrey-b']//button[text()='OK']"), 2);
-
-
-
-
-            #endregion
-
-            #region Methods
-
-            public List<string> GetMoreFiltersOptionsText()
+            List<IWebElement> rows = this.ProductRows;
+            if (rows.IsNullOrEmpty())
             {
-                List<string> optionTexts = new List<string>();
-                var els = this.MoreFiltersOptionsElements();
-                foreach (var el in els)
+                Report.Failure("There was no product rows found in the grid");
+                return false;
+            }
+            bool textNotFound = false;
+            int i = 1;
+            foreach (var item in rows)
+            {
+                IWebElement wantedColum = item.FindElement(By.XPath(".//td[@aria-describedby='dataGrid_ACTIONS']']"), 2);
+                List<IWebElement> actionsOptionsEl = wantedColum.FindElements(By.XPath(".//a"), 2).ToList();
+                bool optionNotFound = false;
+                foreach (var option in actionsOptionsEl)
                 {
-                    optionTexts.Add(el.Text);
+                    Report.Info($"Current Option Text Is: {option.Text}");
+
+                    if (option.Text != value)
+                    {
+                        Report.Info($"The Text: '{value}' was not found for row: {i}");
+                        optionNotFound = true;
+
+                    }
                 }
-                return optionTexts;
-            }
-
-            public bool ClickFilterOption(string label)
-            {
-                //issue if flashpoint (Symbol)??
-                var els = this.MoreFiltersOptionsElements();
-                return els.First(x => x.Text == label).TryClick();
-            }
-
-            public bool FilterFieldExists(string filterLabel)
-            {
-                IWebElement el = this.GivenLabelElementInput(filterLabel);
-                return el != null;
-            }
-
-            public bool EnterParameterForSearch(string value)
-            {
-                var el = this.ParameterSearchBox;
-                el.JsEnterText(value);
-                Delay.Seconds(5);
-                return el.GetAttribute("value") == value;
-            }
-
-            public bool ClickFirstParameterOption()
-            {
-                var els = this.CurrentFilterParameters;
-                var wantedEl = els.First();
-                var boxEl = wantedEl.FindElement(By.XPath(".//input"), 2);
-                if (boxEl != null)
+                if (optionNotFound == true)
                 {
-                    return boxEl.TryClick();
+                    Report.Info($"The text: '{value}' was not found in row: {i}");
+                    textNotFound = true;
                 }
-                else
-                {
-                    return wantedEl.TryClick();
-                }
+                i++;
 
             }
+            return textNotFound;
+        }
 
-            public bool ClickGivenParameterOption(string value)
+        public bool CheckAllProductsDoNotContainGivenOptionInActionsColumn(string value)
+        {
+            List<IWebElement> rows = this.ProductRows;
+            if (rows.IsNullOrEmpty())
             {
-               // var els = this.CurrentFilterParameters;
-                //List<string> testList = new List<string>();
-                //foreach(var el in els)
-                //{
-                //    testList.Add(el.Text);
-                //    if()
-                //    el.Text.Substring(0, el.Text.IndexOf("("));
-                //}              
-                var els = this.GetCurrentFilterParameters();
-                List<string> testList = new List<string>();
-                foreach (var el in els)
-                {
-                    testList.Add(el.Text); 
-                }
-                Report.Info("");
-                var wantedEl = els.First(x => x.Text == value);
-
-
-
-                IWebElement boxEl = wantedEl.FindElement(By.XPath(".//input"), 2);
-                if (boxEl!=null)
-                {
-                    return boxEl.TryClick();
-                }
-                else
-                {
-                    return wantedEl.TryClick();
-                }
-
-
-
-                
+                Report.Failure("There was no product rows found in the grid");
+                return false;
             }
-            public bool OKButtonIsPresent()
+            bool textNotFound = true;
+            int i = 1;
+            foreach (var item in rows)
             {
-                IWebElement el = this.OKButton;
-                return el != null;
-            }
-
-            public bool ClickOKButton()
-            {
-                return this.OKButton.TryClick();
-            }
-
-
-            public List<IWebElement> GetCurrentFilterParameters()
-            {
-
-                // string xPathTest = @"(//ul//li//span[@data-bind='text: translatedValue'] | //ul//li)";
-                //List<IWebElement> elList = SeleniumBrowser.WebBrowser.FindElements(By.XPath(xPathTest), 10).ToList();
-
-                List<IWebElement> parameterElList = this.containerElement.FindElements(By.XPath(".//ul//li//span[@data-bind='text: translatedValue']"), 4).ToList();
-                if(parameterElList.IsNullOrEmpty())
+                IWebElement wantedColum = item.FindElement(By.XPath(".//td[@aria-describedby='dataGrid_ACTIONS']"), 2);
+                List<IWebElement> actionsOptionsEl = wantedColum.FindElements(By.XPath(".//a"), 2).ToList();
+                bool optionNotFound = true;
+                foreach (var option in actionsOptionsEl)
                 {
-                    parameterElList= this.containerElement.FindElements(By.XPath(".//ul//li"), 4).ToList();
-                }               
-                return parameterElList;
+                    Report.Info($"Current Option Text Is: {option.Text}");
 
-            }
+                    if (option.Text == value)
+                    {
+                        Report.Info($"The Text: '{value}' was found for row: {i}");
+                        optionNotFound = false;
 
-            public bool WaitForParametersToShow()
-            {
-                Report.Info("Starting to wait for Parameters List to Show");
-                int x = 0;
-                var parametesElList = this.GetCurrentFilterParameters();
-                while(parametesElList.IsNullOrEmpty()&&x<15)
-                {
-                    parametesElList= this.GetCurrentFilterParameters();
-                    x++;
-                    Delay.Seconds(5);
-
+                    }
                 }
-
-                if(parametesElList.IsNullOrEmpty())
+                if (optionNotFound == false)
                 {
-                    Report.Info($"The parameters list was not showing options");
-                    return false;
+                    Report.Info($"The text: '{value}' was found in row: {i}");
+                    textNotFound = false;
                 }
-                else
-                {
-                    Report.Info($"The parameters list was showing options");
-                    return true;
-                }
-               
+                i++;
 
             }
+            return textNotFound;
+        }
 
+        public bool IConfirmTheColumnNameISelectedAndSavedAs_IsDisplayedNextToTheActionsColumn(string columnName)
+        {
+            IWebElement columnNextToActionsColumn = this.FindElement(By.XPath(".//div[@class='ui-jqgrid-hdiv ui-state-default ui-corner-top']//th[@id='dataGrid_ACTIONS']/preceding-sibling::th[1]//span[@title]"), 2);
+            string test = columnNextToActionsColumn.Text;
+            return columnNextToActionsColumn.Text.Trim() == columnName.Trim();
+        }
 
+        public bool ConfirmTableGraphicIsNextToSelectColumnsButton()
+        {
+            IWebElement tableIcon = this.FindElement(By.XPath(".//button[@data-bind='click: selectCols']//*[@class='bi bi-layout-three-columns']"), 2);
+            return tableIcon != null;
+        }
+        public bool ConfirmColumnSelectorsPopupIsOrIsNotDisplayed()
+        {
+            IWebElement SelectorPopup = this.ContainerElement.FindElement(By.XPath(".//div[@class='modal fade columnsSelectorDialog show']"), 2);
+            return SelectorPopup != null;
+        }
 
-            #endregion
+        public bool IConfirmTheColumnSelectorPopupDisplaysTheFollowingTitleColumnsSelector(string popupTitle)
+        {
+            IWebElement headerTitle = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@class='modal fade columnsSelectorDialog show']//div[@class='modal-header']//h5[@data-bind='text: title']"), 2);
+            return headerTitle.Text.Trim() == popupTitle.Trim();
+        }
 
+        public bool ConfirmColumnSelectorsPopupDisplaysAnXIcon()
+        {
+            IWebElement XIcon = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@class='modal fade columnsSelectorDialog show']//span[text()='×']"), 2);
+            return XIcon != null;
+        }
+        public bool IConfirmTheColumnSelectorPopupDisplaysAColumnSelectorList()
+        {
+            IWebElement columnSelectorList = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@class='modal fade columnsSelectorDialog show']//div[@class='modal-body']//ul[@id='sortableColumnSelector']"), 2);
+            return columnSelectorList != null;
         }
 
 
+        public bool IConfirmTheColumnSelectorPopupDisplaysOrMoreEntries()
+        {
+            IList<IWebElement> columnSelectorList = this.ContainerElement.FindElements(By.XPath(".//div[@class='modal fade columnsSelectorDialog show']//div[@class='modal-body']//ul[@id='sortableColumnSelector']//li"), 2).ToList();
+            return columnSelectorList.Count() > 0;
+        }
+        public bool IConfirmTheColumnSelectorPopupDisplaysAHamburgerIconNextToEachEntry()
+        {
+            IList<IWebElement> columnSelectorList = this.ContainerElement.FindElements(By.XPath(".//div[@class='modal fade columnsSelectorDialog show']//div[@class='modal-body']//ul[@id='sortableColumnSelector']//li"), 2).ToList();
+            foreach (IWebElement el in columnSelectorList)
+            {
+                IWebElement columnSelectorItem = el.FindElement(By.XPath(".//span[@class='px-2 py-0 d-inline handle ui-sortable-handle']"), 2);
+                if (columnSelectorItem == null)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        public bool IConfirmTheColumnSelectorPopupDisplaysAnXIconNextToEachEntry()
+        {
+            IList<IWebElement> columnSelectorList = this.ContainerElement.FindElements(By.XPath(".//div[@class='modal fade columnsSelectorDialog show']//div[@class='modal-body']//ul[@id='sortableColumnSelector']//li"), 2).ToList();
+            foreach (IWebElement el in columnSelectorList)
+            {
+                IWebElement columnSelectorItem = el.FindElement(By.XPath(".//i[@class='fa fa-remove fa-lg']"), 2);
+                if (columnSelectorItem == null)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        public bool IConfirmTheColumnSelectorPopupDisplaysAnAddColumnButtonAtTheBottom()
+        {
+            IWebElement columnSelectorList = this.ContainerElement.FindElement(By.XPath(".//div[@class='modal fade columnsSelectorDialog show']//div[@class='modal-body']//a[@data-bind='click: $data.add.bind($data)']"), 2);
+            return columnSelectorList != null;
+        }
+        public bool IConfirmTheColumnSelectorPopupDisplaysTheFollowingButtons(Table table)
+        {
+            IList<IWebElement> columnSelectorList = this.ContainerElement.FindElements(By.XPath(".//div[@class='modal fade columnsSelectorDialog show']//div[@class='modal-footer']//div[@data-bind='with: model']//button"), 2).ToList();
+            foreach (IWebElement el in columnSelectorList)
+            {
+                bool buttonFound = false;
+
+                foreach (TableRow row in table.Rows)
+                {
+
+                    if (el.Text == row["Button"])
+                    {
+                        buttonFound = true;
+                        break;
+                    }
+
+                }
+
+                if (buttonFound == false)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public bool InTheColumnSelectorPopupIClickClose()
+        {
+            IWebElement closeButton = this.ContainerElement.FindElement(By.XPath("//div[@class='modal fade columnsSelectorDialog show']//div[@class='modal-header']//button[@data-dismiss='modal']"), 2);
+            return closeButton.TryClick();
+        }
+        public bool IConfirmISeeANewRowAtTheBottomOfTheColumnSelectorPopup()
+        {
+            IWebElement emptyColumn = this.containerElement.FindElement(By.XPath(".//span[@class='select2-selection__placeholder']"), 2);
+            return emptyColumn != null;
+        }
+        public bool InTheProductLookUpPageIClickExportButton()
+        {
+            return ExportOptionButton.TryClick();
+        }
+
+        public IWebElement GetRowByWPSID(string ID)
+        {
+            List<IWebElement> rows = this.ProductRows;
+            if (rows.IsNullOrEmpty())
+            {
+                Report.Error($"Did not find any product rows");
+                return null;
+            }
+            bool textPresent = true;
+            int i = 1;
+            foreach (var item in rows)
+            {
+                string column = "PRODINFO";
+                IWebElement wantedColumn = item.FindElement(By.XPath($".//td[contains(@aria-describedby,'dataGrid_PRODINFO')]/span[2]')]"), 2);
+                var wantedColumnData = wantedColumn.GetTextContent();
+                wantedColumnData = wantedColumnData.Substring(6, wantedColumnData.Length-7);
+                if (wantedColumnData == null)
+                {
+                    Report.Error($"Did not find the element for Column: {column}");
+                    return null;
+                }
+                if (wantedColumnData.Contains(ID))
+                {
+                    Report.Info($"Found the row with expected ID");
+                    return item;
+                }
+            }
+            Report.Info("Did not find the row with the expected ID");
+            return null;
+        }
+
+        public string GetColumValueByWPSID(string column, string iD)
+        {
+            if (column == "Prod Info")
+            {
+                column = column.Replace(" ", "");
+            }
+            var wantedRow = this.GetRowByWPSID(iD);
+            IWebElement wantedColumn = wantedRow.FindElement(By.XPath($".//td[contains(@aria-describedby,'dataGrid_{column}')]"), 2);
+            return wantedColumn.Text;
+        }
+
+        public class ProductLookupData
+        {
+
+            public string ProductNumber { get; set; }
+
+            public string ProductName { get; set; }
+
+            public string SupplierName { get; set; }
+
+            public string RecommendedUsageCategoryCode { get; set; }
+
+            public string RecommendedUse { get; set; }
+
+
+            public string UPC { get; set; }
+
+            public override bool Equals(object obj)
+            {
+                var other = obj as ProductLookupData;
+
+                if (other == null)
+                    return false;
+
+                if (ProductNumber != other.ProductNumber || ProductName != other.ProductName || SupplierName != other.SupplierName || RecommendedUsageCategoryCode != other.RecommendedUsageCategoryCode || RecommendedUse != other.RecommendedUse || UPC != other.UPC)
+                {
+
+                    Report.Info("The two sets of recent  product data did not match");
+                    return false;
+                }
+
+                return true;
+            }
+
+        }
+
+        public ProductLookupData GetProductLookupDataByID(string iD)
+        {
+            ProductLookupData currentRecentData = new ProductLookupData();
+            currentRecentData.ProductNumber = iD;
+            currentRecentData.ProductName = this.GetColumValueByWPSID("Prod Info", iD);
+            currentRecentData.SupplierName = this.GetColumValueByWPSID("Prod Info", iD);
+            currentRecentData.UPC = this.GetColumValueByWPSID("Prod Info", iD);
+            currentRecentData.RecommendedUsageCategoryCode = this.GetColumValueByWPSID("Recommended Usage Category Code", iD);
+            currentRecentData.RecommendedUse = this.GetColumValueByWPSID("Recommended Use", iD);
+            return currentRecentData;
+
+        }
+
+        public bool InTheProductLookUpSearchProduct(string text)
+        {
+            IWebElement searchField = this.FindElement(By.XPath("//input[contains(@data-bind,'textInput: searchText')]"), 2);
+             return searchField.TryEnterText(text);
+        }
+        public bool MainPageBodyDisplayed()
+        {
+            IWebElement mainPageBody = this.FindElement(By.XPath("//div[contains(@id,'supertable_main')]"), 2);
+            return mainPageBody.Displayed;
+        }
+
+        public string TakeNoteOfUPCNumber(string savedAs)
+        {
+            IWebElement upcNumber = this.FindElement(By.XPath("//span[contains(text(), 'UPC')]"), 1);
+            string number = upcNumber.Text;
+            number = number.Substring(4);
+            return number;
+        }
+
+        public string TakeNoteOfWPSIDNumber(string savedAs)
+        {
+            IWebElement wpsidNumber = this.FindElement(By.XPath("//span[contains(text(), 'WPSID')]"), 1);
+            string number = wpsidNumber.Text;
+            number = number.Substring(7);
+            return number;
+        }
+
+        public string TakeNoteOfFirstFourDigitsOfUPCNumber(string savedAs)
+        {
+            IWebElement upcNumber = this.FindElement(By.XPath("//span[contains(text(), 'UPC')]"), 1);
+            string number = upcNumber.Text;
+            number = number.Substring(4,8);
+            return number;
+        }
+
+        public string TakeNoteOfProductName(string savedAs)
+        {
+            IWebElement productName = this.FindElement(By.XPath("//table[@id ='dataGrid']//tr[@role ='row']//td/strong"), 1);
+            string name = productName.Text;
+            return name;
+        }
+
+        public void InTheProductLookUpSearchProductAndClickEnter(string text)
+        {
+            IWebElement searchField = this.FindElement(By.XPath("//input[contains(@data-bind,'textInput: searchText')]"), 2);
+            searchField.TryEnterText(text);
+            searchField.SendKeys(Keys.Enter);
+        }
+        public bool GetSearchFieldValue(string expectedText)
+        {
+            IWebElement searchField = this.FindElement(By.XPath("//input[contains(@data-bind,'textInput: searchText')]"), 2);
+            string a = searchField.GetAttribute("value");
+            Report.Info(a);
+
+            return searchField.GetAttribute("value") == expectedText;
+        }
+
+
+        public bool InTheProductLookUpIConfirmTrendGraphicsShowFigure()
+        {
+            IWebElement card = this.FindElement(By.XPath($"//div[@class='card']"), 2);
+            string cardText = card.Text;
+            return cardText.Contains("%");
+
+        }
+
+        
+
+        #endregion
+
+        public class ColumnSelectorPopup : SeleniumBaseObject
+        {
+            protected override By ContainerElementLocator => By.XPath("//div[contains(@class, 'modal fade')][contains(@style,'display: block')]");
+
+            public bool IClickTheAddColumnButtonInTheColumnSelectorPopup()
+            {
+                IWebElement addColumn = this.ContainerElement.FindElement(By.XPath(".//div[@class='modal-body']//a[@data-bind='click: $data.add.bind($data)']"), 2);
+                return addColumn.TryClick();
+            }
+            public bool ISelectTheFirstOptionInTheNarrowedListInTheColumnSelectorPopup()
+            {
+                IList<IWebElement> optionsList = this.ContainerElement.FindElements(By.XPath("//ul[@class='select2-results__options']//li"), 2).ToList();
+                return optionsList[0].TryClick();
+            }
+
+            public bool IConfirmISeeTheBreadcrumbsAreaUnderTheSearchField()
+            {
+                List<IWebElement> breadcrumbs = this.ContainerElement.FindElements(By.XPath(".//div[contains(@class, 'breadcrumbs')]//span"), 2).ToList();
+                return breadcrumbs.Count > 0;
+            }
+            public bool IConfirmISeeANewRowAtTheBottomOfTheColumnSelectorPopup()
+            {
+                IWebElement emptyColumn = this.ContainerElement.FindElement(By.XPath(".//div[@class='modal-body']//span[@class='select2-selection__placeholder']"), 2);
+                return emptyColumn != null;
+            }
+            public bool IClickOnTheNewRowAtTheBottomOfTheColumnSelectorPopup()
+            {
+                IWebElement emptyColumn = this.ContainerElement.FindElement(By.XPath(".//span[@class='select2-selection__placeholder']"), 2);
+                return emptyColumn.TryClick();
+            }
+
+            public bool IConfirmTheNewRowAtTheBottomOfTheColumnSelectorPopupShowsTheDefaultTextSelectColumn(string defaultText)
+            {
+                IWebElement emptyColumn = this.ContainerElement.FindElement(By.XPath(".//span[@class='select2-selection__placeholder']"), 2);
+                return emptyColumn.Text == defaultText;
+            }
+
+            public bool ISelectTheDropDownSelectorForTheNewRowAtTheBottomOfTheColumnSelectorPopup()
+            {
+                IWebElement dropdownArrow = this.ContainerElement.FindElement(By.XPath(".//span[@class='select2-selection__placeholder']/../following-sibling::span[@class='select2-selection__arrow']"), 2);
+                return dropdownArrow.TryClick();
+            }
+
+            public bool IConfirmISeeAListOfAvailableColumnsInTheDropdownSelectorInColumnSelectorPopup()
+            {
+                IList<IWebElement> optionsList = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(".//ul[@class='select2-results__options']//li"), 2).ToList();
+                return optionsList != null && optionsList.Count() > 0;
+            }
+
+            public bool ITypeTheFollowingIntoATextfieldForTheNewRowAtTheBottomOfTheColumnSelectorPopup(string text)
+            {
+                IWebElement textFieldEl = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//ul[@class='select2-results__options']/../preceding-sibling::span//input"), 2);
+                return textFieldEl.TryEnterText(text);
+            }
+
+            public bool ISelectTheFollowingAvailableColumnInTheDropdownSelectorInColumnSelectorPopup(string columnName)
+            {
+                IWebElement columnNameEl = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//ul[@class='select2-results__options']//li[text()='" + columnName + "']"), 2);
+                return columnNameEl.TryClick();
+            }
+
+            public bool IConfirmResetToDefaultIsDisplayedInTheSelectorColumnPopup()
+            {
+                IWebElement resetToDefaultButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@class='modal-footer']//button[contains(@data-bind,'click: $data.reset')]"), 2);
+                return resetToDefaultButton.Displayed;
+            }
+
+            public bool IConfirmSelectorColumnPopupIsDisplayed()
+            {
+                IWebElement selectorColumnPopup = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@class='modal-content']//h3[text()='Column Editor']"), 2);
+                return selectorColumnPopup.Displayed;
+            }
+
+            public List<string> IConfirm3PanelsIsDisplayedInSelectorColumnPopup()
+            {
+                IList<IWebElement> Panels = this.containerElement.FindElements(By.XPath(".//div[@class='modal-body']//div[@class='col-md-4']//h4"), 2);
+                List<string> columnsShownNames = new List<string>();
+
+
+                foreach (IWebElement el in Panels)
+                {
+
+                    columnsShownNames.Add(el.Text);
+
+                }
+                return columnsShownNames;
+            }
+
+            public bool IClickTheCloseButtonInTheSelectorColumnPopup()
+            {
+                IWebElement closeButton = this.ContainerElement.FindElement(By.XPath(".//div[@class='modal-footer']//button[@data-bind='click: applyChanges.bind($data)']/preceding-sibling::button[@data-dismiss='modal']"), 2);
+                return closeButton.TryClick();
+            }
+
+            public int AppliedColumnsPanelCount()
+            {
+                IList<IWebElement> appliedColumnsPanel = this.ContainerElement.FindElements(By.XPath("//ul[@id='sortableColumnSelector']//li"), 2);
+                return appliedColumnsPanel.Count();
+                    
+            }
+
+            public bool ISelectCategoryFromFilterCategory(string category)
+            {
+                IWebElement filterCategory = this.ContainerElement.FindElement(By.XPath($"//span[contains(@data-bind ,'categoryLabel')][contains(text(),'{category}')]"), 2);
+                return filterCategory.TryClick();
+
+            }
+
+            public string GetSelectedCategoryBackgroungColor(string category)
+            {
+                IWebElement backgroundEl = this.ContainerElement.FindElement(By.XPath($"//div[@class='list-select selected'][span[contains(@data-bind ,'categoryLabel')][contains(text(),'{category}')]]"), 2);
+                if (backgroundEl == null)
+                {
+                    Report.Error("The Background El was null");
+                    return null;
+                }
+                string rbgaCssValue = backgroundEl.GetCssValue("background-color");
+                return rbgaCssValue;
+
+            }
+
+            public int FiltersInFiltersPanelCount()
+            {
+                IList<IWebElement> appliedColumnsPanel = this.ContainerElement.FindElements(By.XPath("//div[contains(@class,'list-select')]//span[@data-bind='text: desc']"), 2);
+                return appliedColumnsPanel.Count();
+
+            }
+
+            public bool ISelectFilterFromFiltersPanel(string filter)
+            {
+                IWebElement filterCategory = this.ContainerElement.FindElement(By.XPath($"//div[contains(@class,'list-select')]//span[@data-bind='text: desc'][contains(text(),'{filter}')]"), 2);
+                return filterCategory.TryClick();
+
+            }
+
+            public string GetSelectedFilterBackgroungColor(string filter)
+            {
+                IWebElement backgroundEl = this.ContainerElement.FindElement(By.XPath($"//div[contains(@class,'list-select selected')][span[@data-bind='text: desc'][contains(text(),'{filter}')]]"), 2);
+                if (backgroundEl == null)
+                {
+                    Report.Error("The Background El was null");
+                    return null;
+                }
+                string rbgaCssValue = backgroundEl.GetCssValue("background-color");
+                return rbgaCssValue;
+
+            }
+
+            public bool IConfirmTheFilterAddedIsDisplayedInAppliedColumnPanel(string filter)
+            {
+
+                IWebElement filterinappliedcolumn = this.FindElement(By.XPath($"//ul[@id='sortableColumnSelector']//li//div//span[text()='{filter}']"), 1);
+                return filterinappliedcolumn.NotNullAndDisplayed();
+            }
+
+
+            public bool IConfirmTheColumnNameISelectedAndSavedAs_IsDisplayed(string columnName)
+            {
+
+                IWebElement namedColumn = this.FindElement(By.XPath($".//div[@class='ui-jqgrid-hdiv ui-state-default ui-corner-top']//th[contains(normalize-space(),'{columnName}')]"),1);
+                return namedColumn.NotNullAndDisplayed();
+            }
+
+            public bool IConfirmTheColumnNameISelectedAndSavedAsColumnNameIsDisplayedNextToTheActionsColumn(string columnName)
+            {
+                IWebElement finalColumn = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//div[@class='ui-jqgrid-hdiv ui-state-default ui-corner-top']//th//span[text()='Actions']/../../preceding-sibling::th[1]//div//span[text()='" + columnName + "']"), 2);
+                return finalColumn != null;
+            }
+            public bool ConfirmColumnSelectorsPopupIsOrIsNotDisplayed()
+            {
+                IWebElement SelectorPopup = this.ContainerElement.FindElement(By.XPath(".//div[contains(@class,'modal-dialog')]"), 2);
+                return SelectorPopup != null;
+            }
+
+            public List<string> GetColumnsShownNameListInSelectorPopup()
+            {
+                IList<IWebElement> ColumnsShown = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath("//ul[@id='sortableColumnSelector']//li//span[@class='select2-selection__rendered'][@title]"), 2);
+                List<string> columnsShownNames = new List<string>();
+
+                foreach (IWebElement el in ColumnsShown)
+                {
+                    string test = el.Text;
+                    columnsShownNames.Add(test);
+                }
+
+                return columnsShownNames;
+            }
+            
+            public bool ConfirmColumnSelectorsPopupDisplaysAnXIcon()
+            {
+                IWebElement XIcon = this.ContainerElement.FindElement(By.XPath(".//div[@class='modal-header']//span[text()='×']"), 2);
+                return XIcon != null;
+            }
+            public bool IConfirmTheColumnSelectorPopupDisplaysAColumnSelectorList()
+            {
+                IWebElement columnSelectorList = this.ContainerElement.FindElement(By.XPath(".//div[@class='modal-body']//ul[@id='sortableColumnSelector']"), 2);
+                return columnSelectorList != null;
+            }
+
+            public bool IConfirmTheColumnSelectorPopupDisplaysOrMoreEntries()
+            {
+                IList<IWebElement> columnSelectorList = this.ContainerElement.FindElements(By.XPath(".//div[@class='modal-body']//ul[@id='sortableColumnSelector']//li"), 2).ToList();
+                return columnSelectorList.Count() > 0;
+            }
+
+            public bool IConfirmTheColumnSelectorPopupDisplaysAHamburgerIconNextToEachEntry()
+            {
+                IList<IWebElement> columnSelectorList = this.ContainerElement.FindElements(By.XPath(".//div[@class='modal fade columnsSelectorDialog show']//div[@class='modal-body']//ul[@id='sortableColumnSelector']//li"), 2).ToList();
+                foreach (IWebElement el in columnSelectorList)
+                {
+                    IWebElement columnSelectorItem = el.FindElement(By.XPath(".//span[@class='px-2 py-0 d-inline handle ui-sortable-handle']"), 2);
+                    if (columnSelectorItem == null)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            public bool IClickTheApplyButtonInTheSelectorColumnPopup()
+            {
+                IWebElement applyButton = this.ContainerElement.FindElement(By.XPath(".//div[@class='modal-footer']//button[@data-bind='click: applyChanges.bind($data)']"), 2);
+                return applyButton.TryClick();
+            }
+            public bool IConfirmTheColumnSelectorPopupDisplaysAnXIconNextToEachEntry()
+            {
+                IList<IWebElement> columnSelectorList = this.ContainerElement.FindElements(By.XPath(".//div[@class='modal fade columnsSelectorDialog show']//div[@class='modal-body']//ul[@id='sortableColumnSelector']//li"), 2).ToList();
+                foreach (IWebElement el in columnSelectorList)
+                {
+                    IWebElement columnSelectorItem = el.FindElement(By.XPath(".//i[@class='fa fa-remove fa-lg']"), 2);
+                    if (columnSelectorItem == null)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            public bool IConfirmTheColumnSelectorPopupDisplaysAnAddColumnButtonAtTheBottom()
+            {
+                IWebElement columnSelectorList = this.ContainerElement.FindElement(By.XPath(".//div[@class='modal-body']//a[@data-bind='click: $data.add.bind($data)']"), 2);
+                return columnSelectorList != null;
+            }
+            public bool IConfirmTheColumnSelectorPopupDisplaysTheFollowingButtons(Table table)
+            {
+                IList<IWebElement> columnSelectorList = this.ContainerElement.FindElements(By.XPath(".//div[@class='modal fade columnsSelectorDialog show']//div[@class='modal-footer']//div[@data-bind='with: model']//button"), 2).ToList();
+                foreach (IWebElement el in columnSelectorList)
+                {
+                    bool buttonFound = false;
+
+                    foreach (TableRow row in table.Rows)
+                    {
+
+                        if (el.Text == row["Button"])
+                        {
+
+                            buttonFound = true;
+                            break;
+                        }
+
+                    }
+                    
+                    if (buttonFound == false)
+                    {
+                        return false;
+                    }
+                }
+                return true; ;
+            }
+            public bool InTheColumnSelectorPopupIClickClose()
+            {
+                IList<IWebElement> ColumnsShown = this.ContainerElement.FindElements(By.XPath(".//ul[@id='sortableColumnSelector']//li//span[@class='select2-selection__rendered'][@title]"), 2);
+                List<string> columnsShownNames = new List<string>();
+
+                foreach (IWebElement el in ColumnsShown)
+                {
+                    columnsShownNames.Add(el.Text);
+                }
+                IWebElement closeButton = this.ContainerElement.FindElement(By.XPath(".//div[@class='modal-header']//button[@data-dismiss='modal']"), 2);
+                return closeButton.TryClick();
+            }
+            public bool InTheColumnSelectorPopupISelectHamBurger()
+            {          
+                IWebElement columnSelectorHamBurger = this.ContainerElement.FindElement(By.XPath("//*[@id='sortableColumnSelector']/li[1]/div/span[1]"), 2);
+                return columnSelectorHamBurger.TryClick();
+            
+            }
+            public void InTheColumnSelectorPopupPlaceTheColumnInNewPosition()
+            {
+                IWebElement firstColumn = this.ContainerElement.FindElement(By.XPath("//*[@id='sortableColumnSelector']/li[3]/div/span[1]"), 2);
+                IWebElement secondColumn = this.ContainerElement.FindElement(By.XPath("//*[@id='sortableColumnSelector']/li[1]/div/span[1]"), 2);
+                Actions actions = new Actions(SeleniumBrowser.WebBrowser);
+
+          
+                actions.MoveToElement(firstColumn);
+                actions.ClickAndHold();
+
+                actions.MoveToElement(secondColumn);
+                actions.Release().Perform();
+
+            }
+
+
+        }
+        
+ 
 
     }
 
-    
+
 }
 
 

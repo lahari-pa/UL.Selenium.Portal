@@ -21,9 +21,9 @@ Feature: Web Viewers
 @ScenarioId:9745
 Scenario: [70334] Base Functionality - Web Viewers - Demo Viewer
 
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
 Then I confirm the Home tab has loaded
-Given I click the tab: Web Viewers
+Given I click the main tab: Web Viewers
 Then I click the sub tab: Demo Viewer
 #Issue if both demoviewer and demostatus tabs are open (same title)
 Then I switch to the window with the title: Log On
@@ -37,9 +37,9 @@ Given I call Shared Step 106194 (RPS Sign out)
 @ScenarioId:9789
 Scenario: [70335] Base Functionality - Web Viewers - Demo Status
 
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
 Then I confirm the Home tab has loaded
-Given I click the tab: Web Viewers
+Given I click the main tab: Web Viewers
 Then I click the sub tab: Demo Status
 #Issue if both demoviewer and demostatus tabs are open (same title)
 Then I switch to the window with the title: Log On

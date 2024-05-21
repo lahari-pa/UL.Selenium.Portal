@@ -1,15 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
-using Castle.Core.Internal;
 using OpenQA.Selenium;
-using TechTalk.SpecFlow;
+using Reqnroll;
 using UL.Automation.Reporting;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.SpecFlow.Classes;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Selenium.Portal.RPS.Classes;
 using UL.Selenium.Portal.RPS.Selenium_Classes;
+using UL.Automation.Reporting.Classes;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.RPS.Steps
@@ -17,26 +18,27 @@ namespace UL.Selenium.Portal.RPS.Steps
     [Binding, Scope(Tag = "Home")]
     class Steps_Home
     {
-        [StepDefinition(@"I confirm I am directed to the Home tab")]
-        [StepDefinition(@"I confirm the Home tab has loaded")]
+        [RegexStepDefinition(@"I confirm I am directed to the Home tab")]
+        [RegexStepDefinition(@"I confirm the Home tab has loaded")]
         public void HomeTabLoaded()
         {
             Report.IsTrue(new TopBar().WaitForContainerToBeVisible(), "Top bar did not load!");
             GeneralUtilities.WaitForLoadingToFinish();
             new Home().WaitWidgetSpinnerFinish();
-            if (!new Home().WaitUntilHomeXGraphsDisplayed())
-            {
-                Report.Error("All Graphs did not load");
-            }
-            new Steps_Navigation().ConfirmActiveTab("Home");
-            Report.IsTrue(new Home().WaitForContainerToBeVisible(), "Home page content did not load", "Home page content loaded");
+            new Steps_Navigation().ConfirmActiveTab("Program Health");
         }
 
-        [StepDefinition(@"I confirm the following Widgets are displayed:")]
+        [RegexStepDefinition(@"I confirm the Home tab has loaded in RPS")]
+        public void HomeTabLoadedInRPS()
+        {
+            new Home().HomePageIsDisplayedInRPS();
+        }
+
+        [RegexStepDefinition(@"I confirm the following Widgets are displayed:")]
         public void ConfirmDisplayedWidgets(Table table)
         {
             Report.Info("Expected widgets:");
-            SpecFlowReporting.Table(table);
+            ReqnrollReporting.Table(table);
             var widgets = new Home().WidgetTitles;
             var expectedWidgets = table.Rows.Select(x => x["Widget"]).ToList();
             if (!Report.IsTrue(expectedWidgets.All(x => widgets.Contains(x)), "Not all expected widgets were displayed!", "All expected widgets were displayed"))
@@ -46,7 +48,21 @@ namespace UL.Selenium.Portal.RPS.Steps
             }
         }
 
-        [StepDefinition("I confirm the widget: '(.*) (is|is not) displayed'")]
+        [RegexStepDefinition(@"I confirm the following listed Widgets are displayed: (.*)")]
+        public void ConfirmListedDisplayedWidgets(string widgetList)
+        {
+            Report.Info("Expected widgets:");
+            var widgets = new Home().WidgetTitles;
+            //var expectedWidgets = table.Rows.Select(x => x["Widget"]).ToList();
+            var expectedWidgets = widgetList.Replace(", ", ",").Split(',').Where(x => !string.IsNullOrWhiteSpace(x)).ToList();
+            if (!Report.IsTrue(expectedWidgets.All(x => widgets.Contains(x)), "Not all expected widgets were displayed!", "All expected widgets were displayed"))
+            {
+                var differences = expectedWidgets.Except(widgets).ToList();
+                Report.Failure("The following widgets were not displayed: " + string.Join(", ", differences));
+            }
+        }
+
+        [RegexStepDefinition("I confirm the widget: '(.*) (is|is not) displayed'")]
         public void ConfirmWidgetDisplayedOrNot(string widget, string displayedOrNot)
         {
 
@@ -78,14 +94,29 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(widgets.Contains(widget) == displayed, $"Widget with title '{widget}' {(displayedOrNot == "is" ? "is not" : "is")} displayed!", $"Widget with title '{widget}' {displayedOrNot} displayed as expected");
         }
 
-        [StepDefinition(@"I click the dropdown toggle for widget: (.*)")]
+        [RegexStepDefinition(@"I click the dropdown toggle for widget: (.*)")]
         public void ClickDropDownToggle(string widgetTitle)
         {
             var widget = new Home.Widget(widgetTitle);
             Report.IsTrue(widget.ClickWidgetDropdownToggle(), "Failed to click widget dropdown toggle for: " + widgetTitle, "Clicked widget dropdown toggle for: " + widgetTitle);
         }
 
-        [StepDefinition(@"I click the dropdown toggle for the saved widget")]
+        [RegexStepDefinition(@"I click the hamburger icon for widget: (.*)")]
+        public void ClickHamburgerIcon(string widgetTitle)
+        {
+            var widget = new Home.Widget(widgetTitle);
+            Report.IsTrue(widget.ClickWidgetHamburgerIcon(widgetTitle), "Failed to click hamburger icon for: " + widgetTitle, "Clicked widget hamburger icon for: " + widgetTitle);
+        }
+
+        [RegexStepDefinition(@"In the hamburger menu for the widget: (.*) I click the following option: (.*)")]
+        public void ThenInTheHamburgerMenuForTheWidgetSupplierSubscriptionStatusIClickTheFollowingOptionPrintChart(string widgetTitle, string hamburgerOption)
+        {
+            var widget = new Home.Widget(widgetTitle);
+            Report.IsTrue(widget.ClickHamburgerOptionForWidget(widgetTitle, hamburgerOption), "Failed to click hamburger icon for: " + widgetTitle, "Clicked widget hamburger icon for: " + widgetTitle);
+        }
+
+
+        [RegexStepDefinition(@"I click the dropdown toggle for the saved widget")]
         public void ClickDropDownToggle()
         {
             Home.Widget widget = new Home().GetWidget("%ThisWidget%");
@@ -93,7 +124,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(widget.ClickWidgetDropdownToggle(), "Failed to click widget dropdown toggle", "Clicked widget dropdown toggle");
         }
 
-        [StepDefinition(@"I confirm the dropdown menu list is displayed")]
+        [RegexStepDefinition(@"I confirm the dropdown menu list is displayed")]
         public void ConfirmDropDownMenuDisplayed()
         {
             Home.Widget widget = new Home().GetWidget("%ThisWidget%");
@@ -101,14 +132,14 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(widget.DropdownMenuDisplayed(), "Dropdown menu was not displayed!", "Dropdown menu was displayed");
         }
 
-        [StepDefinition(@"I click '(.*)' in the dropdown menu for widget: (.*)")]
+        [RegexStepDefinition(@"I click '(.*)' in the dropdown menu for widget: (.*)")]
         public void ClickDropdownOptionWidget(string option, string widgetTitle)
         {
             var widget = new Home.Widget(widgetTitle);
             Report.IsTrue(widget.ClickDropDownItem(option), $"Failed to click option: '{option}' for widget: '{widgetTitle}'", $"Clicked option: '{option}' for widget: '{widgetTitle}'");
         }
 
-        [StepDefinition(@"I click '(.*)' in the dropdown menu for the saved widget")]
+        [RegexStepDefinition(@"I click '(.*)' in the dropdown menu for the saved widget")]
         public void ClickDropdownOptionWidget(string option)
         {
             Home.Widget widget = new Home().GetWidget("%ThisWidget%");
@@ -116,7 +147,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(widget.ClickDropDownItem(option), $"Failed to click option: '{option}'", $"Clicked option: '{option}'");
         }
 
-        [StepDefinition(@"I click the first displayed list option in the Select Chart Type popup and save to context as: (.*)")]
+        [RegexStepDefinition(@"I click the first displayed list option in the Select Chart Type popup and save to context as: (.*)")]
         public void ClickFirstListOption(string savedAs)
         {
             if (!new SelectChartModal().WaitForContainerToBeVisible())
@@ -143,7 +174,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(new SelectChartModal().ClickListItem(firstValidOption), $"Failed to click list option: {firstValidOption} in the Select Chart Type popup", $"Clicked list option: {firstValidOption} in the Select Chart Type popup");
         }
 
-        [StepDefinition(@"I confirm a popup has loaded with title: 'Select Chart Type'")]
+        [RegexStepDefinition(@"I confirm a popup has loaded with title: 'Select Chart Type'")]
         public void ConfirmSelectChartTypePopup()
         {
             var modal = new SelectChartModal();
@@ -154,13 +185,13 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"I close the Select Chart Type popup")]
+        [RegexStepDefinition(@"I close the Select Chart Type popup")]
         public void CloseSelectChartTypePopup()
         {
             Report.IsTrue(new SelectChartModal().ClickCloseTopRightX(), "Failed to close the popup", "Closed the popup");
         }
 
-        [StepDefinition(@"I click the list option: (.*) in the Select Chart Type popup")]
+        [RegexStepDefinition(@"I click the list option: (.*) in the Select Chart Type popup")]
         public void ClickListOption(string listOption)
         {
             if (!new SelectChartModal().WaitForContainerToBeVisible())
@@ -173,20 +204,20 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"I confirm the Select Chart Type popup closes")]
+        [RegexStepDefinition(@"I confirm the Select Chart Type popup closes")]
         public void ConfirmSelectChartTypePopupCloses()
         {
             Report.IsTrue(new SelectChartModal().WaitForContainerToBeInvisible(), "Select Chart Type popup did not close!", "Select Chart Type popup closed");
         }
 
-        [StepDefinition(@"I click on the home page container element")]
-        [StepDefinition(@"I click on the home page background")]
+        [RegexStepDefinition(@"I click on the home page container element")]
+        [RegexStepDefinition(@"I click on the home page background")]
         public void ClickHomePageContainer()
         {
             Report.IsTrue(new Home().ClickContainer(), "Failed to click the home page container", "Clicked the home page container");
         }
 
-        [StepDefinition("I confirm there are a total of (.*) widgets displayed in a (.*) x (.*) grid")]
+        [RegexStepDefinition("I confirm there are a total of (.*) widgets displayed in a (.*) x (.*) grid")]
         public void ConfirmWidgetCountAndGridOrder(int widgetCount, int distinctX, int distinctY)
         {
             ReportSettings.UseSubSteps = true;
@@ -196,21 +227,21 @@ namespace UL.Selenium.Portal.RPS.Steps
             this.ConfirmWidgetGridOrder(distinctX, distinctY);
         }
 
-        [StepDefinition("I confirm an information panel is displayed with heading: (.*)")]
+        [RegexStepDefinition("I confirm an information panel is displayed with heading: (.*)")]
         public void ConfirmInformationPanelWithHeading(string heading)
         {
             var panelHeadings = new Home().InformationPanelTitles().Select(x => x.Replace("\r\n", " ")).ToList();
             Report.IsTrue(panelHeadings.Contains(heading), $"Panel heading: '{heading}' was not displayed! Displayed was: " + string.Join(", ", panelHeadings), $"Panel heading: '{heading}' was displayed");
         }
 
-        [StepDefinition(@"I confirm there are a total of (.*) widgets displayed")]
+        [RegexStepDefinition(@"I confirm there are a total of (.*) widgets displayed")]
         public void ConfirmWidgetCount(int widgetCount)
         {
             var widgets = new Home().Widgets();
             Report.IsTrue(widgets.Count == widgetCount, $"Expected there to be {widgetCount} widgets, but there were: " + widgets.Count, $"{widgetCount} widgets were displayed as expected");
         }
 
-        [StepDefinition("I confirm the widgets are displayed in a (.*) x (.*) grid")]
+        [RegexStepDefinition("I confirm the widgets are displayed in a (.*) x (.*) grid")]
         public void ConfirmWidgetGridOrder(int expectedDistinctX, int expectedDistinctY)
         {
             var widgets = new Home().Widgets();
@@ -219,14 +250,14 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(actualDistinctX == expectedDistinctX && actualDisctinctY == expectedDistinctY, $"The widgets were not displayed in a {expectedDistinctX} x {expectedDistinctY} grid! They were displayed in a {actualDistinctX} x {actualDisctinctY} grid", $"The widgets were displayed in a {expectedDistinctX} x {expectedDistinctY} grid");
         }
 
-        [StepDefinition(@"I verify each widget displays the correct data")]
+        [RegexStepDefinition(@"I verify each widget displays the correct data")]
         public void VerifyEachWidgetProperties()
         {
             var allWidgets = new Home().WidgetTitles;
             foreach (var widgetTitle in allWidgets)
             {
                 Report.StartStep("Verifying displayed data in widget: " + widgetTitle);
-                ReportSettings.UseSubSteps = true;
+                ReportDetails.CurrentDetails.UseSubSteps = true;
                 var widget = new Home.Widget(widgetTitle);
                 Report.StartStep("I confirm the widget is shown with a heading and a main body area");
                 var headingDisplayed = widget.HeadingDisplayed();
@@ -238,9 +269,9 @@ namespace UL.Selenium.Portal.RPS.Steps
                 var backgroundColour = widget.BorderColour();
                 Report.IsTrue(backgroundColour == greyRgb, "The heading background was not grey! Displayed colour: " + backgroundColour, "the heading background was grey.");
                 Report.StartStep("I confirm the widget heading shows font color: black");
-                var black = "rgba(51, 51, 51, 1)";
+                var black = "rgba(115, 135, 156, 1)";
                 var headingColour = widget.HeadingColour();
-                Report.IsTrue(headingColour.Contains("(51, 51, 51"), "Heading colour was not black! Colour was: " + headingColour, "Heading colour was black");
+                Report.IsTrue(headingColour.Contains("(115, 135, 156"), "Heading colour was not black! Colour was: " + headingColour, "Heading colour was black");
                 Report.StartStep("I confirm the widget heading shows a title");
                 var titleDisplayed = !widget.HeadingText().IsNullOrEmpty();
                 Report.IsTrue(titleDisplayed, "No heading title was displayed!", "Heading title was displayed");
@@ -264,26 +295,50 @@ namespace UL.Selenium.Portal.RPS.Steps
                 {
                     Report.IsTrue(!noResultsMessage.IsNullOrEmpty(), "No graph was displayed, and also no message with text 'There are no results that meet these criteria'", "Message with text 'There are no results that meet these criteria' was displayed");
                 }
-                ReportSettings.UseSubSteps = false;
+                ReportDetails.CurrentDetails.UseSubSteps = false;
             }
 
         }
 
-        [StepDefinition(@"I click the graph hamburger menu for widget: (.*)")]
+        [RegexStepDefinition(@"I verify each widget diplays a chart of some type")]
+        public void IVerifyEachWidgetDisplaysChartOfSomeType()
+        {
+            var allWidgets = new Home().WidgetTitles;
+            foreach (var widgetTitle in allWidgets)
+            {
+                Report.StartStep($"In the {widgetTitle} widget main body area, I confirm a graph or pie chart is shown - if no graph is shown I confirm I see 'There are no results that meet these criteria'");
+                var widget = new Home.Widget(widgetTitle);
+                var graphdisplayed = widget.GraphContentDisplayed();
+                var noResultsMessage = widget.NoGraphContentText();
+                if (graphdisplayed)
+                {
+                    Report.Success($"In {widgetTitle} widget, Graph content was displayed");
+                    Report.Screenshot();
+                    Report.StartStep("If a graph is shown, confirm the hamburger menu is displayed in the top right");
+                    Report.IsTrue(widget.GraphHamburgerDisplayed(), $"In {widgetTitle} widget, Graph hamburger menu was not displayed!", $"In {widgetTitle} widget, Graph hamburger menu was displayed");
+                }
+                else
+                {
+                    Report.IsTrue(!noResultsMessage.IsNullOrEmpty(), $"In {widgetTitle} widget, No graph was displayed, and also no message with text 'There are no results that meet these criteria'", $"In {widgetTitle} widget, Message with text 'There are no results that meet these criteria' was displayed");
+                }
+            }
+        }
+
+        [RegexStepDefinition(@"I click the graph hamburger menu for widget: (.*)")]
         public void ClickGraphHamburger(string widgetTitle)
         {
             Home.Widget widget = new Home().GetWidget(widgetTitle);
             Report.IsTrue(widget.ClickGraphHamburger(), "Failed to click the graph hamburger menu button", "Clicked the graph hamburger menu button");
         }
 
-        [StepDefinition(@"I click the graph hamburger menu for the saved widget")]
+        [RegexStepDefinition(@"I click the graph hamburger menu for the saved widget")]
         public void ClickGraphHamburger()
         {
             Home.Widget widget = new Home().GetWidget("%ThisWidget%");
             Report.IsTrue(widget.ClickGraphHamburger(), "Failed to click the graph hamburger menu button", "Clicked the graph hamburger menu button");
         }
 
-        [StepDefinition("I save the first widget containing a graph to context as: (.*)")]
+        [RegexStepDefinition("I save the first widget containing a graph to context as: (.*)")]
         public void SaveFirstWidgetWithGraph(string savedAs)
         {
             var widgets = new Home().WidgetTitles;
@@ -293,6 +348,7 @@ namespace UL.Selenium.Portal.RPS.Steps
                 if (thisWidget.GraphContentDisplayed())
                 {
                     Context.AddToContext(savedAs, thisWidget);
+                    Report.IsTrue(Context.Contains(savedAs), $"Failure, failed to save the first widget to context as: '{savedAs}'.", $"Success, saved the first widget to context as: '{savedAs}'.");
                     return;
                 }
             }
@@ -302,7 +358,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         /// <summary>
         /// uses a default savedAs 'ThisWidget'
         /// </summary>
-        [StepDefinition("I save the first widget containing a graph to context")]
+        [RegexStepDefinition("I save the first widget containing a graph to context")]
         public void SaveFirstWidgetWithGraph()
         {
             var widgets = new Home().WidgetTitles;
@@ -318,7 +374,44 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.Failure("Failed to add a widget with graph to context");
         }
 
-        [StepDefinition(@"I confirm a menu list is shown below the three dots icon for the saved widget")]
+        [RegexStepDefinition("I save the first widget containing a (Bar Graph|Pie Chart) to context")]
+        public void SaveFirstWidgetWithGraphChart(string displayType)
+        {
+            var widgets = new Home().WidgetTitles;
+            foreach (var title in widgets)
+            {
+                var thisWidget = new Home.Widget(title);
+                if (thisWidget.GraphContentDisplayed() && thisWidget.Type == displayType)
+                {
+                    Context.AddToContext("ThisWidget", thisWidget);
+                    return;
+                }
+            }
+            Report.Failure("Failed to add a widget with graph to context");
+        }
+
+        [RegexStepDefinition("I save the current list of widgets to context as: (.*)")]
+        public void SaveTheCurrentListOfWidgetsToContextAs(string savedAs)
+        {
+            Report.Info($"Attempting to save the list of widget titles as: '{savedAs}'.");
+            List<WidgetPage.Widget> widgetList = new List<WidgetPage.Widget>();
+            List<string> widgetTitles = new Home().WidgetTitles;
+            foreach(string widgetTitle in widgetTitles)
+            {
+                WidgetPage.Widget widget = new Home.Widget(widgetTitle);
+                widgetList.Add(widget);
+            }
+            Context.AddToContext(savedAs, widgetList);
+            return;
+        }
+
+        [RegexStepDefinition("I save the current list of widgets to context as default")]
+        public void SaveTheCurrentListOfWidgetsToContextAsDefault()
+        {
+            SaveTheCurrentListOfWidgetsToContextAs("WidgetList");
+        }
+
+        [RegexStepDefinition(@"I confirm a menu list is shown below the three dots icon for the saved widget")]
         public void ConfirmMenuList()
         {
             Home.Widget widget = new Home().GetWidget("%ThisWidget%");
@@ -326,7 +419,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(widget.GraphMenuListDisplayed(), "Graph Menu list was not displayed!", "Graph menu list was displayed");
         }
 
-        [StepDefinition(@"I confirm the graph menu list displays the following options:")]
+        [RegexStepDefinition(@"I confirm the graph menu list displays the following options:")]
         public void ConfirmMenuListDisplays(Table options)
         {
             Home.Widget widget = new Home().GetWidget("%ThisWidget%");
@@ -339,7 +432,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             }
         }
 
-        [StepDefinition(@"In the graph menu list I confirm I see a (.*) icon to the left of the option: (.*)")]
+        [RegexStepDefinition(@"In the graph menu list I confirm I see a (.*) icon to the left of the option: (.*)")]
         public void ConfirmIconForGraphDropdownMenuOption(string icon, string option)
         {
             Home.Widget widget = new Home().GetWidget("%ThisWidget%");
@@ -369,7 +462,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(displayedIcon == iconClass, "Expected icon: " + icon + " with class: " + iconClass + " but found icon with class: " + displayedIcon, "Icon " + icon + " was displayed as expected");
         }
 
-        [StepDefinition(@"I confirm graph content (is|is not) displayed for the saved widget")]
+        [RegexStepDefinition(@"I confirm graph content (is|is not) displayed for the saved widget")]
         public void GraphContent(string isIsNot)
         {
             bool displayed = false;
@@ -387,7 +480,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(widget.GraphContentDisplayed() == displayed, $"Graph content {(displayed ? "was not" : "was")} displayed when it {(displayed ? "was" : "was not")} expected to be!", $"Graph content {(displayed ? "was" : "was not")} displayed as expected");
         }
 
-        [StepDefinition(@"I confirm data content (is|is not) displayed for the saved widget")]
+        [RegexStepDefinition(@"I confirm data content (is|is not) displayed for the saved widget")]
         public void DataContent(string isIsNot)
         {
             bool displayed = false;
@@ -405,7 +498,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(widget.DataContentDisplayed() == displayed, $"Data content {(displayed ? "was not" : "was")} displayed when it {(displayed ? "was" : "was not")} expected to be!", $"Data content {(displayed ? "was" : "was not")} displayed as expected");
         }
 
-        [StepDefinition(@"I save the current titles for the graph view in the widget with title: (.*) as: (.*)")]
+        [RegexStepDefinition(@"I save the current titles for the graph view in the widget with title: (.*) as: (.*)")]
         public void SaveGraphTitlesAss(string widgetTitle, string savedAs)
         {
             Report.Info($"Getting to get the titles for widget: {widgetTitle}");
@@ -416,7 +509,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"In the widget with title: (.*), I confirm that when I select the section with title: (.*) that the titles saved as: (.*) no longer appear")]
+        [RegexStepDefinition(@"In the widget with title: (.*), I confirm that when I select the section with title: (.*) that the titles saved as: (.*) no longer appear")]
         public void InWidgetIConfirmWhenISelectTitleThatLowerLevelDataIsShown(string widgetTitle, string sectionTitle, string savedAs, string finalChart = "No")
         {
             Report.Info($"Getting the current Graph sections for the widget with title: {widgetTitle}");
@@ -474,6 +567,7 @@ namespace UL.Selenium.Portal.RPS.Steps
                 while (x < 6 && clickedSuccessfully == false)
                 {
                     Report.Info("Trying to click the section");
+                    currentGraphSections[i].ScrollElementIntoView();
                     if (currentGraphSections[i].TryDoubleClick())
                     {
                         clickedSuccessfully = true;
@@ -541,7 +635,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
             bool diffFound = false;
             int j = 0;
-            while (j < 15 && diffFound == false)
+            while (j < 3 && diffFound == false)
             {
                 new TopBar().RefocusGraph();
                 this.ForWidgetISwitchToView(widgetTitle, "Data");
@@ -560,7 +654,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [StepDefinition(@"In the widget with title: (.*), I confirm that when I select the Back button that the titles saved as: (.*) no longer appear")]
+        [RegexStepDefinition(@"In the widget with title: (.*), I confirm that when I select the Back button that the titles saved as: (.*) no longer appear")]
         public void InWidgetIConfirmWhenISelectBackButtonThatUpperLevelDataIsShown(string widgetTitle, string savedAs)
         {
 
@@ -584,7 +678,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"For the Widget with title: (.*), I switch to the data view from the the actions menu")]
+        [RegexStepDefinition(@"For the Widget with title: (.*), I switch to the data view from the the actions menu")]
         public void ForWidgetISwitchToDataView(string widgetTitle)
 
         {
@@ -597,32 +691,33 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"For the Widget with title: (.*), I switch to the: (.*) view from the the actions menu")]
+        [RegexStepDefinition(@"For the Widget with title: (.*), I switch to the: (.*) view from the the actions menu")]
         public void ForWidgetISwitchToView(string widgetTitle, string option)
 
         {
-            ReportSettings.UseSubSteps = true;
+            ReportDetails.CurrentDetails.UseSubSteps = true;
+            var iWidget = new Home.Widget(widgetTitle);
             Report.StartStep($"Attempting to click the drop down menu for the widget titled: {widgetTitle}");
-            Report.IsTrue(new Home.Widget(widgetTitle).ClickWidgetDropdownToggle(), "Failed to click the drop down toggle", "Successfully clicked the drop down toggle");
+            Report.IsTrue(iWidget.ClickWidgetDropdownToggle(), "Failed to click the drop down toggle", "Successfully clicked the drop down toggle");
             Report.StartStep($"Attempting to click the option: {option} from the drop down menu");
-            Report.IsTrue(new Home.Widget(widgetTitle).ClickDropDownItem(option), "Failed to click the " + option + " option", "Successfully clicked the " + option + " option");
+            Report.IsTrue(iWidget.ClickDropDownItem(option), "Failed to click the " + option + " option", "Successfully clicked the " + option + " option");
             switch (option)
             {
                 case "Data":
-                    Report.IsTrue(new Home.Widget(widgetTitle).DataContentDisplayed(), "The Data content was not displayed", "Data content was displayed");
+                    Report.IsTrue(iWidget.DataContentDisplayed(), "The Data content was not displayed", "Data content was displayed");
                     break;
                 case "Graph":
-                    Report.IsTrue(new Home.Widget(widgetTitle).GraphContentDisplayed(), "The Graph content was not displayed", "Graph content was displayed");
+                    Report.IsTrue(iWidget.GraphContentDisplayed(), "The Graph content was not displayed", "Graph content was displayed");
                     break;
                 default:
                     Report.Failure("The Option must be set to either 'Data' or 'Graph'");
-                    return;
+                    break;
             }
 
-
+            return;
         }
 
-        [StepDefinition(@"I save the current titles for the data view in the widget with title: (.*) as: (.*)")]
+        [RegexStepDefinition(@"I save the current titles for the data view in the widget with title: (.*) as: (.*)")]
         public void SaveDataTitlesAss(string widgetTitle, string savedAs)
         {
             Report.Info($"Attempting to get the data titles for widget: {widgetTitle}");
@@ -633,7 +728,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"I Check that the current titles being displayed for widget: (.*) are the same as those saved as: (.*)")]
+        [RegexStepDefinition(@"I Check that the current titles being displayed for widget: (.*) are the same as those saved as: (.*)")]
         public void CheckThatTheCurrentTitlesBeingDisplayedAreTheSameAs(string widgetTitle, string savedAs)
         {
             ReportSettings.UseSubSteps = true;
@@ -650,10 +745,10 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [StepDefinition(@"For the (.*) widget, I save the current titles as: (.*) and check that when I click on the section: (.*) that the titles change")]
+        [RegexStepDefinition(@"For the (.*) widget, I save the current titles as: (.*) and check that when I click on the section: (.*) that the titles change")]
         public void ForWidgetISaveCurrentTitlesAndCheckThatWhenIClickSectionTheTitlesChange(string widgetTitle, string savedAs, string sectionTitle)
         {
-            ReportSettings.UseSubSteps = true;
+            ReportDetails.CurrentDetails.UseSubSteps = true;
             Report.StartStep("Attempting to switch to the data view");
             this.ForWidgetISwitchToView(widgetTitle, "Data");
             Report.StartStep("Saving the titles to context");
@@ -665,7 +760,14 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"I save the current titles as: (.*) and check that when I Click Back that the titles change for the (.*) widget")]
+        [RegexStepDefinition(@"For the widget saved to context, I save the current titles as: (.*) and check that when I click on the section: (.*) that the titles change")]
+        public void ForWidgetSavedToContextISaveCurrentTitlesAndCheckThatWhenIClickSectionTheTitlesChange(string savedAs, string sectionTitle)
+        {
+            Home.Widget widget = new Home().GetWidget("%ThisWidget%");
+            ForWidgetISaveCurrentTitlesAndCheckThatWhenIClickSectionTheTitlesChange(widget.Title, savedAs, sectionTitle);
+        }
+
+        [RegexStepDefinition(@"I save the current titles as: (.*) and check that when I Click Back that the titles change for the (.*) widget")]
         public void ForWidgetISaveCurrentTitlesAndCheckThatWhenIClickBackTheTitlesChange(string savedAs, string widgetTitle)
         {
             ReportSettings.UseSubSteps = true;
@@ -680,7 +782,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"I Click the hamburger menu for the widget: (.*) and select the option: (.*)")]
+        [RegexStepDefinition(@"I Click the hamburger menu for the widget: (.*) and select the option: (.*)")]
         public void IClickTheHamburgerMenuForTheWidgetAndSelectOption(string widgetTitle, string option)
         {
             if (option.ToLower() == "print")
@@ -694,14 +796,21 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(new Home.Widget(widgetTitle).ClickGraphHamburgerOption(option), "Failed to click the option: " + option, "Successfully clicked the option: " + option);
         }
 
-        [StepDefinition(@"I Check that the Hamburger menu dropdown for widget: (.*) is displayed")]
+        [RegexStepDefinition(@"I Click the hamburger menu for the saved widget and select the option: (.*)")]
+        public void IClickTheHamburgerMenuForTheSavedWidgetAndSelectOption(string option)
+        {
+            Home.Widget widget = new Home().GetWidget("%ThisWidget%");
+            IClickTheHamburgerMenuForTheWidgetAndSelectOption(widget.Title, option);
+        }
+
+        [RegexStepDefinition(@"I Check that the Hamburger menu dropdown for widget: (.*) is displayed")]
         public void ICheckTheHamburgerMenuIsDisplayed(string widgetTitle)
         {
             Report.IsTrue(new Home.Widget(widgetTitle).GraphHamburgerMenuDisplayed(), "The Hamburger menu dropdown was not displayed", "The Hamburger menu dropdown was displayed");
 
         }
 
-        [StepDefinition(@"I Check that the Options displayed in the Hamburger menu for widget: (.*) are as follows:")]
+        [RegexStepDefinition(@"I Check that the Options displayed in the Hamburger menu for widget: (.*) are as follows:")]
         public void ICheckHamburgerMenuOptions(string widgetTitle, Table table)
         {
             List<string> optionsStrings = new Home.Widget(widgetTitle).GetHamburgerOptions();
@@ -738,7 +847,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 
 
-        [StepDefinition(@"I Confirm that the Graph for the widget: (.*) is a: (Pie Chart|Bar Graph)")]
+        [RegexStepDefinition(@"I Confirm that the Graph for the widget: (.*) is a: (Pie Chart|Bar Graph)")]
         public void IConfirmGraphTypeForWidget(string widgetTitle, string graphType)
         {
             Report.Info($"Attempting to get the type of graph for the chosen widget...");
@@ -748,15 +857,23 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
+        [RegexStepDefinition(@"I select a piece of the pie chart for the widget: (.*)")]
+        public void ThenISelectAPieceOfThePieChartForTheWidgetSupplierSubscriptionStatus(string widgetTitle)
+        {
+            Report.Info($"Attempting to get the type of graph for the chosen widget...");
+            string foundType = new Home.Widget(widgetTitle).GetTypeOfGraph();
+            Report.Info($"The type of graph found was: {foundType}");
+            Report.IsTrue(new Home.Widget(widgetTitle).SelectPieceOfPieChart(), "Failed to click piece of pie chart", "Successfully clicked piece of pie chart");
+        }
 
-        [StepDefinition(@"I confirm that a scroll bar is present for the widget: (.*)")]
+        [RegexStepDefinition(@"I confirm that a scroll bar is present for the widget: (.*)")]
         public void IConfirmThatAScrollBarIsPresentForWidget(string widgetTitle)
         {
             Report.Info($"Attempting to find the scroll bar for the chosen widget...");
             Report.IsTrue(new Home.Widget(widgetTitle).ScrollBarIsPresent(), "No Scroll Bar was found", "A scroll bar was present");
         }
 
-        [StepDefinition(@"I Check that if required, a scroll bar is present for the Widget: (.*)")]
+        [RegexStepDefinition(@"I Check that if required, a scroll bar is present for the Widget: (.*)")]
         public void ICheckThatScrollBarPresentIfRequired(string widgetTitle)
         {
             Report.Info($"Checking that the widget is a Bar Graph");
@@ -789,7 +906,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             }
         }
 
-        [StepDefinition(@"I save the (Data|Graph) View Titles (with|with out) Count for the widget: (.*) as: (.*)")]
+        [RegexStepDefinition(@"I save the (Data|Graph) View Titles (with|with out) Count for the widget: (.*) as: (.*)")]
         public void ISaveTheTitleForWidgetAs(string viewType, string useCount, string widgetTitle, string savedAs)
         {
             Report.Info($"Looking at the widget with title: {widgetTitle}");
@@ -827,12 +944,12 @@ namespace UL.Selenium.Portal.RPS.Steps
             Context.AddToContext(savedAs, titleFound);
         }
 
-        [StepDefinition(@"For the Widget: (.*) I select the section with title: (.*)")]
+        [RegexStepDefinition(@"For the Widget: (.*) I select the section with title: (.*)")]
         public void ForWidgetISelectSection(string widgetTitle, string sectionTitle)
         {
 
 
-            ReportSettings.UseSubSteps = true;
+            ReportDetails.CurrentDetails.UseSubSteps = true;
             Report.StartStep("Attempting to switch to the data view");
             this.ForWidgetISwitchToView(widgetTitle, "Data");
             Report.StartStep("Saving the titles to context");
@@ -904,7 +1021,14 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"I confirm graph content (is|is not) displayed for the widget: (.*)")]
+        [RegexStepDefinition(@"For the saved widget I select the section with title: (.*)")]
+        public void ForSavedWidgetISelectSection(string sectionTitle)
+        {
+            Home.Widget widget = new Home().GetWidget("%ThisWidget%");
+            ForWidgetISelectSection(widget.Title, sectionTitle);
+        }
+
+            [RegexStepDefinition(@"I confirm graph content (is|is not) displayed for the widget: (.*)")]
         public void GraphContentDisplayedForTitle(string isIsNot, string widgetTitle)
         {
             bool displayed = false;
@@ -922,7 +1046,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"I confirm Data content (is|is not) displayed for the widget: (.*)")]
+        [RegexStepDefinition(@"I confirm Data content (is|is not) displayed for the widget: (.*)")]
         public void DataContentDisplayedForTitle(string isIsNot, string widgetTitle)
         {
             bool displayed = false;
@@ -940,7 +1064,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"I confirm Product content (is|is not) displayed for the widget: (.*)")]
+        [RegexStepDefinition(@"I confirm Product content (is|is not) displayed for the widget: (.*)")]
         public void ProductContentDisplayedForTitle(string isIsNot, string widgetTitle)
         {
             bool displayed = false;
@@ -958,13 +1082,20 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"I wait for the all widgets to finish loading")]
+        [RegexStepDefinition(@"I confirm Product content (is|is not) displayed for the saved widget")]
+        public void ProductContentDisplayedForSavedWidget(string isIsNot)
+        {
+            Home.Widget widget = new Home().GetWidget("%ThisWidget%");
+            ProductContentDisplayedForTitle(isIsNot, widget.Title);
+        }
+
+            [RegexStepDefinition(@"I wait for the all widgets to finish loading")]
         public void WaitForAllWidgets()
         {
             Report.IsTrue(new Home().WaitWidgetSpinnerFinish(), "The widgets did not finish loading", "The widgets have finished loading");
         }
 
-        [StepDefinition(@"I get the current Legend Items for the widget: (.*) and save them as: (.*)")]
+        [RegexStepDefinition(@"I get the current Legend Items for the widget: (.*) and save them as: (.*)")]
         public void IGetCurrentLegendItemsForAndSaveThemAs(string widgetTitle, string savedAs)
         {
             var LegendItemList = new WidgetPage.Widget(widgetTitle).GetCurrentLegendItems();
@@ -973,15 +1104,14 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"In the (.*) widget, I confirm that a legend is shown")]
+        [RegexStepDefinition(@"In the (.*) widget, I confirm that a legend is shown")]
         public void InTheWidgetConfirmLegendIsShownn(string widgetTitle)
         {
             var LegendItemList = new WidgetPage.Widget(widgetTitle).GetCurrentLegendItems();
             Report.IsTrue(!LegendItemList.IsNullOrEmpty(), "There was no legend", "The Legend was shown");
-
         }
 
-        [StepDefinition(@"In the (.*) widget, I confirm that a legend is not shown")]
+        [RegexStepDefinition(@"In the (.*) widget, I confirm that a legend is not shown")]
         public void InTheWidgetConfirmLegendIsNotShownn(string widgetTitle)
         {
             var LegendItemList = new WidgetPage.Widget(widgetTitle).GetCurrentLegendItems();
@@ -991,7 +1121,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 
 
-        [StepDefinition(@"I click on the legend item: (.*) from the List saved as: (.*), for widget: (.*)")]
+        [RegexStepDefinition(@"I click on the legend item: (.*) from the List saved as: (.*), for widget: (.*)")]
         public void IClickOnTheLegendItemForWidget(string legendTitle, string savedAs, string widget)
         {
 
@@ -1005,7 +1135,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"I confirm the (.*) widget is refreshed and the section with title: (.*) is (removed|not removed) from the pie chart")]
+        [RegexStepDefinition(@"I confirm the (.*) widget is refreshed and the section with title: (.*) is (removed|not removed) from the pie chart")]
         public void WidgetIsRefreshedAndPieChartSectionRemoved(string widget, string sectionTitle, string presence)
         {
             Report.IsTrue(new Home().WaitWidgetSpinnerFinish(), "The widgets did not finish loading", "The widgets have finished loading");
@@ -1058,7 +1188,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"I confirm for the widget: (.*) that the legend entry: (.*) is found and in a grey font in the legend list")]
+        [RegexStepDefinition(@"I confirm for the widget: (.*) that the legend entry: (.*) is found and in a grey font in the legend list")]
         public void LegendEntryIsFoundInGreyFont(string widget, string sectionTitle)
         {
             Report.IsTrue(new Home().WaitWidgetSpinnerFinish(), "The widgets did not finish loading", "The widgets have finished loading");
@@ -1107,17 +1237,17 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"I click the three dots menu icon and select the Export option for the widget: (.*)")]
+        [RegexStepDefinition(@"I click the three dots menu icon and select the Export option for the widget: (.*)")]
         public void ForWidgetISelectThreeDotsMenuAndClickExport(string widget)
         {
             new Steps_Home().ClickDropDownToggle(widget);
             new Steps_Home().ClickDropdownOptionWidget("Export", widget);
         }
 
-        [StepDefinition(@"For the (.*) widget, I save the current titles as: (.*) and check that when I click on the section: (.*) that the products data view is seen.")]
+        [RegexStepDefinition(@"For the (.*) widget, I save the current titles as: (.*) and check that when I click on the section: (.*) that the products data view is seen.")]
         public void ForWidgetISaveCurrentTitlesAndCheckThatWhenIClickSectionThatProductDataSeen(string widgetTitle, string savedAs, string sectionTitle)
         {
-            ReportSettings.UseSubSteps = true;
+            ReportDetails.CurrentDetails.UseSubSteps = true;
             Report.StartStep("Attempting to switch to the data view");
             this.ForWidgetISwitchToView(widgetTitle, "Data");
             Report.StartStep("Saving the titles to context");
@@ -1129,20 +1259,27 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"For the widget that has title: (.*), I click the back button in the Products List and confirm a graph is displayed")]
+        [RegexStepDefinition(@"For the widget that has title: (.*), I click the back button in the Products List and confirm a graph is displayed")]
         public void ForWidgetClickProductsGridBackButtonAndConfrimGraphDisplayed(string widgetTitle)
         {
             Report.IsTrue(new Home.Widget(widgetTitle).ClickProductsListBackButton(), "Failed to click the back button", "Successfully clicked the back button");
             Report.IsTrue(new Home.Widget(widgetTitle).WaitUntilGraphXIsDisplayed(), "The graph content did not appear", "The graph content was shown");
         }
 
-        [StepDefinition(@"In the widget (.*), I confirm I see a Contact Supplier link to the right of the product details for the Product with ID: (.*)")]
+        [RegexStepDefinition(@"For the saved widget, I click the back button in the Products List and confirm a graph is displayed")]
+        public void ForSavedWidgetClickProductsGridBackButtonAndConfrimGraphDisplayed()
+        {
+            Home.Widget widget = new Home().GetWidget("%ThisWidget%");
+            ForWidgetClickProductsGridBackButtonAndConfrimGraphDisplayed(widget.Title);
+        }
+
+            [RegexStepDefinition(@"In the widget (.*), I confirm I see a Contact Supplier link to the right of the product details for the Product with ID: (.*)")]
         public void ForWidgetIConfirmContactSupplierForProduct(string widget, string productID)
         {
             Report.IsTrue(new Home.Widget(widget).ContactSupplierTextFound(productID), "The text 'Contact Supplier' was not found", "The text 'Contact Supplier' was found");
         }
 
-        [StepDefinition(@"For the widget: (.*), I click on the Product Number (.*) and confirm the Product Information pop up is (shown|not shown)")]
+        [RegexStepDefinition(@"For the widget: (.*), I click on the Product Number (.*) and confirm the Product Information pop up is (shown|not shown)")]
         public void IClickProductNumberAndConfirmProductInformationPopupStatus(string widgetTitle, string productID, string status)
         {
             Report.Info("Getting all the product numbers being shown in the Product List");
@@ -1174,7 +1311,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             }
         }
 
-        [StepDefinition(@"I Confirm that the Product Information pop up is (shown|not shown)")]
+        [RegexStepDefinition(@"I Confirm that the Product Information pop up is (shown|not shown)")]
         public void IConfirmThatTheProductInformationPopupIsInStatus(string status)
         {
             bool expectedStatus = true;
@@ -1191,7 +1328,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"For the Supplier Subscription Status widget, I save the current titles as: (.*) and check that when I click on the section: (.*) that the supplier list view is seen.")]
+        [RegexStepDefinition(@"For the Supplier Subscription Status widget, I save the current titles as: (.*) and check that when I click on the section: (.*) that the supplier list view is seen.")]
         public void ForWidgetISaveCurrentTitlesAndCheckThatWhenIClickSectionThatSupplierListSeen(string savedAs, string sectionTitle)
         {
 
@@ -1207,7 +1344,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"I confirm Supplier content (is|is not) displayed for the widget: (.*)")]
+        [RegexStepDefinition(@"I confirm Supplier content (is|is not) displayed for the widget: (.*)")]
         public void SupplierContentDisplayedForTitle(string isIsNot, string widgetTitle)
         {
             bool displayed = false;
@@ -1225,6 +1362,17 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
+        [RegexStepDefinition(@"In the Web Viewers drop down menu I select: (.*)")]
+        public void InTheWebViewersDropDownMenuISelect(string dropDownOption)
+        {
+            Report.IsTrue(new Home().SelectWebViewersDropDownOption(dropDownOption), "Failed to select drop down option: " + dropDownOption, "Successfully selected drop down option: " + dropDownOption);
+        }
+
+        [RegexStepDefinition(@"I Confirm 404 not found error is displayed")]
+        public void IVerifyPageNotFoundErrorIsDisplayed()
+        {
+            Report.IsTrue(new Home().PageNotFoundErrorDisplayed(), "Failed to display 404 not found page", "Successfully displayed 404 page not found ");
+        }
 
 
 

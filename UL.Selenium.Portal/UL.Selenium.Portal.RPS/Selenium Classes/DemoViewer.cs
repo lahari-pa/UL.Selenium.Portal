@@ -12,7 +12,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
         protected override By ContainerElementLocator => By.XPath("//body[//input[@name='__RequestVerificationToken']]");
 
 
-        private IWebElement LoginInputArea => this.containerElement.FindElement(By.XPath(".//fieldset[//legend[text()='Account Information']]"), 2);
+        private IWebElement LoginInputArea => ContainerElement.FindElement(By.XPath(".//fieldset[//legend[text()='Account Information']]"), 2);
 
         #endregion
 

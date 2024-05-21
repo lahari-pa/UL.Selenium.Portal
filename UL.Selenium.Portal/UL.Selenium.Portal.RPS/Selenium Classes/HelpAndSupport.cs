@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Castle.Core.Internal;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using UL.Automation.Reporting.Functions;
@@ -8,17 +7,19 @@ using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
 using UL.Selenium.Portal.WERCSmart.Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+
 
 namespace UL.Selenium.Portal.RPS.Selenium_Classes
-{ 
+{
     class HelpAndSupport : SeleniumBaseObject
     {
         #region Page Objects
         protected override By ContainerElementLocator => By.XPath("//div[@class='freshwidget-container responsive']//div[@class='freshwidget-dialog']");
         
-        private IWebElement PopupHeader => this.containerElement.FindElement(By.XPath($""), 2);
+        private IWebElement PopupHeader => ContainerElement.FindElement(By.XPath($""), 2);
 
-        private IWebElement xIconEl => this.containerElement.FindElement(By.Id("freshwidget-close"), 3);
+        private IWebElement xIconEl => ContainerElement.FindElement(By.Id("freshwidget-close"), 3);
 
 
 
@@ -268,7 +269,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                 SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
                 return false;
             }
-            IWebElement needAnIngredientEl = mainContentEl.FindElement(By.Id("helpdesk_ticket_custom_field_cf_please_provide_details_of_your_ingredient_request_551112"), 2);
+            IWebElement needAnIngredientEl = mainContentEl.FindElement(By.Id("helpdesk_ticket_custom_field_cf_ingredient_add_request_551112"), 2);
             if (needAnIngredientEl == null)
             {
                 Report.Info("The Need An Ingredient Input element was not found");
@@ -294,7 +295,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                 SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
                 return false;
             }
-            IWebElement needAnIngredientLabelEl = mainContentEl.FindElement(By.XPath("//label[contains(@class,'control-label cf_please_provide_details_of_your_ingredient_request_551112-label')]"), 2);
+            IWebElement needAnIngredientLabelEl = mainContentEl.FindElement(By.XPath("//label[.//input[contains(@id,'helpdesk_ticket_custom_field_cf_ingredient_add_request_551112')]"), 2);
             if (needAnIngredientLabelEl == null)
             {
                 Report.Info("The Need An ingredient label element was not found");
@@ -303,7 +304,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             }
             string foundText = needAnIngredientLabelEl.Text;
             SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
-            return foundText.Contains("Need an Ingredient");
+            return foundText.ToLower().Contains("need an ingredient");
         }
 
         public bool CheckHelpAndSupportPopupContainsScrollBar()
@@ -420,7 +421,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                 return false;
             }            
             SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
-            this.containerElement.TryClick();
+            ContainerElement.TryClick();
             Delay.Seconds(3);
             return true;
 
@@ -496,17 +497,15 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             if (priorityFieldLabel == null)
             {
                                 
-                Report.Info("The Priority Field dropdown element was not found123");
+                Report.Info("The Priority Field dropdown element was not found");
                 SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
                 return false;
 
             }
-
-            List<IWebElement> proityFoundOptions = priorityFieldLabel.FindElements(By.XPath(".//following-sibling::select[@class='dropdown select2-offscreen']//option"), 2).ToList();
-
+            List<IWebElement> proityFoundOptions = priorityFieldLabel.FindElements(By.XPath("//select[@class='dropdown select2-offscreen']//option"), 2).ToList();
             if (proityFoundOptions.IsNullOrEmpty())
             {
-                Report.Info("The Priority Field dropdown element was not null or empty123");
+                Report.Info("The Priority Field dropdown element was not null or empty");
                 SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
                 return false;
             }
@@ -1162,6 +1161,117 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             return foundText;
         }
 
+
+        public bool ConfirmIAmADropDownFieldPresent()
+        {
+
+            Report.Info("Switching to iFrame");
+            GeneralUtilities.SwitchToFrame($"<contains(@title,'Feedback Form')>");
+            // IWebElement HeaderElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@class='modal-header-bg']//h3[@class='ellipsis lead pull-left form-title']"), 2);
+            IWebElement mainContentEl = SeleniumBrowser.WebBrowser.FindElement(By.Id("fd_feedback_widget"), 2);
+            if (mainContentEl == null)
+            {
+                Report.Info("The Main Entry Form was not found");
+                SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+                return false;
+            }
+            IWebElement iAmADropField = mainContentEl.FindElement(By.Id("s2id_helpdesk_ticket_custom_field_cf_customer_type_551112"), 2);
+            if (iAmADropField == null)
+            {
+                Report.Info("The I am a Drop Field element was not found");
+                SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+                return false;
+            }
+            SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+            return true;
+
+        }
+
+        public bool ConfirmOpenIAmADropDownFieldPresent()
+        {
+
+            Report.Info("Switching to iFrame");
+            GeneralUtilities.SwitchToFrame($"<contains(@title,'Feedback Form')>");
+            // IWebElement HeaderElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@class='modal-header-bg']//h3[@class='ellipsis lead pull-left form-title']"), 2);
+            IWebElement mainContentEl = SeleniumBrowser.WebBrowser.FindElement(By.Id("fd_feedback_widget"), 2);
+            if (mainContentEl == null)
+            {
+                Report.Info("The Main Entry Form was not found");
+                SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+                return false;
+            }
+            IWebElement iAmADropField = mainContentEl.FindElement(By.Id("s2id_helpdesk_ticket_custom_field_cf_customer_type_551112"), 2);
+            if (iAmADropField == null)
+            {
+                Report.Info("The I am a Drop Field element was not found");
+                SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+                return false;
+            }
+            iAmADropField.TryClick();
+            Delay.Seconds(5);
+            Report.Screenshot();
+            IWebElement dropDown = SeleniumBrowser.WebBrowser.FindElement(By.Id("select2-drop"), 2);
+            if (dropDown == null)
+            {
+                Report.Info("The Open Priority Drop menu element was not found");
+                SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+                return false;
+            }
+            SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+            ContainerElement.TryClick();
+            Delay.Seconds(3);
+            return true;
+
+        }
+
+        public bool ConfirmIAmALabelTextPresent()
+        {
+
+            Report.Info("Switching to iFrame");
+            GeneralUtilities.SwitchToFrame($"<contains(@title,'Feedback Form')>");
+            IWebElement mainContentEl = SeleniumBrowser.WebBrowser.FindElement(By.Id("fd_feedback_widget"), 2);
+            if (mainContentEl == null)
+            {
+                Report.Info("The Main Entry Form was not found");
+                SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+                return false;
+            }
+            IWebElement iAmAFieldLabel = mainContentEl.FindElement(By.XPath("//label[contains(@class,'required control-label cf_customer_type_551112-label')]"), 2);
+            if (iAmAFieldLabel == null)
+            {
+                Report.Info("The Priority Field label element was not found");
+                SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+                return false;
+            }
+            string foundText = iAmAFieldLabel.Text;
+            SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+            return foundText == "I am a...";
+        }
+
+        public string GetHeader()
+        {
+
+            Report.Info("Switching to iFrame");
+            GeneralUtilities.SwitchToFrame($"<contains(@title,'Feedback Form')>");
+            IWebElement mainContentEl = SeleniumBrowser.WebBrowser.FindElement(By.Id("fd_feedback_widget"), 2);
+            if (mainContentEl == null)
+            {
+                Report.Info("The Main Entry Form was not found");
+                SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+                return null;
+            }
+            IWebElement header = mainContentEl.FindElement(By.XPath("//h3[@class='ellipsis lead pull-left form-title']"), 2);
+            if (header == null)
+            {
+                Report.Info("The header element was not found");
+                SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+                return null;
+            }
+            string headerValue = header.Text;
+            SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+            return headerValue;
+
+        }
 
     }
 
