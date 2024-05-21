@@ -12,6 +12,8 @@
 @SafetyDataSheetAuthoring
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 @Ingredients
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 
 Feature: Batteries
 
@@ -23,8 +25,12 @@ Feature: Batteries
 @ignore
 @TestCase:97488
 Scenario: [97488] Stand alone Lithium Battery vehicle
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lithium battery vehicle
 	Then I save the product information as: TestCase97488
 	#And I call Shared Step 60935 (Product Information - US - Direct Ship - Private Label Only)
@@ -82,8 +88,12 @@ Scenario: [97488] Stand alone Lithium Battery vehicle
 @ignore
 @TestCase:97489
 Scenario: [97489] Stand alone Magnesium Battery
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Magnesium Battery
 	Then I save the product information as: TestCase97489
 	Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
@@ -132,7 +142,10 @@ Scenario: [97489] Stand alone Magnesium Battery
 @TestCase:97495
 Scenario: [97495] Stand alone Nickel-Cadmium Battery
 	Given I log in with the account saved in TReVor as: ProductAccount	
-	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Then I should see the The Product Page	
 	#And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Nickel-cadmium battery
 	Then In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Nickel-cadmium battery
@@ -208,7 +221,10 @@ Scenario: [97495] Stand alone Nickel-Cadmium Battery
 @TestCase:97494
 Scenario: [97494] Stand alone Nickel Metal Hydride Battery
 	Given I log in with the account saved in TReVor as: ProductAccount	
-	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	#And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Nickel Metal Hydride (NiMH) Battery
 	Then I should see the The Product Page
 	Then In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Nickel Metal Hydride (NiMH) Battery

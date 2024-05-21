@@ -35,7 +35,8 @@ Scenario: [73949] Kit - Document merge - US only
 	Given I create a Walmart product for a Kit and Force it to completed using Test Case 75335 using SHA Acc: SHAQAAuto9 (SOLD set to US only with Walmart as retailer) and save as: 73949_KitProduct2
 	Given I navigate to the landing page	
 	Given I generate a random UPC number and save as: UPC73949
-	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	#And I In the shared step below use any of the kit product types - these areCosmetic Products in a kit (RU000777)Hair Care kit (RU000723)Hair Color Kit (RU000724)Emergency Road kit (RU000718)Automotive Care Products (RU000124)Personal Care kit (RU001034)
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Hair Color Kit
