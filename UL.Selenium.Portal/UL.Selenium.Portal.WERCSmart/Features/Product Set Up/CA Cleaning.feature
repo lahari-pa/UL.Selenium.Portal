@@ -114,7 +114,6 @@ And In the Product Section, set the option in section: 'Product Name as it appea
 Given In the Product Section, set the option in section: 'Type of Product (select)' to: Bleach
 Given in the The Product page I click Continue
 Then I save the product information as: TestCase139534
-Given I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
 Then I set the value 'FIFRAPopupExpected' to be: true
 #Given In the Product Information Screen I answer the questions as follows - US only - No to GHS - No to shipped supplier - Yes to CA Cleaning - No to Private Label - No to Sold to retailer)
 Given I should see the Product Information Page
@@ -140,6 +139,18 @@ Given In the California Cleaning Product Disclosure Section, set the option in s
 Given In the California Cleaning Product Disclosure Section, set the option in section: 'Company Web Address' to: http://TestWebsitePlaceholderName.com
 Given In the California Cleaning Product Disclosure Section, set the option in section: 'Select the product's GTIN Brick Code' to: [10000424] Laundry Detergents
 Given I click continue
+Then In the Ingredients section, add component with component name: Water
+Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
+Then In the Ingredients Table row with component name: Water, in Ingredient Type column select option Fragrance
+Then In the Ingredients Table row with component name: Water, in Trade Secret? column set checkbox to checked
+Then In the Ingredients Table row with component name: Water, in Generic Name column text input enter: 12345
+Given I click continue
+Then I confirm the pop up should be displayed with the heading: California Cleaning Right to Know
+Then In the popup with the following title: California Cleaning Right to Know I click the Close button
+
+Given I click continue
+And I should see the Inventory Status, Prop 65 (US) Page
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139388
 Given I add the following CA Cleaning ingredients:  
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName     | IngredientType | FunctionalPurpose             | Clean | Certified |
 		| Water         | 100     | false               | false       | AQUA           | Fragrance      | Abrasive, Absorbent, Adhesive | true  | true      |
