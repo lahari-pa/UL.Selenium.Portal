@@ -149,10 +149,11 @@ Then In the Ingredients Table row with component name: Water, in Generic Name co
 Given I click continue
 Then I confirm the pop up should be displayed with the heading: California Cleaning Right to Know
 Then In the popup with the following title: California Cleaning Right to Know I click the Close button
+Then In the Ingredients Table row with component name: Water, in Functional Purpose column delete selected option Abrasive
 Then In the Ingredients Table row with component name: Water, in Functional Purpose column select option Fragrance Component
 Given I click continue
 And I should see the Inventory Status, Prop 65 (US) Page
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139388
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139534
 
 
 @ignore
