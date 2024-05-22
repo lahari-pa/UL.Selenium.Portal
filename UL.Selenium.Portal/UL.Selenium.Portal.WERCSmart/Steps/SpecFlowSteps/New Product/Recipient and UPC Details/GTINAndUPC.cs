@@ -81,5 +81,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 		{
 			new Steps_Prototype().TheCheckboxWithDescriptionIsIsNotChecked(checkbox, is_isnot);
 		}
+		[StepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, click 'sample file' link to download file")]
+		public void ThenInTheU_S_DepartmentOfTransportationDOTClassificationSectionClickSampleFileLink()
+		{
+			string link = "sample file";
+			new Steps_Prototype().ClickLinkElement(link);
+		}
+		[StepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, confirm 'sample file' is downloaded and save as: (.*)")]
+		public void ThenInTheU_S_DepartmentOfTransportationDOTClassificationSectionFileIsDownloaded(string savedAs)
+		{
+			string fileName = "Sample.xlsx";
+			new Steps_Prototype().ConfirmFileAppearsInDownloadsFolder(fileName, savedAs);
+		}
 	}
 }
