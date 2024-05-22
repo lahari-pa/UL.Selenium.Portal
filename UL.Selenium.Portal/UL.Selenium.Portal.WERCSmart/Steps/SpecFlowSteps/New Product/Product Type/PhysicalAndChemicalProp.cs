@@ -40,7 +40,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		public void SelectRelativeDensity(string option)
 		{
 			string section = "Relative Density";
-			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+			new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
 		}
 
 

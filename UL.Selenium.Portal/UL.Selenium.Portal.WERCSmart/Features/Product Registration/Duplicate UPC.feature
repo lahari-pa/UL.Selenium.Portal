@@ -39,6 +39,7 @@
 @Ingredients
 @run_DuplicateUPC
 @StepsPrototype
+@RegulatoryInformation3
 
 Feature: Duplicate UPC
 
@@ -129,20 +130,45 @@ Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
 	Then I save the product information as: TestCase82536
 	And I click continue
-	And I call Shared Step 59680a (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR, with FIFRA - Continue - Happy Path)
-#Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
-Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Bonded, fibrous glass web
-Given In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
-Given In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
-Given I click continue
-#And I call Shared Step 29181 (Ingredients - add any chemical) with name: soap
+	Given I should see the Product Information Page
+	#252868 Product Information - Applicable Only to Type of Product:  Soap (Bar, Liquid) for Body (RU000211)
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Given In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Given In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Given In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Given I click continue
+	#Given I call Shared Step 252869 Physical and Chemical Properties - Applicable Only to Type of Product:  Soap (Bar, Liquid) for Body (RU000211)
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Relative Density' to: lb./gal. (pounds per gallon)
+	Then In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 3588.55
+	Then In the Physical and Chemical Properties Section, for section: 'pH' enter text: 9.2
+	Then In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: 97
+	Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' select the checkbox option: 'I do not have exact Flash Point data available to me'
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point (in Celsius)' to: None, No Flash Point
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Given I click continue
+	#And I call Shared Step 252876 Ingredients - Applicable Only to the Type of Product:  Soap (Bar, Liquid) for Body (RU000211)
 	Given I should see the Ingredients Page
-	Then In the Ingredients section, add the following ingredients:
-	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-	| component name | Soap       | 100     |                     |               |             |
-	Then in the Ingredients page I click Continue
-
+	Then In the Ingredients section, add component with component name: Sodium cocoate
+	Then In the Ingredients Table row with component name: Sodium cocoate, in Percent column text input enter: 100
+	Then In the Ingredients Table row with component name: Sodium cocoate, in Publicly Disclosed? column set checkbox to checked
+	Then In the Ingredients Table row with component name: Sodium cocoate, in Public Name column select option Soap, coconut oil
+	Given I click continue
+	#239830 Inventory Status, Prop 65 (US) - TSCA (EXEMPT) / Prop 65 (NO) - (General Shared-Step)
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is exempt from TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Given I click continue
+	#252877 Regulatory Information 3 - Applicable Only to Type of Product:  Soap (Bar, Liquid) for Body (RU000211)
+	Given I should see the Regulatory Information 3 Page
+	Given I click continue
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above
+	Then In the Regulatory Information 3 Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
+	Then In the Regulatory Information 3 Section, the following link: Nutritional and Supplement Labels should be displayed
+	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	Given I call Shared Step 57590 (Enter Pesticide Data - United States (with EPA number))
