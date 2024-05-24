@@ -12,11 +12,15 @@ using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
+using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Ingredients;
+using UL.Automation.SpecFlow.Classes;
+
+
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {
 	[Binding, Scope(Tag = "Ingredients")]
-	class Ingredients
+	class Ingredients_Steps
 	{
 
 		[StepDefinition(@"In the Ingredients Section, In the popup view with the following title: (.*) I click the (.*) button")]
@@ -111,6 +115,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 					Report.Error("Error: Invalid Search Type");
 					break;
 			}
+		}
+		//See Table format Bellow 
+		//|Functional Purpose|
+		[StepDefinition(@"In the Ingredients Section ingredients table, for Ingredient: (.*) add Ingredient Type: (.*) and Functional Purpose:")]
+		public void ForIngredientsSelectTypeAndFunctionalPurpose(string ingredientName, string ingredientType, Table table)
+		{
+			Report.Info($"Attempting to select the ingredient type: {ingredientType} for the Ingredient: {ingredientName}");
+			Report.IsTrue(new Ingredients().ISelectIngredientType(ingredientName, ingredientType, "ComponentName"), "Failed to Select the Ingredient Type", "Successfully selected the Ingredient Type");
+			Report.Info($"Attempting to Select the Functional Purposes from the table.");
+			var selectedOptionsStr = new List<string>();
+			foreach (TableRow row in table.Rows)
+			{
+			
+				if (Report.IsTrue(new Ingredients().ISelectFunctionalPurpose(ingredientName, row["Functional Purpose"], "ComponentName"), "Failed to Select The Functional Purpose:" + row["Functional Purpose"], "Successfully selected the Functional purpose" + row["Functional Purpose"]))
+				{
+					selectedOptionsStr.Add(row["Functional Purpose"]);
+				}
+			
+			}
+			Context.AddToContext(ingredientName + "FunctionalPurposesList", selectedOptionsStr);
 		}
 		#endregion
 		#region Table Header

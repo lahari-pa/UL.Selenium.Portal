@@ -17,6 +17,8 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 
+
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 Feature: Cart
 
 #Background:
@@ -63,7 +65,12 @@ Scenario: [63323] Remove single product from cart
 	   Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
              | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
              | Water         | 100     | false               | false       |            |
-       Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+    #Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I should be on the Inventory Status, Prop 65 (US) Page
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+
        Given I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
        #Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	   Given I should see the Regulatory Documents to Provide Page
