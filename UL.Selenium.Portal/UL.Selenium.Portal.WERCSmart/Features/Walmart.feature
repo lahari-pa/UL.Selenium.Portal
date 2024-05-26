@@ -95,10 +95,11 @@ Scenario: [73920] Walmart Affiliates when Viewing My Retail Partners
 Scenario: [74133] Walmart Product Type Electronics
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	#Test case calls shared 31053 but this is identical
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
-	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
-	Given in the New Product page I click Continue
+#	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Electronic Equipment with Circuit Board Only
 	Then I save the product information as: TestCase74133
 	#And I call Shared Step 60935 (Product Information - US - Direct Ship - Private Label Only)

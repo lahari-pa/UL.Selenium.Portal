@@ -13,6 +13,8 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ToxicityCharacteristicLeachingProcedureTCLP
 @StepsPrototype
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+
 Feature: Lithium Battery Transport Information
 
 
@@ -187,7 +189,12 @@ Scenario: [65520] BCP - Contains Lithium Primary installed in product - Lithium 
 Scenario: [65523] BCP - Contains Lithium Primary packaged with the product - Lithium Battery Transportation step - question wording and validation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Camera w/Battery
 	Then I save the product information as: TestCase65523	
 	Given I call Shared Step 159304 (Product Information - US, No(Child), No (DSV), No (PLP))
