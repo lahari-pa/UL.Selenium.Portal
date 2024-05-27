@@ -139,6 +139,10 @@ Given In the California Cleaning Product Disclosure Section, set the option in s
 Given In the California Cleaning Product Disclosure Section, set the option in section: 'Company Web Address' to: http://TestWebsitePlaceholderName.com
 Given In the California Cleaning Product Disclosure Section, set the option in section: 'Select the product's GTIN Brick Code' to: [10000424] Laundry Detergents
 Given I click continue
+#Given I add the following CA Cleaning ingredients:  
+#		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName     | IngredientType | FunctionalPurpose             | Clean | Certified |
+#		| Water         | 100     | false               | false       | AQUA           | Fragrance      | Abrasive, Absorbent, Adhesive | true  | true      |
+
 Then In the Ingredients section, add component with component name: Water
 Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
 Then In the Ingredients Table row with component name: Water, in Ingredient Type column select option Fragrance
