@@ -8,11 +8,12 @@ using UL.Automation.WebDriver.Extensions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using UL.Automation.SpecFlow.Classes;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using System.Collections.ObjectModel;
-using TechTalk.SpecFlow;
+using Reqnroll;
 using UL.Automation.Utilities;
+using UL.Automation.Utilities.Mailosaur.Classes;
 using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.RetailerAbbreviations;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
@@ -827,7 +828,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Beginning Invoice_Email_Arrived: " + invoice_no);
 
-			if (!MailosaurFunctions.CheckEmailHasArrived("Invoice " + invoice_no + " is attached", email_address))
+			if (!MailosaurHelpers.DefaultMailbox.CheckEmailHasArrived("Invoice " + invoice_no + " is attached", email_address))
 			{
 				Report.Info("Invoice Email has Not Arrived");
 				return false;

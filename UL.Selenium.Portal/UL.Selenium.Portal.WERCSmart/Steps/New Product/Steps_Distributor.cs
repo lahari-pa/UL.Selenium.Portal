@@ -1,7 +1,7 @@
 ﻿using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.Utilities.Functions;
 using OpenQA.Selenium;
 using System;
@@ -10,8 +10,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
+using Reqnroll;
+using Reqnroll.Assist;
 using UL.Automation.Reporting;
 using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
@@ -20,13 +20,14 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using System.IO;
+using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
 	[Binding, Scope(Tag = "NewDistributor")]
 	class Steps_Distributor
 	{
-		[StepDefinition(@"I click outside Provide manufacturer UPC textbox")]
+		[RegexStepDefinition(@"I click outside Provide manufacturer UPC textbox")]
 		public void ClickOutSideTextBox()
 		{
 			//Report.UseSubSteps = true;
@@ -42,7 +43,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-		[StepDefinition(@"I click on I understand checkbox and then Send to Manufacturer")]
+		[RegexStepDefinition(@"I click on I understand checkbox and then Send to Manufacturer")]
 		public void ClickCheckbox()
 		{
 			var thisNewProduct = new NewProduct();
@@ -56,7 +57,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(SendtoManu.TryClick(), "failed to click Checkbox", "Successfully clicked checkbox");
 		}
 
-		[StepDefinition(@"I search for the product in My Distributor: (.*)")]
+		[RegexStepDefinition(@"I search for the product in My Distributor: (.*)")]
 		public void SearchForTheProductInMyDist(string savedAs)
 		{
 			//Report.Info("Searching for product with ID: '" + product + "'");
@@ -120,7 +121,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(selProdGrid.ProductsInMyDistCount() == 1, "No products were returned for ID: '" + id + "'!", "Product was returned!");
 		}
 
-		[StepDefinition(@"I click Approve for the most recent product returned in my dist")]
+		[RegexStepDefinition(@"I click Approve for the most recent product returned in my dist")]
 		public void ClickApproveInMyDist()
 		{
 			Report.Info("Clicking 'Approve' for first product returned");
@@ -135,7 +136,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Screenshot();
 		}
 
-		[StepDefinition(
+		[RegexStepDefinition(
 			@"I call Shared Step for dist - UPC - Add UPCName, Container type, Size and Package type \(no retailer data needed\) - Continue for UPC Name: (.*), container type: (.*) and size: (.*)")]
 		public void Icallsharedstepfordistupc_Continue(
 			string name, string containerType, string size)
@@ -182,7 +183,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
-		[StepDefinition(@"I create a distibutor request as (.*) and send to manufacturer")]
+		[RegexStepDefinition(@"I create a distibutor request as (.*) and send to manufacturer")]
 		public void CreateNewDistributorProduct(string savedAs)
 		{
 			//Report.UseSubSteps = true;

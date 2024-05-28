@@ -5,11 +5,14 @@ using Mailosaur;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
-using TechTalk.SpecFlow;
+using UL.Automation.ReqnrollHelpers.Classes;
+using Reqnroll;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.Utilities;
+using UL.Automation.Utilities.Mailosaur.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using Message = Mailosaur.Models.Message;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -18,7 +21,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	{
 
 
-		[StepDefinition(@"in the Conflict Minerals page I put in email account for user saved as: (.*)")]
+		[RegexStepDefinition(@"in the Conflict Minerals page I put in email account for user saved as: (.*)")]
 		public void GivenInTheConflictMineralsPageIPutInEmailAccountForUserSavedAs(string savedAsUser)
 		{
 			try
@@ -37,7 +40,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"the Conflict Minerals page should load")]
+		[RegexStepDefinition(@"the Conflict Minerals page should load")]
 		public void ThenTheConflictMineralsPageShouldLoad()
 		{
 			var thisConflictMinerals = new ConflictMinerals();
@@ -46,7 +49,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"in the Conflict Minerals page I put in email account: (.*)")]
+		[RegexStepDefinition(@"in the Conflict Minerals page I put in email account: (.*)")]
 		public void GivenInTheConflictMineralsPageIPutInEmailAccount(string emailToEnter)
 		{
 			var thisConflictMinerals = new ConflictMinerals();
@@ -61,14 +64,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"in the Conflict Minerals page I click on Next")]
+		[RegexStepDefinition(@"in the Conflict Minerals page I click on Next")]
 		public void GivenInTheConflictMineralsPageIClickOnNext()
 		{
 			var thisConflictMinerals = new ConflictMinerals();
 			thisConflictMinerals.ClickNext();
 		}
 
-		[StepDefinition(@"in the Conflict Minerals page the Create Company Account form should have loaded")]
+		[RegexStepDefinition(@"in the Conflict Minerals page the Create Company Account form should have loaded")]
 		public void GivenInTheConflictMineralsPageTheCreateCompanyAccountFormShouldHaveLoaded()
 		{
 			var thisConflictMinerals = new ConflictMinerals();
@@ -76,7 +79,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Create Company Account form has not loaded", "Create Company Account form has loaded as expected.");
 		}
 
-		[StepDefinition(@"in the Conflict Minerals page the Company Contact Person form should have loaded")]
+		[RegexStepDefinition(@"in the Conflict Minerals page the Company Contact Person form should have loaded")]
 		public void ThenInTheConflictMineralsPageTheCompanyContactPersonFormShouldHaveLoaded()
 		{
 			var thisConflictMinerals = new ConflictMinerals();
@@ -84,7 +87,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Create company account form has not loaded", "Company account form has loaded as expected.");
 		}
 
-		[StepDefinition(@"in the Conflict Minerals page the Company Contact Person form email value is: (.*)")]
+		[RegexStepDefinition(@"in the Conflict Minerals page the Company Contact Person form email value is: (.*)")]
 		public void ThenInTheConflictMineralsPageTheCompanyContactPersonFormEmailValueIs(string expectedEmail)
 		{
 			var thisConflictMinerals = new ConflictMinerals();
@@ -97,7 +100,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Company contact email is not showing as expected. Should be: " + expectedEmail + " but is: " + thisConflictMinerals.ContactEmail, "Contact email is showing as expected: " + expectedEmail);
 		}
 
-		[StepDefinition(@"I click on the login button on the congratulations page")]
+		[RegexStepDefinition(@"I click on the login button on the congratulations page")]
 		public void GivenIClickOnTheLoginButtonOnTheCongratulationsPage()
 		{
 			var thisConflictMinerals = new ConflictMinerals();
@@ -107,7 +110,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"in the Conflict Minerals page the New Email form should have loaded")]
+		[RegexStepDefinition(@"in the Conflict Minerals page the New Email form should have loaded")]
 		public void ThenInTheConflictMineralsPageTheNewEmailFormShouldHaveLoaded()
 		{
 			var thisConflictMinerals = new ConflictMinerals();
@@ -115,12 +118,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"New email form has not loaded", "New email form has loaded as expected.");
 		}
 
-		[StepDefinition(@"in the Conflict Minerals page I create enter Company Contact Person as follows:")]
+		[RegexStepDefinition(@"in the Conflict Minerals page I create enter Company Contact Person as follows:")]
 		public void GivenInTheConflictMineralsPageICreateEnterCompanyContactPersonAsFollows(Table table)
 		{
 			var thisConflictMinerals = new ConflictMinerals();
 
-			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
+			foreach (TableRow thisRow in table.Rows)
 			{
 				switch (thisRow["Field"])
 				{
@@ -162,7 +165,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I should see a congratulations page")]
+		[RegexStepDefinition(@"I should see a congratulations page")]
 		public void ThenIShouldSeeACongratulationsPage()
 		{
 			var thisConflictMinerals = new ConflictMinerals();
@@ -170,8 +173,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Congratulations page has loaded as expected");
 		}
 
-		[StepDefinition(@"on the (.*) login page I enter the Email address: (.*)")]
-		[StepDefinition(@"in the (.*) login page I enter Email address: (.*)")]
+		[RegexStepDefinition(@"on the (.*) login page I enter the Email address: (.*)")]
+		[RegexStepDefinition(@"in the (.*) login page I enter Email address: (.*)")]
 		public void GivenInTheConflictMineralsLoginPageIEnterEmailAddress(string dummyType, string emailAddress)
 		{
 			if (emailAddress.ToLower().Contains("saved as"))
@@ -185,16 +188,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisConflictMinerals.EmailAddress == emailAddress, "Failed to input the email address: " + emailAddress, "Successfully inputted the email address: " + emailAddress);
 		}
 
-		[StepDefinition(@"the (.*) Verification page should load")]
-		//[StepDefinition(@"the (.*) Verification page should load")]
+		[RegexStepDefinition(@"the (.*) Verification page should load")]
+		//[RegexStepDefinition(@"the (.*) Verification page should load")]
 		public void ThenTheConflictMineralsVerificationPageShouldLoad(string dummyTitle)
 		{
 			Report.IsTrue(new ConflictMinerals().WaitForEnterVerificationCodePage(120),
 				"Enter verification code page has not loaded", "Enter verification page has loaded");
 		}
 
-		[StepDefinition(@"the (.*) terms of use page should load")]
-		//[StepDefinition(@"the (.*) terms of use page should load")]
+		[RegexStepDefinition(@"the (.*) terms of use page should load")]
+		//[RegexStepDefinition(@"the (.*) terms of use page should load")]
 		public void ThenTheConflictMineralsTermsOfUsePageShouldLoad(string dummyTitle)
 		{
 			var thisConflictMinerals = new ConflictMinerals();
@@ -202,8 +205,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Terms of use page has not loaded", "Terms of use page has loaded");
 		}
 
-		[StepDefinition(@"in the (.*) terms of use I check the Accept checkbox")]
-		[StepDefinition(@"on the (.*) terms of use I check the Accept checkbox")]
+		[RegexStepDefinition(@"in the (.*) terms of use I check the Accept checkbox")]
+		[RegexStepDefinition(@"on the (.*) terms of use I check the Accept checkbox")]
 		public void ThenInTheConflictMineralsTermsOfUseICheckTheAcceptCheckbox(string dummyTitle)
 		{
 			var thisConflictMinerals = new ConflictMinerals {
@@ -212,7 +215,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Success("Successfully accepted the terms of use!");
 		}
 
-		[StepDefinition(@"in the Conflict Minerals I should see the dashboard")]
+		[RegexStepDefinition(@"in the Conflict Minerals I should see the dashboard")]
 		public void ThenInTheConflictMineralsIShouldSeeTheDashboard()
 		{
 			var thisConflictMinerals = new ConflictMinerals();
@@ -220,7 +223,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Dashboard page has not loaded", "Dashboard page has loaded");
 		}
 
-		[StepDefinition(@"in the Conflict Minerals I should see company name in the header: (.*)")]
+		[RegexStepDefinition(@"in the Conflict Minerals I should see company name in the header: (.*)")]
 		public void ThenInTheConflictMineralsIShouldSeeCompanyNameInTheHeader(string companyName)
 		{
 			var thisConflictMinerals = new ConflictMinerals();
@@ -228,7 +231,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Company name is not showing in header as expected.", "Company name is showing in header as expected.");
 		}
 
-		[StepDefinition(@"in the Conflict Minerals I confirm I see my email address in the header: (.*)")]
+		[RegexStepDefinition(@"in the Conflict Minerals I confirm I see my email address in the header: (.*)")]
 		public void ThenInTheConflictMineralsIConfirmISeeMyEmailAddressInTheHeader(string emailAddress)
 		{
 			if (emailAddress.ToLower().Contains("saved as"))
@@ -247,16 +250,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"on the (.*) terms of use I click continue")]
-		[StepDefinition(@"in the (.*) terms of use I click continue")]
+		[RegexStepDefinition(@"on the (.*) terms of use I click continue")]
+		[RegexStepDefinition(@"in the (.*) terms of use I click continue")]
 		public void ThenInTheConflictMineralsTermsOfUseIClickContinue(string dummyTitle)
 		{
 			Report.IsTrue(new ConflictMinerals().ClickContinue(), "Failed to click continue", "Successfully clicked continue!");
 		}
 
 
-		[StepDefinition(@"on the (.*) login page I enter the Password: (.*)")]
-		[StepDefinition(@"in the (.*) login page I enter Password: (.*)")]
+		[RegexStepDefinition(@"on the (.*) login page I enter the Password: (.*)")]
+		[RegexStepDefinition(@"in the (.*) login page I enter Password: (.*)")]
 		public void GivenInTheConflictMineralsLoginPageIEnterPassword(string dummyTitle, string password)
 		{
 			var thisConflictMinerals = new ConflictMinerals {
@@ -266,7 +269,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"if an error message shows I retry entering password: (.*) and clicking on login")]
+		[RegexStepDefinition(@"if an error message shows I retry entering password: (.*) and clicking on login")]
 		public void ThenIfAnErrorMessageShowsIRetryEnteringPasswordAndClickingOnLogin(string password)
 		{
 			var thisConflictMinerals = new ConflictMinerals();
@@ -277,8 +280,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"on the (.*) login page I click on the Login button")]
-		[StepDefinition(@"in the (.*) login page I click on the Login button")]
+		[RegexStepDefinition(@"on the (.*) login page I click on the Login button")]
+		[RegexStepDefinition(@"in the (.*) login page I click on the Login button")]
 		public void GivenInTheConflictMineralsLoginPageIClickOnTheLoginButton(string dummyTitle)
 		{
 			Report.IsTrue(new ConflictMinerals().ClickLogin(), "Failed to click the log in button!", "Successfully clicked the log in button!");
@@ -288,7 +291,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"I confirm that I have received a Signup confirmation email to account: (.*)")]
+		[RegexStepDefinition(@"I confirm that I have received a Signup confirmation email to account: (.*)")]
 		public void ThenIConfirmThatIHaveReceivedASignupConfirmationEmailToAccount(string emailToFind)
 		{
 			if (emailToFind.ToLower().Contains("saved as"))
@@ -297,11 +300,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					.ToString().Trim();
 			}
 
-			Report.IsTrue(MailosaurFunctions.CheckEmailHasArrived("Signup Confirmation", emailToFind),
+			Report.IsTrue(MailosaurHelpers.DefaultMailbox.CheckEmailHasArrived("Signup Confirmation", emailToFind),
 				"Email has not arrived as expected", "Email has arrived as expected");
 		}
 
-		[StepDefinition(@"I confirm that I have received a CARP account email to account: (.*)")]
+		[RegexStepDefinition(@"I confirm that I have received a CARP account email to account: (.*)")]
 		public void ThenIConfirmThatIHaveReceivedACARPAccountEmailToAccount(string emailToFind)
 		{
 			if (emailToFind.ToLower().Contains("saved as"))
@@ -310,11 +313,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					.ToString().Trim();
 			}
 
-			Report.IsTrue(MailosaurFunctions.CheckEmailHasArrived("New CARP Account Created", emailToFind),
+
+			Report.IsTrue(MailosaurHelpers.DefaultMailbox.CheckEmailHasArrived("New CARP Account Created", emailToFind),
 				"Email has not arrived as expected", "Email has arrived as expected");
 		}
 
-		[StepDefinition(@"I confirm that I have a received a Verification code email to account: (.*)")]
+		[RegexStepDefinition(@"I confirm that I have a received a Verification code email to account: (.*)")]
 		public void ThenIConfirmThatIHaveAReceivedAVerificationCodeEmailToAccount(string emailToFind)
 		{
 			if (emailToFind.ToLower().Contains("saved as"))
@@ -325,7 +329,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			for (int i = 0; i < 30; i++)
 			{
-				if (MailosaurFunctions.CheckEmailHasArrived("New Verification Code", emailToFind))
+				if (MailosaurHelpers.DefaultMailbox.CheckEmailHasArrived("New Verification Code", emailToFind))
 				{
 					Report.Success("Verification code has been found");
 					return;
@@ -335,8 +339,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Failure("Email has not arrived as expected");
 		}
 
-		[StepDefinition(@"In the (.*) Verification page I enter verification code: (.*)")]
-		[StepDefinition(@"on the (.*) Verification page I enter verification code: (.*)")]
+		[RegexStepDefinition(@"In the (.*) Verification page I enter verification code: (.*)")]
+		[RegexStepDefinition(@"on the (.*) Verification page I enter verification code: (.*)")]
 		public void ThenInTheConflictMineralsVerificationPageIEnterVerificationCode(string dummyTitle, string verificationCode)
 		{
 			if (verificationCode.ToLower().Contains("saved as"))
@@ -351,8 +355,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisConflictMinerals.VerificationCode == verificationCode, "Failed to input the verification code: " + verificationCode, "Successfully inputted the verification code: " + verificationCode);
 		}
 
-		[StepDefinition(@"In the (.*) Verification page I click Verify")]
-		[StepDefinition(@"on the (.*) Verification page I click Verify")]
+		[RegexStepDefinition(@"In the (.*) Verification page I click Verify")]
+		[RegexStepDefinition(@"on the (.*) Verification page I click Verify")]
 		public void ThenInTheConflictMineralsVerificationPageIClickVerify(string dummyTitle)
 		{
 			var thisConflictMinerals = new ConflictMinerals();
@@ -360,7 +364,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I save the verification code sent to account: (.*) as: (.*)")]
+		[RegexStepDefinition(@"I save the verification code sent to account: (.*) as: (.*)")]
 		public void GivenISaveTheVerificationCodeSentToAccountAs(string emailToFind, string saveAs)
 		{
 			if (emailToFind.ToLower().Contains("saved as"))
@@ -369,9 +373,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					.ToString().Trim();
 			}
 
-			IOrderedEnumerable<Email> ListOfEmails = MailosaurFunctions.GetAllEmailsForEmailEmailAddress(emailToFind)
-				.OrderByDescending(y => y.CreationDate);
-			Email thisEmail = ListOfEmails.FirstOrDefault(x => x.Subject.Contains("New Verification Code"));
+			IOrderedEnumerable<Message> ListOfEmails = MailosaurHelpers.DefaultMailbox.GetAllEmailsForEmailAddress(emailToFind)
+				.OrderByDescending(y => y.Received);
+
+			Message thisEmail = ListOfEmails.FirstOrDefault(x => x.Subject.Contains("New Verification Code"));
 
 			if (thisEmail == null)
 			{
@@ -397,12 +402,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"in the Conflict Minerals page I create enter Company Details as follows:")]
+		[RegexStepDefinition(@"in the Conflict Minerals page I create enter Company Details as follows:")]
 		public void GivenInTheConflictMineralsPageICreateEnterCompanyDetailsAsFollows(Table table)
 		{
 			var thisConflictMinerals = new ConflictMinerals();
 
-			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
+			foreach (TableRow thisRow in table.Rows)
 			{
 				switch (thisRow["Field"])
 				{
@@ -449,7 +454,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"in the Conflict Minerals page I click on Create Company Account")]
+		[RegexStepDefinition(@"in the Conflict Minerals page I click on Create Company Account")]
 		public void GivenInTheConflictMineralsPageIClickOnCreateCompanyAccount()
 		{
 			var thisConflictMinerals = new ConflictMinerals();

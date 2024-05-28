@@ -4,8 +4,9 @@ using System.IO;
 using System.Linq;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
-using TechTalk.SpecFlow;
+using UL.Automation.ReqnrollHelpers.Classes;
+using Reqnroll;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.Utilities.Functions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
@@ -15,7 +16,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding, Scope(Tag = "MyMessages")]
 	class StepsMyMessages
 	{
-		[StepDefinition(@"I click the (Export|Filter|Clear Filter) button")]
+		[RegexStepDefinition(@"I click the (Export|Filter|Clear Filter) button")]
 		public void ClickPrimaryButton(string button)
 		{
 			Report.IsTrue(new MessageCenter().ClickPrimaryButton(button),
@@ -23,7 +24,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked the " + button + " button");
 		}
 
-		[StepDefinition(@"I click the 'Show Archived' checkbox")]
+		[RegexStepDefinition(@"I click the 'Show Archived' checkbox")]
 		public void ClickShowArchived()
 		{
 			Report.IsTrue(new MessageCenter().ClickShowArchived(),
@@ -31,7 +32,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked the Show Archived checkbox");
 		}
 
-		[StepDefinition(@"I click Filter")]
+		[RegexStepDefinition(@"I click Filter")]
 		public void ClickFilter()
 		{
 			Report.IsTrue(new MessageCenter().ClickFilter(),
@@ -39,7 +40,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked Filter");
 		}
 
-		[StepDefinition(@"I confirm an excel file is downloaded then close the Report Download popup. I save the file as (.*)")]
+		[RegexStepDefinition(@"I confirm an excel file is downloaded then close the Report Download popup. I save the file as (.*)")]
 		public void ExcelFileDownloadedCloseReportDownload(string savedAs)
 		{
 			var selReportDownload = new ReportDownload();
@@ -77,7 +78,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I save the messages in Message Center as (.*)")]
+		[RegexStepDefinition(@"I save the messages in Message Center as (.*)")]
 		public void SaveListOfMessages(string savedAs)
 		{
 			List<MessageCenter.Message> myMessages = new MessageCenter().MessageItems();
@@ -85,7 +86,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(savedAs, myMessages);
 		}
 
-		[StepDefinition(@"I confirm that additional messages were displayed since they were saved as (.*)")]
+		[RegexStepDefinition(@"I confirm that additional messages were displayed since they were saved as (.*)")]
 		public void ConfirmAdditionalMessagesWereDisplayed(string savedAs)
 		{
 			var oldMessages = (List<MessageCenter.Message>)Context.GetFromContext(savedAs);
@@ -101,7 +102,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The message count increased compared to messages saved to context as: " + savedAs + " as expected. Previous count was: " + oldMessages.Count + ". New count is: " + newMessages.Count);
 		}
 
-		[StepDefinition(@"I confirm that the text: (.*) is (displayed|displayed exclusively|not displayed) under the (.*) column for file saved as (.*)")]
+		[RegexStepDefinition(@"I confirm that the text: (.*) is (displayed|displayed exclusively|not displayed) under the (.*) column for file saved as (.*)")]
 		public void StatusColumnDisplaysTextActive(string value, string displayCondition, string column, string savedAs)
 		{
 			object file = Context.GetFromContext(savedAs);
@@ -139,7 +140,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the number of rows in the file saved as (.*) matches the number of messages in My Messages saved as (.*)")]
+		[RegexStepDefinition(@"I confirm the number of rows in the file saved as (.*) matches the number of messages in My Messages saved as (.*)")]
 		public void ExportMessagesCountMatchesInboxCount(string fileSavedAs, string messagesSavedAs)
 		{
 			object file = Context.GetFromContext(fileSavedAs);
@@ -158,7 +159,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm that the exported excel file saved as: (.*) contains the following columns:")]
+		[RegexStepDefinition(@"I confirm that the exported excel file saved as: (.*) contains the following columns:")]
 		public void ThenIConfirmThatTheExportedExcelFileSavedAsContainsTheFollowingColumns(string savedAs, Table table)
 		{
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
@@ -177,25 +178,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I Click the More Filters Button to expand the option")]
+		[RegexStepDefinition(@"I Click the More Filters Button to expand the option")]
 		public void IClickTheMoreFiltersButtonToExpandTheOption()
 		{
 			Report.IsTrue(new MessageCenter().SetMoreFiltersToExpanded(), "Failed to expand the More Filters section", "Successfully expanded the more filters section");
 		}
 
-		[StepDefinition("I Select the (.*) message Type in the type filter")]
+		[RegexStepDefinition("I Select the (.*) message Type in the type filter")]
 		public void ISelectXMessageTypeFromFilter(string type)
 		{
 			Report.IsTrue(new MessageCenter().SelectTypeFromList(type), "Failed to select: " + type + " in the type filter", "Successfully selected: " + type + " in the type filter");
 		}
 
-		[StepDefinition(@"I Enter WPSID saved as: (.*) into the WPSID search box")]
+		[RegexStepDefinition(@"I Enter WPSID saved as: (.*) into the WPSID search box")]
 		public void IEnterWPSIDSavedAsIntoTheSearchBox(string savedAs)
 		{
 			Report.IsTrue(new MessageCenter().EnterWPSIDIntoFilter(savedAs), "Failed to enter the WPSID into the search box", "Successfully entered the WPSID into the search box");
 		}
 
-		[StepDefinition(@"I Check that only the 1 message I have filtered for is showing")]
+		[RegexStepDefinition(@"I Check that only the 1 message I have filtered for is showing")]
 		public void ICheckThatOnlyThe1MessageIHaveFilteredForIsShowing(string savedAs)
 		{
 			Report.IsTrue(new MessageCenter().CheckOnly1MessageAndCorrectWPSID(savedAs), "Failed to find only the 1 message we filtered for", "successfully found only the 1 message we filtered for");
@@ -204,7 +205,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"I confirm that sheet named (.*) in the exported excel file saved as: (.*) contains the following columns:")]
+		[RegexStepDefinition(@"I confirm that sheet named (.*) in the exported excel file saved as: (.*) contains the following columns:")]
 		public void ThenIConfirmThatTheExportedExcelFileSavedAsContainsTheFollowingColumns(string sheetName, string savedAs, Table table)
 		{
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";

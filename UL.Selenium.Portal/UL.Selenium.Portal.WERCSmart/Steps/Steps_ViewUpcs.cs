@@ -5,11 +5,12 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
+using UL.Automation.ReqnrollHelpers.Classes;
 using OpenQA.Selenium;
-using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
+using Reqnroll;
+using Reqnroll.Assist;
 using UL.Automation.Reporting;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
@@ -20,7 +21,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding, Scope(Tag = "ViewUpcs")]
 	class Steps_ViewUpcs
 	{
-		[StepDefinition(@"I save the UPCs associated to the product as: (.*)")]
+		[RegexStepDefinition(@"I save the UPCs associated to the product as: (.*)")]
 		public void SaveUpcsToContext(string savedAs)
 		{
 			this.TheViewUPCPageLoadsWithNoErrors();
@@ -35,7 +36,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(savedAs, upcNumbers);
 		}
 
-		[StepDefinition(@"I confirm that the number of UPCs equals the number saved as: (.*)")]
+		[RegexStepDefinition(@"I confirm that the number of UPCs equals the number saved as: (.*)")]
 		public void ConfirmThatNumberOfUPCsEqualsNumberSavedAs(string savedAs)
 		{
 			List<ViewUpcs.ProductUpc> upcs = new ViewUpcs().Upcs();
@@ -45,7 +46,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Number of UPCs matches number saved.");
 		}
 
-		[StepDefinition(@"I confirm that the number of normal UPCs equals the number saved as: (.*)")]
+		[RegexStepDefinition(@"I confirm that the number of normal UPCs equals the number saved as: (.*)")]
 		public void ConfirmThatNumberOfNormalUPCsEqualsNumberSavedAs(string savedAs)
 		{
 			List<ViewUpcs.ProductUpc> upcs = new ViewUpcs().NormalUPCs();
@@ -55,7 +56,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Number of normal UPCs matches number saved.");
 		}
 
-		[StepDefinition(@"I confirm that the number of Case UPCs equal the number saved as: (.*)")]
+		[RegexStepDefinition(@"I confirm that the number of Case UPCs equal the number saved as: (.*)")]
 		public void ConfirmThatNumberOfCaseUPCsEqualsNumberSavedAs(string savedAs)
 		{
 			List<ViewUpcs.ProductUpc> upcs = new ViewUpcs().CaseUPCs();
@@ -65,7 +66,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Number of Case UPCs matches number saved.");
 		}
 
-		[StepDefinition(@"I save the first UPC associated to the product as: (.*)")]
+		[RegexStepDefinition(@"I save the first UPC associated to the product as: (.*)")]
 		public void SaveFirstUpcToContext(string savedAs)
 		{
 			List<ViewUpcs.ProductUpc> upcs = new ViewUpcs().Upcs();
@@ -78,7 +79,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(savedAs, upcs.First());
 		}
 
-		[StepDefinition(@"I confirm the UPC number saved as: (.*) is displayed as a Case UPC")]
+		[RegexStepDefinition(@"I confirm the UPC number saved as: (.*) is displayed as a Case UPC")]
 		public void ConfirmUpcNumberIsDisplayedAsCaseUpc(string savedAs)
 		{
 			if (!Context.Contains(savedAs))
@@ -91,7 +92,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I save all UPC information on the 'View UPCs' page as: (.*)")]
+		[RegexStepDefinition(@"I save all UPC information on the 'View UPCs' page as: (.*)")]
 		public void SaveAllViewUpcInformationAs(string savedAs)
 		{
 			var upcs = new ViewUpcs().Upcs();
@@ -106,7 +107,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		/// <summary>
 		/// Requires a table with columns: | UPC Number | Container Type | Size Ounces | Retailers | Associated UPC | Quantity | Transport |
 		/// </summary>
-		[StepDefinition(@"I verify the Case UPC data is correct in the View UPCs window:")]
+		[RegexStepDefinition(@"I verify the Case UPC data is correct in the View UPCs window:")]
 		public void VerifyCaseUpcData(Table table)
 		{
 			List<ViewUpcs.ProductUpc> upcs = new ViewUpcs().Upcs();
@@ -143,7 +144,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I verify the Regular UPC data is correct in the View UPCs window:")]
+		[RegexStepDefinition(@"I verify the Regular UPC data is correct in the View UPCs window:")]
 		public void VerifyRegularUpcData(Table table)
 		{
 			List<ViewUpcs.ProductUpc> upcs = new ViewUpcs().Upcs();
@@ -179,13 +180,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the UPC Duplicate Warning Icon is visible")]
+		[RegexStepDefinition(@"I confirm the UPC Duplicate Warning Icon is visible")]
 		public void ThenIConfirmTheUPCDuplicateWarningIconIsVisible()
 		{
 			Report.IsTrue(new UPC().CheckIfUPCDuplicateWarningAppears(), "Failed to find the UPC Duplicate Warning Messsage!", "Successfully found the UPC Duplicate Warning Message!");
 		}
 
-		[StepDefinition(@"the View UPC page loads with no errors")]
+		[RegexStepDefinition(@"the View UPC page loads with no errors")]
 		public void TheViewUPCPageLoadsWithNoErrors()
 		{
 			var upcviewpg = new ViewUpcs();
@@ -195,7 +196,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I navigate to the View UPC tab and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'")]
+		[RegexStepDefinition(@"I navigate to the View UPC tab and Check that the Product UPCs table contains the coloumn labeled 'UPC Name'")]
 		public void INavigateToTheViewUPCTabAndCheckForUPCNameColoumn()
 		{
 			new GlobalSteps().SwitchToTabWithTitle("View UPCs");
@@ -204,14 +205,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new GlobalSteps().ThenCloseTheWindowThatOpened();
 		}
 
-		[StepDefinition(@"I check for the appropriate alert: (.*)")]
+		[RegexStepDefinition(@"I check for the appropriate alert: (.*)")]
 		public void GivenICheckForTheAppropriateAlert(string alertText)
 		{
 			UPC UPCObject = new UPC();
 			Report.IsTrue(UPCObject.CheckForAlertWithThisTextInUPCPage(alertText), "The appropriate alert: " + alertText + ", was not shown", "The appropriate alert: " + alertText + ", was shown");
 		}
 
-		[StepDefinition(@"I check if the Regulatory Documents page is shown")]
+		[RegexStepDefinition(@"I check if the Regulatory Documents page is shown")]
 		public void ThenICheckIfTheRegulatoryDocumentsPageIsShown()
 		{
 			ReportSettings.UseSubSteps = true;
@@ -220,21 +221,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyNewProduct.GivenIShouldSeeXPage("Regulatory Documents to Provide");
 		}
 
-		[StepDefinition(@"I click (.*) for the UPCs Warning! popup (.*)")]
+		[RegexStepDefinition(@"I click (.*) for the UPCs Warning! popup (.*)")]
 		public void ThenIClickNOForTheUPCsWarning(string yesOrNoButton, string savedAs)
 		{
 			UPC UPCObject = new UPC();
 			Report.IsTrue(UPCObject.ClickYesOrNoForUPCWarningPopUp(yesOrNoButton, savedAs), "Failed to click " + yesOrNoButton + " for the UPC warning pop up", "Successfully clicked " + yesOrNoButton + " for the UPC warning pop up");
 		}
 
-		[StepDefinition(@"I confirm I would like to delete product")]
+		[RegexStepDefinition(@"I confirm I would like to delete product")]
 		public void ThenIConfirmIWouldLikeToDeleteProduct()
 		{
 			ProductsGrid ProductsGridObject = new ProductsGrid();
 			Report.IsTrue(ProductsGridObject.ConfirmYouWouldLikeToDeleteButton(), "Failed to delete the product", "Successfully deleted the product");
 		}
 
-		[StepDefinition(@"I confirm the retailers are removed (.*)")]
+		[RegexStepDefinition(@"I confirm the retailers are removed (.*)")]
 		public void ThenIConfirmTheRetailersAreRemoved(string savedAs)
 		{
 			ProductsGrid ProductsGridObject = new ProductsGrid();
@@ -245,7 +246,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new GlobalSteps().ThenCloseTheWindowThatOpened();
 		}
 
-		[StepDefinition(@"I save the first UPC number associated to the product as: (.*)")]
+		[RegexStepDefinition(@"I save the first UPC number associated to the product as: (.*)")]
 		public void SaveFirstUpcNumberToContext(string savedAs)
 		{
 			List<ViewUpcs.ProductUpc> upcs = new ViewUpcs().Upcs();

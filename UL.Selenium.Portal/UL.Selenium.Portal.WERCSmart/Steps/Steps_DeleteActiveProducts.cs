@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TechTalk.SpecFlow;
+using Reqnroll;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
@@ -14,7 +15,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	class Steps_DeleteActiveProducts
 	{
 
-		[StepDefinition(@"I select checkbox for product saved as: (.*)")]
+		[RegexStepDefinition(@"I select checkbox for product saved as: (.*)")]
 		public void ThenISelectCheckboxForProductSavedAs(string wpsID)
 		{
 			var deleteActiveProductsObject = new DeleteActiveProducts();
@@ -23,7 +24,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"In the Delete Active Products page I click the Filter button")]
+		[RegexStepDefinition(@"In the Delete Active Products page I click the Filter button")]
 		public void ThenInTheDeleteActiveProductsPageIClickTheFilterButton()
 		{
 			var deleteActiveProductsObject = new DeleteActiveProducts();
@@ -31,7 +32,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(10);
 		}
 
-		[StepDefinition(@"In the Delete Active Products page I click the Clear Filter button")]
+		[RegexStepDefinition(@"In the Delete Active Products page I click the Clear Filter button")]
 		public void ThenInTheDeleteActiveProductsPageIClickTheClearFilterButton()
 		{
 			var deleteActiveProductsObject = new DeleteActiveProducts();
@@ -40,7 +41,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"In the Delete Active Products page I search for WPS ID saved as: (.*)")]
+		[RegexStepDefinition(@"In the Delete Active Products page I search for WPS ID saved as: (.*)")]
 		public void ThenInTheDeleteActiveProductsPageISearchForWPSIDSavedAs(string wpsID)
 		{
 			var deleteActiveProductsObject = new DeleteActiveProducts();
@@ -48,21 +49,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(deleteActiveProductsObject.EnterTextInSearchBarInDeleteActiveProductsPage(wpsID), "Failed to enter WPS ID number in the searchbar", "Successfully entered WPS ID number in the searchbar");
 		}
 
-		[StepDefinition(@"I (select|deselect) the checkbox next to WPS ID in the Delete Active Products page")]
+		[RegexStepDefinition(@"I (select|deselect) the checkbox next to WPS ID in the Delete Active Products page")]
 		public void ThenISelectTheCheckboxNextToWPSIDInTheDeleteActiveProductsPage(string selectOrDeselect)
 		{
 			var deleteActiveProductsObject = new DeleteActiveProducts();
 			Report.IsTrue(deleteActiveProductsObject.SelectCheckBoxNextToWPSIDLabel(selectOrDeselect), "Failed to " + selectOrDeselect + " checkbox next to WPS ID Label", "Successfully  " + selectOrDeselect + "ed checkbox next to WPS ID Label");
 		}
 
-		[StepDefinition(@"I confirm all checkboxes are (selected|deselected) in the Delete Active Products page")]
+		[RegexStepDefinition(@"I confirm all checkboxes are (selected|deselected) in the Delete Active Products page")]
 		public void ThenIConfirmAllCheckboxesAreSelectedInTheDeleteActiveProductsPage(string selectedOrDeselected)
 		{
 			var deleteActiveProductsObject = new DeleteActiveProducts();
 			Report.IsTrue(deleteActiveProductsObject.ConfirmAllProductsInListAreChecked(selectedOrDeselected), "Not all products in product list are " + selectedOrDeselected, "All products in product list are " + selectedOrDeselected);
 		}
 
-		[StepDefinition(@"I click on the Make Obsolete button")]
+		[RegexStepDefinition(@"I click on the Make Obsolete button")]
 		public void ThenIClickOnTheMakeObsoleteButton()
 		{
 			var deleteActiveProductsObject = new DeleteActiveProducts();
@@ -70,14 +71,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(5);
 		}
 
-		[StepDefinition(@"I select the checkbox in the Make Obsolete popup")]
+		[RegexStepDefinition(@"I select the checkbox in the Make Obsolete popup")]
 		public void ThenIClickOnTheCheckboxInTheMakeObsoletePopup()
 		{
 			var deleteActiveProductsObject = new DeleteActiveProducts();
 			Report.IsTrue(deleteActiveProductsObject.SelectCheckBoxInMakeObsoletePopup(), "Failed to select the checkbox in the Make Obsolete popup", "Successfully selected the checkbox in the Make Obsolete popup");
 		}
 
-		[StepDefinition(@"In the Make Obsolete popup I click on the (Accept|Cancel) button")]
+		[RegexStepDefinition(@"In the Make Obsolete popup I click on the (Accept|Cancel) button")]
 		public void GivenInTheDataAcceptancePageIClickOnTheAcceptButton(string acceptOrCancel)
 		{
 			var deleteActiveProductsObject = new DeleteActiveProducts();

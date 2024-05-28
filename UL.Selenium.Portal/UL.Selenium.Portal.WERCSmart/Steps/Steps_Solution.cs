@@ -2,14 +2,15 @@ using System.Collections.Generic;
 using System.Linq;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
-using TechTalk.SpecFlow;
+using UL.Automation.ReqnrollHelpers.Classes;
+using Reqnroll;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using UL.Automation.Utilities.Functions;
 using UL.Automation.WebDriver.Extensions;
 using System;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -17,8 +18,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding, Scope(Tag = "Solutions")]
 	class StepsSolution
 	{
-		[StepDefinition(@"I confirm the following sections are displayed in the UL Solution Center page:")]
-		public void ThenConfirmInTheUlSolutionCenterPageYouSeeSectionsFor(TechTalk.SpecFlow.Table table)
+		[RegexStepDefinition(@"I confirm the following sections are displayed in the UL Solution Center page:")]
+		public void ThenConfirmInTheUlSolutionCenterPageYouSeeSectionsFor(Table table)
 		{
 			var selSolutionCenter = new UlSolutionCenter();
 			List<string> sectionsShowing = selSolutionCenter.OptionShowing();
@@ -34,7 +35,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I Confirm the (.*) heading is displayed next to an icon")]
+		[RegexStepDefinition(@"I Confirm the (.*) heading is displayed next to an icon")]
 		public void ConfirmTheHeadingIsShownNextToTheLogo(string sectionHeader)
 		{
 			var selSolutionCenter = new UlSolutionCenter();
@@ -48,7 +49,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I Confirm the information statement for section: (.*) reads: (.*)")]
+		[RegexStepDefinition(@"I Confirm the information statement for section: (.*) reads: (.*)")]
 		public void ConfirmInformationStatementReads(string sectionHeader, string expectedStatement)
 		{
 			var selSolutionCenter = new UlSolutionCenter();
@@ -65,7 +66,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I confirm the Learn More button is displayed for section: (.*)")]
+		[RegexStepDefinition(@"I confirm the Learn More button is displayed for section: (.*)")]
 		public void ConfirmTheLearnMoreButtonIsDisplayedForSection(string sectionHeader)
 		{
 			var selSolutionCenter = new UlSolutionCenter();
@@ -82,7 +83,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I click the Learn More button for section: (.*)")]
+		[RegexStepDefinition(@"I click the Learn More button for section: (.*)")]
 		public void ClickTheLearnMoreButtonForSection(string sectionHeader)
 		{
 			var selSolutionCenter = new UlSolutionCenter();
@@ -99,7 +100,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I switch to the (.*) information tab")]
+		[RegexStepDefinition(@"I switch to the (.*) information tab")]
 		public void SwitchToTheTab(string sectionTab)
 		{
 			string[] urls = { "" };
@@ -158,7 +159,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Failure("Failed to find tab with url: " + string.Join(", ", urls));
 		}
 
-		[StepDefinition(@"I find the Navigator section logo and check that it appears as expected")]
+		[RegexStepDefinition(@"I find the Navigator section logo and check that it appears as expected")]
 		public void IFindTheLogoForSectionIsAsExepcted()
 		{
 

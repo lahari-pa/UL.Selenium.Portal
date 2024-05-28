@@ -3,10 +3,11 @@ using System.Reflection;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
-using TechTalk.SpecFlow;
+using UL.Automation.ReqnrollHelpers.Classes;
+using Reqnroll;
 using TReVor.Api.Wrapper.Classes;
 using UL.Automation.Reporting;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
@@ -16,21 +17,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding, Scope(Tag = "Login"), Scope(Tag = "WERCSmart_Login")]
 	class StepsLogin
 	{
-		[StepDefinition(@"I click on the Forgot Your Password Link")]
+		[RegexStepDefinition(@"I click on the Forgot Your Password Link")]
 		public void GivenIClickOnTheForgotYourPasswordLink()
 		{
 			Report.IsTrue(new Login().Click_Forgotten_Password(), "Failed to click 'Forgot Your Password?'", "Successfully clicked 'Forgot Your Password?'");
 		}
 
-		[StepDefinition(@"I click on the New to WERCSmart Link")]
-		[StepDefinition(@"\[WERCSmart] I click on the New to WERCSmart Link")]
+		[RegexStepDefinition(@"I click on the New to WERCSmart Link")]
+		[RegexStepDefinition(@"\[WERCSmart] I click on the New to WERCSmart Link")]
 		public void GivenIClickOnTheNewToWercsmartLink()
 		{
 			Report.IsTrue(new Login().Click_New_To_WercSmart(), "Failed to click 'New Tt WercSmart' link",
 				"Clicked 'New to WERCSmart' link");
 		}
 
-		[StepDefinition(@"From the Language drop down I select (.*)")]
+		[RegexStepDefinition(@"From the Language drop down I select (.*)")]
 		public void WhenFromTheLanguageDropDownISelect(string language)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " " + MethodBase.GetCurrentMethod().Name);
@@ -51,7 +52,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"The element: (.*) should display text: (.*)")]
+		[RegexStepDefinition(@"The element: (.*) should display text: (.*)")]
 		public void ThenIShouldSeeForTheDialog(string dialog, string expectedText)
 		{
 			var selLogin = new Login();
@@ -81,7 +82,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(expectedText.Trim() == showing.Trim(), "Text was incorrect!", "Sign In text was showing as expected!");
 		}
 
-		[StepDefinition(@"I ensure that the (email|password) input field is not populated")]
+		[RegexStepDefinition(@"I ensure that the (email|password) input field is not populated")]
 		public void ThenIEnsureThatTheInputFieldIsNotPopulated(string inputField)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " I ensure that the " + inputField + " input field is not populated");
@@ -108,13 +109,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click the Login button")]
+		[RegexStepDefinition(@"I click the Login button")]
 		public void IClickTheLoginButton()
 		{
 			Report.IsTrue(new Login().Click_Login(), "Failed to click the log in button", "Clicked the log in button");
 		}
 
-		[StepDefinition(@"I should see the following error message for (email|password): (.*)")]
+		[RegexStepDefinition(@"I should see the following error message for (email|password): (.*)")]
 		public void ThenIShouldSeeTheFollowingErrorMessageForField(string field, string error)
 		{
 			var selLogin = new Login();
@@ -134,7 +135,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(errorShowing?.Trim() == error.Trim(), "Error message was not as expected!", "Error message was showing correctly!");
 		}
 
-		[StepDefinition(@"I login as user: (.*)")]
+		[RegexStepDefinition(@"I login as user: (.*)")]
 		public void GivenILoginAsUser(string username)
 		{
 			var user = (WERCSmartUser)Context.GetFromContext(username);
@@ -153,7 +154,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new Login().WaitForContainerToBeInvisible(), "Did not redirect from Log in page!");
 		}
 
-		[StepDefinition(@"I log in as user: (.*) with password: (.*)")]
+		[RegexStepDefinition(@"I log in as user: (.*) with password: (.*)")]
 		public void ThenILogInAsUserSavedasXWithPasswordY(string username, string password)
 		{
 			if (!new Login().WaitForContainerToBeVisible())
@@ -168,7 +169,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new Login().WaitForContainerToBeInvisible(), "Did not redirect from Log in page!");
 		}
 
-		[StepDefinition(@"I populate the (email|password) input field with: (.*)")]
+		[RegexStepDefinition(@"I populate the (email|password) input field with: (.*)")]
 		public void GivenIPopulateTheInputFieldWith(string inputField, string text)
 		{
 			var selLogin = new Login();
@@ -217,7 +218,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I should see a server error with message: (.*)")]
+		[RegexStepDefinition(@"I should see a server error with message: (.*)")]
 		public void ShouldSeeAServerErrorWithMessage(string expectedMessage)
 		{
 			var selServerError = new ServerErrorDialog();
@@ -232,7 +233,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I popupate the (email|password) input field with credentials for account: (.*)")]
+		[RegexStepDefinition(@"I popupate the (email|password) input field with credentials for account: (.*)")]
 		public void PopulateTheInputFieldWithCredentialsForTrevorUser(string inputField, string accountSavedAs)
 		{
 			var selLogin = new Login();
@@ -261,7 +262,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"on the Login page I log in as test user: (.*)")]
+		[RegexStepDefinition(@"on the Login page I log in as test user: (.*)")]
 		public void GivenILoginAsTestUser(string account)
 		{
 			if (!new Login().WaitForContainerToBeVisible())

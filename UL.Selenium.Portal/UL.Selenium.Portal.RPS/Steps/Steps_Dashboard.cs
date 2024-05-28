@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Castle.Core.Internal;
-using TechTalk.SpecFlow;
+using Reqnroll;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.RPS.Classes;
 using UL.Selenium.Portal.RPS.Selenium_Classes;
@@ -13,37 +14,40 @@ namespace UL.Selenium.Portal.RPS.Steps
     [Binding, Scope(Tag = "Dashboard")]
     class Steps_Dashboard
     {
-        [StepDefinition(@"I confirm the Dashboard tab has loaded")]
+        [RegexStepDefinition(@"I confirm the Dashboard tab has loaded")]
         public void HomeTabLoaded()
         {
             Report.IsTrue(new TopBar().WaitForContainerToBeVisible(), "Top bar did not load!");
             GeneralUtilities.WaitForLoadingToFinish();
             new Dashboard().WaitWidgetSpinnerFinish();
-            if (!new Dashboard().WaitUntilDashboardXGraphsDisplayed())
+            // TODO: Working with Bev to determine whether this section eneds to be readded, leaving in until then
+            /*
+            if (!new Dashboard().WaitUntilDashboardXGraphsDisplayed(6, 30))
             {
                 Report.Error("All Graphs did not load");
                 Report.Info("All Graphs did not load, Attempting to reset the Dashboard");
                 new Steps_Navigation().ConfirmActiveTab("Dashboard");
                 Report.IsTrue(new Dashboard().WaitForContainerToBeVisible(), "Dashboard content did not load", "Dashboard content loaded");
                 new Steps_Shared().SharedStep54484();
-                if(!new Dashboard().WaitUntilDashboardXGraphsDisplayed())
+                if(!new Dashboard().WaitUntilDashboardXGraphsDisplayed(6, 30))
                 {
                     Report.Error("All Graphs did not load");
                     Report.Info("All Graphs did not load, Attempting to reset the Dashboard");
                 }
             }
+            */
             new Steps_Navigation().ConfirmActiveTab("Dashboard");
             Report.IsTrue(new Dashboard().WaitForContainerToBeVisible(), "Dashboard content did not load", "Dashboard content loaded");
         }
 
-        [StepDefinition(@"I confirm there is no page footer shown")]
+        [RegexStepDefinition(@"I confirm there is no page footer shown")]
         public void ConfirmNoPageFooter()
         {
-            Report.IsTrue(!new Dashboard().AnyInformationPanelsPresent(), "A page footer was shown", "A page footer was not shown");
+            Report.IsTrue(new Dashboard().AnyInformationPanelsPresent() == true, "A page footer was shown", "A page footer was not shown");
 
         }
 
-        [StepDefinition(@"I Check that for widget (.*) the supplier list (is|is not) showing")]
+        [RegexStepDefinition(@"I Check that for widget (.*) the supplier list (is|is not) showing")]
         public void CheckThatSupplierListIsShowing(string widgetTitle, string showStatus)
         {
             bool showing = true;            
@@ -71,33 +75,43 @@ namespace UL.Selenium.Portal.RPS.Steps
             }
         }
 
-        [StepDefinition(@"I Check that for the widget (.*), the Suppliers List shows the Following headings:")]
-        public void CheckWidgetSupplierListHeadings(string widgetTitle, Table table)
+        [RegexStepDefinition(@"I Check that for the widget (.*), the (Supplier|Product) List shows the Following headings:")]
+        public void CheckWidgetSupplierListHeadings(string widgetTitle, string listType, Table table)
         {
             List<string> headers = new List<string>();
             foreach (TableRow thisRow in table.Rows)
             {
                 headers.Add(thisRow["Headers"]);
             }
-            List<string> foundHeadings = new Home.Widget(widgetTitle).GetSupplierListColumnHeadings();
+            List<string> foundHeadings;
+            Delay.Seconds(1);
+            if(listType == "Supplier")
+            {
+                foundHeadings = new Home.Widget(widgetTitle).GetSupplierListColumnHeadings();
+            }
+            else
+            {
+                foundHeadings = new Home.Widget(widgetTitle).GetProductListColumnHeadings();
+            }
+            
             var differences = headers.Except(foundHeadings);
             Report.IsTrue(differences.IsNullOrEmpty(), "The headings found did not fully match the expected headings for the suppliers list", "The headings found matched the expected headings for the suppliers list");
         }
 
-        [StepDefinition(@"END OF AUTOMATION: TEST CASE NEEDS MANUAL COMPLETION")]
+        [RegexStepDefinition(@"END OF AUTOMATION: TEST CASE NEEDS MANUAL COMPLETION")]
         public void EndOfAuotmationStep()
         {
             Report.Warning("END OF AUTOMATION: TEST CASE NEEDS MANUAL COMPLETION");
         }
 
-        [StepDefinition(@"END OF AUTOMATION: TEST CASE NEEDS MANUAL COMPLETION. Message: (.*)")]
+        [RegexStepDefinition(@"END OF AUTOMATION: TEST CASE NEEDS MANUAL COMPLETION. Message: (.*)")]
         public void EndOfAuotmationStepMessage(string message)
         {
             Report.Warning("END OF AUTOMATION: TEST CASE NEEDS MANUAL COMPLETION");
             Report.Warning($"Message: {message}");
         }
 
-        [StepDefinition(@"In the Dashboard page, I confirm all widgets are shown correctly in their original order:")]
+        [RegexStepDefinition(@"In the Dashboard page, I confirm all widgets are shown correctly in their original order:")]
         public void ConfirmDashBoardWidgetsInOrginalOrder(Table table)
         {
             List<string> expectedCoordinates = new List<string>();
@@ -130,13 +144,52 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        //[StepDefinition(@"Drag test (.*)")]
-        //public void IUseDoubleArrowToResizeWidget(string widget)
-        //{
-        //    new Home.Widget(widget).DragWidgetSizeDown();
-        //}
+        [RegexStepDefinition(@"In the Dashboard page, I confirm all widgets are shown correctly in their order saved as: (.*)")]
+        public void ConfirmDashBoardWidgetsInSavedOrder(string savedAs)
+        {
+            List<WidgetPage.Widget> widgetList = new List<WidgetPage.Widget>();
+            if(Context.Contains(savedAs))
+            {
+                widgetList = (List<WidgetPage.Widget>)Context.GetFromContext(savedAs);
+            }
+            else
+            {
+                Report.Failure($"Failed to find widget list in context saved as: '{savedAs}'.");
+                return;
+            }
 
-        [StepDefinition(@"I Confirm that the Products List for the widget: (.*) contains the column headings:")]
+            foreach (var widget in widgetList)
+            {
+                string foundCoordinate = new Home.Widget(widget.Title).GetWidgetXandYCoordinate();
+                Report.Info($"The expected coordinate was: {widget.XandYCoordinate}");
+                Report.Info($"The found corrdinate was: {foundCoordinate}");
+                Report.IsTrue(foundCoordinate == widget.XandYCoordinate, "The found coordinate did not match the expected coordinate for the widget with title: " + widget.Title, "The found coordinate matched the expected coordinate for the widget with title: " + widget.Title);
+            }
+
+
+        }
+
+        [RegexStepDefinition(@"In the Dashboard page, I confirm all widgets are shown correctly in their order saved as default")]
+        public void ConfirmDashBoardWidgetsInSavedOrderDefault()
+        {
+            ConfirmDashBoardWidgetsInSavedOrder("WidgetList");
+        }
+
+            [RegexStepDefinition(@"I use double arrow to resize widget: (.*)")]
+        public void IUseDoubleArrowToResizeWidget(string widget)
+        {
+            Report.IsTrue(new Home.Widget(widget).DragWidgetSizeDown(),$"Failure, failed to resize {widget} widget.",$"Success, resized {widget} widget");
+        }
+
+        [RegexStepDefinition(@"I use double arrow to resize the saved widget")]
+        public void IUseDoubleArrowToResizeSavedWidget()
+        {
+            Home.Widget widget = new Home().GetWidget("%ThisWidget%");
+            Report.Info($"Attempting to resize '{widget.Title}' widget.");
+            IUseDoubleArrowToResizeWidget(widget.Title);
+        }
+
+        [RegexStepDefinition(@"I Confirm that the Products List for the widget: (.*) contains the column headings:")]
         public void ConfrimProductsListHeadings(string widget, Table table)
         {
             List<string> headers = new List<string>();
@@ -144,13 +197,13 @@ namespace UL.Selenium.Portal.RPS.Steps
             {
                 headers.Add(thisRow["Headings"]);
             }
-            List<string> foundHeadings = new Home.Widget(widget).GetProductistColumnHeadings();
+            List<string> foundHeadings = new Home.Widget(widget).GetProductListColumnHeadings();
             var diff1 = foundHeadings.Except(headers);
             var diff2 = headers.Except(foundHeadings);
             Report.IsTrue(diff1.IsNullOrEmpty() && diff2.IsNullOrEmpty(), "The expected and found headings for the products list did not match", "The expected and found headings for the products list matched");
         }
 
-        [StepDefinition(@"I Confirm that the Products list for the widget: (.*) contains 'Contact Supplier' in all rows")]
+        [RegexStepDefinition(@"I Confirm that the Products list for the widget: (.*) contains 'Contact Supplier' in all rows")]
         public void ConfirmProductsListContainsContactSupplierInAllRows(string widget)
         {
             Report.IsTrue(new Home.Widget(widget).ContactSupplierTextFoundForAllProducts(), "The text 'Contact Supplier' was not found in all rows", "The text 'Contact Supplier' was found in all rows");

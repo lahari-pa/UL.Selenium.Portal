@@ -18,6 +18,7 @@
 @Ingredients
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
+@StepsPrototype
 
 Feature: Product Documents
 
@@ -40,7 +41,18 @@ Scenario: [59322] Upload document - VOC exemption letter & VOC product label
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Personal Fragrance Product (more than 20% fragrance) - Liquid
 	Then I save the product information as: TestCase59322
 	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-	And I call Shared Step 70675 (Physical and Chemical Properties - Liquid Only - With Water Solubility - Enter all data - Continue)
+	#And I call Shared Step 70675 (Physical and Chemical Properties - Liquid Only - With Water Solubility - Enter all data - Continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
+	Then In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 1.0
+	Then In the Physical and Chemical Properties Section, for section: 'pH' enter text: 10.2
+	Then In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: 120
+	Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: 55
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Closed cup method
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page, I click Continue
+
 	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I should see the Ingredients Page
 	Then In the Ingredients section, add the following ingredients:

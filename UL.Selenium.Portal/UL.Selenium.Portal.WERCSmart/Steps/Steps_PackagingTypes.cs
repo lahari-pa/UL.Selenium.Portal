@@ -1,16 +1,17 @@
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
-using TechTalk.SpecFlow;
+using UL.Automation.ReqnrollHelpers.Classes;
+using Reqnroll;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using System.Collections.Generic;
+using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "PackagingTypes")]
 	class Steps_PackagingTypes
 	{
-		[StepDefinition(@"I click Add Row in the Bill Of Materials grid")]
+		[RegexStepDefinition(@"I click Add Row in the Bill Of Materials grid")]
 		public void ClickAddRowBillOfMaterials()
 		{
 			Report.IsTrue(new PackagingType().ClickAddRow(),
@@ -18,13 +19,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked Add Row in the Bill of Materials grid");
 		}
 
-		[StepDefinition(@"I confirm that the 'Add Row' button is displayed")]
+		[RegexStepDefinition(@"I confirm that the 'Add Row' button is displayed")]
 		public void ConfirmTheAddRowButtonIsDisplayed()
 		{
 			Report.IsTrue(new PackagingType().AddRowDisplayed(), "The Add Row button was not displayed!", "The Add Row Button is displayed as expected");
 		}
 
-		[StepDefinition(@"I confirm that the following table headings are displayed:")]
+		[RegexStepDefinition(@"I confirm that the following table headings are displayed:")]
 		public void ConfirmTheFollowingTableHeadingsAreDisplayed(Table table)
 		{
 			foreach (TableRow row in table.Rows)
@@ -41,7 +42,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I select the option: (.*) for the (.*) field in the table")]
+		[RegexStepDefinition(@"I select the option: (.*) for the (.*) field in the table")]
 		public void SelectOptionForFieldInTable(string option, string field)
 		{
 			Report.IsTrue(new PackagingType().SelectOptionForField(option, field),
@@ -51,7 +52,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					option, field));
 		}
 
-		[StepDefinition(@"I save the Packaging Type details as: (.*)")]
+		[RegexStepDefinition(@"I save the Packaging Type details as: (.*)")]
 		public void SavePackagingTypeDetails(string savedAs)
 		{
 			Report.IsTrue(new PackagingType().SavePackagingDetails(savedAs),
@@ -60,7 +61,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				false, false);
 		}
 
-		[StepDefinition(@"I confirm that the Packaging Type saved as: (.*) (appears|does not appear) in the My Packaging Types grid")]
+		[RegexStepDefinition(@"I confirm that the Packaging Type saved as: (.*) (appears|does not appear) in the My Packaging Types grid")]
 		public void PackagingTypeSavedAsAppearsInGrid(string savedAs, string appearsOrNot)
 		{
 			bool appears = appearsOrNot == "appears";
@@ -74,7 +75,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The saved Packaging Type  with name: " + packagingType.Name + " and ID: " + packagingType.ID + " " + appearsOrNot + " in the My Packaging Types grid as expected");
 		}
 
-		[StepDefinition(@"I delete Packaging Type saved as: (.*)")]
+		[RegexStepDefinition(@"I delete Packaging Type saved as: (.*)")]
 		public void DeletePackagingType(string savedAs)
 		{
 			var selPackagingTypes = new MyPackagingTypes();
@@ -96,7 +97,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					packagingType.ID, packagingType.Name));
 		}
 
-		[StepDefinition("I click (Delete|Cancel) in the Delete Product pop up")]
+		[RegexStepDefinition("I click (Delete|Cancel) in the Delete Product pop up")]
 		public void ClickOptionInDeleteProductPopUp(string button)
 		{
 			var delDialog = new DeleteDialog();
@@ -124,7 +125,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-		[StepDefinition(@"I confirm the name and ID for Packaging Type saved as: (.*) appear in the Delete Product pop up")]
+		[RegexStepDefinition(@"I confirm the name and ID for Packaging Type saved as: (.*) appear in the Delete Product pop up")]
 		public void PackagingTypeDetailsAppearInDeleteProductPopUp(string savedAs)
 		{
 			var packagingType = new MyPackagingTypes.PackagingTypeItem {
@@ -143,7 +144,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The Packaging Group ID " + packagingType.ID + " appeared in the Delete Product Pop Up dialog as expected");
 		}
 
-		[StepDefinition(@"I edit Packaging Type saved as: (.*)")]
+		[RegexStepDefinition(@"I edit Packaging Type saved as: (.*)")]
 		public void EditPackagingType(string savedAs)
 		{
 			var selPackagingTypes = new MyPackagingTypes();
@@ -165,7 +166,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					packagingType.ID, packagingType.Name));
 		}
 
-		[StepDefinition(@"Save the top packaging id as (.*) if there are no packaging types listed add a new packing type as follows")]
+		[RegexStepDefinition(@"Save the top packaging id as (.*) if there are no packaging types listed add a new packing type as follows")]
 		public void GivenSaveTheTopPackagingIdAsMPIIfThereAreNoPackackingTypesListedAddANewPackingTypeAsFollows(string saveAs, Table table)
 		{
 			var myAccountSteps = new StepsMyAccount();
@@ -206,7 +207,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			newProductSteps.GivenInTheDataAcceptancePageIClickOnTheAcceptButton();
 		}
 
-		[StepDefinition(@"I click the CONEG browse button and upload PDF: (.*)")]
+		[RegexStepDefinition(@"I click the CONEG browse button and upload PDF: (.*)")]
 		public void UploadDPFForCONEG(string pdfFile)
 		{
 			Report.IsTrue(new PackagingType().UploadFileForSection("CONEG Certificate", pdfFile), "Failed to upload CONEG pdf", "Uploaded CONEG pdf");

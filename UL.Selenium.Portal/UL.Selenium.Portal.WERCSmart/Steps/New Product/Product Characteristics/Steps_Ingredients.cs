@@ -1,23 +1,23 @@
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
-using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using OpenQA.Selenium;
+using Reqnroll;
+using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
 	[Binding, Scope(Tag = "NewProduct")]
 	class StepsIngredients
 	{
-		[StepDefinition(@"I add the following ingredients:")]
+		[RegexStepDefinition(@"I add the following ingredients:")]
 		public void AddIngredients(Table ingredientInformation)
 		{
 			var newProductIngredients = new Ingredients();
@@ -28,7 +28,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I click the (Trade Secret|Publicly Disclosed) checkbox for ingredient: (.*)")]
+		[RegexStepDefinition(@"I click the (Trade Secret|Publicly Disclosed) checkbox for ingredient: (.*)")]
 		public void ClickTheCheckboxForIngredient(string input, string name)
 		{
 			var newProductIngredients = new Ingredients();
@@ -46,7 +46,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"for ingredient: (.*) the (Trade Secret|Publicly Disclosed|Public Name|Generic Name) field is (enabled|disabled)")]
+		[RegexStepDefinition(@"for ingredient: (.*) the (Trade Secret|Publicly Disclosed|Public Name|Generic Name) field is (enabled|disabled)")]
 		public void ForIngredientTheTradeSecretCheckboxIsDisabledOrEnabled(string ingredient, string checkbox, string enabledOrDisabled)
 		{
 			var newProductIngredients = new Ingredients();
@@ -81,21 +81,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"for ingredient: (.*) the Generic Name field is (displayed|not displayed)")]
+		[RegexStepDefinition(@"for ingredient: (.*) the Generic Name field is (displayed|not displayed)")]
 		public void GivenForIngredient_TheGenericName_FieldIs_(string ingredient, string displayedOrNotDisplayed)
 		{
 			var newProductIngredients = new Ingredients();
 			Report.IsTrue(newProductIngredients.CheckGenericNameFieldIsDisplayingForIngredient(ingredient, displayedOrNotDisplayed), "The Generic Name field is " + displayedOrNotDisplayed + " which is not as expected", "The Generic Name field is " + displayedOrNotDisplayed + " as expected");
 		}
 
-		[StepDefinition(@"for ingredient: (.*) the Ingredient Type drop-down is (displayed|not displayed)")]
+		[RegexStepDefinition(@"for ingredient: (.*) the Ingredient Type drop-down is (displayed|not displayed)")]
 		public void GivenForIngredient_TheIngredientTypeDrop_DownIsDisplayed(string ingredient, string displayedOrNotDisplayed)
 		{
 			var newProductIngredients = new Ingredients();
 			Report.IsTrue(newProductIngredients.CheckIngredientTypeDropDownIsDisplayingForIngredient(ingredient, displayedOrNotDisplayed), "The Ingredient Type Drop Down field is " + displayedOrNotDisplayed + " which is not as expected", "The Ingredient Type Drop Down field is " + displayedOrNotDisplayed + " as expected");
 		}
 
-		[StepDefinition(@"for ingredient: (.*) I set (Public Disclosure|Trade Secret) checkbox to checked: (true|false)")]
+		[RegexStepDefinition(@"for ingredient: (.*) I set (Public Disclosure|Trade Secret) checkbox to checked: (true|false)")]
 		public void ForIngredientISetPublicDisclosureCheckboxToCheckedTrueFalse(string ingredient, string checkbox, string checkedTrueFalse)
 		{
 			var newProductIngredients = new Ingredients();
@@ -117,7 +117,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I confirm the (Publicly Disclosed|Trade Secret) checkbox is: (checked|unchecked) for ingredient: (.*)")]
+		[RegexStepDefinition(@"I confirm the (Publicly Disclosed|Trade Secret) checkbox is: (checked|unchecked) for ingredient: (.*)")]
 		public void IngredientsConfirmCheckboxState(string option, string checkState, string chemicalName)
 		{
 			List<Ingredients.Ingredient> ingredients = new Ingredients().GetIngredients();
@@ -151,7 +151,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I click the Publicly Disclosed checkbox for ingredient saved as: (.*)")]
+		[RegexStepDefinition(@"I click the Publicly Disclosed checkbox for ingredient saved as: (.*)")]
 		public void ClickPubliclyDisclosedIngredientSavedAs(string savedAs)
 		{
 			var newProductIngredients = new Ingredients();
@@ -177,14 +177,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully set the Publicly Disclosed checkbox to: " + (disclosed ? "false" : "true"));
 		}
 
-		[StepDefinition(@"for ingredient: (.*) I confirm the Public Name selectbox contains names for selection")]
+		[RegexStepDefinition(@"for ingredient: (.*) I confirm the Public Name selectbox contains names for selection")]
 		public void ForIngredientThePublicNameSelectboxShowsNames(string ingredient)
 		{
 			Report.IsTrue(new Ingredients().GetIngredientPublicNameOptions(ingredient).Count > 1,
 				"No options are showing in public name select box", "options are showing in public name select box");
 		}
 
-		[StepDefinition(@"for ingredient: (.*) I should see an error below the public name column which reads: (.*)")]
+		[RegexStepDefinition(@"for ingredient: (.*) I should see an error below the public name column which reads: (.*)")]
 		public void ForIngredientIShouldSeeAnErrorBelowThePublicNameColumn(string ingredient, string error)
 		{
 			string actualError = new Ingredients().GetPublicNameErrorMessage(ingredient);
@@ -192,26 +192,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Error was as expected: " + error);
 		}
 
-		[StepDefinition(@"for ingredient: (.*) I select Public Name: (.*)")]
+		[RegexStepDefinition(@"for ingredient: (.*) I select Public Name: (.*)")]
 		public void ForIngredientISelectPublicName(string ingredient, string publicName)
 		{
 			Report.IsTrue(new Ingredients().SelectIngredientPublicName(ingredient, publicName), "Failed to set public name for ingredient: " + ingredient + " to: " + publicName, "Successfully set public name for ingredient: " + ingredient + " to: " + publicName);
 		}
 
-		[StepDefinition(@"for ingredient: (.*) I select Public Name as: (.*)")]
+		[RegexStepDefinition(@"for ingredient: (.*) I select Public Name as: (.*)")]
 		public void ForIngredientISelectPublicNameAs(string ingredient, string publicName)
 		{
 			string casIdTest = string.Concat("WPS", ingredient);
 			Report.IsTrue(new Ingredients().SelectIngredientPublicName(casIdTest, publicName), $"Failed to set public name for ingredient: { casIdTest } to: { publicName }", $"Successfully set public name for ingredient: {ingredient } to: { publicName }");
 	 	}
 
-		[StepDefinition(@"I select the first Public Name dropdown option for ingredient: (.*)")]
+		[RegexStepDefinition(@"I select the first Public Name dropdown option for ingredient: (.*)")]
 		public void IngredientSelectPublicName(string chemicalName)
 		{
 			Report.IsTrue(new Ingredients().SelectIngredientPublicName(chemicalName), "The Public Name option for ingredient: " + chemicalName + " was not changed", "The Public Name for ingredient: " + chemicalName + " was succesfully changed");
 		}
 
-		[StepDefinition(@"I confirm the following column titles and inputs are displayed in the ingredients table")]
+		[RegexStepDefinition(@"I confirm the following column titles and inputs are displayed in the ingredients table")]
 		public void ConfirmTheFollowingColumnTitlesAndInputsAreDisplayedInTheIngredientsTable(Table table)
 		{
 			var newProductIngredients = new Ingredients();
@@ -223,13 +223,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I click 'Select all' in the Ingredients table")]
+		[RegexStepDefinition(@"I click 'Select all' in the Ingredients table")]
 		public void ClickSelectAllInTheIngredientsTable()
 		{
 			Report.IsTrue(new Ingredients().ClickSelectAllIngredients(), "Failed to click 'Select All' in the ingredients table", "Successfully clicked 'Select All' in the ingredients table");
 		}
 
-		[StepDefinition(@"I confirm the 'Select all' checkbox in the Ingredients table is (checked|unchecked)")]
+		[RegexStepDefinition(@"I confirm the 'Select all' checkbox in the Ingredients table is (checked|unchecked)")]
 		public void ConfirmSelectAllIngredientsIsCheckedUnchecked(string expectChecked)
 		{
 			var newProductIngredients = new Ingredients();
@@ -247,7 +247,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I confirm the 'Delete' button (is|is not) available in the Ingredients table")]
+		[RegexStepDefinition(@"I confirm the 'Delete' button (is|is not) available in the Ingredients table")]
 		public void ConfirmTheDeleteButtonIsDisplayed(string isIsNot)
 		{
 			if (isIsNot == "is")
@@ -261,13 +261,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
-		[StepDefinition(@"I click the 'Delete' button in the Ingredients table")]
+		[RegexStepDefinition(@"I click the 'Delete' button in the Ingredients table")]
 		public void ClickDeleteTheIngredients()
 		{
 			Report.IsTrue(new Ingredients().ClickDeleteIngredients(), "Failed to click 'Delete'", "Successfully clicked 'Delete'");
 		}
 
-		[StepDefinition(@"I confirm that all ingredients in the table are selected")]
+		[RegexStepDefinition(@"I confirm that all ingredients in the table are selected")]
 		public void ConfirmAllIngredientsAreSelected()
 		{
 			List<Ingredients.Ingredient> ingredients = new Ingredients().GetIngredients();
@@ -275,7 +275,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(ingredients.All(x => x.Selected), "Not all of the ingredients were selected! => " + string.Join(", ", notSelected.Select(x => x.ComponentName)), "All of the ingredients in the table were selected as expected");
 		}
 
-		[StepDefinition("I (select|deselect) the following ingredients:")]
+		[RegexStepDefinition("I (select|deselect) the following ingredients:")]
 		public void SelectDeselectIngredients(string doSelect, Table table)
 		{
 			var newProductIngredients = new Ingredients();
@@ -302,7 +302,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(ingredients.Where(x => ingredientsToAction.Contains(x.ComponentName)).All(x => x.Selected == actionSelect), $"Not all of the ingredients were successfully {doSelect}ed", $"All of the listed ingredients were successfully {doSelect}ed");
 		}
 
-		[StepDefinition("I confirm the following ingredients are (selected|unselected):")]
+		[RegexStepDefinition("I confirm the following ingredients are (selected|unselected):")]
 		public void ConfirmIngredientsAreSelectedDeselected(string expectSelected, Table table)
 		{
 			List<Ingredients.Ingredient> ingredients = new Ingredients().GetIngredients();
@@ -322,7 +322,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition("I confirm the 'Remove selected components' popup is displayed with message: (.*)")]
+		[RegexStepDefinition("I confirm the 'Remove selected components' popup is displayed with message: (.*)")]
 		public void ConfirmRemoveSelectedComponentsPopupIsDisplayed(string expectedText)
 		{
 			var selModal = new ModalDialog();
@@ -340,7 +340,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I confirm there are a total of: (.*) ingredients in the table")]
+		[RegexStepDefinition(@"I confirm there are a total of: (.*) ingredients in the table")]
 		public void ConfirmIngredientsCount(string total)
 		{
 
@@ -353,7 +353,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(ingredients.Count == expectedCount, $"The ingredients count was not correct! Expected: {expectedCount} but found: {ingredients.Count}", "The ingredients count was correct: " + expectedCount);
 		}
 
-		[StepDefinition(@"I (should|should not) see the ingredients error message")]
+		[RegexStepDefinition(@"I (should|should not) see the ingredients error message")]
 		public void IngredientsErrorMessageShowing(string should)
 		{
 			bool expected;
@@ -377,7 +377,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		
 
 
-		[StepDefinition(@"I should not see the ingredient obsolete error message")]
+		[RegexStepDefinition(@"I should not see the ingredient obsolete error message")]
 		public void CheckForObsoleteIngredient()
 		{		
 			var ingredients = new Ingredients();
@@ -443,7 +443,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
-		[StepDefinition(@"The ingredients error message should be showing: (.*)")]
+		[RegexStepDefinition(@"The ingredients error message should be showing: (.*)")]
 		public void IngredientsErrorMessageShowingCorrectText(string text)
 		{
 			string showing = new Ingredients().GetIngredientErrorMessage();
@@ -452,13 +452,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				$"Ingredients error message was showing {text.Trim()} as expected!");
 		}
 
-		[StepDefinition(@"I confirm there are (.*) Publicly Disclosed ingredients in the Total section")]
+		[RegexStepDefinition(@"I confirm there are (.*) Publicly Disclosed ingredients in the Total section")]
 		public void IngredientsPubliclyDisclosedTotalIsCorrect(string total)
 		{
 			Report.IsTrue(new Ingredients().PubliclyDisclosedTotalIsCorrect(total), "The Publicly Disclosed summary text did not match the expected: " + total, "The Publicaly Disclosed summary text matched the expected: " + total);
 		}
 
-		[StepDefinition(@"In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: (.*) and denominator: (.*)")]
+		[RegexStepDefinition(@"In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: (.*) and denominator: (.*)")]
 		public void IngredientsPageIConfirmThePublicallyDisclosedTotalDenominatorIsShowing(string numerator, string denominator)
 		{
 			var newProductIngredients = new Ingredients();
@@ -476,7 +476,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"The Transparency Score denominator matched the expected: " + denominator);
 		}
 
-		[StepDefinition(@"In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a (warning|success|danger|info)")]
+		[RegexStepDefinition(@"In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a (warning|success|danger|info)")]
 		public void IngredientsPageIConfirmThePubliclyDisclosedTransparencyScoreIsFlaggedRed(string flag)
 		{
 			string status = new Ingredients().TransparencyScoreStatus();
@@ -507,14 +507,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"In the ingredients table I click (CAS Number|Chemical Name|Percent|Publicly Disclosed|Trade Secret|Public Name) to order")]
+		[RegexStepDefinition(@"In the ingredients table I click (CAS Number|Chemical Name|Percent|Publicly Disclosed|Trade Secret|Public Name) to order")]
 		public void WhenInTheIngredientsTableIClickCASNumberChemicalNameToOrder(string orderBy)
 		{
 			Report.IsTrue(new Ingredients().IngredientOrderbY(orderBy),
 				"Failed to click " + orderBy, "Successfully clicked " + orderBy);
 		}
 
-		[StepDefinition(@"In the ingredients table the ingredients should be in the following order")]
+		[RegexStepDefinition(@"In the ingredients table the ingredients should be in the following order")]
 		public void ThenInTheIngredientsTableTheIngredientsShouldBeInTheFollowingOrder(Table table)
 		{
 			List<Ingredients.Ingredient> listOfIngedients = new Ingredients().GetIngredients();
@@ -534,7 +534,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I click the Regulated button for ingredient: (.*) in the Ingredients table")]
+		[RegexStepDefinition(@"I click the Regulated button for ingredient: (.*) in the Ingredients table")]
 		public void ClickRegulatedButtonForIngredient(string name)
 		{
 			var selNewProduct = new NewProduct();
@@ -558,14 +558,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			newProductIngredients.AddIngredient(thisIngredient);
 		}
 
-		[StepDefinition(@"I enter text: (.*) in the component search box")]
+		[RegexStepDefinition(@"I enter text: (.*) in the component search box")]
 		public void EnterTextComponentSearchBox(string value)
 		{
 			var newProductIngredients = new Ingredients();
 			newProductIngredients.ClickComponentSearchPlaceholder();
 			Report.IsTrue(newProductIngredients.EnterTextSearchComponent(value), $"Failed to enter text '{value}' in the component search box!", $"Successully entered text '{value}' in the component search box");
 		}
-		[StepDefinition(@"I enter WPSId: (.*) in the component search box")]
+		[RegexStepDefinition(@"I enter WPSId: (.*) in the component search box")]
 		public void EnterWpsIDComponentSearchBox(string value)
 		{
 			var newProductIngredients = new Ingredients();
@@ -576,7 +576,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(newProductIngredients.EnterTextSearchComponent(casIdTest), $"Failed to enter text '{casIdTest}' in the component search box!", $"Successully entered text '{casIdTest}' in the component search box");
 			newProductIngredients.ElementEnterKey();
 		}
-		[StepDefinition(@"I select the component search result with (name|CAS) matching text: (.*) and save ingredient as: (.*)")]
+		[RegexStepDefinition(@"I select the component search result with (name|CAS) matching text: (.*) and save ingredient as: (.*)")]
 		public void SearchForAndSelectComponentIngredients(string identifier, string value, string savedAs)
 		{
 			var newProductIngredients = new Ingredients();
@@ -607,7 +607,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Context.AddToContext(savedAs, clickedIngredient);
 		}
 
-		[StepDefinition(@"I confirm that a 'Sustainability Hint' button is displayed under ingredient saved as: (.*) with hover over text: (.*)")]
+		[RegexStepDefinition(@"I confirm that a 'Sustainability Hint' button is displayed under ingredient saved as: (.*) with hover over text: (.*)")]
 		public void ConfirmSustainabilityHintMatchesText(string savedAs, string text)
 		{
 			Report.StartStep($"I confirm that a Sustainability Hint button is displayed under ingredient saved as: {savedAs} with the correct hover over text");
@@ -629,7 +629,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"The Sustainability Hint hover over message matched the expected text: " + text);
 		}
 
-		[StepDefinition(@"I confirm that the 'Sustainability Hint' button (is displayed|is not displayed) under ingredient saved as: (.*)")]
+		[RegexStepDefinition(@"I confirm that the 'Sustainability Hint' button (is displayed|is not displayed) under ingredient saved as: (.*)")]
 		public void ConfirmSustainabilityHintIsDisplayed(string expectDisplayed, string savedAs)
 		{
 			var newProductIngredients = new Ingredients();
@@ -653,7 +653,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Failure("Invalid step variable was provided! Must be either 'is displayed' or 'is not displayed'");
 		}
 
-		[StepDefinition(@"I click on the Sustainability Hint button under ingredient saved as: (.*)")]
+		[RegexStepDefinition(@"I click on the Sustainability Hint button under ingredient saved as: (.*)")]
 		public void ClickOnSustainabilityHintButton(string savedAs)
 		{
 			var ingredient = (Ingredients.Ingredient)Context.GetFromContext(savedAs);
@@ -666,7 +666,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Failed to click the Sustainability Hint button for ingredient saved as: " + savedAs, "Successfully clicked the Sustainability Hint button for the ingredient saved as: " + savedAs);
 		}
 
-		[StepDefinition(@"I confirm a 'Sustainability Hint' popover element is open under ingredient saved as: (.*)")]
+		[RegexStepDefinition(@"I confirm a 'Sustainability Hint' popover element is open under ingredient saved as: (.*)")]
 		public void ConfirmSutainabilityHintPopoverIsActive(string savedAs)
 		{
 			var ingredient = (Ingredients.Ingredient)Context.GetFromContext(savedAs);
@@ -698,7 +698,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 
 
-		[StepDefinition(@"I confirm that a 'Screenability Alert' button is displayed under ingredient saved as: (.*) with hover over text: (.*)")]
+		[RegexStepDefinition(@"I confirm that a 'Screenability Alert' button is displayed under ingredient saved as: (.*) with hover over text: (.*)")]
 		public void ConfirmScreenabilityAlertMatchesText(string savedAs, string text)
 		{
 			Report.StartStep($"I confirm that a Screenability Alert button is displayed under ingredient saved as: {savedAs} with the correct hover over text");
@@ -721,7 +721,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"TheScreenability Alert hover over message matched the expected text: " + text);
 		}
 
-		[StepDefinition(@"I confirm that the 'Screenability Alert' button (is displayed|is not displayed) under ingredient saved as: (.*)")]
+		[RegexStepDefinition(@"I confirm that the 'Screenability Alert' button (is displayed|is not displayed) under ingredient saved as: (.*)")]
 		public void ConfirmScreenabilityAlertIsDisplayed(string expectDisplayed, string savedAs)
 		{
 			var newProductIngredients = new Ingredients();
@@ -745,7 +745,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Failure("Invalid step variable was provided! Must be either 'is displayed' or 'is not displayed'");
 		}
 
-		[StepDefinition(@"I click on the Screenability Alert button under ingredient saved as: (.*)")]
+		[RegexStepDefinition(@"I click on the Screenability Alert button under ingredient saved as: (.*)")]
 		public void ClickOnScreenabilityAlertButton(string savedAs)
 		{
 			var ingredient = (Ingredients.Ingredient)Context.GetFromContext(savedAs);
@@ -758,7 +758,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Failed to click the Screenability Alert button for ingredient saved as: " + savedAs, "Successfully clicked the Screenability Alert button for the ingredient saved as: " + savedAs);
 		}
 
-		[StepDefinition(@"I confirm a 'Screenability Alert' popover element is open under ingredient saved as: (.*)")]
+		[RegexStepDefinition(@"I confirm a 'Screenability Alert' popover element is open under ingredient saved as: (.*)")]
 		public void ConfirmScreenabilityAlertPopoverIsActive(string savedAs)
 		{
 			var ingredient = (Ingredients.Ingredient)Context.GetFromContext(savedAs);
@@ -791,7 +791,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 
 
-		[StepDefinition(@"I confirm that you cannot add a new component to the formulation")]
+		[RegexStepDefinition(@"I confirm that you cannot add a new component to the formulation")]
 		public void ThenIConfirmThatYouCannotAddANewComponentToTheFormulation()
 		{
 			var thisNewProduct = new NewProduct();
@@ -850,28 +850,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"As expected could not add ingredient");
 		}
 
-		[StepDefinition(@"I confirm that you cannot edit the Percentage value for any component shown")]
+		[RegexStepDefinition(@"I confirm that you cannot edit the Percentage value for any component shown")]
 		public void ThenIConfirmThatYouCannotEditThePercentageValueForAnyComponentShown()
 		{
 			Report.IsTrue(!(new Ingredients().ConcentrationsAreEditable()),
 				"Concentrations should not be editable but are", "As expected, concentrations are not editable");
 		}
 
-		[StepDefinition(@"I confirm that you cannot edit the Is this a trade secret entry for any component shown")]
+		[RegexStepDefinition(@"I confirm that you cannot edit the Is this a trade secret entry for any component shown")]
 		public void ThenIConfirmThatYouCannotEditTheIsThisATradeSecretEntryForAnyComponentShown()
 		{
 			Report.IsTrue(!(new Ingredients().TradeSecretsAreEditable()),
 				"Is this a Trade secret should not be editable but is", "As expected, is this a trade secret is not editable");
 		}
 
-		[StepDefinition(@"I confirm that you can edit the Publicly Disclosed entry for any component shown")]
+		[RegexStepDefinition(@"I confirm that you can edit the Publicly Disclosed entry for any component shown")]
 		public void ThenIConfirmThatYouCanEditThePubliclyDisclosedEntryForAnyComponentShown()
 		{
 			Report.IsTrue(new Ingredients().PubliclyDisclosedAreEditable(),
 				"Publicly disclosed should be editable but is not", "As expected, publicly disclosed is editable");
 		}
 
-		[StepDefinition(@"I edit the (first|second) component to show (.*) for Publicly disclosed")]
+		[RegexStepDefinition(@"I edit the (first|second) component to show (.*) for Publicly disclosed")]
 		public void ThenIEditTheComponentToShowYesForPubliclyDisclosed(string firstOrSecond, string yesOrNo)
 		{
 			var newProductIngredients = new Ingredients();
@@ -889,7 +889,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I change the percent field to (.*)")]
+		[RegexStepDefinition(@"I change the percent field to (.*)")]
 		public void IChangeThePercentFieldTo(string value)
 		{
 			var newProductIngredients = new Ingredients();
@@ -902,7 +902,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(newProductIngredients.SetPercentageValue(firstIngredientName, value), "Could not set percentage value to " + value, "Successfully set percentage value to " + value);
 		}
 
-		[StepDefinition(@"I confirm that for the first component an error is shown below the Public Name drop down which reads: (.*)")]
+		[RegexStepDefinition(@"I confirm that for the first component an error is shown below the Public Name drop down which reads: (.*)")]
 		public void ThenIConfirmThatForTheFirstComponentAnErrorIsShownBelowThePublicNameDropDownWhichReads(string expectedError)
 		{
 			if (!new Ingredients().WaitForContainerToBeVisible())
@@ -922,7 +922,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Error is showing as expected" + expectedError);
 		}
 
-		[StepDefinition(@"I confirm that for the first component shows no error below the Public Name drop down")]
+		[RegexStepDefinition(@"I confirm that for the first component shows no error below the Public Name drop down")]
 		public void ThenIConfirmThatForTheFirstComponentShowsNoErrorBelowThePublicNameDropDown()
 		{
 			var newProductIngredients = new Ingredients();
@@ -938,7 +938,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"As expected, no error is showing");
 		}
 
-		[StepDefinition(@"I edit the (first|second) component to select: (.*) from the Public Name drop down and save choice as (.*)")]
+		[RegexStepDefinition(@"I edit the (first|second) component to select: (.*) from the Public Name drop down and save choice as (.*)")]
 		public void ThenIEditTheFirstComponentToSelectFromThePublicNameDropDown(string firstOrSecond, string option, string saveAs)
 		{
 			Report.Info("Beginning I edit the " + firstOrSecond + " component to select: " + option + " from the Public Name drop down and save choice as " + saveAs);
@@ -976,7 +976,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I confirm that the ingredients table looks as follows:")]
+		[RegexStepDefinition(@"I confirm that the ingredients table looks as follows:")]
 		public void IConfirmThatTheIngredientsTableLooksAsFollows(Table table)
 		{
 			var newProductIngredients = new Ingredients();
@@ -1016,13 +1016,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"In the Ingredients page I start typing (.*) and select the first component in the list and set its percent to (.*)")]
+		[RegexStepDefinition(@"In the Ingredients page I start typing (.*) and select the first component in the list and set its percent to (.*)")]
 		public void InTheIngredientsPageIStartTypingAndSelectTheFirstComponentInTheListAndSetItsPercentTo(string text, string percent)
 		{
 			var newProductIngredients = new Ingredients();
 		}
 
-		[StepDefinition(@"On the Ingredients page for the Ingredient: (.*) I add Ingredient Type: (.*) and Functional Purpose:")]
+		[RegexStepDefinition(@"On the Ingredients page for the Ingredient: (.*) I add Ingredient Type: (.*) and Functional Purpose:")]
 		public void OnTheIngredientsPageSelectTypeAndPurpose(string ingredientName, string ingredientType, Table table)
 		{
 			Report.Info($"Attempting to select the ingredient type: {ingredientType} for the Ingredient: {ingredientName}");
@@ -1031,6 +1031,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var selectedOptionsStr = new List<string>();
 			foreach (TableRow row in table.Rows)
 			{
+				
 				if (Report.IsTrue(new Ingredients().ISelectFunctionalPurpose(ingredientName, row["Functional Purpose"], "ComponentName"), "Failed to Select The Functional Purpose:" + row["Functional Purpose"], "Successfully selected the Functional purpose" + row["Functional Purpose"]))
 				{
 					selectedOptionsStr.Add(row["Functional Purpose"]);
@@ -1040,7 +1041,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Context.AddToContext(ingredientName + "FunctionalPurposesList", selectedOptionsStr);
 		}
 
-		[StepDefinition(@"On the Ingredients page for the Ingredient: (.*) I add Ingredient Type: (.*) and All Functional Purposes")]
+		[RegexStepDefinition(@"On the Ingredients page for the Ingredient: (.*) I add Ingredient Type: (.*) and All Functional Purposes")]
 		public void OnTheIngredientsPageSelectTypeAndAllPurpose(string ingredientName, string ingredientType)
 		{
 			Report.IsTrue(new Ingredients().ISelectIngredientType(ingredientName, ingredientType, "ComponentName"), "Failed to Select the Ingredient Type", "Successfully selected the Ingredient Type");
@@ -1052,7 +1053,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 
 
-		[StepDefinition(@"I verify the Transparency Score displays (.*)%")]
+		[RegexStepDefinition(@"I verify the Transparency Score displays (.*)%")]
 		public void ThenIVerifyTheTransparencyScoreDisplays(float p0)
 		{
 			Report.IsTrue(new Ingredients().TransparencyScorePercent(p0, out float trScore),
@@ -1060,7 +1061,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Transparecy score was displayed as: " + trScore + " as expected");
 		}
 
-		[StepDefinition(@"I add the following CA Cleaning ingredients:")]
+		[RegexStepDefinition(@"I add the following CA Cleaning ingredients:")]
 		public void IAddTheFollowingCACleaningIngredients(Table table)
 		{
 			var newProductIngredients = new Ingredients();
@@ -1072,20 +1073,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
-		[StepDefinition(@"for ingredient: (.*) Public Name displayed: (.*)")]
+		[RegexStepDefinition(@"for ingredient: (.*) Public Name displayed: (.*)")]
 		public void ForIngredientIDisplayPublicName(string ingredient, string publicName)
 		{
 			string displayName = new Ingredients().GetIngredientPublicName(ingredient);
 			Report.IsTrue(displayName == publicName, "Failed to display public name for ingredient: " + ingredient + " as: " + publicName + ", actually displayed: " + displayName, "Successfully displayed public name for ingredient: " + ingredient + " as: " + publicName);
 		}
-		[StepDefinition(@"for ingredient: (.*) Percentage displayed: (.*)")]
+		[RegexStepDefinition(@"for ingredient: (.*) Percentage displayed: (.*)")]
 		public void ForIngredientIDisplayPercentage(string ingredient, string percentage)
 		{
 			string displayPercentage = new Ingredients().GetIngredientPercentage(ingredient);
 			Report.IsTrue(displayPercentage == percentage, "Failed to display percentage for ingredient: " + ingredient + " as: " + percentage + ", actually displayed: " + displayPercentage, "Successfully displayed percentage for ingredient: " + ingredient + " as: " + percentage);
 		}
 
-		[StepDefinition(@"I confirm the top result in the searchfields dropdown list has the following CAS number: (.*)")]
+		[RegexStepDefinition(@"I confirm the top result in the searchfields dropdown list has the following CAS number: (.*)")]
 		public void GivenIConfirmTheTopResultInTheSearchfieldsDropdownListHasTheFollowingCASNumber(string casNumber)
 		{
 			Ingredients ingredientsObject = new Ingredients();
@@ -1093,7 +1094,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
-		[StepDefinition(@"In the popup view with the following title: (.*) I click the (.*) button")]
+		[RegexStepDefinition(@"In the popup view with the following title: (.*) I click the (.*) button")]
 		public void ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton(string popupTitle, string buttonTitle)
 		{
 			Ingredients ingredientsObject = new Ingredients();
@@ -1103,34 +1104,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
-		[StepDefinition(@"In the popup view with the following title: (.*) I confirm I see the following buttons in the popup view:")]
+		[RegexStepDefinition(@"In the popup view with the following title: (.*) I confirm I see the following buttons in the popup view:")]
 		public void ThenIConfirmISeeTheFollowingButtonsInThePopupView(string popupTitle, Table table)
 		{
 			Ingredients ingredientsObject = new Ingredients();
 			Report.IsTrue(ingredientsObject.CheckForTheFollowingButtonsInThePopupView(popupTitle, table), "Failed to find all the buttons", "Successfully found all the buttons");
 		}
 
-		[StepDefinition(@"I confirm I check the checkbox in the popup view with the following text: (.*)")]
+		[RegexStepDefinition(@"I confirm I check the checkbox in the popup view with the following text: (.*)")]
 		public void ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingText(string text)
 		{
 			Report.IsTrue(new Ingredients().CheckACheckboxWithTheFollowingText(text), $"Failed to click the ok button with the following text: {text}", $"Successfully clicked the ok button with the following text: {text}");
 			Report.IsTrue(new Ingredients().WaitForContainerToBeVisible(120), "Loading did not finish", showSuccessScreenshot: false);
 		}
 
-		[StepDefinition(@"I click the Ok button in the popup view with the following text: (.*)")]
+		[RegexStepDefinition(@"I click the Ok button in the popup view with the following text: (.*)")]
 		public void ThenIConfirmIClicktheOkButtonInThePopupViewWithTheFollowingTextTheProductTypePestSelectionAndIngredientsListedAreAccurate_(string text)
 		{
 			Report.IsTrue(new Ingredients().CheckACheckboxWithTheFollowingText(text), "Failed to check the checkbox with the following text: " + text, "Successfully checked the checkbox with the following text: " + text);
 		}
 
-		[StepDefinition(@"I confirm I see a checkbox in the popup view with the following text: (.*)")]
+		[RegexStepDefinition(@"I confirm I see a checkbox in the popup view with the following text: (.*)")]
 		public void ThenIConfirmISeeACheckboxInThePopupViewWithTheFollowingText(string text)
 		{
 			Report.IsTrue(new Ingredients().ConfirmACheckboxWithTheFollowingTextExists(text), "Failed to find a checkbox with the following text: " + text, "Successfully found a checkbox with the following text: " + text);
 		}
 
 
-		[StepDefinition(@"I confirm the table in the popup view has following column data")]
+		[RegexStepDefinition(@"I confirm the table in the popup view has following column data")]
 		public void ThenIConfirmTheTableInThePopupViewHasFollowingColumnData(Table table)
 		{
 			Ingredients ingredientsObject = new Ingredients();
@@ -1138,14 +1139,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 		
-		[StepDefinition(@"I confirm the table in the popup view has the following column titles")]
+		[RegexStepDefinition(@"I confirm the table in the popup view has the following column titles")]
 		public void ThenIConfirmIATableWithTheFollowingColumnTitles(Table table)
 		{
 			Ingredients ingredientsObject = new Ingredients();
 			Report.IsTrue(ingredientsObject.CheckForTheFollowingTableColumnTitlesInPopupView(table), "Failed to find all the columns", "Successfully found all the columns");
 		}
 
-		[StepDefinition(@"In the popup view with the following title: (.*) I confirm I see the following statement in the popup view: (.*)")]
+		[RegexStepDefinition(@"In the popup view with the following title: (.*) I confirm I see the following statement in the popup view: (.*)")]
 		public void ThenIConfirmISeeTheFollowingStatementInThePopupView(string popupTitle, string text)
 		{
 			Ingredients ingredientsObject = new Ingredients();
@@ -1153,7 +1154,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
-		[StepDefinition(@"I confirm there (is|is not) a popup view titled: (.*) in the Ingredients page")]
+		[RegexStepDefinition(@"I confirm there (is|is not) a popup view titled: (.*) in the Ingredients page")]
 		public void ThenIConfirmThereIsAPopupVideoTitled(string isOrIsNot, string popupTitle)
 		{
 			Ingredients ingredientsObject = new Ingredients();
@@ -1168,28 +1169,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I confirm the CBD Registration Guidance popup appears in the Ingredients Page with the correct text")]
+		[RegexStepDefinition(@"I confirm the CBD Registration Guidance popup appears in the Ingredients Page with the correct text")]
 		public void GivenIConfirmTheCBDRegistrationGuidancePopupAppearsInTheIngredientsPageWithTheCorrectText()
 		{
 			Ingredients ingredientsObject = new Ingredients();
 			Report.IsTrue(ingredientsObject.ConfirmCBDRegistrationPopupInIndredientsPageContainsCorrectText(), "The correct text was displayed", "Incorrect text was displayed");
 		}
 
-		[StepDefinition(@"I click the link in the CBD Registration Guidance popup")]
+		[RegexStepDefinition(@"I click the link in the CBD Registration Guidance popup")]
 		public void GivenIConfirmTheLinkInTheCBDRegistrationGuidancePopupOpensTheFollowingLink()
 		{
 			Ingredients ingredientsObject = new Ingredients();
 			Report.IsTrue(ingredientsObject.ClickLinkInCBDRegistrationPopupInIndredientsPage(), "Failed to click link in the CBD Registration Popup", "Successfully to clicked link in the CBD Registration Popu");
 		}
 
-		[StepDefinition(@"I close the CBD Registration Guidance popup in the Ingredients Page")]
+		[RegexStepDefinition(@"I close the CBD Registration Guidance popup in the Ingredients Page")]
 		public void GivenICloseTheCBDRegistrationGuidancePopupInTheIngredientsPage()
 		{
 			Ingredients ingredientsObject = new Ingredients();
 			Report.IsTrue(ingredientsObject.CloseCBDRegistrationGuidancePopupInIngredientsPage(), "Failed to close CBD Registration Guidance Popup", "Successfully closed CBD Registration Guidance Popup");
 		}
 	
-		[StepDefinition(@"In the Ingredient Reference Number field I enter the following text: (.*)")]
+		[RegexStepDefinition(@"In the Ingredient Reference Number field I enter the following text: (.*)")]
 		public void IEnterTheGivenTextIntoTheIngredientReferenceNumbreField(string refValue)
 		{
 			Ingredients ingredientsObject = new Ingredients();
@@ -1202,7 +1203,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(ingredientsObject.EnterTextInIngredientReferenceNumberField(refValue), "failed to enter ingredient reference number", "Successfully entered ingredient reference number");
 		}
 
-		[StepDefinition(@"In the Ingredients screen, I ensure that there is a field called: (.*)")]
+		[RegexStepDefinition(@"In the Ingredients screen, I ensure that there is a field called: (.*)")]
 		public void FieldInTheIngredientScreen(string field)
 		{
 			Ingredients ingredientsObject = new Ingredients();
@@ -1210,7 +1211,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(ingredientsObject.IngredientsFieldAvailable(field), "Failed to Confirm the'" + field + "' field is available", "I Confirm the '" + field + "' field is available");
 		}
 
-		[StepDefinition(@"In the Data Summary page, I ensure that the value (.*) shown under the field Ingredient Reference Number \(Optional\) displays as it was keyed on the Ingredients page")]
+		[RegexStepDefinition(@"In the Data Summary page, I ensure that the value (.*) shown under the field Ingredient Reference Number \(Optional\) displays as it was keyed on the Ingredients page")]
 		public void FieldInTheSummaryPage(string value)
 		{
 			Ingredients ingredientsObject = new Ingredients();
@@ -1218,7 +1219,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(ingredientsObject.FieldAvailableInSummaryPage(value), "Failed to ensure that the  value '" + value + "' shown under the field Ingredient Reference Number (Optional) displays as it was keyed on the Ingredients page", "I ensure that the value '" + value + "'shown under the field Ingredient Reference Number (Optional) displays as it was keyed on the Ingredients page");
 		}
 
-		[StepDefinition(@"I (should|should not) see the DOT exceptions error message")]
+		[RegexStepDefinition(@"I (should|should not) see the DOT exceptions error message")]
 		public void DOTExceptionsErrorMessageShowing(string should)
 		{
 			bool expected;
@@ -1238,7 +1239,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				$"{(expected ? "Did not expect" : "Expected")} to see the DOT exceptions error message!",
 				$"DOT exceptions error message {(expected ? "was" : "was not")} showing as expected");
 		}
-		[StepDefinition(@"I Confirm the Product name is shown at the top of the page")]
+		[RegexStepDefinition(@"I Confirm the Product name is shown at the top of the page")]
 
 		public void GivenIConfirmTheProductName()
 		{
@@ -1248,7 +1249,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 
 		}
-		[StepDefinition(@"I Confirm the Product name shows on 1 line only and shows \(3-dots\) ... at the end of the characters")]
+		[RegexStepDefinition(@"I Confirm the Product name shows on 1 line only and shows \(3-dots\) ... at the end of the characters")]
 
 		public void GivenIConfirmThePartialProductNamWith3dots()
 		{
@@ -1256,7 +1257,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(ingredientsObject.ProductNameWithThreeDots(), "Product name doesnt have (3-dots) ... at the end of the characters","Product name shows in 1 line only and shows (3-dots) ... at the end of the characters");
 		}
 
-		[StepDefinition(@"I Confirm the Product Name is shown in full in the hover over pop up")]
+		[RegexStepDefinition(@"I Confirm the Product Name is shown in full in the hover over pop up")]
 
 		public void MouseHoverProductName()
 		{
@@ -1264,7 +1265,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(ingredientsObject.MouseHoverOnElement(), "Failed to Mouse hover on the product", "Successfully Mouse hovered on the product");
 		}
 
-		[StepDefinition(@"I Confirm the WPS ID for the Product is shown at the end of the Product Name in brackets \(parenthesis\)")]
+		[RegexStepDefinition(@"I Confirm the WPS ID for the Product is shown at the end of the Product Name in brackets \(parenthesis\)")]
 
 		public void GivenIConfirmTheWPSID()
 		{
@@ -1272,7 +1273,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(ingredientsObject.GetTheWPSIDForTheValidationOfProductNameFor449Characters(), "WPS ID for the Product is not shown at the end of the Product Name in brackets (parenthesis)", "WPS ID for the Product is shown at the end of the Product Name in brackets (parenthesis)");
 		}
 
-		[StepDefinition(@"I confirm the total percent of these five ingredients is (.*) %")]
+		[RegexStepDefinition(@"I confirm the total percent of these five ingredients is (.*) %")]
 		public void GivenIConfirmPercentageOfFiveIngredients(string value)
 		{
 			Delay.Seconds(15);
@@ -1280,7 +1281,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 			Report.IsTrue(ingredientsObject.TotalPercentage(value), "Failed to confirm the total percent '" + value + "' on the Ingredients page", "I confirm that the total percent '" + value + "' on the Ingredients page");
 		}
-		[StepDefinition(@"I Select the NO Button for the Cleaning products must comply with California Cleaning Product Right to Know Act.")]
+		[RegexStepDefinition(@"I Select the NO Button for the Cleaning products must comply with California Cleaning Product Right to Know Act.")]
 		public void GivenISelectOption()
 		{
 			Delay.Seconds(15);
@@ -1289,7 +1290,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(ingredientsObject.SelectOption(), "Failed to select the option", "I confirm that the option selected");
 		}
 
-		[StepDefinition(@"I Confirm the product retailers appear in orange - Assessment in Progress status")]
+		[RegexStepDefinition(@"I Confirm the product retailers appear in orange - Assessment in Progress status")]
 		public void GivenIConfirmProductRetailersColor()
 		{
 			Delay.Seconds(10);

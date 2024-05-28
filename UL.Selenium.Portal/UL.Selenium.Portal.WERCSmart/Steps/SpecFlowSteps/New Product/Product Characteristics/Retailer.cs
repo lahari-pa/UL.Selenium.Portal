@@ -4,8 +4,9 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TechTalk.SpecFlow;
+using Reqnroll;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
@@ -15,101 +16,101 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 	[Binding, Scope(Tag = "Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer")]
 	class WERCSmart_Distributor_NewProducts_Retailer
 	{
-		[StepDefinition(@"In the Select Retailers window, select retailer: (.*)")]
+		[RegexStepDefinition(@"In the Select Retailers window, select retailer: (.*)")]
 		public void SelectRetailers(string retailer)
 		{
 			var selectRetailers = new SelectRetailers();
 			Report.IsTrue(selectRetailers.SelectRetailer(retailer), $"Failed to select retailer: {retailer}!", $"Successfully selected retailer: {retailer}");
 		}
-		[StepDefinition(@"In the Retailer Section, click 'Add Retailers' button")]
+		[RegexStepDefinition(@"In the Retailer Section, click 'Add Retailers' button")]
 		public void ClickAddRetailers()
 		{
 			string button = "Add Retailers";
 			new Steps_Prototype().ClickButton(button);
 		}
-		[StepDefinition(@"In the Select Retailers window, click 'Done' button")]
+		[RegexStepDefinition(@"In the Select Retailers window, click 'Done' button")]
 		public void ClickDoneButton()
 		{
 			Report.IsTrue(new SelectRetailers().ClickDone(), "Failed to click Done button.", "Successfully clicked Done button.");
 		}
-		[StepDefinition(@"In the Retailer Section, click 'Delete' icon")]
+		[RegexStepDefinition(@"In the Retailer Section, click 'Delete' icon")]
 		public void ClickDeleteButton()
 		{
 			var retailerObject = new Retailer();
 			Report.IsTrue(retailerObject.SelectTheDeleteSelectedRetailersButton(), "Failed to delete selected retailers", "Successfully deleted selected retailers");
 		}
-		[StepDefinition(@"In the Select Retailers window, click 'Show logo tile view' link")]
+		[RegexStepDefinition(@"In the Select Retailers window, click 'Show logo tile view' link")]
 		public void ClickShowLogoTile()
 		{
 			string option = "logo tile view";
 			new Steps_Prototype().ClickRetailersOption(option);
 		}
-		[StepDefinition(@"In the Select Retailers window, click 'Show list view' link")]
+		[RegexStepDefinition(@"In the Select Retailers window, click 'Show list view' link")]
 		public void ClickShowListTile()
 		{
 			string option = "list view";
 			new Steps_Prototype().ClickRetailersOption(option);
 		}
-		[StepDefinition(@"In the Select Retailers window, click 'Select all' link")]
+		[RegexStepDefinition(@"In the Select Retailers window, click 'Select all' link")]
 		public void ClickSelectAll()
 		{
 			string option = "select all";
 			new Steps_Prototype().ClickRetailersOption(option);
 		}
-		[StepDefinition(@"In the Retailer Section, (check|uncheck) the retailer: (.*)")]
+		[RegexStepDefinition(@"In the Retailer Section, (check|uncheck) the retailer: (.*)")]
 		public void CheckUncheckTheretailer(string condition, string retailer)
 		{
 			Report.IsTrue(new Retailer().CheckUncheckRetailer(condition, retailer), $"Failed to {condition} retailer: {retailer}!", $"Successfully {condition}ed retailer: {retailer}");
 		}
-		[StepDefinition(@"In the Retailer Section, for retailer: (.*) enter 'Indicate full name of product, as sold, via this retailer': (.*)")]
+		[RegexStepDefinition(@"In the Retailer Section, for retailer: (.*) enter 'Indicate full name of product, as sold, via this retailer': (.*)")]
 		public void EnterPrivateNameForRetailer(string retailer, string option)
 		{
 			Report.IsTrue(new Retailer().EnterPrivateLabelName(option, retailer), $"Failed to set the Private label name to be: {option} for retailer: {retailer}", $"Successfully set private label name to be: {option} for retailer: {retailer}");
 		}
-		[StepDefinition(@"In the Retailer Section, for retailer: (.*) select 'Indicate full name of product, as sold, via this retailer' option: (.*)")]
+		[RegexStepDefinition(@"In the Retailer Section, for retailer: (.*) select 'Indicate full name of product, as sold, via this retailer' option: (.*)")]
 		public void SelectPrivateNameForRetailer(string retailer, string option)
 		{
 			Report.IsTrue(new Retailer().RetailerPrivateLabelOptionSelect(retailer, option), $"Failed to set the Private label name to be: {option} for retailer: {retailer}", $"Successfully set private label name to be: {option} for retailer: {retailer}");
 		}
-		[StepDefinition(@"In the Retailer Section, for retailer: (.*) select 'Select Vendor' option: (.*)")]
+		[RegexStepDefinition(@"In the Retailer Section, for retailer: (.*) select 'Select Vendor' option: (.*)")]
 		public void SelectVendorOption(string retailer, string option)
 		{
 			Report.IsTrue(new RetailersRow(retailer).EnterSelectVendor(option), $"Failed to select Vendor {option} for {retailer} retailer", $"Successfully selected Vedor {option} for {retailer} retailer");
 		}
-		[StepDefinition(@"In the Retailer Section, for retailer: (.*) click 'Add New Supplier' button")]
+		[RegexStepDefinition(@"In the Retailer Section, for retailer: (.*) click 'Add New Supplier' button")]
 		public void ClickAddNewSupplierButton(string retailer)
 		{
 			Report.IsTrue(new RetailersRow(retailer).ClickAddNewSupplier(), $"Failed to click 'Add New Supplier' button for {retailer} retailer", $"Successfully clicked 'Add New Supplier' button for {retailer} retailer");
 		}
-		[StepDefinition(@"In the Retailer Section 'Add New Supplier' modal window, click 'Save' button")]
+		[RegexStepDefinition(@"In the Retailer Section 'Add New Supplier' modal window, click 'Save' button")]
 		public void ClickSaveAddNewSupplier()
 		{
 			string popupTitle = "Add New Supplier";
 			string button = "Save";
 			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(popupTitle, button);
 		}
-		[StepDefinition(@"In the Retailer Section 'Add New Supplier' modal window, click 'Cancel' button")]
+		[RegexStepDefinition(@"In the Retailer Section 'Add New Supplier' modal window, click 'Cancel' button")]
 		public void ClickCancelAddNewSupplier()
 		{
 			string popupTitle = "Add New Supplier";
 			string button = "Cancel";
 			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(popupTitle, button);
 		}
-		[StepDefinition(@"In the Retailer Section 'Add New Supplier' enter 'Supplier ID': (.*)")]
+		[RegexStepDefinition(@"In the Retailer Section 'Add New Supplier' enter 'Supplier ID': (.*)")]
 		public void EnterSupplierIdAddNewSupplier(string supplierId)
 		{
 			var thisAddNewSupplier = new AddNewSupplier();
 			Report.IsTrue(thisAddNewSupplier.EnterSupplierID(supplierId), "Failed to add supplier ID input",
 				"Entered supplier ID value");
 		}
-		[StepDefinition(@"In the Retailer Section 'Add New Supplier' enter 'Company or Brand Name': (.*)")]
+		[RegexStepDefinition(@"In the Retailer Section 'Add New Supplier' enter 'Company or Brand Name': (.*)")]
 		public void EnterCompanyBrandNameAddNewSupplier(string companyBrandName)
 		{
 			var thisAddNewSupplier = new AddNewSupplier();
 			Report.IsTrue(thisAddNewSupplier.EnterCompanyOrBrandName(companyBrandName), "Failed to add company or brand name input",
 				"Entered company or brand name value");
 		}
-		[StepDefinition(@"In the Retailer Section after clicking 'Cancel' in 'Add New Supplier' modal window click (Ok|Cancel) in alert message 'Are you sure want to cancel\?'")]
+		[RegexStepDefinition(@"In the Retailer Section after clicking 'Cancel' in 'Add New Supplier' modal window click (Ok|Cancel) in alert message 'Are you sure want to cancel\?'")]
 		public void AcceptAlertAreYouSureToCancel(string responce)
 		{
 			new Steps_Prototype().AnAlertIsDisplayedWithTheMessage("should", "Are you sure want to cancel ?");
@@ -124,7 +125,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			new Steps_Prototype().AnAlertIsDisplayedWithTheMessage("should not", "Are you sure want to cancel ?");
 
 		}
-		[StepDefinition(@"In the Retailer Section (is|is not) selected retailer: (.*)")]
+		[RegexStepDefinition(@"In the Retailer Section (is|is not) selected retailer: (.*)")]
 		public void SelectedRetailersShouldBe(string is_isnot, string  retailer)
 		{
 			var actualRetailers = new Retailer().SelectedRetailers();

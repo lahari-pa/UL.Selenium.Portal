@@ -1,0 +1,27 @@
+﻿{
+  "GeneralSettings": {
+    "LogsFolder": "C:\\UL.Automation",
+    "AssemblyName": "UL.Selenium.Portal.ShaManager"
+  },
+  "ReportSettings": {
+    "UseReporting": true,
+    "ReportFolder": "C:\\Reports",
+    "ShowReportAtEndOfRun": true,
+    "PerformReportRendering": true,
+    "CreateReportFolderSubPath": true,
+    "TakeScreenshotOnSuccess": true
+  },
+  "SeleniumSettings": {
+    "BrowserType": "Chrome",
+    "AutoDownloadPdf": true,
+    "UseOnDemandBrowser": true
+  },
+  "TReVorSettings": {
+    "ApiEndpoint": "https://trevor.global.ul.com/api/",
+    "LinkedSoftwareId": 20,
+    "SoftwareBranch": "QA - Integration",
+    "BuildOperationSettings": {
+      "PerformBuildOperations": false
+    }
+  }
+}

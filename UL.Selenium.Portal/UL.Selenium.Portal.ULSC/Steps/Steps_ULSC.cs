@@ -6,8 +6,9 @@ using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
-using UL.Automation.SpecFlow.Classes;
-using TechTalk.SpecFlow;
+using Reqnroll;
+using UL.Automation.ReqnrollHelpers.Classes;
+using Reqnroll;
 using UL.Selenium.Portal.ULSC.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
@@ -16,6 +17,8 @@ using System.Collections.ObjectModel;
 using TReVor.Api.Wrapper.Classes;
 using UL.Automation.TReVor.Classes;
 using UL.Automation.Reporting;
+using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
 
 namespace UL.Selenium.Portal.ULSC.Steps
 {
@@ -23,7 +26,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 	class StepsUlsc
 	{
 
-		[StepDefinition(@"I should see the following option (.*)")]
+		[RegexStepDefinition(@"I should see the following option (.*)")]
 		public void ThenIShouldSeeTheFollowingOption(string option)
 		{
 			Report.StartStep(ReportSettings.StepCounter +  " - Checking that the option " + option + " is showing");
@@ -53,7 +56,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		/// <summary>
 		/// Clicking the learn more button on the UL Solution Center page
 		/// </summary>
-		//[StepDefinition(@"I click the Learn More button")]
+		//[RegexStepDefinition(@"I click the Learn More button")]
 		//public void ClickLearnMorebutton()
 		//{
 		//	Report.StartStep(ReportSettings.StepCounter + " - Clicking 'Learn More button'");
@@ -88,7 +91,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		//	}
 		// }
 
-		[StepDefinition(@"I navigate to Studio for ULSC")]
+		[RegexStepDefinition(@"I navigate to Studio for ULSC")]
 		public void GivenINavigateToStudioULSC()
 		{
 			SeleniumBrowser.WebBrowser.Url = TestVariables.GetVariableSavedAs("TestUrl");
@@ -96,7 +99,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 
 		}
 
-		[StepDefinition(@"I login to Studio as ULSC")]
+		[RegexStepDefinition(@"I login to Studio as ULSC")]
 		public void GivenILoginToStudioAsULSCUser()
 		{
 			var thisStudioLogin = new StudioLogin();
@@ -113,7 +116,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			Report.IsTrue(thisStudioTopMenu.Wait_for_load(60), "Top menu has not loaded", "Top menu has loaded");
 		}
 
-		[StepDefinition(@"the ULSC Login page should open in a new tab")]
+		[RegexStepDefinition(@"the ULSC Login page should open in a new tab")]
 		public void GivenTheULSCLoginPageShouldOpenInANewTab()
 		{
 			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
@@ -134,7 +137,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"In the ULSC Login page I enter Username and password for the following account: (.*)")]
+		[RegexStepDefinition(@"In the ULSC Login page I enter Username and password for the following account: (.*)")]
 		public void GivenInTheULSCLoginPageIEnterUsernameAndPasswordForTheFollowingAccountTest(string accountSavedAs)
 		{
 			var thisULSCLogin = new ULSCLogin();
@@ -146,7 +149,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			}
 		}
 
-		[StepDefinition(@"I the ULSC Login page I click Login")]
+		[RegexStepDefinition(@"I the ULSC Login page I click Login")]
 		public void GivenITheULSCLoginPageIClickLogin()
 		{
 			var thisULSCLogin = new ULSCLogin();
@@ -154,7 +157,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 				"Clicked login on the ULSC login page");
 		}
 
-		[StepDefinition(@"I should see the WERCSLink dashboard")]
+		[RegexStepDefinition(@"I should see the WERCSLink dashboard")]
 		public void GivenIShouldSeeTheWERCSLinkDashboard()
 		{
 			var thisWercsLinkDashboard = new WERCSLinkDashboard();
@@ -162,7 +165,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 				"WERCSlink dasboard is showing as expected");
 		}
 
-		[StepDefinition(@"In the WERCSLink dashboard I click menu item: (.*) and submenu item: (.*)")]
+		[RegexStepDefinition(@"In the WERCSLink dashboard I click menu item: (.*) and submenu item: (.*)")]
 		public void GivenInTheWERCSLinkDashboardIClickMenuItemAndSubmenuItem(string menu, string submenu)
 		{
 			//WERCSLinkDashboard thisWercsLinkDashboard = new WERCSLinkDashboard();
@@ -226,7 +229,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			Report.Screenshot();
 		}
 
-		//[StepDefinition(@"In the WERCSLink dashboard I click left menu link: (.*)")]
+		//[RegexStepDefinition(@"In the WERCSLink dashboard I click left menu link: (.*)")]
 		//public void GivenInTheWERCSLinkDashboardIClickLeftMenuLink(string menu)
 		//{
 		//	WERCSLinkDashboard thisWercsLinkDashboard = new WERCSLinkDashboard();
@@ -234,7 +237,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		//		"Clicked menu item: " + menu);
 		//}
 
-		[StepDefinition(@"I Confirm the WerCSMart Product Information page is shown in new window/tab")]
+		[RegexStepDefinition(@"I Confirm the WerCSMart Product Information page is shown in new window/tab")]
 		public void GivenIConfirmTheWerCSMartProductInformationPageIsShownInNewWindowTab()
 		{
 			Delay.Seconds(30);
@@ -265,7 +268,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			}
 		}
 
-		[StepDefinition(@"I close the tab with the (.*) page")]
+		[RegexStepDefinition(@"I close the tab with the (.*) page")]
 		public void GivenICloseTheTabWithTheProductInformationPage(string page)
 		{
 			var OpenBrowsers = SeleniumBrowser.GetTabURLs().ToList();
@@ -346,7 +349,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			}
 		}
 
-		[StepDefinition(@"I navigate to tab with title: (.*)")]
+		[RegexStepDefinition(@"I navigate to tab with title: (.*)")]
 		public void GivenINavigateToTabWithTitle(string tabTitle)
 		{
 			var OpenBrowsers = SeleniumBrowser.GetTabURLs().ToList();
@@ -364,7 +367,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			Report.Error("Failed to switch to tab with title: " + tabTitle);
 		}
 
-		[StepDefinition(@"In the WERCSLink page - Click the (.*) link from the (.*) area of the Services page")]
+		[RegexStepDefinition(@"In the WERCSLink page - Click the (.*) link from the (.*) area of the Services page")]
 		public void GivenInTheWERCSLinkPage_ClickTheMyProductLinkFromTheWERCSmartAreaOfTheServicesPage(string link, string area)
 		{
 			var thisWercsLinkDashboard = new WERCSLinkDashboard();
@@ -386,7 +389,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 
 		}
 
-		[StepDefinition(@"I Confirm a new window opens with the WERCSmart New Product page shown")]
+		[RegexStepDefinition(@"I Confirm a new window opens with the WERCSmart New Product page shown")]
 		public void GivenIConfirmANewWindowOpensWithTheWERCSmartNewProductPageShown()
 		{
 			Delay.Seconds(30);
@@ -417,7 +420,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm that the WERCSLink header appears at the top left")]
+		[RegexStepDefinition(@"I confirm that the WERCSLink header appears at the top left")]
 		public void GivenIConfirmThatTheWERCSLinkHeaderAppearsAtTheTopLeft()
 		{
 			Report.IsTrue(new TopBarNavigation().TopLeftTitleExists("WERCSLink"), "Failed to find top left title WERCSLink",
@@ -425,7 +428,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		}
 
 		// using new class
-		[StepDefinition(@"I confirm that the following WERCSLink menu items are showing")]
+		[RegexStepDefinition(@"I confirm that the following WERCSLink menu items are showing")]
 		public void GivenIConfirmThatTheFollowingWERCSLinkMenuItemsAreShowing(Table table)
 		{
 			var menuItems = new SideBarNavigation().GetNavLinks().Select(x => x.Title).ToList();
@@ -436,7 +439,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the following sub links are displayed below the WERCSLink menu item: (.*):")]
+		[RegexStepDefinition(@"I confirm the following sub links are displayed below the WERCSLink menu item: (.*):")]
 		public void ConfirmWercsLinkMenuItemDisplaysSubItems(string menuItem, Table table)
 		{
 			SideBarNavigation.NavLink thisMenuItem = new SideBarNavigation().GetNavLink(menuItem);
@@ -460,7 +463,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I click the link: (.*) below the WERCSLink menu item: (.*)")]
+		[RegexStepDefinition(@"I click the link: (.*) below the WERCSLink menu item: (.*)")]
 		public void ClickSubLinkItem(string subLink, string menuItem)
 		{
 			SideBarNavigation.NavLink thisMenuItem = new SideBarNavigation().GetNavLink(menuItem);
@@ -480,7 +483,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			Report.IsTrue(new SideBarNavigation().ClickNavItem(thisSubLink), $"Failed to click sub link: {subLink}!", $"Successfully clicked sub link: {subLink}");
 		}
 
-		[StepDefinition(@"I confirm that the Services page displays the following sections:")]
+		[RegexStepDefinition(@"I confirm that the Services page displays the following sections:")]
 		public void ConfirmServicesPageDisplaysSections(Table table)
 		{
 			List<string> sections = new Services().SectionHeadings();
@@ -491,7 +494,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm that the Services page contains a section with the WERCSmart logo, name and Registered trade mark")]
+		[RegexStepDefinition(@"I confirm that the Services page contains a section with the WERCSmart logo, name and Registered trade mark")]
 		public void ConfirmServicesPageContainsASectionWithWercSmartLogoNameAndRegisteredTrademark()
 		{
 			List<string> images = new Services().SectionImages("WERCSmart®");
@@ -505,7 +508,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I confirm that the Services section: (.*) contains the description text: (.*)")]
+		[RegexStepDefinition(@"I confirm that the Services section: (.*) contains the description text: (.*)")]
 		public void ConfirmThatInServicesSectionContainsDescriptionText(string heading, string expectedText)
 		{
 			string actualText = new Services().SectionDescription(heading);
@@ -515,7 +518,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 				$"Expected text ({expectedText}) did not match actual text ({actualText}) for section: {heading}!", "Expected description text matched actual text for section: " + heading);
 		}
 
-		[StepDefinition(@"I confirm that the following links are displayed in the Services section: (.*):")]
+		[RegexStepDefinition(@"I confirm that the following links are displayed in the Services section: (.*):")]
 		public void ConfirmLinksAreDisplayedInServicesSection(string section, Table table)
 		{
 			List<Services.ServiceLink> links = new Services().SectionLinks(section);
@@ -530,7 +533,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm that the following subheadings are displayed in the Services section: (.*)")]
+		[RegexStepDefinition(@"I confirm that the following subheadings are displayed in the Services section: (.*)")]
 		public void GivenIConfirmThatInTheWERCSmartAreaTheFollowingSubheadingsAppear(string section, Table table)
 		{
 			List<string> subheadings = new Services().SectionSubHeadings(section);
@@ -542,7 +545,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the following images are displayed in the Services section: (.*)")]
+		[RegexStepDefinition(@"I confirm the following images are displayed in the Services section: (.*)")]
 		public void GivenIConfirmThatInTheWERCSmartAreaTheFollowingImagesAppear(string section, Table table)
 		{
 			List<string> images = new Services().SectionImages(section);
@@ -555,7 +558,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm a new window opens with the ULGHS.com page shown")]
+		[RegexStepDefinition(@"I confirm a new window opens with the ULGHS.com page shown")]
 		public void GivenIConfirmANewWindowOpensWithTheULGHSPageShown()
 		{
 			Delay.Seconds(30);
@@ -588,7 +591,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			}
 		}
 
-		[StepDefinition(@"I Confirm New window opens with the Studio Data Management window open \(Welcome page shows\) and that NO script errors display")]
+		[RegexStepDefinition(@"I Confirm New window opens with the Studio Data Management window open \(Welcome page shows\) and that NO script errors display")]
 		public void GivenIConfirmNewWindowOpensWithTheStudioDataManagementWindowOpenWelcomePageShowsAndThatNOScriptErrorsDisplay()
 		{
 			Delay.Seconds(30);
@@ -626,13 +629,13 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			}
 		}
 
-		[StepDefinition(@"I Close the Data Management window")]
+		[RegexStepDefinition(@"I Close the Data Management window")]
 		public void GivenICloseTheDataManagementWindow()
 		{
 			Context.ScenarioContext.Pending();
 		}
 
-		[StepDefinition(@"I navigate to WERCSmart")]
+		[RegexStepDefinition(@"I navigate to WERCSmart")]
 		public void GivenINavigateToWERCSmart()
 		{
 			Report.Info("Getting test variable saved as 'WercSmart_TestUrl'");
@@ -660,7 +663,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			//}
 		}
 
-		[StepDefinition(@"I Confirm New window opens with the error message: (.*)")]
+		[RegexStepDefinition(@"I Confirm New window opens with the error message: (.*)")]
 		public void GivenIConfirmNewWindowOpensWithErrorMessages(string errorMessage)
 		{
 			Delay.Seconds(30);
@@ -701,7 +704,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the left hand navigation is displayed under WercsLink")]
+		[RegexStepDefinition(@"I confirm the left hand navigation is displayed under WercsLink")]
 		public void ConfirmLeftHandNavigationDisplayed()
 		{
 			Report.IsTrue(new SideBarNavigation().GetNavLinks().Any(x => !string.IsNullOrEmpty(x.Title)),
@@ -709,8 +712,8 @@ namespace UL.Selenium.Portal.ULSC.Steps
 				"The left hand navigation loaded with items as expected");
 		}
 
-		[StepDefinition(@"I confirm the following widget panels are (displayed|not displayed) on the Key Performance Indicators page:")]
-		[StepDefinition(@"I confirm the following widget panels are (displayed|not displayed) on the Dashboard page:")]
+		[RegexStepDefinition(@"I confirm the following widget panels are (displayed|not displayed) on the Key Performance Indicators page:")]
+		[RegexStepDefinition(@"I confirm the following widget panels are (displayed|not displayed) on the Dashboard page:")]
 		public void ConfirmWidgetPanelsDisplayedOnTheDashboard(string displayed, Table table)
 		{
 			var expectedWidgets = new List<string>();
@@ -738,7 +741,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 
 		}
 
-		[StepDefinition(@"I Confirm the Layout shows a header, left hand navigation, Message center and KPI areas")]
+		[RegexStepDefinition(@"I Confirm the Layout shows a header, left hand navigation, Message center and KPI areas")]
 		public void ConfirmDashboardLayout_Header_LeftHandNavigation_MessageCenter_KPIAreas()
 		{
 			ReportSettings.UseSubSteps = true;
@@ -760,19 +763,19 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			this.ConfirmWidgetPanelsDisplayedOnTheDashboard("displayed", table);
 		}
 
-		[StepDefinition(@"I confirm the WERCSLink sidebar menu icon is displayed")]
+		[RegexStepDefinition(@"I confirm the WERCSLink sidebar menu icon is displayed")]
 		public void IConfirmTheWercsLinkSidebarMenuIconIsDisplayed()
 		{
 			Report.IsTrue(new TopBarNavigation().WercsLinkNavigationButtonDisplayed(), "The WERCSLink sidebar menu icon was not displayed!", "The WERCSLink sidebar menu icon was displayed as expected");
 		}
 
-		[StepDefinition(@"I click the WERCSLink sidebar menu icon")]
+		[RegexStepDefinition(@"I click the WERCSLink sidebar menu icon")]
 		public void IClickTheWercsLinkSidebarMenuIcon()
 		{
 			Report.IsTrue(new TopBarNavigation().ClickWercsLinkNavigationButton(), "Failed to click the WERCSLink sidebard navigation button", "Successfully clicked the WERCSLink sidebard navigation button");
 		}
 
-		[StepDefinition(@"I confirm the left hand navigation list is (collapsed|expanded)")]
+		[RegexStepDefinition(@"I confirm the left hand navigation list is (collapsed|expanded)")]
 		public void ConfirmLeftNavigationCollapsesWithTitlesNotDisplayed(string navState)
 		{
 			List<SideBarNavigation.NavLink> sideBarItems = new SideBarNavigation().GetNavLinks();
@@ -790,7 +793,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the user button in the header displays the logged in username")]
+		[RegexStepDefinition(@"I confirm the user button in the header displays the logged in username")]
 		public void ConfirmUserButtonDisplaysLoggedInUserName()
 		{
 			TReVorTestUsers user = TestUsers.GetUserSavedAs("WercsUser");
@@ -804,37 +807,37 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			Report.IsTrue(displayedUser == username, "Expected username in the header to be: " + user + " but was: " + displayedUser + "!", "Username: " + username + " was displayed in the header as expected");
 		}
 
-		[StepDefinition(@"I click the user button in the header")]
+		[RegexStepDefinition(@"I click the user button in the header")]
 		public void ClickHeaderUserButton()
 		{
 			Report.IsTrue(new TopBarNavigation().ClickUserButton(), "Failed to click the user button in the header!", "Successfully clicked the user button in the header");
 		}
 
-		[StepDefinition(@"I confirm the Reset Dashboard icon is displayed next to the user button in the header")]
+		[RegexStepDefinition(@"I confirm the Reset Dashboard icon is displayed next to the user button in the header")]
 		public void ConfirmResetDashboardIconDisplayed()
 		{
 			Report.IsTrue(new TopBarNavigation().ResetDashboardIconDisplayed(), "The Reset Dashboard icon was not displayed in the header!", "The Reset Dashboard icon was displyed in the header as expected");
 		}
 
-		[StepDefinition(@"I click the Reset Dashboard icon next to the user button in the header")]
+		[RegexStepDefinition(@"I click the Reset Dashboard icon next to the user button in the header")]
 		public void ClickResetDashboardIcon()
 		{
 			Report.IsTrue(new TopBarNavigation().ClickResetDashboardIcon(), "Failed to click the Reset Dashboard icon in the header!", "Successfully clicked the Reset Dashboard icon in the header");
 		}
 
-		[StepDefinition(@"I confirm the Reset Dashboard dropdown item is displayed underneath the header icon")]
+		[RegexStepDefinition(@"I confirm the Reset Dashboard dropdown item is displayed underneath the header icon")]
 		public void ConfirmResetDashboardDropDownItemDisplayed()
 		{
 			Report.IsTrue(new TopBarNavigation().ResetDashboardDropdownItemDisplayed(), "The Reset Dashboard dropdown item was not displayed under the header icon!", "The Reset Dashboard dropdown item was displyed under the header icon as expected");
 		}
 
-		[StepDefinition(@"I confirm a new tab opens with url: (.*)")]
+		[RegexStepDefinition(@"I confirm a new tab opens with url: (.*)")]
 		public void ConfirmNewTabOpenWithUrl(string url)
 		{
 			new GlobalSteps().SwitchToTheTab(url);
 		}
 
-		[StepDefinition(@"I confirm the Sign Out dropdown item is (displayed|not displayed)")]
+		[RegexStepDefinition(@"I confirm the Sign Out dropdown item is (displayed|not displayed)")]
 		public void ConfirmSignOutDropdownDisplayed(string visibility)
 		{
 			if (visibility == "displayed")
@@ -851,20 +854,20 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the UL Logo is displayed next to the user button in the header")]
+		[RegexStepDefinition(@"I confirm the UL Logo is displayed next to the user button in the header")]
 		public void ConfirmTheUlLogoIsDisplayedHeader()
 		{
 			Report.IsTrue(new TopBarNavigation().ULLogoDisplayed(), "The UL Logo was not displayed in the header!", "The UL logo was displayed in the header as expected");
 		}
 
-		[StepDefinition(@"I click the UL Logo next to the user button in the header")]
+		[RegexStepDefinition(@"I click the UL Logo next to the user button in the header")]
 		public void ClickTheUlLogoHeader()
 		{
 			Report.IsTrue(new TopBarNavigation().ClickULLogo(), "Failed to click the UL Logo in the header!", "Successfully clicked the UL logo in the header");
 			Delay.Seconds(10);
 		}
 
-		[StepDefinition(@"I click the side bar navigation link: (.*)")]
+		[RegexStepDefinition(@"I click the side bar navigation link: (.*)")]
 		public void ClickSideBarLink(string title)
 		{
 			SideBarNavigation.NavLink menuItem = new SideBarNavigation().GetNavLink(title);
@@ -875,7 +878,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			Report.IsTrue(new SideBarNavigation().ClickNavItem(menuItem), "Failed to click the side bar link: " + title, "Successfully cliked the side bar link: " + title);
 		}
 
-		[StepDefinition(@"I confirm the WERCSLink Additional Services page loads")]
+		[RegexStepDefinition(@"I confirm the WERCSLink Additional Services page loads")]
 		public void ConfirmAdditionalServicesPageLoads()
 		{
 			bool anyServices = new WERCSLinkDashboard().AnyServicesGrid();
@@ -889,7 +892,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			Report.IsTrue(anyServices, $"Additional  Services pas was not loaded!", $"Additional Services page was loaded");
 		}
 
-		[StepDefinition(@"I confirm the WERCSLink Recent Activities page loads")]
+		[RegexStepDefinition(@"I confirm the WERCSLink Recent Activities page loads")]
 		public void ConfirmRecentActivitiesPageLoads()
 		{
 			bool loaded = new WERCSLinkDashboard().StatusCheckPageDisplayed("Recent Activities");
@@ -903,7 +906,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			Report.IsTrue(loaded, "The Recent Activities page was not loaded!", "The Recent Activies Page was loaded as expected");
 		}
 
-		[StepDefinition(@"I confirm the WERCSLink Product Lookup page loads")]
+		[RegexStepDefinition(@"I confirm the WERCSLink Product Lookup page loads")]
 		public void ConfirmProductLookupPageLoads()
 		{
 			bool loaded = new WERCSLinkDashboard().StatusCheckPageDisplayed("Product Lookup");
@@ -918,14 +921,14 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		}
 
 		// There is no title or disctinct ids to work with, so just confirm that any widgets are loaded (eg. RUs)
-		[StepDefinition(@"I confirm the WERCSLink Key Performance Indicators page loads")]
+		[RegexStepDefinition(@"I confirm the WERCSLink Key Performance Indicators page loads")]
 		public void ConfirmKeyPerformanceIndicatorsPageLoads()
 		{
 			List<string> widgets = new Dashboard().WidgetTitles();
 			Report.IsTrue(widgets.Any(), "The Key Performance Indicators page did not load with widgets!", "The Key Performance Indictors page loaded with widgets");
 		}
 
-		[StepDefinition(@"I confirm the following links are displayed below menu item: (.*) and sub item (.*)")]
+		[RegexStepDefinition(@"I confirm the following links are displayed below menu item: (.*) and sub item (.*)")]
 		public void ConfirmFollowingSubSubLinksDisplayedBelowWercSmartSubLink(string menuItem, string subLink, Table table)
 		{
 			SideBarNavigation.NavLink link = new SideBarNavigation().GetNavLink(menuItem);
@@ -956,7 +959,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I click the link: (.*) below menu item: (.*) and sub item (.*)")]
+		[RegexStepDefinition(@"I click the link: (.*) below menu item: (.*) and sub item (.*)")]
 		public void ClickLinkBelowWercSmartSubLink(string subSub, string menu, string sub)
 		{
 			SideBarNavigation.NavLink thisMenuItem = new SideBarNavigation().GetNavLink(menu);
@@ -983,19 +986,19 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			Report.IsTrue(new SideBarNavigation().ClickNavItem(thisSubSubLink), "Failed to click the link with title: " + subSub, "Successfully clicked link with title: " + subSub);
 		}
 
-		[StepDefinition(@"I confirm that the drop down button with three dots is displayed for dashboard widget: (.*)")]
+		[RegexStepDefinition(@"I confirm that the drop down button with three dots is displayed for dashboard widget: (.*)")]
 		public void ConfirmVerticalDotDropDownButtonIsDisplayed(string widget)
 		{
 			Report.IsTrue(new Dashboard().WidgetDropDownMenuToggleDisplayed(widget), "", "");
 		}
 
-		[StepDefinition(@"I click the drop down button with three dots for dashboard widget: (.*)")]
+		[RegexStepDefinition(@"I click the drop down button with three dots for dashboard widget: (.*)")]
 		public void ClickVerticalDotDropDownButton(string widget)
 		{
 			Report.IsTrue(new Dashboard().ClickWidgetDropDownMenuToggle(widget), "", "");
 		}
 
-		[StepDefinition(@"I confirm that the 'Remove' drop down item is (displayed|not displayed) for widget: (.*)")]
+		[RegexStepDefinition(@"I confirm that the 'Remove' drop down item is (displayed|not displayed) for widget: (.*)")]
 		public void ConfirmRemoveDropDownItemIsDisplayed(string displayed, string widgetTitle)
 		{
 			switch (displayed)
@@ -1012,13 +1015,13 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			}
 		}
 
-		[StepDefinition(@"I click the 'Remove' drop down item for widget: (.*)")]
+		[RegexStepDefinition(@"I click the 'Remove' drop down item for widget: (.*)")]
 		public void ClickRemoveDropDownItem(string widgetTitle)
 		{
 			Report.IsTrue(new Dashboard().ClickRemoveDropDownItem(widgetTitle), "Failed to click 'Remove' drop down item!", "Successfully clicked 'Remove' drop down item");
 		}
 
-		[StepDefinition(@"I confirm the WERCSLink: (.*) page has loaded")]
+		[RegexStepDefinition(@"I confirm the WERCSLink: (.*) page has loaded")]
 		public void ConfirmWercsLinkPageHasLoaded(string page)
 		{
 			switch (page)
@@ -1038,14 +1041,14 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			}
 		}
 
-		[StepDefinition(@"I Confirm the 'Enter WPS ID or Product Name' filter input is displayed in the Message Center widget")]
+		[RegexStepDefinition(@"I Confirm the 'Enter WPS ID or Product Name' filter input is displayed in the Message Center widget")]
 		public void ConfirmFilterInputIsDisplayedInTheMessageCenterWidget()
 		{
 			Dashboard.MessageCenter messageCenter = new Dashboard().GetMessageCenter();
 			Report.IsTrue(messageCenter.FilterPlaceholder == "Enter WPS ID or Product Name", "The 'Enter WPS ID or Product Name' input was not displayed!", "The 'Enter WPS ID or Product Name' input was displayed as expected");
 		}
 
-		[StepDefinition(@"I confirm that the: (.*) dashboard widget contains a (pie|bar) chart")]
+		[RegexStepDefinition(@"I confirm that the: (.*) dashboard widget contains a (pie|bar) chart")]
 		public void ConfirmDashboardWidgetContainsChart(string widget, string chartType)
 		{
 			if (new Dashboard().WidgetContainer(widget) == null)
@@ -1076,7 +1079,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 
 		}
 
-		[StepDefinition(@"I confirm that the Subscription Status widget displays centered heading with text: (.*)")]
+		[RegexStepDefinition(@"I confirm that the Subscription Status widget displays centered heading with text: (.*)")]
 		public void ConfirmSubscriptionStatusWidgetDisplaysCenteredHeading(string headingText)
 		{
 			Dashboard.SubscriptionStatus subscriptionStatus = new Dashboard().GetSubscriptionStatus();

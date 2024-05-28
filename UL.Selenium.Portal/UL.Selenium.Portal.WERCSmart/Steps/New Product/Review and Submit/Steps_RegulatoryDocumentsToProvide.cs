@@ -6,14 +6,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TechTalk.SpecFlow;
+using Reqnroll;
+using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit
 {
 	[Binding, Scope(Tag = "RegulatoryDocsToProvide")]
 	class Steps_RegulatoryDocumentsToProvide
 	{
-		[StepDefinition(@"in Regulatory Documents to Provide I select: (.*) for the: (.*) question")]
+		[RegexStepDefinition(@"in Regulatory Documents to Provide I select: (.*) for the: (.*) question")]
 		public void GivenISelectForTheQuestion_(string answer, string question)
 		{
 			var regDocs = new RegulatoryDocumentsToProvide();

@@ -1,16 +1,18 @@
+using Reqnroll;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.Reporting.Functions;
-using TechTalk.SpecFlow;
+using Reqnroll;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Steps;
 using UL.Automation.Reporting;
+using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.ULSC.Steps
 {
 	[Binding]
 	public class Steps_Shared_ULSC
 	{
-		[StepDefinition(@"I call Shared Step 29665 - Login to WSW as ULSC user")]
+		[RegexStepDefinition(@"I call Shared Step 29665 - Login to WSW as ULSC user")]
 		public void GivenICallSharedStep_LoginToWSWAsULSCUser()
 		{
 			ReportSettings.UseSubSteps = true;
@@ -24,7 +26,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 
 
 
-		[StepDefinition(@"I call Shared Step 53079 - WERCSLink go to Services - WERCSmart")]
+		[RegexStepDefinition(@"I call Shared Step 53079 - WERCSLink go to Services - WERCSmart")]
 		public void GivenICallSharedStep_WERCSLinkGoToServices_WERCSmart()
 		{
 			ReportSettings.UseSubSteps = true;
@@ -33,7 +35,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			myStepsULSC.GivenInTheWERCSLinkDashboardIClickMenuItemAndSubmenuItem("Services", "WERCSmart");
 		}
 
-		[StepDefinition(@"I call Shared Step 29148 - Login to ULSC as an Administrator User")]
+		[RegexStepDefinition(@"I call Shared Step 29148 - Login to ULSC as an Administrator User")]
 		public void GivenICallSharedStep_LoginToULSCAsAnAdministratorUser()
 		{
 			var MyStepsSHA = new Steps_SHA();
@@ -46,7 +48,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 			MyStepsULSC.GivenITheULSCLoginPageIClickLogin();
 		}
 
-		[StepDefinition(@"I call Shared Step 54595 - WERCSLink Dashboard > Services > My Products")]
+		[RegexStepDefinition(@"I call Shared Step 54595 - WERCSLink Dashboard > Services > My Products")]
 		public void GivenICallSharedStep54595WERCSLinkDashboardServicesMyProducts()
 		{
 			ReportSettings.UseSubSteps = true;

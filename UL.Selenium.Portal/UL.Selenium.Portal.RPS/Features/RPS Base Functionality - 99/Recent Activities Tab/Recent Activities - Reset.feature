@@ -16,9 +16,9 @@ Feature: Recent Activities - Reset
 
 @ScenarioId:8109
 Scenario: [106866] Base Functionality - Recent Activities - Reset 
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
 Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then In the recent activities page, I click the label 'Start Date'
 Then I confirm the Recent Activities tab has loaded
@@ -47,9 +47,9 @@ And I call Shared Step 106194 (RPS Sign out)
 @ScenarioId:8267
 Scenario: [70326] Base Functionality - Recent Activities - Reset again
 #Need a method that saves the list of displayed products to context then a method that checks the current displayed products matches/does not match that saved list ( indicate if filters returned etc)
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
 Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 #Then In the recent activities page, I click the label 'Start Date'
 Then I confirm the Recent Activities tab has loaded
@@ -98,9 +98,9 @@ And I call Shared Step 106194 (RPS Sign out)
 
 @ScenarioId:9352
 Scenario: [98356] Base Functionality  - Recent Activities - Primary Reset button clears Supplier name
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
 Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then In the recent activities Page, I save all the Results to context as: RecentProductsGridResults1
 Then In the recent activities Page, In the Products table I select a random product and save the supplier name to context as: SavedProduct98355

@@ -5,9 +5,10 @@ using System.Text;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
-using TechTalk.SpecFlow;
+using UL.Automation.ReqnrollHelpers.Classes;
+using Reqnroll;
 using UL.Automation.Reporting;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -17,7 +18,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	{
 
 
-		[StepDefinition(@"In the Subscription Enrollment screen I select the following enrollment options")]
+		[RegexStepDefinition(@"In the Subscription Enrollment screen I select the following enrollment options")]
 		public void ThenISelectTheFollowingEnrollmentOptions(Table table)
 		{
 			Report.StartStep(Report.Details.StepIndex + " - I select enrollment options");
@@ -45,7 +46,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"the Subscription Enrollment page should load")]
+		[RegexStepDefinition(@"the Subscription Enrollment page should load")]
 		public void ThenTheSubscriptionEnrollmentPageShouldLoad()
 		{
 			var MySE = new SubscriptionEnrollment();
@@ -54,7 +55,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"In the Subscription Enrollment screen I confirm heading as (.*)")]
+		[RegexStepDefinition(@"In the Subscription Enrollment screen I confirm heading as (.*)")]
 		public void ThenInTheSubscriptionEnrollmentScreenIConfirmHeadingAs(string expectedHeader)
 		{
 			var MySE = new SubscriptionEnrollment();
@@ -63,12 +64,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Page header is showing as expected: " + actualHeader);
 		}
 
-		[StepDefinition(@"In the Subscription Enrollment screen I confirm that I see the following subheadings:")]
+		[RegexStepDefinition(@"In the Subscription Enrollment screen I confirm that I see the following subheadings:")]
 		public void ThenInTheSubscriptionEnrollmentScreenIConfirmThatISeeTheFollowingSubheadings(Table table)
 		{
 			var MySE = new SubscriptionEnrollment();
 			List<string> subHeadings = MySE.Get_Page_SubHeaders();
-			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
+			foreach (TableRow thisRow in table.Rows)
 			{
 				Report.IsTrue(subHeadings.Contains(thisRow["Subheading"]),
 					"Subheading: " + thisRow["Subheading"] + " has not been found.",
@@ -76,7 +77,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the Subscription Enrollment screen I confirm that I see the following Plans")]
+		[RegexStepDefinition(@"In the Subscription Enrollment screen I confirm that I see the following Plans")]
 		public void ThenInTheSubscriptionEnrollmentScreenIConfirmThatISeeTheFollowingPlans(Table table)
 		{
 			var MySE = new SubscriptionEnrollment();
@@ -97,7 +98,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			//| Plan Type | Plan Name | Plan Subtext | Best Value | Selected |
-			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
+			foreach (TableRow thisRow in table.Rows)
 			{
 				Report.Info("Checking on plan: " + thisRow["Plan Name"]);
 				/*
@@ -111,7 +112,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"under subheading (.*) I should see text: (.*)")]
+		[RegexStepDefinition(@"under subheading (.*) I should see text: (.*)")]
 		public void ThenUnderSubheadingIShouldSeeText(string subHeading, string text)
 		{
 			var MySE = new SubscriptionEnrollment();
@@ -120,7 +121,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Text is showing as expected: " + text);
 		}
 
-		[StepDefinition(@"under subheading (.*) I should see hyperlink: (.*)")]
+		[RegexStepDefinition(@"under subheading (.*) I should see hyperlink: (.*)")]
 		public void ThenUnderSubheadingIShouldSeeLink(string subHeading, string link)
 		{
 			var MySE = new SubscriptionEnrollment();
@@ -129,7 +130,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Text is showing as expected: " + link);
 		}
 
-		[StepDefinition(@"I select feature plan: (.*)")]
+		[RegexStepDefinition(@"I select feature plan: (.*)")]
 		public void GivenISelectFeaturePlan(string plan)
 		{
 			var MySE = new SubscriptionEnrollment();
@@ -137,7 +138,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"under subheading (.*) clicking on hyperlink: (.*) opens Agency Service Agreement popup")]
+		[RegexStepDefinition(@"under subheading (.*) clicking on hyperlink: (.*) opens Agency Service Agreement popup")]
 		public void ThenClickingOnHyperlinkOpensAgencyServiceAgreementPopup(string subHeading, string link)
 		{
 			var MySE = new SubscriptionEnrollment();
@@ -149,7 +150,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"on the Agency Service Agreement popup clicking Close closes the popup")]
+		[RegexStepDefinition(@"on the Agency Service Agreement popup clicking Close closes the popup")]
 		public void ThenOnTheAgencyServiceAgreementPopupClickingCloseClosesThePopup()
 		{
 			var MyASA = new AgencyServiceAgreementDlg();
@@ -157,7 +158,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"Agency Service Agreement popup contains the following text: (.*)")]
+		[RegexStepDefinition(@"Agency Service Agreement popup contains the following text: (.*)")]
 		public void ThenAgencyServiceAgreementPopupContainsTheFollowingText(string text)
 		{
 			var MyASA = new AgencyServiceAgreementDlg();
@@ -191,7 +192,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I set the (Articles|Enhanced Articles|Formulated Products) to be: (.*), then the Annual Cost should be: (.*)")]
+		[RegexStepDefinition(@"I set the (Articles|Enhanced Articles|Formulated Products) to be: (.*), then the Annual Cost should be: (.*)")]
 		public void CheckingThatUpdatingInputsChangesCost(string section, string option, string cost)
 		{
 			if (Report.IsTrue(new SubscriptionEnrollment().SetSection(section, option), "Failed to set section: " + section + " to option: " + option, "Successfully set section: " + section + " to option: " + option))
@@ -201,7 +202,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I should see following statement at the bottom (.*)")]
+		[RegexStepDefinition(@"I should see following statement at the bottom (.*)")]
 		public void ThenIShouldSeeFollowingStatementAtTheBottom(string statement)
 		{
 			var MySE = new SubscriptionEnrollment();
@@ -212,7 +213,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Text is showing as expected: " + actualText);
 		}
 
-		[StepDefinition(@"I should see Estimated Annual Cost of: (.*)")]
+		[RegexStepDefinition(@"I should see Estimated Annual Cost of: (.*)")]
 		public void ThenIShouldSeeEstimatedAnnualCostOf(string cost)
 		{
 			var MySE = new SubscriptionEnrollment();
@@ -221,7 +222,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Cost is showing as expected: " + cost);
 		}
 
-		[StepDefinition(@"I should see Estimated Annual Cost per Product of:(.*)")]
+		[RegexStepDefinition(@"I should see Estimated Annual Cost per Product of:(.*)")]
 		public void ThenIShouldSeeEstimatedAnnualCostPerProductOf(string cost)
 		{
 			var MySE = new SubscriptionEnrollment();
@@ -230,7 +231,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Cost is showing as expected: " + cost);
 		}
 
-		[StepDefinition(@"I should see Proceed button (enabled|disabled)")]
+		[RegexStepDefinition(@"I should see Proceed button (enabled|disabled)")]
 		public void ThenIShouldSeeProceedButtonDisabled(string enabled)
 		{
 			bool expectedEnabled = enabled == "enabled";
@@ -238,14 +239,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"In the Subscription Enrollment screen I confirm that I (do|do not) see the following Plans:")]
+		[RegexStepDefinition(@"In the Subscription Enrollment screen I confirm that I (do|do not) see the following Plans:")]
 		public void ThenInTheSubscriptionEnrollmentScreenIConfirmThatIDoOrNotSeeTheFollowingPlans(string doOrNot, Table table)
 		{
 			var MySE = new SubscriptionEnrollment();
 			List<string> planNames = MySE.GetAllPlanNames();
 			if (doOrNot == "do")
 			{
-				foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
+				foreach (TableRow thisRow in table.Rows)
 				{
 					Report.IsTrue(planNames.Contains(thisRow["plan"]), thisRow["plan"] + " is not showing as expected",
 						thisRow["plan"] + " is showing as expected");
@@ -253,7 +254,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			else
 			{
-				foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
+				foreach (TableRow thisRow in table.Rows)
 				{
 					Report.IsTrue(!planNames.Contains(thisRow["plan"]), thisRow["plan"] + " is showing as expected and should not be",
 						thisRow["plan"] + " is not showing as expected");
@@ -264,7 +265,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"In the Subscription Enrollment screen I confirm that under the (.*) Plan I see the following items and further details")]
+		[RegexStepDefinition(@"In the Subscription Enrollment screen I confirm that under the (.*) Plan I see the following items and further details")]
 		public void ThenInTheSubscriptionEnrollmentScreenIConfirmThatUnderThePlanISeeTheFollowingItemsAndFurtherDetails(string plan, Table table)
 		{
 			var MySE = new SubscriptionEnrollment();
@@ -281,7 +282,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			//| Item | Further details |Link text  | Link url
 
-			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
+			foreach (TableRow thisRow in table.Rows)
 			{
 				Plan thisPlan = allPlans.FirstOrDefault(x => x.Plan_Name == plan);
 
@@ -338,7 +339,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"In the Subscription Enrollment screen I confirm that the option showing in the (Articles|Enhanced Articles|Formulated Products) dropdown is: (.*)")]
+		[RegexStepDefinition(@"In the Subscription Enrollment screen I confirm that the option showing in the (Articles|Enhanced Articles|Formulated Products) dropdown is: (.*)")]
 		public void ThenInTheSubscriptionEnrollmentScreenIConfirmThatTheOptionShowingInTheDropdownIs(string dropdown, string expectedOption)
 		{
 			string selected = new SubscriptionEnrollment().GetSectionSelectedOption(dropdown);
@@ -346,7 +347,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"In the Subscription Enrollment screen I confirm that you see (.*) dropdown")]
+		[RegexStepDefinition(@"In the Subscription Enrollment screen I confirm that you see (.*) dropdown")]
 		public void ThenInTheSubscriptionEnrollmentScreenIConfirmThatYouSeeDropdown(string dropdown)
 		{
 			var MySE = new SubscriptionEnrollment();
@@ -371,7 +372,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition("I check that the following are showing in the (Articles|Enhanced Articles|Formulated Products) dropdown:")]
+		[RegexStepDefinition("I check that the following are showing in the (Articles|Enhanced Articles|Formulated Products) dropdown:")]
 		public void CheckThatCorrectItemsAreShowing(string section, Table expected)
 		{
 			List<string> showing = new SubscriptionUpgrade().ReturnSelectDropDownItems(section);
@@ -383,7 +384,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"The (Articles|Enhanced Articles|Formulated Products) popup should have (header|content): (.*)")]
+		[RegexStepDefinition(@"The (Articles|Enhanced Articles|Formulated Products) popup should have (header|content): (.*)")]
 		public void CheckingContentOfPopupDialog(string section, string type, string text)
 		{
 			new SubscriptionEnrollment().HoverOverInformationElement(section);
@@ -400,7 +401,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the Subscription Enrollment screen I confirm that when you hover over \(i\) for (.*) you see following (heading|statement): (.*)")]
+		[RegexStepDefinition(@"In the Subscription Enrollment screen I confirm that when you hover over \(i\) for (.*) you see following (heading|statement): (.*)")]
 		public void ThenInTheSubscriptionEnrollmentScreenIConfirmThatWhenYouHoverOverIForYouSeeFollowing(string hoverOverItem, string headerOrText, string expectedValue)
 		{
 			var MySE = new SubscriptionEnrollment();
@@ -449,7 +450,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"I cancel the Enrollment dialog, confirm correct page opens and Proceed")]
+		[RegexStepDefinition(@"I cancel the Enrollment dialog, confirm correct page opens and Proceed")]
 		public void ThenICancelTheEnrollmentDialogConfirmCorrectPageOpensAndProceed()
 		{
 			Report.StartStep(Report.Details.StepIndex + " - I cancel the Enrollment dialog, confirm correct page opens and Proceed");
@@ -468,20 +469,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click on the Proceed button")]
+		[RegexStepDefinition(@"I click on the Proceed button")]
 		public void ClickProceedButton()
 		{
 			Report.IsTrue(new SubscriptionEnrollment().Proceed_click(), "Failed to click the proceed button!", "Successfully clicked the proceed button!");
 		}
 
-		[StepDefinition(@"The selected item in section: (Select the feature plan|Select the Support Services Plan) should be: (.*)")]
+		[RegexStepDefinition(@"The selected item in section: (Select the feature plan|Select the Support Services Plan) should be: (.*)")]
 		public void VerifyCorrectItemIsSelectedInSection(string section, string text)
 		{
 			string showing = new SubscriptionEnrollment().GetSelectedItemInSection(section).Split(new string[] { "\r\n" }, StringSplitOptions.None).FirstOrDefault().Trim();
 			Report.IsTrue(text.Trim() == showing.Trim(), "Selected item was not as expected! Expected: " + text.Trim() + ", but found: " + showing.Trim(), "Item " + text.Trim() + " was successfully selected!");
 		}
 
-		[StepDefinition(@"I confirm the chosen options and body text are correct")]
+		[RegexStepDefinition(@"I confirm the chosen options and body text are correct")]
 		public void ThenIConfirmTheChosenOptionsAndBodyTextAreCorrect(Table table)
 		{
 			Report.StartStep(Report.Details.StepIndex + " - I confirm the chosen options and body text are correct");
@@ -511,7 +512,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click on (Checkout|Cancel)")]
+		[RegexStepDefinition(@"I click on (Checkout|Cancel)")]
 		public void ThenIClickOnX(string button)
 		{
 			Report.StartStep(Report.Details.StepIndex + " - I click on " + button);
@@ -552,7 +553,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I see the alert message with text: (.*) under Subscription Enrollment")]
+		[RegexStepDefinition(@"I see the alert message with text: (.*) under Subscription Enrollment")]
 		public void TopAlertMessage(string value)
 		{
 			List<string> actualText = new SubscriptionEnrollment().GetAlertMessage();

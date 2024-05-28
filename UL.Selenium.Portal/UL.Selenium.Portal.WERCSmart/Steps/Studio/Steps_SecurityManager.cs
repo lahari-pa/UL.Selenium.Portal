@@ -1,13 +1,14 @@
 ﻿using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using System;
-using TechTalk.SpecFlow;
+using Reqnroll;
 using UL.Automation.Reporting;
 using UL.Automation.Reporting.Functions;
 using UL.Selenium.Portal.WERCSmart.Steps;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.Reporting.Classes;
 using TReVor.Api.Wrapper.Classes;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.TReVor.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -15,14 +16,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding, Scope(Tag = "Studio_SecurityManager")]
 	public class Steps_SecurityManager
 	{
-		[StepDefinition(@"I select '(.*)' from the Security Manager drop down")]
+		[RegexStepDefinition(@"I select '(.*)' from the Security Manager drop down")]
 		public void WhenISelectFromTheSecurityManagerDropDown(string option)
 		{
 			SecurityManager SM = new SecurityManager();
 			Report.IsTrue(SM.SelectObjectDropDown(option), $"Failed to select {option} from the drop down menu", $"Successfully selected {option} from the drop down menu");
 		}
 
-		[StepDefinition(@"I select module '(.*)' under '(.*)'")]
+		[RegexStepDefinition(@"I select module '(.*)' under '(.*)'")]
 		public void ThenISelectModuleUnder(string item, string columnName)
 		{
 			GeneralUtilities.SwitchToFrame("<1>");
@@ -30,7 +31,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(SM_M.ClickItemUnderHeader(item, columnName), $"Failed to click {item} in column {columnName}", $"Successfully clicked {item} in column {columnName}");
 			GeneralUtilities.ExitIFrame();
 		}
-		[StepDefinition(@"I click to edit the selected module")]
+		[RegexStepDefinition(@"I click to edit the selected module")]
 		public void ThenIClickToEditTheSelectedModule()
 		{
 			GeneralUtilities.SwitchToFrame("<1>");
@@ -39,20 +40,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.ExitIFrame();
 		}
 
-		[StepDefinition(@"in the '(.*)' window, I select role '(.*)' under '(.*)'")]
+		[RegexStepDefinition(@"in the '(.*)' window, I select role '(.*)' under '(.*)'")]
 		public void WhenInTheWindowISelectUnder(string windowName, string role, string column)
 		{
 			SecurityManager_SetAccessWindow SM_SAW = new SecurityManager_SetAccessWindow();
 			Report.IsTrue(SM_SAW.SelectItemUnderHeader(role, column), $"Failed to select item {role} under column {column}", $"Successfully selected item {role} under column {column}");
 		}
 
-		[StepDefinition(@"in the '(.*)' window, I set the access level to '(.*)'")]
+		[RegexStepDefinition(@"in the '(.*)' window, I set the access level to '(.*)'")]
 		public void WhenInTheWindowISetTheAccessLevelTo(string windowName, string accessLevel)
 		{
 			SecurityManager_SetAccessWindow SM_SAW = new SecurityManager_SetAccessWindow();
 			Report.IsTrue(SM_SAW.SelectAccessLevel(accessLevel), $"Failed to select the access level '{accessLevel}'", $"Successfully selected the access level '{accessLevel}'");
 		}
-		[StepDefinition(@"in the '(.*)' window, I click to set the access level")]
+		[RegexStepDefinition(@"in the '(.*)' window, I click to set the access level")]
 		public void ThenInTheWindowIClickToSetTheAccessLevel(string windowName)
 		{
 			SecurityManager_SetAccessWindow SM_SAW = new SecurityManager_SetAccessWindow();
@@ -61,7 +62,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		
 
-		[StepDefinition(@"I select screen '(.*)' under '(.*)'")]
+		[RegexStepDefinition(@"I select screen '(.*)' under '(.*)'")]
 		public void ThenISelectScreenUnder(string item, string columnName)
 		{
 			GeneralUtilities.SwitchToFrame("<1>");
@@ -69,7 +70,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(SM_S.ClickItemUnderHeader(item, columnName), $"Failed to click {item} in column {columnName}", $"Successfully clicked {item} in column {columnName}");
 			GeneralUtilities.ExitIFrame();
 		}
-		[StepDefinition(@"I click to open the screen filter builder")]
+		[RegexStepDefinition(@"I click to open the screen filter builder")]
 		public void WhenIClickToOpenTheScreenFilterBuilder()
 		{
 			GeneralUtilities.SwitchToFrame("<1>");
@@ -77,7 +78,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(SM_S.ClickFilterIcon(), "Failed to click the filter icon.", "Successfully clicked the filter icon.");
 			GeneralUtilities.ExitIFrame();
 		}
-		[StepDefinition(@"I filter for the screens '(.*)' that '(.*)' '(.*)'")]
+		[RegexStepDefinition(@"I filter for the screens '(.*)' that '(.*)' '(.*)'")]
 		public void ThenIFilterForTheScreensThat(string filterName, string filterType, string filterText)
 		{
 			GeneralUtilities.SwitchToFrame("<1>");
@@ -87,7 +88,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.ExitIFrame();
 		}
 
-		[StepDefinition(@"I click to apply the screens filter")]
+		[RegexStepDefinition(@"I click to apply the screens filter")]
 		public void ThenIClickToApplyTheScreensFilter()
 		{
 			GeneralUtilities.SwitchToFrame("<1>");
@@ -95,7 +96,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(SM_S.ClickApplyBtn(), "Failed to click the apply button.", "Successfully clicked the apply button.");
 			GeneralUtilities.ExitIFrame();
 		}
-		[StepDefinition(@"I click to edit the selected screen")]
+		[RegexStepDefinition(@"I click to edit the selected screen")]
 		public void ThenIClickToEditTheSelectedScreen()
 		{
 			GeneralUtilities.SwitchToFrame("<1>");
@@ -104,7 +105,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.ExitIFrame();
 		}		
 
-		[StepDefinition(@"I apply the following Screen security settings to '(.*)'")]
+		[RegexStepDefinition(@"I apply the following Screen security settings to '(.*)'")]
 		public void ThenIApplyTheFollowingSecuritySettings(string role, Table table)
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -151,14 +152,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GS.WhenISwitchToTheTab("Security Manager");
 		}
 
-		[StepDefinition(@"In Security Manager, I click the '(.*)' button")]
+		[RegexStepDefinition(@"In Security Manager, I click the '(.*)' button")]
 		public void WhenInSecurityManagerIClickTheButton(string buttonName)
 		{
 			SecurityManager SM = new SecurityManager();
 			Report.IsTrue(SM.ClickButton(buttonName), $"Failed to click the button {buttonName}", $"Successfully clicked the button {buttonName}");
 		}
 
-		[StepDefinition(@"Under '(.*)' I search for the username stored in '(.*)'")]
+		[RegexStepDefinition(@"Under '(.*)' I search for the username stored in '(.*)'")]
 		public void WhenISearchForTheUserNameForTheStoredUserSCREENSECURITY(string searchType, string savedAs)
 		{
 			SecurityManager_UsersAndRoles SM_UAR = new SecurityManager_UsersAndRoles();
@@ -178,7 +179,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"Under '(.*)' I right click the username stored in '(.*)'")]
+		[RegexStepDefinition(@"Under '(.*)' I right click the username stored in '(.*)'")]
 		public void ThenUnderIRightClickTheUsernameStoredIn(string searchType, string savedAs)
 		{
 			SecurityManager_UsersAndRoles SM_UAR = new SecurityManager_UsersAndRoles();
@@ -195,7 +196,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Error($"Could not find the Credentials for {savedAs}");
 			}
 		}
-		[StepDefinition(@"Under '(.*)' I double click the username stored in '(.*)'")]
+		[RegexStepDefinition(@"Under '(.*)' I double click the username stored in '(.*)'")]
 		public void ThenUnderIDoubleClickTheUsernameStoredIn(string searchType, string savedAs)
 		{
 			SecurityManager_UsersAndRoles SM_UAR = new SecurityManager_UsersAndRoles();
@@ -212,7 +213,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Error($"Could not find the Credentials for {savedAs}");
 			}
 		}
-		[StepDefinition(@"Under '(.*)' I click the username stored in '(.*)'")]
+		[RegexStepDefinition(@"Under '(.*)' I click the username stored in '(.*)'")]
 		public void ThenUnderIClickTheUsernameStoredIn(string searchType, string savedAs)
 		{
 			SecurityManager_UsersAndRoles SM_UAR = new SecurityManager_UsersAndRoles();
@@ -230,7 +231,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"in the '(Users and Roles)' window, the '(Add Row|Edit Row|Delete Row)' Button (is|is not) available")]
+		[RegexStepDefinition(@"in the '(Users and Roles)' window, the '(Add Row|Edit Row|Delete Row)' Button (is|is not) available")]
 		public void ThenInTheWindowTheButtonIsNotAvailable(string windowName, string buttonName, string isOrIsNot)
 		{
 			SecurityManager_UsersAndRoles SM_UAR = new SecurityManager_UsersAndRoles();
@@ -244,7 +245,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 		}
-		[StepDefinition(@"in the '(Users and Roles)' window, I click the '(Add Row|Edit Row|Delete Row)' Button ")]
+		[RegexStepDefinition(@"in the '(Users and Roles)' window, I click the '(Add Row|Edit Row|Delete Row)' Button ")]
 		public void ThenInTheWindowIClickTheAddEditDeleteButton(string windowName, string buttonName)
 		{
 			SecurityManager_UsersAndRoles SM_UAR = new SecurityManager_UsersAndRoles();
@@ -252,13 +253,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"in the '(Edit)' window, I click the '(Change password)' button")]
+		[RegexStepDefinition(@"in the '(Edit)' window, I click the '(Change password)' button")]
 		public void WhenInTheWindowIClickTheButton(string windowName, string buttonName)
 		{
 			SecurityManager_EditUser SM_EU = new SecurityManager_EditUser();
 			Report.IsTrue(SM_EU.ClickChangePass(), $"Could not click the {buttonName} button", $"Successfully clicked the {buttonName} button.");
 		}
-		[StepDefinition(@"The password reset page displays the username saved as '(.*)'")]
+		[RegexStepDefinition(@"The password reset page displays the username saved as '(.*)'")]
 		public void GivenThePasswordResetPageDisplaysTheUsernameSavedAs(string savedAs)
 		{
 			SecurityManager_ResetYourPassword SM_RYP = new SecurityManager_ResetYourPassword();
@@ -275,13 +276,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Error($"Could not find the Credentials for {savedAs}");
 			}
 		}
-		[StepDefinition(@"In the '(Users and Roles)' window, I click the '(All Roles)' button")]
+		[RegexStepDefinition(@"In the '(Users and Roles)' window, I click the '(All Roles)' button")]
 		public void ThenInTheWindowIClickTheButton(string windowName, string buttonName)
 		{
 			SecurityManager_UsersAndRoles SM_UAR = new SecurityManager_UsersAndRoles();
 			Report.IsTrue(SM_UAR.ClickAllRolesBtn(buttonName), $"Failed to click the '{buttonName}' button", $"Successfully clicked the '{buttonName}' button");
 		}
-		[StepDefinition(@"in the '(Roles)' window, the '(Add new role|Edit selected|Delete selected)' button (is|is not) available")]
+		[RegexStepDefinition(@"in the '(Roles)' window, the '(Add new role|Edit selected|Delete selected)' button (is|is not) available")]
 		public void ThenInTheRolesWindowTheButtonIsNotAvailable(string windowName, string buttonName, string isOrIsNot)
 		{
 			SecurityManager_Roles SM_R = new SecurityManager_Roles();
@@ -295,7 +296,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			}
 		}
-		[StepDefinition(@"In Security Manager, the '(.*)' button (is|is not) available")]
+		[RegexStepDefinition(@"In Security Manager, the '(.*)' button (is|is not) available")]
 		public void WhenInSecurityManagerTheButtonIsNotAvailable(string buttonName, string isOrIsNot)
 		{
 
@@ -309,7 +310,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsFalse(SM.ButtonIsAvailable(buttonName), $"Failed, the '{buttonName}' button was available", $"Success, the '{buttonName}' button was not available");
 			}
 		}
-		[StepDefinition(@"In the '(Users and Roles)' window, the '(All Roles)' button (is|is not) available")]
+		[RegexStepDefinition(@"In the '(Users and Roles)' window, the '(All Roles)' button (is|is not) available")]
 		public void ThenInTheUARWindowTheRolesButtonIsNotAvailable(string windowName, string buttonName, string isOrIsNot)
 		{
 			SecurityManager_UsersAndRoles SM_UAR = new SecurityManager_UsersAndRoles();
@@ -322,19 +323,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsFalse(SM_UAR.AllRolesButtonIsAvailable(buttonName), $"Failed, the '{buttonName}' button was available", $"Success, the '{buttonName}' button was not available");
 			}
 		}
-		[StepDefinition(@"In the '(Roles)' window, I double click the role '(.*)'")]
+		[RegexStepDefinition(@"In the '(Roles)' window, I double click the role '(.*)'")]
 		public void WhenInTheWindowIDoubleClickTheRole(string windowName, string roleName)
 		{
 			SecurityManager_Roles SM_R = new SecurityManager_Roles();
 			Report.IsTrue(SM_R.DoubleClickRole(roleName), $"Failed, could not click the Role {roleName}", $"Success, could click the Role {roleName}");
 		}
-		[StepDefinition(@"In the Security Manager - Rights by roles page, I select '(.*)' under '(Roles|Category)'")]
+		[RegexStepDefinition(@"In the Security Manager - Rights by roles page, I select '(.*)' under '(Roles|Category)'")]
 		public void WhenInTheSecurityMAnager_RolesPageISelectUnder(string dropDownOption, string dropDownName)
 		{
 			SecurityManager_RightsByRoles SM_RBR = new SecurityManager_RightsByRoles();
 			Report.IsTrue(SM_RBR.SelectFromDropDown(dropDownOption, dropDownName), $"Failed, could not select '{dropDownOption}' under '{dropDownName}'.", $"Success, could select '{dropDownOption}' under '{dropDownName}'.");
 		}
-		[StepDefinition(@"In the Security Manager - Rights by roles page, I right click the product in position '(.*)' under column '(.*)'")]
+		[RegexStepDefinition(@"In the Security Manager - Rights by roles page, I right click the product in position '(.*)' under column '(.*)'")]
 		public void ThenInTheSecurityManager_RightsByRolesPageIRightClickTheProductUnder(int productNum, string columnName)
 		{
 			GeneralUtilities.SwitchToFrame("<1>");
@@ -344,7 +345,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.ExitIFrame();
 
 		}
-		[StepDefinition(@"In the Security Manager - Rights by roles page, a context menu (should|should not) contain '(Full access|No access|Read only)'")]
+		[RegexStepDefinition(@"In the Security Manager - Rights by roles page, a context menu (should|should not) contain '(Full access|No access|Read only)'")]
 		public void ThenInTheSecurityManager_RightsByRolesPageAContextMenuShouldNotContain(string shouldOrShouldNot, string menuItem)
 		{
 			GeneralUtilities.SwitchToFrame("<1>");

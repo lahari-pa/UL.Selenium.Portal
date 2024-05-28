@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TechTalk.SpecFlow;
+using Reqnroll;
+using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_and_Submit
 {
@@ -11,12 +12,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 
 	class SummaWERCSmart_Distributor_NewProducts_ReviewAndSubmit_PurchaseSummary
 	{
-		[StepDefinition(@"The Purchase Summary Page is displayed")]
+		[RegexStepDefinition(@"The Purchase Summary Page is displayed")]
 		public void PurchaseSummaryIsDisplayed()
 		{
 			new Steps_PaymentMethods().ThenThePurchaseSummaryShouldLoad();
 		}
-		[StepDefinition(@"In the Purchase Summary Page, click the 'Home' button")]
+		[RegexStepDefinition(@"In the Purchase Summary Page, click the 'Home' button")]
 		public void ClickHomeButtonInPurchaseSummary()
 		{
 			new Steps_PaymentMethods().ThenInTheThankYouScreenIClickHome();

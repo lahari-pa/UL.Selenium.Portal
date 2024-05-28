@@ -5,14 +5,14 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
+using Reqnroll;
+using Reqnroll.Assist;
 using UL.Automation.Reporting;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.SpecFlow.Classes;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.TReVor.Classes;
 using UL.Automation.Utilities.Functions;
 using UL.Selenium.Portal.WERCSmart.Classes;
@@ -35,15 +35,15 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characte
 using System.Runtime.InteropServices;
 using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.PesticideDetailsState;
 using NPOI.SS.Formula.Functions;
-using TechTalk.SpecFlow.CommonModels;
 using RestSharp.Extensions;
+using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "StepsPrototype")]
 	class Steps_Prototype
 	{
-		//[StepDefinition(@"I set the radio option in section: (.*) to: (.*)")]
+		//[RegexStepDefinition(@"I set the radio option in section: (.*) to: (.*)")]
 		public void SetRadioOptionInSectionTo(string section, string option)
 		{
 			Report.IsTrue(new NewProduct().SelectRadio(section, option),
@@ -51,8 +51,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"Successfully set radio option: '{option}'");
 		}
 
-		//[StepDefinition(@"I set the (.*) field to: (.*)")]
-		//[StepDefinition(@"I set the (.*) option to: (.*)")]
+		//[RegexStepDefinition(@"I set the (.*) field to: (.*)")]
+		//[RegexStepDefinition(@"I set the (.*) option to: (.*)")]
 		public void SetTheSectionOptionTo(string section, string option)
 		{
 			var thisNewProduct = new NewProduct();
@@ -85,7 +85,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"in the (.*) page, I click Continue")]
+		[RegexStepDefinition(@"in the (.*) page, I click Continue")]
 		public void GivenInPageIClickContinue(string page)
 		{
 			var newProduct = new NewProduct();
@@ -127,7 +127,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			}
 		}
-		[StepDefinition(@"Click link element with test: (.*)")]
+		[RegexStepDefinition(@"Click link element with test: (.*)")]
 
 		public void ClickLinkElement(string linkText)
 		{
@@ -136,7 +136,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(new NewProduct().LinkElementClick(linkText), $"Failed to click link element with text {linkText}", $"Successfully clicked link element with text {linkText}");
 			}
 		}
-		[StepDefinition(@"Confirm link element (should|should not) exists with test: (.*)")]
+		[RegexStepDefinition(@"Confirm link element (should|should not) exists with test: (.*)")]
 
 		public void LinkElementExists(string condition, string linkText)
 		{
@@ -152,19 +152,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I switch to tab with url: (.*)")]
+		[RegexStepDefinition(@"I switch to tab with url: (.*)")]
 		public void ConfirmNewTabOpenWithUrl(string url)
 		{
 			new GlobalSteps().SwitchToTheTab(url);
 		}
 
-		[StepDefinition(@"I close the tab with url: (.*)")]
+		[RegexStepDefinition(@"I close the tab with url: (.*)")]
 		public void CloseTabWithUrl(string url)
 		{
 			SeleniumWebDriver.CurrentDriver.CloseTabWithURL(url);
 			Report.IsTrue(!SeleniumWebDriver.CurrentDriver.GetTabURLs().Contains(url), "Failed to close tab with URL: " + url, "Successfully closed tab with URL: " + url);
 		}
-		[StepDefinition(@"I confirm the tab (should|should not) exists with url: (.*)")]
+		[RegexStepDefinition(@"I confirm the tab (should|should not) exists with url: (.*)")]
 		public void NewTabShouldExists(string condition, string url)
 		{
 			if (condition == "should")
@@ -176,7 +176,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(!SeleniumWebDriver.CurrentDriver.GetTabURLs().Contains(url), $"Failed confirm new tab does not exist with url {url}", $"Successfully confirmed new tab does not exist with url {url}");
 			}
 		}
-		[StepDefinition(@"I confirm that a file is produced called (.*) and save as (.*)")]
+		[RegexStepDefinition(@"I confirm that a file is produced called (.*) and save as (.*)")]
 		public void ConfirmFileAppearsInDownloadsFolder(string file, string savedAs)
 		{
 			Report.StartStep($"{Report.Details.StepIndex} - Confirm File is downloaded with name: {file}");
@@ -202,7 +202,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition("I compare the PDF: (.*) to the oracle PDF: (.*)")]
+		[RegexStepDefinition("I compare the PDF: (.*) to the oracle PDF: (.*)")]
 		public void CompareTwoPdfFiles(string toCompare, string oracle)
 		{
 			Assembly studioAssembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(x => string.Equals(x.GetName().Name, "UL.Selenium.Portal.WERCSmart"));
@@ -339,7 +339,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I (should|should not) see an alert with title: (.*) subtitle: (.*) Text: (.*)")]
+		[RegexStepDefinition(@"I (should|should not) see an alert with title: (.*) subtitle: (.*) Text: (.*)")]
 		public void ThenIShouldSeeAnAlertWithTitleSubtitleText(string condition, string title, string subtitle, string text)
 		{
 			var thisNewProduct = new NewProduct();
@@ -357,19 +357,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsFalse(thisAlert.Text == text, "Warning text is displayed, but it is not expected.", "Warning text is not displayed, as expected.");
 			}
 		}
-		[StepDefinition(@"I click the browse button for section: (.*) and upload PDF: (.*)")]
+		[RegexStepDefinition(@"I click the browse button for section: (.*) and upload PDF: (.*)")]
 		public void UploadPDFFile(string section, string pdfFile)
 		{
 			pdfFile = EmbeddedResourceHelpers.ExtractToFile(pdfFile, out string extractFile) ? extractFile : pdfFile;
 			Report.IsTrue(new NewProduct().UploadFileForSection(section, pdfFile), $"Failed to upload PDF file: {pdfFile} for section {section}", $"Successfully uploaded PDF file: {pdfFile} for {section}");
 		}
-		//[StepDefinition(@"I click the button (.*) for section: (.*)")]
+		//[RegexStepDefinition(@"I click the button (.*) for section: (.*)")]
 		public void ClickButtonForSection(string section, string button)
 		{
 			Report.IsTrue(new NewProduct().ClickButton(section, button), $"Failed to click button {button} for section {section}", $"Successfully clicked {button} for {section}");
 		}
 
-		//[StepDefinition(@"I check the button (.*) (should|should not) exists for section: (.*)")]
+		//[RegexStepDefinition(@"I check the button (.*) (should|should not) exists for section: (.*)")]
 		public void CheckButtonExistsForSection(string section, string condition, string button)
 		{
 			if (condition == "should")
@@ -381,7 +381,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsFalse(new NewProduct().CheckButtonExistsInSection(section, button), $"Failed to confirm button {button} does not exist for section {section}", $"Successfully confirmed {button} does not exist for {section}");
 			}
 		}
-		[StepDefinition(@"In the popup with the following title: (.*) I click the (.*) button")]
+		[RegexStepDefinition(@"In the popup with the following title: (.*) I click the (.*) button")]
 		public void ThenInThePopupViewWithTheFollowingTitleIClickTheButton(string popupTitle, string buttonTitle)
 		{
 			Report.IsTrue(new ModalDialog().ClickTheButtonInThePopupView(popupTitle, buttonTitle), "Failed to click the " + buttonTitle + " button", "Successfully clicked the " + buttonTitle + " button");
@@ -389,7 +389,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(1);
 		}
 
-		[StepDefinition(@"The alert message (should|should not) displayed with text: (.*)")]
+		[RegexStepDefinition(@"The alert message (should|should not) displayed with text: (.*)")]
 		public void AlertMessageDisplayed(string displayed, string alert)
 		{
 			bool expectDisplayed = false;
@@ -415,7 +415,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"Message: '{alert}' is displayed as expected");
 		}
 
-		[StepDefinition(@"Error message in section:(.*) (should|should not) be showing the error messages: (.*)")]
+		[RegexStepDefinition(@"Error message in section:(.*) (should|should not) be showing the error messages: (.*)")]
 		public void ErrorMessagesAreShowingForItem(string section, string should, string pipeDelimitedErrorMessages)
 		{
 			Delay.Seconds(1);
@@ -441,13 +441,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		//[StepDefinition(@"I enter the following into the comments field: (.*)")]
+		//[RegexStepDefinition(@"I enter the following into the comments field: (.*)")]
 		public void ThenIEnterTheFollowingIntoTheCommentsFieldCommentsFieldText(string text)
 		{
 			Report.IsTrue(new NewProduct().InputCommentAreaText(text), $"Text: {text} was not successfully inputted into the Optional Comments field!", $"Text: {text} was successfully inputted into the Optional Comments field!");
 		}
 
-		[StepDefinition(@"I should be on the (.*) Page")]
+		[RegexStepDefinition(@"I should be on the (.*) Page")]
 		public void GivenIShouldBeOnXPage(string page)
 		{
 			var newProduct = new NewProduct();
@@ -460,7 +460,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I click button: (.*)")]
+		[RegexStepDefinition(@"I click button: (.*)")]
 		public void ClickButton(string button)
 		{
 			if (Report.IsTrue(new NewProduct().ButtonExists(button),
@@ -473,7 +473,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm that I see the following (.*) value: (.*)")]
+		[RegexStepDefinition(@"I confirm that I see the following (.*) value: (.*)")]
 		public void ThenIConfirmThatISeeTheFollowingCARBValue(string category, string expectedValue)
 		{
 			var newProductpage = new NewProduct();
@@ -482,7 +482,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"value was not as expected! Expected: {expectedValue}, but found: {foundValue}!",
 				$"value was showing: {expectedValue}, as expected!");
 		}
-		[StepDefinition(@"I confirm that the (.*) table (should|should not) exists")]
+		[RegexStepDefinition(@"I confirm that the (.*) table (should|should not) exists")]
 		public void ThenIConfirmThatTableExists(string tableName, string condition)
 		{
 			var newProductpage = new NewProduct();
@@ -497,7 +497,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"Click the following button in the popup video: (.*) I click the (.*) button")]
+		[RegexStepDefinition(@"Click the following button in the popup video: (.*) I click the (.*) button")]
 		public void ClickTheFollowingButtonInThePopupView(string popupTitle, string buttonTitle)
 		{
 			Ingredients ingredientsObject = new Ingredients();
@@ -506,7 +506,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(1);
 		}
 
-		[StepDefinition(@"I confirm the checkbox with the following text: (.*)")]
+		[RegexStepDefinition(@"I confirm the checkbox with the following text: (.*)")]
 		public void CheckACheckboxWithTheFollowingText(string text)
 		{
 			Report.IsTrue(new Ingredients().CheckACheckboxWithTheFollowingText(text),
@@ -515,7 +515,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new Ingredients().CheckACheckboxWithTheFollowingText(text);
 		}
 
-		[StepDefinition(@"I confirm the checkbox with description: (.*) (should|should not) be displayed")]
+		[RegexStepDefinition(@"I confirm the checkbox with description: (.*) (should|should not) be displayed")]
 		public void IConfirmCheckboxWithDescriptionIsDisplayed(string description, string condition)
 		{
 			if (condition == "should")
@@ -531,7 +531,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					$"Successfully confirmed checkbox '{description}' is not displayed, as expected");
 			}
 		}
-		//[StepDefinition(@"I (check|uncheck) the checkbox with description: (.*)")]
+		//[RegexStepDefinition(@"I (check|uncheck) the checkbox with description: (.*)")]
 		public void ICheckTheCheckboxWithDescription(string check, string description)
 		{
 			var selNewProduct = new NewProduct();
@@ -561,7 +561,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"The checkbox was not {check}ed after",
 				$"The checkbox is {check}ed as expected");
 		}
-		[StepDefinition(@"Confirm the checkbox with description: (.*) (is|is not) checked")]
+		[RegexStepDefinition(@"Confirm the checkbox with description: (.*) (is|is not) checked")]
 		public void TheCheckboxWithDescriptionIsIsNotChecked(string description, string is_isnot)
 		{
 			bool expected = is_isnot == "is";
@@ -569,7 +569,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(isChecked == expected, $"Failed to confirm the checkbox with description: '{description} {(expected ? "is not" : "is")} checked'!",$"Successfully confirmed the checkbox with description: '{description}' {is_isnot} checked");
 		}
 
-		//[StepDefinition(@"(.*) should be showing the value: (.*)")]
+		//[RegexStepDefinition(@"(.*) should be showing the value: (.*)")]
 		public void CheckingFieldInputIsCorrect(string section, string value)
 		{
 			if (value.StartsWith("~saved as"))
@@ -591,7 +591,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I confirm the pop up (should|should not) be displayed with the heading: (.*)")]
+		[RegexStepDefinition(@"I confirm the pop up (should|should not) be displayed with the heading: (.*)")]
 		public void ThenIConfirmThePopUpShowsTheHeading(string condition, string title)
 		{
 			if (condition == "should")
@@ -609,13 +609,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the Select Retailers modal, click the (.*) retailers option")]
+		[RegexStepDefinition(@"In the Select Retailers modal, click the (.*) retailers option")]
 		public void ClickRetailersOption(string option)
 		{
 			Report.IsTrue(new SelectRetailers().ClickRetailerOption(option) && GeneralUtilities.Wait_for_load_finish(), $"Failed to click the retailers option: {option}", $"Successfully clicked the retailers option: {option}");
 		}
 
-		[StepDefinition("I (accept|dismiss) the alert pop up")]
+		[RegexStepDefinition("I (accept|dismiss) the alert pop up")]
 		public void ConfirmThealertPopup(string action)
 		{
 			SeleniumWebDriver.CurrentDriver.WaitForAlert();
@@ -633,7 +633,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"An alert (should|should not) be displayed with the message: (.*)")]
+		[RegexStepDefinition(@"An alert (should|should not) be displayed with the message: (.*)")]
 		public void AnAlertIsDisplayedWithTheMessage(string condition, string message)
 		{
 			if (condition == "should")
@@ -662,7 +662,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"The following options (should|should not) be (displayed|exclusively displayed) for section: (.*)")]
+		[RegexStepDefinition(@"The following options (should|should not) be (displayed|exclusively displayed) for section: (.*)")]
 		public void CheckOptionsInSection(string should, string exclusive, string section, Table expected)
 		{
 			var expectedOptions = new List<string>();
@@ -731,7 +731,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 		
-		[StepDefinition(@"In (.*) section, clear the textbox field with the placeholder value: (.*)")]
+		[RegexStepDefinition(@"In (.*) section, clear the textbox field with the placeholder value: (.*)")]
 		public void ClearTextBoxField(string section, string placeholderValue)
 		{
 			if(Report.IsTrue(new NewProduct().ConfirmTextboxDisplayed(placeholderValue), $"Failed to locate a textbox under the section: {section}!",$"Successfully located a textbox under the section: {section}"))
@@ -741,7 +741,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I (should|should only|should not) see the following sections")]
+		[RegexStepDefinition(@"I (should|should only|should not) see the following sections")]
 		public void CheckDisplayedSections(string condition, Table sections)
 		{
 			Report.Info($"Beginning I {condition} the following {sections}");
@@ -780,7 +780,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"section: (.*) is highlighed in red indicating an error")]
+		[RegexStepDefinition(@"section: (.*) is highlighed in red indicating an error")]
 		public void SectionIsHighlightedInRedIndicatingAnError(string section)
 		{
 			var selNewProduct = new NewProduct();
@@ -791,13 +791,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"Section '{section}' colour was not the expected red! The colour is: {colour}",
 				$"Section '{section}' colour was red as expected");
 		}
-		[StepDefinition(@"In the (.*) section, confirm that the shadow text: '(.*)' is displayed in the textbox")]
+		[RegexStepDefinition(@"In the (.*) section, confirm that the shadow text: '(.*)' is displayed in the textbox")]
 		public void ShadowTextDisplayed(string section, string shadowText)
 		{
 			Report.IsTrue(new NewProduct().ConfirmTextboxDisplayed(shadowText), $"The shadow text: {shadowText}, was not displayed in the section: {section}!", $"The shadow text: {shadowText} was successfully displayed in section: {section}!");	
 		}
 
-		[StepDefinition(@"I navigate to the Home Page")]
+		[RegexStepDefinition(@"I navigate to the Home Page")]
 		public void NavigateToTheHomePage()
 		{
 			try
@@ -816,31 +816,36 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-
-		[StepDefinition(@"I should not see any error messages on the page")]
-		public void NoErrorMessages()
+		[RegexStepDefinition(@"I (should|should not) see any error messages on the page")]
+		public void NoErrorMessages(string condition)
 		{
 			var NewProduct = new NewProduct();
 
 			List<string> errors = NewProduct.ErrorMessagesText;
-			if (!errors.Any())
+			if (condition == "should")
 			{
-				Report.Success("As expected, the error message was not showing.");
-				Report.Screenshot();
-				return;
+				if (!errors.Any())
+				{
+					Report.Success("As expected, the error message was not showing.");
+					Report.Screenshot();
+					return;
+				}
 			}
-			Report.Failure($"Error message was showing when it wasn't expected to! Error(s): {string.Join(", ", errors)}");
-			Report.Screenshot();
-		}
+			else if (condition == "should not")
+			{
+				Report.Failure($"Error message was showing when it wasn't expected to! Error(s): {string.Join(", ", errors)}");
+				Report.Screenshot();
+			}
+		}	
 
-		[StepDefinition(@"I confirm I see the error message types in the popup with the following titles: (.*)")]
+		[RegexStepDefinition(@"I confirm I see the error message types in the popup with the following titles: (.*)")]
 		public void ThenIConfirmISeeTheTwoErrorMessagesInThePopupWithTheFollowingTitleCaliforniaCleaningRightToKnow(string popupTitle, Table table)
 		{
 			var newProductIngredients = new Ingredients();
 			Report.IsTrue(newProductIngredients.CheckForTwoErrorMessagesInPopupWithTitle(table, popupTitle), "Failed to find all the error messages in popup with title " + popupTitle, "Successfully found all the error messages in popup with title " + popupTitle);
 		}
 
-		[StepDefinition(@"I click close button for the CA Cleaning Ingredients Popup")]
+		[RegexStepDefinition(@"I click close button for the CA Cleaning Ingredients Popup")]
 		public void ThenIClickTheCloseButtonForThePopupWithTheFollowingTitleCaliforniaCleaningRightToKnow()
 		{
 			var newProductIngredients = new Ingredients();

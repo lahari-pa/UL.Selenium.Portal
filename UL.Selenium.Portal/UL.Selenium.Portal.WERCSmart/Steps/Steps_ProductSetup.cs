@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.Utilities.Functions;
-using TechTalk.SpecFlow;
+using Reqnroll;
 using UL.Automation.Reporting;
 using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Extensions;
@@ -17,13 +17,14 @@ using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Automation.Reporting.Classes;
+using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "ProductSetUp")]
-	class Steps_ProductSetup : TechTalk.SpecFlow.Steps
+	class Steps_ProductSetup
 	{
-		[StepDefinition(
+		[RegexStepDefinition(
 			@"I create a Walmart product and take to completed using Test Case 75335 \(SOLD set to US only with Walmart as retailer\) and save as: (.*)")]
 		public void CreateProductUsingTestCase75335Walmart(string savedAs)
 		{
@@ -125,7 +126,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Completed");
 		}
 
-		[StepDefinition(
+		[RegexStepDefinition(
 			@"I create a Walmart product and take to completed using Test Case 75335 using SHA Acc: (.*) \(SOLD set to US only with Walmart as retailer\) and save as: (.*)")]
 		public void CreateProductUsingTestCase75335WalmartusingShaAcc(string shaAcc, string savedAs)
 		{
@@ -228,7 +229,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(
+		[RegexStepDefinition(
 			@"I create a Walmart product and Force it to completed using Test Case 75335 using SHA Acc: (.*) \(SOLD set to US only with Walmart as retailer\) and save as: (.*)")]
 		public void CreateForcedProductUsingTestCase75335WalmartusingShaAcc(string shaAcc, string savedAs)
 		{
@@ -311,7 +312,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(
+		[RegexStepDefinition(
 			@"I create a Walmart product for a Kit and Force it to completed using Test Case 75335 using SHA Acc: (.*) \(SOLD set to US only with Walmart as retailer\) and save as: (.*)")]
 		public void CreateForcedProductUsingTestCase75335WalmartusingShaAccForAKit(string shaAcc, string savedAs)
 		{
@@ -393,69 +394,69 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I create a new product which has SOLD = US only, PL = No and is in completed status for One or more retailers and save the product as: (.*)")]
+		[RegexStepDefinition(@"I create a new product which has SOLD = US only, PL = No and is in completed status for One or more retailers and save the product as: (.*)")]
 		public void GivenICreateANewProductWhichHasSOLDUSOnlyPLNoAndIsInCompletedStatusForOneOrMoreRetailersAndSaveTheProductAs(string savedAs)
 		{
 			new Steps_ProductSetup().GivenICreateProductUsingTestCase75335(savedAs, "Chalk");
 		}
 
-		[StepDefinition(@"I create a product with name: (.*) and take to completed using Test Case 75335 and save as: (.*)")]
+		[RegexStepDefinition(@"I create a product with name: (.*) and take to completed using Test Case 75335 and save as: (.*)")]
 		public void GivenICreateProductUsingTestCase75335(string name, string savedAs)
 		{
 			this.CreateProductUsingTestCase75335(savedAs, name);
 		}
 
-		[StepDefinition(@"I create a product with name: (.*) and force it to completed using Test Case 75335 and save as: (.*)")]
+		[RegexStepDefinition(@"I create a product with name: (.*) and force it to completed using Test Case 75335 and save as: (.*)")]
 		public void GivenICreateForcedProductUsingTestCase75335(string name, string savedAs)
 		{
 			this.CreateForcedProductUsingTestCase75335(savedAs, name);
 		}
 
 
-		[StepDefinition(@"I create a product with name: (.*) and take to completed using Test Case 75335 using SHA Account: (.*) and save as: (.*)")]
+		[RegexStepDefinition(@"I create a product with name: (.*) and take to completed using Test Case 75335 using SHA Account: (.*) and save as: (.*)")]
 		public void GivenICreateProductUsingTestCase75335UsingSHAAcc(string name, string shaAcc, string savedAs)
 		{
 			this.CreateProductUsingTestCase75335UsingShaAcc(savedAs, name, shaAcc);
 		}
 
-		[StepDefinition(@"I create a product with name: (.*) and Force it to completed using Test Case 75335 using SHA Account: (.*) and save as: (.*)")]
+		[RegexStepDefinition(@"I create a product with name: (.*) and Force it to completed using Test Case 75335 using SHA Account: (.*) and save as: (.*)")]
 		public void GivenICreateForcedProductUsingTestCase75335UsingSHAAcc(string name, string shaAcc, string savedAs)
 		{
 			this.CreateProductForcedUsingTestCase75335UsingShaAcc(savedAs, name, shaAcc);
 		}
 
-		[StepDefinition(@"I create a product for a Kit with name: (.*) and Force it to completed using Test Case 75335 using SHA Account: (.*) and save as: (.*)")]
+		[RegexStepDefinition(@"I create a product for a Kit with name: (.*) and Force it to completed using Test Case 75335 using SHA Account: (.*) and save as: (.*)")]
 		public void GivenICreateForcedProductUsingTestCase75335UsingSHAAccForAKit(string name, string shaAcc, string savedAs)
 		{
 			this.CreateProductForcedUsingTestCase75335UsingShaAccForAKit(savedAs, name, shaAcc);
 		}
 
-		[StepDefinition(@"I create a product and take to completed using Test Case 75335 and save as: (.*)")]
+		[RegexStepDefinition(@"I create a product and take to completed using Test Case 75335 and save as: (.*)")]
 		public void GivenICreateProductUsingTestCase75335(string savedAs)
 		{
 			this.CreateProductUsingTestCase75335(savedAs, "Chalk");
 		}
 
 
-		[StepDefinition(@"I create a product and take to completed using Test Case 75335 Using SHA Account: (.*) and save as: (.*)")]
+		[RegexStepDefinition(@"I create a product and take to completed using Test Case 75335 Using SHA Account: (.*) and save as: (.*)")]
 		public void GivenICreateProductUsingTestCase75335UsingShaAcc(string shaAcc, string savedAs)
 		{
 			this.CreateProductUsingTestCase75335UsingShaAcc(savedAs, "Chalk",shaAcc);
 		}
 
-		[StepDefinition(@"I create a product and force it to completed using Test Case 75335 Using SHA Account: (.*) and save as: (.*)")]
+		[RegexStepDefinition(@"I create a product and force it to completed using Test Case 75335 Using SHA Account: (.*) and save as: (.*)")]
 		public void GivenICreateForcedProductUsingTestCase75335UsingShaAcc(string shaAcc, string savedAs)
 		{
 			this.CreateProductForcedUsingTestCase75335UsingShaAcc(savedAs, "Chalk", shaAcc);
 		}
 
-		[StepDefinition(@"I create a product and force it to Release for distribution using Test Case 75335 Using SHA Account: (.*) and save as: (.*)")]
+		[RegexStepDefinition(@"I create a product and force it to Release for distribution using Test Case 75335 Using SHA Account: (.*) and save as: (.*)")]
 		public void GivenICreateReleasedForDistProductUsingTestCase75335UsingShaAcc(string shaAcc, string savedAs)
 		{
 			this.CreateReleasedForDistProductForcedUsingTestCase75335UsingShaAcc(savedAs, "Chalk", shaAcc);
 		}
 
-		[StepDefinition(@"I create a product for a Kit and force it to completed using Test Case 75335 Using SHA Account: (.*) and save as: (.*)")]
+		[RegexStepDefinition(@"I create a product for a Kit and force it to completed using Test Case 75335 Using SHA Account: (.*) and save as: (.*)")]
 		public void GivenICreateForcedProductUsingTestCase75335UsingShaAccForAKit(string shaAcc, string savedAs)
 		{
 			this.CreateProductForcedUsingTestCase75335UsingShaAccForAKit(savedAs, "Chalk", shaAcc);
@@ -463,20 +464,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"I create a product with name: (.*) and UPC: (.*) and take to completed using Test Case 75335 with no login step and save as: (.*)")]
+		[RegexStepDefinition(@"I create a product with name: (.*) and UPC: (.*) and take to completed using Test Case 75335 with no login step and save as: (.*)")]
 		public void GivenICreateProductUsingTestCase75335(string name, string upc, string savedAs)
 		{
 			this.CreateProductUsingTestCase75335(savedAs, upc, name);
 		}
 
-		[StepDefinition(@"I create a product with name: (.*) and UPC: (.*) and take to completed using Test Case 75335and SHA account: (.*) with no login step and save as: (.*)")]
+		[RegexStepDefinition(@"I create a product with name: (.*) and UPC: (.*) and take to completed using Test Case 75335and SHA account: (.*) with no login step and save as: (.*)")]
 		public void GivenICreateProductUsingTestCase75335(string name, string upc, string shaAcc, string savedAs)
 		{
 			this.CreateProductUsingTestCase75335UsingSHAAcc(savedAs, upc, name,shaAcc);
 		}
 
 
-		[StepDefinition(@"I create a new product of type: Bleach, with a Product Line/ Brand added and select Type of Product: (.*)")]
+		[RegexStepDefinition(@"I create a new product of type: Bleach, with a Product Line/ Brand added and select Type of Product: (.*)")]
 		public void CreateProductWithProductLineBrand(string type)
 		{
 			Report.UseSubSteps = true;
@@ -509,7 +510,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsHomepage().ThenINavigateToTheHomePage();
 		}
 
-		[StepDefinition(@"I take a product from completed to recertification using Test Case 75410 saved: (.*)")]
+		[RegexStepDefinition(@"I take a product from completed to recertification using Test Case 75410 saved: (.*)")]
 		public void TakeProductFromCompletedToRecertification(string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -591,37 +592,37 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		/*
-		[StepDefinition(@"I create a product with name: (.*) and take to completed using Test Case 84108 and save as: (.*)")]
+		[RegexStepDefinition(@"I create a product with name: (.*) and take to completed using Test Case 84108 and save as: (.*)")]
 		public void GivenITakeProductWithNameFromCompletedToRecertification84108(string name, string savedAs)
 		{
 			this.TakeProductFromCompletedToRecertification84108(savedAs, name);
 		}
 		*/
-		[StepDefinition(@"I create a product and take to completed using Test Case 84108 and save as: (.*)")]
+		[RegexStepDefinition(@"I create a product and take to completed using Test Case 84108 and save as: (.*)")]
 		public void GivenITakeProductFromCompletedToRecertification84108(string savedAs)
 		{
 			this.TakeProductFromCompletedToRecertification84108(savedAs, "Alkaline battery");
 		}
 
-		[StepDefinition(@"I create a product with name: (.*) and take to completed using Test Case 84109 and save as: (.*)")]
+		[RegexStepDefinition(@"I create a product with name: (.*) and take to completed using Test Case 84109 and save as: (.*)")]
 		public void GivenITakeProductFromCompletedToRecertification84109(string name, string savedAs)
 		{
 			this.TakeProductFromCompletedToRecertification84109(savedAs, name);
 		}
 
-		[StepDefinition(@"I create a product with name: (.*) and Force it to completed using Test Case 84109 and save as: (.*)")]
+		[RegexStepDefinition(@"I create a product with name: (.*) and Force it to completed using Test Case 84109 and save as: (.*)")]
 		public void GivenITakeForcedProductFromCompletedToRecertification84109(string name, string savedAs)
 		{
 			this.TakeForcedProductFromCompletedToRecertification84109(savedAs, name);
 		}
 
-		[StepDefinition(@"I create a product and take to completed using Test Case 84109 and save as: (.*)")]
+		[RegexStepDefinition(@"I create a product and take to completed using Test Case 84109 and save as: (.*)")]
 		public void GivenITakeProductFromCompletedToRecertification84109(string savedAs)
 		{
 			this.TakeProductFromCompletedToRecertification84109(savedAs, "Alkaline battery");
 		}
 
-		[StepDefinition(@"I call test stuff for saved as: (.*)")]
+		[RegexStepDefinition(@"I call test stuff for saved as: (.*)")]
 		public void GivenICallTestStuff(string savedAs)
 		{
 			this.Test(savedAs);
@@ -1744,7 +1745,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I create a product with name: (.*) using Test Case 87686 which has a Case pack UPC for 1 or more retailers and which is in Completed status and save as: (.*)")]
+		[RegexStepDefinition(@"I create a product with name: (.*) using Test Case 87686 which has a Case pack UPC for 1 or more retailers and which is in Completed status and save as: (.*)")]
 		public void GivenICreateAProductUsingTestCaseWhichHasACasePackUPCForOrMoreRetailersAndWhichIsInCompletedStatus_(string name, string savedAs)
 		{
 			if (Context.Contains("Chalk"))
@@ -1838,7 +1839,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Accepted or Completed");
 		}
 
-		[StepDefinition(@"I create a product with name: (.*) and take to completed using Test Case 84108 and save as: (.*)")]
+		[RegexStepDefinition(@"I create a product with name: (.*) and take to completed using Test Case 84108 and save as: (.*)")]
 		public void TakeProductFromCompletedToRecertification84108(string name, string savedAs)
 		{
 			if (Context.Contains("ElectronicProduct"))
@@ -1939,7 +1940,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I create a product with name: (.*) and force it to completed using Test Case 84108 and save as: (.*)")]
+		[RegexStepDefinition(@"I create a product with name: (.*) and force it to completed using Test Case 84108 and save as: (.*)")]
 		public void TakeProductFromForcedCompletedToRecertification84108(string name, string savedAs)
 		{
 			if (Context.Contains("ElectronicProduct"))
@@ -2028,7 +2029,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I create a product and take to completed using Test Case 84109 and save as: (.*)")]
+		[RegexStepDefinition(@"I create a product and take to completed using Test Case 84109 and save as: (.*)")]
 		public void TakeProductFromCompletedToRecertification84109(string savedAs,
 			string name = "Answering machine, No battery included")
 		{
@@ -2114,7 +2115,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I create a product and Force it to completed using Test Case 84109 and save as: (.*)")]
+		[RegexStepDefinition(@"I create a product and Force it to completed using Test Case 84109 and save as: (.*)")]
 		public void TakeForcedProductFromCompletedToRecertification84109(string savedAs,
 			string name = "Answering machine, No battery included")
 		{
@@ -2185,7 +2186,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I take a product from completed to recertification using Test Case 84511 saved: (.*)")]
+		[RegexStepDefinition(@"I take a product from completed to recertification using Test Case 84511 saved: (.*)")]
 		public void GivenITakeAProductFromCompletedToRecertificationUsingTestCaseSavedTestCase(string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -2313,7 +2314,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			shaSteps.GivenICloseTheProductRecertificationHistoryPopUp();
 		}
 
-		[StepDefinition(@"I create a product with name: (.*) and take to completed using Test Case 80821 and save as: (.*)")]
+		[RegexStepDefinition(@"I create a product with name: (.*) and take to completed using Test Case 80821 and save as: (.*)")]
 		public void GivenICreateAProductWithNameAndTakeToCompletedUsingTestCaseAndSaveAsTestCase(string productName,
 			string savedAs)
 		{
@@ -2635,7 +2636,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(
+		[RegexStepDefinition(
 			@"I create a product with name: (.*) while logged in as (.*) and take to completed using Test Case 79428 and save as: (.*)")]
 		public void GivenICreateAProductWithNameAndTakeToCompletedUsingTestCase79428AndSaveAsTestCase(
 			string productName, string loggedInAs, string savedAs)
@@ -2843,7 +2844,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(
+		[RegexStepDefinition(
 			@"I create a product with name: (.*) while logged in as (.*) and take to completed using Test Case 79428 using SHA Acc: (.*) and save as: (.*)")]
 		public void GivenICreateAProductWithNameAndTakeToCompletedUsingTestCase79428AndSaveAsTestCaseusingSHAAcc(
 			string productName, string loggedInAs, string shaAcc, string savedAs)
@@ -3050,7 +3051,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		//Scenario: [77862] Create a Kit - Direct ship = Yes and retailer = Walmart - thru to Submitted status in SHA
-		[StepDefinition(@"I use Test case 77862 to create a kit and save as (.*)")]
+		[RegexStepDefinition(@"I use Test case 77862 to create a kit and save as (.*)")]
 		public void GivenIUseTestCaseToCreateAKitAndSaveAsTestCase(string saveAs)
 		{
 			Report.UseSubSteps = true;
@@ -3134,7 +3135,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I use Test case 77862 to create a kit using SHA Acc: (.*) and save as (.*)")]
+		[RegexStepDefinition(@"I use Test case 77862 to create a kit using SHA Acc: (.*) and save as (.*)")]
 		public void GivenIUseTestCaseToCreateAKitAndSaveAsTestCaseUsingSHA(string shaAcc, string saveAs)
 		{
 			Report.UseSubSteps = true;
@@ -3218,7 +3219,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I use Forced Test case 77862 to create a kit using SHA Acc: (.*) and save as (.*)")]
+		[RegexStepDefinition(@"I use Forced Test case 77862 to create a kit using SHA Acc: (.*) and save as (.*)")]
 		public void GivenIUseForcedTestCaseToCreateAKitAndSaveAsTestCaseUsingSHA(string shaAcc, string saveAs)
 		{
 			Report.UseSubSteps = true;
@@ -3305,7 +3306,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"I create a product with name: (.*) and take to completed using Test Case 75651 and save as: (.*)")]
+		[RegexStepDefinition(@"I create a product with name: (.*) and take to completed using Test Case 75651 and save as: (.*)")]
 		public void GivenICreateProductUsingTestCase75651(string name, string savedAs)
 		{
 			this.CreateProductUsingTestCase75651(savedAs, name);
@@ -3393,7 +3394,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I Use Test case 84518 to process the product from Assigned back to Completed status saved as (.*)")]
+		[RegexStepDefinition(@"I Use Test case 84518 to process the product from Assigned back to Completed status saved as (.*)")]
 		public void GivenIUseTestCaseToProcessTheProductFromAssignedBackToCompletedStatusSavedAsTestCase(string savedAs)
 		{
 			this.ProcessAssignedFormulatedProductBackToCompletedUsingTestCase84518(savedAs);
@@ -3447,7 +3448,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.StartStep(
 				"I confirm the product is shown with entries for SBCS EN PDF, NGHS EN PDF, NGHS EN RTF, CKLT EN PDF");
-			var tblCheckDocument = new TechTalk.SpecFlow.Table(new string[] {
+			var tblCheckDocument = new Table(new string[] {
 				"ProductOrAlias",
 				"Subformat",
 				"Language",
@@ -3520,7 +3521,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (currentStatus == "Accepted")
 			{
 				// 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase75335)
-				var table4 = new TechTalk.SpecFlow.Table(new string[] {
+				var table4 = new Table(new string[] {
 					"Retailer"
 				});
 				table4.AddRow(new string[] {
@@ -3538,28 +3539,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(
+		[RegexStepDefinition(
 			@"I create a product with name: (.*) and take to completed using Test Case 78865 and save as: (.*)")]
 		public void GivenICreateProductUsingTestCase78865(string name, string savedAs)
 		{
 			this.CreateProductUsingTestCase78865(savedAs, name);
 		}
 
-		[StepDefinition(
+		[RegexStepDefinition(
 			@"I create a product with name: (.*) and take to completed using Test Case 78865 Using SHA Acc: (.*) and save as: (.*)")]
 		public void GivenICreateProductUsingTestCase78865UsingSHAAcc(string name, string shaAcc, string savedAs)
 		{
 			this.CreateProductUsingTestCase78865UsingSHAAcc(savedAs, name, shaAcc);
 		}
 
-		[StepDefinition(
+		[RegexStepDefinition(
 			@"I create a product with name: (.*) and Force it to completed using Test Case 78865 Using SHA Acc: (.*) and save as: (.*)")]
 		public void GivenICreateForcedProductUsingTestCase78865UsingSHAAcc(string name, string shaAcc, string savedAs)
 		{
 			this.CreateForcedProductUsingTestCase78865UsingSHAAcc(savedAs, name, shaAcc);
 		}
 
-		[StepDefinition(
+		[RegexStepDefinition(
 			@"I create a product for a Kit with name: (.*) and Force it to completed using Test Case 78865 Using SHA Acc: (.*) and save as: (.*)")]
 		public void GivenICreateForcedProductUsingTestCase78865UsingSHAAccForAKit(string name, string shaAcc, string savedAs)
 		{
@@ -3902,7 +3903,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I create a product and take it to the ingredients page and save as: (.*)")]
+		[RegexStepDefinition(@"I create a product and take it to the ingredients page and save as: (.*)")]
 		public void CreateProductAndTakeToTheIngredientsPage(string savedAs)
 		{
 			var sharedSteps = new Steps_Shared();
@@ -3920,7 +3921,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I generate a random UPC number for Amazon data tiers and save as: (.*)")]
+		[RegexStepDefinition(@"I generate a random UPC number for Amazon data tiers and save as: (.*)")]
 		public void GivenIGenerateARandomUPCNumberForAmazon(string savedAs)
 		{
 			string upc = new UpcFunctions().GeneratePrefixedUPCForRetailer("Amazon");
@@ -4006,13 +4007,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//	"Submitted");
 		}
 
-		[StepDefinition(@"I create a product with RU - Chalk and take to submitted and save as: (.*)")]
+		[RegexStepDefinition(@"I create a product with RU - Chalk and take to submitted and save as: (.*)")]
 		public void GivenICreateProductAndTakeItToSubmitted(string savedAs)
 		{
 			this.CreateProductAndTakeToSubmitted(savedAs, "Chalk");
 		}
 
-		[StepDefinition(@"I create a product and save as: (.*) and name as: (.*)")]
+		[RegexStepDefinition(@"I create a product and save as: (.*) and name as: (.*)")]
 		public void CreateProductConditionerAndTakeToSubmitted(string savedAs, string name)
 		{
 			Report.UseSubSteps = true;
@@ -4599,8 +4600,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//newProductSteps.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
 		}
 
-		[StepDefinition("Using Test case 75142, I create a NEW PRODUCT and move it into Submitted status in SHA")]
-		[StepDefinition("I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA")]
+		[RegexStepDefinition("Using Test case 75142, I create a NEW PRODUCT and move it into Submitted status in SHA")]
+		[RegexStepDefinition("I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA")]
 		public void IUseTestCase75142ToCreateANEWPRODUCTAndGetItToSubmittedStatusInSHA()
 		{
 			Report.UseSubSteps = true;
@@ -4673,7 +4674,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition("I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA for the Products Automation Account")]
+		[RegexStepDefinition("I Use Test case 75142 to create a NEW PRODUCT and get it to Submitted status in SHA for the Products Automation Account")]
 		public void IUseTestCase75142ToCreateANEWPRODUCTAndGetItToSubmittedStatusInSHAForProductsAutomationAccount()
 		{
 			Report.UseSubSteps = true;
@@ -4762,7 +4763,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I create a product with sds upload and name as: (.*) then take to data acceptance and save as: (.*)")]
+		[RegexStepDefinition(@"I create a product with sds upload and name as: (.*) then take to data acceptance and save as: (.*)")]
 		public void TakeProductWithSDSUploadToDataAcceptance(string name, string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -4793,7 +4794,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I Use Test case 87685 to create a product which has a Case UPC and a regular UPC, processed to completed status")]
+		[RegexStepDefinition(@"I Use Test case 87685 to create a product which has a Case UPC and a regular UPC, processed to completed status")]
 		public void IUseTestCase87685ToCreateAProductWhichHasACaseUPCAndARegularUPCProcessedToCompletedStatus()
 		{
 			Report.UseSubSteps = true;
@@ -4830,7 +4831,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			Report.StartStep("I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for");
 
-			var retailerTable = new TechTalk.SpecFlow.Table("Retailer");
+			var retailerTable = new Table("Retailer");
 			retailerTable.AddRow("Amazon");
 
 			sharedSteps.GivenICallSharedStep75146Retailer_SelectOneOrMoreRetailersThatDoNotRequireVendorIDOrAdditionalUPCInformationClickDoneClickContinue(retailerTable);
@@ -4905,7 +4906,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.GivenICallShared49841SHA_SearchForExactWPSIDInALLStatus("Accepted", "TestCase87685");
 			Report.StartStep("I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase87685) for");
 
-			var retailerTable2 = new TechTalk.SpecFlow.Table("Retailer");
+			var retailerTable2 = new Table("Retailer");
 			retailerTable2.AddRow("Amazon");
 
 			sharedSteps.GivenICallShared51664SHA_AcceptedProduct_SetRetailersToCompletedForSavedAs("TestCase87685", retailerTable2);
@@ -4918,7 +4919,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"I create a Crayon product and take to completed using Test Case 86116 and save as: (.*) with upc: (.*)")]
+		[RegexStepDefinition(@"I create a Crayon product and take to completed using Test Case 86116 and save as: (.*) with upc: (.*)")]
 		public void CreateProductUsingTestCase86116(string savedAs, string upc)
 		{
 			Report.UseSubSteps = true;
@@ -5019,7 +5020,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I create a Crayon product and take to completed using Test Case 86116 using SHA Account: (.*) and save as: (.*) with upc: (.*)")]
+		[RegexStepDefinition(@"I create a Crayon product and take to completed using Test Case 86116 using SHA Account: (.*) and save as: (.*) with upc: (.*)")]
 		public void CreateProductUsingTestCase86116UsingSHAAcc(string shaAcc, string savedAs, string upc)
 		{
 			Report.UseSubSteps = true;
@@ -5123,7 +5124,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//}
 		}
 
-		[StepDefinition(@"I create a Crayon product and Force it to completed using Test Case 86116 using SHA Account: (.*) and save as: (.*) with upc: (.*)")]
+		[RegexStepDefinition(@"I create a Crayon product and Force it to completed using Test Case 86116 using SHA Account: (.*) and save as: (.*) with upc: (.*)")]
 		public void CreateForcedProductUsingTestCase86116UsingSHAAcc(string shaAcc, string savedAs, string upc)
 		{
 			Report.UseSubSteps = true;
@@ -5189,7 +5190,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I create a Crayon product and take to completed using Test Case 86454 and save as: (.*)")]
+		[RegexStepDefinition(@"I create a Crayon product and take to completed using Test Case 86454 and save as: (.*)")]
 		public void CreateProductUsingTestCase86454(string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -5244,7 +5245,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			shaSteps.InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted(savedAs, retailerTable);			
 		}
 
-		[StepDefinition(@"I create a Chalk product and take to completed using Test Case 86114 and save as: (.*)")]
+		[RegexStepDefinition(@"I create a Chalk product and take to completed using Test Case 86114 and save as: (.*)")]
 		public void CreateProductUsingTestCase86114(string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -5310,7 +5311,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I create a Chalk product and take to completed using Test Case 86114 and SHA Account Saved As: (.*) and save as: (.*)")]
+		[RegexStepDefinition(@"I create a Chalk product and take to completed using Test Case 86114 and SHA Account Saved As: (.*) and save as: (.*)")]
 		public void CreateProductUsingTestCase86114UsingShaAccount(string shaAccountSavedAs, string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -5382,7 +5383,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Completed");
 		}
 
-		[StepDefinition(@"I create a Chalk product and Force it to completed using Test Case 86114 and SHA Account Saved As: (.*) and save as: (.*)")]
+		[RegexStepDefinition(@"I create a Chalk product and Force it to completed using Test Case 86114 and SHA Account Saved As: (.*) and save as: (.*)")]
 		public void CreateForcedProductUsingTestCase86114UsingShaAccount(string shaAccountSavedAs, string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -5447,7 +5448,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new Steps_SHA().InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted(savedAs, retailerTable);
 		}
 
-		[StepDefinition(@"I create a Crayon product and take to completed using Test Case 86458 and save as: (.*)")]
+		[RegexStepDefinition(@"I create a Crayon product and take to completed using Test Case 86458 and save as: (.*)")]
 		public void CreateProductUsingTestCase86458(string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -5502,7 +5503,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 		}
 
-		[StepDefinition(@"I create a Crayon product and take to completed using Test Case 86458 and SHA Account Saved as: (.*) and save as: (.*)")]
+		[RegexStepDefinition(@"I create a Crayon product and take to completed using Test Case 86458 and SHA Account Saved as: (.*) and save as: (.*)")]
 		public void CreateProductUsingTestCase86458(string shaAccount, string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -5565,7 +5566,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I create a Crayon product and Force it t completed using Test Case 86458 and SHA Account Saved as: (.*) and save as: (.*)")]
+		[RegexStepDefinition(@"I create a Crayon product and Force it t completed using Test Case 86458 and SHA Account Saved as: (.*) and save as: (.*)")]
 		public void CreateForcedProductUsingTestCase86458(string shaAccount, string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -5633,7 +5634,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I create a Crayon product and take to completed using Test Case 86455 and save as: (.*)")]
+		[RegexStepDefinition(@"I create a Crayon product and take to completed using Test Case 86455 and save as: (.*)")]
 		public void CreateProductUsingTestCase86455(string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -5692,7 +5693,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I create a Crayon product and take to completed using Test Case 86455 using SHA account: (.*) and save as: (.*)")]
+		[RegexStepDefinition(@"I create a Crayon product and take to completed using Test Case 86455 using SHA account: (.*) and save as: (.*)")]
 		public void CreateProductUsingTestCase86455UsingSHAAcc(string shaAcc, string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -5756,7 +5757,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I create a Crayon product and force it to completed using Test Case 86455 using SHA account: (.*) and save as: (.*)")]
+		[RegexStepDefinition(@"I create a Crayon product and force it to completed using Test Case 86455 using SHA account: (.*) and save as: (.*)")]
 		public void CreateForcedProductUsingTestCase86455UsingSHAAcc(string shaAcc, string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -5821,7 +5822,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"I create a Chalk product and take to completed using Test Case 86115 and save as: (.*)")]
+		[RegexStepDefinition(@"I create a Chalk product and take to completed using Test Case 86115 and save as: (.*)")]
 		public void CreateProductUsingTestCase86115(string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -5885,7 +5886,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,"Completed");
 		}
 
-		[StepDefinition(@"I create a Chalk product and take to completed using Test Case 86115 using SHA Acc: (.*) and save as: (.*)")]
+		[RegexStepDefinition(@"I create a Chalk product and take to completed using Test Case 86115 using SHA Acc: (.*) and save as: (.*)")]
 		public void CreateProductUsingTestCase86115UsingSHAAcc(string shaAcc,string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -5955,7 +5956,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs, "Completed");
 		}
 
-		[StepDefinition(@"I create a Chalk product and Force it to completed using Test Case 86115 using SHA Acc: (.*) and save as: (.*)")]
+		[RegexStepDefinition(@"I create a Chalk product and Force it to completed using Test Case 86115 using SHA Acc: (.*) and save as: (.*)")]
 		public void CreateForcedProductUsingTestCase86115UsingSHAAcc(string shaAcc, string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -6016,7 +6017,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new Steps_SHA().InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted(savedAs, retailerTable);
 		}
 
-		[StepDefinition(@"I create a Chalk product and take to completed using Test Case 86419 and save as: (.*)")]
+		[RegexStepDefinition(@"I create a Chalk product and take to completed using Test Case 86419 and save as: (.*)")]
 		public void CreateProductUsingTestCase86419(string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -6071,7 +6072,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//shaSteps.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(savedAs,"Completed");
 		}
 
-		[StepDefinition(@"I create a Chalk product and take to completed using Test Case 86419 using Sha Account: (.*) and save as: (.*)")]
+		[RegexStepDefinition(@"I create a Chalk product and take to completed using Test Case 86419 using Sha Account: (.*) and save as: (.*)")]
 		public void CreateProductUsingTestCase86419UsingSHAAcc(string shaAcc, string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -6133,7 +6134,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I create a Chalk product and force it to completed using Test Case 86419 using Sha Account: (.*) and save as: (.*)")]
+		[RegexStepDefinition(@"I create a Chalk product and force it to completed using Test Case 86419 using Sha Account: (.*) and save as: (.*)")]
 		public void CreateForcedProductUsingTestCase86419UsingSHAAcc(string shaAcc, string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -6195,7 +6196,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new Steps_SHA().InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted(savedAs, retailerTable);
 		}
 
-		[StepDefinition(@"I create a Chalk product which has a Case UPC and a regular UPC, process to completed and save the product as: (.*)")]
+		[RegexStepDefinition(@"I create a Chalk product which has a Case UPC and a regular UPC, process to completed and save the product as: (.*)")]
 		public void ChalkCaseUPCToCompleted(string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -6232,7 +6233,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			Report.StartStep("I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for");
 
-			var retailerTable = new TechTalk.SpecFlow.Table("Retailer");
+			var retailerTable = new Table("Retailer");
 			retailerTable.AddRow("Amazon");
 
 			sharedSteps.GivenICallSharedStep75146Retailer_SelectOneOrMoreRetailersThatDoNotRequireVendorIDOrAdditionalUPCInformationClickDoneClickContinue(retailerTable);
@@ -6296,7 +6297,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I create a Chalk product which has a Case UPC and a regular UPC, process to completed using SHA Account: (.*) and save the product as: (.*)")]
+		[RegexStepDefinition(@"I create a Chalk product which has a Case UPC and a regular UPC, process to completed using SHA Account: (.*) and save the product as: (.*)")]
 		public void ChalkCaseUPCToCompletedUsingSHAAcc(string shaAcc, string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -6333,7 +6334,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			Report.StartStep("I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for");
 
-			var retailerTable = new TechTalk.SpecFlow.Table("Retailer");
+			var retailerTable = new Table("Retailer");
 			retailerTable.AddRow("Amazon");
 
 			sharedSteps.GivenICallSharedStep75146Retailer_SelectOneOrMoreRetailersThatDoNotRequireVendorIDOrAdditionalUPCInformationClickDoneClickContinue(retailerTable);
@@ -6397,7 +6398,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I enter: (.*) as my ingredient in the Ingredients page, and check that the top option on the filter matches my ingredient")]
+		[RegexStepDefinition(@"I enter: (.*) as my ingredient in the Ingredients page, and check that the top option on the filter matches my ingredient")]
 		public void IEnterAnIngredientAndCheckTopOptionMatches(string myIngredient)
 		{
 			Report.UseSubSteps = true;
@@ -6416,7 +6417,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I Submit a new product which has a Case UPC and a regular UPC")]
+		[RegexStepDefinition(@"I Submit a new product which has a Case UPC and a regular UPC")]
 		public void ISubmitANewProductWhichHasACaseUPCAndARegularUPC()
 		{
 			Report.UseSubSteps = true;
@@ -6454,7 +6455,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			sharedSteps.ICallSharedRegulatoryInformation1_TSCARandom_Pro65No_Continue();
 			Report.StartStep("I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for");
 
-			var retailerTable = new TechTalk.SpecFlow.Table("Retailer");
+			var retailerTable = new Table("Retailer");
 			retailerTable.AddRow("Amazon");
 
 			sharedSteps.GivenICallSharedStep75146Retailer_SelectOneOrMoreRetailersThatDoNotRequireVendorIDOrAdditionalUPCInformationClickDoneClickContinue(retailerTable);
@@ -6486,7 +6487,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			stepsNewProduct.GivenIfPurchaseDetailsAreShowingClickConfirmOrder();
 		}
 
-		[StepDefinition("I create a NEW PRODUCT, select all certifications on the UPC screen and get it to Submitted status in SHA")]
+		[RegexStepDefinition("I create a NEW PRODUCT, select all certifications on the UPC screen and get it to Submitted status in SHA")]
 		public void ICreateANewProductSelectAllCertificationsAndGetItToSubmittedStatusInSHA()
 		{
 			Report.UseSubSteps = true;
@@ -6559,7 +6560,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I create a Chalk product for WalMart and Proccess it to completed and save it as: (.*)")]
+		[RegexStepDefinition(@"I create a Chalk product for WalMart and Proccess it to completed and save it as: (.*)")]
 		public void ICreateAChalkProductForWalmartAndProccessItToCompleted(string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -6642,7 +6643,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Completed");
 		}
 
-		[StepDefinition("I create a NEW PRODUCT, select all certifications on the UPC screen and get it to Completed status in SHA")]
+		[RegexStepDefinition("I create a NEW PRODUCT, select all certifications on the UPC screen and get it to Completed status in SHA")]
 		public void ICreateANewProductSelectAllCertificationsAndGetItToCompletedStatusInSHA()
 		{
 			Report.UseSubSteps = true;
@@ -6732,7 +6733,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I create a Chalk product and take to completed for distributor and save as: (.*)")]
+		[RegexStepDefinition(@"I create a Chalk product and take to completed for distributor and save as: (.*)")]
 		public void CreateProductForDistributor(string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -6794,7 +6795,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Completed");
 		}
 
-		[StepDefinition(@"I create a Hair Color Kit using test case 58753 with product name: (.*) and save as: (.*)")]
+		[RegexStepDefinition(@"I create a Hair Color Kit using test case 58753 with product name: (.*) and save as: (.*)")]
 		public void CreateHairColorKitUsing58753AndSaveAs(string productName, string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -6847,7 +6848,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I create a Crayon product and take to completed using Test Case 86116 and SHA account: (.*) and save as: (.*) with upc: (.*)")]
+		[RegexStepDefinition(@"I create a Crayon product and take to completed using Test Case 86116 and SHA account: (.*) and save as: (.*) with upc: (.*)")]
 		public void CreateProductUsingTestCase86116UsingGivenSHAAccount(string shaAccSavedAs, string savedAs, string upc)
 		{
 			Report.UseSubSteps = true;
@@ -6914,7 +6915,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 		}
 
-		[StepDefinition(@"I create a Crayon product and force it to completed using Test Case 86116 and SHA account: (.*) and save as: (.*) with upc: (.*)")]
+		[RegexStepDefinition(@"I create a Crayon product and force it to completed using Test Case 86116 and SHA account: (.*) and save as: (.*) with upc: (.*)")]
 		public void CreateForcedProductUsingTestCase86116UsingGivenSHAAccount(string shaAccSavedAs, string savedAs, string upc)
 		{
 			Report.UseSubSteps = true;
@@ -6990,7 +6991,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I create a Crayon product and take to completed using Test Case 86454 and SHA Account Saved As: (.*) and save as: (.*)")]
+		[RegexStepDefinition(@"I create a Crayon product and take to completed using Test Case 86454 and SHA Account Saved As: (.*) and save as: (.*)")]
 		public void CreateProductUsingTestCase86454AndSHAAccountSavedAs(string shaAccountSavedAs, string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -7052,7 +7053,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			shaSteps.InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted(savedAs, retailerTable);
 		}
 
-		[StepDefinition(@"I create a Crayon product and force it to completed using Test Case 86454 and SHA Account Saved As: (.*) and save as: (.*)")]
+		[RegexStepDefinition(@"I create a Crayon product and force it to completed using Test Case 86454 and SHA Account Saved As: (.*) and save as: (.*)")]
 		public void CreateForcedProductUsingTestCase86454AndSHAAccountSavedAs(string shaAccountSavedAs, string savedAs)
 		{
 			Report.UseSubSteps = true;

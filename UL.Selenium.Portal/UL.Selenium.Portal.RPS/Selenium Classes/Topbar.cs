@@ -9,96 +9,116 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 {
     class TopBar : SeleniumBaseObject
     {
-        #region Page Objects
-        protected override By ContainerElementLocator => By.XPath("//div[contains(concat(' ',normalize-space(@class),' '),' bar-top ')]");
+		#region Page Objects
+		protected override By ContainerElementLocator => By.XPath("//nav[contains(@class,'fixed-top')]");//By.XPath("//nav[@class='navbar navbar-expand-lg bar-top fixed-top']");
 
-        private IWebElement RightToolBar => FindElement(By.XPath(".//ul[@class='nav navbar-nav navbar-right']"), 1);
+        private IWebElement RightToolBar => this.ContainerElement.FindElement(By.XPath(".//ul[contains(@class, 'nav navbar-nav')]"), 1);
 
-        private IWebElement UserAccount => this.RightToolBar.FindElement(By.Id("dAcccount"), 1);
+		private IWebElement UserAccount => this.RightToolBar.FindElement(By.Id("dAcccount"), 1);
 
-        private IWebElement UlLogo => this.RightToolBar.FindElement(By.XPath(".//a[contains(@class,'ul-logo')]"), 1);
+		private IWebElement UlLogo => this.ContainerElement.FindElement(By.XPath(".//a[contains(@class,'ul-logo')]"), 1);
 
-        private IWebElement SignOut => this.RightToolBar.FindElement(By.Id("logoutDialog"), 1);
+		private IWebElement SignOut => this.RightToolBar.FindElement(By.Id("logoutDialog"), 1);
 
-        private IWebElement BrandNameLeft => FindElement(By.XPath(".//a[@class='navbar-brand brand']"), 1);
-        #endregion
+        private IWebElement BrandNameLeft => this.ContainerElement.FindElement(By.XPath(".//div[contains(@class,'brand')]"), 1);
 
-        #region Methods
-        public string UserAccountText() => this.UserAccount?.Text;
+		private IWebElement BrandNameLeftBold => this.BrandNameLeft.FindElement(By.XPath(".//strong"), 1);
+		#endregion
 
-        public bool ClickUserAccount() => this.UserAccount.TryClick();
+		#region Methods
+		public string UserAccountText() => this.UserAccount?.Text;
 
-        public bool ClickUlLogo() => this.UlLogo.TryClick();
+		public bool ClickUserAccount() => this.UserAccount.TryClick();
 
-        public bool ClickBrandName() => this.BrandNameLeft.TryClick();
+		public bool ClickUlLogo() => this.UlLogo.TryClick();
 
-        public bool UlLogoDisplayed() => this.UlLogo != null && this.UlLogo.Displayed;
+		public bool ClickBrandName() => this.BrandNameLeft.TryClick();
 
-        public bool BrandNameDisplayed() => this.BrandNameLeft != null && this.BrandNameLeft.Displayed;
+		public bool UlLogoDisplayed() => this.UlLogo != null && this.UlLogo.Displayed;
 
-        public bool ClickSignOut() => this.SignOut.TryClick();
+		public bool BrandNameDisplayed() => this.BrandNameLeft != null && this.BrandNameLeft.Displayed;
 
-        public bool SignOutDisplayed() => this.SignOut != null && this.SignOut.Displayed;
+		public bool ClickSignOut() => this.SignOut.TryClick();
 
-        public string GetBrandName()
-        {
+		public bool SignOutDisplayed() => this.SignOut != null && this.SignOut.Displayed;
 
-            string fullStr = this.BrandNameLeft.Text;
-            return fullStr;
-        }
+		public string GetBrandName()
+		{
 
-        public string GetBradNameFontColor()
-        {
-            IWebElement brandNameElement = this.BrandNameLeft;
-            if (brandNameElement == null)
-            {
-                Report.Error("The Brand Name Element was null");
-                return null;
-            }
+			string fullStr = this.BrandNameLeft.Text;
+			return fullStr;
+		}
 
-            string rbgaCssValue = brandNameElement.GetCssValue("color");
-            return rbgaCssValue;
-        }
+		public bool BrandNameDisplayedInRPS()
+		{
+			IWebElement brandNameElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@class='nav-link ul-logo']"), 1);
 
-        public string GetUserAccountFontColor()
-        {
-            IWebElement userAccountElement = this.UserAccount;
-            if (userAccountElement == null)
-            {
-                Report.Error("The User Account Element was null");
-                return null;
-            }
+			if (brandNameElement != null)
+			{
+				return true;
+			}
 
-            string rbgaCssValue = userAccountElement.GetCssValue("color");
-            return rbgaCssValue;
-        }
+			return false;
+		}
 
-        public string GetTopBarBackgroundColor()
-        {
-            IWebElement topBarEl = this.containerElement;
-            if (topBarEl == null)
-            {
-                Report.Error("The Top Bar Element was null");
-                return null;
-            }
+		public bool ClickBrandNameInRPS()
+		{
+			IWebElement brandNameElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@class='navbar-brand brand']"), 1);
+			return brandNameElement.TryClick();
+		}
 
-            string rbgaCssValue = topBarEl.GetCssValue("background-color");
-            return rbgaCssValue;
-        }
+		public string GetBradNameFontColor()
+		{
+			IWebElement brandNameElement = this.BrandNameLeft;
+			if (brandNameElement == null)
+			{
+				Report.Error("The Brand Name Element was null");
+				return null;
+			}
 
-        public void RefocusGraph()
-        {
-            var action = new Actions(SeleniumBrowser.WebBrowser);
-            try
-            {
-                action.MoveToElement(this.containerElement).Perform();
-            }
-            catch
-            {
-                Report.Info("Failed to move to element");
-            }
-        }
+			string rbgaCssValue = brandNameElement.GetCssValue("color");
+			return rbgaCssValue;
+		}
 
-        #endregion
-    }
+		public string GetUserAccountFontColor()
+		{
+			IWebElement userAccountElement = this.UserAccount;
+			if (userAccountElement == null)
+			{
+				Report.Error("The User Account Element was null");
+				return null;
+			}
+
+			string rbgaCssValue = userAccountElement.GetCssValue("color");
+			return rbgaCssValue;
+		}
+
+		public string GetTopBarBackgroundColor()
+		{
+			IWebElement topBarEl = ContainerElement;
+			if (topBarEl == null)
+			{
+				Report.Error("The Top Bar Element was null");
+				return null;
+			}
+
+			string rbgaCssValue = topBarEl.GetCssValue("background-color");
+			return rbgaCssValue;
+		}
+
+		public void RefocusGraph()
+		{
+			var action = new Actions(SeleniumBrowser.WebBrowser);
+			try
+			{
+				action.MoveToElement(ContainerElement).Perform();
+			}
+			catch
+			{
+				Report.Info("Failed to move to element");
+			}
+		}
+
+		#endregion
+	}
 }

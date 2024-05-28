@@ -15,10 +15,9 @@
 Feature: Drum Log - More Filters
 
 @ScenarioId:10241
-Scenario: [98392] Lowe's - Drum Log - More Filters - Layout and field types
-	Given I call Shared Step 98339 (RPS Lowe's Login)
-	Then I confirm the Home tab has loaded
-	Given I click the tab: Drum Log
+Scenario: [98392] Drum Log - More Filters - Layout and field types
+	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.LW 
+	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
 	Then In the Drum Log Page, I click the More Filters Button
@@ -49,16 +48,17 @@ Scenario: [98392] Lowe's - Drum Log - More Filters - Layout and field types
 	#For Region, both DrumType and status filters will have to miss some steps regarding opening drop down and checking for scroll bar (automation limitations)
 	Then In the Drum Log Page More Filters Popup, I check that the: Drum Type field is a drop down field
 	Then In the Drum Log Page More Filters Popup, I check the drop down options for the filter: Drum Type match:
-		| Filter             |
-		| REACTIVE           |
-		| NONE               |
+		| Filter             | 
 		| FLAMMABLE GAS      |
 		| FLAMMABLE LIQUID   |
 		| OXIDIZER           |
 		| POISON             |
 		| CLASS 9            |
 		| CORROSIVE ACIDIC   |
-		| CORROSIVE ALKALINE |
+		| Corrosive Alkaline |
+        | REACTIVE           |
+		| None               |
+ 
 	Then In the Drum Log Page More Filters Popup, I check that the: Drum Type Changed by User field is a drop down field
 	Then In the Drum Log Page More Filters Popup, I check the drop down options for the filter: Drum Type Changed by User match:
 		| Filter      |

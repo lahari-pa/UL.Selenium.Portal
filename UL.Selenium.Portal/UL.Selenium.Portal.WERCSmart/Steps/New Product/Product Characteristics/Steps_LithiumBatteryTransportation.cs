@@ -1,5 +1,6 @@
 using UL.Automation.Reporting.Functions;
-using TechTalk.SpecFlow;
+using Reqnroll;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 
@@ -10,7 +11,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 	{
 		private LithiumBatteryTransportation LithiumBatteryTransportation => new LithiumBatteryTransportation();
 
-		[StepDefinition(@"I set 'DOT' to: (.*)")]
+		[RegexStepDefinition(@"I set 'DOT' to: (.*)")]
 		public void SetDotTo(string option)
 		{
 			Report.IsTrue(this.LithiumBatteryTransportation.WaitForTab(NewProduct.Tab.ProductCharacteristics), "Product characteristics has not loaded", "Product characteristics tab is loaded.");
@@ -18,7 +19,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(this.LithiumBatteryTransportation.Dot == option,"Failed to set battery packaged option: " + option,"Successfully set battery packaged option: " + option);
 		}
 
-		[StepDefinition(@"I set 'IMDG' to: (.*)")]
+		[RegexStepDefinition(@"I set 'IMDG' to: (.*)")]
 		public void SetImdgTo(string option)
 		{
 			Report.IsTrue(this.LithiumBatteryTransportation.WaitForTab(NewProduct.Tab.ProductCharacteristics), "Product characteristics has not loaded", "Product characteristics tab is loaded.");
@@ -26,7 +27,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(this.LithiumBatteryTransportation.Imdg == option,"Failed to set battery packaged option: " + option,"Successfully set battery packaged option: " + option);
 		}
 
-		[StepDefinition(@"I set 'IATA' to: (.*)")]
+		[RegexStepDefinition(@"I set 'IATA' to: (.*)")]
 		public void SetIataTo(string option)
 		{
 			Report.IsTrue(this.LithiumBatteryTransportation.WaitForTab(NewProduct.Tab.ProductCharacteristics), "Product characteristics has not loaded","Product characteristics tab is loaded.");
@@ -34,7 +35,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(this.LithiumBatteryTransportation.Iata == option,"Failed to set battery packaged option: " + option,"Successfully set battery packaged option: " + option);
 		}
 
-		[StepDefinition(@"I set 'TDG' to: (.*)")]
+		[RegexStepDefinition(@"I set 'TDG' to: (.*)")]
 		public void SetTdgTo(string option)
 		{
 			Report.IsTrue(this.LithiumBatteryTransportation.WaitForTab(NewProduct.Tab.ProductCharacteristics), "Product characteristics has not loaded","Product characteristics tab is loaded.");

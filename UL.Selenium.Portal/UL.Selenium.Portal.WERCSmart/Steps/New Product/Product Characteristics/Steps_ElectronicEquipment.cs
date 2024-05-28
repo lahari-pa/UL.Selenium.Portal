@@ -1,5 +1,6 @@
 using UL.Automation.Reporting.Functions;
-using TechTalk.SpecFlow;
+using Reqnroll;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 
@@ -10,7 +11,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
 	{
 		private ElectronicEquipment ElectronicEquipment => new ElectronicEquipment();
 
-		[StepDefinition(@"I set 'Has a LCD or Plasma Display' to: (No|Yes)")]
+		[RegexStepDefinition(@"I set 'Has a LCD or Plasma Display' to: (No|Yes)")]
 		public void SetHasAlcdOrPlasmaDisplayToNoOrYes(string noOrYes)
 		{
 			Report.IsTrue(this.ElectronicEquipment.WaitForTab(NewProduct.Tab.ProductCharacteristics), "Product characteristics has not loaded",
@@ -22,7 +23,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
 				"Successfully set Has a LCD or Plasma Display value to: " + noOrYes);
 		}
 
-		[StepDefinition(@"I set 'Contains Circuit Board' to: (No|Yes)")]
+		[RegexStepDefinition(@"I set 'Contains Circuit Board' to: (No|Yes)")]
 		public void SetContainsCircuitBoardToNoOrYes(string noOrYes)
 		{
 			Report.IsTrue(this.ElectronicEquipment.WaitForTab(NewProduct.Tab.ProductCharacteristics), "Product characteristics has not loaded",

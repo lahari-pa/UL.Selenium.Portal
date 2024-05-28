@@ -45,7 +45,6 @@ And In the Product Section, set the option in section: 'Product Name as it appea
 Given In the Product Section, set the option in section: 'Type of Product (select)' to: Bleach
 Given in the The Product page I click Continue
 Then I save the product information as: TestCase139531
-Given I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
 Then I set the value 'FIFRAPopupExpected' to be: true
 #Given In the Product Information Screen I answer the questions as follows - US only - No to GHS - No to shipped supplier - Yes to CA Cleaning - No to Private Label - No to Sold to retailer)
 Given I should see the Product Information Page
@@ -71,29 +70,21 @@ Given In the California Cleaning Product Disclosure Section, set the option in s
 Given In the California Cleaning Product Disclosure Section, set the option in section: 'Company Web Address' to: http://TestWebsitePlaceholderName.com
 Given In the California Cleaning Product Disclosure Section, set the option in section: 'Select the product's GTIN Brick Code' to: [10000424] Laundry Detergents
 Given I click continue
-Given I add the following CA Cleaning ingredients:  
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName | GenericName | IngredientType | FunctionalPurpose             | Clean | Certified |
-		| Water         | 100      | false               | true        | AQUA       | AQUA        | Choose...      | Abrasive, Absorbent, Adhesive | true  | true      |
+#Given I add the following CA Cleaning ingredients:  
+#		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName | GenericName | IngredientType | FunctionalPurpose             | Clean | Certified |
+#		| Water         | 100      | false               | true        | AQUA       | AQUA        | Choose...      | Abrasive, Absorbent, Adhesive | true  | true      |
+
+
+Then In the Ingredients section, add component with component name: Water
+Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
+Then In the Ingredients Table row with component name: Water, in Trade Secret? column set checkbox to checked
+Then In the Ingredients Table row with component name: Water, in Generic Name column text input enter: 12345
 Given I click continue
-Then I should see an error message: Your product registration qualifies for the California SB 258 Cleaning Right-to-Know regulation based on the type of product being registered, as well as chemicals included with the registration.
-Then I should see an error message: Ingredients require Functional Purpose or Ingredient Type selections for one or more listed ingredients.
-And I confirm the 'Select all' checkbox in the Ingredients table is unchecked
-	And I click 'Select all' in the Ingredients table
-	And I confirm that all ingredients in the table are selected
-	And I click the 'Delete' button in the Ingredients table
-	And I confirm the 'Remove selected components' popup is displayed with message: Are you sure you want to remove all selected components?
-	And in the modal dialog I click the "YES" button
-	And I confirm there are a total of: 0 ingredients in the table
-
-Given I add the following CA Cleaning ingredients:  
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName     | GenericName | IngredientType      | FunctionalPurpose             | Clean | Certified |
-		| Water         | 100     | false               | true        | AQUA           | AQUA1       | Fragrance           | Fragrance Component           | true  | true      |
-Then I click continue
-And I should see the Waste Classification Data Page
-#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139531
-	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase139531
-
+Then The alert message should displayed with text: Your product registration qualifies for the California SB 258 Cleaning Right-to-Know regulation based on the type of product being registered, as well as chemicals included with the registration. Ingredients require Functional Purpose or Ingredient Type selections for one or more listed ingredients.
+Then In the Ingredients Table row with component name: Water, in Ingredient Type column select option Fragrance
+Given I click continue
+And I should see the Inventory Status, Prop 65 (US) Page
+Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139531
 
 
 #@ignore
@@ -114,7 +105,6 @@ And In the Product Section, set the option in section: 'Product Name as it appea
 Given In the Product Section, set the option in section: 'Type of Product (select)' to: Bleach
 Given in the The Product page I click Continue
 Then I save the product information as: TestCase139534
-Given I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
 Then I set the value 'FIFRAPopupExpected' to be: true
 #Given In the Product Information Screen I answer the questions as follows - US only - No to GHS - No to shipped supplier - Yes to CA Cleaning - No to Private Label - No to Sold to retailer)
 Given I should see the Product Information Page
@@ -140,21 +130,24 @@ Given In the California Cleaning Product Disclosure Section, set the option in s
 Given In the California Cleaning Product Disclosure Section, set the option in section: 'Company Web Address' to: http://TestWebsitePlaceholderName.com
 Given In the California Cleaning Product Disclosure Section, set the option in section: 'Select the product's GTIN Brick Code' to: [10000424] Laundry Detergents
 Given I click continue
-Given I add the following CA Cleaning ingredients:  
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName     | IngredientType | FunctionalPurpose             | Clean | Certified |
-		| Water         | 100     | false               | false       | AQUA           | Fragrance      | Abrasive, Absorbent, Adhesive | true  | true      |
+#Given I add the following CA Cleaning ingredients:  
+#		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName     | IngredientType | FunctionalPurpose             | Clean | Certified |
+#		| Water         | 100     | false               | false       | AQUA           | Fragrance      | Abrasive, Absorbent, Adhesive | true  | true      |
+
+Then In the Ingredients section, add component with component name: Water
+Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
+Then In the Ingredients Table row with component name: Water, in Ingredient Type column select option Fragrance
+Then In the Ingredients Table row with component name: Water, in Functional Purpose column delete selected option Fragrance Component
+Then In the Ingredients Table row with component name: Water, in Functional Purpose column select option Abrasive
+Then In the Ingredients Table row with component name: Water, in Trade Secret? column set checkbox to checked
+Then In the Ingredients Table row with component name: Water, in Generic Name column text input enter: 12345
 Given I click continue
-Then I confirm I see the error message types in the popup with the following title: California Cleaning Right to Know
-| Error                                   |
-| Functional Purpose                      |
-Then I click the close button for the CA Cleaning Ingredients Popup
-Then I click the 'x' button for component number 1
-Given I click: YES in the 'Remove Component from My Ingredients' pop up
-Given I add the following CA Cleaning ingredients:  
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName     | IngredientType | FunctionalPurpose             | Clean | Certified |
-		| Water         | 100     | false               | false       | AQUA           | Fragrance      |  | true  | true      |
-Then I click continue
-And I should see the Waste Classification Data Page
+Then I confirm the pop up should be displayed with the heading: California Cleaning Right to Know
+Then In the popup with the following title: California Cleaning Right to Know I click the Close button
+Then In the Ingredients Table row with component name: Water, in Functional Purpose column delete selected option Abrasive
+Then In the Ingredients Table row with component name: Water, in Functional Purpose column select option Fragrance Component
+Given I click continue
+And I should see the Inventory Status, Prop 65 (US) Page
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139534
 
 

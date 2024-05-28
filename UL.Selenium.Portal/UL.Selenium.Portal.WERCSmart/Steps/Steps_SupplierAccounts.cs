@@ -4,9 +4,9 @@ using System.Linq;
 using System.Reflection;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
-using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
+using UL.Automation.ReqnrollHelpers.Classes;
+using Reqnroll;
+using Reqnroll.Assist;
 using UL.Automation.Utilities;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
@@ -16,6 +16,7 @@ using TReVor.Integrations;
 using TReVor.Integrations.Classes;
 using UL.Automation.Utilities.Mailosaur.Classes;
 using NPOI.Util;
+using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -24,7 +25,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	{
 		public static string companyName= new AddNewSupplier().GetRandomCompanyName();
 
-		[StepDefinition(@"I create a new supplier products account with the following parameters and update TReVor information for: (.*)")]
+		[RegexStepDefinition(@"I create a new supplier products account with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountWithFollowingParameters(string savedAs)
 		{
 			Report.Info($"Setting up account for user: '{savedAs}'");
@@ -283,7 +284,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I create a new supplier packaging only account with the following parameters and update TReVor information for: (.*)")]
+		[RegexStepDefinition(@"I create a new supplier packaging only account with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountPkgOnlyWithFollowingParameters(string savedAs)
 		{
 			Report.Info($"Setting up account for user: '{savedAs}'");
@@ -328,7 +329,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I create a new supplier lockout account with the following parameters and update TReVor information for: (.*)")]
+		[RegexStepDefinition(@"I create a new supplier lockout account with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountLockOutWithFollowingParameters(string savedAs)
 		{
 			Report.Info($"Setting up account for user: '{savedAs}'");
@@ -344,7 +345,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I create a new supplier Canada address only account with the following parameters and update TReVor information for: (.*)")]
+		[RegexStepDefinition(@"I create a new supplier Canada address only account with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountCanadaAddressOnlyWithFollowingParameters(string savedAs)
 		{
 			Report.Info($"Setting up account for user: '{savedAs}'");
@@ -360,7 +361,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I create a new supplier Stewardship only account with the following parameters and update TReVor information for: (.*)")]
+		[RegexStepDefinition(@"I create a new supplier Stewardship only account with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountStewardshipOnlyWithFollowingParameters(string savedAs)
 		{
 			Report.Info($"Setting up account for user: '{savedAs}'");
@@ -386,7 +387,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.SaveUserToTReVor(savedAs, account);
 		}
 
-		[StepDefinition(@"I create a new supplier Canada has address packaging account with the following parameters and update TReVor information for: (.*)")]
+		[RegexStepDefinition(@"I create a new supplier Canada has address packaging account with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountCanadaHasAddressPackagingWithFollowingParameters(string savedAs)
 		{
 			Report.Info($"Setting up account for user: '{savedAs}'");
@@ -493,7 +494,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I create a new supplier Canada has pack and partial stewardship account with the following parameters and update TReVor information for: (.*)")]
+		[RegexStepDefinition(@"I create a new supplier Canada has pack and partial stewardship account with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountCanadaHasPackAndPartialStwdshipWithFollowingParameters(string savedAs)
 		{
 			Report.Info($"Setting up account for user: '{savedAs}'");
@@ -593,7 +594,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I create a new supplier no pkg stewardship partial and update TReVor information for: (.*)")]
+		[RegexStepDefinition(@"I create a new supplier no pkg stewardship partial and update TReVor information for: (.*)")]
 		public void CreateNewAccountNoPkgPartialStwdshipWithFollowingParameters(string savedAs)
 		{
 			Report.Info($"Setting up account for user: '{savedAs}'");
@@ -623,7 +624,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I create a new supplier data consent and update TReVor information for: (.*)")]
+		[RegexStepDefinition(@"I create a new supplier data consent and update TReVor information for: (.*)")]
 		public void CreateNewAccountDataConsentWithFollowingParameters(string savedAs)
 		{
 			Report.Info($"Setting up account for user: '{savedAs}'");
@@ -634,7 +635,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			WERCSmartUser account = subCompanyInfo.CreateInstance<WERCSmartUser>();
 			account.Email = MailosaurHelpers.DefaultMailbox.CreateEmail(account.Email);
 			account.Identifier = savedAs;
-			UL.Automation.SpecFlow.Classes.Context.AddToContext(savedAs, account, true);
+			UL.Automation.ReqnrollHelpers.Classes.Context.AddToContext(savedAs, account, true);
 			Report.Success("Account details saved!");
 			var mySignUp = new StepsSignup();
 			var myLogin = new StepsLogin();
@@ -681,7 +682,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I create a new supplier no Canada data and update TReVor information for: (.*)")]
+		[RegexStepDefinition(@"I create a new supplier no Canada data and update TReVor information for: (.*)")]
 		public void CreateNewAccountNoCanadaDataWithFollowingParameters(string savedAs)
 		{
 			Report.Info($"Setting up account for user: '{savedAs}'");
@@ -695,7 +696,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I create a new supplier no canada yes packaging full stewardship with the following parameters and update TReVor information for: (.*)")]
+		[RegexStepDefinition(@"I create a new supplier no canada yes packaging full stewardship with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountNoCanYesPkgStwdFullWithFollowingParameters(string savedAs)
 		{
 			Report.Info($"Setting up account for user: '{savedAs}'");
@@ -752,7 +753,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I create a new supplier Partial Stewardship only account with the following parameters and update TReVor information for: (.*)")]
+		[RegexStepDefinition(@"I create a new supplier Partial Stewardship only account with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountpartialStewardshipOnlyWithFollowingParameters(string savedAs)
 		{
 			Report.Info($"Setting up account for user: '{savedAs}'");
@@ -777,7 +778,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I create a new supplier premium subscription with the following parameters and update TReVor information for: (.*)")]
+		[RegexStepDefinition(@"I create a new supplier premium subscription with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountPremiumSubsWithFollowingParameters(string savedAs)
 		{
 			Report.Info($"Setting up account for user: '{savedAs}'");
@@ -840,7 +841,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I create a new supplier Partial Stewardship and packaging account with the following parameters and update TReVor information for: (.*)")]
+		[RegexStepDefinition(@"I create a new supplier Partial Stewardship and packaging account with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountpartialStewardshipAndPkgWithFollowingParameters(string savedAs)
 		{
 			Report.Info($"Setting up account for user: '{savedAs}'");
@@ -894,7 +895,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I create a new supplier no PLP with the following parameters and update TReVor information for: (.*)")]
+		[RegexStepDefinition(@"I create a new supplier no PLP with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountNoPLPWithFollowingParameters(string savedAs)
 		{
 			Report.Info($"Setting up account for user: '{savedAs}'");
@@ -912,7 +913,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I create a new supplier Canada has all data with the following parameters and update TReVor information for: (.*)")]
+		[RegexStepDefinition(@"I create a new supplier Canada has all data with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountCanadaHasAddressPackageStwdshipWithFollowingParameters(string savedAs)
 		{
 			Report.Info($"Setting up account for user: '{savedAs}'");
@@ -1017,7 +1018,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I create a new supplier Products in cart with the following parameters and update TReVor information for: (.*)")]
+		[RegexStepDefinition(@"I create a new supplier Products in cart with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountProductInCartWithFollowingParameters(string savedAs)
 		{
 			Report.Info($"Setting up account for user: '{savedAs}'");
@@ -1037,7 +1038,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I create a new supplier sub cart with the following parameters and update TReVor information for: (.*)")]
+		[RegexStepDefinition(@"I create a new supplier sub cart with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountSubCartWithFollowingParameters(string savedAs)
 		{
 			Report.Info($"Setting up account for user: '{savedAs}'");
@@ -1087,7 +1088,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.SaveUserToTReVor(savedAs, account);
 		}
 
-		[StepDefinition(@"I create a new supplier Visual with the following parameters and update TReVor information for: (.*)")]
+		[RegexStepDefinition(@"I create a new supplier Visual with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountVisualWithFollowingParameters(string savedAs)
 		{
 			Report.Info($"Setting up account for user: '{savedAs}'");
@@ -1208,7 +1209,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new TestCreatingSupplierAccount(specialChar).TryCreateSupplier(), "", "");
 		}
 
-		[StepDefinition(@"I create a new supplier NO products account with the following parameters and update TReVor information for: (.*)")]
+		[RegexStepDefinition(@"I create a new supplier NO products account with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewNOProductsAccountWithFollowingParameters(string savedAs)
 		{
 			Report.Info($"Setting up account for user: '{savedAs}'");
@@ -1325,7 +1326,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.SaveUserToTReVor(savedAs, account);
 		}
 
-		[StepDefinition(@"In Add New Supplier I enter random Company Name")]
+		[RegexStepDefinition(@"In Add New Supplier I enter random Company Name")]
 		public void ThenIFillOutTheInformationInTheAddNewSupplierRandomCompanyNameName()
 		{
 
@@ -1372,7 +1373,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I confirm following tabs appear available")]
+		[RegexStepDefinition(@"I confirm following tabs appear available")]
 		public void ThenIConfirmFollowingTabdAppearAvailable(Table table)
 		{
 			foreach (TableRow Row in table.Rows)
@@ -1383,7 +1384,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click on (.*) tab")]
+		[RegexStepDefinition(@"I click on (.*) tab")]
 		public void ThenClickOnGivenTab(string selectTab)
 		{
 			var newSupplier = new AddNewSupplier();
@@ -1391,7 +1392,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"Succesfully clicked {selectTab} tab");			
 		}
 
-		[StepDefinition(@"I confirm following toggles displayed")]
+		[RegexStepDefinition(@"I confirm following toggles displayed")]
 		public void ThenIConfirmFollowingTogglesDisplayed(Table table)
 		{
 			foreach (TableRow Row in table.Rows)
@@ -1402,7 +1403,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I search with email in the supplier manager window: (.*)")]
+		[RegexStepDefinition(@"I search with email in the supplier manager window: (.*)")]
 		public void ISearchWithEmailInSupplierManagerWindow(string email)
 		{
 			try
@@ -1422,7 +1423,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm (.*) Toggle enable check after clicking (back|save) button")]
+		[RegexStepDefinition(@"I confirm (.*) Toggle enable check after clicking (back|save) button")]
 		public void ThenIConfirmToggleSupplierManagerWindow(string toggleName, string action)
 		{
 			try
@@ -1468,7 +1469,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 		
-		[StepDefinition(@"I create a new (Manufacturer|Supplier) account with the following parameters and update TReVor information for: (.*)")]
+		[RegexStepDefinition(@"I create a new (Manufacturer|Supplier) account with the following parameters and update TReVor information for: (.*)")]
 		public void CreateNewAccountsWithFollowingParametersTable(string accountType, string savedAs)
 		{
 			Report.Info($"Setting up account for user: '{savedAs}'");

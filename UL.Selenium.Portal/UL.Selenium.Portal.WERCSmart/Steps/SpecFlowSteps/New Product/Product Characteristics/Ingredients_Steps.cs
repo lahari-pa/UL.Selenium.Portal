@@ -1,45 +1,40 @@
-﻿using OpenQA.Selenium.DevTools.V108.Database;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TechTalk.SpecFlow;
+using Reqnroll;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.Utilities.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
-using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {
 	[Binding, Scope(Tag = "Ingredients")]
-	class Ingredients
+	class Ingredients_Steps
 	{
-
-		[StepDefinition(@"In the Ingredients Section, In the popup view with the following title: (.*) I click the (.*) button")]
+		[RegexStepDefinition(@"In the Ingredients Section, In the popup view with the following title: (.*) I click the (.*) button")]
 		public void ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton(string popupTitle, string buttonTitle)
 		{
 			new Steps_Prototype().ClickTheFollowingButtonInThePopupView(popupTitle, buttonTitle);
 			Delay.Seconds(1);
 		}
 
-		[StepDefinition(@"In the Ingredients Section, I confirm I check the checkbox in the popup view with the following text: (.*)")]
+		[RegexStepDefinition(@"In the Ingredients Section, I confirm I check the checkbox in the popup view with the following text: (.*)")]
 		public void ThenIConfirmICheckTheCheckboxInThePopupViewWithTheFollowingText(string text)
 		{
 			new Steps_Prototype().CheckACheckboxWithTheFollowingText(text);
 		}
 
-		[StepDefinition(@"In the Ingredients Section, set the option in section: 'Ingredient Reference Number (Optional) to: (.*)")]
+		[RegexStepDefinition(@"In the Ingredients Section, set the option in section: 'Ingredient Reference Number \(Optional\)' to: (.*)")]
 		public void LiquidCoreProductSelectYesOrNo(string option)
 		{
 			string section = "Ingredient Reference Number (Optional)";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 		#region Add Ingredient
-		[StepDefinition(@"In the Ingredients Section, click the component search box")]
+		[RegexStepDefinition(@"In the Ingredients Section, click the component search box")]
 		public void ClickComponentSearchBox()
 		{
 			IngredientsTable ingredientsTable = new IngredientsTable();
@@ -47,7 +42,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(ingredientsTable.ComponentSearchBoxClick(), $"Failure, failed to click component search box.", $"Success, clicked component search box.");
 		}
 
-		[StepDefinition(@"In the Ingredients Section, confirm component search box (is|is not) displayed")]
+		[RegexStepDefinition(@"In the Ingredients Section, confirm component search box (is|is not) displayed")]
 		public void ComponentSearchBoxIsIsNotDisplayed(string is_isnot)
 		{
 			bool expected = is_isnot == "is";
@@ -55,7 +50,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(searchBox.WaitForContainerToBeVisible() == expected, $"Failure, component search box {(expected ? "is not" : "is")} displayed.", $"Success, component search box {is_isnot} displayed.");
 		}
 
-		[StepDefinition(@"In the component search box, enter text: (.*)")]
+		[RegexStepDefinition(@"In the component search box, enter text: (.*)")]
 		public void ComponentSearchBoxEnterText(string searchText)
 		{
 			SearchBoxPrototype searchBox = new SearchBoxPrototype();
@@ -63,7 +58,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(searchBox.SearchInputEnterText(searchText), $"Failure, failed to enter text: '{searchText}'", $"Success, entered text: '{searchText}'");
 		}
 
-		[StepDefinition(@"In the component search box, confirm search results list (is|is not) displayed")]
+		[RegexStepDefinition(@"In the component search box, confirm search results list (is|is not) displayed")]
 		public void ComponentSearchBoxResultListIsIsnotDisplayed(string is_isnot)
 		{
 			bool expected = is_isnot == "is";
@@ -72,7 +67,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(searchBox.SearchResultsExists() == expected, $"Failure, search results list {(expected ? "is not" : "is")} displayed.", $"Success, search results list {is_isnot} displayed.");
 		}
 
-		[StepDefinition(@"In the component search box, click result where (component name|CAS number) contains: (.*)")]
+		[RegexStepDefinition(@"In the component search box, click result where (component name|CAS number) contains: (.*)")]
 		public void ComponentSearchBoxClickResultListOption(string searchType, string searchText)
 		{
 			SearchBoxPrototype searchBox = new SearchBoxPrototype();
@@ -92,7 +87,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			}
 		}
 
-		[StepDefinition(@"In the Ingredients Section ingredients table, confirm row with (component name|CAS number): (.*) (is|is not) displayed")]
+		[RegexStepDefinition(@"In the Ingredients Section ingredients table, confirm row with (component name|CAS number): (.*) (is|is not) displayed")]
 		public void IngredientsTableRowIsIsNotDisplayed(string searchType, string searchText, string is_isnot)
 		{
 			IngredientsTable ingredientsTable = new IngredientsTable();
@@ -112,9 +107,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 					break;
 			}
 		}
+		//See Table format Bellow 
+		//|Functional Purpose|
+		[RegexStepDefinition(@"In the Ingredients Section ingredients table, for Ingredient: (.*) add Ingredient Type: (.*) and Functional Purpose:")]
+		public void ForIngredientsSelectTypeAndFunctionalPurpose(string ingredientName, string ingredientType, Table table)
+		{
+			Report.Info($"Attempting to select the ingredient type: {ingredientType} for the Ingredient: {ingredientName}");
+			Report.IsTrue(new Ingredients().ISelectIngredientType(ingredientName, ingredientType, "ComponentName"), "Failed to Select the Ingredient Type", "Successfully selected the Ingredient Type");
+			Report.Info($"Attempting to Select the Functional Purposes from the table.");
+			var selectedOptionsStr = new List<string>();
+			foreach (TableRow row in table.Rows)
+			{
+			
+				if (Report.IsTrue(new Ingredients().ISelectFunctionalPurpose(ingredientName, row["Functional Purpose"], "ComponentName"), "Failed to Select The Functional Purpose:" + row["Functional Purpose"], "Successfully selected the Functional purpose" + row["Functional Purpose"]))
+				{
+					selectedOptionsStr.Add(row["Functional Purpose"]);
+				}
+			
+			}
+			Context.AddToContext(ingredientName + "FunctionalPurposesList", selectedOptionsStr);
+		}
 		#endregion
 		#region Table Header
-		[StepDefinition(@"In the Ingredients Table, confirm the '(.*)' sortable column (does|does not) exist")]
+		[RegexStepDefinition(@"In the Ingredients Table, confirm the '(.*)' sortable column (does|does not) exist")]
 		public void IngredientsTableSortableColumnDoesDoesNotExist(string columnTitle, string does_doesnot)
 		{
 
@@ -123,7 +138,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(headerRow.SortableColumnTitleExists(columnTitle) == expected, $"Failure, '{columnTitle}' sortable column {(expected ? "does not" : "does")} exist.", $"Success, '{columnTitle}' sortable column {does_doesnot} exist.");
 		}
 
-		[StepDefinition(@"In the Ingredients Table, confirm the '(.*)' sortable column (up|down) carat (does|does not) exist")]
+		[RegexStepDefinition(@"In the Ingredients Table, confirm the '(.*)' sortable column (up|down) carat (does|does not) exist")]
 		public void IngredientsTableSortableColumnCaratDoesDoesNotExist(string columnTitle, string caratDirection, string does_doesnot)
 		{
 			bool expected = does_doesnot == "does";
@@ -134,7 +149,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			}
 		}
 
-		[StepDefinition(@"In the Ingredients Table, confirm the '(.*)' sortable column (up|down) carat (is|is not) displayed")]
+		[RegexStepDefinition(@"In the Ingredients Table, confirm the '(.*)' sortable column (up|down) carat (is|is not) displayed")]
 		public void IngredientsTableSortableColumnCaratIsIsNotDisplayed(string columnTitle, string caratDirection, string is_isnot)
 		{
 			bool expected = is_isnot == "is";
@@ -145,7 +160,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			}
 		}
 
-		[StepDefinition(@"In the Ingredients Table, click the '(.*)' sortable column")]
+		[RegexStepDefinition(@"In the Ingredients Table, click the '(.*)' sortable column")]
 		public void IngredientsTableSortableColumbClick(string columnTitle)
 		{
 			IngredientsTableHeaderRow headerRow = new IngredientsTableHeaderRow();
@@ -156,7 +171,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 
 		}
 
-		[StepDefinition(@"In the Ingredients Table, confirm the '(.*)' column header (does|does not) exist")]
+		[RegexStepDefinition(@"In the Ingredients Table, confirm the '(.*)' column header (does|does not) exist")]
 		public void IngredientsTableColumnHeaderDoesDoesNotExist(string columnTitle, string does_doesnot)
 		{
 
@@ -187,7 +202,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			return ingredientRow;
 		}
 
-		[StepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column text input enter: (.*)")]
+		[RegexStepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column text input enter: (.*)")]
 		public void IngredientsTableRowEnterPercent(string searchType, string searchText, string columnLabel, string inputText)
 		{
 			IngredientsTable ingredientsTable = new IngredientsTable();
@@ -200,7 +215,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(string.Equals(displayedText, inputText), $"Failure, in {searchType}:'{searchText}' row '{columnLabel}' column text input text is '{displayedText}' and should be '{inputText}'.", $"Success, in {searchType}:'{searchText}' row '{columnLabel}' column text input text '{inputText}' is correct.");
 		}
 
-		[StepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column click checkbox")]
+		[RegexStepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column click checkbox")]
 		public void IngredientsTableRowClickCheckBox(string searchType, string searchText, string columnLabel)
 		{
 			IngredientsTable ingredientsTable = new IngredientsTable();
@@ -211,7 +226,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(ingredientRow.CellCheckBoxClick(columnLabel), $"Failure, failed to click {searchType}:'{searchText}' row '{columnLabel}' column check box.", $"Success, clicked {searchType}:'{searchText}' row '{columnLabel}' column check box.");
 		}
 
-		[StepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column confirm checkbox is (checked|unchecked)")]
+		[RegexStepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column confirm checkbox is (checked|unchecked)")]
 		public void IngredientsTableRowConfirmCheckUncheckCheckBox(string searchType, string searchText, string columnLabel, string checked_unchecked)
 		{
 			bool expected = checked_unchecked == "checked";
@@ -223,7 +238,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(ingredientRow.CellCheckBoxIsChecked(columnLabel) == expected, $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column check box is {(expected ? "unchecked" : "checked")}.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column check box is {checked_unchecked}.");
 		}
 
-		[StepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column set checkbox to (checked|unchecked)")]
+		[RegexStepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column set checkbox to (checked|unchecked)")]
 		public void IngredientsTableRowCheckUncheckCheckBox(string searchType, string searchText, string columnLabel, string checked_unchecked)
 		{
 			bool expected = checked_unchecked == "checked";
@@ -239,7 +254,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(ingredientRow.CellCheckBoxIsChecked(columnLabel) == expected, $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column check box is {(expected ? "unchecked" : "checked")}.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column check box is {checked_unchecked}.");
 		}
 
-		[StepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column click select")]
+		[RegexStepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column click select")]
 		public void IngredientsTableRowSelect(string searchType, string searchText, string columnLabel)
 		{
 			IngredientsTable ingredientsTable = new IngredientsTable();
@@ -250,7 +265,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(ingredientRow.CellSelectClick(columnLabel), $"Failure, failed to click {searchType}:'{searchText}' row '{columnLabel}' column select.", $"Success, clicked {searchType}:'{searchText}' row '{columnLabel}' column select.");
 		}
 
-		[StepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column select (.*) option (does|does not) exist")]
+		[RegexStepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column select (.*) option (does|does not) exist")]
 		public void IngredientsTableRowSelectOptionExists(string searchType, string searchText, string columnLabel, string optionLabel, string does_doesnot)
 		{
 			bool expected = does_doesnot == "does";
@@ -262,7 +277,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(ingredientRow.CellSelectOptionExists(columnLabel, optionLabel) == expected, $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column select option '{optionLabel}' {(expected ? "does not" : "does")} exist.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column select option '{optionLabel}' {does_doesnot} exist.");
 		}
 
-		[StepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column select option (.*)")]
+		[RegexStepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column select option (.*)")]
 		public void IngredientsTableRowSelectOptionSelect(string searchType, string searchText, string columnLabel, string optionLabel)
 		{
 			IngredientsTable ingredientsTable = new IngredientsTable();
@@ -272,8 +287,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(ingredientRow.CellSelectExists(columnLabel), $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column select does not exist.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column select does exist.");
 			Report.IsTrue(ingredientRow.CellSelectOptionSelect(columnLabel, optionLabel), $"Failure, to select {searchType}:'{searchText}' row '{columnLabel}' column select option '{optionLabel}'.", $"Success, selected {searchType}:'{searchText}' row '{columnLabel}' column select option '{optionLabel}'.");
 		}
+		[RegexStepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column delete selected option (.*)")]
+		public void ThenInTheIngredientsTableRowWithComponentNameWaterInFunctionalPurposeColumnDeleteSelectedOptionAbrasive(string searchType, string searchText, string columnLabel, string optionLabel)
+		{
+			string is_isnot = "is";
+			bool expected = is_isnot == "is";
+			IngredientsTable ingredientsTable = new IngredientsTable();
+			Report.IsTrue(ingredientsTable.WaitForContainerToBeVisible(), $"Failure, ingredients table does not exist.", $"Success, ingredients table exists.");
+			Report.IsTrue(!ingredientsTable.IngredientRowList.IsNullOrEmpty(), $"Failure, ingredients table is empty.", $"Success, ingredients table is not empty.");
+			IngredientsTableRow ingredientRow = this.IngredientsRowSearchTypeGet(searchType, searchText);
+			Report.IsTrue(ingredientRow.CellSelectExists(columnLabel), $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column select does not exist.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column select does exist.");
+			if (Report.IsTrue(string.Equals(ingredientRow.CellSelectValue(columnLabel), optionLabel) == expected, $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column select option '{optionLabel}' {(expected ? "is not" : "is")} selected.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column select option '{optionLabel}' {is_isnot} selected."))
+			{
+				Report.IsTrue(ingredientRow.CellDeleteOptionSelected(columnLabel, optionLabel), $"Failure, for {searchType}:'{searchText}' row '{columnLabel}' column delete selected option '{optionLabel}'.", $"Success, for {searchType}:'{searchText}' row '{columnLabel}' column delete selected option '{optionLabel}'.");
+			}
+			else
+			{
+				Report.Success($"Option {optionLabel} was not selected for column {columnLabel}");
+			}
+		}
 
-		[StepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column select confirm (.*) option (is|is not) selected")]
+		[RegexStepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column select confirm (.*) option (is|is not) selected")]
 		public void IngredientsTableRowSelectConfirmOptionIsIsNotSelected(string searchType, string searchText, string columnLabel, string optionLabel, string is_isnot)
 		{
 			bool expected = is_isnot == "is";
@@ -285,7 +319,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(string.Equals(ingredientRow.CellSelectValue(columnLabel), optionLabel) == expected, $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column select option '{optionLabel}' {(expected ? "is not" : "is")} selected.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column select option '{optionLabel}' {is_isnot} selected.");
 		}
 
-		[StepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), confirm remove button exists")]
+		[RegexStepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), confirm remove button exists")]
 		public void IngredientsTableRowRemoveButtonExists(string searchType, string searchText)
 		{
 			IngredientsTable ingredientsTable = new IngredientsTable();
@@ -295,7 +329,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(ingredientRow.RowRemoveButtonExists(), $"Failure, {searchType}:'{searchText}' row remove button does not exist.", $"Success, {searchType}:'{searchText}' row remove button does exist.");
 		}
 
-		[StepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), click remove button")]
+		[RegexStepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), click remove button")]
 		public void IngredientsTableRowRemoveButtonClick(string searchType, string searchText)
 		{
 			IngredientsTable ingredientsTable = new IngredientsTable();
@@ -308,7 +342,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		#endregion
 
 		#region Modal Steps
-		[StepDefinition(@"Confirm a modal (is|is not) displayed")]
+		[RegexStepDefinition(@"Confirm a modal (is|is not) displayed")]
 		public void IngredientsModalIsIsNotDisplayed(string is_isnot)
 		{
 			bool expected = is_isnot == "is";
@@ -323,7 +357,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			}
 		}
 
-		[StepDefinition(@"Confirm displayed modal has title: (.*)")]
+		[RegexStepDefinition(@"Confirm displayed modal has title: (.*)")]
 		public void IngredientsModalHasTitle(string expectedTitle)
 		{
 			IngredientsModal ingredientsModal = new IngredientsModal();
@@ -332,7 +366,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(string.Equals(displayedTitle, expectedTitle), $"Failure, displayed modal expected title is '{expectedTitle}' but displayed title is '{displayedTitle}'.", $"Success, expected title '{expectedTitle}' matech displayed title.");
 		}
 
-		[StepDefinition(@"In displayed modal, confirm (.*) footer button (is|is not) displayed")]
+		[RegexStepDefinition(@"In displayed modal, confirm (.*) footer button (is|is not) displayed")]
 		public void IngredientsModalFooterButtonIsIsNotDisplayed(string buttonLabel, string is_isnot)
 		{
 			bool expected = is_isnot == "is";
@@ -341,7 +375,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(ingredientsModal.FooterButtonExists(buttonLabel) == expected, $"Failure, in the displayed modal '{buttonLabel}' button {(expected?"is not":"is")} displayed.", $"Success, in the displayed modal '{buttonLabel}' button {is_isnot} displayed.");
 		}
 
-		[StepDefinition(@"In displayed modal, click (.*) footer button")]
+		[RegexStepDefinition(@"In displayed modal, click (.*) footer button")]
 		public void IngredientsModalClickFooterButton(string buttonLabel)
 		{
 			IngredientsModal ingredientsModal = new IngredientsModal();
@@ -352,7 +386,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		#endregion
 
 		#region Shared Steps
-		[StepDefinition(@"In the Ingredients section, add component with (component name|CAS number): (.*)")]
+		[RegexStepDefinition(@"In the Ingredients section, add component with (component name|CAS number): (.*)")]
 		public void IngredientsTableAddIngredientBy(string searchType, string searchText)
 		{
 			Report.UseSubSteps = true;
@@ -374,7 +408,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			this.IngredientsTableRowIsIsNotDisplayed(searchType, searchText, "is");
 		}
 
-		[StepDefinition(@"In the Ingredients section, delete component with (component name|CAS number): (.*)")]
+		[RegexStepDefinition(@"In the Ingredients section, delete component with (component name|CAS number): (.*)")]
 		public void IngredientsTableDeleteIngredientBy(string searchType, string searchText)
 		{
 			Report.UseSubSteps = true;
@@ -398,11 +432,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			this.IngredientsTableRowIsIsNotDisplayed(searchType, searchText, "is not");
 		}
 
-			/// Copy and paste the following tables to create the table structure as needed 
-			///| SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-			///
-			/// | SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Active Ingredient? | Public Name |
-		[StepDefinition(@"In the Ingredients section, add the following ingredients:")]
+		/// Copy and paste the following tables to create the table structure as needed 
+		///| SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+		///
+		/// | SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Active Ingredient? | Public Name |
+		///
+		///
+		/// | SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name | Ingredient Type |Functional Purpose | Certified |
+		[RegexStepDefinition(@"In the Ingredients section, add the following ingredients:")]
 		public void IngredientsTableAddFollowingIngredients(Table inputTable)
 		{
 			Report.UseSubSteps = true;
@@ -447,17 +484,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 					Report.StartSubStep($"In the Ingredients Table row with {inputRow["SearchType"]}: {inputRow["SearchValue"]}, in 'Active Ingredient?' column set checkbox to checked");
 					this.IngredientsTableRowCheckUncheckCheckBox(inputRow["SearchType"], inputRow["SearchValue"], "Active Ingredient?", "checked");
 				}
+				if (inputRow["Functional Purpose"] != null)
+				{
+					Report.StartSubStep($"Then In the Ingredients Table row with {inputRow["SearchType"]}: {inputRow["SearchValue"]}, in 'Functional Purpose' column select option {inputRow["Ingredient Type"]}");
+					this.IngredientsTableRowSelectOptionSelect(inputRow["SearchType"], inputRow["SearchValue"], "Functional Purpose", inputRow["Functional Purpose"]);
+				}
 			}
 		}
 
-		[StepDefinition(@"In the Ingredients section, I confirm I see the error message types in the popup with the following title: (.*)")]
+		[RegexStepDefinition(@"In the Ingredients section, I confirm I see the error message types in the popup with the following title: (.*)")]
 		public void ThenIConfirmISeeTheTwoErrorMessagesInThePopupWithTheFollowingTitleCaliforniaCleaningRightToKnow(string popupTitle, Table table)
 		{
 			var newProductIngredients = new Steps_Prototype();
 			newProductIngredients.ThenIConfirmISeeTheTwoErrorMessagesInThePopupWithTheFollowingTitleCaliforniaCleaningRightToKnow(popupTitle, table);
 		}
 
-		[StepDefinition(@"In the Ingredients section, I click the close button for the CA Cleaning Ingredients Popup")]
+		[RegexStepDefinition(@"In the Ingredients section, I click the close button for the CA Cleaning Ingredients Popup")]
 		public void ThenIClickTheCloseButtonForThePopupWithTheFollowingTitleCaliforniaCleaningRightToKnow()
 		{
 			var newProductIngredients = new Steps_Prototype();

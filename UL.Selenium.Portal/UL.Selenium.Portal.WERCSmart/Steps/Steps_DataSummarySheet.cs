@@ -1,15 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
-using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
+using UL.Automation.ReqnrollHelpers.Classes;
+using Reqnroll;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using System.Text.RegularExpressions;
-using UL.Automation.WebDriver.Classes;
+using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -17,7 +15,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	class StepsDataSummarySheet
 	{
 		// 'battery_manufacturer: (.*)' set in row["Manufacturer] will fetch value from context
-		[StepDefinition(@"I should see the following batteries present:")]
+		[RegexStepDefinition(@"I should see the following batteries present:")]
 		public void ThenIShouldSeeTheFollowingBatteriesPresent(Table information)
 		{
 			IEnumerable<Battery> expected = information.CreateSet<Battery>();
@@ -47,7 +45,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I confirm that I see the following option for private label question: (.*)")]
+		[RegexStepDefinition(@"I confirm that I see the following option for private label question: (.*)")]
 		public void ThenIConfirmThatISeeTheFollowingOptionForPrivateLabelQuestion(string message)
 		{
 			var dataSummarySheet = new DataSummary();
@@ -58,7 +56,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"private label option was showing: " + message + ", as expected!");
 		}
 
-		[StepDefinition(@"I confirm that I see the following option for Product has been granted an Alternative Control Plan question: (.*)")]
+		[RegexStepDefinition(@"I confirm that I see the following option for Product has been granted an Alternative Control Plan question: (.*)")]
 		public void ThenIConfirmThatISeeTheFollowingOptionForProductHasBeenGrantedAnAlternativeControlPlanQuestion(string message)
 		{
 			var dataSummarySheet = new DataSummary();
@@ -69,7 +67,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"option was showing: " + message + ", as expected!");
 		}
 
-		[StepDefinition(@"I confirm that I see the following option for Product does not contain more than grams of VOC per use question: (.*)")]
+		[RegexStepDefinition(@"I confirm that I see the following option for Product does not contain more than grams of VOC per use question: (.*)")]
 		public void ThenIConfirmThatISeeTheFollowingOptionForProductDoesNotContainMoreThanGramsOfVOCPerUseQuestion(string message)
 		{
 			var dataSummarySheet = new DataSummary();
@@ -80,7 +78,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"option was showing: " + message + ", as expected!");
 		}
 
-		[StepDefinition(@"Product Name should be showing value: (.*)")]
+		[RegexStepDefinition(@"Product Name should be showing value: (.*)")]
 		public void ProductNameShouldBeShowingFollowing(string option)
 		{
 			var dataSummarySheet = new DataSummary();
@@ -95,7 +93,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Report.IsTrue(found.Contains(option), "Failed to find the option: " + option + "!", "Successfully found the option: " + option + "!", false, false);
 		}
 
-		[StepDefinition(@"(.*) document section should be showing the following document: (.*)")]
+		[RegexStepDefinition(@"(.*) document section should be showing the following document: (.*)")]
 		public void DocumentSectionShouldBeShowingTheFollowingDocument(string section, string option)
 		{
 			var dataSummarySheet = new DataSummary();
@@ -107,7 +105,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Got value: " + option + " as expected for section " + section + ".");
 		}
 
-		[StepDefinition(@"I click the View button for section: (.*)")]
+		[RegexStepDefinition(@"I click the View button for section: (.*)")]
 		public void IClickTheViewButtonForDocument(string section)
 		{
 			var dataSummarySheet = new DataSummary();
@@ -117,7 +115,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked the View button for section " + section + ".");
 		}
 
-		[StepDefinition(@"(.*) should be showing the following option: (.*)")]
+		[RegexStepDefinition(@"(.*) should be showing the following option: (.*)")]
 		public void ShouldBeShowingFollowing(string section, string option)
 		{
 			var dataSummarySheet = new DataSummary();
@@ -129,7 +127,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Report.IsTrue(found.Contains(option), "Failed to find the option: " + option + "!", "Successfully found the option: " + option + "!", false, false);
 		}
 
-		[StepDefinition(@"The Data Summary section should be showing the following UPC table:")]
+		[RegexStepDefinition(@"The Data Summary section should be showing the following UPC table:")]
 		public void ShouldBeShowingTheFollowingTable(Table table)
 		{
 			var dataSummarySheet = new DataSummary();
@@ -145,7 +143,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully found UPC information.");
 		}
 
-		[StepDefinition(@"I confirm that the Data Summary section (.*) shows the value for (.*) saved as: (.*) for UPC saved as: (.*)")]
+		[RegexStepDefinition(@"I confirm that the Data Summary section (.*) shows the value for (.*) saved as: (.*) for UPC saved as: (.*)")]
 		public void IConfirmThatTheDataSummarySectionShowsValueSavedAs(string section, string header, string savedAs, string upc)
 		{
 			var dataSummarySheet = new DataSummary();
@@ -157,7 +155,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"The data summary window should be showing")]
+		[RegexStepDefinition(@"The data summary window should be showing")]
 		public void TheDataSummaryWindowShouldBeShowing()
 		{
 			var dataSummarySheet = new DataSummary();
@@ -165,7 +163,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Data summary screen is showing");
 		}
 
-		[StepDefinition(@"Get Ingredients from Data Summary Window and add to product saved as (.*)")]
+		[RegexStepDefinition(@"Get Ingredients from Data Summary Window and add to product saved as (.*)")]
 		public void GetIngredientsFromDataSummaryWindowAndAddToProductSavedAs(string savedAs)
 		{
 			if (Context.Contains(savedAs))
@@ -179,7 +177,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"Get transparency ratio and save as (.*)")]
+		[RegexStepDefinition(@"Get transparency ratio and save as (.*)")]
 		public void GetTransparencyRatioAndSaveAs(string saveAs)
 		{
 			decimal transparencyRatio = new DataSummary().GetTransparencyRatio();
@@ -191,7 +189,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(transparencyRatio > -1, "Failed to get tranparency ratio", "Saved transparency ratio");
 		}
 
-		[StepDefinition(@"Get transparency percentage and save as (.*)")]
+		[RegexStepDefinition(@"Get transparency percentage and save as (.*)")]
 		public void GetTransparencyPercentageAndSaveAs(string saveAs)
 		{
 			double transparencyPercentage = new DataSummary().GetTransparencyPercentage();
@@ -203,7 +201,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(transparencyPercentage > -1, "Failed to get tranparency percentage", "Saved transparency percentage");
 		}
 
-		[StepDefinition(@"Confirm that transparency ratio is (.*) / (.*)")]
+		[RegexStepDefinition(@"Confirm that transparency ratio is (.*) / (.*)")]
 		public void GivenConfirmThatTransparencyRatioSavedAsTRAfterIs(string numerator, string denominator)
 		{
 			var thisDataSummary = new DataSummary();
@@ -219,7 +217,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"Confirm that transparency percentage is (.*)%")]
+		[RegexStepDefinition(@"Confirm that transparency percentage is (.*)%")]
 		public void GivenConfirmThatTransparencyPercentageSavedAsTRAfterIs(string percentage)
 		{
 			var thisDataSummary = new DataSummary();
@@ -234,7 +232,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I confirm that the Transparency Ratio underneath Ingredients equals: (.*)")]
+		[RegexStepDefinition(@"I confirm that the Transparency Ratio underneath Ingredients equals: (.*)")]
 		public void IConfirmThatTheTransparencyRatioEquals(string savedAs)
 		{
 			string transRatio = Context.GetFromContext(savedAs)?.ToString();
@@ -256,7 +254,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		//NOT COMPLETED
-		[StepDefinition(@"I confirm that the Transparency Percentage underneath Ingredients equals: (.*)")]
+		[RegexStepDefinition(@"I confirm that the Transparency Percentage underneath Ingredients equals: (.*)")]
 		public void IConfirmThatTheTransparencyPercentageEquals(string savedAs)
 		{
 			string transRatio = Context.GetFromContext(savedAs)?.ToString();
@@ -277,7 +275,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(regMatch2.Groups[2].ToString() == denominator, "Denominator was expected to be: " + denominator + " but is: " + regMatch.Groups[1].ToString(), "As expected, denominator is: " + denominator);
 		}
 
-		[StepDefinition(@"I take a screenshot of the ingredients")]
+		[RegexStepDefinition(@"I take a screenshot of the ingredients")]
 		public void GivenITakeAScreenshotOfTheIngredients()
 		{
 			var thisDataSummary = new DataSummary();
@@ -286,7 +284,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"In the Data Summary window the (first|second) component should have Public Name: (.*) and Publicly Disclosed: (Yes|No)")]
+		[RegexStepDefinition(@"In the Data Summary window the (first|second) component should have Public Name: (.*) and Publicly Disclosed: (Yes|No)")]
 		public void ThenInTheDataSummaryWindowTheSecondComponentShouldHavePublicNameAndPubliclyDisclosed(string firstOrSecond, string publicName, string publiclyDisclosed)
 		{
 			var thisDataSummary = new DataSummary();
@@ -316,7 +314,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"As expected, for ingredient " + thisIngredient.ComponentName + " public name is showing as: " + publicName);
 		}
 
-		[StepDefinition(@"In the Data Summary page, I confirm that the Ingredients table matches the following:")]
+		[RegexStepDefinition(@"In the Data Summary page, I confirm that the Ingredients table matches the following:")]
 		public void InTheDataSummaryPageIConfirmThatIngredientsMatches(Table table)
 		{
 			var thisDataSummary = new DataSummary();
@@ -358,7 +356,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I confirm that the Prouct UPC Table shows in the UPC Number column the value of PART NUMBER for the UPC with Name: (.*)")]
+		[RegexStepDefinition(@"I confirm that the Prouct UPC Table shows in the UPC Number column the value of PART NUMBER for the UPC with Name: (.*)")]
 		public void IConfirmThatTheDataSummarySectionShowsValueSavedAs(string value)
 		{
 			var dataSummarySheet = new DataSummary();			
@@ -369,7 +367,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					"Successfully found value " + value + " for header " + header + " in Data Summary screen.");
 		}
 
-		[StepDefinition(@"I confirm the following section: (.*) has the following value: (.*) in the Summary Page")]
+		[RegexStepDefinition(@"I confirm the following section: (.*) has the following value: (.*) in the Summary Page")]
 		public void ThenIConfirmTheFollowingSectionHasTheFollowingValueInTheSummaryPage(string section, string value)
 		{
 			DataSummary dataSummaryObject = new DataSummary();

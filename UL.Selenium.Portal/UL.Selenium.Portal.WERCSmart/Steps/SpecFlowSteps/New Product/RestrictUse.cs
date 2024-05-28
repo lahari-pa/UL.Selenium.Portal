@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TechTalk.SpecFlow;
+using Reqnroll;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 {
@@ -13,7 +14,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 	internal class RestrictUse
 	{
 
-		[StepDefinition(@"In the Restrict Use Section, I enter the text of formula registration is an Exclusive 3rd Party Formula field to: (.*)")]
+		[RegexStepDefinition(@"In the Restrict Use Section, I enter the text of formula registration is an Exclusive 3rd Party Formula field to: (.*)")]
 		public void GivenEnterFormulaRegistrationIsAnExclusive3rdPartyFormulaValue(string value)
 		{
 			Report.Info($"I set the text of formula registration is an Exclusive 3rd Party Formula field to: {value}");
@@ -21,7 +22,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			selNewProduct.SetTheSectionOptionTo("This formula registration is an Exclusive 3rd Party Formula and can only be used by this account. This formula cannot be used by Divisions of the same account- nor is this available to any other account holder. Once this formula is submitted- this cannot be changed or adjusted. Please be aware of this restriction before finalizing your submission.", value);
 		}
 
-		[StepDefinition(@"In the Restrict Use Section, I enter the text of Access Code field to: (.*)")]
+		[RegexStepDefinition(@"In the Restrict Use Section, I enter the text of Access Code field to: (.*)")]
 		public void GivenEnterAccessCodeValue(string value)
 		{
 			Report.Info($"I set the text of Access Code field to: {value}");
@@ -29,7 +30,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			selNewProduct.SetTheSectionOptionTo("Access Code", value);
 		}
 
-		[StepDefinition(@"In the Restrict Use Section, I enter the text of restrict searchable access field to: (.*)")]
+		[RegexStepDefinition(@"In the Restrict Use Section, I enter the text of restrict searchable access field to: (.*)")]
 		public void GivenEnterRestrictSearchableAccessValue(string value)
 		{
 			Report.Info($"I set the text of restrict searchable access field to: {value}");
@@ -37,7 +38,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			selNewProduct.SetTheSectionOptionTo("Do you want to restrict searchable access to your registered formula?", value);
 		}
 
-		[StepDefinition(@"In the Restrict Use Section, set the option in section: 'Do you want to restrict searchable access to your registered formula\?': to: (Do Not Restrict|Restrict|Exclusive Use)")]
+		[RegexStepDefinition(@"In the Restrict Use Section, set the option in section: 'Do you want to restrict searchable access to your registered formula\?': to: (Do Not Restrict|Restrict|Exclusive Use)")]
 		public void SetOptionForRestrictSearchableAccess(string option)
 		{
 			string section = "Do you want to restrict searchable access to your registered formula?";

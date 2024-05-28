@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TechTalk.SpecFlow;
+using Reqnroll;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps;
 
@@ -13,13 +14,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 	[Binding, Scope(Tag = "Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Formulated_Batteries")]
 	class WERCSmart_Distributor_NewProducts_Formulation_Batteries
 	{
-		[StepDefinition(@"In the Formulation > Batteries Section, set the radio option in section: 'Consent to Tier 2.1, 2.2, 4.2 Data Uses': to: (Granted|Declined)")]
+		[RegexStepDefinition(@"In the Formulation > Batteries Section, set the radio option in section: 'Consent to Tier 2.1, 2.2, 4.2 Data Uses': to: (Granted|Declined)")]
 		public void SelectConsentToTier(string option)
 		{
 			string section = "Consent to Tier 2.1, 2.2, 4.2 Data Uses";
 			new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
 		}
-		[StepDefinition(@"In the Formulation > Batteries Section, I confirm text 'Data Use Cansents' (should|should not) be displayed")]
+		[RegexStepDefinition(@"In the Formulation > Batteries Section, I confirm text 'Data Use Cansents' (should|should not) be displayed")]
 		public void GivenIConfirmTheFormulationBatteriesDisplaysTheCorrectText(string condition)
 		{
 			string section = "Formulation > Batteries";

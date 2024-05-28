@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UL.Automation.Reporting.Functions;
-using TechTalk.SpecFlow;
+using Reqnroll;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
@@ -15,21 +16,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
 
 		private readonly EcologoReadiness _ecologoReadiness = new EcologoReadiness();
 
-		[StepDefinition(@"The ECOLOGO Readiness page should be loaded")]
+		[RegexStepDefinition(@"The ECOLOGO Readiness page should be loaded")]
 		public void EcologoReadinessPageShouldBeLoaded()
 		{
 			Report.Info("Expected page heading is: " + this._ecologoReadiness.PanelTitle);
 			Report.IsTrue(this._ecologoReadiness.IsActivePanel, "The Ecologo Readiness page did not load!", "The Ecologo Readiness page loaded");
 		}
         
-		[StepDefinition(@"I confirm the ECOLOGO Readiness Assessment question is displayed")]
+		[RegexStepDefinition(@"I confirm the ECOLOGO Readiness Assessment question is displayed")]
 		public void ConfirmEcologoReadinessAssessmentQuestionDisplayed()
 		{
             Report.Info("The ECOLOGO Readiness Assessment question has expected text: " + this._ecologoReadiness.EcologoReadinessAssesmentQuestion);
 			Report.IsTrue(this._ecologoReadiness.EcologoReadinessQuestionDisplayed, "The ECOLOGO Readiness question was not displayed!", "The ECOLOGO Readiness question was displayed");
 		}
 
-		[StepDefinition(@"the ECOLOGO Readiness Assessment question should show the following options:")]
+		[RegexStepDefinition(@"the ECOLOGO Readiness Assessment question should show the following options:")]
 		public void TestEcologoStep(Table values)
 		{
 			var expectedOptions = new List<string>();
@@ -46,7 +47,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
 
 		}
 
-		[StepDefinition(@"I set ECOLOGO Readiness Assessment to: (Yes|Not at this time)")]
+		[RegexStepDefinition(@"I set ECOLOGO Readiness Assessment to: (Yes|Not at this time)")]
 		public void SetEcologoReadiness(string value)
 		{
 			Report.Info("The label text for Ecologo Readiness Assessment question is: " + this._ecologoReadiness.EcologoReadinessAssesmentQuestion);

@@ -1,13 +1,14 @@
 using OpenQA.Selenium;
 using UL.Automation.WebDriver.Classes;
-using UL.Automation.SpecFlow.Classes;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.Reporting.Functions;
-using TechTalk.SpecFlow;
+using Reqnroll;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using System.Collections.ObjectModel;
 using TReVor.Api.Wrapper.Classes;
 using System.IO;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.Utilities.Functions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.AdvancedReportsRules;
 using UL.Selenium.Portal.WERCSmart.Classes;
@@ -17,7 +18,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding, Scope(Tag = "FileOps")]
 	class Steps_FileOps
 	{
-		[StepDefinition(@"I save the information for the first record in Retailer Product in Recert excel spreadsheet saved as: (.*) as: (.*) and (.*)")]
+		[RegexStepDefinition(@"I save the information for the first record in Retailer Product in Recert excel spreadsheet saved as: (.*) as: (.*) and (.*)")]
 		public void ISaveTheInformationForTheFirstRecordInTheExcelSpreadSheetAs(string excel, string savedAs, string savedAs2)
 		{
 			string file = Context.GetFromContext(excel)?.ToString() ?? "";
@@ -49,7 +50,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(savedAs2, prodInfo);
 		}
 
-		[StepDefinition(@"I save the information for the first record in 3rd Party Formula Use in Registrations excel spreadsheet saved as: (.*) as: (.*) and (.*)")]
+		[RegexStepDefinition(@"I save the information for the first record in 3rd Party Formula Use in Registrations excel spreadsheet saved as: (.*) as: (.*) and (.*)")]
 		public void ISaveTheInformationForTheFirstRecordIn3rdPartyExcelAs(string excel, string savedAs, string savedAs2)
 		{
 			string file = Context.GetFromContext(excel)?.ToString() ?? "";

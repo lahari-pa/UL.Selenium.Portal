@@ -13,11 +13,11 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
     {
         //Leaving for now due to issues with the print dialog stopping element clicking and element finding, complicated by the fact there are Shadow DOM elements.
         #region Page Objects
-        protected override By ContainerElementLocator => By.XPath("//print-preview-app[@new-print-preview-layout_]");
+        protected override By ContainerElementLocator => By.XPath("//print-preview-app");
 
         //private List<IWebElement> BottomMenuBottoms => FindElements(By.XPath("."), 1).ToList();
 
-        private List<IWebElement> BottomMenuBottoms => this.containerElement.FindElements(By.XPath(""), 1).ToList();
+        private List<IWebElement> BottomMenuBottoms => ContainerElement.FindElements(By.XPath(""), 1).ToList();
         #endregion
 
         #region Methods

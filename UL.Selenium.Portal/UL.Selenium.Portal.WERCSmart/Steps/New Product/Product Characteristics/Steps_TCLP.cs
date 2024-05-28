@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using UL.Automation.Reporting.Functions;
-using TechTalk.SpecFlow;
+using Reqnroll;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 
@@ -12,7 +13,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 	{
 		private TCLP Tclp => new TCLP();
 
-		[StepDefinition(@"I set 'Product has had TCLP; Report is available' to: (No|Yes)")]
+		[RegexStepDefinition(@"I set 'Product has had TCLP; Report is available' to: (No|Yes)")]
 		public void SetTclpReportIsAvailableTo(string noOrYes)
 		{
 			Report.IsTrue(this.Tclp.WaitForTab(NewProduct.Tab.ProductCharacteristics), "Product Characteristics tab has not loaded",
@@ -24,7 +25,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully set Product has had TCLP: " + noOrYes);
 		}
 
-		[StepDefinition(@"I set all the metal presence value to: (Yes|No)")]
+		[RegexStepDefinition(@"I set all the metal presence value to: (Yes|No)")]
 		public void GivenISetAllTheMetalPresenceValueTo(string noOrYes)
 		{
 			Report.IsTrue(this.Tclp.WaitForMetalSection(30), "Metal section has failed to load.",

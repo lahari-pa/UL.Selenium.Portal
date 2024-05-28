@@ -10,14 +10,15 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
-using TechTalk.SpecFlow;
+using UL.Automation.ReqnrollHelpers.Classes;
+using Reqnroll;
 
 
 using System.Globalization;
 using Newtonsoft.Json.Converters;
 using System.Xml;
 using UL.Automation.Reporting;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.TReVor.Classes;
 
@@ -26,7 +27,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.API
 	[Binding, Scope(Tag = "API")]
 	class Steps_Api
 	{
-		[StepDefinition(@"I authenticate ItemSync username: (.*), password: (.*)")]
+		[RegexStepDefinition(@"I authenticate ItemSync username: (.*), password: (.*)")]
 		public void AuthenticateTestUserItemSync(string userName, string password)
 		{
 			ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(delegate
@@ -53,7 +54,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.API
 			Report.IsTrue(!string.IsNullOrEmpty(token), "Failed to find a token for user: " + userName, "Successfully acquired a token for user: " + userName, false, false);
 		}
 
-		[StepDefinition(@"I authenticate WasteHauler username: (.*), password: (.*)")]
+		[RegexStepDefinition(@"I authenticate WasteHauler username: (.*), password: (.*)")]
 		public void GivenIAuthenticateWasteHaulerUsername(string userName, string password)
 		{
 			ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(delegate
@@ -73,7 +74,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.API
 			Report.IsTrue(!string.IsNullOrEmpty(token), "Failed to find a token for user: " + userName, "Successfully acquired a token for user: " + userName, false, false);
 		}
 
-		[StepDefinition(@"I save the Item Sync report as: (.*) using Retailer GUID: (.*) and")]
+		[RegexStepDefinition(@"I save the Item Sync report as: (.*) using Retailer GUID: (.*) and")]
 		public void ThenISaveTheItemSyncReportForUPCAsItemSyncSavedAs(string savedAs, string guid, Table table)
 		{
 			var tableData = new Dictionary<string, string>();
@@ -152,7 +153,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.API
 			return req;
 		}
 
-		[StepDefinition(@"I save the Waste Hauler report for UPC: (.*) as: (.*)")]
+		[RegexStepDefinition(@"I save the Waste Hauler report for UPC: (.*) as: (.*)")]
 		public void GetWasteHaulerReport(string upc, string reportSavedAs)
 		{
 			var token = (string)Context.GetFromContext("ApiSavedToken");
@@ -181,7 +182,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.API
 			Report.File(Path.Combine(Path.GetDirectoryName(ReportSettings.ReportFile), "Test.xml"));
 		}
 
-		[StepDefinition(@"I verify that data was returned as expected from file saved as: (.*)")]
+		[RegexStepDefinition(@"I verify that data was returned as expected from file saved as: (.*)")]
 		public void ThenIVerifyThatDataWasReturnedAsExpected(string savedAs)
 		{
 			string returnedData = (string)Context.GetFromContext(savedAs);

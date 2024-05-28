@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
-using TechTalk.SpecFlow;
+using UL.Automation.ReqnrollHelpers.Classes;
+using Reqnroll;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using System.Collections.Generic;
 using UL.Automation.WebDriver.Classes;
@@ -10,13 +10,14 @@ using TReVor.Core.Classes.Software;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.ProductTemplate;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using TReVor.Core.Classes.Software.Vault;
+using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.Product_Template
 {
 	[Binding, Scope(Tag = "ProductTemplateLogin")]
 	class Steps_Login
 	{
-		[StepDefinition(@"In the Product Template Login page, enter username: (.*)")]
+		[RegexStepDefinition(@"In the Product Template Login page, enter username: (.*)")]
 		public void ProductTemplateLoginEnterUsername(string username)
 		{
 			var ProductTemplateLogin = new ProductTemplateLogin();
@@ -26,7 +27,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.Product_Template
 			}
 		}
 
-		[StepDefinition(@"In the Product Template Login page, enter password: (.*)")]
+		[RegexStepDefinition(@"In the Product Template Login page, enter password: (.*)")]
 		public void ProductTemplateLoginEnterPassword(string password)
 		{
 			var ProductTemplateLogin = new ProductTemplateLogin();
@@ -36,7 +37,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.Product_Template
 			}
 		}
 
-		[StepDefinition(@"In the Product Template Login page, click the Next button")]
+		[RegexStepDefinition(@"In the Product Template Login page, click the Next button")]
 		public void ProductTemplateLoginNextButtonClick()
 		{
 			var ProductTemplateLogin = new ProductTemplateLogin();
@@ -46,7 +47,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.Product_Template
 			}
 		}
 
-		[StepDefinition(@"In the Product Template Login page, log in with account saved in TReVor as: (.*)")]
+		[RegexStepDefinition(@"In the Product Template Login page, log in with account saved in TReVor as: (.*)")]
 		public void ProductTemplateLoginToAccount(string alias)
 		{
 			Report.UseSubSteps = true;

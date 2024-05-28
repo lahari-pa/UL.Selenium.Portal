@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
-using TechTalk.SpecFlow;
+using UL.Automation.ReqnrollHelpers.Classes;
+using Reqnroll;
 using UL.Automation.Reporting;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Automation.WebDriver.Classes;
@@ -17,7 +18,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 	{
 		private StepsNewProduct StepsNewProduct => new StepsNewProduct();
 
-		[StepDefinition(@"I should see the appropriate response depending on today's date for state: (.*)")]
+		[RegexStepDefinition(@"I should see the appropriate response depending on today's date for state: (.*)")]
 		public void ThenIShouldSeeTheAppropriateResponseDependingOnTodaySDateforstate(string state)
 		{
 			var stepsNewProduct = new StepsNewProduct();
@@ -35,7 +36,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I edit the Expiration Date to: (.*) for the State: (.*) on the Pesticide State Registration Details page")]
+		[RegexStepDefinition(@"I edit the Expiration Date to: (.*) for the State: (.*) on the Pesticide State Registration Details page")]
 		public void IEnterAnExpirationDateForPesticideStateRegistration(string expirationDate, string state)
 		{
 			var pesticideDetailsState = new PesticideDetailsState();
@@ -56,7 +57,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				$"The Pesticide Registration Expiration Date for state '{state}' was successfully edited to be '{expirationDate}'");
 		}
 
-		[StepDefinition(@"I confirm the Expiration Date matches the value provided by Kelly on the State Registration Details Page for the edited State")]
+		[RegexStepDefinition(@"I confirm the Expiration Date matches the value provided by Kelly on the State Registration Details Page for the edited State")]
 		public void IConfirmTheExpirationDateMatchesTheKellyValue()
 		{
 			var pesticideDetailsState = new PesticideDetailsState();
@@ -71,14 +72,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(expirationDate == kellyExpirationDate, "The Expiration Date does not match the value provided by Kelly", "The Expiration correctly matches the value provided by Kelly");
 		}
 
-		[StepDefinition(@"I click the Update Wercs Smart data with EPA data through Kelly Services link")]
+		[RegexStepDefinition(@"I click the Update Wercs Smart data with EPA data through Kelly Services link")]
 		public void IClickTheUpdateWercsSmartDataThroughKellyServicesLink()
 		{
 			var pesticideDetailsState = new PesticideDetailsState();
 			Report.IsTrue(pesticideDetailsState.ClickEpaKellyServicesLink(), "Failed to click the EPA Kelly Services link on the Pesticide State Registration Details page", "Successfully clicked the EPA Kelly Services link on the Pesticide State Registration Details page");
 		}
 
-		[StepDefinition(@"I update each Registration Number with the appended text '-edited'")]
+		[RegexStepDefinition(@"I update each Registration Number with the appended text '-edited'")]
 		public void IEditEachStatePesticideRegNumberWithSuffix()
 		{
 			List<PesticideDetailsState.StatePesticideRegistration> pesticideStateData = new PesticideDetailsState().GetStatePesticideRegistrationDetails();
@@ -95,7 +96,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I check each State Pesticide Registration Number contains the edited suffix")]
+		[RegexStepDefinition(@"I check each State Pesticide Registration Number contains the edited suffix")]
 		public void ICheckEachStatePesticideRegNumberContains()
 		{
 			List<PesticideDetailsState.StatePesticideRegistration> pesticideStateData = new PesticideDetailsState().GetStatePesticideRegistrationDetails();
@@ -134,7 +135,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Every State Pesticide Registrtaion Number in the table was successfully edited");
 		}
 
-		[StepDefinition(@"I confirm that there is data populated in the Expiration Date Column for some States")]
+		[RegexStepDefinition(@"I confirm that there is data populated in the Expiration Date Column for some States")]
 		public void IConfirmDataInExpirationDateColumnPesticideStates()
 		{
 			List<PesticideDetailsState.StatePesticideRegistration> pesticideStateData = new PesticideDetailsState().GetStatePesticideRegistrationDetails();
@@ -145,7 +146,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I confirm the 'Is Kelly Data' field is marked with a check for every State containing data in 'Expiration Date'")]
+		[RegexStepDefinition(@"I confirm the 'Is Kelly Data' field is marked with a check for every State containing data in 'Expiration Date'")]
 		public void IConfirmKellyDataFieldIsCheckedWhenExpirationDateExists()
 		{
 			if (!Context.Contains("Expiration Date States"))
@@ -161,7 +162,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"In the Pesticide Details - State Registration Details page I click 'x' for the following state: (.*)")]
+		[RegexStepDefinition(@"In the Pesticide Details - State Registration Details page I click 'x' for the following state: (.*)")]
 		public void GivenInThePesticideDetails_StateRegistrationDetailsPageIClickForTheFollowingState(string abbrevState)
 		{
 			var Steps = new PesticideDetailsState();
@@ -170,7 +171,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(Steps.ClickYesOrNoForRegistrationDetailsRemoveItemPopup("Yes") == true, "Failed to click the 'x' icon next to state " + abbrevState, "Successfully clicked the 'x' icon next to state " + abbrevState);
 		}
 
-		[StepDefinition(@"I confirm the Expiration Date Provided By Kelly field for state: (.*) is blank")]
+		[RegexStepDefinition(@"I confirm the Expiration Date Provided By Kelly field for state: (.*) is blank")]
 		public void IConfirmTheExpirationDateProvidedByKellyForStateIsBlank(string currentState)
 		{
 			var pesticideDetailsState = new PesticideDetailsState();
@@ -190,7 +191,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"The Expiration Date Provided By Kelly field for state: " + state + " was blank as expected");
 		}
 
-		[StepDefinition(@"I confirm the 'Is Kelly Data' field for State: (.*) (is|is not) checked")]
+		[RegexStepDefinition(@"I confirm the 'Is Kelly Data' field for State: (.*) (is|is not) checked")]
 		public void IConfirmKellyDataIsOrIsNotChecked(string state, string check)
 		{
 			var pesticideDetailsState = new PesticideDetailsState();
@@ -218,7 +219,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Failure("Invalid step parameter! Must be either 'is' or 'is not'");
 		}
 
-		[StepDefinition(@"I confirm the Expiration Date field for state: (.*) is showing the value: (.*)")]
+		[RegexStepDefinition(@"I confirm the Expiration Date field for state: (.*) is showing the value: (.*)")]
 		public void ExpirationDateForStateIsShowingValue(string state, string date)
 		{
 			var pesticideDetailsState = new PesticideDetailsState();
@@ -228,7 +229,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				$"The Expiration Date field for State: '{state}' was showing the value: '{date}' as expected");
 		}
 
-		[StepDefinition(@"I confirm that every date in the Expiration Date column has a matching date in the Expiration Date provided by Kelly column")]
+		[RegexStepDefinition(@"I confirm that every date in the Expiration Date column has a matching date in the Expiration Date provided by Kelly column")]
 		public void ThenIConfirmThatEveryDateInTheExpirationDateColumnHasAMatchingDateInTheExpirationDateProvidedByKellyColumn()
 		{
 			var pesticideDetailsState = new PesticideDetailsState();
@@ -247,7 +248,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I check the State Pesticide Registration Number field matches the text: (.*)")]
+		[RegexStepDefinition(@"I check the State Pesticide Registration Number field matches the text: (.*)")]
 		public void CheckStatePesticideRegistrationNumber(string regNumText)
 		{
 			var pesticideDetailsState = new PesticideDetailsState();
@@ -259,7 +260,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"The State Pesticide Registration Number column matched the expected text: " + regNumText);
 		}
 
-		[StepDefinition(@"I confirm the State Registration EPA table does not contain any Expiration data")]
+		[RegexStepDefinition(@"I confirm the State Registration EPA table does not contain any Expiration data")]
 		public void ConfirmExpirationDataBlankInStateEPATable()
 		{
 			var pesticideDetailsState = new PesticideDetailsState();
@@ -271,7 +272,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"The State Registration EPA table did not contain any Expiration data as expected");
 		}
 
-		[StepDefinition(@"If the current date is after \(MM/DD\): (.*)/(.*) then I confirm no error is shown for the State: (.*) - else I confirm the following error is displayed: (.*)")]
+		[RegexStepDefinition(@"If the current date is after \(MM/DD\): (.*)/(.*) then I confirm no error is shown for the State: (.*) - else I confirm the following error is displayed: (.*)")]
 		public void ConfirmNovemberErrorBasedOnCurrentDate(string month, string day, string state, string error)
 		{
 			var pesticideDetailsState = new PesticideDetailsState();
@@ -300,7 +301,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"If the current date is after \(MM/DD\): (.*)/(.*) then I confirm the error is displayed: 'The expiration date must be a valid future date' - else I confirm that no error is shown and the '(.*)' page has loaded")]
+		[RegexStepDefinition(@"If the current date is after \(MM/DD\): (.*)/(.*) then I confirm the error is displayed: 'The expiration date must be a valid future date' - else I confirm that no error is shown and the '(.*)' page has loaded")]
 		public void IfCurrentDateExceedsEpaDateConfirmError(string month, string day, string page)
 		{
 			int year = DateTime.Now.Year;
@@ -330,7 +331,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I enter the EPA registration date in the current year:")]
+		[RegexStepDefinition(@"I enter the EPA registration date in the current year:")]
 		public void EnterEpaRegistrationDateCurrentYear(Table table)
 		{
 			//'increment year?' set to yes or no depending on whether you want to +1 to the year if the current date is later than the reg date input (which causes an error, as stated by tests)
@@ -390,7 +391,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
-		[StepDefinition(@"I enter the EPA registration date in the next year for state: (.*):")]
+		[RegexStepDefinition(@"I enter the EPA registration date in the next year for state: (.*):")]
 		public void EnterEpaRegistrationDateNextYear(string month, string date, string state, bool addYear = false)
 		{
 			var pesticideDetailsState = new PesticideDetailsState();
@@ -431,7 +432,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
-		[StepDefinition(@"I enter the EPA registration date in the next two years for state: (.*):")]
+		[RegexStepDefinition(@"I enter the EPA registration date in the next two years for state: (.*):")]
 		public void EnterEpaRegistrationDateNextTwoYears(string month, string date, string state, bool addYear = false)
 		{
 			var pesticideDetailsState = new PesticideDetailsState();
@@ -471,7 +472,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I select expiration date \(current year - Not August 31st\) for state: (.*)")]
+		[RegexStepDefinition(@"I select expiration date \(current year - Not August 31st\) for state: (.*)")]
 		public void ExpirationDate_CurrentYear_NotAugust31th(string state)
 		{
 			var table = new Table("State", "Month", "Day", "Increment year?");
@@ -492,7 +493,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			this.EnterEpaRegistrationDateCurrentYear(table);
 		}
 
-		[StepDefinition(@"I select expiration date \(next year - Not August 31st\) for state: (.*)")]
+		[RegexStepDefinition(@"I select expiration date \(next year - Not August 31st\) for state: (.*)")]
 		public void ExpirationDate_NextYear_NotAugust31th(string state)
 		{
 			//looks like this causes and issue if current date (just not be 31 aug and current year;
@@ -510,7 +511,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			this.EnterEpaRegistrationDateNextYear(tomorrowMonth.ToString(), tomorrowDay.ToString(), state);
 		}
 
-		[StepDefinition(@"I select EPA expiration date - enter current year plus (.*):")]
+		[RegexStepDefinition(@"I select EPA expiration date - enter current year plus (.*):")]
 		public void SharedStep_EPAExpirationDate_EnterCurrentYearPlus(string addYear, Table table)
 		{
 			// Click in the EPA Expiration Date box for the state you are working with
@@ -547,7 +548,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 		// enter 'NONE' or 'N/A' if no error is excepted
-		[StepDefinition(@"If the (current|next) year is an (even|odd) number - Confirm that an error shows: (.*)")]
+		[RegexStepDefinition(@"If the (current|next) year is an (even|odd) number - Confirm that an error shows: (.*)")]
 		public void IfCurrentYearIsEvenOddConfirmError(string currentNext, string evenOdd, string error)
 		{
 			if (evenOdd != "even" && evenOdd != "odd")
@@ -586,7 +587,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"If the current year is an (even|odd) number I confirm that no error is displayed and the '(.*)' page has loaded")]
+		[RegexStepDefinition(@"If the current year is an (even|odd) number I confirm that no error is displayed and the '(.*)' page has loaded")]
 		public void IfCurrentYearIsOddIConfirmNoErrorAndPageLoaded(string evenOdd, string page)
 		{
 			if (evenOdd != "even" && evenOdd != "odd")
@@ -605,7 +606,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I set the Expiration Date to be (.*) days from today using the calendar selector for state: (.*)")]
+		[RegexStepDefinition(@"I set the Expiration Date to be (.*) days from today using the calendar selector for state: (.*)")]
 		public void SetExpirationDateForState(string days, string state)
 		{
 			if (!days.All(char.IsDigit))
@@ -621,7 +622,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully set the date to " + days + " from today: " + targetDate.Day + " " + targetDate.Month + " " + targetDate.Year + " with the calendar selector for state: " + state);
 		}
 
-		[StepDefinition(@"I confirm that the EPA table row for state: (.*) is highlighted with the color: (none|orange|yellow)")]
+		[RegexStepDefinition(@"I confirm that the EPA table row for state: (.*) is highlighted with the color: (none|orange|yellow)")]
 		public void EPATableRowHighlight(string state, string colour)
 		{
 			string expectedColourCode;
@@ -648,7 +649,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"The row for state " + state + " was highlighted " + colour + " as expected");
 		}
 
-		[StepDefinition(@"I enter a registration date for the current year that is not March 31st, June 30th, Sept 30th or Dec 31st for state: (.*)")]
+		[RegexStepDefinition(@"I enter a registration date for the current year that is not March 31st, June 30th, Sept 30th or Dec 31st for state: (.*)")]
 		public void EnterRegistrationDate_CurrentYear_NotMarch31NotJune30NotSept30NotDec31(string state)
 		{
 			var table = new Table("State", "Month", "Day", "Increment year?");
@@ -656,7 +657,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			this.EnterEpaRegistrationDateCurrentYear(table);
 		}
 
-		[StepDefinition(@"I enter a registration date for the next year that is not March 31st, June 30th, Sept 30th or Dec 31st for state: (.*)")]
+		[RegexStepDefinition(@"I enter a registration date for the next year that is not March 31st, June 30th, Sept 30th or Dec 31st for state: (.*)")]
 		public void EnterRegistrationDate_NextYear_NotMarch31NotJune30NotSept30NotDec31(string state)
 		{
 			this.EnterEpaRegistrationDateNextYear("8", "1", state);

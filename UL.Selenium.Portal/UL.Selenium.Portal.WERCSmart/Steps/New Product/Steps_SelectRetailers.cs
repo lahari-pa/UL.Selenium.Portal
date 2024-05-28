@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
-using TechTalk.SpecFlow;
+using UL.Automation.ReqnrollHelpers.Classes;
+using Reqnroll;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
@@ -13,8 +14,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 	[Binding, Scope(Tag = "NewProduct")]
 	class StepsSelectRetailers
 	{
-		[StepDefinition(@"I should see the Select Retailers pop up")]
-		[StepDefinition(@"the 'Select Retailers' window appears")]
+		[RegexStepDefinition(@"I should see the Select Retailers pop up")]
+		[RegexStepDefinition(@"the 'Select Retailers' window appears")]
 		public void GivenIShouldSeeTheSelectRetailersPopUp()
 		{
 			var selSelectRetailers = new SelectRetailers();	
@@ -24,13 +25,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
-		[StepDefinition(@"I click the (.*) retailers option in the Select Retailers popup")]
+		[RegexStepDefinition(@"I click the (.*) retailers option in the Select Retailers popup")]
 		public void ClickRetailersOption(string option)
 		{
 			Report.IsTrue(new SelectRetailers().ClickRetailerOption(option) && GeneralUtilities.Wait_for_load_finish(), "Failed to click the retailers option: " + option, "Successfully clicked the retailers option: " + option);
 		}
 
-		[StepDefinition(@"I confirm that retailers are displayed in (list|tile) view with checkboxes next to each")]
+		[RegexStepDefinition(@"I confirm that retailers are displayed in (list|tile) view with checkboxes next to each")]
 		public void ConfirmRetailersAreDisplayedInViewType(string viewType)
 		{
 			Report.IsTrue(new SelectRetailers().RetailersShownInViewType(viewType),
@@ -38,13 +39,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Retailers were shown in " + viewType + " view with checkboxes");
 		}
 
-		[StepDefinition(@"I click Done on Select Retailers window")]
+		[RegexStepDefinition(@"I click Done on Select Retailers window")]
 		public void IClickDoneButtonOnSelectRetailersWindow()
 		{
 			Report.IsTrue(new SelectRetailers().ClickDone(), "Failed to click Done button.", "Successfully clicked Done button.");
 		}
 
-		[StepDefinition(@"I select the following retailers in the Select Retailers popup list view:")]
+		[RegexStepDefinition(@"I select the following retailers in the Select Retailers popup list view:")]
 		public void SelectRetailersInListView(Table retailers)
 		{
 			var retailersToSelect = new List<string>();
@@ -86,20 +87,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
-		[StepDefinition(@"I click Done in the Select Retailers popup")]
+		[RegexStepDefinition(@"I click Done in the Select Retailers popup")]
 		public void ClickDone()
 		{
 			Report.IsTrue(new SelectRetailers().ClickDone(), "Failed to click Done in the Select Retailers pop up!", "Successfully clicked Done in the Select Retailers pop up");
 		}
 
-		[StepDefinition(@"I click Close in the Select Retailers popup")]
+		[RegexStepDefinition(@"I click Close in the Select Retailers popup")]
 		public void ClickClose()
 		{
 			var selectRetailers = new SelectRetailers();
 			Report.IsTrue(selectRetailers.ClickClose(), "Failed to click 'Close' in the select retailers window", "Successfully clicked 'Close' in the select retailers window");
 		}
 
-		[StepDefinition(@"all retailers are selected in the Select Retailers window")]
+		[RegexStepDefinition(@"all retailers are selected in the Select Retailers window")]
 		public void AllRetailersAreSelectedInSelectRetailersWindow()
 		{
 			var selSelectRetailers = new SelectRetailers();
@@ -108,7 +109,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"All retailers were selected as expected");
 		}
 
-		[StepDefinition(@"I save all retailers in the Select Retailers window in alphabetical order as: (.*)")]
+		[RegexStepDefinition(@"I save all retailers in the Select Retailers window in alphabetical order as: (.*)")]
 		public void SaveAllRetailersInSelectRetailersWindowAlphabetical(string savedAs)
 		{
 			var selSelectRetailers = new SelectRetailers();
@@ -116,7 +117,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Context.AddToContext(savedAs, allRetailers);
 		}
 
-		[StepDefinition(@"In the 'Select Retailers' window I select the retailer: (.*)")]
+		[RegexStepDefinition(@"In the 'Select Retailers' window I select the retailer: (.*)")]
 		public void SelectTheRetailer(string retailer)
 		{
 			var selectRetailers = new SelectRetailers();			
@@ -147,7 +148,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(selectRetailers.ClickDone(), "Failed to click the 'Done' button!", "Successfully clicked the 'Done' button");
 		}
 
-		[StepDefinition(@"I confirm that (.*) is listed as a retailer on the Select Retailers pop up")]
+		[RegexStepDefinition(@"I confirm that (.*) is listed as a retailer on the Select Retailers pop up")]
 		public void ConfirmXIsListedAsARetailer(string retailer)
 		{
 			Report.IsTrue(new SelectRetailers().GetListOfRetailers().Contains(retailer),
@@ -155,7 +156,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 		// Added 'should only' parameter to check an exclusive list of Retailers
-		[StepDefinition(@"In the 'Select retailers' window I (should|should only|should not) see the following retailers:")]
+		[RegexStepDefinition(@"In the 'Select retailers' window I (should|should only|should not) see the following retailers:")]
 		public void ConfirmDislayedRetailers(string should, Table expected)
 		{
 
@@ -209,7 +210,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		}
 
-		[StepDefinition(@"I check that Walmart and all of its affiliates are not available")]
+		[RegexStepDefinition(@"I check that Walmart and all of its affiliates are not available")]
 		public void GivenICheckThatWalmartAndAllOfItsAffiliatesAreNotAvailable()
 		{
 			List<string> retailerList = new SelectRetailers().GetListOfRetailers();
@@ -230,7 +231,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"Successfully clicked 'Done' in the Select Retailers window");
 		}
 
-		[StepDefinition(@"I select all retails in Retailers page table view")]
+		[RegexStepDefinition(@"I select all retails in Retailers page table view")]
 		public void GivenISelectAllRetailsInRetailersPageTableView()
 		{
 			Retailer newRetailerObject = new Retailer();
@@ -240,7 +241,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
-		[StepDefinition(@"I confirm the following retailers are selected in the Select Retailers window")]
+		[RegexStepDefinition(@"I confirm the following retailers are selected in the Select Retailers window")]
 		public void ConfirmSelectedRetailers(Table retailers)
 		{
 			var selSelectRetailers = new SelectRetailers();
@@ -252,14 +253,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				"All of the expected retailers were selected");
 		}
 
-		[StepDefinition(@"I confirm that the product names from the drop down for: (.*) for (.*) appear in alphabetical order")]
+		[RegexStepDefinition(@"I confirm that the product names from the drop down for: (.*) for (.*) appear in alphabetical order")]
 		public void ThenIConfirmThatTheProductNamesFromTheDropDownForAppearInAlphabeticalOrder(string dropDownTitle, string retailer)
 		{
 			var retailerObject = new Retailer();
 			Report.IsTrue(retailerObject.ConfirmDropDownOptionsAreInAlphabeticalOrderForRetailer(dropDownTitle, retailer), "Drop down options were not in alphabetical order", "Drop down options were in alphabetical order");
 		}
 
-		[StepDefinition(@"The following retailers in the Select Retailers popup list view (should|should not) be selected")]
+		[RegexStepDefinition(@"The following retailers in the Select Retailers popup list view (should|should not) be selected")]
 		public void ThenTheFollowingRetailersInTheSelectRetailersPopupListViewShouldBeSelected(string shouldOrShouldNot, Table table)
 		{
 			var retailerObject = new Retailer();
@@ -275,14 +276,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
-		[StepDefinition(@"I click the delete icon in the Retailer page")]
+		[RegexStepDefinition(@"I click the delete icon in the Retailer page")]
 		public void ThenIClickTheDeleteIconInTheRetailerPage()
 		{
 			var retailerObject = new Retailer();
 			Report.IsTrue(retailerObject.SelectTheDeleteSelectedRetailersButton(), "Failed to select the delete selected retailers button", "Successfully selected the delete selected retailers button");
 		}
 
-		[StepDefinition(@"I check the checkbox Registration is for a Single Retail Recipient \(No Retailer \+1\) and will use Single-Retail Subscription program")]
+		[RegexStepDefinition(@"I check the checkbox Registration is for a Single Retail Recipient \(No Retailer \+1\) and will use Single-Retail Subscription program")]
 		public void ThenICheckTheCheckboxRegistrationIsForASingleRetailRecipientNoRetailerAndWillUseSingle_RetailSubscriptionProgram()
 		{
 			var retailerObject = new Retailer();
@@ -290,13 +291,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 
-		[StepDefinition(@"I select the following retailers in the Retailer page")]
+		[RegexStepDefinition(@"I select the following retailers in the Retailer page")]
 		public void ThenISelectTheFollowingRetailersInTheRetailerPage(Table table)
 		{
 			var retailerObject = new Retailer();
 			Report.IsTrue(retailerObject.SelectTheFollowingRetailersInTheRetailersPage(table), "Failed to select the following retailers", "Successfully selected the following retailers");
 		}
-		[StepDefinition(@"I Confirm that on the top right corner the Select All option is (available|NOT available)")]
+		[RegexStepDefinition(@"I Confirm that on the top right corner the Select All option is (available|NOT available)")]
 		public void IConfirmSelectAllOptionIstAvailable(string availableNotAvailable)
 		{
 			var selSelectRetailers = new SelectRetailers();
@@ -304,7 +305,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(selSelectRetailers.SelectAllDisplayed() == value, $"Failure, Select All option {(value ? "Not available" : "available")} and should be {availableNotAvailable}", $"Success, Select All option {availableNotAvailable}");
 		}
 
-		[StepDefinition(@"I confirm when I select the retailer: (.*) the retailers cannot be selected, checkboxes appear grayed out with red crossed out circle")]
+		[RegexStepDefinition(@"I confirm when I select the retailer: (.*) the retailers cannot be selected, checkboxes appear grayed out with red crossed out circle")]
 		public void IConfirmRetailerCannotBeSelected(string retailer)
 		{
 			var selectRetailers = new SelectRetailers();
@@ -312,14 +313,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 		
-		[StepDefinition(@"I click the single retailer checkbox")]
+		[RegexStepDefinition(@"I click the single retailer checkbox")]
 		public void ClickTheSingleRetailerCheckbox()
 		{
 			var retailerObject = new Retailer();
 			Report.IsTrue(retailerObject.ClickSingleRetailerCheckbox(), "Failed to click the Single Retailer checkbox", "Successfully clicked the Single Retailer checkbox");
 		}
 
-		[StepDefinition(@"I confirm if the single retailer checkbox (is|is not) selected")]
+		[RegexStepDefinition(@"I confirm if the single retailer checkbox (is|is not) selected")]
 		public void ConfirmIfSingleRetailerCheckboxisSelected(string is_isnot)
 		{
 			var retailer = new Retailer();
@@ -327,7 +328,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(retailer.CheckSingleRetailerCheckboxSelected() == expected, $"Failure, Single retailer checkbox {(expected?"is not":"is")} selected", $"Success, Single retailer checkbox {is_isnot} selected");
 
 		}
-		[StepDefinition(@"I confirm if the Single Retailer Checkbox is (selected|not selected)")]
+		[RegexStepDefinition(@"I confirm if the Single Retailer Checkbox is (selected|not selected)")]
 		public void ConfirmSingleRetailerCheckboxisSelected(string condition)
 		{
 			var retailer = new Retailer();
@@ -343,21 +344,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[StepDefinition(@"I confirm if the single retailer checkbox is displayed on the retailer page")]
+		[RegexStepDefinition(@"I confirm if the single retailer checkbox is displayed on the retailer page")]
 		public void ConfirmIfSingleRetailerCheckboxIsDisplayed()
 		{
 			var retailer = new Retailer();
 			Report.IsTrue(retailer.ConfirmSingleRetailerCheckboxDisplayed(), "The single retailer checkbox was not displayed on the page!", "The single retailer checkbox displayed on the page");
 		}
 
-		[StepDefinition(@"I confirm the message on retailers page : (.*)")]
+		[RegexStepDefinition(@"I confirm the message on retailers page : (.*)")]
 		public void ICheckThatTheDescriptionTextOnTheSupplierReportsPageIsCorrect(string expectedText)
 		{
 			var retailerObject = new Retailer();
 			Report.IsTrue(retailerObject.HoverOverText(expectedText), "The expected text did not match the actual text", "The expected text did match the actual text");
 		}
 
-		[StepDefinition(@"I confirm if the single retailer checkbox is (enabled|disabled)")]
+		[RegexStepDefinition(@"I confirm if the single retailer checkbox is (enabled|disabled)")]
 		public void ConfirmIfSingleRetailerCheckboxIsEnabled(string enabledDisabled)
 		{
 			var retailerObject = new Retailer();
@@ -365,7 +366,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(retailerObject.SubscriptionCheckboxEnbable() == value, $"Failure, check box is {enabledDisabled} when it should {(value ? "enabled" : "disabled")}.", $"Success, checkbox is {enabledDisabled}.");
 		}
 
-		[StepDefinition(@"I confirm the checkbox (.*) is (present|not present) for stand alone batteries in Retailer page")]
+		[RegexStepDefinition(@"I confirm the checkbox (.*) is (present|not present) for stand alone batteries in Retailer page")]
 		public void ThenIConfirmNoRetailerRegistrationCheckbox(string value, string presentNotPresent)
 		{
 			var retailerObject = new Retailer();
@@ -373,7 +374,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(retailerObject.ConfirmRetailerRegistrationCheckbox(value) == status, $"Failed to confirm the checkbox is {presentNotPresent}.", $"Successfully confirmed that the checkbox is {presentNotPresent}.");
 		}
 
-		[StepDefinition(@"I select the following retailers in the Select Retailers popup list view and check no more retailers can be selected:")]
+		[RegexStepDefinition(@"I select the following retailers in the Select Retailers popup list view and check no more retailers can be selected:")]
 		public void ThenInTheWindowICheckOnlyOneRetailerCanBeSelected(Table retailers)
 		{
 			var selSelectRetailers = new SelectRetailers();

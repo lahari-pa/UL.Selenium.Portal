@@ -3,8 +3,9 @@ using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
-using TechTalk.SpecFlow;
+using Reqnroll;
 using UL.Automation.Reporting;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -13,9 +14,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	public class StepsLandingPage
 	{
 
-		[StepDefinition(@"I go to the WERCSmart Log in")]
-		[StepDefinition(@"I click the login button")]
-		[StepDefinition(@"\[WERCSmart] I go to the WERCSmart Log in")]
+		[RegexStepDefinition(@"I go to the WERCSmart Log in")]
+		[RegexStepDefinition(@"I click the login button")]
+		[RegexStepDefinition(@"\[WERCSmart] I go to the WERCSmart Log in")]
 		public void ClickTheLoginButton()
 		{
 			Report.Info("Beginning to click the Login button");
@@ -29,19 +30,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(selHomepage.Click_Login(), "Failed to click Log In", "Successfully clicked Log In");
 		}
 
-		[StepDefinition(@"I select the Sign Up link")]
+		[RegexStepDefinition(@"I select the Sign Up link")]
 		public void ClickSignUpLink()
 		{
 			Report.IsTrue(new LandingPage().Click_SignUp(), "Failed to click Sign Up", "Successfully clicked Sign Up");
 		}
 
-		[StepDefinition(@"the login page should (appear|dissappear)")]
+		[RegexStepDefinition(@"the login page should (appear|dissappear)")]
 		public void LoginPageAppears(string appear)
 		{
 			Report.IsTrue(new Login().WaitForContainerToBeVisible() == (appear == "appear"), "Login page did not " + appear + "!", "Login page " + appear + "ed successfully!");
 		}
 
-		[StepDefinition("I click outside of the login popup")]
+		[RegexStepDefinition("I click outside of the login popup")]
 		public void ClickOutisdeOfLoginPopup()
 		{
 			Report.Info("Clicking outside of the login popup");
@@ -50,7 +51,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I should see the following menu options in the header:")]
+		[RegexStepDefinition(@"I should see the following menu options in the header:")]
 		public void NavigationOptionShowing(Table expected)
 		{
 			System.Collections.Generic.List<string> optionsAvailable = new LandingPage().NavigationOptionsAvailable();
@@ -64,7 +65,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I select the (Manufacturers|Retailers|Subscription) link")]
+		[RegexStepDefinition(@"I select the (Manufacturers|Retailers|Subscription) link")]
 		public void SelectNavigationOption(string option)
 		{
 			Report.IsTrue(new LandingPage().SelectOption(option),
@@ -72,7 +73,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully selected option: " + option + "!");
 		}
 
-		[StepDefinition(@"I confirm I am taken to the (Manufacturers|Retailers|Subscription) page")]
+		[RegexStepDefinition(@"I confirm I am taken to the (Manufacturers|Retailers|Subscription) page")]
 		public void ConfirmNavigation(string option)
 		{
 			switch (option)
@@ -95,25 +96,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"the landing page should load")]
+		[RegexStepDefinition(@"the landing page should load")]
 		public void LandingPageLoads()
 		{
 			Report.IsTrue(new LandingPage().WaitForContainerToBeVisible(), "Landing page did not load!", "Landing page loaded successfully!");
 		}
 
-		[StepDefinition(@"I click the Get Started Now link")]
+		[RegexStepDefinition(@"I click the Get Started Now link")]
 		public void ClickGetStartedNow()
 		{
 			var selLandingPageFooter = new LandingPageFooter();
 			Report.IsTrue(selLandingPageFooter.ClickGetStartedNow(), "Failed to click Get Started Now", "Successfully clicked Get Started Now");
 		}
-		[StepDefinition(@"I click the Terms of Use link in the Landing Page footer")]
+		[RegexStepDefinition(@"I click the Terms of Use link in the Landing Page footer")]
 		public void ClickTermsOfUse()
 		{
 			Report.IsTrue(new LandingPageFooter().ClickTermsOfUse(), "Failed to click Terms of Use", "Successfully clicked Terms of Use");
 		}
 
-		[StepDefinition(@"I confirm the WERCSmart Terms of Use page has loaded")]
+		[RegexStepDefinition(@"I confirm the WERCSmart Terms of Use page has loaded")]
 		public void TermsOfUsePageHasLoaded()
 		{
 			Report.IsTrue(SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h1[contains(text(),'Terms of Use')]"), 30) != null,
@@ -121,7 +122,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The WERCSmart Terms of Use Page loaded as expected");
 		}
 
-		[StepDefinition("I Check The landing page has loaded, and report if an Alert and Inactivity Prompt are open if it is not loaded")]
+		[RegexStepDefinition("I Check The landing page has loaded, and report if an Alert and Inactivity Prompt are open if it is not loaded")]
 		public void ICheckTheLandinPageHasLoadedAndReportIfNot()
 		{
 			ReportSettings.UseSubSteps = true;

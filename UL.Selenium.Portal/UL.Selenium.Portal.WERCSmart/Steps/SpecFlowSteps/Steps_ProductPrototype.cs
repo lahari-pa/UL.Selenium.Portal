@@ -5,13 +5,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
+using Reqnroll;
+using Reqnroll.Assist;
 using UL.Automation.Reporting;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.SpecFlow.Classes;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.TReVor.Classes;
 using UL.Automation.Utilities.Functions;
 using UL.Selenium.Portal.WERCSmart.Classes;
@@ -29,6 +29,7 @@ using System.Drawing.Imaging;
 using BoDi;
 using System.Drawing;
 using System.Reflection;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.Utilities;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
@@ -36,7 +37,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 	[Binding, Scope(Tag = "Steps_ProductPrototype")]
 	class Steps_ProductPrototype
 	{
-		[StepDefinition(@"In section: (.*), set select option: (.*)")]
+		[RegexStepDefinition(@"In section: (.*), set select option: (.*)")]
 		public void InSectionSetOption(string section, string option)
 		{
 			ProductPrototype productPrototype = new ProductPrototype(section);
@@ -48,7 +49,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 				}
 			}
 		}
-		[StepDefinition(@"In section: (.*), verify option: (.*) (is|is not) displayed")]
+		[RegexStepDefinition(@"In section: (.*), verify option: (.*) (is|is not) displayed")]
 		public void InSectionVerifyOption(string section, string option, string is_isnot)
 		{
 			bool expected = is_isnot == "is";
@@ -59,7 +60,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			}
 		}
 
-		[StepDefinition(@"In section: (.*), set option: (.*) so it (is|is not) selected")]
+		[RegexStepDefinition(@"In section: (.*), set option: (.*) so it (is|is not) selected")]
 		public void InSectionSetOptionIsIsNotSelected(string section, string option, string is_isnot)
 		{
 			bool expected = is_isnot == "is";
@@ -73,7 +74,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			}
 		}
 
-		[StepDefinition(@"In section: (.*), confirm option: (.*) (is|is not) selected")]
+		[RegexStepDefinition(@"In section: (.*), confirm option: (.*) (is|is not) selected")]
 		public void InSectionConfirmOptionIsIsNotSelected(string section, string option, string is_isnot)
 		{
 			bool expected = is_isnot == "is";
@@ -87,7 +88,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			}
 		}
 
-		[StepDefinition(@"In section: (.*), enter text: (.*)")]
+		[RegexStepDefinition(@"In section: (.*), enter text: (.*)")]
 		public void InSectionEnterText(string section, string text)
 		{
 			ProductPrototype productPrototype = new ProductPrototype(section);
@@ -100,7 +101,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			}
 		}
 
-		[StepDefinition(@"In section: (.*), confirm text: (.*) (is|is not) displayed")]
+		[RegexStepDefinition(@"In section: (.*), confirm text: (.*) (is|is not) displayed")]
 		public void InSectionConfirmTextIsIsNotDisplayed(string section, string text, string is_isnot)
 		{
 			bool expected = is_isnot == "is";
@@ -114,7 +115,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			}
 		}
 
-		[StepDefinition(@"In section: (.*), click search text box")]
+		[RegexStepDefinition(@"In section: (.*), click search text box")]
 		public void InSectionClickSearchText(string section)
 		{
 			ProductPrototype productPrototype = new ProductPrototype(section);
@@ -125,7 +126,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			Report.IsTrue(searchBoxPrototype.SearchInputExists(), $"Failure, search input box does not exist.", $"Success, search input box exists.");
 		}
 
-		[StepDefinition(@"In search input pop-up, enter text: (.*)")]
+		[RegexStepDefinition(@"In search input pop-up, enter text: (.*)")]
 		public void InSearchPopUpEnterText(string searchText)
 		{
 			SearchBoxPrototype searchBoxPrototype = new SearchBoxPrototype();
@@ -133,7 +134,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			Report.IsTrue(searchBoxPrototype.SearchInputEnterText(searchText),$"Failure, failed to enter '{searchText}' in search input box.",$"Success, entered '{searchText}' in search input box.");
 		}
 
-		[StepDefinition(@"In search input pop-up, search alert '(.*)' (is|is not) displayed")]
+		[RegexStepDefinition(@"In search input pop-up, search alert '(.*)' (is|is not) displayed")]
 		public void InSearchPopUpAlertIsIsNotDisplayed(string alertText, string is_isnot)
 		{
 			SearchBoxPrototype searchBoxPrototype = new SearchBoxPrototype();
@@ -142,7 +143,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			Report.IsTrue(searchBoxPrototype.SearchResultAlertExists(alertText) == expected, $"Failure, failed to confirm search alert '{alertText}' {is_isnot} displayed.", $"Success, confirmed search alert '{alertText}' {is_isnot} displayed.");
 		}
 
-		[StepDefinition(@"In the search input pop-up, '(.*)' search result (is|is not) displayed")]
+		[RegexStepDefinition(@"In the search input pop-up, '(.*)' search result (is|is not) displayed")]
 		public void InSearchPopUpResultIsIsNotDisplayed(string searchText, string is_isnot)
 		{
 			SearchBoxPrototype searchBoxPrototype = new SearchBoxPrototype();
@@ -151,7 +152,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			Report.IsTrue(searchBoxPrototype.SearchResultTextExists(searchText) == expected, $"Failure, '{searchText}' search result {(expected?"is not":"is")} displayed.", $"Success, '{searchText}' search result {is_isnot} displayed.");
 		}
 
-		[StepDefinition(@"In the search input pop-up, search and select: (.*)")]
+		[RegexStepDefinition(@"In the search input pop-up, search and select: (.*)")]
 		public void InSearchPopUpSearchAndSelect(string searchText)
 		{
 			SearchBoxPrototype searchBoxPrototype = new SearchBoxPrototype();
@@ -163,7 +164,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			searchBoxPrototype.WaitForContainerToBeInvisible();
 		}
 
-		[StepDefinition(@"In section (.*), error message '(.*)' (is|is not) displayed")]
+		[RegexStepDefinition(@"In section (.*), error message '(.*)' (is|is not) displayed")]
 		public void InSectionErrorMessageIsIsNotDisplayed(string section, string errorMessage, string is_isnot)
 		{
 			ProductPrototype productPrototype = new ProductPrototype(section);
@@ -173,7 +174,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 				Report.IsTrue(productPrototype.ErrorMessageExists(errorMessage) == expected, $"Failure, '{errorMessage}' error message {(expected ? "is not" : "is")} displayed.", $"Success, '{errorMessage}' error message {is_isnot} displayed.");
 			}
 		}
-		[StepDefinition(@"The (.*) question (is|is not) displayed")]
+		[RegexStepDefinition(@"The (.*) question (is|is not) displayed")]
 		public void ThenInThePageIShouldOrShouldNotSeeQuestion(string question, string is_isnot)
 		{
 			bool expected = is_isnot == "is";
@@ -181,7 +182,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 				$"Failure, question {question} {(expected ? "is not" : "is")} displayed", $"Success, question {question} {is_isnot} displayed.");
 		}
 
-		[StepDefinition(@"Expand the (.*) panel")]
+		[RegexStepDefinition(@"Expand the (.*) panel")]
 		public void ExpandPanel(string panelLabel)
 		{
 			PanelPrototype panelPrototype = new PanelPrototype(panelLabel);

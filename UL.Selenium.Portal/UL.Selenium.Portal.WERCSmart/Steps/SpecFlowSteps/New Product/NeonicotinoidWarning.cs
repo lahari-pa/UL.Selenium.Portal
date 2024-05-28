@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TechTalk.SpecFlow;
+using Reqnroll;
+using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 {
 	[Binding, Scope(Tag = "Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:NeonicotinoidWarning")]
 	class WERCSmart_Distributor_NewProducts_ProductCharacteristics_NeonicotinoidWarning
 	{
-		[StepDefinition(@"In the Neonicotinoid Warning Section, warning message (should|should not) be displayed")]
+		[RegexStepDefinition(@"In the Neonicotinoid Warning Section, warning message (should|should not) be displayed")]
 		public void NeonicotinoidWarningMessage(string condition)
 		{
 			string title = "Danger & Warning";

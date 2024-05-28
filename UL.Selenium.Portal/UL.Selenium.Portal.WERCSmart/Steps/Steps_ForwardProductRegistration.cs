@@ -4,12 +4,13 @@ using System.Linq;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
-using TechTalk.SpecFlow;
+using UL.Automation.ReqnrollHelpers.Classes;
+using Reqnroll;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using System.Text.RegularExpressions;
 using UL.Automation.Reporting;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -21,7 +22,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		/// This is to verify the title of the page
 		/// </summary>
 		/// <param name="headerExpected"></param>
-		[StepDefinition(@"I should see the header: (.*) on the Forward Product Registration window")]
+		[RegexStepDefinition(@"I should see the header: (.*) on the Forward Product Registration window")]
 		public void CorrectHeaderShowing(string headerExpected)
 		{
 			GeneralUtilities.Wait_for_load_finish();
@@ -38,7 +39,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		/// This is to verify sub header 3 which is Select Retailers
 		/// </summary>
 		/// <param name="subheaderExpected"></param>
-		[StepDefinition(@"I should see the subheading 3: (.*) on the Forward Product Registration window")]
+		[RegexStepDefinition(@"I should see the subheading 3: (.*) on the Forward Product Registration window")]
 		public void CorrectSubHeader3Showing(string subheaderExpected)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - Forward Product Registration window should appear");
@@ -64,7 +65,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		/// This is to verify sub header 4 which is You most recently did business with
 		/// </summary>
 		/// <param name="subheaderExpected"></param>
-		[StepDefinition(@"I should see the subheading 4: (.*) on the Forward Product Registration window")]
+		[RegexStepDefinition(@"I should see the subheading 4: (.*) on the Forward Product Registration window")]
 		public void CorrectSubHeader4Showing(string subheaderExpected)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - Forward Product Registration window should appear");
@@ -86,7 +87,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I should be sent to the Product Registration page with retailers list displayed")]
+		[RegexStepDefinition(@"I should be sent to the Product Registration page with retailers list displayed")]
 		public void ThenIShouldBeSentToTheProductRegistrationPageWithRetailersListDisplayed()
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - Forward Product Registration window should appear");
@@ -106,7 +107,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I enter the text: (.*) in the 'Search by WPS ID or Product Name' field")]
+		[RegexStepDefinition(@"I enter the text: (.*) in the 'Search by WPS ID or Product Name' field")]
 		public void EnterTextInSearchByIDOrProductNameField(string value)
 		{
 			if (value.ToLower().Contains("saved as"))
@@ -126,7 +127,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(5);
 		}
 
-		[StepDefinition(@"I click continue on the Forward Product Registration page")]
+		[RegexStepDefinition(@"I click continue on the Forward Product Registration page")]
 		public void ClickContinueForwardProductRegistration()
 		{
 			Delay.Seconds(3);
@@ -135,7 +136,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to click continue", "Successfully clicked continue");
 		}
 
-		[StepDefinition(@"I click Home on the Forward Product Registration Purchase Summary page")]
+		[RegexStepDefinition(@"I click Home on the Forward Product Registration Purchase Summary page")]
 		public void ClickHomeForwardProductRegistrationPurchaseSummaryScreen()
 		{
 			Delay.Seconds(3);
@@ -145,7 +146,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I select the first product under the Select Products tab")]
+		[RegexStepDefinition(@"I select the first product under the Select Products tab")]
 		public void SelectTheFirstProduct()
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
@@ -155,7 +156,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(2);
 		}
 
-		[StepDefinition(@"I select the first product under the Select UPCs tab")]
+		[RegexStepDefinition(@"I select the first product under the Select UPCs tab")]
 		public void SelectTheFirstProductSelectUPCs()
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
@@ -165,7 +166,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(1);
 		}
 
-		[StepDefinition(@"In Forward Product Registration, I ensure that the Select UPCs table has a Transportation column")]
+		[RegexStepDefinition(@"In Forward Product Registration, I ensure that the Select UPCs table has a Transportation column")]
 		public void IEnsureThatTheSelectUPCsTableHasATransportationColumn()
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
@@ -173,7 +174,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully found Transportation column in Select UPCs table");
 		}
 
-		[StepDefinition(@"In Forward Product Registration, I ensure that (DOT|IATA|IMDG|TDG) is listed as (Shipping fully regulated|Shipping with limited quantity|Shipping with consumer commodity)")]
+		[RegexStepDefinition(@"In Forward Product Registration, I ensure that (DOT|IATA|IMDG|TDG) is listed as (Shipping fully regulated|Shipping with limited quantity|Shipping with consumer commodity)")]
 		public void IEnsureThatOptionIsListedAtLevel(string option, string level)
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
@@ -181,7 +182,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully found option " + option + " listed at level " + level + ".");
 		}
 
-		[StepDefinition(@"in the Select Retailers tab under Forward Product Registration I select the retailer: (.*)")]
+		[RegexStepDefinition(@"in the Select Retailers tab under Forward Product Registration I select the retailer: (.*)")]
 		public void SelectRetailer(string retailer)
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
@@ -190,7 +191,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully selected retailer: " + retailer);
 		}
 
-		[StepDefinition(@"I confirm that all Walmart affiliate retail parters are selected")]
+		[RegexStepDefinition(@"I confirm that all Walmart affiliate retail parters are selected")]
 		public void AllWalmartAffiliatesSelected()
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
@@ -199,7 +200,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"All Walart affiliate partners were selected");
 		}
 
-		[StepDefinition(@"I confirm the active Forward Product Registration tab is: (.*)")]
+		[RegexStepDefinition(@"I confirm the active Forward Product Registration tab is: (.*)")]
 		public void ActiveTabIsCorrect(string expectedTab)
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
@@ -215,7 +216,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The actual active tab matched the expected tab: " + actualTab);
 		}
 
-		[StepDefinition(@"I select the Vendor option: (.*) for the first product displayed under the Select UPCs tab")]
+		[RegexStepDefinition(@"I select the Vendor option: (.*) for the first product displayed under the Select UPCs tab")]
 		public void SelectVendor(string value)
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
@@ -228,7 +229,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully selected vendor: " + value);
 		}
 
-		[StepDefinition(@"I select the first UPC in the grid under the Select UPCs tab")]
+		[RegexStepDefinition(@"I select the first UPC in the grid under the Select UPCs tab")]
 		public void SelectFirstUPC()
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
@@ -237,7 +238,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully selected the first UPC");
 		}
 
-		[StepDefinition(@"I select Edit for the first UPC in Select UPCs tab")]
+		[RegexStepDefinition(@"I select Edit for the first UPC in Select UPCs tab")]
 		public void SelectEditForFirstUPC()
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
@@ -246,7 +247,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully selected Edit for the first UPC");
 		}
 
-		[StepDefinition(@"I confirm that Package Type is not shown")]
+		[RegexStepDefinition(@"I confirm that Package Type is not shown")]
 		public void ConfirmPackageTypeNotShown()
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
@@ -255,14 +256,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The Package Type is correctly not shown.");
 		}
 
-		[StepDefinition(@"I confirm that Product name error message shown")]
+		[RegexStepDefinition(@"I confirm that Product name error message shown")]
 		public void ProductNameEnterTextData(string text)
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
 			selForwardProdReg.ProductNameEnterText(text);
 		}
 
-		[StepDefinition(@"I confirm that Transportation is shown")]
+		[RegexStepDefinition(@"I confirm that Transportation is shown")]
 		public void ConfirmTransportationShown()
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
@@ -271,7 +272,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Transportation successfully found.");
 		}
 
-		[StepDefinition(@"In the Forwarding Edit popup, I confirm that (DOT|IATA|IMDG|TDG) is listed at (Shipping with limited quantity|Shipping with consumer commodity|Shipping fully regulated)")]
+		[RegexStepDefinition(@"In the Forwarding Edit popup, I confirm that (DOT|IATA|IMDG|TDG) is listed at (Shipping with limited quantity|Shipping with consumer commodity|Shipping fully regulated)")]
 		public void InTheForwardingEditPopupIConfirmThatOptionisListedatLevel(string option, string level)
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
@@ -279,7 +280,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Option " + option + " successfully found at level " + level + ".");
 		}
 
-		[StepDefinition(@"In the Forwarding Edit popup, I confirm that I cannot downgrade (DOT|IATA|IMDG|TDG) to (Shipping with limited quantity|Shipping fully regulated|Shipping with consumer commodity)")]
+		[RegexStepDefinition(@"In the Forwarding Edit popup, I confirm that I cannot downgrade (DOT|IATA|IMDG|TDG) to (Shipping with limited quantity|Shipping fully regulated|Shipping with consumer commodity)")]
 		public void InTheForwardingEditPopupIConfirmThatICannotDowngradeOptionToLevel(string option, string level)
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
@@ -287,7 +288,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Success. Option " + option + " cannot be downgraded to level " + level + ".");
 		}
 
-		[StepDefinition(@"In the Forwarding Edit popup, I upgrade (DOT|IATA|IMDG|TDG) to (Shipping with limited quantity|Shipping fully regulated|Shipping with consumer commodity)")]
+		[RegexStepDefinition(@"In the Forwarding Edit popup, I upgrade (DOT|IATA|IMDG|TDG) to (Shipping with limited quantity|Shipping fully regulated|Shipping with consumer commodity)")]
 		public void InTheForwardingEditPopupIUpgradeOptionToLevel(string option, string level)
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
@@ -295,7 +296,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully upgraded option " + option + " to level " + level + ".");
 		}
 
-		[StepDefinition(@"I click Save in the Edit UPC popup in Forwarding")]
+		[RegexStepDefinition(@"I click Save in the Edit UPC popup in Forwarding")]
 		public void AndIClickSaveInTheEditUPCPopupInFowarding()
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
@@ -303,7 +304,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked save in the Edit UPC popup in Forwarding.");
 		}
 
-		[StepDefinition(@"In the Forwarding Edit popup, I set the size \(ounces\) attribute to (.*)")]
+		[RegexStepDefinition(@"In the Forwarding Edit popup, I set the size \(ounces\) attribute to (.*)")]
 		public void InTheForwardingEditPopupISetTheSizeAttributeTo(string value)
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
@@ -311,13 +312,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully set the size attribute for the UPC");
 		}
 
-		[StepDefinition(@"I click the 'select all' UPCs checkbox")]
+		[RegexStepDefinition(@"I click the 'select all' UPCs checkbox")]
 		public void ClickSelectAllUpcsCheckbox()
 		{
 			Report.IsTrue(new ForwardProductRegistration().ClickSelectAllUpcs, "Failed to click select all UPCs", "Clicked select all UPCs");
 		}
 
-		[StepDefinition(@"I confirm that: (.*) is displayed in the Destination Retailers column under Select UPCs")]
+		[RegexStepDefinition(@"I confirm that: (.*) is displayed in the Destination Retailers column under Select UPCs")]
 		public void ConfirmDestinationRetailersColumnSelectUPCs(string value)
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
@@ -339,7 +340,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I confirm that: (.*) is displayed in the Destination Retailers column under Product Results")]
+		[RegexStepDefinition(@"I confirm that: (.*) is displayed in the Destination Retailers column under Product Results")]
 		public void ConfirmDestinationRetailersColumnProductResults(string value)
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
@@ -361,7 +362,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I confirm that the product checkbox is disabled while the page is working")]
+		[RegexStepDefinition(@"I confirm that the product checkbox is disabled while the page is working")]
 		public void ConfirmProductCheckboxIsDisabledWhilePageIsWorking()
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
@@ -399,7 +400,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			// test case : confirm the right hand side is disabled while the page is working. I can't verify this manually..
 		}
 
-		[StepDefinition(@"I save first selectable Product ID as: (.*) under the Select Products tab")]
+		[RegexStepDefinition(@"I save first selectable Product ID as: (.*) under the Select Products tab")]
 		public void SaveSelectableProductID(string savedAs)
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
@@ -413,7 +414,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(savedAs, id);
 		}
 
-		[StepDefinition(@"I select the product with ID saved as: (.*) under the Select Products tab")]
+		[RegexStepDefinition(@"I select the product with ID saved as: (.*) under the Select Products tab")]
 		public void SelectProductByIDSavedAs(string savedAs)
 		{
 
@@ -505,7 +506,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I select the product saved as: (.*) under the Select Products tab")]
+		[RegexStepDefinition(@"I select the product saved as: (.*) under the Select Products tab")]
 		public void ISelectTheProductSavedAsUnderSelectProducts(string savedAs)
 		{
 			var selForwardProductReg = new ForwardProductRegistration();
@@ -522,7 +523,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 								"Successfully selected the product with ID: " + info.Id);
 		}
 
-		[StepDefinition(@"I confirm I am unable to select the product with ID saved as: (.*) under the Select Products tab")]
+		[RegexStepDefinition(@"I confirm I am unable to select the product with ID saved as: (.*) under the Select Products tab")]
 		public void ConfirmIAmUnableToSelectProductWithIDSavedAs(string savedAs)
 		{
 			var selForwardProductReg = new ForwardProductRegistration();
@@ -570,7 +571,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I select the product with ID saved as: (.*) under the Select Products tab and the checkbox is disabled while the page is working")]
+		[RegexStepDefinition(@"I select the product with ID saved as: (.*) under the Select Products tab and the checkbox is disabled while the page is working")]
 		public void SelectProductWithIDSavedAsSelectProductAndCheckboxIsDisabled(string savedAs)
 		{
 			ReportSettings.UseSubSteps = true;
@@ -611,7 +612,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I click the Add UPC button under the Select UPCs tab")]
+		[RegexStepDefinition(@"I click the Add UPC button under the Select UPCs tab")]
 		public void ClickAddUPCsButtonUnderSelectUPCsTab()
 		{
 			var selForwardProductReg = new ForwardProductRegistration();
@@ -620,14 +621,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked the Add UPC button");
 		}
 
-		[StepDefinition(@"I click the Add Casepack button under the Select UPCs tab")]
+		[RegexStepDefinition(@"I click the Add Casepack button under the Select UPCs tab")]
 		public void ClickAddCaseUPCsButtonUnderSelectUPCsTab()
 		{
 			var selForwardProductReg = new ForwardProductRegistration();
 			Report.IsTrue(selForwardProductReg.ClickAddCaseUPC(),"Failed to click the Add UPC button!",	"Successfully clicked the Add UPC button");
 		}
 
-		[StepDefinition(@"I click the Add To No Retailer button under the Select UPCs tab")]
+		[RegexStepDefinition(@"I click the Add To No Retailer button under the Select UPCs tab")]
 		public void ClickAddToNoRetailerButtonUnderSelectUPCsTab()
 		{
 			var selForwardProductReg = new ForwardProductRegistration();
@@ -636,7 +637,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked the Add To No Retailer button");
 		}
 
-		[StepDefinition(@"I select the UPC row: 'No UPC'/ 'No Retailer'")]
+		[RegexStepDefinition(@"I select the UPC row: 'No UPC'/ 'No Retailer'")]
 		public void SelectUPCRowNoUPCNoRetailer()
 		{
 			Report.IsTrue(new ForwardProductRegistration().SelectUPCNoUPC(),
@@ -644,7 +645,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully selected UPC row: No UPC");
 		}
 
-		[StepDefinition(@"I select the (true|false) radio for the 'Are Statements True' question under the Review and Submit tab")]
+		[RegexStepDefinition(@"I select the (true|false) radio for the 'Are Statements True' question under the Review and Submit tab")]
 		public void SelectRadioAreStatementsTrueReviewSubmitTab(string option)
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
@@ -653,7 +654,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully set the 'Are Statements True' radio to: " + option);
 		}
 
-		[StepDefinition(@"In the Foward Product Registration Screen I (should|should not) see product: (.*)")]
+		[RegexStepDefinition(@"In the Foward Product Registration Screen I (should|should not) see product: (.*)")]
 		public void ThenInTheFowardProductRegistrationScreenIShouldSeeProduct(string shouldOrShouldNot, string id)
 		{
 			if (id.ToLower().Contains("saved as"))
@@ -682,7 +683,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	
 		}
 
-		[StepDefinition(@"In the Foward Product Registration Screen I Select the product: (.*)")]
+		[RegexStepDefinition(@"In the Foward Product Registration Screen I Select the product: (.*)")]
 		public void ThenInTheFowardProductRegistrationScreenISelectTheProduct(string id)
 		{
 			if (id.ToLower().Contains("saved as"))
@@ -708,7 +709,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 		}
 
-		[StepDefinition(@"In the Forward Product Registration Screen I select a retailer under Other Retailers and save as (.*)")]
+		[RegexStepDefinition(@"In the Forward Product Registration Screen I select a retailer under Other Retailers and save as (.*)")]
 		public void ThenInTheForwardProductRegistrationScreenISelectARetailerUnderOtherRetailersAndSaveAs(string saveAs)
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
@@ -767,7 +768,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In the Forward Product Registration Screen I select a retailer not in the list of retailers saved as (.*) and save as (.*)")]
+		[RegexStepDefinition(@"In the Forward Product Registration Screen I select a retailer not in the list of retailers saved as (.*) and save as (.*)")]
 		public void InTheForwardProductRegistrationScreenSelectRetailerNotInListOfRetailers(string retailers, string saveAs)
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
@@ -820,7 +821,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm that for UPC Number (.*) the retailer is displayed as (.*)")]
+		[RegexStepDefinition(@"I confirm that for UPC Number (.*) the retailer is displayed as (.*)")]
 		public void ThenIConfirmThatForUPCNumberSavedAsTestCaseUPCTheRetailerIsDisplayedAsSavedAsTestCaseRetailer(string aUPCNumber, string aRetailer)
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
@@ -878,7 +879,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Failure("Failed to find retailer: " + aRetailer + " for UPC number: " + aUPCNumber);
 		}
 
-		[StepDefinition(@"I confirm that there are NO Errors displayed for the Product")]
+		[RegexStepDefinition(@"I confirm that there are NO Errors displayed for the Product")]
 		public void ThenIConfirmThatThereAreNoErrorsDisplayedForTheProduct()
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
@@ -886,7 +887,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In the Add UPC modal window I enter the following information:")]
+		[RegexStepDefinition(@"In the Add UPC modal window I enter the following information:")]
 		public void InTheAddUPCWindowIEnterTheFollowingInfo(Table table)
 		{
 			var modal = new AddUPCModal();
@@ -895,7 +896,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							"Successfully entered information into the Add Casepack modal window.");
 		}
 
-		[StepDefinition(@"In the UPC modal window I click Save")]
+		[RegexStepDefinition(@"In the UPC modal window I click Save")]
 		public void InTheUPCModalWindowIClickSave()
 		{
 			var modal = new AddUPCModal();
@@ -912,7 +913,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"In the Add Casepack modal window I enter the following information:")]
+		[RegexStepDefinition(@"In the Add Casepack modal window I enter the following information:")]
 		public void InTheAddCaseUPCWindowIEnterTheFollowingInfo(Table table)
 		{
 			var modal = new AddCaseUPCModal();
@@ -921,14 +922,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully entered information into the Add Casepack modal window.");
 		}
 
-		[StepDefinition(@"In the Case UPC modal window I click Save")]
+		[RegexStepDefinition(@"In the Case UPC modal window I click Save")]
 		public void InTheCaseUPCModalWindowIClickSave()
 		{
 			var modal = new AddCaseUPCModal();
 			Report.IsTrue(modal.ClickSave(), "Failed to click Save in the Add Casepack modal window.",
 			"Successfully clicked Save in the Add Casepack modal window.");
 		}
-		[StepDefinition(@"I select the product with ID saved as: (.*) under the right hand panel of the Select Products tab")]
+		[RegexStepDefinition(@"I select the product with ID saved as: (.*) under the right hand panel of the Select Products tab")]
 		public void ISelectTheProductSavedAsUnderSelectProductsRightPanel(string savedAs)
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
@@ -938,13 +939,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In the Forward Product Registration Screen I select the first retailer under Other Retailers")]
+		[RegexStepDefinition(@"In the Forward Product Registration Screen I select the first retailer under Other Retailers")]
 		public void ThenInTheForwardProductRegistrationScreenISelectTheFirstRetailerUnderOtherRetailers()
 		{
 			Report.IsTrue(new ForwardProductRegistration().SelectFirstOtherRetailer(), "Failed to select the first Retailer under 'Other Retailers'", "Succesfully selected the first retailer under 'Other Retailers'");
 		}
 
-		[StepDefinition(@"In the UPC modal window I click Cancel")]
+		[RegexStepDefinition(@"In the UPC modal window I click Cancel")]
 		public void InTheUPCModalWindowIClickCancel()
 		{
 			var modal = new AddUPCModal();
@@ -952,7 +953,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			"Successfully clicked Cancel in the Add UPC modal window.");
 		}
 
-		[StepDefinition(@"If the Private Label textbox is showing in the Select UPCs screen, I enter the value: (.*)")]
+		[RegexStepDefinition(@"If the Private Label textbox is showing in the Select UPCs screen, I enter the value: (.*)")]
 		public void IfPrivateLabelShowingIEnterValue(string value)
 		{
 			var selForwardProdReg = new ForwardProductRegistration();
@@ -960,13 +961,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully entered value for Private Label.");
 		}
 
-		[StepDefinition(@"In the Forward Product Registration Screen I select the first retailer that does not require additional data and is not: (.*) under Other Retailers and save it as: (.*)")]  //maybe pick a specific alternative instead of avoiding all with additional data requirments
+		[RegexStepDefinition(@"In the Forward Product Registration Screen I select the first retailer that does not require additional data and is not: (.*) under Other Retailers and save it as: (.*)")]  //maybe pick a specific alternative instead of avoiding all with additional data requirments
 		public void ThenInTheForwardProductRegistrationScreenISelectTheFirstRetailerThatIsNotXUnderOtherRetailers(string presentRetailer, string savedAs)
 		{
 			Report.IsTrue(new ForwardProductRegistration().SelectFirstOtherRetailerThatIsNotXOrRequireAdditionalDetails(presentRetailer, savedAs), "Failed to select the first Retailer that is not " + presentRetailer + " or requires additional data under 'Other Retailers'", "Succesfully selected the first retailer that is not " + presentRetailer + "  or requires additional data under 'Other Retailers'");
 		}
 
-		[StepDefinition(@"I confirm that UPC information is displayed in the Select UPCs Table")]
+		[RegexStepDefinition(@"I confirm that UPC information is displayed in the Select UPCs Table")]
 		public void ConfirmUPCInfromationInSelectUPCsTable()
 		{
 
@@ -1010,7 +1011,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition("I Check that the Truck Icon is (present|not present) next to the UPC saved as: (.*)")]
+		[RegexStepDefinition("I Check that the Truck Icon is (present|not present) next to the UPC saved as: (.*)")]
 		public void ICheckTruckIconStatusForSavedAs(string presence, string savedAs)
 		{
 			bool presenceExpected = false;
@@ -1056,7 +1057,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I get the product ID for the product saved as: (.*) then I use this ID in the select Products & UPCs page")]
+		[RegexStepDefinition(@"I get the product ID for the product saved as: (.*) then I use this ID in the select Products & UPCs page")]
 		public void IGetTheProducIDForSavedAsAndSearcForProduct(string savedAs)
 		{
 			Report.Info("input value is " + savedAs + " . Looking in context for a product information with this value");
@@ -1068,7 +1069,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsForwardProductRegistration().SelectProductByIDSavedAs("idStringSavedAs");
 		}
 
-		[StepDefinition(@"I select one of the following retailers: and saved the chosen retailer as: (.*)")]
+		[RegexStepDefinition(@"I select one of the following retailers: and saved the chosen retailer as: (.*)")]
 		public void ISelectOneOfTheFollowingRetailers(string retailerSavedAs, Table table)
 		{
 			foreach (var row in table.Rows)
@@ -1090,7 +1091,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Failure("None of the retailers in the table could be selected");
 		}
 
-		[StepDefinition(@"I select one of the following retailers from the table: that is also not in the list saved as: (.*) and save the chosen retailer as: (.*)")]
+		[RegexStepDefinition(@"I select one of the following retailers from the table: that is also not in the list saved as: (.*) and save the chosen retailer as: (.*)")]
 		public void ISelectOneOfTheFollowingRetailersThatIsNotX(string existingRetailer, string retailerSavedAs, Table table)
 		{
 			foreach (var row in table.Rows)
@@ -1127,35 +1128,35 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I click Add Casepack")]
+		[RegexStepDefinition(@"I click Add Casepack")]
 		public void GivenIClickAddCaseUPC()
 		{
 			UPC UPCObject = new UPC();
 			Report.IsTrue(UPCObject.ClickAddCaseUPCButton(), "Failed to click the 'Add Casepack' button", "Successfully clicked the 'Add Casepack' button");
 		}
 
-		[StepDefinition(@"I confirm no error is shown below the Individual UPC contained in the Case Pack field")]
+		[RegexStepDefinition(@"I confirm no error is shown below the Individual UPC contained in the Case Pack field")]
 		public void ThenIConfirmNoErrorIsShownBelowTheIndividualUPCContainedInTheCasePackField()
 		{
 			UPC UPCObject = new UPC();
 			Report.IsFalse(UPCObject.CheckForErrorUnderneathIndividualUPCContainedInCasePackField(), "The error message was found", "The error message was not found");
 		}
 
-		[StepDefinition(@"I check if the textfields with the following placeholders display the error 'This is a required field.' bottom")]
+		[RegexStepDefinition(@"I check if the textfields with the following placeholders display the error 'This is a required field.' bottom")]
 		public void ThenICheckIfTheFollowingTextfieldsDisplayTheErrorThisIsARequiredField(Table table)
 		{
 			UPC UPCObject = new UPC();
 			UPCObject.CheckIfTextfieldsWithPlaceholdersDisplayTheError(table);
 		}
 
-		[StepDefinition(@"I check if the dropdowns with the following default options display the error 'This is a required field.' bottom")]
+		[RegexStepDefinition(@"I check if the dropdowns with the following default options display the error 'This is a required field.' bottom")]
 		public void ThenICheckIfTheFollowingDropdownsDisplayTheErrorThisIsARequiredField_(Table table)
 		{
 			UPC UPCObject = new UPC();
 			Report.IsTrue(UPCObject.CheckIfDropDownsWithDefaultOptionDisplayTheError(table), "At least one dropdown did not display an error", "All the dropdowns displayed their errors");
 		}
 
-		[StepDefinition(@"I select the first non Kit product from the list of IDs saved as: (.*) under the Select Products tab")]
+		[RegexStepDefinition(@"I select the first non Kit product from the list of IDs saved as: (.*) under the Select Products tab")]
 		public void SelectNonKitProductByIDSavedAs(string savedAs)
 		{
 
@@ -1207,13 +1208,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I wait for the Add Casepack popup to appear")]
+		[RegexStepDefinition(@"I wait for the Add Casepack popup to appear")]
 		public void IWaitForTheAddCaseUPCPopupToAppear()
 		{
 			Report.IsTrue(new AddCaseUPCModal().WaitForAddCaseUPCPopup(), "The Add Casepack modal did not appear", "The Add case upc modal appeared");
 		}
 
-		[StepDefinition(@"If there is the option to select a vendor for the product with ID: (.*), I select the first option")]
+		[RegexStepDefinition(@"If there is the option to select a vendor for the product with ID: (.*), I select the first option")]
 		public void IfThereIsTheOptionToSelectVendorISelect(string id)
 		{
 			Report.Info("Checking to see if there is the option to select a Vendor");
