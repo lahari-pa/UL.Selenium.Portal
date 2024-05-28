@@ -67,7 +67,8 @@ Scenario: [56829] More Filters
 # Created by Amanda Coutant
 @TestCase:68413
 Scenario: [68413] More Filters - Retailer
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I click More Filters in the products grid
 	And I confirm the filter with label: "Retailer" is displayed and default option: "All Retailers"
 	And I confirm retailers list based on environment

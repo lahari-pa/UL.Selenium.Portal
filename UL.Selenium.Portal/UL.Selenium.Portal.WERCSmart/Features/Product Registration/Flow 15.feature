@@ -77,7 +77,7 @@ Scenario: [58760] Light Bulbs - Light Emitting Diodes (LED) - RU000948
 	Given In the Electronic Equipment Section, set the option in section: 'Has a Cathode Ray Tube (CRT)' to: Yes
 	Given in the Electronic Equipment page I click Continue
 
-	# ====== Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon ====== #
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	Given I should see the Retailer Page
 	Given In the Retailer Section, click 'Add Retailers' button
 	Given In the Select Retailers window, select retailer: Amazon
@@ -133,7 +133,7 @@ Scenario: [58759] Servers, Small-Scale - RU001183
 	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Given in the Product Information page I click Continue
 
-	# ====== Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65) ====== #
+	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I should see the Inventory Status, Prop 65 (US) Page
 	Given In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
 	Given In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
@@ -168,7 +168,7 @@ Scenario: [58759] Servers, Small-Scale - RU001183
 	Given In the Electronic Equipment Section, set the option in section: 'Has a LCD or Plasma Display' to: No
 	Given in the Electronic Equipment page I click Continue
 
-	# ====== Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples ====== #
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples
 	Given I should see the Retailer Page
 	Given In the Retailer Section, click 'Add Retailers' button
 	Given In the Select Retailers window, select retailer: Staples

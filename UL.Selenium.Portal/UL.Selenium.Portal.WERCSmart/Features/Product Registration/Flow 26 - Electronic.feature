@@ -44,11 +44,20 @@ Scenario: [60671] Computer (Combination of Monitor & Desktop) - RU001177
 	# ======= Test Setup - Generating + Saving UPC Number and ensuring no duplicates exist ====== #
 	#Given I generate a random UPC number and save as: UPC60671
 	#Given I delete all products with UPC Number: saved as UPC60671
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Computer (Combination of Monitor & Desktop)
 	Then I save the product information as: TestCase60671
 	Given I call Shared Step 60935 Product Information - US - Direct Ship - Private Label Only
-	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page I click Continue
+
 	#In the step below, confirm that the following text is visible on the TCLP screen, "Please answer the following question with regards to your product, not the battery contained in your product." on the TCLP screen.
 	#Given I call Shared 48367 Product Includes Battery > any type
 	Given I call Shared Step 48367 (Product Includes Battery > any type)

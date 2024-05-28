@@ -1,16 +1,16 @@
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UL.Automation.Utilities.Functions;
-using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.SpecFlow.Classes;
+using UL.Automation.Utilities.Functions;
 using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
-using OpenQA.Selenium;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
@@ -1031,6 +1031,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var selectedOptionsStr = new List<string>();
 			foreach (TableRow row in table.Rows)
 			{
+				
 				if (Report.IsTrue(new Ingredients().ISelectFunctionalPurpose(ingredientName, row["Functional Purpose"], "ComponentName"), "Failed to Select The Functional Purpose:" + row["Functional Purpose"], "Successfully selected the Functional purpose" + row["Functional Purpose"]))
 				{
 					selectedOptionsStr.Add(row["Functional Purpose"]);
@@ -1047,10 +1048,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(new Ingredients().ISelectAllFunctionalPurpose(ingredientName, "ComponentName"), "Failed to Select All The Functional Purpose options", "Successfully selected  All The Functional Purpose options");
 
 		}
-
-
-
-
 
 		[StepDefinition(@"I verify the Transparency Score displays (.*)%")]
 		public void ThenIVerifyTheTransparencyScoreDisplays(float p0)

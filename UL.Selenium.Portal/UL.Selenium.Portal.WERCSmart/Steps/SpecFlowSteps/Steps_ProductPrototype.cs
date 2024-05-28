@@ -181,5 +181,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 				$"Failure, question {question} {(expected ? "is not" : "is")} displayed", $"Success, question {question} {is_isnot} displayed.");
 		}
 
+		[StepDefinition(@"Expand the (.*) panel")]
+		public void ExpandPanel(string panelLabel)
+		{
+			PanelPrototype panelPrototype = new PanelPrototype(panelLabel);
+			if (Report.IsTrue(panelPrototype.PanelExpandButtonExists(),$"Failure, '{panelLabel}' panel does not exist.",$"Success, '{panelLabel}' panel exists."))
+			{
+				Report.IsTrue(panelPrototype.PanelExpandButtonClick(), $"Failure, failed to click '{panelLabel}' panel.", $"Success, clicked '{panelLabel}' panel.");
+				//Report.IsTrue(!panelPrototype.PanelExpandButtonExists(), $"Failure, failed to expand '{panelLabel}' panel.", $"Success, expanded '{panelLabel}' panel.");
+			}
+		}
 	}
 }

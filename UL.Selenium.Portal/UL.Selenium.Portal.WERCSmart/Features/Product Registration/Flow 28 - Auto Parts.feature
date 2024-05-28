@@ -62,7 +62,7 @@ Scenario: [60673] Gasoline Container, Portable - RU001419
 	Given I enter the text of Product is a Safety Can field to: Yes
 	Given in the Fuel Container Regulatory Details page I click Continue
 
-	# ====== Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Harbor Freight Tools ====== #
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Harbor Freight Tools
 	Given I should see the Retailer Page
 	Given In the Retailer Section, click 'Add Retailers' button
 	Given In the Select Retailers window, select retailer: Harbor Freight Tools
