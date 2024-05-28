@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UL.Automation.Reporting.Functions;
-using TechTalk.SpecFlow;
+using Reqnroll;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -12,13 +13,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding, Scope(Tag = "Freshdesk")]
 	class Steps_WercSmartFreshDesk
 	{
-		[StepDefinition(@"I confirm the WERCSmart FreshDesk 'Solutions' page is loaded")]
+		[RegexStepDefinition(@"I confirm the WERCSmart FreshDesk 'Solutions' page is loaded")]
 		public void ConfirmFreshDeskSolutionsPageIsLoaded()
 		{
 			Report.IsTrue(new WercSmartFreshDesk().WaitForContainerToBeVisible(), "WERCSmart FreshDesk 'Solutions' page did not load!)", "WERCSmart FreshDesk 'Solutions' page loaded");
 		}
 
-		[StepDefinition(@"I confirm there is an article displayed containing the 'WERCSmart Introductory Video'")]
+		[RegexStepDefinition(@"I confirm there is an article displayed containing the 'WERCSmart Introductory Video'")]
 		public void ConfirmArticleDisplayedContainingWercSmartIntroductoryVideo()
 		{
 			Report.IsTrue(new WercSmartSolutionsArticle().ArticleHeading() != null, "An article was not displayed!");

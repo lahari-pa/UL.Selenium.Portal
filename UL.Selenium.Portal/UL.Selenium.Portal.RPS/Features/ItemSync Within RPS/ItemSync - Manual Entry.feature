@@ -21,7 +21,7 @@ Scenario: [125705] Base functionality - ItemSync - Manual Entry - Screen layout 
 
 Then I call Shared Step 134359 (RPS Login - User has Standard ItemSync Access)
 Then I confirm the Home tab has loaded
-Given I click the tab: ItemSync
+Given I click the main tab: ItemSync
 Then I click the sub tab: Manual Entry
 And I wait for the ItemSync Manual Entry screen to load
 Then I confirm the ItemSync manual entry screen is shown with the title: Add UPC

@@ -8,7 +8,7 @@ using OpenQA.Selenium;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.SpecFlow.Classes;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.Utilities.Functions;
 
 namespace UL.Selenium.Portal.RPS.Classes
@@ -16,11 +16,10 @@ namespace UL.Selenium.Portal.RPS.Classes
     public static class GeneralUtilities
     {
 
-        public static void WaitForLoadingToFinish()
+        public static void WaitForLoadingToFinish(int secondsToWait = 10)
         {
-            int i = 0;
-
-            while (i < 10)
+            int x = 0; 
+            while (x < secondsToWait)
             {
                 IWebElement PaceLoadingBar = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@class='pace pace-active']"), 2);
                 IWebElement PaceLoadingBar_Inactive = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[contains(@class,'pace-inactive')]"), 2);
@@ -31,7 +30,7 @@ namespace UL.Selenium.Portal.RPS.Classes
                 }
                 else
                 {
-                    i++;
+                    x++;
                     Delay.Seconds(1);
                 }
             }
@@ -195,6 +194,24 @@ namespace UL.Selenium.Portal.RPS.Classes
             var finalString = new String(stringChars);
 
             return finalString;
+        }
+
+        public static bool NetworkRequestAtTimeConfirmAttributeValue(string methodType, DateTime requestTime, string attributeLabel, string attributeValue)
+        {
+            Report.Info($"Attempting to confirm a '{methodType}' type ntwork request, sent at {requestTime.ToString()}, has '{attributeLabel}:{attributeValue}'");
+            var driver = SeleniumWebDriver.CurrentDriver;
+            var performanceLog = SeleniumWebDriver.CurrentDriver.Manage().Logs.GetLog("performance");
+            var result = false;
+            var test = performanceLog.Where(log => ((requestTime.Subtract(log.Timestamp).TotalSeconds <= 1) && log.Message.Contains($"\"method\":\"{methodType.ToUpper()}\""))).FirstOrDefault();
+            if (test != null)
+            {
+                result = test.Message.Contains($"\\\"{attributeLabel}\\\":{attributeValue}");
+            }
+            else
+            {
+                Report.Info("No connected log found");
+            }
+            return result;
         }
     }
 }

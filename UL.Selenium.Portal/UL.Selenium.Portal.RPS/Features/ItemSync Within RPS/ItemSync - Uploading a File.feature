@@ -20,7 +20,7 @@ Feature: ItemSync - Uploading a File
 Scenario: [125577] Base functionality - ItemSync - Upload a file - Screen layout - Message shown
 Then I call Shared Step 134359 (RPS Login - User has Standard ItemSync Access)
 Then I confirm the Home tab has loaded
-Given I click the tab: ItemSync
+Given I click the main tab: ItemSync
 Then I click the sub tab: Upload a File
 Then I wait for the ItemSync Upload a File screen to load
 And I confirm the ItemSync Upload a File screen is shown
@@ -32,7 +32,7 @@ Given I call Shared Step 106194 (RPS Sign out)
 Scenario: [125582] Base functionality - ItemSync - Upload a file - Screen layout - File Upload area - Drag and Drop area
 Then I call Shared Step 134359 (RPS Login - User has Standard ItemSync Access)
 Then I confirm the Home tab has loaded
-Given I click the tab: ItemSync
+Given I click the main tab: ItemSync
 Then I click the sub tab: Upload a File
 Then I wait for the ItemSync Upload a File screen to load
 And I confirm the ItemSync Upload a File screen is shown
@@ -46,7 +46,7 @@ Given I call Shared Step 106194 (RPS Sign out)
 Scenario: [125586] Base functionality - ItemSync - Upload a file - Screen layout - File Upload area - Drag and Drop area - Browse link
 Then I call Shared Step 134359 (RPS Login - User has Standard ItemSync Access)
 Then I confirm the Home tab has loaded
-Given I click the tab: ItemSync
+Given I click the main tab: ItemSync
 Then I click the sub tab: Upload a File
 Then I wait for the ItemSync Upload a File screen to load
 And I confirm the ItemSync Upload a File screen is shown
@@ -61,7 +61,7 @@ Given I call Shared Step 106194 (RPS Sign out)
 Scenario: [125587] Base functionality - ItemSync - Upload a file - Screen layout - File Upload area - File selected from Browse link
 Then I call Shared Step 134359 (RPS Login - User has Standard ItemSync Access)
 Then I confirm the Home tab has loaded
-Given I click the tab: ItemSync
+Given I click the main tab: ItemSync
 Then I click the sub tab: Upload a File
 Then I wait for the ItemSync Upload a File screen to load
 And I confirm the ItemSync Upload a File screen is shown
@@ -77,7 +77,7 @@ Given I call Shared Step 106194 (RPS Sign out)
 Scenario: [125588]Base functionality - ItemSync - Upload a file - File Upload area - File selected from drag and drop
 Then I call Shared Step 134359 (RPS Login - User has Standard ItemSync Access)
 Then I confirm the Home tab has loaded
-Given I click the tab: ItemSync
+Given I click the main tab: ItemSync
 Then I click the sub tab: Upload a File
 Then I wait for the ItemSync Upload a File screen to load
 And I confirm the ItemSync Upload a File screen is shown
@@ -86,7 +86,7 @@ And I confirm the ItemSync Upload a File screen is shown
 Scenario: [125590] Base functionality - ItemSync - Upload a file - File Upload area - File selected from Browse link - remove file
 Then I call Shared Step 134359 (RPS Login - User has Standard ItemSync Access)
 Then I confirm the Home tab has loaded
-Given I click the tab: ItemSync
+Given I click the main tab: ItemSync
 Then I click the sub tab: Upload a File
 Then I wait for the ItemSync Upload a File screen to load
 And I confirm the ItemSync Upload a File screen is shown
@@ -98,7 +98,7 @@ Given I call Shared Step 106194 (RPS Sign out)
 Scenario: [125639] Base functionality - ItemSync - Upload a file - File selected from Browse link - Upload button is shown
 Then I call Shared Step 134359 (RPS Login - User has Standard ItemSync Access)
 Then I confirm the Home tab has loaded
-Given I click the tab: ItemSync
+Given I click the main tab: ItemSync
 Then I click the sub tab: Upload a File
 Then I wait for the ItemSync Upload a File screen to load
 And I confirm the ItemSync Upload a File screen is shown
@@ -110,7 +110,7 @@ Given I call Shared Step 106194 (RPS Sign out)
 Scenario: [125641] Base functionality - ItemSync - Upload a file - File selected from Browse link - Upload - Loading indicator
 Then I call Shared Step 134359 (RPS Login - User has Standard ItemSync Access)
 Then I confirm the Home tab has loaded
-Given I click the tab: ItemSync
+Given I click the main tab: ItemSync
 Then I click the sub tab: Upload a File
 Then I wait for the ItemSync Upload a File screen to load
 And I confirm the ItemSync Upload a File screen is shown

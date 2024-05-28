@@ -8,11 +8,11 @@ using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
-using UL.Automation.SpecFlow.Classes;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Steps;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using TechTalk.SpecFlow;
+using Reqnroll;
 using UL.Automation.Utilities.Functions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
@@ -638,7 +638,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					if (delDialog.ClickDelete())
 					{
 						Report.Info("Clicked 'delete'");
-						new DashboardPage().RefreshPageObject();
 						Delay.Seconds(10);
 						GeneralUtilities.Wait_for_load_finish();
 

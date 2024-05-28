@@ -21,7 +21,7 @@ Scenario: [125672] Base functionality - ItemSync - Invalid File Pop-up (from Bro
 
 Then I call Shared Step 134359 (RPS Login - User has Standard ItemSync Access)
 Then I confirm the Home tab has loaded
-Given I click the tab: ItemSync
+Given I click the main tab: ItemSync
 Then I click the sub tab: Upload a File
 Then I wait for the ItemSync Upload a File screen to load
 And I confirm the ItemSync Upload a File screen is shown

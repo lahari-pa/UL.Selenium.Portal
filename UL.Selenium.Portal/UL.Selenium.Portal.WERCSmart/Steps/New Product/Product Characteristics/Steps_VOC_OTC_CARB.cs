@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.Reporting.Functions;
-using TechTalk.SpecFlow;
+using Reqnroll;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
@@ -16,14 +17,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
 		private readonly VocOtcCarb _vocOtcCarb = new VocOtcCarb();
 
 
-		[StepDefinition(@"The VOC OTC CARB page should be loaded")]
+		[RegexStepDefinition(@"The VOC OTC CARB page should be loaded")]
 		public void VocOtcCarbPageShouldBeLoaded()
 		{
 			Report.Info("Expected page heading is: " + this._vocOtcCarb.PanelTitle);
 			Report.IsTrue(this._vocOtcCarb.IsActivePanel, "The VOC OTC CARB page did not load!", "The VOC OTC CARB page loaded");
 		}
 
-		[StepDefinition(@"I set 'Product has been granted an Alternative Control' to: (Yes|No)")]
+		[RegexStepDefinition(@"I set 'Product has been granted an Alternative Control' to: (Yes|No)")]
 		public void SetProductHasBeenGrantedACP(string option)
 		{
 			bool isGranted = false;
@@ -42,7 +43,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
 			Report.IsTrue(this._vocOtcCarb.GrantedAlternativeControlPlan == isGranted, "Failed to set 'Granted an ACP' to: " + option, "Set 'Granted an ACP' to: " + option);
 		}
 
-		[StepDefinition(@"I set 'Product label dilution ratio' to: (Yes|No)")]
+		[RegexStepDefinition(@"I set 'Product label dilution ratio' to: (Yes|No)")]
 		public void SetProductLabelDilutionRatio(string option)
 		{
 			bool dilutionRatio = false;
@@ -62,7 +63,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
 
 		}
 
-		[StepDefinition(@"I set 'VOC Content As Sold' to: (.*)")]
+		[RegexStepDefinition(@"I set 'VOC Content As Sold' to: (.*)")]
 		public void SetVocContentAsSold(string value)
 		{
 			this._vocOtcCarb.VocContentAsSold = value;
@@ -73,7 +74,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
 
 		}
 
-		[StepDefinition(@"I set 'VOC Content As Used' to: (.*)")]
+		[RegexStepDefinition(@"I set 'VOC Content As Used' to: (.*)")]
 		public void SetVocContentAsUsed(string value)
 		{
 			this._vocOtcCarb.VocContentAsUsed = value;
@@ -84,7 +85,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
 
 		}
 
-		[StepDefinition(@"I set 'HVOC content' to: (.*)")]
+		[RegexStepDefinition(@"I set 'HVOC content' to: (.*)")]
 		public void SetHvocContent(string value)
 		{
 			this._vocOtcCarb.HvocContent = value;
@@ -94,7 +95,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
 				"Set 'HVOC content' to: " + value);
 		}
 
-		[StepDefinition(@"I set 'MVOC content' to: (.*)")]
+		[RegexStepDefinition(@"I set 'MVOC content' to: (.*)")]
 		public void SetMvocContent(string value)
 		{
 			this._vocOtcCarb.MvocContent = value;
@@ -104,7 +105,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
 				"Set 'MVOC content' to: " + value);
 		}
 
-		[StepDefinition(@"For the Product's VOC content as sold field I should see the following error: (.*)")]
+		[RegexStepDefinition(@"For the Product's VOC content as sold field I should see the following error: (.*)")]
 		public void ThenForTheProductSVOCContentAsSoldFieldIShouldSeeTheFollowingError(string error)
 		{
 			string actualError = this._vocOtcCarb.VocContentAsSoldError();
@@ -117,7 +118,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
 				"Error is showing as expected");
 		}
 
-		[StepDefinition(@"For the Product's VOC content as used field I should see the following error: (.*)")]
+		[RegexStepDefinition(@"For the Product's VOC content as used field I should see the following error: (.*)")]
 		public void ThenForTheProductSVOCContentAsUsedFieldIShouldSeeTheFollowingError(string error)
 		{
 			string actualError = this._vocOtcCarb.VocContentAsUsedError();
@@ -129,14 +130,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
 				"Error is showing as expected");
 		}
 
-		[StepDefinition(@"For the Product's VOC content as sold field I should see not see an error")]
+		[RegexStepDefinition(@"For the Product's VOC content as sold field I should see not see an error")]
 		public void ThenForTheProductSVOCContentAsSoldFieldIShouldSeeNotSeeAnError()
 		{
 			Report.IsTrue(this._vocOtcCarb.VocContentAsSoldError() == null, "Expected no error but got: " + this._vocOtcCarb.VocContentAsSoldError(),
 				"Error is showing as expected");
 		}
 
-		[StepDefinition(@"For the Product's VOC content as used field I should see not see an error")]
+		[RegexStepDefinition(@"For the Product's VOC content as used field I should see not see an error")]
 		public void ThenForTheProductSVOCContentAsUsedFieldIShouldSeeNotSeeAnError()
 		{
 			Report.IsTrue(this._vocOtcCarb.VocContentAsUsedError() == null, "Expected no error but got: " + this._vocOtcCarb.VocContentAsUsedError(),

@@ -1,5 +1,6 @@
 using UL.Automation.Reporting.Functions;
-using TechTalk.SpecFlow;
+using Reqnroll;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -8,7 +9,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	class Steps_SubscriptionUpgrade
 	{
 
-		[StepDefinition(@"In the Subscription Upgrade screen I confirm heading as (.*)")]
+		[RegexStepDefinition(@"In the Subscription Upgrade screen I confirm heading as (.*)")]
 		public void ThenInTheSubscriptionEnrollmentScreenIConfirmHeadingAs(string expectedHeader)
 		{
 			var MySE = new SubscriptionEnrollment();
@@ -17,7 +18,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Page header is showing as expected: " + actualHeader);
 		}
 
-		[StepDefinition(@"In the Subscription Upgrade screen I confirm I cannot downgrade the existing plan")]
+		[RegexStepDefinition(@"In the Subscription Upgrade screen I confirm I cannot downgrade the existing plan")]
 		public void ThenInTheSubscriptionUpgradeScreenIConfirmICannotDowngradeTheExistingPlan(Table table)
 		{
 			var mySub = new SubscriptionUpgrade();
@@ -33,7 +34,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the Subscription Upgrade screen I confirm the (Premium|Standard|Limited Plus|Limited) Feature Plan is selected")]
+		[RegexStepDefinition(@"In the Subscription Upgrade screen I confirm the (Premium|Standard|Limited Plus|Limited) Feature Plan is selected")]
 		public void ThenInTheSubscriptionUpgradeScreenIConfirmTheXFeaturePlanIsSelected(string featurePlan)
 		{
 			var mySub = new SubscriptionUpgrade();
@@ -43,7 +44,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In the Subscription Upgrade screen I confirm I cannot downgrade the current Feature Plan: (Premium|Standard|Limited Plus)")]
+		[RegexStepDefinition(@"In the Subscription Upgrade screen I confirm I cannot downgrade the current Feature Plan: (Premium|Standard|Limited Plus)")]
 		public void ThenInTheSubscriptionUpgradeScreenIConfirmICannotDowngradeTheCurrentFeaturePlanX(string featurePlan)
 		{
 			var mySub = new SubscriptionUpgrade();
@@ -52,7 +53,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully Checked " + featurePlan + " Plan Cannot be Downgraded");
 		}
 
-		[StepDefinition(@"In the Subscription Upgrade screen I confirm the (Gold|Silver|Bronze|General Support) Support Services Plan is selected")]
+		[RegexStepDefinition(@"In the Subscription Upgrade screen I confirm the (Gold|Silver|Bronze|General Support) Support Services Plan is selected")]
 		public void ThenInTheSubscriptionUpgradeScreenIConfirmTheXSupportServicesPlanIsSelected(string supportPlan)
 		{
 			var mySub = new SubscriptionUpgrade();
@@ -61,7 +62,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully Checked " + supportPlan + " is Selected");
 		}
 
-		[StepDefinition(@"In the Subscription Upgrade screen I confirm I cannot downgrade the current Support Services Plan: (Gold|Silver)")]
+		[RegexStepDefinition(@"In the Subscription Upgrade screen I confirm I cannot downgrade the current Support Services Plan: (Gold|Silver)")]
 		public void ThenInTheSubscriptionUpgradeScreenIConfirmICannotDowngradeTheCurrentSupportServicesPlanX(string supportPlan)
 		{
 			var mySub = new SubscriptionUpgrade();
@@ -70,7 +71,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully Checked " + supportPlan + " Plan Cannot be Downgraded");
 		}
 
-		[StepDefinition(@"In the Subscription Upgrade screen I confirm the Proceed button is (disabled when there is no change|enabled when a change is made) in the plan selection")]
+		[RegexStepDefinition(@"In the Subscription Upgrade screen I confirm the Proceed button is (disabled when there is no change|enabled when a change is made) in the plan selection")]
 		public void ThenInTheSubscriptionUpgradeScreenIConfirmTheProceedButtonIsDisabledWhenThereIsNoChangeInThePlanSelection(string enabled)
 		{
 			var mySub = new SubscriptionUpgrade();
@@ -87,7 +88,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the Subscription Upgrade screen for (Articles|Enhanced Articles|Formulated Products) I select (.*)")]
+		[RegexStepDefinition(@"In the Subscription Upgrade screen for (Articles|Enhanced Articles|Formulated Products) I select (.*)")]
 		public void ThenInTheSubscriptionUpgradeScreenForXISelectY(string rangeType, string rangeValue)
 		{
 			var mySub = new SubscriptionUpgrade();
@@ -110,7 +111,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In the Subscription Upgrade screen I confirm the (Estimated Annual Cost|Estimated Annual Cost per Product) changes when (Articles|Enhanced Articles|Formulated Products) are changed to (.*)")]
+		[RegexStepDefinition(@"In the Subscription Upgrade screen I confirm the (Estimated Annual Cost|Estimated Annual Cost per Product) changes when (Articles|Enhanced Articles|Formulated Products) are changed to (.*)")]
 		public void ThenInTheSubscriptionUpgradeScreenIConfirmTheEstimatedAnnualCostChangesWhenAPlanSelectionIsChanged(string costText, string rangeType, string rangeValue)
 		{
 			var mySub = new SubscriptionUpgrade();
@@ -119,7 +120,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				costText + " Successfully Changed when " + rangeType + " are Changed to " + rangeValue);
 		}
 
-		[StepDefinition(@"In the Subscription Upgrade screen I select the following enrollment options")]
+		[RegexStepDefinition(@"In the Subscription Upgrade screen I select the following enrollment options")]
 		public void ThenInTheSubscriptionUpgradeScreenISelectTheFollowingEnrollmentOptions(Table table)
 		{
 			var mySub = new StepsSubscriptionEnrollment();
@@ -127,7 +128,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			mySub.ThenISelectTheFollowingEnrollmentOptions(table);
 		}
 
-		[StepDefinition(@"In the Subscription popup I confirm the (.*) header exists")]
+		[RegexStepDefinition(@"In the Subscription popup I confirm the (.*) header exists")]
 		public void ThenInTheSubscriptionPopupIConfirmTheXHeaderExists(string headerText)
 		{
 			var mySub = new SubscriptionEnrollmentDlg();

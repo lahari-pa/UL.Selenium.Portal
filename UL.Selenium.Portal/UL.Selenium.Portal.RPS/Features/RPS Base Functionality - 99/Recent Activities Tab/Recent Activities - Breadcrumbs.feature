@@ -17,9 +17,9 @@ Feature: Recent Activities - Breadcrumbs
 
 @ScenarioId:7090
 Scenario: [73094] Base Functionality - Recent Activity - Breadcrumbs - Verify Options are the same
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
 Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then I confirm the Recent Activities page refreshes
 And In the recent activities Page, I click the More Filters Button
@@ -30,7 +30,7 @@ Then In the recent activities Page, The More Filters Popup is not showing
 Then I confirm the Recent Activities page refreshes
 Then I confirm that the recent activities page bread crumb area contains the label: Supplier: "The Dial"
 Then I confirm that the recent activities page bread crumb area contains the label: Status: "Assigned"
-Given I click the tab: Product Lookup
+Given I click the main tab: Product Lookup
 Then I confirm the Product Lookup tab has loaded
 And I confirm the active tab is: Product Lookup
 Then I confirm that the Product Lookup page buttons to the right of the search box are as follows:
@@ -54,9 +54,9 @@ And I call Shared Step 106194 (RPS Sign out)
 
 @ScenarioId:7117
 Scenario: [105035] Base Functionality - Recent Activities - default date range
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
 Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 And I confirm that the recent activities page shows the bread crumb area
 Then In the recent activities Page, I confirm the Start Date breadcrumb shows a date 6 months before today as default
@@ -66,9 +66,9 @@ And I call Shared Step 106194 (RPS Sign out)
 
 @ScenarioId:7119
 Scenario: [105018] Base Functionality - Recent Activities - Breadcrumbs
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
 Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then In the recent activities Page, In the Products table I select a random product and save the supplier name to context as: SavedProduct105018
 And In the recent activities Page, I click the More Filters Button
@@ -85,9 +85,9 @@ And I call Shared Step 106194 (RPS Sign out)
 
 @ScenarioId:8099
 Scenario: [106837] Base Functionality - Recent Activities - Breadcrumbs - Reset
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
 Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then In the recent activities Page, In the Products table I select the first product and save the supplier name to context as: SavedProductSupplier106837a
 And In the recent activities Page, In the Products table I select the first product and save the status to context as: SavedProductStatus106837a
@@ -129,9 +129,9 @@ And I call Shared Step 106194 (RPS Sign out)
 
 @ScenarioId:8108
 Scenario: [98355] Base Functionality - Recent Activities - Reset button in breadcrumb area clears Supplier name
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
 Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then In the recent activities Page, In the Products table I select a random product and save the supplier name to context as: SavedProduct98355
 And In the recent activities Page, I click the More Filters Button
@@ -148,7 +148,16 @@ And In the recent activities Page, In the Products table I confirm that not all 
 And I call Shared Step 106194 (RPS Sign out)
 
 
-
+Scenario: [169166] Recent Activities - Breadcrumbs - multiple selection and reset
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
+Then I confirm the Home tab has loaded
+Given I click the main tab: Recent Activities
+Then I confirm the Recent Activities tab has loaded
+Then In the recent activities page, I take note of the number of products in the footer area and save as: ProductAmount169166
+Given I call Shared Step 146428 (RPS & WV > More Filters > Select Multiple (for Status viewer & Recent Activities)
+Then In the recent activities Page, In the Products table I click the Reset Button
+Given In the recent activites page, I check if the number of products in the footer area matches amount saved as: ProductAmount169166
+And I call Shared Step 106194 (RPS Sign out)
 
 
 

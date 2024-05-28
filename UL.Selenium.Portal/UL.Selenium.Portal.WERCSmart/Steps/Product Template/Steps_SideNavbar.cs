@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
-using TechTalk.SpecFlow;
+using UL.Automation.ReqnrollHelpers.Classes;
+using Reqnroll;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using System.Collections.Generic;
 using UL.Automation.WebDriver.Classes;
@@ -10,6 +10,7 @@ using TReVor.Core.Classes.Software;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.ProductTemplate;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using TReVor.Core.Classes.Software.Vault;
+using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.Product_Template
 {
@@ -17,7 +18,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.Product_Template
 	class Steps_SideNavbar
 
 	{
-		[StepDefinition(@"In the Side Navigation Bar, click the '(.*)' link")]
+		[RegexStepDefinition(@"In the Side Navigation Bar, click the '(.*)' link")]
 		public void InSideNavbarClickLink(string linkTitle)
 		{
 			SideNavbar sideNavbar = new SideNavbar();

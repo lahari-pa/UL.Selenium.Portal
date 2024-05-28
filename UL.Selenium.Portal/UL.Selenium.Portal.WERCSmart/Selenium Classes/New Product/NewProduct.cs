@@ -9,10 +9,10 @@ using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using UL.Automation.SpecFlow.Classes;
+using UL.Automation.ReqnrollHelpers.Classes;
 using System.Collections.ObjectModel;
 using UL.Selenium.Portal.WERCSmart.Classes;
-using TechTalk.SpecFlow;
+using Reqnroll;
 using TReVor.Api.Wrapper.Classes;
 using UL.Automation.Reporting;
 using UL.Automation.WebDriver.Functions;
@@ -22,7 +22,6 @@ using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Chrome;
 using System.Net.NetworkInformation;
-using System.Runtime.InteropServices.WindowsRuntime;
 
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
@@ -4820,7 +4819,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool RemoveRetailers(Table table)
 		{
-			foreach (TechTalk.SpecFlow.TableRow row in table.Rows)
+			foreach (TableRow row in table.Rows)
 			{
 				string retailer = row["Retailer"];
 				IWebElement deleteButton = this.ContainerElement.FindElement(By.XPath(".//span[@data-bind='text: identifier' and text()='" + retailer + "']/following-sibling::a[@title='Remove']//em[@class='fa fa-remove']"), 2);
@@ -4920,7 +4919,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			IWebElement DoneButton = this.ContainerElement.FindElement(By.XPath(".//a[@data-bind='click: closePopup']"), 2);
 			var stepsNewProduct = new StepsNewProduct();
 
-			foreach (TechTalk.SpecFlow.TableRow row in table.Rows)
+			foreach (TableRow row in table.Rows)
 			{
 				
 				ReportSettings.UseSubSteps = true;

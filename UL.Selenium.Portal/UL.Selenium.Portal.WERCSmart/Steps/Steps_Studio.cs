@@ -5,9 +5,10 @@ using System.Text.RegularExpressions;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
-using TechTalk.SpecFlow;
+using UL.Automation.ReqnrollHelpers.Classes;
+using Reqnroll;
 using UL.Automation.Reporting;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Automation.WebDriver.Extensions;
@@ -18,7 +19,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding, Scope(Tag = "Studio")]
 	class Steps_Studio
 	{
-		[StepDefinition(@"I click on publish this Document to open current document popup")]
+		[RegexStepDefinition(@"I click on publish this Document to open current document popup")]
 		public void IClickOnPublishThisDocumentToOpenCurrentDocumentPopup()
 		{
 			var thisStudioPowerDesignerPlusDesignMode =
@@ -36,7 +37,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(3);
 		}
 
-		[StepDefinition(@"in Power Designer Plus page I click on tab: (.*)")]
+		[RegexStepDefinition(@"in Power Designer Plus page I click on tab: (.*)")]
 		public void GivenInPowerDesignerPlusPageIClickOnTab(string tab)
 		{
 			var thisStudioPowerDesignerPlusDesignMode =
@@ -46,7 +47,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Clicked tab: " + tab);
 		}
 
-		[StepDefinition(@"In Power Designer Plus page in My Toolbar tab I click on edit button")]
+		[RegexStepDefinition(@"In Power Designer Plus page in My Toolbar tab I click on edit button")]
 		public void GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnEditButton()
 		{
 			var thisStudioPowerDesignerPlusDesignMode =
@@ -59,7 +60,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisPdEditPage.Wait_for_load(120), "Edit page has failed to load", "Edit page has loaded");
 		}
 
-		[StepDefinition(@"In Power Designer Plus page in My Toolbar tab I click on apply rules button")]
+		[RegexStepDefinition(@"In Power Designer Plus page in My Toolbar tab I click on apply rules button")]
 		public void GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnApplyRulesButton()
 		{
 			var thisStudioPowerDesignerPlusDesignMode =
@@ -76,7 +77,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 		}
 
-		[StepDefinition(@"In Power Designer Plus page in My Toolbar tab I click on document queue button")]
+		[RegexStepDefinition(@"In Power Designer Plus page in My Toolbar tab I click on document queue button")]
 		public void GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnDocumentQueueButton()
 		{
 			var thisStudioPowerDesignerPlusDesignMode =
@@ -93,7 +94,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Document queue page has loaded");
 		}
 
-		[StepDefinition(@"In Power Designer Plus page in My Toolbar tab I click on the product attributes button")]
+		[RegexStepDefinition(@"In Power Designer Plus page in My Toolbar tab I click on the product attributes button")]
 		public void GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnDocumentAttributesButton()
 		{
 			var thisStudioPowerDesignerPlusDesignMode =
@@ -109,7 +110,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In Current Document Popup select checkbox: (.*)")]
+		[RegexStepDefinition(@"In Current Document Popup select checkbox: (.*)")]
 		public void InCurrentDocumentPageSelectCheckbox(string checkbox)
 		{
 			Report.Info("Selecting checkbox: " + checkbox);
@@ -121,7 +122,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Report.Screenshot();
 		}
 
-		[StepDefinition(@"I close Current Document")]
+		[RegexStepDefinition(@"I close Current Document")]
 		public void GivenICloseCurrentDocument()
 		{
 			var thisCurrentDocument = new CurrentDocument();
@@ -129,7 +130,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		//| Text | Should Show |
-		[StepDefinition(@"In Current Document I confirm that alert text matches")]
+		[RegexStepDefinition(@"In Current Document I confirm that alert text matches")]
 		public void GivenInCurrentDocumentIConfirmThatAlertTextMatches(Table table)
 		{
 			Report.Info("Beginning confirm that alert matches what is expected.");
@@ -219,7 +220,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.ISetTheAuthoringCompleteCodeTo("NGHS");
 		}
 
-		[StepDefinition(@"I set the Authoring Complete code to: (NGHS|AGHS)")]
+		[RegexStepDefinition(@"I set the Authoring Complete code to: (NGHS|AGHS)")]
 		public void ISetTheAuthoringCompleteCodeTo(string setTo)
 		{
 			var thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
@@ -235,7 +236,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I set the Datacodes as follows:")]
+		[RegexStepDefinition(@"I set the Datacodes as follows:")]
 		public void GivenISetTheDatacodesAsFollows(Table table)
 		{
 			foreach (TableRow thisRow in table.Rows)
@@ -281,7 +282,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Delay.Seconds(5);
 			}
 		}
-		[StepDefinition(@"in the PD+ page in the Edit Toolbar page I check the Datacodes status:")]
+		[RegexStepDefinition(@"in the PD+ page in the Edit Toolbar page I check the Datacodes status:")]
 		public void GivenICheckTheDatacodesAsFollows(Table table)
 		{
 			foreach (TableRow thisRow in table.Rows)
@@ -336,7 +337,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"in the Edit Toolbar page I check the following items:")]
+		[RegexStepDefinition(@"in the Edit Toolbar page I check the following items:")]
 		public void GivenInTheEditToolbarPageICheckTheFollowingItems(Table table)
 		{
 			var thisPDiEditPage = new PDEditPage();
@@ -349,7 +350,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"in the Edit Toolbar page I click: (.*)")]
+		[RegexStepDefinition(@"in the Edit Toolbar page I click: (.*)")]
 		public void GivenInTheEditToolbarPageIClick(string button)
 		{
 			var thisPDiEditPage = new PDEditPage();
@@ -365,7 +366,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In Apply Rules Page I click on the following apply radio button: (.*)")]
+		[RegexStepDefinition(@"In Apply Rules Page I click on the following apply radio button: (.*)")]
 		public void InApplyRulesPageIClickOnTheFollowingApplyRadioButton(string button)
 		{
 			var thisApplyRulesPage = new ApplyRulesPage();
@@ -374,7 +375,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Clicked " + button);
 		}
 
-		[StepDefinition(@"In Apply Rules Page I click on the single rule ellipsis button")]
+		[RegexStepDefinition(@"In Apply Rules Page I click on the single rule ellipsis button")]
 		public void InApplyRulesPageIClickOnTheSingleRulesEllipsisButton()
 		{
 			var thisApplyRulesPage = new ApplyRulesPage();
@@ -413,7 +414,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Select rules page has loaded");
 		}
 
-		[StepDefinition(@"In Select Rules Popup Page I click on the filter icon")]
+		[RegexStepDefinition(@"In Select Rules Popup Page I click on the filter icon")]
 		public void InSelectRulesPageIClickOnFilterIcon()
 		{
 			var thisSelectRulesPage = new SelectRulesPage();
@@ -424,7 +425,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Select rules popup has loaded");
 		}
 
-		[StepDefinition(@"In Select Rules Filter Popup Page I enter the following: (.*) in textbox: (.*)")]
+		[RegexStepDefinition(@"In Select Rules Filter Popup Page I enter the following: (.*) in textbox: (.*)")]
 		public void InSelectRulesFilterPopupIEnterValueInTextBox(string value, string textbox)
 		{
 			var thisSelectRulesFilter = new SelectRulesFilter();
@@ -433,7 +434,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Succeeded in entering value: " + value + " in textbox: " + textbox);
 		}
 
-		[StepDefinition(@"In Select Rules Filter Popup Page I select the following: (.*) from selectbox: (.*)")]
+		[RegexStepDefinition(@"In Select Rules Filter Popup Page I select the following: (.*) from selectbox: (.*)")]
 		public void InSelectRulesFilterPopupISelectFromSelectBox(string value, string selectbox)
 		{
 			var thisSelectRulesFilter = new SelectRulesFilter();
@@ -442,7 +443,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Succeeded in entering value: " + value + " in selectbox: " + selectbox);
 		}
 
-		[StepDefinition(@"In Select Rules Filter Popup Page I click button: (.*)")]
+		[RegexStepDefinition(@"In Select Rules Filter Popup Page I click button: (.*)")]
 		public void InSelectRulesFilterPopupIClickButton(string button)
 		{
 			var thisSelectRulesFilter = new SelectRulesFilter();
@@ -468,7 +469,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In Select Rules Popup Page I click first record to select")]
+		[RegexStepDefinition(@"In Select Rules Popup Page I click first record to select")]
 		public void InSelectRulesPageIClickOnFirstRecord()
 		{
 			var thisSelectRulesPage = new SelectRulesPage();
@@ -489,7 +490,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In Apply Rules Page I click on the button: (.*)")]
+		[RegexStepDefinition(@"In Apply Rules Page I click on the button: (.*)")]
 		public void InApplyRulesPageIClickOnButton(string button)
 		{
 			Report.Info("Beginning: In Apply Rules Page I click on the button: " + button);
@@ -546,7 +547,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I click on document queue to open document queue popup")]
+		[RegexStepDefinition(@"I click on document queue to open document queue popup")]
 		public void IClickOnPublishThisDocumentToOpenDocumentQueuePopup()
 		{
 			Report.Info($"Starting I click on document queue to open document queue popup");
@@ -568,7 +569,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Document queue page loaded");
 		}
 
-		[StepDefinition(@"In document queue popup I click on filter icon")]
+		[RegexStepDefinition(@"In document queue popup I click on filter icon")]
 		public void InDocumentQueuePopupIClickOnFilterIcon()
 		{
 			var thisDocumentQueuePage = new DocumentQueuePage();
@@ -582,7 +583,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In document queue filter page I enter value: (.*) in select box: (.*)")]
+		[RegexStepDefinition(@"In document queue filter page I enter value: (.*) in select box: (.*)")]
 		public void InDocumentQueueFilterPageIEnterValueInSelectBox(string value, string selectBox)
 		{
 			var thisSelectDocumentQueueFilter = new SelectDocumentQueueFilter();
@@ -594,7 +595,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In document queue filter page I enter value: (.*) in entry box: (.*)")]
+		[RegexStepDefinition(@"In document queue filter page I enter value: (.*) in entry box: (.*)")]
 		public void InDocumentQueueFilterPageIEnterValueInEntryBox(string value, string entryBox)
 		{
 			if (value.ToLower().Contains("saved as"))
@@ -611,7 +612,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In document queue filter page I click on apply")]
+		[RegexStepDefinition(@"In document queue filter page I click on apply")]
 		public void InDocumentQueueFilterPageIClickOnApply()
 		{
 			var thisSelectDocumentQueueFilter = new SelectDocumentQueueFilter();
@@ -619,7 +620,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Click on apply");
 		}
 
-		[StepDefinition(@"In document queue filter page I click on select all checkbox")]
+		[RegexStepDefinition(@"In document queue filter page I click on select all checkbox")]
 		public void InDocumentQueueFilterPageIClickOnSelectAllCheckbox()
 		{
 			Report.Info($"starting In document queue filter page I click on select all checkbox");
@@ -632,7 +633,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//this.InDocumentQueueFilterPageICheckSelectAllChecked();
 		}
 
-		[StepDefinition(@"In document queue filter page I check that the select all Checkbox was successfully checked")]
+		[RegexStepDefinition(@"In document queue filter page I check that the select all Checkbox was successfully checked")]
 		public void InDocumentQueueFilterPageICheckSelectAllChecked()
 		{
 			Report.Info("Beginning: In document queue filter page I click on process documents");
@@ -642,7 +643,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisDocumentQueuePage.CheckSelectAllChecked(), "Failed to check if the select all box was checked", "Select all box was checked", showSuccessScreenshot: false);
 		}
 
-		[StepDefinition(@"In document queue filter page I click on process documents")]
+		[RegexStepDefinition(@"In document queue filter page I click on process documents")]
 		public void InDocumentQueueFilterPageIClickOnProcessDocuments()
 		{
 			Report.Info("Beginning: In document queue filter page I click on process documents");
@@ -652,7 +653,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Clicked process documents",showSuccessScreenshot: false);
 		}
 
-		[StepDefinition(@"In document queue filter page I click on clone selected row")]
+		[RegexStepDefinition(@"In document queue filter page I click on clone selected row")]
 		public void InDocumentQueueFilterPageIClickOnCloneSelectedRow()
 		{
 			var thisDocumentQueuePage = new DocumentQueuePage();
@@ -660,7 +661,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Clicked clone selected row");
 		}
 
-		[StepDefinition(@"In document queue filter page I click on delete selected")]
+		[RegexStepDefinition(@"In document queue filter page I click on delete selected")]
 		public void InDocumentQueueFilterPageIClickOnDeleteSelected()
 		{
 			var thisDocumentQueuePage = new DocumentQueuePage();
@@ -668,14 +669,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Clicked delete selected");
 		}
 
-		[StepDefinition(@"In document queue filter page I click on close")]
+		[RegexStepDefinition(@"In document queue filter page I click on close")]
 		public void InDocumentQueueFilterPageIClickOnClose()
 		{
 			var thisDocumentQueuePage = new DocumentQueuePage();
 			thisDocumentQueuePage.ClickClose();
 		}
 
-		[StepDefinition(@"I navigate to power designer plus")]
+		[RegexStepDefinition(@"I navigate to power designer plus")]
 		public void NavigateToPowerDesignerPlus()
 		{
 			var thisTopMenu = new StudioTopMenu();
@@ -687,7 +688,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisPowerDesignerPlus.ClickContinueButton();
 		}
 
-		[StepDefinition(@"I should see an alert with the following message: (.*)")]
+		[RegexStepDefinition(@"I should see an alert with the following message: (.*)")]
 		public void IShouldSeeAnAlertAsFollows(string expectedAlertText)
 		{
 			var thisCurrentDocument = new CurrentDocument();
@@ -718,7 +719,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//	"Alert text is showing as expected: " + expectedAlertText, false, false);
 		}
 
-		[StepDefinition(@"For product saved as: (.*) I should see an alert with the following message: (.*)")]
+		[RegexStepDefinition(@"For product saved as: (.*) I should see an alert with the following message: (.*)")]
 		public void ForProductSavedAsIShouldSeeAnAlertAsFollows(string productSavedAs, string expectedAlertText)
 		{
 			var thisCurrentDocument = new CurrentDocument();
@@ -749,7 +750,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I close alert")]
+		[RegexStepDefinition(@"I close alert")]
 		public void ICloseAlert()
 		{
 			try
@@ -765,7 +766,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I check the following items are showing in the Document Queue table")]
+		[RegexStepDefinition(@"I check the following items are showing in the Document Queue table")]
 		public void GivenICheckTheFollowingItemsAreShowingInTheDocumentQueueTable(Table table)
 		{
 			var tableHeaders = table.Header.ToList();
@@ -847,7 +848,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"In SHA Manager I select product by id: (.*)")]
+		[RegexStepDefinition(@"In SHA Manager I select product by id: (.*)")]
 		public void InSHAManagerISelectProductById(string idToSelect)
 		{
 			try
@@ -868,7 +869,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In SHA Manager I click on bottom menu item: (.*)")]
+		[RegexStepDefinition(@"In SHA Manager I click on bottom menu item: (.*)")]
 		public void InSHAManagerIClickOnBottomMenuItem(string menuItem)
 		{
 			try
@@ -883,7 +884,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the Process Products popup in SHAManager I select the following retailers")]
+		[RegexStepDefinition(@"In the Process Products popup in SHAManager I select the following retailers")]
 		public void GivenInTheProcessProductsPopupInSHAManagerISelectTheFollowingRetailers(Table table)
 		{
 			var thisProcessProducts = new ProcessProducts();
@@ -913,7 +914,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the Process Products popup in SHAManager I set the new status drop down list to be: (.*)")]
+		[RegexStepDefinition(@"In the Process Products popup in SHAManager I set the new status drop down list to be: (.*)")]
 		public void GivenInTheProcessProductsPopupInSHAManagerISetNewStatusDDListTo(string status)
 		{
 			var thisProcessProducts = new ProcessProducts();
@@ -923,7 +924,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"Selected new status: {status}");
 		}
 
-		[StepDefinition(@"In the Process Products popup in SHAManager I click on update status button")]
+		[RegexStepDefinition(@"In the Process Products popup in SHAManager I click on update status button")]
 		public void GivenInTheProcessProductsPopupInSHAManagerIClickOnUpdateStatusButton()
 		{
 			var thisProcessProducts = new ProcessProducts();
@@ -934,7 +935,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"In the Product Formulation page I click button: (.*)")]
+		[RegexStepDefinition(@"In the Product Formulation page I click button: (.*)")]
 		public void InTheProductForulationPageIClickButton(string button)
 		{
 			var thisFormulationPage = new ProductFormulationPage();
@@ -944,8 +945,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Clicked button: " + button);
 		}
 
-		[StepDefinition(@"In the Create component page I add component")]
-		public void InTheCreateComponentPageIAddComponent(TechTalk.SpecFlow.Table component)
+		[RegexStepDefinition(@"In the Create component page I add component")]
+		public void InTheCreateComponentPageIAddComponent(Table component)
 		{
 			var thisCreateComponentPage = new CreateComponentPage();
 			Report.IsTrue(thisCreateComponentPage.Wait_for_load(30), "Create component screen is not showing",
@@ -1081,7 +1082,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I close the Product Formulation page")]
+		[RegexStepDefinition(@"I close the Product Formulation page")]
 		public void GivenICloseTheProductFormulationPage()
 		{
 			var thisFormulationPage = new ProductFormulationPage();
@@ -1090,7 +1091,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisFormulationPage.ClickClose();
 		}
 
-		[StepDefinition(@"In the Power Designer Plus Welcome page I enter Select Source Product: (.*)")]
+		[RegexStepDefinition(@"In the Power Designer Plus Welcome page I enter Select Source Product: (.*)")]
 		public void PowerDesignerPlusWelcomeIEnterSelectSourceProduct(string productID)
 		{
 			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
@@ -1100,7 +1101,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisPowerDesignerPlus.ClickRefreshButton();
 		}
 
-		[StepDefinition(@"I confirm the selected Subformat in the Power Designer Plus popup is: (.*)")]
+		[RegexStepDefinition(@"I confirm the selected Subformat in the Power Designer Plus popup is: (.*)")]
 		public void IConfirmTheSelectedSubformatInThePdPlusPopupIs(string subFormat)
 		{
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlus();
@@ -1118,7 +1119,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click continue in the Power Designer Plus popup")]
+		[RegexStepDefinition(@"I click continue in the Power Designer Plus popup")]
 		public void ClickContinueInThePowerDesignerPlusPopup()
 		{
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlus();
@@ -1127,7 +1128,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked Continue in the Power Designer Plus popup");
 		}
 
-		[StepDefinition(@"In Power Designer I (left|right|double) click on section: (.*)")]
+		[RegexStepDefinition(@"In Power Designer I (left|right|double) click on section: (.*)")]
 		public void GivenInPowerDesignerIClickOnSection(string click, string section)
 		{
 
@@ -1148,7 +1149,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 		}
 
-		[StepDefinition(@"In Power Designer I double click on category: (.*)")]
+		[RegexStepDefinition(@"In Power Designer I double click on category: (.*)")]
 		public void GivenInPowerDesignerIDoubleClickOnCategory(string category)
 		{
 			Report.Info("Beginning double click on category to edit: " + category);
@@ -1160,7 +1161,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked " + category);
 		}
 
-		[StepDefinition(@"In Power Designer the phrase selector screen should open")]
+		[RegexStepDefinition(@"In Power Designer the phrase selector screen should open")]
 		public void ThenInPowerDesignerThePhraseSelectorScreenShouldOpen()
 		{
 			var thisPhraseEditor = new PhraseEditor();
@@ -1168,7 +1169,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Phrase editor has opened");
 		}
 
-		[StepDefinition(@"In the phrase selector screen I select phrases:")]
+		[RegexStepDefinition(@"In the phrase selector screen I select phrases:")]
 		public void ThenInThePhraseSelectorScreenISelectPhrases(Table table)
 		{
 			bool addedSuccessfully = true;
@@ -1249,7 +1250,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		//save, clear, cancel, previous, next
-		[StepDefinition(@"In the phrase selector screen I click button: (.*)")]
+		[RegexStepDefinition(@"In the phrase selector screen I click button: (.*)")]
 		public void ThenInThePhraseSelectorScreenIClickButton(string button)
 		{
 			var thisPhraseEditor = new PhraseEditor();
@@ -1264,7 +1265,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"I click on home to navigate back to editing specific product saved as (.*)")]
+		[RegexStepDefinition(@"I click on home to navigate back to editing specific product saved as (.*)")]
 		public void GivenIClickOnHomeToNavigateBackToEditingSpecificProductSavedAs(string savedAs)
 		{
 			var thispd = new StudioPowerDesignerPlusDesignMode();
@@ -1326,7 +1327,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selStepsStudio.GivenInPowerDesignerIClickOnSection("left", checkListSection);
 		}
 
-		[StepDefinition(@"I check whether the current environment is Staging or Production and if it is I skip the next three steps")]
+		[RegexStepDefinition(@"I check whether the current environment is Staging or Production and if it is I skip the next three steps")]
 		public void GivenICheckWhetherTheCurrentEnvironmentIsStagingOrProductionAndIfItIsISkipTheNextThreeSteps()
 		{
 			if (TReVorSettings.SoftwareBranch == "Staging" || TReVorSettings.SoftwareBranch == "Local Production" ||
@@ -1337,7 +1338,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click on Product Attributes to open product attribute popup")]
+		[RegexStepDefinition(@"I click on Product Attributes to open product attribute popup")]
 		public void IClickOnProductAttributesToOpenProductAttributePopup()
 		{
 			var thisStudioPowerDesignerPlusDesignMode =
@@ -1350,7 +1351,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(3);
 		}
 
-		[StepDefinition(@"In Product Attributes Popup Page I click on the filter icon")]
+		[RegexStepDefinition(@"In Product Attributes Popup Page I click on the filter icon")]
 		public void InProductAttributePageIClickOnFilterIcon()
 		{
 			var thisProductAttributePage = new ProductAttributePage();
@@ -1362,7 +1363,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Product attributes popup has loaded");
 		}
 
-		[StepDefinition(@"In Product Attributes Filter Popup Page I enter the following: (.*) in textbox: (.*)")]
+		[RegexStepDefinition(@"In Product Attributes Filter Popup Page I enter the following: (.*) in textbox: (.*)")]
 		public void InProductAttributeFilterPopupIEnterValueInTextBox(string value, string textbox)
 		{
 			var thisProductAttributesFilter = new ProductAttributesFilter();
@@ -1371,7 +1372,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Succeeded in entering value: " + value + " in textbox: " + textbox);
 		}
 
-		[StepDefinition(@"In Product Attributes Filter Popup Page I select the following: (.*) from selectbox: (.*)")]
+		[RegexStepDefinition(@"In Product Attributes Filter Popup Page I select the following: (.*) from selectbox: (.*)")]
 		public void InProductAttributeFilterPopupISelectFromSelectBox(string value, string selectbox)
 		{
 			var thisProductAttributesFilter = new ProductAttributesFilter();
@@ -1380,7 +1381,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Succeeded in entering value: " + value + " in selectbox: " + selectbox);
 		}
 
-		[StepDefinition(@"In Product Attributes Filter Popup Page I click button: (.*)")]
+		[RegexStepDefinition(@"In Product Attributes Filter Popup Page I click button: (.*)")]
 		public void InProductAttributeFilterPopupIClickButton(string button)
 		{
 			var thisProductAttributesFilter = new ProductAttributesFilter();
@@ -1406,7 +1407,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In Product Attributes Popup Page I should see (\d+) results")]
+		[RegexStepDefinition(@"In Product Attributes Popup Page I should see (\d+) results")]
 		public void InProductAttributePageIShouldSeeXResults(int expectedResults)
 		{
 			var thisProductAttributePage = new ProductAttributePage();
@@ -1414,7 +1415,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Results count was as expected");
 		}
 
-		[StepDefinition(@"In Power Designer Plus page in My Toolbar tab I click on check in\/out button")]
+		[RegexStepDefinition(@"In Power Designer Plus page in My Toolbar tab I click on check in\/out button")]
 		public void GivenInPowerDesignerPlusPageInMyToolbarTabIClickOnInOutButton()
 		{
 			var thisStudioPowerDesignerPlusDesignMode =
@@ -1425,7 +1426,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Clicked in out button");
 		}
 
-		[StepDefinition(@"In Assign\/Reassign products I click on: (Check In|Check Out)")]
+		[RegexStepDefinition(@"In Assign\/Reassign products I click on: (Check In|Check Out)")]
 		public void GivenInAssignProductsPopupIClickOnCheckInOrCheckOut(string checkInOrCheckOut)
 		{
 			var thisAssignReassignProducts = new AssignReassignProducts();
@@ -1441,7 +1442,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		//	And I Click Check In
 		//And I Click the X in the top corner of the pop up to close it
 
-		[StepDefinition(@"In power designer popup I set language option: (.*)")]
+		[RegexStepDefinition(@"In power designer popup I set language option: (.*)")]
 		public void InPowerDesignerPopupISetLanguageOption(string language)
 		{
 			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
@@ -1452,7 +1453,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Set language option");
 		}
 
-		[StepDefinition(@"In power designer popup I set subformat option: (.*)")]
+		[RegexStepDefinition(@"In power designer popup I set subformat option: (.*)")]
 		public void InPowerDesignerPopupISetSubFormatOption(string subformat)
 		{
 			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
@@ -1464,7 +1465,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"In power designer popup I set format: (.*) and subformat: (.*)")]
+		[RegexStepDefinition(@"In power designer popup I set format: (.*) and subformat: (.*)")]
 		public void InPowerDesignerPopupISetFormatAndSubFormatOption(string format, string subformat)
 		{
 			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
@@ -1474,7 +1475,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Set format option");
 		}
 
-		[StepDefinition(@"In power designer popup I select product id option: (.*)")]
+		[RegexStepDefinition(@"In power designer popup I select product id option: (.*)")]
 		public void InPowerDesignerPopupISelectProductIDOption(string productIDOption)
 		{
 			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
@@ -1484,7 +1485,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Set action option");
 		}
 
-		[StepDefinition(@"In power designer popup I select any Format/Subformat")]
+		[RegexStepDefinition(@"In power designer popup I select any Format/Subformat")]
 		public void InPowerDesignerPopupISelectAnyFormatSubFormatOption()
 		{
 			var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
@@ -1493,7 +1494,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisPowerDesignerPlus.SelectRandomFormat(), "Failed to select ranodm format",
 				"Selected random format");
 		}
-		[StepDefinition(@"In Power Designer I click on the 'Sections' side tab if it is closed")]
+		[RegexStepDefinition(@"In Power Designer I click on the 'Sections' side tab if it is closed")]
 		public void InPowerDesignerIClickOnTheSectionsSideTab()
 		{
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
@@ -1511,7 +1512,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						
 		}
 
-		[StepDefinition(@"In PD+ I Fill the section WALMART QC RESPONCE FORM with junk data")]
+		[RegexStepDefinition(@"In PD+ I Fill the section WALMART QC RESPONCE FORM with junk data")]
 		public void InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData()
 		{
 			ReportSettings.UseSubSteps = true;
@@ -1681,7 +1682,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In Power Designer I ensure SECT2318 is the Active Section")]
+		[RegexStepDefinition(@"In Power Designer I ensure SECT2318 is the Active Section")]
 		public void InPDIEnsureSECT2318IsActive()
 		{
 			string click = "left";
@@ -1700,7 +1701,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			return;
 		}
 
-		[StepDefinition(@"In Power Designer I ensure SECT0077 is the Active Section")]
+		[RegexStepDefinition(@"In Power Designer I ensure SECT0077 is the Active Section")]
 		public void InPDIEnsureSECT0077IsActive()
 		{
 			string click = "left";
@@ -1725,7 +1726,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In Power Desginer, fill in SECT2318 if it is present then navigate to Checklist Section")]
+		[RegexStepDefinition(@"In Power Desginer, fill in SECT2318 if it is present then navigate to Checklist Section")]
 		public void InPDFillInSET2318ifPresentThenNavigateToChecklistSection()
 		{
 			var selStepsStudio = new Steps_Studio();
@@ -1743,7 +1744,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In Power Desginer, fill in Additional Sections if they are present then navigate to Checklist Section")]
+		[RegexStepDefinition(@"In Power Desginer, fill in Additional Sections if they are present then navigate to Checklist Section")]
 		public void InPDFillInAdditonionalSectionsifPresentThenNavigateToChecklistSection()
 		{
 			var selStepsStudio = new Steps_Studio();
@@ -1766,7 +1767,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In Power Desginer, fill in SECT2318 if it is present then navigate to SECT0077")]
+		[RegexStepDefinition(@"In Power Desginer, fill in SECT2318 if it is present then navigate to SECT0077")]
 		public void InPDFillInSET2318ifPresentThenNavigateToSECT0077()
 		{
 			var selStepsStudio = new Steps_Studio();
@@ -1783,7 +1784,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In Power Desginer, fill in SECT2318 if it is present")]
+		[RegexStepDefinition(@"In Power Desginer, fill in SECT2318 if it is present")]
 		public void InPDFillInSET2318ifPresent()
 		{
 			var selStepsStudio = new Steps_Studio();
@@ -1800,7 +1801,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In Power Desginer, fill in Additional Sections if they are present")]
+		[RegexStepDefinition(@"In Power Desginer, fill in Additional Sections if they are present")]
 		public void InPDFillInAdditionalSectionsifPresent()
 		{
 			var selStepsStudio = new Steps_Studio();
@@ -1826,7 +1827,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"In PD+ I Fill the section Walmart Transportation Information  with junk data")]
+		[RegexStepDefinition(@"In PD+ I Fill the section Walmart Transportation Information  with junk data")]
 		public void InPDIFillTheSectionWalmartTransportationInformationWithJunkData()
 		{
 			ReportSettings.UseSubSteps = true;
@@ -2077,7 +2078,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			selStudioPowerDesignerPlus.Wait_for_load(30);
 		}
 		
-		[StepDefinition(@"I confirm data code with data:(.*) with value:(.*) added")]
+		[RegexStepDefinition(@"I confirm data code with data:(.*) with value:(.*) added")]
 		public void GivenIConfirmDataCodeAdded(string data, string value)
 		{
 			try
@@ -2095,7 +2096,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure(ex.Message);
 			}
 		}
-		[StepDefinition(@"I remove the Datacode:(.*) to the Section - Applicable Only to Type of Product")]
+		[RegexStepDefinition(@"I remove the Datacode:(.*) to the Section - Applicable Only to Type of Product")]
 		public void GivenIRemoveDataCode(string datacode)
 		{
 			try

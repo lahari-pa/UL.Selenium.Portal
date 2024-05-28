@@ -2,8 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
-using TechTalk.SpecFlow;
+using UL.Automation.ReqnrollHelpers.Classes;
+using Reqnroll;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -11,7 +12,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding, Scope(Tag = "DocumentAcceptance")]
 	class Steps_DocumentAcceptance
 	{
-		[StepDefinition(@"I confirm there are products listed under My Products on the Document Acceptance page and save as: (.*)")]
+		[RegexStepDefinition(@"I confirm there are products listed under My Products on the Document Acceptance page and save as: (.*)")]
 		public void ConfirmThereAreProductsListedUnderMyProducts(string savedAs)
 		{
 			GeneralUtilities.Wait_for_load_finish();
@@ -23,7 +24,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"There were products listed under My Products");
 		}
 
-		[StepDefinition(@"I select the first product from My Products saved as: (.*) which contains a document")]
+		[RegexStepDefinition(@"I select the first product from My Products saved as: (.*) which contains a document")]
 		public void SelectFirstProductFromMyProductsWithDocument(string savedAs)
 		{
 			var selDocumentAcceptance = new DocumentAcceptance();
@@ -43,7 +44,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I save the displayed Documents on the Document Acceptance page as: (.*)")]
+		[RegexStepDefinition(@"I save the displayed Documents on the Document Acceptance page as: (.*)")]
 		public void SaveDisplayedDocumentsOnDocumentsAcceptancePage(string savedAs)
 		{
 			var selDocumentsAcceptance = new DocumentAcceptance();
@@ -52,7 +53,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(savedAs, documents);
 		}
 
-		[StepDefinition(@"I confirm the Subformat column appears as part of the Documents Information")]
+		[RegexStepDefinition(@"I confirm the Subformat column appears as part of the Documents Information")]
 		public void ConfirmSubformatColumnAppearsUnderDocumentInformation()
 		{
 			var selDocumentAcceptance = new DocumentAcceptance();
@@ -61,7 +62,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The Subformat column is displayed in the Documents grid as expected");
 		}
 
-		[StepDefinition(@"I click on View under Actions for the first document from the list saved as: (.*)")]
+		[RegexStepDefinition(@"I click on View under Actions for the first document from the list saved as: (.*)")]
 		public void ClickViewUnderActionsForTheFirstDocumentDisplayed(string savedAs)
 		{
 			var documents = (List<DocumentAcceptance.DocumentsItem>)Context.GetFromContext(savedAs);
@@ -77,7 +78,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked 'view' for document: " + documents.First().FileName);
 		}
 
-		[StepDefinition(@"I confirm a new window opens displaying the document url: (.*)")]
+		[RegexStepDefinition(@"I confirm a new window opens displaying the document url: (.*)")]
 		public void ConfirmANewWindowOpensDisplayingTheDocument(string option)
 		{
 			var selDocumentAcceptance = new DocumentAcceptance();
@@ -86,7 +87,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"A window containing the document opened as expected");
 		}
 
-		[StepDefinition(@"I close the document window: (.*)")]
+		[RegexStepDefinition(@"I close the document window: (.*)")]
 		public void CloseTheDocumentWindow(string option)
 		{
 			var selDocumentAcceptance = new DocumentAcceptance();
@@ -95,7 +96,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully closed the document window");
 		}
 
-		[StepDefinition(@"I switch to the main window")]
+		[RegexStepDefinition(@"I switch to the main window")]
 		public void ISwitchToMainWindow()
 		{
 			var selDocumentAcceptance = new DocumentAcceptance();
@@ -104,7 +105,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully switched to the main window");
 		}
 
-		[StepDefinition(@"I confirm the subformat type at the top of the document matches the vaulue in the Documents table for the first document I viewed")]
+		[RegexStepDefinition(@"I confirm the subformat type at the top of the document matches the vaulue in the Documents table for the first document I viewed")]
 		public void ConfirmSubformatTypeInDocumentMatchesDocumentsTableValue()
 		{
 			var selDocumentsAcceptance = new DocumentAcceptance();
@@ -121,7 +122,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string documentText = selDocumentsAcceptance.DocumentText(address);
 		}
 
-		[StepDefinition(@"I confirm that the Document Acceptance page is showing")]
+		[RegexStepDefinition(@"I confirm that the Document Acceptance page is showing")]
 		public void ThenIConfirmThatTheDocumentAcceptancePageIsShowing()
 		{
 			DocumentAcceptance EM = new DocumentAcceptance();

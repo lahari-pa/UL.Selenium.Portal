@@ -3,15 +3,16 @@ using System.IO;
 using System.Linq;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.Utilities.Functions;
-using TechTalk.SpecFlow;
+using Reqnroll;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using System.Collections.Generic;
 using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using System.IO;
+using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -19,7 +20,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	class Steps_SupplierReports
 	{
 
-		[StepDefinition(@"Under the Supplier Reports menu I choose: (.*)")]
+		[RegexStepDefinition(@"Under the Supplier Reports menu I choose: (.*)")]
 		public void GivenUnderTheSupplierReportsMenuIChoose(string choice)
 		{
 			Report.IsTrue(new SupplierReports().SelectReport(choice), "Failed to choose: " + choice,
@@ -27,7 +28,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(15);
 		}
 
-		[StepDefinition(@"In the Supplier Reports screen the page title should be: (.*)")]
+		[RegexStepDefinition(@"In the Supplier Reports screen the page title should be: (.*)")]
 		public void InTheSupplierReportsScreenThePageTitleShouldBe(string title)
 		{
 			string actual = new SupplierReports().GetCurrentTitle();
@@ -36,7 +37,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"In the Supplier Reports screen the subheader should be: (.*)")]
+		[RegexStepDefinition(@"In the Supplier Reports screen the subheader should be: (.*)")]
 		public void InTheSupplierReportsScreenTheSubheaderShouldBe(string subheading)
 		{
 			string actual = new SupplierReports().GetSubheadingText();
@@ -44,7 +45,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Page subheading '" + subheading + "' is showing as expected.");
 		}
 
-		[StepDefinition(@"In the Supplier Reports screen the current page should be: (.*)")]
+		[RegexStepDefinition(@"In the Supplier Reports screen the current page should be: (.*)")]
 		public void ThenInTheSupplierReportsScreenTheCurrentPageShouldBe(string expected)
 		{
 			string actual = new SupplierReports().GetCurrentTitle();
@@ -52,21 +53,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Showing subtitle: " + expected + " as expected.");
 		}
 
-		[StepDefinition(@"In the Supplier Reports screen the current sub-page should be: (.*)")]
+		[RegexStepDefinition(@"In the Supplier Reports screen the current sub-page should be: (.*)")]
 		public void ThenInTheSupplierReportsScreenTheCurrentSubPageShouldBe(string subtitle)
 		{
 			Report.IsTrue(new SupplierReports().GetCurrentSubTitle() == subtitle, "Subtitle is not showing as expected",
 				"Showing subtitle: " + subtitle + " as expected.");
 		}
 
-		[StepDefinition(@"In the Supplier Reports screen I click on the Download button")]
+		[RegexStepDefinition(@"In the Supplier Reports screen I click on the Download button")]
 		public void GivenInTheSupplierReportsScreenIClickOnTheDownloadButton()
 		{
 			Report.IsTrue(new SupplierReports().ClickDownload(), "Failed to click download button",
 				"Successfully clicked download button.");
 		}
 
-		[StepDefinition(@"under the supplier Reports menu I should see the following options")]
+		[RegexStepDefinition(@"under the supplier Reports menu I should see the following options")]
 		public void GivenUnderTheSupplierReportsMenuIShouldSeeTheFollowingOptions(Table table)
 		{
 			List<string> SupplierReports = new SupplierReports().GetReportList();
@@ -78,7 +79,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the Kits that contain a specific product I search and select product: (.*)")]
+		[RegexStepDefinition(@"In the Kits that contain a specific product I search and select product: (.*)")]
 		public void GivenInTheKitsThatContainASpecificProductISearchAndSelectProduct(string productCode)
 		{
 			if (productCode.ToLower().Contains("saved as"))
@@ -99,28 +100,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to select product: " + productCode, "Successfully selected product: " + productCode);
 		}
 
-		[StepDefinition(@"In the UPC Report for Specific Product with Retailer I search and select product: (.*)")]
+		[RegexStepDefinition(@"In the UPC Report for Specific Product with Retailer I search and select product: (.*)")]
 		public void GivenInTheUPCReportForSpecificProductWithRetailerISearchAndSelectProduct(string productCode)
 		{
 			Report.IsTrue(new SupplierReports().SelectSpecificProduct(productCode),
 				"Failed to select product: " + productCode, "Successfully selected product: " + productCode);
 		}
 
-		[StepDefinition(@"I select a random product from the drop down")]
+		[RegexStepDefinition(@"I select a random product from the drop down")]
 		public void InTheUPCReportISelectARandomProduct()
 		{
 			Report.IsTrue(new SupplierReports().SelectRandomProduct(), "Failed to select a random product",
 				"Successfully selected a random product");
 		}
 
-		[StepDefinition(@"In the Supplier Report page in the select Retailer dropdown I select: (.*)")]
+		[RegexStepDefinition(@"In the Supplier Report page in the select Retailer dropdown I select: (.*)")]
 		public void GivenInTheSupplierReportPageInTheSelectRetailerDropdownISelect(string retailer)
 		{
 			Report.IsTrue(new SupplierReports().SelectRetailer(retailer),
 				"Failed to select retailer: " + retailer, "Successfully selected retailer: " + retailer);
 		}
 
-		[StepDefinition(@"I confirm that a file is downloaded with file name: (.*) then close the Report Download popup. I save the file as (.*)")]
+		[RegexStepDefinition(@"I confirm that a file is downloaded with file name: (.*) then close the Report Download popup. I save the file as (.*)")]
 		public void ConfirmFileAppearsInDownloadsFolder(string file, string savedAs)
 		{
 			var selReportDownload = new ReportDownload();
@@ -153,7 +154,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I delete the Supplier Report file saved as (.*)")]
+		[RegexStepDefinition(@"I delete the Supplier Report file saved as (.*)")]
 		public void DeleteExcelFile(string savedAs)
 		{
 			string file = Context.GetFromContext(savedAs)?.ToString() ?? "";
@@ -166,7 +167,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			File.Delete(file);
 		}
 
-		[StepDefinition(@"In the Supplier Report page I should see the report description should be showing with text: (.*)")]
+		[RegexStepDefinition(@"In the Supplier Report page I should see the report description should be showing with text: (.*)")]
 		public void SupplierReportPageIShoudSeeDescription(string expected)
 		{
 			string displayed = new SupplierReports().GetCurrentSubText();
@@ -175,7 +176,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The report description text was displayed as expected.");
 		}
 
-		[StepDefinition(@"If the product is Private Label, I ensure that product saved as: (.*) shows as Private Label: (.*)")]
+		[RegexStepDefinition(@"If the product is Private Label, I ensure that product saved as: (.*) shows as Private Label: (.*)")]
 		public void IfProductIsPrivateLabelEnsureThatProductShowsAsPrivateLabel(string savedAs, string privateLabel)
 		{
 			var product = (ProductInformation)Context.GetFromContext(savedAs);
@@ -190,7 +191,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(selProdGrid.ConfirmIsPrivateLabel(pl), "Failed to match Private Label tag to product!", "Successfully match Private Label tag to product.");
 		}
 
-		[StepDefinition(@"I confirm that UPC: (.*) shows in the list of UPCs")]
+		[RegexStepDefinition(@"I confirm that UPC: (.*) shows in the list of UPCs")]
 		public void IConfirmThatTheUPCShowsInTheListOfUPCs(string savedAs)
 		{
 			string upc = Context.GetFromContext(savedAs)?.ToString() ?? "";
@@ -200,7 +201,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully found UPC " + upc + " in list of UPCs.");
 		}
 
-		[StepDefinition(@"I confirm that the retailer listed for product saved as: (.*) appears as: (.*)")]
+		[RegexStepDefinition(@"I confirm that the retailer listed for product saved as: (.*) appears as: (.*)")]
 		public void IConfirmThatTheRetailerForProductAppearsAs(string savedAs, string retailer)
 		{
 			var product = (ProductInformation)Context.GetFromContext(savedAs);
@@ -219,7 +220,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully found retailer " + ret + " in list of retailers.");
 		}
 
-		[StepDefinition(@"I confirm that for product saved as: (.*) the value in the (.*) column of spreadsheet (.*) is: (.*)")]
+		[RegexStepDefinition(@"I confirm that for product saved as: (.*) the value in the (.*) column of spreadsheet (.*) is: (.*)")]
 		public void IConfirmThatForProductTheValueInTheColumnIs(string savedAs, string column, string spreadsheet, string value)
 		{
 			var product = (ProductInformation)Context.GetFromContext(savedAs);
@@ -244,7 +245,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Cell value matches value " + value + " for column " + column + " and id " + product.Id + ".");
 		}
 
-		[StepDefinition(@"I confirm that for product saved as: (.*) the value in each of the columns of spreadsheet (.*) is as follows:")]
+		[RegexStepDefinition(@"I confirm that for product saved as: (.*) the value in each of the columns of spreadsheet (.*) is as follows:")]
 		public void IConfirmThatforProductSavedAsTheValueInEachOfTheColumnsIs(string savedAs, string spreadsheet, Table table)
 		{
 			var product = (ProductInformation)Context.GetFromContext(savedAs);
@@ -275,7 +276,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm that for product saved as: (.*) the UPC in the (.*) column of spreadsheet (.*) is: (.*)")]
+		[RegexStepDefinition(@"I confirm that for product saved as: (.*) the UPC in the (.*) column of spreadsheet (.*) is: (.*)")]
 		public void IConfirmThatForProductTheUPCInTheColumnIs(string savedAs, string column, string spreadsheet, string upc)
 		{
 			var product = (ProductInformation)Context.GetFromContext(savedAs);
@@ -301,14 +302,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Cell value matches UPC " + upc + " for column " + column + " and id " + product.Id + ".");
 
 		}
-		[StepDefinition(@"I Check that the Description text on the supplier report page matches: (.*)")]
+		[RegexStepDefinition(@"I Check that the Description text on the supplier report page matches: (.*)")]
 		public void ICheckThatTheDescriptionTextOnTheSupplierReportsPageIsCorrect(string expectedText)
 		{
 			Report.IsTrue(new SupplierReports().DescriptionTextMatches(expectedText), "The expected text did not match the actual text", "The expected text did match the actual text");
 		}
 
 
-		[StepDefinition(@"I Check that in the excel file saved as: (.*) the Eligible for deletion Dates are exactly 1 year from the Last Submission dates.")]
+		[RegexStepDefinition(@"I Check that in the excel file saved as: (.*) the Eligible for deletion Dates are exactly 1 year from the Last Submission dates.")]
 		public void ICheckThatInTheExcelFileSavedAsTheEligibleForDeletionDates(string savedAs)
 		{
 
@@ -362,7 +363,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"in UPC Error Details WPSID box I enter product ID for the UPC Error Details report")]
+		[RegexStepDefinition(@"in UPC Error Details WPSID box I enter product ID for the UPC Error Details report")]
 		public void ThenInUPCErrorDetailsWPSIDBoxIEnterProductID()
 		{
 			string wpsid = TestVariables.GetVariableSavedAs("UPC Error Product ID");
@@ -370,7 +371,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I get a value for WERCSmart ID from the excel file saved as: (.*) and save it to context as: (.*)")]
+		[RegexStepDefinition(@"I get a value for WERCSmart ID from the excel file saved as: (.*) and save it to context as: (.*)")]
 		public void IGetAValueForWERCSmartIDFromExcelFileAndSaveItAs(string fileSavedAs, string iDSavedAs)
 		{
 			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
@@ -398,7 +399,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Failure($"Could not find any WERCSmart IDs in the spreadsheet saved as: {fileSavedAs}");
 		}
 
-		[StepDefinition(@"I confirm that in the excel file saved as: (.*) for the UPC saved as: (.*) there is a 'Y' in the Case Pack column and an Individual UPC listed as: (.*)")]
+		[RegexStepDefinition(@"I confirm that in the excel file saved as: (.*) for the UPC saved as: (.*) there is a 'Y' in the Case Pack column and an Individual UPC listed as: (.*)")]
 		public void IConfirmThatForTheExcelFileSavedAsThereIsAYinCasePackColumnAndIndvUPC(string savedAs, string casePackUPCSavedAs, string indvUPCSavedAs)
 		{
 			object File = Context.GetFromContext(savedAs);
@@ -484,7 +485,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"For the excel file saved as: (.*) I check that the column with heading name: (.*) does not contains: (.*) in any rows.")]
+		[RegexStepDefinition(@"For the excel file saved as: (.*) I check that the column with heading name: (.*) does not contains: (.*) in any rows.")]
 		public void ThenIConfirmThatForTheExcelFileSavedAsTheColumnDoesNotContain(string savedAs, string column, string failValue)
 		{
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
@@ -532,7 +533,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"For the excel file saved as: (.*) I check that the column with heading name: (.*) only contains: (.*) in all rows.")]
+		[RegexStepDefinition(@"For the excel file saved as: (.*) I check that the column with heading name: (.*) only contains: (.*) in all rows.")]
 		public void ThenIConfirmThatForTheExcelFileSavedAsTheColumnOnlyContains(string savedAs, string column, string wantedValue)
 		{
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
@@ -579,7 +580,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"For the excel file saved as: (.*) I check that the column with heading name: (.*) does not contain: (.*) in at least 1 row.")]
+		[RegexStepDefinition(@"For the excel file saved as: (.*) I check that the column with heading name: (.*) does not contain: (.*) in at least 1 row.")]
 		public void ThenIConfirmThatForTheExcelFileSavedAsTheColumnDoesNotContainForAtLeastOneRow(string savedAs, string column, string failValue)
 		{
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
@@ -629,7 +630,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"For the excel file saved as: (.*) I check that the column with heading name: (.*) contains data in all rows.")]
+		[RegexStepDefinition(@"For the excel file saved as: (.*) I check that the column with heading name: (.*) contains data in all rows.")]
 		public void ThenIConfirmThatForTheExcelFileSavedAsTheColumnContainsDataInAllRows(string savedAs, string column)
 		{
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
@@ -677,7 +678,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"For the excel file saved as: (.*) I check that the column with heading name: (.*) contains dates in all rows.")]
+		[RegexStepDefinition(@"For the excel file saved as: (.*) I check that the column with heading name: (.*) contains dates in all rows.")]
 		public void ThenIConfirmThatForTheExcelFileSavedAsTheColumnContainsDatesInAllRows(string savedAs, string column)
 		{
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
@@ -728,7 +729,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		/// </summary>
 		/// <param name="savedAs"></param>
 		/// <param name="table"></param>
-		[StepDefinition(@"For the excel file saved as: (.*) I check that the columns with heading names found in the Table: contain data in all rows.")]
+		[RegexStepDefinition(@"For the excel file saved as: (.*) I check that the columns with heading names found in the Table: contain data in all rows.")]
 		public void ThenIConfirmThatForTheExcelFileSavedAsTheColumnsInTableContainDataInAllRows(string savedAs, Table table)
 		{
 			List<string> headers = new List<string>();
@@ -753,7 +754,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm that the latest report in the Report history table has the name: (.*)")]
+		[RegexStepDefinition(@"I confirm that the latest report in the Report history table has the name: (.*)")]
 		public void IConfirmLatestReportInHistoryTableHasName(string reportName)
 		{
 			//We are assuming that the report we just ran will still be the latest report, if another test is running at same time this may cause some issues.
@@ -764,7 +765,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(foundName == reportName, "The found report name did not match the expected", "The found report name matched the expected");
 		}
 
-		[StepDefinition(@"I confirm that the latest report in the Report history table has the File Type: (.*)")]
+		[RegexStepDefinition(@"I confirm that the latest report in the Report history table has the File Type: (.*)")]
 		public void IConfirmLatestReportInHistoryTableHasFileType(string reportName)
 		{
 			//We are assuming that the report we just ran will still be the latest report, if another test is running at same time this may cause some issues.
@@ -775,7 +776,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(foundName == reportName, "The found report File Type did not match the expected", "The found report File Type matched the expected");
 		}
 
-		[StepDefinition(@"I confirm that the latest report in the Report history table matches the following data:")]
+		[RegexStepDefinition(@"I confirm that the latest report in the Report history table matches the following data:")]
 		public void IConfirmLatestReportInHistoryTableHasFileType(Table table)
 		{
 			//We are assuming that the report we just ran will still be the latest report, if another test is running at same time this may cause some issues.
@@ -847,7 +848,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I confirm that the latest report in the Report history table has a: (.*) button in the Actions Column")]
+		[RegexStepDefinition(@"I confirm that the latest report in the Report history table has a: (.*) button in the Actions Column")]
 		public void IConfirmLatestReportInHistoryTableHasGivenButtonForLatest(string buttonName)
 		{
 			//We are assuming that the report we just ran will still be the latest report, if another test is running at same time this may cause some issues.
@@ -866,7 +867,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(foundValue, "The " + buttonName + " button was not found in the actions column for the latest report", "The " + buttonName + " button was found in the actions column for the latest report");
 		}
 
-		[StepDefinition(@"I click the: (.*) button for the latest report in the Report history table")]
+		[RegexStepDefinition(@"I click the: (.*) button for the latest report in the Report history table")]
 		public void IClickGivebnButtonForLatestReportInTable(string buttonName)
 		{
 			//We are assuming that the report we just ran will still be the latest report, if another test is running at same time this may cause some issues.
@@ -885,7 +886,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(clickedButton, "The " + buttonName + " button was not clicked in the actions column for the latest report", "The " + buttonName + " button was clicked in the actions column for the latest report");
 		}
 
-		[StepDefinition(@"In the Supplier Reports screen the current page description should be: (.*)")]
+		[RegexStepDefinition(@"In the Supplier Reports screen the current page description should be: (.*)")]
 		public void ThenInTheSupplierReportsScreenTheCurrentPageDescriptionShouldBe(string expectedDesc)
 		{
 			var actualDiscription = new SupplierReports().GetCurrentDescriptionText();
@@ -893,7 +894,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"Expected Description is displayed: {expectedDesc}!");
 		}
 
-		[StepDefinition(@"I select (Excel|CSV) from the Select File Type")]
+		[RegexStepDefinition(@"I select (Excel|CSV) from the Select File Type")]
 		public void ThenISelectCSVFromTheSelectFileType(string excelOrCSV)
 		{
 			SupplierReports supplierReportsObject = new SupplierReports();
@@ -901,14 +902,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I select the Zip Report Checkbox")]
+		[RegexStepDefinition(@"I select the Zip Report Checkbox")]
 		public void GivenISelectTheZipReportCheckbox()
 		{
 			SupplierReports supplierReportsObject = new SupplierReports();
 			Report.IsTrue(supplierReportsObject.SelectZipReportCheckbox(), "Failed to select Zip Report Checkbox", "Successfully selected Zip Report Checkbox");
 		}
 
-		[StepDefinition(@"I select the Request Report button (excel|csv|zip) file is produced called (.*) and save as (.*)")]
+		[RegexStepDefinition(@"I select the Request Report button (excel|csv|zip) file is produced called (.*) and save as (.*)")]
 		public void ThenISelectTheRequestReportButton(string filetype, string file, string savedAs)
 		{
 			SupplierReports supplierReportsObject = new SupplierReports();
@@ -916,7 +917,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-		[StepDefinition(@"I click Close in the Report Download popup")]
+		[RegexStepDefinition(@"I click Close in the Report Download popup")]
 		public void ThenIClickCloseInTheReportDownloadPopup()
 		{
 			SupplierReports supplierReportsObject = new SupplierReports();
@@ -924,7 +925,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-		[StepDefinition(@"I confirm there is a Download button for the most recent report")]
+		[RegexStepDefinition(@"I confirm there is a Download button for the most recent report")]
 		public void ThenIClickThereIsADownloadButtonForTheMostRecentReport()
 		{
 			SupplierReports supplierReportsObject = new SupplierReports();
@@ -934,7 +935,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(supplierReportsObject.CheckForDownloadButtonForTheMostRecentReport(), "Failed to find Download button", "Successfully found Download button");
 		}
 
-		[StepDefinition(@"I click the Download button for the most recent report with Report Name: (.*) File Type: (CSV|XLSX|CSV \(Zip\)|XLSX \(Zip\)) Requested By: (.*)")]
+		[RegexStepDefinition(@"I click the Download button for the most recent report with Report Name: (.*) File Type: (CSV|XLSX|CSV \(Zip\)|XLSX \(Zip\)) Requested By: (.*)")]
 		public void ThenIClickTheDownloadButtonForTheMostRecentReportWithReportNameFileTypeRequestedBy(string reportName, string type, string requestedBy)
 		{
 			GeneralUtilities.Wait_for_load_finish();
@@ -944,7 +945,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-		[StepDefinition(@"I confirm the most recent file has the following information Report Name: (.*) File Type: (CSV|XLSX|CSV \(Zip\)|XLSX \(Zip\)) Requested By: (.*)")]
+		[RegexStepDefinition(@"I confirm the most recent file has the following information Report Name: (.*) File Type: (CSV|XLSX|CSV \(Zip\)|XLSX \(Zip\)) Requested By: (.*)")]
 		public void ThenIConfirmTheMostRecentFileHasTheFollowingInformationReportNameWasteClassificationSummaryFileTypeCSVdRequestedByWERCSTest_Automation_ProductsAccount(string reportName, string type, string requestedBy)
 		{
 			SupplierReports supplierReportsObject = new SupplierReports();
@@ -954,28 +955,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(supplierReportsObject.CheckReportDataForMostRecentFile(reportName, type, requestedBy), "Failed to match all data for the most recent file", "Successfully matched all data for the most recent file");
 		}
 
-		[StepDefinition(@"I see a Report Download popup with the following text: (.*)")]
+		[RegexStepDefinition(@"I see a Report Download popup with the following text: (.*)")]
 		public void GivenISeeAReportDownloadPopupWithTheFollowingText(string text)
 		{
 			SupplierReports supplierReportsObject = new SupplierReports();
 			Report.IsTrue(supplierReportsObject.FindReportDownloadPopupWithTheFollowingText(text), "Failed to find the correct text in the popup", "Successfully found the correct text in the popup");
 		}
 
-		[StepDefinition(@"In the My Reports Screen I confirm the following description is displayed: (.*)")]
+		[RegexStepDefinition(@"In the My Reports Screen I confirm the following description is displayed: (.*)")]
 		public void GivenIConfirmTheFollowingDescriptionIsDisplayed(string description)
 		{
 			SupplierReports supplierReportsObject = new SupplierReports();
 			Report.IsTrue(supplierReportsObject.FindDescriptionInMyReports(description), "Failed to find the correct text in My Reports", "Successfully found the correct text in My Reports");
 		}
 
-		[StepDefinition(@"I enter the following in the WPSID textfield in the My Reports page: (.*)")]
+		[RegexStepDefinition(@"I enter the following in the WPSID textfield in the My Reports page: (.*)")]
 		public void ThenIEnterTheFollowingInTheWPSIDTextfieldInTheMyReportsPage(string text)
 		{
 			SupplierReports supplierReportsObject = new SupplierReports();
 			Report.IsTrue(supplierReportsObject.EnterTextIntoWPSIDTextFieldInMyReportsPage(text), "Failed to find the correct text in WPSID textfield", "Successfully found the correct text in WPSID textfield");
 		}
 
-		[StepDefinition(@"In the My Reports Screen I select the first result in the WPSID textfield search results")]
+		[RegexStepDefinition(@"In the My Reports Screen I select the first result in the WPSID textfield search results")]
 		public void ThenISelectTheFirstResultInTheWPSIDTextfieldSearchResults()
 		{
 			SupplierReports supplierReportsObject = new SupplierReports();

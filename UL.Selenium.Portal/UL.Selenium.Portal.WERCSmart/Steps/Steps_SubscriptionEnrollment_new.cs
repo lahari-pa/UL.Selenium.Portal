@@ -5,9 +5,10 @@ using System.Text;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
-using TechTalk.SpecFlow;
+using UL.Automation.ReqnrollHelpers.Classes;
+using Reqnroll;
 using UL.Automation.Reporting;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -15,14 +16,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding, Scope(Tag = "SubEnrollmentNew")]
 	class StepsSubscriptionEnrollmentNew
 	{
-		[StepDefinition(@"I confirm the (.*) section (does|does not) exist")]
+		[RegexStepDefinition(@"I confirm the (.*) section (does|does not) exist")]
 		public void IConfirmSectionDoesDoesNotExist(string sectionLabel, string does_doesnot)
 		{
 			bool expected = does_doesnot == "does";
 			Report.IsTrue(new SubscriptionEnrollment_new().EnrollmentSectionExists(sectionLabel) == expected, $"Failed, '{sectionLabel}' section {(expected ? "does not" : "does")} exist and {(expected ? "should" : "should not")}.", $"Success, '{sectionLabel}' section {does_doesnot} exist.");
 		}
 
-		[StepDefinition(@"In the (.*) section, I confirm the (.*) heading (does|does not) exist")]
+		[RegexStepDefinition(@"In the (.*) section, I confirm the (.*) heading (does|does not) exist")]
 		public void InSectionConfirmHeadingDoesDoesNotExist(string sectionLabel, string headingText, string does_doesnot)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -33,7 +34,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the Subscription page I confirm the (.*) heading (does|does not) exist")]
+		[RegexStepDefinition(@"In the Subscription page I confirm the (.*) heading (does|does not) exist")]
 		public void InConfirmHeadingDoesDoesNotExist(string headingText, string does_doesnot)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -49,7 +50,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsFalse(subEnrollment.ColumnHeaderExists(), $"Failed to confirm {headingText} column is not displayed", $"Successfully confirmed {headingText} column is not displayed");
 			}
 		}
-		[StepDefinition(@"In the Subscription page I confirm the Single Retailer Subscription column contains text: (.*)")]
+		[RegexStepDefinition(@"In the Subscription page I confirm the Single Retailer Subscription column contains text: (.*)")]
 		public void ThenInTheSubscriptionPageIConfirmTheSingleRetailerSubscriptionColumnContainsText(string text)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -58,7 +59,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(subEnrollment.SingleRetailerColumnTextDisplayed(text), $"The '{text}' is not displayed", $"The '{text}' is displayed");
 			}
 		}
-		[StepDefinition(@"In the Subscription page I confirm the Single Retailer column contains text: '(.*)'")]
+		[RegexStepDefinition(@"In the Subscription page I confirm the Single Retailer column contains text: '(.*)'")]
 		public void ThenInTheSubscriptionPageIConfirmTheSingleRetailerColumnContainsText(string text)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -68,7 +69,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the Subscription page I confirm Select Options element (does|does not) exists in Single Retailer Subscription column")]
+		[RegexStepDefinition(@"In the Subscription page I confirm Select Options element (does|does not) exists in Single Retailer Subscription column")]
 		public void ThenInTheSubscriptionPageIConfirmSelectOptionsElementDoesExistsInSingleRetailerSubscriptionColumn(string does_doesnot)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -84,7 +85,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsFalse(subEnrollment.SingleRetailerSelectExists(), "Failed to confict the Select options element is not displayed in SRS column", "Successfully confirmed the Select options element in not displayed in SRS column");
 			}
 		}
-		[StepDefinition(@"In the Subscription page I confirm the Single Retailer radio icon (does|does not) exist")]
+		[RegexStepDefinition(@"In the Subscription page I confirm the Single Retailer radio icon (does|does not) exist")]
 		public void ThenInTheSubscriptionPageIConfirmTheSingleRetailerRadioIconDoesExist(string does_doesnot)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -100,7 +101,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsFalse(subEnrollment.SingleRetailerRadioIconExists(), $"Failed to confict the Single Retailer radio icon is not displayed", $"Successfully confirmed the Single Retailer radio icon is not displayed");
 			}
 		}
-		[StepDefinition(@"In the Subscription page I confirm the Single Retailer radio icon (is|is not) selected")]
+		[RegexStepDefinition(@"In the Subscription page I confirm the Single Retailer radio icon (is|is not) selected")]
 		public void ThenInTheSubscriptionPageIConfirmTheSingleRetailerRadioIconIsSelected(string condition)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -120,7 +121,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the Single Retailer Section section, I confrim the selector displays: (.*)")]
+		[RegexStepDefinition(@"In the Single Retailer Section section, I confrim the selector displays: (.*)")]
 		public void ThenInTheSingleRetailerSectionSectionIConfrimTheSelectorDisplaysChoose_(string selectedOption)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -132,7 +133,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"In the Subscription page I confirm the (.*) subheader (does|does not) exist")]
+		[RegexStepDefinition(@"In the Subscription page I confirm the (.*) subheader (does|does not) exist")]
 		public void ThenInTheSubscriptionPageIConfirmTheFormulatedEnhancedArticlesPanelHeadingDoesDoesNotExist(string panelHeader, string does_doesnot)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -149,7 +150,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the (.*) section, I confirm the (.*) panel (does|does not) exist")]
+		[RegexStepDefinition(@"In the (.*) section, I confirm the (.*) panel (does|does not) exist")]
 		public void InSectionConfirmPanelDoesDoesNotExist(string sectionLabel, string panelLabel, string does_doesnot)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -160,7 +161,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the (.*) section (.*) panel, I confirm the text area containins: (.*)")]
+		[RegexStepDefinition(@"In the (.*) section (.*) panel, I confirm the text area containins: (.*)")]
 		public void InSectionPanelConfirmTextAreaDoesDoesNotExist(string sectionLabel, string panelLabel, string panelText)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -176,7 +177,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the (.*) section (.*) panel, I confrim the selector displays: (.*)")]
+		[RegexStepDefinition(@"In the (.*) section (.*) panel, I confrim the selector displays: (.*)")]
 		public void InSelectionPanelConfirmSelectorDisplays(string sectionLabel, string panelLabel, string selectorText)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -192,7 +193,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the (.*) section (.*) panel, I confirm the list contains: (.*)")]
+		[RegexStepDefinition(@"In the (.*) section (.*) panel, I confirm the list contains: (.*)")]
 		public void InSectionPabelConfirmListContains(string sectionLabel, string panelLabel, string panelListText)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -205,7 +206,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the (.*) section (.*) panel (.*) list item, I click the info button")]
+		[RegexStepDefinition(@"In the (.*) section (.*) panel (.*) list item, I click the info button")]
 		public void InSectionPanelListItemClickInfoButton(string sectionLabel, string panelLabel, string panelListText)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -221,7 +222,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the (.*) section (.*) panel (.*) list item, I confrim the info text area (is|is not) displayed")]
+		[RegexStepDefinition(@"In the (.*) section (.*) panel (.*) list item, I confrim the info text area (is|is not) displayed")]
 		public void InSectionPanelListItemInfoTextIsIsNotDisplayed(string sectionLabel, string panelLabel, string panelListText, string is_isnot)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -242,7 +243,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the (.*) section (.*) panel (.*) list item, I confrim the info text area displays: (.*)")]
+		[RegexStepDefinition(@"In the (.*) section (.*) panel (.*) list item, I confrim the info text area displays: (.*)")]
 		public void InSectionPanelListItemInfoTextDisplays(string sectionLabel, string panelLabel, string panelListText, string infoText)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -264,7 +265,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the (.*) section (.*) panel (.*) list item, I click the (.*) link")]
+		[RegexStepDefinition(@"In the (.*) section (.*) panel (.*) list item, I click the (.*) link")]
 		public void InSectionPanelListItemInfoTextClickLink(string sectionLabel, string panelLabel, string panelListText, string linkLabel)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -288,7 +289,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the (.*) section (.*) panel, I confirm the (.*) footer (does|does not) exist")]
+		[RegexStepDefinition(@"In the (.*) section (.*) panel, I confirm the (.*) footer (does|does not) exist")]
 		public void InSectionPanelConfirmFooterDoesDoesNotExist(string sectionLabel, string panelLabel, string footerText, string does_doesnot)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -302,7 +303,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the (.*) section (.*) panel, I confrim the radio (is|is not) selected")]
+		[RegexStepDefinition(@"In the (.*) section (.*) panel, I confrim the radio (is|is not) selected")]
 		public void InSectionPanelConfirmRadioIsIsNotSelected(string sectionLabel, string panelLabel, string is_isnot)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -319,7 +320,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the (.*) section (.*) panel, I click the radio button")]
+		[RegexStepDefinition(@"In the (.*) section (.*) panel, I click the radio button")]
 		public void InSectionPanelClickRadioButton(string sectionLabel, string panelLabel)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -335,7 +336,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the (.*) section, I confirm the text area displays: (.*)")]
+		[RegexStepDefinition(@"In the (.*) section, I confirm the text area displays: (.*)")]
 		public void InSectionConfirmTextAreaDisplays(string sectionLabel, string sectionText)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -349,7 +350,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the (.*) section text area, I click on the (.*) link")]
+		[RegexStepDefinition(@"In the (.*) section text area, I click on the (.*) link")]
 		public void InSectionTextAreaClickLink(string sectionLabel, string linkLabel)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -365,7 +366,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the Agency Service Agreement modal (is|is not) displayed")]
+		[RegexStepDefinition(@"I confirm the Agency Service Agreement modal (is|is not) displayed")]
 		public void ConfirmAgencyServiceAgreementModalIsDisplayed(string is_isnot)
 		{
 			var asam = new AgencyServiceAgreementModal();
@@ -374,14 +375,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(asam.WaitForContainerToBeVisible(10) == expected, $"Failure, Agency Service Agreement Modal does not exist.", $"Success, Agency Service Agreement Modal does exist.");
 		}
 
-		[StepDefinition(@"In the Agency Service Agreement modal, I confirm the title displays: (.*)")]
+		[RegexStepDefinition(@"In the Agency Service Agreement modal, I confirm the title displays: (.*)")]
 		public void ConfirmAgencyServiceAgreementModalTitleDisplays(string modalTitle)
 		{
 			var asam = new AgencyServiceAgreementModal();
 			Report.IsTrue(asam.ModalTitleExists(modalTitle), $"Failure, modal title doe snot display correctly.", $"Success, modal title displays correctly.");
 		}
 
-		[StepDefinition(@"In the Agency Service Agreement modal, I confirm the body text displays: (.*)")]
+		[RegexStepDefinition(@"In the Agency Service Agreement modal, I confirm the body text displays: (.*)")]
 		public void ConfirmAgencyServiceAgreementModalBodyTextDisplays(string expectedText)
 		{
 			var asam = new AgencyServiceAgreementModal();
@@ -389,7 +390,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(displayedText.Trim() == expectedText.Trim(), $"Failure, displayed text: '{displayedText}' does not match expected text: '{expectedText}'.", $"Success, displayed text matches expected text.");
 		}
 
-		[StepDefinition(@"In the Agency Service Agreement modal, I click the (.*) button")]
+		[RegexStepDefinition(@"In the Agency Service Agreement modal, I click the (.*) button")]
 		public void InAgencyServiceAgreementModalClickButton(string buttonLabel)
 		{
 			var asam = new AgencyServiceAgreementModal();
@@ -399,7 +400,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confrim the (.*) footer exists and displays the text: (.*)")]
+		[RegexStepDefinition(@"I confrim the (.*) footer exists and displays the text: (.*)")]
 		public void ConfirmFooterExistsAndDisplaysText(string footerLabel, string footerTextAreaText)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -412,7 +413,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the enrollment footer, I confirm the (.*) calculator displayes: (.*)")]
+		[RegexStepDefinition(@"In the enrollment footer, I confirm the (.*) calculator displayes: (.*)")]
 		public void InEnrollmentFooterConfirmCalculatorDisplays(string footerCalculatorLabel, string footerCalculatorValue)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -426,7 +427,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the enrollment footer, I click the (.*) button")]
+		[RegexStepDefinition(@"In the enrollment footer, I click the (.*) button")]
 		public void InEnrollmentFooterClickButton(string buttonLabel)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -439,7 +440,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the (.*) section I confirm the (.*) panel (is|is not) grayed out")]
+		[RegexStepDefinition(@"In the (.*) section I confirm the (.*) panel (is|is not) grayed out")]
 		public void InSectionConfirmPanelIsIsNotGrayedOut(string sectionLabel, string panelLabel, string is_isnot)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -453,7 +454,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the (.*) section I confirm the (.*) panel (does|does not) have the message: (.*)")]
+		[RegexStepDefinition(@"In the (.*) section I confirm the (.*) panel (does|does not) have the message: (.*)")]
 		public void InSectionConfirmPanelIsIsNotGrayedOut(string sectionLabel, string panelLabel, string does_doesnot, string messageText)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -467,7 +468,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the Subscription Enrollment screen, I confirm heading: (.*)")]
+		[RegexStepDefinition(@"In the Subscription Enrollment screen, I confirm heading: (.*)")]
 		public void InSubscriptionEnrollmentScreenConfirmHeading(string pageHeading)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -478,7 +479,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the Subscription Enrollment page, I confirm an alert message with the text: (.*)")]
+		[RegexStepDefinition(@"In the Subscription Enrollment page, I confirm an alert message with the text: (.*)")]
 		public void InSubscriptionEnrollmentPageConfrimAlertMessageWithText(string messageText)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -488,7 +489,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the (.*) section, I confirm the (.*) panel drop down (does|does not) exist")]
+		[RegexStepDefinition(@"In the (.*) section, I confirm the (.*) panel drop down (does|does not) exist")]
 		public void InSectionConfirmPanelDropDoesDoesDoesNotExist(string sectionLabel, string panelLabel, string does_doesnot)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -502,7 +503,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the (.*) section (.*) panel, I confirm the (.*) selector option (does|does not) exist")]
+		[RegexStepDefinition(@"In the (.*) section (.*) panel, I confirm the (.*) selector option (does|does not) exist")]
 		public void InSectionPanelConfirmSelectorOptionDoesDoesNotExist(string sectionLabel, string panelLabel, string optionLabel, string does_doesnot)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -516,7 +517,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the (.*) section (.*) panel, I confirm the following selector options (do|do not) exist:")]
+		[RegexStepDefinition(@"In the (.*) section (.*) panel, I confirm the following selector options (do|do not) exist:")]
 		public void InSectionPanelIConfirmFollowingSelectorOptionsDoDoNotExist(string sectionLabel, string panelLabel, string do_donot, Table selectorOptionsTable)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -527,7 +528,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the (.*) section (.*) panel, I confirm the (.*) selector option is selected")]
+		[RegexStepDefinition(@"In the (.*) section (.*) panel, I confirm the (.*) selector option is selected")]
 		public void InSectionPanelIConfirmSelectorOptionIsSelected(string sectionLabel, string panelLabel, string optionLabel)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -547,7 +548,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the (.*) section (.*) panel, I select the (.*) selector option")]
+		[RegexStepDefinition(@"In the (.*) section (.*) panel, I select the (.*) selector option")]
 		public void InSectionPanelISelectSelectorOption(string sectionLabel, string panelLabel, string optionLabel)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -561,7 +562,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the (.*) section (.*) panel, I confirm the panel sub label text is: (.*)")]
+		[RegexStepDefinition(@"In the (.*) section (.*) panel, I confirm the panel sub label text is: (.*)")]
 		public void InSectionPanelConfirmPanelSubLabelText(string sectionLabel, string panelLabel, string panelSubLabel)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
@@ -578,7 +579,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the Subscription Enrollment Modal, I click the (.*) button")]
+		[RegexStepDefinition(@"In the Subscription Enrollment Modal, I click the (.*) button")]
 		public void InSubscriprionEnrollmentModalClickButton(string buttonLabel)
 		{
 			var sem = new SubscriptionEnrollmentModal();

@@ -9,6 +9,7 @@ using System.Configuration;
 using System.Collections.Specialized;
 using TReVor.Api.Wrapper.Classes;
 using UL.Automation.TReVor.Classes;
+using UL.Automation.WebDriver.Shared.Classes.Configuration;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 { 
@@ -40,15 +41,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Entering Password");
 				if (this.Password.TryEnterText(password, simulateTyping: true, DelayBetweenKeyStrokes: 0.1))
 				{
-					var applicationSettings = ConfigurationManager.GetSection("automationSettings") as NameValueCollection;
-					switch (applicationSettings["BrowserType"])
+					switch (SeleniumConfig.CurrentConfig.SeleniumSettings.BrowserType.ToLower())
 					{
-						case "Chrome":
-						case "Firefox":
-						case "MicrosoftEdge":
+						case "chrome":
+						case "firefox":
+						case "microsoftedge":
+						case "microsoft edge":
+						case "edge":
 							Delay.Seconds(0.1);
 							break;
-						case "IE":
 						default:
 							Delay.Seconds(5);
 							break;

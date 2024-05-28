@@ -1,7 +1,7 @@
 ﻿using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using System;
-using TechTalk.SpecFlow;
+using Reqnroll;
 using UL.Automation.Reporting;
 using UL.Automation.Reporting.Functions;
 using UL.Selenium.Portal.WERCSmart.Steps;
@@ -11,27 +11,28 @@ using TReVor.Api.Wrapper.Classes;
 using UL.Automation.TReVor.Classes;
 using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.RuleWriter;
 using OpenQA.Selenium.Interactions;
+using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "Studio_RuleWriter")]
 	public class Steps_RuleWriter
 	{
-		[StepDefinition(@"In Rule Writer, I click the '(.*)' button")]
+		[RegexStepDefinition(@"In Rule Writer, I click the '(.*)' button")]
 		public void WhenInRuleWriterIClickTheButton(string buttonName)
 		{
 			RuleWriter wr = new RuleWriter();
 			Report.IsTrue(wr.ClickButton(buttonName), $"Failed to click the button {buttonName}", $"Successfully clicked the button {buttonName}");
 		}
 
-		[StepDefinition(@"In Rule Writer, I click the All Rules button")]
+		[RegexStepDefinition(@"In Rule Writer, I click the All Rules button")]
 		public void WhenInRuleWriterIClickTheAllRulesButton()
 		{
 			RuleWriter wr = new RuleWriter();
 			Report.IsTrue(wr.ClickAllRulesButton(), $"Failed to click the button All Rules", $"Successfully clicked the button All Rules");
 		}
 
-		[StepDefinition(@"In Rule Writer, I attempt to click the All Rules button")]
+		[RegexStepDefinition(@"In Rule Writer, I attempt to click the All Rules button")]
 		public void WhenInRuleWriterAttemptToClickTheAllRulesButton()
 		{
 			RuleWriter wr = new RuleWriter();
@@ -41,7 +42,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"In Rule Writer, I right click the Rule with name: (.*) and select 'New'")]
+		[RegexStepDefinition(@"In Rule Writer, I right click the Rule with name: (.*) and select 'New'")]
 		public void WhenInRuleWriterIRightClickTheRulAndSelectNew(string ruleName)
 		{
 			RuleWriter wr = new RuleWriter();

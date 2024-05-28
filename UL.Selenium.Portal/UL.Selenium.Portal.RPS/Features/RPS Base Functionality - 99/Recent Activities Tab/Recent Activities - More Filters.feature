@@ -16,9 +16,9 @@ Feature: Recent Activities - More Filters
 
 @ScenarioId:7014
 Scenario: [104904] Base Functionality - Recent Activities  - More Filter pop up - confirm all fields are shown
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
 Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 And In the recent activities Page, I click the More Filters Button
 Then In the recent activities Page, The More Filters Popup is showing
@@ -37,9 +37,9 @@ Then I confirm the Recent Activities tab has loaded
 
 @ScenarioId:7047
 Scenario: [70325] Base Functionality - Recent Activities - More Filters - Fields shown are correct type
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
 Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 And In the recent activities Page, I click the More Filters Button
 Then In the recent activities Page, The More Filters Popup is showing
@@ -80,9 +80,9 @@ And I call Shared Step 106194 (RPS Sign out)
 
 @ScenarioId:7049
 Scenario: [104907] Base Functionality - Recent Activities  - More Filters - Supplier Name - partial search
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
 Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then In the recent activities page, I click the label 'Start Date'
 Then I confirm the Recent Activities page refreshes
@@ -99,9 +99,9 @@ And I call Shared Step 106194 (RPS Sign out)
 @ScenarioId:7053
 Scenario: [106759] Base Functionality - Recent Activities  - More Filters - Supplier Name - exact match
 #May need updating in the future to find and save random product details and use this supplier (make more filters popup search method less generic?)
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
 Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then In the recent activities page, I click the label 'Start Date'
 Then I confirm the Recent Activities page refreshes
@@ -120,9 +120,9 @@ And I call Shared Step 106194 (RPS Sign out)
 
 @ScenarioId:7054
 Scenario: [104909] Base Functionality - Recent Activities  - More Filters - Status - Accepted
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
 Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then In the recent activities page, I click the label 'Start Date'
 Then I confirm the Recent Activities page refreshes
@@ -139,9 +139,9 @@ And I call Shared Step 106194 (RPS Sign out)
 
 @ScenarioId:7055
 Scenario: [106781] Base Functionality - Recent Activities  - More Filters - Status - Assigned
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
 Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then In the recent activities page, I click the label 'Start Date'
 Then I confirm the Recent Activities page refreshes
@@ -157,9 +157,9 @@ And I call Shared Step 106194 (RPS Sign out)
 
 @ScenarioId:7056
 Scenario: [90161] Base Functionality - Recent Activities  - More Filters - Status - Cancelled
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
 Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then In the recent activities page, I click the label 'Start Date'
 Then I confirm the Recent Activities page refreshes
@@ -175,9 +175,9 @@ And I call Shared Step 106194 (RPS Sign out)
 
 @ScenarioId:7057
 Scenario: [90163] Base Functionality - Recent Activities  - More Filters - Status - Completed
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
 Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then In the recent activities page, I click the label 'Start Date'
 Then I confirm the Recent Activities page refreshes
@@ -193,9 +193,9 @@ And I call Shared Step 106194 (RPS Sign out)
 
 @ScenarioId:7058
 Scenario: [106789] Base Functionality - Recent Activities  - More Filters - Status - Submitted
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
 Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then In the recent activities page, I click the label 'Start Date'
 Then I confirm the Recent Activities page refreshes
@@ -211,9 +211,9 @@ And I call Shared Step 106194 (RPS Sign out)
 
 @ScenarioId:7059
 Scenario: [90147] Base Functionality - Recent Activities - More Filters - Start Date
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
 Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 And In the recent activities Page, I click the More Filters Button
 Then In the recent activities Page, I confirm the Start Date input field shows a date 18 months before today as default
@@ -234,9 +234,9 @@ And I call Shared Step 106194 (RPS Sign out)
 
 @ScenarioId:7064
 Scenario: [106758] Base Functionality - Recent Activities - More Filters - End Date
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
 Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 And In the recent activities Page, I click the More Filters Button
 Then In the recent activities Page, I confirm the End Date input field shows todays date as default
@@ -257,9 +257,9 @@ And I call Shared Step 106194 (RPS Sign out)
 
 @ScenarioId:7065
 Scenario: [98448] More Filters - Enter key applies filters - Ticket is with DEV
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
 Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then I confirm the Recent Activities page refreshes
 And In the recent activities Page, I click the More Filters Button
@@ -271,9 +271,9 @@ Then I confirm that the recent activities page bread crumb area contains the lab
 @ScenarioId:7066
 Scenario: [73168] Base Functionality - Recent Activities - More Filters - Supplier Name - Search for name with apostrophe
 #Test needs fixing because this currently has an issue entering supplier name into the more filters page (apostrophe specific issue in automation?) ***
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
 Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then In the recent activities page, I click the label 'Start Date'
 Then I confirm the Recent Activities page refreshes
@@ -292,9 +292,9 @@ And I call Shared Step 106194 (RPS Sign out)
 
 #Scenario: [90166] Base Functionality - Recent Activities - More Filters - Status - Hold
 #Currently pausing automtion because goes to SHA and uses retailer (what use for 99?)
-#Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+#Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
 #Then I confirm the Home tab has loaded
-#Given I click the tab: Recent Activities
+#Given I click the main tab: Recent Activities
 #Then I confirm the Recent Activities tab has loaded
 #Then In the recent activities page, I click the label 'Start Date'
 #Then I confirm the Recent Activities page refreshes
@@ -302,9 +302,9 @@ And I call Shared Step 106194 (RPS Sign out)
 
 @ScenarioId:7086
 Scenario: [106784] Base Functionality - Recent Activities - More Filters - Status - New 
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
 Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then In the recent activities page, I click the label 'Start Date'
 Then I confirm the Recent Activities page refreshes
@@ -320,9 +320,9 @@ And I call Shared Step 106194 (RPS Sign out)
 
 @ScenarioId:7087
 Scenario: [106785] Base Functionality - Recent Activities - More Filters - Status - Recertification
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
 Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then In the recent activities page, I click the label 'Start Date'
 Then I confirm the Recent Activities page refreshes
@@ -338,9 +338,9 @@ And I call Shared Step 106194 (RPS Sign out)
 
 @ScenarioId:7088
 Scenario: [106786] Base Functionality - Recent Activities - More Filters - Status - Release for Distribution
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
 Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then In the recent activities page, I click the label 'Start Date'
 Then I confirm the Recent Activities page refreshes
@@ -356,9 +356,9 @@ And I call Shared Step 106194 (RPS Sign out)
 
 @ScenarioId:7089
 Scenario: [106790] Base Functionality - Recent Activities - More Filters - Status - UPC Update
-Given I call Shared Step 104950 (RPS Login - Base functionality) for TReVor account: RPS.99
+Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
 Then I confirm the Home tab has loaded
-Given I click the tab: Recent Activities
+Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then In the recent activities page, I click the label 'Start Date'
 Then I confirm the Recent Activities page refreshes

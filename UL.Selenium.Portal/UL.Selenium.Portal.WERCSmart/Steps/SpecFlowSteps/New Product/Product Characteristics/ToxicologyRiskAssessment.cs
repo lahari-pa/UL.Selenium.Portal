@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TechTalk.SpecFlow;
+using Reqnroll;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {
@@ -12,7 +13,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 
 	internal class ToxicologyRiskAssessment
 	{
-		[StepDefinition(@"I enter the text of I want a TRA performed on the registration field to: (Yes|No)")]
+		[RegexStepDefinition(@"I enter the text of I want a TRA performed on the registration field to: (Yes|No)")]
 		public void GivenEnterIWantATRAPerformedOnTheRegistrationValue(string value)
 		{
 			Report.Info($"I set the text of I want a TRA performed on the registration field to: {value}");
@@ -20,7 +21,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			selNewProduct.SetTheSectionOptionTo("I want a TRA performed on the registration", value);
 		}
 
-		[StepDefinition(@"I enter the text of Toxicology Risk Assessment field to: (.*)")]
+		[RegexStepDefinition(@"I enter the text of Toxicology Risk Assessment field to: (.*)")]
 		public void GivenEnterToxicologyRiskAssessmentValue(string value)
 		{
 			Report.Info($"I set the text of Toxicology Risk Assessment field to: {value}");
@@ -28,7 +29,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			selNewProduct.SetTheSectionOptionTo("Toxicological Risk Assessments are an analysis of the Human health risk for specific audiences", value);
 		}
 
-		[StepDefinition(@"I enter the text of You've completed the additional information needed for the TRA field to: (.*)")]
+		[RegexStepDefinition(@"I enter the text of You've completed the additional information needed for the TRA field to: (.*)")]
 		public void GivenEnterYouveCompletedTheAdditionalInformationNeededForTheTRAValue(string value)
 		{
 			Report.Info($"I set the text of You've completed the additional information needed for the TRA field to: {value}");

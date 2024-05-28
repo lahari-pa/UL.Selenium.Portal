@@ -4,20 +4,21 @@ using System.Linq;
 using System.Reflection;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
-using TechTalk.SpecFlow;
+using UL.Automation.ReqnrollHelpers.Classes;
+using Reqnroll;
 using UL.Automation.Reporting;
 using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using OpenQA.Selenium;
+using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
 	[Binding, Scope(Tag = "Homepage")]
 	class StepsHomepage
 	{
-		[StepDefinition(@"the WERCSmart homepage should load")]
-		[StepDefinition(@"the WERCSmart homepage should be loaded")]
+		[RegexStepDefinition(@"the WERCSmart homepage should load")]
+		[RegexStepDefinition(@"the WERCSmart homepage should be loaded")]
 		public void ThenTheWercSmartHomepageShouldLoad()
 		{
 			Report.IsTrue(new Homepage().WaitForContainerToBeVisible(), "WERCSmart Homepage failed to load!", "WERCSmart homepage loaded successfully!");
@@ -26,7 +27,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I stay on the homepage with no activity until the inactivity popup appears")]
+		[RegexStepDefinition(@"I stay on the homepage with no activity until the inactivity popup appears")]
 		public void ThenStayOnTheHomepageWithNoActivityForMinutes()
 		{
 			try
@@ -50,7 +51,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the Inactivity popup is displayed after waiting (.*) minutes accurate to the nearest (.*) minutes")]
+		[RegexStepDefinition(@"I confirm the Inactivity popup is displayed after waiting (.*) minutes accurate to the nearest (.*) minutes")]
 		public void ConfirmTheInactivityPopupDisplayedAfterWait(int expectedWait, int marginOfError)
 		{
 			// check if popup wasn't displayed after 'expected wait + margin' (test upper limit)
@@ -66,13 +67,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The Inactivity popup loaded within the expected time frame. It was loaded after: " + actualWait / 60 + " minutes");
 		}
 
-		[StepDefinition(@"I confirm the Inactivity pop is closed")]
+		[RegexStepDefinition(@"I confirm the Inactivity pop is closed")]
 		public void ConfirmInactivityPopupIsClosed()
 		{
 			Report.IsTrue(new InactivityPopup().WaitForContainerToBeInvisible(), "The Inactivity popup was not closed!", "The Inactivity popup was closed.");
 		}
 
-		[StepDefinition(@"Click (Yes|No) on the inactivity popup")]
+		[RegexStepDefinition(@"Click (Yes|No) on the inactivity popup")]
 		public void GivenClickOnInactivityPopup(string button)
 		{
 			Report.Info("Clicking " + button + " on inactivity popup");
@@ -95,8 +96,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"I should see the (.*) in the (header bar|user dropdown|navigation bar|main window|home page header|products grid)")]
-		[StepDefinition(@"I should see (.*) in the (header bar|user dropdown|navigation bar|main window|home page header|products grid)")]
+		[RegexStepDefinition(@"I should see the (.*) in the (header bar|user dropdown|navigation bar|main window|home page header|products grid)")]
+		[RegexStepDefinition(@"I should see (.*) in the (header bar|user dropdown|navigation bar|main window|home page header|products grid)")]
 		public void ThenIShouldSeeTheUlwercSmartLogoInTheHeaderBar(string item, string area)
 		{
 			try
@@ -222,7 +223,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click on the triangle next to Product Information to (expand|collapse) the section")]
+		[RegexStepDefinition(@"I click on the triangle next to Product Information to (expand|collapse) the section")]
 		public void WhenIClickOnTheTraingleNextToProductInformation(string expandCollapse)
 		{
 			Report.Info("Clicking on Triangle next to Product Information to " + expandCollapse + " the section");
@@ -231,7 +232,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-		[StepDefinition(@"the (Product Information|Alerts|Announcements) dialog should be (visible|hidden)")]
+		[RegexStepDefinition(@"the (Product Information|Alerts|Announcements) dialog should be (visible|hidden)")]
 		public void ThenProductInformationDialogShouldBe(string dialog, string visibility)
 		{
 			try
@@ -264,7 +265,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I (should|should not) see a Pie Chart and Legend under Product Information")]
+		[RegexStepDefinition(@"I (should|should not) see a Pie Chart and Legend under Product Information")]
 		public void ThenIShouldSeeAPieChartAndLegend(string shouldornot)
 		{
 			bool expected = shouldornot == "should";
@@ -273,7 +274,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(selHomepage.PieChartLegendShowingInProductInformation() == expected, "Pie Chart legend " + (expected ? "was not" : "was") + " not showing!", "Pie Chart legend " + (expected ? "was" : "was not") + " showing, as expected!");
 		}
 
-		[StepDefinition(@"I should see the following states in the Legend:")]
+		[RegexStepDefinition(@"I should see the following states in the Legend:")]
 		public void ThenIShouldSeeTheFollowingStatesInTheLegend(Table table)
 		{
 			try
@@ -293,7 +294,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I see notifications in the (Alerts|Announcement) Panel")]
+		[RegexStepDefinition(@"I see notifications in the (Alerts|Announcement) Panel")]
 		public void GivenISeeNotificationsInThePanel(string panel)
 		{
 			try
@@ -310,7 +311,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"clicking on the top (Alert|Announcement) should direct me to the My Messages page")]
+		[RegexStepDefinition(@"clicking on the top (Alert|Announcement) should direct me to the My Messages page")]
 		public void ThenClickingOnTheTopShouldDirectMeToTheMyMessagesPage(string panel)
 		{
 			try
@@ -332,7 +333,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm that I am taken to the My Messages (Alerts|Announcements) page")]
+		[RegexStepDefinition(@"I confirm that I am taken to the My Messages (Alerts|Announcements) page")]
 		public void ThenIConfirmThatIAmTakenToTheMyMessagesAlertsPage(string page)
 		{
 			try
@@ -347,7 +348,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click the (My Products|Add Product|Alerts|Retail Partners|My Reports|Shopping Cart|Support|Chat|Prescription Pharmaceutical) page")]
+		[RegexStepDefinition(@"I click the (My Products|Add Product|Alerts|Retail Partners|My Reports|Shopping Cart|Support|Chat|Prescription Pharmaceutical) page")]
 		public void ThenIClickTheSpecificTab(string tabName)
 		{
 			try
@@ -367,7 +368,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(5);
 		}
 
-		[StepDefinition(@"I navigate to the home page")]
+		[RegexStepDefinition(@"I navigate to the home page")]
 		public void ThenINavigateToTheHomePage()
 		{
 			try
@@ -387,7 +388,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I click the Home navigation icon and (accept|dismiss) the alert popup")]
+		[RegexStepDefinition(@"I click the Home navigation icon and (accept|dismiss) the alert popup")]
 		public void ThenINavigateToTheHomePage(string alertAction)
 		{
 			try
@@ -422,7 +423,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click the Home navigation icon")]
+		[RegexStepDefinition(@"I click the Home navigation icon")]
 		public void ClickTheHomeNavigationIcon()
 		{
 			try
@@ -443,7 +444,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 		}
 
-		[StepDefinition(@"I should see the following filter options below My Products")]
+		[RegexStepDefinition(@"I should see the following filter options below My Products")]
 		public void GivenIShouldSeeTheFollowingFilterOptionsBelowMyProducts(Table table)
 		{
 			try
@@ -464,7 +465,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click More below the (Alerts|Announcements) Panel")]
+		[RegexStepDefinition(@"I click More below the (Alerts|Announcements) Panel")]
 		public void ThenIClickBelowTheAlertsPanel(string panel)
 		{
 			try
@@ -482,7 +483,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I (expand|collapse) the Navigation Menu")]
+		[RegexStepDefinition(@"I (expand|collapse) the Navigation Menu")]
 		public void ThenIClickTheNavigationMenuIcon(string expand)
 		{
 			try
@@ -501,15 +502,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"the Navigation Menu should be (expanded|collapsed)")]
+		[RegexStepDefinition(@"the Navigation Menu should be (expanded|collapsed)")]
 		public void NavigationMenuExpandedCollapsed(string expanded)
 		{
 			Report.IsTrue(new NavigationBar().NavigationMenuExpanded() == (expanded == "expanded"), "Navigation bar was not " + expanded + ", when expected!", "Navigation bar was " + expanded + ", as expected!");
 		}
 
-		[StepDefinition(@"the following (icons|icons and labels) should be found in the (navigation bar)")]
+		[RegexStepDefinition(@"the following (icons|icons and labels) should be found in the (navigation bar)")]
 
-		public void TheFollowingAreShowingInThe(string lookingfor, string area, TechTalk.SpecFlow.Table expected)
+		public void TheFollowingAreShowingInThe(string lookingfor, string area, Table expected)
 		{
 			foreach (TableRow row in expected.Rows)
 			{
@@ -527,7 +528,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"the navigation labels should be hidden")]
+		[RegexStepDefinition(@"the navigation labels should be hidden")]
 		public void NavigationLabelsShouldBeHidden()
 		{
 			Report.IsTrue(new NavigationBar().AllNavigationLabelsAreHidden(),
@@ -535,7 +536,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The navigation labels (Home, Register New Product..) were hidden as expected");
 		}
 
-		[StepDefinition(@"I click the User Icon")]
+		[RegexStepDefinition(@"I click the User Icon")]
 		public void ThenIClickTheUserIcon()
 		{
 			Report.StartStep(ReportSettings.StepCounter + " " + MethodBase.GetCurrentMethod().Name);
@@ -553,8 +554,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click on (My Account|Sign Out)")]
-		[StepDefinition(@"I navigate to (My Account)")]
+		[RegexStepDefinition(@"I click on (My Account|Sign Out)")]
+		[RegexStepDefinition(@"I navigate to (My Account)")]
 		public void ThenIClickOnUserItem(string userItem)
 		{
 			Report.IsTrue(userItem == "My Account" ? new TopMenuBar().ClickMyAccount() : new TopMenuBar().ClickSignOut(),
@@ -563,13 +564,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-		[StepDefinition(@"there should be products available in the Products Grid")]
+		[RegexStepDefinition(@"there should be products available in the Products Grid")]
 		public void ThenThereShouldBeProductsAvailableInTheProductsTable()
 		{
 			Report.IsTrue(new ProductsGrid().ProductsPresent(), "Products were not present in the grid!", "There were products present in the grid, as expected!");
 		}
 
-		[StepDefinition(@"I click on the Notification Icon")]
+		[RegexStepDefinition(@"I click on the Notification Icon")]
 		public void GivenIClickOnTheNotificationIcon()
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - Click on Notification Icon");
@@ -588,7 +589,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"the Notification page should appear")]
+		[RegexStepDefinition(@"the Notification page should appear")]
 		public void ThenTheNotificationPageShouldAppear()
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - Notification Page Should Appear");
@@ -604,7 +605,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm that the (.*) page is loaded")]
+		[RegexStepDefinition(@"I confirm that the (.*) page is loaded")]
 		public void ThenConfirmThatYouAreTakenToTheSpecifiedPage(string pageTitle)
 		{
 			switch (pageTitle)
@@ -646,7 +647,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		//	}
 		//}
 
-		[StepDefinition(@"Confirm that freshdesk opens in another tab")]
+		[RegexStepDefinition(@"Confirm that freshdesk opens in another tab")]
 		public void ConfirmThatFreshdeskOpensInAnotherTab()
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - Confirm that freshdesk opens in another tab");
@@ -701,7 +702,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I should see the empty shopping cart pop up")]
+		[RegexStepDefinition(@"I should see the empty shopping cart pop up")]
 		public void ThenIShouldSeeTheEmptyShoppingCartPopUp()
 		{
 			var selEmptyCart = new EmptyCart();
@@ -709,7 +710,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"As expected, the shopping cart popup is showing.");
 		}
 
-		[StepDefinition(@"I close the Empty Cart pop up")]
+		[RegexStepDefinition(@"I close the Empty Cart pop up")]
 		public void GivenIClickOnCloseInTheShoppingCart()
 		{
 			var selEmptyCart = new EmptyCart();
@@ -718,7 +719,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully closed the Empty Cart pop up");
 		}
 
-		[StepDefinition(@"the Empty Cart pop up message reads: (.*)")]
+		[RegexStepDefinition(@"the Empty Cart pop up message reads: (.*)")]
 		public void EmptyCartPopUpText(string value)
 		{
 			string actualMessage = new EmptyCart().BodyMessage();
@@ -728,7 +729,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		//Adding My Products|Add Product icon in Navigation page due to the new changes in Integration environment
-		[StepDefinition(@"I click the (Home|My Products|Add Product|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) icon in the Navigation Pane")]
+		[RegexStepDefinition(@"I click the (Home|My Products|Add Product|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) icon in the Navigation Pane")]
 		public void ClickItemInNavigationPanel(string item)
 		{
 			try
@@ -747,7 +748,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click the (Home|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) link in the expanded navigation side menu")]
+		[RegexStepDefinition(@"I click the (Home|Register New Product|My Messages|Retail Partners|UL Solution Center|Shopping Cart|Support) link in the expanded navigation side menu")]
 		public void ClickItemInNavigationSideMenu(string item)
 		{
 			Report.Info("Selecting " + item + " in the Navigation Pane");
@@ -758,7 +759,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I click the (Home|Register New Product|Prescription Pharmaceutical|My Messages|Retail Partners|My Reports|Supplier Reports|UL Solution Center|Shopping Cart|Support|ULSC - Data Management) icon in the QuickLinks Pane")]
+		[RegexStepDefinition(@"I click the (Home|Register New Product|Prescription Pharmaceutical|My Messages|Retail Partners|My Reports|Supplier Reports|UL Solution Center|Shopping Cart|Support|ULSC - Data Management) icon in the QuickLinks Pane")]
 		public void ClickItemInQuickLinks(string item)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - Selecting " + item + " in the Navigation Pane");
@@ -780,7 +781,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		/// <summary>
 		/// Clicking the close button on cart is empty popup
 		/// </summary>
-		[StepDefinition(@"I click on the close button on Cart is Empty")]
+		[RegexStepDefinition(@"I click on the close button on Cart is Empty")]
 		public void ClickCloseOnCartisEmpty()
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - I click the close button");
@@ -794,7 +795,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		/// This is to verify the title of the page
 		/// </summary>
 		/// <param name="headerExpected"></param>
-		[StepDefinition(@"I should see the header: (.*) on the Cart is Empty window")]
+		[RegexStepDefinition(@"I should see the header: (.*) on the Cart is Empty window")]
 		public void CorrectHeaderShowing(string headerExpected)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - Cart is Empty window should appear");
@@ -816,7 +817,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click the WERCSmart logo")]
+		[RegexStepDefinition(@"I click the WERCSmart logo")]
 		public void ClickWercSmartLogo()
 		{
 			Report.IsTrue(new TopMenuBar().ClickWercsSmartLogo(),
@@ -824,7 +825,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked the WERCSmart logo");
 		}
 
-		[StepDefinition(@"I should see the following states in the following order in the Legend:")]
+		[RegexStepDefinition(@"I should see the following states in the following order in the Legend:")]
 		public void ThenIShouldSeeTheFollowingStatesInTheFollowingOrderInTheLegend(Table table)
 		{
 			try
@@ -850,7 +851,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I should see the following filters in the following order under My products:")]
+		[RegexStepDefinition(@"I should see the following filters in the following order under My products:")]
 		public void GivenIShouldSeeTheFollowingFiltersInTheFollowingOrderUnderMyProducts(Table table)
 		{
 			try
@@ -876,7 +877,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the announcements area I should see my saved messages")]
+		[RegexStepDefinition(@"In the announcements area I should see my saved messages")]
 		public void ThenInTheAnnouncementsAreaIShouldSeeMySavedMessages()
 		{
 			var myHomepage = new Homepage();
@@ -913,81 +914,81 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"As expected, message count is showing as: " + ActualMessageCount.ToString());
 		}
 
-		[StepDefinition(@"I click on the Live Help button on the upper right")]
+		[RegexStepDefinition(@"I click on the Live Help button on the upper right")]
 		public void GivenIClickOnTheLiveHelpButtonOnTheUpperRight()
 		{
 			var myTopMenuBar = new TopMenuBar();
 			Report.IsTrue(myTopMenuBar.ClickLiveHelp(), "Failed to click live help", "Clicked live help");
 		}
 
-		[StepDefinition(@"I should see the Live Help dialog")]
+		[RegexStepDefinition(@"I should see the Live Help dialog")]
 		public void ThenIShouldSeeTheLiveHelpDialog()
 		{
 			Report.IsTrue(new LiveHelp().Wait_for_load(), "Live Help dialog is not showing",
 				"Live Help dialog is showing as expected");
 		}
 
-		[StepDefinition(@"In the Live Help dialog I should see a small icon with three lines in the upper left hand corner")]
+		[RegexStepDefinition(@"In the Live Help dialog I should see a small icon with three lines in the upper left hand corner")]
 		public void ThenIShouldSeeThreeLinesIcon()
 		{
 			Report.IsTrue(new LiveHelp().VerifyThreeLinesIcon(), "Three lines icon is not present in the upper left hand corner",
 				"Three lines icon is present in the upper left hand corner");
 		}
 
-		[StepDefinition(@"In the Live Help dialog I should see an x in the upper right hand corner")]
+		[RegexStepDefinition(@"In the Live Help dialog I should see an x in the upper right hand corner")]
 		public void ThenIShouldSeeAnXInTheUpperRightHandCorner()
 		{
 			Report.IsTrue(new LiveHelp().VerifyX(), "X is not present in the upper right hand corner",
 				"X is present in the upper right hand corner");
 		}
 
-		[StepDefinition(@"In the Live Help dialog I should see the text 'Inbox' at the top of the chat window")]
+		[RegexStepDefinition(@"In the Live Help dialog I should see the text 'Inbox' at the top of the chat window")]
 		public void ThenIShouldSeeInbox()
 		{
 			Report.IsTrue(new LiveHelp().VerifyInboxText(), "Inbox text is not present", "Inbox text is present");
 		}
 
-		[StepDefinition(@"In the Live Help dialog I should see the description text: (.*) at the top of the chat window")]
+		[RegexStepDefinition(@"In the Live Help dialog I should see the description text: (.*) at the top of the chat window")]
 		public void ThenIShouldSeeDescriptionText(string expectedText)
 		{
 			Report.IsTrue(new LiveHelp().VerifyDescText(expectedText), "Description text is not present", "Description text is present");
 		}
 
-		[StepDefinition(@"In the Live Help dialog I should see the following text in the message area: (.*)")]
+		[RegexStepDefinition(@"In the Live Help dialog I should see the following text in the message area: (.*)")]
 		public void ThenIShouldSeeTheFollowingTextInTheMessageArea(string message)
 		{
 			Report.IsTrue(new LiveHelp().VerifyMessageText(message), "Text is not present in the message area: " + message,
 				"Text is present in the message area: " + message);
 		}
 
-		[StepDefinition(@"In the Live Help dialog I should see the following text in the lower part of the chat window: (.*)")]
+		[RegexStepDefinition(@"In the Live Help dialog I should see the following text in the lower part of the chat window: (.*)")]
 		public void ThenIShouldSeeTheFollowingTextInTheLowerPartOfTheChatWindow(string text)
 		{
 			Report.IsTrue(new LiveHelp().VerifyLowerText(text), "Text '" + text + "' does not appear in the lower part of the message area",
 				"Text appears correctly in the lower part of the chat window: " + text);
 		}
 
-		[StepDefinition(@"In the Live Help dialog I should see the following placeholder text in the text entry field: (.*)")]
+		[RegexStepDefinition(@"In the Live Help dialog I should see the following placeholder text in the text entry field: (.*)")]
 		public void ThenIShouldSeeTheFollowingPlaceholder(string text)
 		{
 			Report.IsTrue(new LiveHelp().VerifyPlaceholder(text), "Placeholder '" + text + "' does not appear in the text entry area",
 				"Placeholder appears correctly in the text entry area: " + text);
 		}
 
-		[StepDefinition(@"In the Live Help dialog I should see the (.*) icon in the lower right hand corner")]
+		[RegexStepDefinition(@"In the Live Help dialog I should see the (.*) icon in the lower right hand corner")]
 		public void ThenIShouldSeeTheIconInTheLowerRightHandCorner(string icon)
 		{
 			Report.IsTrue(new LiveHelp().VerifyIcon(icon), icon + " icon not found in the lower right hand corner",
 				icon + " icon found in the lower right hand corner");
 		}
 
-		[StepDefinition(@"In the Live Help dialog I click on the x to close")]
+		[RegexStepDefinition(@"In the Live Help dialog I click on the x to close")]
 		public void GivenInTheLiveHelpDialogIClickOnTheXToClose()
 		{
 			Report.IsTrue(new LiveHelp().ClickCloseX(), "Failed to click x to close", "Clicked x to close");
 		}
 
-		[StepDefinition(@"the hover over text is as expected for the following navigation icons")]
+		[RegexStepDefinition(@"the hover over text is as expected for the following navigation icons")]
 		public void HoverOverIconsAndConfirmTheTitleAppears(Table icons)
 		{
 			foreach (TableRow row in icons.Rows)
@@ -1000,7 +1001,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I save the list of Product IDs displayed on the page as: (.*)")]
+		[RegexStepDefinition(@"I save the list of Product IDs displayed on the page as: (.*)")]
 		public void SaveListOfIDsDisplayedOnThePageAs(string savedAs)
 		{
 			var selProductsGrid = new ProductsGrid();
@@ -1015,7 +1016,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 		}
 
-		[StepDefinition(@"If there are no Products in the status 'Sending to Retailers' I create one with SHA account: (.*)")]
+		[RegexStepDefinition(@"If there are no Products in the status 'Sending to Retailers' I create one with SHA account: (.*)")]
 		public void IfNoProductsInSendingToRetailersCreateProduct(string shaAcc)
 		{
 			var selProductsGrid = new ProductsGrid();
@@ -1049,14 +1050,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I navigate to the WERCSmart site")]
+		[RegexStepDefinition(@"I navigate to the WERCSmart site")]
 		public void INavigateToWERCSmart()
 		{
 			Report.Info("Navigating to the WERCSmart Landing Page");
 			var thisGlobalSteps = new GlobalSteps();
 			thisGlobalSteps.NavigateToLandingPage();
 		}
-		[StepDefinition(@"I click the Home navigation icon and an alert appears")]
+		[RegexStepDefinition(@"I click the Home navigation icon and an alert appears")]
 		public void ThenIClickTheHomeNavigationIconAndAlertAppears()
 		{
 
@@ -1067,7 +1068,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I confirm the Inactivity popup is displayed after waiting (.*) minutes accurate to the nearest (.*) minutes and no screenshot is taken")]
+		[RegexStepDefinition(@"I confirm the Inactivity popup is displayed after waiting (.*) minutes accurate to the nearest (.*) minutes and no screenshot is taken")]
 		public void ConfirmTheInactivityPopupDisplayedAfterWaitNoScreenShot(int expectedWait, int marginOfError)
 		{
 			// check if popup wasn't displayed after 'expected wait + margin' (test upper limit)
@@ -1082,7 +1083,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The Inactivity popup did not load within the expected time frame! It was loaded after " + actualWait / 60 + " minutes",
 				"The Inactivity popup loaded within the expected time frame. It was loaded after: " + actualWait / 60 + " minutes", false, false);
 		}
-		[StepDefinition(@"Click (Yes|No) on the inactivity popup and no screenshot is taken")]
+		[RegexStepDefinition(@"Click (Yes|No) on the inactivity popup and no screenshot is taken")]
 		public void GivenClickOnInactivityPopupNoScreenshot(string button)
 		{
 			Report.Info("Clicking " + button + " on inactivity popup");
@@ -1103,7 +1104,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(clicked, $"Failed to click the '{button}' button", $"Successfully clicked the '{button}' button", false, false);
 		}
 
-		[StepDefinition(@"Click (Yes|No) on the inactivity popup but dont take a screenshot")]
+		[RegexStepDefinition(@"Click (Yes|No) on the inactivity popup but dont take a screenshot")]
 		public void GivenClickOnInactivityPopupNoScreenShot(string button)
 		{
 			Report.Info("Clicking " + button + " on inactivity popup");
@@ -1132,26 +1133,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I confirm the Inactivity pop is closed but dont take a screenshot")]
+		[RegexStepDefinition(@"I confirm the Inactivity pop is closed but dont take a screenshot")]
 		public void ConfirmInactivityPopupIsClosedNoScreenShot()
 		{
 			Report.IsTrue(new InactivityPopup().WaitForContainerToBeInvisible(), "The Inactivity popup was not closed!", "The Inactivity popup was closed.", false, false);
 		}
 
-		[StepDefinition(@"I confirm the Inactivity pop is open but dont take a screenshot")]
+		[RegexStepDefinition(@"I confirm the Inactivity pop is open but dont take a screenshot")]
 		public void ConfirmInactivityPopupIsOpendNoScreenShot()
 		{
 			Report.IsTrue(new InactivityPopup().WaitForContainerToBeVisible(), "The Inactivity popup was not open.", "The Inactivity popup was open", false, false);
 		}
 
-		[StepDefinition(@"I take a ScreenShot")]
+		[RegexStepDefinition(@"I take a ScreenShot")]
 		public void ITakeAScreenShot()
 		{
 			Report.Info("I take a screenshot");
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I Check the Alert with text: (.*) has the ID: (.*)")]
+		[RegexStepDefinition(@"I Check the Alert with text: (.*) has the ID: (.*)")]
 		public void ICheckAlertWithTextXHasIDY(string alertText, string expxectedAlertID)
 		{
 			try
@@ -1171,7 +1172,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click the 'Resolve' button that is associated to the AGHS alert in the 'Alerts' window")]
+		[RegexStepDefinition(@"I click the 'Resolve' button that is associated to the AGHS alert in the 'Alerts' window")]
 		public void GivenIClickTheButtonThatIsAssociatedToTheAGHSAlertInTheWindow()
 		{
 			Homepage HomePageObject = new Homepage();
@@ -1188,7 +1189,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"If The Data Consent Requests modal is showing, navigate to the Retailer Partners page and add required tiers")]
+		[RegexStepDefinition(@"If The Data Consent Requests modal is showing, navigate to the Retailer Partners page and add required tiers")]
 		public void IfDataConsentRequestsModalIsShowingAddRequiredTiers()
 		{
 			Report.Info("I wait for the Data Consent Requests Modal to appear");
@@ -1216,7 +1217,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm ID/Product Name column displays the product name wrapped within the area of the column")]
+		[RegexStepDefinition(@"I confirm ID/Product Name column displays the product name wrapped within the area of the column")]
 		public void ThenIConfirmIDProductNameColumnDisplaysTheProductNameWrappedWithinTheAreaOfTheColumn()
 		{
 			var homePage = new Homepage();

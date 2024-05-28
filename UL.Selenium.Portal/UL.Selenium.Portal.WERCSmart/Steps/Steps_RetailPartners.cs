@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
-using TechTalk.SpecFlow;
+using UL.Automation.ReqnrollHelpers.Classes;
+using Reqnroll;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using System.Collections.ObjectModel;
@@ -17,6 +17,7 @@ using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 using NPOI.SS.Formula.Functions;
 using System.IO.Compression;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -25,7 +26,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	class StepsRetailPartners
 	{
 
-		[StepDefinition(@"If I see the retail partners page I set all data consent tiers to true for all retailers in the top section")]
+		[RegexStepDefinition(@"If I see the retail partners page I set all data consent tiers to true for all retailers in the top section")]
 		public void GivenIfISeeTheRetailPartnersPageISetAllDataConsentTiersToTrueForAllRetailersInTheTopSection()
 		{
 			var selRetailPartners = new RetailPartners();
@@ -83,7 +84,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I toggle the data consent tier: (.*) to: (on|off)")]
+		[RegexStepDefinition(@"I toggle the data consent tier: (.*) to: (on|off)")]
 		public void SetDataConsentTier(string dct, string onOff)
 		{
 			var selRetailPartnersDetails = new RetailPartnersDetails();
@@ -91,7 +92,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(selRetailPartnersDetails.SetDataConsentTier(dct, toggle), "failed to toggle the data consent tier: " + dct + " to: " + onOff, "Successfully toggled the data consent tier: " + dct + " to: " + onOff);
 		}
 
-		[StepDefinition(@"I (should|should not) see the following subheading (.*)")]
+		[RegexStepDefinition(@"I (should|should not) see the following subheading (.*)")]
 		public void ThenIShouldSeeTheFollowingSubheading(string should, string subheading)
 		{
 			bool expected = should == "should";
@@ -111,7 +112,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I should see the following heading (.*)")]
+		[RegexStepDefinition(@"I should see the following heading (.*)")]
 		public void ThenIShouldSeeTheFollowingHeading(string heading)
 		{
 			Report.StartStep(Report.Details.StepIndex + $" - Checking that the heading '{heading}' is showing");
@@ -139,13 +140,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I should see the retailer heading: (.*)")]
+		[RegexStepDefinition(@"I should see the retailer heading: (.*)")]
 		public void CorrectRetailerShowing(string retailer)
 		{
 			Report.IsTrue(new RetailPartnersDetails().GetSelectedRetailer().Trim() == retailer.Trim(), "Retailer: " + retailer + " was not showing!", "Retailer: " + retailer + " was showing as expected!");
 		}
 
-		[StepDefinition(@"I select the retailer: (.*)")]
+		[RegexStepDefinition(@"I select the retailer: (.*)")]
 		public void SelectRetailer(string retailer)
 		{
 			GeneralUtilities.Wait_for_load_finish();
@@ -163,7 +164,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I confirm that the Data Consent Tiers information matches the information saved as: (.*)")]
+		[RegexStepDefinition(@"I confirm that the Data Consent Tiers information matches the information saved as: (.*)")]
 		public void ConfirmThatDataConsentTiersMatches(string savedAs)
 		{
 			string tiers = Context.GetFromContext(savedAs)?.ToString();
@@ -185,7 +186,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		/// It is the section of text above 'What are the Data Usage Tiers?'
 		/// eg: Lowe's requires suppliers of products to grant Tier 1 at this time.
 		/// </summary>
-		[StepDefinition(@"Retail partner details should be showing text: (.*)")]
+		[RegexStepDefinition(@"Retail partner details should be showing text: (.*)")]
 		public void RetailPartnersDetailShouldBeShowing(string text)
 		{
 			string showing = new RetailPartnersDetails().GetDCDescription();
@@ -193,14 +194,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"Section: (.*) should be showing text: (.*)")]
+		[RegexStepDefinition(@"Section: (.*) should be showing text: (.*)")]
 		public void SectionShouldBeShowingText(string section, string text)
 		{
 			string showing = new RetailPartnersDetails().GetSectionText(section).Trim();
 			Report.IsTrue(showing == text.Trim(), "Text was not showing: " + text.Trim() + ". Instead found: " + showing, "Text was showing: " + text.Trim() + ", as expected!");
 		}
 
-		[StepDefinition(@"I should see the button: (.*) in section: (.*)")]
+		[RegexStepDefinition(@"I should see the button: (.*) in section: (.*)")]
 		public void ButtonsShowingInSection(string button, string section)
 		{
 			List<string> buttons = new RetailPartnersDetails().GetButtons(section);
@@ -208,7 +209,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(buttons.Contains(button.Trim()), "Failed to find the button: " + button + "!", "Succesfully found the button: " + button);
 		}
 
-		[StepDefinition(@"I confirm that there is a section labeled: (.*)")]
+		[RegexStepDefinition(@"I confirm that there is a section labeled: (.*)")]
 		public void ConfirmHeadingShowing(string header)
 		{
 			Report.IsTrue(new RetailPartnersDetails().HeaderShowing(header),
@@ -216,14 +217,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Header '" + header + "' was showing, as expected!");
 		}
 
-		[StepDefinition(@"The Supplier ID Table (should|should not) be showing")]
+		[RegexStepDefinition(@"The Supplier ID Table (should|should not) be showing")]
 		public void SupplierIdShowingCorrectly(string shouldornot)
 		{
 			bool expected = shouldornot == "should";
 			Report.IsTrue(new RetailPartnersDetails().SupplierIDTableShowing() == expected, (expected ? "Expected" : "Did not expect") + " the Supplier ID table to be showing!", "The Supplier ID " + (expected ? "was" : "was not") + " table showing, as expected!");
 		}
 
-		[StepDefinition(@"I confirm that under the pie chart I see the label: (.*)")]
+		[RegexStepDefinition(@"I confirm that under the pie chart I see the label: (.*)")]
 		public void ConfirmPieChartLegend(string legendLabel)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - Confirming that the pie chart has legend containing: " + legendLabel);
@@ -251,13 +252,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"The pie chart should be showing on the retailer details page")]
+		[RegexStepDefinition(@"The pie chart should be showing on the retailer details page")]
 		public void PieChartShowing()
 		{
 			Report.IsTrue(new RetailPartnersDetails().PieChartShowing(), "Pie Chart was not visible!", "Pie chart was visible, as exoected!");
 		}
 
-		[StepDefinition(@"The pie chart footer text should contain: (.*)")]
+		[RegexStepDefinition(@"The pie chart footer text should contain: (.*)")]
 		public void PieChartFooterTextShowingAsExpected(string text)
 		{
 			string showing = new RetailPartnersDetails().GetPieChartFooterText();
@@ -265,7 +266,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(showing.Contains(text), "Showing text did not contain: " + text + "!", "Displayed text successfully contained: " + text);
 		}
 
-		[StepDefinition(@"I see a percentage number in the middle of the pie chart")]
+		[RegexStepDefinition(@"I see a percentage number in the middle of the pie chart")]
 		public void PercentageMiddleOfPieChart()
 		{
 			string percentage = new RetailPartnersDetails().ChartCentrePercentage();
@@ -274,7 +275,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The percentage: " + percentage + " was displayed in the middle of the pie chart");
 		}
 
-		[StepDefinition(@"I confirm that the color of the pie chart for the Retailer selected is Green")]
+		[RegexStepDefinition(@"I confirm that the color of the pie chart for the Retailer selected is Green")]
 		public void ColorOfPieChartForSelectedRetailerGreen()
 		{
 			var selRetailPartnersDetails = new RetailPartnersDetails();
@@ -284,7 +285,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The pie chart fill for the retailer was green as expected. The hex code displayed is: " + testChartFill);
 		}
 
-		[StepDefinition(@"I confirm the percentage in the pie chart legend statement matches the percentage shown in the middle of the pie chart")]
+		[RegexStepDefinition(@"I confirm the percentage in the pie chart legend statement matches the percentage shown in the middle of the pie chart")]
 		public void PieChartLegendPercentageMatchesPieChartPercentage()
 		{
 			var selRetailPartnersDetails = new RetailPartnersDetails();
@@ -295,7 +296,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The percentage showing in the pie chart legend matches the percentage within the pie chart as expected");
 		}
 
-		[StepDefinition(@"I confirm that: (.*) is showing under the Data Consent Tiers heading")]
+		[RegexStepDefinition(@"I confirm that: (.*) is showing under the Data Consent Tiers heading")]
 		public void ThenConfirmYouSeeUnderTheDataConsentTiersHeading(string tierInformation)
 		{
 			Report.StartStep(Report.Details.StepIndex + $" - Confirming that '{ tierInformation }' is showing under the Data Consent Tiers heading");
@@ -351,7 +352,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click the More Information hyperlink")]
+		[RegexStepDefinition(@"I click the More Information hyperlink")]
 		public void ClickMoreInformation()
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - Clicking 'More Information' Hyperlink");
@@ -391,7 +392,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I (should|should not) see the More Information hyperlink")]
+		[RegexStepDefinition(@"I (should|should not) see the More Information hyperlink")]
 		public void MoreInformation(string should)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - I " + should + " see the More Information hyperlink");
@@ -419,7 +420,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click the Products in Scope button and confirm that an (excel|html) file is produced called (.*) and save as (.*)")]
+		[RegexStepDefinition(@"I click the Products in Scope button and confirm that an (excel|html) file is produced called (.*) and save as (.*)")]
 		public void ThenClickTheProductsInScopeButtonBelowTheMoreInformationHyperlink(string filetype, string file, string savedAs)
 		{
 			Report.Info("Click the Products in Scope button");
@@ -466,7 +467,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I confirm that an (excel|html|zip|csv) file is produced called (.*) and save as (.*)")]
+		[RegexStepDefinition(@"I confirm that an (excel|html|zip|csv) file is produced called (.*) and save as (.*)")]
 		public void ConfirmFileAppearsInDownloadsFolder(string filetype, string file, string savedAs)
 		{
 			GeneralUtilities.Wait_for_load_finish();
@@ -494,7 +495,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the excel file saved as (.*) can be opened and contains data")]
+		[RegexStepDefinition(@"I confirm the excel file saved as (.*) can be opened and contains data")]
 		public void ThenConfirmTheExcelFileCanBeOpenedAndContainsDataWPSIDAndProductName(string savedAs)
 		{
 			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
@@ -517,7 +518,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the Supplier Reports excel file saved as (.*) can be opened and contains data")]
+		[RegexStepDefinition(@"I confirm the Supplier Reports excel file saved as (.*) can be opened and contains data")]
 		public void ThenConfirmTheSupplierReportsExcelFileCanBeOpenedAndContainsDataWPSIDAndProductName(string savedAs)
 		{
 			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
@@ -540,7 +541,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the zip excel file saved as (.*) can be opened and contains data")]
+		[RegexStepDefinition(@"I confirm the zip excel file saved as (.*) can be opened and contains data")]
 		public void ThenConfirmTheZipExcelFileCanBeOpenedAndContainsDataWPSIDAndProductName(string savedAs)
 		{
 			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
@@ -584,7 +585,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the csv file saved as (.*) can be opened and contains data")]
+		[RegexStepDefinition(@"I confirm the csv file saved as (.*) can be opened and contains data")]
 		public void ThenConfirmTheCSVFileCanBeOpenedAndContainsDataWPSIDAndProductName(string savedAs)
 		{
 			Report.Info("Confirm the csv file saved as " + savedAs + " can be opened and contains data");
@@ -609,7 +610,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the zip csv file saved as (.*) can be opened and contains data")]
+		[RegexStepDefinition(@"I confirm the zip csv file saved as (.*) can be opened and contains data")]
 		public void ThenConfirmTheZipCSVFileCanBeOpenedAndContainsDataWPSIDAndProductName(string savedAs)
 		{
 			Report.Info("Confirm the csv file saved as " + savedAs + " can be opened and contains data");
@@ -644,7 +645,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the html file saved as (.*) can be opened and contains text: (.*)")]
+		[RegexStepDefinition(@"I confirm the html file saved as (.*) can be opened and contains text: (.*)")]
 		public void CheckingDownloadedHTMLFile(string savedAs, string text)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - Confirm the excel file saved as " + savedAs + " can be opened and contains data");
@@ -659,7 +660,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I ensure the Data Consent Tier Sliders exist for the following tiers:")]
+		[RegexStepDefinition(@"I ensure the Data Consent Tier Sliders exist for the following tiers:")]
 		public void DataConsentTiersSlidersExist(Table expected)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - Ensure the Data Consent Tier Sliders exist");
@@ -681,7 +682,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I ensure the Data Consent Tier On/Off switch exists for the following tiers:")]
+		[RegexStepDefinition(@"I ensure the Data Consent Tier On/Off switch exists for the following tiers:")]
 		public void DataConsentTiersOnOffSwitchExist(Table expected)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - Ensure the Data Consent Tier On/Off switch exist");
@@ -703,7 +704,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I ensure the Data Consent Tier Sliders are set as follows:")]
+		[RegexStepDefinition(@"I ensure the Data Consent Tier Sliders are set as follows:")]
 		public void DataConsentTiersSet(Table expected)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - Ensure the Data Consent Tier Sliders are set");
@@ -726,7 +727,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I ensure the CVS Data Consent Tier Sliders are showing and set as follows:")]
+		[RegexStepDefinition(@"I ensure the CVS Data Consent Tier Sliders are showing and set as follows:")]
 		public void CVSDataConsentTiersAreShowingAndSet(Table expected)
 		{
 			Report.Info($"Ensure the Data Consent Tier Sliders are set");
@@ -780,7 +781,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"the Data Consent Tier: (.*) should be set to: (on|off)")]
+		[RegexStepDefinition(@"the Data Consent Tier: (.*) should be set to: (on|off)")]
 		public void DataConsentTierShouldBeSetTo(string tier, string onOff)
 		{
 			bool toggle = onOff == "on";
@@ -788,7 +789,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The Data Consent Tier: " + tier + " was not set to: " + onOff,
 				"The Data Consent Tier: " + tier + " was set to " + onOff);
 		}
-		[StepDefinition(@"I (should|should not) be able to edit Tier (.*)")]
+		[RegexStepDefinition(@"I (should|should not) be able to edit Tier (.*)")]
 		public void DataUsageTierEditing(string should, string tier)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - Ensure Tier " + tier + " " + (should == "should" ? "is" : "is not") + " editable");
@@ -826,7 +827,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"the save changes button (is|is not) shown")]
+		[RegexStepDefinition(@"the save changes button (is|is not) shown")]
 		public void ThenConfirmTheSaveChangesButtonIsShown(string shown)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - Check that the Save Changes button " + shown + " shown");
@@ -849,7 +850,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click the Save Changes button")]
+		[RegexStepDefinition(@"I click the Save Changes button")]
 		public void GivenClickTheSaveChangesButton()
 		{
 			Report.Info("Click the Save Changes button");
@@ -857,7 +858,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(selRetailDetails.ClickSaveChanges(), "Failed to click 'Save Changes'", "Successfully clicked 'Save Changes'");
 		}
 
-		[StepDefinition(@"I click close on the Save Changes popup dialog")]
+		[RegexStepDefinition(@"I click close on the Save Changes popup dialog")]
 		public void ClickCloseOnSavePopupDialog()
 		{
 			Report.Info("Closing the Save Changes popup dialog");
@@ -870,7 +871,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(0);
 		}
 
-		[StepDefinition(@"if the save button is visible, I save changes and close the popup dialog")]
+		[RegexStepDefinition(@"if the save button is visible, I save changes and close the popup dialog")]
 		public void ClickSaveClosePopupIfVisible()
 		{
 			var selRetailDetails = new RetailPartnersDetails();
@@ -894,9 +895,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"the following warning message should be showing: (.*)")]
+		[RegexStepDefinition(@"the following warning message should be showing: (.*)")]
 
-		[StepDefinition(@"the warning message in the Retail Partners details page should contain the following:")]
+		[RegexStepDefinition(@"the warning message in the Retail Partners details page should contain the following:")]
 		public void WarningMessagesRetailPartnersShouldContain(Table warning)
 		{
 			var expected = new List<string>();
@@ -932,7 +933,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the NOTE message below the Data Consent Tiers Heading is NOT shown")]
+		[RegexStepDefinition(@"I confirm the NOTE message below the Data Consent Tiers Heading is NOT shown")]
 		public void ThenConfirmTheNoteMessageBelowTheDataConsentTiersHeadingIsNotShown()
 		{
 			List<string> displayed = new RetailPartnersDetails().WarningMessages();
@@ -941,13 +942,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The NOTE error message was not diplayed under the Data Consent Tiers Heading");
 		}
 
-		[StepDefinition(@"I confirm that none of the available Retailer Tiles are blank")]
+		[RegexStepDefinition(@"I confirm that none of the available Retailer Tiles are blank")]
 		public void NoRetailerTilesAreBlank()
 		{
 			Report.IsTrue(new RetailPartners().NoRetailerTilesAreEmpty(), "Some retailer partner containers were empty!", "No retailer partner containers were empty!");
 		}
 
-		[StepDefinition(@"I check that the following retailers are showing:")]
+		[RegexStepDefinition(@"I check that the following retailers are showing:")]
 		public void RetailersAreCorrectlyShowing(Table expected)
 		{
 			List<string> showing = new RetailPartners().GetAllAvailableRetailers();
@@ -966,7 +967,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I should see Retailer tiles under the (All Retailers|Most Recent Retailers) heading")]
+		[RegexStepDefinition(@"I should see Retailer tiles under the (All Retailers|Most Recent Retailers) heading")]
 		public void RetailerTilesUnderMostRecentRetailers(string heading)
 		{
 			var selRetailPartners = new RetailPartners();
@@ -978,7 +979,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(selRetailPartners.TilesAppearBelowHeading("most-recent"), "There were no tiles below heading: " + heading, "Tiles were showing below heading: " + heading);
 		}
 
-		[StepDefinition(@"I confirm that the retailers shown under the Most Recent Retailers heading are not repeated under the All Retailers heading")]
+		[RegexStepDefinition(@"I confirm that the retailers shown under the Most Recent Retailers heading are not repeated under the All Retailers heading")]
 		public void RetailersShownUnderMostRecentHeadingAreNotRepeatedUnderAllRetailers()
 		{
 			var selRetailPartners = new RetailPartners();
@@ -986,7 +987,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(!anyMatch, "There were retailers appearing under Most Recent Retailers which were repeated under All Retailers", "No Retailers under the Most Recent heading were repeated under the All Retailers heading");
 		}
 
-		[StepDefinition(@"I confirm that if the Retailer logo is not shown, then the Retailer name is shown in the Retailer tile")]
+		[RegexStepDefinition(@"I confirm that if the Retailer logo is not shown, then the Retailer name is shown in the Retailer tile")]
 		public void RetailerLogoIsNotShownThenRetailerNameIsShown()
 		{
 			var selRetailPartners = new RetailPartners();
@@ -1011,35 +1012,35 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click on close in the Report Download dialog")]
+		[RegexStepDefinition(@"I click on close in the Report Download dialog")]
 		public void GivenIClickOnCloseInTheReportDownloadDialog()
 		{
 			Delay.Seconds(10);
 			Report.IsTrue(new ReportDownload().ClickClose(), "Failed to click close on Report Download modal dialog", "Successfully clicked close");
 		}
 
-		[StepDefinition(@"I click the back arrow next to CVS")]
+		[RegexStepDefinition(@"I click the back arrow next to CVS")]
 		public void GivenIClickTheBackArrowNextToCVS()
 		{
 			Report.IsTrue(new RetailPartnersDetails().ClickBackButton(), "Failed to click the back arrow",
 				"Successfully clicked the back arrow");
 		}
 
-		[StepDefinition(@"I should see the Retail Partners page")]
+		[RegexStepDefinition(@"I should see the Retail Partners page")]
 		public void ThenIShouldSeeTheRetailPartnersPage()
 		{
 			Report.IsTrue(new RetailPartners().Wait_for_load(60), "Retail partners page is not showing as expected",
 				"Retail partners page is showing as expected");
 		}
 
-		[StepDefinition(@"I should see the Retailer Detail page")]
+		[RegexStepDefinition(@"I should see the Retailer Detail page")]
 		public void ThenIShouldSeeTheRetailerDetailPage()
 		{
 			Report.IsTrue(new RetailPartnersDetails().Wait_for_load(60), "Retailer detail page is not showing as expected",
 				"Retailer detail page is showing as expected");
 		}
 
-		[StepDefinition(@"I check that in the Supplier ID table the following columns are showing:")]
+		[RegexStepDefinition(@"I check that in the Supplier ID table the following columns are showing:")]
 		public void ThenICheckThatInTheSupplierIDTableTheFollowingColumnsAreShowing(Table supplierIDTable)
 		{
 			var SupplierIDHeaders = new RetailPartnersDetails().GetSupplierIDTableHeaders().OrderBy(x => x).ToList();
@@ -1064,7 +1065,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I click on the Add new Supplier ID link")]
+		[RegexStepDefinition(@"I click on the Add new Supplier ID link")]
 		public void GivenIClickOnTheAddNewSupplierIDLink()
 		{
 			Report.IsTrue(new RetailPartnersDetails().ClickAddSupplierId(), "Failed to click add supplier id link",
@@ -1072,7 +1073,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Delay.Seconds(5);
 		}
 
-		[StepDefinition(@"I confirm the pop up shows the heading: (.*)")]
+		[RegexStepDefinition(@"I confirm the pop up shows the heading: (.*)")]
 		public void ThenIConfirmThePopUpShowsTheHeading(string title)
 		{
 			Report.IsTrue(new ModalDialog().WaitForContainerToBeVisible(), "The modal was not visible", "The modal was visible");
@@ -1080,7 +1081,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(actualTitle == title, "Title is " + actualTitle + " but should be: " + title,
 				"Title is showing as expected: " + title);
 		}
-		[StepDefinition(@"I click the back arrow on the Retail Partners Details page")]
+		[RegexStepDefinition(@"I click the back arrow on the Retail Partners Details page")]
 		public void ClickTheBackArrowRetailPartnersDetails()
 		{
 			Report.IsTrue(new RetailPartnersDetails().ClickBackButton(), "Failed to click the back arrow",
@@ -1088,21 +1089,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			GeneralUtilities.Wait_for_load_finish();
 		}
 
-		[StepDefinition(@"I confirm the pop up shows the Supplier ID heading and data entry field")]
+		[RegexStepDefinition(@"I confirm the pop up shows the Supplier ID heading and data entry field")]
 		public void ThenIConfirmThePopUpShowsTheSupplierIDHeadingAndDataEntryField()
 		{
 			Report.IsTrue(new AddNewSupplier().EnterSupplierIDExists(), "Supplier ID field does not exist as expected",
 				"Supplier ID field exists as expected");
 		}
 
-		[StepDefinition(@"I confirm the pop up shows the Company or Brand Name heading and data entry field")]
+		[RegexStepDefinition(@"I confirm the pop up shows the Company or Brand Name heading and data entry field")]
 		public void ThenIConfirmThePopUpShowsTheCompanyOrBrandNameHeadingAndDataEntryField()
 		{
 			Report.IsTrue(new AddNewSupplier().EnterCompanyOrBrandNameExists(), "Company or brand name field does not exist as expected",
 				"Company or brand name exists as expected");
 		}
 
-		[StepDefinition(@"I confirm the pop up shows the Is Default Heading and check box")]
+		[RegexStepDefinition(@"I confirm the pop up shows the Is Default Heading and check box")]
 		public void ThenIConfirmThePopUpShowsTheIsDefaultHeadingAndCheckBox()
 		{
 			Report.IsTrue(new AddNewSupplier().IsDefaultExists(), "Is Default field does not exist as expected",
@@ -1110,21 +1111,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I confirm the pop up shows a Save button")]
+		[RegexStepDefinition(@"I confirm the pop up shows a Save button")]
 		public void ThenIConfirmThePopUpShowsASaveButton()
 		{
 			Report.IsTrue(new AddNewSupplier().SaveButtonExists(), "Save button does not exist as expected",
 				"Save button exists as expected");
 		}
 
-		[StepDefinition(@"I confirm the pop up shows a Cancel button")]
+		[RegexStepDefinition(@"I confirm the pop up shows a Cancel button")]
 		public void ThenIConfirmThePopUpShowsACancelButton()
 		{
 			Report.IsTrue(new AddNewSupplier().CancelButtonExists(), "Cancel button does not exist as expected",
 				"Cancel button exists as expected");
 		}
 
-		[StepDefinition(@"in the modal dialog I click (cancel|save|Yes|No)")]
+		[RegexStepDefinition(@"in the modal dialog I click (cancel|save|Yes|No)")]
 		public void GivenInTheModalDialogIClickButton(string type)
 		{
 			//if (cancelOrSave == "cancel")
@@ -1161,7 +1162,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the Add New Supplier ID pop up closes")]
+		[RegexStepDefinition(@"I confirm the Add New Supplier ID pop up closes")]
 		public void ThenIConfirmTheAddNewSupplierIDPopUpCloses()
 		{
 			Delay.Seconds(1);
@@ -1169,13 +1170,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Dialog has closed as expected");
 		}
 
-		[StepDefinition(@"I confirm in the browser popup")]
+		[RegexStepDefinition(@"I confirm in the browser popup")]
 		public void GivenIConfirmInTheBrowserPopup()
 		{
 			SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
 		}
 
-		[StepDefinition(@"I confirm that the CSV file saved as: (.*) contains the following columns:")]
+		[RegexStepDefinition(@"I confirm that the CSV file saved as: (.*) contains the following columns:")]
 		public void ThenIConfirmThatTheCSVFileSavedAsContainsTheFollowingColumns(string savedAs, Table table)
 		{
 			Report.Info("Confirm the CSV file saved as " + savedAs + " can be opened and contains data");
@@ -1208,7 +1209,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains the following columns:")]
+		[RegexStepDefinition(@"I confirm that the excel file saved as: (.*) contains the following columns:")]
 		public void ThenIConfirmThatTheExcelFileSavedAsContainsTheFollowingColumns(string savedAs, Table table)
 		{
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
@@ -1249,7 +1250,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I get the excel row data file saved as: (.*) and save the data to context")]
+		[RegexStepDefinition(@"I get the excel row data file saved as: (.*) and save the data to context")]
 		public void GrabExcelRowDataAndSaveItToContext(string savedAs)
 		{
 
@@ -1276,7 +1277,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains the following columns: and they are in the correct order.")]
+		[RegexStepDefinition(@"I confirm that the excel file saved as: (.*) contains the following columns: and they are in the correct order.")]
 		public void ThenIConfirmThatTheExcelFileSavedAsContainsTheFollowingColumnsAndAreInTheCorrectOrder(string savedAs, Table table)
 		{
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
@@ -1313,7 +1314,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I save the product with name: (.*) and id: (.*) as: (.*)")]
+		[RegexStepDefinition(@"I save the product with name: (.*) and id: (.*) as: (.*)")]
 		public void ISaveProductWithNameAndIDAs(string name, string id, string saveAs)
 		{
 			id = Context.GetFromContext(id)?.ToString() ?? "";
@@ -1325,7 +1326,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(saveAs, newProductInformation);
 		}
 
-		[StepDefinition(@"I save the first product in the excel spreadsheet saved as: (.*) as (.*)")]
+		[RegexStepDefinition(@"I save the first product in the excel spreadsheet saved as: (.*) as (.*)")]
 		public void ISaveTheFirstProductInTheExcelSpreadSheetAs(string spreadsheet, string product)
 		{
 			string File = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
@@ -1341,7 +1342,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I save the first row in the spreadsheet saved as (.*) as (.*)")]
+		[RegexStepDefinition(@"I save the first row in the spreadsheet saved as (.*) as (.*)")]
 		public void ISaveTheFirstRowOfTheSpreadsheetAs(string spreadsheet, string savedAs)
 		{
 			string File = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
@@ -1360,7 +1361,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I save the value with the header (.*) on the first product in the excel spreadsheet saved as: (.*) as (.*)")]
+		[RegexStepDefinition(@"I save the value with the header (.*) on the first product in the excel spreadsheet saved as: (.*) as (.*)")]
 		public void SaveTheValueWithHeaderAs(string header, string spreadsheet, string saveAs)
 		{
 			string File = Context.GetFromContext(spreadsheet)?.ToString() ?? "";
@@ -1373,7 +1374,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click each Wal-mart affiliate retailer and should be taken to the Wal-mart/SAM'S CLUB view")]
+		[RegexStepDefinition(@"I click each Wal-mart affiliate retailer and should be taken to the Wal-mart/SAM'S CLUB view")]
 		public void AllWalMartAffiliatesNavigateToSamsClub()
 		{
 			var retailerInfo = new List<KeyValuePair<string, string>>
@@ -1411,7 +1412,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm that the excel file saved as: (.*) in column: (.*) there are no numbers")]
+		[RegexStepDefinition(@"I confirm that the excel file saved as: (.*) in column: (.*) there are no numbers")]
 		public void ThenIConfirmThatTheExcelFileSavedAsInColumnThereAreNoNumbers(string savedAs, string columnName)
 		{
 			object File = Context.GetFromContext(savedAs);
@@ -1443,7 +1444,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(AllPassed, "Not all items were strings", "As expected all items were strings");
 		}
 
-		[StepDefinition(@"I delete the excel file saved as (.*)")]
+		[RegexStepDefinition(@"I delete the excel file saved as (.*)")]
 		public void DeleteExcelFile(string savedAs)
 		{
 			string file = Context.GetFromContext(savedAs)?.ToString() ?? "";
@@ -1456,13 +1457,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			File.Delete(file);
 		}
 
-		[StepDefinition(@"I click the ""(.*)"" information button in the Retail Partners Details screen")]
+		[RegexStepDefinition(@"I click the ""(.*)"" information button in the Retail Partners Details screen")]
 		public void ClickInformationButtonInDataTierDetails(string button)
 		{
 			Report.IsTrue(new RetailPartnersDetails().ClickInfoButton(button), $"Failed to click the {button} button!", $"Successfully clicked the {button} button");
 		}
 
-		[StepDefinition(@"I confirm the ""(.*)"" information button is displayed on the Retail Partners Details screen")]
+		[RegexStepDefinition(@"I confirm the ""(.*)"" information button is displayed on the Retail Partners Details screen")]
 		public void ConfirmTheInfoButtonIsDisplayedOnRetailPartnersDetails(string button)
 		{
 			Report.IsTrue(new RetailPartnersDetails().InfoButton(button) != null,
@@ -1470,13 +1471,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$@"The ""{button}"" was dipslayed as expected");
 		}
 
-		[StepDefinition(@"I click the ""(.*)"" tab in Data Tier Details")]
+		[RegexStepDefinition(@"I click the ""(.*)"" tab in Data Tier Details")]
 		public void ClickTabInDataTierDetails(string tab)
 		{
 			Report.IsTrue(new DataTierDetails().ClickTab(tab), $"Failed to click the {tab} tab!", $"Successfully clicked the {tab} tab");
 		}
 
-		[StepDefinition(@"The Data Tier Details popup shows the following tabs:")]
+		[RegexStepDefinition(@"The Data Tier Details popup shows the following tabs:")]
 		public void DataTierDetailsPopUpShowsTheFollowingTabs(Table tabs)
 		{
 			Delay.Seconds(10);
@@ -1488,13 +1489,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The displayed tabs matched the expected tabs.");
 		}
 
-		[StepDefinition(@"I close the Data Tier Details popup")]
+		[RegexStepDefinition(@"I close the Data Tier Details popup")]
 		public void ClickCloseDataTierDetails()
 		{
 			Report.IsTrue(new DataTierDetails().ClickClose(), "Failed to click close!", "Successfully clicked close");
 		}
 
-		[StepDefinition(@"I confirm the text displayed in the Data Tier Details popup matches for each section:")]
+		[RegexStepDefinition(@"I confirm the text displayed in the Data Tier Details popup matches for each section:")]
 		public void ConfirmTheTextDisplayedinDataTierDetialsPopupContains(Table paragraphText)
 		{
 			List<KeyValuePair<string, string>> displayedParagraphs_ = new DataTierDetails().TabParagraphs();
@@ -1508,7 +1509,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the Data Tier Details subheading reads: (.*)")]
+		[RegexStepDefinition(@"I confirm the Data Tier Details subheading reads: (.*)")]
 		public void ConfirmTheDataTierDetailsSubheadingReads(string expectedSubheading)
 		{
 			string actualSubHeading = new DataTierDetails().SubHeading().Trim();
@@ -1517,13 +1518,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The Data Tier Details subheading matched the expected text");
 		}
 
-		[StepDefinition(@"I confirm the Retailer Details Page has loaded")]
+		[RegexStepDefinition(@"I confirm the Retailer Details Page has loaded")]
 		public void IConfirmTheRetailerDetailsPageHasLoaded()
 		{
 			Report.IsTrue(new RetailPartnersDetails().Wait_for_load(), "The Retailer Details page was not loaded!", "The Retailer Details page was loaded as expected");
 		}
 
-		[StepDefinition(@"I confirm the Data Consent Tiers table is displayed")]
+		[RegexStepDefinition(@"I confirm the Data Consent Tiers table is displayed")]
 		public void ConfirmTheDataConsentTiersTableIsDisplayed()
 		{
 			Report.IsTrue(new RetailPartnersDetails().DataConsentTiersTable() != null,
@@ -1531,7 +1532,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The Data Consent Tiers table was displayed as expected.");
 		}
 
-		[StepDefinition(@"I confirm that row: (.*) of the Data Consent Tiers table displays: ""(.*)""")]
+		[RegexStepDefinition(@"I confirm that row: (.*) of the Data Consent Tiers table displays: ""(.*)""")]
 		public void ConfirmThatRowOfTheDataConsentTiersTableDisplaysText(string row, string text)
 		{
 			var selRetailPartnersDetails = new RetailPartnersDetails();
@@ -1551,7 +1552,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Failure($"Row number supplied ({row}) was not parsable as an int!");
 		}
 
-		[StepDefinition(@"in the Add New Supplier Dialog I Confirm an error shows below the Supplier ID question: (.*)")]
+		[RegexStepDefinition(@"in the Add New Supplier Dialog I Confirm an error shows below the Supplier ID question: (.*)")]
 		public void GivenIConfirmAnErrorShowsBelowTheSupplierIDQuestion(string expectedError)
 		{
 			var thisAddNewSupplier = new AddNewSupplier();
@@ -1565,7 +1566,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Error is showing as expected");
 		}
 
-		[StepDefinition(@"in the Add New Supplier Dialog I Confirm an error shows below Company or Brand Name question: (.*)")]
+		[RegexStepDefinition(@"in the Add New Supplier Dialog I Confirm an error shows below Company or Brand Name question: (.*)")]
 		public void GivenIConfirmAnErrorShowsBelowTheCompanyQuestion(string expectedError)
 		{
 			var thisAddNewSupplier = new AddNewSupplier();
@@ -1579,7 +1580,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Error is showing as expected");
 		}
 
-		[StepDefinition(@"in the Add New Supplier Dialog I enter the following in the Supplier ID input: (.*)")]
+		[RegexStepDefinition(@"in the Add New Supplier Dialog I enter the following in the Supplier ID input: (.*)")]
 		public void GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheSupplierIDInput(string supplierIDInput)
 		{
 			var thisAddNewSupplier = new AddNewSupplier();
@@ -1587,7 +1588,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Entered supplier ID value");
 		}
 
-		[StepDefinition(@"in the Add New Supplier Dialog I enter the following in the Company or Brand Name input: (.*)")]
+		[RegexStepDefinition(@"in the Add New Supplier Dialog I enter the following in the Company or Brand Name input: (.*)")]
 		public void GivenInTheAddNewSupplierDialogIEnterTheFollowingInTheCompanyOrBrandNameInput(string companyInput)
 		{
 			var thisAddNewSupplier = new AddNewSupplier();
@@ -1595,7 +1596,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Entered company or brand name value");
 		}
 
-		[StepDefinition(@"in the Add New Supplier Dialog I select the first option in the Company or Brand Name input and save to context as: (.*)")]
+		[RegexStepDefinition(@"in the Add New Supplier Dialog I select the first option in the Company or Brand Name input and save to context as: (.*)")]
 		public void GivenInTheAddNewSupplierDialogISelectTheFirstOptionInTheCompanyOrBrandNameInput(string savedAs)
 		{
 			var thisAddNewSupplier = new AddNewSupplier();
@@ -1615,7 +1616,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		//CompanyOrBrandNameOptions()
 
-		[StepDefinition(@"in the Add New Supplier Dialog I Confirm that no error shows below Company or Brand Name question")]
+		[RegexStepDefinition(@"in the Add New Supplier Dialog I Confirm that no error shows below Company or Brand Name question")]
 		public void GivenInTheAddNewSupplierDialogIConfirmThatNoErrorShowsBelowCompanyOrBrandNameQuestion()
 		{
 			var thisAddNewSupplier = new AddNewSupplier();
@@ -1623,7 +1624,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"As expected no error is showing below Company or Brand name question");
 		}
 
-		[StepDefinition(@"in the Add New Supplier Dialog I Confirm that no error shows below Supplier ID question")]
+		[RegexStepDefinition(@"in the Add New Supplier Dialog I Confirm that no error shows below Supplier ID question")]
 		public void GivenInTheAddNewSupplierDialogIConfirmThatNoErrorShowsBelowSupplierIDQuestion()
 		{
 			var thisAddNewSupplier = new AddNewSupplier();
@@ -1635,7 +1636,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		/// Requires a table with columns: | Supplier ID | Company or Brand Name |
 		/// Company or Brand Name may use 'saved as: (.*)' where (.*) is the Context savedAs string
 		/// </summary>
-		[StepDefinition(@"I confirm that in the Supplier IDS list the following row exists")]
+		[RegexStepDefinition(@"I confirm that in the Supplier IDS list the following row exists")]
 		public void ThenIConfirmThatInTheSupplierIDSListTheFollowingRowExists(Table table)
 		{
 			List<Supplier> allSuppliers = new RetailPartnersDetails().GetAllSuppliers();
@@ -1657,7 +1658,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(matchingSupplier != null, "No matching row was found in the list",
 				"Matching row as found as expected");
 		}
-		[StepDefinition(@"in the Add New Supplier Dialog I click save")]
+		[RegexStepDefinition(@"in the Add New Supplier Dialog I click save")]
 		public void GivenInTheAddNewSupplierDialogIClickSave()
 		{
 
@@ -1668,7 +1669,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		//x = 1 for O'Reilly, 2 for Sears, 3 for Wal-Mart
-		[StepDefinition(@"I find the Supplier ID for (.*) in the SupplierID table and save as (.*)")]
+		[RegexStepDefinition(@"I find the Supplier ID for (.*) in the SupplierID table and save as (.*)")]
 		public void GivenIFindTheSupplierIDForSupplierInTheSupplierIDTable(string supplier, string saveAs)
 		{
 			List<Supplier> allSuppliers = new RetailPartnersDetails().GetAllSuppliers();
@@ -1724,7 +1725,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		//Creating a new version of this method as the above one was erroring and I am not sure why its getting rootstrings etc?
-		[StepDefinition(@"For retailer: (.*) I confirm the the supplier ID: (.*) is found in the supplier ID Table and save it as: (.*)")]
+		[RegexStepDefinition(@"For retailer: (.*) I confirm the the supplier ID: (.*) is found in the supplier ID Table and save it as: (.*)")]
 		public void GivenIFindTheSupplierIDForSupplierInTheSupplierIDTable(string supplier, string expectedID, string saveAs)
 		{
 			List<Supplier> allSuppliers = new RetailPartnersDetails().GetAllSuppliers();
@@ -1781,7 +1782,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I Confirm the Is Active column for SupplierID saved as (.*) (shows|does not show) a green check mark")]
+		[RegexStepDefinition(@"I Confirm the Is Active column for SupplierID saved as (.*) (shows|does not show) a green check mark")]
 		public void GivenIConfirmTheIsActiveColumnForSupplierIDSavedAsSupplierIDShowsAGreenCheckMark(string savedAs, string showsDoesNotShow)
 		{
 			List<Supplier> allSuppliers = new RetailPartnersDetails().GetAllSuppliers();
@@ -1824,13 +1825,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I click download PDF for ""(.*)""")]
+		[RegexStepDefinition(@"I click download PDF for ""(.*)""")]
 		public void ClickDownloadPdf(string option)
 		{
 			Report.IsTrue(new DataTierDetails().ClickDownloadPdfWithHeading(option), $"Failed to click download pdf option for {option}!", $"Successfully clicked download pdf option for {option}");
 		}
 
-		[StepDefinition(@"In the What are the Data Usage Tiers modal, I click the (.*) link")]
+		[RegexStepDefinition(@"In the What are the Data Usage Tiers modal, I click the (.*) link")]
 		public void InWhatAreDataUsageTiersModalIClickLink(string linkText)
 		{
 			var dtd = new DataTierDetails();
@@ -1840,7 +1841,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm Terms Use page loads in new tab")]
+		[RegexStepDefinition(@"I confirm Terms Use page loads in new tab")]
 		public void ConfirmTermsUsePageLoadsInNewWindow()
 		{
 			if (Report.IsTrue(SeleniumWebDriver.CurrentDriver.GetTabURLs().Contains($"{SeleniumWebDriver.BaseTestUrl}MyAccount/User/TermsUse"),$"Failure, Terms Use tab does not exist.",$"Success, Terms Use tab exists."))
@@ -1850,7 +1851,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I close the Terms Use tab")]
+		[RegexStepDefinition(@"I close the Terms Use tab")]
 		public void CloseTermsUseTab()
 		{
 			if (Report.IsTrue(SeleniumWebDriver.CurrentDriver.GetTabURLs().Contains($"{SeleniumWebDriver.BaseTestUrl}MyAccount/User/TermsUse"), $"Failure, Terms Use tab does not exist.", $"Success, Terms Use tab exists."))
@@ -1859,7 +1860,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"On the Terms Use page, I click on the '(.*)' link")]
+		[RegexStepDefinition(@"On the Terms Use page, I click on the '(.*)' link")]
 		public void OnTermsUsePageIClickOnLink(string linkLabel)
 		{
 			if(Report.IsTrue(SeleniumWebDriver.CurrentDriver.GetActiveTabURL() == $"{SeleniumWebDriver.BaseTestUrl}MyAccount/User/TermsUse","Failure, not on Terms Use tab.","Success, on Terms Use tab."))
@@ -1869,7 +1870,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"The success message in the Save Changes popup dialog should contain the following:")]
+		[RegexStepDefinition(@"The success message in the Save Changes popup dialog should contain the following:")]
 		public void SuccessMessagesSaveChangesPopupShouldContain(Table warning)
 		{
 			var expected = new List<string>();
@@ -1882,7 +1883,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I create a new supplier products account: (.*) and create a new brand in that account")]
+		[RegexStepDefinition(@"I create a new supplier products account: (.*) and create a new brand in that account")]
 		public void CreateNewSupplierProductsAccountAndCreateAProductWithRetailerCVS(string savedAs)
 		{
 			//delete this step
@@ -1966,7 +1967,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I navigate to the Data Consent Tiers Page for CVS")]
+		[RegexStepDefinition(@"I navigate to the Data Consent Tiers Page for CVS")]
 		public void INavigateToTheDataConentTiersPageForCVS()
 		{
 
@@ -1976,7 +1977,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.ConfirmHeadingShowing("Data Consent Tiers");
 		}
 
-		//[StepDefinition(@"I Check that The expected data tiers for CVS are present in the Data Consent Tiers Section")]
+		//[RegexStepDefinition(@"I Check that The expected data tiers for CVS are present in the Data Consent Tiers Section")]
 		//public void ICheckThatTheGivenDataTiersArePresent()
 		//{
 		//	var retailerPartnerDetails = new RetailPartnersDetails();
@@ -1994,7 +1995,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		//}
 
-		[StepDefinition(@"I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section")]
+		[RegexStepDefinition(@"I Check that The expected data tiers for CVS are the only ones present in the Data Consent Tiers Section")]
 		public void ICheckThatTheGivenDataTiersAreOnlyOnesPresent()
 		{
 			var retailerPartnerDetails = new RetailPartnersDetails();
@@ -2023,7 +2024,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I Check that the data consent tiers available for selection only include Tier 1")]
+		[RegexStepDefinition(@"I Check that the data consent tiers available for selection only include Tier 1")]
 		public void ICheckThatTheDataConsentTiersAvailableForSelectionOnlyIncludeTier1()
 		{
 			var retailerPartnerDetails = new RetailPartnersDetails();
@@ -2091,7 +2092,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I click the Products in Scope button and confirm that a file is not produced called (.*)")]
+		[RegexStepDefinition(@"I click the Products in Scope button and confirm that a file is not produced called (.*)")]
 		public void ThenClickTheProductsInScopeButtonBelowTheMoreInformationHyperlinkAndNotFileProduced(string file)
 		{
 			Report.Info("Click the Products in Scope button");
@@ -2143,7 +2144,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I click the Products in Scope button and confirm that a file is produced called (.*) and save as (.*)")]
+		[RegexStepDefinition(@"I click the Products in Scope button and confirm that a file is produced called (.*) and save as (.*)")]
 		public void ThenClickTheProductsInScopeButtonAndCheckForFile(string file, string savedAs)
 		{
 			Report.Info("Click the Products in Scope button");
@@ -2193,7 +2194,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		
-		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains the WPSID saved as: (.*) and has a 'Y' in the columns:")]
+		[RegexStepDefinition(@"I confirm that the excel file saved as: (.*) contains the WPSID saved as: (.*) and has a 'Y' in the columns:")]
 		public void ThenIConfirmThatTheExcelFileSavedAsContainsWPSIDAndYInColumns(string fileSavedAs, string wpsidSavedAs, Table table)
 		{
 			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
@@ -2263,7 +2264,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains CVS products with tiers 2.1, 2.2, 3 and 4.1 granted")]
+		[RegexStepDefinition(@"I confirm that the excel file saved as: (.*) contains CVS products with tiers 2.1, 2.2, 3 and 4.1 granted")]
 		public void ThenIConfirmThatTheExcelFileSavedAsContainsCVSProductsWithTiers(string fileSavedAs)
 		{
 			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
@@ -2386,7 +2387,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: (.*) and check that is shows the expected product saved as: (.*)")]
+		[RegexStepDefinition(@"I navigate to the CVS retailer Page then check that it contains the expected data tiers and that Products in Scope downloads a file, save it as: (.*) and check that is shows the expected product saved as: (.*)")]
 		public void INavigateToTheCVSRetailerPageThenCheckThatItContainsExpectedTiersAndProductsInScopeAsExpected(string fileSavedAs, string productSavedAs)
 		{
 			ReportSettings.UseSubSteps = true;
@@ -2405,7 +2406,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I confirm that the excel file saved as: (.*) includes the column: (.*) between: (.*) and (.*)")]
+		[RegexStepDefinition(@"I confirm that the excel file saved as: (.*) includes the column: (.*) between: (.*) and (.*)")]
 		public void ThenIConfirmThatTheExcelFileSavedAsIncludesheFollowingColumnsAndAreInTheCorrectOrder(string savedAs, string focusColumn, string column1, string column2)
 		{
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
@@ -2430,7 +2431,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm that the excel file saved as: (.*) includes the following columns:")]
+		[RegexStepDefinition(@"I confirm that the excel file saved as: (.*) includes the following columns:")]
 		public void ThenIConfirmThatTheExcelFileSavedAsIncludesTheFollowingColumns(string savedAs, Table table)
 		{
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
@@ -2450,7 +2451,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains the WPSID saved as: (.*) and has: (.*) in the column: (.*)")]
+		[RegexStepDefinition(@"I confirm that the excel file saved as: (.*) contains the WPSID saved as: (.*) and has: (.*) in the column: (.*)")]
 		public void ThenIConfirmThatTheExcelFileSavedAsContainsUPCNumberAndYInColumns(string fileSavedAs, string wpsidSavedAs, string containsValue, string searchColumn)
 		{
 			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
@@ -2509,7 +2510,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm that the excel file saved as: (.*) contains the following retailers:")]
+		[RegexStepDefinition(@"I confirm that the excel file saved as: (.*) contains the following retailers:")]
 		public bool ThenIConfirmThatTheExcelFileSavedAsContainsTheFollowingRetailers(string savedAs, Table table)
 		{
 			string File = Context.GetFromContext(savedAs)?.ToString() ?? "";
@@ -2562,21 +2563,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I (should|should not) see radio option: (.*)")]
+		[RegexStepDefinition(@"I (should|should not) see radio option: (.*)")]
 		public void ISeeRadioOption(string shouldOrShouldNot, string radioButtonText)
 		{
 			RetailPartners retailPartnersObject = new RetailPartners();
 			Report.IsTrue(retailPartnersObject.FindRadioButton(shouldOrShouldNot, radioButtonText), "Failed to see/not see the radio button with the following text: " + radioButtonText, "Succes saw/not saw the radio button with the following text: " + radioButtonText);
 		}
 
-		[StepDefinition(@"I check if AIS is not uploaded")]
+		[RegexStepDefinition(@"I check if AIS is not uploaded")]
 		public void ICheckIfAISIsNotUploaded()
 		{
 			RetailPartners retailPartnersObject = new RetailPartners();
 			Report.IsTrue(retailPartnersObject.CheckIfAISIsUploaded(), "Failed to check if AIS is uploaded", "Successfully checked if AIS is uploaded");
 		}
 
-		[StepDefinition(@"I confirm the excel file saved as: (.*) (contains|does not contain) the following data: (.*)")]
+		[RegexStepDefinition(@"I confirm the excel file saved as: (.*) (contains|does not contain) the following data: (.*)")]
 		public bool ThenIConfirmTheExcelFileSavedAsProductsInScopeReportForBBBContainsTheFollowingDataCleaningSuppliesProductForBBB(string savedAs, string containsOrDoesNotContain, string data)
 		{
 			Report.Info("Confirm the excel file saved as " + savedAs + " can be opened and contains data");
@@ -2623,7 +2624,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"For Retailer: (.*) If the supplier ID: (.*) is not found In the Supplier Table I add it with the first option in the Company or Brand Name field.")]
+		[RegexStepDefinition(@"For Retailer: (.*) If the supplier ID: (.*) is not found In the Supplier Table I add it with the first option in the Company or Brand Name field.")]
 		public void ForRetailerCheckForSupplierIDAndAddIfNotFound(string retailer, string supplierID)
 		{
 			if (Report.IsTrue(new RetailPartnersDetails().GetSelectedRetailer().Trim() == retailer.Trim(), "Retailer: " + retailer + " was not showing!", "Retailer: " + retailer + " was showing as expected!"))
@@ -2676,13 +2677,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		//[StepDefinition(@"In the Retail Partners page, I close the 'What are the Data Usage Tiers' popup")]
+		//[RegexStepDefinition(@"In the Retail Partners page, I close the 'What are the Data Usage Tiers' popup")]
 		//public void InTheRetailPartnersPageICloseTheWhatAreTheDataUsageTiersPopup()
 		//{
 		//	Report.IsTrue(new RetailPartnersDetails().)
 		//}
 
-		[StepDefinition(@"I confirm that when hover over the tooltip icon : (.*) is showing")]
+		[RegexStepDefinition(@"I confirm that when hover over the tooltip icon : (.*) is showing")]
 		public void ThenConfirmTooltipMessage(string tooltipMessage)
 		{
 			Report.StartStep(Report.Details.StepIndex + $" - Confirming that'{tooltipMessage}' is showing under the Data Consent Tiers heading");
@@ -2718,14 +2719,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I Confirm Regulatory support toggle is Active")]
+		[RegexStepDefinition(@"I Confirm Regulatory support toggle is Active")]
 		public void ConfirmRegulatorySupportTogglenInDataTierDetails()
 		{
 			Report.Info("Start Step: I verify 'Tier 1' is set to: active/ on");
 			Report.IsTrue(new RetailPartnersDetails().GetDataConsentTierOnofFSwitch("Tier 1"), "Tier 1 was not set to active!", "Tier 1 was set to active as expected");
 		}
 
-		[StepDefinition(@"I confirm the following text in Data Consent Tiers table is displayed:(.*)")]
+		[RegexStepDefinition(@"I confirm the following text in Data Consent Tiers table is displayed:(.*)")]
 		public void ConfirmTheFollowingtextDataConsentTiersTable(string text)
 		{
 			Report.IsTrue(new RetailPartnersDetails().DataConsentTierTableData().Text.Contains(text),

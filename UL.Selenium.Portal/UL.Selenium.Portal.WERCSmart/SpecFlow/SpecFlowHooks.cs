@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TechTalk.SpecFlow;
+using Reqnroll;
 using TReVor.Integrations.Classes;
 using TReVor.Integrations.Classes.Configuration;
 using UL.Automation.Helpers;
@@ -22,12 +22,14 @@ namespace UL.Selenium.Portal.WERCSmart.SpecFlow
 		{
 			this.PerformBranchSkipLogic(container, "Staging");
 		}
+
 		[BeforeScenario("OnlyInStaging")]
 		public void RunOnlyInStagingLogic(IObjectContainer container)
 		{
 			this.PerformBranchSkipLogic(container, "QA-Integration");
 			this.PerformBranchSkipLogic(container, "QA-Integration-New");
 		}
+
 		private void PerformBranchSkipLogic(IObjectContainer container, string targetBranchName)
 		{
 			string branchName = this.GetBranchName();

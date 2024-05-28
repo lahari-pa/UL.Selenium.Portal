@@ -8,9 +8,9 @@ using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
 using UL.Automation.Reporting.Functions;
 using System;
-using TechTalk.SpecFlow;
+using Reqnroll;
 using NPOI.SS.UserModel;
-using UL.Automation.SpecFlow.Classes;
+using UL.Automation.ReqnrollHelpers.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {

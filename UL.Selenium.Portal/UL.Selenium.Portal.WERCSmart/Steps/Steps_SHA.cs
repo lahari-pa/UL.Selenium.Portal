@@ -8,8 +8,8 @@ using UL.Automation.WebDriver.Extensions;
 using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
-using UL.Automation.SpecFlow.Classes;
-using TechTalk.SpecFlow;
+using UL.Automation.ReqnrollHelpers.Classes;
+using Reqnroll;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using System.Collections.ObjectModel;
@@ -19,10 +19,10 @@ using UL.Automation.Reporting;
 using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.AdvancedReportsRules;
 using UL.Selenium.Portal.WERCSmart.Classes;
-using iTextSharp.text.pdf;
-using iTextSharp.text.pdf.parser;
 using TReVor.Core.Classes.Software;
 using NUnit.Framework;
+using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Selenium.Portal.WERCSmart.Helpers;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -31,7 +31,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	{
 		public object REport { get; private set; }
 
-		[StepDefinition(@"I navigate to Studio")]
+		[RegexStepDefinition(@"I navigate to Studio")]
 		public void GivenINavigateToStudio()
 		{
 			ReadOnlyCollection<string> handles = SeleniumWebDriver.CurrentDriver.WindowHandles;
@@ -45,14 +45,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			SeleniumWebDriver.CurrentDriver.WaitForPageLoad();
 		}
 
-		[StepDefinition(@"I navigate to Portal")]
+		[RegexStepDefinition(@"I navigate to Portal")]
 		public void GivenINavigateToPortal()
 		{
 			SeleniumWebDriver.CurrentDriver.Url = SeleniumWebDriver.BaseTestUrl;
 			SeleniumWebDriver.CurrentDriver.WaitForPageLoad();
 		}
 
-		[StepDefinition(@"I login to Studio as Administrator")]
+		[RegexStepDefinition(@"I login to Studio as Administrator")]
 		public void GivenILoginToStudioAsAdministrator()
 		{
 			var thisStudioLogin = new StudioLogin();
@@ -93,7 +93,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I login to Studio as (.*)")]
+		[RegexStepDefinition(@"I login to Studio as (.*)")]
 		public void GivenILoginToStudioAsTReVorUser(string savedAs)
 		{
 			var thisStudioLogin = new StudioLogin();
@@ -121,7 +121,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisStudioTopMenu.Wait_for_load(60), "Top menu has not loaded", "Top menu has loaded");
 		}
 
-		[StepDefinition(@"I click top menu item: (.*) and submenu item: (.*)")]
+		[RegexStepDefinition(@"I click top menu item: (.*) and submenu item: (.*)")]
 		public void GivenIClickTopMenuItemAndSubMenuItem(string menuItem, string submenuItem)
 		{
 			var thisTopMenu = new StudioTopMenu();
@@ -140,7 +140,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In SHA Manager Page I click top menu item: (.*)")]
+		[RegexStepDefinition(@"In SHA Manager Page I click top menu item: (.*)")]
 		public void GivenInSHAManagerPageIClickTopMenuItem(string menuItem)
 		{
 			var thisShaManager = new StudioSHAManager();
@@ -148,7 +148,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked: " + menuItem);
 		}
 
-		[StepDefinition(@"In SHA Manager Page I click sub menu item: (.*)")]
+		[RegexStepDefinition(@"In SHA Manager Page I click sub menu item: (.*)")]
 		public void GivenInSHAManagerPageIClickSubMenuItem(string menuItem)
 		{
 			var thisShaManager = new StudioSHAManager();
@@ -167,7 +167,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Failure("Failed to click: " + menuItem);
 		}
 
-		[StepDefinition(@"In the the Manage Global Messages dialog I add and save the following messages:")]
+		[RegexStepDefinition(@"In the the Manage Global Messages dialog I add and save the following messages:")]
 		public void GivenIAddTheFollowingMessages(Table table)
 		{
 			var thisStudioManageGlobalMessages = new StudioManageGlobalMessages();
@@ -176,7 +176,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisStudioManageGlobalMessages.WaitForMessageTableToShow(), "The table was not showing inside the global messages dialog", "The table was  showing inside the global messages dialog");
 
 			var ListOfMessages = new List<Message>();
-			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
+			foreach (TableRow thisRow in table.Rows)
 			{
 				var thisMessage = new Message {
 					Title = thisRow["Title"]
@@ -202,7 +202,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext("Messages", ListOfMessages);
 		}
 
-		[StepDefinition(@"I close the Manage Global Messages dialog")]
+		[RegexStepDefinition(@"I close the Manage Global Messages dialog")]
 		public void GivenICloseTheManageGlobalMessagesDialog()
 		{
 			var thisStudioManageGlobalMessages = new StudioManageGlobalMessages();
@@ -210,7 +210,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully closed messages dialog");
 		}
 
-		[StepDefinition(@"In SHA Manager Page I select status: (.*)")]
+		[RegexStepDefinition(@"In SHA Manager Page I select status: (.*)")]
 		public void GivenInSHAManagerPageISelectStatus(string status)
 		{
 			var thisShaManager = new StudioSHAManager();
@@ -222,8 +222,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		//|RecertificationActive|GGOnlyProducts|ECommFlowProducts|TReg|OrderNo|SubmissionDate|UPC|ParentUPC|
 		//|RecommendedUse|FlashpointRange|PHRange|UNNumber|
 
-		[StepDefinition(@"In SHA Manager ProductSearch page I run search:")]
-		public void GivenInSHAManagerPageIRunSearch(TechTalk.SpecFlow.Table table)
+		[RegexStepDefinition(@"In SHA Manager ProductSearch page I run search:")]
+		public void GivenInSHAManagerPageIRunSearch(Table table)
 		{
 			var thisProductSearch = new StudioSHAManagerProductSearch();
 			Report.IsTrue(thisProductSearch.Wait_for_load(60), "Product search page has not loaded",
@@ -298,9 +298,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						break;
 					case "User":
 						string user = value;
-						if (UL.Automation.SpecFlow.Classes.Context.Contains(value))
+						if (UL.Automation.ReqnrollHelpers.Classes.Context.Contains(value))
 						{
-							user = UL.Automation.SpecFlow.Classes.Context.GetFromContext(value).ToString();
+							user = UL.Automation.ReqnrollHelpers.Classes.Context.GetFromContext(value).ToString();
 						}
 						Report.IsTrue(thisProductSearch.EnterUser(user),
 							"Failed to set user", "Successfully set user", false, false);
@@ -392,7 +392,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and its status is: (.*)")]
+		[RegexStepDefinition(@"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and its status is: (.*)")]
 		public void GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(string productSavedAs,
 			string status)
 		{
@@ -467,7 +467,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(found, "Expected: id=" + ID + " and status " + status, "Statuses match", showSuccessScreenshot: false);
 		}
 
-		[StepDefinition(@"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and if status is Submitted, I change status to Assigned, then confirm status is Assigned")]
+		[RegexStepDefinition(@"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and if status is Submitted, I change status to Assigned, then confirm status is Assigned")]
 		public void InShaManagerGridForProductIDSavedAsIfStatusSubmittedMoveToAssignedThenConfirmStatusAssigned(string productSavedAs)
 		{
 			Report.UseSubSteps = true;
@@ -498,14 +498,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(string.Equals("Assigned", currentStatus, comparisonType: StringComparison.OrdinalIgnoreCase), "Expected: id=" + ID + " and status " + currentStatus, "Statuses match", showSuccessScreenshot: false);
 		}
 
-		[StepDefinition(@"I confirm that the status of the product saved as: (.*) is: (.*)")]
+		[RegexStepDefinition(@"I confirm that the status of the product saved as: (.*) is: (.*)")]
 		public void IConfirmThatTheStatusOfTheProductIs(string productSavedAs, string status)
 		{
 			status = Context.GetFromContext(status)?.ToString() ?? "";
 			this.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(productSavedAs, status);
 		}
 
-		[StepDefinition(
+		[RegexStepDefinition(
 			@"In the SHA manager grid I see the WPS ID I have saved as product: (.*) and its font is (red|not red) indicating a recertification")]
 		public void GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsAndItsFontIsRedOrNotRedIndicatingARecertification(
 			string productSavedAs, string isRed)
@@ -567,13 +567,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the SHA manager grid I right click first product")]
+		[RegexStepDefinition(@"In the SHA manager grid I right click first product")]
 		public void GivenInTheSHAManagerGridIRightClickFirstProduct()
 		{
 			Report.IsTrue(new StudioSHAManager().RightClickFirstProduct(), "Failed to rightclick against first product", "Right clicked against first product", showSuccessScreenshot: false);
 		}
 
-		[StepDefinition(@"In the SHA manager grid I right click against product saved as: (.*)")]
+		[RegexStepDefinition(@"In the SHA manager grid I right click against product saved as: (.*)")]
 		public void GivenInTheSHAManagerGridIRightClickAgainstProductSavedAs(string savedAs)
 		{
 			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
@@ -584,7 +584,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"In the SHA manager grid when the right click context menu is open I select option: (.*)")]
+		[RegexStepDefinition(@"In the SHA manager grid when the right click context menu is open I select option: (.*)")]
 		public void GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption(string option)
 		{
 			var thisContextMenu = new RightClickProductMenu();
@@ -592,7 +592,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"Selected option: { option }");
 		}
 
-		[StepDefinition(@"In the Product Recertification History popup I should see the following entry")]
+		[RegexStepDefinition(@"In the Product Recertification History popup I should see the following entry")]
 		public void GivenInTheProductRecertificationHistoryPopupIShouldSeeTheFollowingEntry(Table table)
 		{
 			var thisProductRecertificationHistory = new ProductRecertificationHistory();
@@ -604,7 +604,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			bool allPassed = true;
 
-			foreach (TechTalk.SpecFlow.TableRow thisRow in table.Rows)
+			foreach (TableRow thisRow in table.Rows)
 			{
 				string id = "";
 				if (thisRow["Product ID"].ToLower().Contains("saved as"))
@@ -695,7 +695,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(allPassed, "Not all products were as expected", "All products listed were as expected");
 		}
 
-		[StepDefinition(@"I Close the Product Recertification History pop up")]
+		[RegexStepDefinition(@"I Close the Product Recertification History pop up")]
 		public void GivenICloseTheProductRecertificationHistoryPopUp()
 		{
 			var thisProductRecertificationHistory = new ProductRecertificationHistory();
@@ -704,7 +704,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked close on the recertification history popup");
 		}
 
-		[StepDefinition(@"I confirm there is no product entry listed with Recertification Reason: (.*)")]
+		[RegexStepDefinition(@"I confirm there is no product entry listed with Recertification Reason: (.*)")]
 		public void IDoNotSeeAnEntryWithRecertificationReason(string reason)
 		{
 			List<Product> recertificationProducts = new ProductRecertificationHistory().GetProducts();
@@ -713,7 +713,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"As expected there were no products in the list with Recerficiation Reason: " + reason);
 		}
 
-		[StepDefinition(
+		[RegexStepDefinition(
 			@"I Confirm the Product ID: (.*) is highlited yellow indicating that this is an e-comm/direct ship product")]
 		public void ConfirmProductIdIsHighlightedYellow_EcommDirectShipProduct(string id)
 		{
@@ -732,7 +732,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"ID has not turned required colour", "ID is required colour");
 		}
 
-		[StepDefinition(
+		[RegexStepDefinition(
 			@"I Confirm the Product ID: (.*) is not highlited yellow indicating that this is not an e-comm/direct ship product")]
 		public void ConfirmProductIdIsNotHighlightedYellow_NotEcommDirectShipProduct(string id)
 		{
@@ -764,11 +764,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Product was not highlighted yellow background as expected");
 		}
 
-		[StepDefinition(@"In SHA Manager I select the following products:")]
+		[RegexStepDefinition(@"In SHA Manager I select the following products:")]
 		public void GivenInSHAManagerISelectTheFollowingProducts(Table table)
 		{
 			string ID = "";
-			foreach (TechTalk.SpecFlow.TableRow thisProduct in table.Rows)
+			foreach (TableRow thisProduct in table.Rows)
 			{
 				if (thisProduct["ProductID"].ToLower().Contains("saved as"))
 				{
@@ -783,7 +783,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In SHA Manager I select the first product saved as: (.*)")]
+		[RegexStepDefinition(@"In SHA Manager I select the first product saved as: (.*)")]
 		public void GivenInSHAManagerISelectTheProduct(string savedAs)
 		{
 			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
@@ -797,7 +797,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStudioSHAManager.SelectProductByID(id);
 		}
 
-		[StepDefinition(@"I Click the Process Recertification button")]
+		[RegexStepDefinition(@"I Click the Process Recertification button")]
 		public void GivenIClickTheProcessRecertificationButton()
 		{
 			var thisStudioSHAManager = new StudioSHAManager();
@@ -805,7 +805,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Clicked process recertification");
 		}
 
-		[StepDefinition(@"I Confirm the Recertification pop up is shown")]
+		[RegexStepDefinition(@"I Confirm the Recertification pop up is shown")]
 		public void GivenIConfirmTheRecertificationPopUpIsShown()
 		{
 			var thisRecertificationPopup = new RecertificationPopup();
@@ -813,7 +813,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Recertification popup is showing");
 		}
 
-		[StepDefinition(@"I Uncheck the Auto Assign Regulatory Specialist to Product check box")]
+		[RegexStepDefinition(@"I Uncheck the Auto Assign Regulatory Specialist to Product check box")]
 		public void GivenIUncheckTheAutoAssignRegulatorySpecialistToProductCheckBox()
 		{
 			var thisRecertificationPopup = new RecertificationPopup();
@@ -822,7 +822,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Unchecked the Auto Assign Regulatory Specialist to Product check box");
 		}
 
-		[StepDefinition(@"I Select (.*) from the drop down list for Select Regulatory Specialist")]
+		[RegexStepDefinition(@"I Select (.*) from the drop down list for Select Regulatory Specialist")]
 		public void GivenISelectFromTheDropDownListForRegulatorySpecialist(string specialist)
 		{
 			var thisRecertificationPopup = new RecertificationPopup();
@@ -831,7 +831,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Selected: " + specialist);
 		}
 
-		[StepDefinition(@"In the Recertification popup I click (.*)")]
+		[RegexStepDefinition(@"In the Recertification popup I click (.*)")]
 		public void GivenInTheRecertificationPopupIClick(string button)
 		{
 			var thisRecertificationPopup = new RecertificationPopup();
@@ -839,7 +839,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Clicked " + button);
 		}
 
-		[StepDefinition(@"In the Recertification popup the (.*) button will no longer be shown")]
+		[RegexStepDefinition(@"In the Recertification popup the (.*) button will no longer be shown")]
 		public void GivenInTheRecertificationPopupTheButtonWillNoLongerBeShown(string button)
 		{
 			var thisRecertificationPopup = new RecertificationPopup();
@@ -847,7 +847,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"As expected button is not showing");
 		}
 
-		[StepDefinition(@"in the Recertification popup I wait for all processing to be completed")]
+		[RegexStepDefinition(@"in the Recertification popup I wait for all processing to be completed")]
 		public void GivenInTheRecertificationPopupIWaitForAllProcessingToBeCompleted()
 		{
 			var thisRecertificationPopup = new RecertificationPopup();
@@ -855,9 +855,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Processing has completed as expected");
 		}
 
-		[StepDefinition(@"in the Recertification popup I should see the following products as successfully assigned")]
+		[RegexStepDefinition(@"in the Recertification popup I should see the following products as successfully assigned")]
 		public void GivenInTheRecertificationPopupIShouldSeeTheFollowingProductsAsSuccessfullyAssigned(
-			TechTalk.SpecFlow.Table productsExpected)
+			Table productsExpected)
 		{
 			var thisRecertificationPopup = new RecertificationPopup();
 			bool passedAll = true;
@@ -866,7 +866,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string ID = "";
 			string expectedString = "";
 			var ListOfProducts = new List<ProductInformation>();
-			foreach (TechTalk.SpecFlow.TableRow thisProduct in productsExpected.Rows)
+			foreach (TableRow thisProduct in productsExpected.Rows)
 			{
 				if (thisProduct["ProductID"].ToLower().Contains("saved as"))
 				{
@@ -895,7 +895,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(passedAll, "Not all expected messages were found", "All expected messages were found");
 		}
 
-		[StepDefinition(@"in the Recertification popup I click on close")]
+		[RegexStepDefinition(@"in the Recertification popup I click on close")]
 		public void GivenInTheRecertificationPopupIClickOnClose()
 		{
 			var thisRecertificationPopup = new RecertificationPopup();
@@ -903,7 +903,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Clicking on close has woked as expected");
 		}
 
-		[StepDefinition(@"I Confirm the Recertification pop up is closed")]
+		[RegexStepDefinition(@"I Confirm the Recertification pop up is closed")]
 		public void GivenIConfirmTheRecertificationPopUpIsClosed()
 		{
 			var thisRecertificationPopup = new RecertificationPopup();
@@ -912,7 +912,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I confirm UPC number saved as: ""UPC(.*)"" is displayed in the SHA Manager Product UPC list")]
+		[RegexStepDefinition(@"I confirm UPC number saved as: ""UPC(.*)"" is displayed in the SHA Manager Product UPC list")]
 		public void ConfirmUpcIsDisplayedInShaManagerProductUpcList(string savedAs)
 		{
 			try
@@ -970,7 +970,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm that UPC number saved as: (.*) shows a grey background for Archived in the SHA Manager Product UPC list")]
+		[RegexStepDefinition(@"I confirm that UPC number saved as: (.*) shows a grey background for Archived in the SHA Manager Product UPC list")]
 		public void IConfirmThatTheUPCNumberSavedAsShowsAGreyBackground(string savedAs)
 		{
 			string upc = Context.GetFromContext(savedAs)?.ToString() ?? "";
@@ -987,7 +987,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I confirm that retailer saved as (.*) appears for UPC saved as UPC(.*)")]
+		[RegexStepDefinition(@"I confirm that retailer saved as (.*) appears for UPC saved as UPC(.*)")]
 		public void IConfirmThatRetailerAppearsForUPC(string retailer, string savedAs)
 		{
 			string upc = Context.GetFromContext("UPC" + savedAs).ToString();
@@ -999,7 +999,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully found retailer " + retailer + " in list of retailers.");
 		}
 
-		[StepDefinition(@"I confirm that retailer saved as: (.*) appears for UPC saved as: (.*)")]
+		[RegexStepDefinition(@"I confirm that retailer saved as: (.*) appears for UPC saved as: (.*)")]
 		public void ConfirmThatRetailerSavedAsAppearsForUPCSavedAs(string retailerSavedAs, string upcSavedAs)
 		{
 			if (!Context.Contains(upcSavedAs))
@@ -1029,13 +1029,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully found retailer " + retailer + " in list of retailers.");
 		}
 
-		[StepDefinition(@"I close the SHA Manager Product UPC window")]
+		[RegexStepDefinition(@"I close the SHA Manager Product UPC window")]
 		public void CloseSHAManagerProductUPCWindow()
 		{
 
 		}
 
-		[StepDefinition(@"I edit My Toolbar to add the following options")]
+		[RegexStepDefinition(@"I edit My Toolbar to add the following options")]
 		public void GivenIEditMyToolbarToAddTheFollowingOptions(Table table)
 		{
 			var thisStepsStudio = new Steps_Studio();
@@ -1046,7 +1046,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		//Search, UPC, Pst/UPC, Status, Reject Submission, Review
-		[StepDefinition(@"I click the following option in the bottom menu: (.*)")]
+		[RegexStepDefinition(@"I click the following option in the bottom menu: (.*)")]
 		public void IClickTheFollowingOptionInTheBottomMenu(string option)
 		{
 			var myStudioShaManager = new StudioSHAManager();
@@ -1055,7 +1055,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		//Comma delimited
-		[StepDefinition(@"In the Suspended dialog I Select the following clients: (.*)")]
+		[RegexStepDefinition(@"In the Suspended dialog I Select the following clients: (.*)")]
 		public void GivenInTheSuspendedDialogISelectTheFollowingClients(string clientsList)
 		{
 			var clients = clientsList.Split(',').Select(x => x.Trim()).ToList();
@@ -1065,7 +1065,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to select clients: " + clientsList, "Selected: " + clientsList);
 		}
 
-		[StepDefinition(@"In the Suspended dialog in the Select Regulatory Specialist drop down I choose: (.*)")]
+		[RegexStepDefinition(@"In the Suspended dialog in the Select Regulatory Specialist drop down I choose: (.*)")]
 		public void GivenInTheSuspendedDialogInTheSelectRegulatorySpecialistDropDownIChoose(string regulatorySpecialist)
 		{
 			var thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
@@ -1078,7 +1078,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In the Suspended dialog in the Select Subject drop down I choose: (.*)")]
+		[RegexStepDefinition(@"In the Suspended dialog in the Select Subject drop down I choose: (.*)")]
 		public void GivenInTheSuspendedDialogInTheSelectSubjectDropDownIChoose(string subject)
 		{
 			var thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
@@ -1086,7 +1086,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to select subject: " + subject, "Selected: " + subject);
 		}
 
-		[StepDefinition(@"In the Reject Submission dialog I Select Subject: (.*)")]
+		[RegexStepDefinition(@"In the Reject Submission dialog I Select Subject: (.*)")]
 		public void GivenInTheRejectSubmissionDialogISelectSubject(string subject)
 		{
 			var thisStudioSHAManagerProductRejectSubmission = new StudioSHAManagerProductRejectSubmission();
@@ -1094,7 +1094,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to select subject: " + subject, "Selected: " + subject);
 		}
 
-		[StepDefinition(@"In the Reject Submission dialog in the Subject field I should see: (.*)")]
+		[RegexStepDefinition(@"In the Reject Submission dialog in the Subject field I should see: (.*)")]
 		public void GivenInTheRejectSubmissionDialogInTheSupplierSubjectIShouldSee(string shouldSee)
 		{
 			var thisStudioSHAManagerProductRejectSubmission = new StudioSHAManagerProductRejectSubmission();
@@ -1133,7 +1133,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the Reject Submission dialog in the Supplier Message field I should see: (.*)")]
+		[RegexStepDefinition(@"In the Reject Submission dialog in the Supplier Message field I should see: (.*)")]
 		public void GivenInTheRejectSubmissionDialogInTheSupplierMessageFieldIShouldSee(string shouldSee)
 		{
 			var thisStudioSHAManagerProductRejectSubmission = new StudioSHAManagerProductRejectSubmission();
@@ -1172,7 +1172,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the Reject Submission dialog in the Supplier Message field I replace the following text: (.*) with: (.*)")]
+		[RegexStepDefinition(@"In the Reject Submission dialog in the Supplier Message field I replace the following text: (.*) with: (.*)")]
 		public void GivenInTheRejectSubmissionDialogInTheSupplierMessageFieldIReplaceTheFollowingTextWith(string textToReplace, string newText)
 		{
 			var thisStudioSHAManagerProductRejectSubmission = new StudioSHAManagerProductRejectSubmission();
@@ -1180,7 +1180,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					"Failed to replace: " + textToReplace + " with: " + newText, "Successfully replaced: " + textToReplace + " with: " + newText);
 		}
 
-		[StepDefinition(@"In the Reject Submission dialog I click (Save|Cancel)")]
+		[RegexStepDefinition(@"In the Reject Submission dialog I click (Save|Cancel)")]
 		public void GivenInTheRejectSubmissionDialogIClickSave(string button)
 		{
 			var thisStudioSHAManagerProductRejectSubmission = new StudioSHAManagerProductRejectSubmission();
@@ -1193,7 +1193,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In SHA Manager I select the first product")]
+		[RegexStepDefinition(@"In SHA Manager I select the first product")]
 		public void GivenInSHAManagerISelectTheProduct()
 		{
 			var thisStudioSHAManager = new StudioSHAManager();
@@ -1208,7 +1208,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I save the first product in the grid with retailers as: (.*)")]
+		[RegexStepDefinition(@"I save the first product in the grid with retailers as: (.*)")]
 		public void ISaveTheFirstProductInTheGridWithRetailersAs(string savedAs)
 		{
 			var thisStudioSHAManager = new StudioSHAManager();
@@ -1222,7 +1222,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext("ID", thisProductInformation);
 		}
 
-		[StepDefinition(@"I confirm that retailer saved as (.*) appears in the list of retailers for product (.*)")]
+		[RegexStepDefinition(@"I confirm that retailer saved as (.*) appears in the list of retailers for product (.*)")]
 		public void IConfirmThatRetailerAppearsInListOfRetailers(string retailer, string product)
 		{
 			var thisStudioSHAManager = new StudioSHAManager();
@@ -1238,7 +1238,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully found retailer " + retailerAbbr + " in list of retailers.");
 		}
 
-		[StepDefinition(@"I confirm that the retailer (.*) is archived for product saved as: (.*)")]
+		[RegexStepDefinition(@"I confirm that the retailer (.*) is archived for product saved as: (.*)")]
 		public void IConfirmThatTheRetailerIsArchivedForProduct(string retailer, string savedAs)
 		{
 			string retailerAbbr = "";
@@ -1254,7 +1254,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"In the Suspended dialog in the Supplier Message field I should see: (.*)")]
+		[RegexStepDefinition(@"In the Suspended dialog in the Supplier Message field I should see: (.*)")]
 		public void GivenInTheSuspendedDialogInTheSupplierMessageFieldIShouldSee(string shouldSee)
 		{
 			var thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
@@ -1293,7 +1293,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the Suspended dialog in the Supplier Message field I add the following text: (.*)")]
+		[RegexStepDefinition(@"In the Suspended dialog in the Supplier Message field I add the following text: (.*)")]
 		public void GivenInTheSuspendedDialogInTheSupplierMessageFieldIAddTheFollowingText(string textToAdd)
 		{
 			var thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
@@ -1301,7 +1301,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to add message: " + textToAdd, "Added message " + textToAdd);
 		}
 
-		[StepDefinition(@"In the Suspended dialog in the Supplier Message field I enter the following text: (.*)")]
+		[RegexStepDefinition(@"In the Suspended dialog in the Supplier Message field I enter the following text: (.*)")]
 		public void GivenInTheSuspendedDialogInTheSupplierMessageFieldIEnterTheFollowingText(string textToAdd)
 		{
 			var thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
@@ -1309,7 +1309,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to add message: " + textToAdd, "Added message " + textToAdd);
 		}
 
-		[StepDefinition(@"In the Suspended dialog below the Supplier Message field I see the following text in red: (.*)")]
+		[RegexStepDefinition(@"In the Suspended dialog below the Supplier Message field I see the following text in red: (.*)")]
 		public void GivenInTheSuspendedDialogBelowTheSupplierMessageFieldIEnterTheFollowingTextInRed(string textToAdd)
 		{
 			var thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
@@ -1317,7 +1317,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to add message: " + textToAdd, "Added message " + textToAdd);
 		}
 
-		[StepDefinition(@"In the Suspended dialog in the Internal Product Note field I should see: (.*)")]
+		[RegexStepDefinition(@"In the Suspended dialog in the Internal Product Note field I should see: (.*)")]
 		public void GivenInTheSuspendedDialogInTheInternalProductNoteFieldIShouldSee(string shouldSee)
 		{
 			var thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
@@ -1353,7 +1353,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the Suspended dialog in the Internal Product Note field I add the following text: (.*)")]
+		[RegexStepDefinition(@"In the Suspended dialog in the Internal Product Note field I add the following text: (.*)")]
 		public void GivenInTheSuspendedDialogInTheInternalProductNoteFieldIAddTheFollowingText(string textToAdd)
 		{
 			var thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
@@ -1361,7 +1361,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to add message: " + textToAdd, "Added message " + textToAdd);
 		}
 
-		[StepDefinition(@"In the Suspended dialog in the Internal Product Note field I enter the following text: (.*)")]
+		[RegexStepDefinition(@"In the Suspended dialog in the Internal Product Note field I enter the following text: (.*)")]
 		public void GivenInTheSuspendedDialogInTheInternalProductNoteFieldIEnterTheFollowingText(string textToAdd)
 		{
 			var thisStudioSHAManagerProductSuspend = new StudioSHAManagerProductSuspend();
@@ -1369,7 +1369,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to add message: " + textToAdd, "Added message " + textToAdd);
 		}
 
-		[StepDefinition(@"In the Suspended dialog I click (.*)")]
+		[RegexStepDefinition(@"In the Suspended dialog I click (.*)")]
 		public void GivenInTheSuspendedDialogIClick(string button)
 		{
 			Delay.Seconds(1);
@@ -1379,12 +1379,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		//| Type | Notification Date | Subject |
-		[StepDefinition(@"In the Notification History Screen I confirm that one of the rows is as follows:")]
+		[RegexStepDefinition(@"In the Notification History Screen I confirm that one of the rows is as follows:")]
 		public void ThenInTheNotificationHistoryScreenIConfirmThatOneOfTheRowsIsAsFollows(Table table)
 		{
 			var thisProductNotificationHistory = new ProductNotificationHistory();
 			thisProductNotificationHistory.WaitForTableContentToLoad();
-			SpecFlowReporting.TableRow(table.Rows[0]);
+			ReqnrollReporting.TableRow(table.Rows[0]);
 			Report.Info("Getting displayed notifications");
 			List<Notification> notifications = thisProductNotificationHistory.GetNotifications();
 			for (int i = 0; i < notifications.Count; i++)
@@ -1449,7 +1449,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"In the Notification History Screen I click on the most recent notification")]
+		[RegexStepDefinition(@"In the Notification History Screen I click on the most recent notification")]
 		public void ThenInTheNotificationHistoryScreenIClickOnTheMostRecentNotification()
 		{
 			var thisProductNotificationHistory = new ProductNotificationHistory();
@@ -1461,7 +1461,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		//| Subject | Message| Notification Date |
-		[StepDefinition(@"In the Notification History Detail Screen I confirm that details are as follows")]
+		[RegexStepDefinition(@"In the Notification History Detail Screen I confirm that details are as follows")]
 		public void ThenInTheNotificationHistoryDetailScreenIConfirmThatDetailsAreAsFollows(Table table)
 		{
 			var thisProductNotificationHistory = new ProductNotificationHistory();
@@ -1527,7 +1527,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"In SHA Manager I set the filter for status to : (.*)")]
+		[RegexStepDefinition(@"In SHA Manager I set the filter for status to : (.*)")]
 		public void GivenInSHAManagerISetTheFilterForStatusTo(string status)
 		{
 			var myStudioShaManager = new StudioSHAManager();
@@ -1663,7 +1663,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(correct, "The status of the top "+n+" items was not " +status+".", "The status of the top "+n+" items was "+status+".");
 		}
 
-		[StepDefinition(@"I verify the product saved as: (.*) displays in red with a red box around it")]
+		[RegexStepDefinition(@"I verify the product saved as: (.*) displays in red with a red box around it")]
 		public void GivenIVerifyTheProductDisplaysInRedWithARedBoxAroundIt(string savedAs)
 		{
 			var myStudioShaManager = new StudioSHAManager();
@@ -1674,14 +1674,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In the Notification History Detail Screen I click on: (.*)")]
+		[RegexStepDefinition(@"In the Notification History Detail Screen I click on: (.*)")]
 		public void ThenInTheNotificationHistoryDetailScreenIClickOn(string button)
 		{
 			var thisProductNotificationHistory = new ProductNotificationHistory();
 			thisProductNotificationHistory.ClickButtonInNotificationDetails(button);
 		}
 
-		[StepDefinition(@"In SHA Manager grid I click the following top menu item: (.*)")]
+		[RegexStepDefinition(@"In SHA Manager grid I click the following top menu item: (.*)")]
 		public void GivenInSHAManagerGridIClickTheFollowingTopMenuItem(string item)
 		{
 			var thiStudioShaManager = new StudioSHAManager();
@@ -1713,7 +1713,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"The Add Product to Recertification screen should be showing")]
+		[RegexStepDefinition(@"The Add Product to Recertification screen should be showing")]
 		public void ThenTheAddProductToRecertificationScreenShouldBeShowing()
 		{
 			var thisAddProductToRecertificationDialog =
@@ -1723,7 +1723,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Add Product to Recertification screen has loaded");
 		}
 
-		[StepDefinition(@"The Add Product to Recertification screen should be loaded")]
+		[RegexStepDefinition(@"The Add Product to Recertification screen should be loaded")]
 		public void ThenAddProductToRecertificationScreenShouldBeShowing()
 		{
 			var thisAddProductToRecertificationDialog =
@@ -1732,7 +1732,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Add Product to Recertification screen has failed to load",
 				"Add Product to Recertification screen has loaded");
 		}
-		[StepDefinition(@"in the Add Product to Recertification screen only the following Reasons are selected:")]
+		[RegexStepDefinition(@"in the Add Product to Recertification screen only the following Reasons are selected:")]
 		public void ThenInTheAddProductToRecertificationScreenOnlyTheFollowingReasonsAreSelected(Table table)
 		{
 			var thisAddProductToRecertificationDialog =
@@ -1778,7 +1778,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(
+		[RegexStepDefinition(
 			@"in the Add Product to Recertification screen only the following allow users checkboxes are selected:")]
 		public void ThenInTheAddProductToRecertificationScreenOnlyTheFollowingAllowUsersCheckboxesAreSelected(
 			Table table)
@@ -1794,7 +1794,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Selected options are not as expected", "Selected options are expected");
 		}
 
-		[StepDefinition(@"The SHA Manager UPC List screen should show")]
+		[RegexStepDefinition(@"The SHA Manager UPC List screen should show")]
 		public void ThenTheSHAManagerUPCListScreenShouldShow()
 		{
 			var newStudioSHAManagerProductUPC = new StudioSHAManagerProductUPC();
@@ -1803,7 +1803,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I confirm the top (\d*) products all have PH Range of: (.*)")]
+		[RegexStepDefinition(@"I confirm the top (\d*) products all have PH Range of: (.*)")]
 		public void GivenIConfirmTheTopProductsAllHavePHRangeOf(int n, string phRange)
 		{
 			var thisStudioShaManager = new StudioSHAManager();
@@ -1882,7 +1882,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In SHA Manager (\d*) record is found")]
+		[RegexStepDefinition(@"In SHA Manager (\d*) record is found")]
 		public void GivenInSHAManagerRecordIsFound(int recordCount)
 		{
 			var myStudioShaManager = new StudioSHAManager();
@@ -1900,7 +1900,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		//| Product    | savedas PackagingTypeID_MPI75034   |
 		//| Name       | savedas PackagingTypeName_MPI75034 |
 		//| Distrbutor | P                                  |
-		[StepDefinition(@"In SHA Manager for the top record the values are as follows")]
+		[RegexStepDefinition(@"In SHA Manager for the top record the values are as follows")]
 		public void GivenInSHAManagerForTheTopRecordTheValuesAreAsFollows(Table table)
 		{
 			var myStudioShaManager = new StudioSHAManager();
@@ -1958,7 +1958,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the Add Product to Recertification Screen I select reason number: (\d+)")]
+		[RegexStepDefinition(@"In the Add Product to Recertification Screen I select reason number: (\d+)")]
 		public void InAddProductToRecertificationScreenSelectReasonByNumber(int number)
 		{
 			var thisAddProductToRecertificationDialog =
@@ -1969,7 +1969,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In the Add Product to Recertification Screen I click button: (.*)")]
+		[RegexStepDefinition(@"In the Add Product to Recertification Screen I click button: (.*)")]
 		public void InAddProductToRecertificationScreenIClickButton(string button)
 		{
 			var thisAddProductToRecertificationDialog =
@@ -1980,7 +1980,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In the list of UPCs I should (see|not see) case pack indicatior for UPC: (.*)")]
+		[RegexStepDefinition(@"In the list of UPCs I should (see|not see) case pack indicatior for UPC: (.*)")]
 		public void ConfirmCaseUpc(string condition, string upc)
 		{
 			try
@@ -2057,7 +2057,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the SHA list of UPCs I should (see|not see) UPC: (.*)")]
+		[RegexStepDefinition(@"In the SHA list of UPCs I should (see|not see) UPC: (.*)")]
 		public void ShaUPCList(string condition, string upc)
 		{
 			try
@@ -2128,7 +2128,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"In the SHA UPC list I should (see|not see) UPC: (.*) in the First Row of the UPC table")]
+		[RegexStepDefinition(@"In the SHA UPC list I should (see|not see) UPC: (.*) in the First Row of the UPC table")]
 		public void ShaUPCListFirstItemCheck(string condition, string upc)
 		{
 			try
@@ -2198,7 +2198,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the SHA UPC list I should (see|not see) UPC: (.*) in Any Row of the UPC table")]
+		[RegexStepDefinition(@"In the SHA UPC list I should (see|not see) UPC: (.*) in Any Row of the UPC table")]
 		public void ShaUPCListAllItemsCheck(string condition, string upc)
 		{
 			try
@@ -2271,7 +2271,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"In the SHA UPC list I should (see|not see) the case pack asterisk for the UPC: (.*)")]
+		[RegexStepDefinition(@"In the SHA UPC list I should (see|not see) the case pack asterisk for the UPC: (.*)")]
 		public void ShaUPCListCasePackAsteriskSeen(string condition, string upc)
 		{
 			try
@@ -2375,7 +2375,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"The recertification popup should show")]
+		[RegexStepDefinition(@"The recertification popup should show")]
 		public void TheRecertificationPopupShouldShow()
 		{
 			var thisRecertificationPopup = new RecertificationPopup();
@@ -2383,7 +2383,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Recertification popup is showing");
 		}
 
-		[StepDefinition(@"In the recertification popup I set auto assign checkbox to: (true|false)")]
+		[RegexStepDefinition(@"In the recertification popup I set auto assign checkbox to: (true|false)")]
 		public void SetAutoAssignCheckbox(string trueOrFalse)
 		{
 			var thisRecertificationPopup = new RecertificationPopup();
@@ -2393,7 +2393,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Set auto assign to: " + trueOrFalse);
 		}
 
-		[StepDefinition(@"In the recertification popup I select Regulatory Specialist: (.*)")]
+		[RegexStepDefinition(@"In the recertification popup I select Regulatory Specialist: (.*)")]
 		public void SetSpecialist(string specialist)
 		{
 			var thisRecertificationPopup = new RecertificationPopup();
@@ -2402,7 +2402,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Selected: " + specialist);
 		}
 
-		[StepDefinition(@"In the recertification popup I click button: (.*)")]
+		[RegexStepDefinition(@"In the recertification popup I click button: (.*)")]
 		public void ClickButton(string button)
 		{
 			var thisRecertificationPopup = new RecertificationPopup();
@@ -2410,7 +2410,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Clicked button: " + button);
 		}
 
-		[StepDefinition(@"in the Recertification popup I click close button")]
+		[RegexStepDefinition(@"in the Recertification popup I click close button")]
 		public void GivenInTheRecertificationPopupIClickCloseButton()
 		{
 			var thisRecertificationPopup = new RecertificationPopup();
@@ -2419,7 +2419,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(3);
 		}
 
-		[StepDefinition(@"In the Product Attribute Screen I Confirm the screen shows CNTXT present")]
+		[RegexStepDefinition(@"In the Product Attribute Screen I Confirm the screen shows CNTXT present")]
 		public void GivenInTheProductAttributeScreenIConfirmTheScreenShowsCNTXTPresent()
 		{
 			var thiStudioProductAttributeScreen = new StudioProductAttributeScreen();
@@ -2427,7 +2427,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Showing as expected");
 		}
 
-		[StepDefinition(@"In the Product Attribute Screen I Select the first entry in the table with code: (.*)")]
+		[RegexStepDefinition(@"In the Product Attribute Screen I Select the first entry in the table with code: (.*)")]
 		public void GivenInTheProductAttributeScreenISelectFirstEntryWithCodeInTheTable(string code)
 		{
 			var thiStudioProductAttributeScreen = new StudioProductAttributeScreen();
@@ -2435,7 +2435,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Selected item: " + code);
 		}
 
-		[StepDefinition(@"I Confirm the Data area of the screen shows (.*)")]
+		[RegexStepDefinition(@"I Confirm the Data area of the screen shows (.*)")]
 		public void GivenIConfirmTheDataAreaOfTheScreenShows(string expectedData)
 		{
 			var thiStudioProductAttributeScreen = new StudioProductAttributeScreen();
@@ -2444,7 +2444,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Data item " + expectedData + " showing as expected");
 		}
 
-		[StepDefinition(@"In the SHA Manager Grid I run a search for product saved as: (.*) and its status is: (.*)")]
+		[RegexStepDefinition(@"In the SHA Manager Grid I run a search for product saved as: (.*) and its status is: (.*)")]
 		public void GivenInTheSHAManagerGridIRunASearchForProductSavedAsTestCaseAndItsStatusIs(string savedAs,
 			string status)
 		{
@@ -2476,7 +2476,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			mySHAManager.WaitForProductList(10);
 		}
 
-		[StepDefinition(@"In the Product Attribute Screen confirm that no records are found")]
+		[RegexStepDefinition(@"In the Product Attribute Screen confirm that no records are found")]
 		public void GivenInTheProductAttributeScreenConfirmThatNoRecordsAreFound()
 		{
 			var thiStudioProductAttributeScreen = new StudioProductAttributeScreen();
@@ -2484,7 +2484,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"As expected results are not showing");
 		}
 
-		[StepDefinition(@"I Confirm you see the Document List pop up")]
+		[RegexStepDefinition(@"I Confirm you see the Document List pop up")]
 		public void GivenIConfirmYouSeeTheDocumentListPopUp()
 		{
 			Report.IsTrue(new SHADocumentList().Wait_for_load(30), "Documnet List pop up is not showing",
@@ -2492,7 +2492,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(
+		[RegexStepDefinition(
 			@"In the Document List popup I Confirm the Filename column shows an entry for xxxxxxx\.pdf - where xxxxxxx is the product id of product saved as: (.*)")]
 		public void
 			GivenIConfirmTheFilenameColumnShowsAnEntryForXxxxxxx_Pdf_WhereXxxxxxxIsTheProductIdOfProductSavedAsTestCase(
@@ -2510,7 +2510,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				string.Join(",", Documents), "Filename: " + expectedFilename + " is showing as expected");
 		}
 
-		[StepDefinition(@"In the Document List popup I Double click on the filename for product saved as: (.*)")]
+		[RegexStepDefinition(@"In the Document List popup I Double click on the filename for product saved as: (.*)")]
 		public void GivenInTheDocumentListPopupIDoubleClickOnTheFilenameForProductSavedAsTestCase(string savedAs)
 		{
 			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
@@ -2520,14 +2520,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to double click filename: " + expectedFilename, "Clicked filename: " + expectedFilename);
 		}
 
-		[StepDefinition(@"I Click (.*) on the Document List window pop up")]
+		[RegexStepDefinition(@"I Click (.*) on the Document List window pop up")]
 		public void ThenIClickButtonOnTheDocumentListWindowPopUp(string button)
 		{
 			Report.IsTrue(new SHADocumentList().ClickButton(button),
 				"Failed to double click button: " + button, "Clicked button: " + button);
 		}
 
-		//[StepDefinition(
+		//[RegexStepDefinition(
 		//	@"I should see a new tabbed document with the pdf containing product code saved as: (.*) and NGHS / English twice")]
 		//public void ThenIShouldSeeANewTabbedDocumentWithThePdfContainingProductCodeSavedAsTestCase(string savedAs)
 		//{
@@ -2581,7 +2581,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		//	}
 		//}
 
-		[StepDefinition(@"I Check that the file saved as: (.*) contains the text 'NGHS / English' twice as well as the product codes saved as: (.*) and (.*)")]
+		[RegexStepDefinition(@"I Check that the file saved as: (.*) contains the text 'NGHS / English' twice as well as the product codes saved as: (.*) and (.*)")]
 		public void CheckThatFileSavedAsContaisnTextNGHSEnglishTwicAndProductCodesSavedAs(string fileSavedAs, string code1SavedAs, string code2SavedAs)
 		{
 			var productOneDetails = (ProductInformation)Context.GetFromContext(code1SavedAs);
@@ -2600,16 +2600,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				fileSavedAs = (string)Context.GetFromContext(fileSavedAs);
 			}
 
-			PdfReader reader = new PdfReader(fileSavedAs);
-			string text = string.Empty;
-			for (int page = 1; page <= reader.NumberOfPages; page++)
-			{
-				text += PdfTextExtractor.GetTextFromPage(reader, page);
-			}
-			reader.Close();
-			var pdfText = text;
-
-
+			string pdfText = WercsmartPdfHelpers.GetTextFromPdf(fileSavedAs);
 			Report.Info($"The Found PDF Text was: {pdfText}");
 			Report.IsTrue(pdfText.Contains(ID1), "PDF does not contain: " + ID1, "PDF contains " + ID1);
 			Report.IsTrue(pdfText.Contains(ID2), "PDF does not contain: " + ID2, "PDF contains " + ID2);
@@ -2620,7 +2611,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I Check that the file saved as: (.*) contains the product codes saved as: (.*) and (.*)")]
+		[RegexStepDefinition(@"I Check that the file saved as: (.*) contains the product codes saved as: (.*) and (.*)")]
 		public void CheckThatFileSavedAsContaisnProductCodesSavedAs(string fileSavedAs, string code1SavedAs, string code2SavedAs)
 		{
 			var productOneDetails = (ProductInformation)Context.GetFromContext(code1SavedAs);
@@ -2642,16 +2633,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				fileSavedAs = (string)Context.GetFromContext(fileSavedAs);
 			}
 
-			PdfReader reader = new PdfReader(fileSavedAs);
-			string text = string.Empty;
-			for (int page = 1; page <= reader.NumberOfPages; page++)
-			{
-				text += PdfTextExtractor.GetTextFromPage(reader, page);
-			}
-			reader.Close();
-			var pdfText = text;
-
-
+			string pdfText = WercsmartPdfHelpers.GetTextFromPdf(fileSavedAs);
 			Report.Info($"The Found PDF Text was: {pdfText}");
 			Report.IsTrue(pdfText.Contains(ID1), "PDF does not contain: " + ID1, "PDF contains " + ID1);
 			Report.IsTrue(pdfText.Contains(ID2), "PDF does not contain: " + ID2, "PDF contains " + ID2);
@@ -2660,7 +2642,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I Check that the file saved as: (.*) contains the text 'Canada / English' twice")]
+		[RegexStepDefinition(@"I Check that the file saved as: (.*) contains the text 'Canada / English' twice")]
 		public void CheckThatFileSavedAsContaisnTextCanadaEnglishTwice(string fileSavedAs)
 		{
 
@@ -2673,25 +2655,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				fileSavedAs = (string)Context.GetFromContext(fileSavedAs);
 			}
 
-			PdfReader reader = new PdfReader(fileSavedAs);
-			string text = string.Empty;
-			for (int page = 1; page <= reader.NumberOfPages; page++)
-			{
-				text += PdfTextExtractor.GetTextFromPage(reader, page);
-			}
-			reader.Close();
-			var pdfText = text;
-
-
+			string pdfText = WercsmartPdfHelpers.GetTextFromPdf(fileSavedAs);
 			Report.Info($"The Found PDF Text was: {pdfText}");
-
 
 			var foundOccurences = CountStringOccurrences(pdfText.Replace(" ", ""), @"Canada/English");
 			Report.IsTrue(foundOccurences == 2, "PDF does not contain: Canada / English twice", "PDF contains NGHS / English twice");
 
 		}
 
-		[StepDefinition(@"I Check that the file saved as: (.*) contains the text 'Canada / Français' twice")]
+		[RegexStepDefinition(@"I Check that the file saved as: (.*) contains the text 'Canada / Français' twice")]
 		public void CheckThatFileSavedAsContaisnTextCanadaFrançaisTwice(string fileSavedAs)
 		{
 
@@ -2704,22 +2676,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				fileSavedAs = (string)Context.GetFromContext(fileSavedAs);
 			}
 
-			PdfReader reader = new PdfReader(fileSavedAs);
-			string text = string.Empty;
-			for (int page = 1; page <= reader.NumberOfPages; page++)
-			{
-				text += PdfTextExtractor.GetTextFromPage(reader, page);
-			}
-			reader.Close();
-			var pdfText = text;
-
-
+			string pdfText = WercsmartPdfHelpers.GetTextFromPdf(fileSavedAs);
 			Report.Info($"The Found PDF Text was: {pdfText}");
-
 
 			var foundOccurences = CountStringOccurrences(pdfText.Replace(" ", ""), @"Canada/Français");
 			Report.IsTrue(foundOccurences == 2, "PDF does not contain: Canada / Français twice", "PDF contains NGHS / English twice");
-
 		}
 
 
@@ -2737,7 +2698,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			return count;
 		}
 
-		[StepDefinition(@"I click on the Suppliers link on the top right of the screen")]
+		[RegexStepDefinition(@"I click on the Suppliers link on the top right of the screen")]
 		public void IClickOnSuppliersLink()
 		{
 			var thisShaManager = new StudioSHAManager();
@@ -2745,7 +2706,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Clicked suppliers button");
 		}
 
-		[StepDefinition(@"The Supplier Manager popup appears")]
+		[RegexStepDefinition(@"The Supplier Manager popup appears")]
 		public void TheSupplierManagerPopupAppears()
 		{
 			var thisStudioSupplierManager = new StudioSupplierManager();
@@ -2754,7 +2715,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I (should|should not) see the '(.*)' popup")]
+		[RegexStepDefinition(@"I (should|should not) see the '(.*)' popup")]
 		public void ThenIShouldSeeThePopup(string condition,  string header)
 		{
 			var thisStudioSupplierManager = new StudioSupplierManager();
@@ -2772,7 +2733,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 		}
-		[StepDefinition(@"An alert is displayed with next errors:")]
+		[RegexStepDefinition(@"An alert is displayed with next errors:")]
 		public void ThenAnAlertIsDisplayedWithNextErrors(Table table)
 		{
 			string alertText = SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Text;
@@ -2783,7 +2744,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In the Supplier Manager Popup I check next radio buttons:")]
+		[RegexStepDefinition(@"In the Supplier Manager Popup I check next radio buttons:")]
 		public void ThenInTheSupplierManagerPopupICheckNextRadioButtons(Table table)
 		{
 			var thisStudioSupplierManager = new StudioSupplierManager();
@@ -2796,7 +2757,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In the Supplier Manager Popup I enter the following search term: (.*)")]
+		[RegexStepDefinition(@"In the Supplier Manager Popup I enter the following search term: (.*)")]
 		public void InSupplierManagerPopupIEnterSearchTerm(string searchTerm)
 		{
 			if (searchTerm.Contains("saved as "))
@@ -2816,7 +2777,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Entered search term: " + searchTerm);
 		}
 
-		[StepDefinition(@"In the Supplier Manager Popup I enter in search field Email of user: (.*)")]
+		[RegexStepDefinition(@"In the Supplier Manager Popup I enter in search field Email of user: (.*)")]
 		public void ThenInTheSupplierManagerPopupIEnterInSearchFieldEmailIfUserSavedAsTC(string savedAs)
 		{
 			if (savedAs.Contains("saved as "))
@@ -2837,7 +2798,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Entered search term: " + savedAs);
 		}
 
-		[StepDefinition(@"In the Supplier Manager Popup I enter the following accounts email: (.*)")]
+		[RegexStepDefinition(@"In the Supplier Manager Popup I enter the following accounts email: (.*)")]
 		public void GivenInTheSupplierManagerPopupIEnterTheFollowingAccountsEmail(string accountSavedAs)
 		{
 			TReVorTestUsers user = TestUsers.GetUserSavedAs(accountSavedAs);
@@ -2873,7 +2834,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"In the Supplier Manager Popup I select radio button: (.*)")]
+		[RegexStepDefinition(@"In the Supplier Manager Popup I select radio button: (.*)")]
 		public void InSupplierManagerPopupISelectRadioButton(string button)
 		{
 			var thisStudioSupplierManager = new StudioSupplierManager();
@@ -2882,7 +2843,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Selected radio button: " + button);
 		}
 
-		[StepDefinition(@"In the Supplier Manager Popup I click on the search button")]
+		[RegexStepDefinition(@"In the Supplier Manager Popup I click on the search button")]
 		public void InSupplierManagerPopupIClickOnTheSearchButton()
 		{
 			var thisStudioSupplierManager = new StudioSupplierManager();
@@ -2890,7 +2851,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Clicked search button");
 			Delay.Seconds(10);
 		}
-		[StepDefinition(@"In the Supplier Manager Popup I (should|should not) see supliers")]
+		[RegexStepDefinition(@"In the Supplier Manager Popup I (should|should not) see supliers")]
 		public void ThenInTheSupplierManagerPopupIShouldSeeSupliers(string condition)
 		{
 			var thisStudioSupplierManager = new StudioSupplierManager();
@@ -2902,7 +2863,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		//Step can be used for New User Request button in Supplier Manager too
-		[StepDefinition(@"In the Supplier Manager Popup I click on button: (.*)")]
+		[RegexStepDefinition(@"In the Supplier Manager Popup I click on button: (.*)")]
 		public void ThenInTheSupplierManagerPopupIClickOnTheNewSupplierButton(string button)
 		{
 			var thisStudioSupplierManager = new StudioSupplierManager();
@@ -2910,7 +2871,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"Clicked {button} button");
 		}
 
-		[StepDefinition(@"In the Add New Supplier I click on Accept button")]
+		[RegexStepDefinition(@"In the Add New Supplier I click on Accept button")]
 		public void ThenInTheAddNewSupplierIClickOnButtonAccept()
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
@@ -2921,7 +2882,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In Add New Supplier I enter Company Name: (.*)")]
+		[RegexStepDefinition(@"In Add New Supplier I enter Company Name: (.*)")]
 		public void ThenIFillOutTheInformationInTheAddNewSupplierCompanyNameName(string value)
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
@@ -2932,7 +2893,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			
 		}
-		[StepDefinition(@"In Add New Supplier I enter Supplier Seller ID: (.*)")]
+		[RegexStepDefinition(@"In Add New Supplier I enter Supplier Seller ID: (.*)")]
 		public void ThenInAddNewSupplierIEnterSupplierSellerID(string value)
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
@@ -2943,7 +2904,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			
 		}
-		[StepDefinition(@"In the Supplier Manager Popup I turn (on|off) toggle: (.*)")]
+		[RegexStepDefinition(@"In the Supplier Manager Popup I turn (on|off) toggle: (.*)")]
 		public void ThenInTheSupplierManagerPopupITurnOnToggleSingle_RetailSubscription(string condition, string toggleName)
 		{
 			var thisStudioSupplierManager = new StudioSupplierManager();
@@ -2977,7 +2938,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"In the Supplier Manager Popup I confirm (.*) is turned (on|off)")]
+		[RegexStepDefinition(@"In the Supplier Manager Popup I confirm (.*) is turned (on|off)")]
 		public void ThenInTheSupplierManagerPopupIConfirmSingle_RetailSubscriptionIsTurnedOn(string toggleName, string condition)
 		{
 			var thisStudioSupplierManager = new StudioSupplierManager();
@@ -3001,7 +2962,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 			}
 		}
-		[StepDefinition(@"In Add New Supplier I enter Country: (.*)")]
+		[RegexStepDefinition(@"In Add New Supplier I enter Country: (.*)")]
 		public void ThenInAddNewSupplierIEnterCountry(string value)
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
@@ -3013,7 +2974,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 		}
 
-		[StepDefinition(@"I Add New Supplier I enter Country Code: (.*)")]
+		[RegexStepDefinition(@"I Add New Supplier I enter Country Code: (.*)")]
 		public void ThenIAddNewSupplierIEnterCountryCode(string value)
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
@@ -3024,7 +2985,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}	
 		}
 
-		[StepDefinition(@"In Add New Supplier I enter Supplier Phone: (.*)")]
+		[RegexStepDefinition(@"In Add New Supplier I enter Supplier Phone: (.*)")]
 		public void ThenInAddNewSupplierIEnterSupplierPhone(string value)
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
@@ -3035,7 +2996,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In Add New Supplier I enter Address: (.*)")]
+		[RegexStepDefinition(@"In Add New Supplier I enter Address: (.*)")]
 		public void ThenInAddNewSupplierIEnterAddress(string value)
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
@@ -3046,7 +3007,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In Add New Supplier I enter City: (.*)")]
+		[RegexStepDefinition(@"In Add New Supplier I enter City: (.*)")]
 		public void ThenInAddNewSupplierIEnterCity(string value)
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
@@ -3058,7 +3019,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			
 		}
 
-		[StepDefinition(@"In Add New Supplier I enter State: (.*)")]
+		[RegexStepDefinition(@"In Add New Supplier I enter State: (.*)")]
 		public void ThenInAddNewSupplierIEnterState(string value)
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
@@ -3069,7 +3030,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}		
 		}
 
-		[StepDefinition(@"In Add New Supplier I enter Postal Code: (.*)")]
+		[RegexStepDefinition(@"In Add New Supplier I enter Postal Code: (.*)")]
 		public void ThenInAddNewSupplierIEnterPostalCode(string value)
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
@@ -3080,7 +3041,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In Add New Supplier I enter Contact Name: (.*)")]
+		[RegexStepDefinition(@"In Add New Supplier I enter Contact Name: (.*)")]
 		public void ThenInAddNewSupplierIEnterContactName(string value)
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
@@ -3091,7 +3052,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In Add New Supplier I enter Contact Email: (.*)")]
+		[RegexStepDefinition(@"In Add New Supplier I enter Contact Email: (.*)")]
 		public void ThenInAddNewSupplierIEnterContactEmail(string value)
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
@@ -3102,7 +3063,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}	
 		}
 
-		[StepDefinition(@"I enter email address: (.*)")]
+		[RegexStepDefinition(@"I enter email address: (.*)")]
 		public void IEnterEmailAddress(string email)
 		{
 			try
@@ -3126,7 +3087,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"In Add New Supplier I enter Contact Phone: (.*)")]
+		[RegexStepDefinition(@"In Add New Supplier I enter Contact Phone: (.*)")]
 		public void ThenInAddNewSupplierIEnterContactPhone(string value)
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
@@ -3137,7 +3098,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}	
 		}
 
-		[StepDefinition(@"In the Supplier Manager Popup I save the first search result Supplier Name as: (.*)")]
+		[RegexStepDefinition(@"In the Supplier Manager Popup I save the first search result Supplier Name as: (.*)")]
 		public void InSupplierManagerPopupISaveFirstSupplierNameAs(string saveAs)
 		{
 			var thisStudioSupplierManager = new StudioSupplierManager();
@@ -3151,14 +3112,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Name: " + name + " was saved as: " + saveAs);
 		}
 
-		[StepDefinition(@"In the Supplier Manager Popup I click on the close button")]
+		[RegexStepDefinition(@"In the Supplier Manager Popup I click on the close button")]
 		public void InSupplierManagerPopupIClickOnTheCloseButton()
 		{
 			var thisStudioSupplierManager = new StudioSupplierManager();
 			Report.IsTrue(thisStudioSupplierManager.CloseSupplierManager(), "Failed to click close button","Clicked close button");
 		}
 
-		[StepDefinition(@"I save a product id which blue and has retailers as (.*)")]
+		[RegexStepDefinition(@"I save a product id which blue and has retailers as (.*)")]
 		public void GivenISaveAProductIdWhichIsNotRedOrOrangeAndHasRetailersAsTestCase(string saveAs)
 		{
 			var thisStudioSHAManager = new StudioSHAManager();
@@ -3173,7 +3134,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I save a product which blue and has retailers as (.*)")]
+		[RegexStepDefinition(@"I save a product which blue and has retailers as (.*)")]
 		public void GivenISaveAProductWhichIsNotRedOrOrangeAndHasRetailersAsTestCase(string saveAs)
 		{
 			var thisStudioSHAManager = new StudioSHAManager();
@@ -3190,7 +3151,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"I save a product which blue and has retailers and at least 1 UCP as (.*)")]
+		[RegexStepDefinition(@"I save a product which blue and has retailers and at least 1 UCP as (.*)")]
 		public void GivenISaveAProductWhichIsNotRedOrOrangeAndHasRetailersAndUPCAsTestCase(string saveAs)
 		{
 			var thisStudioSHAManager = new StudioSHAManager();
@@ -3205,7 +3166,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I save the retailers associated with product (.*) as (.*)")]
+		[RegexStepDefinition(@"I save the retailers associated with product (.*) as (.*)")]
 		public void ISaveTheRetailersAssociatedWithTheProductAs(string productSavedAs, string retailersSavedAs)
 		{
 			var thisStudioSHAManager = new StudioSHAManager();
@@ -3215,7 +3176,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(retailersSavedAs, retailers);
 		}
 
-		[StepDefinition(@"I confirm that the list of retailers associated with product (.*) includes retailer (.*)")]
+		[RegexStepDefinition(@"I confirm that the list of retailers associated with product (.*) includes retailer (.*)")]
 		public void IConfirmThatTheListOfRetailersAssociatedWithProductIncludesRetailer(string productSavedAs, string retailer)
 		{
 			var thisStudioSHAManager = new StudioSHAManager();
@@ -3224,7 +3185,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(retailers.Contains(retailer), "Failed to find retailer " + retailer + " in list of retailers.", "Successfully found retailer " + retailer + ".");
 		}
 
-		[StepDefinition(@"I Confirm the Product shows status: (.*) for retailer: (.*)")]
+		[RegexStepDefinition(@"I Confirm the Product shows status: (.*) for retailer: (.*)")]
 		public void GivenIConfirmTheProductShowsStatusForRetailer(string status, string retailer)
 		{
 			Report.UseSubSteps = true;
@@ -3300,7 +3261,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I should see a new tabbed document whose URL contains DocumentID")]
+		[RegexStepDefinition(@"I should see a new tabbed document whose URL contains DocumentID")]
 		public void ThenIShouldSeeANewTabbedDocumentWhoseURLContainsDocumentID()
 		{
 			Delay.Seconds(30);
@@ -3325,7 +3286,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm all UPC numbers in the list saved as: (.*) are displayed in the SHA Manager Product UPC list")]
+		[RegexStepDefinition(@"I confirm all UPC numbers in the list saved as: (.*) are displayed in the SHA Manager Product UPC list")]
 		public void ConfirmAllUpcsAreDisplayedInShaManagerProductUpcList(string savedAs)
 		{
 			try
@@ -3360,7 +3321,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I save a UPC number in the SHA Manager Product UPC list to context as: (.*) with report failure: (true|false)")]
+		[RegexStepDefinition(@"I save a UPC number in the SHA Manager Product UPC list to context as: (.*) with report failure: (true|false)")]
 		public void SaveUpcNumberInShaManagerProductUpcListAs(string savedAs, bool reportFailure)
 		{
 			// Switch to window
@@ -3430,7 +3391,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Context.AddToContext(savedAs, upcNumber);
 		}				
 
-		[StepDefinition(@"I switch to the Product List UPC Window")]
+		[RegexStepDefinition(@"I switch to the Product List UPC Window")]
 		public void SwitchToProductListUpcWindow()
 		{
 			try
@@ -3471,7 +3432,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I create a new file saved as: (.*) to upload using the UPCs saved as:")]
+		[RegexStepDefinition(@"I create a new file saved as: (.*) to upload using the UPCs saved as:")]
 		public void GivenICreateANewFileSavedAsToUploadUsingTheUPCsSavedAs(string savedAs, Table upcs)
 		{
 			throw new NotImplementedException();
@@ -3479,7 +3440,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		// I click Sample File link and verify the Upload UPC form
-		[StepDefinition(@"I click Sample File link and verify the Upload UPC form and save it as (.*)")]
+		[RegexStepDefinition(@"I click Sample File link and verify the Upload UPC form and save it as (.*)")]
 		public void ClickSampleFileAndVerifyTheUploadUPCForm(string savedAs, Table table)
 		{
 			var upc = new UPC();
@@ -3488,8 +3449,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(upc.VerifySampleFile(table, "Sample.xlsx", savedAs), "Failed to validate Sample File", "Successfully validated Sample File");
 		}
 
-		[StepDefinition(@"I save a UPC number for any product in the grid to context as: (.*)")]
-		[StepDefinition(@"I find a UPC number for any product in the grid and save to context as: (.*)")]
+		[RegexStepDefinition(@"I save a UPC number for any product in the grid to context as: (.*)")]
+		[RegexStepDefinition(@"I find a UPC number for any product in the grid and save to context as: (.*)")]
 		public void SaveUpcNumberForAnyProduct(string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -3513,7 +3474,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}Report.Info("testing0 " + savedAs);
 		}
 
-		[StepDefinition(@"I find a UPC number for any product not belonging to Supplier: (.*) in the grid and save to context as: (.*)")]
+		[RegexStepDefinition(@"I find a UPC number for any product not belonging to Supplier: (.*) in the grid and save to context as: (.*)")]
 		public void SaveUpcNumberForAnyProductNotCompany(string notSupplier, string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -3540,7 +3501,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm that the Current Submission date in SHA Manager matches the date saved as: (.*)")]
+		[RegexStepDefinition(@"I confirm that the Current Submission date in SHA Manager matches the date saved as: (.*)")]
 		public void IConfirmThatTheCurrentSubmissionDateMatches(string savedAs)
 		{
 			string date = Context.GetFromContext(savedAs)?.ToString() ?? "";
@@ -3549,7 +3510,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Current submission date '" + product.CurrentSubmission.ToString() + "' matches date saved to context '" + date + "'.");
 		}
 
-		[StepDefinition(@"In the Authoring menu I select Power Designer Plus")]
+		[RegexStepDefinition(@"In the Authoring menu I select Power Designer Plus")]
 		public void InTheAuthoringMenuISelectPowerDesignerPlus()
 		{
 			var thisTopMenu = new StudioTopMenu();
@@ -3570,7 +3531,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(30), "Power designer plus has not loaded",
 				"Power designer plus has loaded");
 		}
-		[StepDefinition(@"I Confirm the Product saved as: (.*) shows the: '(.*)' Status")]
+		[RegexStepDefinition(@"I Confirm the Product saved as: (.*) shows the: '(.*)' Status")]
 		public void ConfirmProductInCorrectStatus(string savedAs, string status)
 		{
 			var productStatus = new StudioSHAManager().GetproductStatus(savedAs);
@@ -3578,7 +3539,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I find the UPC number for: (.*) products in the grid and save them to context starting with: (.*)")]
+		[RegexStepDefinition(@"I find the UPC number for: (.*) products in the grid and save them to context starting with: (.*)")]
 		public void SaveUpcNumberForXProducts(int numberOfProducts, string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -3627,7 +3588,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I add the UPC numbers saved to context starting with: (.*) to the UPC bulk upload spreadsheet: (.*)")]
+		[RegexStepDefinition(@"I add the UPC numbers saved to context starting with: (.*) to the UPC bulk upload spreadsheet: (.*)")]
 		public void AddUpcNumbersToBulkUploadSpreadsheet(string savedAs, string spreadsheetSavedAs)
 		{
 			int numberOfProducts = (int)Context.GetFromContext("numberOfUpcnumbers");
@@ -3649,7 +3610,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I add Generic Product Names to the UPC bulk upload spreadsheet: (.*)")]
+		[RegexStepDefinition(@"I add Generic Product Names to the UPC bulk upload spreadsheet: (.*)")]
 		public void IUpdateBulkUPCFileToIncludeProductNames(string spreadsheetSavedAs)
 		{
 
@@ -3665,7 +3626,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I find a UPC number for: (.*) products not belonging to Supplier: (.*) in the grid and save to context starting with: (.*)")]
+		[RegexStepDefinition(@"I find a UPC number for: (.*) products not belonging to Supplier: (.*) in the grid and save to context starting with: (.*)")]
 		public void SaveUpcNumberForXProductsNotCompany(int numberOfProducts, string notSupplier, string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -3715,7 +3676,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I navigate to SHA Manager and save a UPC to context as: (.*) for trevor account: (.*)")]
+		[RegexStepDefinition(@"I navigate to SHA Manager and save a UPC to context as: (.*) for trevor account: (.*)")]
 		public void NavigateToShaSaveUpcToContext(string upcSavedAs, string accountSavedAs)
 		{
 			Report.UseSubSteps = true;
@@ -3738,7 +3699,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.SaveUpcNumberForAnyProduct(upcSavedAs);
 
 		}
-		[StepDefinition(@"I Check that the product under the retailer: (.*) is under the status: (.*)")]
+		[RegexStepDefinition(@"I Check that the product under the retailer: (.*) is under the status: (.*)")]
 		public void ICheckProductUnderRetailerStatus(string retailer, string expectedStatus)
 		{
 			string actualStatus = new StudioSHAManager().GetProductStatusByRetailer(retailer);
@@ -3747,14 +3708,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(actualStatus == expectedStatus, "The Product under retailer: " + retailer + " was not in the expected status", "The Product under retailer: " + retailer + " was in the expected status");
 		}
 
-		[StepDefinition(@"In SHA Manager I confirm that there is one item in the grid")]
+		[RegexStepDefinition(@"In SHA Manager I confirm that there is one item in the grid")]
 		public void InSHAManagerIConfirmThatThereIsOneItemInTheGrid()
 		{
 			var sha = new StudioSHAManager();
 			Report.IsTrue(sha.ConfirmThereIsOneProductInTheGrid(), "Failed to find one product in the grid!", "Successfully found one product in the grid.");
 		}
 
-		[StepDefinition("SHA Search for Archived UPC. This uses environment variable for know archived product")]
+		[RegexStepDefinition("SHA Search for Archived UPC. This uses environment variable for know archived product")]
 		public void SHASearchForArchived()
 		{
 			string upc = TReVor.Integrations.Classes.TReVorSettings.Variables.GetVariable("Archived UPC");
@@ -3762,7 +3723,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"SHA Search for product by UPC: (.*) in all statuses")]
+		[RegexStepDefinition(@"SHA Search for product by UPC: (.*) in all statuses")]
 		public void ThenSHASearchForProductByUPCInAllStatuses(string uPC)
 		{
 			Context.AddToContext("UPC", uPC);
@@ -3772,7 +3733,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.GivenInSHAManagerPageIRunSearch(table);
 		}
 
-		[StepDefinition(@"I verify the popup message displays with the title ""(.*)""")]
+		[RegexStepDefinition(@"I verify the popup message displays with the title ""(.*)""")]
 		public void GivenIVerifyThePopupMessageDisplaysWithTheTitle(string title)
 		{
 			Report.IsTrue(new StudioSHAManagerArchivedProduct().ArchivedUPCPopupTitle(title, out string displayedTitle),
@@ -3780,10 +3741,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Located popup titled " + displayedTitle);
 		}
 
-		[StepDefinition(@"I close the Archived Product popup")]
+		[RegexStepDefinition(@"I close the Archived Product popup")]
 		public void ICloseTheArchivedProductPopup() => Report.IsTrue(new StudioSHAManagerArchivedProduct().ClosePopup(), "Popup was not closed", "Popup closed successfully");
 
-		[StepDefinition(@"I verify the file saved as: (.*) contains integers in all fields on the first data row")]
+		[RegexStepDefinition(@"I verify the file saved as: (.*) contains integers in all fields on the first data row")]
 		public void ThenIVerifyTheFileSavedAsContainsIntegersInAllFieldsOnTheFirstDataRow(string savedAs)
 		{
 
@@ -3808,7 +3769,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"Verify (.*) Advanced Report description reads: (.*)")]
+		[RegexStepDefinition(@"Verify (.*) Advanced Report description reads: (.*)")]
 		public void GivenVerifyAdvancedReportDescriptionReads(string report, string description)
 		{
 			var myStudioShaManager = new StudioSHAManager();
@@ -3823,7 +3784,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"In SHA Manager - Select Actions - (.*)")]
+		[RegexStepDefinition(@"In SHA Manager - Select Actions - (.*)")]
 		public void ICallSharedStep96169SHAManager_SelectProduct_Actions(string actionType)
 		{
 			var myStudioShaManager = new StudioSHAManager();
@@ -3837,28 +3798,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Failed to click " + actionType, "Clicked " + actionType);
 		}
 
-		[StepDefinition(@"I close the Advanced Reporting popup")]
+		[RegexStepDefinition(@"I close the Advanced Reporting popup")]
 		public void ICloseTheAdvancedReportingPopup()
 		{
 			var shaReport = new SHAAdvancedReporting();
 			Report.IsTrue(shaReport.ClickClose(), "Failed to click close on Advanced Reporting popup", "Successfully clicked close on Advanced Reporting popup");
 		}
 
-		[StepDefinition(@"In Advanced Reporting I confirm I see a table called (.*)")]
+		[RegexStepDefinition(@"In Advanced Reporting I confirm I see a table called (.*)")]
 		public void InAdvancedReportingIConfirmISeeATableCalled(string tableName)
 		{
 			var shaReport = new SHAAdvancedReporting();
 			Report.IsTrue(shaReport.ConfirmTableName(tableName), "Failed to find table called " + tableName, "Successfully found table called " + tableName);
 		}
 
-		[StepDefinition(@"In Advanced Reporting I confirm I see column header (.*)")]
+		[RegexStepDefinition(@"In Advanced Reporting I confirm I see column header (.*)")]
 		public void InAdvancedReportingIConfirmISeeColumnHeader(string header)
 		{
 			var shaReport = new SHAAdvancedReporting();
 			Report.IsTrue(shaReport.ConfirmHeader(header), "Failed to find header called " + header, "Successfully found header called " + header);
 		}
 
-		[StepDefinition(@"I verify that the following options are available in the Report List table:")]
+		[RegexStepDefinition(@"I verify that the following options are available in the Report List table:")]
 		public void IVerifyThatTheFollowingOptionsAreAvailableInTheReportListTable(Table table)
 		{
 			var shaReport = new SHAAdvancedReporting();
@@ -3870,21 +3831,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm that the Report Names are listed in (abc|cba) order")]
+		[RegexStepDefinition(@"I confirm that the Report Names are listed in (abc|cba) order")]
 		public void IConfirmThatTheReportsAreListedInOrder(string order)
 		{
 			var shaReport = new SHAAdvancedReporting();
 			Report.IsTrue(shaReport.ConfirmReportNamesAlphebeticalOrder(order), "Failed to find Report Names in abc order.", "Successfully found Report Names in abc order.");
 		}
 
-		[StepDefinition(@"I confirm that the report descriptions are listed in (abc|cba) order")]
+		[RegexStepDefinition(@"I confirm that the report descriptions are listed in (abc|cba) order")]
 		public void IConfirmThatTheReportDescriptionsAreListedInCBAOrder(string order)
 		{
 			var shaReport = new SHAAdvancedReporting();
 			Report.IsTrue(shaReport.ConfirmReportDescriptionsAlphabeticalOrder(order), "Failed to find Report Descriptions in abc order.", "Successfully found Report Descriptions in abc order.");
 		}
 
-		[StepDefinition(@"I confirm that the (up|down) arrow next to Report Name is (active|inactive)")]
+		[RegexStepDefinition(@"I confirm that the (up|down) arrow next to Report Name is (active|inactive)")]
 		public void IConfirmThatTheDownArrowNextToReportNameIs(string upDown, string isActive)
 		{
 			var shaReport = new SHAAdvancedReporting();
@@ -3903,7 +3864,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I confirm that the (up|down) arrow next to Report Description is (active|inactive)")]
+		[RegexStepDefinition(@"I confirm that the (up|down) arrow next to Report Description is (active|inactive)")]
 		public void IConfirmThatTheUpDownArrowNextToReportDescriptionIs(string upDown, string isActive)
 		{
 			var shaReport = new SHAAdvancedReporting();
@@ -3921,14 +3882,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click on the Report Name column")]
+		[RegexStepDefinition(@"I click on the Report Name column")]
 		public void IClickOnTheReportNameColumn()
 		{
 			var shaReport = new SHAAdvancedReporting();
 			Report.IsTrue(shaReport.ClickReportNameHeader(), "Failed to click report name header", "Successfully clicked report name header");
 		}
 
-		[StepDefinition(@"I click on the Report Description column")]
+		[RegexStepDefinition(@"I click on the Report Description column")]
 		public void IClickOnTheReportDescriptionColumn()
 		{
 			var shaReport = new SHAAdvancedReporting();
@@ -3936,7 +3897,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I verify the popup data using UPC: (.*)")]
+		[RegexStepDefinition(@"I verify the popup data using UPC: (.*)")]
 		public void ThenIVerifyThePopupDataUsingUPC(string uPC)
 		{
 
@@ -3952,7 +3913,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"In SHA I Search for exact UPC in (.*) Status for UPC saved as: (.*)")]
+		[RegexStepDefinition(@"In SHA I Search for exact UPC in (.*) Status for UPC saved as: (.*)")]
 		public void InSHAISearchForExactUPCInForUPCSavedAs(string status, string savedAs)
 		{
 
@@ -3996,7 +3957,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"The Manager Validation Require Popup is not shown")]
+		[RegexStepDefinition(@"The Manager Validation Require Popup is not shown")]
 		public void TheManagerValidationRequirePopupIsNotShown()
 		{
 			var managerValidationPopup = new StudioSHAManagerUPCDetailsPopupManagerValidationPopup();
@@ -4004,14 +3965,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In the Advanced Reporting popup I select report (.*)")]
+		[RegexStepDefinition(@"In the Advanced Reporting popup I select report (.*)")]
 		public void InTheAdvancedReportingPopupISelectReport(string report)
 		{
 			var shaReport = new SHAAdvancedReporting();
 			Report.IsTrue(shaReport.ClickReport(report), "Failed to click report " + report + ".", "Successfully clicked report " + report + ".");
 		}
 
-		[StepDefinition(@"In the Advanced Reporting popup I verify I (can|cannot) select report (.*)")]
+		[RegexStepDefinition(@"In the Advanced Reporting popup I verify I (can|cannot) select report (.*)")]
 		public void GivenInTheAdvancedReportingPopupIVerifyICannotSelectReport(string option, string reportName)
 		{
 			bool expected = option == "can";
@@ -4020,7 +3981,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Report is not available, as expected");
 		}
 
-		[StepDefinition(@"Verify no Advanced Report exists with description reading: (.*)")]
+		[RegexStepDefinition(@"Verify no Advanced Report exists with description reading: (.*)")]
 		public void GivenVerifyNoAdvancedReportExistsWithDescriptionReading(string reportDescription)
 		{
 			Report.IsTrue(new SHAAdvancedReporting().ReportDescriptionNotAvailable(reportDescription),
@@ -4028,7 +3989,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"");
 		}
 
-		[StepDefinition(@"In the Advanced Reporting Retailer Products in Recertification report dropdown I select retailer: (.*)")]
+		[RegexStepDefinition(@"In the Advanced Reporting Retailer Products in Recertification report dropdown I select retailer: (.*)")]
 		public void InTheAdvancedReportingRetailerProductsInREcertificationReportDropdownISelectRetailer(string retailer)
 		{
 			var dropDownForm = new AdvancedReportingDropDownForm();
@@ -4036,7 +3997,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(dropDownForm.SelectOption(retailer), "Failed to select retailer " + retailer, "Successfully selected retailer " + retailer);
 		}
 
-		[StepDefinition(@"In the Advanced Reporting Retailer Products in Recertification report dropdown I click submit")]
+		[RegexStepDefinition(@"In the Advanced Reporting Retailer Products in Recertification report dropdown I click submit")]
 		public void InTheAdvancedReportingRetailerProductsInRecertificationReportDropdownIClickSubmit()
 		{
 			var dropDownForm = new AdvancedReportingDropDownForm();
@@ -4045,7 +4006,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I enter start date (.*) and end date (.*) for Advanced Reporting")]
+		[RegexStepDefinition(@"I enter start date (.*) and end date (.*) for Advanced Reporting")]
 		public void ThenIEnterStartAndEndDatesForAdvancedReporting(string startDate, string endDate)
 		{
 			Report.Info("Attempting to enter start (" + startDate + ") and end (" + endDate + ") dates");
@@ -4054,7 +4015,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				successMessage: "Successfully updated the date fields");
 		}
 
-		[StepDefinition(@"In the 3rd Party Formula Use in Registrations text box I enter the CAS Number without the WPS for ingredient: (.*)")]
+		[RegexStepDefinition(@"In the 3rd Party Formula Use in Registrations text box I enter the CAS Number without the WPS for ingredient: (.*)")]
 		public void InThe3rdPartyFormulaUseInRegistrationsIEnterTheCASNumber(string savedAs)
 		{
 			var ingredient = (Ingredients.Ingredient)Context.GetFromContext(savedAs);
@@ -4077,14 +4038,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(input.EnterText(CAS), "Failed to enter the CAS number into the text input field.", "Successfully entered the CAS Number into the text input field.");
 		}
 
-		[StepDefinition(@"In the Advanced Reporting 3rd Party Formula Use in Registrations report I click submit")]
+		[RegexStepDefinition(@"In the Advanced Reporting 3rd Party Formula Use in Registrations report I click submit")]
 		public void InThe3rdPartyFormulaUseInRegistrationsReportIClickSubmit()
 		{
 			var input = new AdvancedReportingTextInput();
 			Report.IsTrue(input.ClickSubmit(), "Failed to click submit.", "Successfully clicked submit.");
 		}
 
-		[StepDefinition(@"I verify the (.*) popup displays")]
+		[RegexStepDefinition(@"I verify the (.*) popup displays")]
 		public void ThenIVerifyThePreparingReportPopupDisplays(string expectedTitle)
 		{
 			Report.IsTrue(new SHAAdvancedReporting().VerifyPopupTitle(expectedTitle, out string output),
@@ -4098,7 +4059,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		/// <param name="savedAs"></param>
 		/// <param name="retailer"></param>
 		/// <param name="presence"></param>
-		[StepDefinition(@"I check that the UPC number saved as: (.*) and under the retailer: (.*), (does|does not) show the Obsolete UPC Option in the UPC details popup")]
+		[RegexStepDefinition(@"I check that the UPC number saved as: (.*) and under the retailer: (.*), (does|does not) show the Obsolete UPC Option in the UPC details popup")]
 		public void ICheckUPCNumberXObsoleteUPCOptionPresence(string savedAs, string retailer, string presence)
 		{
 			//For Testing the Dupe UPC Sha Tool
@@ -4152,7 +4113,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I Search for a product containing duplicate UPCs listed in the Spreadsheet 'UPCsDuplicatedwithinAccount.xlsx' and save its details ending with: (.*)")]
+		[RegexStepDefinition(@"I Search for a product containing duplicate UPCs listed in the Spreadsheet 'UPCsDuplicatedwithinAccount.xlsx' and save its details ending with: (.*)")]
 		public void ISearchForAProductContainingDuplicateUPCSUsingSpreadSheet(string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -4211,7 +4172,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I close the SHA Manager Product UPC details pop up")]
+		[RegexStepDefinition(@"I close the SHA Manager Product UPC details pop up")]
 		public void ICloseTheUPCDetailsPopup()
 		{
 
@@ -4223,7 +4184,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(upcDetailsPopupTable.WaitForContainerToBeInvisible(30), "The UPC details popup did not close", "The UPC details popup was closed");
 		}
 
-		[StepDefinition(@"I Click the Obsolete Button and Check a Popup Appears with 'Cancel' and 'Continue' buttons and the following message: (.*)")]
+		[RegexStepDefinition(@"I Click the Obsolete Button and Check a Popup Appears with 'Cancel' and 'Continue' buttons and the following message: (.*)")]
 		public void IClickObsoleteAndCheckAPopUpAppearsWithButtonsAndMessageX(string expectedMessage)
 		{
 			Report.UseSubSteps = true;
@@ -4243,7 +4204,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I click close in the Confirm Obsolete UPC popup, and the Confirm Obsolete UPC popup is closed and the UPC Details Popup remains on screen.")]
+		[RegexStepDefinition(@"I click close in the Confirm Obsolete UPC popup, and the Confirm Obsolete UPC popup is closed and the UPC Details Popup remains on screen.")]
 		public void IClickCloseInTheConfirmObsoleteUPCPopUpAndCheckItClosesAndTheUPCDetailsPopUpRemains()
 		{
 			Report.UseSubSteps = true;
@@ -4259,7 +4220,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I click Continue in the Confirm Obsolete UPC popup, and the Confirm the Manager Validation Require Popup appears.")]
+		[RegexStepDefinition(@"I click Continue in the Confirm Obsolete UPC popup, and the Confirm the Manager Validation Require Popup appears.")]
 		public void IClickContinueInTheConfirmObsoleteUPCPopUpAndCheckItTheManagerValidationPopupAppears()
 		{
 			Report.UseSubSteps = true;
@@ -4276,14 +4237,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In the Advanced Reporting popup I click Submit")]
+		[RegexStepDefinition(@"In the Advanced Reporting popup I click Submit")]
 		public void InTheAdvancedReportingPopupIClickSubmit()
 		{
 			var shaReport = new SHAAdvancedReporting();
 			Report.IsTrue(shaReport.ClickSubmit(), "Failed to click submit", "Successfully clicked submit");
 		}
 
-		[StepDefinition(@"I Check that for the product: (.*) the Details in SHA Manager Match the details found in the file: (.*)")]
+		[RegexStepDefinition(@"I Check that for the product: (.*) the Details in SHA Manager Match the details found in the file: (.*)")]
 		public void ICheckThatForTheProductXTheDetailsInSHAManagerMatchTheFile(string productInfoSavedAs, string fileSavedAs)
 		{
 			Report.UseSubSteps = true;
@@ -4372,14 +4333,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I wait for the Advanced Reporting Preparing Report popup to disappear")]
+		[RegexStepDefinition(@"I wait for the Advanced Reporting Preparing Report popup to disappear")]
 		public void WaitForAdvancedReportingPopupToDisappear()
 		{
 			var shaReport = new SHAAdvancedReporting();
 			Report.IsTrue(shaReport.WaitForPreparingReportPopup(), "Failed to wait for Preparing Report popup", "Successfully waited for Preparing Report popup");
 		}
 
-		[StepDefinition(@"I search in the excel spreadsheet saved as: (.*) for product saved as: (.*) and save its information as: (.*)")]
+		[RegexStepDefinition(@"I search in the excel spreadsheet saved as: (.*) for product saved as: (.*) and save its information as: (.*)")]
 		public void ISearchInTheExcelSpreadsheetForProductAndSaveItsInformation(string excel, string product, string saveAs)
 		{
 			var prodInfo = (ProductInformation)Context.GetFromContext(product);
@@ -4408,7 +4369,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm that the following information is present in the excel info saved as: (.*):")]
+		[RegexStepDefinition(@"I confirm that the following information is present in the excel info saved as: (.*):")]
 		public void IConfirmThatTheFollowingInformationIsPresentInTheExcelInfoSavedAs(string savedAs, Table table)
 		{
 			var excelInfo = (Dictionary<string, string>)Context.GetFromContext(savedAs);
@@ -4459,7 +4420,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the Product UPC window has opened")]
+		[RegexStepDefinition(@"I confirm the Product UPC window has opened")]
 		public void ConfirmProductUpcWindowOpened()
 		{
 			ReadOnlyCollection<string> allHandles = SeleniumWebDriver.CurrentDriver.WindowHandles;
@@ -4487,7 +4448,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 	
-		[StepDefinition(@"I verify the file saved as: (.*) against the specific requirements for Daily Report - WERCSmart Additional Reports Published")]
+		[RegexStepDefinition(@"I verify the file saved as: (.*) against the specific requirements for Daily Report - WERCSmart Additional Reports Published")]
 		public void ThenIVerifyTheFileSavedAsAgainstTheSpecificRequirementsForDailyReport_WERCSmartAdditionalReportsPublished(string savedAs)
 		{
 			Report.IsTrue(new DailyReportWERCSmartAdditionalReportsPublished().VerifyFile(savedAs), "Report did not match expectations", "Report conforms to stated spec");
@@ -4501,7 +4462,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		}
-		[StepDefinition(@"I enter start Date: (.*) and end Date: (.*) for the Advanced report then I click Submit")]
+		[RegexStepDefinition(@"I enter start Date: (.*) and end Date: (.*) for the Advanced report then I click Submit")]
 		public void IEnterAStartDateForTheProductRegistrationPublishedReportClickSubmit(string startDate, string endDate)
 		{
 			Report.UseSubSteps = true;
@@ -4515,7 +4476,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I Check that the Description Text for the Report: (.*) is shown as: (.*)")]
+		[RegexStepDefinition(@"I Check that the Description Text for the Report: (.*) is shown as: (.*)")]
 		public void ICheckThatTheDescriptionForTheReportIsShowAS(string reportName, string reportText)
 		{
 			var shaReport = new SHAAdvancedReporting();
@@ -4524,7 +4485,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I select the: (.*) report from Advanced Reporting in SHA")]
+		[RegexStepDefinition(@"I select the: (.*) report from Advanced Reporting in SHA")]
 		public void ISelectProductRegistrationPublishedReportFromAdvancedReportingInSHA(string report)
 		{
 			Report.UseSubSteps = true;
@@ -4538,7 +4499,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In The advanced reporting screen I enter WPSID saved as: (.*)")]
+		[RegexStepDefinition(@"In The advanced reporting screen I enter WPSID saved as: (.*)")]
 		public void InTheAdvancedReportingScreenIEnterWPSIDSavedAs(string savedAs)
 		{
 			var shaReport = new SHAAdvancedReporting();
@@ -4558,14 +4519,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In The advanced reporting screen I choose retailer: (.*)")]
+		[RegexStepDefinition(@"In The advanced reporting screen I choose retailer: (.*)")]
 		public void InTheAdvancedReportingScreenIChooseRetailer(string retailer)
 		{
 			var shaReport = new SHAAdvancedReporting();
 			Report.IsTrue(shaReport.ChooseRetailer(retailer), "Failed to choose retailer: " + retailer, "Successfully selected the retailer: " + retailer);
 		}
 
-		[StepDefinition(@"I delete the Advanced Report file saved as (.*)")]
+		[RegexStepDefinition(@"I delete the Advanced Report file saved as (.*)")]
 		public void DeleteExcelFile(string savedAs)
 		{
 			string file = Context.GetFromContext(savedAs)?.ToString() ?? "";
@@ -4578,13 +4539,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			File.Delete(file);
 		}
 
-		[StepDefinition(@"I Click close in the Advanced Reporting Popup")]
+		[RegexStepDefinition(@"I Click close in the Advanced Reporting Popup")]
 		public void ClickCloseInAdvancedReports()
 		{
 			Report.IsTrue(new SHAAdvancedReporting().CloseButton.TryClick(), "Failed to click the close button", "Successfully click the close button");
 		}
 
-		[StepDefinition(@"In The advanced reporting screen I Click Option: (Includes Water|Contains Alcohol)")]
+		[RegexStepDefinition(@"In The advanced reporting screen I Click Option: (Includes Water|Contains Alcohol)")]
 		public void InTheAdvancedReportingScreenClickOption(string optionChoice)
 		{
 			var shaReport = new SHAAdvancedReporting();
@@ -4598,7 +4559,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I enter UPC Size: (.*) in the advanced reporting popup")]
+		[RegexStepDefinition(@"I enter UPC Size: (.*) in the advanced reporting popup")]
 		public void IEnterUPCSizeInTheAdvancedReportingPopup(string size)
 		{
 			var shaReport = new SHAAdvancedReporting();
@@ -4607,14 +4568,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In The advanced reporting screen I choose WERCSmart Retail Recipient Code: (.*)")]
+		[RegexStepDefinition(@"In The advanced reporting screen I choose WERCSmart Retail Recipient Code: (.*)")]
 		public void InTheAdvancedReportingScreenIChooseRetailRecipientCode(string recipient)
 		{
 			var shaReport = new SHAAdvancedReporting();
 			Report.IsTrue(shaReport.ChooseRecpientCode(recipient), "Failed to choose recipient: " + recipient, "Successfully selected the recipient: " + recipient);
 		}
 
-		[StepDefinition(@"I move the product saved as (.*) from Submitted to Completed Status")]
+		[RegexStepDefinition(@"I move the product saved as (.*) from Submitted to Completed Status")]
 		public void IMoveTheProductSavedAsFromSubmittedToCompletedStatus(string saveAs)
 		{
 			Report.UseSubSteps = true;
@@ -4651,7 +4612,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			MyStepsSHA.GivenInTheSHAManagerGridISeeTheWPSIDIHaveSavedAsProductTestCaseAndItsStatusIs(saveAs, "Completed");
 		}
 
-		[StepDefinition(@"In the Supplier Manager Popup I click on the first supplier returned")]
+		[RegexStepDefinition(@"In the Supplier Manager Popup I click on the first supplier returned")]
 		public void InTheSupplierManagerPopupIClickOnFirstSupplier()
 		{
 			Report.Info("Attempting to click on the first supplier returned in the supplier manager popup");
@@ -4662,7 +4623,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I ensure that the correct tabs are displayed at the bottom of the suppliers popup")]
+		[RegexStepDefinition(@"I ensure that the correct tabs are displayed at the bottom of the suppliers popup")]
 		public void IEnsureThatTheCorrectTabsAreDisplayedAtTheBottomOfTheSuppliersPopup(Table table)
 		{
 			Report.Info("Checking for tabs at the bottom of the Suppliers popup");
@@ -4672,14 +4633,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I ensure that there is a SubscriptionStatus column in the Supplier Manager popup")]
+		[RegexStepDefinition(@"I ensure that there is a SubscriptionStatus column in the Supplier Manager popup")]
 		public void IEnsureThatThereIsASubscriptionStatusColumn()
 		{
 			Report.Info("Checking for SubscriptionStatus column");
 			Report.IsTrue(new StudioSupplierManager().CheckForSupplierManagerColumn("SubscriptionStatus"), "Failed to find SubscriptionStatus column", "Successfully found SubscriptionStatus column");
 		}
 
-		[StepDefinition(@"In the Supplier Manager Popup I check next columns exist:")]
+		[RegexStepDefinition(@"In the Supplier Manager Popup I check next columns exist:")]
 		public void ThenInTheSupplierManagerPopupICheckNextColumnsExist(Table table)
 		{
 			var thisStudioSupplierManager = new StudioSupplierManager();
@@ -4691,7 +4652,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 			}
 		}
-		[StepDefinition(@"In the Supplier Manager Popup I check value in Subscription column should be Tiered, Single, Single\+Tier or it should be blank")]
+		[RegexStepDefinition(@"In the Supplier Manager Popup I check value in Subscription column should be Tiered, Single, Single\+Tier or it should be blank")]
 		public void ThenInTheSupplierManagerPopupICheckValueInSubscriptionColumnShouldBeTieredSingleSingleTierOrItShouldBeBlank()
 		{
 			var thisStudioSupplierManager = new StudioSupplierManager();
@@ -4701,21 +4662,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I ensure that I see the status (.*) under the SubscriptionStatus column")]
+		[RegexStepDefinition(@"I ensure that I see the status (.*) under the SubscriptionStatus column")]
 		public void IEnsureThatISeeTheStatusUnderTheSubscriptionStatusColumn(string status)
 		{
 			Report.Info("Checking for status " + status + " under the SubscriptionStatus column");
 			Report.IsTrue(new StudioSupplierManager().CheckForSupplierManagerColumnValue("SubscriptionStatus", status), "Failed to find status " + status + " for the SubscriptionStatus", "Successfully found SubscriptionStatus " + status + ".");
 		}
 
-		[StepDefinition(@"I ensure that the Subscription tab has (.*) font")]
+		[RegexStepDefinition(@"I ensure that the Subscription tab has (.*) font")]
 		public void IEnsureThatTheSubscriptionTabHasFont(string color)
 		{
 			Report.Info("Checking for " + color + " font on Subscription tab");
 			Report.IsTrue(new StudioSupplierManager().CheckForSubscriptionTabColor(color), "Failed to find " + color + " font on the Subscription tab", "Successfully found " + color + " font on the Subscription tab");
 		}
 
-		[StepDefinition(@"I ensure that the Subscription tab has (.*) background color")]
+		[RegexStepDefinition(@"I ensure that the Subscription tab has (.*) background color")]
 		public void IEnsureThatTheSubscriptionTabHasBackgroundColor(string color)
 		{
 			Report.Info("Checking for " + color + " background color on Subscription tab");
@@ -4724,7 +4685,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 
-		[StepDefinition(@"In The Supplier Manager popup I click on the category: (.*)")]
+		[RegexStepDefinition(@"In The Supplier Manager popup I click on the category: (.*)")]
 		public void InTheSupplierManagerPopupIClickCategory(string category)
 		{
 			Report.UseSubSteps = true;
@@ -4735,7 +4696,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(15);
 		}
 
-		[StepDefinition(@"In The Supplier Manager popup I click on the 'Clear Cart for All Users' button")]
+		[RegexStepDefinition(@"In The Supplier Manager popup I click on the 'Clear Cart for All Users' button")]
 		public void InTheSupplierManagerPopupIClickTheClearCartForAllUsersButton()
 		{
 			Report.UseSubSteps = true;
@@ -4743,7 +4704,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new StudioSupplierManager().ClickClearCartForAllUsers(), "Failed to click the 'Clear Cart for All Users' button", "Successfully clicked the 'Clear Cart for All Users' button");
 		}
 
-		[StepDefinition(@"In The Supplier Manager popup I check that the column: (.*) contains all values found in the table:")]
+		[RegexStepDefinition(@"In The Supplier Manager popup I check that the column: (.*) contains all values found in the table:")]
 		public void InTheSupplierManagerPopupICheckThatColumnXContainsAllValues(string column, Table table)
 		{
 			Report.Info("Converting the table to a List");
@@ -4757,7 +4718,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In the supplier manager popup I check that Data Tier Consent Table contains the following columns headings:")]
+		[RegexStepDefinition(@"In the supplier manager popup I check that Data Tier Consent Table contains the following columns headings:")]
 		public void InTheSupplierManagerPopupICheckThatTheDataConsentTierTableContainsHeaders(Table table)
 		{
 			Report.Info("Converting the table to a List");
@@ -4770,39 +4731,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"In the Supplier Manager popup I check that in The Data Tier Consent Table the email column contains only valid email addresses")]
+		[RegexStepDefinition(@"In the Supplier Manager popup I check that in The Data Tier Consent Table the email column contains only valid email addresses")]
 		public void InTheSupplierManagerPopupICheckThatTheDataConsentTierTableContainsOnlyValidEmailAddress()
 		{
 			Report.IsTrue(new StudioSupplierManager().EmailColumnContainsEmailAddresses(), "The columns contained non valid email addresses", "The column contained only valid email addresses");
 
 		}
 
-		[StepDefinition(@"In the Supplier Manager popup I check that in The Data Tier Consent Table the date column contains dates that are in the format mm-dd-yyyy")]
+		[RegexStepDefinition(@"In the Supplier Manager popup I check that in The Data Tier Consent Table the date column contains dates that are in the format mm-dd-yyyy")]
 		public void InTheSupplierManagerPopupICheckThatTheDataConsentTierTableContainsOnlyDatesInFormatmmddyyyy()
 		{
 			Report.IsTrue(new StudioSupplierManager().DateColumnContainsValidmmddyyyy(), "The Date column contained at least one non valid date", "The Date column contained only valid dates");
 
 		}
 
-		[StepDefinition(@"In The Supplier Manager popup I check that the column: (.*) is in alphabetical order")]
+		[RegexStepDefinition(@"In The Supplier Manager popup I check that the column: (.*) is in alphabetical order")]
 		public void ThenInTheSupplierManagerPopupICheckThatTheColumnRetailerIsInAlphabeticalOrder(string columnName)
 		{
 			Report.IsTrue(new StudioSupplierManager().RetailsAreInAlphabeticalOrder(), "The retailers were not in alphabetical order in column: " + columnName, "The retailers were in alphabetical order in column: " + columnName);
 		}
 
-		[StepDefinition(@"In the Clear Cart for All Users Popup I confirm the correct text is displayed")]
+		[RegexStepDefinition(@"In the Clear Cart for All Users Popup I confirm the correct text is displayed")]
 		public void GivenIConfirmTheConfirmClearCartForAllUsersPopupContainsTheCorrectText()
 		{
 			Report.IsTrue(new StudioSupplierManager().CheckTextInConfirmClearCartForAllUsersPopup(), "The 'Confirm Clear Cart for All Users' Popup did not display the correct text", "The 'Confirm Clear Cart for All Users' Popup displayed the correct text");
 		}
 
-		[StepDefinition(@"In the Clear Cart for All Users Popup I click the Continue button")]
+		[RegexStepDefinition(@"In the Clear Cart for All Users Popup I click the Continue button")]
 		public void GivenInTheClearCartForAllUsersPopupIClickTheContinueButton()
 		{
 			Report.IsTrue(new StudioSupplierManager().ClickContinueInConfirmClearCartForAllUsersPopup(), "Failed to click the Continue button in 'Confirm Clear Cart for All Users' Popup", "Successfully clicked the Continue button in 'Confirm Clear Cart for All Users' Popup");
 		}
 
-		[StepDefinition(@"In the Clear Shopping Cart Popup I enter the following UserID: (.*), Password: (.*), TFS Ticket Number: (.*), Support Ticket Number: (.*) then I click Continue")]
+		[RegexStepDefinition(@"In the Clear Shopping Cart Popup I enter the following UserID: (.*), Password: (.*), TFS Ticket Number: (.*), Support Ticket Number: (.*) then I click Continue")]
 		public void GivenInTheClearShoppingCartPopupIEnterTheFollowingUserIDAPasswordATFSTicketNumberASupportTicketNumberAThenIClickContinue(string userID, string password, string tfsTicketNumber, string supportTicketNumber)
 		{
 			Report.IsTrue(new StudioSupplierManager().EnterInformationInClearShoppingCartPopup(userID, password, tfsTicketNumber, supportTicketNumber), "Failed to enter information in 'Clear Shopping Cart' Popup", "Successfully entered information in 'Clear Shopping Cart' Popup");
@@ -4810,13 +4771,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(10);
 		}
 
-		[StepDefinition(@"In the Results Clear Shopping Cart for All Users Popup I confirm the correct text is displayed")]
+		[RegexStepDefinition(@"In the Results Clear Shopping Cart for All Users Popup I confirm the correct text is displayed")]
 		public void GivenInTheResultsClearShoppingCartForAllUsersPopupIConfirmTheCorrectTextIsDisplayed()
 		{
 			Report.IsTrue(new StudioSupplierManager().CheckTextInResultsClearShoppingCartForAllUsersPopup(), "The 'Results Clear Shopping Cart for All Users' Popup did not display the correct text", "The 'Results Clear Shopping Cart for All Users' Popup displayed the correct text");
 		}
 
-		[StepDefinition(@"In the SHA manager I search for the Product saved as: (.*) and if its Status is Accepted I set the retailers: to Completed and check the Products Grid")]
+		[RegexStepDefinition(@"In the SHA manager I search for the Product saved as: (.*) and if its Status is Accepted I set the retailers: to Completed and check the Products Grid")]
 		public void InTheSHAMangerGridIFindProductAndEnsureIsCompletedIfAccepted(string productSavedAs, Table retailerTable)
 		{
 			var ProductDetails = (ProductInformation)Context.GetFromContext(productSavedAs);
@@ -4898,7 +4859,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		[StepDefinition(@"I check for the following columns in UPC Retailer and Feed")]
+		[RegexStepDefinition(@"I check for the following columns in UPC Retailer and Feed")]
 		public void ThenICheckForTheFollowingColumnsInUPCRetailerAndFeed(Table table)
 		{
 			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
@@ -4914,7 +4875,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		
-		[StepDefinition(@"I save all clients for product saved as: (.*)")]
+		[RegexStepDefinition(@"I save all clients for product saved as: (.*)")]
 		public void ThenISaveAllClientsForPrductsSavedAsTestCase(string savedAs)
 		{
 			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
@@ -4937,7 +4898,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I confirm that there is a 'U' next to the following product saved as: (.*)")]
+		[RegexStepDefinition(@"I confirm that there is a 'U' next to the following product saved as: (.*)")]
 		public void ThenIConfirmThatThereIsANextToTheFollowingProductSavedAs(string productSavedAs)
 		{
 			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
@@ -4948,7 +4909,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(studioSHAManagerObject.ConfirmUInSecondColumn(ID), "Failed to find 'U' next to product with product ID: " + ID, "Successfully found a 'U' next to product with product ID: " + ID);
 		}
 
-		[StepDefinition(@"I Close 'Supplier Manager'")]
+		[RegexStepDefinition(@"I Close 'Supplier Manager'")]
 		public void ThenICloseSupplierManager()
 		{
 			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
@@ -4956,7 +4917,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"Confirm that '(.*)' shows (.*) marked with a '(.*)'")]
+		[RegexStepDefinition(@"Confirm that '(.*)' shows (.*) marked with a '(.*)'")]
 		public void ThenConfirmThatShowsTierTierAndTierMarkedWithA(string supplier, string tiers, string marked)
 		{
 			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
@@ -4965,7 +4926,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"Select the '(.*)' Tab in Supplier Manager")]
+		[RegexStepDefinition(@"Select the '(.*)' Tab in Supplier Manager")]
 		public void ThenSelectTheTabInSupplierManager(string tabName)
 		{
 			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
@@ -4974,7 +4935,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"Select the supplier with the following name in Supplier Manager: '(.*)'")]
+		[RegexStepDefinition(@"Select the supplier with the following name in Supplier Manager: '(.*)'")]
 		public void SelectTheSupplierWithTheFollowingNameInSupplierManager(string selectedResult)
 		{
 			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
@@ -4983,7 +4944,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"Search for the supplier with the following name in Supplier Manager: '(.*)'")]
+		[RegexStepDefinition(@"Search for the supplier with the following name in Supplier Manager: '(.*)'")]
 		public void SearchForTheSupplierWithTheFollowingNameInSupplierManager(string text)
 		{
 			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
@@ -4992,14 +4953,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"I Click 'Suppliers' in SHA Manager")]
+		[RegexStepDefinition(@"I Click 'Suppliers' in SHA Manager")]
 		public void IClickSuppliersInSHAManager()
 		{
 			StudioSupplierManager studioSupplierManagerObject = new StudioSupplierManager();
 			Report.IsTrue(studioSupplierManagerObject.ClickSuppliersButton(), "Failed to click 'Suppliers' button", "Successfully clicked 'Suppliers' button");
 		}
 
-        [StepDefinition(@"I check that all clients for product saved as: (.*) have data")]
+        [RegexStepDefinition(@"I check that all clients for product saved as: (.*) have data")]
         public void ThenICheckThatAllClientsForProductSavedAsTestCaseHaveData(string savedAs)
         {
             StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
@@ -5017,49 +4978,49 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
             studioSHAManagerObject.FindDataForClientsInUPCRetailerAndFeedPage(arr);
         }
 		
-		[StepDefinition(@"In UPC Retailer and Feed I check that the following sections contain the corresponding titles:")]
+		[RegexStepDefinition(@"In UPC Retailer and Feed I check that the following sections contain the corresponding titles:")]
 		public void ThenInUPCRetailerAndFeedICheckThatTheFollowingSectionsContainTheCorrespondingTitles(Table table)
 		{
 			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
 			Report.IsTrue(studioSHAManagerObject.CheckTheFollowingSectionTitles(table), "Failed to confirm the following section titles", "Successfully confirmed the following section titles");
 		}
 
-		[StepDefinition(@"I confirm the Document Purpose Type dropdown shows: (.*)")]
+		[RegexStepDefinition(@"I confirm the Document Purpose Type dropdown shows: (.*)")]
 		public void GivenIConfirmTheDocumentPurposeTypeDropdownShowsAIS(string dropDownOption)
 		{
 			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
 			Report.IsTrue(studioSHAManagerObject.CheckTheDocumentPurposeTypeDropdown(dropDownOption), "The following option was not displayed: " + dropDownOption, "The following option was displayed: " + dropDownOption);
 		}
 
-		[StepDefinition(@"I click the first UPC in the UPC Retailer and Feed page")]
+		[RegexStepDefinition(@"I click the first UPC in the UPC Retailer and Feed page")]
 		public void GivenIClickTheFirstUPCInTheUPCRetailerAndFeedPage()
 		{
 			StudioSHAManagerUPCRetailerAndFeedPage studioSHAManagerObject = new StudioSHAManagerUPCRetailerAndFeedPage();
 			Report.IsTrue(studioSHAManagerObject.SelectFirstUPCInUPCRetailerAndFeed(), "Failed to select first UPC in UPC Retailer and Feed", "Successfully selected first UPC in UPC Retailer and Feed");
 		}
 
-		[StepDefinition(@"In UPC Details popup in UPC Retailer and Feed page I select retailer: (.*)")]
+		[RegexStepDefinition(@"In UPC Details popup in UPC Retailer and Feed page I select retailer: (.*)")]
 		public void GivenISelctRetailerFromUPCDetailsPopupInUPCRetailerAndFeedPage(string retailer)
 		{
 			StudioSHAManagerUPCRetailerAndFeedPage studioSHAManagerObject = new StudioSHAManagerUPCRetailerAndFeedPage();
 			Report.IsTrue(studioSHAManagerObject.SelectRetailerInUPCDetailsPoupInUPCRetailerAndFeed(retailer), "Failed to select retailer in UPC Details Popup", "Successfully selected retailer in UPC Details Popup");
 		}
 
-		[StepDefinition(@"In UPC Details popup in Retailer and UPC Feed page I see the following properties and values")]
+		[RegexStepDefinition(@"In UPC Details popup in Retailer and UPC Feed page I see the following properties and values")]
 		public void GivenInUPCDetailsPopupInRetailerAndUPCFeedPageISeeTheFollowingPropertiesAndValues(Table table)
 		{
 			StudioSHAManagerUPCRetailerAndFeedPage studioSHAManagerObject = new StudioSHAManagerUPCRetailerAndFeedPage();
 			Report.IsTrue(studioSHAManagerObject.InUPCDetailsPoupInUPCRetailerAndFeedISeeTheFollowingPropertiesAndValues(table).Count() == 0, "Failed to find the correct properties and values", "Successfully found the correct properties and values");
 		}
 
-		[StepDefinition(@"I close UPC Details popup in Retailer and UPC Feed page")]
+		[RegexStepDefinition(@"I close UPC Details popup in Retailer and UPC Feed page")]
 		public void GivenICloseUPCDetailsPopupInRetailerAndUPCFeedPage()
 		{
 			StudioSHAManagerUPCRetailerAndFeedPage studioSHAManagerObject = new StudioSHAManagerUPCRetailerAndFeedPage();
 			Report.IsTrue(studioSHAManagerObject.CloseUPCDetailsPoupInUPCRetailerAndFeed(), "Failed to close UPC Details popup", "Successfully closed UPC Details popup");
 		}
 
-		[StepDefinition(@"In SHA products grid, I find the first product that contains a UPC and navigate to the UPC Retailers and Feed page.")]
+		[RegexStepDefinition(@"In SHA products grid, I find the first product that contains a UPC and navigate to the UPC Retailers and Feed page.")]
 		public void SHAFindFirstUPCProductNavigateToUPCRetailersAndFeed()
 		{
 			Report.UseSubSteps = true;
@@ -5090,7 +5051,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		
 
-		[StepDefinition(@"In the UPC Retailer and Feed page, confirm that the Packing Type Name saved as: (.*) is displayed")]
+		[RegexStepDefinition(@"In the UPC Retailer and Feed page, confirm that the Packing Type Name saved as: (.*) is displayed")]
 		public void ConfirmProductNameDisplayedOnUPCRetailerAndFeedPage(string savedAs)
 		{
 			var packagingType = new MyPackagingTypes.PackagingTypeItem { Name = Context.GetFromContext("PackagingTypeName_" + savedAs).ToString() };
@@ -5099,7 +5060,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(packagingType.Name.Equals(displayedProductName), $"Expected Product Name: {packagingType.Name} is not showing. Displayed: {displayedProductName}", $"Expected Product Name: {packagingType.Name} is showing!");
 		}
 
-		[StepDefinition(@"In The SHA Products Grid, I open the product search popup, click cancel and confirm the product search popup closes")]
+		[RegexStepDefinition(@"In The SHA Products Grid, I open the product search popup, click cancel and confirm the product search popup closes")]
 		public void OpenSHAProductsGridClickCancelConfirmCloses()
 		{
 			var thisProductSearch = new StudioSHAManagerProductSearch();
@@ -5123,7 +5084,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		[StepDefinition(@"In the UPC Assessment Details Screen, I Confirm that I see the Product ID saved as: (.*)")]
+		[RegexStepDefinition(@"In the UPC Assessment Details Screen, I Confirm that I see the Product ID saved as: (.*)")]
 		public void InUPCAssessmentScreenConfrimISeeUPCSavedAs(string savedAs)
 		{
 			Report.Info("Getting saved product: " + savedAs);
@@ -5139,7 +5100,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(id == idfound, "The id found was not equal to the produc ID in context", "The Product ID's matched!");
 		}
 
-		[StepDefinition(@"I confirm the Product Data window has opened")]
+		[RegexStepDefinition(@"I confirm the Product Data window has opened")]
 		public void ConfirmProductDatawindowOpened()
 		{
 			ReadOnlyCollection<string> allHandles = SeleniumWebDriver.CurrentDriver.WindowHandles;
@@ -5167,14 +5128,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I check for the following columns in Formulation")]
+		[RegexStepDefinition(@"I check for the following columns in Formulation")]
 		public void ThenICheckForTheFollowingColumnsInFormulation(Table table)
 		{
 			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
 			Report.IsTrue(studioSHAManagerObject.FindColumnInProductDataPageWithTable(table), "Failed to find all the columns", "Successfully found all the columns");
 		}
 
-		[StepDefinition(@"In the Add New Supplier I click on Cancel button")]
+		[RegexStepDefinition(@"In the Add New Supplier I click on Cancel button")]
 		public void ThenInTheAddNewSupplierIClickOnCancelButton()
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
@@ -5185,7 +5146,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I click on New Supplier Button")]
+		[RegexStepDefinition(@"I click on New Supplier Button")]
 		public void ThenClickNewSupplierButton()
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
@@ -5196,7 +5157,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I close Supplier Manager window")]
+		[RegexStepDefinition(@"I close Supplier Manager window")]
 		public void ThenICloseSupplierManagerWindow()
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
@@ -5206,7 +5167,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(thisStudioAddNewSupplier.CloseSupplierManagerButton(), "Failed to click on Supplier Manager window button", "Succesfully clicked Supplier Manager window close button");
 			}
 		}
-		[StepDefinition(@"In SHA Manager I confirm product Id color is (.*) for product saved as: (.*)")]
+		[RegexStepDefinition(@"In SHA Manager I confirm product Id color is (.*) for product saved as: (.*)")]
 		public void ThenInSHAManagerIConfirmProductIdColorIsBlue(string color, string savedAs)
 		{
 			var product = (ProductInformation)Context.GetFromContext(savedAs);
@@ -5215,7 +5176,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Verify product id is blue");
 			Report.IsTrue(myStudioShaManager.WaitForIDToTurnBlue(id, 120), "ID has not turned blue", "ID is blue");
 		}
-		[StepDefinition(@"In SHA Manager I right click on the selected product:(.*) with option:(.*)")]
+		[RegexStepDefinition(@"In SHA Manager I right click on the selected product:(.*) with option:(.*)")]
 		public void ThenInSHAManagerIRightClickProductWithSelectedOption(string savedAs, string option)
 		{
 			var product = (ProductInformation)Context.GetFromContext(savedAs);
@@ -5226,7 +5187,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption(option);
 		}
 
-		[StepDefinition(@"I confirm (.*) column header is displayed")]
+		[RegexStepDefinition(@"I confirm (.*) column header is displayed")]
 		public void ThenInSHAManagerIRightClickProductDocumentRequest(string header)
 		{
 			var myStudioShaManager = new StudioSHAManager();
@@ -5234,7 +5195,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(headerText.Equals(header), "Failed to find header", "Succesfully found header");
 		}
 		
-		[StepDefinition(@"I Confirm that productID: (.*) and name matches with the Product selected in the SHA Manager Product List")]
+		[RegexStepDefinition(@"I Confirm that productID: (.*) and name matches with the Product selected in the SHA Manager Product List")]
 		public void IConfirmProductID_ProductnameMatchProductListGrid(string productsavedAs)
 		{
 			var product = (ProductInformation)Context.GetFromContext(productsavedAs);
@@ -5275,7 +5236,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Screenshot();
 			}
 		}
-		[StepDefinition(@"In the Review Screen I check Ascending or Decending order in the Fomulation section")]
+		[RegexStepDefinition(@"In the Review Screen I check Ascending or Decending order in the Fomulation section")]
 		public void ThenICheckAscDecInFormulationSection()
 		{
 			int i = 0;
@@ -5297,7 +5258,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					myStudioShaManager.AscDecCheck(columns[i++], "asc");
 			}			
 		}
-		[StepDefinition(@"I call shared step add 3rd Party Component in Studio: (.*) (.*)")]
+		[RegexStepDefinition(@"I call shared step add 3rd Party Component in Studio: (.*) (.*)")]
 		public void IcallSharedStepIAddThirdPartyComponent(string compName, string casIdsavedAs)
 		{
 			try

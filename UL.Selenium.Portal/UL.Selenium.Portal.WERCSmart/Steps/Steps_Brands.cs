@@ -1,10 +1,11 @@
 using System;
 using System.Linq;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.SpecFlow.Classes;
-using TechTalk.SpecFlow;
+using UL.Automation.ReqnrollHelpers.Classes;
+using Reqnroll;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using System.Collections.Generic;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.WebDriver.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -12,7 +13,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding, Scope(Tag = "Brands")]
 	class Steps_Brands
 	{
-		[StepDefinition(@"I enter the Brand Name: (.*) in the input field on the expanded row")]
+		[RegexStepDefinition(@"I enter the Brand Name: (.*) in the input field on the expanded row")]
 		public void EnterBrandNameExpandedRow(string name)
 		{
 			Report.Info("Entering '" + name + "' in the 'Product Line/ Brand Name' column in the grid");
@@ -20,7 +21,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Screenshot();
 		}
 
-		[StepDefinition(@"I confirm the 'Active' input is checked on the expanded row in the My Brands grid")]
+		[RegexStepDefinition(@"I confirm the 'Active' input is checked on the expanded row in the My Brands grid")]
 		public void ActiveIsCheckedExpandedRow()
 		{
 			Report.IsTrue(new MyBrands().ActiveIsChecked(),
@@ -28,7 +29,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The 'Active?' input box was checked for the expanded (editing) row as expected");
 		}
 
-		[StepDefinition(@"I click Save on the expanded row in the My Brands grid")]
+		[RegexStepDefinition(@"I click Save on the expanded row in the My Brands grid")]
 		public void ClickSaveMyBrandsGrid()
 		{
 			Report.IsTrue(new MyBrands().ClickSave(),
@@ -36,7 +37,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked Save in the My Brands grid");
 		}
 
-		[StepDefinition(@"I click Cancel on the expanded row in the My Brands grid")]
+		[RegexStepDefinition(@"I click Cancel on the expanded row in the My Brands grid")]
 		public void ClickCancelMyBrandsGrid()
 		{
 			Report.IsTrue(new MyBrands().ClickCancel(),
@@ -44,7 +45,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked Cancel in the My Brands grid");
 		}
 
-		[StepDefinition("I confirm a brand with name: (.*) is present in the My Brands grid")]
+		[RegexStepDefinition("I confirm a brand with name: (.*) is present in the My Brands grid")]
 		public void BrandNameExistsMyBrandsGrid(string brandName)
 		{
 			Report.Info("Fetching all brands saved in the My Brands grid");
@@ -54,7 +55,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The brand: " + brandName + " was present in the My Brands grid as expected");
 		}
 
-		[StepDefinition("I confirm that the text '(Yes|No)' is displayed under the 'Active' column for the last saved brand")]
+		[RegexStepDefinition("I confirm that the text '(Yes|No)' is displayed under the 'Active' column for the last saved brand")]
 		public void ActiveValueIsYesForLastBrand(string active)
 		{
 			//Requires Context on latest brand save
@@ -68,7 +69,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The 'Active?' text: '" + actualActive + "' matched the expected value for the last saved Brand: " + savedBrandName);
 		}
 
-		[StepDefinition(@"I confirm the last saved brand appears in the My Brands grid")]
+		[RegexStepDefinition(@"I confirm the last saved brand appears in the My Brands grid")]
 		public void SavedBrandAppearsInGrid()
 		{
 			int savedRowIndex = Convert.ToInt32(Context.GetFromContext("Saved brand row index")) + 1;
@@ -80,7 +81,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The saved brand: " + savedBrandName + " was appearing in the Brands Grid as expected");
 		}
 
-		[StepDefinition(@"I click Edit in the My Brands grid for the last saved brand")]
+		[RegexStepDefinition(@"I click Edit in the My Brands grid for the last saved brand")]
 		public void ClickEditMyBrandsGrid()
 		{
 			Report.Screenshot();
@@ -93,7 +94,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"Successfully clicked 'Edit' for the saved Brand: " + savedBrandName + " at row: " + savedRowIndex);
 		}
 
-		[StepDefinition(@"I (select|deselect) the 'Active' checkbox on the expanded row in the My Brands grid")]
+		[RegexStepDefinition(@"I (select|deselect) the 'Active' checkbox on the expanded row in the My Brands grid")]
 		public void CheckActiveCheckboxExpandedRow(string selectOrNot)
 		{
 			bool select = selectOrNot == "select";
@@ -116,7 +117,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"The 'Active?' checkbox has been successfully " + selectOrNot + "ed.");
 		}
 
-		[StepDefinition(@"I save the active brands list to context")]
+		[RegexStepDefinition(@"I save the active brands list to context")]
 		public void SaveActiveBrandsListToContext()
 		{
 			Delay.Seconds(15);

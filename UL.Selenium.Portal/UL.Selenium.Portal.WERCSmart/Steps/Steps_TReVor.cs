@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System;
-using TechTalk.SpecFlow;
+using Reqnroll;
 using TReVor.Core.Classes.Software;
 using TReVor.Integrations.Classes;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Automation.WebDriver.Extensions;
@@ -28,7 +29,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.Homepage = container.Resolve<Homepage>();
 		}
 
-		[StepDefinition(@"I update the password for the following TReVor test users:")]
+		[RegexStepDefinition(@"I update the password for the following TReVor test users:")]
 		public void UpdateThePasswordForTheFollowingTrevorTestUsers(Table users)
 		{
 			Report.UseSubSteps = true;
@@ -40,7 +41,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I update the password for all TReVor Test Users within the current branch")]
+		[RegexStepDefinition(@"I update the password for all TReVor Test Users within the current branch")]
 		public void UpdateThePasswordForAllTrevorTestUsersWithinCurrentBranch()
 		{
 			Report.UseSubSteps = true;
@@ -54,7 +55,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 		}
 
-		[StepDefinition(@"I update the password for TReVor test user: (.*) in the change user password popup")]
+		[RegexStepDefinition(@"I update the password for TReVor test user: (.*) in the change user password popup")]
 		public void UpdateThePasswordForTrevorTestUser(string alias)
 		{
 			try
