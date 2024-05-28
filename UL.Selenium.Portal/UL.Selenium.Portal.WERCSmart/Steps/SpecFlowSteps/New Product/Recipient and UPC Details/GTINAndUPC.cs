@@ -117,19 +117,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 		{
 			new Steps_Prototype().TheCheckboxWithDescriptionIsIsNotChecked(checkbox, is_isnot);
 		}
-		[StepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, click 'sample file' link to download file")]
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, click 'sample file' link to download file")]
 		public void ThenInTheU_S_DepartmentOfTransportationDOTClassificationSectionClickSampleFileLink()
 		{
 			string link = "sample file";
 			new Steps_Prototype().ClickLinkElement(link);
 		}
-		[StepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, confirm 'sample file' is downloaded and save as: (.*)")]
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, confirm 'sample file' is downloaded and save as: (.*)")]
 		public void ThenInTheU_S_DepartmentOfTransportationDOTClassificationSectionFileIsDownloaded(string savedAs)
 		{
 			string fileName = "Sample.xlsx";
 			new Steps_Prototype().ConfirmFileAppearsInDownloadsFolder(fileName, savedAs);
 		}
-		[StepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, click 'Upload File' button and upload file saved as: (.*)")]
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, click 'Upload File' button and upload file saved as: (.*)")]
 		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionClickButtonAndUploadFileSavedAs(string savedAs)
 		{
 			string button = "Upload File";
@@ -144,13 +144,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			Report.IsTrue(UploadDialog.UploadFile(excelFile), "Failed to enter file name!", "Successfully entered file name");
 
 		}
-		[StepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, confirm 'Add Multiple' modal window (should|should not) be displayed")]
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, confirm 'Add Multiple' modal window (should|should not) be displayed")]
 		public void ThenInTheU_S_DepartmentOfTransportationDOTClassificationSectionAddMultipleIsDisplayed(string condition)
 		{
 			string modalTitle = "Add Multiple";
 			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeading(condition, modalTitle);
 		}
-		[StepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, at 'Add Multiple' modal (check|uncheck) All UPCs checkbox")]
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, at 'Add Multiple' modal (check|uncheck) All UPCs checkbox")]
 		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionAtModalCheckAllUPCsCheckbox(string check_uncheck)
 		{
 			if (check_uncheck == "check")
@@ -177,27 +177,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			}
 		}
 
-		[StepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, at 'Add Multiple' modal confirm all UPCs are (selected|not selected)")]
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, at 'Add Multiple' modal confirm all UPCs are (selected|not selected)")]
 		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionConfirmAllUPCsAreSelected(string condition)
 		{
 			new StepsUPC().ICheckAllRetailersSelectedStatus(condition);
 		}
-		[StepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, at 'Add Multiple' modal select Packaging Type: (.*)")]
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, at 'Add Multiple' modal select Packaging Type: (.*)")]
 		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionAtModalSelectPackagingTypePlasticContainer(string value)
 		{
 			new StepsUPC().InTheAddMultipleDialogBoxSelectPackagingTypeX(value);
 		}
-		[StepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, at 'Add Multiple' modal click 'Next' button")]
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, at 'Add Multiple' modal click 'Next' button")]
 		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionAtModaClickNext()
 		{
 			new StepsUPC().InTheAddMultipleDialogBoxClickNext();
 		}
-		[StepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, at 'Add Multiple' modal click 'Finish' button")]
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, at 'Add Multiple' modal click 'Finish' button")]
 		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionAtModaClickFinish()
 		{
 			new StepsUPC().InTheAddMultipleDialogBoxClickFinish();
 		}
-		[StepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, at 'Add Multiple' modal (check|uncheck) retailer: (.*)")]
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, at 'Add Multiple' modal (check|uncheck) retailer: (.*)")]
 		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionAtSelectRetailerTarget(string check_uncheck, string retailer)
 		{
 			if (Report.IsTrue(new MultipleUPC().RetailerExists(retailer), $"Failed to find retailer '{retailer}'", $"Successfully found retailer '{retailer}'"))
@@ -227,7 +227,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			}
 		}
 
-		[StepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, error message (should|should not) be displayed with text: 'You have added UPCs to the registration that are already in use within your WERCSmart account. Duplicate UPCs are not permitted, as they may provide conflicting Assessment information to your retailer recipients. Please remove the instances of duplicate UPC\(s\) from the necessary registration data.'")]
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, error message (should|should not) be displayed with text: 'You have added UPCs to the registration that are already in use within your WERCSmart account. Duplicate UPCs are not permitted, as they may provide conflicting Assessment information to your retailer recipients. Please remove the instances of duplicate UPC\(s\) from the necessary registration data.'")]
 		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionErrorMessageShouldBeDisplayedWithText(string condition)
 		{
 			string alertText = "You have added UPCs to the registration that are already in use within your WERCSmart account. Duplicate UPCs are not permitted, as they may provide conflicting Assessment information to your retailer recipients. Please remove the instances of duplicate UPC(s) from the necessary registration data.";
