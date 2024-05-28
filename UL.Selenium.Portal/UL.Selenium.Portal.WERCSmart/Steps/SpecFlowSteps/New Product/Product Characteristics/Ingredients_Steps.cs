@@ -36,7 +36,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			new Steps_Prototype().CheckACheckboxWithTheFollowingText(text);
 		}
 
-		[StepDefinition(@"In the Ingredients Section, set the option in section: 'Ingredient Reference Number (Optional) to: (.*)")]
+		[StepDefinition(@"In the Ingredients Section, set the option in section: 'Ingredient Reference Number \(Optional\)' to: (.*)")]
 		public void LiquidCoreProductSelectYesOrNo(string option)
 		{
 			string section = "Ingredient Reference Number (Optional)";
@@ -296,6 +296,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(ingredientRow.CellSelectExists(columnLabel), $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column select does not exist.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column select does exist.");
 			Report.IsTrue(ingredientRow.CellSelectOptionSelect(columnLabel, optionLabel), $"Failure, to select {searchType}:'{searchText}' row '{columnLabel}' column select option '{optionLabel}'.", $"Success, selected {searchType}:'{searchText}' row '{columnLabel}' column select option '{optionLabel}'.");
 		}
+		[StepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column delete selected option (.*)")]
+		public void ThenInTheIngredientsTableRowWithComponentNameWaterInFunctionalPurposeColumnDeleteSelectedOptionAbrasive(string searchType, string searchText, string columnLabel, string optionLabel)
+		{
+			string is_isnot = "is";
+			bool expected = is_isnot == "is";
+			IngredientsTable ingredientsTable = new IngredientsTable();
+			Report.IsTrue(ingredientsTable.WaitForContainerToBeVisible(), $"Failure, ingredients table does not exist.", $"Success, ingredients table exists.");
+			Report.IsTrue(!ingredientsTable.IngredientRowList.IsNullOrEmpty(), $"Failure, ingredients table is empty.", $"Success, ingredients table is not empty.");
+			IngredientsTableRow ingredientRow = this.IngredientsRowSearchTypeGet(searchType, searchText);
+			Report.IsTrue(ingredientRow.CellSelectExists(columnLabel), $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column select does not exist.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column select does exist.");
+			if (Report.IsTrue(string.Equals(ingredientRow.CellSelectValue(columnLabel), optionLabel) == expected, $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column select option '{optionLabel}' {(expected ? "is not" : "is")} selected.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column select option '{optionLabel}' {is_isnot} selected."))
+			{
+				Report.IsTrue(ingredientRow.CellDeleteOptionSelected(columnLabel, optionLabel), $"Failure, for {searchType}:'{searchText}' row '{columnLabel}' column delete selected option '{optionLabel}'.", $"Success, for {searchType}:'{searchText}' row '{columnLabel}' column delete selected option '{optionLabel}'.");
+			}
+			else
+			{
+				Report.Success($"Option {optionLabel} was not selected for column {columnLabel}");
+			}
+		}
 
 		[StepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column select confirm (.*) option (is|is not) selected")]
 		public void IngredientsTableRowSelectConfirmOptionIsIsNotSelected(string searchType, string searchText, string columnLabel, string optionLabel, string is_isnot)
@@ -422,10 +441,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			this.IngredientsTableRowIsIsNotDisplayed(searchType, searchText, "is not");
 		}
 
-			/// Copy and paste the following tables to create the table structure as needed 
-			///| SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-			///
-			/// | SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Active Ingredient? | Public Name |
+		/// Copy and paste the following tables to create the table structure as needed 
+		///| SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+		///
+		/// | SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Active Ingredient? | Public Name |
+		///
+		///
+		/// | SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name | Ingredient Type |Functional Purpose | Certified |
 		[StepDefinition(@"In the Ingredients section, add the following ingredients:")]
 		public void IngredientsTableAddFollowingIngredients(Table inputTable)
 		{
@@ -470,6 +492,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 				{
 					Report.StartSubStep($"In the Ingredients Table row with {inputRow["SearchType"]}: {inputRow["SearchValue"]}, in 'Active Ingredient?' column set checkbox to checked");
 					this.IngredientsTableRowCheckUncheckCheckBox(inputRow["SearchType"], inputRow["SearchValue"], "Active Ingredient?", "checked");
+				}
+				if (inputRow["Functional Purpose"] != null)
+				{
+					Report.StartSubStep($"Then In the Ingredients Table row with {inputRow["SearchType"]}: {inputRow["SearchValue"]}, in 'Functional Purpose' column select option {inputRow["Ingredient Type"]}");
+					this.IngredientsTableRowSelectOptionSelect(inputRow["SearchType"], inputRow["SearchValue"], "Functional Purpose", inputRow["Functional Purpose"]);
 				}
 			}
 		}
