@@ -3,12 +3,11 @@ using System.Linq;
 using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
-
-
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {

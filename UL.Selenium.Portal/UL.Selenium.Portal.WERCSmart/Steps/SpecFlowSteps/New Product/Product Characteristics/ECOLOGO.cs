@@ -1,11 +1,6 @@
-﻿using Microsoft.SqlServer.Server;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TechTalk.SpecFlow;
+﻿using Reqnroll;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {
