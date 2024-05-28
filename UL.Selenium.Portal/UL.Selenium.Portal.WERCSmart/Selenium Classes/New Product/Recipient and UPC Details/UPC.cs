@@ -574,7 +574,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var listOfUPCNewProducts = new List<UPCNewProduct>();
 				IWebElement thisTable = this.ContainerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
 				List<KeyValuePair<int, string>> th = this.TableHeaders(thisTable); //?
-				ReadOnlyCollection<IWebElement> listOfRows = this.ContainerElement.FindElements(By.XPath(".//table[@class='table table-hover upc-table']//tbody//tr"));
+				ReadOnlyCollection<IWebElement> listOfRows = this.ContainerElement.FindElements(By.XPath(".//tbody//tr"));
 				int isCheckedIndex = th.FirstOrDefault(x => x.Value == "").Key;
 				int upcNumberIndex = th.FirstOrDefault(x => x.Value.Contains("UPC Number")).Key;
 				int containerTypeIndex = th.FirstOrDefault(x => x.Value.Contains("Container Type")).Key;
@@ -976,13 +976,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	{
 		protected override By ContainerElementLocator => By.XPath(@"//h4[@class='modal-title' and contains(text(),'Add Multiple')]/ancestor::div[@class='modal-content']");
 
-		public IWebElement SelectAllUpcsButton => ContainerElement.FindElement(By.XPath("//tr//th//input[@type='checkbox' and contains(@data-bind,'areAllRowsSelected')]"), 2);
+		public IWebElement SelectAllUpcsButton => this.ContainerElement.FindElement(By.XPath("//tr//th//input[@type='checkbox' and contains(@data-bind,'areAllRowsSelected')]"), 2);
 		public IWebElement ContainsType => ContainerElement.FindElement(By.XPath(".//select[contains(@data-bind,'packagingChanged')]"), 2);
 		public IWebElement NextButton => ContainerElement.FindElement(By.XPath("//button[@type='button' and text()='Next']"), 2);
 		public IWebElement SelectAllRetailersButton => ContainerElement.FindElement(By.XPath("//tr//th//input[@type='checkbox' and contains(@data-bind,'retailers')]"), 2);
 		public IWebElement SelectXRetailersButton => ContainerElement.FindElement(By.XPath("//tr//th//input[@type='checkbox' and contains(@data-bind,'retailers')]"), 2);
 		public IWebElement FinishButton => ContainerElement.FindElement(By.XPath("//button[@type='button' and text()='Finish']"), 2);
+		public IWebElement RetailerCheckbox(string retailer) => this.ContainerElement.FindElement(By.XPath($"//tr[td//span[text()='{retailer}']]//input"), 2);
 
+		public bool RetailerExists(string retailer)
+		{
+			return this.RetailerCheckbox(retailer) != null;
+		}
+		public bool SelectRetailer(string retailer)
+		{
+			return this.RetailerCheckbox(retailer).TryClick();
+		}
+		public bool SelectedRetailer(string retailer)
+		{
+			return this.RetailerCheckbox(retailer).Selected;
+		}
 		public bool ClickSelectAllUpcsButton()
 		{
 			return this.SelectAllUpcsButton.TryClick();
@@ -998,6 +1011,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickFinishButton()
 		{
 			return this.FinishButton.TryClick();
+		}
+		public bool AllUpcCheckboxSelected()
+		{
+			return this.SelectAllUpcsButton.Selected;
 		}
 
 		public bool CheckAllUPCsAreSelected()

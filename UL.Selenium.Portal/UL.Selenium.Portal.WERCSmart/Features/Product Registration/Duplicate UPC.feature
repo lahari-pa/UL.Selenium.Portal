@@ -119,7 +119,7 @@ Scenario: [91076] Duplicate UPC is not permitted within account - New Product re
 
 @singlerun
 @TestCase:82536
-Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
+Scenario: [82536] Soap (Bar, Liquid) for Body (RU000211) - GTIN/UPC - Verify Duplicate UPCs Cannot be Saved
 	Given I generate: 5 random UPC numbers and save them starting with: RandomUPC
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -197,23 +197,20 @@ Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 		| %RandomUPC3% | MySoap3 | 5        | 32   | 5.66               | 00EE05          | 2005            | 1115            | J0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |                         |            |                  |                  |            |              |            |          |                              |
 		| %RandomUPC4% | MySoap4 | 3        | 32   | 3.44               | 00CC03          | 2003            | 1113            | H0003           | 111-22-0003 | 100000003 | 123-1234,123-1232 |                         |            |                  |                  |            |              |            |          |                              |
 		| %RandomUPC4% | MySoap5 | 1        | 32   | 1.22               | 00AA01          | 2001            | 1111            | F0001           | 111-22-0001 | 100000001 | 123-1234,123-1230 |                         |            |                  |                  |            |              |            |          |                              |
-	Then I click the 'Upload File' button and upload the file saved as: Bulktest82536
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, click 'Upload File' button and upload file saved as: Bulktest82536
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm 'Add Multiple' modal window should be displayed
 	Then I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: UPCTable82536
-	Then In the Add Multiple dialog box I select all UPCs
-	Then I Confirm All UPCs are: Selected
-	Then In the Add Multiple dialog box I select the packaging type: <first>
-	Then I Check that the type column becomes populated with option: <first>
-	Given In the Add Multiple dialog box I click Next
-	Then In the Add Multiple dialog box I select all Retailers
-	Then I Check if all Retailers are: Selected
-	Then In the Add Multiple dialog box I select all Retailers
-	Then I Check if all Retailers are: Not Selected
-	Then In the Add Multiple dialog box I select all Retailers
-	Then I Check if all Retailers are: Selected
-	Then In the Add Multiple dialog box I click Finish
-	And I confirm that Add Multiple UPC popup disappears and the values on the new product screen are the same as the UPC Upload document saved in the Table called: UPCTable82536
-	Given I click continue
-	And I should see a list style form error with text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. UPCs:
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal check All UPCs checkbox
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal confirm all UPCs are selected
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal select Packaging Type: Plastic Container
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal click 'Next' button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal confirm all UPCs are selected
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal check retailer: Target
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal click 'Finish' button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm 'Add Multiple' modal window should not be displayed
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, error message should be displayed with text: 'You have added UPCs to the registration that are already in use within your WERCSmart account. Duplicate UPCs are not permitted, as they may provide conflicting Assessment information to your retailer recipients. Please remove the instances of duplicate UPC(s) from the necessary registration data.'
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	And I confirm that Add Multiple UPC popup disappears and the values on the new product screen are the same as the UPC Upload document saved in the Table called: UPCTable82536
 	Then I make a list of the duplicated UPCs and save it as: duplicateUPCs82536 from the table saved as: UPCTable82536
 	Then I use a list of duplicated UPCs saved as: duplicateUPCs82536 and check that they have a warning traingle next to their retailer code and save the ones that do as: warningPresentList82536
