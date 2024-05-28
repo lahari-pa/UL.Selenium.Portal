@@ -32,7 +32,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			new Steps_Prototype().CheckACheckboxWithTheFollowingText(text);
 		}
 
-		[StepDefinition(@"In the Ingredients Section, set the option in section: 'Ingredient Reference Number (Optional) to: (.*)")]
+		[StepDefinition(@"In the Ingredients Section, set the option in section: 'Ingredient Reference Number \(Optional\)' to: (.*)")]
 		public void LiquidCoreProductSelectYesOrNo(string option)
 		{
 			string section = "Ingredient Reference Number (Optional)";
@@ -398,10 +398,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			this.IngredientsTableRowIsIsNotDisplayed(searchType, searchText, "is not");
 		}
 
-			/// Copy and paste the following tables to create the table structure as needed 
-			///| SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-			///
-			/// | SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Active Ingredient? | Public Name |
+		/// Copy and paste the following tables to create the table structure as needed 
+		///| SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+		///
+		/// | SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Active Ingredient? | Public Name |
+		///
+		///
+		/// | SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name | Ingredient Type |Functional Purpose | Certified |
 		[StepDefinition(@"In the Ingredients section, add the following ingredients:")]
 		public void IngredientsTableAddFollowingIngredients(Table inputTable)
 		{
@@ -446,6 +449,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 				{
 					Report.StartSubStep($"In the Ingredients Table row with {inputRow["SearchType"]}: {inputRow["SearchValue"]}, in 'Active Ingredient?' column set checkbox to checked");
 					this.IngredientsTableRowCheckUncheckCheckBox(inputRow["SearchType"], inputRow["SearchValue"], "Active Ingredient?", "checked");
+				}
+				if (inputRow["Functional Purpose"] != null)
+				{
+					Report.StartSubStep($"Then In the Ingredients Table row with {inputRow["SearchType"]}: {inputRow["SearchValue"]}, in 'Functional Purpose' column select option {inputRow["Ingredient Type"]}");
+					this.IngredientsTableRowSelectOptionSelect(inputRow["SearchType"], inputRow["SearchValue"], "Functional Purpose", inputRow["Functional Purpose"]);
 				}
 			}
 		}

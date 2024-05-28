@@ -27,6 +27,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 @Ingredients
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:CaliforniaCleaningProductDisclosure
 
 Feature: SHA Search
 	Limited to functions which only search SHA Manager
@@ -440,7 +441,14 @@ Scenario: [193958] CA Cleaning Right-to-Know - SB 258 Target Phase 2 - Create an
 	Then in the Regulatory Documents to Provide page I click Continue
 
 	Given I call Shared Step 213796 (Physical and Chemical Properties - Applicable Only to Lip Balm (RU000246))
-	Given I call Shared Step 193979 California Cleaning Product Disclosure - Final Domestic Distributor
+	#Given I call Shared Step 193979 California Cleaning Product Disclosure - Final Domestic Distributor
+	Given I should see the California Cleaning Product Disclosure Page
+	Then In the California Cleaning Product Disclosure Section, set the radio option in section: 'Who is publicly identified on the product label as responsible for the product?': to: Final Domestic Distributor
+	Then In the California Cleaning Product Disclosure Section, set the option in section: 'Who is the Final Domestic Distributor (if any) of the product?' to: None
+	Then In the California Cleaning Product Disclosure Section, set the option in section: 'Is your identity, as the Manufacturer of this product, Confidential Business Information (CBI)?' to: No
+	Then In the California Cleaning Product Disclosure Section, set the option in section: 'Select the product's GTIN Brick Code' to: [10000740] Fresheners – Fabric
+	Then in the California Cleaning Product Disclosure page I click Continue
+
 	Given I enter WPSId: TestCase193958 in the component search box
 	Given I change the percent field to 100
 	Given for ingredient: TestCase193958 I select Public Name as: TestCase193958
