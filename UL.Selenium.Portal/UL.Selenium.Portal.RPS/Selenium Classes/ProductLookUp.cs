@@ -12,6 +12,7 @@ using UL.Selenium.Portal.RPS.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using static UL.Selenium.Portal.RPS.Selenium_Classes.RecentActivities;
 
+
 namespace UL.Selenium.Portal.RPS.Selenium_Classes
 {
     public class ProductLookUp : SeleniumBaseObject
@@ -39,7 +40,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         private IWebElement PageTitle => ContainerElement.FindElement(By.XPath(".//h2"), 2);
 
-        public List<IWebElement> ProductLookUpButtons => ContainerElement.FindElements(By.XPath(".//div[@class='col']//button[not(contains(@data-bind,'showSaveReport'))]"), 2).ToList();
+        public List<IWebElement> ProductLookUpButtons => ContainerElement.FindElements(By.XPath(".//div[@class='col']//button"), 2).ToList();
 
         private IWebElement BreadCrumbArea => ContainerElement.FindElement(By.XPath(".//div[@class='filter-breadcrumbs']"), 2);
 
@@ -1608,12 +1609,24 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             return this.MoreFiltersOptionButton.TryClick();
         }
 
+        public bool ClickSaveReportOptionButton()  
+        {
+            IWebElement SaveReportOptionButton = this.FindElement(By.XPath(".//div[@class='col']//button[contains(@data-bind,'showSaveReport')]"), 2);
+            return SaveReportOptionButton.TryClick();
+        }
+
         public void EnterCurrentPageValue(string value)
         {
             IWebElement currentPageEl = this.ProductsTableFooter.FindElement(By.XPath(".//input[@class='ui-pg-input form-control']"), 2);
             currentPageEl.ClearTextBox();
             currentPageEl.EnterText(value);
             currentPageEl.SendKeys(Keys.Enter);
+        }
+
+        public bool ClickOpenReportOptionButton()
+        {
+            IWebElement openReportOptionButton = this.FindElement(By.XPath(".//div[@class='col']//button[contains(@data-bind,'showOpenReport')]"), 2);
+            return openReportOptionButton.TryClick();
         }
 
         public bool CheckAllProductsDoesContainGivenOptionInActionsColumn(string value)
@@ -2266,8 +2279,52 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
 
         }
-        
+
+
+        public class ReportPopup : SeleniumBaseObject
+        {
+            protected override By ContainerElementLocator => By.XPath("//div[contains(@class, 'modal fade')][contains(@style,'display: block')]//div[contains(@class, 'content')]");
+
+            public bool IConfirmTheSaveReportPopupDisplaysTheFollowingTitleSaveReport(string popupTitle)
+            {
+                IWebElement headerTitle = this.FindElement(By.XPath(".//div[@class='modal fade show']//div[@class='modal-header']//h3[@data-bind='text: title']"), 2);
+                return headerTitle.Text.Trim() == popupTitle.Trim();
+            }
  
+            public bool InTheReportPopupEnterName(string text)
+            {
+                IWebElement nameField = this.FindElement(By.XPath(".//div[@class='modal fade show']//div[@class='modal-body']//div[contains(@class, 'col-sm-6')]//input[@id='reportName']"), 2);
+                return nameField.TryEnterText(text);
+            }
+
+            public bool InTheSaveReportPopupClickSaveButton()
+            {
+                IWebElement saveButton = this.FindElement(By.XPath(".//div[@class='modal fade show']//div[@class='modal-footer']//button[contains(@data-bind, 'submitReport')]"), 2); 
+                return saveButton.TryClick();
+            }
+
+            public bool InTheOpenReportPopupClickOpenButton()
+            {
+                IWebElement openButton = this.FindElement(By.XPath(".//div[@class='modal fade show']//div[@class='modal-footer']//button[contains(@data-bind, 'loadReport')]"), 2);
+                return openButton.TryClick();
+            }
+
+            public bool InTheOpenReportPopupClickISelectReport(string reportName)
+            {
+                IWebElement report = this.FindElement(By.XPath($".//div[@class='modal fade show']//div[@class='modal-body']//tr//td[contains(text(), '{reportName}')] "), 2);
+                return report.TryClick();
+            }
+
+            public bool InTheOpenReportPopupVerifyReportNameIsDisplayed(string reportName)
+            {
+                IWebElement report = this.FindElement(By.XPath($".//div[@class='modal fade show']//div[@class='modal-body']//tr//td[contains(text(), '{reportName}')] "), 2);
+                return report != null;
+            }
+
+
+        }
+
+
 
     }
 

@@ -1044,3 +1044,59 @@ Scenario Outline: [224790] 3 Panel-More Filters-DPCI- Has Any/No Value
 #    	| [#224796p]  3 Panel-More Filters pop up - Filter By Packaging Type- Has Any Value/Has No Value - Checkbox List     | RPS.CT          | Recent Activities       | No          |
 #	    | [#224796q]  3 Panel-More Filters pop up - Filter By Packaging Type- Has Any Value/Has No Value - Checkbox List     | RPS.CT          | Classification History  | No          |
 
+Scenario Outline: [224810] 3 Panel-More Filters- Has Any/No Value- Open/Save Report
+	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer> 
+	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
+	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
+	Then I confirm the page has loaded
+	Then In the recent activities Page, I click the More Filters Button
+	Then In the Product Lookup Page, The More Filters Popup is showing
+	And In the More Filters pop up, I enter value in search box in the Filter Categories column: Supplier Name
+	Then In the More Filters pop up, I confirm searched filter is displayed in Filters Panel : Supplier Name
+	Then In the More Filters pop up, I click on searched filter in Filters Panel : Supplier Name
+	Then In the More Filters pop up, I confirm the Filters Parameter panel populates with a list of Supplier Names
+	Then In the More Filters pop up, I confirm I see Search under the filter parameter heading
+	Then In the More Filters pop up, I confirm the left side of the search box, there is a dropdown box
+	Then In the More Filters pop up, I confirm default value of the dropdown box is Contains
+	Then In the More Filters pop up, I confirm in the Filter Parameter Panel Selector three options are : Contains, Start With and Is are displayed
+	Then I confirm, under the search box, has value checkbox is displayed: Has Any Value 
+	Then I confirm, under the search box, has value checkbox is displayed: Has No Value 
+    Then In the More Filters pop up, I check the checkbox with value: Has Any Value
+	Then In the More Filters pop up, I confirm Search Control Panel is greyed out and disabled 
+	Then In the product lookup page More Filters Popup, I Click the the Apply Filter Button
+	Then I confirm the page has refreshed
+	Then I confirm that the recent activities page bread crumb area contains the label: Has Any Value
+	Then I confirm that the Product Lookup page buttons to the right of the search box are as follows:
+		| Buttons        |
+		| More Filters   |
+		| Reset          |
+		| Select Columns |
+		| Export         |
+		| Open Report    |
+		| Save Report    |
+	 Then In the product lookup page, I click the Save Report Button
+	 Then I confirm the Report popup displays the following title: Save Report
+	 Then In Save Report popup I Enter Name: auomationtest in Name field
+	 Then In Save Report popup, I click Save button
+	 Then In the Product Lookup Page, The Report Popup is not showing
+	 Then I confirm that the recent activities page bread crumb area contains the label: Has Any Value
+	 Then In the product lookup Page, In the Products table I click the Reset Button
+	 Then I confirm the page has refreshed
+	 Then I confirm that the recent activities page bread crumb area does not contain the label: Has Any Value
+	 Then In the product lookup page, I click the Open Report Button
+	 Then I confirm the Report popup displays the following title: Open Report
+	 Then In Open Report popup, Report:auomationtest is displayed 
+	 Then In Open Report popup, I Select Report:auomationtest
+	 Then In Open Report popup, I click Open button
+	 Then In the Product Lookup Page, The Report Popup is not showing
+	 Then I confirm the page has refreshed
+	 Then I confirm that the recent activities page bread crumb area contains the label: Has Any Value
+
+	Examples:
+		| Scenario Name                                                            | Retailer           | Page                    | IsWebviewer |
+ 		| [#224810a]  3 Panel-More Filters- Has Any/No Value- Open/Save Report     | RPS.TG          | Product Lookup          | No          |
+ 		| [#224810b]  3 Panel-More Filters- Has Any/No Value- Open/Save Report     | RPS.SF          | Product Lookup          | No          |
+ 		| [#224810c]  3 Panel-More Filters- Has Any/No Value- Open/Save Report     | RPS.CT          | Product Lookup          | No          |
+		| [#224810d]  3 Panel-More Filters- Has Any/No Value- Open/Save Report     | RPS.CV          | Product Lookup          | No          |
+ 		| [#224810e]  3 Panel-More Filters- Has Any/No Value- Open/Save Report     | RPS.LW          | Product Lookup          | No          |
+		 

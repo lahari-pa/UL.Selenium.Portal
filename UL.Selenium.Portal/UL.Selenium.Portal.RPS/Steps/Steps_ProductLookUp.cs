@@ -7,8 +7,8 @@ using UL.Selenium.Portal.RPS.Selenium_Classes;
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
-using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Classes;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using GeneralUtilities = UL.Selenium.Portal.RPS.Classes.GeneralUtilities;
 
 namespace UL.Selenium.Portal.RPS.Steps
@@ -937,9 +937,62 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-         
+        [RegexStepDefinition(@"In the product lookup page, I click the Save Report Button")]
+        public void GivenInTheProductLookupPageIClickTheSaveReportButton()
+        {
+            Report.IsTrue(new ProductLookUp().ClickSaveReportOptionButton(), "Failed to click the Save Report button", "Successfully clicked the Save Report button");
+        }
 
-        
+        [RegexStepDefinition(@"I confirm the Report popup displays the following title: (.*)")]
+        public void ThenIConfirmTheSaveReportPopupDisplaysTheFollowingTitleSaveReport(string reportTitle)
+        {
+            Report.IsTrue(new ProductLookUp.ReportPopup().IConfirmTheSaveReportPopupDisplaysTheFollowingTitleSaveReport(reportTitle), $"Failed to find the following title in the Save Report popup: " + reportTitle, $"Successfully found the following title in the Save Report popup: " + reportTitle);
+        }
+
+        [RegexStepDefinition(@"In Save Report popup I Enter Name: (.*) in Name field")]
+        public void InTheSaveReportPopupEnterName(string text)
+        {
+            Report.IsTrue(new ProductLookUp.ReportPopup().InTheReportPopupEnterName(text), "Failed to enter name in save report popup", $"Successfully entered name in save report popup");
+        }
+
+        [RegexStepDefinition(@"In Save Report popup, I click Save button")]
+        public void InTheSaveReportPopupIClickSaveButton()
+        {
+            Report.IsTrue(new ProductLookUp.ReportPopup().InTheSaveReportPopupClickSaveButton(), $"Failed to click Save Button in Save Report Popup" , "Successfully clicked Save Button in Save Report Popup");
+        }
+
+        [RegexStepDefinition(@"In the Product Lookup Page, The Report Popup is not showing")]
+        public void InTheProductLookupPageSaveReportPopupIsNotShowing()
+        {
+            Report.IsTrue(new ProductLookUp.ReportPopup().WaitForContainerToBeInvisible(), "The More filters popup was showing", "The More filters popup was not showing");
+        }
+
+        [RegexStepDefinition(@"In the product lookup page, I click the Open Report Button")]
+        public void GivenInTheProductLookupPageIClickTheOpenReportButton()
+        {
+            Report.IsTrue(new ProductLookUp().ClickOpenReportOptionButton(), "Failed to click the Open Report button", "Successfully clicked the Open Report button");
+        }
+
+        [RegexStepDefinition(@"In Open Report popup, I click Open button")]
+        public void InTheOpenReportPopupIClickOpenButton()
+        {
+            Report.IsTrue(new ProductLookUp.ReportPopup().InTheOpenReportPopupClickOpenButton(), $"Failed to click Open Button in Open Report Popup", "Successfully clicked Open Button in Open Report Popup");
+        }
+
+        [RegexStepDefinition(@"In Open Report popup, I Select Report:(.*)")]
+        public void InTheOpenReportPopupISelecReport(string reportName)
+        {
+            Report.IsTrue(new ProductLookUp.ReportPopup().InTheOpenReportPopupClickISelectReport(reportName), $"Failed to Select Report in Open Report Popup", "Successfully Selected Report  in Open Report Popup");
+        }
+
+        [RegexStepDefinition(@"In Open Report popup, Report:(.*) is displayed")]
+        public void InTheOpenReportPopupVerifyReportNameIsDisplayed(string reportName)
+        {
+            Report.IsTrue(new ProductLookUp.ReportPopup().InTheOpenReportPopupVerifyReportNameIsDisplayed(reportName), $"Failed to display Report in Open Report Popup", "Successfully displayed Report  in Open Report Popup");
+        }
+
+
+
     }
 
 }

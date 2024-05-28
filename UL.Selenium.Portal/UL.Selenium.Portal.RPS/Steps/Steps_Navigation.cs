@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Reqnroll;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.RPS.Classes;
 using UL.Selenium.Portal.RPS.Selenium_Classes;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.TReVor.Classes;
 
 namespace UL.Selenium.Portal.RPS.Steps
