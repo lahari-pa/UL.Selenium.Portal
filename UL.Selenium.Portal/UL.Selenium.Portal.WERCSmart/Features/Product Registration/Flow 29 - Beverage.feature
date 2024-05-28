@@ -143,11 +143,11 @@ Scenario: [60695] Juice and Juice Drinks - RU001413
 		| Retailer |
 		| Autozone |
 	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
-	Given I should see the Retailer Page
-	Then In the Retailer Section, click 'Add Retailers' button
-	Then In the Select Retailers window, select retailer: Walgreens
-	Then In the Select Retailers window, click 'Done' button
-	Then in the Retailer page I click Continue
+	Then I should be on the Retailer Page
+	And In the Retailer Section, click 'Add Retailers' button
+	And In the Select Retailers window, select retailer: Walgreens
+	And In the Select Retailers window, click 'Done' button
+	Then in the Retailer page, I click Continue
 
 	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60695, container type: Plastic Container and size: 3.5
 	Then I should see the Additional Documents to Provide Page
@@ -167,7 +167,10 @@ Scenario: [60695] Juice and Juice Drinks - RU001413
 Scenario: [73085] Wine - RU001418 - Walgreens and No Retailer only for Retailers
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alcoholic Beverages - Wine
 	Then I save the product information as: TestCase73085
 	Given I call Shared Step 59922 (Product Information - Private Label or Brand only)
@@ -206,7 +209,10 @@ Scenario: [73085] Wine - RU001418 - Walgreens and No Retailer only for Retailers
 Scenario: [144468] Alcoholic Beverages - Beer - RU001417 - Complete Flow Check, With DOT Exception
 
 Given I log in with the account saved in TReVor as: ProductAccount
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I click the Add Product icon in the Navigation Pane
+Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Given in the New Product page I click Continue
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alcoholic Beverages - Beer
 Then I save the product information as: TestCase144468
 Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in

@@ -30,8 +30,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			Report.IsTrue(new NewProduct().ClickAddUpcButton(), "Failed to click the 'Add' button!", "Successfully clicked the 'Add' button");
 		}
 
-		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Provide the product's UPC\(s\)- including container type and size \(ounces\)' enter UPC Number: (.*) enter Size: (.*) enter Container Type: (.*) and enter Quantity: (.*)")]
-		public void EnterUPCInformation(string upc, string size, string containerType, string quantity)
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Provide the product's UPC\(s\)- including container type and size \(ounces\)' enter UPC Number: (.*) enter Size: (.*) and enter Container Type: (.*)")]
+		public void EnterUPCInformation(string upc, string size, string containerType)
 		{
 
 			if (upc.ToLower().Contains("saved as"))
@@ -55,15 +55,49 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 					ContainerType = containerType,
 					Size = size,
 					UpcNumber = upc,
-					Quantity=quantity,
 			};
 
-		
 			var NP = new NewProduct();
 				NP.WaitForContainerToBeVisible(30);
 				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
 					"Successfully inputted UPC information!");
 		}
+
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Provide the product's UPC\(s\)- including container type and size \(ounces\)' enter UPC Number: (.*) enter Size: (.*) enter Container Type: (.*) and enter Quantity: (.*)")]
+		public void EnterUPCInformationWithQuantity(string upc, string size, string containerType, string quantity)
+		{
+
+			if (upc.ToLower().Contains("saved as"))
+			{
+				try
+				{
+					string savedUPC = Context
+						.GetFromContext(upc.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+						.ToString();
+					upc = savedUPC;
+				}
+				catch (Exception e)
+				{
+					Report.Info("Failed to find saved item in context: " + upc.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
+					throw;
+				}
+
+			}
+
+			var upcInfo = new UpcInformation {
+				ContainerType = containerType,
+				Size = size,
+				UpcNumber = upc,
+				Quantity = quantity,
+			};
+
+
+			var NP = new NewProduct();
+			NP.WaitForContainerToBeVisible(30);
+			Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
+				"Successfully inputted UPC information!");
+		}
+
 		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, verify retailer '(.*)' (is|is not) present under the 'Destination Retailers' column")]
 		public void RetailerUnderDestinationRetailers(string retailer, string is_isnot)
 		{
@@ -81,6 +115,38 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 		public void ThenInTheU_S_DepartmentOfTransportationDOTClassificationSectionUnderTransportationColumnTheCheckboxDOTIsChecked(string checkbox, string is_isnot)
 		{
 			new Steps_Prototype().TheCheckboxWithDescriptionIsIsNotChecked(checkbox, is_isnot);
+		}
+
+		// table format bellow 
+		//|Container Type|
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, the following container types (should|should not) be displayed from the drop down list:")]
+		public void GivenIShouldSeeContainerTypeFromTheDropDownList(string shouldOrNot, Table table)
+		{
+			List<string> containerTypes = new NewProduct().GetContainerOptions();
+			if (shouldOrNot == "should")
+			{
+				foreach (TableRow Row in table.Rows)
+				{
+					Report.IsTrue(containerTypes.Contains(Row["Container Type"]), "Container type was not found", "Container Type was found on the upc page as expected");
+				}
+			}
+			else if (shouldOrNot == "should not")
+			{
+				foreach (TableRow Row in table.Rows)
+				{
+					Report.IsTrue(!containerTypes.Contains(Row["Container Type"]), "Container type was found", "Container Type was not found on the upc page as expected");
+				}
+			}
+			else
+			{
+				Report.Failure("input values must be either 'should' or 'should not'");
+			}
+		}
+
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, an error message (should|should not) be displayed")]
+		public void ConfirmNoErrorMessagesOnUPCPage(string condition)
+		{
+			new Steps_Prototype().NoErrorMessages(condition); 
 		}
 	}
 }

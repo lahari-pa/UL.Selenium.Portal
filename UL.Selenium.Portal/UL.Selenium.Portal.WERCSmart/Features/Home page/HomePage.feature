@@ -308,7 +308,8 @@ Scenario: [66336] Main Menu - collapsed
 
 @TestCase:73791
 Scenario: [73791] My Products grid - Retailers Column Alphabetical Order
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I filter the products by: Accepted by Retailers
 	And I check for all items in the grid that the retailers are alphabetically listed

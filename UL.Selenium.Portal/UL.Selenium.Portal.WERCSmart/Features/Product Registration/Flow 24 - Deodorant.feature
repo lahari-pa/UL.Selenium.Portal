@@ -74,12 +74,12 @@ Scenario: [60617] Deodorant - Non-Aerosol - RU000760(Liquid)
 	Then MVOC (microbial volatile organic compound) content as weight percentage of the total formulation should not be showing the error messages: This is a required field.
 	Then I should see the Volatile Organic Compound Summary Page
 	And in the New Product page I click Continue
-	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples
-	Given I should see the Retailer Page
-	Then In the Retailer Section, click 'Add Retailers' button
-	Then In the Select Retailers window, select retailer: Staples
-	Then In the Select Retailers window, click 'Done' button
-	Then in the Retailer page I click Continue
+#	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples
+	Then I should be on the Retailer Page
+	And In the Retailer Section, click 'Add Retailers' button
+	And In the Select Retailers window, select retailer: Staples
+	And In the Select Retailers window, click 'Done' button
+	Then in the Retailer page, I click Continue
 
 	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60617, container type: Cardboard and size: 14
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
@@ -205,12 +205,12 @@ Scenario: [60619] Deodorant - Aerosol - RU000758
 	Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
 	Given I call Shared Step 60631 (VOC - HVOC and MVOC - add values - Continue - Happy Path)
 	Given I click continue
-	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples
-	Given I should see the Retailer Page
-	Then In the Retailer Section, click 'Add Retailers' button
-	Then In the Select Retailers window, select retailer: Staples
-	Then In the Select Retailers window, click 'Done' button
-	Then in the Retailer page I click Continue
+#	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples
+	Then I should be on the Retailer Page
+	And In the Retailer Section, click 'Add Retailers' button
+	And In the Select Retailers window, select retailer: Staples
+	And In the Select Retailers window, click 'Done' button
+	Then in the Retailer page, I click Continue
 
 	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60619, container type: Aerosol Can and size: 33
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)

@@ -29,7 +29,8 @@ Background:
 @TestCase:79428
 Scenario: [79428] Create a 3rd party product - with Tier 2 approval (include generic component)- thru to Completed (includes adding WPSxxxxxx component)
 	Given I generate a random UPC number and save as: UPC79428
-	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Raw Material
 	Then I save the product information as: TestCase79428
@@ -111,7 +112,8 @@ Scenario: [79428] Create a 3rd party product - with Tier 2 approval (include gen
 @TestCase:80768
 Scenario: [80768] Create a 3rd party product - with Tier 2 declined (no generic component) - thru to Completed (includes adding WPSxxxxxx component)
 	Given I generate a random UPC number and save as: UPC80768
-	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Raw Material
 	Then I save the product information as: TestCase80768
@@ -180,7 +182,8 @@ Scenario: [80768] Create a 3rd party product - with Tier 2 declined (no generic 
 @TestCase:80763
 Scenario: [80763] Create a 3rd party product - with Tier 2 declined (include generic component) - thru to Completed (includes adding WPSxxxxxx component)
 	Given I generate a random UPC number and save as: UPC80763
-	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Raw Material
 	Then I save the product information as: TestCase80763
@@ -256,7 +259,8 @@ Scenario: [80763] Create a 3rd party product - with Tier 2 declined (include gen
 @TestCase:80821
 Scenario: [80821] Create a 3rd party product - with Tier 2 approval Specific components for Transparency ratio testing
 	Given I generate a random UPC number and save as: UPC80821
-	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Raw material
 	Then I save the product information as: TestCase80821

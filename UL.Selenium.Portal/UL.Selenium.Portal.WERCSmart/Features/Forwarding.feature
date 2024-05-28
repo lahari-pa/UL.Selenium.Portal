@@ -31,7 +31,8 @@ Background:
 Scenario: [86003] Forward Product - US Only - PL = No, Packaging type not required/shown
 	Given I create a product and force it to completed using Test Case 75335 Using SHA Account: SHAQAAuto11 and save as: ProductSetup86003
 	Given I navigate to the landing page
-	Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I filter the products by: Accepted by Retailers
 	Given I search for the product saved as: ProductSetup86003
 	And I Confirm the Products shown display the Green Colour Status - which is the Accepted by Retailers

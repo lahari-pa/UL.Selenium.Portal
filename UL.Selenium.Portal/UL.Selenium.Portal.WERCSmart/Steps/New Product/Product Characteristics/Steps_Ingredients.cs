@@ -1,3 +1,4 @@
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -1030,6 +1031,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var selectedOptionsStr = new List<string>();
 			foreach (TableRow row in table.Rows)
 			{
+				
 				if (Report.IsTrue(new Ingredients().ISelectFunctionalPurpose(ingredientName, row["Functional Purpose"], "ComponentName"), "Failed to Select The Functional Purpose:" + row["Functional Purpose"], "Successfully selected the Functional purpose" + row["Functional Purpose"]))
 				{
 					selectedOptionsStr.Add(row["Functional Purpose"]);

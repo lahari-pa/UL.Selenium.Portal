@@ -28,7 +28,10 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 @Ingredients
+@StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
 
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 Feature: Single Retailer Subscription
 
 @TestCase:200502
@@ -370,7 +373,11 @@ Then I click the Home icon in the Navigation Pane
 Scenario: [181949] Single Retailer Checkbox and Hover message
 
 Given I log in with the account saved in TReVor as: SingleRetailerAccount
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 Then I save the product information as: TestCase181949
 #Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
@@ -399,7 +406,12 @@ Given I should see the Ingredients Page
 	| component name | Water       | 100     |                     |               |             |
 	Then in the Ingredients page I click Continue
 
-Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I should be on the Inventory Status, Prop 65 (US) Page
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+
 Then I should see the Retailer Page
 Then I confirm if the single retailer checkbox is displayed on the retailer page
 Then I confirm the message on retailers page : Single-Retailer subscription permits the registration to be part of an annual subscription that permits only one (1) active retailer + "No Retailer" to be associated to a product registration. The Single-Retailer registration is not permitted to have more than ten (10) active GTIN/UPCs associated. Single-Retailer subscription is a discounted annual rate. You may convert, at a future time, the registration to a Tiered Subscription (formula, enhanced, article) and your annual amount will be pro-rated.
@@ -410,7 +422,11 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 Scenario: [182705] Single Retailer Checkbox - Not Visible in Battery Flow 
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alkaline Battery
 Then I save the product information as: TestCase182705
 #Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
@@ -443,8 +459,12 @@ Scenario: [182824] Single Retailer - UPC Screen and Retailer Screen Checks
 
 Given I log in with the account saved in TReVor as: SingleRetailerAccount
 Then The home screen should load
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
+	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 Given I generate a random UPC number and save as: UPC182824
 Given I generate a random UPC number and save as: UPC1828241
 Given I generate a random UPC number and save as: UPC1828242
@@ -483,7 +503,13 @@ Given I should see the Ingredients Page
 	| component name | Water       | 100     |                     |               |             |
 	Then in the Ingredients page I click Continue
 
-Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I should be on the Inventory Status, Prop 65 (US) Page
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+
+
 Then I call Shared Step 183893 (Single Retailer - Retailer Screen - Select retailer)
 | Retailer |
 | Amazon   |
