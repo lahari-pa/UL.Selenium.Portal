@@ -583,12 +583,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				int warningIsPresentIndex = th.FirstOrDefault(x => x.Value.Contains("Destination Retailers")).Key;
 				foreach (IWebElement thisRow in listOfRows)
 				{
-					bool isChecked = thisRow.FindElement(By.XPath(".//td[" + isCheckedIndex.ToString() + "]//input"), 2).Selected;
-					string upcNumber = thisRow.FindElement(By.XPath(".//td[" + upcNumberIndex.ToString() + "]/span[contains(@data-bind,'upc')]"), 2).Text;
-					string containerType = thisRow.FindElement(By.XPath(".//td[" + upcNumberIndex.ToString() + "]/span[contains(@data-bind,'type')]"), 2).Text;
-					string size = thisRow.FindElement(By.XPath(".//td[" + upcNumberIndex.ToString() + "]/span[contains(@data-bind,'size')]"), 2).Text;
-					string retailer = thisRow.FindElement(By.XPath(".//td[" + retailerIndex.ToString() + "]//span[@data-bind='text: identifier']"), 2).Text;
-					bool warningIsPresent = thisRow.FindElement(By.XPath(".//td[" + warningIsPresentIndex.ToString() + "]//i[@title='This GTIN/UPC is duplicated.']"), 2).Displayed;
+					bool isChecked = thisRow.FindElement(By.XPath($".//td[{isCheckedIndex.ToString()}]//input"), 2).Selected;
+					string upcNumber = thisRow.FindElement(By.XPath($".//td[{upcNumberIndex.ToString()}]/span[contains(@data-bind,'upc')]"), 2).Text;
+					string containerType = thisRow.FindElement(By.XPath($".//td[{upcNumberIndex.ToString()}]/span[contains(@data-bind,'type')]"), 2).Text;
+					string size = thisRow.FindElement(By.XPath($".//td[{upcNumberIndex.ToString()}]/span[contains(@data-bind,'size')]"), 2).Text;
+					string retailer = thisRow.FindElement(By.XPath($".//td[{retailerIndex.ToString()}]//span[@data-bind='text: identifier']"), 2).Text;
+					bool warningIsPresent = thisRow.FindElement(By.XPath($".//td[{warningIsPresentIndex.ToString()}]//i[@title='This GTIN/UPC is duplicated.']"), 2).Displayed;
 					listOfUPCNewProducts.Add(new UPCNewProduct() { IsChecked = isChecked, UpcNumber = upcNumber, ContainerType = containerType, Size = size, Retailer = retailer, WarningIsPresent = warningIsPresent });
 				}
 				return listOfUPCNewProducts;
