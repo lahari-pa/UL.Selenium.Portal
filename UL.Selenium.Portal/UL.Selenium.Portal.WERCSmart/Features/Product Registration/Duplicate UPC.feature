@@ -211,18 +211,16 @@ Scenario: [82536] Soap (Bar, Liquid) for Body (RU000211) - GTIN/UPC - Verify Dup
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, error message should be displayed with text: 'You have added UPCs to the registration that are already in use within your WERCSmart account. Duplicate UPCs are not permitted, as they may provide conflicting Assessment information to your retailer recipients. Please remove the instances of duplicate UPC(s) from the necessary registration data.'
 	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
 	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
-	And I confirm that Add Multiple UPC popup disappears and the values on the new product screen are the same as the UPC Upload document saved in the Table called: UPCTable82536
-	Then I make a list of the duplicated UPCs and save it as: duplicateUPCs82536 from the table saved as: UPCTable82536
-	Then I use a list of duplicated UPCs saved as: duplicateUPCs82536 and check that they have a warning traingle next to their retailer code and save the ones that do as: warningPresentList82536
-	Then Using the Hashtable of duplicate UPCs saved as: warningPresentList82536 I select the UPCS
-	Then I Click Delete Rows
-	Then I Check the Delete Rows Warning Popup: appears
-	Then I Click Ok in the Delete Rows Warning Popup
-	Then I Check the Delete Rows Warning Popup: disappears
-	Then I Check all Duplicate UPCs saved as: warningPresentList82536 are no longer shown
-	Then I click Continue and should not see an error message
-	And I navigate to the home page
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm the values on the new product screen are the same as the UPC Upload document saved in the Table called: UPCTable82536
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm UPC number saved as RandomUPC4 is duplicated and Warning Icons are displayed
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, check all UPCs with number: RandomUPC4
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, click 'Delete Rows' button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm Warning modal window should be displayed
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, in Warning modal window click 'Ok' button
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	Given I should see the Regulatory Documents to Provide Page
 	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase82536
+
 
 		
 

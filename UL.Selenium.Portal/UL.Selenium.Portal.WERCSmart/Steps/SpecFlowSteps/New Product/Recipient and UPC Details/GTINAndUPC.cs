@@ -9,6 +9,7 @@ using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.Utilities.Functions;
 using UL.Automation.WebDriver.Functions;
+using UL.Selenium.Portal.RPS.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
@@ -232,6 +233,121 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 		{
 			string alertText = "You have added UPCs to the registration that are already in use within your WERCSmart account. Duplicate UPCs are not permitted, as they may provide conflicting Assessment information to your retailer recipients. Please remove the instances of duplicate UPC(s) from the necessary registration data.";
 			new Steps_Prototype().AlertMessageDisplayed(condition, alertText);
+		}
+
+		[RegexStepDefinition("In the Global Trade Item Number \\(GTIN\\) / Universal Product Code \\(UPC\\) Section, confirm the values on the new product screen are the same as the UPC Upload document saved in the Table called: (.*)")]
+		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionConfirmTheValuesOnTheNewProductScreenAreTheSameAsTheUPCUploadDocumentSavedInTheTableCalledUPCTable(string tableSavedAs)
+		{
+			Report.StartStep("I confirm the UPC numbers and sizes are the same as the upload document");
+			var listDisplayedUPCs = new UPC().UPCsNewProduct;
+			if (Context.Contains(tableSavedAs))
+			{
+				var tableContent = (Table)Context.GetFromContext(tableSavedAs);
+				int i = 0;
+
+				bool successIsTrue = true;
+				foreach (var row in tableContent.Rows)
+				{
+					var upcNumber = row["UPC"];
+
+					var size = row["Size"];
+
+					var displayedSize = listDisplayedUPCs[i].Size;
+
+					upcNumber = Context.GetFromContextRegex(upcNumber)?.ToString() ?? upcNumber;
+
+					var displayedUpcNumber = listDisplayedUPCs[i].UpcNumber;
+
+					if (displayedUpcNumber != upcNumber)
+					{
+						Report.Failure($"The Value for UPC number did not match. The displayed value was: {displayedUpcNumber}. The UPC number in the document was: {upcNumber}.");
+						successIsTrue = false;
+					}
+					if (displayedSize != size)
+					{
+						Report.Failure($"The Value for size did not match. The displayed value was: {displayedSize}. The Size in the document was: {size}.");
+						successIsTrue = false;
+					}
+					i++;
+				}
+				Report.IsTrue(successIsTrue, "Not all Values matched the UPC upload document", "All Values matched the UPC upload document");
+				return;
+			}
+
+			Report.Failure($"The table {tableSavedAs} was not found in context");
+		}
+
+		[RegexStepDefinition("In the Global Trade Item Number \\(GTIN\\) / Universal Product Code \\(UPC\\) Section, confirm Warning Icon (is|is not) displayed for UPC: (.*)")]
+		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionConfirmWarningIconIsIsNotDisplayedForUPCRandomUPC(string is_isnot, string upcNumber)
+		{
+			upcNumber = (string)Context.GetFromContext(upcNumber);
+
+			bool expected = is_isnot == "is";
+			if (Report.IsTrue(new GTIN_UPC_TableRow(upcNumber) != null, $"Failure, row with '{upcNumber}' does not exist.", $"Success, row with '{upcNumber}' exists."))
+			{
+				Report.IsTrue(new GTIN_UPC_TableRow(upcNumber).WarningIconExists() == expected, $"Failure, Warning Icon {(expected ? "is not" : "is")} displayed.", $"Success, Warning Icon {is_isnot} displayed.");
+			}
+		}
+		[RegexStepDefinition("In the Global Trade Item Number \\(GTIN\\) / Universal Product Code \\(UPC\\) Section, (check|uncheck) checkbox for UPC: (.*)")]
+		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionSelectCheckboxForUPCRandomUPC(string check_uncheck, string upcNumber)
+		{
+			upcNumber = (string)Context.GetFromContext(upcNumber);
+			if (check_uncheck == "check")
+			{
+				if (!new GTIN_UPC_TableRow(upcNumber).CheckboxSelected())
+				{
+					Report.IsTrue(new GTIN_UPC_TableRow(upcNumber).ClickCheckbox(), $"Failed to check UPC '{upcNumber}'", $"Successfully checked UPC '{upcNumber}'");
+				}
+				else
+				{
+					Report.Success($"UPC '{upcNumber}' is already selected");
+				}
+			}
+			else
+			{
+				if (new GTIN_UPC_TableRow(upcNumber).CheckboxSelected())
+				{
+					Report.IsTrue(new GTIN_UPC_TableRow(upcNumber).ClickCheckbox(), $"Failed to uncheck UPC '{upcNumber}'", $"Successfully unchecked UPC '{upcNumber}'");
+				}
+				else
+				{
+					Report.Success($"UPC '{upcNumber}' is already deselected");
+				}
+			}
+		}
+		[RegexStepDefinition("In the Global Trade Item Number \\(GTIN\\) / Universal Product Code \\(UPC\\) Section, confirm UPC number saved as (.*) is duplicated and Warning Icons are displayed")]
+		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionConfirmUPCNumberSavedAsRandomUPCIsDuplicatedAndWarningIconsAreDisplayed(string upcNumber)
+		{
+			upcNumber = (string)Context.GetFromContext(upcNumber);
+			List<string> expectedDuplicatedUPCs = new List<string>();
+			expectedDuplicatedUPCs.Add(upcNumber);
+			expectedDuplicatedUPCs.Add(upcNumber);
+			Report.IsTrue(Enumerable.SequenceEqual(new GTIN_UPC_Table().DuplicatedUPCs(), expectedDuplicatedUPCs), $"Faild to confirm UPC {upcNumber} is duplicated", $"Successfully confirmed UPC {upcNumber} is duplicated");
+		}
+		[RegexStepDefinition("In the Global Trade Item Number \\(GTIN\\) / Universal Product Code \\(UPC\\) Section, check all UPCs with number: (.*)")]
+		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionCheckAllUPCsWithNumberRandomUPC(string upcNumber)
+		{
+			upcNumber = (string)Context.GetFromContext(upcNumber);
+			Report.IsTrue(new GTIN_UPC_Table().CheckAllUpcWithNumber(upcNumber), $"Faild to select all UPCs with number {upcNumber}", $"Successfully selected all UPCs with number {upcNumber}");
+		}
+		[RegexStepDefinition("In the Global Trade Item Number \\(GTIN\\) / Universal Product Code \\(UPC\\) Section, click 'Delete Rows' button")]
+		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionClickButton()
+		{
+			new StepsUPC().IClickDeleteRows();
+		}
+		[RegexStepDefinition("In the Global Trade Item Number \\(GTIN\\) / Universal Product Code \\(UPC\\) Section, confirm Warning modal window (should|should not) be displayed")]
+		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionConfirmWarningModalWindowIsDisplayed(string condition)
+		{
+			string title = "Warning!";
+			string text = "You are about to delete 2 UPC's.\r\nDo you want to proceed?";
+			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeadingAndText(condition, title, text);
+		}
+		[RegexStepDefinition("In the Global Trade Item Number \\(GTIN\\) / Universal Product Code \\(UPC\\) Section, in Warning modal window click 'Ok' button")]
+		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionInWarningModalWindowClickButton()
+		{
+			string title = "Warning!";
+			string button = "Ok";
+			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(title, button);
 		}
 
 
