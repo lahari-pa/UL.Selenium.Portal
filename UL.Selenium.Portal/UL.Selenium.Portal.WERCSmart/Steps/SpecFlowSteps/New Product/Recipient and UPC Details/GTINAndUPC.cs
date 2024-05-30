@@ -118,6 +118,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 		{
 			new Steps_Prototype().TheCheckboxWithDescriptionIsIsNotChecked(checkbox, is_isnot);
 		}
+
+		// table format bellow 
+		//|Container Type|
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, the following container types (should|should not) be displayed from the drop down list:")]
+		public void GivenIShouldSeeContainerTypeFromTheDropDownList(string shouldOrNot, Table table)
+		{
+			List<string> containerTypes = new NewProduct().GetContainerOptions();
+			if (shouldOrNot == "should")
+			{
+				foreach (TableRow Row in table.Rows)
+				{
+					Report.IsTrue(containerTypes.Contains(Row["Container Type"]), "Container type was not found", "Container Type was found on the upc page as expected");
+				}
+			}
+			else if (shouldOrNot == "should not")
+			{
+				foreach (TableRow Row in table.Rows)
+				{
+					Report.IsTrue(!containerTypes.Contains(Row["Container Type"]), "Container type was found", "Container Type was not found on the upc page as expected");
+				}
+			}
+			else
+			{
+				Report.Failure("input values must be either 'should' or 'should not'");
+			}
+		}
+
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, an error message (should|should not) be displayed")]
+		public void ConfirmNoErrorMessagesOnUPCPage(string condition)
+		{
+			new Steps_Prototype().NoErrorMessages(condition);
+		}
+
 		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, click 'sample file' link to download file")]
 		public void ThenInTheU_S_DepartmentOfTransportationDOTClassificationSectionClickSampleFileLink()
 		{
