@@ -577,8 +577,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				ReadOnlyCollection<IWebElement> listOfRows = this.ContainerElement.FindElements(By.XPath(".//tbody//tr"));
 				int isCheckedIndex = th.FirstOrDefault(x => x.Value == "").Key;
 				int upcNumberIndex = th.FirstOrDefault(x => x.Value.Contains("UPC")).Key;
-				//int containerTypeIndex = th.FirstOrDefault(x => x.Value.Contains("Container Type")).Key;
-				//int sizeIndex = th.FirstOrDefault(x => x.Value.Contains("Size (Weight Ounces)")).Key;
 				int retailerIndex = th.FirstOrDefault(x => x.Value.Contains("Destination Retailers")).Key;
 				int warningIsPresentIndex = th.FirstOrDefault(x => x.Value.Contains("Destination Retailers")).Key;
 				foreach (IWebElement thisRow in listOfRows)
