@@ -39,6 +39,7 @@
 @Ingredients
 @run_DuplicateUPC
 @StepsPrototype
+@RegulatoryInformation3
 
 Feature: Duplicate UPC
 
@@ -118,7 +119,7 @@ Scenario: [91076] Duplicate UPC is not permitted within account - New Product re
 
 @singlerun
 @TestCase:82536
-Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
+Scenario: [82536] Soap (Bar, Liquid) for Body (RU000211) - GTIN/UPC - Verify Duplicate UPCs Cannot be Saved
 	Given I generate: 5 random UPC numbers and save them starting with: RandomUPC
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -129,89 +130,97 @@ Scenario: [82536] Mass Upload UPCs, Checking for Duplicate UPCs
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
 	Then I save the product information as: TestCase82536
 	And I click continue
-	And I call Shared Step 59680a (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR, with FIFRA - Continue - Happy Path)
-#Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
-Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Bonded, fibrous glass web
-Given In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
-Given In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
-Given I click continue
-#And I call Shared Step 29181 (Ingredients - add any chemical) with name: soap
+	Given I should see the Product Information Page
+	#252868 Product Information - Applicable Only to Type of Product:  Soap (Bar, Liquid) for Body (RU000211)
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Given In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Given In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Given In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Given I click continue
+	#Given I call Shared Step 252869 Physical and Chemical Properties - Applicable Only to Type of Product:  Soap (Bar, Liquid) for Body (RU000211)
+	And I should only see the following options for Primary Physical State:
+		| State  |
+		| Liquid |
+		| Solid  |
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Relative Density' to: lb./gal. (pounds per gallon)
+	Then In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 3588.55
+	Then In the Physical and Chemical Properties Section, for section: 'pH' enter text: 9.2
+	Then In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: 97
+	Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' select the checkbox option: 'I do not have exact Flash Point data available to me'
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point (in Celsius)' to: None, No Flash Point
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Given I click continue
+	#And I call Shared Step 252876 Ingredients - Applicable Only to the Type of Product:  Soap (Bar, Liquid) for Body (RU000211)
 	Given I should see the Ingredients Page
-	Then In the Ingredients section, add the following ingredients:
-	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-	| component name | Soap       | 100     |                     |               |             |
-	Then in the Ingredients page I click Continue
-
-	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
-	Given I call Shared Step 57590 (Enter Pesticide Data - United States (with EPA number))
-		Given I click continue
-	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
-	Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)
-		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |
-		| No                                       | 2                     | 2                          | Yes            |
-	Given I call Shared Step 57801 (Confirm VOC Summary step shown and VOC analysis date is shown - Happy Path)
-	Given I call Shared Step 57817 (VOC Results - Confirm VOC Limits table shows correct values (OTC & CARB) - Happy Path): Wipes, Cleaning (with Chemical)
-	Then I confirm that I see the following CARB value: 2
-	Then I confirm that I see the following OTC Model Rule value: 2
-	And I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
-	And I confirm the Exceeds/Does not exceed statement is shown and is correct based on inputted CARB value: 2
-	And I confirm the Exceeds/Does not exceed statement is shown and is correct based on inputted OTC value: 2
+	Then In the Ingredients section, add component with component name: Sodium cocoate
+	Then In the Ingredients Table row with component name: Sodium cocoate, in Percent column text input enter: 100
+	Then In the Ingredients Table row with component name: Sodium cocoate, in Publicly Disclosed? column set checkbox to checked
+	Then In the Ingredients Table row with component name: Sodium cocoate, in Public Name column select option Soap, coconut oil
+	Given I click continue
+	#239830 Inventory Status, Prop 65 (US) - TSCA (EXEMPT) / Prop 65 (NO) - (General Shared-Step)
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is exempt from TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Given I click continue
+	#252877 Regulatory Information 3 - Applicable Only to Type of Product:  Soap (Bar, Liquid) for Body (RU000211)
+	Given I should see the Regulatory Information 3 Page
+	Given I click continue
+	Then In the Regulatory Information 3 Section, the error 'Please select at least one option from above.' is displayed for section 'Refer to your Product Label. From the options, select those that appear on the Label.'
+	Then The following options should be displayed exclusively for section: Refer to your Product Label.  From the options, select those that appear on the Label.
+	| Option                 |
+	| Drug Facts Panel       |
+	| Supplement Facts Panel |
+	| Nutrition Facts Panel  |
+	| None of the Above      |
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above
+	Then In the Regulatory Information 3 Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
+	Then In the Regulatory Information 3 Section, the following link: Nutritional and Supplement Labels should be displayed
+	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
 	Given I click continue
 	#And I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	Given I should see the Retailer Page
 	Then In the Retailer Section, click 'Add Retailers' button
-	Then In the Select Retailers window, select retailer: Amazon
+	Then In the Select Retailers window, select retailer: Target
 	Then In the Select Retailers window, click 'Done' button
 	Then in the Retailer page I click Continue
-
-	And I click continue
-	And I click Sample File link and verify the Upload UPC form and save it as test82536 with data:
-		| UPC           | Name   | Quantity | Size | Internal SKU | US: Part Number | US: Item Number | GP: Part Number | SP: Part Number | TG: DPCI    | HD: OMSID | CT: Item Number   | Green Good Housekeeping | Green Seal | EPA Safer Choice | Cradle to Cradle | UL Ecologo | EWG Verified | Green Tick | Madesafe | NSF Sustainability Certified |
-		| 823973000000  | Saco 1 | 1        | 100  | KS955AR      | 11AB45          | 1001            | 1111            | A0001           | 111-22-0001 | 100000001 | 123-1234,123-1230 | Yes                     |            |                  |                  |            | Yes          |            |          | Yes                          |
-		| 0037600724210 | Saco 2 | 2        | 101  |              | 12AB56          | 1002            | 2222            | B0002           | 111-22-0002 | 100000002 | 123-1234,123-1231 |                         | Yes        |                  |                  |            |              | Yes        |          |                              |
-		| 978959000000  | Saco 3 | 3        | 102  |              | 12AC67          | 1003            | 3333            | C0003           | 111-22-0003 | 100000003 | 123-1234,123-1232 |                         |            | Yes              |                  |            |              |            |          |                              |
-		| 688267000000  | Saco 4 | 4        | 103  | KS956AG      | 12AD89          | 1004            | 4444            | D0004           | 111-22-0004 | 100000004 | 123-1234,123-1233 |                         |            |                  | Yes              |            |              |            | Yes      |                              |
-		| 854911000000  | Saco 5 | 5        | 104  | KS957AT      | 12AF00          | 1005            | 5555            | E0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |                         |            |                  |                  | Yes        |              |            |          |                              |
+	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, click 'sample file' link to download file
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm 'sample file' is downloaded and save as: test82536
 	And I edit the testdoc.xlsx, and save its filepath as: Bulktest82536 and verify it contains the UPC data in the table saved as: UPCTable82536, (Base Data Only: true)
 		| UPC          | Name    | Quantity | Size | Net Explosive Mass | US: Part Number | US: Item Number | GP: Part Number | SP: Part Number | TG: DPCI    | HD: OMSID | CT: Item Number   | Green Good Housekeeping | Green Seal | EPA Safer Choice | Cradle to Cradle | UL Ecologo | EWG Verified | Green Tick | Madesafe | NSF Sustainability Certified |
+		| %RandomUPC4% | MySoap4 | 3        | 32   | 3.44               | 00CC03          | 2003            | 1113            | H0003           | 111-22-0003 | 100000003 | 123-1234,123-1232 |                         |            |                  |                  |            |              |            |          |                              |
+		| %RandomUPC4% | MySoap5 | 1        | 32   | 1.22               | 00AA01          | 2001            | 1111            | F0001           | 111-22-0001 | 100000001 | 123-1234,123-1230 |                         |            |                  |                  |            |              |            |          |                              |
 		| %RandomUPC1% | MySoap1 | 1        | 32   | 1.22               | 00AA01          | 2001            | 1111            | F0001           | 111-22-0001 | 100000001 | 123-1234,123-1230 |                         |            |                  |                  |            |              |            |          |                              |
-		| %RandomUPC1% | MySoap2 | 2        | 32   | 2.33               | 00BB02          | 2002            | 1112            | G0002           | 111-22-0002 | 100000002 | 123-1234,123-1231 |                         |            |                  |                  |            |              |            |          |                              |
-		| %RandomUPC2% | MySoap3 | 3        | 32   | 3.44               | 00CC03          | 2003            | 1113            | H0003           | 111-22-0003 | 100000003 | 123-1234,123-1232 |                         |            |                  |                  |            |              |            |          |                              |
-		| %RandomUPC2% | MySoap4 | 4        | 32   | 4.55               | 00DD04          | 2004            | 1114            | I0004           | 111-22-0004 | 100000004 | 123-1234,123-1233 |                         |            |                  |                  |            |              |            |          |                              |
-		| %RandomUPC3% | MySoap5 | 5        | 32   | 5.66               | 00EE05          | 2005            | 1115            | J0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |                         |            |                  |                  |            |              |            |          |                              |
-		| %RandomUPC4% | MySoap6 | 6        | 32   | 6.77               | 00FF06          | 2006            | 1116            | K0006           | 111-22-0006 | 100000006 | 123-1234,123-1235 |                         |            |                  |                  |            |              |            |          |                              |
-		| %RandomUPC5% | MySoap7 | 7        | 32   | 7.88               | 00GG07          | 2007            | 1117            | L0007           | 111-22-0007 | 100000007 | 123-1234,123-1236 |                         |            |                  |                  |            |              |            |          |                              |
-	Then I click the 'Upload File' button and upload the file saved as: Bulktest82536
+		| %RandomUPC2% | MySoap2 | 3        | 32   | 3.44               | 00CC03          | 2003            | 1113            | H0003           | 111-22-0003 | 100000003 | 123-1234,123-1232 |                         |            |                  |                  |            |              |            |          |                              |
+		| %RandomUPC3% | MySoap3 | 5        | 32   | 5.66               | 00EE05          | 2005            | 1115            | J0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |                         |            |                  |                  |            |              |            |          |                              |	
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, click 'Upload File' button and upload file saved as: Bulktest82536
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm 'Add Multiple' modal window should be displayed
 	Then I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: UPCTable82536
-	Then In the Add Multiple dialog box I select all UPCs
-	Then I Confirm All UPCs are: Selected
-	Then In the Add Multiple dialog box I select the packaging type: <first>
-	Then I Check that the type column becomes populated with option: <first>
-	Given In the Add Multiple dialog box I click Next
-	Then In the Add Multiple dialog box I select all Retailers
-	Then I Check if all Retailers are: Selected
-	Then In the Add Multiple dialog box I select all Retailers
-	Then I Check if all Retailers are: Not Selected
-	Then In the Add Multiple dialog box I select all Retailers
-	Then I Check if all Retailers are: Selected
-	Then In the Add Multiple dialog box I click Finish
-	And I confirm that Add Multiple UPC popup disappears and the values on the new product screen are the same as the UPC Upload document saved in the Table called: UPCTable82536
-	Given I click continue
-	And I should see a list style form error with text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. UPCs:
-	And I confirm that Add Multiple UPC popup disappears and the values on the new product screen are the same as the UPC Upload document saved in the Table called: UPCTable82536
-	Then I make a list of the duplicated UPCs and save it as: duplicateUPCs82536 from the table saved as: UPCTable82536
-	Then I use a list of duplicated UPCs saved as: duplicateUPCs82536 and check that they have a warning traingle next to their retailer code and save the ones that do as: warningPresentList82536
-	Then Using the Hashtable of duplicate UPCs saved as: warningPresentList82536 I select the UPCS
-	Then I Click Delete Rows
-	Then I Check the Delete Rows Warning Popup: appears
-	Then I Click Ok in the Delete Rows Warning Popup
-	Then I Check the Delete Rows Warning Popup: disappears
-	Then I Check all Duplicate UPCs saved as: warningPresentList82536 are no longer shown
-	Then I click Continue and should not see an error message
-	And I navigate to the home page
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal check All UPCs checkbox
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal confirm all UPCs are selected
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal select Packaging Type: Plastic Container
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal click 'Next' button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal confirm all UPCs are selected
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal check retailer: Target
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal click 'Finish' button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm 'Add Multiple' modal window should not be displayed
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, error message should be displayed with text: 'You have added UPCs to the registration that are already in use within your WERCSmart account. Duplicate UPCs are not permitted, as they may provide conflicting Assessment information to your retailer recipients. Please remove the instances of duplicate UPC(s) from the necessary registration data.'
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm the values on the new product screen are the same as the UPC Upload document saved in the Table called: UPCTable82536
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm UPC number saved as RandomUPC4 is duplicated and Warning Icons are displayed
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, check all UPCs with number: RandomUPC4
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, click 'Delete Rows' button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm Warning modal window should be displayed
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, in Warning modal window click 'Ok' button
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	Given I should see the Regulatory Documents to Provide Page
 	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase82536
+
 
 		
 
