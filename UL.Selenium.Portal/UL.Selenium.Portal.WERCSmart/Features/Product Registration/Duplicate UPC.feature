@@ -40,6 +40,8 @@
 @run_DuplicateUPC
 @StepsPrototype
 @RegulatoryInformation3
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 
 Feature: Duplicate UPC
 
@@ -662,28 +664,86 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 
 @TestCase:91157
 Scenario: [91157] Duplicate UPC is not permitted within account - Forward Product registration - single UPC
+	#Given I call Shared Step 67823(207480) (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
+	Then I generate a random UPC number and save as: UPC91157
+	#Given I call Shared Step 57408(252966) (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
+	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I save the product information as: TestCase91157
+	#And I call Shared Step 59680(252968) (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+	#And I call Shared Step 26897(252546) (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+	#And I call Shared Step 29181(152778) (Ingredients - add any chemical) with name: Water
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add component with component name: Calcium Carbonate
+	Then In the Ingredients Table row with component name: Calcium Carbonate, in Percent column text input enter: 100
+	Then in the Ingredients page I click Continue
+	#And I call Shared Step 152747 (Inventory Status, Prop 65 (US) - Applicable Only to CHALK (RU000711) - General Shared-Step)
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Given In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is exempt from TSCA chemical Inventory listing requirements.
+	Given In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Given in the Inventory Status, Prop 65 (US) page I click Continue
+	#And I call Shared Step 252954 (Retailer - Add Retailer(s):  Target and Walgreens - Applicable Only to CHALK (RU000711) - General Shared-Step)
+	Given I should see the Retailer Page
+	Given In the Retailer Section, click 'Add Retailers' button
+	Given In the Select Retailers window, select retailer: Target
+	Given In the Select Retailers window, select retailer: Walgreens
+	Given In the Select Retailers window, click 'Done' button
+	Given in the Retailer page I click Continue
+	#Shared Step 253324 GTIN / UPC - Add UPC Number - Applicable Only to CHALK (RU000711) - General Shared-Step
+	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC91157 enter Size: 12 and enter Container Type: Plastic Container
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	#Shared step 253325 Regulatory Documents to Provide - Upload OSHA-Compliant SDS - Applicable Only to CHALK (RU000711) - General Shared-Step
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Yes, I certify that I have an OSHA-compliant SDS for this product and would like to upload it.
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'OSHA SDS'
+	Then in the Regulatory Documents to Provide page I click Continue
+	#Shared Step 253326 Additional Documents to Provide - Applicable Only to CHALK (RU000711) - General Shared-Step - CLICK CONTINUE
+	Given I should see the Additional Documents to Provide Page
+	Then in the Additional Documents to Provide page I click Continue
+	#Shared Step 253327 Optional Reports and Documents Available for Purchase - Applicable Only to CHALK (RU000711) - General Shared-Step - CLICK CONTINUE
+	Given I should see the Optional Reports and Documents Available for Purchase Page
+	Then in the Optional Reports and Documents Available for Purchase page I click Continue
+	#Shared Step 253329 Optional Comments - Applicable Only to CHALK (RU000711) - General Shared-Step - CLICK CONTINUE
+	Given I should see the Optional Comments Page
+	Then in the Optional Comments page I click Continue
+	#Shared Step 253426 Summary Tab - Record the Product ID and/or UPC Number for Posterior Verification
+	Then In the Data Acceptance Section, click 'Summary' button
+	Then I switch to the tab with Data Summary page
+	Then In the Summary Page, verify table data in column UPC Number showing the value: saved as UPC91157
+	Then I close the tab with Data Summary page
+	#Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+	#Shared Step 157174 Purchase Summary - Thank You for Registering Message - Click Home to Continue
+	Given I should see the Purchase Summary Page
+	Then I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then I call Shared Step 74655 SHA - Search by Supplier ID saved as TestCase91157 for specific product status: Assigned
+	Then I call Shared Step 65969 (Go to Power Designer Plus - Select your product & CKLT - Continue)
+	Then I call Shared Step 209526 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and MTR only) for product saved as: TestCase91157
+	Then I call Shared Step 209552 Power Designer Plus - APPLY RULES To Product
+	 
 
-	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	Then I filter the products by: Accepted by Retailers
-	And I save the ProductID of the first Product in the grid no in recertification as: testProduct91157
-	Given I click Bulk Actions in the Products Grid
-	Given I click Forward Product Registration in the Bulk Actions window
-	Then I should see the header: Forward Product Registration on the Forward Product Registration window
-	And I confirm the active Forward Product Registration tab is: Select Products
-	Then I select the product with ID saved as: testProduct91157 under the Select Products tab
-	And I select the product with ID saved as: testProduct91157 under the right hand panel of the Select Products tab
-	Given I click continue on the Forward Product Registration page
-	Then In the Forward Product Registration Screen I select the first retailer under Other Retailers
-	And I click continue on the Forward Product Registration page
-	Given I select the first product under the Select UPCs tab
-	Given I click the Add UPC button under the Select UPCs tab
-	And In the Add UPC modal window I enter the following information:
-		| UPC Number           | Type    | Size (Ounces) | Retailer   |
-		| saved as ExistingUPC | <first> | 1             | Select all |
-	And In the UPC modal window I click Save
-	Then I check alert text contains There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. and dismiss
-	Then In the UPC modal window I click Cancel
-	And I click the Home navigation icon and accept the alert popup
 
 @TestCase:91077
 Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New Product registration - Single UPC

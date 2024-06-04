@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.ForwardProductRegistration;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_and_Submit
 {
@@ -33,6 +35,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 		[RegexStepDefinition(@"In the Summary Page, verify table data in column (.*) showing the value: (.*)")]
 		public void InTheSummarySectionCheckTableData(string column, string value)
 		{
+			if(value.ToLower().Contains("saved as"))
+			{
+				value = Context.GetFromContext(value.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim()).ToString();		
+			}
 			Report.IsTrue(new DataSummary().VerifyTableValueInSammeryPage(column, value), $"Failed to confirm there is value {value} in column {column}", $"Successfully confirmed there is value {value} in column {column}");
 		}
 		[RegexStepDefinition(@"In the Summary Page, the document section (.*) should be showing the following document: (.*)")]
