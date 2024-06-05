@@ -1204,13 +1204,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 	}
 
-	class GraphicEditor : BaseObject
+	class GraphicEditor : SeleniumBaseObject
 	{
-		public const string BasePath = "//div[@id='koPopup']";
-
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
-
+		protected override By ContainerElementLocator => By.XPath("//div[@id='koPopup']");
 
 		public bool SelectGraphic(string graphicName)
 		{
@@ -1218,7 +1214,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				try
 				{
-					ReadOnlyCollection<IWebElement> Graphics = this.containerElement.FindElements(By.XPath("//div[@id='subsectionGrphEditor']//table//img"));
+					ReadOnlyCollection<IWebElement> Graphics = this.ContainerElement.FindElements(By.XPath("//div[@id='subsectionGrphEditor']//table//img"));
 
 					IWebElement matchingGraphic =
 						Graphics.FirstOrDefault(x => x.GetAttribute("title").ToLower().Contains(graphicName.ToLower()));
@@ -2295,12 +2291,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 	}
 
-	class SelectRulesFilter : BaseObject
+	class SelectRulesFilter : SeleniumBaseObject
 	{
-		public const string BasePath = "//table[@id='Selectrecord1_tblFilter']";
-
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath("//table[@id='Selectrecord1_tblFilter']");
 
 		public void Close()
 		{

@@ -2098,13 +2098,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 	}
 
-		class StudioSHAManagerProductSearch : BaseObject
+		class StudioSHAManagerProductSearch : SeleniumBaseObject
 	{
-		public const string BasePath = "//div[contains(@class,'ui-dialog ui-widget') and not ( contains(@style, 'display: none'))]";
-
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
-
+		protected override By ContainerElementLocator => By.XPath("//div[contains(@class,'ui-dialog ui-widget') and not ( contains(@style, 'display: none'))]");
 
 		public bool SelectStatus(string option)
 		{

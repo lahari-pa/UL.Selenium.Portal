@@ -42,6 +42,7 @@
 @RegulatoryInformation3
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
 
 Feature: Duplicate UPC
 
@@ -736,9 +737,10 @@ Scenario: [91157] Duplicate UPC is not permitted within account - Forward Produc
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
 	Then In the Data Acceptance Section, click 'Accept' button
 	#Shared Step 157174 Purchase Summary - Thank You for Registering Message - Click Home to Continue
-	Given I should see the Purchase Summary Page
+	Given The Purchase Summary Page is displayed
+	Then In the Purchase Summary page message is displayed with text: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 	Then I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	Then I call Shared Step 74655 SHA - Search by Supplier ID saved as TestCase91157 for specific product status: Assigned
+	Then In the SHA manager grid I see the WPS ID I have saved as product: TestCase91157 and its status is: Assigned
 	Then I call Shared Step 65969 (Go to Power Designer Plus - Select your product & CKLT - Continue)
 	Then I call Shared Step 209526 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and MTR only) for product saved as: TestCase91157
 	Then I call Shared Step 209552 Power Designer Plus - APPLY RULES To Product
