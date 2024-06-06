@@ -851,6 +851,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var newProductIngredients = new Ingredients();
 			Report.IsTrue(newProductIngredients.CloseCACleaningIngredientsPopupWindow(), "Failed to click close button for popup", "Successfully clicked close button for popup");
 		}
+		[RegexStepDefinition(@"I confirm the pop up (should|should not) be displayed with the heading: (.*) and text: (.*)")]
+		public void ThenIConfirmThePopUpShowsTheHeadingAndText(string condition, string title, string text)
+		{
+			if (condition == "should")
+			{
+				if (Report.IsTrue(new ModalDialog().WaitForContainerToBeVisible(), "The modal was not visible", "The modal was visible"))
+				{
+					string actualTitle = new ModalDialog().GetTitle();
+					string actualText = new ModalDialog().GetText();
+
+					if (Report.IsTrue(actualTitle == title, $"Title is {actualTitle}, but should be: {title}",
+						$"Title is showing as expected: {title}"))
+					{
+						Report.IsTrue(actualText == text, $"The {title} popup did not display the correct message! Expected: '{text}' but found: '{actualText}'", $"The {title} popup was displayed correctly");
+					}
+				}
+			}
+			else
+			{
+				Report.IsFalse(new ModalDialog().WaitForContainerToBeVisible(), "The modal is visible, but it is not expected", "The modal is not visible as expected");
+			}
+		}
 	}
 }
 

@@ -22,6 +22,7 @@ using UL.Automation.WebDriver.Functions;
 using UL.Automation.TReVor.Classes;
 using UL.Automation.Reporting.Classes;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.Utilities.Helpers;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -792,7 +793,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//Create file here
 			//var excelfile = new ExcelFunctions CreateSpreadsheet(fileName);
 			//var utils = ExcelFunctions.CreateSpreadsheet(Path.Combine(KnownFolders.GetPath(KnownFolder.Downloads), fileName));
-			if (!EmbeddedResources.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.Excel.testdoc.xlsx", out string destination))
+			if (!EmbeddedResourceHelpers.ExtractToFile("UL.Selenium.Portal.WERCSmart.Dependencies.Excel.testdoc.xlsx", out string destination))
 			{
 				Report.Failure("testdoc.xlsx could not be found in the embedded resource");
 				return;

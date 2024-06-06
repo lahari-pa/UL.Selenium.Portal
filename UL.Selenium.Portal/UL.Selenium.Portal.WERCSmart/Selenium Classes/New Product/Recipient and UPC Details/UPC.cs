@@ -574,21 +574,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var listOfUPCNewProducts = new List<UPCNewProduct>();
 				IWebElement thisTable = this.ContainerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
 				List<KeyValuePair<int, string>> th = this.TableHeaders(thisTable); //?
-				ReadOnlyCollection<IWebElement> listOfRows = this.ContainerElement.FindElements(By.XPath(".//table[@class='table table-hover upc-table']//tbody//tr"));
+				ReadOnlyCollection<IWebElement> listOfRows = this.ContainerElement.FindElements(By.XPath(".//tbody//tr"));
 				int isCheckedIndex = th.FirstOrDefault(x => x.Value == "").Key;
-				int upcNumberIndex = th.FirstOrDefault(x => x.Value.Contains("UPC Number")).Key;
-				int containerTypeIndex = th.FirstOrDefault(x => x.Value.Contains("Container Type")).Key;
-				int sizeIndex = th.FirstOrDefault(x => x.Value.Contains("Size (Weight Ounces)")).Key;
+				int upcNumberIndex = th.FirstOrDefault(x => x.Value.Contains("UPC")).Key;
 				int retailerIndex = th.FirstOrDefault(x => x.Value.Contains("Destination Retailers")).Key;
 				int warningIsPresentIndex = th.FirstOrDefault(x => x.Value.Contains("Destination Retailers")).Key;
 				foreach (IWebElement thisRow in listOfRows)
 				{
-					bool isChecked = thisRow.FindElement(By.XPath(".//td[" + isCheckedIndex.ToString() + "]//input"), 2).Selected;
-					string upcNumber = thisRow.FindElement(By.XPath(".//td[" + upcNumberIndex.ToString() + "]/span[contains(@data-bind,'upc')]"), 2).Text;
-					string containerType = thisRow.FindElement(By.XPath(".//td[" + containerTypeIndex.ToString() + "]/span[contains(@data-bind,'type')]"), 2).Text;
-					string size = thisRow.FindElement(By.XPath(".//td[" + sizeIndex.ToString() + "]/span[contains(@data-bind,'size')]"), 2).Text;
-					string retailer = thisRow.FindElement(By.XPath(".//td[" + retailerIndex.ToString() + "]//span[@data-bind='text: identifier']"), 2).Text;
-					bool warningIsPresent = thisRow.FindElement(By.XPath(".//td[" + warningIsPresentIndex.ToString() + "]//i[@title='This UPC Number is duplicated.']"), 2).Displayed;
+					bool isChecked = thisRow.FindElement(By.XPath($".//td[{isCheckedIndex.ToString()}]//input"), 2).Selected;
+					string upcNumber = thisRow.FindElement(By.XPath($".//td[{upcNumberIndex.ToString()}]/span[contains(@data-bind,'upc')]"), 2).Text;
+					string containerType = thisRow.FindElement(By.XPath($".//td[{upcNumberIndex.ToString()}]/span[contains(@data-bind,'type')]"), 2).Text;
+					string size = thisRow.FindElement(By.XPath($".//td[{upcNumberIndex.ToString()}]/span[contains(@data-bind,'size')]"), 2).Text;
+					string retailer = thisRow.FindElement(By.XPath($".//td[{retailerIndex.ToString()}]//span[@data-bind='text: identifier']"), 2).Text;
+					bool warningIsPresent = thisRow.FindElement(By.XPath($".//td[{warningIsPresentIndex.ToString()}]//i[@title='This GTIN/UPC is duplicated.']"), 2).Displayed;
 					listOfUPCNewProducts.Add(new UPCNewProduct() { IsChecked = isChecked, UpcNumber = upcNumber, ContainerType = containerType, Size = size, Retailer = retailer, WarningIsPresent = warningIsPresent });
 				}
 				return listOfUPCNewProducts;
@@ -613,7 +611,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				List<KeyValuePair<int, string>> th = this.TableHeaders(thisTable); //?
 				ReadOnlyCollection<IWebElement> listOfRows = this.ContainerElement.FindElements(By.XPath(".//table[@class='table table-hover upc-table']//tbody//tr"));
 				int checkboxIndex = th.FirstOrDefault(x => x.Value == "").Key;
-				int upcNumberIndex = th.FirstOrDefault(x => x.Value.Contains("UPC Number")).Key;
+				int upcNumberIndex = th.FirstOrDefault(x => x.Value.Contains("UPC")).Key;
 				foreach (IWebElement thisRow in listOfRows)
 				{
 					IWebElement checkBox = thisRow.FindElement(By.XPath(".//td[" + checkboxIndex.ToString() + "]//input"), 2);
@@ -976,13 +974,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	{
 		protected override By ContainerElementLocator => By.XPath(@"//h4[@class='modal-title' and contains(text(),'Add Multiple')]/ancestor::div[@class='modal-content']");
 
-		public IWebElement SelectAllUpcsButton => ContainerElement.FindElement(By.XPath("//tr//th//input[@type='checkbox' and contains(@data-bind,'areAllRowsSelected')]"), 2);
+		public IWebElement SelectAllUpcsButton => this.ContainerElement.FindElement(By.XPath("//tr//th//input[@type='checkbox' and contains(@data-bind,'areAllRowsSelected')]"), 2);
 		public IWebElement ContainsType => ContainerElement.FindElement(By.XPath(".//select[contains(@data-bind,'packagingChanged')]"), 2);
 		public IWebElement NextButton => ContainerElement.FindElement(By.XPath("//button[@type='button' and text()='Next']"), 2);
 		public IWebElement SelectAllRetailersButton => ContainerElement.FindElement(By.XPath("//tr//th//input[@type='checkbox' and contains(@data-bind,'retailers')]"), 2);
 		public IWebElement SelectXRetailersButton => ContainerElement.FindElement(By.XPath("//tr//th//input[@type='checkbox' and contains(@data-bind,'retailers')]"), 2);
 		public IWebElement FinishButton => ContainerElement.FindElement(By.XPath("//button[@type='button' and text()='Finish']"), 2);
+		public IWebElement RetailerCheckbox(string retailer) => this.ContainerElement.FindElement(By.XPath($"//tr[td//span[text()='{retailer}']]//input"), 2);
 
+		public bool RetailerExists(string retailer)
+		{
+			return this.RetailerCheckbox(retailer) != null;
+		}
+		public bool SelectRetailer(string retailer)
+		{
+			return this.RetailerCheckbox(retailer).TryClick();
+		}
+		public bool SelectedRetailer(string retailer)
+		{
+			return this.RetailerCheckbox(retailer).Selected;
+		}
 		public bool ClickSelectAllUpcsButton()
 		{
 			return this.SelectAllUpcsButton.TryClick();
@@ -998,6 +1009,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickFinishButton()
 		{
 			return this.FinishButton.TryClick();
+		}
+		public bool AllUpcCheckboxSelected()
+		{
+			return this.SelectAllUpcsButton.Selected;
 		}
 
 		public bool CheckAllUPCsAreSelected()

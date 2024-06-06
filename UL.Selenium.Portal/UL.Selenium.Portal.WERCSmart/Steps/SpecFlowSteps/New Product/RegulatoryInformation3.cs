@@ -38,8 +38,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			new Steps_Prototype().ClickLinkElement(linkText);
 		}
 
+		[RegexStepDefinition(@"In the Regulatory Information 3 Section, the error 'Please select at least one option from above.' (is|is not) displayed for section 'Refer to your Product Label. From the options, select those that appear on the Label.'")]
+		public void Regulatory3ErrorIsIsNotDisplayed(string is_isnot)
+		{
+			string section = "Refer to your Product Label.  From the options, select those that appear on the Label.";
+			string error = "Please select at least one option from above.";
+			new Steps_ProductPrototype().InSectionErrorMessageIsIsNotDisplayed(section, error, is_isnot);
+		}
 
 
 
-	}
+
+		}
 }
