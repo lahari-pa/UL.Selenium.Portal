@@ -1478,6 +1478,70 @@ namespace UL.Selenium.Portal.RPS.Steps
  
         }
 
+
+        [RegexStepDefinition(@"I call Shared Step 243836 \(RPS- More Filters- Select All- Contains\): (.*)")]
+        public void SharedStep243836(string value)
+        {
+            ReportDetails.CurrentDetails.UseSubSteps = true;
+
+            Report.StartSubStep("I confirm the very first displayed list is shown as: Select All: Contains \"xxxx\" (xx)");
+            Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupSelectAllFilterDisplayed("Contains",value), "Failed to display  Select All: Contains \"xxxx\" (xx)", "Successfully displayed  Select All: Contains \"xxxx\" (xx)");
+            Report.StartSubStep($"I verify \"xxxx\" matches the value I searched for");
+            Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupSelectAllValueMatchestheSearch(value), "Failed to match the value I searched for", "Successfully matched the value I searched for");
+            Report.StartSubStep("I verify \"xx\" is the count of list based the search text");
+            Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupSelectAllCountMatchestheListDisplayed(), "Failed to match the value count of list based the search text", "Successfully matched the value count of list based the search text");
+            Report.StartSubStep("Given, I click Select All checkbox");
+            Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupClickiSelectAllCheckBox(), "Failed to click Select All checkbox", "Successfully clicked Select All checkbox");
+            Report.StartSubStep("I confirm, Select All badge is shown under the Selected filters section");
+            InTheMoreFiltersPopupSelectedFiltersAreaIVerifyBreadcrumbIsDisplayedWithSelectedValues("Select All");
+            Report.StartSubStep("Given, I click Apply Filters button");
+            InTheProductLookUpPageMoreFiltersPopupClickApplyFilterButton();
+            Report.StartSubStep("I confirm pop is removed and page is refreshed");
+            InTheProductLookupPageIClickTheMoreFiltersPopupIsNotShowing();
+        }
+
+        [RegexStepDefinition(@"I call Shared Step 243837 \(RPS- More Filters- Select All- Is\): (.*)")]
+        public void SharedStep243837(string value)
+        {
+            ReportDetails.CurrentDetails.UseSubSteps = true;
+
+            Report.StartSubStep("I confirm the very first displayed list is shown as: Select All: Is \"xxxx\" (xx)");
+            Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupSelectAllFilterDisplayed("Is", value), "Failed to display  Select All: Contains \"xxxx\" (xx)", "Successfully displayed  Select All: Contains \"xxxx\" (xx)");
+            Report.StartSubStep($"I verify \"xxxx\" matches the value I searched for");
+            Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupSelectAllValueMatchestheSearch(value), "Failed to match the value I searched for", "Successfully matched the value I searched for");
+            Report.StartSubStep("I verify \"xx\" is the count of list based the search text");
+            Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupSelectAllCountMatchestheListDisplayed(), "Failed to match the value count of list based the search text", "Successfully matched the value count of list based the search text");
+            Report.StartSubStep("Given, I click Select All checkbox");
+            Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupClickiSelectAllCheckBox(), "Failed to click Select All checkbox", "Successfully clicked Select All checkbox");
+            Report.StartSubStep("I confirm, Select All badge is shown under the Selected filters section");
+            InTheMoreFiltersPopupSelectedFiltersAreaIVerifyBreadcrumbIsDisplayedWithSelectedValues("Select All");
+            Report.StartSubStep("Given, I click Apply Filters button");
+            InTheProductLookUpPageMoreFiltersPopupClickApplyFilterButton();
+            Report.StartSubStep("I confirm pop is removed and page is refreshed");
+            InTheProductLookupPageIClickTheMoreFiltersPopupIsNotShowing();
+        }
+
+        [RegexStepDefinition(@"I call Shared Step 243838 \(RPS- More Filters- Select All- Starts with\): (.*)")]
+        public void SharedStep243838(string value)
+        {
+            ReportDetails.CurrentDetails.UseSubSteps = true;
+
+            Report.StartSubStep("I confirm the very first displayed list is shown as: Select All: Starts with \"xxxx\" (xx)");
+            Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupSelectAllFilterDisplayed("Starts with", value), "Failed to display  Select All: Contains \"xxxx\" (xx)", "Successfully displayed  Select All: Contains \"xxxx\" (xx)");
+            Report.StartSubStep($"I verify \"xxxx\" matches the value I searched for");
+            Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupSelectAllValueMatchestheSearch(value), "Failed to match the value I searched for", "Successfully matched the value I searched for");
+            Report.StartSubStep("I verify \"xx\" is the count of list based the search text");
+            Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupSelectAllCountMatchestheListDisplayed(), "Failed to match the value count of list based the search text", "Successfully matched the value count of list based the search text");
+            Report.StartSubStep("Given, I click Select All checkbox");
+            Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupClickiSelectAllCheckBox(), "Failed to click Select All checkbox", "Successfully clicked Select All checkbox");
+            Report.StartSubStep("I confirm, Select All badge is shown under the Selected filters section");
+            InTheMoreFiltersPopupSelectedFiltersAreaIVerifyBreadcrumbIsDisplayedWithSelectedValues("Select All");
+            Report.StartSubStep("Given, I click Apply Filters button");
+            InTheProductLookUpPageMoreFiltersPopupClickApplyFilterButton();
+            Report.StartSubStep("I confirm pop is removed and page is refreshed");
+            InTheProductLookupPageIClickTheMoreFiltersPopupIsNotShowing();
+        }
+
         #endregion
     }
 
