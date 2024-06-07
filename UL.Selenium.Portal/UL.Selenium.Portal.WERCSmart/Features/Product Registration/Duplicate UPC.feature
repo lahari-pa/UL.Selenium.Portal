@@ -582,7 +582,9 @@ Scenario: [91741] Duplicate UPC is not permitted within account - New Product re
 	And I should see a list style form error with text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. UPCs:
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91741
-	
+
+#Removed from regression 2024/06
+@ignore
 @TestCase:91100
 Scenario: [91100] Duplicate UPC is not permitted within account - New Product registration - Bulk Upload
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -754,6 +756,7 @@ Scenario: [91157] Duplicate UPC is not permitted within account - Forward Produc
 	Then I open the new tab in browser
 	Then I navigate to the landing page
 	Given I log in with the account saved in TReVor as: ProductAccount
+	#253440 Bulk Actions - Forward Product Registration - Verify Duplicate UPCs Cannot Be Forwarded
 	Then I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
 	And I enter the text: saved as TestCase91157 in the 'Search by WPS ID or Product Name' field
 	And In the Foward Product Registration Screen I should see product: saved as TestCase91157
@@ -842,7 +845,8 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91077
 
-	
+#Removed from regression 2024/03
+@ignore
 @TestCase:91101
 Scenario: [91101] Duplicate UPC is not permitted within WERCSmart system - New Product registration - Bulk Upload
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
