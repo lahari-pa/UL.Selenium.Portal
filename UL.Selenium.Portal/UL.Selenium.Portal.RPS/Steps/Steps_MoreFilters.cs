@@ -1504,6 +1504,10 @@ namespace UL.Selenium.Portal.RPS.Steps
         public void SharedStep243837(string value)
         {
             ReportDetails.CurrentDetails.UseSubSteps = true;
+            if (value.Contains("savedAs"))
+            {
+                value = (string)Context.GetFromContext(value);
+            }
 
             Report.StartSubStep("I confirm the very first displayed list is shown as: Select All: Is \"xxxx\" (xx)");
             Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupSelectAllFilterDisplayed("Is", value), "Failed to display  Select All: Contains \"xxxx\" (xx)", "Successfully displayed  Select All: Contains \"xxxx\" (xx)");

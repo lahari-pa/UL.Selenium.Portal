@@ -22,8 +22,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		{
 			Report.IsTrue(new TopBar().WaitForContainerToBeVisible(), "Top bar did not load!");
 			GeneralUtilities.WaitForLoadingToFinish();
-			new ProductLookUp().WaitProductsGridSpinnerFinish();
-			new Steps_Navigation().ConfirmActiveTab("Product Lookup");
+			new ProductLookUp().WaitProductsGridSpinnerFinish(); 
 			Report.IsTrue(new ProductLookUp().WaitForContainerToBeVisible(), "Dashboard content did not load", "Dashboard content loaded");
 		}
 
