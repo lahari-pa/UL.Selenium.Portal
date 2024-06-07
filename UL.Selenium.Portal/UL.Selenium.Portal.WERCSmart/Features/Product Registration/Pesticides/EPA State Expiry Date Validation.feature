@@ -105,54 +105,6 @@ Scenario: [56592] Pesticide Data - EPA Expiration date validation (Georgia - Dec
 	Then I should see the Transportation Details 1 Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56592
 
-#Removed from regression: 2023/06
-@ignore
-@TestCase:56582
-Scenario: [56582] Pesticide Data - EPA Expiration date validation (Alaska - Dec 31st for current calendar year until Oct 1st,  then Dec 31st for this or next year)
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wood Finishing Cloth with Stain
-	Given I save the product information as: TestCase56582
-	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
-	Given I should see the Product Information Page
-	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
-	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
-	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
-	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
-	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
-	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
-	Then in the Product Information page I click Continue
-
-	#Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
-	Given I should see the Liquid Core Product Page
-	Then In the Liquid Core Product Section, set the option in section: 'Is there a free liquid in the Product's container that is 10ml or greater?' to: No
-	Then in the Liquid Core Product page I click Continue
-
-	#Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	Given I should see the Physical and Chemical Properties Page
-	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
-	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
-	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
-	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
-	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
-	Then in the Physical and Chemical Properties page I click Continue
-
-	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
-	Given I should see the Ingredients Page
-	Then In the Ingredients section, add the following ingredients:
-	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-	| component name | Sodium hydroxide       | 100     |                     |               |             |
-	Then in the Ingredients page I click Continue
-
-	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	Given I call Shared Step 63226 (Pesticide Date - Yes registered - Enter EPA Number not on Kelly - Click Continue - Happy path)
-	Given I call Shared Step 225948 (EPA expiration date - enter current year - enter next year - check for error) for state:
-	| State |
-	| IA    |
-	Then I should see the Transportation Details 1 Page
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56582
-
 @ignore
 #Removed from regression 2023/11
 @TestCase:56591
