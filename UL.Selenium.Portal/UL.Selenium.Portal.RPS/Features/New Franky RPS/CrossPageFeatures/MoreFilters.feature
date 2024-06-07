@@ -1099,4 +1099,154 @@ Scenario Outline: [224810] 3 Panel-More Filters- Has Any/No Value- Open/Save Rep
  		| [#224810c]  3 Panel-More Filters- Has Any/No Value- Open/Save Report     | RPS.CT          | Product Lookup          | No          |
 		| [#224810d]  3 Panel-More Filters- Has Any/No Value- Open/Save Report     | RPS.CV          | Product Lookup          | No          |
  		| [#224810e]  3 Panel-More Filters- Has Any/No Value- Open/Save Report     | RPS.LW          | Product Lookup          | No          |
-		 
+	
+	
+Scenario Outline: [243835] 3 Panel-More Filters- Suppliers Name- Select All 
+	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer> 
+	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
+	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
+	Then I confirm the page has loaded
+	Then In the recent activities Page, I click the More Filters Button
+	Then In the Product Lookup Page, The More Filters Popup is showing
+	And In the More Filters pop up, I enter value in search box in the Filter Categories column: Supplier Name
+	Then In the More Filters pop up, I confirm searched filter is displayed in Filters Panel : Supplier Name
+	Then In the More Filters pop up, I click on searched filter in Filters Panel : Supplier Name
+	Then In the More Filters pop up, I confirm the Filters Parameter panel populates with a list of Supplier Names
+	Then In the More Filters pop up, I confirm I see Search under the filter parameter heading
+	Then In the More Filters pop up, I confirm the left side of the search box, there is a dropdown box
+	Then In the More Filters pop up, I confirm default value of the dropdown box is Contains
+	Then In the More Filters pop up, I confirm in the Filter Parameter Panel Selector three options are : Contains, Start With and Is are displayed
+    Then  In the More Filters pop up, I now type a string  in Supplier Name search field: lor 
+    Then I call Shared Step 243836 (RPS- More Filters- Select All- Contains): lor
+	Then I confirm the page has refreshed
+	Then In the product lookup Page, In the Products table I click the Reset Button
+    Then In the recent activities Page, I click the More Filters Button
+	Then In the Product Lookup Page, The More Filters Popup is showing
+	And In the More Filters pop up, I enter value in search box in the Filter Categories column: Supplier Name
+	Then In the More Filters pop up, I confirm searched filter is displayed in Filters Panel : Supplier Name
+	Then In the More Filters pop up, I click on searched filter in Filters Panel : Supplier Name
+	Then In the More Filters pop up, I confirm the Filters Parameter panel populates with a list of Supplier Names
+	Then In the More Filters pop up, I confirm I see Search under the filter parameter heading
+	Then In the More Filters pop up, I confirm the left side of the search box, there is a dropdown box
+	Then In the More Filters pop up, I confirm default value of the dropdown box is Contains
+	Then In the More Filters pop up, I confirm in the Filter Parameter Panel Selector three options are : Contains, Start With and Is are displayed
+	Then In the More Filters pop up, I select the option from the Parameters drop down list: Is
+    Then In the More Filters pop up, In the search field in the Filter Parameters panel, In the search box, I enter full Supplier Name: savedAs
+    Then I confirm I see the Supplier Name I was searching for: savedAs
+    Then I call Shared Step 243837 (RPS- More Filters- Select All- Is): savedAs
+	Then I confirm the page has refreshed
+	Then In the product lookup Page, In the Products table I click the Reset Button
+    Then In the recent activities Page, I click the More Filters Button
+	Then In the Product Lookup Page, The More Filters Popup is showing
+	And In the More Filters pop up, I enter value in search box in the Filter Categories column: Supplier Name
+	Then In the More Filters pop up, I confirm searched filter is displayed in Filters Panel : Supplier Name
+	Then In the More Filters pop up, I click on searched filter in Filters Panel : Supplier Name
+	Then In the More Filters pop up, I confirm the Filters Parameter panel populates with a list of Supplier Names
+	Then In the More Filters pop up, I confirm I see Search under the filter parameter heading
+	Then In the More Filters pop up, I confirm the left side of the search box, there is a dropdown box
+	Then In the More Filters pop up, I confirm default value of the dropdown box is Contains
+	Then In the More Filters pop up, I confirm in the Filter Parameter Panel Selector three options are : Contains, Start With and Is are displayed
+	Then In the More Filters pop up, I select the option from the Parameters drop down list: Starts with
+	Then In the More Filters pop up, I now type a string  in Supplier Name search field: Lor
+	Then In the More Filters pop up, I confirm the list of items shown is narrowed based on the characters I enter: Lor
+    Then I call Shared Step 243838 (RPS- More Filters- Select All- Starts with): Lor
+	Then I confirm the page has refreshed
+
+	Examples:
+		| Scenario Name                                                     | Retailer        | Page                    | IsWebviewer |
+ 		| [#243835a]  3 Panel-More Filters- Suppliers Name- Select All      | RPS.TG          | Product Lookup          | No          |
+ 		| [#243835b]  3 Panel-More Filters- Suppliers Name- Select All      | RPS.TG          | Recent Activities       | No          |
+# 		| [#243835c]  3 Panel-More Filters- Suppliers Name- Select All      | RPS.CV          | Product Lookup          | No          |
+		| [#243835d]  3 Panel-More Filters- Suppliers Name- Select All      | RPS.CV          | Recent Activities       | No          |
+#		| [#243835e]  3 Panel-More Filters- Suppliers Name- Select All      | RPS.LW          | Product Lookup          | No          |
+		| [#243835f]  3 Panel-More Filters- Suppliers Name- Select All      | RPS.LW          | Recent Activities       | No          |
+		| [#243835g]  3 Panel-More Filters- Suppliers Name- Select All      | RPS.SF          | Product Lookup          | No          |
+ 		| [#243835h]  3 Panel-More Filters- Suppliers Name- Select All      | RPS.SF          | Recent Activities       | No          |
+#		| [#243835i]  3 Panel-More Filters- Suppliers Name- Select All      | RPS.LW          | Demo Viewer             | Yes         |
+#		| [#243835j]  3 Panel-More Filters- Suppliers Name- Select All      | RPS.TG          | Store Viewer            | Yes         |
+#		| [#243835k]  3 Panel-More Filters- Suppliers Name- Select All      | RPS.TG          | Status Viewer           | Yes         |
+#		| [#243835l]  3 Panel-More Filters- Suppliers Name- Select All      | RPS.TG          | HQ Viewer               | Yes         |
+		| [#243835m]  3 Panel-More Filters- Suppliers Name- Select All      | RPS.SF          | SmartFinal_Store        | Yes         |
+# 		| [#243835n]  3 Panel-More Filters- Suppliers Name- Select All      | RPS.LW          | Lowes_store             | Yes         |
+#		| [#243835o]  3 Panel-More Filters- Suppliers Name- Select All      | RPS.CT          | Product Lookup          | No          |
+#    	| [#243835p]  3 Panel-More Filters- Suppliers Name- Select All      | RPS.CT          | Recent Activities       | No          |
+#	    | [#243835q]  3 Panel-More Filters- Suppliers Name- Select All      | RPS.CT          | Classification History  | No          |
+
+
+Scenario Outline: [243839] 3 Panel-More Filters- WPSID- Select All 
+	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer> 
+	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
+	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
+	Then I confirm the page has loaded
+	Then In the recent activities Page, I click the More Filters Button
+	Then In the Product Lookup Page, The More Filters Popup is showing
+    And In the More Filters pop up, I enter value in search box in the Filter Categories column: WPS ID
+	Then In the More Filters pop up, I confirm searched filter is displayed in Filters Panel : WPS ID
+	Then In the More Filters pop up, I click on searched filter in Filters Panel : WPS ID 
+	Then In the More Filters pop up, I confirm I see Search under the filter parameter heading
+	Then In the More Filters pop up, I confirm the left side of the search box, there is a dropdown box
+	Then In the More Filters pop up, I confirm default value of the dropdown box is Contains
+	Then In the More Filters pop up, I confirm in the Filter Parameter Panel Selector three options are : Contains, Start With and Is are displayed 
+	Then In the More Filters pop up, In Filter Parameter panel I confirm the Search field shows the default text: Search
+	Then In the More Filters pop up, I confirm the Filter Parameter panel shows the WPS Id list
+	Then In the More Filters pop up, In Filter Parameter panel I confirm each item for selection shows a check box before the DPCI value
+    Then In the More Filters pop up, I select the option from the Parameters drop down list: Contains 
+	Then In the More Filters pop up, I now type a string  in DPCI search field: 12
+	Then In the More Filters pop up, I confirm the Filters Parameter panel populates with a list of DPCI values
+    Then I call Shared Step 243836 (RPS- More Filters- Select All- Contains): 12
+	Then I confirm the page has refreshed
+	Then In the product lookup Page, In the Products table I click the Reset Button
+    Then In the recent activities Page, I click the More Filters Button
+	Then In the Product Lookup Page, The More Filters Popup is showing
+    And In the More Filters pop up, I enter value in search box in the Filter Categories column: WPS ID
+	Then In the More Filters pop up, I confirm searched filter is displayed in Filters Panel : WPS ID
+	Then In the More Filters pop up, I click on searched filter in Filters Panel : WPS ID
+	Then In the More Filters pop up, I confirm I see Search under the filter parameter heading
+	Then In the More Filters pop up, I confirm the left side of the search box, there is a dropdown box
+	Then In the More Filters pop up, I confirm default value of the dropdown box is Contains
+	Then In the More Filters pop up, I confirm in the Filter Parameter Panel Selector three options are : Contains, Start With and Is are displayed 
+	Then In the More Filters pop up, In Filter Parameter panel I confirm the Search field shows the default text: Search
+	Then In the More Filters pop up, I confirm the Filter Parameter panel shows the DPCI list 
+	Then In the More Filters pop up, In the search field in the Filter Parameters panel, In the search box, I enter full WPS ID: savedAs
+    Then In the More Filters pop up, I select the option from the Parameters drop down list: Is 
+	Then I confirm I see the Supplier Name I was searching for: savedAs
+    Then I call Shared Step 243837 (RPS- More Filters- Select All- Is): savedAs
+	Then I confirm the page has refreshed
+	Then In the product lookup Page, In the Products table I click the Reset Button
+    Then In the recent activities Page, I click the More Filters Button
+	Then In the Product Lookup Page, The More Filters Popup is showing
+	And In the More Filters pop up, I enter value in search box in the Filter Categories column: WPS ID
+	Then In the More Filters pop up, I confirm searched filter is displayed in Filters Panel : WPS ID
+	Then In the More Filters pop up, I click on searched filter in Filters Panel : WPS ID
+	Then In the More Filters pop up, I confirm I see Search under the filter parameter heading
+	Then In the More Filters pop up, I confirm the left side of the search box, there is a dropdown box
+	Then In the More Filters pop up, I confirm default value of the dropdown box is Contains
+	Then In the More Filters pop up, I confirm in the Filter Parameter Panel Selector three options are : Contains, Start With and Is are displayed 
+	Then In the More Filters pop up, In Filter Parameter panel I confirm the Search field shows the default text: Search
+	Then In the More Filters pop up, I confirm the Filter Parameter panel shows the DPCI list
+	Then In the More Filters pop up, In Filter Parameter panel I confirm each item for selection shows a check box before the DPCI value
+    Then In the More Filters pop up, I select the option from the Parameters drop down list: Starts with
+	Then In the More Filters pop up, I now type a string  in DPCI search field: 100
+	Then In the More Filters pop up, I confirm the list of items shown is narrowed based on the characters I enter: 100
+    Then I call Shared Step 243838 (RPS- More Filters- Select All- Starts with): 100
+	Then I confirm the page has refreshed
+
+	Examples:
+		| Scenario Name                                            | Retailer        | Page                    | IsWebviewer |
+ 		| [#243839a]  3 Panel-More Filters- WPSID- Select All      | RPS.TG          | Product Lookup          | No          |
+ 		| [#243839b]  3 Panel-More Filters- WPSID- Select All      | RPS.TG          | Recent Activities       | No          |
+# 		| [#243839c]  3 Panel-More Filters- WPSID- Select All      | RPS.CV          | Product Lookup          | No          |
+#		| [#243839d]  3 Panel-More Filters- WPSID- Select All      | RPS.CV          | Recent Activities       | No          |
+#		| [#243839e]  3 Panel-More Filters- WPSID- Select All      | RPS.LW          | Product Lookup          | No          |
+		| [#243839f]  3 Panel-More Filters- WPSID- Select All      | RPS.LW          | Recent Activities       | No          |
+		| [#243839g]  3 Panel-More Filters- WPSID- Select All      | RPS.SF          | Product Lookup          | No          |
+ 		| [#243839h]  3 Panel-More Filters- WPSID- Select All      | RPS.SF          | Recent Activities       | No          |
+#		| [#243839i]  3 Panel-More Filters- WPSID- Select All      | RPS.LW          | Demo Viewer             | Yes         |
+#		| [#243839j]  3 Panel-More Filters- WPSID- Select All      | RPS.TG          | Store Viewer            | Yes         |
+#		| [#243839k]  3 Panel-More Filters- WPSID- Select All      | RPS.TG          | Status Viewer           | Yes         |
+#		| [#243839l]  3 Panel-More Filters- WPSID- Select All      | RPS.TG          | HQ Viewer               | Yes         |
+		| [#243839m]  3 Panel-More Filters- WPSID- Select All      | RPS.SF          | SmartFinal_Store        | Yes         |
+# 		| [#243839n]  3 Panel-More Filters- WPSID- Select All      | RPS.LW          | Lowes_store             | Yes         |
+#		| [#243839o]  3 Panel-More Filters- WPSID- Select All      | RPS.CT          | Product Lookup          | No          |
+#    	| [#243839p]  3 Panel-More Filters- WPSID- Select All      | RPS.CT          | Recent Activities       | No          |
+#	    | [#243839q]  3 Panel-More Filters- WPSID- Select All      | RPS.CT          | Classification History  | No          |
