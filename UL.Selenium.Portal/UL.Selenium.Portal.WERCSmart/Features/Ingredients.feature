@@ -29,6 +29,7 @@
 @Ingredients
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ECOLOGO
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 
 Feature: Ingredients
 (Suite ID: 64740)
@@ -43,7 +44,12 @@ Scenario: [71985] Sorting Cas Number/ Chemical Name Ingredient page
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mulch with Pesticide
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mulch with Pesticide
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Mulch with Pesticide_#71985
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Mulch with Pesticide
+	Then in the The Product page, I click Continue
+
 	Then I save the product information as: TestCase71985
 	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I should see the Product Information Page
@@ -99,7 +105,12 @@ Scenario: [71987] Sorting Percent on Ingredient page
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mulch with Pesticide
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mulch with Pesticide
+		Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Mulch with Pesticide_#71987
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Mulch with Pesticide
+	Then in the The Product page, I click Continue
+
 	Then I save the product information as: TestCase71987
 	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I should see the Product Information Page
@@ -166,7 +177,12 @@ Scenario: [65470] Ingredients - Select Trade Secret check box - Un-check Trade S
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bubble Solution_#65470
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Bubble Solution
+	Then in the The Product page, I click Continue
+
 	Then I save the product information as: TestCase65470
 	Given I call Shared Step 59680a (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
@@ -195,7 +211,12 @@ Scenario: [65459] Ingredients - Select Trade Secret check box - Publicly Disclos
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bubble Solution_#65459
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Bubble Solution
+	Then in the The Product page, I click Continue
+
 	Then I save the product information as: TestCase65459
 	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 59680a (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
@@ -219,7 +240,13 @@ Scenario: [65451] Ingredients - Select Publicly Disclosed check box - Public Nam
 	Then in the New Product page, I click Continue
 
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
-	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble Solution
+
+	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble Solution
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bubble Solution_#65451
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Bubble Solution
+	Then in the The Product page, I click Continue
+
 	Then I save the product information as: TestCase65451
 	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 59680a (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
@@ -244,7 +271,12 @@ Scenario: [65448] Ingredients - Publicly Disclosed, Trade secret and Public Name
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bubble Solution_#65448
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Bubble Solution
+	Then in the The Product page, I click Continue
+
 	Then I save the product information as: TestCase65448
 	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I should see the Product Information Page
@@ -305,7 +337,12 @@ Scenario: [71291] Product Ingredients contains a third party component that requ
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mulch with Pesticide
+#	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mulch with Pesticide
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Mulch with Pesticide_#71291
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Mulch with Pesticide
+	Then in the The Product page, I click Continue
+
 	Then I save the product information as: TestCase71291
 	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I should see the Product Information Page
@@ -343,7 +380,12 @@ Scenario: [74142] Pop up that Informs the regulations the components are associa
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mascara - Washable
+#	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mascara - Washable
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Mascara - Washable_#74142
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Mascara - Washable
+	Then in the The Product page, I click Continue
+
 	Then I save the product information as: TestCase74142
 	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 #Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP) ====== #
@@ -375,7 +417,12 @@ Scenario: [69796] Aerosol Warning Message on Ingredient page
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Hair Styling Product - Aerosol and Pump Spray
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Hair Styling Product - Aerosol and Pump Spray
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Hair Styling Product - Aerosol and Pump Spray_#69796
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Hair Styling Product - Aerosol and Pump Spray
+	Then in the The Product page, I click Continue
+
 	Then I save the product information as: TestCase69796
 	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Then I should see the Physical and Chemical Properties Page
@@ -411,7 +458,12 @@ Scenario: [80728] Ingredients - Transparency Ratio - FRAGRANCE component - inclu
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk_#80728
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
+	Then in the The Product page, I click Continue
+
 	Then I save the product information as: TestCase80728
 	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I should see the Product Information Page
@@ -455,7 +507,12 @@ Scenario: [80720] Ingredients - Transparency Ratio - FLAVOR component - included
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+#	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk_#80720
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
+	Then in the The Product page, I click Continue
+
 	Then I save the product information as: TestCase80720
 	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I should see the Product Information Page
@@ -1108,7 +1165,12 @@ Scenario: [207581] Oven Cleaner - Pump Spray - (RU000798) - New Flow Testing
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Oven Cleaner - Pump Sprays
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Oven Cleaner - Pump Sprays
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Oven Cleaner - Pump Sprays_#207581
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Oven Cleaner - Pump Sprays
+	Then in the The Product page, I click Continue
+
 	Then I save the product information as: TestCase207581
 	Given I call Shared Step 118138a Product Information - US, Pesticide No, No OSHA, No DSV, No CA Cleaning ,No PL, No GNFR Without Child question
 	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)

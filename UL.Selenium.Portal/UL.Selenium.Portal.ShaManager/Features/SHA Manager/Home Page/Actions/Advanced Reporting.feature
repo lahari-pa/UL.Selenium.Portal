@@ -45,7 +45,12 @@ Scenario: [105329] PM Monthly Status Report - Target
 	Given in the New Product page I click Continue
 
 
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Shampoo (Liquid)
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Shampoo (Liquid)
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Shampoo (Liquid)_#105329
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Shampoo (Liquid)
+	Then in the The Product page, I click Continue
+
 	Then I save the product information as: TestCase105329
 	And I call Shared Step 62678 (Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
 	And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
