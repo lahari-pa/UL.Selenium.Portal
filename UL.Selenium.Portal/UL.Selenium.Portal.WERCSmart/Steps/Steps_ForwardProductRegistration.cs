@@ -1248,7 +1248,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			string error = "This UPC Number is duplicated.";
 			string section = "UPC Number";
-			new Steps_ProductPrototype().InSectionErrorMessageIsIsNotDisplayed(section, error, is_isnot);
+			bool expected = is_isnot == "is";
+			if (Report.IsTrue(new AddUPCModal().SectionExists(section), $"Failure, '{section}' section does not exist.", $"Success, '{section}' section exists."))
+			{
+				Report.IsTrue(new AddUPCModal().ErrorIsDisplayedForSection(section, error) == expected, $"Failure, '{error}' error message {(expected ? "is not" : "is")} displayed.", $"Success, '{error}' error message {is_isnot} displayed.");
+			}
 		}
 
 		[RegexStepDefinition("In The Add UPC modal verify for Retailers error message 'This UPC Number is duplicated' (is|is not) displayed")]
@@ -1256,9 +1260,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			string error = "This UPC Number is duplicated.";
 			string section = "Retailers";
-			new Steps_ProductPrototype().InSectionErrorMessageIsIsNotDisplayed(section, error, is_isnot);
+			bool expected = is_isnot == "is";
+			if (Report.IsTrue(new AddUPCModal().SectionExists(section), $"Failure, '{section}' section does not exist.", $"Success, '{section}' section exists."))
+			{
+				Report.IsTrue(new AddUPCModal().ErrorIsDisplayedForSection(section, error) == expected, $"Failure, '{error}' error message {(expected ? "is not" : "is")} displayed.", $"Success, '{error}' error message {is_isnot} displayed.");
+			}
 		}
-
-
 	}
 }
