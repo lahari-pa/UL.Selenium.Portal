@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using UL.Automation.Reporting;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Classes;
+using UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -1241,6 +1242,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info($"Selecting the option: {firstOption} for ID: {id}");
 			Report.IsTrue(frwdProdReg.GivenProductSelectVendor(id, firstOption), "Failed to select the option", "Successfully selected the option");
 		}
+
+		[RegexStepDefinition("In The Add UPC modal verify for UPC Number error message 'This UPC Number is duplicated' (is|is not) displayed")]
+		public void ThenInTheAddUPCModalVerifyForUPCNumberErrorMessageThisUPCNumberIsDuplicatedIsDisplayed(string is_isnot)
+		{
+			string error = "This UPC Number is duplicated.";
+			string section = "UPC Number";
+			new Steps_ProductPrototype().InSectionErrorMessageIsIsNotDisplayed(section, error, is_isnot);
+		}
+
+		[RegexStepDefinition("In The Add UPC modal verify for Retailers error message 'This UPC Number is duplicated' (is|is not) displayed")]
+		public void ThenInTheAddUPCModalVerifyForRetailersErrorMessageThisUPCNumberIsDuplicatedIsDisplayed(string is_isnot)
+		{
+			string error = "This UPC Number is duplicated.";
+			string section = "Retailers";
+			new Steps_ProductPrototype().InSectionErrorMessageIsIsNotDisplayed(section, error, is_isnot);
+		}
+
 
 	}
 }

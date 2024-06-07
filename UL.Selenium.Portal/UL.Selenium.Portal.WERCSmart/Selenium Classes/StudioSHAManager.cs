@@ -22,12 +22,10 @@ using NPOI.XWPF.UserModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	public class StudioSHAManager : BaseObject
+	public class StudioSHAManager : SeleniumBaseObject
 	{
-		public const string BasePath = "//div[@id='main']";
-
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+	
+		protected override By ContainerElementLocator => By.XPath("//div[@id='main']");
 
 		public bool Wait_for_load(int secondsToWait = 30)
 		{
@@ -35,8 +33,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				StudioUtilites.SwitchToWindow("Wercs Studio");
 				this.SwitchToFrame(frame: "<contains(@data-frameid,'SHA')>");
-				this.containerElement = SeleniumWebDriver.CurrentDriver.WaitUntilElementVisible(By.XPath(BasePath), secondsToWait);
-				return this.containerElement != null && base.Wait_for_load(secondsToWait);
+				this.ContainerElement.WaitUntilElementVisible(By.XPath("//div[@id='main']"), secondsToWait);
+				return this.ContainerElement != null && base.Wait_for_load(secondsToWait);
 			}
 			catch
 			{

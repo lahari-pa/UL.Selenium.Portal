@@ -672,7 +672,11 @@ Scenario: [91157] Duplicate UPC is not permitted within account - Forward Produc
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
-	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	#And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Given I should see the The Product Page
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
+ 	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase91157
 	#And I call Shared Step 59680(252968) (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I should see the Product Information Page
@@ -742,9 +746,32 @@ Scenario: [91157] Duplicate UPC is not permitted within account - Forward Produc
 	Then I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then In the SHA manager grid I see the WPS ID I have saved as product: TestCase91157 and its status is: Assigned
 	Then I call Shared Step 65969 (Go to Power Designer Plus - Select your product & CKLT - Continue)
-	Then I call Shared Step 209526 (WPS Studio - PD+ - set all data and publish using rule and doc queue - CKLT and MTR only) for product saved as: TestCase91157
+	Then I call Shared Step 209526 (Power Designer Plus - AUTHORIZE Product (Applicable Only to Products with an Uploaded OSHA-SDS / Kit Products / Products that Do NOT Require an SDS Upload)) for product saved as: TestCase91157
 	Then I call Shared Step 209552 Power Designer Plus - APPLY RULES To Product
-	 
+	Then I call Sared Step 214627 Power Designer Plus - PUBLISH Product (Applicable Only to Battery Products ): TestCase91157
+	Then I call Shared Step 59066 (Go to SHA Manager)
+	Then In the SHA manager grid I see the WPS ID I have saved as product: TestCase91157 and its status is: Completed
+	Then I open the new tab in browser
+	Then I navigate to the landing page
+	Given I log in with the account saved in TReVor as: ProductAccount
+	Then I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
+	And I enter the text: saved as TestCase91157 in the 'Search by WPS ID or Product Name' field
+	And In the Foward Product Registration Screen I should see product: saved as TestCase91157
+	And In the Foward Product Registration Screen I Select the product: saved as TestCase91157
+	And I click continue on the Forward Product Registration page
+	Given in the Select Retailers tab under Forward Product Registration I select the retailer: Office Depot
+	And I click continue on the Forward Product Registration page
+	Then I select the first product under the Select UPCs tab
+	Then I click the Add UPC button under the Select UPCs tab
+	And In the Add UPC modal window I enter the following information:
+		| UPC Number        | Type        | Size (Ounces) | Retailer |
+		| saved as UPC91157 | Plastic bag | 18            | OD       |
+	Then In the UPC modal window I click Save
+	Then In The Add UPC modal verify for UPC Number error message 'This UPC Number is duplicated' is displayed
+	Then In The Add UPC modal verify for Retailers error message 'This UPC Number is duplicated' is displayed
+	Then In the UPC modal window I click Cancel
+	Then I click the Home navigation icon and accept the alert popup
+	Then The home screen should load
 
 
 @TestCase:91077

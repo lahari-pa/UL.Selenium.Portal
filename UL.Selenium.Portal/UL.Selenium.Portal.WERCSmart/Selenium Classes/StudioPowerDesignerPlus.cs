@@ -246,12 +246,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 	}
 
-	class StudioPowerDesignerPlusDesignMode : BaseObject
+	class StudioPowerDesignerPlusDesignMode : SeleniumBaseObject
 	{
-		public const string BasePath = "//div[@id='main']";
-
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath("//div[@id='main']");
 
 		public bool Wait_for_load(int secondsToWait = 30)
 		{
@@ -263,7 +260,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				IWebElement frame =
 					SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe[contains(@src, 'powertoolsworkspaceDesignMode')]"));
 				SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
-				this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+				//this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
 				return base.Wait_for_load(30);
 			}
 			catch (Exception)
@@ -941,7 +938,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool IsSectionActive(string section)
 		{
 
-			IList<IWebElement> listOfSections = this.containerElement.FindElements(By.XPath("//ul[@id='sectionActionList']/li/span"), 2);
+			IList<IWebElement> listOfSections = this.ContainerElement.FindElements(By.XPath("//ul[@id='sectionActionList']/li/span"), 2);
 			IWebElement matchingSection = listOfSections.FirstOrDefault(x => x.GetValue() == section);
 			IWebElement parentElement = matchingSection.FindElement(By.XPath(".//parent::li"), 2);
 
@@ -1674,12 +1671,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 	}
 
-	class ApplyRulesPage : BaseObject
+	class ApplyRulesPage : SeleniumBaseObject
 	{
-		public const string BasePath = "//body";
-
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath("//body");
 
 		public bool Wait_for_load(int secondsToWait = 60)
 		{
@@ -1726,7 +1720,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				Report.Info("The iframe was not null.");
 				SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
-				this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+				this.containerElement.FindElement(By.XPath("//body"));
 				Report.Info("going to 'base wait for load'");
 				if (base.Wait_for_load(30))
 				{
@@ -1794,7 +1788,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				ReadOnlyCollection<IWebElement> radios = this.containerElement.FindElements(By.XPath(".//table[@id='tblApply']//input[@type='radio']"));
+				ReadOnlyCollection<IWebElement> radios = this.ContainerElement.FindElements(By.XPath(".//table[@id='tblApply']//input[@type='radio']"));
 				IWebElement matchingRadio;
 				switch (name.ToLower())
 				{
@@ -2028,12 +2022,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 	}
 
-	class SelectRulesPage : BaseObject
+	class SelectRulesPage : SeleniumBaseObject
 	{
-		public const string BasePath = "//body";
-
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath("//body");
 
 		public bool Wait_for_load(int secondsToWait = 60)
 		{
@@ -2094,11 +2085,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
 
-			Report.Info($"looking for container element from basePath");
-
-
-			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
-
 			Report.Info($"going for wait load...");
 
 			if (base.Wait_for_load(30))
@@ -2114,11 +2100,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info($"base did not load...");
 			return false;
 		}
-
-
-
-
-
 
 		public bool Wait_for_loadLatestVersion(int secondsToWait = 60)
 		{
@@ -2216,11 +2197,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
 
-			Report.Info($"looking for container element from basePath");
-
-
-			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
-
 			Report.Info($"going for wait load...");
 
 			//why are we clicking filter button here?
@@ -2262,7 +2238,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickFilterButton()
 		{
-			IWebElement button = this.containerElement.FindElement(By.XPath(".//a[@id='Selectrecord1_lnkFilter']"), 2);
+			IWebElement button = this.ContainerElement.FindElement(By.XPath(".//a[@id='Selectrecord1_lnkFilter']"), 2);
 			if (button != null)
 			{
 				return button.TryClick();
@@ -2348,7 +2324,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool EnterInTextBox(string textBox, string value)
 		{
-			ReadOnlyCollection<IWebElement> listOfSelects = this.containerElement.FindElements(By.XPath(".//input"));
+			ReadOnlyCollection<IWebElement> listOfSelects = this.ContainerElement.FindElements(By.XPath(".//input"));
 			IWebElement matchingInput;
 			switch (textBox.ToLower())
 			{
@@ -3136,12 +3112,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 	}
 
-	class SelectDocumentQueueFilter : BaseObject
+	class SelectDocumentQueueFilter : SeleniumBaseObject
 	{
-		public const string BasePath = "//table[@id='DocumentQueue_tblFilter']";
-
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath("//table[@id='DocumentQueue_tblFilter']");
 
 		public void Close()
 		{

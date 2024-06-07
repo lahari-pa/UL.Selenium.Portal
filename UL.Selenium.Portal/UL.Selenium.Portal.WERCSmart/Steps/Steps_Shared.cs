@@ -7596,7 +7596,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.ICloseAlert();
 			thisStepsStudio.InDocumentQueueFilterPageIClickOnClose();
 		}
-
+		
 		[RegexStepDefinition(
 			@"I call Shared Step 209526 \(WPS Studio - PD\+ - set all data and publish using rule and doc queue - CKLT and MTR only\) for product saved as: (.*)")]
 		public void GivenICallSharedStep209526WPSStudio_PD_SetAllDataAndPublishUsingRuleAndDocQueue_CKLTAndMTROnly(
@@ -13646,7 +13646,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("In the Additional Documents to Provide page I click Continue");
 			MyNewProductSteps.GivenInTheNewProductPageIClickContinue("Additional Documents to Provide");
 		}
-
+		[RegexStepDefinition(
+			@"I call Shared Step 209526 \(Power Designer Plus - AUTHORIZE Product \(Applicable Only to Products with an Uploaded OSHA-SDS / Kit Products / Products that Do NOT Require an SDS Upload\)\) for product saved as: (.*)")]
 		[RegexStepDefinition(@"I call Shared Step 214620 Power Designer Plus - AUTHORIZE Product \(Applicable Only to Battery Products\) for product saved as: (.*)")]
 		public void ThenICallSharedStepPowerDesignerPlus_AUTHORIZEProductApplicableOnlyToProductsWithAnUploadedOSHA_SDSOrKitProducts(string savedAs)
 		{
@@ -13785,8 +13786,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("In the rule name filter box I enter the studio user name");
 			//thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
 
-			bool found = Context.FeatureContext.TryGetValue("QASHAAccount", out string savedStudioAcc);
-			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox(savedStudioAcc, "rule name");
+			//bool found = Context.FeatureContext.TryGetValue("QASHAAccount", out string savedStudioAcc);
+			thisStepsStudio.InSelectRulesFilterPopupIEnterValueInTextBox("QASHA", "rule name");
 
 			thisStepsStudio.InSelectRulesFilterPopupIClickButton("Apply");
 			Report.StartSubStep("I select the rule  by clicking on it");
