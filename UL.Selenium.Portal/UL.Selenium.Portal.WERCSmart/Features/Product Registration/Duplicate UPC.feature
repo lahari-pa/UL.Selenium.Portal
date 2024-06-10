@@ -359,7 +359,8 @@ Scenario: [88879] Input fields and labels for Retailers HD and TG have been Upda
 	Given I should see the Regulatory Documents to Provide Page
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase88879
 
-
+#Removed from regression 2024/06
+@ignore
 @TestCase:91801
 Scenario: [91801] Duplicate UPC is not permitted within WERCSmart system - Forward Product registration - Case UPC
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto7 and Open SHA manager)
@@ -394,7 +395,8 @@ Scenario: [91801] Duplicate UPC is not permitted within WERCSmart system - Forwa
 	And In the Case UPC modal window I click Save
 	Then I check that the alert displayed contains text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review.
 	
-
+#Removed from regression 2024/06
+@ignore
 @TestCase:91735
 Scenario: [91735] Duplicate UPC is not permitted within WERCSmart system - Forward Product registration - single UPC
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -476,6 +478,9 @@ Scenario: [91798] Duplicate UPC is not permitted within WERCSmart system - New P
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase91798
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase91798
+
+#Removed from regression 2024/06
+@ignore
 @TestCase:91800
 Scenario: [91800] Duplicate UPC is not permitted within account - Forward Product registration - Case UPC
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -567,7 +572,9 @@ Scenario: [91741] Duplicate UPC is not permitted within account - New Product re
 	And I should see a list style form error with text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. UPCs:
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91741
-	
+
+#Removed from regression 2024/06
+@ignore
 @TestCase:91100
 Scenario: [91100] Duplicate UPC is not permitted within account - New Product registration - Bulk Upload
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -741,7 +748,8 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91077
 
-	
+#Removed from regression 2024/06
+@ignore	
 @TestCase:91101
 Scenario: [91101] Duplicate UPC is not permitted within WERCSmart system - New Product registration - Bulk Upload
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
