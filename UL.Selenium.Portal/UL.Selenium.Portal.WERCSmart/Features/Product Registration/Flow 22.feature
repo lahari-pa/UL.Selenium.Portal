@@ -357,7 +357,7 @@ Scenario: [60547] Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol 
 
 		# ====== Following the steps from 'Shared Step' 60567 ====== #
 	Given I upload PDF document to Upload SDS (Optional) field
-	Given I upload PDF document to Flash Point Testing Report field
+	Given In the Additional Documents to Provide section, I upload PDF document to Flash Point Testing Report field
 	Then in the Additional Documents To Provide page I click Continue
 
 	And in the Optional Reports and Documents Available for Purchase page I click Continue

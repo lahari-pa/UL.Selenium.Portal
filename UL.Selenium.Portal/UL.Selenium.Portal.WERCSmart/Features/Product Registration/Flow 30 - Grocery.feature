@@ -152,7 +152,7 @@ Scenario: [60724] Condiments, Sauces - RU001454
 
 	# ====== Given I call Shared Step 60567 (Upload Product Label only) ====== #
 	Given I upload PDF document to Upload SDS (Optional) field
-	Given I upload PDF document to Flash Point Testing Report field
+	Given In the Additional Documents to Provide section, I upload PDF document to Flash Point Testing Report field
 	Then in the Additional Documents To Provide page I click Continue
 
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
@@ -241,7 +241,7 @@ Scenario: [60723] Jelly, Jam or Preserves - RU001456
 	Given in the Regulatory Documents To Provide page I click Continue
 
 	Given I upload PDF document to Upload SDS (Optional) field
-	Given I upload PDF document to Flash Point Testing Report field
+	Given In the Additional Documents to Provide section, I upload PDF document to Flash Point Testing Report field
 	Then in the Additional Documents To Provide page I click Continue
 
 		#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text

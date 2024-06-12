@@ -30,6 +30,9 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
 @GTINAndUPC
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
+@@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
+
 Feature: Flow 9
 
 @TestCase:58072
@@ -206,6 +209,12 @@ Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 
 	#Then I call Shared Step 132473 (Regulatory Information 3 - Nutritional Category)
 	Given I should see the Regulatory Information 3 Page
+	Then In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible Nutritional Supplement. Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
+	| Option                 |
+	| Supplement Facts Panel |
+	| Nutrition Facts Panel  |
+	| None of the Above      |
 	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: Nutrition Facts Panel
 	Then In the Regulatory Information 3 Section, the following link: Nutritional and Supplement Labels should be displayed
 	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
@@ -214,6 +223,7 @@ Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS
 	Then I should be on the Retailer Page
 	And In the Retailer Section, click 'Add Retailers' button
+	Then In the Retailer Section is selected retailer: No Retailer/No UPC Product
 	And In the Select Retailers window, select retailer: CVS
 	And In the Select Retailers window, click 'Done' button
 	Then in the Retailer page, I click Continue
@@ -225,12 +235,20 @@ Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
 	#Given I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
 	Given I should see the Additional Documents to Provide Page
+	Then In the Additional Documents to Provide Section, I upload PDF document to Upload Full Product Label (required) field
+	Then in the Additional Documents to Provide  page I click Continue
+	Given I should see the Optional Reports and Documents Available for Purchase Page
+	Then in the Optional Reports and Documents Available for Purchase  page I click Continue
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58078. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I should see the Optional Comments Page
-	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
 	Then in the Optional Comments page I click Continue
-
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Energy or Nutritional Bars
+	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Energy or Nutritional Bars
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, click 'Summary' button
+	Given I switch to the tab with Data Summary page
+	Given In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Energy or Nutritional Bars
+	Given I close the tab with Data Summary page
+    Given I should see the Data Acceptance Page
 	Given I navigate to the home page
 	Then I delete the product: TestCase58078
 
