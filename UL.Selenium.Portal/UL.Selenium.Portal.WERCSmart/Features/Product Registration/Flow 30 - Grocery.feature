@@ -39,7 +39,8 @@ Feature: [64735] Flow 30 - Grocery
 @ignore
 @TestCase:60725
 Scenario: [60725] Baked Goods, Crackers - RU001449
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 	Then The home screen should load
 	# ====== Test Setup - Generating + Saving UPC Number and ensuring no duplicates exist ====== #
@@ -86,7 +87,8 @@ Scenario: [60725] Baked Goods, Crackers - RU001449
 
 @TestCase:60724
 Scenario: [60724] Condiments, Sauces - RU001454
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 	Then The home screen should load
 	# ====== Test Setup - Generating + Saving UPC Number and ensuring no duplicates exist ====== #
@@ -175,7 +177,8 @@ Scenario: [60724] Condiments, Sauces - RU001454
 
 @TestCase:60723
 Scenario: [60723] Jelly, Jam or Preserves - RU001456
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 	Then The home screen should load
 	# ====== Test Setup - Generating + Saving UPC Number and ensuring no duplicates exist ====== #
@@ -264,7 +267,8 @@ Scenario: [60723] Jelly, Jam or Preserves - RU001456
 @tfs_design
 @TestCase:60722
 Scenario: [60722] Nut Butters - RU001455
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 	Then The home screen should load
 	# ====== Test Setup - Generating + Saving UPC Number and ensuring no duplicates exist ====== #
@@ -302,7 +306,8 @@ Scenario: [60722] Nut Butters - RU001455
 @ignore
 @TestCase:73041
 Scenario: [73041] Cereals - RU001448 - Retailers associated Walgreens
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 	Then The home screen should load
 	# ====== Test Setup - Generating + Saving UPC Number and ensuring no duplicates exist ====== #

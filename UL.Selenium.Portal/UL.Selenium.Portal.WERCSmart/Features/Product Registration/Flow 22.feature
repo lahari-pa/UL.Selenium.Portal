@@ -42,7 +42,8 @@ Feature: Flow 22
 @tfsdesign
 @TestCase:60544
 Scenario: [60544] Weld-Through Primer - Aerosol - RU001050
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC60544
 	Given I delete all products with UPC Number: saved as UPC60544
@@ -117,7 +118,8 @@ Scenario: [60544] Weld-Through Primer - Aerosol - RU001050
 
 @TestCase:60545
 Scenario: [60545] Photograph Coating - Aerosol - RU001067
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC60545
 	Given I delete all products with UPC Number: saved as UPC60545
@@ -197,7 +199,8 @@ Scenario: [60545] Photograph Coating - Aerosol - RU001067
 @ignore
 @TestCase:60546
 Scenario: [60546] Glass Coating - Aerosol - RU001037
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC60546
 	Given I delete all products with UPC Number: saved as UPC60546
