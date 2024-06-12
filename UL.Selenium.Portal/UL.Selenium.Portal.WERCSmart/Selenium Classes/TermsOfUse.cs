@@ -5,16 +5,15 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class TermsOfUse : BaseObject
+	class TermsOfUse : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[@id='termsOfUserContainer']";
 
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public void Accept()
 		{
-			IWebElement checkBox = this.containerElement.FindElement(By.XPath(".//input[@id='Accepted']"), 2);
+			IWebElement checkBox = this.FindElement(By.XPath(".//input[@id='Accepted']"), 2);
 			if (checkBox == null)
 			{
 				return;
@@ -23,7 +22,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			checkBox.ScrollElementIntoView();
 			checkBox.Check(true);
 
-			IWebElement acceptBtn = this.containerElement.FindElement(By.XPath(".//button[@value='Continue' and @type='submit']"), 2);
+			IWebElement acceptBtn = this.FindElement(By.XPath(".//button[@value='Continue' and @type='submit']"), 2);
 
 			if (acceptBtn == null)
 			{
