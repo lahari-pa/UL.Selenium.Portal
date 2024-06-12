@@ -287,6 +287,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(ingredientRow.CellSelectExists(columnLabel), $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column select does not exist.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column select does exist.");
 			Report.IsTrue(ingredientRow.CellSelectOptionSelect(columnLabel, optionLabel), $"Failure, to select {searchType}:'{searchText}' row '{columnLabel}' column select option '{optionLabel}'.", $"Success, selected {searchType}:'{searchText}' row '{columnLabel}' column select option '{optionLabel}'.");
 		}
+
+		[RegexStepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column multiselect options (.*)")]
+		public void IngredientsTableRowSelectOptionsMultiSelect(string searchType, string searchText, string columnLabel, string optionsListString)
+		{
+			IngredientsTable ingredientsTable = new IngredientsTable();
+			MultiSelectModal multiSelectModal = new MultiSelectModal();
+			Report.IsTrue(ingredientsTable.WaitForContainerToBeVisible(), $"Failure, ingredients table does not exist.", $"Success, ingredients table exists.");
+			Report.IsTrue(!ingredientsTable.IngredientRowList.IsNullOrEmpty(), $"Failure, ingredients table is empty.", $"Success, ingredients table is not empty.");
+			IngredientsTableRow ingredientRow = this.IngredientsRowSearchTypeGet(searchType, searchText);
+			Report.IsTrue(ingredientRow.CellMultiSelectExists(columnLabel), $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column multiselect does not exist.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column multiselect does exist.");
+			Report.IsTrue(ingredientRow.CellMultiSelectClick(columnLabel), $"Failure, failed to click {searchType}:'{searchText}' row '{columnLabel}' column multiselect.", $"Success, clicked {searchType}:'{searchText}' row '{columnLabel}' column multiselect.");
+			//Report.IsTrue(ingredientRow.CellSelectOptionSelect(columnLabel, optionsListString), $"Failure, to select {searchType}:'{searchText}' row '{columnLabel}' column select option '{optionLabel}'.", $"Success, selected {searchType}:'{searchText}' row '{columnLabel}' column select option '{optionLabel}'.");
+			List<string> optionsList = [.. optionsListString.Split(",")];
+			foreach(string option in optionsList)
+			{
+				string optionTrimed = option.Trim();
+				Report.IsTrue(multiSelectModal.MultiSelectOptionExists(optionTrimed), $"Failure, multiselect modal option '{optionTrimed}' does not exist.", $"Success, multiselect option '{option}' exists.");
+				Report.IsTrue(multiSelectModal.MultiSelectOptionClick(optionTrimed), $"Failure, failed to click multiselect modal option '{optionTrimed}'.", $"Success, clicked multiselect option '{option}'.");
+				Report.IsTrue(multiSelectModal.MultiSelectSelectedOptionExists(optionTrimed), $"Failure, failed to select multiselect option '{optionTrimed}'.", $"Success, selecred mulitselect option '{optionTrimed}'.");
+			}
+			Report.IsTrue(multiSelectModal.CloseButtonClick(), $"Failure, failed to click multiselect modal 'Close' button.", $"Success, clicked multiselect modal 'Close' button.");
+			Report.Screenshot();
+		}
+
 		[RegexStepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column delete selected option (.*)")]
 		public void ThenInTheIngredientsTableRowWithComponentNameWaterInFunctionalPurposeColumnDeleteSelectedOptionAbrasive(string searchType, string searchText, string columnLabel, string optionLabel)
 		{
@@ -487,7 +511,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 				if (inputRow["Functional Purpose"] != null)
 				{
 					Report.StartSubStep($"Then In the Ingredients Table row with {inputRow["SearchType"]}: {inputRow["SearchValue"]}, in 'Functional Purpose' column select option {inputRow["Ingredient Type"]}");
-					this.IngredientsTableRowSelectOptionSelect(inputRow["SearchType"], inputRow["SearchValue"], "Functional Purpose", inputRow["Functional Purpose"]);
+					this.IngredientsTableRowSelectOptionsMultiSelect(inputRow["SearchType"], inputRow["SearchValue"], "Functional Purpose", inputRow["Functional Purpose"]);
 				}
 			}
 		}
