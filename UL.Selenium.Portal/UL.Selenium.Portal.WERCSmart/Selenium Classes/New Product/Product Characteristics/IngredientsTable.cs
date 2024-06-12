@@ -31,7 +31,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		IWebElement CellErrorMessage(string columnTitle) => this.RowColumnCell(columnTitle).FindElement(By.XPath(".//p[@class='form-error']"), 1);
 		IWebElement CellTextInput(string columnTitle) => this.RowColumnCell(columnTitle).FindElement(By.XPath(".//input[@type='text']"), 1);
 		IWebElement CellSelect(string columnTitle) => this.RowColumnCell(columnTitle).FindElement(By.XPath(".//select[@class = 'form-control']"), 1);
-		IWebElement CellMultiSelect(string columnTitle) => this.RowColumnCell(columnTitle).FindElement(By.XPath(".//select[contains(@class,'select2-hidden-accessible')]"), 1);
+		IWebElement CellMultiSelect(string columnTitle) => this.RowColumnCell(columnTitle).FindElement(By.XPath(".//span[contains(@class,'select2-selection--multiple')]"), 1);
+		List<IWebElement> CellMultiSelectSelectedList(string columnTitle) => this.CellMultiSelect(columnTitle).FindElements(By.XPath(".//li[@title]"), 1).ToList();
         IWebElement OptionDeleteIcon(string columnTitle, string option) => this.RowColumnCell(columnTitle).FindElement(By.XPath($".//li[text() = '{option}']//span"), 1);
         List<IWebElement> CellSelectOptionList(string columnTitle) => this.CellSelect(columnTitle).FindElements(By.XPath(".//option"), 1).ToList();
 		#endregion
@@ -136,6 +137,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		{
 			Report.Info($"Attempting to click '{columnTitle}' column cell multi select.");
 			return this.CellMultiSelect(columnTitle).TryClick();
+		}
+
+		public bool CellMultiSelectSelectedListExists(string columnTitle)
+		{
+			Report.Info($"Attempting to confirm '{columnTitle}' column cell multi select selected list exists.");
+			return !this.CellMultiSelectSelectedList(columnTitle).IsNullOrEmpty();
+		}
+
+		public bool CellMultiSelectSelectedListItemExists(string columnTitle, string itemLabel)
+		{
+			Report.Info($"Attempting to confirm '{columnTitle}' column cell multi select item '{itemLabel}' exists.");
+			return this.CellMultiSelectSelectedList(columnTitle).Exists(x=>x.Text == itemLabel);
 		}
 
 		public bool CellSelectExists(string columnTitle)
@@ -416,6 +429,54 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 			return this.IngredientRowList.Where(x => string.Equals(x.CASNumber, casNumber, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
 		}
 		#endregion
+		#endregion
+	}
+
+	class MultiSelectModal : SeleniumBaseObject
+	{
+		#region Page Objects
+		protected override By ContainerElementLocator => By.XPath($"//span[contains(@class,'select2-dropdown')]");
+		List<IWebElement> MultiSelectOptions => this.FindElements(By.XPath(".//li[@role='option']"), 1).ToList();
+		List<IWebElement> MultiSelectSelectedOptions => this.FindElements(By.XPath(".//li[@role='option'][@aria-selected='true']"), 1).ToList();
+		IWebElement CloseButton => this.FindElement(By.XPath(".//button[text()='Close']"), 1);
+		#endregion
+
+		#region Methods
+		public bool MultiSelectOptionExists(string optionLabel)
+		{
+			Report.Info($"Attempting to confrim multiselect option '{optionLabel}' exists.");
+			return this.MultiSelectOptions.Any(x=>x.Text == optionLabel);
+		}
+
+		public bool MultiSelectOptionClick(string optionLabel)
+		{
+			Report.Info($"Attempting to click multiselect option '{optionLabel}'.");
+			return this.MultiSelectOptions.Where(x=>x.Text==optionLabel).FirstOrDefault().TryClick();
+		}
+
+		public bool MultiSelectSelectedOptionExists(string optionLabel)
+		{
+			Report.Info($"Attempting to confrim multiselect selected option '{optionLabel}' exists.");
+			return this.MultiSelectSelectedOptions.Any(x => x.Text == optionLabel);
+		}
+
+		public bool MultiSelectSelectedOptionClick(string optionLabel)
+		{
+			Report.Info($"Attempting to click multiselect selected option '{optionLabel}'.");
+			return this.MultiSelectSelectedOptions.Where(x => x.Text == optionLabel).FirstOrDefault().TryClick();
+		}
+
+		public bool CloseButtonExists()
+		{
+			Report.Info($"Attempting to confirm Close button exists.");
+			return this.CloseButton != null;
+		}
+
+		public bool CloseButtonClick()
+		{
+			Report.Info($"Attempting to click Close button.");
+			return this.CloseButton.TryClick();
+		}
 		#endregion
 	}
 }

@@ -2213,7 +2213,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 		}
 
-		[RegexStepDefinition(@"The following options (should|should not) be (displayed|displayed exclusively) for section: (.*)")]
+		//[RegexStepDefinition(@"The following options (should|should not) be (displayed|displayed exclusively) for section: (.*)")]
 		public void CheckOptionsInSection(string should, string exclusive, string section, Table expected)
 		{
 			var expectedOptions = new List<string>();

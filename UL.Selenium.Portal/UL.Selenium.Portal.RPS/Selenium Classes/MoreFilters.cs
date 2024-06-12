@@ -885,10 +885,33 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             return el;
         }
 
+        public bool InTheMoreFiltersPopupSelectAllFilterDisplayed(string filter, string value)
+        {
+            IWebElement el = this.FindElement(By.XPath($"//div[@class='modal-body']//div[contains(@class,'filters-scroll')]//label[contains(text(),'Select All: {filter} \"{value}\"')]"), 2);
+            return el.Displayed;
+        }
+
+        public bool InTheMoreFiltersPopupSelectAllValueMatchestheSearch(string value)
+        {
+            IWebElement el = this.FindElement(By.XPath($"//div[@class='modal-body']//div[contains(@class,'filters-scroll')]//label[contains(@data-bind,'selectAllText')]"), 2);
+            return el.Text.Contains(value);
+        }
+
+        public bool InTheMoreFiltersPopupSelectAllCountMatchestheListDisplayed()
+        {
+            IWebElement el = this.FindElement(By.XPath($"//div[@class='modal-body']//div[contains(@class,'filters-scroll')]//label[contains(@data-bind,'selectAllCount')]"), 2);
+            List<IWebElement> optionsEls = this.FindElements(By.XPath("//div[@class='modal-body']//div[contains(@class,'filters-scroll')]//label[contains(@data-bind,'value')]"), 2).ToList();
+            string optionscount = optionsEls.Count.ToString();
+            return el.Text == optionscount;
+        }
+
+        public bool InTheMoreFiltersPopupClickiSelectAllCheckBox()
+        {
+            IWebElement el = this.FindElement(By.XPath($"//div[@class='modal-body']//div[contains(@class,'filters-scroll')]//input[contains(@data-bind,'checked: selectAll')]"), 2);
+            return el.TryClick();
+        }
 
         #endregion
-
-
 
     }
 }
