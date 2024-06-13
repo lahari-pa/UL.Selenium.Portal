@@ -238,11 +238,14 @@ Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 	#Given I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
 	Given I should see the Additional Documents to Provide Page
 	Then In the Additional Documents to Provide Section, I upload PDF document to Upload Full Product Label (required) field
+	Then In the Additional Documents to Provide Section, for section Product Label I click button 'View'
+	Then In the Additional Documents to Provide Section, after clicking 'View' button I confirm pdf file is downloaded
 	Then in the Additional Documents to Provide  page I click Continue
 	Given I should see the Optional Reports and Documents Available for Purchase Page
 	Then in the Optional Reports and Documents Available for Purchase  page I click Continue
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58078. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' is availiable
 	Then in the Optional Comments page I click Continue
 	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Energy or Nutritional Bars
 	Given I should see the Data Acceptance Page
