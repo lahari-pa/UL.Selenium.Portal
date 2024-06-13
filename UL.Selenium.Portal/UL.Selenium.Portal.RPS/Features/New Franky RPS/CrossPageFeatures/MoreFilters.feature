@@ -1250,3 +1250,82 @@ Scenario Outline: [243839] 3 Panel-More Filters- WPSID- Select All
 #		| [#243839o]  3 Panel-More Filters- WPSID- Select All      | RPS.CT          | Product Lookup          | No          |
 #    	| [#243839p]  3 Panel-More Filters- WPSID- Select All      | RPS.CT          | Recent Activities       | No          |
 #	    | [#243839q]  3 Panel-More Filters- WPSID- Select All      | RPS.CT          | Classification History  | No          |
+
+
+Scenario Outline: [243841] 3 Panel-More Filters- DPCI Number- Select All
+	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer> 
+	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
+	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
+	Then I confirm the page has loaded
+	Then In the recent activities Page, I click the More Filters Button
+	Then In the Product Lookup Page, The More Filters Popup is showing
+    And In the More Filters pop up, I enter value in search box in the Filter Categories column: DPCI Number
+	Then In the More Filters pop up, I confirm searched filter is displayed in Filters Panel : DPCI Number
+	Then In the More Filters pop up, I click on searched filter in Filters Panel : DPCI Number 
+	Then In the More Filters pop up, I confirm I see Search under the filter parameter heading
+	Then In the More Filters pop up, I confirm the left side of the search box, there is a dropdown box
+	Then In the More Filters pop up, I confirm default value of the dropdown box is Contains
+	Then In the More Filters pop up, I confirm in the Filter Parameter Panel Selector three options are : Contains, Start With and Is are displayed 
+	Then In the More Filters pop up, In Filter Parameter panel I confirm the Search field shows the default text: Search
+	Then In the More Filters pop up, I confirm the Filter Parameter panel shows the WPS Id list
+	Then In the More Filters pop up, In Filter Parameter panel I confirm each item for selection shows a check box before the DPCI value
+    Then In the More Filters pop up, I select the option from the Parameters drop down list: Contains 
+	Then In the More Filters pop up, I now type a string  in DPCI search field: 12
+	Then In the More Filters pop up, I confirm the Filters Parameter panel populates with a list of DPCI values
+    Then I call Shared Step 243836 (RPS- More Filters- Select All- Contains): 12
+	Then I confirm the page has refreshed
+	Then In the product lookup Page, In the Products table I click the Reset Button
+    Then In the recent activities Page, I click the More Filters Button
+	Then In the Product Lookup Page, The More Filters Popup is showing
+    And In the More Filters pop up, I enter value in search box in the Filter Categories column: DPCI Number
+	Then In the More Filters pop up, I confirm searched filter is displayed in Filters Panel : DPCI Number
+	Then In the More Filters pop up, I click on searched filter in Filters Panel : DPCI Number
+	Then In the More Filters pop up, I confirm I see Search under the filter parameter heading
+	Then In the More Filters pop up, I confirm the left side of the search box, there is a dropdown box
+	Then In the More Filters pop up, I confirm default value of the dropdown box is Contains
+	Then In the More Filters pop up, I confirm in the Filter Parameter Panel Selector three options are : Contains, Start With and Is are displayed 
+	Then In the More Filters pop up, In Filter Parameter panel I confirm the Search field shows the default text: Search
+	Then In the More Filters pop up, I confirm the Filter Parameter panel shows the DPCI list 
+	Then In the More Filters pop up, In the search field in the Filter Parameters panel, In the search box, I enter full WPS ID: savedAs
+    Then In the More Filters pop up, I select the option from the Parameters drop down list: Is 
+	Then I confirm I see the Supplier Name I was searching for: savedAs
+    Then I call Shared Step 243837 (RPS- More Filters- Select All- Is): savedAs
+	Then I confirm the page has refreshed
+	Then In the product lookup Page, In the Products table I click the Reset Button
+    Then In the recent activities Page, I click the More Filters Button
+	Then In the Product Lookup Page, The More Filters Popup is showing
+	And In the More Filters pop up, I enter value in search box in the Filter Categories column: DPCI Number
+	Then In the More Filters pop up, I confirm searched filter is displayed in Filters Panel : DPCI Number
+	Then In the More Filters pop up, I click on searched filter in Filters Panel : DPCI Number
+	Then In the More Filters pop up, I confirm I see Search under the filter parameter heading
+	Then In the More Filters pop up, I confirm the left side of the search box, there is a dropdown box
+	Then In the More Filters pop up, I confirm default value of the dropdown box is Contains
+	Then In the More Filters pop up, I confirm in the Filter Parameter Panel Selector three options are : Contains, Start With and Is are displayed 
+	Then In the More Filters pop up, In Filter Parameter panel I confirm the Search field shows the default text: Search
+	Then In the More Filters pop up, I confirm the Filter Parameter panel shows the DPCI list
+	Then In the More Filters pop up, In Filter Parameter panel I confirm each item for selection shows a check box before the DPCI value
+    Then In the More Filters pop up, I select the option from the Parameters drop down list: Starts with
+	Then In the More Filters pop up, I now type a string  in DPCI search field: 037
+	Then In the More Filters pop up, I confirm the list of items shown is narrowed based on the characters I enter: 037
+    Then I call Shared Step 243838 (RPS- More Filters- Select All- Starts with): 037
+	Then I confirm the page has refreshed
+
+	Examples:
+		| Scenario Name                                                  | Retailer        | Page                    | IsWebviewer |
+ 		| [#243841a]  3 Panel-More Filters- DPCI Number- Select All      | RPS.TG          | Product Lookup          | No          |
+# 		| [#243841b]  3 Panel-More Filters- DPCI Number- Select All      | RPS.TG          | Recent Activities       | No          |
+# 		| [#243841c]  3 Panel-More Filters- DPCI Number- Select All      | RPS.CV          | Product Lookup          | No          |
+#		| [#243841d]  3 Panel-More Filters- DPCI Number- Select All      | RPS.CV          | Recent Activities       | No          |
+#		| [#243841e]  3 Panel-More Filters- DPCI Number- Select All      | RPS.LW          | Product Lookup          | No          |
+#		| [#243841f]  3 Panel-More Filters- DPCI Number- Select All      | RPS.LW          | Recent Activities       | No          |
+#		| [#243841g]  3 Panel-More Filters- DPCI Number- Select All      | RPS.SF          | Product Lookup          | No          |
+# 		| [#243841h]  3 Panel-More Filters- DPCI Number- Select All      | RPS.SF          | Recent Activities       | No          |
+#		| [#243841i]  3 Panel-More Filters- DPCI Number- Select All      | RPS.LW          | Demo Viewer             | Yes         |
+#		| [#243841j]  3 Panel-More Filters- DPCI Number- Select All      | RPS.TG          | Store Viewer            | Yes         |
+#		| [#243841k]  3 Panel-More Filters- DPCI Number- Select Alll     | RPS.TG          | Status Viewer           | Yes         |
+#		| [#243841l]  3 Panel-More Filters- DPCI Number- Select All      | RPS.TG          | HQ Viewer               | Yes         |
+#		| [#243841m]  3 Panel-More Filters- DPCI Number- Select All      | RPS.SF          | SmartFinal_Store        | Yes         |
+# 		| [#243841n]  3 Panel-More Filters- DPCI Number- Select All      | RPS.LW          | Lowes_store             | Yes         |
+#		| [#243841o]  3 Panel-More Filters- DPCI Number- Select All      | RPS.CT          | Product Lookup          | No          |
+#    	| [#243841p]  3 Panel-More Filters- DPCI Number- Select All      | RPS.CT          | Recent Activities       | No          |
+#	    | [#243841q]  3 Panel-More Filters- DPCI Number- Select All      | RPS.CT          | Classification History  | No          |
