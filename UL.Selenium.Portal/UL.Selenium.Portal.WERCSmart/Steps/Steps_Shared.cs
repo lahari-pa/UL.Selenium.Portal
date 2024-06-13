@@ -10024,7 +10024,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				"When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?",
 				"No");
 			Report.StartSubStep(
-				"If Water Solubility question displays  then select a option from dropdown for 'Select the best Water Solubility description' else this step");
+				"If Water Solubility question displays  then select a option from dropdown for 'Select the best Water Solubility description' else ignore this step");
 			if (newProduct.OptionExists("Select the best Water Solubility description"))
 			{
 				stepsNewProduct.SetTheSectionOptionTo("Select the best Water Solubility description", "Dispersible");
