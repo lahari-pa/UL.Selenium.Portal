@@ -259,22 +259,38 @@ Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
 #	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Save Mart Supermarkets
 	Then I should be on the Retailer Page
 	And In the Retailer Section, click 'Add Retailers' button
-	And In the Select Retailers window, select retailer: Save Mart Supermarkets
+	Then In the Retailer Section is selected retailer: No Retailer/No UPC Product
+	And In the Select Retailers window, select retailer: CVS
 	And In the Select Retailers window, click 'Done' button
 	Then in the Retailer page, I click Continue
 
-	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58079, container type: Plastic bag and size: 8
-	Given I call Shared Step 60567 (Upload Product Label only)
-	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58079. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	#Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58078, container type: Plastic Container and size: 3.6
+	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC58078 enter Size: 12 and enter Container Type: Plastic bag
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	#Given I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
+	Given I should see the Additional Documents to Provide Page
+	Then In the Additional Documents to Provide Section, I upload PDF document to Upload Full Product Label (required) field
+	Then In the Additional Documents to Provide Section, for section Product Label I click button 'View'
+	Then In the Additional Documents to Provide Section, after clicking 'View' button I confirm pdf file is downloaded
+	Then in the Additional Documents to Provide  page I click Continue
+	Given I should see the Optional Reports and Documents Available for Purchase Page
+	Then in the Optional Reports and Documents Available for Purchase  page I click Continue
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58078. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I should see the Optional Comments Page
-	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then In the Optional Comments Section, section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' is availiable
 	Then in the Optional Comments page I click Continue
-
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Energy or Nutritional Powder/Mix
-	#Replace shared 42214
+	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Energy or Nutritional Bars
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, click 'Summary' button
+	Given I switch to the tab with Data Summary page
+	Given In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Energy or Nutritional Bars
+	Given I close the tab with Data Summary page
+    Given I should see the Data Acceptance Page
 	Given I navigate to the home page
 	Then I delete the product: TestCase58079
+
 @TestCase:58073
 Scenario: [58073] Footwear - Gel Insert - RU000854
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
