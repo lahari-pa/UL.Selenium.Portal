@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Reqnroll;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_and_Submit
 {
@@ -22,6 +24,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 		{
 			new Steps_PaymentMethods().ThenInTheThankYouScreenIClickHome();
 		}
+		[RegexStepDefinition("In the Purchase Summary page message is displayed with text: (.*)")]
+		public void ThenInThePurchaseSummaryPageMessageIsDisplayedWithText( string text)
+		{
+			Report.IsTrue(new PaymentMethods_Thank_You().Thank_You_TextExists(text), $"Failed to confirm message '{text}' is displayed", $"Successfully confirmed message '{text}' is displayed");
+		}
+
 
 	}
 }
