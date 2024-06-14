@@ -270,7 +270,7 @@ Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
 	#Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58078, container type: Plastic Container and size: 3.6
 	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC58078 enter Size: 12 and enter Container Type: Plastic bag
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC58079 enter Size: 12 and enter Container Type: Plastic bag
 	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
 	#Given I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
 	Given I should see the Additional Documents to Provide Page
@@ -288,7 +288,7 @@ Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
 	Given I should see the Data Acceptance Page
 	Then In the Data Acceptance Section, click 'Summary' button
 	Given I switch to the tab with Data Summary page
-	Given In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Energy or Nutritional Bars
+	Given In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Energy or Nutritional Powder/Mix
 	Given I close the tab with Data Summary page
     Given I should see the Data Acceptance Page
 	Given I navigate to the home page
