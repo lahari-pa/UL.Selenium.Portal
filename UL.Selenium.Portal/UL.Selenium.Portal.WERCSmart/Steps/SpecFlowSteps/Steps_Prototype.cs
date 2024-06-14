@@ -873,6 +873,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsFalse(new ModalDialog().WaitForContainerToBeVisible(), "The modal is visible, but it is not expected", "The modal is not visible as expected");
 			}
 		}
+		[RegexStepDefinition(@"The statement: (.*) (is|is not) displayed")]
+		public void ConfirmTextIsIsNotDisplayed(string text, string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			Report.IsTrue(new NewProduct().TextExistsOnThePage(text) == expected, $"Failure, failed to confirm the statement: '{text}' {is_isnot} displayed.", $"Success, confirmed the statement: '{text}' {is_isnot} displayed.");
+		}
+
 	}
 }
 

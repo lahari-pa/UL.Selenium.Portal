@@ -40,6 +40,9 @@
 @run_DuplicateUPC
 @StepsPrototype
 @RegulatoryInformation3
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
 
 Feature: Duplicate UPC
 
@@ -58,7 +61,8 @@ Feature: Duplicate UPC
 Scenario: [91076] Duplicate UPC is not permitted within account - New Product registration - single UPC
 
     #Logging in as the correct user
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
@@ -170,7 +174,7 @@ Scenario: [82536] Soap (Bar, Liquid) for Body (RU000211) - GTIN/UPC - Verify Dup
 	Given I should see the Regulatory Information 3 Page
 	Given I click continue
 	Then In the Regulatory Information 3 Section, the error 'Please select at least one option from above.' is displayed for section 'Refer to your Product Label. From the options, select those that appear on the Label.'
-	Then The following options should be displayed exclusively for section: Refer to your Product Label.  From the options, select those that appear on the Label.
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
 	| Option                 |
 	| Drug Facts Panel       |
 	| Supplement Facts Panel |
@@ -399,14 +403,16 @@ Scenario: [91801] Duplicate UPC is not permitted within WERCSmart system - Forwa
 @ignore
 @TestCase:91735
 Scenario: [91735] Duplicate UPC is not permitted within WERCSmart system - Forward Product registration - single UPC
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I create a product with name: Chalk1 and UPC: UPC91801_1 and take to completed using Test Case 75335and SHA account: SHAQAAuto7 with no login step and save as: TestCase91801_Product1
 
 	Given I navigate to the landing page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account
 	Given I create a product with name: Chalk2 and UPC: UPC91801_2 and take to completed using Test Case 75335 with no login step and save as: TestCase91801_Product2
 	Given I navigate to the landing page
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I click Bulk Actions in the Products Grid
 	Given I click Forward Product Registration in the Bulk Actions window
 	Given I select the product saved as: TestCase91801_Product1 under the Select Products tab
@@ -423,10 +429,12 @@ Scenario: [91735] Duplicate UPC is not permitted within WERCSmart system - Forwa
 
 @TestCase:91798
 Scenario: [91798] Duplicate UPC is not permitted within WERCSmart system - New Product registration - Case UPC
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I create a product with name: Chalk2 and UPC: UPC91801_2 and take to completed using Test Case 75335and SHA account: SHAQAAuto7 with no login step and save as: TestCase91801_Product2
 	Given I navigate to the landing page
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
@@ -483,13 +491,16 @@ Scenario: [91798] Duplicate UPC is not permitted within WERCSmart system - New P
 @ignore
 @TestCase:91800
 Scenario: [91800] Duplicate UPC is not permitted within account - Forward Product registration - Case UPC
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I create a product with name: Chalk1 and UPC: UPC91800_1 and take to completed using Test Case 75335and SHA account: SHAQAAuto7 with no login step and save as: TestCase91800_Product1
 	Given I navigate to the landing page
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I create a product with name: Chalk2 and UPC: UPC91800_2 and take to completed using Test Case 75335and SHA account: SHAQAAuto7 with no login step and save as: TestCase91800_Product2
 	Given I navigate to the landing page
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I click Bulk Actions in the Products Grid
 	Given I click Forward Product Registration in the Bulk Actions window
 	Given I select the product saved as: TestCase91800_Product1 under the Select Products tab
@@ -657,28 +668,115 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 
 @TestCase:91157
 Scenario: [91157] Duplicate UPC is not permitted within account - Forward Product registration - single UPC
-
-	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	Then I filter the products by: Accepted by Retailers
-	And I save the ProductID of the first Product in the grid no in recertification as: testProduct91157
-	Given I click Bulk Actions in the Products Grid
-	Given I click Forward Product Registration in the Bulk Actions window
-	Then I should see the header: Forward Product Registration on the Forward Product Registration window
-	And I confirm the active Forward Product Registration tab is: Select Products
-	Then I select the product with ID saved as: testProduct91157 under the Select Products tab
-	And I select the product with ID saved as: testProduct91157 under the right hand panel of the Select Products tab
-	Given I click continue on the Forward Product Registration page
-	Then In the Forward Product Registration Screen I select the first retailer under Other Retailers
+	#Given I call Shared Step 67823(207480) (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
+	Then I generate a random UPC number and save as: UPC91157
+	#Given I call Shared Step 57408(252966) (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
+	#And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Given I should see the The Product Page
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
+ 	Given in the The Product page I click Continue
+	Then I save the product information as: TestCase91157
+	#And I call Shared Step 59680(252968) (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+	#And I call Shared Step 26897(252546) (Physical and Chemical Properties - Solid only available - continue)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+	#And I call Shared Step 29181(152778) (Ingredients - add any chemical) with name: Water
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add component with component name: Calcium Carbonate
+	Then In the Ingredients Table row with component name: Calcium Carbonate, in Percent column text input enter: 100
+	Then in the Ingredients page I click Continue
+	#And I call Shared Step 152747 (Inventory Status, Prop 65 (US) - Applicable Only to CHALK (RU000711) - General Shared-Step)
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Given In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is exempt from TSCA chemical Inventory listing requirements.
+	Given In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Given in the Inventory Status, Prop 65 (US) page I click Continue
+	#And I call Shared Step 252954 (Retailer - Add Retailer(s):  Target and Walgreens - Applicable Only to CHALK (RU000711) - General Shared-Step)
+	Given I should see the Retailer Page
+	Given In the Retailer Section, click 'Add Retailers' button
+	Given In the Select Retailers window, select retailer: Target
+	Given In the Select Retailers window, select retailer: Walgreens
+	Given In the Select Retailers window, click 'Done' button
+	Given in the Retailer page I click Continue
+	#Shared Step 253324 GTIN / UPC - Add UPC Number - Applicable Only to CHALK (RU000711) - General Shared-Step
+	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC91157 enter Size: 12 and enter Container Type: Plastic Container
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	#Shared step 253325 Regulatory Documents to Provide - Upload OSHA-Compliant SDS - Applicable Only to CHALK (RU000711) - General Shared-Step
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Yes, I certify that I have an OSHA-compliant SDS for this product and would like to upload it.
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'OSHA SDS'
+	Then in the Regulatory Documents to Provide page I click Continue
+	#Shared Step 253326 Additional Documents to Provide - Applicable Only to CHALK (RU000711) - General Shared-Step - CLICK CONTINUE
+	Given I should see the Additional Documents to Provide Page
+	Then in the Additional Documents to Provide page I click Continue
+	#Shared Step 253327 Optional Reports and Documents Available for Purchase - Applicable Only to CHALK (RU000711) - General Shared-Step - CLICK CONTINUE
+	Given I should see the Optional Reports and Documents Available for Purchase Page
+	Then in the Optional Reports and Documents Available for Purchase page I click Continue
+	#Shared Step 253329 Optional Comments - Applicable Only to CHALK (RU000711) - General Shared-Step - CLICK CONTINUE
+	Given I should see the Optional Comments Page
+	Then in the Optional Comments page I click Continue
+	#Shared Step 253426 Summary Tab - Record the Product ID and/or UPC Number for Posterior Verification
+	Then In the Data Acceptance Section, click 'Summary' button
+	Then I switch to the tab with Data Summary page
+	Then In the Summary Page, verify table data in column UPC Number showing the value: saved as UPC91157
+	Then I close the tab with Data Summary page
+	#Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+	#Shared Step 157174 Purchase Summary - Thank You for Registering Message - Click Home to Continue
+	Given The Purchase Summary Page is displayed
+	Then In the Purchase Summary page message is displayed with text: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
+	Then I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	Then In the SHA manager grid I see the WPS ID I have saved as product: TestCase91157 and its status is: Assigned
+	Then I call Shared Step 65969 (Go to Power Designer Plus - Select your product & CKLT - Continue)
+	Then I call Shared Step 209526 (Power Designer Plus - AUTHORIZE Product (Applicable Only to Products with an Uploaded OSHA-SDS / Kit Products / Products that Do NOT Require an SDS Upload)) for product saved as: TestCase91157
+	Then I call Shared Step 209552 Power Designer Plus - APPLY RULES To Product
+	Then I call Sared Step 214627 Power Designer Plus - PUBLISH Product (Applicable Only to Battery Products ): TestCase91157
+	Then I call Shared Step 59066 (Go to SHA Manager)
+	Then In the SHA manager grid I see the WPS ID I have saved as product: TestCase91157 and its status is: Completed
+	Then I open the new tab in browser
+	Then I navigate to the landing page
+	Given I log in with the account saved in TReVor as: ProductAccount
+	#253440 Bulk Actions - Forward Product Registration - Verify Duplicate UPCs Cannot Be Forwarded
+	Then I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
+	And I enter the text: saved as TestCase91157 in the 'Search by WPS ID or Product Name' field
+	And In the Foward Product Registration Screen I should see product: saved as TestCase91157
+	And In the Foward Product Registration Screen I Select the product: saved as TestCase91157
 	And I click continue on the Forward Product Registration page
-	Given I select the first product under the Select UPCs tab
-	Given I click the Add UPC button under the Select UPCs tab
+	Given in the Select Retailers tab under Forward Product Registration I select the retailer: Office Depot
+	And I click continue on the Forward Product Registration page
+	Then I select the first product under the Select UPCs tab
+	Then I click the Add UPC button under the Select UPCs tab
 	And In the Add UPC modal window I enter the following information:
-		| UPC Number           | Type    | Size (Ounces) | Retailer   |
-		| saved as ExistingUPC | <first> | 1             | Select all |
-	And In the UPC modal window I click Save
-	Then I check alert text contains There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. and dismiss
+		| UPC Number        | Type        | Size (Ounces) | Retailer |
+		| saved as UPC91157 | Plastic bag | 18            | OD       |
+	Then In the UPC modal window I click Save
+	Then In The Add UPC modal verify for UPC Number error message 'This UPC Number is duplicated' is displayed
+	Then In The Add UPC modal verify for Retailers error message 'This UPC Number is duplicated' is displayed
 	Then In the UPC modal window I click Cancel
-	And I click the Home navigation icon and accept the alert popup
+	Then I click the Home navigation icon and accept the alert popup
+	Then The home screen should load
+
 
 @TestCase:91077
 Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New Product registration - Single UPC
@@ -748,8 +846,8 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91077
 
-#Removed from regression 2024/06
-@ignore	
+#Removed from regression 2024/03
+@ignore
 @TestCase:91101
 Scenario: [91101] Duplicate UPC is not permitted within WERCSmart system - New Product registration - Bulk Upload
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
