@@ -14,8 +14,6 @@
 @UPC
 @StepsPrototype
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
-@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
-
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 @PhysicalAndChemicalProp
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
@@ -26,9 +24,14 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 @SafetyDataSheetAuthoring
-
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:Product
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
+@RegulatoryInformation3
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
+@GTINAndUPC
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
+@@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 Feature: Flow 9
 
 @TestCase:58072
