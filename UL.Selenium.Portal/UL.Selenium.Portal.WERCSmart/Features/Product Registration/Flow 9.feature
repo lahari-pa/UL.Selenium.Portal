@@ -24,14 +24,21 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 @SafetyDataSheetAuthoring
-
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:Product
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
+@RegulatoryInformation3
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
+@GTINAndUPC
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
+@@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
+
 Feature: Flow 9
 
 @TestCase:58072
 Scenario: [58072] Baby/Infant/Adult Care/Cleansing Wipes - RU000248
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC58072
 	Given I delete all products with UPC Number: saved as UPC58072
@@ -115,7 +122,8 @@ Scenario: [58072] Baby/Infant/Adult Care/Cleansing Wipes - RU000248
 @newproductstepstest
 @TestCase:58098
 Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Then I click the Add Product icon in the Navigation Pane
@@ -147,57 +155,112 @@ Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 	Given I confirm there are 1 Publicly Disclosed ingredients in the Total section
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58098
 	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase58098	
-@TestCase:58078
-Scenario: [58078] Energy or Nutritional Bars - RU000618
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Then In the Product Grid, delete the product saved as: TestCase58098
+	
+	@TestCase:58078
+	Scenario: [58078] Energy or Nutritional Bars - RU000618
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC58078
 	Given I delete all products with UPC Number: saved as UPC58078
+
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Energy or Nutritional Bars
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Energy or Nutritional Bars
+	Given I should see the The Product Page
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Energy or Nutritional Bars
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Energy or Nutritional Bars
+ 	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase58078
-	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-	Given I call Shared Step 37857 (Enter Physical Property - Solid) with the following inputs:
-		| Secondary Physical State | Water Solubility |
-		| Granular                 | Dispersible      |
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Water         | 100     | false               | false       |            |
+
+	#Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
+	#Given I call Shared Step 37857 (Enter Physical Property - Solid) with the following inputs:
+	#	| Secondary Physical State | Water Solubility |
+	#	| Granular                 | Dispersible      |
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
+	#Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Water         | 100     | false               | false       |            |
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add component with component name: Water
+	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
+	Given I click continue
+
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I should see the Inventory Status, Prop 65 (US) Page
 	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
 	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page I click Continue
 
-	Given I set the Refer to your Product Label option to: None of the Above
-	Given I click continue
-#	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS
+	#Then I call Shared Step 132473 (Regulatory Information 3 - Nutritional Category)
+	Given I should see the Regulatory Information 3 Page
+	Then In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible Nutritional Supplement. Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
+	| Option                 |
+	| Supplement Facts Panel |
+	| Nutrition Facts Panel  |
+	| None of the Above      |
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: Nutrition Facts Panel
+	Then In the Regulatory Information 3 Section, the following link: Nutritional and Supplement Labels should be displayed
+	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
+	Then in the Regulatory Information 3 page I click Continue
+
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS
 	Then I should be on the Retailer Page
 	And In the Retailer Section, click 'Add Retailers' button
+	Then In the Retailer Section is selected retailer: No Retailer/No UPC Product
 	And In the Select Retailers window, select retailer: CVS
 	And In the Select Retailers window, click 'Done' button
 	Then in the Retailer page, I click Continue
 
-	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58078, container type: Plastic Container and size: 3.6
-	Given I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
-	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	#Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58078, container type: Plastic Container and size: 3.6
+	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC58078 enter Size: 12 and enter Container Type: Plastic bag
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	#Given I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
+	Given I should see the Additional Documents to Provide Page
+	Then In the Additional Documents to Provide Section, I upload PDF document to Upload Full Product Label (required) field
+	Then In the Additional Documents to Provide Section, for section Product Label I click button 'View'
+	Then In the Additional Documents to Provide Section, after clicking 'View' button I confirm pdf file is downloaded
+	Then in the Additional Documents to Provide  page I click Continue
+	Given I should see the Optional Reports and Documents Available for Purchase Page
+	Then in the Optional Reports and Documents Available for Purchase  page I click Continue
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58078. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I should see the Optional Comments Page
-	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then In the Optional Comments Section, section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' is availiable
 	Then in the Optional Comments page I click Continue
-
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Energy or Nutritional Bars
+	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Energy or Nutritional Bars
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, click 'Summary' button
+	Given I switch to the tab with Data Summary page
+	Given In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Energy or Nutritional Bars
+	Given I close the tab with Data Summary page
+    Given I should see the Data Acceptance Page
 	Given I navigate to the home page
 	Then I delete the product: TestCase58078
 
 @TestCase:58079
 Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC58079
 	Given I delete all products with UPC Number: saved as UPC58079
@@ -206,9 +269,20 @@ Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Energy or Nutritional Powder/Mix
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Energy or Nutritional Powder/Mix
+	Given I should see the The Product Page
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Energy or Nutritional Powder/Mix
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Energy or Nutritional Powder/Mix
+ 	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase58079
-	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	#Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
 	Given I call Shared Step 37857 (Enter Physical Property - Solid) with the following inputs:
 		| Secondary Physical State | Water Solubility |
 		| Flaked                   | Soluble in water |
@@ -245,7 +319,8 @@ Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
 
 @TestCase:58073
 Scenario: [58073] Footwear - Gel Insert - RU000854
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC58073
 	Given I delete all products with UPC Number: saved as UPC58073
@@ -255,8 +330,19 @@ Scenario: [58073] Footwear - Gel Insert - RU000854
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Footwear - Gel Insert
+	Given I should see the The Product Page
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Footwear - Gel Insert
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Footwear - Gel Insert
+ 	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase58073
-	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	#Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
 	Given I call Shared Step 37857 (Enter Physical Property - Solid) with the following inputs:
 		| Secondary Physical State | Water Solubility |
 		| Solid                    | Dispersible      |
@@ -311,7 +397,8 @@ Scenario: [58073] Footwear - Gel Insert - RU000854
 	Then In the Product Grid, delete the product saved as: TestCase58073	
 @TestCase:63325
 Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking SDS step shows only product label and Additional documents to provide shows SDS as optional)
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
@@ -319,6 +406,10 @@ Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking S
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Herbal or Dietary Supplement
+	Given I should see the The Product Page
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Herbal or Dietary Supplement
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Herbal or Dietary Supplement
+ 	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase63325
 	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I should see the Product Information Page
@@ -369,7 +460,8 @@ Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking S
 	Then In the Product Grid, delete the product saved as: TestCase63325	
 @TestCase:58091
 Scenario: [58091] Latex Gloves - RU000151
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC58091
 	Given I delete all products with UPC Number: saved as UPC58091
@@ -379,8 +471,19 @@ Scenario: [58091] Latex Gloves - RU000151
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Latex gloves
+	Given I should see the The Product Page
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Latex gloves
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Latex gloves
+ 	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase58091
-	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	#Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
 	Given I call Shared Step 37857 (Enter Physical Property - Solid)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -427,7 +530,8 @@ Scenario: [58091] Latex Gloves - RU000151
 
 @TestCase:58075
 Scenario: [58075] Nutritional Supplement for Infants - Liquid - RU001365
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC58075
 	Given I delete all products with UPC Number: saved as UPC58075
@@ -437,6 +541,10 @@ Scenario: [58075] Nutritional Supplement for Infants - Liquid - RU001365
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nutritional Supplement for Infants - Liquid
+	Given I should see the The Product Page
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Nutritional Supplement for Infants - Liquid
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Nutritional Supplement for Infants - Liquid
+ 	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase58075
 	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I should see the Product Information Page
@@ -463,7 +571,19 @@ Scenario: [58075] Nutritional Supplement for Infants - Liquid - RU001365
 	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page I click Continue
 
-	Then I call Shared Step 132473 (Regulatory Information 3 - Nutritional Category)
+	#Then I call Shared Step 132473 (Regulatory Information 3 - Nutritional Category)
+	Given I should see the Regulatory Information 3 Page
+	Then In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible Nutritional Supplement. Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
+	| Option                 |
+	| Supplement Facts Panel |
+	| Nutrition Facts Panel  |
+	| None of the Above      |
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: Nutrition Facts Panel
+	Then In the Regulatory Information 3 Section, the following link: Nutritional and Supplement Labels should be displayed
+	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
+	Then in the Regulatory Information 3 page I click Continue
+
 #	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS
 	Then I should be on the Retailer Page
 	And In the Retailer Section, click 'Add Retailers' button
@@ -488,7 +608,8 @@ Scenario: [58075] Nutritional Supplement for Infants - Liquid - RU001365
 
 @TestCase:58089
 Scenario: [58089] Nutritional Supplements for Domesticated Animals - RU001239
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC58089
 	Given I delete all products with UPC Number: saved as UPC58089
@@ -499,7 +620,14 @@ Scenario: [58089] Nutritional Supplements for Domesticated Animals - RU001239
 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nutritional Supplements for Domesticated Animals
 	Then I save the product information as: TestCase58089
-	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	#Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
 	Then I call Shared Step 57441 (Physical and Chemical Properties - Primary Physical Property - Liquid)
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
@@ -513,7 +641,19 @@ Scenario: [58089] Nutritional Supplements for Domesticated Animals - RU001239
 	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
 
-	Given I call Shared Step 132473 (Regulatory Information 3 - Nutritional Category)
+	#Then I call Shared Step 132473 (Regulatory Information 3 - Nutritional Category)
+	Given I should see the Regulatory Information 3 Page
+	Then In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible Nutritional Supplement. Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
+	| Option                 |
+	| Supplement Facts Panel |
+	| Nutrition Facts Panel  |
+	| None of the Above      |
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: Nutrition Facts Panel
+	Then In the Regulatory Information 3 Section, the following link: Nutritional and Supplement Labels should be displayed
+	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
+	Then in the Regulatory Information 3 page I click Continue
+
 #	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Petco
 	Then I should be on the Retailer Page
 	And In the Retailer Section, click 'Add Retailers' button
@@ -537,7 +677,8 @@ Scenario: [58089] Nutritional Supplements for Domesticated Animals - RU001239
 
 @TestCase:58097
 Scenario: [58097] Ingredient Search in Registration
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Then I click the Add Product icon in the Navigation Pane
@@ -546,7 +687,14 @@ Scenario: [58097] Ingredient Search in Registration
 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Paint balls
 	Then I save the product information as: TestCase58097
-	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	#Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
 	#Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
 	Given I should see the Liquid Core Product Page
 	Then In the Liquid Core Product Section, set the option in section: 'Is there a free liquid in the Product's container that is 10ml or greater?' to: No
@@ -566,7 +714,8 @@ Scenario: [58097] Ingredient Search in Registration
 @ignore
 @TestCase:58094
 Scenario: [58094] Suppository, Laxative, Stool-Softener - RU000944
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC58094
 	Given I delete all products with UPC Number: saved as UPC58094
@@ -579,7 +728,14 @@ Scenario: [58094] Suppository, Laxative, Stool-Softener - RU000944
 	Then I save the product information as: TestCase58094
 	# Missing from TFS test case
 	#Given I call Shared Step 57441 (Physical and Chemical Properties - Primary Physical Property - Liquid)
-	Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	#Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName       | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Magnesium citrate   | 15      | false               | false       |            |
@@ -627,7 +783,8 @@ Scenario: [58094] Suppository, Laxative, Stool-Softener - RU000944
 @ignore
 @TestCase:58081
 Scenario: [58081] Nutritional Supplement - Solid - RU000619
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC58081
 	Given I delete all products with UPC Number: saved as UPC58081
@@ -678,7 +835,8 @@ Scenario: [58081] Nutritional Supplement - Solid - RU000619
 @upctest
 @TestCase:58604
 Scenario: [58604] Condom - RU000937
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC58604
 	Given I delete all products with UPC Number: saved as UPC58604

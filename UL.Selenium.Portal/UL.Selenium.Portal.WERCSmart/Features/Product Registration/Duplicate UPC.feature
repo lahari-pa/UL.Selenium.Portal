@@ -61,7 +61,8 @@ Feature: Duplicate UPC
 Scenario: [91076] Duplicate UPC is not permitted within account - New Product registration - single UPC
 
     #Logging in as the correct user
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
@@ -173,7 +174,7 @@ Scenario: [82536] Soap (Bar, Liquid) for Body (RU000211) - GTIN/UPC - Verify Dup
 	Given I should see the Regulatory Information 3 Page
 	Given I click continue
 	Then In the Regulatory Information 3 Section, the error 'Please select at least one option from above.' is displayed for section 'Refer to your Product Label. From the options, select those that appear on the Label.'
-	Then The following options should be displayed exclusively for section: Refer to your Product Label.  From the options, select those that appear on the Label.
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
 	| Option                 |
 	| Drug Facts Panel       |
 	| Supplement Facts Panel |
@@ -402,14 +403,16 @@ Scenario: [91801] Duplicate UPC is not permitted within WERCSmart system - Forwa
 @ignore
 @TestCase:91735
 Scenario: [91735] Duplicate UPC is not permitted within WERCSmart system - Forward Product registration - single UPC
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I create a product with name: Chalk1 and UPC: UPC91801_1 and take to completed using Test Case 75335and SHA account: SHAQAAuto7 with no login step and save as: TestCase91801_Product1
 
 	Given I navigate to the landing page
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account
 	Given I create a product with name: Chalk2 and UPC: UPC91801_2 and take to completed using Test Case 75335 with no login step and save as: TestCase91801_Product2
 	Given I navigate to the landing page
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I click Bulk Actions in the Products Grid
 	Given I click Forward Product Registration in the Bulk Actions window
 	Given I select the product saved as: TestCase91801_Product1 under the Select Products tab
@@ -426,10 +429,12 @@ Scenario: [91735] Duplicate UPC is not permitted within WERCSmart system - Forwa
 
 @TestCase:91798
 Scenario: [91798] Duplicate UPC is not permitted within WERCSmart system - New Product registration - Case UPC
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I create a product with name: Chalk2 and UPC: UPC91801_2 and take to completed using Test Case 75335and SHA account: SHAQAAuto7 with no login step and save as: TestCase91801_Product2
 	Given I navigate to the landing page
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
@@ -486,13 +491,16 @@ Scenario: [91798] Duplicate UPC is not permitted within WERCSmart system - New P
 @ignore
 @TestCase:91800
 Scenario: [91800] Duplicate UPC is not permitted within account - Forward Product registration - Case UPC
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I create a product with name: Chalk1 and UPC: UPC91800_1 and take to completed using Test Case 75335and SHA account: SHAQAAuto7 with no login step and save as: TestCase91800_Product1
 	Given I navigate to the landing page
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I create a product with name: Chalk2 and UPC: UPC91800_2 and take to completed using Test Case 75335and SHA account: SHAQAAuto7 with no login step and save as: TestCase91800_Product2
 	Given I navigate to the landing page
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I click Bulk Actions in the Products Grid
 	Given I click Forward Product Registration in the Bulk Actions window
 	Given I select the product saved as: TestCase91800_Product1 under the Select Products tab

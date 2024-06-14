@@ -42,7 +42,8 @@ Feature: Flow 22
 @tfsdesign
 @TestCase:60544
 Scenario: [60544] Weld-Through Primer - Aerosol - RU001050
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC60544
 	Given I delete all products with UPC Number: saved as UPC60544
@@ -117,7 +118,8 @@ Scenario: [60544] Weld-Through Primer - Aerosol - RU001050
 
 @TestCase:60545
 Scenario: [60545] Photograph Coating - Aerosol - RU001067
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC60545
 	Given I delete all products with UPC Number: saved as UPC60545
@@ -197,7 +199,8 @@ Scenario: [60545] Photograph Coating - Aerosol - RU001067
 @ignore
 @TestCase:60546
 Scenario: [60546] Glass Coating - Aerosol - RU001037
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC60546
 	Given I delete all products with UPC Number: saved as UPC60546
@@ -357,7 +360,7 @@ Scenario: [60547] Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol 
 
 		# ====== Following the steps from 'Shared Step' 60567 ====== #
 	Given I upload PDF document to Upload SDS (Optional) field
-	Given I upload PDF document to Flash Point Testing Report field
+	Given In the Additional Documents to Provide section, I upload PDF document to Flash Point Testing Report field
 	Then in the Additional Documents To Provide page I click Continue
 
 	And in the Optional Reports and Documents Available for Purchase page I click Continue
