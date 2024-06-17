@@ -1361,9 +1361,9 @@ Scenario Outline: [243841] 3 Panel-More Filters- DPCI Number- Select All
 		| Scenario Name                                                                                     | Retailer        | Page                    | IsWebviewer |
  		| [#229830a]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.TG          | Product Lookup          | No          |
  		| [#229830b]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.TG          | Recent Activities       | No          |
-		| [#229830c]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.CV          | Product Lookup          | No          |
+#		| [#229830c]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.CV          | Product Lookup          | No          |
 		| [#229830d]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.CV          | Recent Activities       | No          |
-		| [#229830e]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.LW          | Product Lookup          | No          |
+#		| [#229830e]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.LW          | Product Lookup          | No          |
 		| [#229830f]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.LW          | Recent Activities       | No          |
 		| [#229830g]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.SF          | Product Lookup          | No          |
  		| [#229830h]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.SF          | Recent Activities       | No          |
@@ -1372,7 +1372,7 @@ Scenario Outline: [243841] 3 Panel-More Filters- DPCI Number- Select All
 #		| [#229830k]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.TG          | Status Viewer           | Yes         |
 #		| [#229830l]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.TG          | HQ Viewer               | Yes         |
 		| [#229830m]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.SF          | SmartFinal_Store        | Yes         |
- 		| [#229830n]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.LW          | Lowes_store             | Yes         |
+# 		| [#229830n]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.LW          | Lowes_store             | Yes         |
 		| [#229830o]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.CT          | Product Lookup          | No          |
     	| [#229830p]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.CT          | Recent Activities       | No          |
 #	    | [#229830q]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.CT          | Classification History  | No          |
