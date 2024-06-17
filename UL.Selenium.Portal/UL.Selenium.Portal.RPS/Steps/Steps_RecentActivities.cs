@@ -2381,6 +2381,13 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
+        [RegexStepDefinition(@"I confirm that the recent activities Page, I click bread crumb area")]
+        public void IClickInTheProductLookupPageBreadCrumbAreal()
+        {
+
+            Report.IsTrue(new ProductLookUp().IClickBreadCrumbArea(), "Failed to click The Bread crumb area ", "Successfull clicked The bread crumb area");
+        }
+
     }
 
 
