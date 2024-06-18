@@ -508,7 +508,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 					Report.StartSubStep($"In the Ingredients Table row with {inputRow["SearchType"]}: {inputRow["SearchValue"]}, in 'Active Ingredient?' column set checkbox to checked");
 					this.IngredientsTableRowCheckUncheckCheckBox(inputRow["SearchType"], inputRow["SearchValue"], "Active Ingredient?", "checked");
 				}
-				if (inputRow["Functional Purpose"] != null)
+				if (inputTable.ContainsColumn("Functional Purpose") && inputRow["Functional Purpose"] != null)
 				{
 					Report.StartSubStep($"Then In the Ingredients Table row with {inputRow["SearchType"]}: {inputRow["SearchValue"]}, in 'Functional Purpose' column select option {inputRow["Ingredient Type"]}");
 					this.IngredientsTableRowSelectOptionsMultiSelect(inputRow["SearchType"], inputRow["SearchValue"], "Functional Purpose", inputRow["Functional Purpose"]);
