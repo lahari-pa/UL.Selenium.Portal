@@ -19,15 +19,18 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 @Ingredients
-@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 @SafetyDataSheetAuthoring
 @AdditionalDocsContactInfo
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:CaliforniaCleaningProductDisclosure
-@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails2
-@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOC_OzoneTransportCommission
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
+@Product:WERCSmart_Account:Distributor_Page:NewProducts_Tab:ReciewAndSubmit_Section:OptionalReportsAndDocumentsAvailableForPurchase
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails2
 Feature: Flow 18
 
 @ignore
@@ -152,9 +155,9 @@ Scenario: [208099] Fabric Softener - Single-Use Dryer Product Only (RU000808)
 
 	Given I should see the Ingredients Page
 	Then In the Ingredients section, add the following ingredients:
-	| SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name                                                                                                                            | Ingredient Type     | Functional Purpose | Certified |
-	| CAS number | 157905-74-3 | 50      | True                | False         | Ethanaminium, 2-hydroxy-N,N-bis(2-hydroxyethyl)-N-methyl-, esters with C16-18 and C18-unsaturated fatty acids, methyl sulfates (salts) | Intentionally Added | Antistatic Agent   |           |
-	| CAS number | 57-11-4     | 50      | True                | False         | Octadecanoic Acid                                                                                                                      | Intentionally Added | Binder             |           |
+	| SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name                                                                                                                            | Ingredient Type     | Functional Purpose                | Certified |
+	| CAS number | 157905-74-3 | 50      | True                | False         | Ethanaminium, 2-hydroxy-N,N-bis(2-hydroxyethyl)-N-methyl-, esters with C16-18 and C18-unsaturated fatty acids, methyl sulfates (salts) | Intentionally Added | Antistatic Agent, Softening Agent |           |
+	| CAS number | 57-11-4     | 50      | True                | False         | Octadecanoic acid                                                                                                                      | Intentionally Added | Binder, Thickener                 |           |
 	Then in the Ingredients page I click Continue
 
 	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -163,7 +166,7 @@ Scenario: [208099] Fabric Softener - Single-Use Dryer Product Only (RU000808)
 	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
 
-	Then I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
+	Then I should be on the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
 	Then I see the following questions
 		| Section                                                                                                                                        |
 		| Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. |
@@ -171,6 +174,44 @@ Scenario: [208099] Fabric Softener - Single-Use Dryer Product Only (RU000808)
 		| Option |
 		| Yes    |
 		| No     |
+	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.': to: No
+	Then I see the following questions
+		| Section                                                                                                                                                       |
+		| Product does not contain more than 0.05 grams of VOC per use, as defined in the California Consumer Products Regulation, Title 17, CCR Division 3, Chapter 1. |
+	Then The following options should be displayed for section: Product does not contain more than 0.05 grams of VOC per use, as defined in the California Consumer Products Regulation, Title 17, CCR Division 3, Chapter 1.
+		| Option   |
+		| Agree    |
+		| Disagree |
+	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Product does not contain more than 0.05 grams of VOC per use, as defined in the California Consumer Products Regulation, Title 17, CCR Division 3, Chapter 1.': to: Agree
+	Then in the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) page, I click Continue
+
+	Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
+
+	Then I should be on the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Yes, I certify that I have an OSHA-compliant SDS for this product and would like to upload it.
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'OSHA SDS'
+	Then in the Regulatory Documents to Provide page, I click Continue
+
+	Then I should be on the Additional Documents to Provide Page
+	Then I upload PDF document to Upload Volatile Organic Compounds field
+	Then in the Additional Documents to Provide page, I click Continue
+
+	Then I should be on the Optional Reports and Documents Available for Purchase Page
+	Then in the Optional Reports and Documents Available for Purchase page, I click Continue
+
+	Then I should be on the Optional Comments Page
+	Then in the Optional Comments page, I click Continue
+
+	Then I should be on the Data Acceptance Page
+	Then In the Data Acceptance Section, click 'Summary' button
+	Then I switch to the tab with Data Summary page
+	Then In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Fabric Softener - Single Use Dryer Product Only
+	Then In the Summary Page, the 'Which best describes your product, including when FIFRA 25(b) Exempt' section should be showing the following value: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
+	Then In the Summary Page, the 'Cleaning products must comply with California's Cleaning Product Right to Know Act.' section should be showing the following value: Yes
+	Then In the Summary Page, the 'Product does not contain more than 0.05 grams of VOC per use, as defined in the California Consumer Products Regulation, Title 17, CCR Division 3, Chapter 1.' section should be showing the following value: Agree
+	Then I close the tab with Data Summary page
+
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase208099
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase208099

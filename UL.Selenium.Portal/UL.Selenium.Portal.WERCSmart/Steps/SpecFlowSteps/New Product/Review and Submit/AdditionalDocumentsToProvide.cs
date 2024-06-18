@@ -77,15 +77,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		{
 			Report.Info($"I upload PDF document to Upload Volatile Organic Compounds field");
 			var selNewProduct = new Steps_Prototype();
-			selNewProduct.UploadPDFFile("Volatile Organic Compounds", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			selNewProduct.UploadPDFFile("Product Label", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
-		[RegexStepDefinition(@"I upload PDF document to Upload Full Product Label \(required\) field")]
+		[RegexStepDefinition(@"In the Additional Documents to Provide Section, I upload PDF document to Upload Full Product Label \(required\) field")]
 		public void GivenIUploadPDFDocumentToUploadFullProductLabelRequiredField()
 		{
 			Report.Info($"I upload PDF document to Upload Full Product Label (required) field");
 			var selNewProduct = new Steps_Prototype();
-			selNewProduct.UploadPDFFile("Upload Full Product Label (required)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			selNewProduct.UploadPDFFile("Product Label", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
 		[RegexStepDefinition(@"I upload PDF document to Generic Private Label \(all sides\) field")]

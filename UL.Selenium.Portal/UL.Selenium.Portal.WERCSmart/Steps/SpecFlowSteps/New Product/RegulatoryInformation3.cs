@@ -12,6 +12,7 @@ using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 {
@@ -21,10 +22,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		[RegexStepDefinition(@"In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: (Drug Facts Panel|Supplement Facts Panel|Nutrition Facts Panel|None of the Above)")]
 		public void SelectProductLabel(string option)
 		{
-			string section = "Refer to your Product Label.  From the options, select those that appear on the Label.";
-			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+			new StepsNewProduct().GivenInTheRegulatoryInforamtionTabISelectProductLableAs(option);
 		}
-
 
 		[RegexStepDefinition(@"In the Regulatory Information 3 Section, the following link: (OTC Drug Facts Label \(may include Active Ingredient\)|Nutritional and Supplement Labels|Dietary Supplements Label) (should|should not) be displayed")]
 		public void Regulatory3LinkExists(string linkText, string condition)
@@ -46,8 +45,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			new Steps_ProductPrototype().InSectionErrorMessageIsIsNotDisplayed(section, error, is_isnot);
 		}
 
-
-
-
+		[RegexStepDefinition(@"In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible Nutritional Supplement. Please complete the additional question below to ensure proper classification of this product for the retailer\(s\).' (is|is not) displayed")]
+		public void Regulatory3TextIsIsNotDisplayed(string is_isnot)
+		{
+			string text = "Based on the product's recommended use and formulation, this is a possible Nutritional Supplement. Please complete the additional question below to ensure proper classification of this product for the retailer(s).";
+			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);	
 		}
+		[RegexStepDefinition(@"In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:")]
+		public void ThenInTheRegulatoryInformationSectionInSectionDisplayedOptionsAreSupplementFactsPanelNutritionFactsPanelNoneOfTheAbove(Table table)
+		{
+			string section = "Refer to your Product Label. From the options, select those that appear on the Label.";
+			string condition = "should";
+			string displayed = "exclusively displayed"; 
+			new Steps_Prototype().CheckOptionsInSection(condition, displayed, section, table);
+		}
+
+
+
+
+	}
 }

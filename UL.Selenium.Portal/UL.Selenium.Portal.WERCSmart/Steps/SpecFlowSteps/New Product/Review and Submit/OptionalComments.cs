@@ -25,5 +25,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string section = "Provide any additional comments or information about the product that you want the Assessment Team to know.";
 			new Steps_ProductPrototype().InSectionEnterText(section, option);
 		}
+		[RegexStepDefinition(@"In the Optional Comments Section, section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' (is|is not) availiable")]
+		public void OptionalCommentsSectionIsAvailable(string is_isnot)
+		{
+			string section = "Provide any additional comments or information about the product that you want the Assessment Team to know.";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
 	}
 }

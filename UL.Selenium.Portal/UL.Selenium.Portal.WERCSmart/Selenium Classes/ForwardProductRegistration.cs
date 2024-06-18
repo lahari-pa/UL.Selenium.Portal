@@ -1186,6 +1186,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	class AddUPCModal : SeleniumBaseObject
 	{
 		protected override By ContainerElementLocator => By.XPath("//div[@class='modal-content']");
+		IWebElement Section(string section) => this.ContainerElement.FindElement(By.XPath($"//div[label[text() = '{section}']]"));
 
 		public bool EnterUPCInformation(TableRow row)
 		{
@@ -1271,11 +1272,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickSave()
 		{
-			return this.containerElement.FindElement(By.XPath(@"//button[contains(text(), 'Save')]"), 2).TryClick();
+			return this.ContainerElement.FindElement(By.XPath(@"//button[contains(text(), 'Save')]"), 2).TryClick();
 		}
 		public bool ClickCancel()
 		{
-			return this.containerElement.FindElement(By.XPath(@"//button[contains(text(), 'Cancel') and @class='btn btn-default pull-left']"), 2).TryClick();
+			return this.ContainerElement.FindElement(By.XPath(@"//button[contains(text(), 'Cancel') and @class='btn btn-default pull-left']"), 2).TryClick();
+		}
+		public bool SectionExists(string section)
+		{
+			Report.Info($"Attempting to get section {section}");
+			return this.Section(section) != null;
+		}
+		public bool ErrorIsDisplayedForSection(string section, string error)
+		{
+			IWebElement Error(string error) => this.Section(section).FindElement(By.XPath($".//span[text()='{error}']"));
+			return Error(error) != null;
+
 		}
 	}
 

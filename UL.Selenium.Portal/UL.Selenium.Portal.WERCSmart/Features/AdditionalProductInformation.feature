@@ -22,7 +22,8 @@ Feature: Product Information
 
 @TestCase:31352
 Scenario: [31352] Product Information - navigation
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given I log in with the account saved in TReVor as: ProductAccount
 Then The home screen should load
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
@@ -47,7 +48,8 @@ Then In the Product Grid, delete the product saved as: TestCase31352
 @ignore
 @TestCase:31359
 Scenario: [31359] Product Information - validation
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given I log in with the account saved in TReVor as: ProductAccount
 Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Non-aerosol
@@ -77,7 +79,8 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 @ignore
 @TestCase:85244
 Scenario: [85244] Product Information with marketed child question- validation
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given I log in with the account saved in TReVor as: ProductAccount
 Then The home screen should load
 Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk

@@ -35,7 +35,8 @@ Feature: Flow 6
 @TestCase:78731
 Scenario: [78731] Insecticide - Crawling Bug - Aerosol (RU001005) - 6A
 
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given I log in with the account saved in TReVor as: ProductAccount
 
 Then The home screen should load
 
@@ -135,7 +136,8 @@ Then In the Product Grid, delete the product saved as: TestCase78731
 @TestCase:57711
 Scenario: [57711] Antifungal - Aerosol (RU000050) - 6A
 
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Given I log in with the account saved in TReVor as: ProductAccount
 
 Then The home screen should load
 
@@ -491,7 +493,8 @@ Scenario: [208260]  Insecticide - Flea and Tick (RU001407) - Aerosol - PESTICIDE
 # Created by Saikiran Chittampally
 @TestCase:57986
 Scenario: [57986] Footwear or Leather Care Product - All other forms - (RU000746) - 4All - 4G
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)

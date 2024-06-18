@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using UL.Automation.Reporting;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Classes;
+using UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -1242,5 +1243,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(frwdProdReg.GivenProductSelectVendor(id, firstOption), "Failed to select the option", "Successfully selected the option");
 		}
 
+		[RegexStepDefinition("In The Add UPC modal verify for UPC Number error message 'This UPC Number is duplicated' (is|is not) displayed")]
+		public void ThenInTheAddUPCModalVerifyForUPCNumberErrorMessageThisUPCNumberIsDuplicatedIsDisplayed(string is_isnot)
+		{
+			string error = "This UPC Number is duplicated.";
+			string section = "UPC Number";
+			bool expected = is_isnot == "is";
+			if (Report.IsTrue(new AddUPCModal().SectionExists(section), $"Failure, '{section}' section does not exist.", $"Success, '{section}' section exists."))
+			{
+				Report.IsTrue(new AddUPCModal().ErrorIsDisplayedForSection(section, error) == expected, $"Failure, '{error}' error message {(expected ? "is not" : "is")} displayed.", $"Success, '{error}' error message {is_isnot} displayed.");
+			}
+		}
+
+		[RegexStepDefinition("In The Add UPC modal verify for Retailers error message 'This UPC Number is duplicated' (is|is not) displayed")]
+		public void ThenInTheAddUPCModalVerifyForRetailersErrorMessageThisUPCNumberIsDuplicatedIsDisplayed(string is_isnot)
+		{
+			string error = "This UPC Number is duplicated.";
+			string section = "Retailers";
+			bool expected = is_isnot == "is";
+			if (Report.IsTrue(new AddUPCModal().SectionExists(section), $"Failure, '{section}' section does not exist.", $"Success, '{section}' section exists."))
+			{
+				Report.IsTrue(new AddUPCModal().ErrorIsDisplayedForSection(section, error) == expected, $"Failure, '{error}' error message {(expected ? "is not" : "is")} displayed.", $"Success, '{error}' error message {is_isnot} displayed.");
+			}
+		}
 	}
 }

@@ -1996,7 +1996,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 		{
 			try
 			{
-				if (this._btn_confirm.Displayed)
+				if (this._btn_confirm != null)
 				{
 					return true;
 				}

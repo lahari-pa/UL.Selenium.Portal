@@ -395,7 +395,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Navigating to the Home Page");
 				var selNav = new NavigationBar();
-				Report.IsTrue(selNav.Click_Icon("Home"), "Failed to click the home icon!", "Successfully clicked the Home icon!", false, false);
+				Report.IsTrue(selNav.Click_Icon("My Products"), "Failed to click the home icon!", "Successfully clicked the Home icon!", false, false);
 				// Screenshot throws exception while an alert is open - selenium utils needs updating
 				//Report.Screenshot();
 				SeleniumBrowser.Alert.WaitForAlert(5);
