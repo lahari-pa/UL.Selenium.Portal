@@ -20,7 +20,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string section = "Consent to Tier 2.1, 2.2, 4.2 Data Uses";
 			new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
 		}
-		[RegexStepDefinition(@"In the Formulation > Batteries Section, I confirm text 'Data Use Cansents' (should|should not) be displayed")]
+		[RegexStepDefinition(@"In the Formulation > Batteries Section, I confirm text 'Data Use Consents' (should|should not) be displayed")]
 		public void GivenIConfirmTheFormulationBatteriesDisplaysTheCorrectText(string condition)
 		{
 			string section = "Formulation > Batteries";
