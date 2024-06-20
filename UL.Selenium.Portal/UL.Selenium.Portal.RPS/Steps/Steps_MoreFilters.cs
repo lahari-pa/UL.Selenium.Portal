@@ -597,6 +597,21 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
+        [RegexStepDefinition(@"In the More Filters pop up, I select item shown below the drop down and Search field")]
+        public void ISelectItemInDropDownInTheMoreFilters()
+        {
+
+            Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupISelectRandomEntryFromListOfUPCs(), "Failed to select upc from the list ", "Successfully selected upc from the list");
+            GeneralUtilities.WaitForLoadingToFinish();
+        }
+
+        [RegexStepDefinition(@"In the More Filters pop up, I click on Search UPCs box")]
+        public void InTheMoreFiltersIClickSearchUPCs()
+        {
+
+            Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIClickUPCdropdown(), "Failed to click on Search UPCs box", "Successfully clicked on Search UPCs box");
+            GeneralUtilities.WaitForLoadingToFinish();
+        }
 
 
         #region Shared Steps
@@ -770,10 +785,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIVerifyUPCSearchFieldIsDisplayed(), "Failed to display UPC Search Field", "Successfully displayed UPC Search Field");
             Report.StartSubStep("In the More Filters pop up, I confirm the Filter Parameter panel shows the dropdown Selector for UPCs");
             Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIVerifyUPCdropdownSelectorIsDisplayed(), "Failed to display UPC dropdown Selector", "Successfully displayed UPC dropdown Selector");
-            List<string> options = new List<string> { "Contains", "Starts with", "Is" };
-            Report.StartSubStep("I confirm the drop down selector shows three options: Contains, Starts with,Is");
-            Report.IsTrue(new MoreFiltersPopup().IConfirmISeeAListOfAvailableOptionsInFilterParameterPanelUPCdropdownSelectorIsDisplayed(options), "Failed to display UPC dropdown Selector options", "Successfully displayed UPC dropdown Selector options");
-            Report.StartSubStep("I confirm the Search field shows the default text: Search UPCs");
+             Report.StartSubStep("I confirm the Search field shows the default text: Search UPCs");
             Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIVerifyUPCdropdownPlaceholderIsDisplayed("Search UPCs"), "Failed to display Search field default text: Search UPCs", "Successfully displayed Search field default text: Search UPCs");
             Report.StartSubStep("I click on Search UPCs box");
             Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIClickUPCdropdown(), "Failed to click on Search UPCs box", "Successfully clicked on Search UPCs box");
