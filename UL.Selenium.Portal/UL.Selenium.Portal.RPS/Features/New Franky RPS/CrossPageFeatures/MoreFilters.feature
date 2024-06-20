@@ -1383,13 +1383,13 @@ Scenario Outline: [229831] 3 Panel-More Filters - Checklist fields -Clear All ne
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
 	Then I call Shared Step 205105 (More Filters > Checklist Field > Format checks)
-	Then In the More Filters pop up, I select item shown below the drop down and Search field
+	Then In the More Filters pop up, I select or more of the items shown below the drop down and Search field
     Then In the More Filters pop up, I confirm in the Selected Filters area, that breadcrumb shows with the selected value: Packaging Type   
  	Then In the More Filters pop up, In the Selected Filters area I click Clear All to remove all filters
 	Then In the More Filters popup I do not see the Selected Filters area
 	Then In the More Filters pop up, I click on searched filter in Filters Panel : Packaging Type
 	Then In the More Filters pop up, I click on Search UPCs box
-	Then In the More Filters pop up, I select item shown below the drop down and Search field
+	Then In the More Filters pop up, I select or more of the items shown below the drop down and Search field
     Then In the More Filters pop up, I confirm in the Selected Filters area, that breadcrumb shows with the selected value: Packaging Type
 	Then In the product lookup page More Filters Popup, I Click the the Apply Filter Button
 	Then I confirm the page has refreshed

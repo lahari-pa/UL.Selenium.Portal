@@ -613,6 +613,15 @@ namespace UL.Selenium.Portal.RPS.Steps
             GeneralUtilities.WaitForLoadingToFinish();
         }
 
+        [RegexStepDefinition(@"In the More Filters pop up, I select or more of the items shown below the drop down and Search field")]
+        public void InTheMoreFiltersISelectItem()
+        {
+            Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupISelectRandomEntryFromListOfItemsInFilterPanel(), "Failed to select  value from the list ", "Successfully selected value from the list");
+            GeneralUtilities.WaitForLoadingToFinish();
+        }
+
+
+
 
         #region Shared Steps
 
