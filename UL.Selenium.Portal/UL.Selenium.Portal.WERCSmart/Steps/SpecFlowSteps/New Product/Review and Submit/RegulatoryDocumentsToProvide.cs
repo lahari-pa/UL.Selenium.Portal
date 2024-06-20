@@ -91,6 +91,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string pdfFile = "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf";
 			new Steps_Prototype().UploadPDFFile(section, pdfFile);
 		}
+		[RegexStepDefinition(@"In the Regulatory Documents to Provide Section: 'Upload Full Product Label \(required\) \(For private label products please upload a generic label that is not retailer-specific.\)' error message (should|should not) display: (.*)")]
+		public void UploadFileForProductLabelShouldShouldNotDisplayError(string shouldShouldNot, string pipeDelimitedErrorMessages)
+		{
+			string section = "Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)";
+			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, shouldShouldNot, pipeDelimitedErrorMessages);
+		}
 		[RegexStepDefinition(@"In the Regulatory Documents to Provide Section, click 'OSHA Hazard Communication' link")]
 		public void ClickLinkFreeWaterOf2015()
 		{
