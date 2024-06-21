@@ -376,10 +376,12 @@ Scenario: [60547] Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol 
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
 	Then in the Regulatory Documents to Provide page I click Continue
 
-		# ====== Following the steps from 'Shared Step' 60567 ====== #
-	Given I upload PDF document to Upload SDS (Optional) field
-	Given In the Additional Documents to Provide section, I upload PDF document to Flash Point Testing Report field
-	Then in the Additional Documents To Provide page I click Continue
+	#Following the steps from 'Shared Step' 60567
+	Given I should see the Regulatory Documents to Provide Page
+	Given in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Given in the Regulatory Documents to Provide page I click Continue
 
 	And in the Optional Reports and Documents Available for Purchase page I click Continue
 #	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
