@@ -264,11 +264,10 @@ Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC58079
 	Given I delete all products with UPC Number: saved as UPC58079
-#	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Energy or Nutritional Powder/Mix
 	Given I should see the The Product Page
 	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Energy or Nutritional Powder/Mix
@@ -291,7 +290,6 @@ Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
 	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Then in the Physical and Chemical Properties page I click Continue
-
 	#Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 	#	| Water         | 100     | false               | false       |            |
@@ -316,14 +314,13 @@ Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
 	Then In the Regulatory Information 3 Section, the following link: Nutritional and Supplement Labels should be displayed
 	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
 	Then in the Regulatory Information 3 page I click Continue
-#	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Save Mart Supermarkets
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Save Mart Supermarkets
 	Then I should be on the Retailer Page
 	And In the Retailer Section, click 'Add Retailers' button
 	Then In the Retailer Section is selected retailer: No Retailer/No UPC Product
 	And In the Select Retailers window, select retailer: CVS
 	And In the Select Retailers window, click 'Done' button
 	Then in the Retailer page, I click Continue
-
 	#Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58078, container type: Plastic Container and size: 3.6
 	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
@@ -332,9 +329,11 @@ Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
 	#Given I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
 	Given I should see the Additional Documents to Provide Page
 	Then In the Additional Documents to Provide Section, I upload PDF document to Upload Full Product Label (required) field
+	Then I save the current window handle to context as: MainWindowHandle
 	Then In the Additional Documents to Provide Section, for section Product Label I click button 'View'
 	Then In the Additional Documents to Provide Section, after clicking 'View' button I confirm pdf file is downloaded
 	Then in the Additional Documents to Provide  page I click Continue
+	Then I close All the current windows except the Main Window
 	Given I should see the Optional Reports and Documents Available for Purchase Page
 	Then in the Optional Reports and Documents Available for Purchase  page I click Continue
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58078. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)

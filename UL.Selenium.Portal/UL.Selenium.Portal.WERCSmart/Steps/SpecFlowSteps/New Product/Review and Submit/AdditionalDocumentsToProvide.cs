@@ -143,6 +143,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string file = "testdoc.pdf";
 			string savedAs = "downloadedFile";
 			new Steps_Prototype().ConfirmFileAppearsInDownloadsFolder(file, savedAs);
+
 		}
 	}
 }
