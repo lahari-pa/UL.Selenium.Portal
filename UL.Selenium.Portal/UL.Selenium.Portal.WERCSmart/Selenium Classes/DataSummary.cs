@@ -69,7 +69,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string GetPrivateLabelStatement()
 		{
 			this.WaitForSpinner();
-			return this.containerElement.FindElement(By.XPath(".//h3[@class='summary-question' and contains(text(),'Private Label')]/../p[1]"), 2).Text;
+			return this.FindElement(By.XPath(".//h3[@class='summary-question' and contains(text(),'Private Label')]/../p[1]"), 2).Text;
 		}
 
 		/// <summary>
@@ -78,7 +78,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string GetAlternativeControlPlanQuestion()
 		{
 			this.WaitForSpinner();
-			return this.containerElement.FindElement(By.XPath(".//h3[@class='summary-question' and contains(text(),'Alternative Control Plan')]/../p[1]"), 2).Text;
+			return this.FindElement(By.XPath(".//h3[@class='summary-question' and contains(text(),'Alternative Control Plan')]/../p[1]"), 2).Text;
 		}
 
 		/// <summary>
@@ -87,7 +87,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string GetGramsOfVocPerUseAsDefinedCaliforniaConsumerProductsQuestion()
 		{
 			this.WaitForSpinner();
-			return this.containerElement.FindElement(By.XPath(".//h3[@class='summary-question' and contains(text(),'California Consumer Products Regulation')]/../p[1]"), 2).Text;
+			return this.FindElement(By.XPath(".//h3[@class='summary-question' and contains(text(),'California Consumer Products Regulation')]/../p[1]"), 2).Text;
 		}
 
 		public string GetInfoForSectionOption(string section, string option)
@@ -160,7 +160,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			
 
-			IWebElement table = this.containerElement.FindElement(By.XPath(@"//div[@class='summary-question-container-bottom']/table[@class='table'][thead//th/div[text()='UPC Number']]"), 2);
+			IWebElement table = this.FindElement(By.XPath(@"//div[@class='summary-question-container-bottom']/table[@class='table'][thead//th/div[text()='UPC Number']]"), 2);
 			table.ScrollElementIntoView();
 			IList<IWebElement> headersElems = table.FindElements(By.TagName("th"), 2);
 			var foundHeaders = new List<string>();
@@ -186,7 +186,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ConfirmCaseUPC(TableRows rows)
 		{
-			IWebElement table = this.containerElement.FindElement(By.XPath(@"//div[@class='summary-question-container-bottom']/table[@class='table'][thead//th/div[text()='UPC Number']]"), 2);
+			IWebElement table = this.FindElement(By.XPath(@"//div[@class='summary-question-container-bottom']/table[@class='table'][thead//th/div[text()='UPC Number']]"), 2);
 			table.ScrollElementIntoView();
 
 			IWebElement caseUPCIcon = table.FindElement(By.XPath("//i[@class='fa fa-truck']"), 2);
@@ -482,7 +482,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string SGetProductName()
 		{
-			IWebElement productName = this.containerElement.FindElement(
+			IWebElement productName = this.FindElement(
 				By.XPath("//h2/small[contains(text(), 'Product Name')]/../span[not(contains(@style, 'none'))]"), 2);
 			if (productName == null)
 			{
@@ -495,10 +495,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string GetDocumentForSection(string section, string option)
 		{
-			IWebElement document = this.containerElement.FindElement(By.XPath(".//div[@class='form-group has-success']//span[contains(text(), '" + section + "')]/../div/span[contains(text(),'" + option + "')]"), 2);
+			IWebElement document = this.FindElement(By.XPath($".//div[@class='form-group has-success']//span[contains(text(), '{section}')]/../div/span[contains(text(),'{option}')]"), 2);
 			if (document == null)
 			{
-				Report.Info("Could not find option " + option + " for section " + section);
+				Report.Info($"Could not find option {option} for section {section}");
 				return "";
 			}
 
@@ -507,10 +507,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickViewForDocument(string section)
 		{
-			IWebElement button = this.containerElement.FindElement(By.XPath(".//div[@class='form-group has-success']//span[contains(text(), '" + section + "')]/../div/a[contains(text(),'View')]"), 2);
+			IWebElement button = this.FindElement(By.XPath(".//div[@class='form-group has-success']//span[contains(text(), '" + section + "')]/../div/a[contains(text(),'View')]"), 2);
 			if (button == null)
 			{
-				Report.Info("Could not find View button for section: " + section);
+				Report.Info("Could not find View button for section: {section}");
 				return false;
 			}
 
@@ -537,7 +537,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			else
 			{
-				Report.Info("Found " + ingredientsRows.Count.ToString() + " ingredients");
+				Report.Info($"Found {ingredientsRows.Count.ToString()} ingredients");
 			}
 
 			for (int i = 0; i < ingredientsRows.Count - 1; i++)
@@ -571,7 +571,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public void ScrollToIngredients()
 		{
-			IWebElement ingredientsTable = this.containerElement.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"), 2);
+			IWebElement ingredientsTable = this.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"), 2);
 			if (ingredientsTable == null)
 			{
 				Report.Error("Failed to find ingredients table");
@@ -584,7 +584,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				IWebElement ingredientsTable = this.containerElement.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"), 2);
+				IWebElement ingredientsTable = this.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"), 2);
 
 				if (ingredientsTable == null)
 				{
@@ -628,7 +628,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				IWebElement ingredientsTable = this.containerElement.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"), 2);
+				IWebElement ingredientsTable = this.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"), 2);
 
 				if (ingredientsTable == null)
 				{
@@ -661,7 +661,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				IWebElement ingredientsTable = this.containerElement.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"), 2);
+				IWebElement ingredientsTable = this.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"), 2);
 
 				if (ingredientsTable == null)
 				{
@@ -703,7 +703,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				IWebElement ingredientsTable = this.containerElement.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"), 2);
+				IWebElement ingredientsTable = this.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"), 2);
 
 				if (ingredientsTable == null)
 				{
@@ -734,7 +734,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ConfirmSectionHasFollowingValueInSummaryPage(string section, string value)
 		{
-			IWebElement sectionValue = this.ContainerElement.FindElement(By.XPath("//h3[text()='" + section + "']/following-sibling::p[@data-bind='html: Data']"), 2);
+			IWebElement sectionValue = this.ContainerElement.FindElement(By.XPath($"//h3[text()='{section}']/following-sibling::p[@data-bind='html: Data']"), 2);
 
 			if (sectionValue == null)
 			{

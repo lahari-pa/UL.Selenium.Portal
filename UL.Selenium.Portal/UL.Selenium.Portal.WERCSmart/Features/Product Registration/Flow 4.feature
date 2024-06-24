@@ -137,8 +137,11 @@ Scenario: [57950] Conditioner - Leave In (RU001272) 4-L
 	Given in the Retailer page I click Continue
 
 	#Given I call Shared Step 60567 (Upload Product Label only)
-	Given In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
-	Given in the New Product page I click Continue
+	Given I should see the Regulatory Documents to Provide Page
+	Given in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Given in the Regulatory Documents to Provide page I click Continue
 
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -260,7 +263,13 @@ Scenario: [57924] Penetrants (RU000801) - Flow 4AL - 4A
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
 	Then in the Regulatory Documents to Provide page I click Continue
 
-	Given I call Shared Step 60567 (Upload Product Label only)
+	#Given I call Shared Step 60567 (Upload Product Label only)
+	Given I should see the Regulatory Documents to Provide Page
+	Given in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Given in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
@@ -314,7 +323,13 @@ Scenario: [57925] Floor Maintenance Product - Non-Aerosol (RU001433) 4-L
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
 	Then in the Regulatory Documents to Provide page I click Continue
 
-	Given I call Shared Step 60567 (Upload Product Label only)
+	#Given I call Shared Step 60567 (Upload Product Label only)
+	Given I should see the Regulatory Documents to Provide Page
+	Given in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Given in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
@@ -372,7 +387,13 @@ Scenario: [57927] Floor Wax - Wood (RU000790) 4LS - 4S
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
 	Then in the Regulatory Documents to Provide page I click Continue
 
-	Given I call Shared Step 60567 (Upload Product Label only)
+	#Given I call Shared Step 60567 (Upload Product Label only)
+	Given I should see the Regulatory Documents to Provide Page
+	Given in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Given in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 #	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 #		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
@@ -437,7 +458,13 @@ Scenario: [57931] Hair Styling Product - Mousse (RU000669) - 4A
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
 	Then in the Regulatory Documents to Provide page I click Continue
 
-	Given I call Shared Step 60567 (Upload Product Label only)
+	#Given I call Shared Step 60567 (Upload Product Label only)
+	Given I should see the Regulatory Documents to Provide Page
+	Given in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Given in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
@@ -489,7 +516,13 @@ Scenario: [57933] Hair Styling Product - Aerosol and Pump Spray - Flow 4AL - 4A
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
 	Then in the Regulatory Documents to Provide page I click Continue
 
-	Given I call Shared Step 60567 (Upload Product Label only)
+	#Given I call Shared Step 60567 (Upload Product Label only)
+	Given I should see the Regulatory Documents to Provide Page
+	Given in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Given in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
@@ -591,9 +624,12 @@ Scenario: [57952] Hair Styling Gel- (RU000749) 4LS - 4S
 	# ====== Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path) ====== #
 	Given in the Retailer page I click Continue
 
-	# ====== Given I call Shared Step 60567 (Upload Product Label only) ====== #
-	Given In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
-	Given in the New Product page I click Continue
+	#Given I call Shared Step 60567 (Upload Product Label only)
+	Given I should see the Regulatory Documents to Provide Page
+	Given in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Given in the Regulatory Documents to Provide page I click Continue
 
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -667,7 +703,13 @@ Scenario: [57958] Adhesive - Aerosol Web Spray (RU000909) - 4A
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
 	Then in the Regulatory Documents to Provide page I click Continue
 
-	Given I call Shared Step 60567 (Upload Product Label only)
+	#Given I call Shared Step 60567 (Upload Product Label only)
+	Given I should see the Regulatory Documents to Provide Page
+	Given in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Given in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 #	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 #		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
@@ -726,7 +768,13 @@ Scenario: [57977] Adhesive (Spray, Special Purpose): Polyolefin and Laminate Rep
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
 	Then in the Regulatory Documents to Provide page I click Continue
 
-	Given I call Shared Step 60567 (Upload Product Label only)
+	#Given I call Shared Step 60567 (Upload Product Label only)
+	Given I should see the Regulatory Documents to Provide Page
+	Given in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Given in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 #	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 #		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
@@ -869,9 +917,12 @@ Scenario: [57982] Bonding agent (RU000023) - 4All - 4G
 	And I confirm that retailer "HD" is present under the 'Destination Retailers' column in the UPC table
 	Then I click continue	
 
-	# ====== Given I call Shared Step 60567 (Upload Product Label only) ====== #
-	Given In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
-	Given in the New Product page I click Continue
+	#Given I call Shared Step 60567 (Upload Product Label only)
+	Given I should see the Regulatory Documents to Provide Page
+	Given in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Given in the Regulatory Documents to Provide page I click Continue
 
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -956,7 +1007,13 @@ Scenario: [57983] Lubricant, Multi-Purpose, Not for Personal Use (RU000674) 4L
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
 	Then in the Regulatory Documents to Provide page I click Continue
 
-	Given I call Shared Step 60567 (Upload Product Label only)
+	#Given I call Shared Step 60567 (Upload Product Label only)
+	Given I should see the Regulatory Documents to Provide Page
+	Given in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Given in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 #	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 #		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
@@ -1100,9 +1157,12 @@ Scenario: [57985] Footwear or Leather Care Product - Aerosol (RU000744) - Testin
 	# ====== Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path) ====== #
 	Given in the Retailer page I click Continue
 
-	# ====== Given I call Shared Step 60567 (Upload Product Label only) ====== #
-	Given In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
-	Given in the New Product page I click Continue
+	#Given I call Shared Step 60567 (Upload Product Label only)
+	Given I should see the Regulatory Documents to Provide Page
+	Given in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Given in the Regulatory Documents to Provide page I click Continue
 
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -1187,7 +1247,13 @@ Scenario: [57988] Anti-Static Product - Non-Aerosol (RU000667) 4-L
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
 	Then in the Regulatory Documents to Provide page I click Continue
 
-	Given I call Shared Step 60567 (Upload Product Label only)
+	#Given I call Shared Step 60567 (Upload Product Label only)
+	Given I should see the Regulatory Documents to Provide Page
+	Given in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Given in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 #	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
 #		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |

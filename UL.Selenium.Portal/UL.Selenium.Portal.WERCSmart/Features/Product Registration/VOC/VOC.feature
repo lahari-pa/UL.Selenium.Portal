@@ -181,7 +181,13 @@ Scenario: [56475] VOC checks for Fabric Softener - single Use dryer product (RU0
 	Given in the New Product page I click Continue
 	Then I should see an error message: Document is required: Product Label
 	Then Toxicity Characteristic Leaching Procedure (TCLP) should not be showing any error messages
-	Given I call Shared Step 60567 (Upload Product Label only)
+	#Given I call Shared Step 60567 (Upload Product Label only)
+	Given I should see the Regulatory Documents to Provide Page
+	Given in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Given in the Regulatory Documents to Provide page I click Continue
+
 	Then I should see the Optional Reports and Documents Available for Purchase Page
 	Given in the New Product page I click Continue
 	Then I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
@@ -403,7 +409,13 @@ Scenario: [56481] VOC checks for Oven Cleaner - pump sprays (RU000798) - CARB an
 		| Volatile Organic Compounds |
 	Given in the New Product page I click Continue
 	Then I should see an error message: Document is required: Product Label
-Given I call Shared Step 60567 (Upload Product Label only)
+	#Given I call Shared Step 60567 (Upload Product Label only)
+	Given I should see the Regulatory Documents to Provide Page
+	Given in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Given in the Regulatory Documents to Provide page I click Continue
+
 	Then I should see the Optional Reports and Documents Available for Purchase Page
 	Given in the New Product page I click Continue
 	Then I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
@@ -741,7 +753,13 @@ Scenario: [56476] VOC checks for Personal Fragrance product
 		| Volatile Organic Compounds |
 	Given in the New Product page I click Continue
 	Then I should see an error message: Document is required: Product Label
-Given I call Shared Step 60567 (Upload Product Label only)
+	#Given I call Shared Step 60567 (Upload Product Label only)
+	Given I should see the Regulatory Documents to Provide Page
+	Given in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Given in the Regulatory Documents to Provide page I click Continue
+
 	Then I should see the Optional Reports and Documents Available for Purchase Page
 	Given in the New Product page I click Continue
 	Then I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
