@@ -237,6 +237,8 @@ Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
 	#Given I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
 	Given I should see the Additional Documents to Provide Page
+	Then In the Additional Documents to Provide, section 'OSHA-compliant Safety Data Sheet (Optional)' is displayed
+	Then In the Additional Documents to Provide, section 'Toxicity Characteristic Leaching Procedure (TCLP)' is displayed
 	Then In the Additional Documents to Provide Section, I upload PDF document to Upload Full Product Label (required) field
 	Then In the Additional Documents to Provide Section, for section Product Label I click button 'View'
 	Then In the Additional Documents to Provide Section, after clicking 'View' button I confirm pdf file is downloaded
@@ -643,8 +645,15 @@ Scenario: [58075] Nutritional Supplement for Infants - Liquid - RU001365
 		| Section                    |
 		| Flash Point Testing Report |
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	Then I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
-	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	#Given I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
+	Given I should see the Additional Documents to Provide Page
+	Then In the Additional Documents to Provide, section 'OSHA-compliant Safety Data Sheet (Optional)' is displayed
+	Then In the Additional Documents to Provide, section 'Toxicity Characteristic Leaching Procedure (TCLP)' is displayed
+	Then In the Additional Documents to Provide Section, I upload PDF document to Upload Full Product Label (required) field
+	Then I save the current window handle to context as: MainWindowHandle
+	Then In the Additional Documents to Provide Section, for section Product Label I click button 'View'
+	Then In the Additional Documents to Provide Section, after clicking 'View' button I confirm pdf file is downloaded
+	Then in the Additional Documents to Provide  page I click Continue	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58075. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I should see the Optional Comments Page
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
@@ -712,8 +721,15 @@ Scenario: [58089] Nutritional Supplements for Domesticated Animals - RU001239
 	Then I see the following sections
 		| Section                    |
 		| Flash Point Testing Report |
-	Given I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
-	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	#Given I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
+	Given I should see the Additional Documents to Provide Page
+	Then In the Additional Documents to Provide, section 'OSHA-compliant Safety Data Sheet (Optional)' is displayed
+	Then In the Additional Documents to Provide, section 'Toxicity Characteristic Leaching Procedure (TCLP)' is displayed
+	Then In the Additional Documents to Provide Section, I upload PDF document to Upload Full Product Label (required) field
+	Then I save the current window handle to context as: MainWindowHandle
+	Then In the Additional Documents to Provide Section, for section Product Label I click button 'View'
+	Then In the Additional Documents to Provide Section, after clicking 'View' button I confirm pdf file is downloaded
+	Then in the Additional Documents to Provide  page I click Continue	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58089. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I should see the Optional Comments Page
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
