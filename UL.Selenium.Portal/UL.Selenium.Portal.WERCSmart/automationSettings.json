@@ -21,7 +21,7 @@
     "LinkedSoftwareId": 20,
     "SoftwareBranch": "Staging-New",
     "BuildOperationSettings": {
-      "PerformBuildOperations": true
+      "PerformBuildOperations": false
     }
   },
   "MailosaurSettings": {

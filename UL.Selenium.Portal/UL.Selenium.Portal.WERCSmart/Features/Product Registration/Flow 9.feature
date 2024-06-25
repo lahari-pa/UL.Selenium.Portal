@@ -328,6 +328,8 @@ Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
 	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
 	#Given I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
 	Given I should see the Additional Documents to Provide Page
+	Then In the Additional Documents to Provide, section 'OSHA-compliant Safety Data Sheet (Optional)' is displayed
+	Then In the Additional Documents to Provide, section 'Toxicity Characteristic Leaching Procedure (TCLP)' is displayed
 	Then In the Additional Documents to Provide Section, I upload PDF document to Upload Full Product Label (required) field
 	Then I save the current window handle to context as: MainWindowHandle
 	Then In the Additional Documents to Provide Section, for section Product Label I click button 'View'
