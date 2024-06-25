@@ -1352,8 +1352,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle);
 				Delay.Seconds(5);
-				IWebElement title = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//h1[text()='Summary']"), 2);
-				if (title != null)
+				if (SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//h1[text()='Summary']"), 20) != null)
 				{
 					Report.Success("Tab was switched successfully!");
 					Report.Screenshot();
@@ -1373,7 +1372,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			foreach (string handle in allHandles)
 			{
 				SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle);
-				if (SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//h3[text()='Data Acceptance']"), 2) != null)
+				if (SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//h3[text()='Data Acceptance']"), 2) != null)
 				{
 					Report.Success("Tab was switched successfully!");
 					return;
