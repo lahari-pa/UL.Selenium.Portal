@@ -129,8 +129,11 @@ Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Given I should see the The Product Page
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Energy or Nutritional Bars
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
+ 	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase58098
 	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I should see the Product Information Page
@@ -141,18 +144,26 @@ Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page I click Continue
-
-	Given I call Shared Step 37857 (Enter Physical Property - Solid)
-	Given I add the following ingredients:
-		| ComponentName    | Percent |
-		| Aqua             | 50      |
-		| Sodium hydroxide | 50      |
-	#Given I select the first Public Name dropdown option for ingredient: Aqua
-	Given I click the Trade Secret checkbox for ingredient: Aqua
-	Given for ingredient: Aqua the Publicly Disclosed field is disabled
-	Given I click the Trade Secret checkbox for ingredient: Aqua
-	Given I click the Publicly Disclosed checkbox for ingredient: Aqua
-	Given I confirm there are 1 Publicly Disclosed ingredients in the Total section
+	#Given I call Shared Step 37857 (Enter Physical Property - Solid)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add component with component name: Water
+	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
+	Then In the Ingredients Table row with component name: Water, in Public Name column select option Water
+	Then In the Ingredients Table row with component name: Water, in Public Name column select confirm Water option is selected
+	Then In the Ingredients Table row with component name: Water, in Publicly Disclosed? column confirm checkbox is checked
+	Then In the Ingredients Table row with component name: Water, in Trade Secret column confirm checkbox is disabled
+	Then In the Ingredients section, add component with component name: Carbon
+	Then In the Ingredients Table row with component name: Carbon, in Percent column text input enter: 100
+	Then In the Ingredients section, add component with component name: Gold
+	Then In the Ingredients Table row with component name: Gold, in Percent column text input enter: 100
+	Then In the Ingredients section, verify Total Percent displays value: 300
+	Then In the Ingredients section, verify Transparency displays value: 33.33%
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58098
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase58098
@@ -702,8 +713,11 @@ Scenario: [58097] Ingredient Search in Registration
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Paint balls
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Paint balls
+	Given I should see the The Product Page
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Energy or Nutritional Bars
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Paint balls
+ 	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase58097
 	#Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I should see the Product Information Page
@@ -717,14 +731,17 @@ Scenario: [58097] Ingredient Search in Registration
 	Given I should see the Liquid Core Product Page
 	Then In the Liquid Core Product Section, set the option in section: 'Is there a free liquid in the Product's container that is 10ml or greater?' to: No
 	Then in the Liquid Core Product page I click Continue
-
-	#Given I call Shared Step 37857 (Enter Physical Property - Solid)
-	Given I call Shared Step 73223 (Enter Physical Property - Solid - Without Secondary Physical State)
-	Given I enter text: 7732-18-5 in the component search box
-	Given I confirm the top result in the searchfields dropdown list has the following CAS number: 7732-18-5
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| CASNumber | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| 7732-18-5 | 100     | false               | false       |            |
+	#Given I call Shared Step 73223 (Enter Physical Property - Solid - Without Secondary Physical State)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+	Given I should see the Ingredients Page
+	Then In the Ingredients Section, click the component search box
+	Then In the component search box, enter text: 7732-18-5
+	Then In the component search box, confirm search results list is displayed
+	Then In the component search box, click result where CAS number contains: 7732-18-5
 	Given I navigate to the home page
 	Then I delete the product: TestCase58097
 
