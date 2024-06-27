@@ -64,7 +64,13 @@ Scenario: [58072] Baby/Infant/Adult Care/Cleansing Wipes - RU000248
 	Then In the Liquid Core Product Section, set the option in section: 'Is there a free liquid in the Product's container that is 10ml or greater?' to: No
 	Then in the Liquid Core Product page I click Continue
 
-	Given I call Shared Step 37857 (Enter Physical Property - Solid)
+	#Given I call Shared Step 37857 (Enter Physical Property - Solid)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName    | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Aqua             | 10      | false               | false       |            |
@@ -539,7 +545,13 @@ Scenario: [58091] Latex Gloves - RU000151
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page I click Continue
-	Given I call Shared Step 37857 (Enter Physical Property - Solid)
+	#Given I call Shared Step 37857 (Enter Physical Property - Solid)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Water         | 100     | false               | false       |            |
@@ -878,7 +890,13 @@ Scenario: [58081] Nutritional Supplement - Solid - RU000619
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nutritional Supplement - Solid
 	Given I call Shared Step 62678 (Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
-	Given I call Shared Step 37857 (Enter Physical Property - Solid)
+	#Given I call Shared Step 37857 (Enter Physical Property - Solid)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Aqua          | 50      | false               | false       |            |
@@ -941,7 +959,13 @@ Scenario: [58604] Condom - RU000937
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Condom with or without Spermicide
 	Then I save the product information as: TestCase58604
 	Given I call Shared Step 60310 (Product Information - Without Child question)
-	Given I call Shared Step 37857 (Enter Physical Property - Solid)
+	#Given I call Shared Step 37857 (Enter Physical Property - Solid)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Polyisoprene  | 90      | false               | false       |            |
