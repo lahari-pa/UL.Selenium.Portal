@@ -237,6 +237,8 @@ Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
 	#Given I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
 	Given I should see the Additional Documents to Provide Page
+	Then In the Additional Documents to Provide, section 'OSHA-compliant Safety Data Sheet (Optional)' is displayed
+	Then In the Additional Documents to Provide, section 'Toxicity Characteristic Leaching Procedure (TCLP)' is displayed
 	Then In the Additional Documents to Provide Section, I upload PDF document to Upload Full Product Label (required) field
 	Then In the Additional Documents to Provide Section, for section Product Label I click button 'View'
 	Then In the Additional Documents to Provide Section, after clicking 'View' button I confirm pdf file is downloaded
@@ -264,11 +266,10 @@ Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC58079
 	Given I delete all products with UPC Number: saved as UPC58079
-#	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Energy or Nutritional Powder/Mix
 	Given I should see the The Product Page
 	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Energy or Nutritional Powder/Mix
@@ -283,43 +284,73 @@ Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page I click Continue
-	Given I call Shared Step 37857 (Enter Physical Property - Solid) with the following inputs:
-		| Secondary Physical State | Water Solubility |
-		| Flaked                   | Soluble in water |
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Water         | 100     | false               | false       |            |
+	#Given I call Shared Step 37857 (Enter Physical Property - Solid) with the following inputs:
+	#	| Secondary Physical State | Water Solubility |
+	#	| Flaked                   | Soluble in water |
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+	#Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Water         | 100     | false               | false       |            |
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add component with component name: Water
+	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
+	Given I click continue
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I should see the Inventory Status, Prop 65 (US) Page
 	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
 	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page I click Continue
-
-	Given I set the Refer to your Product Label option to: None of the Above
-	Given I click continue
-#	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Save Mart Supermarkets
+	#Then I call Shared Step 132473 (Regulatory Information 3 - Nutritional Category)
+	Given I should see the Regulatory Information 3 Page
+	Then In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible Nutritional Supplement. Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
+	| Option                 |
+	| Supplement Facts Panel |
+	| Nutrition Facts Panel  |
+	| None of the Above      |
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: Nutrition Facts Panel
+	Then In the Regulatory Information 3 Section, the following link: Nutritional and Supplement Labels should be displayed
+	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
+	Then in the Regulatory Information 3 page I click Continue
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Save Mart Supermarkets
 	Then I should be on the Retailer Page
 	And In the Retailer Section, click 'Add Retailers' button
-	And In the Select Retailers window, select retailer: Save Mart Supermarkets
+	Then In the Retailer Section is selected retailer: No Retailer/No UPC Product
+	And In the Select Retailers window, select retailer: CVS
 	And In the Select Retailers window, click 'Done' button
 	Then in the Retailer page, I click Continue
-
-	Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58079, container type: Plastic bag and size: 8
-	#Given I call Shared Step 60567 (Upload Product Label only)
-	Given I should see the Regulatory Documents to Provide Page
-	Given in the Regulatory Documents to Provide page I click Continue
-	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
-	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
-	Given in the Regulatory Documents to Provide page I click Continue
-
-	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58079. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	#Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58078, container type: Plastic Container and size: 3.6
+	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC58079 enter Size: 12 and enter Container Type: Plastic bag
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	#Given I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
+	Given I should see the Additional Documents to Provide Page
+	Then In the Additional Documents to Provide, section 'OSHA-compliant Safety Data Sheet (Optional)' is displayed
+	Then In the Additional Documents to Provide, section 'Toxicity Characteristic Leaching Procedure (TCLP)' is displayed
+	Then In the Additional Documents to Provide Section, I upload PDF document to Upload Full Product Label (required) field
+	Then I save the current window handle to context as: MainWindowHandle
+	Then In the Additional Documents to Provide Section, for section Product Label I click button 'View'
+	Then In the Additional Documents to Provide Section, after clicking 'View' button I confirm pdf file is downloaded
+	Then in the Additional Documents to Provide  page I click Continue
+	Then I close All the current windows except the Main Window
+	Given I should see the Optional Reports and Documents Available for Purchase Page
+	Then in the Optional Reports and Documents Available for Purchase  page I click Continue
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58078. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I should see the Optional Comments Page
-	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then In the Optional Comments Section, section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' is availiable
 	Then in the Optional Comments page I click Continue
-
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Energy or Nutritional Powder/Mix
-	#Replace shared 42214
+	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Energy or Nutritional Bars
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, click 'Summary' button
+	Given I switch to the tab with Data Summary page
+	Given In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Energy or Nutritional Powder/Mix
+	Given I close the tab with Data Summary page
+    Given I should see the Data Acceptance Page
 	Given I navigate to the home page
 	Then I delete the product: TestCase58079
 
@@ -614,8 +645,15 @@ Scenario: [58075] Nutritional Supplement for Infants - Liquid - RU001365
 		| Section                    |
 		| Flash Point Testing Report |
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	Then I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
-	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	#Given I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
+	Given I should see the Additional Documents to Provide Page
+	Then In the Additional Documents to Provide, section 'OSHA-compliant Safety Data Sheet (Optional)' is displayed
+	Then In the Additional Documents to Provide, section 'Toxicity Characteristic Leaching Procedure (TCLP)' is displayed
+	Then In the Additional Documents to Provide Section, I upload PDF document to Upload Full Product Label (required) field
+	Then I save the current window handle to context as: MainWindowHandle
+	Then In the Additional Documents to Provide Section, for section Product Label I click button 'View'
+	Then In the Additional Documents to Provide Section, after clicking 'View' button I confirm pdf file is downloaded
+	Then in the Additional Documents to Provide  page I click Continue	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58075. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I should see the Optional Comments Page
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
@@ -683,8 +721,15 @@ Scenario: [58089] Nutritional Supplements for Domesticated Animals - RU001239
 	Then I see the following sections
 		| Section                    |
 		| Flash Point Testing Report |
-	Given I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
-	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	#Given I call Shared Step 132601 (Additional Documents to Provide - Nutritional Flow)
+	Given I should see the Additional Documents to Provide Page
+	Then In the Additional Documents to Provide, section 'OSHA-compliant Safety Data Sheet (Optional)' is displayed
+	Then In the Additional Documents to Provide, section 'Toxicity Characteristic Leaching Procedure (TCLP)' is displayed
+	Then In the Additional Documents to Provide Section, I upload PDF document to Upload Full Product Label (required) field
+	Then I save the current window handle to context as: MainWindowHandle
+	Then In the Additional Documents to Provide Section, for section Product Label I click button 'View'
+	Then In the Additional Documents to Provide Section, after clicking 'View' button I confirm pdf file is downloaded
+	Then in the Additional Documents to Provide  page I click Continue	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58089. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I should see the Optional Comments Page
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
