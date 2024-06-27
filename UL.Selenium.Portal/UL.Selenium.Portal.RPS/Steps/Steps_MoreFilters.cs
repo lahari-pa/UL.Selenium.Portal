@@ -435,6 +435,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
         [RegexStepDefinition(@"I confirm I see the Supplier Name I was searching for: (.*)")]
+        [RegexStepDefinition(@"I confirm I see the DPCI I was searching for: (.*)")]
         public void InTheTheMoreFiltersInFilterParameterPanelIConfirmListMachtesExactlyForSearchedSupplierNameIsDisplayed(string supplierName)
         {
             if (supplierName.Contains("savedAs"))
