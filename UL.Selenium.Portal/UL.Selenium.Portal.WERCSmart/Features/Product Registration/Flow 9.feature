@@ -162,8 +162,9 @@ Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 	Then In the Ingredients Table row with component name: Carbon, in Percent column text input enter: 100
 	Then In the Ingredients section, add component with component name: Gold
 	Then In the Ingredients Table row with component name: Gold, in Percent column text input enter: 100
-	Then In the Ingredients section, verify Total Percent displays value: 300
+	Then In the Ingredients Section, click the component search box
 	Then In the Ingredients section, verify Transparency displays value: 33.33%
+	Then In the Ingredients section, verify Total Percent displays value: 300
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58098
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase58098

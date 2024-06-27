@@ -545,9 +545,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		[RegexStepDefinition(@"In the Ingredients section, verify Total Percent displays value: (.*)")]
 		public void ThenIVerifyTotalPercent(string value)
 		{
-			Ingredients ingredientsObject = new Ingredients();
-
-			Report.IsTrue(ingredientsObject.TotalPercentage(value), $"Failed to confirm the total percent {value} on the Ingredients page", $"Confirmed that the total percent {value} on the Ingredients page");
+			new StepsIngredients().GivenIConfirmPercentageOfFiveIngredients(value);
 		}
 
 		[RegexStepDefinition("In the Ingredients section, verify Transparency displays value: (.*)%")]
