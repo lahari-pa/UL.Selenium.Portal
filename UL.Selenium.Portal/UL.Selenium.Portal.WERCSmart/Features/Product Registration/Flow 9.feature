@@ -137,7 +137,7 @@ Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 	Then in the New Product page, I click Continue
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Given I should see the The Product Page
-	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Energy or Nutritional Bars
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk
 	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
  	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase58098
@@ -773,7 +773,7 @@ Scenario: [58097] Ingredient Search in Registration
 	Then in the New Product page, I click Continue
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Paint balls
 	Given I should see the The Product Page
-	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Energy or Nutritional Bars
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Paint balls
 	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Paint balls
  	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase58097
