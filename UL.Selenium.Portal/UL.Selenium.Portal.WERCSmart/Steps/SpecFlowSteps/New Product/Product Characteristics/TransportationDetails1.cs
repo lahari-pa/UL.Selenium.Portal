@@ -71,10 +71,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			string section = "Please select DOT Exceptions if applicable?";
 			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
-
 		}
-
-
+		[RegexStepDefinition(@"In the Transportation Details 1 Section, verify in 'Please select DOT Exceptions if applicable\?' section the error message (should|should not) be displayed: (.*)")]
+		public void ThenInTheTransportationDetailsSectionExceptionsVerifyErrorMessage(string should_shouldnot, string pipeDelimitedErrorMessages)
+		{
+			string section = "Please select DOT Exceptions if applicable?";
+			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, should_shouldnot, pipeDelimitedErrorMessages);
+		}
 		[RegexStepDefinition(@"In the Transportation Details 1 Section, for section 'Product is Regulated for Transport': the following options (should|should not) be (displayed|displayed exclusively):")]
 		public void CheckOptionsInProductIsRegulatedForTransportSection(string condition, string displayed, Table table)
 		{

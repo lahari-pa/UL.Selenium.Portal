@@ -8,6 +8,7 @@ using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
+using OpenQA.Selenium.Internal;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -606,8 +607,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		//==================================================================================== WIRE TRANSFER
 
 		//Wire Transfer Warning
-		[FindsBy(How = How.Id, Using = "wireTransferWarning-new")]
-		private IWebElement _transfer_warning;
+		//[FindsBy(How = How.Id, Using = "wireTransferWarning-new")]
+		private IWebElement Transfer_warning => this.FindElement(By.Id("wireTransferWarning-new"),1);
 
 		public bool Wire_Transfer_Warning(string warning)
 		{
@@ -615,10 +616,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			Report.Info("Expected Warning = " + warning);
 
-			if (this._transfer_warning.Text != warning)
+			if (this.Transfer_warning.Text != warning)
 			{
 				Report.Info("Warning Message Text Incorrect");
-				Report.Info(this._transfer_warning.Text);
+				Report.Info(this.Transfer_warning.Text);
 				Report.Screenshot();
 				return false;
 			}
@@ -634,13 +635,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		//Continue Button
-		[FindsBy(How = How.Id, Using = "continueButton")]
-		private IWebElement _btnContinue;
+		//[FindsBy(How = How.Id, Using = "continueButton")]
+		private IWebElement BtnContinue => this.FindElement(By.Id("continueButton"),1);
 
 		public bool Continue_click()
 		{
 			Report.Info("Attempting to Click Continue Button");
-			this._btnContinue.Click();
+			this.BtnContinue.Click();
 			return true;
 		}
 
@@ -651,7 +652,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			if (enabled == "enabled")
 			{
-				if (!this._btnContinue.Enabled)
+				if (!this.BtnContinue.Enabled)
 				{
 					Report.Info("Continue Button is Disabled");
 					Report.Screenshot();
@@ -664,7 +665,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			if (enabled == "disabled")
 			{
-				if (this._btnContinue.Enabled)
+				if (this.BtnContinue.Enabled)
 				{
 					Report.Info("Continue Button is Enabled");
 					Report.Screenshot();
@@ -679,8 +680,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		//Formulated Products
-		[FindsBy(How = How.XPath, Using = ".//div[@class='col-sm-2 address-panel']")]
-		private IWebElement _tbl_addresses;
+		//[FindsBy(How = How.XPath, Using = ".//div[@class='col-sm-2 address-panel']")]
+		private IWebElement Tbl_addresses => this.FindElement(By.Id(".//div[@class='col-sm-2 address-panel']"),1);
 
 		public List<string> Get_Contact_Info()
 		{
@@ -695,7 +696,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			//}
 			//Report.Info("Contact Information Found");
 			//return myContact.Text;
-			IList<IWebElement> myContact = this._tbl_addresses.FindElements(By.XPath("div[1]/div"), 10);
+			IList<IWebElement> myContact = this.Tbl_addresses.FindElements(By.XPath("div[1]/div"), 10);
 			if (myContact != null)
 			{
 				return myContact.Select(x => x.GetValue()).ToList();
@@ -834,13 +835,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		//Change Button
-		[FindsBy(How = How.XPath, Using = ".//div/a[text()='Change']")]
-		private IWebElement _btnChange;
+		//[FindsBy(How = How.XPath, Using = ".//div/a[text()='Change']")]
+		private IWebElement BtnChange => FindElement(By.Id(".//div/a[text()='Change']"),1);
 
 		public bool Change_click()
 		{
 			Report.Info("Attempting to Click Change Button");
-			this._btnChange.Click();
+			this.BtnChange.Click();
 			return true;
 		}
 
@@ -1202,8 +1203,8 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 		//===================================================================================================== PRIMARY ACCOUNT CONTACT
 
 		//Primary Account Contact Section
-		[FindsBy(How = How.XPath, Using = ".//div/h4[text()='Primary Account Contact']/..")]
-		private IWebElement _section_pac;
+		//[FindsBy(How = How.XPath, Using = ".//div/h4[text()='Primary Account Contact']/..")]
+		private IWebElement Section_pac => this.FindElement(By.Id(".//div/h4[text()='Primary Account Contact']/.."),1);
 
 		public bool Edit_Primary_Account_Contact(string firstName = "", string lastName = "", string email = "")
 		{
@@ -1218,7 +1219,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 			Report.Info("Edit Address Form Open");
 			if (firstName != "")
 			{
-				IWebElement myFirst = this._section_pac.FindElements(By.XPath(".//input[@name='firstName']"), 10).FirstOrDefault();
+				IWebElement myFirst = this.Section_pac.FindElements(By.XPath(".//input[@name='firstName']"), 10).FirstOrDefault();
 				if (myFirst == null)
 				{
 					Report.Info("Failed to Find First Name Text Box");
@@ -1230,7 +1231,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 			}
 			if (lastName != "")
 			{
-				IWebElement myLast = this._section_pac.FindElements(By.XPath(".//input[@name='lastName']"), 10).FirstOrDefault();
+				IWebElement myLast = this.Section_pac.FindElements(By.XPath(".//input[@name='lastName']"), 10).FirstOrDefault();
 				if (myLast == null)
 				{
 					Report.Info("Failed to Find Last Name Text Box");
@@ -1242,7 +1243,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 			}
 			if (email != "")
 			{
-				IWebElement myEmail = this._section_pac.FindElements(By.XPath(".//input[@name='email']"), 10).FirstOrDefault();
+				IWebElement myEmail = this.Section_pac.FindElements(By.XPath(".//input[@name='email']"), 10).FirstOrDefault();
 				if (myEmail == null)
 				{
 					Report.Info("Failed to Find Email Address Text Box");
@@ -1259,8 +1260,8 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 		}
 
 		//Edit Account Name
-		[FindsBy(How = How.XPath, Using = ".//div/h4[text()='Primary Account Contact']/..")]
-		private IWebElement _section_acc;
+		//[FindsBy(How = How.XPath, Using = ".//div/h4[text()='Primary Account Contact']/..")]
+		private IWebElement Section_acc => this.FindElement(By.Id(".//div/h4[text()='Primary Account Contact']/.."),1);
 
 		public bool Edit_Account_Name(string accountName = "")
 		{
@@ -1275,7 +1276,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 			Report.Info("Edit Address Form Open");
 			if (accountName != "")
 			{
-				IWebElement myCompany = this._section_acc.FindElement(By.XPath(".//input[@name='account']"), 10);
+				IWebElement myCompany = this.Section_acc.FindElement(By.XPath(".//input[@name='account']"), 10);
 				if (myCompany == null)
 				{
 					Report.Info("Failed to Find Account Name Text Box");
@@ -1329,8 +1330,8 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 		//================================================================================================= BILLING ADDRESS
 
 		//Billing Address Section
-		[FindsBy(How = How.XPath, Using = ".//div/h4[text()='Billing Address']/..")]
-		private IWebElement _section_bill;
+		//[FindsBy(How = How.XPath, Using = ".//div/h4[text()='Billing Address']/..")]
+		private IWebElement Section_bill => this.FindElement(By.Id(".//div/h4[text()='Billing Address']/.."),1);
 
 		public bool Billing_Headers_Check(List<string> myList)
 		{
@@ -1353,7 +1354,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 				switch (field)
 				{
 					case "First Name":
-						myFieldHeader = this._section_pac.FindElements(By.XPath(".//label[text()='First Name']"), 10).FirstOrDefault();
+						myFieldHeader = this.Section_bill.FindElements(By.XPath(".//label[text()='First Name']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -1364,7 +1365,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 						Report.Success(field + " Field Displayed");
 						break;
 					case "Last Name":
-						myFieldHeader = this._section_pac.FindElements(By.XPath(".//label[text()='Last Name']"), 10).FirstOrDefault();
+						myFieldHeader = this.Section_bill.FindElements(By.XPath(".//label[text()='Last Name']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -1375,7 +1376,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 						Report.Success(field + " Field Displayed");
 						break;
 					case "Email Address":
-						myFieldHeader = this._section_pac.FindElements(By.XPath(".//label[text()='Email Address']"), 10).FirstOrDefault();
+						myFieldHeader = this.Section_bill.FindElements(By.XPath(".//label[text()='Email Address']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -1386,7 +1387,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 						Report.Success(field + " Field Displayed");
 						break;
 					case "Address 1":
-						myFieldHeader = this._section_bill.FindElements(By.XPath(".//label[text()='Address Line 1']"), 10).FirstOrDefault();
+						myFieldHeader = this.Section_bill.FindElements(By.XPath(".//label[text()='Address Line 1']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -1397,7 +1398,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 						Report.Success(field + " Field Displayed");
 						break;
 					case "Address 2":
-						myFieldHeader = this._section_bill.FindElements(By.XPath(".//label[text()='Address Line 2']"), 10).FirstOrDefault();
+						myFieldHeader = this.Section_bill.FindElements(By.XPath(".//label[text()='Address Line 2']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -1408,7 +1409,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 						Report.Success(field + " Field Displayed");
 						break;
 					case "City":
-						myFieldHeader = this._section_bill.FindElements(By.XPath(".//label[text()='City']"), 10).FirstOrDefault();
+						myFieldHeader = this.Section_bill.FindElements(By.XPath(".//label[text()='City']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -1419,7 +1420,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 						Report.Success(field + " Field Displayed");
 						break;
 					case "State":
-						myFieldHeader = this._section_bill.FindElements(By.XPath(".//label[text()='State']"), 10).FirstOrDefault();
+						myFieldHeader = this.Section_bill.FindElements(By.XPath(".//label[text()='State']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -1430,7 +1431,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 						Report.Success(field + " Field Displayed");
 						break;
 					case "Zip Code":
-						myFieldHeader = this._section_bill.FindElements(By.XPath(".//label[text()='Zip']"), 10).FirstOrDefault();
+						myFieldHeader = this.Section_bill.FindElements(By.XPath(".//label[text()='Zip']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -1441,7 +1442,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 						Report.Success(field + " Field Displayed");
 						break;
 					case "Country":
-						myFieldHeader = this._section_bill.FindElements(By.XPath(".//label[text()='Country']"), 10).FirstOrDefault();
+						myFieldHeader = this.Section_bill.FindElements(By.XPath(".//label[text()='Country']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -1452,7 +1453,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 						Report.Success(field + " Field Displayed");
 						break;
 					case "Phone Number":
-						myFieldHeader = this._section_bill.FindElements(By.XPath(".//label[text()='Phone']"), 10).FirstOrDefault();
+						myFieldHeader = this.Section_bill.FindElements(By.XPath(".//label[text()='Phone']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -1507,7 +1508,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 			Report.Info("Edit Address Form Open");
 			if (address1 != "")
 			{
-				IWebElement myAdd1 = this._section_bill.FindElements(By.XPath(".//input[@name='address1']"), 10).FirstOrDefault();
+				IWebElement myAdd1 = this.Section_bill.FindElements(By.XPath(".//input[@name='address1']"), 10).FirstOrDefault();
 				if (myAdd1 == null)
 				{
 					Report.Info("Failed to Find Address Line 1 Text Box");
@@ -1519,7 +1520,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 			}
 			if (address2 != "")
 			{
-				IWebElement myAdd2 = this._section_bill.FindElements(By.XPath(".//input[@name='address2']"), 10).FirstOrDefault();
+				IWebElement myAdd2 = this.Section_bill.FindElements(By.XPath(".//input[@name='address2']"), 10).FirstOrDefault();
 				if (myAdd2 == null)
 				{
 					Report.Info("Failed to Find Address Line 2 Text Box");
@@ -1531,7 +1532,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 			}
 			if (city != "")
 			{
-				IWebElement myCity = this._section_bill.FindElements(By.XPath(".//input[@name='city']"), 10).FirstOrDefault();
+				IWebElement myCity = this.Section_bill.FindElements(By.XPath(".//input[@name='city']"), 10).FirstOrDefault();
 				if (myCity == null)
 				{
 					Report.Info("Failed to Find City Text Box");
@@ -1543,7 +1544,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 			}
 			if (state != "")
 			{
-				IWebElement myState = this._section_bill.FindElements(By.XPath(".//select"), 10).FirstOrDefault();
+				IWebElement myState = this.Section_bill.FindElements(By.XPath(".//select"), 10).FirstOrDefault();
 				if (myState == null)
 				{
 					Report.Info("Failed to Find State Text Box");
@@ -1555,7 +1556,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 			}		
 			if (zip != "")
 			{
-				IWebElement myZip = this._section_bill.FindElements(By.XPath(".//input[@name='zip']"), 10).FirstOrDefault();
+				IWebElement myZip = this.Section_bill.FindElements(By.XPath(".//input[@name='zip']"), 10).FirstOrDefault();
 				if (myZip == null)
 				{
 					Report.Info("Failed to Find Zip Text Box");
@@ -1567,7 +1568,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 			}
 			if (country != "")
 			{
-				IWebElement myCountry = this._section_bill.FindElements(By.XPath(".//input[@name='country']"), 10).FirstOrDefault();
+				IWebElement myCountry = this.Section_bill.FindElements(By.XPath(".//input[@name='country']"), 10).FirstOrDefault();
 				if (myCountry == null)
 				{
 					Report.Info("Failed to Find Zip Text Box");
@@ -1579,7 +1580,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 			}
 			if (phone != "")
 			{
-				IWebElement myPhone = this._section_bill.FindElements(By.XPath(".//input[@name='phone']"), 10).FirstOrDefault();
+				IWebElement myPhone = this.Section_bill.FindElements(By.XPath(".//input[@name='phone']"), 10).FirstOrDefault();
 				if (myPhone == null)
 				{
 					Report.Info("Failed to Find Phone Text Box");
@@ -1598,35 +1599,35 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 		
 
 		//Shipping Address is the same as billing address
-		[FindsBy(How = How.XPath, Using = ".//div[@class='checkbox']/label/input")]
-		private IWebElement _chk_same;
+		//[FindsBy(How = How.XPath, Using = ".//div[@class='checkbox']/label/input")]
+		private IWebElement Chk_same => this.FindElement(By.Id(".//div[@class='checkbox']/label/input"),1);
 
 		public bool Shipp_Same_As_Bill_Check(bool bEnable)
 		{
 			Report.Info("Shipping Address is the same as Billing Address - " + bEnable);
-			this._chk_same.Check(bEnable);
+			this.Chk_same.Check(bEnable);
 			return true;
 		}
 
 		//Cancel Button
-		[FindsBy(How = How.XPath, Using = ".//button[@class='btn btn-danger']")]
-		private IWebElement _btnCancel;
+		//[FindsBy(How = How.XPath, Using = ".//button[@class='btn btn-danger']")]
+		private IWebElement BtnCancel => this.FindElement(By.Id(".//button[@class='btn btn-danger']"),1);
 
 		public bool Cancel_click()
 		{
 			Report.Info("Attempting to Click Cancel Button");
-			this._btnCancel.Click();
+			this.BtnCancel.Click();
 			return true;
 		}
 
 		//Save Button
-		[FindsBy(How = How.Id, Using = "SaveAddress")]
-		private IWebElement _btnSave;
+		//[FindsBy(How = How.Id, Using = "SaveAddress")]
+		private IWebElement BtnSave => this.FindElement(By.Id("SaveAddress"),1);
 
 		public bool Save_click()
 		{
 			Report.Info("Attempting to Click Save Button");
-			this._btnSave.Click();
+			this.BtnSave.Click();
 			return true;
 		}
 
@@ -1634,8 +1635,8 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 		//==================================================================================== SHIPPING ADDRESS
 
 		//Shipping Address Section
-		[FindsBy(How = How.XPath, Using = ".//div/h4[text()='Shipping Address']/..")]
-		private IWebElement _section_ship;
+		//[FindsBy(How = How.XPath, Using = ".//div/h4[text()='Shipping Address']/..")]
+		private IWebElement Section_ship => this.FindElement(By.Id(".//div/h4[text()='Shipping Address']/.."),1);
 
 		public bool Shipping_Headers_Check(List<string> myList)
 		{
@@ -1658,7 +1659,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 				switch (field)
 				{
 					case "Address 1":
-						myFieldHeader = this._section_ship.FindElements(By.XPath(".//label[text()='Address Line 1']"), 10).FirstOrDefault();
+						myFieldHeader = this.Section_ship.FindElements(By.XPath(".//label[text()='Address Line 1']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -1669,7 +1670,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 						Report.Success(field + " Field Displayed");
 						break;
 					case "Address 2":
-						myFieldHeader = this._section_ship.FindElements(By.XPath(".//label[text()='Address Line 2']"), 10).FirstOrDefault();
+						myFieldHeader = this.Section_ship.FindElements(By.XPath(".//label[text()='Address Line 2']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -1680,7 +1681,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 						Report.Success(field + " Field Displayed");
 						break;
 					case "City":
-						myFieldHeader = this._section_ship.FindElements(By.XPath(".//label[text()='City']"), 10).FirstOrDefault();
+						myFieldHeader = this.Section_ship.FindElements(By.XPath(".//label[text()='City']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -1691,7 +1692,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 						Report.Success(field + " Field Displayed");
 						break;
 					case "State":
-						myFieldHeader = this._section_ship.FindElements(By.XPath(".//label[text()='State']"), 10).FirstOrDefault();
+						myFieldHeader = this.Section_ship.FindElements(By.XPath(".//label[text()='State']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -1702,7 +1703,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 						Report.Success(field + " Field Displayed");
 						break;
 					case "Zip Code":
-						myFieldHeader = this._section_ship.FindElements(By.XPath(".//label[text()='Zip']"), 10).FirstOrDefault();
+						myFieldHeader = this.Section_ship.FindElements(By.XPath(".//label[text()='Zip']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -1713,7 +1714,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 						Report.Success(field + " Field Displayed");
 						break;
 					case "Country":
-						myFieldHeader = this._section_ship.FindElements(By.XPath(".//label[text()='Country']"), 10).FirstOrDefault();
+						myFieldHeader = this.Section_ship.FindElements(By.XPath(".//label[text()='Country']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -1724,7 +1725,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 						Report.Success(field + " Field Displayed");
 						break;
 					case "Phone Number":
-						myFieldHeader = this._section_ship.FindElements(By.XPath(".//label[text()='Phone']"), 10).FirstOrDefault();
+						myFieldHeader = this.Section_ship.FindElements(By.XPath(".//label[text()='Phone']"), 10).FirstOrDefault();
 						if (!myFieldHeader.Displayed)
 						{
 							Report.Info(field + " Field Not Displayed");
@@ -1748,7 +1749,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 		{
 			Report.Info("Shipping_Address_Hidden");
 
-			if (this._section_ship.Displayed)
+			if (this.Section_ship.Displayed)
 			{
 				Report.Info("Shipping Address Not Hidden");
 				Report.Screenshot();
@@ -1983,20 +1984,20 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 		}
 
 		//Confirm Order Button
-		[FindsBy(How = How.Id, Using = "ConfirmOrder")]
-		public IWebElement _btn_confirm;
+		//[FindsBy(How = How.Id, Using = "ConfirmOrder")]
+		public IWebElement Btn_confirm => this.FindElement(By.Id("ConfirmOrder"),1);
 
 		public bool Confirm_Order_click()
 		{
 			Report.Info("Attempting to Click Confirm Order Button");
-			return this._btn_confirm.TryClick();
+			return this.Btn_confirm.TryClick();
 		}
 
 		public bool ConfirmOrderButtonExists()
 		{
 			try
 			{
-				if (this._btn_confirm != null)
+				if (this.Btn_confirm != null)
 				{
 					return true;
 				}
@@ -2138,13 +2139,15 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 
 	}
 
-	class PaymentMethods_PayPal : BaseObject
+	class PaymentMethods_PayPal : SeleniumBaseObject
 	{
+		/*
 		public const string BasePath = "//div[@class='main']";
 		[FindsBy(How = How.XPath, Using = BasePath)]
 
 		protected override IWebElement containerElement { get; set; }
-
+		*/
+		protected override By ContainerElementLocator => By.XPath("//div[@class='main']");
 
 		public string EmailField {
 			get => this.containerElement.FindElement(By.Id("email"), 2).Text;
@@ -2196,11 +2199,14 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 		}
 	}
 
-	class PaymentMethods_PayPal_MemberReview : BaseObject
+	class PaymentMethods_PayPal_MemberReview : SeleniumBaseObject
 	{
+		/*
 		public const string BasePath = "memberReview";
 		[FindsBy(How = How.Id, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
+		*/
+		protected override By ContainerElementLocator => By.Id("memberReview");
 
 		//Spinner element
 		[FindsBy(How = How.Id, Using = "preloaderSpinner")]
