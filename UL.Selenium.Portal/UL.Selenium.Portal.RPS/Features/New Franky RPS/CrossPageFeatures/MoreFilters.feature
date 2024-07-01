@@ -1329,3 +1329,52 @@ Scenario Outline: [243841] 3 Panel-More Filters- DPCI Number- Select All
 #		| [#243841o]  3 Panel-More Filters- DPCI Number- Select All      | RPS.CT          | Product Lookup          | No          |
 #    	| [#243841p]  3 Panel-More Filters- DPCI Number- Select All      | RPS.CT          | Recent Activities       | No          |
 #	    | [#243841q]  3 Panel-More Filters- DPCI Number- Select All      | RPS.CT          | Classification History  | No          |
+
+ Scenario Outline: [229830] 3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters
+	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer> 
+	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
+	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
+	Then I confirm the page has loaded
+	Then I call Shared Step 205641 (More Filters > UPC Number > Format checks)
+	Then In the More Filters pop up, I select item shown below the drop down and Search field
+    Then In the More Filters pop up, I confirm in the Selected Filters area, that breadcrumb shows with the selected value: UPC Number 
+	Then In the More Filters pop up, UPCs I selected earlier are shown at the top of the Search results area with a minus icon in a circle next to each selected UPCs 
+ 	Then In the More Filters pop up, In the Selected Filters area I click Clear All to remove all filters
+	Then In the More Filters popup I do not see the Selected Filters area
+	Then In the More Filters pop up, I click on searched filter in Filters Panel : UPC Number
+	Then In the More Filters pop up, I click on Search UPCs box
+	Then In the More Filters pop up, I select item shown below the drop down and Search field
+    Then In the More Filters pop up, I confirm in the Selected Filters area, that breadcrumb shows with the selected value: UPC Number
+	Then In the product lookup page More Filters Popup, I Click the the Apply Filter Button
+	Then I confirm the page has refreshed
+	Then I confirm that the recent activities page bread crumb area contains the label: UPC Number
+	Then I confirm that the recent activities Page, I click bread crumb area
+	Then In the Product Lookup Page, The More Filters Popup is showing
+    Then In the More Filters pop up, I confirm in the Selected Filters area, that breadcrumb shows with the selected value: UPC Number 
+	Then In the More Filters pop up, UPCs I selected earlier are shown at the top of the Search results area with a minus icon in a circle next to each selected UPCs 
+ 	Then In the More Filters pop up, In the Selected Filters area I click Clear All to remove all filters
+	Then In the More Filters popup I do not see the Selected Filters area
+ 	Then In the product lookup page More Filters Popup, I Click the the Apply Filter Button
+	Then I confirm the page has refreshed
+
+	Examples:
+		| Scenario Name                                                                                     | Retailer        | Page                    | IsWebviewer |
+ 		| [#229830a]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.TG          | Product Lookup          | No          |
+ 		| [#229830b]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.TG          | Recent Activities       | No          |
+#		| [#229830c]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.CV          | Product Lookup          | No          |
+		| [#229830d]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.CV          | Recent Activities       | No          |
+#		| [#229830e]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.LW          | Product Lookup          | No          |
+		| [#229830f]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.LW          | Recent Activities       | No          |
+		| [#229830g]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.SF          | Product Lookup          | No          |
+ 		| [#229830h]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.SF          | Recent Activities       | No          |
+#		| [#229830i]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.LW          | Demo Viewer             | Yes         |
+#		| [#229830j]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.TG          | Store Viewer            | Yes         |
+#		| [#229830k]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.TG          | Status Viewer           | Yes         |
+#		| [#229830l]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.TG          | HQ Viewer               | Yes         |
+		| [#229830m]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.SF          | SmartFinal_Store        | Yes         |
+# 		| [#229830n]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.LW          | Lowes_store             | Yes         |
+		| [#229830o]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.CT          | Product Lookup          | No          |
+    	| [#229830p]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.CT          | Recent Activities       | No          |
+#	    | [#229830q]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.CT          | Classification History  | No          |
+
+

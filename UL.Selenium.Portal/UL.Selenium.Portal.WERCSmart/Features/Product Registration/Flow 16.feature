@@ -396,7 +396,13 @@ Scenario: [59277] Magnesium Battery - RU000728
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
 	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Given I click continue
-	Given I call Shared Step 60567 (Upload Product Label only)
+	#Given I call Shared Step 60567 (Upload Product Label only)
+	Given I should see the Regulatory Documents to Provide Page
+	Given in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Given in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 #	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
 	Then I should be on the Additional Documents -> Contact Information Page
@@ -475,7 +481,13 @@ Scenario: [59278] Nickel Metal Hydride (NiMH) Battery - RU000373
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
 	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
     Given I click continue
-	Given I call Shared Step 60567 (Upload Product Label only)
+	#Given I call Shared Step 60567 (Upload Product Label only)
+	Given I should see the Regulatory Documents to Provide Page
+	Given in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Given in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 #	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
 	Then I should be on the Additional Documents -> Contact Information Page
@@ -689,7 +701,13 @@ Scenario: [59281] Water-Charged Cell - RU001543
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
 	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Given I click continue
-	Given I call Shared Step 60567 (Upload Product Label only)
+	#Given I call Shared Step 60567 (Upload Product Label only)
+	Given I should see the Regulatory Documents to Provide Page
+	Given in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Given in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 #	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
 	Then I should be on the Additional Documents -> Contact Information Page
@@ -780,7 +798,13 @@ Scenario: [59282] Zinc Air - RU001205
 	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
 	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	Given I click continue
-	Given I call Shared Step 60567 (Upload Product Label only)
+	#Given I call Shared Step 60567 (Upload Product Label only)
+	Given I should see the Regulatory Documents to Provide Page
+	Given in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Given in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 #	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
 	Then I should be on the Additional Documents -> Contact Information Page

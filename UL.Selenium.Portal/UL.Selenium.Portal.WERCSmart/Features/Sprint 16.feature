@@ -30,6 +30,7 @@
 @PhysicalAndChemicalProp
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
 
 Feature: Sprint 16
 
@@ -68,7 +69,13 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 	Then I call Shared Step 132427 (Waste Classification Data- For OTC Products)
 	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
-	Given I call Shared Step 60567 (Upload Product Label only)
+	#Given I call Shared Step 60567 (Upload Product Label only)
+	Given I should see the Regulatory Documents to Provide Page
+	Given in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Given in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Then I should see the Optional Comments Page for the New Product

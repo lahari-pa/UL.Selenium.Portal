@@ -144,5 +144,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string savedAs = "downloadedFile";
 			new Steps_Prototype().ConfirmFileAppearsInDownloadsFolder(file, savedAs);
 		}
+		[RegexStepDefinition(@"In the Additional Documents to Provide, section 'OSHA-compliant Safety Data Sheet \(Optional\)' (is|is not) displayed")]
+		public void ThenInTheAdditionalDocumentsToProvideSectionOSHAIsDisplayed(string condition)
+		{
+			string section = "OSHA-compliant Safety Data Sheet (Optional)";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, condition);
+		}
+		[RegexStepDefinition(@"In the Additional Documents to Provide, section 'Toxicity Characteristic Leaching Procedure \(TCLP\)' (is|is not) displayed")]
+		public void ThenInTheAdditionalDocumentsToProvideSectionTCLPIsIsNotDisplayed(string condition)
+		{
+			string section = "Toxicity Characteristic Leaching Procedure (TCLP)";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, condition);
+		}
+
 	}
 }

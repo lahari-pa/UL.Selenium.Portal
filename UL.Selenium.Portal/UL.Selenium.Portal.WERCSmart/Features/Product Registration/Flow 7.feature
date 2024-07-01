@@ -79,7 +79,13 @@ Scenario: [57863] Flow 7 - ABS Welding (RU000868)
 	Then in the Regulatory Documents to Provide page I click Continue
 
 	#Given I call Shared Step 60933 (Additional Documents to Provide - Product Label and OSHA SDS only)
-	Given I call Shared Step 60567 (Upload Product Label only)
+	#Given I call Shared Step 60567 (Upload Product Label only)
+	Given I should see the Regulatory Documents to Provide Page
+	Given in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Given in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	# Additional Documents to Provide page is showing here
 	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
@@ -162,7 +168,13 @@ Scenario: [57905] Flow 7 - Automotive Coating - SCAQMD Any other coating type (R
 	Then in the Regulatory Documents to Provide page I click Continue
 
 	#Given I call Shared Step 78801 (Additional Documents to Provide - VOC and Product Label)
-	Given I call Shared Step 60567 (Upload Product Label only)
+	#Given I call Shared Step 60567 (Upload Product Label only)
+	Given I should see the Regulatory Documents to Provide Page
+	Given in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Given in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	#Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Product Label and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
 	#

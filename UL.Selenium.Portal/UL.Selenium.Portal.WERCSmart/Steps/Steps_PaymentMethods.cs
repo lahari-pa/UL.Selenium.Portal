@@ -758,7 +758,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				if (mySub.ConfirmOrderButtonExists())
 				{
 					Report.IsTrue(mySub.Confirm_Order_click(), "Failed to Click Confirm Order Button", "Confirm Order Button Clicked");
-					GeneralUtilities.WaitForRefreshToDisappear(mySub._btn_confirm);
+					GeneralUtilities.WaitForRefreshToDisappear(mySub.Btn_confirm);
 					GeneralUtilities.Wait_for_load_finish();
 					Report.Screenshot();
 

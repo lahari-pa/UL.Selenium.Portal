@@ -1,4 +1,4 @@
-@Shared
+ï»¿@Shared
 @LandingPage
 @Login
 @Homepage
@@ -24,12 +24,15 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails2
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
-
+@Ingredients
 @SafetyDataSheetAuthoring
+@Steps_ProductPrototype
+@GTINAndUPC
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
+@PaymentMethods
 
-@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
-@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
 Feature: Flow 8
 
 @TestCase:57295
@@ -82,7 +85,7 @@ Scenario: [57295] Absorbent solid - Automotive(RU000939) - 8-S
 #		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 501.827328
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (Â°C)' enter text: 501.827328
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
@@ -145,7 +148,7 @@ Scenario: [57332] Automotive Accessories containing Gel (Seat Cushions, etc) - 8
 #		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 501.827328
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (Â°C)' enter text: 501.827328
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
@@ -209,7 +212,7 @@ Scenario: [58187] Matches (RU000317) - 8-S
 #		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 501.827328
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (Â°C)' enter text: 501.827328
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
@@ -272,7 +275,7 @@ Scenario: [58293] Engines for Model Rockets(RU000338) - 8-S
 #		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 501.827328
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (Â°C)' enter text: 501.827328
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
@@ -338,7 +341,7 @@ Scenario: [58297] Fireworks (RU000330) - 8-S
 #		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 501.827328
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (Â°C)' enter text: 501.827328
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
@@ -443,7 +446,7 @@ Scenario: [58104] Fabric Dye - Liquid or Solid - 8-L
 #		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 501.827328
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (Â°C)' enter text: 501.827328
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
@@ -505,7 +508,7 @@ Scenario: [58210] Antibiotic, Liquid or Cream, Non-Aerosol - 8-L
 #		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 501.827328
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (Â°C)' enter text: 501.827328
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
@@ -565,7 +568,7 @@ Scenario: [58285] Toothpaste - Whitening (RU001359) - 8-L
 #		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 501.827328
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (Â°C)' enter text: 501.827328
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
@@ -632,7 +635,7 @@ Scenario: [58401] Correction Fluid(RU000201) - 8L
 #		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 501.827328
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (Â°C)' enter text: 501.827328
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
@@ -697,7 +700,7 @@ Scenario: [57339] Craft Kits containing Glues and Paints - Crafts - 8-All - 8L
 #		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 501.827328
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (Â°C)' enter text: 501.827328
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
@@ -757,7 +760,7 @@ Scenario: [57088] Engine (motor) oil for Auto or Boat - 8L
 #		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
 	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 501.827328
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (Â°C)' enter text: 501.827328
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
@@ -839,7 +842,7 @@ Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Containe
 #		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 501.827328
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (Â°C)' enter text: 501.827328
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
@@ -863,14 +866,32 @@ Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Containe
 Scenario: [128744] Ammunition - DOT Exceptions Saved
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-#	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+	Given I generate a random UPC number and save as: UPC128744
+	Given I delete all products with UPC Number: saved as UPC128744
+
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Ammunition
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Ammunition
+	Given I should see the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to:  Ammunition_#128744
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Ammunition
+ 	Given in the The Product page I click Continue
+
 	Then I save the product information as: TestCase128744
-	Given I call Shared Step 60310 (Product Information - Without Child question)
+	#Given I call Shared Step 60310 (Product Information - Without Child question)
+	Given I should see the Product Information Page
+	#Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Given in the Product Information page I click Continue
+
 	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I should see the Physical and Chemical Properties Page
 	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
@@ -880,20 +901,92 @@ Scenario: [128744] Ammunition - DOT Exceptions Saved
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Then in the Physical and Chemical Properties page I click Continue
 
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Propane       | 100     | false               | false       |            |
+	#Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Propane       | 100     | false               | false       |            |
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+		| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+		| component name | Water       | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should be on the Inventory Status, Prop 65 (US) Page
 	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
 	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
 
-	Given I call Shared Step 128742 (Transportation Details - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
-	Given I call Shared Step (Transportation Details - Confirm DOT Exceptions saved - Continue - Happy Path)
+	#Given I call Shared Step 128742 (Transportation Details - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+	Then I should be on the Transportation Details 1 Page
+	Then In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: No, due to an exemption or exception
+	Then In the Transportation Details 1 Section, set the option in section: 'Other DOT Exception': to: ' '
+	Then in the Transportation Details 1 page, I click Continue
+	Then In the Transportation Details 1 Section, verify in 'Please select DOT Exceptions if applicable?' section the error message should be displayed: Please select at least one option from above.
+	Then In the Transportation Details 1 Section, set the option in section: 'Please select DOT Exceptions if applicable?': to: 173.120(b)(3):  Combustible liquid that does not sustain combustion
+	Then In the Transportation Details 1 Section, set the option in section: 'Other DOT Exception': to: test
+	Then in the Transportation Details 1 page, I click Continue
+	Then I should be on the Transportation Details 2 Page
+	Then Expand the Transportation Details 1 panel
+	Then I should be on the Transportation Details 1 Page
+	Then In the Transportation Details 1 Section, verify in 'Please select DOT Exceptions if applicable?' section is option: 173.120(b)(3):  Combustible liquid that does not sustain combustion
+	Then in the Transportation Details 1 page, I click Continue
+	Then I should be on the Transportation Details 2 Page
+	Then In the Transportation Details 2 Section, set the option in section: 'International Shipping when DOT Exemption taken?': to: I do not ship internationally and I do not know the classification
+	Then in the Transportation Details 2 page, I click Continue
+
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
+	Given I should see the Retailer Page
+	Given In the Retailer Section, click 'Add Retailers' button
+	Given In the Select Retailers window, select retailer: Walgreens
+	Given In the Select Retailers window, click 'Done' button
+	Given in the Retailer page I click Continue
+
+	#And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60775, container type: Aerosol Can - Metal and size: 20
+	Given I should see the Universal Product Code (UPC) Page
+	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC128744 enter Size: 20 and enter Container Type: any
+	Given in the Universal Product Code (UPC) page I click Continue
+
+	#And I call Shared Step 57881 (Regulatory Documents to Provide - Request to Author (General Shared-Step))
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Given in the Regulatory Documents to Provide page I click Continue
+
+	#And I call Shared Step 214558 (Additional Documents to Provide Page (No Upload is Required) - Click Continue (General Shared-Step))
+	Given I should see the Additional Documents to Provide Page
+	Given in the Additional Documents to Provide page I click Continue
+
+	#And I call Shared Step 214559 (Optional Reports and Documents Available for Purchase - No Document Purchase is Required - Click Continue (General Shared-Step))
+	Given I should see the Optional Reports and Documents Available for Purchase Page
+	Then The statement: â€¢ Additional documents are not subject to standard two day turnaround. is displayed
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+
+	#And I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional) (General Shared-Step))
+	Given I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
+	Then In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Mask
+	Then In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (Â°C)' enter text: 50
+	Then In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10
+	Then In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 0.5
+	Then In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Amber
+	Then In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor' to: Acetic
+	Then In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor Threshold' to: No data available
+	Then In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Partition Coefficient' enter text: 10
+	Given in the Safety Data Sheet Authoring - Additional Data (Optional) page I click Continue
+
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' is availiable
+	Given in the Optional Comments page I click Continue
+
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
+	Then The Purchase Summary Page is displayed
+	Then In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
+
 #	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128744
 	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase128744
+	#Then In the Product Grid, delete the product saved as: TestCase128744
 
 	@ignore
 #Removed from regression 2023/11
@@ -908,7 +1001,16 @@ Scenario: [128743] Ammunition - Other DOT Exception Validation
 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Ammunition
 	Then I save the product information as: TestCase128743
-	Given I call Shared Step 60310 (Product Information - Without Child question)
+	#Given I call Shared Step 60310 (Product Information - Without Child question)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Given in the Product Information page I click Continue
+
 	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I should see the Physical and Chemical Properties Page
 	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
@@ -921,6 +1023,7 @@ Scenario: [128743] Ammunition - Other DOT Exception Validation
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Propane       | 100     | false               | false       |            |
+
 	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should be on the Inventory Status, Prop 65 (US) Page
 	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.

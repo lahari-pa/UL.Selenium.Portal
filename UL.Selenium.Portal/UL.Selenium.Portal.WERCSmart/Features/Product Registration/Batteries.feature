@@ -124,7 +124,13 @@ Scenario: [97489] Stand alone Magnesium Battery
 	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload a PDF
 	Given I click the browse button for document type: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and for control label: Article Information Sheet (AIS) and upload a PDF
 	Given I click continue
-	Given I call Shared Step 60567 (Upload Product Label only)
+	#Given I call Shared Step 60567 (Upload Product Label only)
+	Given I should see the Regulatory Documents to Provide Page
+	Given in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Given in the Regulatory Documents to Provide page I click Continue
+
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
 	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
