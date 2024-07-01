@@ -1377,4 +1377,83 @@ Scenario Outline: [243841] 3 Panel-More Filters- DPCI Number- Select All
     	| [#229830p]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.CT          | Recent Activities       | No          |
 #	    | [#229830q]  3 Panel-More Filters - UPC Number - Clear All next to Selected UPCs removes filters   | RPS.CT          | Classification History  | No          |
 
+Scenario Outline: [229831] 3 Panel-More Filters - Checklist fields -Clear All next to All Parameters removes filters
+	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer> 
+	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
+	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
+	Then I confirm the page has loaded
+	Then I call Shared Step 205105 (More Filters > Checklist Field > Format checks)
+	Then In the More Filters pop up, I select one or more of the items shown below the drop down and Search field
+    Then In the More Filters pop up, I confirm in the Selected Filters area, that breadcrumb shows with the selected value: Packaging Type   
+ 	Then In the More Filters pop up, In the Selected Filters area I click Clear All to remove all filters
+	Then In the More Filters popup I do not see the Selected Filters area
+	Then In the More Filters pop up, I click on searched filter in Filters Panel : Packaging Type
+	Then In the More Filters pop up, I click on Search UPCs box
+	Then In the More Filters pop up, I select one or more of the items shown below the drop down and Search field
+    Then In the More Filters pop up, I confirm in the Selected Filters area, that breadcrumb shows with the selected value: Packaging Type
+	Then In the product lookup page More Filters Popup, I Click the the Apply Filter Button
+	Then I confirm the page has refreshed
+	Then I confirm that the recent activities page bread crumb area contains the label: Packaging Type
+	Then I confirm that the recent activities Page, I click bread crumb area
+	Then In the Product Lookup Page, The More Filters Popup is showing
+    Then In the More Filters pop up, I confirm in the Selected Filters area, that breadcrumb shows with the selected value: Packaging Type  
+ 	Then In the More Filters pop up, In the Selected Filters area I click Clear All to remove all filters
+	Then In the More Filters popup I do not see the Selected Filters area
+ 	Then In the product lookup page More Filters Popup, I Click the the Apply Filter Button
+	Then I confirm the page has refreshed
 
+	Examples:
+		| Scenario Name                                                                                           | Retailer        | Page                    | IsWebviewer |
+ 		| [#229831a]  3 Panel-More Filters - Checklist fields -Clear All next to All Parameters removes filters   | RPS.TG          | Product Lookup          | No          |
+ 		| [#229831b]  3 Panel-More Filters - Checklist fields -Clear All next to All Parameters removes filters   | RPS.TG          | Recent Activities       | No          |
+# 		| [#229831c]  3 Panel-More Filters - Checklist fields -Clear All next to All Parameters removes filters   | RPS.CV          | Product Lookup          | No          |
+		| [#229831d]  3 Panel-More Filters - Checklist fields -Clear All next to All Parameters removes filters   | RPS.CV          | Recent Activities       | No          |
+ 		| [#229831e]  3 Panel-More Filters - Checklist fields -Clear All next to All Parameters removes filters   | RPS.LW          | Product Lookup          | No          |
+		| [#229831f]  3 Panel-More Filters - Checklist fields -Clear All next to All Parameters removes filters   | RPS.LW          | Recent Activities       | No          |
+		| [#229831g]  3 Panel-More Filters - Checklist fields -Clear All next to All Parameters removes filters   | RPS.SF          | Product Lookup          | No          |
+ 		| [#229831h]  3 Panel-More Filters - Checklist fields -Clear All next to All Parameters removes filters   | RPS.SF          | Recent Activities       | No          |
+#		| [#229831i]  3 Panel-More Filters - Checklist fields -Clear All next to All Parameters removes filters   | RPS.LW          | Demo Viewer             | Yes         |
+#		| [#229831j]  3 Panel-More Filters - Checklist fields -Clear All next to All Parameters removes filters   | RPS.TG          | Store Viewer            | Yes         |
+#		| [#229831k]  3 Panel-More Filters - Checklist fields -Clear All next to All Parameters removes filters   | RPS.TG          | Status Viewer           | Yes         |
+#		| [#229831l]  3 Panel-More Filters - Checklist fields -Clear All next to All Parameters removes filters   | RPS.TG          | HQ Viewer               | Yes         |
+		| [#229831m]  3 Panel-More Filters - Checklist fields -Clear All next to All Parameters removes filters   | RPS.SF          | SmartFinal_Store        | Yes         |
+  		| [#229831n]  3 Panel-More Filters - Checklist fields -Clear All next to All Parameters removes filters   | RPS.LW          | Lowes_store             | Yes         |
+		| [#229831o]  3 Panel-More Filters - Checklist fields -Clear All next to All Parameters removes filters   | RPS.CT          | Product Lookup          | No          |
+#    	| [#229831p]  3 Panel-More Filters - Checklist fields -Clear All next to All Parameters removes filters   | RPS.CT          | Recent Activities       | No          |
+#	    | [#229831q]  3 Panel-More Filters - Checklist fields -Clear All next to All Parameters removes filters   | RPS.CT          | Classification History  | No          |
+
+Scenario Outline: [225871] 3 Panel-More Filters pop up - DPCI - Is
+	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer> 
+	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
+	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
+	Then I confirm the page has loaded
+	Then In the recent activities Page, I click the More Filters Button
+	Then In the recent activities Page, The More Filters Popup is showing 
+	And In the More Filters pop up, I enter value in search box in the Filter Categories column: DPCI Number
+	Then In the More Filters pop up, I confirm searched filter is displayed in Filters Panel : DPCI Number
+	Then In the More Filters pop up, I click on searched filter in Filters Panel : DPCI Number 
+	Then In the More Filters pop up, I confirm I see Search under the filter parameter heading
+	Then In the More Filters pop up, I confirm the left side of the search box, there is a dropdown box
+	Then In the More Filters pop up, I confirm default value of the dropdown box is Contains
+	Then In the More Filters pop up, I confirm in the Filter Parameter Panel Selector three options are : Contains, Start With and Is are displayed 
+	Then In the More Filters pop up, In Filter Parameter panel I confirm the Search field shows the default text: Search
+	Then In the More Filters pop up, I confirm the Filter Parameter panel shows the DPCI list
+	Then In the More Filters pop up, In Filter Parameter panel I confirm each item for selection shows a check box before the DPCI value
+    Then In the More Filters pop up, I select the option from the Parameters drop down list: Is 
+    Then In the More Filters pop up, I now type a string  in DPCI search field: 052
+	Then In the More Filters pop up, I confirm a blue box with text No results found  is shown under search box 
+    Then In the More Filters pop up, I now type a string  in DPCI search field: 052-06-6265
+	Then I confirm I see the DPCI I was searching for: 052-06-6265
+	Then In the More Filters pop up, In the Filter parameters list I select the searched entry for the DPCI Parmeter list
+	Then In the product lookup page More Filters Popup, I Click the the Apply Filter Button
+	Then I confirm the page has refreshed
+	Then I confirm that the recent activities page bread crumb area contains the label: DPCI
+ 
+ 
+	Examples:
+		| Scenario Name                                             | Retailer        | Page                    | IsWebviewer | 
+ 		| [#225871a]  3 Panel-More Filters pop up - DPCI - Is       | RPS.TG          | Product Lookup          | No          | 
+#		| [#225871b]  3 Panel-More Filters pop up - DPCI - Is       | RPS.TG          | Store Viewer            | Yes         |
+#		| [#225871c]  3 Panel-More Filters pop up - DPCI - Is       | RPS.TG          | Status Viewer           | Yes         |
+#		| [#225871d]  3 Panel-More Filters pop up - DPCI - Is       | RPS.TG          | HQ Viewer               | Yes         |
+ 
