@@ -20,6 +20,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
 		}
 
+		[RegexStepDefinition(@"In the Product Information Section, confirm section: 'Which best describes your product, including when FIFRA 25\(b\) Exempt' (is|is not) displayed")]
+		public void Fefra25ExemptDisplayed(string is_isnot)
+		{
+			string section = "Which best describes your product, including when FIFRA 25(b) Exempt";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
+
 		[RegexStepDefinition(@"In the Product Information Section, set the option in section: 'Product has been classified using OSHA \(US\) Globally Harmonized Standards \(GHS\) under 29 CFR 1910\.1200 and\/or CCOHS WHMIS Standards \(Canada\)' to: (Yes|No)")]
 		public void SelectOSHAGloballyHarmonizedStandards(string option)
 		{

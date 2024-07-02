@@ -843,7 +843,13 @@ Scenario: [128140] Data Tier Expansion for BBB - Products in Scope Report - Nutr
 	Given I call Shared Step 57561a (The Product - Enter Product Name: Nutritional (Solid) Supplement Product for BBB and select Type of Product): Nutritional Supplement - Solid
 	Given I generate a random UPC number and save as: UPC128140
 	And I call Shared Step 62678 (Product Information - US & Canada, No Child, No OSHA, NO Direct ship, No PL, No NGFR - Continue, Happy path)
-	Given I call Shared Step 37857 (Enter Physical Property - Solid)
+	#Given I call Shared Step 37857 (Enter Physical Property - Solid)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
 		| 56-85-9   | L-Glutamine   | 100     |                     |            |             |
