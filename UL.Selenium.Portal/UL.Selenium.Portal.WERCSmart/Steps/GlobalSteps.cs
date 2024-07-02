@@ -2318,7 +2318,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReadOnlyCollection<string> allHandles = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			foreach (var handle in allHandles)
 			{
-				if(handle ==mainHandle)
+				if(handle == mainHandle)
 				{
 					Report.Info($"Main Handle");
 					//do nothing
