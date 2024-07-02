@@ -1043,24 +1043,59 @@ Scenario: [213999] WERCSmart Portal and SHA Manager Test Flow for Product Type: 
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC213999
 	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Plant Food
+	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Plant Food
+	Given I should see the The Product Page
+	Then In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Plant Food_#213999
+	Then In the Product Section, set the option in section: 'Type of Product (select)' to: Plant Food
+	Then in the The Product page I click Continue
+
 	Then I save the product information as: TestCase213999
+	#Given I call Shared Step 214032 (Product Information - Pesticide= Not considered, Fertilizer=YES, SOLD=US, everything else = No - Continue)
 	Given I should see the Product Information Page
-	Given I call Shared Step 214032 (Product Information - Pesticide= Not considered, Fertilizer=YES, SOLD=US, everything else = No - Continue)
+	Then In the Product Information Section, confirm section: 'Which best describes your product, including when FIFRA 25(b) Exempt' is not displayed
+	Then In the Product Information Section, set the option in section: 'Does the product contain fertilizer (N, P, K)?' to: Yes
+	Then In the Product Information Section, set the option in section: 'Nitrogen /Nitrates (“N”)' to: 12
+	Then In the Product Information Section, set the option in section: 'Phosphates /Phosphorous (“P”)' to: 3
+	Then In the Product Information Section, set the option in section: 'Potassium(“K”)' to: 12
+	Then In the Product Information Section, set the option in section: 'Slow-Release Agent' to: 6
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
 	Then a Warning popup dialog should appear with the message: The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.
-	Then I set the Nitrogen /Nitrates field to: 12
-	Then I set the Phosphates /Phosphorous field to: 3	
-	Then I set the Potassium field to: 12
-	Then I set the Slow-Release Agent field to: 6
-	Then I click continue
-	Then a Warning popup dialog should appear with the message: The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.
-	Given I call Shared Step 214034 (Physical and Chemical Properties - Applicable Only to Plant Food)
-	Then I add the following ingredients:
-		| ComponentName     | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| 57-13-6        | 33      | false               | false       |            |
-		| 7664-38-2 | 50      | false               | false       |            |
-		| 10117-38-1            | 17       | false               | false       |            |
-	Given I click continue
+
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
+
+	#Given I call Shared Step 214034 (Physical and Chemical Properties - Applicable Only to Plant Food)
+	Given I should see the Physical and Chemical Properties Page
+	#Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Liquid
+	#Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then The following options should be exclusively displayed for section: Primary Physical State
+		| Option |
+		| Solid  |
+		| Liquid |
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
+	Then In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 10.7
+	Then In the Physical and Chemical Properties Section, for section: 'pH' enter text: 10.9
+	Then In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: 106
+	Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' select the checkbox option: 'I do not have exact Flash Point data available to me'
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point (in Celsius)' to: None, No Flash Point
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+		| SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+		| CAS number | 57-13-6     | 33      | false                | false        |             |
+		| CAS number | 7664-38-2   | 50      | false                | false        |             |
+		| CAS number | 10117-38-1  | 17      | false                | false        |             |
+	Then in the Ingredients page I click Continue
+
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I should see the Inventory Status, Prop 65 (US) Page
 	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
@@ -1077,25 +1112,28 @@ Scenario: [213999] WERCSmart Portal and SHA Manager Test Flow for Product Type: 
 	And In the Retailer Section, click 'Add Retailers' button
 	And In the Select Retailers window, select retailer: Wal-Mart/SAM'S CLUB
 	And In the Select Retailers window, click 'Done' button
+	Then In the Retailer Section, for retailer: Wal-Mart/SAM'S CLUB select 'Select Vendor' option: QA_ProductAccount_840375279ProductAccount_c61f167fa348@kxxyxunf.mailosaur.net
 	Then in the Retailer page, I click Continue
-	Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 
+	#Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC213999, container type: Plastic Container and size: 18 do not click continue
+	Then I should be on the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC213999 enter Size: 18 and enter Container Type: Plastic Container
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, verify retailer 'WM' is present under the 'Destination Retailers' column
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page, I click Continue
 
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Wal-Mart/SAM'S CLUB	
-	Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
-	Then I click continue
-	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC213999, container type: Plastic Container and size: 18 do not click continue
-	And I confirm that retailer "WM" is present under the 'Destination Retailers' column in the UPC table
-	Then I click continue
-	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	#And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	Then I should be on the Additional Documents to Provide Page
 	Given in the Additional Documents to Provide page I click Continue
+
+	Then I should be on the Optional Reports and Documents Available for Purchase Page
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test
 	Given I should see the Optional Comments Page
-	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
 	Then in the Optional Comments page I click Continue
 
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Plant food
+	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Plant food
 	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given I should see the Data Acceptance Page
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
