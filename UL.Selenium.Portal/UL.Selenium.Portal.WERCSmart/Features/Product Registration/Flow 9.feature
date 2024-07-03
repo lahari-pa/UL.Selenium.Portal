@@ -31,7 +31,8 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
 @GTINAndUPC
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
-@@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
 
 Feature: Flow 9
 
@@ -1158,7 +1159,6 @@ Scenario: [213905] WERCSmart Portal and SHA Manager Test Flow for Product Type: 
 	Then in the Product Information page I click Continue
 	Then In the Product Information Section, a warning pop-up should be displayed with text: 'The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of the product in Pinellas County, Florida (Restricted). This is informational only and does not restrict your registration to the Retailer.'
 	Then In the Product Information Section Section, in Warning modal window click 'Ok' button
-	Then in the Product Information page I click Continue
 	#Given I call Shared Step 213923 (Physical and Chemical Properties - Applicable Only to Engine Fertilizer)
 	Given I should see the Physical and Chemical Properties Page
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
@@ -1172,13 +1172,20 @@ Scenario: [213905] WERCSmart Portal and SHA Manager Test Flow for Product Type: 
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point (in Celsius)' to: Not Tested/Unknown
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Then in the Physical and Chemical Properties page I click Continue
-	Then a Warning popup dialog should appear with the message: The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of the product in Pinellas County, Florida (Restricted). This is informational only and does not restrict your registration to the Retailer.
-	Then I add the following ingredients:
-		| ComponentName     | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| 6484-52-2        | 47.6      | false               | false       |            |
-		| 57-13-6 | 36.1      | false               | false       |            |
-		| 14797-55-8            | 16.3       | false               | false       |            |
-	Given I click continue
+	#Ingredients - Applicable Only to Type of Product:  Fertilizer (RU000462)
+	#Then I add the following ingredients:
+	#	| ComponentName     | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| 6484-52-2        | 47.6      | false               | false       |            |
+	#	| 57-13-6 | 36.1      | false               | false       |            |
+	#	| 14797-55-8            | 16.3       | false               | false       |            |
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add component with component name: Ammonium Nitrate
+	Then In the Ingredients Table row with component name: Ammonium Nitrate, in Percent column text input enter: 47.6
+	Then In the Ingredients section, add component with component name: Urea
+	Then In the Ingredients Table row with component name: Urea, in Percent column text input enter: 36.1
+	Then In the Ingredients section, add component with component name: Nitrate
+	Then In the Ingredients Table row with component name: Nitrate, in Percent column text input enter: 16.3
+	Then in the Ingredients page I click Continue
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I should see the Inventory Status, Prop 65 (US) Page
 	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
@@ -1193,30 +1200,49 @@ Scenario: [213905] WERCSmart Portal and SHA Manager Test Flow for Product Type: 
 	And In the Retailer Section, click 'Add Retailers' button
 	And In the Select Retailers window, select retailer: Wal-Mart/SAM'S CLUB
 	And In the Select Retailers window, click 'Done' button
+	Then In the Retailer Section, for retailer: Wal-Mart/SAM'S CLUB select 'Select Vendor' option: QA_ProductAccount_840375279ProductAccount_c61f167fa348@kxxyxunf.mailosaur.net
 	Then in the Retailer page, I click Continue
-
-
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Wal-Mart/SAM'S CLUB	
-	Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
-	Then I click continue
-	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC213905, container type: Plastic Container and size: 32 do not click continue
-	And I confirm that retailer "WM" is present under the 'Destination Retailers' column in the UPC table
-	Then I click continue
-	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	#Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC213905, container type: Plastic Container and size: 32 do not click continue
+	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC213905 enter Size: 32 and enter Container Type: Plastic Container
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, verify retailer 'WM' is present under the 'Destination Retailers' column
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	#And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	#Regulatory Documents to Provide - Applicable Only to Type of Product:  Fertilizer (RU000462)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Yes, I certify that I have an OSHA-compliant SDS for this product and would like to upload it.
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'OSHA SDS'
+	Then in the Regulatory Documents to Provide page I click Continue
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test
 	Given I should see the Optional Comments Page
-	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
 	Then in the Optional Comments page I click Continue
-
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Fertilizer
+	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Fertilizer
+	#232621 Summary Tab - Data Verification - Applicable Only to FERTILIZER (RU000462)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, click 'Summary' button
+	Given I switch to the tab with Data Summary page
+	Given In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Fertilizer
+	Given In the Summary Page, the 'Does the product contain fertilizer (N, P, K)?' section should be showing the following value: Yes
+	Given In the Summary Page, the 'Nitrogen /Nitrates (“N”)' section should be showing the following value: 8
+	Given In the Summary Page, the 'Phosphates /Phosphorous (“P”)' section should be showing the following value: 14
+	Given In the Summary Page, the 'Potassium(“K”)' section should be showing the following value: 14
+	Given In the Summary Page, the 'Slow-Release Agent' section should be showing the following value: 3
+	Then In the Summary Page, verify table data in column Container Type showing the value: Plastic Container
+	Then In the Summary Page, verify table data in column Retailers showing the value: WM
+	Then In the Summary Page, the document section Supplier Uploaded should be showing the following document: testdoc.pdf
+	Then In the Summary Page, click the View button for section: Supplier Uploaded
+	Then In the Summary Page, after clicking 'View' button I confirm pdf file is downloaded
+	Given I close the tab with Data Summary page
+    Given I should see the Data Acceptance Page
 	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given I should see the Data Acceptance Page
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
 	Then In the Data Acceptance Section, click 'Accept' button
-
-	Then If purchase details are showing click confirm order
+	Then In the Purchase Summary page message is displayed with text: Thank you for registering your product on WERCSmart for assessment.  The Retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise
+	Then In the Purchase Summary Page, click the 'Home' button
+	#Then If purchase details are showing click confirm order
 	Given I navigate to the landing page
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase213905)
