@@ -42,7 +42,7 @@ Feature: Flow 2
 
 @TestCase:57439
 Scenario: [57439] Anti-Transpirant (RU000992) 2-L
-	Given I log in with the account saved in TReVor as: ProductAccount
+Given I log in with the account saved in TReVor as: ProductAccount
 Then The home screen should load
 Given I generate a random UPC number and save as: UPC57439
 Then In the Product Grid, delete all products with UPC Number: saved as UPC57439
@@ -148,7 +148,7 @@ Then in the Optional Reports and Documents Available for Purchase page, I click 
 #	| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
 And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
-And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (캜)' enter text: 501.827328
+And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (째C)' enter text: 501.827328
 And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
 And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
 And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
@@ -156,8 +156,6 @@ And In the Safety Data Sheet Authoring - Additional Data (Optional), set the opt
 And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor Threshold' to: No data available
 And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Partition Coefficient' enter text: 41.3005
 Then in the Safety Data Sheet Authoring - Additional Data (Optional) page, I click Continue
-
-Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
 #Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 Given I should see the Optional Comments Page
@@ -251,7 +249,7 @@ Scenario: [57646] Plant Growth regulator (Liquid or Solid) (RU000291) 2-L
 #		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (캜)' enter text: 501.827328
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (째C)' enter text: 501.827328
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
@@ -330,7 +328,7 @@ Scenario: [57649] Cosmetics (RU000034) 2LS - 2L
 #		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (캜)' enter text: 501.827328
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (째C)' enter text: 501.827328
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
@@ -429,7 +427,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 #		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (캜)' enter text: 501.827328
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (째C)' enter text: 501.827328
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
@@ -513,7 +511,7 @@ Scenario: [71274] Flea or Tick Repellent (L) - RU000323
 #		| Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
 	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Mask
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (캜)' enter text: 150
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (째C)' enter text: 150
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 44
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.7
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: White
@@ -617,7 +615,7 @@ Scenario: [57647] Insecticide-Flying Bug-Moth Proofing Product containing <98% P
 #		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (캜)' enter text: 501.827328
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (째C)' enter text: 501.827328
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
