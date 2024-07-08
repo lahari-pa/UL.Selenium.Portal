@@ -68,10 +68,12 @@ Scenario: [216819] Container Types - Primary Physical State Liquid - Engine Moto
 	Given In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
 	Given In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
-	#Then I call Shared Step 26900 (Transportation Details 1 > Not Regulated)
-	Then I should see the Transportation Details 1 Page
-	Given In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
-	Then in the Transportation Details 1 page, I click Continue
+	#Given I call Shared Step 26900 (Transportation Details 1 > Not Regulated)
+	Given I should see the Transportation Details 1 Page
+	Then in the Transportation Details 1  page I click Continue
+	Then In the Transportation Details 1 Section, the error 'This is a required field' is displayed for section 'Product is Regulated for Transport'
+	Then In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
+	Then in the Transportation Details 1  page I click Continue
 	Given I select the following retailers in the Select Retailers popup list view:
 		| Retailer       |
 		| The Home Depot |
