@@ -22,6 +22,7 @@
 @LiquidCoreProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:PesticideDetailsUS
 @AdditionalDocsContactInfo
+@RegulatoryInformation3
 
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
@@ -92,7 +93,20 @@ Scenario: [62849] Pesticide - Manually entered date not altered by refresh from 
 	Then in the Ingredients page I click Continue
 
 	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	#Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	Given I should see the Regulatory Information 3 Page
+	Then In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California.  Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
+	| Option                 |
+	| Drug Facts Panel       |
+	| Supplement Facts Panel |
+	| Nutrition Facts Panel  |
+	| None of the Above      |
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above 
+	Then In the Regulatory Information 3 Section, the following link: Nutritional and Supplement Labels should be displayed
+	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
+	Then In the Regulatory Information 3 Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
+	Then in the Regulatory Information 3 page I click Continue
 	Then I should see the Pesticide Details - U.S. Page
 	Given I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
 	Given in the New Product page I click Continue
@@ -185,8 +199,35 @@ Scenario: [62852] Pesticide - Product Label is required
 	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
 
-	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
-    #Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
+	#Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	Given I should see the Regulatory Information 3 Page
+	Then In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California.  Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
+	| Option                 |
+	| Drug Facts Panel       |
+	| Supplement Facts Panel |
+	| Nutrition Facts Panel  |
+	| None of the Above      |
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above 
+	Then In the Regulatory Information 3 Section, the following link: Nutritional and Supplement Labels should be displayed
+	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
+	Then In the Regulatory Information 3 Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
+	Then in the Regulatory Information 3 page I click Continue
+#Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	Given I should see the Regulatory Information 3 Page
+	Then In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California.  Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
+	| Option                 |
+	| Drug Facts Panel       |
+	| Supplement Facts Panel |
+	| Nutrition Facts Panel  |
+	| None of the Above      |
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above 
+	Then In the Regulatory Information 3 Section, the following link: Nutritional and Supplement Labels should be displayed
+	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
+	Then In the Regulatory Information 3 Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
+	Then in the Regulatory Information 3 page I click Continue
+	#Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
 	Given I should see the Pesticide Details - U.S. Page
 	Then In the Pesticide Details - U.S. Section, in 'Product has an Environmental Protection Agency (EPA) Registration Number' enter No
 	Then In the Pesticide Details - U.S. Section, in 'Product has a State Registration' enter No
@@ -247,7 +288,20 @@ Scenario: [56547] Pesiticde Data - EPA registration - Active Ingredient informat
 	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
 
-	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	#Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	Given I should see the Regulatory Information 3 Page
+	Then In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California.  Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
+	| Option                 |
+	| Drug Facts Panel       |
+	| Supplement Facts Panel |
+	| Nutrition Facts Panel  |
+	| None of the Above      |
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above 
+	Then In the Regulatory Information 3 Section, the following link: Nutritional and Supplement Labels should be displayed
+	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
+	Then In the Regulatory Information 3 Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
+	Then in the Regulatory Information 3 page I click Continue
 	Then I should see the Pesticide Details - U.S. Page
 	Given I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
 	Given in the New Product page I click Continue
@@ -618,7 +672,20 @@ Scenario: [56541] Pesticide Data - United States - EPA Registered - Data returne
 	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
 
-	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	#Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	Given I should see the Regulatory Information 3 Page
+	Then In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California.  Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
+	| Option                 |
+	| Drug Facts Panel       |
+	| Supplement Facts Panel |
+	| Nutrition Facts Panel  |
+	| None of the Above      |
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above 
+	Then In the Regulatory Information 3 Section, the following link: Nutritional and Supplement Labels should be displayed
+	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
+	Then In the Regulatory Information 3 Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
+	Then in the Regulatory Information 3 page I click Continue
 	And I should see the Pesticide Details - U.S. Page
 	And I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
 	Given in the New Product page I click Continue
@@ -704,7 +771,20 @@ Scenario: [62778] Pesticide Details - U.S. - Validation of Product has an Enviro
 	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
 
-	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	#Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	Given I should see the Regulatory Information 3 Page
+	Then In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California.  Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
+	| Option                 |
+	| Drug Facts Panel       |
+	| Supplement Facts Panel |
+	| Nutrition Facts Panel  |
+	| None of the Above      |
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above 
+	Then In the Regulatory Information 3 Section, the following link: Nutritional and Supplement Labels should be displayed
+	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
+	Then In the Regulatory Information 3 Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
+	Then in the Regulatory Information 3 page I click Continue
 	Then I should see the Pesticide Details - U.S. Page
 	And I see the following sections
 		| Section                                                                  |
@@ -762,7 +842,20 @@ Scenario: [62780] Pesticide Details - U.S. - Validation of EPA Registration Numb
 	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
 
-	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	#Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	Given I should see the Regulatory Information 3 Page
+	Then In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California.  Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
+	| Option                 |
+	| Drug Facts Panel       |
+	| Supplement Facts Panel |
+	| Nutrition Facts Panel  |
+	| None of the Above      |
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above 
+	Then In the Regulatory Information 3 Section, the following link: Nutritional and Supplement Labels should be displayed
+	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
+	Then In the Regulatory Information 3 Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
+	Then in the Regulatory Information 3 page I click Continue
 	Then I should see the Pesticide Details - U.S. Page
 	And I see the following sections
 		| Section                                                                  |
@@ -828,7 +921,20 @@ Scenario: [56577] Pesticide Data - EPA data - Is Kelly Data is updated when user
 	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
 
-	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	#Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	Given I should see the Regulatory Information 3 Page
+	Then In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California.  Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
+	| Option                 |
+	| Drug Facts Panel       |
+	| Supplement Facts Panel |
+	| Nutrition Facts Panel  |
+	| None of the Above      |
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above 
+	Then In the Regulatory Information 3 Section, the following link: Nutritional and Supplement Labels should be displayed
+	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
+	Then In the Regulatory Information 3 Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
+	Then in the Regulatory Information 3 page I click Continue
 	Then I should see the Pesticide Details - U.S. Page
 	Given I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
 	Given I add the EPA registration number: 56228-10
@@ -927,7 +1033,20 @@ Scenario: [62799] Pesticide Details - State Registration - Manual entry of dates
 	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
 
-	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	#Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	Given I should see the Regulatory Information 3 Page
+	Then In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California.  Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
+	| Option                 |
+	| Drug Facts Panel       |
+	| Supplement Facts Panel |
+	| Nutrition Facts Panel  |
+	| None of the Above      |
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above 
+	Then In the Regulatory Information 3 Section, the following link: Nutritional and Supplement Labels should be displayed
+	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
+	Then In the Regulatory Information 3 Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
+	Then in the Regulatory Information 3 page I click Continue
 	Then I should see the Pesticide Details - U.S. Page
 	Given I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
 	Given I add the EPA registration number: testregistrationnumber
@@ -1029,7 +1148,20 @@ Scenario: [56502] Pesticide Data - United States - EPA Exempt
 	Then in the Ingredients page I click Continue
 
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	And I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	#Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	Given I should see the Regulatory Information 3 Page
+	Then In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California.  Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
+	| Option                 |
+	| Drug Facts Panel       |
+	| Supplement Facts Panel |
+	| Nutrition Facts Panel  |
+	| None of the Above      |
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above 
+	Then In the Regulatory Information 3 Section, the following link: Nutritional and Supplement Labels should be displayed
+	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
+	Then In the Regulatory Information 3 Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
+	Then in the Regulatory Information 3 page I click Continue
 	Then I should see the Pesticide Details - U.S. Page
 	Given I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: No
     Given I set the Product has a State Registration option to: No
@@ -1122,7 +1254,20 @@ Scenario: [71051] Pesticide Details - EPA Registration number if edited is NOT r
 	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
 
-	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	#Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	Given I should see the Regulatory Information 3 Page
+	Then In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California.  Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
+	| Option                 |
+	| Drug Facts Panel       |
+	| Supplement Facts Panel |
+	| Nutrition Facts Panel  |
+	| None of the Above      |
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above 
+	Then In the Regulatory Information 3 Section, the following link: Nutritional and Supplement Labels should be displayed
+	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
+	Then In the Regulatory Information 3 Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
+	Then in the Regulatory Information 3 page I click Continue
 	And I should see the Pesticide Details - U.S. Page
 	And I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
 	Given in the New Product page I click Continue
@@ -1207,7 +1352,20 @@ Scenario: [62848] Pesticide Details - EPA Expiration Date is refresh from Kelly 
 	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
 
-	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	#Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	Given I should see the Regulatory Information 3 Page
+	Then In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California.  Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
+	| Option                 |
+	| Drug Facts Panel       |
+	| Supplement Facts Panel |
+	| Nutrition Facts Panel  |
+	| None of the Above      |
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above 
+	Then In the Regulatory Information 3 Section, the following link: Nutritional and Supplement Labels should be displayed
+	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
+	Then In the Regulatory Information 3 Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
+	Then in the Regulatory Information 3 page I click Continue
 	And I should see the Pesticide Details - U.S. Page
 	And I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
 	Given in the New Product page I click Continue
@@ -1303,8 +1461,20 @@ Scenario:[121120] Pesticide - New Radio Icon Option
 	| component name | Water       | 100     |                     |               |             |
 	Then in the Ingredients page I click Continue
 
-	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	#Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
+	Given I should see the Regulatory Information 3 Page
+	Then In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California.  Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
+	| Option                 |
+	| Drug Facts Panel       |
+	| Supplement Facts Panel |
+	| Nutrition Facts Panel  |
+	| None of the Above      |
+	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above 
+	Then In the Regulatory Information 3 Section, the following link: Nutritional and Supplement Labels should be displayed
+	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
+	Then In the Regulatory Information 3 Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
+	Then in the Regulatory Information 3 page I click Continue
 	And I should see the Transportation Details 1 Page
     And The following options should be displayed exclusively for section: Product is Regulated for Transport
 		| Option                               |

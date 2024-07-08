@@ -85,6 +85,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string section = "Product is Regulated for Transport"; 
 			new Steps_Prototype().CheckOptionsInSection(condition, displayed, section, table);
 		}
+		[RegexStepDefinition(@"In the Transportation Details 1 Section, the error 'This is a required field' (is|is not) displayed for section 'Product is Regulated for Transport'")]
+		public void ProductIsRegulatedForTransportErrorIsIsNotDisplayed(string is_isnot)
+		{
+			string section = "Product is Regulated for Transport";
+			string error = "This is a required field";
+			new Steps_ProductPrototype().InSectionErrorMessageIsIsNotDisplayed(section, error, is_isnot);
+		}
 
 
 	}
