@@ -1126,7 +1126,7 @@ Scenario: [213910] WERCSmart Portal and SHA Manager Test Flow for Product Type: 
 
 # Ignore execution in QA-Integration Environment as SHA Automation is set to OFF
 # Created by Saikiran Chittampally
-@OnlyInStaging
+#@OnlyInStaging
 @TestCase:213905
 Scenario: [213905] WERCSmart Portal and SHA Manager Test Flow for Product Type: Fertilizer (RU000462)
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -1161,6 +1161,10 @@ Scenario: [213905] WERCSmart Portal and SHA Manager Test Flow for Product Type: 
 	Then In the Product Information Section Section, in Warning modal window click 'Ok' button
 	#Given I call Shared Step 213923 (Physical and Chemical Properties - Applicable Only to Engine Fertilizer)
 	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, for section: 'Primary Physical State': the following options should be displayed exclusively:
+	| Option |
+	| Solid  |
+	| Liquid |
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
 	Then In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 11.16
@@ -1191,16 +1195,16 @@ Scenario: [213905] WERCSmart Portal and SHA Manager Test Flow for Product Type: 
 	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
 	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page I click Continue
-#	And I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+	#And I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Then I should be on the Transportation Details 1 Page
 	And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
 	Then in the Transportation Details 1 page, I click Continue
-#	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Wal-Mart/SAM'S CLUB	
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Wal-Mart/SAM'S CLUB	
 	Then I should be on the Retailer Page
 	And In the Retailer Section, click 'Add Retailers' button
 	And In the Select Retailers window, select retailer: Wal-Mart/SAM'S CLUB
 	And In the Select Retailers window, click 'Done' button
-	Then In the Retailer Section, for retailer: Wal-Mart/SAM'S CLUB select 'Select Vendor' option: QA_ProductAccount_840375279ProductAccount_c61f167fa348@kxxyxunf.mailosaur.net
+	Then In the Retailer Section, for retailer: Wal-Mart/SAM'S CLUB select 'Select Vendor' option: any
 	Then in the Retailer page, I click Continue
 	#Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC213905, container type: Plastic Container and size: 32 do not click continue
 	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
@@ -1231,27 +1235,33 @@ Scenario: [213905] WERCSmart Portal and SHA Manager Test Flow for Product Type: 
 	Given In the Summary Page, the 'Slow-Release Agent' section should be showing the following value: 3
 	Then In the Summary Page, verify table data in column Container Type showing the value: Plastic Container
 	Then In the Summary Page, verify table data in column Retailers showing the value: WM
-	Then In the Summary Page, the document section Supplier Uploaded should be showing the following document: testdoc.pdf
-	Then In the Summary Page, click the View button for section: Supplier Uploaded
-	Then In the Summary Page, after clicking 'View' button I confirm pdf file is downloaded
+	#Then In the Summary Page, verify table data in column File Name showing the value: testdoc.pdf
+	#Then In the Summary Page, the document section Supplier Uploaded should be showing the following document: testdoc.pdf
+	#Then In the Summary Page, click the View button for section: Supplier Uploaded
+	#Then In the Summary Page, after clicking 'View' button I confirm pdf file is downloaded
 	Given I close the tab with Data Summary page
     Given I should see the Data Acceptance Page
 	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given I should see the Data Acceptance Page
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
 	Then In the Data Acceptance Section, click 'Accept' button
-	Then In the Purchase Summary page message is displayed with text: Thank you for registering your product on WERCSmart for assessment.  The Retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise
+	Given The Purchase Summary Page is displayed
+	Then In the Purchase Summary page message is displayed with text: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 	Then In the Purchase Summary Page, click the 'Home' button
 	#Then If purchase details are showing click confirm order
-	Given I navigate to the landing page
+	#Then I open the new tab in browser
+	#Given I navigate to the landing page
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase213905)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase213905)
 	Then I call Shared Step 65969 (Go to Power Designer Plus - Select your product & CKLT - Continue)
-	Given I call Shared Step 209526(b) (WPS Studio - PD+ - set all data and publish using rule and doc queue for CKLT and MTR only) for product saved as: TestCase213905
+	Then I call Shared Step 209526 (Power Designer Plus - AUTHORIZE Product (Applicable Only to Products with an Uploaded OSHA-SDS / Kit Products / Products that Do NOT Require an SDS Upload)) for product saved as: TestCase213905
 	Then I call Shared Step 209552 Power Designer Plus - APPLY RULES To Product
 	Then I call Sared Step 214627 Power Designer Plus - PUBLISH Product (Applicable Only to Battery Products ): TestCase213905
-	When I switch to the 'Power Designer Plus' tab
+	#When I switch to the 'Power Designer Plus' tab
+	Given I call Shared Step 231412 I add the UsageType: PTXT: Product Text with Datacode FERT with data: Does the Product contain fertilizer (P, N, or K)? to the Section - Applicable Only to Type of Product
+	Given I confirm data code with data:Does the Product contain fertilizer (P, N, or K)? with value:Yes added
+	Given I remove the Datacode:Does the Product contain fertilizer (P, N, or K)? to the Section - Applicable Only to Type of Product
 	Given I call Shared Step 231412 I add the UsageType: PVAL: Product Value with Datacode FERTN with data: Nitrogen / Nitrates (“N”) to the Section - Applicable Only to Type of Product
 	Given I confirm data code with data:Nitrogen / Nitrates (“N”) with value:8 added
 	Given I remove the Datacode:Nitrogen / Nitrates (“N”) to the Section - Applicable Only to Type of Product

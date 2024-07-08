@@ -99,7 +99,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool VerifyTableValueInSammeryPage(string tableHeader, string tableValue)
 		{
-			IWebElement table = this.ContainerElement.FindElement(By.XPath($".//div[@class='summary-question-container-bottom']/table[@class='table'][thead//th/div[text()='{tableHeader}']]"), 2);
+			IWebElement table = this.ContainerElement.FindElement(By.XPath($".//table[@class='table'][thead//th/div[text()='{tableHeader}']]"), 2);
 			bool status = false;
 			if (table == null)
 			{

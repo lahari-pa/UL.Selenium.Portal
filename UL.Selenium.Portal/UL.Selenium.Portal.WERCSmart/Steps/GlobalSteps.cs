@@ -534,7 +534,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[RegexStepDefinition(@"I navigate to the landing page")]
 		public void NavigateToLandingPage()
 		{
-			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Navigate to landing page");
+			Report.StartStep(Report.Details.StepIndex + " - Navigate to landing page");
 			try
 			{
 				Report.Info("Navigating to the landing page");
@@ -553,7 +553,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					SeleniumBrowser.StartBrowser(WebDriverType.Chrome);
 					//SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
 				}
-
 
 				SeleniumWebDriver.CurrentDriver.Navigate(SeleniumWebDriver.BaseTestUrl);
 				Delay.Seconds(1);
