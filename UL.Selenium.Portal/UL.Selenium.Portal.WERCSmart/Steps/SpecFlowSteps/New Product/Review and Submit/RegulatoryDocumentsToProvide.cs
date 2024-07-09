@@ -186,7 +186,5 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			new Steps_Prototype().CheckOptionsInSection(condition, displayed, section, table);
 		}
 
-
-
 	}
 }
