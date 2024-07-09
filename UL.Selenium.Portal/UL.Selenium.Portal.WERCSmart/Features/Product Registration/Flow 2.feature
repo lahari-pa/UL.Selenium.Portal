@@ -25,6 +25,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
 @SafetyDataSheetAuthoring
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails2
 @RegulatoryInformation3
 
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
@@ -37,99 +38,143 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ECOLOGO
 @GTINAndUPC
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
+
 Feature: Flow 2
 
 @TestCase:57439
 Scenario: [57439] Anti-Transpirant (RU000992) 2-L
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Then The home screen should load
-	Given I generate a random UPC number and save as: UPC57439
-	Given I delete all products with UPC Number: saved as UPC57439
-#	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
-	Then in the New Product page, I click Continue
+Given I log in with the account saved in TReVor as: ProductAccount
+Then The home screen should load
+Given I generate a random UPC number and save as: UPC57439
+Then In the Product Grid, delete all products with UPC Number: saved as UPC57439
 
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Anti-Transpirant
-	Then I save the product information as: TestCase57439
-	#CLF 18/6/2019 removing this step because it appears to have been replaced by 73629
-	#Given I call Shared Step 62686 (Enter Physical Property - Liquid - Without Water Solubility)
-	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
-	Given I should see the Product Information Page
-	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
-	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
-	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
-	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
-	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
-	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
-	Then in the Product Information page I click Continue
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Given I click the Add Product icon in the Navigation Pane
+Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Given in the New Product page I click Continue
 
-	Given I call Shared Step 73629 (Physical and Chemical Properties - Liquid - select any options(enter pH, boiling point, flash point))
-		| Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
-		| Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
-	#CLF 18/6/2019 removing this step because it appears to have been replaced by 57502
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Propane       | 100     | false               | false       |            |
-	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-	Given I should see the Inventory Status, Prop 65 (US) Page
-	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
-	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
-	Then in the Inventory Status, Prop 65 (US) page I click Continue
+#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Anti-Transpirant
+Then I should be on the The Product Page
+And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Anti-Transpirant_#59276
+And In the Product Section, set the option in section: 'Type of Product (select)' to: Anti-Transpirant
+Then in the The Product page, I click Continue
 
-	#Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
-	Given I should see the Pesticide Details - U.S. Page
-	Then In the Pesticide Details - U.S. Section, in 'Product has an Environmental Protection Agency (EPA) Registration Number' enter No
-	Then In the Pesticide Details - U.S. Section, in 'Product has a State Registration' enter No
-	Then In the Pesticide Details - U.S. Section, in 'Select the applicable exemption' enter Food Based Pesticides - Exempt from EPA Registration
-	Then in the Pesticide Details - U.S. page I click Continue
+Then I save the product information as: TestCase57439
 
-	Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
-	Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
-	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
-	Then I should be on the Retailer Page
-	And In the Retailer Section, click 'Add Retailers' button
-	And In the Select Retailers window, select retailer: Amazon
-	And In the Select Retailers window, click 'Done' button
-	Then in the Retailer page, I click Continue
+#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
+Then I should be on the Product Information Page
+Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+Then in the Product Information page, I click Continue
 
+#Given I call Shared Step 73629 (Physical and Chemical Properties - Liquid - select any options(enter pH, boiling point, flash point))
+#	| Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+#	| Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
+Then I should be on the Physical and Chemical Properties Page
+And In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Liquid 
+And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
+And In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 2
+And In the Physical and Chemical Properties Section, for section: 'pH' enter text: 2
+And In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: 2
+And In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: 66
+And In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Closed cup method
+And In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Cloth not soluble
+Then in the Physical and Chemical Properties page, I click Continue
 
-	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57439, container type: Glass Container and size: 33
-    #Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	Given I should see the Regulatory Documents to Provide Page
-	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
-	Then in the Regulatory Documents to Provide page I click Continue
+#Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+#	| Propane       | 100     | false               | false       |            |
+Then I should be on the Ingredients Page
+And In the Ingredients section, add the following ingredients:
+| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+| component name | Water       | 100     | False               | False         |             |
+Then in the Ingredients page, I click Continue
 
-	#Given I call Shared Step 60931 (Additional Documents to Provide - Exemption - Special Permit - Product Label)
-	Given I should see the Additional Documents to Provide Page
-	Then I upload PDF document to Upload Transportation Exemption Letter or Special Permit field
-	Then I upload PDF document to Provide Full Product Label (required) field
-	Then in the Additional Documents to Provide page I click Continue
+#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+Given I should be on the Inventory Status, Prop 65 (US) Page
+Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+Then in the Inventory Status, Prop 65 (US) page, I click Continue
 
-	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	#Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-	#	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
-	#	| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
-	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 501.827328
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor' to: Orange
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor Threshold' to: No data available
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Partition Coefficient' enter text: 41.3005
-	Then in the Safety Data Sheet Authoring - Additional Data (Optional) page, I click Continue
+#Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))
+Given I should be on the Pesticide Details - U.S. Page
+Then In the Pesticide Details - U.S. Section, in 'Product has an Environmental Protection Agency (EPA) Registration Number' enter No
+Then In the Pesticide Details - U.S. Section, in 'Product has a State Registration' enter No
+Then In the Pesticide Details - U.S. Section, in 'Select the applicable exemption' enter Food Based Pesticides - Exempt from EPA Registration
+Then in the Pesticide Details - U.S. page, I click Continue
 
-	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
-	Given I should see the Optional Comments Page
-	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
-	Then in the Optional Comments page I click Continue
+#Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+Then I should be on the Transportation Details 1 Page
+And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: No, due to an exemption or exception
+And In the Transportation Details 1 Section, set the option in section: 'Please select DOT Exceptions if applicable?': to: 173.120(b)(3):  Combustible liquid that does not sustain combustion
+Then in the Transportation Details 1 page, I click Continue
 
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Anti-Transpirant
-	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57439
-	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase57439
+#Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
+Then I should be on the Transportation Details 2 Page
+And In the Transportation Details 2 Section, set the option in section: 'International Shipping when DOT Exemption taken?': to: I do not ship internationally and I do not know the classification
+Then in the Transportation Details 2 page, I click Continue
+
+#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
+Given I should be on the Retailer Page
+Then In the Retailer Section, click 'Add Retailers' button
+Then In the Select Retailers window, select retailer: Amazon
+Then In the Select Retailers window, click 'Done' button
+Then in the Retailer page, I click Continue
+
+#Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57439, container type: Glass Container and size: 33
+Then I should be on the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+And In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+And In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC57439 enter Size: 33 and enter Container Type: Glass Container
+Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page, I click Continue
+
+#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+Given I should be on the Regulatory Documents to Provide Page
+Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+Then in the Regulatory Documents to Provide page, I click Continue
+
+#Given I call Shared Step 60931 (Additional Documents to Provide - Exemption - Special Permit - Product Label)
+Given I should be on the Additional Documents to Provide Page
+Then I upload PDF document to Upload Transportation Exemption Letter or Special Permit field
+Then I upload PDF document to Provide Full Product Label (required) field
+Then in the Additional Documents to Provide page, I click Continue
+
+Then in the Optional Reports and Documents Available for Purchase page, I click Continue
+
+#Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+#	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
+#	| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
+Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
+And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
+And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (ï¿½C)' enter text: 501.827328
+And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
+And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
+And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
+And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor' to: Orange
+And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor Threshold' to: No data available
+And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Partition Coefficient' enter text: 41.3005
+Then in the Safety Data Sheet Authoring - Additional Data (Optional) page, I click Continue
+
+#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
+Given I should see the Optional Comments Page
+Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+Then in the Optional Comments page I click Continue
+
+#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Anti-Transpirant
+Then I should be on the Data Acceptance Page
+And In the Data Acceptance Section, click 'Summary' button
+And I switch to the tab with Data Summary page
+And In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Anti-Transpirant
+And I close the tab with Data Summary page
+Then I should be on the Data Acceptance Page
+
+#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57439
+Then I navigate to the Home Page
+Then In the Product Grid, delete the product saved as: TestCase57439
 
 @TestCase:57646
 Scenario: [57646] Plant Growth regulator (Liquid or Solid) (RU000291) 2-L
@@ -206,7 +251,7 @@ Scenario: [57646] Plant Growth regulator (Liquid or Solid) (RU000291) 2-L
 #		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 501.827328
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (ï¿½C)' enter text: 501.827328
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
@@ -274,8 +319,18 @@ Scenario: [57649] Cosmetics (RU000034) 2LS - 2L
 	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
 	Then In the Regulatory Information 3 Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
 	Then in the Regulatory Information 3 page I click Continue
-	Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
-	Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
+	
+	#Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
+	Then I should be on the Transportation Details 1 Page
+	And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: No, due to an exemption or exception
+	And In the Transportation Details 1 Section, set the option in section: 'Please select DOT Exceptions if applicable?': to: 173.120(b)(3):  Combustible liquid that does not sustain combustion
+	Then in the Transportation Details 1 page, I click Continue
+
+	#Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
+	Then I should be on the Transportation Details 2 Page
+	And In the Transportation Details 2 Section, set the option in section: 'International Shipping when DOT Exemption taken?': to: I do not ship internationally and I do not know the classification
+	Then in the Transportation Details 2 page, I click Continue
+
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
@@ -289,7 +344,7 @@ Scenario: [57649] Cosmetics (RU000034) 2LS - 2L
 #		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 501.827328
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (ï¿½C)' enter text: 501.827328
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
@@ -401,7 +456,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 #		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 501.827328
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (ï¿½C)' enter text: 501.827328
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
@@ -498,7 +553,7 @@ Scenario: [71274] Flea or Tick Repellent (L) - RU000323
 #		| Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
 	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Mask
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 150
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (ï¿½C)' enter text: 150
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 44
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.7
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: White
@@ -602,7 +657,7 @@ Scenario: [57647] Insecticide-Flying Bug-Moth Proofing Product containing <98% P
 #		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
 	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 501.827328
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (ï¿½C)' enter text: 501.827328
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
