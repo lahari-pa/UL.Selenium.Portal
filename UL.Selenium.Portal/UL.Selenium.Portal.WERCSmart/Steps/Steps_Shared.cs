@@ -7827,6 +7827,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.ISelectDataCode(data);
 			Delay.Seconds(5);
 			thisStudioPowerDesignerPlusDesignMode.ClickSaveAndClose();
+			if (SeleniumWebDriver.CurrentDriver.WaitForAlert(2))
+			{
+				Report.Info("Found an alert");
+				string alertText = SeleniumWebDriver.CurrentDriver.GetAlertText();
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
+				Report.Info("Got an alert: " + alertText);
+			}
+			else
+			{
+				Report.Info("Did not find an alert");
+			}
 			GeneralUtilities.StudioWaitForSpinner(60);
 			thisStudioPowerDesignerPlusDesignMode.Wait_for_load(60);
 		}
