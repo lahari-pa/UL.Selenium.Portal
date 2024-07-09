@@ -1079,7 +1079,23 @@ Scenario: [213910] WERCSmart Portal and SHA Manager Test Flow for Product Type: 
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Grass Seed
 	Then I save the product information as: TestCase213910
 	Given I should see the Product Information Page
-	Given I call Shared Step 214000 (Product Information - Pesticide= Not considered, Fertilizer=YES, SOLD=US, everything else = No - Continue)
+	#Given I call Shared Step 214000 (Product Information - Pesticide= Not considered, Fertilizer=YES, SOLD=US, everything else = No - Continue)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm section: 'Which best describes your product, including when FIFRA 25(b) Exempt' is displayed
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
+	Then In the Product Information Section, set the option in section: 'Does the product contain fertilizer (N, P, K)?' to: Yes
+	Then In the Product Information Section, set the option in section: 'Nitrogen /Nitrates (“N”)' to: 8
+	Then In the Product Information Section, set the option in section: 'Phosphates /Phosphorous (“P”)' to: 14
+	Then In the Product Information Section, set the option in section: 'Potassium(“K”)' to: 14
+	Then In the Product Information Section, set the option in section: 'Slow-Release Agent' to: 3
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+	Then In the Product Information Section, a warning pop-up should be displayed with text: 'The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of the product in Pinellas County, Florida (Restricted). This is informational only and does not restrict your registration to the Retailer.'
+	Then In the Product Information Section Section, in Warning modal window click 'Ok' button
 	Then a Warning popup dialog should appear with the message: The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.	
 	And I see the following sections
 		| Section                       |
