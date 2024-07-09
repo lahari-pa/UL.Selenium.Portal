@@ -19,7 +19,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class DataSummary : SeleniumBaseObject
 	{
-		protected override By ContainerElementLocator => By.XPath("//div[@id='dataentry']");
+		protected override By ContainerElementLocator => By.XPath("//body");
 
 		public bool WaitForSpinner()
 		{
@@ -147,6 +147,66 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				for (i = 0; i < headersElems.Count; i++)
 				{
 					if (tableData[0,i] == tableHeader)
+					{
+						Report.Info($"Found column header {tableHeader} in table");
+						status = tableData[1, i].Contains(tableValue);
+					}
+
+				}
+			}
+			return status;
+		}
+
+		public bool VerifyDocumentsTableValueInSammeryPage(string sectionName,string tableHeader, string tableValue)
+		{
+			IWebElement table = this.ContainerElement.FindElement(By.XPath($".//div[h4[text() = 'Supplier Uploaded']]//table[@class='table'][thead//tr//*[text()='{tableHeader}']]"), 2);
+			bool status = false;
+			if (table == null)
+			{
+				Report.Info("Cannot find table with such column");
+				status = false;
+			}
+			table.ScrollElementIntoView();
+			IList<IWebElement> headersElems = table.FindElements(By.TagName("th"), 2);
+			if (headersElems == null)
+			{
+				Report.Info("Cannot find table columns");
+				status = false;
+			}
+			IList<IWebElement> rowData = table.FindElements(By.XPath($".//tbody//td"), 2);
+			if (rowData == null)
+			{
+				Report.Info("Cannot find table data");
+				status = false;
+			}
+			string[,] tableData = new string[2, 9];
+			int i = 0;
+			foreach (IWebElement elem in headersElems)
+			{
+				tableData[0, i] = elem.Text;
+				i++;
+			}
+			if (tableData == null)
+			{
+				Report.Info("Cannot get and save table headers");
+				status = false;
+			}
+			i = 0;
+			foreach (IWebElement elem in rowData)
+			{
+				tableData[1, i] = elem.Text;
+				i++;
+			}
+			if (tableData == null)
+			{
+				Report.Info("Cannot get and save table data");
+				status = false;
+			}
+			if (tableData != null)
+			{
+				for (i = 0; i < headersElems.Count; i++)
+				{
+					if (tableData[0, i] == tableHeader)
 					{
 						Report.Info($"Found column header {tableHeader} in table");
 						status = tableData[1, i].Contains(tableValue);

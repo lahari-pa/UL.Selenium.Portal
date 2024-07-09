@@ -41,6 +41,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 			}
 			Report.IsTrue(new DataSummary().VerifyTableValueInSammeryPage(column, value), $"Failed to confirm there is value {value} in column {column}", $"Successfully confirmed there is value {value} in column {column}");
 		}
+		[RegexStepDefinition(@"In the Summary Page, verify table data for 'Document' section (.*) in column (.*) showing the value: (.*)")]
+		public void InTheSummaryDocumenrSectionCheckTableData(string sectionName, string column, string value)
+		{
+			if (value.ToLower().Contains("saved as"))
+			{
+				value = Context.GetFromContext(value.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim()).ToString();
+			}
+			Report.IsTrue(new DataSummary().VerifyDocumentsTableValueInSammeryPage(sectionName, column, value), $"Failed to confirm there is value {value} in column {column}", $"Successfully confirmed there is value {value} in column {column}");
+		}
 		[RegexStepDefinition(@"In the Summary Page, the document section (.*) should be showing the following document: (.*)")]
 		public void InTheSummaryPageDocumentSectionShouldBeShowingTheFollowingDocument(string section, string option)
 		{

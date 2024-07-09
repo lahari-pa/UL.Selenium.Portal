@@ -1235,10 +1235,8 @@ Scenario: [213905] WERCSmart Portal and SHA Manager Test Flow for Product Type: 
 	Given In the Summary Page, the 'Slow-Release Agent' section should be showing the following value: 3
 	Then In the Summary Page, verify table data in column Container Type showing the value: Plastic Container
 	Then In the Summary Page, verify table data in column Retailers showing the value: WM
-	#Then In the Summary Page, verify table data in column File Name showing the value: testdoc.pdf
-	#Then In the Summary Page, the document section Supplier Uploaded should be showing the following document: testdoc.pdf
-	#Then In the Summary Page, click the View button for section: Supplier Uploaded
-	#Then In the Summary Page, after clicking 'View' button I confirm pdf file is downloaded
+	Then In the Summary Page, verify table data for 'Document' section Supplier Uploaded in column File Name showing the value: testdoc.pdf
+	Then In the Summary Page, verify table data for 'Document' section Supplier Uploaded in column Actions showing the value: View
 	Given I close the tab with Data Summary page
     Given I should see the Data Acceptance Page
 	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
@@ -1248,9 +1246,6 @@ Scenario: [213905] WERCSmart Portal and SHA Manager Test Flow for Product Type: 
 	Given The Purchase Summary Page is displayed
 	Then In the Purchase Summary page message is displayed with text: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 	Then In the Purchase Summary Page, click the 'Home' button
-	#Then If purchase details are showing click confirm order
-	#Then I open the new tab in browser
-	#Given I navigate to the landing page
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase213905)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase213905)
@@ -1258,10 +1253,9 @@ Scenario: [213905] WERCSmart Portal and SHA Manager Test Flow for Product Type: 
 	Then I call Shared Step 209526 (Power Designer Plus - AUTHORIZE Product (Applicable Only to Products with an Uploaded OSHA-SDS / Kit Products / Products that Do NOT Require an SDS Upload)) for product saved as: TestCase213905
 	Then I call Shared Step 209552 Power Designer Plus - APPLY RULES To Product
 	Then I call Sared Step 214627 Power Designer Plus - PUBLISH Product (Applicable Only to Battery Products ): TestCase213905
-	#When I switch to the 'Power Designer Plus' tab
-	Given I call Shared Step 231412 I add the UsageType: PTXT: Product Text with Datacode FERT with data: Does the Product contain fertilizer (P, N, or K)? to the Section - Applicable Only to Type of Product
-	Given I confirm data code with data:Does the Product contain fertilizer (P, N, or K)? with value:Yes added
-	Given I remove the Datacode:Does the Product contain fertilizer (P, N, or K)? to the Section - Applicable Only to Type of Product
+	Given I call Shared Step 231412 I add the UsageType: PTXT: Product Text with Datacode FERT with data: Does the product contain fertilizer (P, N or K)? to the Section - Applicable Only to Type of Product
+	Given I confirm data code with data:Does the product contain fertilizer (P, N or K)? with value:Yes added
+	Given I remove the Datacode:Does the product contain fertilizer (P, N or K)? to the Section - Applicable Only to Type of Product
 	Given I call Shared Step 231412 I add the UsageType: PVAL: Product Value with Datacode FERTN with data: Nitrogen / Nitrates (“N”) to the Section - Applicable Only to Type of Product
 	Given I confirm data code with data:Nitrogen / Nitrates (“N”) with value:8 added
 	Given I remove the Datacode:Nitrogen / Nitrates (“N”) to the Section - Applicable Only to Type of Product
