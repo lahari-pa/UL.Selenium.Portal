@@ -16,6 +16,7 @@
 @StepsPrototype
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 
 Feature: Product Information
 
@@ -29,7 +30,12 @@ Then The home screen should load
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Non-aerosol
+#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Non-aerosol
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Deodorant - Non-aerosol_#31352
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Deodorant - Non-aerosol
+	Then in the The Product page, I click Continue
+
 Then I save the product information as: TestCase31352
 And I should see the Product Information Page
 And I should see following statement: Select countries the product may be sold in

@@ -8,6 +8,7 @@ using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {
@@ -237,7 +238,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(ingredientRow.CellCheckBoxExists(columnLabel), $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column check box does not exist.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column check box does exist.");
 			Report.IsTrue(ingredientRow.CellCheckBoxIsChecked(columnLabel) == expected, $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column check box is {(expected ? "unchecked" : "checked")}.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column check box is {checked_unchecked}.");
 		}
-
+		[RegexStepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column confirm checkbox is (enabled|disabled)")]
+		public void IngredientsTableRowConfirmkCheckBoxISEnabledDisabled(string searchType, string searchText, string columnLabel, string checked_unchecked)
+		{
+			bool expected = checked_unchecked == "checked";
+			IngredientsTable ingredientsTable = new IngredientsTable();
+			Report.IsTrue(ingredientsTable.WaitForContainerToBeVisible(), $"Failure, ingredients table does not exist.", $"Success, ingredients table exists.");
+			Report.IsTrue(!ingredientsTable.IngredientRowList.IsNullOrEmpty(), $"Failure, ingredients table is empty.", $"Success, ingredients table is not empty.");
+			IngredientsTableRow ingredientRow = this.IngredientsRowSearchTypeGet(searchType, searchText);
+			new StepsIngredients().ForIngredientTheTradeSecretCheckboxIsDisabledOrEnabled(searchText, columnLabel, checked_unchecked);
+		}
 		[RegexStepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column set checkbox to (checked|unchecked)")]
 		public void IngredientsTableRowCheckUncheckCheckBox(string searchType, string searchText, string columnLabel, string checked_unchecked)
 		{
@@ -508,7 +518,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 					Report.StartSubStep($"In the Ingredients Table row with {inputRow["SearchType"]}: {inputRow["SearchValue"]}, in 'Active Ingredient?' column set checkbox to checked");
 					this.IngredientsTableRowCheckUncheckCheckBox(inputRow["SearchType"], inputRow["SearchValue"], "Active Ingredient?", "checked");
 				}
-				if (inputTable.ContainsColumn("Active Ingredient?") && inputRow["Functional Purpose"] != null)
+				if (inputTable.ContainsColumn("Functional Purpose") && inputRow["Functional Purpose"] != null)
 				{
 					Report.StartSubStep($"Then In the Ingredients Table row with {inputRow["SearchType"]}: {inputRow["SearchValue"]}, in 'Functional Purpose' column select option {inputRow["Ingredient Type"]}");
 					this.IngredientsTableRowSelectOptionsMultiSelect(inputRow["SearchType"], inputRow["SearchValue"], "Functional Purpose", inputRow["Functional Purpose"]);
@@ -530,5 +540,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			newProductIngredients.ThenIClickTheCloseButtonForThePopupWithTheFollowingTitleCaliforniaCleaningRightToKnow();
 		}
 		#endregion
+
+		#region Other Steps
+		[RegexStepDefinition(@"In the Ingredients section, verify Total Percent displays value: (.*)")]
+		public void ThenIVerifyTotalPercent(string value)
+		{
+			new StepsIngredients().GivenIConfirmPercentageOfFiveIngredients(value);
+		}
+
+		[RegexStepDefinition("In the Ingredients section, verify Transparency displays value: (.*)%")]
+		public void ThenInTheIngredientsSectionVerifyTransparencyDisplaysValue(float value)
+		{
+			new StepsIngredients().ThenIVerifyTheTransparencyScoreDisplays(value);
+		}
+
+		#endregion
+
 	}
 }

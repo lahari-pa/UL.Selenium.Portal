@@ -49,19 +49,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		public void Regulatory3TextIsIsNotDisplayed(string is_isnot)
 		{
 			string text = "Based on the product's recommended use and formulation, this is a possible Nutritional Supplement. Please complete the additional question below to ensure proper classification of this product for the retailer(s).";
-			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);	
+			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);
 		}
 		[RegexStepDefinition(@"In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:")]
 		public void ThenInTheRegulatoryInformationSectionInSectionDisplayedOptionsAreSupplementFactsPanelNutritionFactsPanelNoneOfTheAbove(Table table)
 		{
 			string section = "Refer to your Product Label. From the options, select those that appear on the Label.";
 			string condition = "should";
-			string displayed = "exclusively displayed"; 
+			string displayed = "exclusively displayed";
 			new Steps_Prototype().CheckOptionsInSection(condition, displayed, section, table);
 		}
+		[RegexStepDefinition(@"In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California.  Please complete the additional question below to ensure proper classification of this product for the retailer\(s\).' (is|is not) displayed")]
+		public void Regulatory3StatementIsIsNotDisplayed(string is_isnot)
+		{
+			string text = "Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California.  Please complete the additional question below to ensure proper classification of this product for the retailer(s).";
+			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);
 
 
 
 
+		}
 	}
 }

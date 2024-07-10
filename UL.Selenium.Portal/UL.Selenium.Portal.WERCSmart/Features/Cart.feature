@@ -16,8 +16,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
-
-
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 Feature: Cart
 
@@ -40,8 +39,13 @@ Scenario: [63323] Remove single product from cart
 		Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 		Then in the New Product page, I click Continue
 
-       Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
-       Then I save the product information as: TestCase63323
+      # Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	  Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk_#63323
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
+	Then in the The Product page, I click Continue
+
+	  Then I save the product information as: TestCase63323
 	   #Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	   Given I should see the Product Information Page
 	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
