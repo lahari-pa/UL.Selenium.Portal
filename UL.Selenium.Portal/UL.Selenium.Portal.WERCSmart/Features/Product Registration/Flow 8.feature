@@ -32,6 +32,7 @@
 @GTINAndUPC
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
 @PaymentMethods
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 
 Feature: Flow 8
 
@@ -1137,51 +1138,123 @@ Scenario: [214039] Test Case 214039: WERCSmart Portal and SHA Manager Test Flow 
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC214039
-	Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Soil (No Additives, Fertilizers, or Inhibitors)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
+	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Soil (No Additives, Fertilizers, or Inhibitors)
+	Given I should see the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to:  Soil (No Additives, Fertilizers, or Inhibitors)_#214039
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Soil (No Additives, Fertilizers, or Inhibitors)
+ 	Given in the The Product page I click Continue
+
 	Then I save the product information as: TestCase214039
+	
+	#Given I call Shared Step 214040 (Product Information -Applicable Only to Type of Product: SOIL No - Continue)
 	Given I should see the Product Information Page
-	Given I call Shared Step 214040 (Product Information -Applicable Only to Type of Product: SOIL No - Continue)
-	Given I call Shared Step 214041 (Physical and Chemical Properties - Applicable Only to SOIL)
-	Then I add the following ingredients:
-		| ComponentName     | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| N/A209      | 50      | false               | false       |            |
-		| 308075-07-2 | 50      | false               | false       |            |
-	Given I click continue
-	Given I call Shared Step 231514 (Inventory Status, Prop 65 - Applicable Only to SOIL)
+	Then In the Product Information Section, confirm the question: 'Which best describes your product, including when FIFRA 25(b) Exempt' is not displayed
+	Then In the Product Information Section, set the option in section: 'Does the product contain fertilizer (N, P, K)?' to: No
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Given in the Product Information page I click Continue
+
+	#Given I call Shared Step 214041 (Physical and Chemical Properties - Applicable Only to SOIL)
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Cloth not soluble
+	Given in the Physical and Chemical Properties page I click Continue
+
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+		| SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+		| CAS number | N/A209      | 50      | false               | false         |             |
+		| CAS number | 308075-07-2 | 50      | false               | false         |             |
+	Given in the Ingredients page I click Continue
+
+	#Given I call Shared Step 231514 (Inventory Status, Prop 65 - Applicable Only to SOIL)
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is exempt from TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Given in the Inventory Status, Prop 65 (US) page I click Continue
+
 #	And I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Then I should be on the Transportation Details 1 Page
 	And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
 	Then in the Transportation Details 1 page, I click Continue
+
 	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Wal-Mart/SAM'S CLUB
 	Then I should be on the Retailer Page
 	And In the Retailer Section, click 'Add Retailers' button
 	And In the Select Retailers window, select retailer: Wal-Mart/SAM'S CLUB
 	And In the Select Retailers window, click 'Done' button
+	#Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
+	Then In the Retailer Section, for retailer: Wal-Mart/SAM'S CLUB select 'Select Vendor' option: QA_ProductAccount_840375279ProductAccount_c61f167fa348@kxxyxunf.mailosaur.net
 	Then in the Retailer page, I click Continue
 
-	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Wal-Mart/SAM'S CLUB	
-	Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
-	Then I click continue
-	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC214039, container type: Plastic bag and size: 56 do not click continue
-	And I confirm that retailer "WM" is present under the 'Destination Retailers' column in the UPC table
-	Then I click continue
-	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	#Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC214039, container type: Plastic bag and size: 56 do not click continue
+	Then I should be on the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC214039 enter Size: 56 and enter Container Type: Plastic bag
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, verify retailer 'WM' is present under the 'Destination Retailers' column
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page, I click Continue
+
+	#And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	Then I should be on the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page, I click Continue
+
+	Then I should be on the Additional Documents to Provide Page
 	Given in the Additional Documents to Provide page I click Continue
+
+	Then I should be on the Optional Reports and Documents Available for Purchase Page
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+
+	#Given I call Shared Step 214046 (Safety Data Sheet Authoring - Additional Data - Applicable Only to SOIL (RU001075))
+	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
+	Then In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Goggles
+	Then In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
+	Then In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor' to: Earthy
+	Then In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor Threshold' to: Not applicable
+	Given in the Safety Data Sheet Authoring - Additional Data (Optional) page I click Continue
+
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test
 	Given I should see the Optional Comments Page
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
 	Then in the Optional Comments page I click Continue
 
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Soil (No Additives, Fertilizers, or Inhibitors)
+	#Given I call Shared Step 214047 (Summary Tab - Data Verification - Applicable Only to SOIL (RU001075))
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, click 'Summary' button
+	Then I switch to the tab with Data Summary page
+	Then In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Soil (No Additives, Fertilizers, or Inhibitors)
+	Then In the Summary Page, the 'Does the product contain fertilizer (N, P, K)?' section should be showing the following value: No
+	Then In the Summary Page, the 'U.S. Toxic Substances Control Act (TSCA) status' section should be showing the following value: This product is exempt from TSCA chemical Inventory listing requirements.
+	Then In the Summary Page, verify table data in column Container Type showing the value: Plastic bag
+	Then In the Summary Page, verify table data in column Size (Ounces) showing the value: 56
+	Then In the Summary Page, verify table data in column Retailers showing the value: WM
+	Then In the Summary Page, the 'OSHA-compliant Safety Data Sheet, English' section should be showing the following value: Request to author
+	Then In the Summary Page, the 'Personal Protection Equipment Recommended (select)' section should be showing the following value: Goggles
+	Then In the Summary Page, the 'Appearance' section should be showing the following value: Brown
+	Then In the Summary Page, the 'Odor' section should be showing the following value: Earthy
+	Then In the Summary Page, the 'Odor Threshold' section should be showing the following value: Not applicable
+	Then In the Summary Page, the 'Partition Coefficient' section should be showing the following value: No data available
+	Then I close the tab with Data Summary page
+
 	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given I should see the Data Acceptance Page
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
 	Then In the Data Acceptance Section, click 'Accept' button
 
-	Then If purchase details are showing click confirm order
-	Given I navigate to the landing page
+	Then The Purchase Summary Page is displayed
+	Then In the Purchase Summary Page, click the 'Home' button
+	Then The home screen should load
+
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase214039)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase214039)
