@@ -31,8 +31,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
 @GTINAndUPC
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
-@@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
-
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 Feature: Flow 9
 
 @TestCase:58072
