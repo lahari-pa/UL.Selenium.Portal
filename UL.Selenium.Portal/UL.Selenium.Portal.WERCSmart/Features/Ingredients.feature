@@ -32,6 +32,8 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 @GTINAndUPC
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 
 Feature: Ingredients
 (Suite ID: 64740)
@@ -792,49 +794,60 @@ Scenario: [109230] Ingredients - Proper ingredients and percentages are showing 
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC109230 enter Size: 12 and enter Container Type: Plastic bag
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, verify retailer 'WG' is present under the 'Destination Retailers' column
 	And in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
-	And I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	#And I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Yes, I certify that I have an OSHA-compliant SDS for this product and would like to upload it.
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'OSHA SDS'
+	Then In the Regulatory Documents to Provide Section, for section OSHA SDS button View should exists
+	Then In the Regulatory Documents to Provide Section, for section OSHA SDS button Remove should exists
+	Then in the Regulatory Documents to Provide page I click Continue
+	#214558 Additional Documents to Provide Page (No Upload is Required) - Click Continue (General Shared-Step)
+	Given I should see the Additional Documents to Provide Page
 	And in the Additional Documents to Provide page I click Continue
-	And in the Optional Reports and Documents Available for Purchase page I click Continue
+	#And I call Shared Step 214559 (Optional Reports and Documents Available for Purchase - No Document Purchase is Required - Click Continue (General Shared-Step))
+	Given I should see the Optional Reports and Documents Available for Purchase Page
+	Then The statement: • Additional documents are not subject to standard two day turnaround. is displayed
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I should see the Optional Comments Page
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
 	Then in the Optional Comments page I click Continue
-
-	Given I click the Summary button in the Data Acceptance window
-	Then I switch to the Data Summary page
-	And In the Data Summary page, I confirm that the Ingredients table matches the following:
-		| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name              |
-		| Water                   | 100     | Yes                 | No            | Aqua (Water, Eau)      |
-		| Chlorine                | 100     | No                  | Yes           | Trade Secret           |
-		| Formaldehyde            | 100     | No                  | No            |                        |
-		| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
-	And I close the window that opened
+	#238389 Summary Tab - Data Verification of Different Component(s) and Disclosure(s) - Applicable Only to Type of Product:  CHALK (RU000711)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, click 'Summary' button
+	Given I switch to the tab with Data Summary page
+	Given In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Chalk
+	Then In the Summary page, I confirm the Ingredients table matches the following:
+	| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name             |
+	| Calcium carbonate       | 25      | Yes                 | No            | Calcium Carbonate     |
+	| Chlorine                | 25      | Yes                 | No		      | Undisclosed Ingredient|
+	| Aluminum oxide          | 25		| No                  | Yes           | Trade Secret          |
+	| FM6019                  | 25      | Yes                 | No            | FM6019                |
+	Then In the Summary Page, verify table data for 'Document' section Supplier Uploaded in column File Name showing the value: testdoc.pdf
+	Then In the Summary Page, verify table data for 'Document' section Supplier Uploaded in column Actions showing the value: View
+	Then In the Summary Page, the document section OSHA SDS should be showing the following document: testdoc.pdf
+	Then In the Summary Page, click the View button for section: OSHA SDS
+	Then In the Summary Page, after clicking 'View' button I confirm pdf file is downloaded
+	Given I close the tab with Data Summary page
 	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	#And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
-	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase109230)
-	#Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase109230)
-	#And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase109230)
-	#And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase109230)
-	#Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase109230
-	#And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase109230)
-	#Given I call Shared Step 59066 (Go to SHA Manager)
-	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
-	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109230 and its status is: Accepted or Completed
-	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
-	#Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase109230) for
-	#	| Retailer  |
-	#	| Walgreens |
-	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
-	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109230 and its status is: Completed
-	#And I call Shared Step 43587 - SHA Manager > Completed Product - Add Recert reason 20 for product saved as: TestCase109230
-	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
-	#And In the SHA manager grid I see the WPS ID I have saved as product: TestCase109230 and its font is red indicating a recertification
-	#Given I navigate to the landing page
-	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	#And I filter for the product saved as: TestCase109230
-	#And I click Row Actions for the first product returned
-	#And I click on the Row Action: View
-	#Then I switch to the Data Summary page
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+	#157174 Purchase Summary - Thank You for Registering Message - Click Home to Continue
+	Given The Purchase Summary Page is displayed
+	Then In the Purchase Summary page message is displayed with text: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
+	Then In the Purchase Summary Page, click the 'Home' button
+	Then The home screen should load
+	And I filter for the product saved as: TestCase109230
+	And I click Row Actions for the first product returned
+	And I click on the Row Action: View
+	Then I switch to the Data Summary page
+	Then In the Summary page, I confirm the Ingredients table matches the following:
+	| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name             |
+	| Calcium Carbonate       | 25      | Yes                 | No            | Calcium Carbonate     |
+	| Chlorine                | 25      | Yes                 | No		      | Undisclosed Ingredient|
+	| Aluminum Oxide          | 25		| No                  | Yes           | Trade Secret          |
+	| FM6019                  | 25      | Yes                 | No            | FM6019                |
 	#And In the Data Summary page, I confirm that the Ingredients table matches the following:
 	#	| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name              |
 	#	| Water                   | 100     | Yes                 | No            | Aqua (Water, Eau)      |

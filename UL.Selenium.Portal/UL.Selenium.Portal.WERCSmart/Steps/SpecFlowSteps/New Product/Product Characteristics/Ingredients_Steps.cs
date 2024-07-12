@@ -543,7 +543,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		[RegexStepDefinition(@"In the Ingredients section, I confirm the popup (should|should not) be displayed with the following title: (.*) and text: (.*)")]
 		public void ThenIConfirmISeeTheTwoErrorMessagesInThePopupWithTheFollowingTitleWarning(string condition, string popupTitle, string text)
 		{
-			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeadingAndText(condition, popupTitle, popupTitle);
+			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeadingAndText(condition, popupTitle, text);
 		}
 		#endregion
 
