@@ -171,5 +171,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 				new Steps_Prototype().ICheckTheCheckboxWithDescription(section, option);
 			}
 		}
+		[RegexStepDefinition(@"In the Product Information Section, a warning pop-up (should|should not) be displayed with text: 'The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of the product in Pinellas County, Florida \(Restricted\). This is informational only and does not restrict your registration to the Retailer.'")]
+		public void WarningPopupIsDisplayedInProductInformation(string condition)
+		{
+			string title = "Warning";
+			string text = "The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of the product in Pinellas County, Florida (Restricted). This is informational only and does not restrict your registration to the Retailer.";
+			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeadingAndText(condition, title, text);
+		}
+		[RegexStepDefinition("In the Product Information Section Section, in Warning modal window click 'Ok' button")]
+		public void ThenInTheProductInfoSectionInWarningModalWindowClickButton()
+		{
+			string title = "Warning";
+			string button = "Ok";
+			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(title, button);
+		}
 	}
 }
