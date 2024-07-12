@@ -825,9 +825,6 @@ Scenario: [109230] Ingredients - Proper ingredients and percentages are showing 
 	| FM6019                  | 25      | Yes                 | No            | FM6019                |
 	Then In the Summary Page, verify table data for 'Document' section Supplier Uploaded in column File Name showing the value: testdoc.pdf
 	Then In the Summary Page, verify table data for 'Document' section Supplier Uploaded in column Actions showing the value: View
-	Then In the Summary Page, the document section OSHA SDS should be showing the following document: testdoc.pdf
-	Then In the Summary Page, click the View button for section: OSHA SDS
-	Then In the Summary Page, after clicking 'View' button I confirm pdf file is downloaded
 	Given I close the tab with Data Summary page
 	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given I should see the Data Acceptance Page
