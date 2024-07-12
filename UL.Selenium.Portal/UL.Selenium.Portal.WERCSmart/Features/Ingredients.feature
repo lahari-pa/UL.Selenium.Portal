@@ -763,14 +763,16 @@ Scenario: [109230] Ingredients - Proper ingredients and percentages are showing 
 	Then In the Ingredients Table row with component name: Chlorine, in Publicly Disclosed? column set checkbox to checked
 	Then In the Ingredients Table row with component name: Chlorine, in Public Name column select option Undisclosed Ingredient
 	Then In the Ingredients section, add component with component name: Aluminum Oxide
-	Then In the Ingredients Table row with component name: Aluminum Oxide, in Percent column text input enter: 25
-	Then In the Ingredients Table row with component name: Aluminum Oxide, in Trade Secret? column set checkbox to checked
-	#Then In the Ingredients Table row with component name: Aluminum Oxide, in Public Name column confirm checkbox is disabled
+	Then In the Ingredients Table row with component name: Aluminum oxide, in Percent column text input enter: 25
+	Then In the Ingredients Table row with component name: Aluminum oxide, in Trade Secret? column set checkbox to checked
+	Then In the Ingredients Table row with component name: Aluminum oxide, in Public Name column is disabled
 	Then In the Ingredients section, add component with component name: FM6019
 	Then In the Ingredients Table row with component name: FM6019, in Percent column text input enter: 25
 	Then In the Ingredients Table row with component name: FM6019, in Publicly Disclosed? column set checkbox to checked
 	Then In the Ingredients Table row with component name: FM6019, in Public Name column select option FM6019
 	Then in the Ingredients page I click Continue
+	Then In the Ingredients section, I confirm the popup should be displayed with the following title: Warning and text: Your product contains a 3rd-Party Formula that may need Data Tier Consent, or if Consent has been accepted by the Formulator, has no ingredients that are indicated to be Public. A notification has been provided to the Formulator to revisit their registration and resubmit if necessary. You may continue with your registration. Should the 3rd-Party Formula be revised, your registration will be updated accordingly and revised scoring will occur. No action is required from you.
+	Then In displayed modal, click Ok footer button
 	#Given I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
 	#Given In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
 	#44966 Inventory Status, Prop 65 (US) - TSCA (Complies) / Prop 65 (NO) - (General Shared-Step #2)
