@@ -11,6 +11,7 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
 using UL.Selenium.Portal.WERCSmart.Classes;
+using OpenQA.Selenium.Support.UI;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -259,11 +260,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				SeleniumWebDriver.CurrentDriver.SwitchTo().DefaultContent();
 				IWebElement frame =
 				SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//iframe[contains(@src, 'powertoolsworkspaceDesignMode')]"));
-				SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
-				return base.WaitForContainerToBeVisible(30);
+				WebDriverWait IFrameWait = new (SeleniumWebDriver.CurrentDriver,TimeSpan.FromSeconds(secondsToWait));
+				_= IFrameWait.Until(ExpectedConditions.FrameToBeAvailableAndSwitchToIt(By.XPath("//iframe[contains(@src, 'powertoolsworkspaceDesignMode')]")));
+				//SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
+				return base.WaitForContainerToBeVisible(secondsToWait);
 			}
 			catch (Exception)
 			{
+				_ = SeleniumWebDriver.CurrentDriver.SwitchTo().DefaultContent();
 				return false;
 			}
 		}
