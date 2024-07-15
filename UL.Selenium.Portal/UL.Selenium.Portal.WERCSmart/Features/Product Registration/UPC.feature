@@ -39,6 +39,8 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 @SafetyDataSheetAuthoring
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ElectronicEquipment
+
 
 Feature: UPC
 
@@ -303,7 +305,11 @@ Scenario: [87597] Create Electronic - UPC Step - Size shows as Size (Weight Ounc
 
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
-	And I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
+	#Then I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
+	Given I should see the Electronic Equipment Page
+	Then In the Electronic Equipment Section, set the option in section: 'Contains Circuit Board' to: No
+	Then In the Electronic Equipment Section, set the option in section: 'Has a LCD or Plasma Display' to: No
+	Then in the Electronic Equipment page I click Continue
 #	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	Then I should be on the Retailer Page
 	And In the Retailer Section, click 'Add Retailers' button

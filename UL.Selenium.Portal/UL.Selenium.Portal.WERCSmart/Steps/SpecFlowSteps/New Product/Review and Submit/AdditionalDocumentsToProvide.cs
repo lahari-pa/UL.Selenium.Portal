@@ -162,6 +162,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string section = "Upload SDS (Optional)";
 			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, condition);
 		}
+		[RegexStepDefinition(@"In the Additional Documents to Provide Section: 'Provide Full Product Label \(required\)' error message (should|should not) display: (.*)")]
+		public void UploadFileForProductLabelShouldShouldNotDisplayError(string shouldShouldNot, string pipeDelimitedErrorMessages)
+		{
+			string section = "Provide Full Product Label (required)";
+			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, shouldShouldNot, pipeDelimitedErrorMessages);
+		}
 
 	}
 }

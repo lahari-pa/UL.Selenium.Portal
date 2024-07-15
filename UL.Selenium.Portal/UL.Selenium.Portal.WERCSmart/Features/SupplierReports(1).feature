@@ -23,6 +23,8 @@
 @Ingredients
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ElectronicEquipment
+
 
 Feature: Supplier Reports 1
 
@@ -296,14 +298,17 @@ Scenario: [108254] UPC Report for All Products with Retailer - Create new produc
 	Then I save the product information as: TestCase108254Lightbulb
 	Given I call Shared Step 69687 (Product Information - US, No(PL))
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	Given I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
+	#And I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
+	And I should see the Electronic Equipment Page
+	And In the Electronic Equipment Section, set the option in section: 'Contains Circuit Board' to: No
+	And In the Electronic Equipment Section, set the option in section: 'Has a LCD or Plasma Display' to: No
+	And in the Electronic Equipment page I click Continue
 	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I should see the Retailer Page
 	Then In the Retailer Section, click 'Add Retailers' button
 	Then In the Select Retailers window, select retailer: Walgreens
 	Then In the Select Retailers window, click 'Done' button
 	Then in the Retailer page I click Continue
-
 	And I call Shared Step 85909 (UPC - Confirm Package type link and drop down not shown - Add UPC data - Continue) for UPC: saved as UPC108254Lightbulb, container type: Plastic Container and size: 12 click continue
 	Then in the Additional Documents to Provide page I click Continue
 	Then in the Optional Reports and Documents Available for Purchase page I click Continue
