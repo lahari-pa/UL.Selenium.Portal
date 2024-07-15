@@ -13,6 +13,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 @Ingredients
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ElectronicEquipment
 
 Feature: UPCCheckDigit
 
@@ -130,7 +131,11 @@ Given I log in with the account saved in TReVor as: ProductAccount
 		| Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product |
 		| Alkaline     | <any>        | 4                               | 2                                  |
 	Given I call Shared Step 104083 Toxicity Characteristics Leaching Procedure TCLP - NO to ALL - NO COPPER LISTED
-	And I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
+	#And I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
+	And I should see the Electronic Equipment Page
+	And In the Electronic Equipment Section, set the option in section: 'Contains Circuit Board' to: No
+	And In the Electronic Equipment Section, set the option in section: 'Has a LCD or Plasma Display' to: No
+	And in the Electronic Equipment page I click Continue
 	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 	| Retailer  |
 	| Walgreens |	
