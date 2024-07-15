@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using Reqnroll;
 using UL.Automation.WebDriver.BaseClasses;
 using NPOI.SS.Formula.Functions;
+using OpenQA.Selenium.Support.UI;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
@@ -568,6 +569,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			IWebElement VendorField = this.ContainerElement.FindElement(By.XPath(".//div[label[text() = 'Select Vendor']]//select"), 2);
 			VendorField.Select(vendor);
 			return VendorField.SelectedOption() == vendor;
+		}
+
+		public bool EnterSelectAnyVendor()
+		{
+			IWebElement VendorField = this.ContainerElement.FindElement(By.XPath(".//div[label[text() = 'Select Vendor']]//select"), 2);
+			SelectElement select = new SelectElement(VendorField);
+			select.SelectByIndex(1);
+			string selectedOtion = VendorField.SelectedOption();
+			return selectedOtion != null;
 		}
 		public bool ClickAddNewSupplier()
 		{

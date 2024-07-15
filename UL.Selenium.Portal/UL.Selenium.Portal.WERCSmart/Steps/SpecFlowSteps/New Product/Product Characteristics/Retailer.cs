@@ -75,7 +75,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		[RegexStepDefinition(@"In the Retailer Section, for retailer: (.*) select 'Select Vendor' option: (.*)")]
 		public void SelectVendorOption(string retailer, string option)
 		{
-			Report.IsTrue(new RetailersRow(retailer).EnterSelectVendor(option), $"Failed to select Vendor {option} for {retailer} retailer", $"Successfully selected Vedor {option} for {retailer} retailer");
+			if (option == "any")
+			{
+				Report.IsTrue(new RetailersRow(retailer).EnterSelectAnyVendor(), $"Failed to select Vendor for {retailer} retailer", $"Successfully selected Vedor for {retailer} retailer");
+			}
+			else
+			{
+				Report.IsTrue(new RetailersRow(retailer).EnterSelectVendor(option), $"Failed to select Vendor {option} for {retailer} retailer", $"Successfully selected Vedor {option} for {retailer} retailer");
+			}
 		}
 		[RegexStepDefinition(@"In the Retailer Section, for retailer: (.*) click 'Add New Supplier' button")]
 		public void ClickAddNewSupplierButton(string retailer)
