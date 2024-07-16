@@ -1259,7 +1259,7 @@ Scenario: [214039] Test Case 214039: WERCSmart Portal and SHA Manager Test Flow 
 	And In the Select Retailers window, select retailer: Wal-Mart/SAM'S CLUB
 	And In the Select Retailers window, click 'Done' button
 	#Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
-	Then In the Retailer Section, for retailer: Wal-Mart/SAM'S CLUB select 'Select Vendor' option: QA_ProductAccount_840375279ProductAccount_c61f167fa348@kxxyxunf.mailosaur.net
+	Then In the Retailer Section, for retailer: Wal-Mart/SAM'S CLUB select 'Select Vendor' option: any
 	Then in the Retailer page, I click Continue
 
 	#Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC214039, container type: Plastic bag and size: 56 do not click continue

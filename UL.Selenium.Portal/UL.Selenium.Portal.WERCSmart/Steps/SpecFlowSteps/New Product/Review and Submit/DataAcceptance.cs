@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Reqnroll;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_and_Submit
 {
@@ -28,6 +30,32 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 		{
 			string button = "Accept";
 			new Steps_Prototype().ClickButton(button);
+			/*
+			Report.UseSubSteps = true;
+			var MyStepsPaymentMethods = new Steps_PaymentMethods();
+			var mySub = new PaymentMethods_Subscription_Billing();
+			var sub = new SubscriptionEnrollment();
+			
+			if (sub.Get_Page_Header().Equals("Subscription  Upgrade"))
+			{
+				var MyStepsSubscriptonEnrollment = new StepsSubscriptionEnrollment();
+				Report.StartSubStep("The Subscription Upgrade page should load");
+				MyStepsSubscriptonEnrollment.ThenTheSubscriptionEnrollmentPageShouldLoad();
+				Report.StartSubStep("I should see Proceed button enabled");
+				MyStepsSubscriptonEnrollment.ThenIShouldSeeProceedButtonDisabled("enabled");
+				Report.StartSubStep("I click on the Proceed button");
+				MyStepsSubscriptonEnrollment.ClickProceedButton();
+				var StepsSE_new = new StepsSubscriptionEnrollmentNew();
+				Report.StartSubStep("In the Subscription Enrollment Modal, I click the Checkout button");
+				StepsSE_new.InSubscriprionEnrollmentModalClickButton("Checkout");
+				Report.StartSubStep("In the Payment Methods screen I click Continue");
+				MyStepsPaymentMethods.ThenIClickContinue();
+				Report.StartSubStep("In the Purchase Summary screen I click Confirm Order");
+				MyStepsPaymentMethods.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
+				Report.StartSubStep("In the Thank You screen I check the Header is correct");
+				MyStepsPaymentMethods.ThenInTheThankYouScreenICheckTheHeaderIsCorrect();
+			}
+			*/
 		}
 		[RegexStepDefinition(@"In the Data Acceptance Section, I confirm text 'Data Acceptance' text (should|should not) be displayed")]
 		public void GivenIConfirmTheFormulation3rdPartyDataUseConsentsDisplaysTheCorrectText(string condition)
