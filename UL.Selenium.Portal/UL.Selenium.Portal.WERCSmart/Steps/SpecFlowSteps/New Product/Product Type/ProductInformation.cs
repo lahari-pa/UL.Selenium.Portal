@@ -20,8 +20,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
 		}
 
-		[RegexStepDefinition(@"In the Product Information Section, confirm section: 'Which best describes your product, including when FIFRA 25\(b\) Exempt' (is|is not) displayed")]
-		public void Fefra25ExemptDisplayed(string is_isnot)
+		[RegexStepDefinition(@"In the Product Information Section, confirm the question: 'Which best describes your product, including when FIFRA 25\(b\) Exempt' (is|is not) displayed")]
+		public void ConfirmFefra25ExemptIsIsNotDisplayed(string is_isnot)
 		{
 			string section = "Which best describes your product, including when FIFRA 25(b) Exempt";
 			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
