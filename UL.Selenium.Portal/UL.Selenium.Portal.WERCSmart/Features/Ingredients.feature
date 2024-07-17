@@ -775,8 +775,6 @@ Scenario: [109230] Ingredients - Proper ingredients and percentages are showing 
 	Then in the Ingredients page I click Continue
 	Then In the Ingredients section, I confirm the popup should be displayed with the following title: Warning and text: Your product contains a 3rd-Party Formula that may need Data Tier Consent, or if Consent has been accepted by the Formulator, has no ingredients that are indicated to be Public. A notification has been provided to the Formulator to revisit their registration and resubmit if necessary. You may continue with your registration. Should the 3rd-Party Formula be revised, your registration will be updated accordingly and revised scoring will occur. No action is required from you.
 	Then In displayed modal, click Ok footer button
-	#Given I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
-	#Given In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
 	#44966 Inventory Status, Prop 65 (US) - TSCA (Complies) / Prop 65 (NO) - (General Shared-Step #2)
 	Then I should be on the Inventory Status, Prop 65 (US) Page
 	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.

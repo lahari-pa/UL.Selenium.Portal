@@ -34,7 +34,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 			}
 			else
 			{
-				Report.Success("Successfully confirmed message '{text}' is displayed");
+				Report.Success($"Successfully confirmed message '{text}' is displayed");
 			}
 
 		}
