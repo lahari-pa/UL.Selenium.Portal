@@ -1065,7 +1065,8 @@ Scenario: [58604] Condom - RU000937
 	Then In the Product Grid, delete the product saved as: TestCase58604	
 # Ignore execution in QA-Integration Environment as SHA Automation is set to OFF
 # Created by Saikiran Chittampally
-@OnlyInStaging
+
+#@OnlyInStaging
 @TestCase:213910
 Scenario: [213910] WERCSmart Portal and SHA Manager Test Flow for Product Type:  Grass Seed (RU000470)
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -1076,18 +1077,22 @@ Scenario: [213910] WERCSmart Portal and SHA Manager Test Flow for Product Type: 
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Grass Seed
+	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Grass Seed
+	Given I should see the The Product Page
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Grass Seed
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Grass Seed
+ 	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase213910
 	Given I should see the Product Information Page
 	#Given I call Shared Step 214000 (Product Information - Pesticide= Not considered, Fertilizer=YES, SOLD=US, everything else = No - Continue)
 	Given I should see the Product Information Page
-	Then In the Product Information Section, confirm section: 'Which best describes your product, including when FIFRA 25(b) Exempt' is displayed
+	Then In the Product Information Section, confirm the question: 'Which best describes your product, including when FIFRA 25(b) Exempt' is displayed
 	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
 	Then In the Product Information Section, set the option in section: 'Does the product contain fertilizer (N, P, K)?' to: Yes
-	Then In the Product Information Section, set the option in section: 'Nitrogen /Nitrates (“N”)' to: 8
-	Then In the Product Information Section, set the option in section: 'Phosphates /Phosphorous (“P”)' to: 14
-	Then In the Product Information Section, set the option in section: 'Potassium(“K”)' to: 14
-	Then In the Product Information Section, set the option in section: 'Slow-Release Agent' to: 3
+	Then In the Product Information Section, set the option in section: 'Nitrogen /Nitrates (“N”)' to: 21
+	Then In the Product Information Section, set the option in section: 'Phosphates /Phosphorous (“P”)' to: 22
+	Then In the Product Information Section, set the option in section: 'Potassium(“K”)' to: 4
+	Then In the Product Information Section, set the option in section: 'Slow-Release Agent' to: 10.50
 	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
 	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
@@ -1096,20 +1101,8 @@ Scenario: [213910] WERCSmart Portal and SHA Manager Test Flow for Product Type: 
 	Then in the Product Information page I click Continue
 	Then In the Product Information Section, a warning pop-up should be displayed with text: 'The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of the product in Pinellas County, Florida (Restricted). This is informational only and does not restrict your registration to the Retailer.'
 	Then In the Product Information Section Section, in Warning modal window click 'Ok' button
-	Then a Warning popup dialog should appear with the message: The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.	
-	And I see the following sections
-		| Section                       |
-		| Phosphates /Phosphorous (“P”) |
-		| Nitrogen /Nitrates (“N”)      |
-		| Potassium(“K”)                |
-		| Slow-Release Agent            |
-	Then I set the Phosphates /Phosphorous (“P”) field to: 22
-	Then I set the Nitrogen /Nitrates (“N”) field to: 21
-	Then I set the Potassium(“K”) field to: 4
-	Then I set the Slow-Release Agent field to: 10.50
-	Then I click continue
-	Then a Warning popup dialog should appear with the message: The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.
 	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	#214002 Physical and Chemical Properties - Applicable Only to Type of Product:  Grass Seed (RU000470)
 	Given I should see the Physical and Chemical Properties Page
 	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
 	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
@@ -1202,7 +1195,7 @@ Scenario: [213905] WERCSmart Portal and SHA Manager Test Flow for Product Type: 
 	Then I save the product information as: TestCase213905
 	#Given I call Shared Step 214000 (Product Information - Pesticide= Not considered, Fertilizer=YES, SOLD=US, everything else = No - Continue)
 	Given I should see the Product Information Page
-	Then In the Product Information Section, confirm section: 'Which best describes your product, including when FIFRA 25(b) Exempt' is displayed
+	Then In the Product Information Section, confirm the question: 'Which best describes your product, including when FIFRA 25(b) Exempt' is displayed
 	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
 	Then In the Product Information Section, set the option in section: 'Does the product contain fertilizer (N, P, K)?' to: Yes
 	Then In the Product Information Section, set the option in section: 'Nitrogen /Nitrates (“N”)' to: 8
