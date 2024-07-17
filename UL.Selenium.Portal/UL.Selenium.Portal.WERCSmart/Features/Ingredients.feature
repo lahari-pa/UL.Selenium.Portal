@@ -724,7 +724,7 @@ Scenario: [80800] Ingredients - Transparency Ratio - Regular component
 @TestCase:109230
 Scenario: [109230] Ingredients - Proper ingredients and percentages are showing in Summary and Ingredients Table
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	Given I log in with the account saved in TReVor as: ProductAccount
+	Given I log in with the account saved in TReVor as: PasswordResetAccount
 	Given I generate a random UPC number and save as: UPC109230
 	#And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Then I click the Add Product icon in the Navigation Pane
@@ -841,9 +841,9 @@ Scenario: [109230] Ingredients - Proper ingredients and percentages are showing 
 	Then I switch to the Data Summary page
 	Then In the Summary page, I confirm the Ingredients table matches the following:
 	| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name             |
-	| Calcium Carbonate       | 25      | Yes                 | No            | Calcium Carbonate     |
+	| Calcium carbonate       | 25      | Yes                 | No            | Calcium Carbonate     |
 	| Chlorine                | 25      | Yes                 | No		      | Undisclosed Ingredient|
-	| Aluminum Oxide          | 25		| No                  | Yes           | Trade Secret          |
+	| Aluminum oxide          | 25		| No                  | Yes           | Trade Secret          |
 	| FM6019                  | 25      | Yes                 | No            | FM6019                |
 	#And In the Data Summary page, I confirm that the Ingredients table matches the following:
 	#	| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name              |
