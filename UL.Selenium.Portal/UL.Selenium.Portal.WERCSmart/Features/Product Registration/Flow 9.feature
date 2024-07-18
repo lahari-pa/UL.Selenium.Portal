@@ -1067,6 +1067,8 @@ Scenario: [58604] Condom - RU000937
 # Created by Saikiran Chittampally
 
 #@OnlyInStaging
+#Removed from regression 2024/07
+@ignore
 @TestCase:213910
 Scenario: [213910] WERCSmart Portal and SHA Manager Test Flow for Product Type:  Grass Seed (RU000470)
 	Given I log in with the account saved in TReVor as: ProductAccount
