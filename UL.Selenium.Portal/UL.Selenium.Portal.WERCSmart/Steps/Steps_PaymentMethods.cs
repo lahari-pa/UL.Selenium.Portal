@@ -591,8 +591,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					string exp_year = thisRow["Expiration Year"];
 					string cvv = thisRow["CVV"];
 					string cardh_name = thisRow["Cardholder Name"];
+					string postal_code = thisRow["Postal Code"];
 
-					Report.IsTrue(myPay.Enter_Credit_Card_Details(card_type, card_no, exp_month, exp_year, cvv, cardh_name),
+
+					Report.IsTrue(myPay.Enter_Credit_Card_Details(card_type, card_no, exp_month, exp_year, cvv, cardh_name, postal_code),
 						"Failed to Enter Credit Card Details", "Credit Card Details Entered");
 				}
 			}
