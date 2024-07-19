@@ -30,6 +30,10 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ECOLOGO
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
+@GTINAndUPC
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 
 Feature: Ingredients
 (Suite ID: 64740)
@@ -722,9 +726,17 @@ Scenario: [109230] Ingredients - Proper ingredients and percentages are showing 
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC109230
-	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	#And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+	#And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Given I should see the The Product Page
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
+ 	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase109230
+	#227718 Product Information - Applicable Only to Type of Product:  Chalk (RU000711)
 	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I should see the Product Information Page
 	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
@@ -734,80 +746,103 @@ Scenario: [109230] Ingredients - Proper ingredients and percentages are showing 
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page I click Continue
-
-	#And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	#225355 Physical and Chemical Properties - Applicable Only to Type of Product:  Chalk (RU000711)
 	Given I should see the Physical and Chemical Properties Page
 	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
 	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
 	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
-	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Insoluble in water
 	Then in the Physical and Chemical Properties page I click Continue
-
-	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName        |
-		| Water         | 100     | true                | false       | Aqua (Water, Eau) |
-	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Chlorine      | 100     | false               | true        |            |
-	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Formaldehyde  | 100     | false               | false       |            |
-	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName             |
-		| Sodium        | 100     | true                | false       | Undisclosed Ingredient |
-	And I click continue
-	Given I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
-	Given In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
-	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
-		| Retailer  |
-		| Walgreens |
-	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC109230, container type: Paper bag and size: 2 do not click continue
-	And I click continue
-	And I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	#237670 Ingredients - Applicable Only to Type of Product:  Chalk (RU000711) - Scenario:  Testing Different Component(s) and Disclosure(s)
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add component with component name: Calcium Carbonate
+	Then In the Ingredients Table row with component name: Calcium Carbonate, in Percent column text input enter: 25
+	Then In the Ingredients Table row with component name: Calcium Carbonate, in Publicly Disclosed? column set checkbox to checked
+	Then In the Ingredients Table row with component name: Calcium Carbonate, in Public Name column select option Calcium Carbonate
+	Then In the Ingredients section, add component with component name: Chlorine
+	Then In the Ingredients Table row with component name: Chlorine, in Percent column text input enter: 25
+	Then In the Ingredients Table row with component name: Chlorine, in Publicly Disclosed? column set checkbox to checked
+	Then In the Ingredients Table row with component name: Chlorine, in Public Name column select option Undisclosed Ingredient
+	Then In the Ingredients section, add component with component name: Aluminum Oxide
+	Then In the Ingredients Table row with component name: Aluminum oxide, in Percent column text input enter: 25
+	Then In the Ingredients Table row with component name: Aluminum oxide, in Trade Secret? column set checkbox to checked
+	Then In the Ingredients Table row with component name: Aluminum oxide, in Public Name column is disabled
+	Then In the Ingredients section, add component with component name: FM6019
+	Then In the Ingredients Table row with component name: FM6019, in Percent column text input enter: 25
+	Then In the Ingredients Table row with component name: FM6019, in Publicly Disclosed? column set checkbox to checked
+	Then In the Ingredients Table row with component name: FM6019, in Public Name column select option FM6019
+	Then in the Ingredients page I click Continue
+	Then In the Ingredients section, I confirm the popup should be displayed with the following title: Warning and text: Your product contains a 3rd-Party Formula that may need Data Tier Consent, or if Consent has been accepted by the Formulator, has no ingredients that are indicated to be Public. A notification has been provided to the Formulator to revisit their registration and resubmit if necessary. You may continue with your registration. Should the 3rd-Party Formula be revised, your registration will be updated accordingly and revised scoring will occur. No action is required from you.
+	Then In displayed modal, click Ok footer button
+	#44966 Inventory Status, Prop 65 (US) - TSCA (Complies) / Prop 65 (NO) - (General Shared-Step #2)
+	Then I should be on the Inventory Status, Prop 65 (US) Page
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+	#238379 Retailer - Add Retailer(s):  WALGREENS - (General Shared-Step)
+	Then I should be on the Retailer Page
+	And In the Retailer Section, click 'Add Retailers' button
+	And In the Select Retailers window, select retailer: Walgreens
+	And In the Select Retailers window, click 'Done' button
+	Then in the Retailer page, I click Continue
+	#Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC109230, container type: Paper bag and size: 2 do not click continue
+	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC109230 enter Size: 12 and enter Container Type: Plastic bag
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, verify retailer 'WG' is present under the 'Destination Retailers' column
+	And in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	#And I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Yes, I certify that I have an OSHA-compliant SDS for this product and would like to upload it.
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'OSHA SDS'
+	Then In the Regulatory Documents to Provide Section, for section OSHA SDS button View should exists
+	Then In the Regulatory Documents to Provide Section, for section OSHA SDS button Remove should exists
+	Then in the Regulatory Documents to Provide page I click Continue
+	#214558 Additional Documents to Provide Page (No Upload is Required) - Click Continue (General Shared-Step)
+	Given I should see the Additional Documents to Provide Page
 	And in the Additional Documents to Provide page I click Continue
-	And in the Optional Reports and Documents Available for Purchase page I click Continue
+	#And I call Shared Step 214559 (Optional Reports and Documents Available for Purchase - No Document Purchase is Required - Click Continue (General Shared-Step))
+	Given I should see the Optional Reports and Documents Available for Purchase Page
+	Then The statement: • Additional documents are not subject to standard two day turnaround. is displayed
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I should see the Optional Comments Page
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
 	Then in the Optional Comments page I click Continue
-
-	Given I click the Summary button in the Data Acceptance window
-	Then I switch to the Data Summary page
-	And In the Data Summary page, I confirm that the Ingredients table matches the following:
-		| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name              |
-		| Water                   | 100     | Yes                 | No            | Aqua (Water, Eau)      |
-		| Chlorine                | 100     | No                  | Yes           | Trade Secret           |
-		| Formaldehyde            | 100     | No                  | No            |                        |
-		| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
-	And I close the window that opened
+	#238389 Summary Tab - Data Verification of Different Component(s) and Disclosure(s) - Applicable Only to Type of Product:  CHALK (RU000711)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, click 'Summary' button
+	Given I switch to the tab with Data Summary page
+	Given In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Chalk
+	Then In the Summary page, I confirm the Ingredients table matches the following:
+	| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name             |
+	| Calcium carbonate       | 25      | Yes                 | No            | Calcium Carbonate     |
+	| Chlorine                | 25      | Yes                 | No		      | Undisclosed Ingredient|
+	| Aluminum oxide          | 25		| No                  | Yes           | Trade Secret          |
+	| FM6019                  | 25      | Yes                 | No            | FM6019                |
+	Then In the Summary Page, verify table data for 'Document' section Supplier Uploaded in column File Name showing the value: testdoc.pdf
+	Then In the Summary Page, verify table data for 'Document' section Supplier Uploaded in column Actions showing the value: View
+	Given I close the tab with Data Summary page
 	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	#And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
-	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase109230)
-	#Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase109230)
-	#And I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase109230)
-	#And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase109230)
-	#Given I call Shared Step 75347 (WPS Studio - PD+ - set all data and publish using rule and Doc queue - CKLT, NGHS and SBCS) for product saved as: TestCase109230
-	#And I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase109230)
-	#Given I call Shared Step 59066 (Go to SHA Manager)
-	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
-	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109230 and its status is: Accepted or Completed
-	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
-	#Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase109230) for
-	#	| Retailer  |
-	#	| Walgreens |
-	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
-	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109230 and its status is: Completed
-	#And I call Shared Step 43587 - SHA Manager > Completed Product - Add Recert reason 20 for product saved as: TestCase109230
-	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109230)
-	#And In the SHA manager grid I see the WPS ID I have saved as product: TestCase109230 and its font is red indicating a recertification
-	#Given I navigate to the landing page
-	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	#And I filter for the product saved as: TestCase109230
-	#And I click Row Actions for the first product returned
-	#And I click on the Row Action: View
-	#Then I switch to the Data Summary page
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+	#157174 Purchase Summary - Thank You for Registering Message - Click Home to Continue
+	Given The Purchase Summary Page is displayed
+	Then In the Purchase Summary page message is displayed with text: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
+	Then In the Purchase Summary Page, click the 'Home' button
+	Then The home screen should load
+	And I filter for the product saved as: TestCase109230
+	And I click Row Actions for the first product returned
+	And I click on the Row Action: View
+	Then I switch to the Data Summary page
+	Then In the Summary page, I confirm the Ingredients table matches the following:
+	| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name             |
+	| Calcium carbonate       | 25      | Yes                 | No            | Calcium Carbonate     |
+	| Chlorine                | 25      | Yes                 | No		      | Undisclosed Ingredient|
+	| Aluminum oxide          | 25		| No                  | Yes           | Trade Secret          |
+	| FM6019                  | 25      | Yes                 | No            | FM6019                |
 	#And In the Data Summary page, I confirm that the Ingredients table matches the following:
 	#	| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name              |
 	#	| Water                   | 100     | Yes                 | No            | Aqua (Water, Eau)      |

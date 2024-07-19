@@ -238,10 +238,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(ingredientRow.CellCheckBoxExists(columnLabel), $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column check box does not exist.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column check box does exist.");
 			Report.IsTrue(ingredientRow.CellCheckBoxIsChecked(columnLabel) == expected, $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column check box is {(expected ? "unchecked" : "checked")}.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column check box is {checked_unchecked}.");
 		}
+		[RegexStepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column is (enabled|disabled)")]
 		[RegexStepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column confirm checkbox is (enabled|disabled)")]
 		public void IngredientsTableRowConfirmkCheckBoxISEnabledDisabled(string searchType, string searchText, string columnLabel, string checked_unchecked)
 		{
-			bool expected = checked_unchecked == "checked";
+			bool expected = checked_unchecked == "enabled";
 			IngredientsTable ingredientsTable = new IngredientsTable();
 			Report.IsTrue(ingredientsTable.WaitForContainerToBeVisible(), $"Failure, ingredients table does not exist.", $"Success, ingredients table exists.");
 			Report.IsTrue(!ingredientsTable.IngredientRowList.IsNullOrEmpty(), $"Failure, ingredients table is empty.", $"Success, ingredients table is not empty.");
@@ -538,6 +539,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			var newProductIngredients = new Steps_Prototype();
 			newProductIngredients.ThenIClickTheCloseButtonForThePopupWithTheFollowingTitleCaliforniaCleaningRightToKnow();
+		}
+		[RegexStepDefinition(@"In the Ingredients section, I confirm the popup (should|should not) be displayed with the following title: (.*) and text: (.*)")]
+		public void ThenIConfirmISeeTheTwoErrorMessagesInThePopupWithTheFollowingTitleWarning(string condition, string popupTitle, string text)
+		{
+			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeadingAndText(condition, popupTitle, text);
 		}
 		#endregion
 
