@@ -364,7 +364,7 @@ Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
 	Given I should see the Additional Documents to Provide Page
 	Then In the Additional Documents to Provide, section 'OSHA-compliant Safety Data Sheet (Optional)' is displayed
 	Then In the Additional Documents to Provide, section 'Toxicity Characteristic Leaching Procedure (TCLP)' is displayed
-	Then In the Additional Documents to Provide Section, I upload PDF document to Upload Full Product Label (required) field
+	Then In the Additional Documents to Provide Section, upload PDF document to Provide Full Product Label (required) field
 	Then I save the current window handle to context as: MainWindowHandle
 	Then In the Additional Documents to Provide Section, for section Product Label I click button 'View'
 	Then In the Additional Documents to Provide Section, after clicking 'View' button I confirm pdf file is downloaded
@@ -1063,10 +1063,8 @@ Scenario: [58604] Condom - RU000937
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58604
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase58604	
-# Ignore execution in QA-Integration Environment as SHA Automation is set to OFF
-# Created by Saikiran Chittampally
 
-#@OnlyInStaging
+# Created by Saikiran Chittampally
 #Removed from regression 2024/07
 @ignore
 @TestCase:213910
