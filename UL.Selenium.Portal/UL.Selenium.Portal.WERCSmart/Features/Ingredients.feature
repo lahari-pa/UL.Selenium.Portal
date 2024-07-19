@@ -30,14 +30,11 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ECOLOGO
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
-@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 @GTINAndUPC
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
-
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 @SafetyDataSheetAuthoring
-@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 Feature: Ingredients
 (Suite ID: 64740)
 
