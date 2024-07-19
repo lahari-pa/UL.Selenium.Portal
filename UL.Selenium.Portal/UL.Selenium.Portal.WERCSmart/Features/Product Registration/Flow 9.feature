@@ -1065,7 +1065,6 @@ Scenario: [58604] Condom - RU000937
 	Then In the Product Grid, delete the product saved as: TestCase58604	
 
 # Created by Saikiran Chittampally
-#@OnlyInStaging
 #Removed from regression 2024/07
 @ignore
 @TestCase:213910
