@@ -1066,7 +1066,6 @@ Scenario: [58604] Condom - RU000937
 # Ignore execution in QA-Integration Environment as SHA Automation is set to OFF
 # Created by Saikiran Chittampally
 
-#@OnlyInStaging
 #Removed from regression 2024/07
 @ignore
 @TestCase:213910
