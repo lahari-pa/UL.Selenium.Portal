@@ -1285,8 +1285,8 @@ Scenario: [207581] Oven Cleaner - Pump Spray - (RU000798) - New Flow Testing
 	Then In the Ingredients Table row with component name: Sodium Lauryl Sulfate, in Publicly Disclosed? column set checkbox to checked
 	Then In the Ingredients section, verify Transparency displays value: 100%
 	Then In the Ingredients Table row with component name: Water, in Public Name column select option Water
-	Then In the Ingredients Table row with component name: Sodium hydroxide, in Public Name column select option SODIUM HYDROXIDE
-	Then In the Ingredients Table row with component name: Sodium Lauryl Sulfate, in Public Name column select option SODIUM LAURYL SULFATE
+	Then In the Ingredients Table row with component name: Sodium hydroxide, in Public Name column select option Sodium hydroxide (Na(OH))
+	Then In the Ingredients Table row with component name: Sodium Lauryl Sulfate, in Public Name column select option Sodium lauryl sulphate
 	Then in the Ingredients page, I click Continue
 	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should be on the Inventory Status, Prop 65 (US) Page
@@ -1341,9 +1341,6 @@ Scenario: [207581] Oven Cleaner - Pump Spray - (RU000798) - New Flow Testing
 	Then In the Volatile Organic Compound Summary Section, for 'Your acknowledgement of this registration includes that your product..' set 'Yes, I Acknowledge'
 	And I click continue
 	And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
-	#Then I should be on the ECOLOGO Readiness Page
-	#And In the ECOLOGO Readiness Section, set the option in section: 'Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment...': to: Not at this time
-	#Then in the ECOLOGO Readiness page, I click Continue
 
 	#Given I call Shared Step 150905 (Retailer - NR selected by default)
 	Then I should be on the Retailer Page
