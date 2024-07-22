@@ -35,6 +35,12 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:USDepartamentOfTransportationDOT
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InternationalMarineClassification
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOC_OzoneTransportCommission
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOC_Summary
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
+@SafetyDataSheetAuthoring
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
 Feature: Ingredients
 (Suite ID: 64740)
 
@@ -1174,7 +1180,7 @@ Scenario: [209549] Ingredient Table - Sum of Ingredients: Decimal Place Maximum 
 	And I close the current window and switch to the main window in Studio
 	Then I click to open the 'My Wercs' menu and select 'Log Out'
 
-# Created by Saikiran Chittampally
+#Created by Saikiran Chittampally
 @TestCase:207581
 Scenario: [207581] Oven Cleaner - Pump Spray - (RU000798) - New Flow Testing
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
@@ -1198,7 +1204,7 @@ Scenario: [207581] Oven Cleaner - Pump Spray - (RU000798) - New Flow Testing
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page I click Continue
-	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
+	#Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Liquid
 	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
 	And In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 120
@@ -1207,7 +1213,7 @@ Scenario: [207581] Oven Cleaner - Pump Spray - (RU000798) - New Flow Testing
 	And In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: 100
 	Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: 61
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Not applicable/available
-	And In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	#And In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Then in the Physical and Chemical Properties page, I click Continue
 	#Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName             |
@@ -1243,63 +1249,77 @@ Scenario: [207581] Oven Cleaner - Pump Spray - (RU000798) - New Flow Testing
 	Then in the Pesticide Details - State Registration Details page, I click Continue
 	And I should see the Transportation Details 1 Page
 	Then In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Yes
-	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: DOT
-	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: IMDG
 	Then In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping with limited quantity
 	Then In the Transportation Details 1 Section, set the option for IMDG mode of transport to: Shipping with limited quantity
 	Then in the Transportation Details 1 page, I click Continue
-	And I should see the U.S. Department of Transportation (DOT) Classification Page
+	And I should see the U. S. Department of Transportation (DOT) Classification Page
 	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1719
 	Then In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Caustic alkali liquids, n.o.s.
 	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Technical Name (if applicable)': to: Sodium Hydroxide
 	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 8
 	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: II
-	Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue	
+	Then in the U. S. Department of Transportation (DOT) Classification page, I click Continue	
 	And I should see the International Marine (IMDG) Classification Page
 	Then In the International Marine (IMDG) Classification Section, I check checkbox 'Copy information from my U.S. Department of Transportation data'
 	Then In the International Marine (IMDG) Classification Section, verify section: 'UN Number' contains value: UN1719
-	Then In the International Marine (IMDG) Classification Section, verify section: 'Proper Shipping Name' contains value: Caustic alkali liquids, n.o.s.
-
+	Then In the International Marine (IMDG) Classification Section, verify section: 'Proper Shipping Name' contains value: Caustic alkali liquid, n.o.s.
+	Then In the International Marine (IMDG) Classification Section, verify section: 'Technical Name (if applicable)' contains value: Sodium Hydroxide
+	Then In the International Marine (IMDG) Classification Section, verify section: 'Hazard Class (select)' contains value: 8
 	Then In the International Marine (IMDG) Classification Section, verify section: 'Packing Group (select)' contains value: II
-	And UN Number should be showing the value: UN1719
-	And Proper Shipping Name should be showing the value: Caustic alkali liquid, n.o.s.
-	And Technical Name (if applicable) should be showing the value: SODIUM HYDROXIDE
-	And Hazard Class (select) should be showing the value: 8
-	And Packing Group (select) should be showing the value: II
-	And I click continue
+	Then in the International Marine (IMDG) Classification page, I click Continue
+	#101330 The Volatile Organic Compound (VOC) for Ozone Transport Commission (OTC) and/or California Air Resource Board (CARB) - with option for VOC value
 	And I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
-	And I set the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. option to: Yes
-	And I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB option to: 50
-	And I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule option to: 40
-	And I set the Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison? option to: Yes
+	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.': to: No
+	Then In the VOC - Ozone Transport Commission section, I confirm text 'Need help? Regulatory services are included in Premium Subscription. Upgrade now!' should be displayed
+	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB': to: 5
+	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule': to: 5
+	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?': to: Yes
+	Then in the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) page, I click Continue	
+	#Given I call Shared Step 57801 (Confirm VOC Summary step shown and VOC analysis date is shown - Happy Path)
+	And I should see the Volatile Organic Compound Summary Page
+	Then In the Volatile Organic Compound Summary Section, confirm that I see todays 'VOC Analysis Date'
+	Then In the Volatile Organic Compound Summary Section, confirm 'Limits' table should exists
+	Then In the Volatile Organic Compound Summary Section, confirm 'VOC content as weight percentage of total formula, minus exempt compounds, for each of the following states.' table should exists
+	Then In the Volatile Organic Compound Summary Section, confirm that I see the following 'CARB' value: 5
+	Then In the Volatile Organic Compound Summary Section, confirm that I see the following 'OTC Model Rule' value: 5
+	Then In the Volatile Organic Compound Summary Section, the statement 'Based on the type of product, this must comply with the most restrictive VOC limit.' is displayed
+	Then In the Volatile Organic Compound Summary Section, the statement 'Exceeds the limits specified in the California Consumer Products Regulation' is displayed
+	Then In the Volatile Organic Compound Summary Section, the statement 'Exceeds the limits specified by the Ozone Transport Commission' is displayed
+	Then In the Volatile Organic Compound Summary Section, for 'Your acknowledgement of this registration includes that your product..' set 'Yes, I Acknowledge'
 	And I click continue
-	Given I call Shared Step 57801 (Confirm VOC Summary step shown and VOC analysis date is shown - Happy Path)
-	Given I set the Your acknowledgement of this registration includes that your product option to: Yes, I Acknowledge
-	And I click continue
-	#And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
-	Then I should be on the ECOLOGO Readiness Page
-	And In the ECOLOGO Readiness Section, set the option in section: 'Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment...': to: Not at this time
-	Then in the ECOLOGO Readiness page, I click Continue
+	And If ECOLOGO Readiness page is displayed I call Shared Step 57712 - ECOLOGO Readiness Assessment - Not at this time - Continue - Happy Path
+	#Then I should be on the ECOLOGO Readiness Page
+	#And In the ECOLOGO Readiness Section, set the option in section: 'Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment...': to: Not at this time
+	#Then in the ECOLOGO Readiness page, I click Continue
 
-	Given I call Shared Step 150905 (Retailer - NR selected by default)
+	#Given I call Shared Step 150905 (Retailer - NR selected by default)
+	Then I should be on the Retailer Page
+	And In the Retailer Section, click 'Add Retailers' button
+	Then In the Retailer Section is selected retailer: No Retailer/No UPC Product
+	And In the Select Retailers window, click 'Done' button
+	Then in the Retailer page, I click Continue
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
-	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
-	Then in the Regulatory Documents to Provide page I click Continue
-
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Yes, I certify that I have an OSHA-compliant SDS for this product and would like to upload it.
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'OSHA SDS'
+	Given in the Regulatory Documents to Provide page I click Continue
 	Then I should see the Additional Documents to Provide Page
-	Then I click continue
-	Then Volatile Organic Compounds should be showing the error messages: Document is required: VOC Exemption Letter
-	Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: VOC Exemption Letter and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-	Given I call shared step 65961 (Additional Documents to Provide - Upload Full Product Label - Continue.
+	Given in the Additional Documents to Provide page I click Continue
+	Then In the Additional Documents to Provide Section: 'Provide Full Product Label (required)' error message should display: Document is required: Please upload a PDF of the product label (full label).
+	Then In the Additional Documents to Provide Section, upload PDF document to Provide Full Product Label (required) field
+	Given in the Additional Documents to Provide page I click Continue
 	Then I should see the Optional Reports and Documents Available for Purchase Page
-	Given I click continue
-	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
-		| Personal Protection Equipment | Appearance | Autoignition Temperature | Minimum Ignition Energy | Odor   | Odor Threshold | Partition Coefficient | Viscosity |
-		| Mask                          | Brown      | 2                        | 2                       | Banana | Not applicable | 2                     | 2         |
-	
-	Then I should see the Optional Comments Page
-	Given I click continue
-	Given In the Data Acceptance page I select Agreed
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Oven Cleaner - Pump Sprays
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase207581
+	Then The statement: • Additional documents are not subject to standard two day turnaround. is displayed
+	Then In the Optional Reports and Documents Available for Purchase page, the footer text contains: Additional documents are not subject to standard two day turnaround.
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+	#Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+	Given The Purchase Summary Page is displayed
+	Then In the Purchase Summary page message is displayed with text: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
+	Then In the Purchase Summary Page, click the 'Home' button

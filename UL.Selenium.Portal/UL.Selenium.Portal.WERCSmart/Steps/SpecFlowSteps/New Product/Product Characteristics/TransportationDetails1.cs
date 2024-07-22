@@ -33,8 +33,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			var MyNewProduct = new StepsNewProduct();
 			MyNewProduct.SetTheSectionOptionTo("Select all modes of transport that you've classified the product for",
 				section);
-			MyNewProduct.SetTheSectionOptionTo("Select all modes of transport that you've classified the product for",
-				option);
+			new StepsNewProduct().SetTheOptionSubOptionTo(option,
+				"Select all modes of transport that you've classified the product for", section);
 		}
 		[RegexStepDefinition(@"In the Transportation Details 1 Section, set the option in section: 'Provide Special Permit numbers \(if applicable\)': to: (.*)")]
 		public void SetProvideSpecialPermitNumbers(string option)
