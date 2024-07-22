@@ -42,7 +42,6 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
 @GTINAndUPC
-@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 @SafetyDataSheetAuthoring
