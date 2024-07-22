@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NPOI.SS.Formula.Functions;
 using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_and_Submit
 {
@@ -30,33 +33,81 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 		{
 			string button = "Accept";
 			new Steps_Prototype().ClickButton(button);
-			/*
 			Report.UseSubSteps = true;
 			var MyStepsPaymentMethods = new Steps_PaymentMethods();
-			var mySub = new PaymentMethods_Subscription_Billing();
 			var sub = new SubscriptionEnrollment();
-			
-			if (sub.Get_Page_Header().Equals("Subscription  Upgrade"))
+			var myPay = new Steps_PaymentMethods();
+
+			if (new SubscriptionEnrollment_new().WaitForContainerToBeVisible())
 			{
-				var MyStepsSubscriptonEnrollment = new StepsSubscriptionEnrollment();
-				Report.StartSubStep("The Subscription Upgrade page should load");
-				MyStepsSubscriptonEnrollment.ThenTheSubscriptionEnrollmentPageShouldLoad();
-				Report.StartSubStep("I should see Proceed button enabled");
-				MyStepsSubscriptonEnrollment.ThenIShouldSeeProceedButtonDisabled("enabled");
-				Report.StartSubStep("I click on the Proceed button");
-				MyStepsSubscriptonEnrollment.ClickProceedButton();
-				var StepsSE_new = new StepsSubscriptionEnrollmentNew();
-				Report.StartSubStep("In the Subscription Enrollment Modal, I click the Checkout button");
-				StepsSE_new.InSubscriprionEnrollmentModalClickButton("Checkout");
-				Report.StartSubStep("In the Payment Methods screen I click Continue");
-				MyStepsPaymentMethods.ThenIClickContinue();
-				Report.StartSubStep("In the Purchase Summary screen I click Confirm Order");
-				MyStepsPaymentMethods.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
-				Report.StartSubStep("In the Thank You screen I check the Header is correct");
-				MyStepsPaymentMethods.ThenInTheThankYouScreenICheckTheHeaderIsCorrect();
+				var subEnrollment = new SubscriptionEnrollment_new();
+				if (Report.IsTrue(subEnrollment.EnrollmentFooterExists(), $"Failure, enrollment footer does not exist.", $"Success, enrollment footer exists."))
+				{
+					if (Report.IsTrue(subEnrollment.EnrollmentFooterButtonExists("PROCEED"), $"Failure, in enrollment footer 'PROCEED' button does not exist.", $"Success, in enrollment footer 'PROCEED' button exists."))
+					{
+						Report.IsTrue(subEnrollment.EnrollmentFooterButtonClick("PROCEED"), $"Failure, in enrollment footer failed to click 'PROCEED' button.", $"Success, in enrollment footer clicked 'PROCEED' button.");
+						new SubscriptionEnrollmentModal().WaitForContainerToBeVisible();
+						if (Report.IsTrue(new SubscriptionEnrollmentModal().ModalButtonExists("Checkout"), $"Failure, in the Subscription Enrollment modal, I confirm 'Checkout' button does not exists.", $"Success, in the Subscription Enrollment modal, I confirm 'Checkout' button does exist."))
+						{
+							Report.IsTrue(new SubscriptionEnrollmentModal().ModalButtonClick("Checkout"), $"Failure, in the Subscription Enrollment modal, failed to click 'Checkout' button.", $"Success, in the Subscription Enrollment modal, successfully clicked 'Checkout' button.");
+						}
+					}
+				}
+				new PaymentMethods().WaitForContainerToBeVisible();
+
+				if (new PaymentMethods().Payment_Method_Exists("Credit Card"))
+				{
+					Report.Info("Credit card details is already added");
+					if(!new PaymentMethods().Credit_Card_Default())
+					{
+						Report.IsTrue(new PaymentMethods().ClickMakeDeaultForPaymentMetod("Credit Card"), "Failed to make Credit Card as Default Payment Method",
+							"Successfully made Credit Card as Default Payment Method");
+					}
+					Report.StartSubStep("In the Payment Methods screen I click Continue");
+					MyStepsPaymentMethods.ThenIClickContinue();
+				}
+				else
+				{
+					foreach (string address in new PaymentMethods().Get_Billing_Address())
+					{
+						if (address.Contains("undefined"))
+						{
+							Report.Info("The state is undefined in Billing Address");
+							Report.Info("Attempt to edit state");
+							Report.IsTrue(new PaymentMethods().Change_click(), "Failed to Click Change Button", "Change Button Clicked");
+							Report.IsTrue(new PaymentMethods_Edit_Address().EditState("New York"), "Failed to select state", "Successfully selected state");
+							Report.IsTrue(new PaymentMethods_Edit_Address().Save_click(), "Failed to Click Save Button", "Save Button Clicked");
+						}
+					}
+					var myCreditCardTable = new Table("Card Type", "Card Number", "Expiration Month", "Expiration Year", "CVV", "Cardholder Name", "Postal Code");
+					myCreditCardTable.AddRow("Visa", "4111 1111 1111 1111", "08", "2028", "1111", "WERCS_QA_Automation", "12205");
+
+					if (!new PaymentMethods().Select_Payment_Method("Credit Card"))
+					{
+						new PaymentMethods().Add_A_New_Payment_Method("Credit Card");
+						myPay.ThenIEnterCreditCardDetails(myCreditCardTable);
+						Report.IsTrue(new PaymentMethods().ClickSubmitButton(), "Failed to click Submit button", "Successfully clicked Submit button");
+					}
+					else
+					{
+						myPay.ThenIEnterCreditCardDetails(myCreditCardTable);
+						Report.IsTrue(new PaymentMethods().ClickSubmitButton(), "Failed to click Submit button", "Successfully clicked Submit button");
+						Report.StartSubStep("In the Payment Methods screen I click Continue");
+					}	
+				}
 			}
-			*/
+			if (new PaymentMethods_Subscription_Billing().Purchase_Header_Correct())
+			{
+				if (new PaymentMethods_Subscription_Billing().ConfirmOrderButtonExists())
+				{
+					Report.IsTrue(new PaymentMethods_Subscription_Billing().Confirm_Order_click(), "Failed to Click Confirm Order Button", "Confirm Order Button Clicked");
+					GeneralUtilities.WaitForRefreshToDisappear(new PaymentMethods_Subscription_Billing().Btn_confirm);
+					GeneralUtilities.Wait_for_load_finish();
+					Report.Screenshot();
+				}
+			}
 		}
+
 		[RegexStepDefinition(@"In the Data Acceptance Section, I confirm text 'Data Acceptance' text (should|should not) be displayed")]
 		public void GivenIConfirmTheFormulation3rdPartyDataUseConsentsDisplaysTheCorrectText(string condition)
 		{
