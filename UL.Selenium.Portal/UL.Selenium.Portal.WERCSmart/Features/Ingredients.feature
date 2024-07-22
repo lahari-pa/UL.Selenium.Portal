@@ -30,11 +30,11 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ECOLOGO
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
-@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 @GTINAndUPC
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
-
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
+@SafetyDataSheetAuthoring
 Feature: Ingredients
 (Suite ID: 64740)
 
@@ -1051,7 +1051,11 @@ Scenario: [158853] Ingredient Identifier
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Given I should see the The Product Page
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
+ 	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase158853
 	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I should see the Product Information Page
@@ -1072,9 +1076,9 @@ Scenario: [158853] Ingredient Identifier
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Then in the Physical and Chemical Properties page I click Continue
 
-	Given In the Ingredients screen, I ensure that there is a field called: Ingredient Reference Number (Optional)
 	#Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	Given I should see the Ingredients Page
+	Then In the Ingredients Section, confirm section: 'Ingredient Reference Number (Optional)' is displayed
 	Then In the Ingredients section, add the following ingredients:
 	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
 	| component name | Water       | 100     |                     |               |             |
@@ -1083,23 +1087,26 @@ Scenario: [158853] Ingredient Identifier
 	And I should see the Inventory Status, Prop 65 (US) Page
 	And I click the page heading: Ingredients
 	And I should see the Ingredients Page
-	Then In the Ingredient Reference Number field I enter the following text: 1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123
-	Then I click continue
-	Then I should see an error message: This field has a maximum length of 100 characters
-	Then In the Ingredient Reference Number field I enter the following text: test 123 !@#
-	Then I click continue
-	Then I should see an error message: Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + ® ™)
-	Then I click continue
-	Then In the Ingredient Reference Number field I enter the following text: test 123 @#
-	Then I click continue
-	And I should see the Inventory Status, Prop 65 (US) Page
+	Then In the Ingredients Section, set the option in section: 'Ingredient Reference Number (Optional)' to: 1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123
+	Then in the Ingredients page I click Continue
+	Then In the Ingredients Section, confirm for section: 'Ingredient Reference Number (Optional)' error is displayed: This field has a maximum length of 100 characters
+	Then In the Ingredients Section, set the option in section: 'Ingredient Reference Number (Optional)' to: test 123 !@#
+	Then in the Ingredients page I click Continue
+	Then In the Ingredients Section, confirm for section: 'Ingredient Reference Number (Optional)' error is displayed: Enter valid information (The following characters are not allowed: = ; ^ * ¿? !¡ \ ~ [] <> | {} + ® ™)
+	Then In the Ingredients Section, set the option in section: 'Ingredient Reference Number (Optional)' to: test 123 @#
+	Then in the Ingredients page I click Continue
 	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should be on the Inventory Status, Prop 65 (US) Page
 	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
 	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
 
-	Given I call Shared Step 150905 (Retailer - NR selected by default)
+	#Given I call Shared Step 150905 (Retailer - NR selected by default)
+	Then I should be on the Retailer Page
+	And In the Retailer Section, click 'Add Retailers' button
+	Then In the Retailer Section is selected retailer: No Retailer/No UPC Product
+	And In the Select Retailers window, click 'Done' button
+	Then in the Retailer page, I click Continue
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
@@ -1107,23 +1114,34 @@ Scenario: [158853] Ingredient Identifier
 
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
-		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
-		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	Given in the Optional Comments page I click Continue
-	Given I click the Summary button in the Data Acceptance window
-	Then I switch to the Data Summary page
-	Given In the Data Summary page, I ensure that the value test 123 @# shown under the field Ingredient Reference Number (Optional) displays as it was keyed on the Ingredients page
-	Given I close the browser tab with the Summary page
+	#Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+	#	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+	#	| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 800
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 99
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 60
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Clear
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor' to: Odorless
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor Threshold' to: No data available
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Partition Coefficient' enter text: 10
+	Then in the Safety Data Sheet Authoring - Additional Data (Optional) page, I click Continue	Given in the Optional Comments page I click Continue
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, click 'Summary' button
+	Given I switch to the tab with Data Summary page
+	Given In the Summary Page, the 'Ingredient Reference Number (Optional)' section should be showing the following value: test 123 @#
+	Given I close the tab with Data Summary page
 	#Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given I should see the Data Acceptance Page
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
 	Then In the Data Acceptance Section, click 'Accept' button
-
-	Then In the Purchase Summary screen I click Confirm Order
-	Then In the Thank You screen I click Home
+	Then I navigate to the home page
 	Then the WERCSmart homepage should load
-	Given I delete the product: TestCase158853
 
 	
 

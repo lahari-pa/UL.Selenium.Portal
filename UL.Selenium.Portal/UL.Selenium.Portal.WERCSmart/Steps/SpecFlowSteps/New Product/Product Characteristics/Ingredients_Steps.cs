@@ -27,7 +27,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			new Steps_Prototype().CheckACheckboxWithTheFollowingText(text);
 		}
-
+		[RegexStepDefinition(@"In the Ingredients Section, confirm section: 'Ingredient Reference Number \(Optional\)' (is|is not) displayed")]
+		public void IngredientReferenceNumberIsIsNotDisplayed(string is_isnot)
+		{
+			string section = "Ingredient Reference Number (Optional)";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
+		[RegexStepDefinition(@"In the Ingredients Section, confirm for section: 'Ingredient Reference Number \(Optional\)' error (is|is not) displayed: (.*)")]
+		public void IngredientReferenceNumberErrorIsIsNotDisplayed(string is_isnot, string error)
+		{
+			string section = "Ingredient Reference Number (Optional)";
+			new Steps_ProductPrototype().InSectionErrorMessageIsIsNotDisplayed(section, error, is_isnot);
+		}
 		[RegexStepDefinition(@"In the Ingredients Section, set the option in section: 'Ingredient Reference Number \(Optional\)' to: (.*)")]
 		public void LiquidCoreProductSelectYesOrNo(string option)
 		{
