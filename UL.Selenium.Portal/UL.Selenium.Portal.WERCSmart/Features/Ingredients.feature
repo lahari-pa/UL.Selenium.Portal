@@ -1196,7 +1196,6 @@ Scenario: [209549] Ingredient Table - Sum of Ingredients: Decimal Place Maximum 
 	Then In the Ingredients section, add component with CAS number: 7778-18-9
 	Then In the Ingredients Table row with CAS number: 7778-18-9, in Percent column text input enter: 61.44374
 	Then In the Ingredients Section, click the component search box
-	#And I click the page heading: Ingredients
 	Then In the Ingredients section, verify Total Percent displays value: 105.82258
 	Then in the Ingredients page I click Continue
 	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
