@@ -1265,7 +1265,8 @@ Scenario: [209549] Ingredient Table - Sum of Ingredients: Decimal Place Maximum 
 # Created by Saikiran Chittampally
 @TestCase:207581
 Scenario: [207581] Oven Cleaner - Pump Spray - (RU000798) - New Flow Testing
-	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
