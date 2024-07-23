@@ -307,15 +307,22 @@ Scenario: [65448] Ingredients - Publicly Disclosed, Trade secret and Public Name
 #	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65448
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase65448
+
 @TestCase:63321
 Scenario: [63321] Product Ingredients contains a third party component that requires updating for public disclosure
-	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+
+	#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble Solution
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bubble Solution
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Bubble Solution
+	Then in the The Product page, I click Continue
 	Then I save the product information as: TestCase63321
 	#Given I call Shared Step 65511 (Product Information - No Child, No Direct ship, No PL, Click Continue - Happy Path (use in a BCP))
 	Given I call Shared Step 59680a (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
