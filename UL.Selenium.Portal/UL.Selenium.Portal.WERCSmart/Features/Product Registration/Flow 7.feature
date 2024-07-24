@@ -41,7 +41,17 @@ Scenario: [57863] Flow 7 - ABS Welding (RU000868)
 	Then I save the product information as: TestCase57863
 	Given I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
 	Given I call Shared Step 73748 (Product Information - US only - No to GHS - No to shipped supplier - No to Private Label - No to Sold to retailer)
-	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
+	#Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Liquid
+	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
+	And In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 120
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Relative Density' to: g/ml (grams per milliliter)
+	And In the Physical and Chemical Properties Section, for section: 'pH' enter text: 8
+	And In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: 100
+	Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: 61
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Not applicable/available
+	And In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page, I click Continue
 	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Ketone
 	Given I should see the Ingredients Page
 	Then In the Ingredients section, add the following ingredients:

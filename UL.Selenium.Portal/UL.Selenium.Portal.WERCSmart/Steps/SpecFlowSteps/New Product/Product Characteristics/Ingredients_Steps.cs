@@ -309,7 +309,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(ingredientRow.CellSelectExists(columnLabel), $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column select does not exist.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column select does exist.");
 			Report.IsTrue(ingredientRow.CellSelectOptionSelect(columnLabel, optionLabel), $"Failure, to select {searchType}:'{searchText}' row '{columnLabel}' column select option '{optionLabel}'.", $"Success, selected {searchType}:'{searchText}' row '{columnLabel}' column select option '{optionLabel}'.");
 		}
-
+		[RegexStepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column select element (does|does not) exists")]
+		public void IngredientsTableRowSelectElementExists(string searchType, string searchText, string columnLabel, string does_doesnot)
+		{
+			bool expected = does_doesnot == "does";
+			IngredientsTable ingredientsTable = new IngredientsTable();
+			Report.IsTrue(ingredientsTable.WaitForContainerToBeVisible(), $"Failure, ingredients table does not exist.", $"Success, ingredients table exists.");
+			Report.IsTrue(!ingredientsTable.IngredientRowList.IsNullOrEmpty(), $"Failure, ingredients table is empty.", $"Success, ingredients table is not empty.");
+			IngredientsTableRow ingredientRow = this.IngredientsRowSearchTypeGet(searchType, searchText);
+			Report.IsTrue(ingredientRow.CellSelectExists(columnLabel)== expected, $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column select elemet {(expected ? "does not" : "does")} exist.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column select element {does_doesnot} exist.");
+		}
 		[RegexStepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column multiselect options (.*)")]
 		public void IngredientsTableRowSelectOptionsMultiSelect(string searchType, string searchText, string columnLabel, string optionsListString)
 		{

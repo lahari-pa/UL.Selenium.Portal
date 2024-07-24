@@ -170,7 +170,17 @@ Scenario: [65469] Ingredients - Select Publicly Disclosed check box - un-check P
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble Solution
 	Then I save the product information as: TestCase65469
 	Given I call Shared Step 59680a (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
+	#Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Liquid
+	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
+	And In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 120
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Relative Density' to: g/ml (grams per milliliter)
+	And In the Physical and Chemical Properties Section, for section: 'pH' enter text: 8
+	And In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: 100
+	Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: 61
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Not applicable/available
+	And In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page, I click Continue
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Water         | 100     | true                | false       |            |
@@ -199,7 +209,17 @@ Scenario: [65470] Ingredients - Select Trade Secret check box - Un-check Trade S
 
 	Then I save the product information as: TestCase65470
 	Given I call Shared Step 59680a (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
+	#Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Liquid
+	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
+	And In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 120
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Relative Density' to: g/ml (grams per milliliter)
+	And In the Physical and Chemical Properties Section, for section: 'pH' enter text: 8
+	And In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: 100
+	Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: 61
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Not applicable/available
+	And In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page, I click Continue
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Water         | 100     | false               | true        |            |
@@ -234,7 +254,17 @@ Scenario: [65459] Ingredients - Select Trade Secret check box - Publicly Disclos
 	Then I save the product information as: TestCase65459
 	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 59680a (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
+	#Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Liquid
+	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
+	And In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 120
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Relative Density' to: g/ml (grams per milliliter)
+	And In the Physical and Chemical Properties Section, for section: 'pH' enter text: 8
+	And In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: 100
+	Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: 61
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Not applicable/available
+	And In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page, I click Continue
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Water         | 100     | false               | true        |            |
@@ -264,7 +294,17 @@ Scenario: [65451] Ingredients - Select Publicly Disclosed check box - Public Nam
 	Then I save the product information as: TestCase65451
 	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I call Shared Step 59680a (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
+	#Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Liquid
+	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
+	And In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 120
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Relative Density' to: g/ml (grams per milliliter)
+	And In the Physical and Chemical Properties Section, for section: 'pH' enter text: 8
+	And In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: 100
+	Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: 61
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Not applicable/available
+	And In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page, I click Continue
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 		| Water         | 100     | true                | false       |            |
@@ -277,20 +317,20 @@ Scenario: [65451] Ingredients - Select Publicly Disclosed check box - Public Nam
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65451
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase65451
+
 @TestCase:65448
 Scenario: [65448] Ingredients - Publicly Disclosed, Trade secret and Public Name are not required fields
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
 	Then I should be on the The Product Page
 	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bubble Solution_#65448
 	And In the Product Section, set the option in section: 'Type of Product (select)' to: Bubble Solution
 	Then in the The Product page, I click Continue
-
 	Then I save the product information as: TestCase65448
 	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I should see the Product Information Page
@@ -301,20 +341,32 @@ Scenario: [65448] Ingredients - Publicly Disclosed, Trade secret and Public Name
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page I click Continue
-
-	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
-	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Water         | 100     | false               | true        |            |
-	Given I confirm the following column titles and inputs are displayed in the ingredients table
-		| Column              | Input    |
-		| Percent             | textbox  |
-		| Publicly Disclosed? | checkbox |
-		| Trade Secret?       | checkbox |
-		| Public Name         | select   |
+	#Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Liquid
+	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
+	And In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 120
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Relative Density' to: g/ml (grams per milliliter)
+	And In the Physical and Chemical Properties Section, for section: 'pH' enter text: 8
+	And In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: 100
+	Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: 61
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Not applicable/available
+	And In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page, I click Continue
+	#Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Water         | 100     | false               | true        |            |
+	And I should see the Ingredients Page
+	Then In the Ingredients section, add component with component name: Water
+	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
+	Then In the Ingredients Table, confirm the 'Publicly Disclosed?' column header does exist
+	Then In the Ingredients Table, confirm the 'Trade Secret?' column header does exist
+	Then In the Ingredients Table, confirm the 'Public Name' column header does exist
+	Then In the Ingredients Table row with component name: Water, in Publicly Disclosed? column confirm checkbox is unchecked
+	Then In the Ingredients Table row with component name: Water, in Trade Secret? column confirm checkbox is unchecked
+	Then In the Ingredients Table row with component name: Water, in Public Name column select element does exists
 	Then in the Ingredients page I click Continue
 	And I should see the Inventory Status, Prop 65 (US) Page
-#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65448
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65448
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase65448
 

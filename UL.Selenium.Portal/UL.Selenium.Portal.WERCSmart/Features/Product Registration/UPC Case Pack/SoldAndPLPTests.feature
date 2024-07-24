@@ -32,6 +32,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ElectronicEquipment
+@StepsPrototype
 
 Feature: Sold and PLP Tests
 
@@ -143,7 +144,17 @@ Scenario: [87959] SOLD = US only, PL Yes, Create Liquid (Bubble Solution) with C
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble solution
 	Then I save the product information as: TestCase87959
 	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
-	And I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
+	#Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Liquid
+	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
+	And In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 120
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Relative Density' to: g/ml (grams per milliliter)
+	And In the Physical and Chemical Properties Section, for section: 'pH' enter text: 8
+	And In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: 100
+	Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: 61
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Not applicable/available
+	And In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page, I click Continue
 	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
 	Given I should see the Ingredients Page
 	Then In the Ingredients section, add the following ingredients:
