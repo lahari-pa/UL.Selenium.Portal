@@ -103,5 +103,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string tableName = "VOC content as weight percentage of total formula, minus exempt compounds, for each of the following states.";
 			new Steps_Prototype().ThenIConfirmThatTableExists(tableName, condition);
 		}
+		[RegexStepDefinition(@"In the Volatile Organic Compound Summary Section, the statement 'Based on the type of product, this must comply with the most restrictive VOC limit.' (is|is not) displayed")]
+		public void StatemantBasedOnTheTypeOfProduct(string is_isnot)
+		{
+			string text = "Based on the type of product, this must comply with the most restrictive VOC limit.";
+			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);
+		}
+		[RegexStepDefinition(@"In the Volatile Organic Compound Summary Section, the statement 'Exceeds the limits specified in the California Consumer Products Regulation' (is|is not) displayed")]
+		public void StatemantExeedsTheLimitsSpecifiedTnTheCalifornia(string is_isnot)
+		{
+			string text = "Exceeds the limits specified in the California Consumer Products Regulation";
+			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);
+		}
+		[RegexStepDefinition(@"In the Volatile Organic Compound Summary Section, the statement 'Exceeds the limits specified by the Ozone Transport Commission' (is|is not) displayed")]
+		public void StatemantExeedsTheLimitsOzoneTransport(string is_isnot)
+		{
+			string text = "Exceeds the limits specified by the Ozone Transport Commission";
+			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);
+		}
 	}	
 }
