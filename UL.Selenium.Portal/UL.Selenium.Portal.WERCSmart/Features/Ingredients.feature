@@ -275,25 +275,31 @@ Scenario: [65459] Ingredients - Select Trade Secret check box - Publicly Disclos
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65459
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase65459
+
 @TestCase:65451
 Scenario: [65451] Ingredients - Select Publicly Disclosed check box - Public Name is required, trade secret is not required
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-#	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-
-	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
-
 	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble Solution
 	Then I should be on the The Product Page
 	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bubble Solution_#65451
 	And In the Product Section, set the option in section: 'Type of Product (select)' to: Bubble Solution
 	Then in the The Product page, I click Continue
-
 	Then I save the product information as: TestCase65451
 	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	Given I call Shared Step 59680a (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	#Given I call Shared Step 59680a (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
 	#Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Liquid
 	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
@@ -305,13 +311,18 @@ Scenario: [65451] Ingredients - Select Publicly Disclosed check box - Public Nam
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Not applicable/available
 	And In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Then in the Physical and Chemical Properties page, I click Continue
-	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Water         | 100     | true                | false       |            |
-	Then for ingredient: Water the Trade Secret field is disabled
+	#Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Water         | 100     | true                | false       |            |
+	And I should see the Ingredients Page
+	Then In the Ingredients section, add component with component name: Water
+	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
+	Then In the Ingredients Table row with component name: Water, in Publicly Disclosed? column set checkbox to checked
+	Then In the Ingredients Table row with component name: Water, in Trade Secret column confirm checkbox is disabled
 	Then in the Ingredients page I click Continue
-	Then for ingredient: Water I should see an error below the public name column which reads: Please select Public Name since you agreed on Publicly Disclosed
-	Then for ingredient: Water I select Public Name: Water
+	Then In the Ingredients Table row with component name: Water, in Public Name column confirm error message is displayed with text: Please select Public Name since you agreed on Publicly Disclosed
+	#Then for ingredient: Water I should see an error below the public name column which reads: Please select Public Name since you agreed on Publicly Disclosed
+	Then In the Ingredients Table row with component name: Water, in Public Name column select option Water
 	Then in the Ingredients page I click Continue
 	And I should see the Inventory Status, Prop 65 (US) Page
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65451
