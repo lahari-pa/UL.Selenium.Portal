@@ -1457,3 +1457,82 @@ Scenario Outline: [225871] 3 Panel-More Filters pop up - DPCI - Is
 #		| [#225871c]  3 Panel-More Filters pop up - DPCI - Is       | RPS.TG          | Status Viewer           | Yes         |
 #		| [#225871d]  3 Panel-More Filters pop up - DPCI - Is       | RPS.TG          | HQ Viewer               | Yes         |
  
+Scenario Outline: [225962] 3 Panel-More Filters pop up - Filter By Packing Size- Upper bound = Packaging Size < 5
+	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer> 
+	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
+	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
+	Then I confirm the page has loaded 
+	Then In the recent activities Page, I click the More Filters Button
+	Then In the recent activities Page, The More Filters Popup is showing 
+	And In the More Filters pop up, I enter value in search box in the Filter Categories column: Packaging Size
+	Then In the More Filters pop up, I confirm searched filter is displayed in Filters Panel : Packaging Size
+	Then In the More Filters pop up, I click on searched filter in Filters Panel : Packaging Size 
+	Then Under Filter Parameters text, I verify there are two search boxes separated by text to
+	Then Under the search boxes, there are two check boxes: Has Any Value and Has No Value
+	Then Search field on left contains text 'Lower Bound' and search field on right contains text 'Upper Bound' 
+	Then In the More Filters pop up, I now type a string in upperBound bound field: 5
+	Then In the More Filters pop up, I confirm New Range text now switches to <5 text with -sign in a circle in front of it
+	Then I confirm below the Selected Ranges text, I see a + sign in a circle with 'Add a Range' text right next to it
+	Then In the More Filters pop up, I confirm in the Selected Filters area, that breadcrumb shows with the selected value: Packaging Size: < 5
+	Then In the product lookup page More Filters Popup, I Click the the Apply Filter Button
+	Then In the Product Lookup Page, The More Filters Popup is not showing
+
+	Examples:
+		| Scenario Name                                                                                        | Retailer        | Page                    | IsWebviewer |
+ 		| [#225962a]  3 Panel-More Filters pop up - Filter By Packing Size- Upper bound = Packaging Size < 5   | RPS.TG          | Product Lookup          | No          |
+ 		| [#225962b]  3 Panel-More Filters pop up - Filter By Packing Size- Upper bound = Packaging Size < 5   | RPS.TG          | Recent Activities       | No          |
+#		| [#225962c]  3 Panel-More Filters pop up - Filter By Packing Size- Upper bound = Packaging Size < 5   | RPS.CV          | Product Lookup          | No          |
+		| [#225962d]  3 Panel-More Filters pop up - Filter By Packing Size- Upper bound = Packaging Size < 5   | RPS.CV          | Recent Activities       | No          |
+#		| [#225962e]  3 Panel-More Filters pop up - Filter By Packing Size- Upper bound = Packaging Size < 5   | RPS.LW          | Product Lookup          | No          |
+		| [#225962f]  3 Panel-More Filters pop up - Filter By Packing Size- Upper bound = Packaging Size < 5   | RPS.LW          | Recent Activities       | No          |
+		| [#225962g]  3 Panel-More Filters pop up - Filter By Packing Size- Upper bound = Packaging Size < 5   | RPS.SF          | Product Lookup          | No          |
+ 		| [#225962h]  3 Panel-More Filters pop up - Filter By Packing Size- Upper bound = Packaging Size < 5   | RPS.SF          | Recent Activities       | No          |
+#		| [#225962i]  3 Panel-More Filters pop up - Filter By Packing Size- Upper bound = Packaging Size < 5   | RPS.LW          | Demo Viewer             | Yes         |
+#		| [#225962j]  3 Panel-More Filters pop up - Filter By Packing Size- Upper bound = Packaging Size < 5   | RPS.TG          | Store Viewer            | Yes         |
+#		| [#225962k]  3 Panel-More Filters pop up - Filter By Packing Size- Upper bound = Packaging Size < 5   | RPS.TG          | Status Viewer           | Yes         |
+#		| [#225962l]  3 Panel-More Filters pop up - Filter By Packing Size- Upper bound = Packaging Size < 5   | RPS.TG          | HQ Viewer               | Yes         |
+		| [#225962m]  3 Panel-More Filters pop up - Filter By Packing Size- Upper bound = Packaging Size < 5   | RPS.SF          | SmartFinal_Store        | Yes         |
+# 		| [#225962n]  3 Panel-More Filters pop up - Filter By Packing Size- Upper bound = Packaging Size < 5   | RPS.LW          | Lowes_store             | Yes         |
+		| [#225962o]  3 Panel-More Filters pop up - Filter By Packing Size- Upper bound = Packaging Size < 5   | RPS.CT          | Product Lookup          | No          |
+    	| [#225962p]  3 Panel-More Filters pop up - Filter By Packing Size- Upper bound = Packaging Size < 5   | RPS.CT          | Recent Activities       | No          |
+#	    | [#225962q]  3 Panel-More Filters pop up - Filter By Packing Size- Upper bound = Packaging Size < 5   | RPS.CT          | Classification History  | No          |
+
+Scenario Outline: [225961] 3 Panel-More Filters pop up - Filter By Packing Size-Lower bound = Packaging Size > 5
+	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer> 
+	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
+	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
+	Then I confirm the page has loaded 
+	Then In the recent activities Page, I click the More Filters Button
+	Then In the recent activities Page, The More Filters Popup is showing 
+	And In the More Filters pop up, I enter value in search box in the Filter Categories column: Packaging Size
+	Then In the More Filters pop up, I confirm searched filter is displayed in Filters Panel : Packaging Size
+	Then In the More Filters pop up, I click on searched filter in Filters Panel : Packaging Size 
+	Then Under Filter Parameters text, I verify there are two search boxes separated by text to
+	Then Under the search boxes, there are two check boxes: Has Any Value and Has No Value
+	Then Search field on left contains text 'Lower Bound' and search field on right contains text 'Upper Bound' 
+	Then In the More Filters pop up, I now type a string in lowerBound bound field: 5
+	Then In the More Filters pop up, I confirm New Range text now switches to >5 text with -sign in a circle in front of it
+	Then I confirm below the Selected Ranges text, I see a + sign in a circle with 'Add a Range' text right next to it
+	Then In the More Filters pop up, I confirm in the Selected Filters area, that breadcrumb shows with the selected value: Packaging Size: > 5
+	Then In the product lookup page More Filters Popup, I Click the the Apply Filter Button
+	Then In the Product Lookup Page, The More Filters Popup is not showing
+
+	Examples:
+		| Scenario Name                                                                                       | Retailer        | Page                    | IsWebviewer |
+ 		| [#225961a]  3 Panel-More Filters pop up - Filter By Packing Size-Lower bound = Packaging Size > 5   | RPS.TG          | Product Lookup          | No          |
+ 		| [#225961b]  3 Panel-More Filters pop up - Filter By Packing Size-Lower bound = Packaging Size > 5   | RPS.TG          | Recent Activities       | No          |
+#		| [#225961c]  3 Panel-More Filters pop up - Filter By Packing Size-Lower bound = Packaging Size > 5   | RPS.CV          | Product Lookup          | No          |
+		| [#225961d]  3 Panel-More Filters pop up - Filter By Packing Size-Lower bound = Packaging Size > 5   | RPS.CV          | Recent Activities       | No          |
+#		| [#225961e]  3 Panel-More Filters pop up - Filter By Packing Size-Lower bound = Packaging Size > 5   | RPS.LW          | Product Lookup          | No          |
+		| [#225961f]  3 Panel-More Filters pop up - Filter By Packing Size-Lower bound = Packaging Size > 5   | RPS.LW          | Recent Activities       | No          |
+		| [#225961g]  3 Panel-More Filters pop up - Filter By Packing Size-Lower bound = Packaging Size > 5   | RPS.SF          | Product Lookup          | No          |
+ 		| [#225961h]  3 Panel-More Filters pop up - Filter By Packing Size-Lower bound = Packaging Size > 5   | RPS.SF          | Recent Activities       | No          |
+#		| [#225961i]  3 Panel-More Filters pop up - Filter By Packing Size-Lower bound = Packaging Size > 5   | RPS.LW          | Demo Viewer             | Yes         |
+#		| [#225961j]  3 Panel-More Filters pop up - Filter By Packing Size-Lower bound = Packaging Size > 5   | RPS.TG          | Store Viewer            | Yes         |
+#		| [#225961k]  3 Panel-More Filters pop up - Filter By Packing Size-Lower bound = Packaging Size > 5   | RPS.TG          | Status Viewer           | Yes         |
+#		| [#225961l]  3 Panel-More Filters pop up - Filter By Packing Size-Lower bound = Packaging Size > 5   | RPS.TG          | HQ Viewer               | Yes         |
+		| [#225961m]  3 Panel-More Filters pop up - Filter By Packing Size-Lower bound = Packaging Size > 5   | RPS.SF          | SmartFinal_Store        | Yes         |
+# 		| [#225961n]  3 Panel-More Filters pop up - Filter By Packing Size-Lower bound = Packaging Size > 5   | RPS.LW          | Lowes_store             | Yes         |
+		| [#225961o]  3 Panel-More Filters pop up - Filter By Packing Size-Lower bound = Packaging Size > 5   | RPS.CT          | Product Lookup          | No          |
+    	| [#225961p]  3 Panel-More Filters pop up - Filter By Packing Size-Lower bound = Packaging Size > 5   | RPS.CT          | Recent Activities       | No          |
+#	    | [#225961q]  3 Panel-More Filters pop up - Filter By Packing Size-Lower bound = Packaging Size > 5   | RPS.CT          | Classification History  | No          |
