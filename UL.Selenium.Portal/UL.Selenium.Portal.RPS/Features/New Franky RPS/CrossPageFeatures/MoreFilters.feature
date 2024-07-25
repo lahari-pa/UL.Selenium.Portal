@@ -1503,7 +1503,7 @@ Scenario Outline: [225961] 3 Panel-More Filters pop up - Filter By Packing Size-
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded 
 	Then In the recent activities Page, I click the More Filters Button
-	Then In the recent activities Page, The More Filters Popup is showing 
+	Then In the Product Lookup Page, The More Filters Popup is showing
 	And In the More Filters pop up, I enter value in search box in the Filter Categories column: Packaging Size
 	Then In the More Filters pop up, I confirm searched filter is displayed in Filters Panel : Packaging Size
 	Then In the More Filters pop up, I click on searched filter in Filters Panel : Packaging Size 
