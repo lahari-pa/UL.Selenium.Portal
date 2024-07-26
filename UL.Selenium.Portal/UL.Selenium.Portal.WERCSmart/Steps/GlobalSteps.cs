@@ -1622,6 +1622,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			SeleniumWebDriver.CurrentDriver.Quit();
 		}
 
+		[RegexStepDefinition(@"Switch to the window labeled: (.*)")]
+		public void SwitchToWindow(string windowTitle)
+		{
+			if (SeleniumWebDriver.CurrentDriver.WindowHandles.Contains(windowTitle))
+			{
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Window(windowTitle);
+			}
+			
+		}
+
 		[RegexStepDefinition(@"I confirm (.*) tab (does|does not) exist")]
 		public void ConfirmTabDoesDoesNotExist(string tabURL, string does_doesnot)
 		{

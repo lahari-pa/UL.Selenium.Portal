@@ -565,12 +565,36 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return document.GetValue();
 		}
 
-		public bool ClickViewForDocument(string section)
+		public string GetProductDocumentForSection(string section, string option)
 		{
-			IWebElement button = this.FindElement(By.XPath(".//div[@class='form-group has-success']//span[contains(text(), '" + section + "')]/../div/a[contains(text(),'View')]"), 2);
+			IWebElement document = this.FindElement(By.XPath($".//div[@class='form-group'][.//h3[text()='Product Documents']]//div[@class='form-group'][.//h4[text()='{section}']]//tr[.//td[@data-bind='text: FileName'][text()='{option}']]"), 2);
+			if (document == null)
+			{
+				Report.Info($"Could not find option {option} for section {section}");
+				return "";
+			}
+
+			return document.GetValue();
+		}
+
+		public bool ClickViewProductDocumentForSection(string section, string option)
+		{
+			IWebElement button = this.FindElement(By.XPath($".//div[@class='form-group'][.//h3[text()='Product Documents']]//div[@class='form-group'][.//h4[text()='{section}']]//tr[.//td[@data-bind='text: FileName'][text()='{option}']]//a"), 2);
 			if (button == null)
 			{
-				Report.Info("Could not find View button for section: {section}");
+				Report.Info($"Could not find View button for file: {option}");
+				return false;
+			}
+
+			return button.TryClick();
+		}
+
+		public bool ClickViewForDocument(string section)
+		{
+			IWebElement button = this.FindElement(By.XPath($".//div[@class='form-group has-success']//span[contains(text(), '{section}')]/../div/a[contains(text(),'View')]"), 2);
+			if (button == null)
+			{
+				Report.Info($"Could not find View button for section: {section}");
 				return false;
 			}
 
