@@ -92,6 +92,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 			string savedAs = "downloadedFile";
 			new Steps_Prototype().ConfirmFileAppearsInDownloadsFolder(file, savedAs);
 		}
+
+		[RegexStepDefinition(@"In the Summary page, I confirm the Ingredients table matches the following:")]
+		public void InTheSummaryPageVerifyIngredientsTable(Table table)
+		{
+			new StepsDataSummarySheet().InTheDataSummaryPageIConfirmThatIngredientsMatches(table);
+		}
+
 	}
 }
 

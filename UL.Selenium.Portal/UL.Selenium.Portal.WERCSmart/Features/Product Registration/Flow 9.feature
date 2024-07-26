@@ -271,7 +271,7 @@ Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 	Given I should see the Additional Documents to Provide Page
 	Then In the Additional Documents to Provide, section 'OSHA-compliant Safety Data Sheet (Optional)' is displayed
 	Then In the Additional Documents to Provide, section 'Toxicity Characteristic Leaching Procedure (TCLP)' is displayed
-	Then In the Additional Documents to Provide Section, I upload PDF document to Upload Full Product Label (required) field
+	Then In the Additional Documents to Provide Section, upload PDF document to Upload Full Product Label (required) field
 	Then In the Additional Documents to Provide Section, for section Product Label I click button 'View'
 	Then In the Additional Documents to Provide Section, after clicking 'View' button I confirm pdf file is downloaded
 	Then in the Additional Documents to Provide  page I click Continue
@@ -364,7 +364,7 @@ Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
 	Given I should see the Additional Documents to Provide Page
 	Then In the Additional Documents to Provide, section 'OSHA-compliant Safety Data Sheet (Optional)' is displayed
 	Then In the Additional Documents to Provide, section 'Toxicity Characteristic Leaching Procedure (TCLP)' is displayed
-	Then In the Additional Documents to Provide Section, I upload PDF document to Upload Full Product Label (required) field
+	Then In the Additional Documents to Provide Section, upload PDF document to Provide Full Product Label (required) field
 	Then I save the current window handle to context as: MainWindowHandle
 	Then In the Additional Documents to Provide Section, for section Product Label I click button 'View'
 	Then In the Additional Documents to Provide Section, after clicking 'View' button I confirm pdf file is downloaded
@@ -711,7 +711,7 @@ Scenario: [58075] Nutritional Supplement for Infants - Liquid - RU001365
 	Given I should see the Additional Documents to Provide Page
 	Then In the Additional Documents to Provide, section 'OSHA-compliant Safety Data Sheet (Optional)' is displayed
 	Then In the Additional Documents to Provide, section 'Toxicity Characteristic Leaching Procedure (TCLP)' is displayed
-	Then In the Additional Documents to Provide Section, I upload PDF document to Upload Full Product Label (required) field
+	Then In the Additional Documents to Provide Section, upload PDF document to Upload Full Product Label (required) field
 	Then I save the current window handle to context as: MainWindowHandle
 	Then In the Additional Documents to Provide Section, for section Product Label I click button 'View'
 	Then In the Additional Documents to Provide Section, after clicking 'View' button I confirm pdf file is downloaded
@@ -787,7 +787,7 @@ Scenario: [58089] Nutritional Supplements for Domesticated Animals - RU001239
 	Given I should see the Additional Documents to Provide Page
 	Then In the Additional Documents to Provide, section 'OSHA-compliant Safety Data Sheet (Optional)' is displayed
 	Then In the Additional Documents to Provide, section 'Toxicity Characteristic Leaching Procedure (TCLP)' is displayed
-	Then In the Additional Documents to Provide Section, I upload PDF document to Upload Full Product Label (required) field
+	Then In the Additional Documents to Provide Section, upload PDF document to Upload Full Product Label (required) field
 	Then I save the current window handle to context as: MainWindowHandle
 	Then In the Additional Documents to Provide Section, for section Product Label I click button 'View'
 	Then In the Additional Documents to Provide Section, after clicking 'View' button I confirm pdf file is downloaded
@@ -900,10 +900,21 @@ Scenario: [58094] Suppository, Laxative, Stool-Softener - RU000944
 	Given in the Regulatory Documents to Provide page I click Continue
 
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
-		| Gloves                        | 340                      | 12                      | 20.5      | Clear      | Odorless | No data available | 5.0                   |
-	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58094. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+	#Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+	#	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+	#	| Gloves                        | 340                      | 12                      | 20.5      | Clear      | Odorless | No data available | 5.0                   |
+	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 800
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 99
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 60
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Clear
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor' to: Odorless
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor Threshold' to: No data available
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Partition Coefficient' enter text: 10
+	Then in the Safety Data Sheet Authoring - Additional Data (Optional) page, I click Continue
+	Given in the Optional Comments page I click Continue
+		#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58094. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I should see the Optional Comments Page
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
 	Then in the Optional Comments page I click Continue
@@ -968,9 +979,20 @@ Scenario: [58081] Nutritional Supplement - Solid - RU000619
 	Given in the Regulatory Documents to Provide page I click Continue
 
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
-		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
+	#Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+	#	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
+	#	| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
+	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 800
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 99
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 60
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Clear
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor' to: Odorless
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor Threshold' to: No data available
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Partition Coefficient' enter text: 10
+	Then in the Safety Data Sheet Authoring - Additional Data (Optional) page, I click Continue
+	Given in the Optional Comments page I click Continue
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58081. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I should see the Optional Comments Page
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
@@ -1063,9 +1085,10 @@ Scenario: [58604] Condom - RU000937
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58604
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase58604	
-# Ignore execution in QA-Integration Environment as SHA Automation is set to OFF
+
 # Created by Saikiran Chittampally
-@OnlyInStaging
+#Removed from regression 2024/07
+@ignore
 @TestCase:213910
 Scenario: [213910] WERCSmart Portal and SHA Manager Test Flow for Product Type:  Grass Seed (RU000470)
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -1076,18 +1099,22 @@ Scenario: [213910] WERCSmart Portal and SHA Manager Test Flow for Product Type: 
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Grass Seed
+	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Grass Seed
+	Given I should see the The Product Page
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Grass Seed
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Grass Seed
+ 	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase213910
 	Given I should see the Product Information Page
 	#Given I call Shared Step 214000 (Product Information - Pesticide= Not considered, Fertilizer=YES, SOLD=US, everything else = No - Continue)
 	Given I should see the Product Information Page
-	Then In the Product Information Section, confirm section: 'Which best describes your product, including when FIFRA 25(b) Exempt' is displayed
+	Then In the Product Information Section, confirm the question: 'Which best describes your product, including when FIFRA 25(b) Exempt' is displayed
 	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
 	Then In the Product Information Section, set the option in section: 'Does the product contain fertilizer (N, P, K)?' to: Yes
-	Then In the Product Information Section, set the option in section: 'Nitrogen /Nitrates (“N”)' to: 8
-	Then In the Product Information Section, set the option in section: 'Phosphates /Phosphorous (“P”)' to: 14
-	Then In the Product Information Section, set the option in section: 'Potassium(“K”)' to: 14
-	Then In the Product Information Section, set the option in section: 'Slow-Release Agent' to: 3
+	Then In the Product Information Section, set the option in section: 'Nitrogen /Nitrates (“N”)' to: 21
+	Then In the Product Information Section, set the option in section: 'Phosphates /Phosphorous (“P”)' to: 22
+	Then In the Product Information Section, set the option in section: 'Potassium(“K”)' to: 4
+	Then In the Product Information Section, set the option in section: 'Slow-Release Agent' to: 10.50
 	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
 	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
@@ -1096,20 +1123,8 @@ Scenario: [213910] WERCSmart Portal and SHA Manager Test Flow for Product Type: 
 	Then in the Product Information page I click Continue
 	Then In the Product Information Section, a warning pop-up should be displayed with text: 'The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of the product in Pinellas County, Florida (Restricted). This is informational only and does not restrict your registration to the Retailer.'
 	Then In the Product Information Section Section, in Warning modal window click 'Ok' button
-	Then a Warning popup dialog should appear with the message: The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.	
-	And I see the following sections
-		| Section                       |
-		| Phosphates /Phosphorous (“P”) |
-		| Nitrogen /Nitrates (“N”)      |
-		| Potassium(“K”)                |
-		| Slow-Release Agent            |
-	Then I set the Phosphates /Phosphorous (“P”) field to: 22
-	Then I set the Nitrogen /Nitrates (“N”) field to: 21
-	Then I set the Potassium(“K”) field to: 4
-	Then I set the Slow-Release Agent field to: 10.50
-	Then I click continue
-	Then a Warning popup dialog should appear with the message: The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.
 	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+	#214002 Physical and Chemical Properties - Applicable Only to Type of Product:  Grass Seed (RU000470)
 	Given I should see the Physical and Chemical Properties Page
 	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
 	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
@@ -1202,7 +1217,7 @@ Scenario: [213905] WERCSmart Portal and SHA Manager Test Flow for Product Type: 
 	Then I save the product information as: TestCase213905
 	#Given I call Shared Step 214000 (Product Information - Pesticide= Not considered, Fertilizer=YES, SOLD=US, everything else = No - Continue)
 	Given I should see the Product Information Page
-	Then In the Product Information Section, confirm section: 'Which best describes your product, including when FIFRA 25(b) Exempt' is displayed
+	Then In the Product Information Section, confirm the question: 'Which best describes your product, including when FIFRA 25(b) Exempt' is displayed
 	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
 	Then In the Product Information Section, set the option in section: 'Does the product contain fertilizer (N, P, K)?' to: Yes
 	Then In the Product Information Section, set the option in section: 'Nitrogen /Nitrates (“N”)' to: 8

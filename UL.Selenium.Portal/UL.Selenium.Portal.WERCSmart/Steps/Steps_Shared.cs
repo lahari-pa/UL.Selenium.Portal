@@ -7696,7 +7696,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			});
 			thisStepsStudio.GivenInTheEditToolbarPageICheckTheFollowingItems(table3);
 			thisStepsStudio.GivenInTheEditToolbarPageIClick("save");
-
+			Delay.Seconds(3);
 			Report.Info("Going to do publishing");
 			thisStepsStudio.IClickOnPublishThisDocumentToOpenCurrentDocumentPopup();
 			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("authorized");

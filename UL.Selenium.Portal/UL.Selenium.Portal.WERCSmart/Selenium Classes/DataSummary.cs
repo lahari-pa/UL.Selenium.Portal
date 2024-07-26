@@ -655,7 +655,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public void ScrollToIngredients()
 		{
-			IWebElement ingredientsTable = this.FindElement(By.XPath(".//h2[contains(text(),'Ingredients')]/../table"), 2);
+			IWebElement ingredientsTable = this.FindElement(By.XPath(".//table[thead//div[text()='CAS Number/ChemicalName']]"), 2);
 			if (ingredientsTable == null)
 			{
 				Report.Error("Failed to find ingredients table");
