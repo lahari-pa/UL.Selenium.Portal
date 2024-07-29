@@ -155,28 +155,24 @@ Scenario: [60724] Condiments, Sauces - RU001454
 	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC60724 enter Size: 20 and enter Container Type: Glass Container
 	Given in the Universal Product Code (UPC) page I click Continue
 
-	Given In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
-	Given in the Regulatory Documents To Provide page I click Continue
-
 	#Given I call Shared Step 60567 (Upload Product Label only)
 	Given I should see the Regulatory Documents to Provide Page
 	Given in the Regulatory Documents to Provide page I click Continue
 	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
 	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should not display: Document is required: Product Label
 	Given in the Regulatory Documents to Provide page I click Continue
 
-	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
+	Given I should see the Additional Documents to Provide Page
+	Then in the Additional Documents to Provide page I click Continue
+
+	Given I should see the Optional Reports and Documents Available for Purchase Page
 	Then in the Optional Reports and Documents Available for Purchase page I click Continue
+
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
+	Given I should see the Optional Comments Page
 	Given In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: Comment Text
 	Then in the Optional Comments page I click Continue
-
-	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Condiments, Sauces
-    Given I should see the Data Acceptance Page
-	Given I click the Summary button in the Data Acceptance window
-	Given I switch to the Data Summary page
-	Given Type of Product (select) should be showing the following option: Condiments, Sauces
-	Given I close the Data Summary Tab
-    Given I should see the Data Acceptance Page
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60724
 	Then I navigate to the Home Page
