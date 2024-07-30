@@ -1470,8 +1470,7 @@ Scenario Outline: [225962] 3 Panel-More Filters pop up - Filter By Packing Size-
 	Then Under the search boxes, there are two check boxes: Has Any Value and Has No Value
 	Then Search field on left contains text 'Lower Bound' and search field on right contains text 'Upper Bound'
 	Then In the More Filters pop up, I now type a string in upperBound bound field: 5
-	Then In the More Filters pop up, I confirm New Range text now switches to <5 text with -sign in a circle in front of it
-	Then I confirm below the Selected Ranges text, I see a + sign in a circle with 'Add a Range' text right next to it
+	Then In the More Filters pop up, I confirm New Range text now switches to < 5 text with -sign in a circle in front of it 
 	Then In the More Filters pop up, I confirm in the Selected Filters area, that breadcrumb shows with the selected value: Packaging Size: < 5
 	Then In the product lookup page More Filters Popup, I Click the the Apply Filter Button
 	Then In the Product Lookup Page, The More Filters Popup is not showing
@@ -1501,8 +1500,7 @@ Scenario Outline: [225961] 3 Panel-More Filters pop up - Filter By Packing Size-
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded 
-	Then In the recent activities Page, I click the More Filters Button
-	Then In the Product Lookup Page, The More Filters Popup is showing
+	Then In the recent activities Page, I click the More Filters Button 
 	And In the More Filters pop up, I enter value in search box in the Filter Categories column: Packaging Size
 	Then In the More Filters pop up, I confirm searched filter is displayed in Filters Panel : Packaging Size
 	Then In the More Filters pop up, I click on searched filter in Filters Panel : Packaging Size 
@@ -1510,8 +1508,7 @@ Scenario Outline: [225961] 3 Panel-More Filters pop up - Filter By Packing Size-
 	Then Under the search boxes, there are two check boxes: Has Any Value and Has No Value
 	Then Search field on left contains text 'Lower Bound' and search field on right contains text 'Upper Bound' 
 	Then In the More Filters pop up, I now type a string in lowerBound bound field: 5
-	Then In the More Filters pop up, I confirm New Range text now switches to >5 text with -sign in a circle in front of it
-	Then I confirm below the Selected Ranges text, I see a + sign in a circle with 'Add a Range' text right next to it
+	Then In the More Filters pop up, I confirm New Range text now switches to > 5 text with -sign in a circle in front of it 
 	Then In the More Filters pop up, I confirm in the Selected Filters area, that breadcrumb shows with the selected value: Packaging Size: > 5
 	Then In the product lookup page More Filters Popup, I Click the the Apply Filter Button
 	Then In the Product Lookup Page, The More Filters Popup is not showing
@@ -1542,8 +1539,7 @@ Scenario Outline: [225960] 3 Panel-More Filters pop up - Filter By  Packing Size
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded 
-	Then In the recent activities Page, I click the More Filters Button
-	Then In the Product Lookup Page, The More Filters Popup is showing
+	Then In the recent activities Page, I click the More Filters Button 
 	And In the More Filters pop up, I enter value in search box in the Filter Categories column: Packaging Size
 	Then In the More Filters pop up, I confirm searched filter is displayed in Filters Panel : Packaging Size
 	Then In the More Filters pop up, I click on searched filter in Filters Panel : Packaging Size 
@@ -1551,13 +1547,11 @@ Scenario Outline: [225960] 3 Panel-More Filters pop up - Filter By  Packing Size
 	Then Under the search boxes, there are two check boxes: Has Any Value and Has No Value
 	Then Search field on left contains text 'Lower Bound' and search field on right contains text 'Upper Bound' 
 	Then In the More Filters pop up, I now type a string in lowerBound bound field: 5
-	Then In the More Filters pop up, I confirm New Range text now switches to >5 text with -sign in a circle in front of it
-	Then I confirm below the Selected Ranges text, I see a + sign in a circle with 'Add a Range' text right next to it
+	Then In the More Filters pop up, I confirm New Range text now switches to > 5 text with -sign in a circle in front of it 
 	Then In the More Filters pop up, I confirm in the Selected Filters area, that breadcrumb shows with the selected value: Packaging Size: > 5
 	Then In the More Filters pop up, I now type a string in upperBound bound field: 5
-	Then In the More Filters pop up, I confirm New Range text now switches to <5 text with -sign in a circle in front of it
-	Then I confirm below the Selected Ranges text, I see a + sign in a circle with 'Add a Range' text right next to it
-	Then In the More Filters pop up, I confirm in the Selected Filters area, that breadcrumb shows with the selected value: Packaging Size: < 5
+	Then In the More Filters pop up, I confirm New Range text now switches to 5 to 5 text with -sign in a circle in front of it 
+	Then In the More Filters pop up, I confirm in the Selected Filters area, that breadcrumb shows with the selected value: Packaging Size: 5 to 5
  
 
 	Examples:

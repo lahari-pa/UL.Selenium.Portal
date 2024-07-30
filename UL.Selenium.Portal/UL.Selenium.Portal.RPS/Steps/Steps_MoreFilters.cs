@@ -659,10 +659,10 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I confirm below the Selected Ranges text, I see a + sign in a circle with 'Add a Range' text right next to it")]
+        [RegexStepDefinition(@"I confirm below the Selected Ranges text, I see a + sign in a circle with Add a Range text right next to it")]
         public void InTheMoreFiltersPopupVerifyAddRange(string value)
         {
-            Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIVerifyNewRangeText("<5"), "Failed to display the range value as expected", "Successfully displayed the range value expected");
+            Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIVerifyNewRangeText("< 5"), "Failed to display the range value as expected", "Successfully displayed the range value expected");
             Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIVerifyMinusSignIsDisplayed(), "Failed to display -sign", "Successfully displayed -sign");
 
         }
