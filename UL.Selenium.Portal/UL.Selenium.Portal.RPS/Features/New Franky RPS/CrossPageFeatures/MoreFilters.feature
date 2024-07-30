@@ -1535,3 +1535,47 @@ Scenario Outline: [225961] 3 Panel-More Filters pop up - Filter By Packing Size-
 		| [#225961o]  3 Panel-More Filters pop up - Filter By Packing Size-Lower bound = Packaging Size > 5   | RPS.CT          | Product Lookup          | No          |
     	| [#225961p]  3 Panel-More Filters pop up - Filter By Packing Size-Lower bound = Packaging Size > 5   | RPS.CT          | Recent Activities       | No          |
 #	    | [#225961q]  3 Panel-More Filters pop up - Filter By Packing Size-Lower bound = Packaging Size > 5   | RPS.CT          | Classification History  | No          |
+
+
+Scenario Outline: [225960] 3 Panel-More Filters pop up - Filter By  Packing Size Lower and Upper search field defaults
+	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer> 
+	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
+	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
+	Then I confirm the page has loaded 
+	Then In the recent activities Page, I click the More Filters Button
+	Then In the Product Lookup Page, The More Filters Popup is showing
+	And In the More Filters pop up, I enter value in search box in the Filter Categories column: Packaging Size
+	Then In the More Filters pop up, I confirm searched filter is displayed in Filters Panel : Packaging Size
+	Then In the More Filters pop up, I click on searched filter in Filters Panel : Packaging Size 
+	Then Under Filter Parameters text, I verify there are two search boxes separated by text to
+	Then Under the search boxes, there are two check boxes: Has Any Value and Has No Value
+	Then Search field on left contains text 'Lower Bound' and search field on right contains text 'Upper Bound' 
+	Then In the More Filters pop up, I now type a string in lowerBound bound field: 5
+	Then In the More Filters pop up, I confirm New Range text now switches to >5 text with -sign in a circle in front of it
+	Then I confirm below the Selected Ranges text, I see a + sign in a circle with 'Add a Range' text right next to it
+	Then In the More Filters pop up, I confirm in the Selected Filters area, that breadcrumb shows with the selected value: Packaging Size: > 5
+	Then In the More Filters pop up, I now type a string in upperBound bound field: 5
+	Then In the More Filters pop up, I confirm New Range text now switches to <5 text with -sign in a circle in front of it
+	Then I confirm below the Selected Ranges text, I see a + sign in a circle with 'Add a Range' text right next to it
+	Then In the More Filters pop up, I confirm in the Selected Filters area, that breadcrumb shows with the selected value: Packaging Size: < 5
+ 
+
+	Examples:
+		| Scenario Name                                                                                             | Retailer        | Page                    | IsWebviewer |
+ 		| [#225960a]  3 Panel-More Filters pop up - Filter By  Packing Size Lower and Upper search field defaults   | RPS.TG          | Product Lookup          | No          |
+ 		| [#225960b]  3 Panel-More Filters pop up - Filter By  Packing Size Lower and Upper search field defaults   | RPS.TG          | Recent Activities       | No          |
+#		| [#225960c]  3 Panel-More Filters pop up - Filter By  Packing Size Lower and Upper search field defaults   | RPS.CV          | Product Lookup          | No          |
+		| [#225960d]  3 Panel-More Filters pop up - Filter By  Packing Size Lower and Upper search field defaults   | RPS.CV          | Recent Activities       | No          |
+#		| [#225960e]  3 Panel-More Filters pop up - Filter By  Packing Size Lower and Upper search field defaults  | RPS.LW          | Product Lookup          | No          |
+		| [#225960f]  3 Panel-More Filters pop up - Filter By  Packing Size Lower and Upper search field defaults   | RPS.LW          | Recent Activities       | No          |
+		| [#225960g]  3 Panel-More Filters pop up - Filter By  Packing Size Lower and Upper search field defaults   | RPS.SF          | Product Lookup          | No          |
+ 		| [#225960h]  3 Panel-More Filters pop up - Filter By  Packing Size Lower and Upper search field defaults   | RPS.SF          | Recent Activities       | No          |
+#		| [#225960i]  3 Panel-More Filters pop up - Filter By  Packing Size Lower and Upper search field defaults   | RPS.LW          | Demo Viewer             | Yes         |
+#		| [#225960j]  3 Panel-More Filters pop up - Filter By  Packing Size Lower and Upper search field defaults   | RPS.TG          | Store Viewer            | Yes         |
+#		| [#225960k]  3 Panel-More Filters pop up - Filter By  Packing Size Lower and Upper search field defaults   | RPS.TG          | Status Viewer           | Yes         |
+#		| [#225960l]  3 Panel-More Filters pop up - Filter By  Packing Size Lower and Upper search field defaults   | RPS.TG          | HQ Viewer               | Yes         |
+		| [#225960m]  3 Panel-More Filters pop up - Filter By  Packing Size Lower and Upper search field defaults   | RPS.SF          | SmartFinal_Store        | Yes         |
+# 		| [#225960n]  3 Panel-More Filters pop up - Filter By  Packing Size Lower and Upper search field defaults   | RPS.LW          | Lowes_store             | Yes         |
+		| [#225960o]  3 Panel-More Filters pop up - Filter By  Packing Size Lower and Upper search field defaults   | RPS.CT          | Product Lookup          | No          |
+    	| [#225960p]  3 Panel-More Filters pop up - Filter By  Packing Size Lower and Upper search field defaults   | RPS.CT          | Recent Activities       | No          |
+#	    | [#225960q]  3 Panel-More Filters pop up - Filter By  Packing Size Lower and Upper search field defaults   | RPS.CT          | Classification History  | No          |
