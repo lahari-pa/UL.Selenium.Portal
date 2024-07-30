@@ -98,7 +98,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 					break;
 			}
 		}
+		[RegexStepDefinition(@"In the Ingredients Section confirm error is displayed with text: (.*)")]
+		public void IngredientsTableErrorDisplayed( string errorText)
+		{
+			new StepsNewProduct().ErrorMessageSpecific(errorText);	
 
+		}
 		[RegexStepDefinition(@"In the Ingredients Section ingredients table, confirm row with (component name|CAS number): (.*) (is|is not) displayed")]
 		public void IngredientsTableRowIsIsNotDisplayed(string searchType, string searchText, string is_isnot)
 		{
