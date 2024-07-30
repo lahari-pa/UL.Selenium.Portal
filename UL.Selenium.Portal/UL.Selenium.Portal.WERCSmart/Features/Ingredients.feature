@@ -159,6 +159,7 @@ Scenario: [71987] Sorting Percent on Ingredient page
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71987
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase71987
+
 @TestCase:65469
 Scenario: [65469] Ingredients - Select Publicly Disclosed check box - un-check Publicly Disclosed check box- Trade secret is active
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -166,7 +167,11 @@ Scenario: [65469] Ingredients - Select Publicly Disclosed check box - un-check P
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble Solution
+	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble Solution
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bubble Solution
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Bubble Solution
+	Then in the The Product page, I click Continue
 	#Given I call Shared Step 59680a (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
 	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
@@ -187,13 +192,17 @@ Scenario: [65469] Ingredients - Select Publicly Disclosed check box - un-check P
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Not applicable/available
 	And In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Then in the Physical and Chemical Properties page, I click Continue
-	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Water         | 100     | true                | false       |            |
-	Then for ingredient: Water the Trade Secret field is disabled
-	Given for ingredient: Water I set Public Disclosure checkbox to checked: false
-	Then for ingredient: Water the Trade Secret field is enabled
-	Then in the Ingredients page I click Continue
+	#Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Water         | 100     | true                | false       |            |
+	And I should see the Ingredients Page
+	Then In the Ingredients section, add component with component name: Water
+	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
+	Then In the Ingredients Table row with component name: Water, in Publicly Disclosed? column set checkbox to checked
+	Then In the Ingredients Table row with component name: Water, in Trade Secret column confirm checkbox is disabled
+	Then In the Ingredients Table row with component name: Water, in Publicly Disclosed? column set checkbox to unchecked
+	Then In the Ingredients Table row with component name: Water, in Trade Secret column confirm checkbox is enabled
+	Then in the Ingredients page I click Continue	
 	And I should see the Inventory Status, Prop 65 (US) Page
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65469
 	Then I navigate to the Home Page
@@ -202,11 +211,10 @@ Scenario: [65469] Ingredients - Select Publicly Disclosed check box - un-check P
 @TestCase:65470
 Scenario: [65470] Ingredients - Select Trade Secret check box - Un-check Trade Secret check box - Publicly Disclosed & Public Name are active
 	Given I log in with the account saved in TReVor as: ProductAccount
-#	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
 	Then I should be on the The Product Page
 	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bubble Solution_#65470
@@ -232,16 +240,20 @@ Scenario: [65470] Ingredients - Select Trade Secret check box - Un-check Trade S
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Not applicable/available
 	And In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Then in the Physical and Chemical Properties page, I click Continue
-	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Water         | 100     | false               | true        |            |
-	Then for ingredient: Water the Publicly Disclosed field is disabled
-	Then for ingredient: Water the Public Name field is disabled
-	Given for ingredient: Water I set Trade Secret checkbox to checked: false
-	Then for ingredient: Water the Publicly Disclosed field is enabled
-	Then for ingredient: Water the Public Name field is enabled
-	Then for ingredient: Water I confirm the Public Name selectbox contains names for selection
-	Then in the Ingredients page I click Continue
+	#Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Water         | 100     | false               | true        |            |
+	And I should see the Ingredients Page
+	Then In the Ingredients section, add component with component name: Water
+	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
+	Then In the Ingredients Table row with component name: Water, in Trade Secret? column set checkbox to checked
+	Then In the Ingredients Table row with component name: Water, in Publicly Disclosed column confirm checkbox is disabled
+	Then In the Ingredients Table row with component name: Water, in Public Name column confirm checkbox is disabled
+	Then In the Ingredients Table row with component name: Water, in Trade Secret? column set checkbox to unchecked
+	Then In the Ingredients Table row with component name: Water, in Publicly Disclosed column confirm checkbox is enabled
+	Then In the Ingredients Table row with component name: Water, in Public Name column confirm checkbox is enabled
+	Then In the Ingredients Table row with component name: Water, in Public Name column select element does exists
+	Then in the Ingredients page I click Continue	
 	And I should see the Inventory Status, Prop 65 (US) Page
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65470
 	Then I navigate to the Home Page
@@ -256,7 +268,6 @@ Scenario: [65459] Ingredients - Select Trade Secret check box - Publicly Disclos
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
 	Then I should be on the The Product Page
 	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bubble Solution_#65459
@@ -282,11 +293,15 @@ Scenario: [65459] Ingredients - Select Trade Secret check box - Publicly Disclos
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Not applicable/available
 	And In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Then in the Physical and Chemical Properties page, I click Continue
-	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Water         | 100     | false               | true        |            |
-	Then for ingredient: Water the Publicly Disclosed field is disabled
-	Then for ingredient: Water the Public Name field is disabled
+	#Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Water         | 100     | false               | true        |            |
+	And I should see the Ingredients Page
+	Then In the Ingredients section, add component with component name: Water
+	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
+	Then In the Ingredients Table row with component name: Water, in Trade Secret? column set checkbox to checked
+	Then In the Ingredients Table row with component name: Water, in Publicly Disclosed column confirm checkbox is disabled
+	Then In the Ingredients Table row with component name: Water, in Public Name column confirm checkbox is disabled
 	Then in the Ingredients page I click Continue
 	And I should see the Inventory Status, Prop 65 (US) Page
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65459
