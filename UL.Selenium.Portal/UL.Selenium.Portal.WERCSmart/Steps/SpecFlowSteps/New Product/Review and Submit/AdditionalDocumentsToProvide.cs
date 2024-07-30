@@ -137,6 +137,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string section = "OSHA-compliant Safety Data Sheet (Optional)";
 			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, condition);
 		}
+		[RegexStepDefinition(@"In the Additional Documents to Provide, section 'Flash Point Testing Report' (is|is not) displayed")]
+		public void ThenInTheAdditionalDocumentsToProvideSectionFlashPointIsDisplayed(string condition)
+		{
+			string section = "Flash Point Testing Report";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, condition);
+		}
 		[RegexStepDefinition(@"In the Additional Documents to Provide, section 'Toxicity Characteristic Leaching Procedure \(TCLP\)' (is|is not) displayed")]
 		public void ThenInTheAdditionalDocumentsToProvideSectionTCLPIsIsNotDisplayed(string condition)
 		{
