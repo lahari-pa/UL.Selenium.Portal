@@ -1468,7 +1468,7 @@ Scenario Outline: [225962] 3 Panel-More Filters pop up - Filter By Packing Size-
 	Then In the More Filters pop up, I click on searched filter in Filters Panel : Packaging Size 
 	Then Under Filter Parameters text, I verify there are two search boxes separated by text to
 	Then Under the search boxes, there are two check boxes: Has Any Value and Has No Value
-	Then Search field on left contains text 'Lower Bound' and search field on right contains text 'Upper Bound' 
+	Then Search field on left contains text 'Lower Bound' and search field on right contains text 'Upper Bound'
 	Then In the More Filters pop up, I now type a string in upperBound bound field: 5
 	Then In the More Filters pop up, I confirm New Range text now switches to <5 text with -sign in a circle in front of it
 	Then I confirm below the Selected Ranges text, I see a + sign in a circle with 'Add a Range' text right next to it

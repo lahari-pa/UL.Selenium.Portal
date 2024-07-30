@@ -636,7 +636,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"Search field on left contains text 'Lower Bound' and search field on right contains text 'Upper Bound' ")]
+        [RegexStepDefinition(@"Search field on left contains text 'Lower Bound' and search field on right contains text 'Upper Bound'")]
         public void InTheMoreFiltersUnderFilterParameterVerifyPlaceHolderValues()
         {
             Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIVerifyLowerBoundPlaceholderIsDisplayed("Lower Bound"), "Failed to display the placeholder lower bound", "Successfully displayed the placeholder lower bound");
