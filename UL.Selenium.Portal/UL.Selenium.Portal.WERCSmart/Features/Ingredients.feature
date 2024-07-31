@@ -578,6 +578,7 @@ Scenario: [69796] Aerosol Warning Message on Ingredient page
 	Then In the Ingredients Section confirm error is displayed with text: Formulation must total or exceed 100%.
 	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
 	Given in the Ingredients page I click Continue
+	Then I wait 60 seconds for the Inventory Status, Prop 65 (US) Page to load
 	Then I should see the Inventory Status, Prop 65 (US) Page
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase69796
 	Then I navigate to the Home Page
