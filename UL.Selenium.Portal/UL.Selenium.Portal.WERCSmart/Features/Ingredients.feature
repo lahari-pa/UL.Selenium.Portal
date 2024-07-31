@@ -474,7 +474,7 @@ Scenario: [71291] Product Ingredients contains a third party component that requ
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-#	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mulch with Pesticide
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mulch with Pesticide
 	Then I should be on the The Product Page
 	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Mulch with Pesticide_#71291
 	And In the Product Section, set the option in section: 'Type of Product (select)' to: Mulch with Pesticide
@@ -490,15 +490,23 @@ Scenario: [71291] Product Ingredients contains a third party component that requ
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page I click Continue
-
-	And I set the Secondary Physical State option to: Solid
-	And I set the When mixed with an equal amount of water field to: No
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
 	Then in the Physical and Chemical Properties page I click Continue
-	Given I add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Wood chips    | 75.0    | false               | false       |            |
-		| RED 4         | 20.0    | false               | false       |            |
-		| Clothianidin  | 5.0     | false               | false       |            |
+	#Given I add the following ingredients:
+	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Wood chips    | 75.0    | false               | false       |            |
+	#	| RED 4         | 20.0    | false               | false       |            |
+	#	| Clothianidin  | 5.0     | false               | false       |            |
+	And I should see the Ingredients Page
+	Then In the Ingredients section, add component with component name: Wood chips
+	Then In the Ingredients Table row with component name: Wood chips, in Percent column text input enter: 75
+	Then In the Ingredients section, add component with component name: RED 4
+	Then In the Ingredients Table row with component name: RED 4, in Percent column text input enter: 20
+	Then In the Ingredients section, add component with component name: Clothianidin
+	Then In the Ingredients Table row with component name: Clothianidin, in Percent column text input enter: 5
 	Then in the Ingredients page I click Continue
 	And I should see the Neonicotinoid Warning Page
 	Then I should see an alert with title: Danger & Warning subtitle: This product contains a neonicotinoid pesticide which may adversely affect pollinating bee populations. Text: Presence of this ingredient may limit the sale of this product through a Retailer. Please refer to the EPA website for more information.
