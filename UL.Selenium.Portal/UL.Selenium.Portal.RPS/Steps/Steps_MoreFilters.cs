@@ -621,6 +621,54 @@ namespace UL.Selenium.Portal.RPS.Steps
             GeneralUtilities.WaitForLoadingToFinish();
         }
 
+        [RegexStepDefinition(@"Under Filter Parameters text, I verify there are two search boxes separated by text to")]
+        public void InTheMoreFiltersUnderFilterParameterVerifySearchBoxes()
+        {
+            Report.IsTrue(new MoreFiltersPopup().UnderFilterParamterVeifyTheTwoTextBoxes(), "Failed to display the 2 search sboxes under filter panels", "Successfully displayed the 2 search boxes under filter panels");
+            GeneralUtilities.WaitForLoadingToFinish();
+        }
+
+        [RegexStepDefinition(@"Under the search boxes, there are two check boxes: Has Any Value and Has No Value")]
+        public void InTheMoreFiltersUnderFilterParameterVerifyHasAnyValueAndHasNoValueIsDisplayed()
+        {
+            List<string> checkboxoptions = new List<string> { "Has Any Value", "Has No Value" }; 
+            Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIConfirmListOfCheckboxesAreDisplayed(checkboxoptions), "Failed to display two checkbox field: Has Any Value and Has No Value", "Successfully displayed two checkbox field: Has Any Value and Has No Value");
+
+        }
+
+        [RegexStepDefinition(@"Search field on left contains text 'Lower Bound' and search field on right contains text 'Upper Bound'")]
+        public void InTheMoreFiltersUnderFilterParameterVerifyPlaceHolderValues()
+        {
+            Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIVerifyLowerBoundPlaceholderIsDisplayed("Lower Bound"), "Failed to display the placeholder lower bound", "Successfully displayed the placeholder lower bound");
+            Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIVerifyUpperBoundPlaceholderIsDisplayed("Upper Bound"), "Failed to display the placeholder upper bound", "Successfully displayed the placeholder upper bound");
+        }
+
+        [RegexStepDefinition(@"In the More Filters pop up, I now type a string in (.*) bound field: (.*)")]
+        public void InTheMoreFiltersPopupInFilterParameterPanelIboundValue(string boundvalue, string searchText)
+        {
+            Report.Info($"Attempting to Enter value in {boundvalue} bound search box");
+            new MoreFiltersPopup().InFilterParameterPanelIEnterBound( boundvalue, searchText);
+             
+        }
+
+        [RegexStepDefinition(@"In the More Filters pop up, I confirm New Range text now switches to (.*) text with -sign in a circle in front of it")]
+        public void InTheMoreFiltersPopupVerifyNewRangeText(string value)
+        {
+            Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIVerifyNewRangeText(value), "Failed to display the range value as expected", "Successfully displayed the range value expected");
+            Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIVerifyMinusSignIsDisplayed(), "Failed to display -sign", "Successfully displayed -sign");
+
+        }
+
+        [RegexStepDefinition(@"I confirm below the Selected Ranges text, I see a + sign in a circle with Add a Range text right next to it")]
+        public void InTheMoreFiltersPopupVerifyAddRange(string value)
+        {
+            Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIVerifyNewRangeText("< 5"), "Failed to display the range value as expected", "Successfully displayed the range value expected");
+            Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIVerifyMinusSignIsDisplayed(), "Failed to display -sign", "Successfully displayed -sign");
+
+        }
+
+
+
 
 
 

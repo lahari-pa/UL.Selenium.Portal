@@ -1863,7 +1863,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[RegexStepDefinition(@"in the VOC Limits table, the (Use|VOC Compliance Limit|Regulation) column should contain the value: (.*)")]
 		public void VOCLimitsTableContainsUse(string column, string valueExpected)
 		{
-			List<VocLimitsWithUnits> displayed = new NewProduct().GetDisplayedVocLimitsWithUnits();
+			//List<VocLimitsWithUnits> displayed = new NewProduct().GetDisplayedVocLimitsWithUnits();
+			List<VocLimits> displayed = new NewProduct().GetDisplayedVocLimits();
 			if (column == "Use")
 			{
 				Report.IsTrue(displayed.Any(x => x.Use == valueExpected),
