@@ -216,7 +216,9 @@ Given in the Volatile Organic Compound Summary page I click Continue
 
 #Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57711, container type: Aerosol Can and size: 33
 
-Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+#Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
 
 #Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 Given I should see the Regulatory Documents to Provide Page

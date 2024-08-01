@@ -73,7 +73,10 @@ Scenario: [57295] Absorbent solid - Automotive(RU000939) - 8-S
 	Then in the Transportation Details 1 page I click Continue
 
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	#Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
+
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
@@ -136,7 +139,10 @@ Scenario: [57332] Automotive Accessories containing Gel (Seat Cushions, etc) - 8
 	Given I call Shared Step 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
 	Given I call Shared Step 57980 (Transportation Details 1 - Yes option - Select IMDG, Limited Quantity - Continue - Happy Path)
 	Given I call Shared Step 57981 (Transportation Details - UN Number Water (IMDG) - Enter UN Number and select other data - Continue - Happy Path) : 1954
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	#Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
+
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
@@ -200,7 +206,10 @@ Scenario: [58187] Matches (RU000317) - 8-S
 	Given I call Shared Step 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
 	Given I call Shared Step 57980 (Transportation Details 1 - Yes option - Select IMDG, Limited Quantity - Continue - Happy Path)
 	Given I call Shared Step 57981 (Transportation Details - UN Number Water (IMDG) - Enter UN Number and select other data - Continue - Happy Path) : 1954
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	#Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
+
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
@@ -263,7 +272,10 @@ Scenario: [58293] Engines for Model Rockets(RU000338) - 8-S
 	Given I call Shared Step 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
 	Given I call Shared Step 57980 (Transportation Details - Yes only option - Select IMDG, Fully regulated - Continue - Happy Path)
 	Given I call Shared Step 57981 (Transportation Details - UN Number Water (IMDG) - Enter UN Number and select other data - Continue - Happy Path) : 1954
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	#Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
+
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
@@ -329,7 +341,10 @@ Scenario: [58297] Fireworks (RU000330) - 8-S
 	Then in the Transportation Details 1 page I click Continue
 
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	#Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
+
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
@@ -434,7 +449,11 @@ Scenario: [58104] Fabric Dye - Liquid or Solid - 8-L
 
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+
+	#Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
+
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
@@ -508,8 +527,16 @@ Scenario: [58210] Antibiotic, Liquid or Cream, Non-Aerosol - 8-L
 	Then in the Regulatory Information 3 page I click Continue
 	#Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 	#Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
-	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+
+	#Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+	Then I should be on the Transportation Details 1 Page
+	And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
+	Then in the Transportation Details 1 page, I click Continue
+
+#	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
+
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
@@ -569,7 +596,11 @@ Scenario: [58285] Toothpaste - Whitening (RU001359) - 8-L
 
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+
+#	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
+
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
@@ -636,7 +667,10 @@ Scenario: [58401] Correction Fluid(RU000201) - 8L
 	Then in the Transportation Details 1 page I click Continue
 
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+#	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
+
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
@@ -700,7 +734,11 @@ Scenario: [57339] Craft Kits containing Glues and Paints - Crafts - 8-All - 8L
 	Then in the Transportation Details 1 page I click Continue
 
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+
+#	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
+
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
@@ -761,7 +799,11 @@ Scenario: [57088] Engine (motor) oil for Auto or Boat - 8L
 
 	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+
+#	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
+
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author

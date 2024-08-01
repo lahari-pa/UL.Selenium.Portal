@@ -204,7 +204,10 @@ Scenario: [57922] Odor Remover/Eliminator - Aerosol (RU001086) - 4A
 		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |
 		| No                                       | 2                     | 2                          | Yes            |
 	Given in the Volatile Organic Compound Summary page I click Continue
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	#Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
+
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
@@ -257,7 +260,10 @@ Scenario: [57924] Penetrants (RU000801) - Flow 4AL - 4A
 		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |
 		| No                                       | 2                     | 2                          | Yes            |
 	Given in the Volatile Organic Compound Summary page I click Continue
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	#Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
+
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
@@ -317,7 +323,10 @@ Scenario: [57925] Floor Maintenance Product - Non-Aerosol (RU001433) 4-L
 		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |
 		| No                                       | 2                     | 2                          | Yes            |
 	Given in the Volatile Organic Compound Summary page I click Continue
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	#Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
+
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
@@ -381,7 +390,10 @@ Scenario: [57927] Floor Wax - Wood (RU000790) 4LS - 4S
 		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |
 		| No                                       | 2                     | 2                          | Yes            |
 	Given in the Volatile Organic Compound Summary page I click Continue
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	#Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+		Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
+
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
@@ -452,7 +464,10 @@ Scenario: [57931] Hair Styling Product - Mousse (RU000669) - 4A
 		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |
 		| No                                       | 2                     | 2                          | Yes            |
 	Given in the Volatile Organic Compound Summary page I click Continue
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	#Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
+
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
@@ -510,7 +525,10 @@ Scenario: [57933] Hair Styling Product - Aerosol and Pump Spray - Flow 4AL - 4A
 		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |
 		| No                                       | 2                     | 2                          | Yes            |
 	Given in the Volatile Organic Compound Summary page I click Continue
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	#Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
+
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
@@ -697,7 +715,10 @@ Scenario: [57958] Adhesive - Aerosol Web Spray (RU000909) - 4A
 		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |
 		| No                                       | 2                     | 2                          | Yes            |
 	Given in the Volatile Organic Compound Summary page I click Continue
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+#	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
+
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
@@ -762,7 +783,10 @@ Scenario: [57977] Adhesive (Spray, Special Purpose): Polyolefin and Laminate Rep
 		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |
 		| No                                       | 2                     | 2                          | Yes            |
 	Given in the Volatile Organic Compound Summary page I click Continue
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	#Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
+
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
@@ -1001,7 +1025,10 @@ Scenario: [57983] Lubricant, Multi-Purpose, Not for Personal Use (RU000674) 4L
 		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |
 		| No                                       | 2                     | 2                          | Yes            |
 	Given in the Volatile Organic Compound Summary page I click Continue
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	#Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
+
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
@@ -1236,12 +1263,19 @@ Scenario: [57988] Anti-Static Product - Non-Aerosol (RU000667) 4-L
 	Then in the Ingredients page I click Continue
 
 	Given I call Shared Step 57932 (Regulatory - TSCA Only - Yes to All Prop 65 questions - Continue - Happy Path)
-	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+	#Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+	Then I should be on the Transportation Details 1 Page
+	And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
+	Then in the Transportation Details 1 page, I click Continue
+
 	Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)
 		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |
 		| No                                       | 2                     | 2                          | Yes            |
 	Given in the Volatile Organic Compound Summary page I click Continue
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+#	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
+
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author

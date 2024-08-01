@@ -428,13 +428,19 @@ Scenario: [59278] Nickel Metal Hydride (NiMH) Battery - RU000373
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC59278
-	Given I delete all products with UPC Number: saved as UPC59278
+	Then In the Product Grid, delete all products with UPC Number: saved as UPC59278
+
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nickel Metal Hydride (NiMH) Battery
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nickel Metal Hydride (NiMH) Battery
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Nickel Metal Hydride (NiMH) Battery_#59278
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Nickel Metal Hydride (NiMH) Battery
+	Then in the The Product page, I click Continue
+
 	#Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Then I should be on the Product Information Page
 	And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No 
@@ -444,6 +450,7 @@ Scenario: [59278] Nickel Metal Hydride (NiMH) Battery - RU000373
 	Then in the Product Information page, I click Continue
 
 	Given I save the product information as: TestCase59278
+
 	#Given I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 	Then I should be on the Physical and Chemical Properties Page
 	And In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
@@ -451,14 +458,21 @@ Scenario: [59278] Nickel Metal Hydride (NiMH) Battery - RU000373
 	And In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
 	Then in the Physical and Chemical Properties page, I click Continue
 
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Nickel        | 9       | false               | false       |            |
-		| Lanthanum     | 1       | false               | false       |            |
-		| Aqua          | 90      | false               | false       |            |
-	And I should see the Formulation > Batteries Page
-	Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
-	Given I click continue
+	#Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Nickel        | 9       | false               | false       |            |
+	#	| Lanthanum     | 1       | false               | false       |            |
+	#	| Aqua          | 90      | false               | false       |            |
+	Then I should be on the Ingredients Page
+	And In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     | False               | False         |             |
+	Then in the Ingredients page, I click Continue
+
+	Then I should be on the Formulation > Batteries Page
+	And In the Formulation > Batteries Section, set the radio option in section: 'Consent to Tier 2.1, 2.2, 4.2 Data Uses': to: Granted
+	Then in the Formulation > Batteries page, I click Continue
+
 	#Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Then I should be on the Inventory Status, Prop 65 (US) Page
 	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is exempt from TSCA chemical Inventory listing requirements.
@@ -473,22 +487,23 @@ Scenario: [59278] Nickel Metal Hydride (NiMH) Battery - RU000373
 	And In the Select Retailers window, click 'Done' button
 	Then in the Retailer page, I click Continue
 
-	Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59278 with container type: Metal Container size: 40.0 and quantity: 100
-	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	Given I should see the Regulatory Documents to Provide Page
-	Given I click the browse button for label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
-	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-    Given I click continue
-	#Given I call Shared Step 60567 (Upload Product Label only)
-	Given I should see the Regulatory Documents to Provide Page
-	Given in the Regulatory Documents to Provide page I click Continue
-	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
-	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
-	Given in the Regulatory Documents to Provide page I click Continue
+	#Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59278 with container type: Metal Container size: 40.0 and quantity: 100
+	Then I should be on the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	And In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	And In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC59278 enter Size: 40.0 enter Container Type: Metal Container and enter Quantity: 100
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page, I click Continue
 
-	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Then I should be on the Regulatory Documents to Provide Page
+	And In the Regulatory Documents to Provide Section, upload file in section: 'I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide.'
+	And In the Regulatory Documents to Provide Section, set the radio option in section: 'Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS. When providing an SDS it must be both U.S. and Canada formats.' to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
+	And In the Regulatory Documents to Provide Section, set the radio option in section: 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
+	And In the Regulatory Documents to Provide Section, upload file in section: 'Label in both French and English'
+	Then in the Regulatory Documents to Provide page, I click Continue
+
+	Then in the Additional Documents to Provide page, I click Continue
+	Then in the Optional Reports and Documents Available for Purchase page, I click Continue
+
 #	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
 	Then I should be on the Additional Documents -> Contact Information Page
 	And In the Additional Documents -> Contact Information section, for section: 'Manufacturer Name' enter text: Manufacturer
@@ -511,13 +526,19 @@ Scenario: [59278] Nickel Metal Hydride (NiMH) Battery - RU000373
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Partition Coefficient' enter text: 9.1000223
 	Then in the Safety Data Sheet Authoring - Additional Data (Optional) page, I click Continue
 
-
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 59278. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I should see the Optional Comments Page
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
 	Then in the Optional Comments page I click Continue
 
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Nickel Metal Hydride (NiMH) Battery
+	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Nickel Metal Hydride (NiMH) Battery
+	Then I should be on the Data Acceptance Page
+	And In the Data Acceptance Section, click 'Summary' button
+	And I switch to the tab with Data Summary page
+	And In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Nickel Metal Hydride (NiMH) Battery
+	And I close the tab with Data Summary page
+	Then I should be on the Data Acceptance Page
+
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59278
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase59278
@@ -647,14 +668,21 @@ Scenario: [59281] Water-Charged Cell - RU001543
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC59281
-	Given I delete all products with UPC Number: saved as UPC59281
+	Then In the Product Grid, delete all products with UPC Number: saved as UPC59281
+
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Water-Charged Cell
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Water-Charged Cell
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Water-Charged Cell_#59281
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Water-Charged Cell
+	Then in the The Product page, I click Continue
+
 	Given I save the product information as: TestCase59281
+
 	#Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Then I should be on the Product Information Page
 	And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No 
@@ -670,15 +698,22 @@ Scenario: [59281] Water-Charged Cell - RU001543
 	And In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
 	Then in the Physical and Chemical Properties page, I click Continue
 
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| 7647-14-5     | 33.33   | false               | false       |            |
-		| Copper        | 4.70    | false               | false       |            |
-		| Magnesium     | 5.30    | false               | false       |            |
-		| Aqua          | 56.67   | false               | false       |            |
-	And I should see the Formulation > Batteries Page
-	Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
-	Given I click continue
+#	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+#		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+#		| 7647-14-5     | 33.33   | false               | false       |            |
+#		| Copper        | 4.70    | false               | false       |            |
+#		| Magnesium     | 5.30    | false               | false       |            |
+#		| Aqua          | 56.67   | false               | false       |            |
+	Then I should be on the Ingredients Page
+	And In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     | False               | False         |             |
+	Then in the Ingredients page, I click Continue
+
+	Then I should be on the Formulation > Batteries Page
+	And In the Formulation > Batteries Section, set the radio option in section: 'Consent to Tier 2.1, 2.2, 4.2 Data Uses': to: Granted
+	Then in the Formulation > Batteries page, I click Continue
+
 	#Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Then I should be on the Inventory Status, Prop 65 (US) Page
 	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is exempt from TSCA chemical Inventory listing requirements.
@@ -693,14 +728,20 @@ Scenario: [59281] Water-Charged Cell - RU001543
 	And In the Select Retailers window, click 'Done' button
 	Then in the Retailer page, I click Continue
 
-	Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59281 with container type: Metal Container size: 30.0 and quantity: 50
+	#Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59281 with container type: Metal Container size: 30.0 and quantity: 50
+	Then I should be on the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	And In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	And In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC59281 enter Size: 30.0 enter Container Type: Metal Container and enter Quantity: 50
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page, I click Continue
+
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	Given I should see the Regulatory Documents to Provide Page
-	Given I click the browse button for label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
-	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-	Given I click continue
+	Then I should be on the Regulatory Documents to Provide Page
+	And In the Regulatory Documents to Provide Section, upload file in section: 'I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide.'
+	And In the Regulatory Documents to Provide Section, set the radio option in section: 'Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS. When providing an SDS it must be both U.S. and Canada formats.' to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
+	And In the Regulatory Documents to Provide Section, set the radio option in section: 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
+	And In the Regulatory Documents to Provide Section, upload file in section: 'Label in both French and English'
+	Then in the Regulatory Documents to Provide page, I click Continue
+
 	#Given I call Shared Step 60567 (Upload Product Label only)
 	Given I should see the Regulatory Documents to Provide Page
 	Given in the Regulatory Documents to Provide page I click Continue
@@ -709,6 +750,7 @@ Scenario: [59281] Water-Charged Cell - RU001543
 	Given in the Regulatory Documents to Provide page I click Continue
 
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+
 #	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
 	Then I should be on the Additional Documents -> Contact Information Page
 	And In the Additional Documents -> Contact Information section, for section: 'Manufacturer Name' enter text: Manufacturer
@@ -731,28 +773,43 @@ Scenario: [59281] Water-Charged Cell - RU001543
 	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Partition Coefficient' enter text: 2.1008
 	Then in the Safety Data Sheet Authoring - Additional Data (Optional) page, I click Continue
 
-	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 59281. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
+#	Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 59281. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I should see the Optional Comments Page
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
 	Then in the Optional Comments page I click Continue
 
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Water-Charged Cell
+#	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Water-Charged Cell
+	Then I should be on the Data Acceptance Page
+	And In the Data Acceptance Section, click 'Summary' button
+	And I switch to the tab with Data Summary page
+	And In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Water-Charged Cell
+	And I close the tab with Data Summary page
+	Then I should be on the Data Acceptance Page
+
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59281
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase59281
+
 @TestCase:59282
 Scenario: [59282] Zinc Air - RU001205
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC59282
-	Given I delete all products with UPC Number: saved as UPC59282
+	Then In the Product Grid, delete all products with UPC Number: saved as UPC59282
+
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Zinc Air
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Zinc Air
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Zinc Air_#59282
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Zinc Air
+	Then in the The Product page, I click Continue
+
 	Given I save the product information as: TestCase59282
+
 	#Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Then I should be on the Product Information Page
 	And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No 
@@ -768,14 +825,21 @@ Scenario: [59282] Zinc Air - RU001205
 	And In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
 	Then in the Physical and Chemical Properties page, I click Continue
 
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Zinc          | 30      | false               | false       |            |
-		| Carbon        | 15      | false               | false       |            |
-		| Aqua          | 55      | false               | false       |            |
-	And I should see the Formulation > Batteries Page
-	Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
-	Given I click continue
+	#Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Zinc          | 30      | false               | false       |            |
+	#	| Carbon        | 15      | false               | false       |            |
+	#	| Aqua          | 55      | false               | false       |            |
+	Then I should be on the Ingredients Page
+	And In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     | False               | False         |             |
+	Then in the Ingredients page, I click Continue
+
+	Then I should be on the Formulation > Batteries Page
+	And In the Formulation > Batteries Section, set the radio option in section: 'Consent to Tier 2.1, 2.2, 4.2 Data Uses': to: Granted
+	Then in the Formulation > Batteries page, I click Continue
+
 	#Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Then I should be on the Inventory Status, Prop 65 (US) Page
 	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is exempt from TSCA chemical Inventory listing requirements.
@@ -790,22 +854,23 @@ Scenario: [59282] Zinc Air - RU001205
 	And In the Select Retailers window, click 'Done' button
 	Then in the Retailer page, I click Continue
 
-	Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59282 with container type: Metal Container size: 40.0 and quantity: 100
-	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	Given I should see the Regulatory Documents to Provide Page
-	Given I click the browse button for label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
-	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-	Given I click continue
-	#Given I call Shared Step 60567 (Upload Product Label only)
-	Given I should see the Regulatory Documents to Provide Page
-	Given in the Regulatory Documents to Provide page I click Continue
-	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
-	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
-	Given in the Regulatory Documents to Provide page I click Continue
+	#Given I call Shared Step 60826 (Enter Universal Product Code (UPC) - Battery - Confirm Quantity ) for UPC saved as: UPC59282 with container type: Metal Container size: 40.0 and quantity: 100
+	Then I should be on the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	And In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	And In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC59282 enter Size: 40.0 enter Container Type: Metal Container and enter Quantity: 100
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page, I click Continue
 
-	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Then I should be on the Regulatory Documents to Provide Page
+	And In the Regulatory Documents to Provide Section, upload file in section: 'I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide.'
+	And In the Regulatory Documents to Provide Section, set the radio option in section: 'Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS. When providing an SDS it must be both U.S. and Canada formats.' to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
+	And In the Regulatory Documents to Provide Section, set the radio option in section: 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
+	And In the Regulatory Documents to Provide Section, upload file in section: 'Label in both French and English'
+	Then in the Regulatory Documents to Provide page, I click Continue
+
+	Then in the Additional Documents to Provide page, I click Continue
+	Then in the Optional Reports and Documents Available for Purchase page, I click Continue
+
 #	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
 	Then I should be on the Additional Documents -> Contact Information Page
 	And In the Additional Documents -> Contact Information section, for section: 'Manufacturer Name' enter text: Manufacturer
@@ -833,7 +898,14 @@ Scenario: [59282] Zinc Air - RU001205
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
 	Then in the Optional Comments page I click Continue
 
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Zinc Air
+#	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Zinc Air
+	Then I should be on the Data Acceptance Page
+	And In the Data Acceptance Section, click 'Summary' button
+	And I switch to the tab with Data Summary page
+	And In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Zinc Air
+	And I close the tab with Data Summary page
+	Then I should be on the Data Acceptance Page
+
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59282
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase59282
@@ -935,8 +1007,14 @@ Scenario: [97470] Stand alone Lead Acid Battery
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lead acid battery
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Lead acid battery
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Lead acid battery_#97470
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Lead acid battery
+	Then in the The Product page, I click Continue
+
 	Then I save the product information as: TestCase97470
+
 	#Given I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
 	Then I should be on the Product Information Page
 	And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No 
@@ -952,14 +1030,19 @@ Scenario: [97470] Stand alone Lead Acid Battery
 	And In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
 	Then in the Physical and Chemical Properties page, I click Continue
 
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Lead sulfate  | 50      | false               | false       |            |
-		| Aqua          | 50      | false               | false       |            |
-		And I should see the Formulation > Batteries Page
-    Given I confirm the Formulation > Batteries displays the correct text
-    Given I set the Consent to Tier 2.1, 2.2, 4.2 Data Uses field to: Granted
-    Given I click continue
+#	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+#		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+#		| Lead sulfate  | 50      | false               | false       |            |
+#		| Aqua          | 50      | false               | false       |            |
+	Then I should be on the Ingredients Page
+	And In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Lead	       | 100     | False               | False         |             |
+	Then in the Ingredients page, I click Continue
+
+	Then I should be on the Formulation > Batteries Page
+	And In the Formulation > Batteries Section, set the radio option in section: 'Consent to Tier 2.1, 2.2, 4.2 Data Uses': to: Granted
+	Then in the Formulation > Batteries page, I click Continue
 
 	#Given I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Then I should be on the Inventory Status, Prop 65 (US) Page
@@ -968,16 +1051,26 @@ Scenario: [97470] Stand alone Lead Acid Battery
 	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No 
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
 
-	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
-	Given I should see the Regulatory Documents to Provide Page
-	Given I click the browse button for label: I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide. and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-	Given I set the Batteries are considered Articles under Global Harmonized Standards option to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
-	Given I set the WHMIS-compliant Safety Data Sheet option to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
-	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload PDF: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-	Given I click continue
-	Given in the Additional Documents to Provide page I click Continue
-	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	#Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+	Then I should be on the Transportation Details 1 Page
+	And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
+	Then in the Transportation Details 1 page, I click Continue
+
+	#Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
+
+	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	Then I should be on the Regulatory Documents to Provide Page
+	And In the Regulatory Documents to Provide Section, upload file in section: 'I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide.'
+	And In the Regulatory Documents to Provide Section, set the radio option in section: 'Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS. When providing an SDS it must be both U.S. and Canada formats.' to: I need an OSHA-Compliant Safety Data Sheet (SDS) authored for this product.
+	And In the Regulatory Documents to Provide Section, set the radio option in section: 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
+	And In the Regulatory Documents to Provide Section, upload file in section: 'Label in both French and English'
+	Then in the Regulatory Documents to Provide page, I click Continue
+
+	Given in the Additional Documents to Provide page, I click Continue
+	Given in the Optional Reports and Documents Available for Purchase page, I click Continue
+
 #	And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
 	Then I should be on the Additional Documents -> Contact Information Page
 	And In the Additional Documents -> Contact Information section, for section: 'Manufacturer Name' enter text: Manufacturer
@@ -1005,7 +1098,14 @@ Scenario: [97470] Stand alone Lead Acid Battery
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
 	Then in the Optional Comments page I click Continue
 
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lead acid battery
+	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lead acid battery
+	Then I should be on the Data Acceptance Page
+	And In the Data Acceptance Section, click 'Summary' button
+	And I switch to the tab with Data Summary page
+	And In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Lead acid battery
+	And I close the tab with Data Summary page
+	Then I should be on the Data Acceptance Page
+
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase97470
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase97470
