@@ -542,13 +542,15 @@ Scenario: [74142] Pop up that Informs the regulations the components are associa
 	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 	#	| Chlorine      | 100     | false               | false       |            |
 	Then In the Ingredients section, add component with component name: Chlorine
-	Then In the Ingredients Table row with component name: Chlorine, in Percent column text input enter: 50
-
-	Given I click the Regulated button for ingredient: Chlorine in the Ingredients table
-	Then the 'Regulatory List' window opens
-	Given I confirm that a list of regulations associated with the component is displayed
-	Given I close the Regulatory List window
-	Given I navigate to the home page
+	Then In the Ingredients Table row with component name: Chlorine, in Percent column text input enter: 100
+	Then In the Ingredients Table row with component name: Chlorine, in CAS Number / Chemical Name column click 'Regulated' button
+	Then Confirm a modal is displayed
+	Then Confirm displayed modal has title: Regulatory List
+	Then In displayed modal, click Close footer button
+	#Given I click the Regulated button for ingredient: Chlorine in the Ingredients table
+	#Then the 'Regulatory List' window opens
+	#Given I confirm that a list of regulations associated with the component is displayed
+	#Given I close the Regulatory List window
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74142
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase74142
