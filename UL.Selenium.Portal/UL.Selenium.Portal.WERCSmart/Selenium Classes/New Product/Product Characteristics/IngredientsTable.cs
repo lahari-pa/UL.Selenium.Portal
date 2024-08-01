@@ -120,7 +120,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 			Report.Info($"In '{columnTitle}' column cell text input, attempting to enter text: '{text}'");
 			return this.CellTextInput(columnTitle).TryEnterText(text);
 		}
-
+		public bool CellTextInputEnterTextAndTab(string columnTitle, string text)
+		{
+			Report.Info($"In '{columnTitle}' column cell text input, attempting to enter text: '{text}'");
+			return this.CellTextInput(columnTitle).TryEnterTextAndTab(text);
+		}
 		public string CellTextInputText(string columnTitle)
 		{
 			Report.Info($"Attempting to get '{columnTitle}' column cell text input text.");
