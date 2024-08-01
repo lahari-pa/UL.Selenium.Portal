@@ -911,6 +911,65 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             return el.TryClick();
         }
 
+        public bool UnderFilterParamterVeifyTheTwoTextBoxes()
+        {
+            IWebElement lowerbound_textbox = this.FindElement(By.XPath($"//div[@class='input-group']//input[@id='lowerBound']"), 2);
+            IWebElement upperbound_textbox = this.FindElement(By.XPath($"//div[@class='input-group']//input[@id='upperBound']"), 2);
+            IWebElement to_textbox = this.FindElement(By.XPath($"//div[@class='input-group']//p"), 2); 
+            return lowerbound_textbox.Displayed && upperbound_textbox.Displayed && to_textbox.Text == "to";
+        }
+
+        public bool InFilterParameterPanelIVerifyUpperBoundPlaceholderIsDisplayed(string expectedplaceholdervalue)
+        {
+            IWebElement upperbound_textbox = this.FindElement(By.XPath($"//div[@class='input-group']//input[@id='upperBound']"), 2);
+            string placeholderText = upperbound_textbox.GetAttribute("placeholder");
+            Report.Info($"Place holder text was: {placeholderText}");
+            return placeholderText == expectedplaceholdervalue;
+        }
+
+        public bool InFilterParameterPanelIVerifyLowerBoundPlaceholderIsDisplayed(string expectedplaceholdervalue)
+        {
+            IWebElement lowerbound_textbox = this.FindElement(By.XPath($"//div[@class='input-group']//input[@id='lowerBound']"), 2);
+            string placeholderText = lowerbound_textbox.GetAttribute("placeholder");
+            Report.Info($"Place holder text was: {placeholderText}");
+            return placeholderText == expectedplaceholdervalue;
+        }
+
+        public void InFilterParameterPanelIEnterBound(string boundvalue, string searchText)
+        {
+            IWebElement bound_textbox = this.FindElement(By.XPath($"//div[@class='input-group']//input[@id='{boundvalue}']"), 2);
+            bound_textbox.ClearTextBox();
+            bound_textbox.EnterText(searchText);
+
+        }
+
+        public bool InFilterParameterPanelIVerifyNewRangeText(string value)
+        {
+            IWebElement rangeText = this.FindElement(By.XPath($"//div[contains(@data-bind,'range')]//span"), 2);
+            string newRangeText = rangeText.Text;
+            return newRangeText == value;
+        }
+
+        public bool InFilterParameterPanelIVerifyMinusSignIsDisplayed()
+        {
+            IWebElement minusSign = this.FindElement(By.XPath($"//div[contains(@data-bind,'range')]//img[contains(@src,'minus-circle')]"), 2);
+            return minusSign.Displayed;
+        }
+
+        public bool InFilterParameterPanelIVerifyAddRangeTextIsDisplayed()
+        {
+            IWebElement addRangeText = this.FindElement(By.XPath($"//div[@class='list-select']//span[contains(@data-bind,'addRangeText')]"), 2);
+            return addRangeText.Displayed;
+        }
+
+        public bool InFilterParameterPanelIVerifyPlusSignIsDisplayed()
+        {
+            IWebElement plusSign = this.FindElement(By.XPath($"//div[@class='list-select']//img[contains(@src,'plus-circle')]"), 2);
+            return plusSign.Displayed;
+        }
+
+
+
         #endregion
 
     }

@@ -26,12 +26,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		private IWebElement GridNavigationInput() => this.containerElement.FindElement(By.XPath(".//input[@type='number']"), 2);
 
-		private IWebElement ProductTable => this.containerElement.FindElement(By.XPath(".//table[contains(@class, 'products-table')]"), 1);
+		private IWebElement ProductTable => this.containerElement.FindElement(By.XPath(".//table[contains(@class, 'products-table')][tbody]"), 1);
 
 		private List<IWebElement> ProductRows => this.ProductTable?.FindElements(By.XPath(".//tbody/tr"), 1).ToList();
 
-		private IWebElement ProductsHeading => this.containerElement.FindElement(By.XPath("./h2[contains(@class,'title')]"), 1);
-
+		private IWebElement ProductsHeading => this.containerElement.FindElement(By.XPath("./h2[contains(@class,'title')]"), 1); 
 		private List<IWebElement> ProductTableHeadings => this.ProductTable.FindElements(By.XPath(".//th"), 2).ToList();
 		
 		#endregion
@@ -1115,13 +1114,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return "";
 			}
 
-			string borderColour = retailerLi.GetCssValue("border-color");
+			string borderColour = retailerLi.GetCssValue("background-color");
 
 			switch (borderColour)
 			{
 				case "rgb(30, 143, 31)":
 					return "Accepted by Retailers";
-				case "rgb(239, 157, 14)":
+				case "rgba(255, 157, 85, 1)":
 					return "Assessment in Progress";
 				case "rgb(75, 82, 87)":
 					return "Not Yet Submitted";

@@ -9,6 +9,8 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
 using OpenQA.Selenium.Internal;
+using OpenQA.Selenium.Support.UI;
+using System.Windows;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -98,13 +100,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			Delay.Seconds(2 * Delay.SpeedFactor);
 
-			var allProducts = this.containerElement.FindElements(By.XPath(".//div[@class='col-sm-3']/a/div")).ToList();
+			var allProducts = this.ContainerElement.FindElements(By.XPath(".//div[@class='col-sm-4']//h4")).ToList();
 
 			foreach (IWebElement method in allProducts)
 			{
-				Report.Info("Payment Method = " + method.Text);
+				Report.Info($"Payment Method {method.Text}");
 
-				if (method.Text == payment_method)
+				if (method.Text.Contains(payment_method))
 				{
 					Report.Success("Payment Method Found");
 					return true;
@@ -115,6 +117,29 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
+		public bool ClickMakeDeaultForPaymentMetod(string payment_method)
+		{
+			Report.Info($"Beginning Payment_Method_Exists: {payment_method}");
+
+			Delay.Seconds(2 * Delay.SpeedFactor);
+
+			var allProducts = this.ContainerElement.FindElements(By.XPath(".//div[@class='col-sm-4']//h4")).ToList();
+
+			foreach (IWebElement method in allProducts)
+			{
+				Report.Info($"Payment Method {method.Text}");
+
+				if (method.Text.Contains(payment_method))
+				{
+					Report.Success("Payment Method Found");
+					IWebElement MakeDefault = method.FindElement(By.XPath("//a[span[text() = 'Make Default']]"));
+					return MakeDefault.TryClick();
+				}
+				Report.Info("Payment Method Doesn't Match");
+			}
+			Report.Info("Failed to Find Payment Method");
+			return false;
+		}
 		//==================================================================================== CREDIT CARD
 
 		public bool Credit_Card_Default()
@@ -359,7 +384,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return true;
 		}
 
-		public bool Enter_Credit_Card_Details(string card_type, string card_no, string exp_month, string exp_year, string cvv, string cardh_name)
+		public bool ClickSubmitButton()
+		{
+			Report.Info("Switching to iFrame");
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("z_hppm_iframe");
+			IWebElement SubmitButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//a[text()=' submit']"), 2);
+			if(SubmitButton == null)
+			{
+				Report.Info("Could not find 'Submit' button");
+				Report.Info("Exiting iFrame");
+				SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
+				return false;
+			}
+			bool result = SubmitButton.TryClick();
+			Report.Info("Exiting iFrame");
+			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
+			return result;
+		}
+		public bool Enter_Credit_Card_Details(string card_type, string card_no, string exp_month, string exp_year, string cvv, string cardh_name, string postal_code)
 		{
 			Report.Info("Beginning Enter_Credit_Card_Details");
 
@@ -383,6 +425,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement _sel_exp_year = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//select[@id='input-creditCardExpirationYear']"), 2);
 			IWebElement _txt_cvv = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@id='input-cardSecurityCode']"), 2);
 			IWebElement _txt_cardholder_name = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@id='input-creditCardHolderName']"), 2);
+			IWebElement _txt_postal_code = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@id='input-creditCardPostalCode']"), 2);
 
 			switch (card_type)
 			{
@@ -416,7 +459,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			_txt_cvv.EnterText(cvv);
 			Report.Info("Entering Cardholder Name: " + cardh_name);
 			_txt_cardholder_name.EnterText(cardh_name);
-
+			Report.Info($"Entering Postal Code: {postal_code}");
+			_txt_postal_code.EnterText(postal_code);
 			Report.Info("Exiting iFrame");
 			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
 			Report.Info("Credit Card Details Entered");
@@ -759,13 +803,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			//}
 			//Report.Info("Billing Address Found");
 			//return myAddress.Text;
-			IWebElement myBill = this.containerElement.FindElements(By.XPath(".//div/h3[text()='Billing Address']"), 10).FirstOrDefault();
+			IWebElement myBill = this.ContainerElement.FindElements(By.XPath(".//div[h3[text()='Billing Address']]"), 10).FirstOrDefault();
 			if (myBill == null)
 			{
 				Report.Info("Failed to Find Billing Address heading");
 				return null;
 			}
-			IList<IWebElement> myAddress = myBill.FindElements(By.XPath("../div"), 10);
+			IList<IWebElement> myAddress = myBill.FindElements(By.XPath(".//div"), 10);
 			if (myAddress != null)
 			{
 				return myAddress.Select(x => x.GetValue()).ToList();
@@ -836,13 +880,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		//Change Button
 		//[FindsBy(How = How.XPath, Using = ".//div/a[text()='Change']")]
-		private IWebElement BtnChange => FindElement(By.Id(".//div/a[text()='Change']"),1);
+		private IWebElement BtnChange => this.ContainerElement.FindElement(By.XPath(".//a[text()='Change']"),1);
 
 		public bool Change_click()
 		{
+			if(this.BtnChange == null)
+			{
+				Report.Info("Could not find Change button");
+				return false;
+			}
 			Report.Info("Attempting to Click Change Button");
-			this.BtnChange.Click();
-			return true;
+			return this.BtnChange.TryClick();
 		}
 
 		//Add a New Payment Method
@@ -1331,8 +1379,22 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 
 		//Billing Address Section
 		//[FindsBy(How = How.XPath, Using = ".//div/h4[text()='Billing Address']/..")]
-		private IWebElement Section_bill => this.FindElement(By.Id(".//div/h4[text()='Billing Address']/.."),1);
+		private IWebElement Section_bill => this.FindElement(By.XPath(".//div/h4[text()='Billing Address']/.."),1);
 
+		public bool EditState(string state)
+		{
+			IWebElement myState = this.Section_bill.FindElements(By.XPath(".//select[@name='state']"), 10).FirstOrDefault();
+
+			if (myState == null)
+			{
+				Report.Info("Failed to Find State Text Box");
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info($"Editing State: {state}");
+			myState.Select(state);
+			return myState.SelectedOption() == state;
+		}
 		public bool Billing_Headers_Check(List<string> myList)
 		{
 			Report.Info("Beginning Billing_Headers_Check");
@@ -1544,7 +1606,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 			}
 			if (state != "")
 			{
-				IWebElement myState = this.Section_bill.FindElements(By.XPath(".//select"), 10).FirstOrDefault();
+				IWebElement myState = this.Section_bill.FindElements(By.XPath(".//select[@name='state']"), 10).FirstOrDefault();
 				if (myState == null)
 				{
 					Report.Info("Failed to Find State Text Box");

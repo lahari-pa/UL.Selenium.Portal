@@ -16,6 +16,8 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ElectronicEquipment
+
 
 Feature: Flow 25
 
@@ -62,8 +64,11 @@ Given I click continue
 
 Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 
-Given I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
-
+	#And I call Shared Step 71955 (Answer Electronic Equipment questions - Without Cathode Ray - No to all)
+	And I should see the Electronic Equipment Page
+	And In the Electronic Equipment Section, set the option in section: 'Contains Circuit Board' to: No
+	And In the Electronic Equipment Section, set the option in section: 'Has a LCD or Plasma Display' to: No
+	And in the Electronic Equipment page I click Continue
 #Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Genuine Parts
 	Then I should be on the Retailer Page
 	And In the Retailer Section, click 'Add Retailers' button

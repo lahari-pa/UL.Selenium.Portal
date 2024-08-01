@@ -18,11 +18,12 @@
 @StepsPrototype
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
-
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
 @StepsPrototype
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
-
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOCForCaliforniaAirDistrictAndCanada
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOC_Summary"
 
 Feature: Flow 7
 
@@ -41,7 +42,17 @@ Scenario: [57863] Flow 7 - ABS Welding (RU000868)
 	Then I save the product information as: TestCase57863
 	Given I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
 	Given I call Shared Step 73748 (Product Information - US only - No to GHS - No to shipped supplier - No to Private Label - No to Sold to retailer)
-	Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
+	#Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Liquid
+	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
+	And In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 120
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Relative Density' to: g/ml (grams per milliliter)
+	And In the Physical and Chemical Properties Section, for section: 'pH' enter text: 8
+	And In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: 100
+	Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: 61
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Not applicable/available
+	And In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page, I click Continue
 	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Ketone
 	Given I should see the Ingredients Page
 	Then In the Ingredients section, add the following ingredients:
@@ -210,27 +221,36 @@ Scenario: [63623] Flow 7 - Grout (RU001548) - has its own SCAQMD limit
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Grout
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Grout
+	Given I should see the The Product Page
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Grout_#63623
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Grout
+	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase63623
+
 	#Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I should see the Product Information Page
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
 	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
 	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page I click Continue
+
 	#Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+	Given I should see the Physical and Chemical Properties Page
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Bonded, fibrous glass web
 	Given In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
-	Given I click continue
+	Then in the Physical and Chemical Properties page I click Continue
+
 	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Polymethyl acrylate
 	Given I should see the Ingredients Page
 	Then In the Ingredients section, add the following ingredients:
-	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-	| component name | Polymethyl acrylate       | 100     |                     |               |             |
+		| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+		| component name | Water       | 100     |                     |               |             |
 	Then in the Ingredients page I click Continue
 
 	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
@@ -239,25 +259,32 @@ Scenario: [63623] Flow 7 - Grout (RU001548) - has its own SCAQMD limit
 	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
 
-#	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+	#Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Then I should be on the Transportation Details 1 Page
 	And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
 	Then in the Transportation Details 1 page, I click Continue
 
-	Given I call Shared Step 57794 (Confirm VOC (SCAQMD) step title, Confirm ACP question shown  - Select No - Happy Path)
-	Given I set the Product is a Low Solid option to: Yes
-	Given I set the VOC content of product in g/L, including water and exempt compounds. option to: 1.00
-	Given I set the Would you like to use the VOC data provided to be copied for all areas (e.g. country, state, local) for comparison? option to: Yes
-	Given in the Volatile Organic Compounds (VOC) for California Air District(s) and Canada page I click Continue
+	#Given I call Shared Step 57794 (Confirm VOC (SCAQMD) step title, Confirm ACP question shown  - Select No - Happy Path)
+	Then I should be on the Volatile Organic Compounds (VOC) for California Air District(s) and Canada Page
+	Then In the VOC for California Air District(s) and Canada Section, set the option in section: 'Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.': to: No
+	Then In the VOC for California Air District(s) and Canada Section, set the option in section: 'Product is a Low Solid': to: Yes
+	Then In the VOC for California Air District(s) and Canada Section, set the option in section: 'VOC content of product in g/L, including water and exempt compounds.': to: 1.00
+	Then In the VOC for California Air District(s) and Canada Section, set the option in section: 'Would you like to use the VOC data provided to be copied for all areas (e.g. country, state, local) for comparison?': to: Yes
+	Then in the Volatile Organic Compounds (VOC) for California Air District(s) and Canada page, I click Continue
+
 	Given I should see the Volatile Organic Compound Summary Page
 	Then in the VOC Limits table, the Use column should contain the value: Grout
 	Then in the VOC Limits table, the VOC Compliance Limit column should contain the value: 120
 	Then in the VOC Limits table, the Regulation column should contain the value: (g/L) including water & exempts
 	Then I click the page heading: Volatile Organic Compounds (VOC) for California Air District(s) and Canada
+
 	And I should see the Volatile Organic Compounds (VOC) for California Air District(s) and Canada Page
-	Given I set the Product is a Low Solid option to: No
-	Given I set the VOC content in g/L contained in this product option to: 2.00
+	Then In the VOC for California Air District(s) and Canada Section, set the option in section: 'Product is a Low Solid': to: No
+	Given In the VOC for California Air District(s) and Canada Section, set the option in section: 'VOC content in g/L contained in this product': to: 2.00
 	Given in the Volatile Organic Compounds (VOC) for California Air District(s) and Canada page I click Continue
+
+	Given I should see the Volatile Organic Compound Summary Page
 	Then in the VOC Limits table, the VOC Compliance Limit column should contain the value: 65
+
 	Given I navigate to the home page
 	Then I delete the product: TestCase63623

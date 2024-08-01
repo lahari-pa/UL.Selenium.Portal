@@ -116,13 +116,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			new Steps_Prototype().NewTabShouldExists(condition, url);
 		}
 		[RegexStepDefinition(@"In the Regulatory Documents to Provide Section, for section (I have an Article Information Sheet \(AIS\), Technical Data Sheet \(TDS\), Battery Data Sheet \(BDS\) to provide.|OSHA SDS|Dual-Language WHMIS SDS, in French Canadian and English|Label in both French and English|Upload UN38.3 Test Document \(Required\)|Product Label) I click button 'View'")]
-		public void ClickBrowseButtonForSection(string section)
+		public void ClickViewButton(string section)
 		{
 			string button = "view";
 			new Steps_Prototype().ClickButtonForSection(section, button);
 		}
 		[RegexStepDefinition(@"In the Regulatory Documents to Provide Section, for section (I have an Article Information Sheet \(AIS\), Technical Data Sheet \(TDS\), Battery Data Sheet \(BDS\) to provide.|OSHA SDS|Dual-Language WHMIS SDS, in French Canadian and English|Label in both French and English|Upload UN38.3 Test Document \(Required\)|Product Label) I click button 'Remove'")]
-		public void ClickViewButton(string section)
+		public void ClickRemoveButton(string section)
 		{
 			string button = "remove";
 			new Steps_Prototype().ClickButtonForSection(section, button);

@@ -14,7 +14,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
-
+@SafetyDataSheetAuthoring
 
 Feature: Flow 4-A
 
@@ -61,10 +61,21 @@ Scenario: [74825] Flow 4-A - Engine Degreaser - Aerosol - RU000647
 
 	And I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
 	And I click continue
-	And I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
-		| Gloves                        | 340                      | 12                      | 20.5      | Clear      | Odorless | No data available | 5.0                   | Aerosol                     |
-	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
+	#And I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
+	#	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
+	#	| Gloves                        | 340                      | 12                      | 20.5      | Clear      | Odorless | No data available | 5.0                   | Aerosol                     |
+	Then I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 800
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 99
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 60
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Clear
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor' to: Odorless
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor Threshold' to: No data available
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Partition Coefficient' enter text: 10
+	Then in the Safety Data Sheet Authoring - Additional Data (Optional) page I click Continue
+	Given in the Optional Comments page I click Continue
+		#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
 	Given I should see the Optional Comments Page
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
 	Then in the Optional Comments page I click Continue

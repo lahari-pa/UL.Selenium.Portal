@@ -16,106 +16,93 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 	[Binding, Scope(Tag = "Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide")]
 	internal class AdditionalDocumentsToProvide
 	{
-		[RegexStepDefinition(@"I upload PDF document to Packaged Product Photo \(front and back\) field")]
+		[RegexStepDefinition(@"In the Additional Documents to Provide Section, upload PDF document to Packaged Product Photo \(front and back\) field")]
 		public void UploadPDFDocumentToPackagedProductPhotoFrontAndBack()
 		{
-			Report.Info($"I upload PDF document to Packaged Product Photo (front and back) field");
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.UploadPDFFile("Packaged Product Photo (front and back)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
-		[RegexStepDefinition(@"I upload PDF document to Product Photo field")]
+		[RegexStepDefinition(@"In the Additional Documents to Provide Section, upload PDF document to Product Photo field")]
 		public void UploadPDFDocumentToProductPhoto()
 		{
-			Report.Info($"I upload PDF document to Product Photo field");
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.UploadPDFFile("Product Photo", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
-		[RegexStepDefinition(@"I upload PDF document to Flash Point Testing Report field")]
+		[RegexStepDefinition(@"In the Additional Documents to Provide Section, upload PDF document to Flash Point Testing Report field")]
 		public void UploadPDFDocumentToFlashPointTestingReport()
 		{
-			Report.Info($"I upload PDF document to Flash Point Testing Report field");
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.UploadPDFFile("Flash Point Document", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
-		[RegexStepDefinition(@"I upload PDF document to Upload SDS \(Optional\) field")]
+		[RegexStepDefinition(@"In the Additional Documents to Provide Section, upload PDF document to Upload SDS \(Optional\) field")]
 		public void UploadPDFDocumentToOSHACompliantSafetyDataSheetOptionalValue()
 		{
-			Report.Info($"I upload PDF document to OSHA-compliant Safety Data Sheet (Optional) field");
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.UploadPDFFile("OSHA SDS", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
-		[RegexStepDefinition(@"I upload PDF document to International Fragrance Association \(IFRA\) field")]
+		[RegexStepDefinition(@"In the Additional Documents to Provide Section, upload PDF document to International Fragrance Association \(IFRA\) field")]
 		public void UploadPDFDocumentToInternationalFragranceAssociationIFRA()
 		{
-			Report.Info($"I upload PDF document to International Fragrance Association (IFRA) field");
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.UploadPDFFile("International Fragrance Association (IFRA)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
-		[RegexStepDefinition(@"I upload PDF document to Generally Recognized as Safe \(GRAS\) field")]
+		[RegexStepDefinition(@"In the Additional Documents to Provide Section, upload PDF document to Generally Recognized as Safe \(GRAS\) field")]
 		public void UploadPDFDocumentToGenerallyRecognizedAsSafeGRAS()
 		{
-			Report.Info($"I upload PDF document to Generally Recognized as Safe (GRAS) field");
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.UploadPDFFile("Generally Recognized as Safe (GRAS)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
-		[RegexStepDefinition(@"I upload PDF document to Toxicity Characteristic Leaching Procedure \(TCLP\) field")]
+		[RegexStepDefinition(@"In the Additional Documents to Provide Section, upload PDF document to Toxicity Characteristic Leaching Procedure \(TCLP\) field")]
 		public void UploadPDFDocumentToToxicityCharacteristicLeachingProcedureTCLP()
 		{
-			Report.Info($"I upload PDF document to Toxicity Characteristic Leaching Procedure (TCLP) field");
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.UploadPDFFile("Toxicity Characteristic Leaching Procedure (TCLP)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
-		[RegexStepDefinition(@"I upload PDF document to Upload Volatile Organic Compounds field")]
+		[RegexStepDefinition(@"In the Additional Documents to Provide Section, upload PDF document to Upload Volatile Organic Compounds field")]
 		public void UploadPDFDocumentToVolatileOrganicCompoundsRequired()
 		{
-			Report.Info($"I upload PDF document to Upload Volatile Organic Compounds field");
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.UploadPDFFile("Product Label", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
-		[RegexStepDefinition(@"In the Additional Documents to Provide Section, I upload PDF document to Upload Full Product Label \(required\) field")]
+		[RegexStepDefinition(@"In the Additional Documents to Provide Section, upload PDF document to Upload Full Product Label \(required\) field")]
 		public void GivenIUploadPDFDocumentToUploadFullProductLabelRequiredField()
 		{
-			Report.Info($"I upload PDF document to Upload Full Product Label (required) field");
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.UploadPDFFile("Product Label", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
-		[RegexStepDefinition(@"I upload PDF document to Generic Private Label \(all sides\) field")]
+		[RegexStepDefinition(@"In the Additional Documents to Provide Section, upload PDF document to Generic Private Label \(all sides\) field")]
 		public void GivenIUploadPDFDocumentToGenericPrivateLabelAllSidesField()
 		{
-			Report.Info($"I upload PDF document to Generic Private Label (all sides) field");
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.UploadPDFFile("Product Label", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
-		[RegexStepDefinition(@"I upload PDF document to Provide Full Product Label \(required\) field")]
+		[RegexStepDefinition(@"In the Additional Documents to Provide Section, upload PDF document to Provide Full Product Label \(required\) field")]
 		public void UploadPDFDocumentToProvideFullProductLabelRequired()
 		{
-			Report.Info($"I upload PDF document to Provide Full Product Label (required) field");
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.UploadPDFFile("Please upload a PDF of the product label (full label).", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
-		[RegexStepDefinition(@"I upload PDF document to California Air Resources Board \(CARB\) Executive Order field")]
+		[RegexStepDefinition(@"In the Additional Documents to Provide Section, upload PDF document to California Air Resources Board \(CARB\) Executive Order field")]
 		public void UploadPDFDocumentToCaliforniaAirResourcesBoardCARBExecutiveOrder()
 		{
-			Report.Info($"I upload PDF document to California Air Resources Board (CARB) Executive Order field");
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.UploadPDFFile("California Air Resources Board (CARB) Executive Order", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
-		[RegexStepDefinition(@"I upload PDF document to Upload Transportation Exemption Letter or Special Permit field")]
+		[RegexStepDefinition(@"In the Additional Documents to Provide Section, upload PDF document to Upload Transportation Exemption Letter or Special Permit field")]
 		public void UploadPDFDocumentToTransportationExemptionLetterOrSpecialPermitRequired()
 		{
-			Report.Info($"I upload PDF document to Upload Transportation Exemption Letter or Special Permit  field");
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.UploadPDFFile("Exemption Letter", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
@@ -150,6 +137,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string section = "OSHA-compliant Safety Data Sheet (Optional)";
 			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, condition);
 		}
+		[RegexStepDefinition(@"In the Additional Documents to Provide, section 'Flash Point Testing Report' (is|is not) displayed")]
+		public void ThenInTheAdditionalDocumentsToProvideSectionFlashPointIsDisplayed(string condition)
+		{
+			string section = "Flash Point Testing Report";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, condition);
+		}
 		[RegexStepDefinition(@"In the Additional Documents to Provide, section 'Toxicity Characteristic Leaching Procedure \(TCLP\)' (is|is not) displayed")]
 		public void ThenInTheAdditionalDocumentsToProvideSectionTCLPIsIsNotDisplayed(string condition)
 		{
@@ -161,6 +154,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		{
 			string section = "Upload SDS (Optional)";
 			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, condition);
+		}
+		[RegexStepDefinition(@"In the Additional Documents to Provide Section: 'Provide Full Product Label \(required\)' error message (should|should not) display: (.*)")]
+		public void UploadFileForProductLabelShouldShouldNotDisplayError(string shouldShouldNot, string pipeDelimitedErrorMessages)
+		{
+			string section = "Provide Full Product Label (required)";
+			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, shouldShouldNot, pipeDelimitedErrorMessages);
 		}
 
 	}

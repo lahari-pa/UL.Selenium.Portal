@@ -534,7 +534,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[RegexStepDefinition(@"I navigate to the landing page")]
 		public void NavigateToLandingPage()
 		{
-			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + " - Navigate to landing page");
+			Report.StartStep(Report.Details.StepIndex + " - Navigate to landing page");
 			try
 			{
 				Report.Info("Navigating to the landing page");
@@ -553,7 +553,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					SeleniumBrowser.StartBrowser(WebDriverType.Chrome);
 					//SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
 				}
-
 
 				SeleniumWebDriver.CurrentDriver.Navigate(SeleniumWebDriver.BaseTestUrl);
 				Delay.Seconds(1);
@@ -1621,6 +1620,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void CloseCurrentWindow()
 		{
 			SeleniumWebDriver.CurrentDriver.Quit();
+		}
+
+		[RegexStepDefinition(@"Switch to the window labeled: (.*)")]
+		public void SwitchToWindow(string windowTitle)
+		{
+			if (SeleniumWebDriver.CurrentDriver.WindowHandles.Contains(windowTitle))
+			{
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Window(windowTitle);
+			}
+			
 		}
 
 		[RegexStepDefinition(@"I confirm (.*) tab (does|does not) exist")]

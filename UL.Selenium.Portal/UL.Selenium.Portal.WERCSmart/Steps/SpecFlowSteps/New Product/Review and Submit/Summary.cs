@@ -41,6 +41,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 			}
 			Report.IsTrue(new DataSummary().VerifyTableValueInSammeryPage(column, value), $"Failed to confirm there is value {value} in column {column}", $"Successfully confirmed there is value {value} in column {column}");
 		}
+		[RegexStepDefinition(@"In the Summary Page, verify table data for 'Document' section (.*) in column (.*) showing the value: (.*)")]
+		public void InTheSummaryDocumenrSectionCheckTableData(string sectionName, string column, string value)
+		{
+			if (value.ToLower().Contains("saved as"))
+			{
+				value = Context.GetFromContext(value.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim()).ToString();
+			}
+			Report.IsTrue(new DataSummary().VerifyDocumentsTableValueInSammeryPage(sectionName, column, value), $"Failed to confirm there is value {value} in column {column}", $"Successfully confirmed there is value {value} in column {column}");
+		}
 		[RegexStepDefinition(@"In the Summary Page, the document section (.*) should be showing the following document: (.*)")]
 		public void InTheSummaryPageDocumentSectionShouldBeShowingTheFollowingDocument(string section, string option)
 		{
@@ -49,6 +58,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 			Report.IsTrue(found.Contains(option),
 				$"Expected: {option} but got: {found} for section {section}.",
 				$"Got value: {option} as expected for section {section}.");
+		}
+		[RegexStepDefinition(@"In the Summary Page, the Product Document section (.*) should be showing the following document: (.*)")]
+		public void InTheSummaryPageProductDocumentSectionShouldBeShowingTheFollowingDocument(string section, string option)
+		{
+			var dataSummarySheet = new DataSummary();
+			string found = dataSummarySheet.GetProductDocumentForSection(section, option);
+			Report.IsTrue(found.Contains(option),
+				$"Expected: {option} but got: {found} for section {section}.",
+				$"Got value: {option} as expected for section {section}.");
+		}
+		[RegexStepDefinition(@"In the Summary Page, the Product Document section (.*) click the view link for the following document: (.*)")]
+		public void InTheSummaryPageProductDocumentSectionClickViewForTheFollowingDocument(string section, string option)
+		{
+			var dataSummarySheet = new DataSummary();
+			bool result = dataSummarySheet.ClickViewProductDocumentForSection(section, option);
+			Report.IsTrue(result,
+				$"Failure, failed to click view button for {option} in section {section}.",
+				$"Success, clicked view button for {option} in section {section}.");
 		}
 		[RegexStepDefinition(@"In the Summary Page, click the View button for section: (.*)")]
 		public void InTheSummaryPageIClickTheViewButtonForDocument(string section)
@@ -65,6 +92,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 			string savedAs = "downloadedFile";
 			new Steps_Prototype().ConfirmFileAppearsInDownloadsFolder(file, savedAs);
 		}
+
+		[RegexStepDefinition(@"In the Summary page, I confirm the Ingredients table matches the following:")]
+		public void InTheSummaryPageVerifyIngredientsTable(Table table)
+		{
+			new StepsDataSummarySheet().InTheDataSummaryPageIConfirmThatIngredientsMatches(table);
+		}
+
 	}
 }
 

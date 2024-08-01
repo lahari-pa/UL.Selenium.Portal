@@ -21,6 +21,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 
+		[RegexStepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Primary Physical State': the following options (should|should not) be (displayed|displayed exclusively):")]
+		public void CheckOptionsInPrimaryPhysicalStateSection(string condition, string displayed, Table table)
+		{
+			string section = "Primary Physical State";
+			new Steps_Prototype().CheckOptionsInSection(condition, displayed, section, table);
+		}
 
 		[RegexStepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: (.*)")]
 		public void SelectSecondaryPhsicalState(string option)
@@ -128,6 +134,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		{
 			string section = "Flash Point Testing Method Used";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+			Delay.Seconds(1);
 		}
 
 

@@ -7696,7 +7696,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			});
 			thisStepsStudio.GivenInTheEditToolbarPageICheckTheFollowingItems(table3);
 			thisStepsStudio.GivenInTheEditToolbarPageIClick("save");
-
+			Delay.Seconds(3);
 			Report.Info("Going to do publishing");
 			thisStepsStudio.IClickOnPublishThisDocumentToOpenCurrentDocumentPopup();
 			thisStepsStudio.InCurrentDocumentPageSelectCheckbox("authorized");
@@ -7805,11 +7805,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			@"I call Shared Step 231412 I add the UsageType: (.*) with Datacode (.*) with data: (.*) to the Section - Applicable Only to Type of Product")]
 		public void GivenICallSharedStep231412_SetDataCode(string usageType, string dataCode,string data)
 		{
-			
+			var thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
 			Report.UseSubSteps = true;
 			var thisStepsStudio = new Steps_Studio();
+			if (thisStudioPowerDesignerPlusDesignMode.DoesPDSectionExist("[SECT0877] Reviewer Checklist"))
+			{
+				thisStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0877] Reviewer Checklist");
+			}
+			if (thisStudioPowerDesignerPlusDesignMode.DoesPDSectionExist("[SECT0755] Reviewer Checklist"))
+			{
+				thisStepsStudio.GivenInPowerDesignerIClickOnSection("left", "[SECT0755] Reviewer Checklist");
+			}
 			Report.Info("In Designer Plus clicking Add New Link to add Data Code");
-			var thisStudioPowerDesignerPlusDesignMode =	new StudioPowerDesignerPlusDesignMode();
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(60), "Power designer has not opened.",
 				"Power designer has opened");
 			thisStudioPowerDesignerPlusDesignMode.ClickAddNewButton();
@@ -7820,6 +7827,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			thisStepsStudio.ISelectDataCode(data);
 			Delay.Seconds(5);
 			thisStudioPowerDesignerPlusDesignMode.ClickSaveAndClose();
+			if (SeleniumWebDriver.CurrentDriver.WaitForAlert(2))
+			{
+				Report.Info("Found an alert");
+				string alertText = SeleniumWebDriver.CurrentDriver.GetAlertText();
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
+				Report.Info("Got an alert: " + alertText);
+			}
+			else
+			{
+				Report.Info("Did not find an alert");
+			}
 			GeneralUtilities.StudioWaitForSpinner(60);
 			thisStudioPowerDesignerPlusDesignMode.Wait_for_load(60);
 		}
