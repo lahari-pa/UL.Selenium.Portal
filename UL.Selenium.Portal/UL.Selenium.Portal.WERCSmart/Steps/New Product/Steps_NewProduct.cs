@@ -1484,7 +1484,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 		// NB: The error messages should be delimited by the '|' character!
-		[RegexStepDefinition(@"(.*) (should|should not) be showing the error messages: (.*)")]
+		[RegexStepDefinition(@"Section: (.*) (should|should not) be showing the error messages: (.*)")]
 		public void ErrorMessagesAreShowingForItem(string section, string should, string pipeDelimitedErrorMessages)
 		{
 			Delay.Seconds(1);
