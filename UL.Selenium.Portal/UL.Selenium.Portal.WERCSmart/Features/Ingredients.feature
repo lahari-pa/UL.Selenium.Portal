@@ -45,6 +45,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 @SafetyDataSheetAuthoring
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:NeonicotinoidWarning
 Feature: Ingredients
 (Suite ID: 64740)
 
@@ -159,6 +160,7 @@ Scenario: [71987] Sorting Percent on Ingredient page
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71987
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase71987
+
 @TestCase:65469
 Scenario: [65469] Ingredients - Select Publicly Disclosed check box - un-check Publicly Disclosed check box- Trade secret is active
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -166,7 +168,11 @@ Scenario: [65469] Ingredients - Select Publicly Disclosed check box - un-check P
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble Solution
+	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bubble Solution
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bubble Solution
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Bubble Solution
+	Then in the The Product page, I click Continue
 	#Given I call Shared Step 59680a (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
 	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
@@ -187,13 +193,17 @@ Scenario: [65469] Ingredients - Select Publicly Disclosed check box - un-check P
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Not applicable/available
 	And In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Then in the Physical and Chemical Properties page, I click Continue
-	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Water         | 100     | true                | false       |            |
-	Then for ingredient: Water the Trade Secret field is disabled
-	Given for ingredient: Water I set Public Disclosure checkbox to checked: false
-	Then for ingredient: Water the Trade Secret field is enabled
-	Then in the Ingredients page I click Continue
+	#Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Water         | 100     | true                | false       |            |
+	And I should see the Ingredients Page
+	Then In the Ingredients section, add component with component name: Water
+	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
+	Then In the Ingredients Table row with component name: Water, in Publicly Disclosed? column set checkbox to checked
+	Then In the Ingredients Table row with component name: Water, in Trade Secret column confirm checkbox is disabled
+	Then In the Ingredients Table row with component name: Water, in Publicly Disclosed? column set checkbox to unchecked
+	Then In the Ingredients Table row with component name: Water, in Trade Secret column confirm checkbox is enabled
+	Then in the Ingredients page I click Continue	
 	And I should see the Inventory Status, Prop 65 (US) Page
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65469
 	Then I navigate to the Home Page
@@ -202,11 +212,10 @@ Scenario: [65469] Ingredients - Select Publicly Disclosed check box - un-check P
 @TestCase:65470
 Scenario: [65470] Ingredients - Select Trade Secret check box - Un-check Trade Secret check box - Publicly Disclosed & Public Name are active
 	Given I log in with the account saved in TReVor as: ProductAccount
-#	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
 	Then I should be on the The Product Page
 	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bubble Solution_#65470
@@ -232,16 +241,20 @@ Scenario: [65470] Ingredients - Select Trade Secret check box - Un-check Trade S
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Not applicable/available
 	And In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Then in the Physical and Chemical Properties page, I click Continue
-	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Water         | 100     | false               | true        |            |
-	Then for ingredient: Water the Publicly Disclosed field is disabled
-	Then for ingredient: Water the Public Name field is disabled
-	Given for ingredient: Water I set Trade Secret checkbox to checked: false
-	Then for ingredient: Water the Publicly Disclosed field is enabled
-	Then for ingredient: Water the Public Name field is enabled
-	Then for ingredient: Water I confirm the Public Name selectbox contains names for selection
-	Then in the Ingredients page I click Continue
+	#Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Water         | 100     | false               | true        |            |
+	And I should see the Ingredients Page
+	Then In the Ingredients section, add component with component name: Water
+	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
+	Then In the Ingredients Table row with component name: Water, in Trade Secret? column set checkbox to checked
+	Then In the Ingredients Table row with component name: Water, in Publicly Disclosed column confirm checkbox is disabled
+	Then In the Ingredients Table row with component name: Water, in Public Name column confirm checkbox is disabled
+	Then In the Ingredients Table row with component name: Water, in Trade Secret? column set checkbox to unchecked
+	Then In the Ingredients Table row with component name: Water, in Publicly Disclosed column confirm checkbox is enabled
+	Then In the Ingredients Table row with component name: Water, in Public Name column confirm checkbox is enabled
+	Then In the Ingredients Table row with component name: Water, in Public Name column select element does exists
+	Then in the Ingredients page I click Continue	
 	And I should see the Inventory Status, Prop 65 (US) Page
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65470
 	Then I navigate to the Home Page
@@ -256,7 +269,6 @@ Scenario: [65459] Ingredients - Select Trade Secret check box - Publicly Disclos
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble Solution
 	Then I should be on the The Product Page
 	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bubble Solution_#65459
@@ -282,11 +294,15 @@ Scenario: [65459] Ingredients - Select Trade Secret check box - Publicly Disclos
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Not applicable/available
 	And In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Then in the Physical and Chemical Properties page, I click Continue
-	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Water         | 100     | false               | true        |            |
-	Then for ingredient: Water the Publicly Disclosed field is disabled
-	Then for ingredient: Water the Public Name field is disabled
+	#Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Water         | 100     | false               | true        |            |
+	And I should see the Ingredients Page
+	Then In the Ingredients section, add component with component name: Water
+	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
+	Then In the Ingredients Table row with component name: Water, in Trade Secret? column set checkbox to checked
+	Then In the Ingredients Table row with component name: Water, in Publicly Disclosed column confirm checkbox is disabled
+	Then In the Ingredients Table row with component name: Water, in Public Name column confirm checkbox is disabled
 	Then in the Ingredients page I click Continue
 	And I should see the Inventory Status, Prop 65 (US) Page
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65459
@@ -458,13 +474,11 @@ Scenario: [71291] Product Ingredients contains a third party component that requ
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-
-#	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mulch with Pesticide
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mulch with Pesticide
 	Then I should be on the The Product Page
 	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Mulch with Pesticide_#71291
 	And In the Product Section, set the option in section: 'Type of Product (select)' to: Mulch with Pesticide
 	Then in the The Product page, I click Continue
-
 	Then I save the product information as: TestCase71291
 	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I should see the Product Information Page
@@ -475,24 +489,35 @@ Scenario: [71291] Product Ingredients contains a third party component that requ
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page I click Continue
-
-	And I set the Secondary Physical State option to: Solid
-	And I set the When mixed with an equal amount of water field to: No
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
 	Then in the Physical and Chemical Properties page I click Continue
-	Given I add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Wood chips    | 75.0    | false               | false       |            |
-		| RED 4         | 20.0    | false               | false       |            |
-		| Clothianidin  | 5.0     | false               | false       |            |
+	#Given I add the following ingredients:
+	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Wood chips    | 75.0    | false               | false       |            |
+	#	| RED 4         | 20.0    | false               | false       |            |
+	#	| Clothianidin  | 5.0     | false               | false       |            |
+	And I should see the Ingredients Page
+	Then In the Ingredients section, add component with component name: Wood chips
+	Then In the Ingredients Table row with component name: Wood chips, in Percent column text input enter: 75
+	Then In the Ingredients section, add component with component name: RED 4
+	Then In the Ingredients Table row with component name: RED 4, in Percent column text input enter: 20
+	Then In the Ingredients section, add component with component name: Clothianidin
+	Then In the Ingredients Table row with component name: Clothianidin, in Percent column text input enter: 5
 	Then in the Ingredients page I click Continue
 	And I should see the Neonicotinoid Warning Page
-	Then I should see an alert with title: Danger & Warning subtitle: This product contains a neonicotinoid pesticide which may adversely affect pollinating bee populations. Text: Presence of this ingredient may limit the sale of this product through a Retailer. Please refer to the EPA website for more information.
-	Then on the Neonicotinoid Warning Page I should see a link with text: EPA website which links to page: https://www.epa.gov/pollinator-protection/epa-actions-protect-pollinators
+	Then In the Neonicotinoid Warning Section, warning message should be displayed
+	Then In the Neonicotinoid Warning Section, click 'EPA website' link
+	Then In the Neonicotinoid Warning Section, after clicking 'EPA website' link confirm new tab opens
+	Then In the Neonicotinoid Warning Section, after clicking 'EPA website' link close new tab
 	Then in the Neonicotinoid Warning page I click Continue
 	And I should see the Inventory Status, Prop 65 (US) Page
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71291
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase71291
+
 @TestCase:74142
 Scenario: [74142] Pop up that Informs the regulations the components are associated
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -545,13 +570,11 @@ Scenario: [69796] Aerosol Warning Message on Ingredient page
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Hair Styling Product - Aerosol and Pump Spray
 	Then I should be on the The Product Page
 	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Hair Styling Product - Aerosol and Pump Spray_#69796
 	And In the Product Section, set the option in section: 'Type of Product (select)' to: Hair Styling Product - Aerosol and Pump Spray
 	Then in the The Product page, I click Continue
-
 	Then I save the product information as: TestCase69796
 	#Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I should see the Product Information Page
@@ -562,25 +585,25 @@ Scenario: [69796] Aerosol Warning Message on Ingredient page
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page I click Continue
 	Then I should see the Physical and Chemical Properties Page
-	Given I set the Primary Physical State option to: Aerosol
-	Given I set the Secondary Physical State option to: Bag-on-valve (BOV)
-	Given I set the pH option to: 5
-	Given I set the Select the best Water Solubility option to: Dispersible
-	Given I select the first option in section: When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then
-	Given I click continue
-	Given I click continue
-	Then I should see an error message: Formulation must total or exceed 100%.
-	Given I add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Water         | 80      | false               | false       |            |
-	Given I click continue
-	Then I should see an error message: Formulation must total or exceed 100%.
-	Given I change the percent field to 100
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Aerosol
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Bag-on-valve (BOV)
+	And In the Physical and Chemical Properties Section, for section: 'pH' enter text: 8
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then In the Physical and Chemical Properties Section, set the option in section: 'When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then' to: This product is classified as a D001 Hazardous Waste under RCRA (as per Section 13 or 15 of the SDS).
+	Then in the Physical and Chemical Properties page I click Continue
+	Then I should see the Ingredients Page
+	Given in the Ingredients page I click Continue
+	Then In the Ingredients Section confirm error is displayed with text: Formulation must total or exceed 100%.
+	#Given I add the following ingredients:
+	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Water         | 80      | false               | false       |            |
+	Then In the Ingredients section, add component with component name: Water
+	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 80
+	Given in the Ingredients page I click Continue
+	Then In the Ingredients Section confirm error is displayed with text: Formulation must total or exceed 100%.
+	Then In the Ingredients Table row with component name: Water, in Percent column text input enter value: 100 and press tab
 	Given in the Ingredients page I click Continue
 	Then I should see the Inventory Status, Prop 65 (US) Page
-	Given In the New Product page I click tab: Product Characteristics
-	And I click the page heading: Ingredients
-	Then I should not see an error message: Formulation must total or exceed 100%.
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase69796
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase69796

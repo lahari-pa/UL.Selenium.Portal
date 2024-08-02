@@ -98,7 +98,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 					break;
 			}
 		}
+		[RegexStepDefinition(@"In the Ingredients Section confirm error is displayed with text: (.*)")]
+		public void IngredientsTableErrorDisplayed( string errorText)
+		{
+			new StepsNewProduct().ErrorMessageSpecific(errorText);	
 
+		}
 		[RegexStepDefinition(@"In the Ingredients Section ingredients table, confirm row with (component name|CAS number): (.*) (is|is not) displayed")]
 		public void IngredientsTableRowIsIsNotDisplayed(string searchType, string searchText, string is_isnot)
 		{
@@ -223,6 +228,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			IngredientsTableRow ingredientRow = this.IngredientsRowSearchTypeGet(searchType, searchText);
 			Report.IsTrue(ingredientRow.CellTextInputExists(columnLabel), $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column text input does not exist.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column text input does exist.");
 			Report.IsTrue(ingredientRow.CellTextInputEnterText(columnLabel, inputText), $"Failure, in {searchType}:'{searchText}' row '{columnLabel}' column text input failed to enter text '{inputText}'.", $"Success, in {searchType}:'{searchText}' row '{columnLabel}' column text input enter text '{inputText}'.");
+			string displayedText = ingredientRow.CellTextInputText(columnLabel);
+			Report.IsTrue(string.Equals(displayedText, inputText), $"Failure, in {searchType}:'{searchText}' row '{columnLabel}' column text input text is '{displayedText}' and should be '{inputText}'.", $"Success, in {searchType}:'{searchText}' row '{columnLabel}' column text input text '{inputText}' is correct.");
+		}
+		[RegexStepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column text input enter value: (.*) and press tab")]
+		public void IngredientsTableRowEnterPercentAndPressTab(string searchType, string searchText, string columnLabel, string inputText)
+		{
+			IngredientsTable ingredientsTable = new IngredientsTable();
+			Report.IsTrue(ingredientsTable.WaitForContainerToBeVisible(), $"Failure, ingredients table does not exist.", $"Success, ingredients table exists.");
+			Report.IsTrue(!ingredientsTable.IngredientRowList.IsNullOrEmpty(), $"Failure, ingredients table is empty.", $"Success, ingredients table is not empty.");
+			IngredientsTableRow ingredientRow = this.IngredientsRowSearchTypeGet(searchType, searchText);
+			Report.IsTrue(ingredientRow.CellTextInputExists(columnLabel), $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column text input does not exist.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column text input does exist.");
+			Report.IsTrue(ingredientRow.CellTextInputEnterTextAndTab(columnLabel, inputText), $"Failure, in {searchType}:'{searchText}' row '{columnLabel}' column text input failed to enter text '{inputText}'.", $"Success, in {searchType}:'{searchText}' row '{columnLabel}' column text input enter text '{inputText}'.");
 			string displayedText = ingredientRow.CellTextInputText(columnLabel);
 			Report.IsTrue(string.Equals(displayedText, inputText), $"Failure, in {searchType}:'{searchText}' row '{columnLabel}' column text input text is '{displayedText}' and should be '{inputText}'.", $"Success, in {searchType}:'{searchText}' row '{columnLabel}' column text input text '{inputText}' is correct.");
 		}
