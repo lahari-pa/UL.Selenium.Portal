@@ -415,7 +415,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"Message: '{alert}' is displayed as expected");
 		}
 
-		[RegexStepDefinition(@"Error message in section:(.*) (should|should not) be showing the error messages: (.*)")]
+		[RegexStepDefinition(@"Error message in section: (.*) (should|should not) be showing the error messages: (.*)")]
 		public void ErrorMessagesAreShowingForItem(string section, string should, string pipeDelimitedErrorMessages)
 		{
 			Delay.Seconds(1);
