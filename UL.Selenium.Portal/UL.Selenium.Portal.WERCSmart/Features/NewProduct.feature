@@ -57,12 +57,12 @@ Scenario: [31344] New Product Screen validation
 @TestCase:82750
 Scenario: [82750] Copy from an Existing Registration validation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 	Then The home screen should load
-	Given I click the Register New Product icon in the Navigation Pane
-	And I set the Select the type of product to create: option to: Copy from an Existing Registration
-	When I click continue
-	Then I should see an error message: This is a required field.
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Copy from an Existing Registration
+	Then in the New Product page, I click Continue
+	Then Error message in section: Please select the source product should be showing the error messages: This is a required field.
+
 
 @TestCase:87295
 Scenario: [87295] 3rd party Ingredients - Informational Message
