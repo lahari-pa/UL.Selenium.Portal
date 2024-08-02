@@ -100,6 +100,41 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 				"Successfully inputted UPC information!");
 		}
 
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Provide the product's UPC\(s\)- including container type and size \(ounces\)' enter UPC Number: (.*) enter Size: (.*) enter Container Type: (.*) and enter internal SKU: (.*)")]
+		public void EnterUPCInformationWithSKU(string upc, string size, string containerType, string internalSKU)
+		{
+
+			if (upc.ToLower().Contains("saved as"))
+			{
+				try
+				{
+					string savedUPC = Context
+						.GetFromContext(upc.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+						.ToString();
+					upc = savedUPC;
+				}
+				catch (Exception e)
+				{
+					Report.Info("Failed to find saved item in context: " + upc.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase) + e.Message);
+					throw;
+				}
+
+			}
+
+			var upcInfo = new UpcInformation {
+				ContainerType = containerType,
+				Size = size,
+				UpcNumber = upc,
+				InternalSKU = internalSKU,
+			};
+
+
+			var NP = new NewProduct();
+			NP.WaitForContainerToBeVisible(30);
+			Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
+				"Successfully inputted UPC information!");
+		}
+
 		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, verify retailer '(.*)' (is|is not) present under the 'Destination Retailers' column")]
 		public void RetailerUnderDestinationRetailers(string retailer, string is_isnot)
 		{
@@ -382,8 +417,33 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			string button = "Ok";
 			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(title, button);
 		}
+		
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'GTIN/UPC (include check digit)' enter the value: (.*)")]
+		public void EnterUPCGTIN(string option)
+		{
+			string section = "GTIN/UPC (include check digit)";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+		
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Product Name on Label' enter the value: (.*)")]
+		public void EnterUPCProductNameOnLabel(string option)
+		{
+			string section = "Product Name on Label";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
 
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Size (Fluid Ounces)' enter the value: (.*)")]
+		public void EnterUPCSize(string option)
+		{
+			string section = "Size (Fluid Ounces)";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
 
-
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Internal SKU' enter the value: (.*)")]
+		public void EnterInternalSKU(string option)
+		{
+			string section = "Internal SKU";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
 	}
 }
