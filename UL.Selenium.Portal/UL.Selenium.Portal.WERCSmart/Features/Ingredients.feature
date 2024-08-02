@@ -75,28 +75,37 @@ Scenario: [71985] Sorting Cas Number/ Chemical Name Ingredient page
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page I click Continue
-
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then in the Physical and Chemical Properties page I click Continue
 	And I set the Secondary Physical State option to: Solid
 	And I set the When mixed with an equal amount of water field to: No
 	Then in the Physical and Chemical Properties page I click Continue
-	##Product Characteristics
-	Given I add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Wood chips    | 50.0    | false               | false       |            |
-		| RED 4         | 23.0    | false               | false       |            |
-		| Clothianidin  | 27.0    | false               | false       |            |
-	When In the ingredients table I click Chemical Name to order
-	Then In the ingredients table the ingredients should be in the following order
+	#Given I add the following ingredients:
+	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Wood chips    | 50.0    | false               | false       |            |
+	#	| RED 4         | 23.0    | false               | false       |            |
+	#	| Clothianidin  | 27.0    | false               | false       |            |
+	And I should see the Ingredients Page
+	Then In the Ingredients section, add component with component name: Wood chips
+	Then In the Ingredients section, add component with component name: RED 4
+	Then In the Ingredients section, add component with component name: Clothianidin
+	Then In the Ingredients Table, click the 'Chemical Name' sortable column
+	Then In the Ingredients Table, confirm the 'Chemical Name' sortable column up carat is displayed
+	Then In the Ingredients table confirm ingredients should be in the following order
 		| Name         |
 		| Clothianidin |
 		| RED 4        |
-		| Wood chips    |
-	When In the ingredients table I click Chemical Name to order
-	Then In the ingredients table the ingredients should be in the following order
-		| Name         |
 		| Wood chips   |
-		| RED 4        |
+	Then In the Ingredients Table, click the 'Chemical Name' sortable column
+	Then In the Ingredients Table, confirm the 'Chemical Name' sortable column up carat is displayed
+	Then In the Ingredients table confirm ingredients should be in the following order
+		| Name         |
 		| Clothianidin |
+		| RED 4        |
+		| Wood chips   |
 	When In the ingredients table I click CAS Number to order
 	Then In the ingredients table the ingredients should be in the following order
 		| Name         |
@@ -112,6 +121,7 @@ Scenario: [71985] Sorting Cas Number/ Chemical Name Ingredient page
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71985
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase71985
+
 @TestCase:71987
 Scenario: [71987] Sorting Percent on Ingredient page
 	Given I log in with the account saved in TReVor as: ProductAccount
