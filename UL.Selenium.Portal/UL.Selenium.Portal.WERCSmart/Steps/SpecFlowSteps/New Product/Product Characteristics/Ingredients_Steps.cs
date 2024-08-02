@@ -478,6 +478,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(ingredientsModal.FooterButtonExists(buttonLabel), $"Failure, in the displayed modal '{buttonLabel}' button is not displayed.", $"Success, in the displayed modal '{buttonLabel}' button is displayed.");
 			Report.IsTrue(ingredientsModal.FooterButtonClick(buttonLabel), $"Failure, in the displayed modal failed to click '{buttonLabel}' button.", $"Success, in the displayed modal clicked '{buttonLabel}' button.");
 		}
+		[RegexStepDefinition("In the Ingredients section confirm a list of regulations associated with the component is displayed in the modal window")]
+		public void ThenInTheIngredientsSectionConfirmAListOfRegulationsAssociatedWithTheComponentIsDisplayedInTheModalWindow()
+		{
+			new StepsNewProduct().ConfirmListOfRegulationsAssociatedWithComponentDisplayed();
+
+		}
+
 		#endregion
 
 		#region Shared Steps
