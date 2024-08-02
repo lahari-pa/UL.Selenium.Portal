@@ -57,7 +57,7 @@ Scenario: [209162] WERCSmart Portal Test Flow for Type of Product:  Light Bulb -
 	Then I generate a random UPC number and save as: UPC209162
 	#Then I call Shared Step 234311 (Product Information - Applicable Only to Light Bulbs - Germicidal Ultra Violet (RU000962))
 	Given I should see the Product Information Page
-	Then In the Product Information Section, confirm section: 'Which best describes your product, including when FIFRA 25(b) Exempt' is displayed
+	Then In the Product Information Section, confirm the question: 'Which best describes your product, including when FIFRA 25(b) Exempt' is displayed
 	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
 	Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
@@ -94,13 +94,13 @@ Scenario: [209162] WERCSmart Portal Test Flow for Type of Product:  Light Bulb -
 	#234317 Additional Documents to Provide - Applicable Only to Light Bulbs - Germicidal Ultra Violet (RU000962)
 	Given I should see the Additional Documents to Provide Page
 	Then in the Additional Documents to Provide page I click Continue
-	Then In the Additional Documents to Provide Section: 'Provide Full Product Label (required)' error message should display: Document is required: Please upload a PDF of the product label (full label).
+	Then In the Additional Documents to Provide, section 'Provide Full Product Label (required)' error message should display: Please upload a PDF of the product label (full label).
 	Then I save the current window handle to context as: MainWindowHandle
-	Then I upload PDF document to Provide Full Product Label (required) field
-	Then In the Additional Documents to Provide Section, for section Please upload a PDF of the product label (full label). button Remove should exists
-	Then In the Additional Documents to Provide Section, for section Please upload a PDF of the product label (full label). button View should exists
-	Then In the Additional Documents to Provide Section, for section Please upload a PDF of the product label (full label). I click button 'View'
-	Then In the Additional Documents to Provide Section, after clicking 'View' button I confirm pdf file is downloaded
+	Then In the Additional Documents to Provide, upload PDF document to Provide Full Product Label (required) field
+	Then In the Additional Documents to Provide, for section Please upload a PDF of the product label (full label). button Remove should exists
+	Then In the Additional Documents to Provide, for section Please upload a PDF of the product label (full label). button View should exists
+	Then In the Additional Documents to Provide, for section Please upload a PDF of the product label (full label). I click button 'View'
+	Then In the Additional Documents to Provide, after clicking 'View' button I confirm pdf file is downloaded
 	Then in the Additional Documents to Provide page I click Continue
 	Then I close All the current windows except the Main Window
 	#And I call Shared Step 214559 (Optional Reports and Documents Available for Purchase - No Document Purchase is Required - Click Continue (General Shared-Step))

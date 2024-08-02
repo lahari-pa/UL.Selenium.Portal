@@ -1526,8 +1526,8 @@ Scenario: [207581] Oven Cleaner - Pump Spray - (RU000798) - New Flow Testing
 	Given in the Regulatory Documents to Provide page I click Continue
 	Then I should see the Additional Documents to Provide Page
 	Given in the Additional Documents to Provide page I click Continue
-	Then In the Additional Documents to Provide Section: 'Provide Full Product Label (required)' error message should display: Document is required: Please upload a PDF of the product label (full label).
-	Then In the Additional Documents to Provide Section, upload PDF document to Provide Full Product Label (required) field
+	Then In the Additional Documents to Provide: 'Provide Full Product Label (required)' error message should display: Document is required: Please upload a PDF of the product label (full label).
+	Then In the Additional Documents to Provide, upload PDF document to Provide Full Product Label (required) field
 	Given in the Additional Documents to Provide page I click Continue
 	Then I should see the Optional Reports and Documents Available for Purchase Page
 	Then The statement: • Additional documents are not subject to standard two day turnaround. is displayed
