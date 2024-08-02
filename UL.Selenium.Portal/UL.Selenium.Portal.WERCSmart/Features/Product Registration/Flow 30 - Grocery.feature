@@ -249,8 +249,8 @@ Scenario: [60723] Jelly, Jam or Preserves - RU001456
 	Given in the Regulatory Documents to Provide page I click Continue
 
 	Given I should see the Additional Documents to Provide Page
-	Given In the Additional Documents to Provide Section, upload PDF document to Upload SDS (Optional) field
-	Given In the Additional Documents to Provide Section, upload PDF document to Flash Point Testing Report field
+	Given In the Additional Documents to Provide, upload PDF document to Upload SDS (Optional) field
+	Given In the Additional Documents to Provide, upload PDF document to Flash Point Testing Report field
 	Then in the Additional Documents to Provide page I click Continue
 
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
