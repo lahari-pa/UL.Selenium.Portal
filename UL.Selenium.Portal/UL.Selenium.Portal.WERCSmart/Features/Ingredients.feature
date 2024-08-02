@@ -553,7 +553,6 @@ Scenario: [74142] Pop up that Informs the regulations the components are associa
 	Then In the Ingredients section, add component with component name: Chlorine
 	Then In the Ingredients Table row with component name: Chlorine, in Percent column text input enter: 100
 	Then In the Ingredients Table row with component name: Chlorine, in CAS Number / Chemical Name column click 'Regulated' button
-	Then Confirm a modal is displayed
 	Then Confirm displayed modal has title: Regulatory List
 	Then In the Ingredients section confirm a list of regulations associated with the component is displayed in the modal window
 	Then In displayed modal, click Close footer button
