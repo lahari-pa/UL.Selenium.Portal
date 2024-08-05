@@ -19,5 +19,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string text = "Presence of this ingredient may limit the sale of this product through a Retailer. Please refer to the EPA website for more information.";
 			new Steps_Prototype().ThenIShouldSeeAnAlertWithTitleSubtitleText(condition, title, subTitle, text);
 		}
+		[RegexStepDefinition(@"In the Neonicotinoid Warning Section, click 'EPA website' link")]
+		public void NeonicotinoidClickLink()
+		{
+			string link = "EPA website";
+			new Steps_Prototype().ClickLinkElement(link);
+		}
+		[RegexStepDefinition(@"In the Neonicotinoid Warning Section, after clicking 'EPA website' link confirm new tab opens")]
+		public void NeonicotinoidNewTab()
+		{
+			string url = "https://www.epa.gov/pollinator-protection/epa-actions-protect-pollinators";
+			new Steps_Prototype().ConfirmNewTabOpenWithUrl(url);
+		}
+		[RegexStepDefinition(@"In the Neonicotinoid Warning Section, after clicking 'EPA website' link close new tab")]
+		public void NeonicotinoidCloseNewTab()
+		{
+			string url = "https://www.epa.gov/pollinator-protection/epa-actions-protect-pollinators";
+			new Steps_Prototype().CloseTabWithUrl(url);
+		}
+
 	}
 }

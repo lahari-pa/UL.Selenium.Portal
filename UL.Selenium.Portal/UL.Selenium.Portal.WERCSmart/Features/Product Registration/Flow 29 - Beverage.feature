@@ -330,7 +330,7 @@ Scenario: [105007] Wine - RU001418 - Not Regulated Less than <=24% Alcohol
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC105007 enter Size: 12.3 and enter Container Type: Glass Container
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, verify retailer 'WG' is present under the 'Destination Retailers' column
 	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page, I click Continue
-	#Given in the Additional Documents to Provide section page I click Continue
+	#Given In the Additional Documents to Provide page I click Continue
 	Then I should be on the Additional Documents to Provide Page
 	Then in the Additional Documents to Provide page, I click Continue
 	Then I should be on the Optional Comments Page
@@ -451,10 +451,10 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then The Flash Point Testing Report question is displayed
 	Then The Transportation Exemption Letter or Special Permit question is displayed
 	Then I upload PDF document to Upload SDS (Optional) field
-	Then In the Additional Documents to Provide Section, for section OSHA SDS button View should exists
-	Then In the Additional Documents to Provide Section, for section OSHA SDS button Remove should exists
-	Then In the Additional Documents to Provide Section, for section OSHA SDS I click button 'View'
-	Then In the Additional Documents to Provide Section, after clicking 'View' button I confirm pdf file is downloaded
+	Then In the Additional Documents to Provide, for section OSHA SDS button View should exists
+	Then In the Additional Documents to Provide, for section OSHA SDS button Remove should exists
+	Then In the Additional Documents to Provide, for section OSHA SDS I click button 'View'
+	Then In the Additional Documents to Provide, after clicking 'View' button I confirm pdf file is downloaded
 	Given in the Additional Documents to Provide page I click Continue
 	#Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: [string]
 	Then I should be on the Optional Comments Page

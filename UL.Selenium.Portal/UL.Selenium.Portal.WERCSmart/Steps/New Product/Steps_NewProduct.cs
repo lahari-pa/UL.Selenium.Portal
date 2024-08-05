@@ -1483,8 +1483,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Screenshot();
 		}
 
-		// NB: The error messages should be delimited by the '|' character!
-		[RegexStepDefinition(@"(.*) (should|should not) be showing the error messages: (.*)")]
+	
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="section"></param>
+		/// <param name="should"></param>
+		/// <param name="pipeDelimitedErrorMessages">The error messages should be delimited by the '|' character!</param>
+		[RegexStepDefinition(@"Section: (.*) (should|should not) be showing the error messages: (.*)")]
 		public void ErrorMessagesAreShowingForItem(string section, string should, string pipeDelimitedErrorMessages)
 		{
 			Delay.Seconds(1);

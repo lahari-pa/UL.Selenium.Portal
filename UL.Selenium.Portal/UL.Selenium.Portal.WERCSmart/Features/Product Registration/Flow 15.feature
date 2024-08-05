@@ -34,22 +34,22 @@ Scenario: [58760] Light Bulbs - Light Emitting Diodes (LED) - RU000948
 	Given I generate a random UPC number and save as: UPC58760
 	Given I delete all products with UPC Number: saved as UPC58760
 
-	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
     Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
 
-	# ====== And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Food Item Dispensed by Compressed Gas - Dairy Topping ====== #
+	#And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Food Item Dispensed by Compressed Gas - Dairy Topping
 	And I should see the The Product Page
 	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Light Bulbs - Light Emitting Diodes (LED)
 	And In the Product Section, set the option in section: 'Type of Product (select)' to: Light Bulbs - Light Emitting Diodes (LED)
 	And in the The Product page I click Continue
 	Then I save the product information as: TestCase58760
 
-	# ====== And I call Shared Step 69687 (Product Information - US, No(PL)) ====== #
+	#And I call Shared Step 69687 (Product Information - US, No(PL))
     Given I should see the Product Information Page
-	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both) ' to select: United States
-	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product ' to: No
+	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
+	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Given in the Product Information page I click Continue
 
 	Given I should see the Inventory Status, Prop 65 (US) Page
@@ -57,7 +57,7 @@ Scenario: [58760] Light Bulbs - Light Emitting Diodes (LED) - RU000948
 	Given In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Given in the Inventory Status, Prop 65 (US) page I click Continue
 
-	# ====== Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper) ====== #
+	#Given I call Shared Step 48369 (Toxicity Characteristics Leaching Procedure (TCLP) - No to ALL With Copper)
 	Given I should see the Toxicity Characteristic Leaching Procedure (TCLP) Page
 	Given In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the option in section: 'Product has had TCLP testing; Report is available' to: No
 	Given In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Lead': to: No
@@ -71,7 +71,7 @@ Scenario: [58760] Light Bulbs - Light Emitting Diodes (LED) - RU000948
 	Given In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Copper': to: No
 	Given in the Toxicity Characteristic Leaching Procedure (TCLP) page I click Continue
 
-	# ====== Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all) ====== #
+	#Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 	Given I should see the Electronic Equipment Page
 	Given In the Electronic Equipment Section, set the option in section: 'Contains Circuit Board' to: Yes
 	Given In the Electronic Equipment Section, set the option in section: 'Has a Cathode Ray Tube (CRT)' to: Yes
@@ -84,7 +84,7 @@ Scenario: [58760] Light Bulbs - Light Emitting Diodes (LED) - RU000948
 	Given In the Select Retailers window, click 'Done' button
 	Given in the Retailer page I click Continue
 
-	# ====== Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58760, container type: Plastic Container and size: 22 ====== #
+	#Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58760, container type: Plastic Container and size: 22
 	And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
 	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC58760 enter Size: 22 and enter Container Type: Plastic Container
@@ -98,7 +98,7 @@ Scenario: [58760] Light Bulbs - Light Emitting Diodes (LED) - RU000948
 	And In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: User added Comments Text 58760. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Then in the Optional Comments page I click Continue
 
-	# ====== Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Light Bulbs - Light Emitting Diodes (LED) ====== #
+	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Light Bulbs - Light Emitting Diodes (LED)
 	Given I should see the Data Acceptance Page
 	Given In the Data Acceptance Section, click 'Summary' button
 	Given I switch to the tab with Data Summary page
@@ -115,12 +115,12 @@ Scenario: [58759] Servers, Small-Scale - RU001183
 	Given I generate a random UPC number and save as: UPC58759
 	Given I delete all products with UPC Number: saved as UPC58759
 
-    # ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+    #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
     Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
 
-	# ====== And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Servers, Small-Scale ====== #
+	#And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Servers, Small-Scale
     And I should see the The Product Page
 	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Servers, Small-Scale
 	And In the Product Section, set the option in section: 'Type of Product (select)' to: Servers, Small-Scale
@@ -139,16 +139,16 @@ Scenario: [58759] Servers, Small-Scale - RU001183
 	Given In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Given in the Inventory Status, Prop 65 (US) page I click Continue
 
-	# ====== Given I call Shared Step 48367 (Product Includes Battery > any type) ====== #
-	# ====== 	| Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product | ====== #
-	# ====== 	| Alkaline     | <any>        | 4                               | 2                                  | ====== #
+	#Given I call Shared Step 48367 (Product Includes Battery > any type)
+	# 	| Battery Type | Manufacturer | Quantity of Batteries per Package | Quantity of Batteries to Operate Product |
+	# 	| Alkaline     | <any>        | 4                               | 2                                  |
 	Given I should see the Product Includes Battery Page
 	Given In the Product Includes Battery Section enter the values in the table:
           | Battery Is Packaged      | Battery Type | Manufacturer                                                       | Quantity of Batteries per Package | Quantity of Batteries to Operate Product |
           | Installed in the product | Alkaline     | FM - Alkaline Battery (RU000344) by The WERCS LTD (WPS ID 1777820) | 4                                 | 2                                        |
 	Given in the Product Includes Battery page I click Continue
 
-	# ====== Given I call Shared Step 104083 Toxicity Characteristics Leaching Procedure TCLP - NO to ALL - NO COPPER LISTED ====== #
+	#Given I call Shared Step 104083 Toxicity Characteristics Leaching Procedure TCLP - NO to ALL - NO COPPER LISTED
 	Given I should see the Toxicity Characteristic Leaching Procedure (TCLP) Page
 	Given In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the option in section: 'Product has had TCLP testing; Report is available' to: No
 	Given In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Lead': to: No
@@ -161,7 +161,7 @@ Scenario: [58759] Servers, Small-Scale - RU001183
 	Given In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Selenium': to: No
 	Given in the Toxicity Characteristic Leaching Procedure (TCLP) page I click Continue
 
-	# ====== Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all) ====== #
+	#Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
 	Given I should see the Electronic Equipment Page
 	Given In the Electronic Equipment Section, set the option in section: 'Contains Circuit Board' to: No
 	Given In the Electronic Equipment Section, set the option in section: 'Has a Cathode Ray Tube (CRT)' to: No
@@ -175,7 +175,7 @@ Scenario: [58759] Servers, Small-Scale - RU001183
 	Given In the Select Retailers window, click 'Done' button
 	Given in the Retailer page I click Continue
 
-	# ====== And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58759, container type: Plastic Container and size: 10.00 ====== #
+	#And I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC58759, container type: Plastic Container and size: 10.00
 	And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
 	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC58759 enter Size: 22 and enter Container Type: Plastic Container
@@ -189,7 +189,7 @@ Scenario: [58759] Servers, Small-Scale - RU001183
 	And I enter the following into the comments field: User added Comments Text 58759. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Then in the Comments page I click Continue
 
-	# ====== Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Servers, Small-Scale ====== #
+	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Servers, Small-Scale
 	Given I should see the Data Acceptance Page
 	Given In the Data Acceptance Section, click 'Summary' button
 	Given I switch to the tab with Data Summary page
