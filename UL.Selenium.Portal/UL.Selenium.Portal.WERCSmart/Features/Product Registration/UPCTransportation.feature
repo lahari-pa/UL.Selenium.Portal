@@ -283,6 +283,8 @@ Scenario: [122428] UPC Transportation - Forwarding
 	Given I click continue on the Forward Product Registration page
 	Given In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 
+# Removed from regression: 2024/08
+@ignore
 @TestCase:122940
 Scenario: [122940] UPC Transporation - Data Entry - Exceptions
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
