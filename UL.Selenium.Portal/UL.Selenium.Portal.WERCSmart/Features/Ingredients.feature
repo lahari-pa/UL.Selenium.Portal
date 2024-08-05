@@ -100,9 +100,9 @@ Scenario: [71985] Sorting Cas Number/ Chemical Name Ingredient page
 	Then In the Ingredients Table, confirm the 'Chemical Name' sortable column up carat is displayed
 	Then In the Ingredients table confirm ingredients should be in the following order
 		| Name         |
-		| RED 4        |
-		| Clothianidin |
 		| Wood chips   |
+		| RED 4        |
+		| Clothianidin |	
 	Then In the Ingredients Table, click the 'CAS Number' sortable column
 	Then In the Ingredients Table, confirm the 'CAS Number' sortable column down carat is displayed
 	Then In the Ingredients table confirm ingredients should be in the following order
