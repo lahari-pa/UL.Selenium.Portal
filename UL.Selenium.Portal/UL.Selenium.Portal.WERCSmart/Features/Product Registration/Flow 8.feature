@@ -170,6 +170,8 @@ Scenario: [57332] Automotive Accessories containing Gel (Seat Cushions, etc) - 8
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase57332
 
+# Removed from regression: 2024/08
+@ignore
 @TestCase:58187
 Scenario: [58187] Matches (RU000317) - 8-S
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -233,6 +235,9 @@ Scenario: [58187] Matches (RU000317) - 8-S
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase58187
 #check RU number and name
+
+# Removed from regression: 2024/08
+@ignore
 @TestCase:58293
 Scenario: [58293] Engines for Model Rockets(RU000338) - 8-S
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -408,6 +413,9 @@ Scenario: [58297] Fireworks (RU000330) - 8-S
 #Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Engine (motor) oil for Auto or Boat
 #
 #Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57088
+
+# Removed from regression: 2024/08
+@ignore
 @TestCase:58104
 Scenario: [58104] Fabric Dye - Liquid or Solid - 8-L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -468,6 +476,8 @@ Scenario: [58104] Fabric Dye - Liquid or Solid - 8-L
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase58104
 
+# Removed from regression: 2024/08
+@ignore
 @TestCase:58210
 Scenario: [58210] Antibiotic, Liquid or Cream, Non-Aerosol - 8-L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -543,6 +553,8 @@ Scenario: [58210] Antibiotic, Liquid or Cream, Non-Aerosol - 8-L
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase58210
 
+# Removed from regression: 2024/08
+@ignore
 @TestCase:58285
 Scenario: [58285] Toothpaste - Whitening (RU001359) - 8-L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -794,6 +806,8 @@ Scenario: [57088] Engine (motor) oil for Auto or Boat - 8L
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase57088
 
+# Removed from regression: 2024/08
+@ignore
 @TestCase:57709
 Scenario: [57709] Training aid repellant (RU000326) - 8LS -8L
 	Given I generate a random UPC number and save as: UPC57709
@@ -1089,9 +1103,10 @@ Scenario: [128743] Ammunition - Other DOT Exception Validation
 	Given I call Shared Step (Transportation Details - Other DOT Exception Validation - Continue - Happy Path)
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128743
 
-# Ignore execution in QA-Integration Environment as SHA Automation is set to OFF
+
 # Created by Saikiran Chittampally
-@OnlyInStaging
+# Removed from regression: 2024/08
+@ignore
 @TestCase:213999	
 Scenario: [213999] WERCSmart Portal and SHA Manager Test Flow for Product Type:  Plant Food (RU000148) 
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -1223,8 +1238,9 @@ Scenario: [213999] WERCSmart Portal and SHA Manager Test Flow for Product Type: 
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Completed Status for saved as: TestCase213999)
 
 
-# Ignore execution in QA-Integration Environment as SHA Automation is set to OFF
 # Created by Saikiran Chittampally
+# Removed from regression: 2024/08
+@ignore
 @TestCase:214039
 Scenario: [214039] Test Case 214039: WERCSmart Portal and SHA Manager Test Flow for Product Type: SOIL (RU001075)
 	Given I log in with the account saved in TReVor as: ProductAccount
