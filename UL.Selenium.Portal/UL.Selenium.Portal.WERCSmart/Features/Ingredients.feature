@@ -522,17 +522,15 @@ Scenario: [71291] Product Ingredients contains a third party component that requ
 Scenario: [74142] Pop up that Informs the regulations the components are associated
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
-#	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-
-#	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mascara - Washable
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Mascara - Washable
 	Then I should be on the The Product Page
 	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Mascara - Washable_#74142
 	And In the Product Section, set the option in section: 'Type of Product (select)' to: Mascara - Washable
 	Then in the The Product page, I click Continue
-
 	Then I save the product information as: TestCase74142
 	#Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I should see the Product Information Page
@@ -542,20 +540,22 @@ Scenario: [74142] Pop up that Informs the regulations the components are associa
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page I click Continue
-#Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP) ====== #
-Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
-Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Bonded, fibrous glass web
-Given In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
-Given In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
-Given I click continue
-Given I add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Chlorine      | 100     | false               | false       |            |
-	Given I click the Regulated button for ingredient: Chlorine in the Ingredients table
-	Then the 'Regulatory List' window opens
-	Given I confirm that a list of regulations associated with the component is displayed
-	Given I close the Regulatory List window
-	Given I navigate to the home page
+	#Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP) ====== #
+	Given I should see the Physical and Chemical Properties Page
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Bonded, fibrous glass web
+	Given In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+	#Given I add the following ingredients:
+	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Chlorine      | 100     | false               | false       |            |
+	Then In the Ingredients section, add component with component name: Chlorine
+	Then In the Ingredients Table row with component name: Chlorine, in Percent column text input enter: 100
+	Then In the Ingredients Table row with component name: Chlorine, in CAS Number / Chemical Name column click 'Regulated' button
+	Then Confirm displayed modal has title: Regulatory List
+	Then In the Ingredients section confirm a list of regulations associated with the component is displayed in the modal window
+	Then In displayed modal, click Close footer button
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74142
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase74142

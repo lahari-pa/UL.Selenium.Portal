@@ -315,6 +315,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(ingredientRow.CellSelectClick(columnLabel), $"Failure, failed to click {searchType}:'{searchText}' row '{columnLabel}' column select.", $"Success, clicked {searchType}:'{searchText}' row '{columnLabel}' column select.");
 		}
 
+		[RegexStepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column click 'Regulated' button")]
+		public void IngredientsTableRowClickRegulatedButton(string searchType, string searchText, string columnLabel)
+		{
+			string button = "Regulated";
+			IngredientsTable ingredientsTable = new IngredientsTable();
+			Report.IsTrue(ingredientsTable.WaitForContainerToBeVisible(), $"Failure, ingredients table does not exist.", $"Success, ingredients table exists.");
+			Report.IsTrue(!ingredientsTable.IngredientRowList.IsNullOrEmpty(), $"Failure, ingredients table is empty.", $"Success, ingredients table is not empty.");
+			IngredientsTableRow ingredientRow = this.IngredientsRowSearchTypeGet(searchType, searchText);
+			Report.IsTrue(ingredientRow.CellButtonExists(columnLabel, button), $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column button {button} does not exist.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column button {button} does exist.");
+			Report.IsTrue(ingredientRow.CellButtonClick(columnLabel, button), $"Failure, failed to click {searchType}:'{searchText}' row '{columnLabel}' column button.", $"Success, clicked {searchType}:'{searchText}' row '{columnLabel}' column button.");
+		}
+
 		[RegexStepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column select (.*) option (does|does not) exist")]
 		public void IngredientsTableRowSelectOptionExists(string searchType, string searchText, string columnLabel, string optionLabel, string does_doesnot)
 		{
@@ -466,6 +478,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(ingredientsModal.FooterButtonExists(buttonLabel), $"Failure, in the displayed modal '{buttonLabel}' button is not displayed.", $"Success, in the displayed modal '{buttonLabel}' button is displayed.");
 			Report.IsTrue(ingredientsModal.FooterButtonClick(buttonLabel), $"Failure, in the displayed modal failed to click '{buttonLabel}' button.", $"Success, in the displayed modal clicked '{buttonLabel}' button.");
 		}
+		[RegexStepDefinition("In the Ingredients section confirm a list of regulations associated with the component is displayed in the modal window")]
+		public void ThenInTheIngredientsSectionConfirmAListOfRegulationsAssociatedWithTheComponentIsDisplayedInTheModalWindow()
+		{
+			new StepsNewProduct().ConfirmListOfRegulationsAssociatedWithComponentDisplayed();
+
+		}
+
 		#endregion
 
 		#region Shared Steps
