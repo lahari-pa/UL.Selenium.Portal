@@ -795,8 +795,8 @@ Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulat
 	Then in the New Product page, I click Continue
 	#And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Soap (Bar, Liquid) for Body
 	Then I should be on the The Product Page
-	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to:  Soap (Bar, Liquid) for Body
-	And In the Product Section, set the option in section: 'Type of Product (select)' to:  Soap (Bar, Liquid) for Body
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Soap (Bar, Liquid) for Body
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Soap (Bar, Liquid) for Body
 	Then in the The Product page, I click Continue
 	Then I save the product information as: TestCase84528
 	#And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
