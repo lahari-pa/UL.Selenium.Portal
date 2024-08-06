@@ -737,7 +737,11 @@ Scenario: [87301] Ingredients - Selecting a Public Label Name Automatically Init
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
 	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	#And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk_#80720
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
+	Then in the The Product page, I click Continue
 	#And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I should see the Product Information Page
 	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
@@ -747,7 +751,6 @@ Scenario: [87301] Ingredients - Selecting a Public Label Name Automatically Init
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page I click Continue
-
 	#And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I should see the Physical and Chemical Properties Page
 	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
@@ -756,10 +759,8 @@ Scenario: [87301] Ingredients - Selecting a Public Label Name Automatically Init
 	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Then in the Physical and Chemical Properties page I click Continue
-
-	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
-		| ComponentName    | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Sodium hydroxide | 33      | false               | false       |            |
+	Then In the Ingredients section, add component with component name: Water
+	Then In the Ingredients Table row with component name: Water, in Public Name column select option Water
 	And I select the first Public Name dropdown option for ingredient: Sodium hydroxide
 	And I confirm the Publicly Disclosed checkbox is: checked for ingredient: Sodium hydroxide
 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
