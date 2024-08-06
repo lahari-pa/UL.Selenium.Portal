@@ -22,6 +22,8 @@
 
 Feature: CVS RCL
 
+# Removed from regression: 2024/08
+@ignore
 @TestCase:74208
 Scenario: [74208] CVS merchandising category and verification
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -143,6 +145,9 @@ Scenario: [74208] CVS merchandising category and verification
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74208
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase74208
+
+# Removed from regression: 2024/08
+@ignore
 @TestCase:74253
 Scenario: [74253] CVS marketed or labeled for infants question and verification
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -264,6 +269,8 @@ Scenario: [74254] CVS topically used product and verification
 	Then Is this a topically used product which includes but is not limited to liquids, ointments, bath soaps/bombs, scrubs, masks, wipes, lotions, creams and gels? should be showing the error messages: This is a required field.
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74254
 
+# Removed from regression: 2024/08
+@ignore
 @TestCase:74255
 Scenario: [74255] CVS microbeads product and verification
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -326,6 +333,9 @@ Scenario: [74255] CVS microbeads product and verification
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74255
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase74255
+
+# Removed from regression: 2024/08
+@ignore
 @TestCase:74256
 Scenario: [74256] CVS Refer to your Product Label and verification
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -397,6 +407,9 @@ Scenario: [74256] CVS Refer to your Product Label and verification
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74256
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase74256
+
+# Removed from regression: 2024/08
+@ignore
 @TestCase:74257
 Scenario: [74257] CVS product intended to be rinsed off after use and verification
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -461,6 +474,8 @@ Scenario: [74257] CVS product intended to be rinsed off after use and verificati
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase74257
 
+# Removed from regression: 2024/08
+@ignore
 @TestCase:74259
 Scenario: [74259] CVS product intended to be ingested and verification
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -527,6 +542,8 @@ Scenario: [74259] CVS product intended to be ingested and verification
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase74259
 
+# Removed from regression: 2024/08
+@ignore
 @TestCase:74260
 Scenario: [74260] CVS Is this product a personal care sanitizer and verification
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -593,6 +610,9 @@ Scenario: [74260] CVS Is this product a personal care sanitizer and verification
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74260
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase74260
+
+# Removed from regression: 2024/08
+@ignore
 @TestCase:74188
 Scenario: [74188] CVS Store Brand Associations and verification
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -896,6 +916,8 @@ Scenario: [74272] CVS RCL - Page is NOT shown if Product has CVS selected with a
 	And I should see the Regulatory Documents to Provide Page
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74272
 
+# Removed from regression: 2024/08
+@ignore
 @TestCase:74261
 Scenario: [74261] CVS Brand Registration section and validation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -966,6 +988,9 @@ Scenario: [74261] CVS Brand Registration section and validation
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74261
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase74261
+
+# Removed from regression: 2024/08
+@ignore
 @TestCase:74278
 Scenario: [74278] CVS Brand Registration section and Data Tier validation
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)

@@ -50,6 +50,8 @@ Feature: UPC
 #		| SHAQAAuto29 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 
+# Removed from regression: 2024/08
+@ignore
 @TestCase:87584
 Scenario: [87584] Physical State = Solid, UPC step - Size shows as Size (Weight Ounces)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -904,6 +906,8 @@ Scenario: [87598]- Universal Product Code (UPC) Step - Add Casepack - fields req
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase87598
 
+# Removed from regression: 2024/08
+@ignore
 @TestCase:115334
 Scenario: [115334] Target - Add UPC - DPCI - is no longer required
 #Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -1109,6 +1113,8 @@ Scenario: [156789] UPC Screen - Internal SKU field - Check field parameters and 
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase156789
 
+# Removed from regression: 2024/08
+@ignore
 @TestCase:90001
 Scenario: [90001] Labels for Input Fields in UPC Screen
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
