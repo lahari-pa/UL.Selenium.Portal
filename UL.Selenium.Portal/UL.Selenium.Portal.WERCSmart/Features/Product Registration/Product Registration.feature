@@ -25,6 +25,7 @@
 @Ingredients
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 @RegulatoryInformation3
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
 
 Feature: Product Registration
 
@@ -311,7 +312,12 @@ Scenario: [65392] Ecologo Readiness - Question wording and validation of respons
 		| Formaldehyde  | 100     | false               | false       |            |
 	Given in the New Product page I click Continue
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+
+#	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+	Then I should be on the Transportation Details 1 Page
+	And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
+	Then in the Transportation Details 1 page, I click Continue
+
 	Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
 	Given I call Shared Step 60515 (VOC - Dilution - Yes to ratio - enter any values > Continue - Happy Path)
 	Given I click continue

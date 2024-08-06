@@ -167,7 +167,10 @@ Scenario: [56475] VOC checks for Fabric Softener - single Use dryer product (RU0
 	And In the ECOLOGO Readiness Section, set the option in section: 'Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment...': to: Not at this time
 	Then in the ECOLOGO Readiness page, I click Continue
 
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+#	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
+
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
@@ -295,7 +298,10 @@ Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 	Given I set the Your acknowledgement of this registration includes that your product option to: Yes, I Acknowledge
 
 	And in the New Product page I click Continue
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	#Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
+
 	# Regulatory Documents to Provide Page
 	And I should see the Regulatory Documents to Provide Page
 	And in the Review and Submit tab of the New Product Page for OSHA compliant SDS I select: Request to author
@@ -416,7 +422,10 @@ Scenario: [56481] VOC checks for Oven Cleaner - pump sprays (RU000798) - CARB an
 	And In the ECOLOGO Readiness Section, set the option in section: 'Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment...': to: Not at this time
 	Then in the ECOLOGO Readiness page, I click Continue
 
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+#	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
+
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
@@ -538,7 +547,10 @@ Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 	And I confirm statement: limits specified shows the text: Does not exceed the limits specified by CARB and OTC Model Rule
 	Given I set the Your acknowledgement of this registration includes that your product option to: Yes, I Acknowledge
 	And in the New Product page I click Continue
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+#	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
+
 	# Regulatory Documents to Provide Page
 	And I should see the Regulatory Documents to Provide Page
 	And in the Review and Submit tab of the New Product Page for OSHA compliant SDS I select: Request to author
@@ -658,7 +670,10 @@ Scenario: [56484] VOC - Aero checks
 	And I confirm statement: limits specified shows the text: Exceeds the limits specified in the Aerosol Coatings by the CARB
 	Given I set the Your acknowledgement of this registration includes that your product option to: Yes, I Acknowledge
 	And in the New Product page I click Continue
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+#	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
+
 	# Regulatory Documents to Provide Page
 	And I should see the Regulatory Documents to Provide Page
 	And in the Review and Submit tab of the New Product Page for OSHA compliant SDS I select: Request to author
@@ -769,7 +784,10 @@ Scenario: [56476] VOC checks for Personal Fragrance product
 	Then I should be on the ECOLOGO Readiness Page
 	And In the ECOLOGO Readiness Section, set the option in section: 'Take advantage of Premium Subscription benefits by electing to receive a UL ECOLOGO Readiness Assessment...': to: Not at this time
 	Then in the ECOLOGO Readiness page, I click Continue
-	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+#	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
+
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
