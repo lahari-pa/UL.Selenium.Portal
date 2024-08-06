@@ -593,6 +593,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 				}
 			}
 		}
+		[RegexStepDefinition("In the Ingredients table confirm ingredients should be in the following order")]
+		public void ThenInTheIngredientsTableConfirmIngredientsShouldBeInTheFollowingOrder(Table table)
+		{
+			new StepsIngredients().ThenInTheIngredientsTableTheIngredientsShouldBeInTheFollowingOrder(table);
+		}
 
 		[RegexStepDefinition(@"In the Ingredients section, I confirm I see the error message types in the popup with the following title: (.*)")]
 		public void ThenIConfirmISeeTheTwoErrorMessagesInThePopupWithTheFollowingTitleCaliforniaCleaningRightToKnow(string popupTitle, Table table)
