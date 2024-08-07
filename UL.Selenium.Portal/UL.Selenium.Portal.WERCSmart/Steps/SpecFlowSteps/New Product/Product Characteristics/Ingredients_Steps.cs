@@ -304,6 +304,38 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(ingredientRow.CellCheckBoxIsChecked(columnLabel) == expected, $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column check box is {(expected ? "unchecked" : "checked")}.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column check box is {checked_unchecked}.");
 		}
 
+		[RegexStepDefinition("In the Ingredients table, set 'Select All' checkbox to (checked|unchecked)")]
+		public void ThenInTheIngredientsTableSetCheckboxToChecked(string checked_unchecked)
+		{
+			bool expected = checked_unchecked == "checked";
+			IngredientsTable ingredientsTable = new IngredientsTable();
+			var newProductIngredients = new Ingredients();
+			Report.IsTrue(ingredientsTable.WaitForContainerToBeVisible(), $"Failure, ingredients table does not exist.", $"Success, ingredients table exists.");
+			Report.IsTrue(!ingredientsTable.IngredientRowList.IsNullOrEmpty(), $"Failure, ingredients table is empty.", $"Success, ingredients table is not empty.");
+			if (newProductIngredients.SelectAllIngredientsChecked() != expected)
+			{
+				Report.IsTrue(new Ingredients().ClickSelectAllIngredients(), "Failed to click 'Select All' in the ingredients table", "Successfully clicked 'Select All' in the ingredients table");
+			}
+			Report.IsTrue(newProductIngredients.SelectAllIngredientsChecked() == expected, $"Failure, 'Select All' checkbox is {(expected ? "unchecked" : "checked")}.", $"Success, 'Select All' check box is {checked_unchecked}.");
+		}
+
+		[RegexStepDefinition("In the Ingredients table, confirm 'Select All' checkbox is (checked|unchecked)")]
+		public void ThenInTheIngredientsTableCheckboxSelectAll(string checked_unchecked)
+		{
+			bool expected = checked_unchecked == "checked";
+			IngredientsTable ingredientsTable = new IngredientsTable();
+			var newProductIngredients = new Ingredients();
+			Report.IsTrue(ingredientsTable.WaitForContainerToBeVisible(), $"Failure, ingredients table does not exist.", $"Success, ingredients table exists.");
+			Report.IsTrue(!ingredientsTable.IngredientRowList.IsNullOrEmpty(), $"Failure, ingredients table is empty.", $"Success, ingredients table is not empty.");
+			Report.IsTrue(newProductIngredients.SelectAllIngredientsChecked() == expected, $"Failure, 'Select All' checkbox is {(expected ? "unchecked" : "checked")}.", $"Success, 'Select All' check box is {checked_unchecked}.");
+		}
+		[RegexStepDefinition("In the Ingredients Table, confirm the 'Delete' button (is|is not) displayed")]
+		public void ThenInTheIngredientsTableConfirmTheButtonIsDisplayed(string is_isnot)
+		{
+			new StepsIngredients().ConfirmTheDeleteButtonIsDisplayed(is_isnot);
+		}
+
+
 		[RegexStepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column click select")]
 		public void IngredientsTableRowSelect(string searchType, string searchText, string columnLabel)
 		{

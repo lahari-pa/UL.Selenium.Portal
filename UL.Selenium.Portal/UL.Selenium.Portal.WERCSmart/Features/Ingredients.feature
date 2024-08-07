@@ -823,14 +823,17 @@ Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulat
 	Then In the Ingredients section, add component with component name: Hydrogenated Olive Oil
 	Then In the Ingredients section, add component with component name: Stearic Acid
 	Then In the Ingredients section, add component with component name: Coconut Oil, methyl ester, glycerol-free
-	And I click 'Select all' in the Ingredients table
-	And I confirm that all ingredients in the table are selected
-	And I confirm the 'Delete' button is available in the Ingredients table
-	And I deselect the following ingredients:
-		| Name            |
-		| Water           |
-		| Sodium chloride |
-		| Boric acid      |
+	Then In the Ingredients table, set 'Select All' checkbox to checked
+	Then In the Ingredients Table row with component name: Water, in Select All column confirm checkbox is checked
+	Then In the Ingredients Table row with component name: Shea Butter, in Select All column confirm checkbox is checked
+	Then In the Ingredients Table row with component name: Hydrogenated Olive Oil, in Select All column confirm checkbox is checked
+	Then In the Ingredients Table row with component name: Stearic Acid, in Select All column confirm checkbox is checked
+	Then In the Ingredients Table row with component name: Coconut oil, methyl ester, glycerol-free, in Select All column confirm checkbox is checked
+	Then In the Ingredients Table, confirm the 'Delete' button is displayed
+	Then In the Ingredients Table row with component name: Water, in Select All column set checkbox to unchecked
+	Then In the Ingredients Table row with component name: Stearic Acid, in Select All column set checkbox to unchecked
+	Then In the Ingredients table, confirm 'Select All' checkbox is unchecked
+	#And I confirm the 'Delete' button is available in the Ingredients table
 	And I confirm the following ingredients are unselected:
 		| Name            |
 		| Water           |
