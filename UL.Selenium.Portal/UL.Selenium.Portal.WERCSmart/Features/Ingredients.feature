@@ -736,12 +736,16 @@ Scenario: [80720] Ingredients - Transparency Ratio - FLAVOR component - included
 Scenario: [87301] Ingredients - Selecting a Public Label Name Automatically Initiates Publicly Disclosed Indicator
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
-	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	#And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
 	#And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I should be on the The Product Page
 	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk_#80720
 	And In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
 	Then in the The Product page, I click Continue
+	Then I save the product information as: TestCase87301
 	#And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I should see the Product Information Page
 	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
@@ -761,25 +765,20 @@ Scenario: [87301] Ingredients - Selecting a Public Label Name Automatically Init
 	Then in the Physical and Chemical Properties page I click Continue
 	Then In the Ingredients section, add component with component name: Water
 	Then In the Ingredients Table row with component name: Water, in Public Name column select option Water
-	And I select the first Public Name dropdown option for ingredient: Sodium hydroxide
-	And I confirm the Publicly Disclosed checkbox is: checked for ingredient: Sodium hydroxide
-	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Water         | 33      | false               | false       |            |
-	And I click the Trade Secret checkbox for ingredient: Water
-	Then for ingredient: Water the Public Name field is disabled
-	Then for ingredient: Water the Publicly Disclosed field is disabled
-	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Boric acid    | 34      | false               | false       |            |
-	And I select the first Public Name dropdown option for ingredient: Boric acid
-	Then for ingredient: Boric acid the Trade Secret field is disabled
-	And for ingredient: Boric acid I select Public Name: Choose...
-	And I click the Trade Secret checkbox for ingredient: Boric acid
-	Then for ingredient: Boric acid the Public Name field is disabled
-	Then for ingredient: Boric acid the Publicly Disclosed field is disabled
-	And I navigate to the home page
-	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase87301
+	Then In the Ingredients Table row with component name: Water, in Publicly Disclosed? column confirm checkbox is checked
+	Then In the Ingredients section, add component with component name: Clothianidin
+	Then In the Ingredients Table row with component name: Clothianidin, in Trade Secret? column set checkbox to checked
+	Then In the Ingredients Table row with component name: Clothianidin, in Public Name column is disabled
+	Then In the Ingredients section, add component with component name: Chlorine
+	Then In the Ingredients Table row with component name: Chlorine, in Public Name column select option Chlorine
+	Then In the Ingredients Table row with component name: Chlorine, in Trade Secret column confirm checkbox is disabled
+	Then In the Ingredients Table row with component name: Chlorine, in Public Name column select option Choose...
+	Then In the Ingredients Table row with component name: Chlorine, in Trade Secret? column set checkbox to checked
+	Then In the Ingredients Table row with component name: Chlorine, in Public Name column is disabled
+	Then In the Ingredients Table row with component name: Chlorine, in Publicly Disclosed column confirm checkbox is disabled
+	#And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase87301
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase87301
 
 # Assigned to Paulina Mata
 # Created by Paulina Mata
