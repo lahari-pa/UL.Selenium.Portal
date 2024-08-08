@@ -176,8 +176,6 @@ Scenario: [57332] Automotive Accessories containing Gel (Seat Cushions, etc) - 8
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase57332
 
-# Removed from regression: 2024/08
-@ignore
 @TestCase:58187
 Scenario: [58187] Matches (RU000317) - 8-S
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -245,8 +243,6 @@ Scenario: [58187] Matches (RU000317) - 8-S
 	Then In the Product Grid, delete the product saved as: TestCase58187
 #check RU number and name
 
-# Removed from regression: 2024/08
-@ignore
 @TestCase:58293
 Scenario: [58293] Engines for Model Rockets(RU000338) - 8-S
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -429,8 +425,6 @@ Scenario: [58297] Fireworks (RU000330) - 8-S
 #
 #Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57088
 
-# Removed from regression: 2024/08
-@ignore
 @TestCase:58104
 Scenario: [58104] Fabric Dye - Liquid or Solid - 8-L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -495,8 +489,6 @@ Scenario: [58104] Fabric Dye - Liquid or Solid - 8-L
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase58104
 
-# Removed from regression: 2024/08
-@ignore
 @TestCase:58210
 Scenario: [58210] Antibiotic, Liquid or Cream, Non-Aerosol - 8-L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -580,8 +572,6 @@ Scenario: [58210] Antibiotic, Liquid or Cream, Non-Aerosol - 8-L
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase58210
 
-# Removed from regression: 2024/08
-@ignore
 @TestCase:58285
 Scenario: [58285] Toothpaste - Whitening (RU001359) - 8-L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -848,8 +838,6 @@ Scenario: [57088] Engine (motor) oil for Auto or Boat - 8L
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase57088
 
-# Removed from regression: 2024/08
-@ignore
 @TestCase:57709
 Scenario: [57709] Training aid repellant (RU000326) - 8LS -8L
 	Given I generate a random UPC number and save as: UPC57709
