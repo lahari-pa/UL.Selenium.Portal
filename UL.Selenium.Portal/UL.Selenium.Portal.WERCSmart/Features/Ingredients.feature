@@ -1061,8 +1061,11 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-
-	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	#And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Given I should see the The Product Page
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
+ 	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase95487
 	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I should see the Product Information Page
