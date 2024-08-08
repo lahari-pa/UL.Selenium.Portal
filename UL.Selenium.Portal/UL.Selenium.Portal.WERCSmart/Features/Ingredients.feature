@@ -832,20 +832,26 @@ Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulat
 	Then In the Ingredients Table, confirm the 'Delete' button is displayed
 	Then In the Ingredients Table row with component name: Water, in Select All column set checkbox to unchecked
 	Then In the Ingredients Table row with component name: Stearic Acid, in Select All column set checkbox to unchecked
+	Then In the Ingredients Table row with component name: Water, in Select All column confirm checkbox is unchecked
+	Then In the Ingredients Table row with component name: Shea Butter, in Select All column confirm checkbox is checked
+	Then In the Ingredients Table row with component name: Hydrogenated Olive Oil, in Select All column confirm checkbox is checked
+	Then In the Ingredients Table row with component name: Stearic Acid, in Select All column confirm checkbox is unchecked
+	Then In the Ingredients Table row with component name: Coconut oil, methyl ester, glycerol-free, in Select All column confirm checkbox is checked
 	Then In the Ingredients table, confirm 'Select All' checkbox is unchecked
-	#And I confirm the 'Delete' button is available in the Ingredients table
-	And I confirm the following ingredients are unselected:
-		| Name            |
-		| Water           |
-		| Sodium chloride |
-		| Boric acid      |
-	And I confirm the 'Select all' checkbox in the Ingredients table is unchecked
-	And I click 'Select all' in the Ingredients table
-	And I confirm that all ingredients in the table are selected
-	And I click the 'Delete' button in the Ingredients table
-	And I confirm the 'Remove selected components' popup is displayed with message: Are you sure you want to remove all selected components?
-	And in the modal dialog I click the "YES" button
-	And I confirm there are a total of: 0 ingredients in the table
+	Then In the Ingredients table, set 'Select All' checkbox to checked
+	Then In the Ingredients Table row with component name: Water, in Select All column confirm checkbox is checked
+	Then In the Ingredients Table row with component name: Shea Butter, in Select All column confirm checkbox is checked
+	Then In the Ingredients Table row with component name: Hydrogenated Olive Oil, in Select All column confirm checkbox is checked
+	Then In the Ingredients Table row with component name: Stearic Acid, in Select All column confirm checkbox is checked
+	Then In the Ingredients Table row with component name: Coconut oil, methyl ester, glycerol-free, in Select All column confirm checkbox is checked
+	Then In the Ingredients Table, click the 'Delete' button
+	Then In the Ingredients section, I confirm the popup should be displayed with the following title: Remove selected components? and text: Are you sure you want to remove all selected components?
+	Then In displayed modal, click Yes footer button
+	Then In the Ingredients Section ingredients table, confirm row with component name: Water is not displayed
+	Then In the Ingredients Section ingredients table, confirm row with component name: Shea Butter is not displayed
+	Then In the Ingredients Section ingredients table, confirm row with component name: Hydrogenated Olive Oil is not displayed
+	Then In the Ingredients Section ingredients table, confirm row with component name: Stearic Acid is not displayed
+	Then In the Ingredients Section ingredients table, confirm row with component name: Coconut oil, methyl ester, glycerol-free is not displayed
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase84528
 

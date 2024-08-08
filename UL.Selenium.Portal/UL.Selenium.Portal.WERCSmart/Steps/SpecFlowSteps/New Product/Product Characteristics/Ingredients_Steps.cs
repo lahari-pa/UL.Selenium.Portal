@@ -334,7 +334,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			new StepsIngredients().ConfirmTheDeleteButtonIsDisplayed(is_isnot);
 		}
-
+		[RegexStepDefinition("In the Ingredients Table, click the 'Delete' button")]
+		public void ThenInTheIngredientsTableClickTheButton()
+		{
+			Report.IsTrue(new Ingredients().ClickDeleteIngredients(), "Failed to click 'Delete'", "Successfully clicked 'Delete'");
+		}
 
 		[RegexStepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column click select")]
 		public void IngredientsTableRowSelect(string searchType, string searchText, string columnLabel)
