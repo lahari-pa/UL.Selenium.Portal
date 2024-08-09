@@ -13,6 +13,7 @@ using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Automation.Reporting.Classes;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static iText.StyledXmlParser.Jsoup.Select.Evaluator;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -566,7 +567,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[RegexStepDefinition(@"I click Row Actions for product saved as: (.*)")]
 		public void IClickRowActionsForTheProductSavedAs(string savedAs)
 		{
-			Report.StartStep(Report.Details.StepIndex + " - Clicking 'Row Actions' for product saved as " + savedAs + ".");
+			//Report.StartStep(Report.Details.StepIndex + " - Clicking 'Row Actions' for product saved as " + savedAs + ".");
 			try
 			{
 				var product = (ProductGridItem)Context.GetFromContext(savedAs);

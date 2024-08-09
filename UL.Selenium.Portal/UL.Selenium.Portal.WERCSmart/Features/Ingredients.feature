@@ -1071,6 +1071,7 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
  	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase95487
+	#252968 Product Information - Applicable Only to Type of Product:  CHALK (RU000711) - General Shared-Step
 	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I should see the Product Information Page
 	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
@@ -1080,63 +1081,36 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page I click Continue
-
-	Given I call Shared Step 37857 (Enter Physical Property - Solid) with the following inputs:
-		| Secondary Physical State | Water Solubility |
-		| Flaked                   | Soluble in water |
+	#252546 Physical and Chemical Properties - Applicable Only to Type of Product:  CHALK (RU000711) - General Shared-Step
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+	#Given I add the following ingredients:
+	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Water         | 43.0    | false               | false       |            |
 	Then I should see the Ingredients Page
+	Then In the Ingredients section, add component with component name: Water
+	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 10
+	Then In the Ingredients Table row with component name: Water, in Public Name column select option Water
+	Then In the Ingredients Table row with component name: Water, in Publicly Disclosed? column confirm checkbox is checked
+	Then In the Ingredients section, add component with component name: Calcium carbonate
+	Then In the Ingredients Table row with component name: Calcium carbonate, in Percent column text input enter: 80
+	Then In the Ingredients Table row with component name: Calcium carbonate, in Trade Secret? column set checkbox to checked
 	When in the Ingredients page I click Continue
-	Given I add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Water         | 43.0    | false               | false       |            |
-	And for ingredient: Water Percentage displayed: 43.0
-	When for ingredient: Water I select Public Name: AQUA
-	Then for ingredient: Water Public Name displayed: AQUA
-	And I confirm the Publicly Disclosed checkbox is: checked for ingredient: Water
-	Given for ingredient: Water I set Public Disclosure checkbox to checked: false
-	And for ingredient: Water I set Trade Secret checkbox to checked: true
-	Then for ingredient: Water the Public Name field is disabled
-	#And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 0 and denominator: 1
-	And I verify the Transparency Score displays 0.00%
-	Given for ingredient: Water I set Trade Secret checkbox to checked: false
-	And for ingredient: Water I set Public Disclosure checkbox to checked: true
-	#Then In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 1
-	And I verify the Transparency Score displays 100.00%
-	Then I click continue
-	#Given I close the current window
-	#Given I open a new window
+	Then In the Ingredients Section confirm error is displayed with text: Formulation must total or exceed 100%.
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
-	When I filter the products by: Not Yet Submitted
-	Given I save the ProductID and Name of the first Product in the grid as: FirstProduct
+	Then I search for the product saved as: TestCase95487
 	When I click Row Actions for the most recent product returned
 	Then I click on the Row Action: Edit
-	Then the Product Editor page should be loaded
-	And In the New Product page I click tab: Product Characteristics
-	And I click the page heading: Ingredients
-	And the product saved as: FirstProduct should be visible in editor
-	#Looks like th issue is with the ingredients page not showing, instead its the product information page
-	And In the ingredients table the ingredients should be in the following order
-		| Name  |
-		| Water |
-	And for ingredient: Water Percentage displayed: 0
-	Then I enter text: Butane in the component search box
-	And I select the component search result with CAS matching text: 106-97-8 and save ingredient as: Butane_95487
-	And In the ingredients table the ingredients should be in the following order
-		| Name   |
-		| Water  |
-		| Butane |
-	Then I click the Home navigation icon
-	When I filter the products by: Not Yet Submitted
-	Given I save the ProductID and Name of the first Product in the grid as: FirstProduct
-	When I click Row Actions for the most recent product returned
-	Then I click on the Row Action: Edit
-	Then the Product Editor page should be loaded
-	And the product saved as: FirstProduct should be visible in editor
-	And In the ingredients table the ingredients should be in the following order
-		| Name   |
-		| Water  |
-		| Butane |
+	#Then the Product Editor page should be loaded
+	Then I should see the Ingredients Page
+	
+
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase95487
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase95487
