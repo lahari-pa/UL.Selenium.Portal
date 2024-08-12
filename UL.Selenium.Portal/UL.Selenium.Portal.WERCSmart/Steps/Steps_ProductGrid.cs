@@ -567,7 +567,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[RegexStepDefinition(@"I click Row Actions for product saved as: (.*)")]
 		public void IClickRowActionsForTheProductSavedAs(string savedAs)
 		{
-			//Report.StartStep(Report.Details.StepIndex + " - Clicking 'Row Actions' for product saved as " + savedAs + ".");
+			Report.StartStep(Report.Details.StepIndex + " - Clicking 'Row Actions' for product saved as " + savedAs + ".");
 			try
 			{
 				var product = (ProductGridItem)Context.GetFromContext(savedAs);
