@@ -1109,8 +1109,12 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 	Then I click on the Row Action: Edit
 	#Then the Product Editor page should be loaded
 	Then I should see the Ingredients Page
-	
-
+	Then In the Ingredients Section ingredients table, confirm row with component name: Calcium carbonate is displayed
+	Then In the Ingredients Table row with component name: Calcium carbonate, in Percent column verify text input is: 0
+	Then In the Ingredients Table row with component name: Calcium carbonate, in Percent column text input enter: 90
+	Then In the Ingredients Table row with component name: Calcium carbonate, in Trade Secret? column confirm checkbox is unchecked
+	Then In the Ingredients Table row with component name: Calcium carbonate, in Trade Secret? column set checkbox to checked
+	When in the Ingredients page I click Continue
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase95487
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase95487
