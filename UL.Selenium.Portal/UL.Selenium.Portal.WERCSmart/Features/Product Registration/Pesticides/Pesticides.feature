@@ -1667,7 +1667,7 @@ Scenario: [132756] Canadian Province Pesticide Options
 	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bleach
 	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Bleach
  	Given in the The Product page I click Continue
-	Given I save the product information as: TestCase
+	Given I save the product information as: TestCase132756
 	#234362 Product Information - Yes Pesticide - Canada only, No OSHA, No Direct Ship, No Ca Cleaning, No Private Label, No GNFR
 	#Given I call Shared Step 140562 (Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, No CA Cleaning - Continue - Happy Path)
 	Given I should see the Product Information Page
@@ -1683,7 +1683,7 @@ Scenario: [132756] Canadian Province Pesticide Options
 	Then in the Product Information page I click Continue
 	#43920 Physical and Chemical Properties Screen - Select SOLID Option
 	Given I should see the Physical and Chemical Properties Page
-	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
 	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
 	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
@@ -1700,3 +1700,105 @@ Scenario: [132756] Canadian Province Pesticide Options
 	#234364 Pesticide Details - Canada - Options Available for each Province
 	Then I should see the Pesticide Details - Canada Page
 	Then In the 'Pesticide Details - Canada' in row number 1 enter 'Canada's 5-Digit Pest Control Number(s) (PCN) or 8-Digit Drug Identification Number(s) (DIN)': 12345
+	Then In the Pesticide Details - Canada Section, set the option in section: 'Product's packaging includes a Poison Danger symbol': to: No
+	Then In the Pesticide Details - Canada Section, confirm following options should be exclusively displayed for section: Alberta
+	| Option     |
+	| None       |
+	| Schedule 1 |
+	| Schedule 2 |
+	| Schedule 3 |
+	| Schedule 4 |
+	Then In the Pesticide Details - Canada Section, set option for Province: 'Alberta': to: None
+	Then In the Pesticide Details - Canada Section, confirm following options should be exclusively displayed for section: British Columbia
+	| Option            |
+	| None              |
+	| Permit Restricted |
+	| Restricted        |
+	| Commercial        |
+	| Domestic          |
+	| Excluded          |
+	Then In the Pesticide Details - Canada Section, set option for Province: 'British Columbia': to: Excluded
+	Then In the Pesticide Details - Canada Section, confirm following options should be exclusively displayed for section: Manitoba
+	| Option              |
+	| None                |
+	| Commercial          |
+	| Controlled Purchase |
+	| Not Regulated       |
+	| Restricted          |
+	| Self-Select         |
+	Then In the Pesticide Details - Canada Section, set option for Province: 'Manitoba': to: Commercial
+	Then In the Pesticide Details - Canada Section, confirm following options should be exclusively displayed for section: New Brunswick
+	| Option                 |
+	| None                   |
+	| Banned                 |
+	| Domestic / Self-Select |
+	| Non-Domectic           |
+	Then In the Pesticide Details - Canada Section, set option for Province: 'New Brunswick': to: Banned
+	Then In the Pesticide Details - Canada Section, confirm following options should be exclusively displayed for section: New Foundland and Labrador
+	| Option     |
+	| None       |
+	| Banned     |
+	| Domestic   |
+	| Commercial |
+	| Restricted |
+	Then In the Pesticide Details - Canada Section, set option for Province: 'New Foundland and Labrador': to: Banned
+	Then In the Pesticide Details - Canada Section, confirm following options should be exclusively displayed for section: Nova Scotia
+	| Option                |
+	| None                  |
+	| Allowed / Self-Select |
+	| Banned                |
+	| Commercial            |
+	| Controlled Purchase   |
+	| Restricted            |
+	| Not Regulated         |
+	Then In the Pesticide Details - Canada Section, set option for Province: 'Nova Scotia': to: Banned
+	Then In the Pesticide Details - Canada Section, confirm following options should be exclusively displayed for section: Ontario
+	| Option                                                    |
+	| None                                                      |
+	| Class A: Manufacturing Products                           |
+	| Class B: Restricted                                       |
+	| Class C: Commercial                                       |
+	| Class D: Banned-Cosmetic Pesticide                        |
+	| Class D: Domestic Controlled Purchase Requiring a License |
+	| Class D: Domestic with License                            |
+	| Class D: Domestic without License                         |
+	| Class E: Treated Seed                                     |
+	Then In the Pesticide Details - Canada Section, set option for Province: 'Ontario': to: None
+	Then In the Pesticide Details - Canada Section, confirm following options should be exclusively displayed for section: Prince Edward Island
+	| Option                  |
+	| None                    |
+	| Banned                  |
+	| Controlled Purchase     |
+	| Exempt: Schedule 7      |
+	| Exempt: Schedule 2      |
+	| Non-Domestic            |
+	| Self-Select: Schedule 8 |
+	Then In the Pesticide Details - Canada Section, set option for Province: 'Prince Edward Island': to: None
+	Then In the Pesticide Details - Canada Section, confirm following options should be exclusively displayed for section: Quebec 
+	| Option   |
+	| None     |
+	| Class 1  |
+	| Class 2  |
+	| Class 3  |
+	| Class 3A |
+	| Class 4  |
+	| Class 5  |
+	| Banned   |
+	Then In the Pesticide Details - Canada Section, set option for Province: 'Quebec': to: None
+	Then In the Pesticide Details - Canada Section, confirm following options should be exclusively displayed for section: Saskatchewan  
+	| Option     |
+	| None       |
+	| Commercial |
+	| Restricted |
+	Then In the Pesticide Details - Canada Section, set option for Province: 'Saskatchewan': to: None
+	Then In the Pesticide Details - Canada Section, confirm following options should be exclusively displayed for section: Yukon Territory  
+	| Option     |
+	| None       |
+	| Commercial |
+	| Domestic   |
+	| Restricted |
+	Then In the Pesticide Details - Canada Section, set option for Province: 'Yukon Territory': to: None
+	Then in the Pesticide Details - Canada page I click Continue
+	Then I should see the Transportation Details 1 Page
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase132756

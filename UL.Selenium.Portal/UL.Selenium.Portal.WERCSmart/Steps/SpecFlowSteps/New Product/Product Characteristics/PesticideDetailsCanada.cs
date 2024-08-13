@@ -132,5 +132,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string text = "For each Province, make the appropriate selection from the options available";
 			new Steps_Prototype().AlertMessageDisplayed(condition, text);
 		}
+		[RegexStepDefinition("In the Pesticide Details - Canada Section, confirm following options (should|should not) be (displayed|exclusively displayed) for section: (.*)")]
+		public void ThenInThePesticideDetails_CanadaSectionConfirmFollowingOptionsShouldShouldNotBeDisplayedExclusivelyDisplayedForSectionAlberta(string should, string exclusive, string section, Table table)
+		{
+			new Steps_Prototype().CheckOptionsInSection(should, exclusive, section, table);
+		}
+
 	}
 }
