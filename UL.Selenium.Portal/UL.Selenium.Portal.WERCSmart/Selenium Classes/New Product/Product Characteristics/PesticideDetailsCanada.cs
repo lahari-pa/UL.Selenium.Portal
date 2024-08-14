@@ -20,7 +20,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		IWebElement RemoveIcon => this.Row.FindElement(By.XPath(".//i"));
 		public PesticideDetailsCanadaTableRow(int rowNumber)
 		{
-			if (rowNumber < this.PCNFields.Count)
+			if (rowNumber <= this.PCNFields.Count)
 			{
 				this.Row = this.PCNFields[rowNumber - 1];
 			}

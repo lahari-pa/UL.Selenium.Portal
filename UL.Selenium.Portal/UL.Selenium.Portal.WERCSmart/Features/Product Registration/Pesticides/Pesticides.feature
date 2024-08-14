@@ -1732,7 +1732,7 @@ Scenario: [132756] Canadian Province Pesticide Options
 	| None                   |
 	| Banned                 |
 	| Domestic / Self-Select |
-	| Non-Domectic           |
+	| Non-Domestic           |
 	Then In the Pesticide Details - Canada Section, set option for Province: 'New Brunswick': to: Banned
 	Then In the Pesticide Details - Canada Section, confirm following options should be exclusively displayed for section: New Foundland and Labrador
 	| Option     |
@@ -1791,6 +1791,10 @@ Scenario: [132756] Canadian Province Pesticide Options
 	| Commercial |
 	| Restricted |
 	Then In the Pesticide Details - Canada Section, set option for Province: 'Saskatchewan': to: None
+	Then In the Pesticide Details - Canada Section, confirm following options should be exclusively displayed for section: Northwest Territory  
+	| Option         |
+	| Not Applicable |
+	Then In the Pesticide Details - Canada Section, set option for Province: 'Northwest Territory': to: Not Applicable
 	Then In the Pesticide Details - Canada Section, confirm following options should be exclusively displayed for section: Yukon Territory  
 	| Option     |
 	| None       |
