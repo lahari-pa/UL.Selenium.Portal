@@ -231,6 +231,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string displayedText = ingredientRow.CellTextInputText(columnLabel);
 			Report.IsTrue(string.Equals(displayedText, inputText), $"Failure, in {searchType}:'{searchText}' row '{columnLabel}' column text input text is '{displayedText}' and should be '{inputText}'.", $"Success, in {searchType}:'{searchText}' row '{columnLabel}' column text input text '{inputText}' is correct.");
 		}
+		[RegexStepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column verify text input is: (.*)")]
+		public void IngredientsTableRowCheckText(string searchType, string searchText, string columnLabel, string inputText)
+		{
+			IngredientsTable ingredientsTable = new IngredientsTable();
+			Report.IsTrue(ingredientsTable.WaitForContainerToBeVisible(), $"Failure, ingredients table does not exist.", $"Success, ingredients table exists.");
+			Report.IsTrue(!ingredientsTable.IngredientRowList.IsNullOrEmpty(), $"Failure, ingredients table is empty.", $"Success, ingredients table is not empty.");
+			IngredientsTableRow ingredientRow = this.IngredientsRowSearchTypeGet(searchType, searchText);
+			Report.IsTrue(ingredientRow.CellTextInputExists(columnLabel), $"Failure, {searchType}:'{searchText}' row '{columnLabel}' column text input does not exist.", $"Success, {searchType}:'{searchText}' row '{columnLabel}' column text input does exist.");
+			string displayedText = ingredientRow.CellTextInputText(columnLabel);
+			Report.IsTrue(string.Equals(displayedText, inputText), $"Failure, in {searchType}:'{searchText}' row '{columnLabel}' column text input text is '{displayedText}' and should be '{inputText}'.", $"Success, in {searchType}:'{searchText}' row '{columnLabel}' column text input text '{inputText}' is correct.");
+		}
 		[RegexStepDefinition(@"In the Ingredients Table row with (component name|CAS number): (.*), in (.*) column text input enter value: (.*) and press tab")]
 		public void IngredientsTableRowEnterPercentAndPressTab(string searchType, string searchText, string columnLabel, string inputText)
 		{
