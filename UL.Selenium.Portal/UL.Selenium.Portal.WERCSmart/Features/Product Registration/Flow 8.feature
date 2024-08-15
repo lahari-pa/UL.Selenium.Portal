@@ -923,43 +923,67 @@ Scenario: [57709] Training aid repellant (RU000326) - 8LS -8L
 	#Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC57709, container type: Cardboard and size: 1
 	Then I should be on the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
-	#Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC57709 enter Size: 13.6 enter Container Type: Plastic Container and enter internal SKU: ABC1478
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'GTIN/UPC (include check digit)' enter the value: saved as UPC57709
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Product Name on Label' enter the value: Training Aid Repellant_#57709
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC57709 enter Size: 13.6 and enter Container Type: Plastic Container
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Internal SKU' enter the value: ABC1478
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, verify retailer 'TG' is present under the 'Destination Retailers' column
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page, I click Continue
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, section: 'Internal SKU' should display error message: Only 8 to 12 letters and/or numbers allowed
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Internal SKU' enter the value: ABC14789
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, section: 'Internal SKU' should not display error message: Only 8 to 12 letters and/or numbers allowed
 	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page, I click Continue
 
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
-	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Yes, I certify that I have an OSHA-compliant SDS for this product and would like to upload it.
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'OSHA SDS'
 	Then in the Regulatory Documents to Provide page I click Continue
 
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-#	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-#		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
-#		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
-	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 501.827328
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor' to: Orange
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor Threshold' to: No data available
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Partition Coefficient' enter text: 41.3005
-	Then in the Safety Data Sheet Authoring - Additional Data (Optional) page, I click Continue
-
 
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I should see the Optional Comments Page
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
 	Then in the Optional Comments page I click Continue
 
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Training aid repellant
-#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57709
-	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase57709
+	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Training aid repellant
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, click 'Summary' button
+	Then I switch to the tab with Data Summary page
+	Then In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Training aid repellant
+	Then In the Summary Page, the 'Primary Physical State' section should be showing the following value: Liquid
+	Then In the Summary Page, the 'Secondary Physical State' section should be showing the following value: Liquid
+	Then In the Summary Page, the 'Product is Regulated for Transport' section should be showing the following value: Not Regulated
+	Then In the Summary Page, verify table data in column Container Type showing the value: Plastic Container
+	Then In the Summary Page, verify table data in column Size (Ounces) showing the value: 13.6
+	Then In the Summary Page, verify table data in column Internal SKU showing the value: ABC14789
+	Then In the Summary Page, verify table data in column Retailers showing the value: TG
+	Then In the Summary Page, the Product Document section Supplier Uploaded should be showing the following document: testdoc.pdf
+	Then In the Summary Page, the Product Document section Supplier Uploaded click the view link for the following document: testdoc.pdf
+	Then In the Summary Page, after clicking 'View' button I confirm pdf file is downloaded
+	Then I close the tab with Data Summary page
+	
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
+	Then The Purchase Summary Page is displayed
+	Then In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
+	Then In the Purchase Summary Page, click the 'Home' button
+
+	Then The home screen should load
+	Then I search for the product saved as: TestCase57709
+	Then I should only see one product in the grid, with Product ID matching that saved as: TestCase57709
+	Then I clear the Search Criteria
+	Then I click More Filters in the products grid
+	Then I confirm More Filters section is expended
+	Then In the 'Product ID, Ingredient ID, SKU filter' field, search text: ABC14789
+	#Then I should only see one product in the grid, with Product ID matching that saved as: TestCase57709
+	Then I confirm that the product returned has the same name as the product saved as: TestCase57709
+	Then I click Row Actions for the first product returned
+	Then I click on the Row Action: Discontinue
+	Then In the popup with the following title: Discontinue Product I click the Yes button
+	#Then In the Product Grid, delete the product saved as: TestCase57709
 
 @TestCase:128744
 Scenario: [128744] Ammunition - DOT Exceptions Saved
