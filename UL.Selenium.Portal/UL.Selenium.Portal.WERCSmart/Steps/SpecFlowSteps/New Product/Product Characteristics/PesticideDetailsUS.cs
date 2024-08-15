@@ -56,7 +56,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			"Due to the lack of both an Active and an Inert Ingredient in the ingredients entered, the election for FIFRA 25(b) exemption is not available. Please either enter the Federal EPA Registration Number, or review the ingredients that have been entered, in its entirety, for accuracy. Note: WERCSmart requires 100% disclosure of the ingredients."
 			};
 			new Steps_Prototype().GivenIConfirmTheTextsDisplaysTheCorrectText(section, correctText, condition);
-
+		}
+		[RegexStepDefinition(@"In the Pesticide Details - U.S. Section, confirm for section: 'Product has an Environmental Protection Agency \(EPA\) Registration Number' error (is|is not) displayed: (.*)")]
+		public void EPAErrorIsIsNotDisplayed(string is_isnot, string error)
+		{
+			string section = "Product has an Environmental Protection Agency (EPA) Registration Number";
+			new Steps_ProductPrototype().InSectionErrorMessageIsIsNotDisplayed(section, error, is_isnot);
+		}
+		[RegexStepDefinition(@"In the Pesticide Details - U.S. Section, confirm for section: 'Product has a State Registration' error (is|is not) displayed: (.*)")]
+		public void ProductStateRegistrationErrorIsIsNotDisplayed(string is_isnot, string error)
+		{
+			string section = "Product has a State Registration";
+			new Steps_ProductPrototype().InSectionErrorMessageIsIsNotDisplayed(section, error, is_isnot);
+		}
+		[RegexStepDefinition(@"In the Pesticide Details - U.S. Section, confirm for section: 'Select the applicable exemption' error (is|is not) displayed: (.*)")]
+		public void PSelectApplicableExemptionErrorIsIsNotDisplayed(string is_isnot, string error)
+		{
+			string section = "Select the applicable exemption";
+			new Steps_ProductPrototype().InSectionErrorMessageIsIsNotDisplayed(section, error, is_isnot);
 		}
 	}
 }

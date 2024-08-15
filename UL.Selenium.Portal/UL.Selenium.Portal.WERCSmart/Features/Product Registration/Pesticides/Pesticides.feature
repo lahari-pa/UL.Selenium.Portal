@@ -23,15 +23,20 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:PesticideDetailsUS
 @AdditionalDocsContactInfo
 @RegulatoryInformation3
-
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
+
 Feature: Pesticides
 
-Background:
-	Given I verify the following users exist and if not I create them using SHAUser
-		| username    | FirstName | LastName   | Role         | EmailAddress                |
-		| SHAQAAuto17 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+#Background:
+#	Given I verify the following users exist and if not I create them using SHAUser
+#		| username    | FirstName | LastName   | Role         | EmailAddress                |
+#		| SHAQAAuto17 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 
 @TestCase:62775
@@ -1216,10 +1221,16 @@ Scenario: [62799] Pesticide Details - State Registration - Manual entry of dates
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides
 @TestCase:56502
 Scenario: [56502] Pesticide Data - United States - EPA Exempt
-	Given I generate a random UPC number and save as: UPC56502
-	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
+	#And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given I log in with the account saved in TReVor as: ProductAccount
+	#And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
+	#And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Pet Shampoo with Pest Control
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Pet Shampoo with Pest Control
+ 	Given in the The Product page I click Continue
 	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I should see the Product Information Page
 	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
@@ -1229,7 +1240,7 @@ Scenario: [56502] Pesticide Data - United States - EPA Exempt
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page I click Continue
-
+	Then I save the product information as: TestCase56502
 	#Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Liquid
 	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
@@ -1243,12 +1254,14 @@ Scenario: [56502] Pesticide Data - United States - EPA Exempt
 	Then in the Physical and Chemical Properties page, I click Continue
 	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
 	Given I should see the Ingredients Page
-	Then In the Ingredients section, add the following ingredients:
-	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-	| component name | Sodium hydroxide       | 100     |                     |               |             |
+	Then In the Ingredients section, add component with component name: Water
+	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
 	Then in the Ingredients page I click Continue
-
-	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	#And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I should be on the Inventory Status, Prop 65 (US) Page
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
 	#Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	Given I should see the Regulatory Information 3 Page
 	Then In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California.  Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
@@ -1264,60 +1277,61 @@ Scenario: [56502] Pesticide Data - United States - EPA Exempt
 	Then In the Regulatory Information 3 Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
 	Then in the Regulatory Information 3 page I click Continue
 	Then I should see the Pesticide Details - U.S. Page
-	Given I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: No
-    Given I set the Product has a State Registration option to: No
-    Given I see the following sections
-		| Section                         |
-		| Select the applicable exemption |
-	And The following radio buttons should be displayed for section: Select the applicable exemption
-		| Button                                               |
-		| Product is FIFRA 25(b) Exempt.                       |
-		| Food Based Pesticides - Exempt from EPA Registration |
-		| Device based products - Exempt from EPA Registration |
-		| Pheromone Traps – Exempt from EPA Registration       |
-	And I click continue
-	Then Select the applicable exemption should be showing the error messages: This is a required field.
-	And I set the Select the applicable exemption option to: Food Based Pesticides - Exempt from EPA Registration
-	Then Select the applicable exemption should not be showing the error messages: This is a required field.
-	And I click continue
-	And I should see the Transportation Details 1 Page
-#	And I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+	Then in the Pesticide Details - U.S. page I click Continue
+	Then In the Pesticide Details - U.S. Section, confirm for section: 'Product has an Environmental Protection Agency (EPA) Registration Number' error is displayed: This is a required field.
+	Then In the Pesticide Details - U.S. Section, in 'Product has an Environmental Protection Agency (EPA) Registration Number' enter No
+	Then in the Pesticide Details - U.S. page I click Continue
+	Then In the Pesticide Details - U.S. Section, confirm for section: 'Product has a State Registration' error is displayed: This is a required field.
+	Then In the Pesticide Details - U.S. Section, confirm for section: 'Select the applicable exemption' error is displayed: This is a required field.
+	Then In the Pesticide Details - U.S. Section, in 'Product has a State Registration' enter No
+	Then In the Pesticide Details - U.S. Section, in 'Select the applicable exemption' enter Food Based Pesticides - Exempt from EPA Registration
+	Then in the Pesticide Details - U.S. page I click Continue
+	#And The following radio buttons should be displayed for section: Select the applicable exemption
+	#	| Button                                               |
+	#	| Product is FIFRA 25(b) Exempt.                       |
+	#	| Food Based Pesticides - Exempt from EPA Registration |
+	#	| Device based products - Exempt from EPA Registration |
+	#	| Pheromone Traps – Exempt from EPA Registration       |
+
+	#And I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Then I should be on the Transportation Details 1 Page
 	And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
 	Then in the Transportation Details 1 page, I click Continue
-
-	And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
-	#And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
+	#And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I should be on the Retailer Page
+	And In the Retailer Section, click 'Add Retailers' button
+	Then In the Retailer Section is selected retailer: No Retailer/No UPC Product
+	And In the Select Retailers window, click 'Done' button
+	Then in the Retailer page, I click Continue
+	#And I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
 	Given I should see the Regulatory Documents to Provide Page
-	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Yes, I certify that I have an OSHA-compliant SDS for this product and would like to upload it.
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'OSHA SDS'
+	Then In the Regulatory Documents to Provide Section, for section OSHA SDS button View should exists
+	Then In the Regulatory Documents to Provide Section, for section OSHA SDS button Remove should exists
 	Then in the Regulatory Documents to Provide page I click Continue
-
+	#Then I call shared step 65961 (Additional Documents to Provide - Upload Full Product Label - Continue.
 	Then I should see the Additional Documents to Provide Page
-	And I click continue
-	Then Provide Full Product Label (required) should be showing the error messages: Document is required: Please upload a PDF of the product label (full label).
-	Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Please upload a PDF of the product label (full label). and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-	Given I click continue
+	Then In the Additional Documents to Provide, upload PDF document to Provide Full Product Label (required) field
+	Then in the Additional Documents to Provide page I click Continue
 	Then I should see the Optional Reports and Documents Available for Purchase Page
-	And I click continue
-	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
-		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
-		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment 0000
-	Given I should see the Optional Comments Page
-	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
-	Then in the Optional Comments page I click Continue
-
-	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Pet Shampoo with Pest Control
-	Then In the Data Acceptance page I select Agreed
-	And In the Data Acceptance page I click on the Accept button
-	Given If purchase details are showing click confirm order
-	#And I Confirm the Purchase summary step is shown, depending on your subscription you will see either the success message or the product details and the Confirm order button.  If the product is shown click Confirm order
-	And I navigate to the home page
-	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto17 and Open SHA manager)
+	Then in the Optional Reports and Documents Available for Purchase page, I click Continue
+	Then I should see the Optional Comments Page
+	Then in the Optional Comments page, I click Continue
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+	Given The Purchase Summary Page is displayed
+	Then In the Purchase Summary page message is displayed with text: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
+	Then In the Purchase Summary Page, click the 'Home' button
+	Then The home screen should load
+	Then I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	#And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto17 and Open SHA manager)
 	#And I Use the shared step below to search for your product - you may have to wait a few minutes for the product to show in submitted (the Zuora process)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase56502)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase56502 and its status is: Submitted
-	And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase56502)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase56502 and its status is: Assigned
+	#And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase56502)
 	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase56502)
 	#And I Go to the State Pesticide Section of MTR/CKLT SECT0127
 	#And I Confirm the Pesticide data RPDS does not show any data Heading for the RPDS reads "State Pesticide Information Group"
