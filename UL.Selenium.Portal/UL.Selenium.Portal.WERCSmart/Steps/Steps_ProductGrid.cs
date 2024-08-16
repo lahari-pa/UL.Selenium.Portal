@@ -12,8 +12,6 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Automation.Reporting.Classes;
 using UL.Automation.ReqnrollHelpers.Attributes;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static iText.StyledXmlParser.Jsoup.Select.Evaluator;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
