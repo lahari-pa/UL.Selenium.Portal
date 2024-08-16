@@ -97,6 +97,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string button = "Add Row";
 			new Steps_Prototype().ClickButton(button);
 		}
+		//Row counting starts from '1'
 		[RegexStepDefinition(@"In the 'Pesticide Details - Canada' in row number (.*) enter 'Canada\'s 5-Digit Pest Control Number\(s\) \(PCN\) or 8-Digit Drug Identification Number\(s\) \(DIN\)': (.*)")]
 		public void SetOptionForCanadas5DigitPestControlNumbers(int rowNumber, string value)
 		{
@@ -132,5 +133,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string text = "For each Province, make the appropriate selection from the options available";
 			new Steps_Prototype().AlertMessageDisplayed(condition, text);
 		}
+		[RegexStepDefinition("In the Pesticide Details - Canada Section, confirm following options (should|should not) be (displayed|exclusively displayed) for section: (.*)")]
+		public void ThenInThePesticideDetails_CanadaSectionConfirmFollowingOptionsShouldShouldNotBeDisplayedExclusivelyDisplayedForSectionAlberta(string should, string exclusive, string section, Table table)
+		{
+			new Steps_Prototype().CheckOptionsInSection(should, exclusive, section, table);
+		}
+
 	}
 }
