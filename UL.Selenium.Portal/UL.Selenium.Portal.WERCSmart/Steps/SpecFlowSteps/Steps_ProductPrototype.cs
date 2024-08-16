@@ -87,7 +87,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 				}
 			}
 		}
-
+		[RegexStepDefinition(@"In section: (.*), confirm option(.*) (is|is not) highlighted with color: (.*)")]
+		public void InSectionOptionBackground(string section, string option,string is_isnot, string color)
+		{
+			bool expected = is_isnot == "is";
+			ProductPrototype productPrototype = new ProductPrototype(section);
+			if (Report.IsTrue(productPrototype != null, $"Failure, '{section}' section does not exist.", $"Success, '{section}' section exists."))
+			{
+				if (Report.IsTrue(productPrototype.OptionExists(option), $"Failure, '{option}' option does not exist.", $"Success, '{option}' option exists."))
+				{
+					Report.IsTrue(productPrototype.GetOptionColorBackground(option) == color == expected, $"Failure, failed to confirm '{option}' option's background color {is_isnot} '{color}'.", $"Success, confirmed '{option}' option's background color {is_isnot} '{color}");
+				}
+			}
+		}
 		[RegexStepDefinition(@"In section: (.*), enter text: (.*)")]
 		public void InSectionEnterText(string section, string text)
 		{

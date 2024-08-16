@@ -30,7 +30,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
-
+@Studio
 Feature: Pesticides
 
 #Background:
@@ -1278,21 +1278,22 @@ Scenario: [56502] Pesticide Data - United States - EPA Exempt
 	Then in the Regulatory Information 3 page I click Continue
 	Then I should see the Pesticide Details - U.S. Page
 	Then in the Pesticide Details - U.S. page I click Continue
+	Then In the Pesticide Details - U.S. Section, confirm for section: 'Product has an Environmental Protection Agency (EPA) Registration Number' options background color is red
 	Then In the Pesticide Details - U.S. Section, confirm for section: 'Product has an Environmental Protection Agency (EPA) Registration Number' error is displayed: This is a required field.
 	Then In the Pesticide Details - U.S. Section, in 'Product has an Environmental Protection Agency (EPA) Registration Number' enter No
 	Then in the Pesticide Details - U.S. page I click Continue
+	Then In the Pesticide Details - U.S. Section, confirm for section: 'Product has a State Registration' options background color is red
 	Then In the Pesticide Details - U.S. Section, confirm for section: 'Product has a State Registration' error is displayed: This is a required field.
 	Then In the Pesticide Details - U.S. Section, confirm for section: 'Select the applicable exemption' error is displayed: This is a required field.
+	Then In the Pesticide Details - U.S. Section, for section: 'Select the applicable exemption': the following options should be displayed exclusively:
+	| Option                                               |
+	| Food Based Pesticides - Exempt from EPA Registration |
+	| Device based products - Exempt from EPA Registration |
+	| Pheromone Traps – Exempt from EPA Registration       |
+	Then In the Pesticide Details - U.S. Section, I confirm text 'Due to the lack of both an Active and an Inert Ingredient in the ingredients entered, the election for FIFRA 25(b) exemption is not available. Please either enter the Federal EPA Registration Number, or review the ingredients that have been entered, in its entirety, for accuracy. Note: WERCSmart requires 100% disclosure of the ingredients.' should be displayed
 	Then In the Pesticide Details - U.S. Section, in 'Product has a State Registration' enter No
 	Then In the Pesticide Details - U.S. Section, in 'Select the applicable exemption' enter Food Based Pesticides - Exempt from EPA Registration
 	Then in the Pesticide Details - U.S. page I click Continue
-	#And The following radio buttons should be displayed for section: Select the applicable exemption
-	#	| Button                                               |
-	#	| Product is FIFRA 25(b) Exempt.                       |
-	#	| Food Based Pesticides - Exempt from EPA Registration |
-	#	| Device based products - Exempt from EPA Registration |
-	#	| Pheromone Traps – Exempt from EPA Registration       |
-
 	#And I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Then I should be on the Transportation Details 1 Page
 	And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
@@ -1333,7 +1334,7 @@ Scenario: [56502] Pesticide Data - United States - EPA Exempt
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase56502 and its status is: Assigned
 	#And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase56502)
 	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase56502)
-	#And I Go to the State Pesticide Section of MTR/CKLT SECT0127
+	Then In Power Designer I left click on section: [SECT0127] State Pesticide Information
 	#And I Confirm the Pesticide data RPDS does not show any data Heading for the RPDS reads "State Pesticide Information Group"
 
 #Removed from regression: 2023/04
