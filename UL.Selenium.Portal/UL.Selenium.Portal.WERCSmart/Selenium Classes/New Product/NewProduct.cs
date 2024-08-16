@@ -139,9 +139,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				els = upperEl.FindElements(By.XPath($".//following-sibling::div[1]//p[@class='form-error']//span"), 2);
 
 			}
-            else
-            {
-				els = this.ContainerElement.FindElements(By.XPath(@".//span[(.//ancestor::p[@class='form-error']) and (.//ancestor::div[starts-with(@class, 'form-group')]//label[starts-with(text(),""" + section + @""")])]"), 2);
+			else
+			{
+				els = this.ContainerElement.FindElements(By.XPath(@$".//span[(.//ancestor::p[@class='form-error']) and (.//ancestor::div[starts-with(@class, 'form-group')]//label[starts-with(normalize-space(text()),'{section}')])]"), 2);
 			}			
 			return els.Count == 0 ? new List<string>() : els.Select(x => x.Text).ToList();
 		}

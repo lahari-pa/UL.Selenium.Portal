@@ -333,7 +333,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				ProductIdField = product
 			};
 			GeneralUtilities.Wait_for_load_finish();
-			Report.IsTrue(selProdGrid.ProductsCount() > 0, "No products were returned for ID: '" + product + "'!", "Product was returned!");
+			var selProdGrid2 = new ProductsGrid { };
+			Delay.Seconds(10);
+			Report.IsTrue(selProdGrid2.ProductsCount() > 0, "No products were returned for ID: '" + product + "'!", "Product was returned!");
 		}
 
 
@@ -3180,14 +3182,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(selProductGridMoreFilters.ProductIDIngredientIDSKUFieldIsFound(), "The field was not found", "The field was found");
 		}
 
+		[RegexStepDefinition(@"In the 'Product ID, Ingredient ID, SKU filter' field, search text: (.*)")]
+		public void GivenInTheProductIDIngredientIDSKUFilterFieldSearchText(string id)
+		{
+			var selProductGridMoreFilters = new MoreFilters {
+				ProductIDIngredientIDSKU = id
+			};
+			Report.IsTrue(selProductGridMoreFilters.ProductIDIngredientIDSKU == id,
+			$"Value: {id} was not inputted into the Product ID, Ingredient ID, SKU field correctly!",
+			$"Value: {id} was correctly inputted into the Product ID, Ingredient ID, SKU field", false, false);
 
+			//Report.IsTrue(new ProductsGrid().InProductIDIngredientIDSKUFilterFieldSearchFollowingText(id),
+			//"Failed to enter text in 'Product ID, Ingredient ID, SKU' above the products grid",
+			//"Successfully entered text in 'Product ID, Ingredient ID, SKU' above the products grid");
 
-		[RegexStepDefinition(@"In the Product ID, Ingredient ID, SKU filter field I search for: (.*)")]
+			Report.IsTrue(new ProductsGrid().ClickProductIDIngredientIDSKUSearchButton(),
+				"Failed to select search button next to 'Product ID, Ingredient ID, SKU' above the products grid",
+				"Successfully selected search button next to 'Product ID, Ingredient ID, SKU' above the products grid");
+
+			GeneralUtilities.Wait_for_load_finish();
+			Delay.Seconds(10);
+
+			Report.Info($"ID searched for: '{id}'");
+			var selProdGrid = new ProductsGrid();
+			Report.IsTrue(selProdGrid.ProductsCount() >= 1, "Failure, no entries were found", "Success, at least one entry was found, as expected!");
+		}
+
+			[RegexStepDefinition(@"In the Product ID, Ingredient ID, SKU filter field I search for: (.*)")]
 		public void GivenInTheProductIDIngredientIDSKUFilterFieldISearchFor(string savedAs)
 		{
-
+			
 			try
 			{
+				
 				Report.Info("Searching for Product Saved as " + savedAs);
 
 				if (!Context.Contains(savedAs))
@@ -3234,7 +3261,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 					}
 				}
-
+			
 				var selProductGridMoreFilters = new MoreFilters();
 
 				selProductGridMoreFilters.ProductIDIngredientIDSKU = id;

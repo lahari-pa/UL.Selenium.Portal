@@ -23,20 +23,34 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:PesticideDetailsUS
 @AdditionalDocsContactInfo
 @RegulatoryInformation3
-@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
+
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
-@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
-@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ECOLOGO
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:PesticideDetailsStateRegistration
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:USDepartamentOfTransportationDOT
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InternationalMarineClassification
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOC_OzoneTransportCommission
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOC_Summary
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
+@SafetyDataSheetAuthoring
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
-@Studio
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
+@GTINAndUPC
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
+@SafetyDataSheetAuthoring
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:NeonicotinoidWarning
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:PesticideDetailsCanada
 Feature: Pesticides
 
-#Background:
-#	Given I verify the following users exist and if not I create them using SHAUser
-#		| username    | FirstName | LastName   | Role         | EmailAddress                |
-#		| SHAQAAuto17 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
+Background:
+	Given I verify the following users exist and if not I create them using SHAUser
+		| username    | FirstName | LastName   | Role         | EmailAddress                |
+		| SHAQAAuto17 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 
 @TestCase:62775
@@ -1653,35 +1667,153 @@ Scenario:[121120] Pesticide - New Radio Icon Option
 	
 @TestCase:132756
 Scenario: [132756] Canadian Province Pesticide Options
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I generate a random UPC number and save as: RandomUPC
-	Given I delete all products with UPC Number: RandomUPC
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
-	Given I save the product information as: TestCase
-	Given I call Shared Step 140562 (Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, No CA Cleaning - Continue - Happy Path)
-	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-		| Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | pH | Primary Physical State | Secondary Physical State | Select the best Water Solubility description | Relative Density |
-		| 2                          | 66                       | Closed cup method               | 2  | Liquid                 | Liquid                   | Dispersible                                  | 2                |
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
-		| 74-98-6   | Propane       | 100     | false               |            | false       |
-	And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
+	Given I should see the The Product Page
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bleach
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Bleach
+ 	Given in the The Product page I click Continue
+	Given I save the product information as: TestCase132756
+	#234362 Product Information - Yes Pesticide - Canada only, No OSHA, No Direct Ship, No Ca Cleaning, No Private Label, No GNFR
+	#Given I call Shared Step 140562 (Product Information - YES to pesticide - Canada only, No OSHA, No Direct Ship, No CA Cleaning - Continue - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, Check or Uncheck for the section uncheck: Retailers will be selling my product at their store locations in (select either or both) to : United States
+	Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: Canada
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+	#43920 Physical and Chemical Properties Screen - Select SOLID Option
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
+	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+	#Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
+	And I should see the Ingredients Page
+	Then In the Ingredients section, add component with component name: Water
+	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
+	Then in the Ingredients page I click Continue
+	#And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
+	And I should see the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'Canadian Environmental Protection Act (CEPA) status' to: Compliant with Domestic Substances List (DSL)
+	Then in the Inventory Status, Prop 65 (US) page I click Continue
+	#234364 Pesticide Details - Canada - Options Available for each Province
 	Then I should see the Pesticide Details - Canada Page
-	Then I check the options in the dropdown menus for the following sections
-		| Section                    | Options                                                                                                                                                                                                                       |
-		| Alberta                    | None, 1,Schedule 2,Schedule 3,Schedule 4                                                                                                                                                                              |
-		| British Columbia           | None,Permit Restricted,Restricted,Commercial,Domestic,Excluded                                                                                                                                                                |
-		| Manitoba                   | None,Commercial,Controlled Purchase,Not Regulated,Restricted,Self-Select                                                                                                                                                      |
-		| New Brunswick              | None,Banned,Domestic / Self-Select,Non-Domestic                                                                                                                                                                               |
-		| New Foundland and Labrador | None,Banned,Domestic,Commerical,Restricted                                                                                                                                                                                    |
-		| Nova Scotia                | None,Allowed / Self-Select,Banned,Commercial,Controlled Purchase,Restricted,Not Regulated                                                                                                                                     |
-		| Ontario                    | None,Class A: Manufacturing Products,Class B: Restricted,Class C: Commercial,Class D: Domestic with License,Class D: Domestic without License,Class D: Domestic Controlled Purchase Requiring a License,Class E: Treated Seed, Class D: Banned-Cosmetic Pesticide |
-		| Prince Edward Island       | None,Banned,Controlled Purchase,Exempt: Schedule 7,Exempt: Schedule 2,Non-Domestic,Self-Select: Schedule 8                                                                                                                    |
-		| Quebec                     | None,Class 1,Class 2,Class 3,Class 3A,Class 4,Class 5,Banned                                                                                                                                                                  |
-		| Saskatchewan               | None,Commercial,Restricted                                                                                                                                                                                                    |
-		| Northwest Territory        | Not Applicable                                                                                                                                                                                                                |
-		| Yukon Territory            | None,Commercial,Domestic,Restricted                                                                                                                                                                                |       
+	Then In the 'Pesticide Details - Canada' in row number 1 enter 'Canada's 5-Digit Pest Control Number(s) (PCN) or 8-Digit Drug Identification Number(s) (DIN)': 12345
+	Then In the Pesticide Details - Canada Section, set the option in section: 'Product's packaging includes a Poison Danger symbol': to: No
+	Then In the Pesticide Details - Canada Section, confirm following options should be exclusively displayed for section: Alberta
+	| Option     |
+	| None       |
+	| Schedule 1 |
+	| Schedule 2 |
+	| Schedule 3 |
+	| Schedule 4 |
+	Then In the Pesticide Details - Canada Section, set option for Province: 'Alberta': to: None
+	Then In the Pesticide Details - Canada Section, confirm following options should be exclusively displayed for section: British Columbia
+	| Option            |
+	| None              |
+	| Permit Restricted |
+	| Restricted        |
+	| Commercial        |
+	| Domestic          |
+	| Excluded          |
+	Then In the Pesticide Details - Canada Section, set option for Province: 'British Columbia': to: Excluded
+	Then In the Pesticide Details - Canada Section, confirm following options should be exclusively displayed for section: Manitoba
+	| Option              |
+	| None                |
+	| Commercial          |
+	| Controlled Purchase |
+	| Not Regulated       |
+	| Restricted          |
+	| Self-Select         |
+	Then In the Pesticide Details - Canada Section, set option for Province: 'Manitoba': to: Commercial
+	Then In the Pesticide Details - Canada Section, confirm following options should be exclusively displayed for section: New Brunswick
+	| Option                 |
+	| None                   |
+	| Banned                 |
+	| Domestic / Self-Select |
+	| Non-Domestic           |
+	Then In the Pesticide Details - Canada Section, set option for Province: 'New Brunswick': to: Banned
+	Then In the Pesticide Details - Canada Section, confirm following options should be exclusively displayed for section: New Foundland and Labrador
+	| Option     |
+	| None       |
+	| Banned     |
+	| Domestic   |
+	| Commercial |
+	| Restricted |
+	Then In the Pesticide Details - Canada Section, set option for Province: 'New Foundland and Labrador': to: Banned
+	Then In the Pesticide Details - Canada Section, confirm following options should be exclusively displayed for section: Nova Scotia
+	| Option                |
+	| None                  |
+	| Allowed / Self-Select |
+	| Banned                |
+	| Commercial            |
+	| Controlled Purchase   |
+	| Restricted            |
+	| Not Regulated         |
+	Then In the Pesticide Details - Canada Section, set option for Province: 'Nova Scotia': to: Banned
+	Then In the Pesticide Details - Canada Section, confirm following options should be exclusively displayed for section: Ontario
+	| Option                                                    |
+	| None                                                      |
+	| Class A: Manufacturing Products                           |
+	| Class B: Restricted                                       |
+	| Class C: Commercial                                       |
+	| Class D: Banned-Cosmetic Pesticide                        |
+	| Class D: Domestic Controlled Purchase Requiring a License |
+	| Class D: Domestic with License                            |
+	| Class D: Domestic without License                         |
+	| Class E: Treated Seed                                     |
+	Then In the Pesticide Details - Canada Section, set option for Province: 'Ontario': to: None
+	Then In the Pesticide Details - Canada Section, confirm following options should be exclusively displayed for section: Prince Edward Island
+	| Option                  |
+	| None                    |
+	| Banned                  |
+	| Controlled Purchase     |
+	| Exempt: Schedule 7      |
+	| Exempt: Schedule 2      |
+	| Non-Domestic            |
+	| Self-Select: Schedule 8 |
+	Then In the Pesticide Details - Canada Section, set option for Province: 'Prince Edward Island': to: None
+	Then In the Pesticide Details - Canada Section, confirm following options should be exclusively displayed for section: Quebec 
+	| Option   |
+	| None     |
+	| Class 1  |
+	| Class 2  |
+	| Class 3  |
+	| Class 3A |
+	| Class 4  |
+	| Class 5  |
+	| Banned   |
+	Then In the Pesticide Details - Canada Section, set option for Province: 'Quebec': to: None
+	Then In the Pesticide Details - Canada Section, confirm following options should be exclusively displayed for section: Saskatchewan  
+	| Option     |
+	| None       |
+	| Commercial |
+	| Restricted |
+	Then In the Pesticide Details - Canada Section, set option for Province: 'Saskatchewan': to: None
+	Then In the Pesticide Details - Canada Section, confirm following options should be exclusively displayed for section: Northwest Territory  
+	| Option         |
+	| Not Applicable |
+	Then In the Pesticide Details - Canada Section, set option for Province: 'Northwest Territory': to: Not Applicable
+	Then In the Pesticide Details - Canada Section, confirm following options should be exclusively displayed for section: Yukon Territory  
+	| Option     |
+	| None       |
+	| Commercial |
+	| Domestic   |
+	| Restricted |
+	Then In the Pesticide Details - Canada Section, set option for Province: 'Yukon Territory': to: None
+	Then in the Pesticide Details - Canada page I click Continue
+	Then I should see the Transportation Details 1 Page
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase132756

@@ -445,5 +445,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			string section = "Internal SKU";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
+
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, section: 'Internal SKU' (should|should not) display error message: (.*)")]
+		public void InternalSKUShouldShouldNotDisplayErrorMessage(string shouldShouldNot, string errorMessage)
+		{
+			string section = "Internal SKU";
+			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, shouldShouldNot, errorMessage);
+		}
 	}
 }
