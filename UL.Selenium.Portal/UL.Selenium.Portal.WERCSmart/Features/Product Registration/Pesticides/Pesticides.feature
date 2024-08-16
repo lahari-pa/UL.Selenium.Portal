@@ -23,7 +23,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:PesticideDetailsUS
 @AdditionalDocsContactInfo
 @RegulatoryInformation3
-
+@Studio
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
@@ -46,11 +46,6 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:NeonicotinoidWarning
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:PesticideDetailsCanada
 Feature: Pesticides
-
-Background:
-	Given I verify the following users exist and if not I create them using SHAUser
-		| username    | FirstName | LastName   | Role         | EmailAddress                |
-		| SHAQAAuto17 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
 
 @TestCase:62775
