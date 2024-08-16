@@ -2123,5 +2123,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 		}
+		[RegexStepDefinition(@"In Power Designer, confirm no data is displayed in section 'SECT0127 State Pesticide Information'")]
+		public void ThenInPowerDesignerConfirmNoDataIsDisplayedInSection()
+		{
+			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
+			Report.IsFalse(selStudioPowerDesignerPlus.GivenCategoryContainsData("State Pesticide Expiration Date"), "Failed", "Success");
+			Report.IsFalse(selStudioPowerDesignerPlus.GivenCategoryContainsData("State Pesticide State"), "Failed", "Success");
+			Report.IsFalse(selStudioPowerDesignerPlus.GivenCategoryContainsData("State Pesticide Registration Number"), "Failed", "Success");
+			Report.IsFalse(selStudioPowerDesignerPlus.GivenCategoryContainsData("EPA Pesticide Registration Number"), "Failed", "Success");
+			Report.IsFalse(selStudioPowerDesignerPlus.GivenCategoryContainsData("EPA Pesticide Registration Date"), "Failed", "Success");
+			Report.IsFalse(selStudioPowerDesignerPlus.GivenCategoryContainsData("EPA Pesticide Information Group"), "Failed", "Success");
+			Report.IsFalse(selStudioPowerDesignerPlus.GivenCategoryContainsData("State Pesticide Expiration Date"), "Failed", "Success");
+
+
+		}
+
 	}
 }

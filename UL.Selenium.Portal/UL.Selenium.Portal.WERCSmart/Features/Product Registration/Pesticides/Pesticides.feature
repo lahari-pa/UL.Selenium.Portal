@@ -1335,7 +1335,7 @@ Scenario: [56502] Pesticide Data - United States - EPA Exempt
 	#And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase56502)
 	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase56502)
 	Then In Power Designer I left click on section: [SECT0127] State Pesticide Information
-	#And I Confirm the Pesticide data RPDS does not show any data Heading for the RPDS reads "State Pesticide Information Group"
+	Then In Power Designer, confirm no data is displayed in section 'SECT0127 State Pesticide Information'
 
 #Removed from regression: 2023/04
 @ignore
