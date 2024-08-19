@@ -2127,15 +2127,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenInPowerDesignerConfirmNoDataIsDisplayedInSection()
 		{
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
-			Report.IsFalse(selStudioPowerDesignerPlus.GivenCategoryContainsData("State Pesticide Expiration Date"), "Failed", "Success");
-			Report.IsFalse(selStudioPowerDesignerPlus.GivenCategoryContainsData("State Pesticide State"), "Failed", "Success");
-			Report.IsFalse(selStudioPowerDesignerPlus.GivenCategoryContainsData("State Pesticide Registration Number"), "Failed", "Success");
-			Report.IsFalse(selStudioPowerDesignerPlus.GivenCategoryContainsData("EPA Pesticide Registration Number"), "Failed", "Success");
-			Report.IsFalse(selStudioPowerDesignerPlus.GivenCategoryContainsData("EPA Pesticide Registration Date"), "Failed", "Success");
-			Report.IsFalse(selStudioPowerDesignerPlus.GivenCategoryContainsData("EPA Pesticide Information Group"), "Failed", "Success");
-			Report.IsFalse(selStudioPowerDesignerPlus.GivenCategoryContainsData("State Pesticide Expiration Date"), "Failed", "Success");
-
-
+			Report.IsFalse(selStudioPowerDesignerPlus.GivenCategoryContainsData("EPA Pesticide Information Group"), "Failed to confirm 'EPA Pesticide Information Group' doesn't contains data", "Successfully confirmed 'EPA Pesticide Information Group' doesn't contains data");
+			Report.IsFalse(selStudioPowerDesignerPlus.GivenCategoryContainsData("State Pesticide Information Group"), "Failed to confirm 'State Pesticide Information Group' doesn't contains data", "Successfully confirmed 'State Pesticide Information Group' doesn't contains data");
+			Report.IsFalse(selStudioPowerDesignerPlus.GivenCategoryContainsData("EPA Pesticide Registration Number"), "Failed to confirm 'EPA Pesticide Registration Number' doesn't contains data", "Successfully confirmed 'EPA Pesticide Registration Number' doesn't contains data");
+			Report.IsFalse(selStudioPowerDesignerPlus.GivenCategoryContainsData("EPA Pesticide Registration Date"), "Failed to confirm 'EPA Pesticide Registration Date' doesn't contains data", "Successfully confirmed 'EPA Pesticide Registration Date' doesn't contains data");
+			Report.IsFalse(selStudioPowerDesignerPlus.GivenCategoryContainsData("State Pesticide Expiration Date"), "Failed to confirm 'State Pesticide Expiration Date' doesn't contains data", "Successfully confirmed 'State Pesticide Expiration Date' doesn't contains data");
+			Report.IsFalse(selStudioPowerDesignerPlus.GivenCategoryContainsData("State Pesticide State"), "Failed to confirm 'State Pesticide State' doesn't contains data", "Successfully confirmed 'State Pesticide State' doesn't contains data");
+			Report.IsFalse(selStudioPowerDesignerPlus.GivenCategoryContainsData("State Pesticide Registration Number"), "Failed to confirm 'State Pesticide Registration Number' doesn't contains data", "Successfully confirmed 'State Pesticide Registration Number' doesn't contains data");
+			Report.IsFalse(selStudioPowerDesignerPlus.GivenCategoryContainsData("Kelly Approved"), "Failed to confirm 'Kelly Approved' doesn't contains data", "Successfully confirmed 'Kelly Approved' doesn't contains data");
+			Report.IsFalse(selStudioPowerDesignerPlus.GivenCategoryContainsData("Kelly Data Override"), "Failed to confirm 'Kelly Data Override' doesn't contains data", "Successfully confirmed 'Kelly Data Override' doesn't contains data");
+			Report.IsFalse(selStudioPowerDesignerPlus.GivenCategoryContainsData("EPA Active Ingredients"), "Failed to confirm 'EPA Active Ingredients' doesn't contains data", "Successfully confirmed 'EPA Active Ingredients' doesn't contains data");
+			Report.IsFalse(selStudioPowerDesignerPlus.GivenCategoryContainsData("EPA Active Ingredients Percentage"), "Failed to confirm 'EPA Active Ingredients Percentage' doesn't contains data", "Successfully confirmed 'EPA Active Ingredients Percentage' doesn't contains data");
+			Report.IsFalse(selStudioPowerDesignerPlus.GivenCategoryContainsData("State Pesticide Registration Validation"), "Failed to confirm 'State Pesticide Registration Validation' doesn't contains data", "Successfully confirmed State 'Pesticide Registration Validation' doesn't contains data");
+			Report.IsFalse(selStudioPowerDesignerPlus.GivenCategoryContainsData("State Pesticide Status"), "Failed to confirm 'State Pesticide Status' doesn't contains data", "Successfully confirmed 'State Pesticide Status' doesn't contains data");
+			Report.IsFalse(selStudioPowerDesignerPlus.GivenCategoryContainsData("Pesticide Data Source"), "Failed to confirm 'Pesticide Data Source' doesn't contains data", "Successfully confirmed 'Pesticide Data Source' doesn't contains data");
 		}
 
 	}
