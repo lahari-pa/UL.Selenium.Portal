@@ -100,6 +100,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 				}
 			}
 		}
+		[RegexStepDefinition(@"In section: (.*), get background color for option (.*) and save it as: (.*)")]
+		public void InSectionGetOptionBackgroundColor(string section, string option, string saveAs)
+		{
+			string color;
+			ProductPrototype productPrototype = new ProductPrototype(section);
+			if (Report.IsTrue(productPrototype != null, $"Failure, '{section}' section does not exist.", $"Success, '{section}' section exists."))
+			{
+				if (Report.IsTrue(productPrototype.OptionExists(option), $"Failure, '{option}' option does not exist.", $"Success, '{option}' option exists."))
+				{
+					color = productPrototype.GetOptionColorBackground(option);
+					Report.IsTrue(color.IsNullOrEmpty(), $"Failure, failed to get option's background color", $"Successfully got option's background color");
+					Context.AddToContext(color, saveAs);
+				}
+			}
+		}	
+
 		[RegexStepDefinition(@"In section: (.*), enter text: (.*)")]
 		public void InSectionEnterText(string section, string text)
 		{

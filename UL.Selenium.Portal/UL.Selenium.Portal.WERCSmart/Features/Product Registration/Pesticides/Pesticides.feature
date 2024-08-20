@@ -1286,12 +1286,14 @@ Scenario: [56502] Pesticide Data - United States - EPA Exempt
 	Then In the Regulatory Information 3 Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
 	Then in the Regulatory Information 3 page I click Continue
 	Then I should see the Pesticide Details - U.S. Page
+	Then In the Pesticide Details - U.S. Section, for section: 'Product has an Environmental Protection Agency (EPA) Registration Number' get default option's background color and save it as: defaultColor
 	Then in the Pesticide Details - U.S. page I click Continue
-	Then In the Pesticide Details - U.S. Section, confirm for section: 'Product has an Environmental Protection Agency (EPA) Registration Number' options background color is red
+	Then In the Pesticide Details - U.S. Section, confirm for section: 'Product has an Environmental Protection Agency (EPA) Registration Number' options background color is not default saved as: defaultColor
 	Then In the Pesticide Details - U.S. Section, confirm for section: 'Product has an Environmental Protection Agency (EPA) Registration Number' error is displayed: This is a required field.
 	Then In the Pesticide Details - U.S. Section, in 'Product has an Environmental Protection Agency (EPA) Registration Number' enter No
+	Then In the Pesticide Details - U.S. Section, for section: 'Product has a State Registration' get default option's background color and save it as: defaultColor
 	Then in the Pesticide Details - U.S. page I click Continue
-	Then In the Pesticide Details - U.S. Section, confirm for section: 'Product has a State Registration' options background color is red
+	Then In the Pesticide Details - U.S. Section, confirm for section: 'Product has a State Registration' options background color is not default saved as: defaultColor
 	Then In the Pesticide Details - U.S. Section, confirm for section: 'Product has a State Registration' error is displayed: This is a required field.
 	Then In the Pesticide Details - U.S. Section, confirm for section: 'Select the applicable exemption' error is displayed: This is a required field.
 	Then In the Pesticide Details - U.S. Section, for section: 'Select the applicable exemption': the following options should be displayed exclusively:

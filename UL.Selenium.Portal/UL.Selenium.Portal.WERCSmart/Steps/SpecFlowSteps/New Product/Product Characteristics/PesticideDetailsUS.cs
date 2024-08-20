@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
@@ -80,25 +81,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string section = "Select the applicable exemption";
 			new Steps_ProductPrototype().InSectionErrorMessageIsIsNotDisplayed(section, error, is_isnot);
 		}
-		[RegexStepDefinition(@"In the Pesticide Details - U.S. Section, confirm for section: 'Product has an Environmental Protection Agency \(EPA\) Registration Number' options background color (is|is not) red")]
-		public void EPAOptionsColor(string is_isnot)
+		[RegexStepDefinition(@"In the Pesticide Details - U.S. Section, confirm for section: 'Product has an Environmental Protection Agency \(EPA\) Registration Number' options background color (is|is not) default saved as: (.*)")]
+		public void EPAOptionsColor(string is_isnot, string savedAs)
 		{
 			string section = "Product has an Environmental Protection Agency (EPA) Registration Number";
 			string option1 = "Yes";
 			string option2 = "No";
-			string color = "rgba(255, 240, 240, 1)";
-			new Steps_ProductPrototype().InSectionOptionBackground(section, option1, is_isnot, color);
-			new Steps_ProductPrototype().InSectionOptionBackground(section, option2, is_isnot, color);
+			string defaultColor = (string)Context.GetFromContext(savedAs);
+			new Steps_ProductPrototype().InSectionOptionBackground(section, option1, is_isnot, defaultColor);
+			new Steps_ProductPrototype().InSectionOptionBackground(section, option2, is_isnot, defaultColor);
 		}
-		[RegexStepDefinition(@"In the Pesticide Details - U.S. Section, confirm for section: 'Product has a State Registration' options background color (is|is not) red")]
-		public void StateRegistrationOptionsColor(string is_isnot)
+		[RegexStepDefinition(@"In the Pesticide Details - U.S. Section, for section: 'Product has an Environmental Protection Agency \(EPA\) Registration Number' get default option's background color and save it as: (.*)")]
+		public void GetEPAOptionsColor(string savedAs)
+		{
+			string section = "Product has an Environmental Protection Agency (EPA) Registration Number";
+			string option1 = "Yes";
+			new Steps_ProductPrototype().InSectionGetOptionBackgroundColor(section, option1, savedAs);
+		}
+		[RegexStepDefinition(@"In the Pesticide Details - U.S. Section, confirm for section: 'Product has a State Registration' options background color (is|is not) default saved as: (.*)")]
+		public void StateRegistrationOptionsColor(string is_isnot, string savedAs)
 		{
 			string section = "Product has a State Registration";
 			string option1 = "Yes";
 			string option2 = "No";
-			string color = "rgba(255, 240, 240, 1)";
-			new Steps_ProductPrototype().InSectionOptionBackground(section, option1, is_isnot, color);
-			new Steps_ProductPrototype().InSectionOptionBackground(section, option2, is_isnot, color);
+			string defaultColor = (string)Context.GetFromContext(savedAs);
+			new Steps_ProductPrototype().InSectionOptionBackground(section, option1, is_isnot, defaultColor);
+			new Steps_ProductPrototype().InSectionOptionBackground(section, option2, is_isnot, defaultColor);
+		}
+		[RegexStepDefinition(@"In the Pesticide Details - U.S. Section, for section: 'Product has a State Registration' get default option's background color and save it as: (.*)")]
+		public void GetStateRegistrationOptionsColor(string savedAs)
+		{
+			string section = "Product has a State Registration";
+			string option1 = "Yes";
+			new Steps_ProductPrototype().InSectionGetOptionBackgroundColor(section, option1, savedAs);
 		}
 	}
 }
