@@ -7,6 +7,7 @@ using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
@@ -88,8 +89,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string option1 = "Yes";
 			string option2 = "No";
 			string defaultColor = (string)Context.GetFromContext(savedAs);
-			new Steps_ProductPrototype().InSectionOptionBackground(section, option1, is_isnot, defaultColor);
-			new Steps_ProductPrototype().InSectionOptionBackground(section, option2, is_isnot, defaultColor);
+			if (!defaultColor.IsNullOrEmpty())
+			{
+				new Steps_ProductPrototype().InSectionOptionBackground(section, option1, is_isnot, defaultColor);
+				new Steps_ProductPrototype().InSectionOptionBackground(section, option2, is_isnot, defaultColor);
+			}
+			else
+			{
+				Report.Failure("Cannot get default color");
+			}
 		}
 		[RegexStepDefinition(@"In the Pesticide Details - U.S. Section, for section: 'Product has an Environmental Protection Agency \(EPA\) Registration Number' get default option's background color and save it as: (.*)")]
 		public void GetEPAOptionsColor(string savedAs)
@@ -105,8 +113,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string option1 = "Yes";
 			string option2 = "No";
 			string defaultColor = (string)Context.GetFromContext(savedAs);
-			new Steps_ProductPrototype().InSectionOptionBackground(section, option1, is_isnot, defaultColor);
-			new Steps_ProductPrototype().InSectionOptionBackground(section, option2, is_isnot, defaultColor);
+			if (!defaultColor.IsNullOrEmpty())
+			{
+				new Steps_ProductPrototype().InSectionOptionBackground(section, option1, is_isnot, defaultColor);
+				new Steps_ProductPrototype().InSectionOptionBackground(section, option2, is_isnot, defaultColor);
+			}
+			else
+			{
+				Report.Failure("Cannot get default color");
+			}
 		}
 		[RegexStepDefinition(@"In the Pesticide Details - U.S. Section, for section: 'Product has a State Registration' get default option's background color and save it as: (.*)")]
 		public void GetStateRegistrationOptionsColor(string savedAs)

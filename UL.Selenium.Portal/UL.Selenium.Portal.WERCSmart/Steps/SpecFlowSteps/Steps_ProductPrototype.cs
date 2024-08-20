@@ -96,7 +96,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			{
 				if (Report.IsTrue(productPrototype.OptionExists(option), $"Failure, '{option}' option does not exist.", $"Success, '{option}' option exists."))
 				{
-					Report.IsTrue(productPrototype.GetOptionColorBackground(option) == color == expected, $"Failure, failed to confirm '{option}' option's background color {is_isnot} '{color}'.", $"Success, confirmed '{option}' option's background color {is_isnot} '{color}");
+					Report.IsTrue(productPrototype.GetOptionColorBackground(option) == color == expected, $"Failure, failed to confirm '{option}' option's background color {is_isnot} '{color}'.", $"Success, confirmed '{option}' option's background color {is_isnot} '{color}'");
 				}
 			}
 		}
@@ -110,8 +110,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 				if (Report.IsTrue(productPrototype.OptionExists(option), $"Failure, '{option}' option does not exist.", $"Success, '{option}' option exists."))
 				{
 					color = productPrototype.GetOptionColorBackground(option);
-					Report.IsTrue(color.IsNullOrEmpty(), $"Failure, failed to get option's background color", $"Successfully got option's background color");
-					Context.AddToContext(color, saveAs);
+					Report.IsTrue(!color.IsNullOrEmpty(), $"Failure, failed to get option's background color", $"Successfully got option's background color");
+					Context.AddToContext(saveAs, color);
 				}
 			}
 		}	
