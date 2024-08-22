@@ -72,8 +72,8 @@ Scenario: [62775] Pesticides - Validation of Which one best describes your produ
  	Given in the Product Information page I click Continue
 	Then In the Product Information Section, the section: 'Which best describes your product, including when FIFRA 25(b) Exempt' should be showing error message: This is a required field.
 	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
-	Then In the Product Information Section, the section: 'Which best describes your product, including when FIFRA 25(b) Exempt' should not be showing error message: This is a required field.
 	Given in the Product Information page I click Continue
+	Then In the Product Information Section, the section: 'Which best describes your product, including when FIFRA 25(b) Exempt' should not be showing error message: This is a required field.
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62775
 
