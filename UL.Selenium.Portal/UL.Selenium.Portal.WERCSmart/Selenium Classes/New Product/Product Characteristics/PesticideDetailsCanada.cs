@@ -18,9 +18,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 
 		IWebElement InputField => this.Row.FindElement(By.XPath(".//input"));
 		IWebElement RemoveIcon => this.Row.FindElement(By.XPath(".//i"));
+
+		//Row(rowNumber) counting starts from '1'.
 		public PesticideDetailsCanadaTableRow(int rowNumber)
 		{
-			if (rowNumber < this.PCNFields.Count)
+			if (rowNumber <= this.PCNFields.Count)
 			{
 				this.Row = this.PCNFields[rowNumber - 1];
 			}

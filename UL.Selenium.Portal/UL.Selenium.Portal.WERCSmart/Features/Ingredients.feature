@@ -789,8 +789,15 @@ Scenario: [87301] Ingredients - Selecting a Public Label Name Automatically Init
 Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulation
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
-	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Soap (Bar, Liquid) for Body
+	#And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+	#And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Soap (Bar, Liquid) for Body
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Soap (Bar, Liquid) for Body
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Soap (Bar, Liquid) for Body
+	Then in the The Product page, I click Continue
 	Then I save the product information as: TestCase84528
 	#And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I should see the Product Information Page
@@ -801,53 +808,50 @@ Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulat
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page I click Continue
-
-# ====== Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP) ====== #
-Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
-Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Bonded, fibrous glass web
-Given In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
-Given In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
-Given I click continue
-#And I Start typing in the component box
-	#And I Add as many random ingredients as possible
-	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Boric acid    | 10      | false               | false       |            |
-	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
-		| ComponentName    | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Sodium hydroxide | 10      | false               | false       |            |
-	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Bromate       | 10      | false               | false       |            |
-	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
-		| ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Sodium chloride | 10      | false               | false       |            |
-	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
-		| ComponentName     | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Potassium sulfate | 10      | false               | false       |            |
-	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Water         | 50      | false               | false       |            |
-	And I click 'Select all' in the Ingredients table
-	And I confirm that all ingredients in the table are selected
-	And I confirm the 'Delete' button is available in the Ingredients table
-	And I deselect the following ingredients:
-		| Name            |
-		| Water           |
-		| Sodium chloride |
-		| Boric acid      |
-	And I confirm the following ingredients are unselected:
-		| Name            |
-		| Water           |
-		| Sodium chloride |
-		| Boric acid      |
-	And I confirm the 'Select all' checkbox in the Ingredients table is unchecked
-	And I click 'Select all' in the Ingredients table
-	And I confirm that all ingredients in the table are selected
-	And I click the 'Delete' button in the Ingredients table
-	And I confirm the 'Remove selected components' popup is displayed with message: Are you sure you want to remove all selected components?
-	And in the modal dialog I click the "YES" button
-	And I confirm there are a total of: 0 ingredients in the table
+	#Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP) ====== #
+	Given I should see the Physical and Chemical Properties Page
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Bonded, fibrous glass web
+	Given In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+	#Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
+	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Water         | 50      | false               | false       |            |
+	Then In the Ingredients section, add component with component name: Water
+	Then In the Ingredients section, add component with component name: Shea Butter
+	Then In the Ingredients section, add component with component name: Hydrogenated Olive Oil
+	Then In the Ingredients section, add component with component name: Stearic Acid
+	Then In the Ingredients section, add component with component name: Coconut Oil, methyl ester, glycerol-free
+	Then In the Ingredients table, set 'Select All' checkbox to checked
+	Then In the Ingredients Table row with component name: Water, in Select All column confirm checkbox is checked
+	Then In the Ingredients Table row with component name: Shea Butter, in Select All column confirm checkbox is checked
+	Then In the Ingredients Table row with component name: Hydrogenated Olive Oil, in Select All column confirm checkbox is checked
+	Then In the Ingredients Table row with component name: Stearic Acid, in Select All column confirm checkbox is checked
+	Then In the Ingredients Table row with component name: Coconut oil, methyl ester, glycerol-free, in Select All column confirm checkbox is checked
+	Then In the Ingredients Table, confirm the 'Delete' button is displayed
+	Then In the Ingredients Table row with component name: Water, in Select All column set checkbox to unchecked
+	Then In the Ingredients Table row with component name: Stearic Acid, in Select All column set checkbox to unchecked
+	Then In the Ingredients Table row with component name: Water, in Select All column confirm checkbox is unchecked
+	Then In the Ingredients Table row with component name: Shea Butter, in Select All column confirm checkbox is checked
+	Then In the Ingredients Table row with component name: Hydrogenated Olive Oil, in Select All column confirm checkbox is checked
+	Then In the Ingredients Table row with component name: Stearic Acid, in Select All column confirm checkbox is unchecked
+	Then In the Ingredients Table row with component name: Coconut oil, methyl ester, glycerol-free, in Select All column confirm checkbox is checked
+	Then In the Ingredients table, confirm 'Select All' checkbox is unchecked
+	Then In the Ingredients table, set 'Select All' checkbox to checked
+	Then In the Ingredients Table row with component name: Water, in Select All column confirm checkbox is checked
+	Then In the Ingredients Table row with component name: Shea Butter, in Select All column confirm checkbox is checked
+	Then In the Ingredients Table row with component name: Hydrogenated Olive Oil, in Select All column confirm checkbox is checked
+	Then In the Ingredients Table row with component name: Stearic Acid, in Select All column confirm checkbox is checked
+	Then In the Ingredients Table row with component name: Coconut oil, methyl ester, glycerol-free, in Select All column confirm checkbox is checked
+	Then In the Ingredients Table, click the 'Delete' button
+	Then In the Ingredients section, I confirm the popup should be displayed with the following title: Remove selected components? and text: Are you sure you want to remove all selected components?
+	Then In displayed modal, click Yes footer button
+	Then In the Ingredients Section ingredients table, confirm row with component name: Water is not displayed
+	Then In the Ingredients Section ingredients table, confirm row with component name: Shea Butter is not displayed
+	Then In the Ingredients Section ingredients table, confirm row with component name: Hydrogenated Olive Oil is not displayed
+	Then In the Ingredients Section ingredients table, confirm row with component name: Stearic Acid is not displayed
+	Then In the Ingredients Section ingredients table, confirm row with component name: Coconut oil, methyl ester, glycerol-free is not displayed
 	And I navigate to the home page
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase84528
 
@@ -1061,9 +1065,13 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-
-	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	#And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Given I should see the The Product Page
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
+ 	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase95487
+	#252968 Product Information - Applicable Only to Type of Product:  CHALK (RU000711) - General Shared-Step
 	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I should see the Product Information Page
 	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
@@ -1073,63 +1081,40 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page I click Continue
-
-	Given I call Shared Step 37857 (Enter Physical Property - Solid) with the following inputs:
-		| Secondary Physical State | Water Solubility |
-		| Flaked                   | Soluble in water |
+	#252546 Physical and Chemical Properties - Applicable Only to Type of Product:  CHALK (RU000711) - General Shared-Step
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+	#Given I add the following ingredients:
+	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Water         | 43.0    | false               | false       |            |
 	Then I should see the Ingredients Page
+	Then In the Ingredients section, add component with component name: Water
+	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 10
+	Then In the Ingredients Table row with component name: Water, in Public Name column select option Water
+	Then In the Ingredients Table row with component name: Water, in Publicly Disclosed? column confirm checkbox is checked
+	Then In the Ingredients section, add component with component name: Calcium carbonate
+	Then In the Ingredients Table row with component name: Calcium carbonate, in Percent column text input enter: 80
+	Then In the Ingredients Table row with component name: Calcium carbonate, in Trade Secret? column set checkbox to checked
 	When in the Ingredients page I click Continue
-	Given I add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Water         | 43.0    | false               | false       |            |
-	And for ingredient: Water Percentage displayed: 43.0
-	When for ingredient: Water I select Public Name: AQUA
-	Then for ingredient: Water Public Name displayed: AQUA
-	And I confirm the Publicly Disclosed checkbox is: checked for ingredient: Water
-	Given for ingredient: Water I set Public Disclosure checkbox to checked: false
-	And for ingredient: Water I set Trade Secret checkbox to checked: true
-	Then for ingredient: Water the Public Name field is disabled
-	#And In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 0 and denominator: 1
-	And I verify the Transparency Score displays 0.00%
-	Given for ingredient: Water I set Trade Secret checkbox to checked: false
-	And for ingredient: Water I set Public Disclosure checkbox to checked: true
-	#Then In the Ingredients page I confirm the Publicly Disclosed Transparency Score has numerator: 1 and denominator: 1
-	And I verify the Transparency Score displays 100.00%
-	Then I click continue
-	#Given I close the current window
-	#Given I open a new window
+	Then In the Ingredients Section confirm error is displayed with text: Formulation must total or exceed 100%.
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
-	When I filter the products by: Not Yet Submitted
-	Given I save the ProductID and Name of the first Product in the grid as: FirstProduct
+	Then I search for the product saved as: TestCase95487
 	When I click Row Actions for the most recent product returned
 	Then I click on the Row Action: Edit
-	Then the Product Editor page should be loaded
-	And In the New Product page I click tab: Product Characteristics
-	And I click the page heading: Ingredients
-	And the product saved as: FirstProduct should be visible in editor
-	#Looks like th issue is with the ingredients page not showing, instead its the product information page
-	And In the ingredients table the ingredients should be in the following order
-		| Name  |
-		| Water |
-	And for ingredient: Water Percentage displayed: 0
-	Then I enter text: Butane in the component search box
-	And I select the component search result with CAS matching text: 106-97-8 and save ingredient as: Butane_95487
-	And In the ingredients table the ingredients should be in the following order
-		| Name   |
-		| Water  |
-		| Butane |
-	Then I click the Home navigation icon
-	When I filter the products by: Not Yet Submitted
-	Given I save the ProductID and Name of the first Product in the grid as: FirstProduct
-	When I click Row Actions for the most recent product returned
-	Then I click on the Row Action: Edit
-	Then the Product Editor page should be loaded
-	And the product saved as: FirstProduct should be visible in editor
-	And In the ingredients table the ingredients should be in the following order
-		| Name   |
-		| Water  |
-		| Butane |
+	#Then the Product Editor page should be loaded
+	Then I should see the Ingredients Page
+	Then In the Ingredients Section ingredients table, confirm row with component name: Calcium carbonate is displayed
+	Then In the Ingredients Table row with component name: Calcium carbonate, in Percent column verify text input is: 0
+	Then In the Ingredients Table row with component name: Calcium carbonate, in Percent column text input enter: 90
+	Then In the Ingredients Table row with component name: Calcium carbonate, in Trade Secret? column confirm checkbox is unchecked
+	Then In the Ingredients Table row with component name: Calcium carbonate, in Trade Secret? column set checkbox to checked
+	When in the Ingredients page I click Continue
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase95487
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase95487

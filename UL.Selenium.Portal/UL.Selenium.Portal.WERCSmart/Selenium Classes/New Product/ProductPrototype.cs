@@ -85,7 +85,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		#region Page Objects
 		private string _label;
 		protected override By ContainerElementLocator => By.XPath($@"//div[contains(@class,'form-group')][.//label[@class='control-label'][text()=""{_label}""]]");
-		private IWebElement Option(string optionLabel) => this.FindElement(By.XPath($".//div[@class='radio' or @class='checkbox'][.//*[text()='{optionLabel}']]//input[@type='radio' or @type='checkbox']"), 1);
+		private IWebElement Option(string optionLabel) => this.FindElement(By.XPath($".//div[@class='radio' or @class='checkbox' or @class='btn-group'][.//*[text()='{optionLabel}']]//input[@type='radio' or @type='checkbox']"), 1);
+		private IWebElement OptionLabel(string optionLabel) => this.FindElement(By.XPath($".//div[@class='radio' or @class='checkbox' or @class='btn-group'][.//*[text()='{optionLabel}']]//label"), 1);
+
 		#endregion
 
 		#region Methods
@@ -100,7 +102,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			Report.Info($"Attempting to confirm {optionLabel} option exists.");
 			return this.Option(optionLabel) != null;
 		}
-
+		public string GetOptionColorBackground(string optionLabel)
+		{
+			Report.Info($"Attempting to get {optionLabel} background color.");
+			return this.OptionLabel(optionLabel).GetCssValue("background-color");
+		}
 		public bool OptionClick(string optionLabel)
 		{
 			Report.Info($"Attempting to click {optionLabel} option.");
