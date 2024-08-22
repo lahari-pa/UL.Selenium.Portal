@@ -57,5 +57,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string linkText = "Add new Product Line/Brand name";
 			new Steps_Prototype().ClickLinkElement(linkText);
 		}
+
+		[RegexStepDefinition(@"In the Product Section, for section 'Type of Product \(select\)' enter text: (.*)")]
+		public void EnterTextForTypeOfProduct(string value)
+		{
+			Steps_ProductPrototype productPrototype = new Steps_ProductPrototype();
+			productPrototype.InSearchPopUpEnterText(value);
+		}
+
+		
+		[RegexStepDefinition(@"In the Product Section, for section 'Type of Product \(select\)' confirm no results are returned")]
+		public void ConfirmNoResultsAreReturned()
+		{
+			NewProduct newProductObject = new NewProduct();
+			Report.IsTrue(newProductObject.ConfirmNoResultsAreReturnedForProductType(), "Failed to find no results", "Successfully found no results");
+		}
 	}
 }
