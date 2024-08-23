@@ -25,7 +25,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
-
+@Steps_ProductPrototype
 Feature: New Product
 
 #Removed from regression 2024/03
@@ -403,25 +403,26 @@ Scenario: [136058] The Product - Industrial Category not available for Selection
 
 	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Product Name 
 
+	And In section: Type of Product (select), click search text box
 	And In the Product Section, for section 'Type of Product (select)' enter text: For Industrial use only
 	Then In the Product Section, for section 'Type of Product (select)' confirm no results are returned
-	Then In Type of Product (select) section, clear the textbox field with the placeholder value: For Industrial use only
+	Then In the Product Section, for section 'Type of Product (select)' clear the search box
 
 	And In the Product Section, for section 'Type of Product (select)' enter text: For Laboratory use only
 	Then In the Product Section, for section 'Type of Product (select)' confirm no results are returned
-	Then In Type of Product (select) section, clear the textbox field with the placeholder value: For Laboratory use only
+	Then In the Product Section, for section 'Type of Product (select)' clear the search box
 
 	And In the Product Section, for section 'Type of Product (select)' enter text: For Pharmaceutical use only
 	Then In the Product Section, for section 'Type of Product (select)' confirm no results are returned
-	Then In Type of Product (select) section, clear the textbox field with the placeholder value: For Pharmaceutical use only
+	Then In the Product Section, for section 'Type of Product (select)' clear the search box
 
 	And In the Product Section, for section 'Type of Product (select)' enter text: For Profession use only
 	Then In the Product Section, for section 'Type of Product (select)' confirm no results are returned
-	Then In Type of Product (select) section, clear the textbox field with the placeholder value: For Profession use only
+	Then In the Product Section, for section 'Type of Product (select)' clear the search box
 
 	And In the Product Section, for section 'Type of Product (select)' enter text: For Research and Development use only
 	Then In the Product Section, for section 'Type of Product (select)' confirm no results are returned
-	Then In Type of Product (select) section, clear the textbox field with the placeholder value: For Research and Development use only
+	Then In the Product Section, for section 'Type of Product (select)' clear the search box
 
 
 

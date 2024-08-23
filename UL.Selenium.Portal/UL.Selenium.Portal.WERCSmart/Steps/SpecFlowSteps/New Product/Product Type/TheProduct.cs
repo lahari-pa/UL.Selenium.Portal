@@ -64,8 +64,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Steps_ProductPrototype productPrototype = new Steps_ProductPrototype();
 			productPrototype.InSearchPopUpEnterText(value);
 		}
+		[RegexStepDefinition(@"In the Product Section, for section 'Type of Product \(select\)' clear the search box")]
+		public void ClearTextForTypeOfProduct()
+		{
+			SearchBoxPrototype pp = new SearchBoxPrototype();
+			Report.IsTrue(pp.ClearSearchTextBox(), "Failed to clear the search box!", "Successfully cleared the search box!");
+		}
 
-		
 		[RegexStepDefinition(@"In the Product Section, for section 'Type of Product \(select\)' confirm no results are returned")]
 		public void ConfirmNoResultsAreReturned()
 		{
