@@ -152,7 +152,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		public void ThenInThePesticideDetails_UASectionConfirmFEPARegistrationNumberTable(string is_isnot)
 		{
 			bool expected = is_isnot == "is";
-
 			Report.IsTrue(new NewProduct().Table() != null == expected, $"The EPA Registration Number Table {(expected ? "is not" : "is")} displayed", $"The EPA Registration Number Table {is_isnot} displayed");
 		}
 

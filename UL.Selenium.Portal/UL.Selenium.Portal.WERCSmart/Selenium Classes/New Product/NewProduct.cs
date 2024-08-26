@@ -4222,7 +4222,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public IWebElement Table()
 		{
-			return this.ContainerElement.FindElement(By.XPath(@".//div[@class ='panel-heading']/following-sibling::table"), 10);
+			return this.ContainerElement.FindElement(By.XPath(@"//div[//div[text()='Provide the EPA Registration Number']]//table"), 10);
 		}
 
 		public string TableHeading()
