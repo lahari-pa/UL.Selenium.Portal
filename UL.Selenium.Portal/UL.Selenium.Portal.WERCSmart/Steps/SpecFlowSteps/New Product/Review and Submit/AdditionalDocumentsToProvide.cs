@@ -149,6 +149,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string section = "Toxicity Characteristic Leaching Procedure (TCLP)";
 			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, condition);
 		}
+		[RegexStepDefinition(@"In the Additional Documents to Provide, section 'Provide Full Product Label \(required\)' (is|is not) displayed")]
+		public void ThenInTheAdditionalDocumentsToProvideSectionFullLabelDisplayed(string condition)
+		{
+			string section = "Provide Full Product Label (required)";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, condition);
+		}
 		[RegexStepDefinition(@"In the Additional Documents to Provide, section 'Upload SDS \(Optional\)' (is|is not) displayed")]
 		public void ThenInTheAdditionalDocumentsToProvideSectionUploadSDSIsIsNotDisplayed(string condition)
 		{

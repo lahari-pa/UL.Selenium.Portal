@@ -190,14 +190,17 @@ Scenario: [62849] Pesticide - Manually entered date not altered by refresh from 
 
 @TestCase:62852
 Scenario: [62852] Pesticide - Product Label is required
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Pet Shampoo with Pest Control
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Pet Shampoo with Pest Control
+ 	Given in the The Product page I click Continue
 	Given I save the product information as: TestCase62852
 	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I should see the Product Information Page
@@ -208,7 +211,6 @@ Scenario: [62852] Pesticide - Product Label is required
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page I click Continue
-
 	#Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Liquid
 	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
@@ -221,33 +223,16 @@ Scenario: [62852] Pesticide - Product Label is required
 	And In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Then in the Physical and Chemical Properties page, I click Continue
 	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
-	Given I should see the Ingredients Page
-	Then In the Ingredients section, add the following ingredients:
-	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-	| component name | Sodium hydroxide       | 100     |                     |               |             |
+	And I should see the Ingredients Page
+	Then In the Ingredients section, add component with component name: Water
+	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
 	Then in the Ingredients page I click Continue
-
 	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should be on the Inventory Status, Prop 65 (US) Page
 	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
 	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
-
 	#Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
-	Given I should see the Regulatory Information 3 Page
-	Then In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California.  Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
-	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
-	| Option                 |
-	| Drug Facts Panel       |
-	| Supplement Facts Panel |
-	| Nutrition Facts Panel  |
-	| None of the Above      |
-	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above 
-	Then In the Regulatory Information 3 Section, the following link: Nutritional and Supplement Labels should be displayed
-	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
-	Then In the Regulatory Information 3 Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
-	Then in the Regulatory Information 3 page I click Continue
-#Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	Given I should see the Regulatory Information 3 Page
 	Then In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California.  Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
 	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
@@ -267,30 +252,27 @@ Scenario: [62852] Pesticide - Product Label is required
 	Then In the Pesticide Details - U.S. Section, in 'Product has a State Registration' enter No
 	Then In the Pesticide Details - U.S. Section, in 'Select the applicable exemption' enter Food Based Pesticides - Exempt from EPA Registration
 	Then in the Pesticide Details - U.S. page I click Continue
-
-#	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+	#Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Then I should be on the Transportation Details 1 Page
 	And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
 	Then in the Transportation Details 1 page, I click Continue
-
 	#Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Then I should be on the Retailer Page
+	And In the Retailer Section, click 'Add Retailers' button
+	Then In the Retailer Section is selected retailer: No Retailer/No UPC Product
+	And In the Select Retailers window, click 'Done' button
 	Then in the Retailer page, I click Continue
-
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
 	Then in the Regulatory Documents to Provide page I click Continue
-
 	Then I should see the Additional Documents to Provide Page
-	Given I see the following sections
-		| Section                               |
-		| Provide Full Product Label (required) |
+	Then In the Additional Documents to Provide, section 'Provide Full Product Label (required)' is displayed
 	Given in the Additional Documents to Provide page I click Continue
-	Then Provide Full Product Label (required) should be showing the error messages: Document is required: Please upload a PDF of the product label (full label).
-	Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Please upload a PDF of the product label (full label). and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-	# Click continue confirm no error
-	Given I click continue
+	Then In the Additional Documents to Provide, section 'Provide Full Product Label (required)' error message should display: Document is required: Please upload a PDF of the product label (full label).
+	Then In the Additional Documents to Provide, upload PDF document to Provide Full Product Label (required) field
+	Given in the Additional Documents to Provide page I click Continue
+	Then I should see the Optional Reports and Documents Available for Purchase Page
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62852
 
