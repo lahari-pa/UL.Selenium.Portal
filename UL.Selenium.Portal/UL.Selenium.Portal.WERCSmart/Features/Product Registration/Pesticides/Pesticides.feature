@@ -50,31 +50,30 @@ Feature: Pesticides
 
 @TestCase:62775
 Scenario: [62775] Pesticides - Validation of Which one best describes your product question - Prevents, Destroys etc
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Pet Shampoo with Pest Control
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Pet Shampoo with Pest Control
+ 	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase62775
 	And I should see the Product Information Page
-	Given I see the following sections
-		| Section                               |
-		| Which best describes your product, including when FIFRA 25(b) Exempt |
-	Given I should see a total of 3 radio buttons for the section: Which best describes your product, including when FIFRA 25(b) Exempt
-	Then I should see the following radio buttons:
-		| Button                                                                                                                                                                               |
+	Then In the Product Information Section, confirm the question: 'Which best describes your product, including when FIFRA 25(b) Exempt' is displayed
+	Then In the Product Information Section, confirm following options should be exclusively displayed for section: 'Which best describes your product, including when FIFRA 25(b) Exempt'
+		| Option                                                                                                                                                                               |
 		| Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)                        |
 		| Product is intended for use as a plant regulator (controls growth), defoliant (removes leaves), or desiccant (dehydrates plants to control growth)                                   |
 		| Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial) |
-	And in the New Product page I click Continue
-	Then I should see an error message: This is a required field.
-	And I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
-	Then Which best describes your product, including when FIFRA 25(b) Exempt should not be showing the error messages: This is a required field.
-	And in the New Product page I click Continue
-	Then Which best describes your product, including when FIFRA 25(b) Exempt should not be showing the error messages: This is a required field.
+ 	Given in the Product Information page I click Continue
+	Then In the Product Information Section, the section: 'Which best describes your product, including when FIFRA 25(b) Exempt' should be showing error message: This is a required field.
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+	Given in the Product Information page I click Continue
+	Then In the Product Information Section, the section: 'Which best describes your product, including when FIFRA 25(b) Exempt' should not be showing error message: This is a required field.
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62775
 

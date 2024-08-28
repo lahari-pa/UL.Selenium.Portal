@@ -26,6 +26,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string section = "Which best describes your product, including when FIFRA 25(b) Exempt";
 			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
 		}
+		[RegexStepDefinition(@"In the Product Information Section, confirm following options (should|should not) be (displayed|exclusively displayed) for section: 'Which best describes your product, including when FIFRA 25\(b\) Exempt'")]
+		public void ThenInThePesticideDetails_CanadaSectionConfirmFollowingOptionsShouldShouldNotBeDisplayedExclusivelyDisplayedForSectionAlberta(string should, string exclusive, Table table)
+		{
+			string section = "Which best describes your product, including when FIFRA 25(b) Exempt";
+			new Steps_Prototype().CheckOptionsInSection(should, exclusive, section, table);
+		}
+
+		[RegexStepDefinition(@"In the Product Information Section, the section: 'Which best describes your product, including when FIFRA 25\(b\) Exempt' (should|should not) be showing error message: (.*)")]
+		public void CheckUNSectionsWithErrorMessages(string condition, string message)
+		{
+			string section = "Which best describes your product, including when FIFRA 25(b) Exempt";
+			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, condition, message);
+		}
 
 		[RegexStepDefinition(@"In the Product Information Section, set the option in section: 'Product has been classified using OSHA \(US\) Globally Harmonized Standards \(GHS\) under 29 CFR 1910\.1200 and\/or CCOHS WHMIS Standards \(Canada\)' to: (Yes|No)")]
 		public void SelectOSHAGloballyHarmonizedStandards(string option)
