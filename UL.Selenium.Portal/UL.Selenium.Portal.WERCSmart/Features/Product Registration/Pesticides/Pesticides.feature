@@ -802,14 +802,17 @@ Scenario: [56541] Pesticide Data - United States - EPA Registered - Data returne
 
 @TestCase:62778
 Scenario: [62778] Pesticide Details - U.S. - Validation of Product has an Environment Protection Agency (EPA) Registration Number
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet Shampoo with Pest Control
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Pet Shampoo with Pest Control
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Pet Shampoo with Pest Control
+ 	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase62778
 	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I should see the Product Information Page
@@ -820,7 +823,6 @@ Scenario: [62778] Pesticide Details - U.S. - Validation of Product has an Enviro
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page I click Continue
-
 	#Given I call Shared Step 57514 (Physical and Chemical Properties - Liquid Only available - Enter all data - Continue - Happy Path)
 	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Liquid
 	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
@@ -833,18 +835,15 @@ Scenario: [62778] Pesticide Details - U.S. - Validation of Product has an Enviro
 	And In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Then in the Physical and Chemical Properties page, I click Continue
 	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium hydroxide
-	Given I should see the Ingredients Page
-	Then In the Ingredients section, add the following ingredients:
-	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-	| component name | Sodium hydroxide       | 100     |                     |               |             |
+	And I should see the Ingredients Page
+	Then In the Ingredients section, add component with component name: Water
+	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
 	Then in the Ingredients page I click Continue
-
 	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should be on the Inventory Status, Prop 65 (US) Page
 	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
 	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
-
 	#Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	Given I should see the Regulatory Information 3 Page
 	Then In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California.  Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
@@ -860,24 +859,20 @@ Scenario: [62778] Pesticide Details - U.S. - Validation of Product has an Enviro
 	Then In the Regulatory Information 3 Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
 	Then in the Regulatory Information 3 page I click Continue
 	Then I should see the Pesticide Details - U.S. Page
-	And I see the following sections
-		| Section                                                                  |
-		| Product has an Environmental Protection Agency (EPA) Registration Number |
-	And The following options should be displayed for section: Product has an Environmental Protection Agency (EPA) Registration Number
+	Then In the Pesticide Details - U.S. Section, confirm the question: 'Product has an Environmental Protection Agency (EPA) Registration Number' is displayed
+	Then In the Pesticide Details - U.S. Section, confirm following options should be displayed for section: 'Product has an Environmental Protection Agency (EPA) Registration Number'
 		| Option |
 		| Yes    |
 		| No     |
-	Given I click continue
-	Then Product has an Environmental Protection Agency (EPA) Registration Number should be showing the error messages: This is a required field.
-	Given I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: Yes
-	Then Product has an Environmental Protection Agency (EPA) Registration Number should not be showing the error messages: This is a required field
-	And I confirm the EPA Pesticide Registration table is shown
-	Given I set the Product has an Environmental Protection Agency (EPA) Registration Number option to: No
-	Then I confirm the EPA Pesticide Registration table is not shown
-	And I see the following sections
-		| Section                         |
-		| Select the applicable exemption |
-	Then Product has an Environmental Protection Agency (EPA) Registration Number should not be showing the error messages: This is a required field
+	Then in the Pesticide Details - U.S. page I click Continue
+	Then In the Pesticide Details - U.S. Section, confirm for section: 'Product has an Environmental Protection Agency (EPA) Registration Number' error is displayed: This is a required field.
+	Then In the Pesticide Details - U.S. Section, in 'Product has an Environmental Protection Agency (EPA) Registration Number' enter Yes
+	Then In the Pesticide Details - U.S. Section, confirm for section: 'Product has an Environmental Protection Agency (EPA) Registration Number' error is not displayed: This is a required field.
+	Then In the Pesticide Details - U.S. Section, confirm the EPA Pesticide Registration table is displayed
+	Then In the Pesticide Details - U.S. Section, in 'Product has an Environmental Protection Agency (EPA) Registration Number' enter No
+	Then In the Pesticide Details - U.S. Section, confirm the EPA Pesticide Registration table is not displayed
+	Then In the Pesticide Details - U.S. Section, confirm the question: 'Select the applicable exemption' is displayed
+	Then In the Pesticide Details - U.S. Section, confirm for section: 'Product has an Environmental Protection Agency (EPA) Registration Number' error is not displayed: This is a required field.
 	Given I navigate to the home page
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62778
 

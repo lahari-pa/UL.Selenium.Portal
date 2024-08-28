@@ -22,13 +22,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 
+		[RegexStepDefinition(@"In the Pesticide Details - U.S. Section, confirm the question: 'Product has an Environmental Protection Agency \(EPA\) Registration Number' (is|is not) displayed")]
+		public void ConfirmAnEnvironmentalProtectionAgencyDisplayed(string is_isnot)
+		{
+			string section = "Product has an Environmental Protection Agency (EPA) Registration Number";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
+
 		[RegexStepDefinition(@"In the Pesticide Details - U.S. Section, in 'Product has a State Registration' enter (Yes|No)")]
 		public void SelectProductHasAStateRegistration(string option)
 		{
 			string section = "Product has a State Registration";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
-
+		[RegexStepDefinition(@"In the Pesticide Details - U.S. Section, confirm the question: 'Select the applicable exemption' (is|is not) displayed")]
+		public void ConfirmSelectTheApplicableExemption(string is_isnot)
+		{
+			string section = "Select the applicable exemption";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
 		[RegexStepDefinition(@"In the Pesticide Details - U.S. Section, in 'Select the applicable exemption' enter (Product is FIFRA 25\(b\) Exempt.|Food Based Pesticides - Exempt from EPA Registration|Device based products - Exempt from EPA Registration|Pheromone Traps – Exempt from EPA Registration)")]
 		public void SelectTheApplicableExemption(string option)
 		{
@@ -130,5 +142,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string option1 = "Yes";
 			new Steps_ProductPrototype().InSectionGetOptionBackgroundColor(section, option1, savedAs);
 		}
+		[RegexStepDefinition(@"In the Pesticide Details - U.S. Section, confirm following options (should|should not) be (displayed|exclusively displayed) for section: 'Product has an Environmental Protection Agency \(EPA\) Registration Number'")]
+		public void ThenInThePesticideDetails_UASectionConfirmFollowingOptionsShouldShouldNotBeDisplayedExclusivelyDisplayedForSectionAlberta(string should, string exclusive, Table table)
+		{
+			string section = "Product has an Environmental Protection Agency (EPA) Registration Number";
+			new Steps_Prototype().CheckOptionsInSection(should, exclusive, section, table);
+		}
+		[RegexStepDefinition(@"In the Pesticide Details - U.S. Section, confirm the EPA Pesticide Registration table (is|is not) displayed")]
+		public void ThenInThePesticideDetails_UASectionConfirmFEPARegistrationNumberTable(string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			Report.IsTrue(new NewProduct().Table() != null == expected, $"The EPA Registration Number Table {(expected ? "is not" : "is")} displayed", $"The EPA Registration Number Table {is_isnot} displayed");
+		}
+
 	}
 }
