@@ -258,6 +258,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			Report.Info($"Attempting to confirm search input box exists.");
 			return this.SearchInput != null;
 		}
+		public bool ClearSearchTextBox()
+		{
+			Report.Info($"Attempting to confirm search input box exists.");
+			return this.SearchInput.ClearTextBox();
+		}
 
 		public bool SearchInputClick()
 		{

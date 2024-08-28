@@ -25,7 +25,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
-
+@Steps_ProductPrototype
 Feature: New Product
 
 #Removed from regression 2024/03
@@ -391,31 +391,38 @@ Scenario: [128703] DSV Option Available for Auto Parts - Engine Parts and Compon
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128703
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase128703
+
 @TestCase:136058
 Scenario: [136058] The Product - Industrial Category not available for Selection	
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-		Then I click the Add Product icon in the Navigation Pane
+	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-	Given I set the Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS) field to: Product Name as it a appears on the Package Label, Container or Safety Data Sheet (SDS)
-	Given I set non-existent 'Type of Product': For Industrial use only
-	Given I confirm no results are returned
-	Given I clear 'Type of Product'
-	Given I set non-existent 'Type of Product': For Laboratory use only
-	Given I confirm no results are returned
-	Given I clear 'Type of Product'
-	Given I set non-existent 'Type of Product': For Pharmaceutical use only
-	Given I confirm no results are returned
-	Given I clear 'Type of Product'
-	Given I set non-existent 'Type of Product': For Profession use only
-	Given I confirm no results are returned
-	Given I clear 'Type of Product'
-	Given I set non-existent 'Type of Product': For Research and Development use only
-	Given I confirm no results are returned
-	Given I clear 'Type of Product'
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Product Name 
+
+	And In section: Type of Product (select), click search text box
+	And In the Product Section, for section 'Type of Product (select)' enter text: For Industrial use only
+	Then In the Product Section, for section 'Type of Product (select)' confirm no results are returned
+	Then In the Product Section, for section 'Type of Product (select)' clear the search box
+
+	And In the Product Section, for section 'Type of Product (select)' enter text: For Laboratory use only
+	Then In the Product Section, for section 'Type of Product (select)' confirm no results are returned
+	Then In the Product Section, for section 'Type of Product (select)' clear the search box
+
+	And In the Product Section, for section 'Type of Product (select)' enter text: For Pharmaceutical use only
+	Then In the Product Section, for section 'Type of Product (select)' confirm no results are returned
+	Then In the Product Section, for section 'Type of Product (select)' clear the search box
+
+	And In the Product Section, for section 'Type of Product (select)' enter text: For Profession use only
+	Then In the Product Section, for section 'Type of Product (select)' confirm no results are returned
+	Then In the Product Section, for section 'Type of Product (select)' clear the search box
+
+	And In the Product Section, for section 'Type of Product (select)' enter text: For Research and Development use only
+	Then In the Product Section, for section 'Type of Product (select)' confirm no results are returned
+	Then In the Product Section, for section 'Type of Product (select)' clear the search box
 
 
 
