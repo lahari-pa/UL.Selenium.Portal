@@ -311,7 +311,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			Report.Info($"Attempting to get text: '{searchText}' search result.");
 			return this.SearchResultList.Where(x => x.ResultText.Equals(searchText, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
 		}
-
+		public SearchBoxResult SearchResultTextGetContains(string searchText)
+		{
+			Report.Info($"Attempting to get text: '{searchText}' search result.");
+			return this.SearchResultList.Where(x => x.ResultText.Contains(searchText, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+		}
 		public SearchBoxResult SearchComponentGet(string searchText)
 		{
 			Report.Info($"Attempting to get component name: '{searchText}' search result.");

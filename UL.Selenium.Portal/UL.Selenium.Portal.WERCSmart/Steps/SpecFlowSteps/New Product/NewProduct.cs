@@ -24,5 +24,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string section = "Select the type of product to create";
 			new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
 		}
+		[RegexStepDefinition(@"In the New Product Section, set the radio option in section: 'Would you like to Create a New Product\?': to: (Yes, create a new product)")]
+		public void SelectProductTypeToCreatePharma(string option)
+		{
+			string section = "Would you like to Create a New Product?";
+			new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
+		}
 	}
 }

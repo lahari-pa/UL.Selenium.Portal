@@ -13,6 +13,12 @@
 @run_Pharma
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 @LiquidCoreProduct
+@UPC
+@StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@PhysicalAndChemicalProp
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 
 Feature: Pharma
 
@@ -311,14 +317,16 @@ Scenario: [127854] Pharma - Tablet or Capsule Count Field is Available for Solid
 Scenario: [127791] Pharma - Retailer Default
 	Given I log in with the account saved in TReVor as: PharmaAccount
 	Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
-	Given I generate a random UPC number and save as: UPC127791
-	Given I click continue
-	Then I set 'Product Name' to: Prescription Pharmaceutical, Solid
-	Then I set 'Type of Product' to: Prescription Pharmaceutical, Solid
-	Then I click continue
+	#Given I generate a random UPC number and save as: UPC127791
+	Then In the New Product Section, set the radio option in section: 'Would you like to Create a New Product?': to: Yes, create a new product
+	Then in the New Product page, I click Continue
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Prescription Pharmaceutical, Solid
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Prescription Pharmaceutical, Solid
+ 	Given in the The Product page I click Continue
+	Then In the Product Information Section, enter the value in section: 'Enter NDC #': 10866-0885-2
+	Given in the Product Information page I click Continue
 	Given I enter the NDC number: 10866-0885-2
 	Then I save the product information as: TestCase127791
-	Then I click continue
 	Then I click continue
 	Given I fill all empty fields in the SPL Information screen
 	Then I click continue
