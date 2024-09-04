@@ -317,7 +317,7 @@ Scenario: [127854] Pharma - Tablet or Capsule Count Field is Available for Solid
 Scenario: [127791] Pharma - Retailer Default
 	Given I log in with the account saved in TReVor as: PharmaAccount
 	Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
-	#Given I generate a random UPC number and save as: UPC127791
+	Given I generate a random UPC number and save as: UPC127791
 	Then In the New Product Section, set the radio option in section: 'Would you like to Create a New Product?': to: Yes, create a new product
 	Then in the New Product page, I click Continue
 	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Prescription Pharmaceutical, Solid
