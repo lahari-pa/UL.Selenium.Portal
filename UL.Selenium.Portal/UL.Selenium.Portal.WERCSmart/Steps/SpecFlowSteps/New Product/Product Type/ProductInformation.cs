@@ -183,7 +183,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			{
 				new Steps_Prototype().ICheckTheCheckboxWithDescription(section, option);
 			}
-			else if(section == "uncheck")
+			else if (section == "uncheck")
 			{
 				new Steps_Prototype().ICheckTheCheckboxWithDescription(section, option);
 			}
@@ -216,6 +216,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			Report.IsTrue(searchBoxPrototype.SearchResultTextExists(option), $"Failure, '{option}' search result is not displayed.", $"Success, '{option}' search result is displayed.");
 			Report.IsTrue(searchBoxPrototype.SearchResultTextGetContains(option).Click(), $"Failure, failed to click '{option}' search result.", $"Success, clicked '{option}' search result.");
 			searchBoxPrototype.WaitForContainerToBeInvisible();
+		}
+
+		[RegexStepDefinition(@"In the Product Information Section, verify section: 'Enter NDC #' contains value: (.*)")]
+		public void VerifyEnterNDC(string value)
+		{
+			string section = "Enter NDC #";
+			new Steps_Prototype().CheckingFieldInputIsCorrect(section, value);
+		}
+		[RegexStepDefinition(@"In the Product Information Section, verify section: 'Product Name' contains value: (.*)")]
+		public void VerifyProductName(string value)
+		{
+			string section = "Product Name";
+			new Steps_Prototype().CheckingFieldInputIsCorrect(section, value);
+		}
+		[RegexStepDefinition(@"In the Product Information Section, verify section: 'Generic Name' contains value: (.*)")]
+		public void VerifyGenericName(string value)
+		{
+			string section = "Generic Name";
+			new Steps_Prototype().CheckingFieldInputIsCorrect(section, value);
 		}
 	}
 }

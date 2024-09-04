@@ -19,6 +19,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 @PhysicalAndChemicalProp
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
+@SPLInformation
 
 Feature: Pharma
 
@@ -323,8 +324,21 @@ Scenario: [127791] Pharma - Retailer Default
 	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Prescription Pharmaceutical, Solid
 	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Prescription Pharmaceutical, Solid
  	Given in the The Product page I click Continue
+	Given I should see the Product Information Page
 	Then In the Product Information Section, enter the value in section: 'Enter NDC #': 10866-0885-2
+	Then In the Product Information Section, verify section: 'Enter NDC #' contains value: 10866-0885-2
+	Then In the Product Information Section, verify section: 'Product Name' contains value: 60 Second Taste Chocolate Vanilla
+	Then In the Product Information Section, verify section: 'Generic Name' contains value: Topical APF Fluoride Gel
 	Given in the Product Information page I click Continue
+	Given I should see the SPL Information Page
+	Then In the SPL Information Section, verify section: 'Manufacturer' contains value: Pascal Company  Inc.
+	Then In the SPL Information Section, verify section: 'Distributor' contains value: Distributor
+	Then In the SPL Information Section, verify section: 'Prescription Dosage Form' contains value: GEL
+	Then In the SPL Information Section, verify section: 'DEA Schedule' contains value: None
+	Then In the SPL Information Section, verify section: 'Marketing Category' contains value: Unapproved drug other
+	Then In the SPL Information Section, verify section: 'Marketing End Date' contains value: None
+	Then In the SPL Information Section, verify section: 'NDA Number' contains value: None
+	Given in the SPL Information page I click Continue
 	Given I enter the NDC number: 10866-0885-2
 	Then I save the product information as: TestCase127791
 	Then I click continue
