@@ -10,6 +10,7 @@ using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {
@@ -121,7 +122,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		public void AcceptAlertAreYouSureToCancel(string responce)
 		{
 			new Steps_Prototype().AnAlertIsDisplayedWithTheMessage("should", "Are you sure want to cancel ?");
-			if(responce == "Ok")
+			if (responce == "Ok")
 			{
 				new Steps_Prototype().ConfirmThealertPopup("accept");
 			}
@@ -133,12 +134,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 
 		}
 		[RegexStepDefinition(@"In the Retailer Section (is|is not) selected retailer: (.*)")]
-		public void SelectedRetailersShouldBe(string is_isnot, string  retailer)
+		public void SelectedRetailersShouldBe(string is_isnot, string retailer)
 		{
 			var actualRetailers = new Retailer().SelectedRetailers();
 			bool expected = is_isnot == "is";
 			Report.IsTrue(actualRetailers.Contains(retailer) == expected, $"Failure, the selected retailer {(expected ? "is not" : "is")} added.", $"Success, the selected retailer {is_isnot} added.");
-			
+
+		}
+		[RegexStepDefinition(@"In the Retailer Section, following retailers (should|should not) be displayed:")]
+		public void DisplayedRetaiers(string condition, Table table)
+		{
+			new Steps_Retailer().SelectedRetailersShouldBe(condition, table);
 		}
 	}
 }

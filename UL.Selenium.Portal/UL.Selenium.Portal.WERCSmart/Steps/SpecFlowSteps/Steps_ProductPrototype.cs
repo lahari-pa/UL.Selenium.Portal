@@ -142,7 +142,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 				}
 			}
 		}
-
+		[RegexStepDefinition(@"For section: (.*), confirm text: (.*) (is|is not) displayed as option")]
+		public void InSectionConfirmTextIsIsNotDisplayedAsOption(string section, string text, string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			ProductPrototype productPrototype = new ProductPrototype(section);
+			if (Report.IsTrue(productPrototype != null, $"Failure, '{section}' section does not exist.", $"Success, '{section}' section exists."))
+			{
+				if (Report.IsTrue(productPrototype.TextFieldExists(), $"Failure, text field does not exist.", $"Success, text field exists."))
+				{
+					Report.IsTrue(string.Equals(productPrototype.TextFieldGetText(), text) == expected, $"Failure, failed to confirm '{text}' text {is_isnot} displayed.", $"Success, confirmed '{text}' text {is_isnot} displayed.");
+				}
+			}
+		}
 		[RegexStepDefinition(@"In section: (.*), click search text box")]
 		public void InSectionClickSearchText(string section)
 		{

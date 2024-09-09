@@ -221,6 +221,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		[RegexStepDefinition(@"In the Product Information Section, verify section: 'Enter NDC #' contains value: (.*)")]
 		public void VerifyEnterNDC(string value)
 		{
+			string is_isnot = "is";
 			string section = "Enter NDC #";
 			new Steps_Prototype().CheckingFieldInputIsCorrect(section, value);
 		}
@@ -228,13 +229,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		public void VerifyProductName(string value)
 		{
 			string section = "Product Name";
-			new Steps_Prototype().CheckingFieldInputIsCorrect(section, value);
+			new Steps_ProductPrototype().InSectionConfirmTextIsIsNotDisplayedAsOption(section, value, "is");
+			//new Steps_Prototype().CheckingFieldInputIsCorrect(section, value);
 		}
 		[RegexStepDefinition(@"In the Product Information Section, verify section: 'Generic Name' contains value: (.*)")]
 		public void VerifyGenericName(string value)
 		{
 			string section = "Generic Name";
-			new Steps_Prototype().CheckingFieldInputIsCorrect(section, value);
+			new Steps_ProductPrototype().InSectionConfirmTextIsIsNotDisplayedAsOption(section, value, "is");
 		}
 	}
 }

@@ -55,5 +55,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 			string section = "NDA Number";
 			new Steps_Prototype().CheckingFieldInputIsCorrect(section, value);
 		}
+		[RegexStepDefinition(@"In the SPL Information Section, for section: 'Distributor' enter value: (.*)")]
+		public void EnterDistributor(string value)
+		{
+			string section = "Distributor";
+			new Steps_Prototype().SetTheSectionOptionTo(section, value);
+		}
 	}
 }
