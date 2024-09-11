@@ -225,7 +225,7 @@ And I navigate to the home page
 
 @TestCase:127847
 Scenario: [127847] Pharma - Tablet or Capsule Count Field is Available for Solid - Solid
-		Given I log in with the account saved in TReVor as: PharmaAccount
+	Given I log in with the account saved in TReVor as: PharmaAccount
 	Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 	Given I generate a random UPC number and save as: UPC127791
 	Then In the New Product Section, set the radio option in section: 'Would you like to Create a New Product?': to: Yes, create a new product
@@ -260,7 +260,7 @@ Scenario: [127847] Pharma - Tablet or Capsule Count Field is Available for Solid
 	Then In the Ingredients Table row with component name: Saccharin sodium dihydrate, in Percent column text input enter: 50
 	Given in the Ingredients page I click Continue
 	Given I should see the Transportation - Refrigeration Page
-	Then In the Transportation - R efrigeration Section, set the option in section: 'Should this product be refrigerated for transport or storage?' to: No
+	Then In the Transportation - Refrigeration Section, set the option in section: 'Should this product be refrigerated for transport or storage?' to: No
 	Given in the Transportation - Refrigeration page I click Continue
 	Given I should see the Transportation Classification Page
 	Then In the Transportation Classification Section, set the option in section: 'Is the product regulated for transport (before exceptions or exemptions)' to: No, not regulated
