@@ -452,5 +452,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			string section = "Internal SKU";
 			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, shouldShouldNot, errorMessage);
 		}
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Tablet or Capsule Count' enter the value: (.*)")]
+		public void EnterTabletOrCapsuleCount(string option)
+		{
+			string section = "Tablet or Capsule Count";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, section: 'Tablet or Capsule Count' (is|is not) displayed")]
+		public void TabletOrCapsuleIsDisplayed(string is_isnot)
+		{
+			string section = "Tablet or Capsule Count";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
 	}
 }
