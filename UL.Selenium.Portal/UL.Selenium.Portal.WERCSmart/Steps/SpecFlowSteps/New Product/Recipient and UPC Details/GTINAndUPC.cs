@@ -458,11 +458,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			string section = "Tablet or Capsule Count";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
-		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, section: 'Tablet or Capsule Count' (is|is not) displayed")]
-		public void TabletOrCapsuleIsDisplayed(string is_isnot)
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, section: 'Tablet or Capsule Count' is displayed")]
+		public void TabletOrCapsuleIsDisplayed()
 		{
 			string section = "Tablet or Capsule Count";
-			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.UPCSectionFieldsAvailable(section), $"Failed to Confirm the '{section}' field is available", $"I Confirm the '{section}' field is available");
 		}
 	}
 }
