@@ -25,6 +25,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationClassification
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 @GTINAndUPC
+
 Feature: Pharma
 
 @TestCase:128085
@@ -342,37 +343,54 @@ Scenario: [127791] Pharma - Retailer Default
 	Given I log in with the account saved in TReVor as: PharmaAccount
 	Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 	Given I generate a random UPC number and save as: UPC127791
-	Given I click continue
-	Then I set 'Product Name' to: Prescription Pharmaceutical, Solid
-	Then I set 'Type of Product' to: Prescription Pharmaceutical, Solid
-	Then I click continue
-	Given I enter the NDC number: 10866-0885-2
+	Then In the New Product Section, set the radio option in section: 'Would you like to Create a New Product?': to: Yes, create a new product
+	Then in the New Product page, I click Continue
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Prescription Pharmaceutical, Solid
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Prescription Pharmaceutical, Solid
+ 	Given in the Product Type page I click Continue
+	Given I should see the Product Information Page
+	Then In the Product Information Section, enter the value in section: 'Enter NDC #': 10866-0885-2
+	Then In the Product Information Section, verify section: 'Enter NDC #' contains value: (10866-0885-2 - 60 SECOND TASTE CHOCOLATE VANILLA (TOPICAL APF FLUORIDE GEL) GEL [PASCAL COMPANY, INC.]
+	Then In the Product Information Section, verify section: 'Product Name' contains value: 60 Second Taste Chocolate Vanilla
+	Then In the Product Information Section, verify section: 'Generic Name' contains value: Topical APF Fluoride Gel
+	Given in the Product Information page I click Continue
+	Given I should see the SPL Information Page
+	Then In the SPL Information Section, verify section: 'Manufacturer' contains value: Pascal Company  Inc.
+	Then In the SPL Information Section, verify section: 'Prescription Dosage Form' contains value: GEL
+	Then In the SPL Information Section, verify section: 'DEA Schedule' contains value: None
+	Then In the SPL Information Section, verify section: 'Marketing Category' contains value: Unapproved drug other
+	Then In the SPL Information Section, verify section: 'Marketing End Date' contains value: None
+	Then In the SPL Information Section, verify section: 'NDA Number' contains value: None
+	Then In the SPL Information Section, for section: 'Distributor' enter value: Distributor
 	Then I save the product information as: TestCase127791
-	Then I click continue
-	Then I click continue
-	Given I fill all empty fields in the SPL Information screen
-	Then I click continue
-	And I set the Secondary Physical State to be: Solid
-	And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-	And I set the Select the best Water Solubility description to be: Dispersible
-	Then I click continue
-	Then I click continue
-	Given I fill all empty fields in the Pharma Ingredients screen
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Water       | 100     | false               | false       |            |
-	Given I set the Should this product be refrigerated for transport or storage? option to: No
-	Then I click continue
-	Given I set the Is the product regulated for transport (before exceptions or exemptions) option to exactly match: No, not regulated
-	Then I click continue
-	And The selected retailers on the Retailer page should be:
-		| Retailer                   |
-		| No Retailer/No UPC Product |
-		| Wal-Mart/SAM'S CLUB        |
-	Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
-	Then I click continue
-	Given I click the 'Add' button
-	And I confirm that retailer "WM" is present under the 'Destination Retailers' column in the UPC table
+	Given in the SPL Information page I click Continue
+	Given I should see the Product Characteristics Page
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Given in the Product Characteristics page I click Continue
+	Given I should see the Ingredients Page
+	Then In the Ingredients Section ingredients table, confirm row with component name: Sodium fluoride is displayed
+	Then In the Ingredients Table row with component name: Sodium fluoride, in Percent column text input enter: 50
+	Then In the Ingredients Section ingredients table, confirm row with component name: Saccharin sodium dihydrate is displayed
+	Then In the Ingredients Table row with component name: Saccharin sodium dihydrate, in Percent column text input enter: 50
+	Given in the Ingredients page I click Continue
+	Given I should see the Transportation - Refrigeration Page
+	Then In the Transportation - Refrigeration Section, set the option in section: 'Should this product be refrigerated for transport or storage?' to: No
+	Given in the Transportation - Refrigeration page I click Continue
+	Given I should see the Transportation Classification Page
+	Then In the Transportation Classification Section, set the option in section: 'Is the product regulated for transport (before exceptions or exemptions)' to: No, not regulated
+	Given in the Transportation Classification page I click Continue
+	Given I should see the Retailer Association Page
+	Then In the Retailer Section, following retailers should be displayed:
+	| Retailer                   |
+	| No Retailer/No UPC Product |
+	| Wal-Mart/SAM'S CLUB        |
+	Then In the Retailer Section, for retailer: Wal-Mart/SAM'S CLUB select 'Select Vendor' option: any
+	Given in the Retailer Association page I click Continue
+	Given I should see the Universal Product Code (UPC) Page
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, verify retailer 'WM' is present under the 'Destination Retailers' column
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127791
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase127791
