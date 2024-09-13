@@ -235,18 +235,18 @@ Scenario: [127847] Pharma - Tablet or Capsule Count Field is Available for Solid
 	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Prescription Pharmaceutical, Solid
  	Given in the Product Type page I click Continue
 	Given I should see the Product Information Page
-	Then In the Product Information Section, enter the value in section: 'Enter NDC #': 10866-0885-2
-	Then In the Product Information Section, verify section: 'Enter NDC #' contains value: (10866-0885-2 - 60 SECOND TASTE CHOCOLATE VANILLA (TOPICAL APF FLUORIDE GEL) GEL [PASCAL COMPANY, INC.]
-	Then In the Product Information Section, verify section: 'Product Name' contains value: 60 Second Taste Chocolate Vanilla
-	Then In the Product Information Section, verify section: 'Generic Name' contains value: Topical APF Fluoride Gel
+	Then In the Product Information Section, enter the value in section: 'Enter NDC #': 0002-3228-30
+	Then In the Product Information Section, verify section: 'Enter NDC #' contains value: (0002-3228-30 - STRATTERA (ATOMOXETINE HYDROCHLORIDE) CAPSULE [ELI LILLY AND COMPANY
+	Then In the Product Information Section, verify section: 'Product Name' contains value: Strattera
+	Then In the Product Information Section, verify section: 'Generic Name' contains value: Atomoxetine hydrochloride
 	Given in the Product Information page I click Continue
 	Given I should see the SPL Information Page
-	Then In the SPL Information Section, verify section: 'Manufacturer' contains value: Pascal Company  Inc.
-	Then In the SPL Information Section, verify section: 'Prescription Dosage Form' contains value: GEL
+	Then In the SPL Information Section, verify section: 'Manufacturer' contains value: Eli Lilly and Company
+	Then In the SPL Information Section, verify section: 'Prescription Dosage Form' contains value: CAPSULE
 	Then In the SPL Information Section, verify section: 'DEA Schedule' contains value: None
-	Then In the SPL Information Section, verify section: 'Marketing Category' contains value: Unapproved drug other
+	Then In the SPL Information Section, verify section: 'Marketing Category' contains value: NDA
 	Then In the SPL Information Section, verify section: 'Marketing End Date' contains value: None
-	Then In the SPL Information Section, verify section: 'NDA Number' contains value: None
+	Then In the SPL Information Section, verify section: 'NDA Number' contains value: NDA021411
 	Then In the SPL Information Section, for section: 'Distributor' enter value: Distributor
 	Given in the SPL Information page I click Continue
 	Then I save the product information as: TestCase127847
@@ -273,7 +273,7 @@ Scenario: [127847] Pharma - Tablet or Capsule Count Field is Available for Solid
 	Given I should see the Universal Product Code (UPC) Page
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, section: 'Tablet or Capsule Count' is displayed
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Tablet or Capsule Count' enter the value: 12345
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Tablet or Capsule Count' enter the value: 1234
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC127847 enter Size: 1 and enter Container Type: Plastic Container
 	Given in the Universal Product Code (UPC) page I click Continue
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127847
@@ -329,7 +329,7 @@ Scenario: [127854] Pharma - Tablet or Capsule Count Field is Available for Solid
 	Given I should see the Universal Product Code (UPC) Page
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, section: 'Tablet or Capsule Count' is displayed
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Tablet or Capsule Count' enter the value: 12345
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Tablet or Capsule Count' enter the value: 1234
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC127854 enter Size: 1 and enter Container Type: Plastic Container
 	Given in the Universal Product Code (UPC) page I click Continue
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127854
