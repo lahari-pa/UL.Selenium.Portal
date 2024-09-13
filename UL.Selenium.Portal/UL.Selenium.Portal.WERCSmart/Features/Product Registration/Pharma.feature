@@ -275,7 +275,6 @@ Scenario: [127847] Pharma - Tablet or Capsule Count Field is Available for Solid
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, section: 'Tablet or Capsule Count' is displayed
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Tablet or Capsule Count' enter the value: 12345
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC127847 enter Size: 1 and enter Container Type: Plastic Container
-	Then I Confirm that the Tablet or Capsule Count field is available
 	Given in the Universal Product Code (UPC) page I click Continue
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127847
 	Then I navigate to the Home Page
@@ -292,7 +291,7 @@ Scenario: [127854] Pharma - Tablet or Capsule Count Field is Available for Solid
 	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Prescription Pharmaceutical, Solid
  	Given in the Product Type page I click Continue
 	Given I should see the Product Information Page
-	Then In the Product Information Section, enter the value in section: 'Enter NDC #': 0360-0089-01
+	Then In the Product Information Section, enter the value in section: 'Enter NDC #': 10866-0885-2
 	Then In the Product Information Section, verify section: 'Enter NDC #' contains value: (10866-0885-2 - 60 SECOND TASTE CHOCOLATE VANILLA (TOPICAL APF FLUORIDE GEL) GEL [PASCAL COMPANY, INC.]
 	Then In the Product Information Section, verify section: 'Product Name' contains value: 60 Second Taste Chocolate Vanilla
 	Then In the Product Information Section, verify section: 'Generic Name' contains value: Topical APF Fluoride Gel
@@ -305,7 +304,8 @@ Scenario: [127854] Pharma - Tablet or Capsule Count Field is Available for Solid
 	Then In the SPL Information Section, verify section: 'Marketing End Date' contains value: None
 	Then In the SPL Information Section, verify section: 'NDA Number' contains value: None
 	Then In the SPL Information Section, for section: 'Distributor' enter value: Distributor
-	Then I save the product information as: TestCase127791
+	Given in the SPL Information page I click Continue
+	Then I save the product information as: TestCase127854
 	Given I should see the Product Characteristics Page
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid Containing Liquid
 	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
@@ -330,9 +330,8 @@ Scenario: [127854] Pharma - Tablet or Capsule Count Field is Available for Solid
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, section: 'Tablet or Capsule Count' is displayed
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Tablet or Capsule Count' enter the value: 12345
-	Then I Confirm that the Tablet or Capsule Count field is available
-	Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127854, container type: Plastic Container, capsule count: 50 and size: 1
-	When I click continue
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC127854 enter Size: 1 and enter Container Type: Plastic Container
+	Given in the Universal Product Code (UPC) page I click Continue
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127854
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase127854	
