@@ -236,7 +236,7 @@ Scenario: [127847] Pharma - Tablet or Capsule Count Field is Available for Solid
  	Given in the Product Type page I click Continue
 	Given I should see the Product Information Page
 	Then In the Product Information Section, enter the value in section: 'Enter NDC #': 0002-3228-30
-	Then In the Product Information Section, verify section: 'Enter NDC #' contains value: (0002-3228-30 - STRATTERA (ATOMOXETINE HYDROCHLORIDE) CAPSULE [ELI LILLY AND COMPANY
+	Then In the Product Information Section, verify section: 'Enter NDC #' contains value: (0002-3228-30 - STRATTERA (ATOMOXETINE HYDROCHLORIDE) CAPSULE [ELI LILLY AND COMPANY ]
 	Then In the Product Information Section, verify section: 'Product Name' contains value: Strattera
 	Then In the Product Information Section, verify section: 'Generic Name' contains value: Atomoxetine hydrochloride
 	Given in the Product Information page I click Continue
@@ -256,11 +256,19 @@ Scenario: [127847] Pharma - Tablet or Capsule Count Field is Available for Solid
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Given in the Product Characteristics page I click Continue
 	Given I should see the Ingredients Page
-	Then In the Ingredients Section ingredients table, confirm row with component name: Sodium fluoride is displayed
-	Then In the Ingredients Table row with component name: Sodium fluoride, in Percent column text input enter: 50
-	Then In the Ingredients Section ingredients table, confirm row with component name: Saccharin sodium dihydrate is displayed
-	Then In the Ingredients Table row with component name: Saccharin sodium dihydrate, in Percent column text input enter: 50
+	Then In the Ingredients Section ingredients table, confirm row with component name: Benzenepropanamine, N-methyl-.gamma.(2-methylphenoxy)-, hydrochloride (1:1), (.gamma.R)- is displayed
+	Then In the Ingredients Table row with component name: Benzenepropanamine, N-methyl-.gamma.(2-methylphenoxy)-, hydrochloride (1:1), (.gamma.R)-, in Percent column text input enter: 20
+	Then In the Ingredients Section ingredients table, confirm row with component name: Ferric oxide black is displayed
+	Then In the Ingredients Table row with component name: Ferric oxide black, in Percent column text input enter: 20
+	Then In the Ingredients Section ingredients table, confirm row with component name: Titanium dioxide is displayed
+	Then In the Ingredients Table row with component name: Titanium dioxide, in Percent column text input enter: 20
+	Then In the Ingredients Section ingredients table, confirm row with component name: SODIUM LAURYL SULFATE is displayed
+	Then In the Ingredients Table row with component name: SODIUM LAURYL SULFATE, in Percent column text input enter: 20
+	Then In the Ingredients Section ingredients table, confirm row with component name: Gelatin is displayed
+	Then In the Ingredients Table row with component name: Gelatin, in Percent column text input enter: 20
 	Given in the Ingredients page I click Continue
+	Then In the Ingredients Section, I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
+	Then In displayed modal, click Confirm footer button
 	Given I should see the Transportation - Refrigeration Page
 	Then In the Transportation - Refrigeration Section, set the option in section: 'Should this product be refrigerated for transport or storage?' to: No
 	Given in the Transportation - Refrigeration page I click Continue
@@ -307,7 +315,7 @@ Scenario: [127854] Pharma - Tablet or Capsule Count Field is Available for Solid
 	Given in the SPL Information page I click Continue
 	Then I save the product information as: TestCase127854
 	Given I should see the Product Characteristics Page
-	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid Containing Liquid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid containing liquid
 	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Given in the Product Characteristics page I click Continue
