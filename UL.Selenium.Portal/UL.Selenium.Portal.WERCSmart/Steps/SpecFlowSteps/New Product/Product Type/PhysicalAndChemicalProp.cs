@@ -267,5 +267,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 			string section = "Select the best Water Solubility description";
 			new Steps_ProductPrototype().InSectionErrorMessageIsIsNotDisplayed(section, error, is_isnot);
 		}
+		[RegexStepDefinition(@"In the Physical and Chemical Properties Section, confirm for section: 'Relative Density' error (is|is not) displayed: (.*)")]
+		public void RelativeDensityErrorIsIsNotDisplayed(string is_isnot, string error)
+		{
+			string section = "Relative Density";
+			new Steps_ProductPrototype().InSectionErrorMessageIsIsNotDisplayed(section, error, is_isnot);
+		}
+		[RegexStepDefinition(@"In the Physical and Chemical Properties Section, confirm for section: 'pH' error (is|is not) displayed: (.*)")]
+		public void PHErrorIsIsNotDisplayed(string is_isnot, string error)
+		{
+			string section = "pH";
+			new Steps_ProductPrototype().InSectionErrorMessageIsIsNotDisplayed(section, error, is_isnot);
+		}
+		[RegexStepDefinition(@"In the Physical and Chemical Properties Section, confirm for section: 'Boiling Point \(in Celsius\)' error (is|is not) displayed: (.*)")]
+		public void BoilingPointErrorIsIsNotDisplayed(string is_isnot, string error)
+		{
+			string section = "Boiling Point (in Celsius)";
+			new Steps_ProductPrototype().InSectionErrorMessageIsIsNotDisplayed(section, error, is_isnot);
+		}
+		[RegexStepDefinition(@"In the Physical and Chemical Properties Section, confirm for section: 'Flash Point \(in Celsius\)' error (is|is not) displayed: (.*)")]
+		public void FlashPointErrorIsIsNotDisplayed(string is_isnot, string error)
+		{
+			string section = "Flash Point (in Celsius)";
+			new Steps_ProductPrototype().InSectionErrorMessageIsIsNotDisplayed(section, error, is_isnot);
+		}
 	}
 }
