@@ -255,5 +255,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 			string section = "Flash Point (in Celsius)";
 			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
 		}
+		[RegexStepDefinition(@"In the Physical and Chemical Properties Section, confirm for section: 'Secondary Physical State' error (is|is not) displayed: (.*)")]
+		public void SecondaryDtateErrorIsIsNotDisplayed(string is_isnot, string error)
+		{
+			string section = "Secondary Physical State";
+			new Steps_ProductPrototype().InSectionErrorMessageIsIsNotDisplayed(section, error, is_isnot);
+		}
+		[RegexStepDefinition(@"In the Physical and Chemical Properties Section, confirm for section: 'Select the best Water Solubility description' error (is|is not) displayed: (.*)")]
+		public void WaterSolubilityErrorIsIsNotDisplayed(string is_isnot, string error)
+		{
+			string section = "Select the best Water Solubility description";
+			new Steps_ProductPrototype().InSectionErrorMessageIsIsNotDisplayed(section, error, is_isnot);
+		}
 	}
 }

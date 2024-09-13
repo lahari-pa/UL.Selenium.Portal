@@ -14,6 +14,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 @PhysicalAndChemicalProp
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @StepsPrototype
 
 Feature: Physical and Chemical Properties
@@ -65,14 +66,17 @@ Scenario: [31786] Physical and Chemical Properties - Aerosol only navigation
 
 @TestCase:31826
 Scenario: [31826] Physical and Chemical Properties - Gas only validation
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
-#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Compressed gas
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Compressed gas
+	Given I should see the The Product Page
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Compressed gas
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Compressed gas
+ 	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase31826
 	#Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I should see the Product Information Page
@@ -83,10 +87,13 @@ Scenario: [31826] Physical and Chemical Properties - Gas only validation
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page I click Continue
 	And I should see the Physical and Chemical Properties Page
-	Given Primary Physical State should be showing the value: Gas
-	When I click continue
-	And Secondary Physical State should be showing the error messages: This is a required field.
-	And Select the best Water Solubility description should be showing the error messages: This is a required field.
+	Then In the Physical and Chemical Properties Section, for section: 'Primary Physical State': the following options should be displayed exclusively:
+	| Option |
+	| Gas    |
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Gas
+	Then in the Physical and Chemical Properties page I click Continue
+	Then In the Physical and Chemical Properties Section, confirm for section: 'Secondary Physical State' error is displayed: This is a required field.
+	Then In the Physical and Chemical Properties Section, confirm for section: 'Select the best Water Solubility description' error is displayed: This is a required field.
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31826
 
 #Removed from regression 2024/03
