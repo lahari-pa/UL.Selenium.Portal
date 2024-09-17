@@ -114,7 +114,7 @@ Scenario: [127870] Pharma - Tablet or Capsule Count Field is Available for Solid
 	Then I save the product information as: TestCase127870
 	Given in the SPL Information page I click Continue
 	Given I should see the Product Characteristics Page
-	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid gel consistency
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid Gel Consistency
 	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Given in the Product Characteristics page I click Continue
