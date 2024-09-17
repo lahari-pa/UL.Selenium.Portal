@@ -458,12 +458,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			string section = "Tablet or Capsule Count";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
-		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, section: 'Tablet or Capsule Count' is displayed")]
-		public void TabletOrCapsuleIsDisplayed()
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, section: 'Tablet or Capsule Count' (is|is not) displayed")]
+		public void TabletOrCapsuleIsDisplayed(string is_isnot)
 		{
+			bool expected = is_isnot == "is";
 			string section = "Tablet or Capsule Count";
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.UPCSectionFieldsAvailable(section), $"Failed to Confirm the '{section}' field is available", $"I Confirm the '{section}' field is available");
+			Report.IsTrue(selNewProduct.UPCSectionFieldsAvailable(section) == expected, $"Failed to Confirm the '{section}' field {(expected ? "is not" : "is")} available", $"I Confirm the '{section}' field {is_isnot} available");
 		}
 	}
 }
