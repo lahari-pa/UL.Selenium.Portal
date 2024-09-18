@@ -27,6 +27,7 @@
 @GTINAndUPC
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
 
 Feature: Pharma
 
@@ -191,9 +192,7 @@ Scenario: [127970] Pharma - Regulatory Documents to Provide and Additional Docum
 	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
 	Then in the Regulatory Documents to Provide page I click Continue
 	Given I should see the Additional Documents to Provide Page
-	Then I check for the following options in the Additonal Documents to Provide section
-		| Option                       |
-		| Safety Data Sheet (Optional) |
+	Then In the Additional Documents to Provide, section 'Safety Data Sheet (Optional)' is displayed
 	Then in the Additional Documents to Provide page I click Continue
 	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given I should see the Data Acceptance Page
