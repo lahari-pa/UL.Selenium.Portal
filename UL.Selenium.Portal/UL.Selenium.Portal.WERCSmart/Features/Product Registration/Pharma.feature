@@ -172,7 +172,6 @@ Scenario: [127970] Pharma - Regulatory Documents to Provide and Additional Docum
 	Given in the Ingredients page I click Continue
 	Then In the Ingredients Section, I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
 	Then In displayed modal, click Confirm footer button
-	Given I should see the Transportation - Refrigeration Page
 	Then In the Transportation - Refrigeration Section, set the option in section: 'Should this product be refrigerated for transport or storage?' to: No
 	Given in the Transportation - Refrigeration page I click Continue
 	Given I should see the Transportation Classification Page
