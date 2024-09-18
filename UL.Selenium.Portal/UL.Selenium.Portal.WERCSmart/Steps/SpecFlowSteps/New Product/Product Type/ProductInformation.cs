@@ -93,12 +93,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 
-		[RegexStepDefinition(@"In the Product Information Section, for section: 'Retailers will be selling my product at their store locations in \(select either or both\) ': confirm the following option (is|is not) checked: (United States|Canada)")]
-		public void OptionsDisplayedCountriesTheProductMayBeSold(string condition, string option)
-		{
-			new Steps_Prototype().TheCheckboxWithDescriptionIsIsNotChecked(option, condition);
-		}
-
 		[RegexStepDefinition(@"In the Product Information Section, for section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer...': the following options (should|should not) be (displayed|displayed exclusively):")]
 		public void OptionsDisplayedProductIsShippedBySupplier(string condition, string displayed, Table table)
 		{

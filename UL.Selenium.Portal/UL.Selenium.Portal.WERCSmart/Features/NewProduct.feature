@@ -320,8 +320,10 @@ Scenario: [120820] WERCSmart product - Submitted to SHA, Status = Cancelled
 
 @TestCase:128694
 Scenario: [128694] DSV Option Available for Electronic - Peripherals - RU001162
+
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
+
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
@@ -333,11 +335,13 @@ Scenario: [128694] DSV Option Available for Electronic - Peripherals - RU001162
 	Then in the The Product page, I click Continue
 
 	Then I save the product information as: TestCase128694
-	Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
-	And The following options should be displayed exclusively for section: Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.
-		| Option |
-		| Yes    |
-		| No	 |
+
+	And In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, for section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer...': the following options should be displayed:
+	| Option |
+	| Yes    |
+	| No	 |
+
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128694
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase128694
@@ -361,7 +365,7 @@ Scenario: [128721] DSV Option Available for Appliance - Hot Water Tank (Standard
 
 	Then I save the product information as: TestCase128721
 
-	And In the Product Information Section, for section: 'Retailers will be selling my product at their store locations in (select either or both) ': confirm the following option is checked: United States
+	And In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
 	Then In the Product Information Section, for section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer...': the following options should be displayed:
 	| Option |
 	| Yes    |
@@ -373,25 +377,29 @@ Scenario: [128721] DSV Option Available for Appliance - Hot Water Tank (Standard
 
 @TestCase:128703
 Scenario: [128703] DSV Option Available for Auto Parts - Engine Parts and Components with Electrical Parts -  RU001428
+
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
+
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Engine Parts and Components with Electrical Parts
-		Then I should be on the The Product Page
+	Then I should be on the The Product Page
 	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Engine Parts and Components with Electrical Parts_#128703
 	And In the Product Section, set the option in section: 'Type of Product (select)' to: Engine Parts and Components with Electrical Parts
 	Then in the The Product page, I click Continue
 
 	Then I save the product information as: TestCase128703
-	Then I confirm that the the option: United States is checked for the following section: Select countries the product may be sold in
-	And The following options should be displayed exclusively for section: Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.
-		| Option |
-		| Yes    |
-		| No	 |
+
+	And In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, for section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer...': the following options should be displayed:
+	| Option |
+	| Yes    |
+	| No	 |
+
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128703
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase128703
