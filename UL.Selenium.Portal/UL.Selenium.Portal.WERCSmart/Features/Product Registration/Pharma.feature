@@ -228,25 +228,24 @@ Scenario: [128018] Pharma - Forwarding Not Allowed
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Tablet or Capsule Count' enter the value: 1234
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC128018 enter Size: 1 and enter Container Type: Plastic Container
 	Given in the Universal Product Code (UPC) page I click Continue
-
-	Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
-	And I call Shared Step 60567 (Upload Product Label only) for section: Upload Full Product Label (required)
-When I click continue
-Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-When I click continue
-When I click continue
-#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-Given I should see the Data Acceptance Page
+	Then in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Then in the Regulatory Documents to Provide page I click Continue
+	Given I should see the Additional Documents to Provide Page
+	Then In the Additional Documents to Provide, section 'Safety Data Sheet (Optional)' is displayed
+	Then in the Additional Documents to Provide page I click Continue
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
 	Then In the Data Acceptance Section, click 'Accept' button
-
-And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
-Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
-And I navigate to the home page
-Given I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
-And I enter the text: saved as TestCase128018 in the 'Search by WPS ID or Product Name' field
-And In the Foward Product Registration Screen I should not see product: saved as TestCase128018
-And I navigate to the home page
+	Then The Purchase Summary Page is displayed
+	Then In the Purchase Summary page message is displayed with text: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
+	And I navigate to the home page
+	Given I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
+	And I enter the text: saved as TestCase128018 in the 'Search by WPS ID or Product Name' field
+	And In the Foward Product Registration Screen I should not see product: saved as TestCase128018
+	And I navigate to the home page
 
 
 
