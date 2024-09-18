@@ -14,6 +14,10 @@
 @StepsPrototype
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ProductIncludesBattery
 
 Feature: Lithium Battery Transport Information
 
@@ -108,29 +112,46 @@ Scenario: [65512] BCP - Contains Lithium Ion installed in product - Lithium Batt
 
 @TestCase:65523
 Scenario: [65523] BCP - Contains Lithium Primary packaged with the product - Lithium Battery Transportation step - question wording and validation
+
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
+
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Camera w/Battery
-	Then I save the product information as: TestCase65523	
-	Given I call Shared Step 159304 (Product Information - US, No(Child), No (DSV), No (PLP))
+	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Camera w/Battery
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Camera w/Battery_#65523
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Camera w/Battery
+	Then in the The Product page, I click Continue
+
+	Then I save the product information as: TestCase65523
+	
+	#Given I call Shared Step 159304 (Product Information - US, No(Child), No (DSV), No (PLP))
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then in the Product Information page I click Continue
+
 	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should be on the Inventory Status, Prop 65 (US) Page
 	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
 	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
 
-	Then I should see the Product Includes Battery Page
-	Given I set the Indicate how battery is packaged option to: The battery is shipped with but not included in my product
+	Then I should be on the Product Includes Battery Page
+    Then In the Product Includes Battery Section, set the radio option in section: 'Indicate how battery is packaged': to: The battery is shipped with but not included in my product.
+
 	Given I add the following batteries:
 		| Battery Type    | Manufacturer                                                 | Quantity of Batteries per Package | Quantity of Batteries to Operate Product | Saved As |
 		| Lithium Primary |Pau Lithium Primary Battery by The WERCS LTD (WPS ID 1549664) | 10                                | 10                                       | lithiumbattery65520 |
 	Given I continue to the next screen in the product registration
+
 	#Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
 	Given I should see the Toxicity Characteristic Leaching Procedure (TCLP) Page
 	And In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the option in section: 'Product has had TCLP testing; Report is available' to: No
