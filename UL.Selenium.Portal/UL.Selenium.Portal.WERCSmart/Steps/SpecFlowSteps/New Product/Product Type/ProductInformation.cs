@@ -93,6 +93,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 
+		[RegexStepDefinition(@"In the Product Information Section, for section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer...': the following options (should|should not) be (displayed|displayed exclusively):")]
+		public void OptionsDisplayedProductIsShippedBySupplier(string condition, string displayed, Table table)
+		{
+			string section = "Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.";
+			new Steps_Prototype().CheckOptionsInSection(condition, displayed, section, table);
+		}
+
 		[RegexStepDefinition(@"In the Product Information Section, set the option in section: 'Does the product contain fertilizer \(N, P, K\)\?' to: (Yes|No)")]
 		public void SelectDoesProductContainFertilizer(string option)
 		{
