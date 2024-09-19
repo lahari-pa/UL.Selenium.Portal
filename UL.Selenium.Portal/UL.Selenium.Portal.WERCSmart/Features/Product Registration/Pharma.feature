@@ -284,7 +284,7 @@ Scenario: [128018] Pharma - Forwarding Not Allowed
 	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
 	Then in the Regulatory Documents to Provide page I click Continue
 	Given I should see the Additional Documents to Provide Page
-	#Then In the Additional Documents to Provide, section 'Safety Data Sheet (Optional)' is displayed
+	Then In the Additional Documents to Provide, section 'Safety Data Sheet (Optional)' is displayed
 	Then in the Additional Documents to Provide page I click Continue
 	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given I should see the Data Acceptance Page
