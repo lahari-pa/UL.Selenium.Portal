@@ -105,8 +105,9 @@ Scenario Outline: [169079] UL Logo
 	| [#169079g] UL Logo | RPS.TG   | Product Lookup           |
 	| [#169079h] UL Logo | RPS.CT   | Program Health           |
 
+# Removed from regression: 2024/08
+@ignore
 Scenario: [70243] Landing Page
-
 	And I confirm the logged in page banner shows background color: red
 	Then I verify that there is a Sign In Link in the upper-right corner
 	And I verify that there is a UL Logo in the upper-right corner
@@ -123,18 +124,23 @@ Scenario: [70243] Landing Page
 		| Contact Us Link         |
 		| Sign In button          |
 
+# Removed from regression: 2024/08
+@ignore
 Scenario: [70244] I'd Like to Learn More
 	And I click on the "I'd like to learn more" button in the Good business section
 	And I verify that a tab opens with url: https://www.ul.com/services/portfolios/chemical-data-management
 	Then I close the tab with url: https://www.ul.com/services/portfolios/chemical-data-management
 	And I verify that the I'd like to learn more link for section: Let's talk has a subject line containing: Retail Product Suite
 
-
+# Removed from regression: 2024/08
+@ignore
 Scenario: [70246] Request More Information
 	Given I verify that the Request more information link for section: UL Audit has a subject line containing: I would like to learn more about UL Audit
 	And I verify that the Request more information link for section: UL PurView has a subject line containing: I would like to learn more about UL Purview
 	And I verify that the Request more information link for section: Item Scan has a subject line containing: I would like to learn more about UL Item Scan
 
+# Removed from regression: 2024/08
+@ignore
 Scenario: [70247] Footer
 	And I verify that the following items are displayed in the Landing Page Footer:
 		| Item                    |
