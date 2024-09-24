@@ -552,16 +552,23 @@ Then In the Thank You screen I click Home
 @TestCase:128677
 Scenario: [128677] Pharma - Prescription Pharmaceutical - Liquid Product
 
-Given I call Shared Step (Login to WERCSmart - Pharma Account)
+Given I log in with the account saved in TReVor as: PharmaAccount
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC128677
-Given I click continue
-Then I should see the Product Type Page
-Then I set 'Product Name' to: prescription pharmaceutical, solid
-Then I set 'Type of Product' to: prescription pharmaceutical, solid
-Then I click continue
-Given I enter the NDC number: 10866-0885-2
+Then I should see the New Product Page
+Then In the New Product Section, set the radio option in section: 'Would you like to Create a New Product?': to: Yes, create a new product
+Then in the New Product page, I click Continue
+Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Prescription Pharmaceutical, Liquid
+Given In the Product Section, set the option in section: 'Type of Product (select)' to: Prescription Pharmaceutical, Liquid
+Given in the Product Type page I click Continue
+Given I should see the Product Information Page
+Then In the Product Information Section, enter the value in section: 'Enter NDC #': 13630-0089-3
+Then In the Product Information Section, verify section: 'Enter NDC #' contains value: (0904-7056-99 - ASPIRIN AND EXTENDED - RELEASE DIPYRIDAMOLE CAPSULES, 25 MG / 200 MG (ASPIRIN AND EXTENDED - RELEASE DIPYRIDAMOLE) CAPSULE [MAJOR PHARMACEUTICALS]
+Then In the Product Information Section, verify section: 'Product Name' contains value: Aspirin and Extended - Release Dipyridamole Capsules, 25 mg / 200 mg
+Then In the Product Information Section, verify section: 'Generic Name' contains value: Aspirin and Extended - Release Dipyridamole
 Then I save the product information as: TestCase128677
+Given in the Product Information page I click Continue
+Given I enter the NDC number: 10866-0885-2
 Then I click continue
 Then I click continue
 Given I fill all empty fields in the SPL Information screen
