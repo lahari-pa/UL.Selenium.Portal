@@ -461,11 +461,11 @@ Scenario: [128671] Pharma - Prescription Pharmaceutical - Liquid Core Product
 	Given I log in with the account saved in TReVor as: PharmaAccount
 	Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 	Given I generate a random UPC number and save as: UPC128671
-	Then I should see the Product Type Page
+	Then I should see the New Product Page
 	Then In the New Product Section, set the radio option in section: 'Would you like to Create a New Product?': to: Yes, create a new product
 	Then in the New Product page, I click Continue
 	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Prescription Pharmaceutical, Solid
-	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Prescription Pharmaceutical, Solid
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Prescription Pharmaceutical with Liquid Core
 	Given in the Product Type page I click Continue
 	Given I should see the Product Information Page
 	Then In the Product Information Section, enter the value in section: 'Enter NDC #': 0904-7056-99
@@ -483,7 +483,6 @@ Scenario: [128671] Pharma - Prescription Pharmaceutical - Liquid Core Product
 	Then In the SPL Information Section, verify section: 'NDA Number' contains value: None
 	Then In the SPL Information Section, for section: 'Distributor' enter value: Distributor
 	Given in the SPL Information page I click Continue
-	Then I set 'Type of Product' to: Prescription Pharmaceutical with Liquid Core
 	Given I should see the Liquid Core Product Page
 	Then In the Liquid Core Product Section, set the option in section: 'Is there a free liquid in the Product's container that is 10ml or greater?' to: No
 	Then in the Liquid Core Product page I click Continue
@@ -564,14 +563,11 @@ Scenario: [128671] Pharma - Prescription Pharmaceutical - Liquid Core Product
 	Given I should see the Data Acceptance Page
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
 	Then In the Data Acceptance Section, click 'Accept' button
-	Then In the Data Acceptance Section, click 'Accept' button
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 	Then In the Purchase Summary screen I click Confirm Order
 	Then In the Thank You screen I click Home
-	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128671
-	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase128671
+
 
 
 
