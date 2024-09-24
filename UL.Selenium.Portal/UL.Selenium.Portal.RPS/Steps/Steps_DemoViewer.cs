@@ -1,5 +1,6 @@
 ﻿using Reqnroll;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.RPS.Classes;
 using UL.Selenium.Portal.RPS.Selenium_Classes;
 
@@ -8,7 +9,7 @@ namespace UL.Selenium.Portal.RPS.Steps
     [Binding, Scope(Tag = "DemoViewer")]
     class Steps_DemoViewer
     {
-        [StepDefinition(@"I confirm the Demo Viewer Page has loaded")]
+        [RegexStepDefinition(@"I confirm the Demo Viewer Page has loaded")]
         public void DemoViewerPageLoaded()
         {
            

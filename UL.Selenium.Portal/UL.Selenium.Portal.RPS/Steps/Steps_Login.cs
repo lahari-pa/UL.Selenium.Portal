@@ -5,6 +5,7 @@ using TReVor.Core.Classes.Software;
 using TReVor.Integrations.Classes;
 using UL.Automation.Reporting;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Selenium.Portal.RPS.Classes;
@@ -21,7 +22,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		private const string AccountOrPasswordIncorrectText = "Account does not exist or password is incorrect.";
 
-		[StepDefinition(@"I log into the RPS Integrated site as Retailer: (.*)")]
+		[RegexStepDefinition(@"I log into the RPS Integrated site as Retailer: (.*)")]
 		public void LogInAsRetailer(string retailer)
 		{
 			Report.UseSubSteps = true;
@@ -44,13 +45,13 @@ namespace UL.Selenium.Portal.RPS.Steps
 			GeneralUtilities.WaitForLoadingToFinish();
 		}
 
-		[StepDefinition("I confirm the login popup is displayed")]
+		[RegexStepDefinition("I confirm the login popup is displayed")]
 		public void ConfirmLoginModalIsDisplayed()
 		{
 			Report.IsTrue(new LogInModal().WaitForContainerToBeVisible(), "Login modal was not displayed!", "Login modal was displayed");
 		}
 
-		[StepDefinition(@"I confirm the 'Welcome' login popup is displayed")]
+		[RegexStepDefinition(@"I confirm the 'Welcome' login popup is displayed")]
 		public void WelcomeLoginPopupIsDisplayed()
 		{
 			Report.UseSubSteps = true;
@@ -60,13 +61,13 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(new LogInModal().TitleText == "Welcome", "Popup title did not match: 'Welcome'!", "Popup title matched: 'Welcome'");
 		}
 
-		[StepDefinition(@"I click 'Log in'")]
+		[RegexStepDefinition(@"I click 'Log in'")]
 		public void ClickLogIn()
 		{
 			Report.IsTrue(new LogInModal().ClickLoginButton, "Failed to click Log In button", "Clicked Log in button");
 		}
 
-		[StepDefinition("The following log in validation errors should be displayed:")]
+		[RegexStepDefinition("The following log in validation errors should be displayed:")]
 		public void LogInValidationErrorsShouldBeDisplayed(Table expectedErrors)
 		{
 			var displayedErrors = new LogInModal().LogInErrors();
@@ -77,7 +78,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the (User Name|Password) required field error is displayed")]
+		[RegexStepDefinition(@"I confirm the (User Name|Password) required field error is displayed")]
 		public void ConfirmRequiredFieldError(string input)
 		{
 			switch (input)
@@ -94,7 +95,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm the required field error is displayed for both User Name and Password")]
+		[RegexStepDefinition(@"I confirm the required field error is displayed for both User Name and Password")]
 		public void ConfirmRequiredFieldForUserNameAndPassword()
 		{
 			Report.UseSubSteps = true;
@@ -104,7 +105,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			this.ConfirmRequiredFieldError("Password");
 		}
 
-		[StepDefinition(@"I confirm the error is displayed indicating Account does not exist or password is incorrect")]
+		[RegexStepDefinition(@"I confirm the error is displayed indicating Account does not exist or password is incorrect")]
 		public void ConfirmAccountError()
 		{
 			Delay.Seconds(2);
@@ -133,7 +134,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I enter incorrect credentials for User name and Password fields")]
+		[RegexStepDefinition(@"I enter incorrect credentials for User name and Password fields")]
 		public void EnterIncorrectCredentialsForUserNameAndPasswordFields()
 		{
 			Report.UseSubSteps = true;
@@ -143,8 +144,8 @@ namespace UL.Selenium.Portal.RPS.Steps
 			this.EnterIncorrectPassword();
 		}
 
-		[StepDefinition(@"I enter an incorrect User Name")]
-		[StepDefinition(@"I enter an incorrect User name")]
+		[RegexStepDefinition(@"I enter an incorrect User Name")]
+		[RegexStepDefinition(@"I enter an incorrect User name")]
 		public void EnterIncorrectUserName()
 		{
 			TReVorSettings.Variables.AllVariables.TryGetValue("RPS Mailosaur Prefix", out string emailPart);
@@ -154,7 +155,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			this.EnterUserNameInput(invalidUserName);
 		}
 
-		[StepDefinition(@"I enter an incorrect Password")]
+		[RegexStepDefinition(@"I enter an incorrect Password")]
 		public void EnterIncorrectPassword()
 		{
 			var invalidPassword = GeneralUtilities.GenerateRandomAlphanumericStric(15);
@@ -163,19 +164,19 @@ namespace UL.Selenium.Portal.RPS.Steps
 			this.EnterPasswordInput(invalidPassword);
 		}
 
-		[StepDefinition("I enter: (.*) to the User Name input field")]
+		[RegexStepDefinition("I enter: (.*) to the User Name input field")]
 		public void EnterUserNameInput(string input)
 		{
 			Report.IsTrue(new LogInModal().EnterUserName(input), "Failed to enter user name: " + input, "Successfully entered user name: " + input);
 		}
 
-		[StepDefinition("I enter: (.*) to the Password input field")]
+		[RegexStepDefinition("I enter: (.*) to the Password input field")]
 		public void EnterPasswordInput(string input)
 		{
 			Report.IsTrue(new LogInModal().EnterPassword(input), "Failed to enter password: " + input, "Successfully entered password: " + input);
 		}
 
-		[StepDefinition("I enter the (User Name|Password) for TReVor test user: (.*)")]
+		[RegexStepDefinition("I enter the (User Name|Password) for TReVor test user: (.*)")]
 		public void EnterUserNameForTrevorTestUser(string input, string savedAs)
 		{
 			if (TReVorSettings.Credentials.AllCredentials.TryGetValue(savedAs, out var user))
@@ -211,7 +212,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			this.EnterPasswordInput(password);
 		}
 
-		[StepDefinition("I enter the User Name for the active user")]
+		[RegexStepDefinition("I enter the User Name for the active user")]
 		public void EnterUserNameForActive()
 		{
 			if (!Context.Contains("ActiveUser"))
@@ -225,7 +226,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			this.EnterUserNameInput(username);
 		}
 
-		[StepDefinition("I enter the Password for the active user")]
+		[RegexStepDefinition("I enter the Password for the active user")]
 		public void EnterPasswordForActive()
 		{
 			if (!Context.Contains("ActiveUser"))
@@ -239,7 +240,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			this.EnterPasswordInput(password);
 		}
 
-		[StepDefinition(@"I log in as trevor user: (.*)")]
+		[RegexStepDefinition(@"I log in as trevor user: (.*)")]
 		public void LogInAsTrevorUser(string savedAs)
 		{
 			if (TReVorSettings.Credentials.AllCredentials.TryGetValue(savedAs, out var user))
@@ -256,21 +257,21 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Context.AddToContext("ActiveUser", user);
 		}
 
-		[StepDefinition(@"I confirm the 'Close' and 'Log In' buttons are displayed")]
+		[RegexStepDefinition(@"I confirm the 'Close' and 'Log In' buttons are displayed")]
 		public void ConfirmCloseAndLogInButtonDisplayed()
 		{
 			Report.IsTrue(new LogInModal().LoginButtonTextDisplayed(), "Log In button not displayed!", "Log in button displayed");
 			Report.IsTrue(new LogInModal().CloseButtonTextDisplayed(), "Close button not displayed!", "Close button displayed");
 		}
 
-		[StepDefinition(@"I confirm the 'User Name' and 'Password' fields are displayed")]
+		[RegexStepDefinition(@"I confirm the 'User Name' and 'Password' fields are displayed")]
 		public void ConfirmUserNameAndPasswordFieldsDisplayed()
 		{
 			Report.IsTrue(new LogInModal().UserNameLabelDisplayed(), "User Name label not displayed!", "User name label displayed");
 			Report.IsTrue(new LogInModal().PasswordLabelDisplayed(), "Password label not displayed!", "Password label displayed");
 		}
 
-		[StepDefinition("I click the Close button")]
+		[RegexStepDefinition("I click the Close button")]
 		public void ClickCloseButton()
 		{
 			Report.IsTrue(new LogInModal().ClickCloseButton(), "Failed to click the Close button", "Clicked the close button");

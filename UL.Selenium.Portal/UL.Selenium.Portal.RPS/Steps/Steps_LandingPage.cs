@@ -4,6 +4,7 @@ using OpenQA.Selenium;
 using Reqnroll;
 using UL.Automation.Reporting;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
 using UL.Selenium.Portal.RPS.Selenium_Classes;
@@ -15,86 +16,86 @@ namespace UL.Selenium.Portal.RPS.Steps
 	class Steps_LandingPage
 	{
 
-		[StepDefinition(@"In the Retail Product Suite Home page, I click on the (.*) heading")]
+		[RegexStepDefinition(@"In the Retail Product Suite Home page, I click on the (.*) heading")]
 		public void GivenInTheRetailProductSuiteHomePageIClickOnTheRecentActivitiesHeading(string headingItem)
 		{
 			Report.IsTrue(new Home().ClickHeadingItemWithNameInRPS(headingItem), "Failed to click on heading item: " + headingItem, @"Successfully clicked on heading item: " + headingItem);
 		}
 
-		[StepDefinition(@"I see my username in the heading")]
+		[RegexStepDefinition(@"I see my username in the heading")]
 		public void GivenISeeMyUsernameInTheHeading()
 		{
 
 			Report.IsTrue(new Home().ISeeMyUsernameInTheHeadingBanner("rps.cv.xvxblauh@mailosaur.io"), "Failed to find my username", @"Successfully found my username");
 		}
 
-		[StepDefinition(@"I click on my username in the heading banner")]
+		[RegexStepDefinition(@"I click on my username in the heading banner")]
 		public void GivenIClickOnMyUsernameInTheHeadingBanner()
 		{
 			Report.IsTrue(new Home().ClickUsernameInHeadingBanner(), "Failed to click on my username", @"Successfully clicked my username");
 		}
 
-		[StepDefinition(@"I confirm I see the option: (.*)")]
+		[RegexStepDefinition(@"I confirm I see the option: (.*)")]
 		public void GivenIConfirmISeeTheOptionSignOut(string option)
 		{
 			Report.IsTrue(new Home().ISeeTheFollowingOption(option), "Failed to find option: " + option, @"Successfully found option: " + option);
 		}
 
-		[StepDefinition(@"I confirm I click the option: (.*)")]
+		[RegexStepDefinition(@"I confirm I click the option: (.*)")]
 		public void GivenIConfirmIClickTheOptionSignOut(string option)
 		{
 			Report.IsTrue(new LandingPage().IClickTheFollowingOption(option), "Failed to click option: " + option, @"Successfully clicked option: " + option);
 		}
 
-		[StepDefinition(@"I click anywhere")]
+		[RegexStepDefinition(@"I click anywhere")]
 		public void GivenIClickAnywhere()
 		{
 			new Home().IClickAnywhere();
 		}
-		[StepDefinition(@"I confirm I am still on the main RPS page")]
+		[RegexStepDefinition(@"I confirm I am still on the main RPS page")]
 		public void GivenIConfirmIAmStillOnTheHomePage()
 		{
 			Report.IsTrue(new Home().IAmOnTheMainRPSPage(), "Failed to find the main page", @"Successfully founded the main page");
 		}
 
-		[StepDefinition(@"I click the I'D LIKE TO LEARN MORE button at the top of the page")]
+		[RegexStepDefinition(@"I click the I'D LIKE TO LEARN MORE button at the top of the page")]
 		public void GivenIClickTheIDLIKETOLEARNMOREButtonAtTheTopOfThePage()
 		{
 			Report.IsTrue(new LandingPage().ClickIDLIKETOLEARNMOREBUTTONAtTopOfPage(), "Failed to click I'd like to learn button", @"Successfully clicked I'd like to learn button");
 		}
 
-		[StepDefinition(@"I click the I'D LIKE TO LEARN MORE button at the bottom of the page")]
+		[RegexStepDefinition(@"I click the I'D LIKE TO LEARN MORE button at the bottom of the page")]
 		public void GivenIClickTheIDLIKETOLEARNMOREButtonAtTheBottomOfThePage()
 		{
 			Report.IsTrue(new LandingPage().ClickIDLIKETOLEARNMOREBUTTONATBottomOfPage(), "Failed to click I'd like to learn button", @"Successfully clicked I'd like to learn button");
 		}
 
-		[StepDefinition(@"I click the UL Logo in the header area")]
+		[RegexStepDefinition(@"I click the UL Logo in the header area")]
 		public void GivenIClickTheULLogo()
 		{
 			Report.IsTrue(new Home().ClickULLogoInTheHeaderArea(), "Failed to click UL Logo", @"Successfully clicked UL Logo");
 			Delay.Seconds(10);
 		}
 
-		[StepDefinition(@"I click the UL Logo in the footer area")]
+		[RegexStepDefinition(@"I click the UL Logo in the footer area")]
 		public void GivenIClickTheULLogoInTheFooterArea()
 		{
 			Report.IsTrue(new LandingPage().ClickULLogoInTheFooterArea(), "Failed to click UL Logo", @"Successfully clicked UL Logo");
 		}
 
-		[StepDefinition(@"In the upper right corner I locate and click the UL logo")]
+		[RegexStepDefinition(@"In the upper right corner I locate and click the UL logo")]
 		public void GivenIInTheUpperRightCornerLocateTheULLogo()
 		{
 			Report.IsTrue(new LandingPage().ClickUlLogoInTopRight(), "Failed to click the UL Logo!", "Successfully clicked the UL Logo!");
 		}
 
-		[StepDefinition(@"In the upper right corner I locate and click the UL logo in RPS")]
+		[RegexStepDefinition(@"In the upper right corner I locate and click the UL logo in RPS")]
 		public void GivenIInTheUpperRightCornerLocateTheULLogoInRPS()
 		{
 			Report.IsTrue(new LandingPage().ClickUlLogoInTopRightInRPS(), "Failed to click the UL Logo!", "Successfully clicked the UL Logo!");
 		}
 
-		[StepDefinition(@"I verify that the (Request more information|I'd like to learn more) link for section: (.*) has a subject line containing: (.*)")]
+		[RegexStepDefinition(@"I verify that the (Request more information|I'd like to learn more) link for section: (.*) has a subject line containing: (.*)")]
 		public void CheckMoreInformationLinksAreCorrect(string link, string header, string subject)
 		{
 			string subjectLine = null;
@@ -112,14 +113,14 @@ namespace UL.Selenium.Portal.RPS.Steps
 			}
 		}
 
-		[StepDefinition(@"I verify that WERCSmart Product Suite logo is showing")]
+		[RegexStepDefinition(@"I verify that WERCSmart Product Suite logo is showing")]
 		public void VerifyWERCSmartProductSuiteLogoShowing()
 		{
 			var header = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//*[contains(@class,'bar-top')]//a[contains(@class,'brand')]"), 2).GetValue();
 			Report.IsTrue(header == "WERCSmart® Product Suite", "Failed to find the WERCSmart Product Suite logo!", "Successfully found the WERCSmart Product Suite logo!");
 		}
 
-		[StepDefinition(@"I verify that there is a (Sign In Link|UL Logo) in the upper-right corner")]
+		[RegexStepDefinition(@"I verify that there is a (Sign In Link|UL Logo) in the upper-right corner")]
 		public void VerifyUpperRightScreenElements(string element)
 		{
 			IWebElement el = null;
@@ -137,7 +138,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(el != null, "Failed to find the " + element + "!", "Successfully found the " + element);
 		}
 
-		[StepDefinition(@"I verify that there is a section titled (Good business with I'd like to learn more button|Instant Access displaying a graph|Let's talk with I'd like to learn more button)")]
+		[RegexStepDefinition(@"I verify that there is a section titled (Good business with I'd like to learn more button|Instant Access displaying a graph|Let's talk with I'd like to learn more button)")]
 		public void VerifySections(string element)
 		{
 			IWebElement el = null;
@@ -174,7 +175,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			}
 		}
 
-		[StepDefinition(@"I verify that under offerings there is a section for (UL Audit|UL PurView|Item Scan) with 'request more information' button")]
+		[RegexStepDefinition(@"I verify that under offerings there is a section for (UL Audit|UL PurView|Item Scan) with 'request more information' button")]
 		public void VerifyOfferingsSection(string heading)
 		{
 			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//h2[starts-with(text(),'Offerings')]//ancestor::div[starts-with(@class,'row')]"), 2);
@@ -189,7 +190,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			}
 		}
 
-		[StepDefinition(@"I verify that in the footer there is a (UL Logo|About UL WERCSmart Link|Contact Us Link|Sign In button)")]
+		[RegexStepDefinition(@"I verify that in the footer there is a (UL Logo|About UL WERCSmart Link|Contact Us Link|Sign In button)")]
 		public void CheckFooterContent(string element)
 		{
 			var selLandingFooter = new LandingPage.Footer();
@@ -221,7 +222,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			}
 		}
 
-		[StepDefinition(@"I verify that the following items are displayed in the Landing Page Footer:")]
+		[RegexStepDefinition(@"I verify that the following items are displayed in the Landing Page Footer:")]
 		public void VerifyItemsDisplayedInLandingFooter(Table items)
 		{
 			ReportSettings.UseSubSteps = true;
@@ -232,7 +233,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 				CheckFooterContent(elName);
 			}
 		}
-		[StepDefinition(@"I click on the ""I'd like to learn more"" button in the (Good business|Let's talk) section")]
+		[RegexStepDefinition(@"I click on the ""I'd like to learn more"" button in the (Good business|Let's talk) section")]
 		public void IClickIdLikeToLearnMoreButtonInGoodBusinessSection(string section)
 		{
 			var el = SeleniumBrowser.WebBrowser.FindElement(By.XPath($@"//h2[contains(text(),""{section}"")]//ancestor::div[starts-with(@class,'row')]"), 2);
@@ -253,7 +254,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			}
 		}
 
-		[StepDefinition(@"I click the footer link: (About UL WERCSmart|Contact Us|Sign In)")]
+		[RegexStepDefinition(@"I click the footer link: (About UL WERCSmart|Contact Us|Sign In)")]
 		public void ClickFooterLink(string link)
 		{
 			var selLandingPageFooter = new LandingPage.Footer();
@@ -274,7 +275,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			}
 		}
 
-		[StepDefinition(@"I verify that the Contact Us button in the footer is a valid email link")]
+		[RegexStepDefinition(@"I verify that the Contact Us button in the footer is a valid email link")]
 		public void VerifyFooterContactUsButtonIsValidEmailLink()
 		{
 			var selLandingPageFooter = new LandingPage.Footer();
@@ -286,26 +287,26 @@ namespace UL.Selenium.Portal.RPS.Steps
 			}
 		}
 
-		[StepDefinition(@"I click 'Sign In'")]
+		[RegexStepDefinition(@"I click 'Sign In'")]
 		public void ClickSignIn()
 		{
 			Report.IsTrue(new LandingPage().ClickSignIn(), "Failed to click Sign In", "Clicked Sign In");
 		}
 
-		[StepDefinition(@"I click 'Sign In' in RPS")]
+		[RegexStepDefinition(@"I click 'Sign In' in RPS")]
 		public void ClickSignInInRPS()
 		{
 			Report.IsTrue(new LandingPage().ClickSignInInRPS(), "Failed to click Sign In in RPS", "Clicked Sign In in RPS");
 		}
 
-		[StepDefinition(@"I confirm the Landing Page has loaded")]
+		[RegexStepDefinition(@"I confirm the Landing Page has loaded")]
 		public void ConfirmLandingPageHasLoaded()
 		{
 			var landing = new LandingPage();
 			Report.IsTrue(new LandingPage().WaitForContainerToBeVisible(), "Landing Page did not load!", "Landing Page loaded");
 		}
 
-        [StepDefinition(@"I confirm the footer shows background color: grey")]
+        [RegexStepDefinition(@"I confirm the footer shows background color: grey")]
         public void ConfirmPageBannerColorIsNavyBlue()
         {
 

@@ -9,6 +9,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using Reqnroll;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Selenium.Portal.RPS.Classes;
@@ -19,7 +20,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 	[Binding, Scope(Tag = "Cards")]
 	class Steps_Cards
 	{
-		[StepDefinition(@"I confirm that the cards are in the following order:")]
+		[RegexStepDefinition(@"I confirm that the cards are in the following order:")]
 		public void ConfirmCardOrder(Table table)
 		{
 			var superTableNav = new SuperTableNav();
@@ -34,7 +35,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 				"PASS. Cards are in the correct order.");
 		}
 
-		[StepDefinition(@"I confirm that the (.*) card contains a numeric value")]
+		[RegexStepDefinition(@"I confirm that the (.*) card contains a numeric value")]
 		public void ConfirmCardNumericValue(string card)
 		{
 			var superTableNav = new SuperTableNav();
@@ -42,7 +43,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 				String.Format("Card count for {0} card exists and is numeric!", card));
 		}
 
-		[StepDefinition(@"I confirm that the (.*) card contains a graphic")]
+		[RegexStepDefinition(@"I confirm that the (.*) card contains a graphic")]
 		public void ConfirmCardGraphic(string card)
 		{
 			var superTableNav = new SuperTableNav();
@@ -50,7 +51,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 				String.Format("PASS. Card graphic for {0} exists.", card));
 		}
 
-		[StepDefinition(@"I confirm that the (.*) card (shows|does not show) a percentage value")]
+		[RegexStepDefinition(@"I confirm that the (.*) card (shows|does not show) a percentage value")]
 		public void CardShowsPercentageValue(string card, string doesOrNot)
 		{
 			var superTableNav = new SuperTableNav();
@@ -66,7 +67,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm that the hover text for the (.*) card is: (.*)")]
+		[RegexStepDefinition(@"I confirm that the hover text for the (.*) card is: (.*)")]
 		public void ConfirmHoverText(string card, string text)
 		{
 			var superTableNav = new SuperTableNav();
@@ -75,7 +76,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 				String.Format("PASS. {0} card's tool tip text matched what was expected.", card));
 		}
 
-		[StepDefinition(@"I confirm that I (see|do not see) the three cards to the right of the Search field and buttons")]
+		[RegexStepDefinition(@"I confirm that I (see|do not see) the three cards to the right of the Search field and buttons")]
 		public void ConfirmSeeOrNotCards(string choice)
 		{
 			var superTableNav = new SuperTableNav();
@@ -89,7 +90,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			}
 		}
 
-		[StepDefinition(@"I confirm that I see card with label: (.*)")]
+		[RegexStepDefinition(@"I confirm that I see card with label: (.*)")]
 		public void ConfirmSeeCard(string cardLabel)
 		{
 			var superTableNav = new SuperTableNav();

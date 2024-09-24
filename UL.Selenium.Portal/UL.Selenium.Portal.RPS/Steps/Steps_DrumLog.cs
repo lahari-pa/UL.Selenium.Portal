@@ -6,6 +6,7 @@ using Castle.Core.Internal;
 using OpenQA.Selenium;
 using Reqnroll;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Selenium.Portal.RPS.Classes;
 using UL.Selenium.Portal.RPS.Selenium_Classes;
@@ -17,8 +18,8 @@ namespace UL.Selenium.Portal.RPS.Steps
     class Steps_DrumLog
     {
 
-        [StepDefinition(@"I confirm the Drum Log tab has loaded")]
-        [StepDefinition(@"I confirm the Drum Log page refreshes")]
+        [RegexStepDefinition(@"I confirm the Drum Log tab has loaded")]
+        [RegexStepDefinition(@"I confirm the Drum Log page refreshes")]
         public void HomeTabLoaded()
         {
             Report.IsTrue(new TopBar().WaitForContainerToBeVisible(), "Top bar did not load!");
@@ -28,7 +29,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(new DrumLog().WaitForContainerToBeVisible(), "Page content did not load", "Page content loaded");
         }
 
-        [StepDefinition(@"In the Drum Log Page, I click the More Filters Button")]
+        [RegexStepDefinition(@"In the Drum Log Page, I click the More Filters Button")]
         public void InTheDrumLogPageIClickTheMoreFiltersOption()
         {
             Report.IsTrue(new DrumLog().ClickMoreFiltersOptionButton(), "Failed to click the more filters button", "Successfully clicked the more filters button");
@@ -37,19 +38,19 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 
 
-        [StepDefinition(@"In the Drum Log Page, The More Filters Popup is showing")]
+        [RegexStepDefinition(@"In the Drum Log Page, The More Filters Popup is showing")]
         public void InTheDrumLogPageIClickTheMoreFiltersPopupIsShowing()
         {
             Report.IsTrue(new DrumLog.MoreFiltersPopup().WaitForContainerToBeVisible(), "The More filters popup was not showing", "The More filters popup was showing");
         }
 
-        [StepDefinition(@"In the Drum Log Page, The More Filters Popup is not showing")]
+        [RegexStepDefinition(@"In the Drum Log Page, The More Filters Popup is not showing")]
         public void InTheDrumLogPageIClickTheMoreFiltersPopupIsNotShowing()
         {
             Report.IsTrue(new DrumLog.MoreFiltersPopup().WaitForContainerToBeInvisible(), "The More filters popup was showing", "The More filters popup was not showing");
         }
 
-        [StepDefinition(@"In the Drum Log Page More Filters Popup, I check that the following filters fields exist:")]
+        [RegexStepDefinition(@"In the Drum Log Page More Filters Popup, I check that the following filters fields exist:")]
         public void InTheDrumLogPageMoreFiltersPopupCheckFiltersExist(Table table)
         {
             List<string> filters = new List<string>();
@@ -63,25 +64,25 @@ namespace UL.Selenium.Portal.RPS.Steps
             }
         }
 
-        [StepDefinition(@"In the Drum Log Page More Filters Popup, I check that the Cancel Button Exists")]
+        [RegexStepDefinition(@"In the Drum Log Page More Filters Popup, I check that the Cancel Button Exists")]
         public void InTheDrumLogPageMoreFiltersPopupCheckCancelButtonExists()
         {
             Report.IsTrue(new DrumLog.MoreFiltersPopup().CancelButtonIsPresent(), "The cancel button did not exists", "The cancel button exists");
         }
 
-        [StepDefinition(@"In the Drum Log Page More Filters Popup, I check that the Apply Filter Button Exists")]
+        [RegexStepDefinition(@"In the Drum Log Page More Filters Popup, I check that the Apply Filter Button Exists")]
         public void InTheDrumLogPageMoreFiltersPopupCheckApplyFilterButtonExists()
         {
             Report.IsTrue(new DrumLog.MoreFiltersPopup().ApplyFilterButtonIsPresent(), "The Apply Filter button did not exists", "The Apply Filter button exists");
         }
 
-        [StepDefinition(@"In the Drum Log Page More Filters Popup, I Click the the Cancel Button")]
+        [RegexStepDefinition(@"In the Drum Log Page More Filters Popup, I Click the the Cancel Button")]
         public void InTheDrumLogPageMoreFiltersPopupClickCancelButton()
         {
             Report.IsTrue(new DrumLog.MoreFiltersPopup().ClickCancelButton(), "The Cancel button was not clicked", "The Cancel button was clicked successfully");
         }
 
-        [StepDefinition(@"In the Drum Log Page More Filters Popup, I Click the the Apply Filter Button")]
+        [RegexStepDefinition(@"In the Drum Log Page More Filters Popup, I Click the the Apply Filter Button")]
         public void InTheDrumLogPageMoreFiltersPopupClickApplyFilterButton()
         {
             Report.IsTrue(new DrumLog.MoreFiltersPopup().ClickApplyFiltersButton(), "The Apply Filter button was not clicked", "The Apply Filter button was clicked successfully");
@@ -92,7 +93,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 
 
-        [StepDefinition(@"In the Drum Log Page More Filters Popup, I check that the: (.*) field is a drop down field")]
+        [RegexStepDefinition(@"In the Drum Log Page More Filters Popup, I check that the: (.*) field is a drop down field")]
         public void InTheDrumLogPageMoreFiltersPopupCheckThatFieldIsADropDown(string label)
         {
             Report.IsTrue(new DrumLog.MoreFiltersPopup().FieldIsADropDown(label), "The field was not a drop down", "The field was a drop down");
@@ -100,7 +101,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"In the Drum Log page, I select the option: (.*) from the: (.*) drop down menu")]
+        [RegexStepDefinition(@"In the Drum Log page, I select the option: (.*) from the: (.*) drop down menu")]
         public void InTheDrumLogPageISelectStatusOption(string option, string section)
         {
             if (option.Contains("SavedProduct"))
@@ -111,19 +112,19 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [StepDefinition(@"In the Drum Log page, I Verify page refreshes in the background with a a breadcrumb matching the item you selected shown: (.*)")]
+        [RegexStepDefinition(@"In the Drum Log page, I Verify page refreshes in the background with a a breadcrumb matching the item you selected shown: (.*)")]
         public void InTheDrumLogPageIVerifyItemsInBreadCrumbs(string itemName)
         {
             Report.IsTrue(new DrumLog().ItemNameBreadCrumb()== itemName, "Failed to show breadcrumb matching the item you selected", "breadcrumb matching the item you selected is shown");
         }
 
-        [StepDefinition(@"In the Drum Log page, I Verify page refreshes in the background with a new row called: (.*)")]
+        [RegexStepDefinition(@"In the Drum Log page, I Verify page refreshes in the background with a new row called: (.*)")]
         public void InTheDrumLogPageIVerifyBreadCrumbs(string rowName)
         {
             Report.Failure("Can not automate currently, as there is no row");
         }
 
-        [StepDefinition(@"I confirm that the Drum Log page bread crumb area contains the label: (.*)")]
+        [RegexStepDefinition(@"I confirm that the Drum Log page bread crumb area contains the label: (.*)")]
         public void IConfirmThatTheDrumLogPageBreadCrumbAreaContainsLabel(string label)
         {
             if (label.Contains("SavedProduct"))
@@ -141,7 +142,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(new DrumLog().ConfirmBreadCrumbAreaContainsLabel(label), "The Bread crumb area did not contain the label", "The bread crumb are contained the label");
         }
 
-        [StepDefinition(@"I confirm the Drum Log Page background color is: grey")]
+        [RegexStepDefinition(@"I confirm the Drum Log Page background color is: grey")]
         public void ConfirmDrumLogBackgroundColorIsGrey()
         {
 
@@ -153,7 +154,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"I confirm the Drum Log Page Text color is: black")]
+        [RegexStepDefinition(@"I confirm the Drum Log Page Text color is: black")]
         public void ConfirmDrumLogTextColorIsGrey()
         {
 
@@ -165,25 +166,25 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"I Check that the current page title is 'Drum Log'")]
+        [RegexStepDefinition(@"I Check that the current page title is 'Drum Log'")]
         public void CheckDrumLogTitle()
         {
             Report.IsTrue(new DrumLog().GetCurrentPageTitle() == "Drum Log", "The Page title was not as expected", "The page title was as expected");
         }
 
-        [StepDefinition(@"I confirm the Drum Log search box is shown")]
+        [RegexStepDefinition(@"I confirm the Drum Log search box is shown")]
         public void ConfirmDrumLogSearchBoxIsPresent()
         {
             Report.IsTrue(new DrumLog().SearchBoxPresent(), "The search box was not present", "The search box was present");
         }
 
-        [StepDefinition(@"I confirm that the Drum Log search box place holder text reads: (.*)")]
+        [RegexStepDefinition(@"I confirm that the Drum Log search box place holder text reads: (.*)")]
         public void IConfirmThatDrumLogSearchBoxPlaceHolderTextReads(string placeholderText)
         {
             Report.IsTrue(new DrumLog().SearchBoxPlaceHolderText() == placeholderText, "The place holder text did not match the expected", "The place holder text was as expected");
         }
 
-        [StepDefinition(@"I confirm that the Drum Log Page buttons to the right of the search box are as follows:")]
+        [RegexStepDefinition(@"I confirm that the Drum Log Page buttons to the right of the search box are as follows:")]
         public void IConfirmThatInTheDrumLogPageButtonsAreAsFollows(Table table)
         {
             List<string> buttons = new List<string>();
@@ -200,19 +201,19 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [StepDefinition(@"I confirm that the Drum Log page shows the bread crumb area")]
+        [RegexStepDefinition(@"I confirm that the Drum Log page shows the bread crumb area")]
         public void IConfirmThatTheDrumLogPageShowsBreadCrumbArea()
         {
             Report.IsTrue(new DrumLog().ConfirmBreadCrumbAreaIsPresent(), "The breadcrumb area was not present", "The bread crumb area was present");
         }
 
-        [StepDefinition(@"I confirm that the Drum Log page does not show the bread crumb area")]
+        [RegexStepDefinition(@"I confirm that the Drum Log page does not show the bread crumb area")]
         public void IConfirmThatTheDrumLogPageDoesNotShowTheBreadCrumbArea()
         {
             Report.IsTrue(!new DrumLog().ConfirmBreadCrumbAreaIsPresent(), "The bread crumb area was present", "The breadcrumb area was not present");
         }
 
-        [StepDefinition(@"I confirm that the Drum Log page shows the headings row in the table")]
+        [RegexStepDefinition(@"I confirm that the Drum Log page shows the headings row in the table")]
         public void IConfirmThatTheDrumLogPageShowsHeadingsRow()
         {
             Report.IsTrue(new DrumLog().ConfirmTableHeadingRowIsPresent(), "The headings row was not found", "The headings row was found");
@@ -220,7 +221,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 
 
-        [StepDefinition(@"I confirm that the Drum Log page headings row has a grey background color")]
+        [RegexStepDefinition(@"I confirm that the Drum Log page headings row has a grey background color")]
         public void IConfirmThatDrumLogPageHeadingsShowGrey()
         {
             string expectedColorString = "rgba(240, 243, 245, 1)";
@@ -230,13 +231,13 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"In the Drum Log page, I confirm the column labels show a colon \(:\) icon as the column resize anchor")]
+        [RegexStepDefinition(@"In the Drum Log page, I confirm the column labels show a colon \(:\) icon as the column resize anchor")]
         public void InTheDrumLogPageConfirmLabelsShowColonAsResizeAnchor()
         {
             Report.IsTrue(new DrumLog().CheckColumnSesizeAnchorShowsSymbol(), "not all columns showed a colon as the resize anchor in the main table", "All columns showed a colon as ther reize anchor in the main table");
         }
 
-        [StepDefinition(@"In the Drum Log page, I confirm that the main table has the following columns:")]
+        [RegexStepDefinition(@"In the Drum Log page, I confirm that the main table has the following columns:")]
         public void InDrumLogPageIConfirmColumnsNames(Table table)
         {
             List<string> expectedHeadings = new List<string>();
@@ -250,7 +251,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(expectedHeadings.SequenceEqual(foundHeadings), "The headings found were not as expected", "The headings found matched the expected headings");
         }
 
-        [StepDefinition(@"In the Drum Logg page, I confirm that the main table shows data rows")]
+        [RegexStepDefinition(@"In the Drum Logg page, I confirm that the main table shows data rows")]
         public void InTheDrumLogPageIConfirmThatTableShowsDataRows()
         {
             int rowCount = new DrumLog().ProductsCount();
@@ -258,13 +259,13 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"In the Drum Log page, I confirm that In the data row to the far left I confirm I see a right facing arrow \(Expand arrow\)")]
+        [RegexStepDefinition(@"In the Drum Log page, I confirm that In the data row to the far left I confirm I see a right facing arrow \(Expand arrow\)")]
         public void InTheDrumLogPageIConfirmThatTheTableContainsRightFacingArrow()
         {
             Report.IsTrue(new DrumLog().SubGridColumnContainsRightFacingArrow(), "The first column did not contain a right facing arrow in every row", "The first column did contain a right facing arrow in every row");
         }
 
-        [StepDefinition(@"In the Drum Log page, I confirm that to the right of the expand arrow I see the Drum Name")]
+        [RegexStepDefinition(@"In the Drum Log page, I confirm that to the right of the expand arrow I see the Drum Name")]
         public void InTheDrumLogPageConfirmProductIDToRightOfExpandArrow()
         {
             Report.IsTrue(new DrumLog().HeadingCheckDrumNameColumnIsToRightOfExpandArrow(), "The Drum Name column heading was not to the right of the expand arrow column heading", "The Drum Name column heading was to the right of the expand arrow column heading");
@@ -272,47 +273,47 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(new DrumLog().CheckColumnContainsDrumName(), "The column to the right of the expand arrow column did not contain Drum Names in all rows", "The column to the right of the expand arrow column contained Drum Name in all rows");
         }
 
-        [StepDefinition(@"~~MANUAL CHECK~~ In the Drum Log page, I confirm that each column of data is aligned to the left of the column")]
+        [RegexStepDefinition(@"~~MANUAL CHECK~~ In the Drum Log page, I confirm that each column of data is aligned to the left of the column")]
         public void InTheRecentActivitiesPageConfirmDataAlignedToLeft()
         {
             Report.Warning("MANAUAL CHECK: In the data row I confirm each column of data is aligned to the left of the column");
             Report.Screenshot();
         }
 
-        [StepDefinition(@"In the Drum Log page, I confirm that the table shows alternating background color \(grey to white\)")]
+        [RegexStepDefinition(@"In the Drum Log page, I confirm that the table shows alternating background color \(grey to white\)")]
         public void InTheDrumLogPageIConfirmTableShowsAlternatingBackgroundColor()
         {
             Report.IsTrue(new DrumLog().CheckTableAlternatesBetweenGreyAndWhite(), "the table background color was not alternating between grey and white", "the table background color was alternating between grey and white");
         }
 
-        [StepDefinition(@"In the Drum Log page, below the Most Recent Activity table I confirm: page footer is shown")]
+        [RegexStepDefinition(@"In the Drum Log page, below the Most Recent Activity table I confirm: page footer is shown")]
         public void InTheDrumLogPageICheckThatTheTableFooterIsShown()
         {
             Report.IsTrue(new DrumLog().ProductsGridFooterPresent(), "The table footer was not shown", "The table footer was shown");
         }
 
-        [StepDefinition(@"In the Drum Log Page, In the Products table footer, select the items per page option: (.*)")]
+        [RegexStepDefinition(@"In the Drum Log Page, In the Products table footer, select the items per page option: (.*)")]
         public void InThDrumLogPageInProductsTableFooterSelectItemPerPageOption(string option)
         {
             Report.IsTrue(new DrumLog().SelectOptionFromItemsPerPageSelector(option), "The Option was not selected", "The option was selected successfully");
             this.HomeTabLoaded();
         }
 
-        [StepDefinition(@"In the Drum Log Page, In the Products table I scroll down to the bottom product and check its interactable")]
+        [RegexStepDefinition(@"In the Drum Log Page, In the Products table I scroll down to the bottom product and check its interactable")]
         public void InTheDrumLogPageInProductsTableScrollToBottomProduct()
         {
             Report.IsTrue(new DrumLog().ScrollToAndCheckBottomProductInteractable(), "Failed to scroll to and interact with the bottom product", "Successfully scrolled to and interact with the bottom product");
 
         }
 
-        [StepDefinition(@"In the Drum Log Page, In the Products table I scroll up to the top product and check its interactable")]
+        [RegexStepDefinition(@"In the Drum Log Page, In the Products table I scroll up to the top product and check its interactable")]
         public void InTheDrumLogPageInProductsTableScrollToTopProduct()
         {
             Report.IsTrue(new DrumLog().ScrollToAndCheckTopProductInteractable(), "Failed to scroll to and interact with the top product", "Successfully scrolled to and interact with the top product");
 
         }
 
-        [StepDefinition(@"In the Drum Log Page, In the Products table I click the Reset Button")]
+        [RegexStepDefinition(@"In the Drum Log Page, In the Products table I click the Reset Button")]
         public void InTheDrumLogPageInProductsTableIClickReset()
         {
             Report.IsTrue(new DrumLog().ClickResetButton(), "Failed to click reset", "Successfully clicked the reset button");
@@ -320,20 +321,20 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [StepDefinition(@"~~MANUAL CHECK~~ In the Drum Log page, I confirm a slider bar is shown to the right of the table")]
+        [RegexStepDefinition(@"~~MANUAL CHECK~~ In the Drum Log page, I confirm a slider bar is shown to the right of the table")]
         public void InTheRecentActivitiesPageConfirmSliderBarShownToRightOfTable()
         {
             Report.Warning("MANAUAL CHECK: In the data row I confirm a slider bar is shown to the right of the table");
             Report.Screenshot();
         }
 
-        [StepDefinition(@"In the Drum Log page, I expand the first row of the products table")]
+        [RegexStepDefinition(@"In the Drum Log page, I expand the first row of the products table")]
         public void InTheDrumLogPageIExpandFirstRow()
         {
             Report.IsTrue(new DrumLog().ExpandFirstRow(), "Failed to expand the first row", "The first row was expanded successfully");
         }
 
-        [StepDefinition(@"In the Drum Log page, I check that there are additional rows below the expanded version of the first row in the products table.")]
+        [RegexStepDefinition(@"In the Drum Log page, I check that there are additional rows below the expanded version of the first row in the products table.")]
         public void InTheDrumLogPageCheckFirstRowExpandedAdditionalRows()
         {
             IWebElement row = new DrumLog().GetFirstExpandedDrumRow();
@@ -343,7 +344,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 
 
-        [StepDefinition(@"In the Drum Log page, I confirm that the expanded first row has following columns in the sub table:")]
+        [RegexStepDefinition(@"In the Drum Log page, I confirm that the expanded first row has following columns in the sub table:")]
         public void InDrumLogPageIConfirmExapndedFirstRowColumnsNames(Table table)
         {
             IWebElement row = new DrumLog().GetFirstExpandedDrumRow();
@@ -363,7 +364,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(differences.Any() == false && expectedHeadings.Count() == foundHeadings.Count(), "The headings found were not as expected", "The headings found matched the expected headings");
         }
 
-        [StepDefinition(@"In the Drum Log page, I confirm that the expanded first row column headings show the ':' resize anchor")]
+        [RegexStepDefinition(@"In the Drum Log page, I confirm that the expanded first row column headings show the ':' resize anchor")]
         public void InDrumLogPageConfrimExpandedFirstRowResizeAnchor()
         {
             IWebElement row = new DrumLog().GetFirstExpandedDrumRow();
@@ -373,34 +374,34 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 
 
-        [StepDefinition(@"In the Drum Log page, I confirm that in the expanded first row I see the expanded menu icon to the left")]
+        [RegexStepDefinition(@"In the Drum Log page, I confirm that in the expanded first row I see the expanded menu icon to the left")]
         public void InTheDrumLogPageIConfirmThatInExpandedFirstRowIseeExpandedMenuIcon()
         {
             IWebElement row = new DrumLog().GetFirstExpandedDrumRow();
             Report.IsTrue(new DrumLog().RowSubTableContainsExpandedMenuIcon(row), "The expanded first row did not contain an expanded menu icon the the left", "The expanded first row did contain an expanded menu icon the the left");
         }
 
-        [StepDefinition(@"In the Drum Log page, I collapse the first row of the products table")]
+        [RegexStepDefinition(@"In the Drum Log page, I collapse the first row of the products table")]
         public void InTheDrumLogPageICollapseFirstRow()
         {
             Report.IsTrue(new DrumLog().CollapseFirstRow(), "Failed to collapse the first row", "The first row was collapsed successfully");
         }
 
-        [StepDefinition(@"In the Drum Log page, I check that there are no additional rows below the expanded version of the first row in the products table.")]
+        [RegexStepDefinition(@"In the Drum Log page, I check that there are no additional rows below the expanded version of the first row in the products table.")]
         public void InTheDrumLogPageCheckFirstRowExpandedNoAdditionalRows()
         {
             IWebElement row = new DrumLog().GetFirstExpandedDrumRow();
             Report.IsTrue(row == null, "There was additional rows below the expanded first row", "There was not any additional rows below the expanded first row");
         }
 
-        [StepDefinition(@"In the Drum Log page, I check that the data shown is not repeated")]
+        [RegexStepDefinition(@"In the Drum Log page, I check that the data shown is not repeated")]
         public void InTheDrumLogPageCheckDataIsNotDuplicated()
         {
             Report.IsTrue(new DrumLog().DrumNameNotRepeated(), "There was repeated data", "No Repeated Data was found");
         }
 
 
-        [StepDefinition(@"In the Drum Log page, I Look for an expanded Row that contains Date Removed data and save it to context as: (.*)")]
+        [RegexStepDefinition(@"In the Drum Log page, I Look for an expanded Row that contains Date Removed data and save it to context as: (.*)")]
         public void InTheDrumLogLookForDateRemovedData(string savedAs)
         {
 
@@ -437,28 +438,28 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [StepDefinition(@"In the Drum Log page, I check that the Date Removed Column For the row saved as: (.*) shows in the format yyyy-mm-dd")]
+        [RegexStepDefinition(@"In the Drum Log page, I check that the Date Removed Column For the row saved as: (.*) shows in the format yyyy-mm-dd")]
         public void InTheDrumLogCheckExpandedGivenRowDateRemovedFormat(string savedAs)
         {
             IWebElement row = (IWebElement)Context.GetFromContext(savedAs);
             Report.IsTrue(new DrumLog().CheckDateRemovedFormat(row), "Not all values for Date Removed were in the expected format", "All values for Date Removed were in the expected format");
         }
 
-        [StepDefinition(@"In the Drum Log page, I check that the 'Date In Drum' Column For the first row shows in the format yyyy-mm-dd")]
+        [RegexStepDefinition(@"In the Drum Log page, I check that the 'Date In Drum' Column For the first row shows in the format yyyy-mm-dd")]
         public void InTheDrumLogCheckExpandedFirstRowDateInDrumFormat()
         {
             IWebElement row = new DrumLog().GetFirstExpandedDrumRow();
             Report.IsTrue(new DrumLog().CheckDateInDrumFormat(row), "Not all values for Date In Drum were in the expected format", "All values for Date In Drum were in the expected format");
         }
 
-        [StepDefinition(@"In the Drum Log page, I check that the 'Scan Date' Column For the first row shows in the format yyyy-mm-dd")]
+        [RegexStepDefinition(@"In the Drum Log page, I check that the 'Scan Date' Column For the first row shows in the format yyyy-mm-dd")]
         public void InTheDrumLogCheckExpandedFirstRowScanDateFormat()
         {
             IWebElement row = new DrumLog().GetFirstExpandedDrumRow();
             Report.IsTrue(new DrumLog().CheckScanDateFormat(row), "Not all values for Scan Date were in the expected format", "All values for Scan Date were in the expected format");
         }
 
-        [StepDefinition(@"In the Drum Log Page, In the table footer I click on the Last Page Button")]
+        [RegexStepDefinition(@"In the Drum Log Page, In the table footer I click on the Last Page Button")]
         public void InThDrumLogPageInTableFooterAndClickLastPageButton()
         {
             Report.IsTrue(new DrumLog().LastPageButtonExists(), "Failed to find the last page button", "Successfully found the last page button");
@@ -466,7 +467,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             this.HomeTabLoaded();
         }
 
-        [StepDefinition(@"In the Drum Log Page, In the Products table footer I check that the current page is the same as the last page number")]
+        [RegexStepDefinition(@"In the Drum Log Page, In the Products table footer I check that the current page is the same as the last page number")]
         public void InTheRecentActivitiesPageInProductsTableFooterCheckFinalPageActive()
         {
             string currentNumber = new DrumLog().GetCurrentPageNumber();
@@ -486,7 +487,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"In the Drum Log Page, In the Products table footer I click on the Next Page Button")]
+        [RegexStepDefinition(@"In the Drum Log Page, In the Products table footer I click on the Next Page Button")]
         public void InTheDrumLogPageInProductsTableFooterAndClickNextPageButton()
         {
             Report.IsTrue(new DrumLog().NextPageButtonExists(), "Failed to find the Next page button", "Successfully found the Next page button");
@@ -495,14 +496,14 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"In the Drum Log Page, In the Products table footer I check that the current page is: (.*)")]
+        [RegexStepDefinition(@"In the Drum Log Page, In the Products table footer I check that the current page is: (.*)")]
         public void InTheDrumLogPageInProductsTableFooterCheckCurrentPageExpected(string expectedPage)
         {
             string currentNumber = new DrumLog().GetCurrentPageNumber();
             Report.IsTrue(currentNumber == expectedPage, "The current page number was not as expected", "The current page number was as expected");
         }
 
-        [StepDefinition(@"In the Drum Log Page, In the Products table footer I click on the Previous Page Button")]
+        [RegexStepDefinition(@"In the Drum Log Page, In the Products table footer I click on the Previous Page Button")]
         public void InTheDrumLogPageInProductsTableFooterAndClickPreviousPageButton()
         {
             Report.IsTrue(new DrumLog().PreviousPageButonExists(), "Failed to find the Previous page button", "Successfully found the Previous page button");
@@ -511,13 +512,13 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"In the Drum Log page, In the products table footer I confirm I see the first page icon")]
+        [RegexStepDefinition(@"In the Drum Log page, In the products table footer I confirm I see the first page icon")]
         public void InTheDrumLogPageInProductsTableFooterIConfirmISeeTheFirstPageIcon()
         {
             Report.IsTrue(new DrumLog().FirstPageButonExists(), "Failed to find the First page button", "Successfully found the First page button");
         }
 
-        [StepDefinition(@"In the Drum Log Page, In the Products table footer I click on the First Page Button")]
+        [RegexStepDefinition(@"In the Drum Log Page, In the Products table footer I click on the First Page Button")]
         public void InTheDrumLogPageInProductsTableFooterAndClickFirstPageButton()
         {
             Report.IsTrue(new DrumLog().FirstPageButonExists(), "Failed to find the First page button", "Successfully found the First page button");
@@ -526,7 +527,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"In the Drum Log Page, In the Products table footer I enter the page number value of: (.*)")]
+        [RegexStepDefinition(@"In the Drum Log Page, In the Products table footer I enter the page number value of: (.*)")]
         public void InTheDrumLogPageInProductsTableFooterEnterPageNumber(string value)
         {
             new DrumLog().EnterCurrentPageValue(value);
@@ -534,7 +535,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             this.InTheDrumLogPageInProductsTableFooterCheckCurrentPageExpected(value);
         }
 
-        [StepDefinition(@"In the Drum Log Page, In the Products table footer I confirm the product count range reflects the page I am on")]
+        [RegexStepDefinition(@"In the Drum Log Page, In the Products table footer I confirm the product count range reflects the page I am on")]
         public void InTheDrumLogPageInProductsTableFooteProducsAccountCorrect()
         {
             var drumLogPage = new DrumLog();
@@ -544,7 +545,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [StepDefinition(@"In the Drum Log Page, In the Products table I select a random product and save Drum Data to context as: (.*)")]
+        [RegexStepDefinition(@"In the Drum Log Page, In the Products table I select a random product and save Drum Data to context as: (.*)")]
         public void InTheDrumLogPageInProductsTableISelectRandomDrumAndSaveDataAs(string savedAs)
         {
             string drumName = GeneralUtilities.SelectRandomFromListOfStrings(new DrumLog().GetCurrentProductDrumName());
@@ -552,7 +553,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Context.AddToContext(savedAs, currentData);
         }
 
-        [StepDefinition(@"In the Drum Log Page, In the Products table I select the first product and save Drum Data to context as: (.*)")]
+        [RegexStepDefinition(@"In the Drum Log Page, In the Products table I select the first product and save Drum Data to context as: (.*)")]
         public void InTheDrumLogPageInProductsTableISelectFirstDrumAndSaveDataAs(string savedAs)
         {
             string drumName = new DrumLog().GetCurrentProductDrumName().First();
@@ -562,7 +563,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 
 
-        [StepDefinition(@"In the Drum Log, In the table I search for the drum with Drum Name: (.*)")]
+        [RegexStepDefinition(@"In the Drum Log, In the table I search for the drum with Drum Name: (.*)")]
         public void InTheDrumLogPageInProductsTableSearchForDrumName(string drumName)
         {
             if (drumName.ToLower().Contains("drumlogdata"))
@@ -575,7 +576,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"In the Drum Log Page, In the table the first result matches the Drum Name: (.*)")]
+        [RegexStepDefinition(@"In the Drum Log Page, In the table the first result matches the Drum Name: (.*)")]
         public void InTheDrumLogPageInTableFirstResultMatchesDrumName(string drumName)
         {
 
@@ -587,7 +588,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(new DrumLog().GetFirstDrumName() == drumName, "The Drum Name did not match", "The Drum Name matched");
         }
 
-        [StepDefinition(@"In the Drum Log Page, In the table the first result matches the Store Name: (.*)")]
+        [RegexStepDefinition(@"In the Drum Log Page, In the table the first result matches the Store Name: (.*)")]
         public void InTheDrumLogPageInTableFirstResultMatchesStoreName(string storeName)
         {
 
@@ -600,7 +601,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [StepDefinition(@"In the Drum Log, In the table I search for the drum with Store Name: (.*)")]
+        [RegexStepDefinition(@"In the Drum Log, In the table I search for the drum with Store Name: (.*)")]
         public void InTheDrumLogPageInTableSearchForStoreName(string storeName)
         {
             if (storeName.ToLower().Contains("drumlogdata"))
@@ -614,7 +615,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"In the Drum Log, In the table I search for the drum with Location: (.*)")]
+        [RegexStepDefinition(@"In the Drum Log, In the table I search for the drum with Location: (.*)")]
         public void InTheDrumLogPageInTableSearchForLoction(string loction)
         {
             if (loction.ToLower().Contains("drumlogdata"))
@@ -627,7 +628,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"In the Drum Log, In the table I search for the drum with partial Location: (.*)")]
+        [RegexStepDefinition(@"In the Drum Log, In the table I search for the drum with partial Location: (.*)")]
         public void InTheDrumLogPageInTableSearchForPartialLoction(string location)
         {
             if (location.ToLower().Contains("drumlogdata"))
@@ -644,7 +645,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"In the Drum Log Page, In the table the first result matches the Location: (.*)")]
+        [RegexStepDefinition(@"In the Drum Log Page, In the table the first result matches the Location: (.*)")]
         public void InTheDrumLogPageInTableFirstResultMatchesLocation(string location)
         {
 
@@ -661,7 +662,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         /// This is for the expanded column called 'Name', if
         /// </summary>
         /// <param name="name"></param>
-        [StepDefinition(@"In the Drum Log Page, In the table I search for the drum with Name: (.*) for the expanded row in postion: (.*)")]
+        [RegexStepDefinition(@"In the Drum Log Page, In the table I search for the drum with Name: (.*) for the expanded row in postion: (.*)")]
         public void InTheDrumLogPageInTableSearchForNameFromData(string name, string position)
         {
             if (name.ToLower().Contains("drumlogdata"))
@@ -677,7 +678,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"In the Drum Log Page, In the table I search for the text: (.*)")]
+        [RegexStepDefinition(@"In the Drum Log Page, In the table I search for the text: (.*)")]
         public void InTheDrumLogPageInTableSearchForText(string text)
         {
 
@@ -691,7 +692,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"For the Drum Data saved as: (.*) I save the Name for the data in postion: (.*) as: (.*)")]
+        [RegexStepDefinition(@"For the Drum Data saved as: (.*) I save the Name for the data in postion: (.*) as: (.*)")]
         public void ForTheDrumLogDataSavedAsSaveNameForPositionAs(string savedAs, int position, string saveAs)
         {
             var drumData = (DrumLog.DrumLogData)Context.GetFromContext(savedAs);
@@ -702,7 +703,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [StepDefinition(@"For the Drum Data saved as: (.*) I save the Manufacturer for the data in postion: (.*) as: (.*)")]
+        [RegexStepDefinition(@"For the Drum Data saved as: (.*) I save the Manufacturer for the data in postion: (.*) as: (.*)")]
         public void ForTheDrumLogDataSavedAsSaveManufacturerForPositionAs(string savedAs, int position, string saveAs)
         {
             var drumData = (DrumLog.DrumLogData)Context.GetFromContext(savedAs);
@@ -712,7 +713,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"In the Drum Log page, I check that the first result in the table contains the Name saved as: (.*)")]
+        [RegexStepDefinition(@"In the Drum Log page, I check that the first result in the table contains the Name saved as: (.*)")]
         public void InTheDrumLogPageCheckFirstResultContainsNameSavedAs(string savedAs)
         {
             this.InTheDrumLogPageInProductsTableISelectFirstDrumAndSaveDataAs("CurrentFirstData");
@@ -737,7 +738,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [StepDefinition(@"In the Drum Log, In the table I search for the drum with Region Name: (.*)")]
+        [RegexStepDefinition(@"In the Drum Log, In the table I search for the drum with Region Name: (.*)")]
         public void InTheDrumLogPageInTableSearchForRegionName(string regionName)
         {
             if (regionName.ToLower().Contains("drumlogdata"))
@@ -754,7 +755,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"In the Drum Log Page, In the table the first result matches the Region Name: (.*)")]
+        [RegexStepDefinition(@"In the Drum Log Page, In the table the first result matches the Region Name: (.*)")]
         public void InTheDrumLogPageInTableFirstResultMatchesRegionName(string regionName)
         {
 
@@ -766,7 +767,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(new DrumLog().GetFirstLocation() == regionName, "The Region Name did not match", "The Region Name matched");
         }
 
-        [StepDefinition(@"In the Drum Log Page, In the table I find a result which matches the Drum Name: (.*) and save it as: (.*)")]
+        [RegexStepDefinition(@"In the Drum Log Page, In the table I find a result which matches the Drum Name: (.*) and save it as: (.*)")]
         public void InTheDrumLogPageInTableResultFoundMatchingDrumName(string drumName, string savedAs)
         {
 
@@ -782,7 +783,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(!wantedRow.IsNullOrEmpty(), "No Results matched the Drum Name", "A matching Drum Name was found in the results");
         }
 
-        [StepDefinition(@"In the Drum Log Page, In the Products table save the Drum Data to context as: (.*) for Drum with Drum Name: (.*)")]
+        [RegexStepDefinition(@"In the Drum Log Page, In the Products table save the Drum Data to context as: (.*) for Drum with Drum Name: (.*)")]
         public void InTheDrumLogPageInProductsTableISaveDataAsForDrumName(string savedAs, string drumName)
         {
             //check to ensure drum can be found on screen (may need to change page)
@@ -812,7 +813,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"In the Drum Log page, I check that the Data Saved As: (.*) contains the Manufacturer saved as: (.*)")]
+        [RegexStepDefinition(@"In the Drum Log page, I check that the Data Saved As: (.*) contains the Manufacturer saved as: (.*)")]
         public void InTheDrumLogPageCheckDataSavedAsContainsManufacturer(string dataSavedAs, string manufacturerSavedAs)
         {
 
@@ -833,7 +834,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"In the Drum Log page More Filters Popup I check for a scroll bar if the Date Removed Filter Option is not displayed on screen")]
+        [RegexStepDefinition(@"In the Drum Log page More Filters Popup I check for a scroll bar if the Date Removed Filter Option is not displayed on screen")]
         public void InTheDrumLogPageMoreFilterPopupCheckDateRemovedFilterIsDisplayed()
         {
             if (new DrumLog.MoreFiltersPopup().DateRemovedOnScreen())
@@ -850,7 +851,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"In the Drum Log page More Filters Popup I check I can Scroll through the Store Name options")]
+        [RegexStepDefinition(@"In the Drum Log page More Filters Popup I check I can Scroll through the Store Name options")]
         public void InTheDrumLogPageMoreFilterPopupCheckICanScrollThroughStroreNameOptions()
         {
             Report.IsTrue(new DrumLog.MoreFiltersPopup().TopStoreNameFilterOptionVisible(), "The top filter option was not visible", "The top filter option was visible");
@@ -862,7 +863,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"In the Drum Log Page More Filters Popup, I Open the Store Name Filter Drop Down menu")]
+        [RegexStepDefinition(@"In the Drum Log Page More Filters Popup, I Open the Store Name Filter Drop Down menu")]
         public void InTheDrumLogPageMoreFiltersPopupOpenStoreNameFilterDropDown()
         {
             Report.IsTrue(new DrumLog.MoreFiltersPopup().OpenStoreNameDropDown(), "The Store Name Drop Down Menu was not opened", "The Store Name Drop Down Menu was opened");
@@ -870,7 +871,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"In the Drum Log Page More Filters Popup, I Close the Store Name Filter Drop Down menu")]
+        [RegexStepDefinition(@"In the Drum Log Page More Filters Popup, I Close the Store Name Filter Drop Down menu")]
         public void InTheDrumLogPageMoreFiltersPopupCloseStoreNameFilterDropDown()
         {
             Report.IsTrue(new DrumLog.MoreFiltersPopup().CloseStoreNameDropDown(), "The Store Name Drop Down Menu was not closed", "The Store Name Drop Down Menu was closed");
@@ -878,7 +879,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"In the Drum Log Page More Filters Popup, I check the drop down options for the filter: (.*) match:")]
+        [RegexStepDefinition(@"In the Drum Log Page More Filters Popup, I check the drop down options for the filter: (.*) match:")]
         public void InTheDrumLogPageMoreFiltersPopupCheckDropDownOptionsForFilterMatch(string filter, Table table)
         {
             List<string> filtersExpected = new List<string>();
@@ -906,7 +907,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"In the Drum Log Page More Filters button is displayed")]
+        [RegexStepDefinition(@"In the Drum Log Page More Filters button is displayed")]
         public void InTheDrumLogPageMoreFiltersButtonIsDisplayed()
         {
             Report.IsTrue(new DrumLog().ConfirmMoreFiltersOptionButtonIsDisplayed(), "More Filters button is not displayed", "More Filters button is displayed successfully");
@@ -914,14 +915,14 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [StepDefinition(@"In the Drum Log page, I confirm data is shown in the column:Volume")]
+        [RegexStepDefinition(@"In the Drum Log page, I confirm data is shown in the column:Volume")]
         public void InTheDrumLogPageIConfirmVolumeColumnHasData()
         {
             Report.IsTrue(new DrumLog().ConfirmVolumeColumnDataIsDisplayed(), "Volume column data is not displayed", "Volume column data is displayed successfully");
 
         }
 
-        [StepDefinition(@"In the Drum Log Page, I save all the Results to context as: (.*)")]
+        [RegexStepDefinition(@"In the Drum Log Page, I save all the Results to context as: (.*)")]
         public void InTheDrumLogPageInProductsTableISaveAllTheResultsToContextAs(string savedAs)
         {
 
@@ -939,7 +940,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [StepDefinition(@"In the Drum log Page, I confirm the Products shown in the export file saved as: (.*)  match the products saved as: (.*)")]
+        [RegexStepDefinition(@"In the Drum log Page, I confirm the Products shown in the export file saved as: (.*)  match the products saved as: (.*)")]
         public void InTheDrumLogPageIConfirmProductsInExportFileMatchSavedProducts(string fileSavedAs, string valuesSavedAs)
         {
 
@@ -1084,28 +1085,28 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"In the Drum Log page, I click the Export To Excel Button")]
+        [RegexStepDefinition(@"In the Drum Log page, I click the Export To Excel Button")]
         public void InTheDrumLogPageIClickExportToExcelButton()
         {
             Report.IsTrue(new DrumLog().ClickExportToExcelButton(), "Failed to click Export to Excel button", "Successfully clicked Export to Excel button");
 
         }
 
-        [StepDefinition(@"In the Drum Log page, In the Export to Excel popup I click the 'x' Close icon")]
+        [RegexStepDefinition(@"In the Drum Log page, In the Export to Excel popup I click the 'x' Close icon")]
         public void InTheRecentActivitiesPageInTheExportToExcelPopupIClickXCloseIcon()
         {
             Report.IsTrue(new DrumLog().ClickHeaderCross(), "Failed to Click the 'x' Close icon", "Successfully clicked the 'x' Close icon");
 
         }
 
-        [StepDefinition(@"In the Drum Log page, In the Export to Excel popup I Confirm the 'x' Close icon is shown")]
+        [RegexStepDefinition(@"In the Drum Log page, In the Export to Excel popup I Confirm the 'x' Close icon is shown")]
         public void InTheDrumLogPageInTheExportToExcelPopupIConfirmTheXCloseiconIsShown()
         {
             Report.IsTrue(new DrumLog().HeaderCrossFound(), "The Header Cross was not found", "The Header Cross was found");
 
         }
 
-        [StepDefinition(@"In the Drum Log Page, In the Export to Excel popup I Confirm the header text reads: (.*)")]
+        [RegexStepDefinition(@"In the Drum Log Page, In the Export to Excel popup I Confirm the header text reads: (.*)")]
         public void InTheDrumLogPageInTheExportToExcelPopupIConfirmHeaderTextReads(string expectedText)
         {
             var titleText = new DrumLog().GetHeaderTitleText();
@@ -1113,7 +1114,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(titleText == expectedText, "The header text did not match", "The header text matched");
         }
 
-        [StepDefinition(@"In the Drum Log Page, In the Export to Excel popup main body I confirm there are 2 buttons displayed")]
+        [RegexStepDefinition(@"In the Drum Log Page, In the Export to Excel popup main body I confirm there are 2 buttons displayed")]
         public void InTheDrumLogPageInTheExportToExcelPopupMainBodyIConfirm2ButtonsShown()
         {
 
@@ -1122,20 +1123,20 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"In the Drum Log page, In the Export to Excel popup I Confirm the Export All Drums button is shown")]
+        [RegexStepDefinition(@"In the Drum Log page, In the Export to Excel popup I Confirm the Export All Drums button is shown")]
         public void InTheDrumLogPageInTheExportToExcelPopupIConfirmTheExportAllDrumsIsShown()
         {
             Report.IsTrue(new DrumLog().ExportAllDrumsButtonDisplayed(), "The Export All Drums was not displayed", "The Export All Drums was displayed");
 
         }
 
-        [StepDefinition(@"In the Drum Log page, In the Export to Excel popup I Confirm the Export All Drums with UPCs button is shown")]
+        [RegexStepDefinition(@"In the Drum Log page, In the Export to Excel popup I Confirm the Export All Drums with UPCs button is shown")]
         public void InTheDrumLogPageInTheExportToExcelPopupIConfirmTheExportAllDrumsWithUPCsIsShown()
         {
             Report.IsTrue(new DrumLog().ExportAllDrumsButtonDisplayed(), "The Export All Drums with UPCs was not displayed", "The Export All Drums with UPCs was displayed");
 
         }
-        [StepDefinition(@"I confirm that the Drum Log page bread crumb area does not contain the label: (.*)")]
+        [RegexStepDefinition(@"I confirm that the Drum Log page bread crumb area does not contain the label: (.*)")]
         public void IConfirmThatTheDrumLogPageBreadCrumbAreaDoesNotContainsLabel(string label)
         {
             if (label.Contains("SavedProduct"))
@@ -1153,7 +1154,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsFalse(new DrumLog().ConfirmBreadCrumbAreaContainsLabel(label), "The Bread crumb area contains the label", "The bread crumb are did not contain the label");
         }
 
-        [StepDefinition(@"In the expanded data row I am working with, in the Actions column, I click: View Data ")]
+        [RegexStepDefinition(@"In the expanded data row I am working with, in the Actions column, I click: View Data ")]
         public void InTheDrumLogPageInProductsTableIClickViewDataForFirstProduct()
         {
             Report.IsTrue(new DrumLog().ClickViewDataForFirstResultInGrid(), "Failed to click the view data for the first product", "Successfully clicked the view data for the first product");

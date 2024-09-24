@@ -11,13 +11,14 @@ using UL.Selenium.Portal.RPS.Classes;
 using UL.Selenium.Portal.RPS.Selenium_Classes;
 using UL.Automation.Reporting.Classes;
 using System.Threading;
+using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.RPS.Steps
 {
 	[Binding, Scope(Tag = "Shared")]
 	class Steps_Shared
 	{
-		[StepDefinition(@"I call Shared Step 104950 \(RPS Login - Base Functionality\) for TReVor account: (.*)")]
+		[RegexStepDefinition(@"I call Shared Step 104950 \(RPS Login - Base Functionality\) for TReVor account: (.*)")]
 		public void GivenICallSharedStepRPSLogin_BaseFunctionalityForTReVorAccountRPS_CV(string savedAs)
 		{
             Report.UseSubSteps = true;
@@ -36,7 +37,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Context.AddToContext("ActiveUser", user);
         }
 
-		[StepDefinition(@"I call Shared Step 106194 \(RPS Sign out\)")]
+		[RegexStepDefinition(@"I call Shared Step 106194 \(RPS Sign out\)")]
 		public void SharedStep106194()
 		{
 			Report.UseSubSteps = true;
@@ -47,7 +48,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		}
 
 
-		[StepDefinition(@"I call Shared Step 134361 \(RPS Login - User does not have access to ItemSync\)")]
+		[RegexStepDefinition(@"I call Shared Step 134361 \(RPS Login - User does not have access to ItemSync\)")]
 		public void Shared134361()
 		{
 			string savedAs = "RPS.HD";
@@ -68,7 +69,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-		[StepDefinition(@"I call Shared Step 134359 \(RPS Login - User has Standard ItemSync Access\)")]
+		[RegexStepDefinition(@"I call Shared Step 134359 \(RPS Login - User has Standard ItemSync Access\)")]
 		public void Shared134359()
 		{
 			Report.UseSubSteps = true;
@@ -88,7 +89,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Context.AddToContext("ActiveUser", user);
 		}
 
-		[StepDefinition(@"I call Shared Step 134362 \(RPS Login - User has Subscription ItemSync access\)")]
+		[RegexStepDefinition(@"I call Shared Step 134362 \(RPS Login - User has Subscription ItemSync access\)")]
 		public void Shared134362()
 		{
 			string savedAs = "RPS.99";
@@ -110,7 +111,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-		[StepDefinition(@"I call Shared Step 106517 \(Home > Replace an original widget\) for widget: (.*)")]
+		[RegexStepDefinition(@"I call Shared Step 106517 \(Home > Replace an original widget\) for widget: (.*)")]
 		public void SharedStep106517(string widget)
 		{
 			Report.UseSubSteps = true;
@@ -131,7 +132,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			new Steps_Home().ConfirmWidgetDisplayedOrNot("%NewWidget%", "is");
 		}
 
-		[StepDefinition(@"I call Shared Step 70474 \(Verify Chart functionality\) for widget: (.*)")]
+		[RegexStepDefinition(@"I call Shared Step 70474 \(Verify Chart functionality\) for widget: (.*)")]
 		public void SharedStep70475(string widget)
 		{
 			Report.UseSubSteps = true;
@@ -256,7 +257,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 111976 \(Click UL Solutions Logo - Confirm Home page shown\)")]
+		[RegexStepDefinition(@"I call Shared Step 111976 \(Click UL Solutions Logo - Confirm Home page shown\)")]
 		public void GivenICallSharedStepClickWERCSmartProductSuiteLogo_ConfirmHomePageShownA()
 		{
 			Report.UseSubSteps = true;
@@ -268,7 +269,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			new Steps_Home().HomeTabLoadedInRPS();
 		}
 
-		[StepDefinition(@"I call Shared Step 70484 \(Chart Drill-down Export\) for widget: (.*)")]
+		[RegexStepDefinition(@"I call Shared Step 70484 \(Chart Drill-down Export\) for widget: (.*)")]
 		public void SharedStep70484(string widget)
 		{
 			Report.UseSubSteps = true;
@@ -439,14 +440,14 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 70484 \(Chart Drill-down Export\) for the saved widget")]
+		[RegexStepDefinition(@"I call Shared Step 70484 \(Chart Drill-down Export\) for the saved widget")]
 		public void SharedStep70484Saved()
 		{
 			Home.Widget widget = new Home().GetWidget("%ThisWidget%");
 			SharedStep70484(widget.Title);
 		}
 
-		[StepDefinition(@"I call Shared Step 109167 \(Product Information pop up - layout verification\)")]
+		[RegexStepDefinition(@"I call Shared Step 109167 \(Product Information pop up - layout verification\)")]
 		public void SharedStep109167()
 		{
 			Report.UseSubSteps = true;
@@ -464,7 +465,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(new ProductInformation().ProductInformatinSectionsPresent(sectionHeadings), "The headings were not as expected", "The headings were as expected");
 		}
 
-		[StepDefinition(@"I call Shared Step 109168 \(Product Information pop up - Expand Product Details - confirm rows\)")]
+		[RegexStepDefinition(@"I call Shared Step 109168 \(Product Information pop up - Expand Product Details - confirm rows\)")]
 		public void SharedStep109168()
 		{
 			Report.UseSubSteps = true;
@@ -489,7 +490,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 109169 \(Product Information pop up - Expand Transportation - confirm rows\)")]
+		[RegexStepDefinition(@"I call Shared Step 109169 \(Product Information pop up - Expand Transportation - confirm rows\)")]
 		public void SharedStep109169()
 		{
 			Report.UseSubSteps = true;
@@ -513,7 +514,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 109170 \(Product Information pop up - Expand Storage - confirm rows\)")]
+		[RegexStepDefinition(@"I call Shared Step 109170 \(Product Information pop up - Expand Storage - confirm rows\)")]
 		public void SharedStep109170()
 		{
 			Report.UseSubSteps = true;
@@ -537,7 +538,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 109171 \(Product Information pop up - Expand Battery - confirm rows\)")]
+		[RegexStepDefinition(@"I call Shared Step 109171 \(Product Information pop up - Expand Battery - confirm rows\)")]
 		public void SharedStep109171()
 		{
 			Report.UseSubSteps = true;
@@ -560,7 +561,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 109172 \(Product information pop up - Only 1 section expands at a time\)")]
+		[RegexStepDefinition(@"I call Shared Step 109172 \(Product information pop up - Only 1 section expands at a time\)")]
 		public void SharedStep109172()
 		{
 			Report.UseSubSteps = true;
@@ -588,7 +589,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(new ProductInformation().SectionDataTablePresent("Battery"), "The additional area is shown below the heading was not showing", "The additional area is shown below the heading was showing");
 		}
 
-		[StepDefinition(@"I call Shared Step 108597 \(Widget data view - Contact Supplier - email verification\) for widget: (.*)")]
+		[RegexStepDefinition(@"I call Shared Step 108597 \(Widget data view - Contact Supplier - email verification\) for widget: (.*)")]
 		public void SharedStep108597(string widget)
 		{
 			Report.UseSubSteps = true;
@@ -606,7 +607,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 106605 \(Dashboard - Remove Widget\) for widget: (.*)")]
+		[RegexStepDefinition(@"I call Shared Step 106605 \(Dashboard - Remove Widget\) for widget: (.*)")]
 		public void SharedStep106605(string widget)
 		{
 			Report.UseSubSteps = true;
@@ -618,7 +619,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			new Steps_Home().ConfirmWidgetDisplayedOrNot(widget, "is not");
 		}
 
-		[StepDefinition(@"I call Shared Step 106605 \(Dashboard - Remove Widget\) for all widgets except: (.*)")]
+		[RegexStepDefinition(@"I call Shared Step 106605 \(Dashboard - Remove Widget\) for all widgets except: (.*)")]
 		public void SharedStep106605ForAllExcept(string widget)
 		{
 			Report.UseSubSteps = true;
@@ -633,14 +634,14 @@ namespace UL.Selenium.Portal.RPS.Steps
 			}
 		}
 
-		[StepDefinition(@"I call Shared Step 106605 \(Dashboard - Remove Widget\) for all widgets except the saved widget")]
+		[RegexStepDefinition(@"I call Shared Step 106605 \(Dashboard - Remove Widget\) for all widgets except the saved widget")]
 		public void SharedStep106605ForAllExceptSavedWidget()
 		{
 			Home.Widget widget = new Home().GetWidget("%ThisWidget%");
 			SharedStep106605ForAllExcept(widget.Title);
 		}
 
-		[StepDefinition(@"I call Shared Step 54484 \(Dashboard - Gauge - Reset Dashboard - confrim page refreshes\)")]
+		[RegexStepDefinition(@"I call Shared Step 54484 \(Dashboard - Gauge - Reset Dashboard - confrim page refreshes\)")]
 		public void SharedStep54484()
 		{
 			Report.UseSubSteps = true;
@@ -652,7 +653,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			new Steps_Dashboard().HomeTabLoaded();
 		}
 
-		[StepDefinition(@"I call Shared Step 106623 \(Dashboard - Gauge - Re-add removed widget\) for widget: (.*)")]
+		[RegexStepDefinition(@"I call Shared Step 106623 \(Dashboard - Gauge - Re-add removed widget\) for widget: (.*)")]
 		public void SharedStep106623(string widget)
 		{
 			Report.UseSubSteps = true;
@@ -671,7 +672,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 111155 \(Table Heading or sub heading - confirm column resize anchor - resize column\) On the: (.*) page, for the column: (.*)")]
+		[RegexStepDefinition(@"I call Shared Step 111155 \(Table Heading or sub heading - confirm column resize anchor - resize column\) On the: (.*) page, for the column: (.*)")]
 		public void SharedStep111155(string pageName, string column)
 		{
 			Report.UseSubSteps = true;
@@ -749,7 +750,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 106809 \(Breadcrumbs - Supplier Name field - confirm shown correctly and remove\) for text: (.*)")]
+		[RegexStepDefinition(@"I call Shared Step 106809 \(Breadcrumbs - Supplier Name field - confirm shown correctly and remove\) for text: (.*)")]
 		public void SharedStep106809(string value)
 		{
 			if (value.Contains("SavedProduct"))
@@ -770,7 +771,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 
 
-		[StepDefinition(@"I call Shared Step 106777 \(Breadcrumbs - Status Name field - confirm shown correctly and remove\) for text: (.*)")]
+		[RegexStepDefinition(@"I call Shared Step 106777 \(Breadcrumbs - Status Name field - confirm shown correctly and remove\) for text: (.*)")]
 		public void SharedStep106777(string value)
 		{
 
@@ -787,7 +788,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		}
 
 
-		[StepDefinition(@"I call Shared Step 107729 \(Breadcrumbs - General shared step - confirm shown correctly and remove\) for filter: (.*) and text: (.*)")]
+		[RegexStepDefinition(@"I call Shared Step 107729 \(Breadcrumbs - General shared step - confirm shown correctly and remove\) for filter: (.*) and text: (.*)")]
 		public void SharedStep107729(string filter, string value)
 		{
 
@@ -824,7 +825,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		}
 
 
-		[StepDefinition(@"I call Shared Step 111879 \(Product Information pop up - when no data available\)")]
+		[RegexStepDefinition(@"I call Shared Step 111879 \(Product Information pop up - when no data available\)")]
 		public void SharedStep111879(string status)
 		{
 
@@ -832,7 +833,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 108016 \(Help & Support pop up - X to close\)")]
+		[RegexStepDefinition(@"I call Shared Step 108016 \(Help & Support pop up - X to close\)")]
 		public void SharedStep1080164()
 		{
 			Report.UseSubSteps = true;
@@ -845,7 +846,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 98339 \(RPS Lowe's Login\)")]
+		[RegexStepDefinition(@"I call Shared Step 98339 \(RPS Lowe's Login\)")]
 		public void Shared104950()
 		{
 			Report.UseSubSteps = true;
@@ -863,7 +864,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Context.AddToContext("ActiveUser", user);
         }
 
-		[StepDefinition(@"I call Shared Step 125598 \(ItemSync - Upload a File - Remove icon - page refreshes\)")]
+		[RegexStepDefinition(@"I call Shared Step 125598 \(ItemSync - Upload a File - Remove icon - page refreshes\)")]
 		public void Shared125598()
 		{
 			Report.UseSubSteps = true;
@@ -879,7 +880,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		}
 
 
-		[StepDefinition(@"I call Shared Step 125671 \(ItemSync - Invalid File pop-up\)")]
+		[RegexStepDefinition(@"I call Shared Step 125671 \(ItemSync - Invalid File pop-up\)")]
 		public void Shared125671()
 		{
 			Report.UseSubSteps = true;
@@ -910,7 +911,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 125689 \(ItemSync - UPC Limit Exceeded pop-up\)")]
+		[RegexStepDefinition(@"I call Shared Step 125689 \(ItemSync - UPC Limit Exceeded pop-up\)")]
 		public void Shared125689()
 		{
 			Report.UseSubSteps = true;
@@ -948,7 +949,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 
 
-		[StepDefinition(@"I call Shared Step 126165 \(RPS - ItemSync - Go to Manual Entry screen\)")]
+		[RegexStepDefinition(@"I call Shared Step 126165 \(RPS - ItemSync - Go to Manual Entry screen\)")]
 		public void Shared126165()
 		{
 			Report.UseSubSteps = true;
@@ -962,7 +963,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 125709 \(ItemSync - Manual Entry - Add UPC\)")]
+		[RegexStepDefinition(@"I call Shared Step 125709 \(ItemSync - Manual Entry - Add UPC\)")]
 		public void Shared125709()
 		{
 			Report.UseSubSteps = true;
@@ -977,7 +978,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		}
 
 
-		[StepDefinition(@"I call Shared Step 125709 \(ItemSync - Manual Entry - Add UPC\) for UPC: (.*)")]
+		[RegexStepDefinition(@"I call Shared Step 125709 \(ItemSync - Manual Entry - Add UPC\) for UPC: (.*)")]
 		public void Shared125709GivenUPC(string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -1013,7 +1014,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 125737 \(ItemSync > Upload File to Results page\)")]
+		[RegexStepDefinition(@"I call Shared Step 125737 \(ItemSync > Upload File to Results page\)")]
 		public void Shared125737()
 		{
 			Report.UseSubSteps = true;
@@ -1037,7 +1038,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 125737 \(ItemSync > Upload File to Results page\) for file: (.*)")]
+		[RegexStepDefinition(@"I call Shared Step 125737 \(ItemSync > Upload File to Results page\) for file: (.*)")]
 		public void Shared125737FileX(string fileName)
 		{
 			Report.UseSubSteps = true;
@@ -1061,7 +1062,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 146363 \(Status Webviewer - Page formatting\)")]
+		[RegexStepDefinition(@"I call Shared Step 146363 \(Status Webviewer - Page formatting\)")]
 		public void GivenICallSharedStepStatusWebviewer_PageFormatting()
 		{
 
@@ -1088,7 +1089,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 146631 \(RPS - Go to Status Web Viewer\)")]
+		[RegexStepDefinition(@"I call Shared Step 146631 \(RPS - Go to Status Web Viewer\)")]
 		public void GivenICallSharedStepRPS_GoToStatusWebViewer()
 		{
 			new Steps_Navigation().ClickTab("web viewers", "No");
@@ -1098,7 +1099,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(new Home().WaitForContainerToBeVisible(), "Web Viewers page content did not load", "Web Viewers page content loaded");
 		}
 
-		[StepDefinition(@"I call Shared Step 153163 \(RPS - Go to Logistics/Store Web Viewer\): (.*)")]
+		[RegexStepDefinition(@"I call Shared Step 153163 \(RPS - Go to Logistics/Store Web Viewer\): (.*)")]
 		public void GivenICallSharedStepRPS_GoToLogisticsStoreWebViewer(string menu_link)
 		{
 			new Steps_Navigation().ClickTab("web viewers", "No");
@@ -1110,7 +1111,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			//Report.IsTrue(new Home().WaitForContainerToBeVisible(), "Web Viewers page content did not load", "Web Viewers page content loaded");
 		}
 
-		[StepDefinition(@"I call Shared Step 153955 \(Logistics Webviewer - Page formatting\)")]
+		[RegexStepDefinition(@"I call Shared Step 153955 \(Logistics Webviewer - Page formatting\)")]
 		public void GivenICallSharedStepLogisticsWebviewer_PageFormatting()
 		{
 			new Steps_Navigation().GivenInTheStatusWebviewPageIConfirmTheSearchBoxIsShown();
@@ -1137,7 +1138,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		
 
-        [StepDefinition(@"I call Shared Step 151361 \(Product Lookup - Select Columns - Add new Column to pop up - Click Apply\) category: (.*), filter: (.*)")]
+        [RegexStepDefinition(@"I call Shared Step 151361 \(Product Lookup - Select Columns - Add new Column to pop up - Click Apply\) category: (.*), filter: (.*)")]
         public void ThenICallSharedStepProductLookup_SelectColumns_AddNewColumnToPopUp_ClickApply(string category, string filter)
         {
             Report.UseSubSteps = true;
@@ -1173,7 +1174,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 
 
-        [StepDefinition(@"I call Shared Step 148760 \(Product Lookup - Select Columns - Add new Column to pop up - Do not click Apply\) category: (.*), filter: (.*)")]
+        [RegexStepDefinition(@"I call Shared Step 148760 \(Product Lookup - Select Columns - Add new Column to pop up - Do not click Apply\) category: (.*), filter: (.*)")]
 		public void ThenICallSharedStepProductLookup_SelectColumns_AddNewColumnToPopUp_DoNotClickApply(string category, string filter)
 		{
             Report.UseSubSteps = true;
@@ -1206,7 +1207,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 		
-        [StepDefinition(@"I call Shared Step 148793 \(RPS/WV any page - check for showAllStatuses : (true|false)\)")]
+        [RegexStepDefinition(@"I call Shared Step 148793 \(RPS/WV any page - check for showAllStatuses : (true|false)\)")]
 		public void GivenICallSharedStepRPSWVCheckShowAllStatuses(string true_false)
 		{
 			bool expected = true_false == "true";
@@ -1219,7 +1220,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 
 
-		[StepDefinition(@"I call Shared Step 154003 \(RPS & WV - Warning message when > 100,000 records\)")]
+		[RegexStepDefinition(@"I call Shared Step 154003 \(RPS & WV - Warning message when > 100,000 records\)")]
 		public void ThenICallSharedStepWarningMessage_WhenMoreThan_100000Records()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1290,7 +1291,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 154005 \(RPS & WV > Warning re 100,000 and More Filters applied\)")]
+		[RegexStepDefinition(@"I call Shared Step 154005 \(RPS & WV > Warning re 100,000 and More Filters applied\)")]
 		public void ThenICallSharedStepWarningMessage_WhenMoreThan_100000Records_AndMoreFiltersApplied()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1368,7 +1369,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		}
 
 
-		[StepDefinition(@"I call Shared Step 153272 \(RPS & WV > Find UPC prefix > Search > Confirm\)")]
+		[RegexStepDefinition(@"I call Shared Step 153272 \(RPS & WV > Find UPC prefix > Search > Confirm\)")]
 		public void ThenICallSharedStep_FindUpcPrefix_Search()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1392,7 +1393,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 153276 \(RPS & WV > Search field > UPC ignores leading zeroes\)")]
+		[RegexStepDefinition(@"I call Shared Step 153276 \(RPS & WV > Search field > UPC ignores leading zeroes\)")]
 		public void ThenICallSharedStep_FindUpcIgnoresLeading_Zeroes_Search()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1407,7 +1408,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 153277 \(RPS & WV > Search field > Enter key or wait return results\)")]
+		[RegexStepDefinition(@"I call Shared Step 153277 \(RPS & WV > Search field > Enter key or wait return results\)")]
 		public void ThenICallSharedStep_SearchField_EnterKey_Or_WaitForReturnResults()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1429,7 +1430,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 149247 \(Canadian Tire - Product Information pop up - Expand Transportation Data - Confirm rows\)")]
+		[RegexStepDefinition(@"I call Shared Step 149247 \(Canadian Tire - Product Information pop up - Expand Transportation Data - Confirm rows\)")]
 		public void SharedStep149247()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1452,7 +1453,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 149197 \(Canadian Tire - Product Information pop up - Expand Waste - Confirm rows\)")]
+		[RegexStepDefinition(@"I call Shared Step 149197 \(Canadian Tire - Product Information pop up - Expand Waste - Confirm rows\)")]
 		public void SharedStep149197()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1474,7 +1475,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 149119 \(Canadian Tire - Product Information pop up - Expand Regulatory Data - Confirm rows\)")]
+		[RegexStepDefinition(@"I call Shared Step 149119 \(Canadian Tire - Product Information pop up - Expand Regulatory Data - Confirm rows\)")]
 		public void SharedStep149119()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1498,7 +1499,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 149021 \(Canadian Tire - Product Information pop up - Expand Product Data - Confirm rows\)")]
+		[RegexStepDefinition(@"I call Shared Step 149021 \(Canadian Tire - Product Information pop up - Expand Product Data - Confirm rows\)")]
 		public void SharedStep149021()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1520,7 +1521,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 149027 \(Canadian Tire - Product Information pop up - Expand Battery data codes - Confirm rows\)")]
+		[RegexStepDefinition(@"I call Shared Step 149027 \(Canadian Tire - Product Information pop up - Expand Battery data codes - Confirm rows\)")]
 		public void SharedStep149027()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1542,7 +1543,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 149077 \(Canadian Tire - Product Information pop up - Expand Pesticide - Confirm rows\)")]
+		[RegexStepDefinition(@"I call Shared Step 149077 \(Canadian Tire - Product Information pop up - Expand Pesticide - Confirm rows\)")]
 		public void SharedStep149077()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1563,7 +1564,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(!new ProductInformation().SectionDataTablePresent("Pesticide"), "The additional area is shown below the Pesticide heading was showing", "The additional area is shown below the Pesticide heading was not showing");
 
 		}
-		[StepDefinition(@"I call Shared Step 110820 \(View Data - Product Information pop up - Expand Transportation Data \(Longer version\) - confirm rows\)")]
+		[RegexStepDefinition(@"I call Shared Step 110820 \(View Data - Product Information pop up - Expand Transportation Data \(Longer version\) - confirm rows\)")]
 		public void SharedStep110820()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1584,7 +1585,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(!new ProductInformation().SectionDataTablePresent("Transportation"), "The additional area is shown below the Transportation Data heading was showing", "The additional area is shown below the Transportation Data heading was not showing");
 		}
 
-		[StepDefinition(@"I call Shared Step 163151 \(Product Information pop up - New version - Battery Data - confirm rows\)")]
+		[RegexStepDefinition(@"I call Shared Step 163151 \(Product Information pop up - New version - Battery Data - confirm rows\)")]
 		public void SharedStep163151()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1604,7 +1605,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(!new ProductInformation().SectionDataTablePresent("Battery"), "The additional area is shown below the Battery heading was showing", "The additional area is shown below the Battery heading was not showing");
 		}
 
-		[StepDefinition(@"I call Shared Step 152620 \(View Data - Product Information pop up - Product Details - Confirm rows\)")]
+		[RegexStepDefinition(@"I call Shared Step 152620 \(View Data - Product Information pop up - Product Details - Confirm rows\)")]
 		public void SharedStep152620()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1624,7 +1625,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(!new ProductInformation().SectionDataTablePresent("Product Details"), "The additional area is shown below the Product Details heading was showing", "The additional area is shown below the Product Details heading was not showing");
 		}
 
-		[StepDefinition(@"I call Shared Step 163160 \(Product Information pop up - New Version - Disposal - Confirm rows\)")]
+		[RegexStepDefinition(@"I call Shared Step 163160 \(Product Information pop up - New Version - Disposal - Confirm rows\)")]
 		public void SharedStep163130()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1649,7 +1650,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(!new ProductInformation().SectionDataTablePresent("Disposal"), "The additional area is shown below the Disposal heading was showing", "The additional area is shown below the Disposal heading was not showing");
 		}
 
-		[StepDefinition(@"I call Shared Step 163153 \(Product Information pop up - New version - Storage Data - Confirm rows\)")]
+		[RegexStepDefinition(@"I call Shared Step 163153 \(Product Information pop up - New version - Storage Data - Confirm rows\)")]
 		public void SharedStep163153()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1671,7 +1672,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 153375 \(RPS > Actions > View Data > Collapse All\)")]
+		[RegexStepDefinition(@"I call Shared Step 153375 \(RPS > Actions > View Data > Collapse All\)")]
 		public void SharedStep153375()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1709,7 +1710,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 151306 \(View Data - Product Information pop up - Product Data Codes > Collapse and Expand\)")]
+		[RegexStepDefinition(@"I call Shared Step 151306 \(View Data - Product Information pop up - Product Data Codes > Collapse and Expand\)")]
 		public void SharedStep151306()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1732,7 +1733,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 152628 \(View Data - Product Information pop up - Transportation Data > Collapse and Expand\)")]
+		[RegexStepDefinition(@"I call Shared Step 152628 \(View Data - Product Information pop up - Transportation Data > Collapse and Expand\)")]
 		public void SharedStep152628()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1760,7 +1761,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		}
 
 
-		[StepDefinition(@"I call Shared Step 152629 \(View Data - Product Information pop up - Storage Data > Collapse and Expand\)")]
+		[RegexStepDefinition(@"I call Shared Step 152629 \(View Data - Product Information pop up - Storage Data > Collapse and Expand\)")]
 		public void SharedStep152629()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1790,7 +1791,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		}
 
 
-		[StepDefinition(@"I call Shared Step 152630 \(View Data - Product Information pop up - Battery Data > Collapse and Expand\)")]
+		[RegexStepDefinition(@"I call Shared Step 152630 \(View Data - Product Information pop up - Battery Data > Collapse and Expand\)")]
 		public void SharedStep152630()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1819,7 +1820,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 211934 \(Product Information - For Retailer Uploaded\) for TReVor account: (.*)")]
+		[RegexStepDefinition(@"I call Shared Step 211934 \(Product Information - For Retailer Uploaded\) for TReVor account: (.*)")]
 		public void SharedStep211934(string retailer)
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1856,7 +1857,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 
 
-		[StepDefinition(@"I call Shared Step 153315 \(RPS & WV > Search text only cleared on Reset\)")]
+		[RegexStepDefinition(@"I call Shared Step 153315 \(RPS & WV > Search text only cleared on Reset\)")]
 		public void ThenICallSharedStep_SearchText_Only_ClearedonReset()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1927,7 +1928,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 153316 \(RPS & WV - Search text is taken into consideration by More Filters\)")]
+		[RegexStepDefinition(@"I call Shared Step 153316 \(RPS & WV - Search text is taken into consideration by More Filters\)")]
 		public void ThenICallSharedStep_SearchText_IntoConsideration_ByMoreFilters()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1958,7 +1959,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 163970 \(RPS & WV - Applied filter - Main search field apply search - results grid shows correct results\)")]
+		[RegexStepDefinition(@"I call Shared Step 163970 \(RPS & WV - Applied filter - Main search field apply search - results grid shows correct results\)")]
 		public void ThenICallSharedStep_AppliedFiler_ResultGridShowsCorrectResult()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1973,7 +1974,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 153278 \(RPS & WV > Search > No Smart Search shown\)")]
+		[RegexStepDefinition(@"I call Shared Step 153278 \(RPS & WV > Search > No Smart Search shown\)")]
 		public void SharedStep153278()
 		{
 			Report.StartStep("In the search field I start typing a Product ID, Name or UPC into the Search field");
@@ -1986,7 +1987,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			new Steps_ProductLookUP().CheckProductsGridDisplaysProductISearched("For WVs");
 
 		}
-		[StepDefinition(@"I call Shared Step 153374 \(RPS - Actions - View Data > Expand All\)")]
+		[RegexStepDefinition(@"I call Shared Step 153374 \(RPS - Actions - View Data > Expand All\)")]
 		public void SharedStep153274()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2028,7 +2029,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 146584 \(WPS Studio - PD\+ - Current Document > List of Published > Open NGHS - keep window open\)")]
+		[RegexStepDefinition(@"I call Shared Step 146584 \(WPS Studio - PD\+ - Current Document > List of Published > Open NGHS - keep window open\)")]
 		public void SharedStep146584()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2057,7 +2058,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 153152 \(RPS/WV : Search for specific product\) WPSId: (.*)")]
+		[RegexStepDefinition(@"I call Shared Step 153152 \(RPS/WV : Search for specific product\) WPSId: (.*)")]
 		public void SharedStep153152(string productID)
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2072,7 +2073,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.Info(productName);
 		}
 
-		[StepDefinition(@"I call Shared Step 149250 \(Any Page - Actions: Open Document Link \(not PLP\)\)")]
+		[RegexStepDefinition(@"I call Shared Step 149250 \(Any Page - Actions: Open Document Link \(not PLP\)\)")]
 		public void SharedStep149250()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2087,7 +2088,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			new Steps_ProductLookUP().InTheDocumentationPopUpProductNameisDisplayedSameAsSavedValue("savedAs");
 		}
 
-		[StepDefinition(@"I call Shared Step 149035 \(Webviewer: Documents > SDS US compare to NGHS\)")]
+		[RegexStepDefinition(@"I call Shared Step 149035 \(Webviewer: Documents > SDS US compare to NGHS\)")]
 		public void SharedStep149035()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2109,7 +2110,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 146422 \(SHA Manager > Document Management > Primary 1, Source 0, document\)")]
+		[RegexStepDefinition(@"I call Shared Step 146422 \(SHA Manager > Document Management > Primary 1, Source 0, document\)")]
 		public void SharedStep146422()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2130,7 +2131,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		}
 
 
-		[StepDefinition(@"I call Shared Step 149246 \(Webviewer: Documents >US SDS compare to Uploaded SDS\)")]
+		[RegexStepDefinition(@"I call Shared Step 149246 \(Webviewer: Documents >US SDS compare to Uploaded SDS\)")]
 		public void SharedStep149246()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2152,7 +2153,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 149196 \(Any Page - Actions: Open Document Link for PLP\)")]
+		[RegexStepDefinition(@"I call Shared Step 149196 \(Any Page - Actions: Open Document Link for PLP\)")]
 		public void SharedStep149196()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2167,7 +2168,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			new Steps_ProductLookUP().InTheDocumentationPopUpProductNameisDisplayedSameAsSavedValue("savedAs");
 		}
 
-		[StepDefinition(@"I call Shared Step 146583 \(WPS Studio - PD\+ - Select Alias product for retailer\) WPSID: (.*) Retailer: (.*)")]
+		[RegexStepDefinition(@"I call Shared Step 146583 \(WPS Studio - PD\+ - Select Alias product for retailer\) WPSID: (.*) Retailer: (.*)")]
 		public void SharedStep146583(string productID, string retailer)
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2192,7 +2193,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			new Steps_RecentActivities().GivenInDocumentsPageICheckIfTheAliasNameMatchesProductSavedAsProductID("savedAs", retailer);
 		}
 
-		[StepDefinition(@"I call Shared Step 148846 \(Webviewer: Documents > Kit > Merged SDS > Keep pop up open\)")]
+		[RegexStepDefinition(@"I call Shared Step 148846 \(Webviewer: Documents > Kit > Merged SDS > Keep pop up open\)")]
 		public void SharedStep148846()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2216,7 +2217,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 146585 \(WPS Studio - PD\+ - Current Document > List of Published > Open Summary Sheet - keep window open\)")]
+		[RegexStepDefinition(@"I call Shared Step 146585 \(WPS Studio - PD\+ - Current Document > List of Published > Open Summary Sheet - keep window open\)")]
 		public void SharedStep146585()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2245,7 +2246,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 148764 \(WPS Studio - Report writer - find UN38.3 document name\) for WPSID:(.*)")]
+		[RegexStepDefinition(@"I call Shared Step 148764 \(WPS Studio - Report writer - find UN38.3 document name\) for WPSID:(.*)")]
 		public void SharedStep148764(string WPSID)
 		{
 			var thisTopMenu = new StudioTopMenu();
@@ -2271,7 +2272,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 148765 \(WPS Studio - PD\+ - related documents - Open UN38.3 document\)")]
+		[RegexStepDefinition(@"I call Shared Step 148765 \(WPS Studio - PD\+ - related documents - Open UN38.3 document\)")]
 		public void SharedStep148765()
 		{
 
@@ -2289,7 +2290,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(new RelatedDocuments().DocumentIsDisplayed(), "Failed to display document", "Successfully displayed document");
 		}
 
-		[StepDefinition(@"I call Shared Step 149110 \(Webviewer: Documents > Battery > UN38.3 compare to Studio related document\)")]
+		[RegexStepDefinition(@"I call Shared Step 149110 \(Webviewer: Documents > Battery > UN38.3 compare to Studio related document\)")]
 		public void SharedStep149110()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2317,7 +2318,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 149071 \(Webviewer: Documents > SDS Summary Sheet compare to SBCS\)")]
+		[RegexStepDefinition(@"I call Shared Step 149071 \(Webviewer: Documents > SDS Summary Sheet compare to SBCS\)")]
 		public void SharedStep149071()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2345,7 +2346,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 146592 \(Webviewer: Documents > No documents shown\)")]
+		[RegexStepDefinition(@"I call Shared Step 146592 \(Webviewer: Documents > No documents shown\)")]
 		public void SharedStep146592()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2361,7 +2362,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 146626 \(WPS Studio - PD\+ > Related Documents > Consumer Label > SHAMANAGER user\)")]
+		[RegexStepDefinition(@"I call Shared Step 146626 \(WPS Studio - PD\+ > Related Documents > Consumer Label > SHAMANAGER user\)")]
 		public void SharedStep146626()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2383,7 +2384,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 149121 \(Webviewer: Documents  > Consumer Label compare with Studio related document\)")]
+		[RegexStepDefinition(@"I call Shared Step 149121 \(Webviewer: Documents  > Consumer Label compare with Studio related document\)")]
 		public void SharedStep149121()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2405,7 +2406,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 220438 \(Webviewer: Documents - US SDS opens directly - compare to Uploaded SDS\)")]
+		[RegexStepDefinition(@"I call Shared Step 220438 \(Webviewer: Documents - US SDS opens directly - compare to Uploaded SDS\)")]
 		public void SharedStep220438()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2419,7 +2420,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 220316 \(Webviewer: Documents - SDS US opens directly - compare to NGHS\)")]
+		[RegexStepDefinition(@"I call Shared Step 220316 \(Webviewer: Documents - SDS US opens directly - compare to NGHS\)")]
 		public void SharedStep220316()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2433,7 +2434,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 148839 \(SHA Manager - Open Merged SDS for BCP\) with WPSID: (.*)")]
+		[RegexStepDefinition(@"I call Shared Step 148839 \(SHA Manager - Open Merged SDS for BCP\) with WPSID: (.*)")]
 		public void SharedStep148839(string wpsid)
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2451,7 +2452,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		}
 
 
-		[StepDefinition(@"I call Shared Step 148960 \(Webviewer: Documents > Compare SDS with Merged SDS in SHA manager for BCP\)")]
+		[RegexStepDefinition(@"I call Shared Step 148960 \(Webviewer: Documents > Compare SDS with Merged SDS in SHA manager for BCP\)")]
 		public void SharedStep148960()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2472,7 +2473,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 108297 \(Drum Log - Export to Excel - Export All Drums - open file\)")]
+		[RegexStepDefinition(@"I call Shared Step 108297 \(Drum Log - Export to Excel - Export All Drums - open file\)")]
 		public void SharedStep108297()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2487,7 +2488,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 108298 \(Drum Log - Export to Excel - Export all Drums with UPCs - open file\)")]
+		[RegexStepDefinition(@"I call Shared Step 108298 \(Drum Log - Export to Excel - Export all Drums with UPCs - open file\)")]
 		public void SharedStep108298()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2502,7 +2503,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 146627 \(Recent Activities - Export - Open File\)")]
+		[RegexStepDefinition(@"I call Shared Step 146627 \(Recent Activities - Export - Open File\)")]
 		public void SharedStep146627()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2514,7 +2515,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 110819 \(Home Depot & CVS Only - Product Information pop up - Expand Product Details - Confirm rows\)")]
+		[RegexStepDefinition(@"I call Shared Step 110819 \(Home Depot & CVS Only - Product Information pop up - Expand Product Details - Confirm rows\)")]
 		public void SharedStep110819()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2535,7 +2536,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		}
 
 
-		[StepDefinition(@"I call Shared Step 150041 \(WPS Studio - PD\+ - Current Document > List of Published > Open HGHS in EN and CF keep windows open\)")]
+		[RegexStepDefinition(@"I call Shared Step 150041 \(WPS Studio - PD\+ - Current Document > List of Published > Open HGHS in EN and CF keep windows open\)")]
 		public void SharedStep150041()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2568,7 +2569,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 149205 \(Webviewer: Documents > SDS, Canada GHS, English compare to HGHS\)")]
+		[RegexStepDefinition(@"I call Shared Step 149205 \(Webviewer: Documents > SDS, Canada GHS, English compare to HGHS\)")]
 		public void SharedStep149205()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2591,7 +2592,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[StepDefinition(@"I call Shared Step 146328 \(Webviewer: Documents > SDS, Canada GHS, French compare to HGHS in CF\)")]
+		[RegexStepDefinition(@"I call Shared Step 146328 \(Webviewer: Documents > SDS, Canada GHS, French compare to HGHS in CF\)")]
 		public void SharedStep146328()
 		{
 			ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2614,7 +2615,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-        [StepDefinition(@"I call Shared Step 165091 \(Logistics Viewer - View Data - Additional Data - Confirm rows \(Target Specific - Target HQ Viewer\)\)")]
+        [RegexStepDefinition(@"I call Shared Step 165091 \(Logistics Viewer - View Data - Additional Data - Confirm rows \(Target Specific - Target HQ Viewer\)\)")]
         public void SharedStep165091()
         {
             ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2642,7 +2643,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [StepDefinition(@"I call Shared Step 163203 \(Status/Store Viewer - View Data - Additional Data - Confirm rows \(Target specific\)\)")]
+        [RegexStepDefinition(@"I call Shared Step 163203 \(Status/Store Viewer - View Data - Additional Data - Confirm rows \(Target specific\)\)")]
         public void SharedStep163203()
         {
             ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2668,7 +2669,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(!new ProductInformation().SectionDataTablePresent("Additional Data"), "The additional area is shown below the Additional Data heading was showing", "The additional area is shown below the Additional Data heading was not showing");
         }
 
-        [StepDefinition(@"I call Shared Step 162795 \(View Data - Product Information Pop up - Additional Data Codes - Confirm row \(Target Specific\)\)")]
+        [RegexStepDefinition(@"I call Shared Step 162795 \(View Data - Product Information Pop up - Additional Data Codes - Confirm row \(Target Specific\)\)")]
         public void SharedStep162795()
         {
             ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2694,7 +2695,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(!new ProductInformation().SectionDataTablePresent("Additional Data"), "The additional area is shown below the Additional Data heading was showing", "The additional area is shown below the Additional Data heading was not showing");
         }
 
-        [StepDefinition(@"I call Shared Step 108305 \(Drum Log - Select Row and Expand > Actions - View Data\)")]
+        [RegexStepDefinition(@"I call Shared Step 108305 \(Drum Log - Select Row and Expand > Actions - View Data\)")]
         public void SharedStep108305()
         {
             ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2712,7 +2713,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [StepDefinition(@"I call Shared Step 153264 \(RPS & WV > Product Info > Recertification tags check\)")]
+        [RegexStepDefinition(@"I call Shared Step 153264 \(RPS & WV > Product Info > Recertification tags check\)")]
         public void SharedStep153264()
         {
             ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -2724,7 +2725,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [StepDefinition(@"I call Shared Step 153383 \(RPS & WV > Retailer Uploaded tag\)")]
+        [RegexStepDefinition(@"I call Shared Step 153383 \(RPS & WV > Retailer Uploaded tag\)")]
         public void SharedStep153383()
         {
             ReportDetails.CurrentDetails.UseSubSteps = true;

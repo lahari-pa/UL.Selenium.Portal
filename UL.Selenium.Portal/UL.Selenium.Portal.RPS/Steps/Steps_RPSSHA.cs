@@ -1,6 +1,7 @@
 ﻿using System;
 using Reqnroll;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using WERCSClasses = UL.Selenium.Portal.WERCSmart.Selenium_Classes;
@@ -13,7 +14,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 	[Binding, Scope(Tag = "RPSSHA")]
 	class Steps_RPSSHA
 	{
-		[StepDefinition(@"In The SHA products grid I filter for product saved as: (.*) and check that last activity date matches the one found in RPS")]
+		[RegexStepDefinition(@"In The SHA products grid I filter for product saved as: (.*) and check that last activity date matches the one found in RPS")]
 		public void InSHAProductsGridFilterByProductAndCompareLastActivityDateToRPS(string savedAs)
 		{
 
