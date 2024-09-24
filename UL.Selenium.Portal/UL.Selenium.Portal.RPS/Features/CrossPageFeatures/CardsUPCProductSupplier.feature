@@ -76,6 +76,8 @@ Scenario Outline: [169633] UPCs card - Any Page - Total & Percentage shown
 		| [#169633d] UPCs card - Any Page - Total & Percentage shown | LW       | Lowes_store    | Yes         | LWLandingtab           |
 		| [#169633e] UPCs card - Any Page - Total & Percentage shown | LW       | Product Lookup | No          | LWLandingtab           |
 
+#Removed from regression: 2023/06
+@ignore
 Scenario Outline: [169635] Suppliers card - Any Page - Total & Percentage shown
 	Given I log into the RPS Integrated site as Retailer: <Retailer>
 	Then I confirm the active tab is: <LandingTab>

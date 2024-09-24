@@ -1,18 +1,21 @@
 using System;
 using Reqnroll;
+using TReVor.Api.Wrapper.Classes;
+using UL.Automation.Reporting;
+using UL.Automation.Reporting.Classes;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Classes;
 using TReVor.Integrations.Classes;
+using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.RPS.Selenium_Classes;
 using TReVor.Core.Classes.Software;
-using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.RPS.Steps
 {
     [Binding, Scope(Tag = "TopBar")]
     class Steps_TopBar
     {
-        [RegexStepDefinition(@"I confirm the top menu bar is displayed with the logged in username")]
+        [StepDefinition(@"I confirm the top menu bar is displayed with the logged in username")]
         public void ConfirmTopBarDisplayedWithLoggedInUser()
         {
             Report.UseSubSteps = true;
@@ -22,7 +25,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             this.ConfirmLoggedInUserNameTopBar();
         }
 
-		[RegexStepDefinition(@"I confirm the logged in user displayed in the top bar is correct for TReVor user: (.*)")]
+		[StepDefinition(@"I confirm the logged in user displayed in the top bar is correct for TReVor user: (.*)")]
 		public void ConfirmLoggedInUserNameTopBar(string savedAs)
 		{
 			if (TReVorSettings.SoftwareCredentials.TryGetValue(savedAs, out var user))
@@ -34,7 +37,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"I confirm the user displayed in the top bar matches the active logged in user")]
+		[StepDefinition(@"I confirm the user displayed in the top bar matches the active logged in user")]
 		public void ConfirmLoggedInUserNameTopBar()
 		{
 			if (!Context.Contains("ActiveUser"))
@@ -49,37 +52,37 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(displayedUser == expectedUser, "Displayed logged in user did not match: " + expectedUser + "! Displayed was: " + displayedUser, "Logged in user was displayed as expected.");
 		}
 
-		[RegexStepDefinition(@"I click the user button in the top bar")]
+		[StepDefinition(@"I click the user button in the top bar")]
 		public void ClickUserNameButtonTopBar()
 		{
 			Report.IsTrue(new TopBar().ClickUserAccount(), "Failed to click user button in the top bar!", "Clicked user button in the top bar");
 		}
 
-		[RegexStepDefinition("I click 'Sign Out' under the user button")]
+		[StepDefinition("I click 'Sign Out' under the user button")]
 		public void ClickSignOut()
 		{
 			Report.IsTrue(new TopBar().ClickSignOut(), "Failed to click Sign Out", "Clicked Sign Out");
 		}
 
-		[RegexStepDefinition("I confirm the 'Sign Out' dropdown option is displayed under the user button")]
+		[StepDefinition("I confirm the 'Sign Out' dropdown option is displayed under the user button")]
 		public void SignOutDisplayed()
 		{
 			Report.IsTrue(new TopBar().SignOutDisplayed(), "Sign Out was not displayed!", "Sign Out was displayed");
 		}
 
-		[RegexStepDefinition(@"I confirm the UL Logo is displayed in the top bar")]
+		[StepDefinition(@"I confirm the UL Logo is displayed in the top bar")]
 		public void UlLogoDisplayed()
 		{
 			Report.IsTrue(new TopBar().UlLogoDisplayed(), "UL logo was not displayed in the top bar!", "UL logo was displayed in the top bar");
 		}
 
-		[RegexStepDefinition(@"I click the UL Logo in the top bar")]
+		[StepDefinition(@"I click the UL Logo in the top bar")]
 		public void ClickUlLogo()
 		{
 			Report.IsTrue(new TopBar().ClickUlLogo(), "Failed to click the UL logo", "Clicked the UL logo");
 		}
 
-		[RegexStepDefinition(@"I confirm the logged in page banner shows background color: red")]
+		[StepDefinition(@"I confirm the logged in page banner shows background color: red")]
 		public void ConfirmPageBannerColorIsRed()
 		{
 
@@ -90,7 +93,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"I confirm the logged in page banner shows font color: white")]
+		[StepDefinition(@"I confirm the logged in page banner shows font color: white")]
 		public void ConfirmBannerFontColorIsWhite()
 		{
 
@@ -109,7 +112,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 
 
-		[RegexStepDefinition(@"I confirm the page heading banner shows the WERCSmart Product Suite logo and it reads : (.*)")]
+		[StepDefinition(@"I confirm the page heading banner shows the WERCSmart Product Suite logo and it reads : (.*)")]
 		public void ConfirmBannerFontColorIsWhite(string logoText)
 		{
 
@@ -121,32 +124,32 @@ namespace UL.Selenium.Portal.RPS.Steps
 		}
 
 		/*
-		[RegexStepDefinition(@"I confirm the Product Suite Brand Name Logo is displayed in the top bar")]
+		[StepDefinition(@"I confirm the Product Suite Brand Name Logo is displayed in the top bar")]
 		public void ProductSuiteLogoDisplayed()
 		{
 			Report.IsTrue(new TopBar().BrandNameDisplayed(), "UL logo was not displayed in the top bar!", "UL logo was displayed in the top bar");
 		}
 		*/
 
-		[RegexStepDefinition(@"I confirm the Product Suite Brand Name Logo is displayed in the top bar")]
+		[StepDefinition(@"I confirm the Product Suite Brand Name Logo is displayed in the top bar")]
 		public void ProductSuiteLogoDisplayedInRPS()
 		{
 			Report.IsTrue(new TopBar().UlLogoDisplayed(), "UL logo was not displayed in the top bar!", "UL logo was displayed in the top bar");
 		}
 
-		[RegexStepDefinition(@"I click the Product Suite Brand Name Logo in the top bar")]
+		[StepDefinition(@"I click the Product Suite Brand Name Logo in the top bar")]
 		public void ClickProductSuiteLogo()
 		{
 			Report.IsTrue(new TopBar().ClickBrandName(), "Failed to click the UL logo", "Clicked the UL logo");
 		}
 
-		[RegexStepDefinition(@"I click the Product Suite Brand Name Logo in the top bar in RPS")]
+		[StepDefinition(@"I click the Product Suite Brand Name Logo in the top bar in RPS")]
 		public void ClickProductSuiteLogoInRPS()
 		{
 			Report.IsTrue(new TopBar().ClickBrandNameInRPS(), "Failed to click the UL logo", "Clicked the UL logo");
 		}
 
-        [RegexStepDefinition(@"I confirm the logged in page banner shows background color: black")]
+        [StepDefinition(@"I confirm the logged in page banner shows background color: black")]
         public void ConfirmPageBannerColorIsBlack()
         {
 

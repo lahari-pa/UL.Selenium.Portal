@@ -6,8 +6,10 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
+using Castle.Core.Internal;
 using NUnit.Framework;
 using Reqnroll;
+using UL.Automation.Reporting;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.ReqnrollHelpers.Classes;
@@ -15,9 +17,10 @@ using TReVor.Integrations.Classes;
 using UL.Automation.Utilities.Functions;
 using UL.Selenium.Portal.RPS.Classes;
 using UL.Selenium.Portal.RPS.Selenium_Classes;
+using static UL.Selenium.Portal.RPS.Selenium_Classes.WidgetPage.Widget;
 using System.Configuration;
 using System.Collections.Specialized;
-using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.Reporting.Classes;
 using UL.Automation.WebDriver.Extensions;
 using UL.Selenium.Portal.WERCSmart.Classes;
 
@@ -29,7 +32,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 	public class Global_Steps
 	{
 
-		[RegexStepDefinition(@"I verify that a tab opens with url: (.*)")]
+		[StepDefinition(@"I verify that a tab opens with url: (.*)")]
 		public void GivenIVerifyANewTabOpensToTheProductSupplyChainIntelligenceWebsite(string url)
 		{
 			if (Report.IsTrue(SeleniumWebDriver.CurrentDriver.GetTabURLs().Contains(url), "Failed to find a tab with URL: " + url, "Successfully found a tab with URL: " + url, false, false))
@@ -41,20 +44,20 @@ namespace UL.Selenium.Portal.RPS.Steps
 			}
 		}
 
-		[RegexStepDefinition(@"I verify that no tab opens")]
+		[StepDefinition(@"I verify that no tab opens")]
 		public void CheckNotabsOpenUp()
 		{
 			Report.IsTrue(SeleniumWebDriver.CurrentDriver.GetTabURLs().Count == 1, "Another tab was found to be open!", "No tabs were found to be open!");
 		}
 
-		[RegexStepDefinition(@"I close the tab with url: (.*)")]
+		[StepDefinition(@"I close the tab with url: (.*)")]
 		public void CloseTabWithUrl(string url)
 		{
 			SeleniumWebDriver.CurrentDriver.CloseTabWithURL(url);
 			Report.IsTrue(!SeleniumWebDriver.CurrentDriver.GetTabURLs().Contains(url), "Failed to close tab with URL: " + url, "Successfully closed tab with URL: " + url);
 		}
 
-		[RegexStepDefinition(@"I save TReVor test user: (.*) to Context as the active user")]
+		[StepDefinition(@"I save TReVor test user: (.*) to Context as the active user")]
 		public void SaveTrevorTestUserToContext(string savedAs)
 		{
 			var user = TReVorSettings.Credentials.GetCredential(savedAs);
@@ -65,13 +68,13 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Context.AddToContext("ActiveUser", user);
 		}
 
-        [RegexStepDefinition(@"I navigate to the RPS landing page")]
+        [StepDefinition(@"I navigate to the RPS landing page")]
         public void NavigateToTheLandingPage()
         {
             SeleniumWebDriver.CurrentDriver.Navigate().GoToUrl(SeleniumWebDriver.BaseTestUrl);
         }
 
-        [RegexStepDefinition(@"I cannot change URL to access (Auditor|Drumlog) page")]
+        [StepDefinition(@"I cannot change URL to access (Auditor|Drumlog) page")]
         public void AtemptToNavigatePage(string pageName)
         {
             Report.Info($"Attempting to navigate to the {pageName} page.");
@@ -80,7 +83,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             new Steps_Home().IVerifyPageNotFoundErrorIsDisplayed();
         }
 
-        [RegexStepDefinition(@"I close the browser, all instances")]
+        [StepDefinition(@"I close the browser, all instances")]
         public void ICloseBrowser()
         {
             Report.Info($"Attempting to close the browser.");
@@ -88,7 +91,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.Screenshot();
         }
 
-        [RegexStepDefinition(@"I open a new browser window")]
+        [StepDefinition(@"I open a new browser window")]
         public void IOpenBrowser()
         {
             Report.Info("Attempting to open a new browser window.");
@@ -116,7 +119,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.Screenshot();
         }
 
-		[RegexStepDefinition(@"I confirm a new file has been downloaded with .csv format and save to context as: (.*)")]
+		[StepDefinition(@"I confirm a new file has been downloaded with .csv format and save to context as: (.*)")]
 		public void ConfirmNewFile(string savedAs)
 		{
 			if (!Context.Contains("Downloads"))
@@ -149,14 +152,14 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"I save the download folder")]
+		[StepDefinition(@"I save the download folder")]
 		public void SaveDownloads()
 		{
 			FileInfo[] files = GeneralUtilities.GetDownloads();
 			Context.AddToContext("Downloads", files);
 		}
 
-		[RegexStepDefinition(@"I confirm the csv file saved as: (.*) contains data")]
+		[StepDefinition(@"I confirm the csv file saved as: (.*) contains data")]
 		public void ConfirmCsvFileContainsData(string savedAs)
 		{
 			if (!Context.Contains(savedAs))
@@ -194,7 +197,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.Failure("The CSV file did not contain data");
 		}
 
-        [RegexStepDefinition(@"I confirm that a new file is produced called (.*) and save as (.*)")]
+        [StepDefinition(@"I confirm that a new file is produced called (.*) and save as (.*)")]
         public void ConfirmFileAppearsInDownloadsFolder(string file, string savedAs)
         {
             Report.StartStep(Report.Details.StepIndex + " - Confirm File is downloaded with name: " + file);
@@ -218,7 +221,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			}
 		}
 
-		[RegexStepDefinition(@"I open the file saved as: (.*) should see a new tabbed document with the pdf at it contains the text: (.*)")]
+		[StepDefinition(@"I open the file saved as: (.*) should see a new tabbed document with the pdf at it contains the text: (.*)")]
 		public void ThenIShouldSeeANewTabbedDocumentWithThePdfContainingProductCodeSavedAsTestCase(string file, string findText)
 		{
 			Report.Info("Opening the file saved in context in a new chrome window");
@@ -241,7 +244,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			}
 		}
 
-		[RegexStepDefinition(@"I open the file saved as: (.*) and take a screenshot")]
+		[StepDefinition(@"I open the file saved as: (.*) and take a screenshot")]
 		public void IOpenTheFileSavedAsAndTakeAScreenShot(string file)
 		{
 			Report.Info("Opening the file saved in context in a new chrome window");
@@ -260,7 +263,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		}
 
 
-        [RegexStepDefinition(@"I delete the file I saved as (.*)")]
+        [StepDefinition(@"I delete the file I saved as (.*)")]
         public void DeleteFile(string savedAs)
         {
             string file = Context.GetFromContext(savedAs)?.ToString() ?? "";
@@ -273,7 +276,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             File.Delete(file);
         }
 
-		[RegexStepDefinition(@"I Check that the two bitmaps saved as: (.*) and: (.*) are the same")]
+		[StepDefinition(@"I Check that the two bitmaps saved as: (.*) and: (.*) are the same")]
 		public void CheckBitmapsAreTheSame(string file1, string file2)
 		{
 			if (file1.ToLower().Contains("savedas"))
@@ -318,7 +321,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			}
 		}
 
-		[RegexStepDefinition(@"I close the window that was opened")]
+		[StepDefinition(@"I close the window that was opened")]
 		public void ThenCloseTheWindowThatOpened()
 		{
 			Report.StartStep(Report.Details.StepIndex + " - Closing current window");
@@ -344,7 +347,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			}
 		}
 
-		[RegexStepDefinition(@"I Check that the excel file saved as: (.*) contains the data saved as: (.*) for the column: (.*)")]
+		[StepDefinition(@"I Check that the excel file saved as: (.*) contains the data saved as: (.*) for the column: (.*)")]
 		public void ExcelFileContainsFollowingData(string fileSavedAs, string savedValues, string column)
 		{
 			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
@@ -405,7 +408,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		}
 
 
-		[RegexStepDefinition(@"I find the export csv saved as (.*) and check if the values saved as (.*) are found.")]
+		[StepDefinition(@"I find the export csv saved as (.*) and check if the values saved as (.*) are found.")]
 		public void ICheckCSVContainsValues(string fileSavedAs, string valuesSavedAs)
 		{
 			var savedDictionary = (Dictionary<string, string>)Context.GetFromContext(valuesSavedAs);
@@ -478,10 +481,10 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"OLD I find the Product List Pie Chart export csv saved as (.*) and check if the values saved as (.*) are found.")]
+		[StepDefinition(@"OLD I find the Product List Pie Chart export csv saved as (.*) and check if the values saved as (.*) are found.")]
 		public void ICheckProductListPieCSVContainsValuesOld(string fileSavedAs, string valuesSavedAs)
 		{
-			var savedItems = (WidgetPage.Widget.ProductListItems)Context.GetFromContext(valuesSavedAs);
+			var savedItems = (ProductListItems)Context.GetFromContext(valuesSavedAs);
 			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
 			var lines = System.IO.File.ReadAllLines(File);
 
@@ -536,10 +539,10 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"I find the Product List Bar Graph export csv saved as (.*) and check if the values saved as (.*) are found.")]
+		[StepDefinition(@"I find the Product List Bar Graph export csv saved as (.*) and check if the values saved as (.*) are found.")]
 		public void ICheckProductListBarCSVContainsValues(string fileSavedAs, string valuesSavedAs)
 		{
-			var savedItems = (WidgetPage.Widget.ProductListItems)Context.GetFromContext(valuesSavedAs);
+			var savedItems = (ProductListItems)Context.GetFromContext(valuesSavedAs);
 			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
 			var lines = System.IO.File.ReadAllLines(File);
 
@@ -603,10 +606,10 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"I find the Product List Pie Chart export csv saved as (.*) and check if the values saved as (.*) are found.")]
+		[StepDefinition(@"I find the Product List Pie Chart export csv saved as (.*) and check if the values saved as (.*) are found.")]
 		public void ICheckProductListPieCSVContainsValues(string fileSavedAs, string valuesSavedAs)
 		{
-			var savedItems = (WidgetPage.Widget.ProductListItems)Context.GetFromContext(valuesSavedAs);
+			var savedItems = (ProductListItems)Context.GetFromContext(valuesSavedAs);
 			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
 			var lines = System.IO.File.ReadAllLines(File);
 
@@ -665,7 +668,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"I Check that there is a new csv file downloaded and save the file path as: (.*)")]
+		[StepDefinition(@"I Check that there is a new csv file downloaded and save the file path as: (.*)")]
 		public void CheckNewCsvFileDownloadedAndSaveAs(string savedAs)
 		{
 			new Global_Steps().SaveDownloads();
@@ -677,7 +680,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		}
 
 
-		[RegexStepDefinition(@"I check that the file saved as: (.*) contains the following column headings:")]
+		[StepDefinition(@"I check that the file saved as: (.*) contains the following column headings:")]
 		public void CheckTheExcelFileContainsTheColumnHeadings(string fileSavedAs, Table table)
 		{
 
@@ -711,7 +714,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"I Check that the file saved as: (.*) included the following data in the column with heading: (.*)")]
+		[StepDefinition(@"I Check that the file saved as: (.*) included the following data in the column with heading: (.*)")]
 		public void CheckNewCsvIncludesDataInColumn(string fileSavedAs, string heading, Table table)
 		{
 			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
@@ -776,10 +779,10 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"I find the Supplier List export csv saved as (.*) and check if the values saved as (.*) are found.")]
+		[StepDefinition(@"I find the Supplier List export csv saved as (.*) and check if the values saved as (.*) are found.")]
 		public void ICheckSupplierListCSVContainsValues(string fileSavedAs, string valuesSavedAs)
 		{
-			var savedItems = (WidgetPage.Widget.SupplierListItems)Context.GetFromContext(valuesSavedAs);
+			var savedItems = (SupplierListItems)Context.GetFromContext(valuesSavedAs);
 			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
 			var lines = System.IO.File.ReadAllLines(File);
 			List<string> suppliersStr = new List<string>();
@@ -836,7 +839,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 
 
-		//[RegexStepDefinition("For the Supplier Subscription Status Widget, I perform Chart Drill-down Export")]
+		//[StepDefinition("For the Supplier Subscription Status Widget, I perform Chart Drill-down Export")]
 		public void ForSupplierSubscriptionStatusIPerformChartDrillDownExport()
 		{
 			string widget = "Supplier Subscription Status";
@@ -876,20 +879,20 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the URL area of the browser page, I confirm that the URL does not contain a #")]
+		[StepDefinition(@"In the URL area of the browser page, I confirm that the URL does not contain a #")]
 		public void CheckURLDoesNotContainHash()
 		{
 			string currentUrl = SeleniumWebDriver.CurrentDriver.Url;
 			Report.IsTrue(!currentUrl.Contains("#"), "The Current URL did contain a #", "The current URL did not contain a #");
 		}
 
-		[RegexStepDefinition(@"I confirm that a loading bar icon is shown")]
+		[StepDefinition(@"I confirm that a loading bar icon is shown")]
 		public void IConfirmLoadingBarShown()
 		{
 			Report.IsTrue(GeneralUtilities.LoadingBarShowing(), "The loading bar was not showing", "The loading bar was shown");
 		}
 
-		[RegexStepDefinition(@"RPS Login - Base functionality for TReVor account: (.*) and do not wait for load")]
+		[StepDefinition(@"RPS Login - Base functionality for TReVor account: (.*) and do not wait for load")]
 		public void Shared104950(string savedAs)
 		{
 			Report.UseSubSteps = true;
@@ -911,7 +914,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Context.AddToContext("ActiveUser", user);
 		}
 
-		[RegexStepDefinition(@"I switch to the window with the title: (.*)")]
+		[StepDefinition(@"I switch to the window with the title: (.*)")]
 		public void SwitchToWindowWithTitle(string title)
 		{
 			string currentHandle = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
@@ -943,7 +946,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			throw new Exception("Failed to find window with title: " + title);
 		}
 
-		[RegexStepDefinition(@"I Close the browser tab with the title: (.*)")]
+		[StepDefinition(@"I Close the browser tab with the title: (.*)")]
 		public void CloseBrowserTabWithTitle(string title)
 		{
 			string currentHandle = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
@@ -975,7 +978,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			throw new Exception("Failed to find window with title: " + title);
 		}
 
-		[RegexStepDefinition(@"I generate a random UPC number and save as: (.*)")]
+		[StepDefinition(@"I generate a random UPC number and save as: (.*)")]
 		public void GivenIGenerateARandomUPCNumberAndSaveAs(string savedAs)
 		{
 			string uPCNo = GeneralFunctions.GenerateUPCNumber();
@@ -987,7 +990,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"I generate 1000 random UPCs save them in a string array as: (.*)")]
+		[StepDefinition(@"I generate 1000 random UPCs save them in a string array as: (.*)")]
 		public void GivenIGenerate1000RandomUpcsAndSaveThemInArray(string savedAs)
 		{
 			string uPCNo;
@@ -1030,7 +1033,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		}
 
 
-		[RegexStepDefinition(@"I generate a total of: (.*) random UPCs save them in a string array as: (.*)")]
+		[StepDefinition(@"I generate a total of: (.*) random UPCs save them in a string array as: (.*)")]
 		public void GivenIGenerateTotalXRandomUpcsAndSaveThemInArray(int upctotal, string savedAs)
 		{
 			string uPCNo;
@@ -1072,7 +1075,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-        [RegexStepDefinition(@"I wait for (60|[1-5][0-9]?) minutes")]
+        [StepDefinition(@"I wait for (60|[1-5][0-9]?) minutes")]
         public void IWaitForMinutes(int nMinutes)
         {
             Report.Info($"Attempting to delaying for {nMinutes} minutes.");
@@ -1080,7 +1083,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.Success($"Success, delayed for {nMinutes} minutes.");
         }
 
-        [RegexStepDefinition(@"I refresh the web page")]
+        [StepDefinition(@"I refresh the web page")]
         public void IRefreshWebPage()
         {
             Report.Info("Attempting to refresh the web page.");
@@ -1088,8 +1091,8 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.Success("Success, refreshed the webpage.");
         }
 
-		[RegexStepDefinition(@"I confirm the page has loaded")]
-		[RegexStepDefinition(@"I confirm the page has refreshed")]
+		[StepDefinition(@"I confirm the page has loaded")]
+		[StepDefinition(@"I confirm the page has refreshed")]
 
 		public void IConfirmPageHasLoaded()
 		{

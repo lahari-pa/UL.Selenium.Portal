@@ -3,12 +3,15 @@ using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Selenium.Portal.RPS.Classes;
 using UL.Selenium.Portal.RPS.Selenium_Classes;
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Castle.Core.Internal;
 using UL.Selenium.Portal.WERCSmart.Classes;
-using UL.Automation.ReqnrollHelpers.Attributes;
+using NPOI.SS.Formula.Functions;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using GeneralUtilities = UL.Selenium.Portal.RPS.Classes.GeneralUtilities;
 
 namespace UL.Selenium.Portal.RPS.Steps
@@ -16,17 +19,18 @@ namespace UL.Selenium.Portal.RPS.Steps
 	[Binding, Scope(Tag = "ProductLookUP")]
 	class Steps_ProductLookUP
 	{
-		[RegexStepDefinition(@"I confirm the Product Lookup tab has loaded")]
-		[RegexStepDefinition(@"I confirm the Product Lookup page refreshes")]
+		[StepDefinition(@"I confirm the Product Lookup tab has loaded")]
+		[StepDefinition(@"I confirm the Product Lookup page refreshes")]
 		public void HomeTabLoaded()
 		{
 			Report.IsTrue(new TopBar().WaitForContainerToBeVisible(), "Top bar did not load!");
 			GeneralUtilities.WaitForLoadingToFinish();
-			new ProductLookUp().WaitProductsGridSpinnerFinish(); 
+			new ProductLookUp().WaitProductsGridSpinnerFinish();
+			new Steps_Navigation().ConfirmActiveTab("Product Lookup");
 			Report.IsTrue(new ProductLookUp().WaitForContainerToBeVisible(), "Dashboard content did not load", "Dashboard content loaded");
 		}
 
-		[RegexStepDefinition(@"I enter Product ID: (.*) into the Product Lookup search box")]
+		[StepDefinition(@"I enter Product ID: (.*) into the Product Lookup search box")]
 		public void IEnterProductIDIntoProductLookup(string productID)
 		{
 			Report.Info($"Checking to see if Product ID contains 'ProductInformation'");
@@ -40,7 +44,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(new ProductLookUp().CheckSearchBoxContains(productID), "The Product Search Box did not contain the Product ID", "The Product Search Box contained the product ID");
 
 		}
-		[RegexStepDefinition(@"I Check that only one Product Is present in the Products Grid with the ID: (.*)")]
+		[StepDefinition(@"I Check that only one Product Is present in the Products Grid with the ID: (.*)")]
 		public void CheckProductsGridOnly1ProductWithID(string productID)
 		{
 
@@ -58,13 +62,13 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"I Click the Row actions: (.*) for the first product in the Products Grid")]
+		[StepDefinition(@"I Click the Row actions: (.*) for the first product in the Products Grid")]
 		public void IClickRowActionForFirstProduct(string action)
 		{
 			Report.IsTrue(new ProductLookUp().ClickActionForFirstResultInGrid(action), "Failed to click the action for the first product", "Successfully clicked the action for the first product");
 		}
 
-		[RegexStepDefinition(@"I confirm that the Product Lookup page buttons to the right of the search box are as follows:")]
+		[StepDefinition(@"I confirm that the Product Lookup page buttons to the right of the search box are as follows:")]
 		public void IConfirmThatThProductLookupPageButtonsAreAsFollows(Table table)
 		{
 			List<string> buttons = new List<string>();
@@ -79,13 +83,13 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the product lookup page, I click the More Filters Button")]
+		[StepDefinition(@"In the product lookup page, I click the More Filters Button")]
 		public void GivenInTheProductLookupPageIClickTheMoreFiltersButton()
 		{
 			Report.IsTrue(new ProductLookUp().ClickMoreFiltersOptionButton(), "Failed to click the more filters button", "Successfully clicked the more filters button");
 		}
  
-		[RegexStepDefinition(@"I confirm that the Lookup Page bread crumb area contains the label: (.*)")]
+		[StepDefinition(@"I confirm that the Lookup Page bread crumb area contains the label: (.*)")]
 		public void IConfirmThatTheProductLookupPageBreadCrumbAreaContainsLabel(string label)
 		{
 
@@ -93,14 +97,14 @@ namespace UL.Selenium.Portal.RPS.Steps
 		}
 
  
-		[RegexStepDefinition(@"In the product lookup Page, In the Products table I click the Reset Button")]
+		[StepDefinition(@"In the product lookup Page, In the Products table I click the Reset Button")]
 		public void InTheProductLookupPageInProductsTableIClickReset()
 		{
 			Report.IsTrue(new ProductLookUp().ClickResetButton(), "Failed to click reset", "Successfully clicked the reset button");
 			this.HomeTabLoaded();
 		}
  
-        [RegexStepDefinition(@"In the product lookup page, I confirm for all products the Action column (does|does not) include option: (.*)")]
+        [StepDefinition(@"In the product lookup page, I confirm for all products the Action column (does|does not) include option: (.*)")]
         public void InTheProductLookUpPageIConfirmForAllProductsActionsColumnDoesOrDoesNotContainGivenOption(string doesOrDoesNot, string value)
         {
             if (doesOrDoesNot == "does")
@@ -113,38 +117,38 @@ namespace UL.Selenium.Portal.RPS.Steps
             }
         }
 
-        [RegexStepDefinition(@"I click the Add Column button in the Column Selector popup")]
+        [StepDefinition(@"I click the Add Column button in the Column Selector popup")]
         public void ThenIClickTheAddColumnButtonInTheColumnSelectorPopup()
         {
             Report.IsTrue(new ProductLookUp.ColumnSelectorPopup().IClickTheAddColumnButtonInTheColumnSelectorPopup(), "Failed click the Add Column button", "Successfully clicked the Add Column button");
         }
 
-        [RegexStepDefinition(@"I confirm I see a new row at the bottom of the Column Selector popup")]
+        [StepDefinition(@"I confirm I see a new row at the bottom of the Column Selector popup")]
         public void ThenIConfirmISeeANewRowAtTheBottomOfTheColumnSelectorPopup()
         {
             Report.IsTrue(new ProductLookUp.ColumnSelectorPopup().IConfirmISeeANewRowAtTheBottomOfTheColumnSelectorPopup(), "Failed to find a new row", "Successfully found a new row");
         }
 
-        [RegexStepDefinition(@"I click on the new row at the bottom of the Column Selector popup")]
+        [StepDefinition(@"I click on the new row at the bottom of the Column Selector popup")]
         public void ThenIClickOnTheNewRowAtTheBottomOfTheColumnSelectorPopup()
         {
             Report.IsTrue(new ProductLookUp.ColumnSelectorPopup().IClickOnTheNewRowAtTheBottomOfTheColumnSelectorPopup(), "Failed to click the new row", "Successfully clicked new row");
         }
 
 
-        [RegexStepDefinition(@"I confirm the new row at the bottom of the Column Selector popup shows the default text: (.*)")]
+        [StepDefinition(@"I confirm the new row at the bottom of the Column Selector popup shows the default text: (.*)")]
         public void ThenIConfirmTheNewRowAtTheBottomOfTheColumnSelectorPopupShowsTheDefaultTextSelectColumn(string defaultText)
         {
             Report.IsTrue(new ProductLookUp.ColumnSelectorPopup().IConfirmTheNewRowAtTheBottomOfTheColumnSelectorPopupShowsTheDefaultTextSelectColumn(defaultText), "Failed to confirm the new row shows the default text", "Successfully confirmed the new row shows the default text");
         }
 
-        [RegexStepDefinition(@"I select the drop down selector for the new row at the bottom of the Column Selector popup")]
+        [StepDefinition(@"I select the drop down selector for the new row at the bottom of the Column Selector popup")]
         public void ThenISelectTheDropDownSelectorForTheNewRowAtTheBottomOfTheColumnSelectorPopup()
         {
             Report.IsTrue(new ProductLookUp.ColumnSelectorPopup().ISelectTheDropDownSelectorForTheNewRowAtTheBottomOfTheColumnSelectorPopup(), "Failed to select the dropdown selector for the new row", "Successfully selected the dropdown selector for the new row");
         }
 
-        [RegexStepDefinition(@"I confirm I (see|do not see) a list of available columns in the dropdown selector in Column Selector popup that contain the following text: (.*)")]
+        [StepDefinition(@"I confirm I (see|do not see) a list of available columns in the dropdown selector in Column Selector popup that contain the following text: (.*)")]
         public void ThenIConfirmISeeAListOfAvailableColumnsInTheDropdownSelectorInColumnSelectorPopupThatContainTheFollowingText(string seeOrDoNotSee, string text)
         {
             if (seeOrDoNotSee == "see")
@@ -157,14 +161,14 @@ namespace UL.Selenium.Portal.RPS.Steps
             }
         }
 
-        [RegexStepDefinition(@"I type the following into a textfield for the new row at the bottom of the Column Selector popup: (.*)")]
+        [StepDefinition(@"I type the following into a textfield for the new row at the bottom of the Column Selector popup: (.*)")]
         public void ThenITypeTheFollowingIntoATextfieldForTheNewRowAtTheBottomOfTheColumnSelectorPopup(string text)
         {
             Report.IsTrue(new ProductLookUp.ColumnSelectorPopup().ITypeTheFollowingIntoATextfieldForTheNewRowAtTheBottomOfTheColumnSelectorPopup(text), "Failed to type text into the new row", "Successfully typed the text into the new row");
         }
 
 
-        [RegexStepDefinition(@"I confirm I (see|do not see) a list of available columns in the dropdown selector in Column Selector popup")]
+        [StepDefinition(@"I confirm I (see|do not see) a list of available columns in the dropdown selector in Column Selector popup")]
         public void ThenIConfirmISeeAListOfAvailableColumnsInTheDropdownSelectorInColumnSelectorPopup(string seeOrDoNotSee)
         {
             if (seeOrDoNotSee == "see")
@@ -177,20 +181,20 @@ namespace UL.Selenium.Portal.RPS.Steps
             }
         }
 
-        [RegexStepDefinition(@"I select the following available column in the dropdown selector in Column Selector popup: (.*) and save as: (.*)")]
+        [StepDefinition(@"I select the following available column in the dropdown selector in Column Selector popup: (.*) and save as: (.*)")]
         public void ThenISelectTheFollowingAvailableColumnInTheDropdownSelectorInColumnSelectorPopupAndSaveAs(string columnName, string savedAs)
         {
             Report.IsTrue(new ProductLookUp.ColumnSelectorPopup().ISelectTheFollowingAvailableColumnInTheDropdownSelectorInColumnSelectorPopup(columnName), "Failed to select the following column: " + columnName, "Successfully selected the following column: " + columnName);
             Context.AddToContext(savedAs, columnName);
         }
 
-        [RegexStepDefinition(@"I click the Close button in the Selector Column popup")]
+        [StepDefinition(@"I click the Close button in the Selector Column popup")]
         public void ThenIClickTheCloseButtonInTheSelectorColumnPopup()
         {
             Report.IsTrue(new ProductLookUp.ColumnSelectorPopup().IClickTheCloseButtonInTheSelectorColumnPopup(), "Failed to click the Close button", "Successfully clicked the Close button");
         }
         /*
-        [RegexStepDefinition(@"I confirm the column name I selected and saved as: (.*) (is|is not) displayed next to the Actions column")]
+        [StepDefinition(@"I confirm the column name I selected and saved as: (.*) (is|is not) displayed next to the Actions column")]
         public void ThenIConfirmTheColumnNameISelectedAndSavedAsColumnNameIsDisplayedNextToTheActionsColumn(string savedAs, string isOrIsNot)
         {
             string columnName = Context.GetFromContext(savedAs).ToString();
@@ -206,7 +210,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             }
         }
         */
-        [RegexStepDefinition(@"I confirm the column name I selected and saved as: (.*) (is|is not) displayed")]
+        [StepDefinition(@"I confirm the column name I selected and saved as: (.*) (is|is not) displayed")]
         public void ThenIConfirmTheColumnNameISelectedAndSavedAs_IsDisplayed(string columnName, string isOrIsNot)
         {
             if (isOrIsNot == "is")
@@ -219,14 +223,14 @@ namespace UL.Selenium.Portal.RPS.Steps
             }
         }
         
-        [RegexStepDefinition(@"In the product lookup Page, In the Products table I click the Select Columns Button")]
+        [StepDefinition(@"In the product lookup Page, In the Products table I click the Select Columns Button")]
         public void InTheProductLookupPageInProductsTableIClickSelectColumns()
         {
             Report.IsTrue(new ProductLookUp().ClickSelectColumnsButton(), "Failed to click select columns", "Successfully clicked the select columns button");
             this.HomeTabLoaded();
         }
 
-        [RegexStepDefinition(@"I confirm the Column Selector popup (is|is not) shown")]
+        [StepDefinition(@"I confirm the Column Selector popup (is|is not) shown")]
         public void ThenIConfirmTheColumnSelectorPopupIsShown(string isOrIsNot)
         {
             if (isOrIsNot == "is")
@@ -239,20 +243,20 @@ namespace UL.Selenium.Portal.RPS.Steps
             }
         }
 
-        [RegexStepDefinition(@"I confirm the column name I selected and saved as: (.*) is displayed next to the Actions column")]
+        [StepDefinition(@"I confirm the column name I selected and saved as: (.*) is displayed next to the Actions column")]
         public void ThenIConfirmTheColumnNameISelectedAndSavedAsColumnNameIsDisplayedNextToTheActionsColumn(string savedAs)
         {
             Report.IsTrue(new ProductLookUp().IConfirmTheColumnNameISelectedAndSavedAs_IsDisplayedNextToTheActionsColumn(savedAs), "Failed to locate saved column", "Successfully located saved column");
         }
 
-        [RegexStepDefinition(@"I click the Apply button in the Selector Column popup")]
+        [StepDefinition(@"I click the Apply button in the Selector Column popup")]
         public void ThenIClickTheApplyButtonInTheSelectorColumnPopup()
         {
             Report.IsTrue(new ProductLookUp.ColumnSelectorPopup().IClickTheApplyButtonInTheSelectorColumnPopup(), "Failed to click the Apply button", "Successfully clicked the apply button");
             Delay.Seconds(10);
         }
 
-        [RegexStepDefinition(@"I save the order of the columns shown in the Column Selector Popup as: (.*)")]
+        [StepDefinition(@"I save the order of the columns shown in the Column Selector Popup as: (.*)")]
         public void ISaveTheOrderOfTheColumnsShownInTheColumnSelectorPopupAs(string savedAs)
         {
 
@@ -269,39 +273,39 @@ namespace UL.Selenium.Portal.RPS.Steps
             }
         }
         /*
-        [RegexStepDefinition(@"I confirm the column name I selected and saved as: (.*) is displayed")]
+        [StepDefinition(@"I confirm the column name I selected and saved as: (.*) is displayed")]
         public void ThenIConfirmTheColumnNameISelectedAndSavedAs_IsDisplayed(string savedAs)
         {
             string columnName = Context.GetFromContext(savedAs).ToString();
             Report.IsTrue(new ProductLookUp.ColumnSelectorPopup().IConfirmTheColumnNameISelectedAndSavedAs_IsDisplayed(columnName), "Failed to confirm new column is displayed", "Successfully confirmed new column is displayed");
         }
         */
-        [RegexStepDefinition(@"I confirm there is a table graphic next to the Select Columns button")]
+        [StepDefinition(@"I confirm there is a table graphic next to the Select Columns button")]
         public void ThenIConfirmThereIsATableGraphicNextToTheSelectColumnsButton()
         {
             Report.IsTrue(new ProductLookUp().SelectColumnsButtonGraphicExists(), "Failed to find graohic on the Select Columns Button.", "Successfully found graphic on the Select Columns Button.");
         }
         
-        [RegexStepDefinition(@"I select the first option in the narrowed list in the Column Selector popup")]
+        [StepDefinition(@"I select the first option in the narrowed list in the Column Selector popup")]
         public void ThenISelectTheFirstOptionInTheNarrowedListInTheColumnSelectorPopup()
         {
             Report.IsTrue(new ProductLookUp.ColumnSelectorPopup().ISelectTheFirstOptionInTheNarrowedListInTheColumnSelectorPopup(), "Failed to select the first option", "Successfully selected the first option");
         }
 
-        [RegexStepDefinition(@"I confirm the Column Selector popup displays the following title: (.*)")]
+        [StepDefinition(@"I confirm the Column Selector popup displays the following title: (.*)")]
         public void ThenIConfirmTheColumnSelectorPopupDisplaysTheFollowingTitleColumnsSelector(string popupTitle)
         {
             Report.IsTrue(new ProductLookUp().IConfirmTheColumnSelectorPopupDisplaysTheFollowingTitleColumnsSelector(popupTitle), $"Failed to find the following title in the column selector popup: " + popupTitle, $"Successfully found the following title in the column selector popup: " + popupTitle);
         }
 
 
-        [RegexStepDefinition(@"I confirm the Column Selector popup displays an x icon in the top right corner")]
+        [StepDefinition(@"I confirm the Column Selector popup displays an x icon in the top right corner")]
         public void ThenIConfirmTheColumnSelectorPopupDisplaysAnXIconInTheTopRightCorner()
         {
             Report.IsTrue(new ProductLookUp.ColumnSelectorPopup().ConfirmColumnSelectorsPopupDisplaysAnXIcon(), $"Failed to find the x icon in the top right corner", $"Successfully found the x icon in the top right corner");
         }
 
-        [RegexStepDefinition(@"I confirm the Column Selector popup displays a column selector list")]
+        [StepDefinition(@"I confirm the Column Selector popup displays a column selector list")]
         public void ThenIConfirmTheColumnSelectorPopupDisplaysAColumnSelectorList()
         {
             Report.IsTrue(new ProductLookUp.ColumnSelectorPopup().IConfirmTheColumnSelectorPopupDisplaysAColumnSelectorList(), $"Failed to find the column selector list in the column selector popup", $"Successfully found the column selector list in the column seletor popup");
@@ -309,43 +313,43 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 
 
-        [RegexStepDefinition(@"I confirm the Column Selector popup displays 1 or more entries")]
+        [StepDefinition(@"I confirm the Column Selector popup displays 1 or more entries")]
         public void ThenIConfirmTheColumnSelectorPopupDisplaysOrMoreEntries()
         {
             Report.IsTrue(new ProductLookUp.ColumnSelectorPopup().IConfirmTheColumnSelectorPopupDisplaysOrMoreEntries(), $"Failed to find 1 or more entries in the Column Selector popup", $"Successfully found 1 or more entries in the Column Selector popup");
         }
 
-        [RegexStepDefinition(@"I confirm the Column Selector popup displays a hamburger icon next to each entry")]
+        [StepDefinition(@"I confirm the Column Selector popup displays a hamburger icon next to each entry")]
         public void ThenIConfirmTheColumnSelectorPopupDisplaysAHamburgerIconNextToEachEntry()
         {
             Report.IsTrue(new ProductLookUp.ColumnSelectorPopup().IConfirmTheColumnSelectorPopupDisplaysAHamburgerIconNextToEachEntry(), $"Failed to find the hamburger icon next to each entry", $"Successfully found the hamburger icon next to each entry");
         }
 
-        [RegexStepDefinition(@"I confirm the Column Selector popup displays an x icon next to each entry")]
+        [StepDefinition(@"I confirm the Column Selector popup displays an x icon next to each entry")]
         public void ThenIConfirmTheColumnSelectorPopupDisplaysAnXIconNextToEachEntry()
         {
             Report.IsTrue(new ProductLookUp.ColumnSelectorPopup().IConfirmTheColumnSelectorPopupDisplaysAnXIconNextToEachEntry(), $"Failed to find an ex icon next to each entry", $"Successfully found an x icon next to each entry");
         }
 
-        [RegexStepDefinition(@"I confirm the Column Selector popup displays an Add Column button at the bottom")]
+        [StepDefinition(@"I confirm the Column Selector popup displays an Add Column button at the bottom")]
         public void ThenIConfirmTheColumnSelectorPopupDisplaysAnAddColumnButtonAtTheBottom()
         {
             Report.IsTrue(new ProductLookUp.ColumnSelectorPopup().IConfirmTheColumnSelectorPopupDisplaysAnAddColumnButtonAtTheBottom(), $"Failed to find the Add Column button at the bottom of the popup", $"Successfully found the Add Column button at the bottom of the popup");
         }
 
-        [RegexStepDefinition(@"I confirm the Column Selector popup displays the following buttons:")]
+        [StepDefinition(@"I confirm the Column Selector popup displays the following buttons:")]
         public void ThenIConfirmTheColumnSelectorPopupDisplaysTheFollowingButtons(Table table)
         {
             Report.IsTrue(new ProductLookUp.ColumnSelectorPopup().IConfirmTheColumnSelectorPopupDisplaysTheFollowingButtons(table), $"Failed to find all the buttons in the table", $"Successfully found all the bottom in the table");
         }
 
-        [RegexStepDefinition(@"In the Column Selector popup I click close")]
+        [StepDefinition(@"In the Column Selector popup I click close")]
         public void ThenInTheColumnSelectorPopupIClickClose()
         {
             Report.IsTrue(new ProductLookUp.ColumnSelectorPopup().InTheColumnSelectorPopupIClickClose(), $"Failed to close the Column Selector popup", $"Successfully closed the Column Selector popup");
         }
 
-        [RegexStepDefinition(@"I confirm I (see|do not see) the breadcrumbs area under the search field")]
+        [StepDefinition(@"I confirm I (see|do not see) the breadcrumbs area under the search field")]
         public void GivenIConfirmISeeTheBreadcrumbsAreaUnderTheSearchField(string seeOrDoNotSee)
         {
             if (seeOrDoNotSee == "see")
@@ -358,7 +362,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             }
         }
 
-        [RegexStepDefinition(@"I confirm I (see|do not see) the bredcrumbs area under the search field")]
+        [StepDefinition(@"I confirm I (see|do not see) the bredcrumbs area under the search field")]
         public void GivenIConfirmIDoNotSeeTheBredcrumbsAreaUnderTheSearchField(string seeOrDoesNotSee)
         {
             if (seeOrDoesNotSee == "see")
@@ -371,7 +375,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             }
         }
  
-        [RegexStepDefinition(@"In the Product Lookup Page, I save all the Results to context as: (.*)")]
+        [StepDefinition(@"In the Product Lookup Page, I save all the Results to context as: (.*)")]
         public void InTheProductLookUpPageInProductsTableISaveAllTheResultsToContextAs(string savedAs)
         {
             Report.IsTrue(new ProductLookUp().WaitProductsGridSpinnerFinish(), "The Spinner is still showing, the products grid has not loaded", "The products grid has loaded");
@@ -391,13 +395,13 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [RegexStepDefinition(@"In the Product Lookup Page, I click the Export Button")]
+        [StepDefinition(@"In the Product Lookup Page, I click the Export Button")]
         public void InTheProductLookUpPageIClickExportButton()
         {
             Report.IsTrue(new ProductLookUp().InTheProductLookUpPageIClickExportButton(), "Failed to click Export button", $"Successfully clicked on Export button");
         }
 
-        [RegexStepDefinition(@"In the product lookup Page, I confirm the Products shown in the export file saved as: (.*)  match the products saved as: (.*)")]
+        [StepDefinition(@"In the product lookup Page, I confirm the Products shown in the export file saved as: (.*)  match the products saved as: (.*)")]
         public void InTheProductLookupPageIConfirmProductsInExportFileMatchSavedProducts(string fileSavedAs, string valuesSavedAs)
         {
 
@@ -533,15 +537,15 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
         
-        [RegexStepDefinition(@"I Enter WPS ID : (.*) in Search field")]
-        [RegexStepDefinition(@"I Enter Product ID : (.*) in Search field")]
-        [RegexStepDefinition(@"I Enter Product Name : (.*) in Search field")]
+        [StepDefinition(@"I Enter WPS ID : (.*) in Search field")]
+        [StepDefinition(@"I Enter Product ID : (.*) in Search field")]
+        [StepDefinition(@"I Enter Product Name : (.*) in Search field")]
         public void InTheProductLookUpSearchtheProduct(string text)
         {
             Report.IsTrue(new ProductLookUp().InTheProductLookUpSearchProduct(text), "Failed to search the product", $"Successfully searched the product");
         }
 
-        [RegexStepDefinition(@"I save the order of the columns shown in the Product Table as: (.*)")]
+        [StepDefinition(@"I save the order of the columns shown in the Product Table as: (.*)")]
         public void ISaveTheOrderOfTheColumnsShownInTheProductTableAs(string savedAs)
         {
             List<string> columnNamesList = new ProductLookUp().GetColumnsShownNameListInProductTable();
@@ -555,7 +559,7 @@ namespace UL.Selenium.Portal.RPS.Steps
                 Report.Success("Failed to find list of column names in Column Selector Popup");
             }
         }
-        [RegexStepDefinition(@"I confirm columns shown in the Column Selector Popup: (.*) match with columns shown in the Product Table: (.*)")]
+        [StepDefinition(@"I confirm columns shown in the Column Selector Popup: (.*) match with columns shown in the Product Table: (.*)")]
         
         public void IMatchTheColumnOrders(string productTable, string columnSelector)
         {
@@ -564,13 +568,13 @@ namespace UL.Selenium.Portal.RPS.Steps
             bool ColumnsareTheSame = ColumnSelectorColumnNamesList.SequenceEqual(ProductTableColumnNamesList);
             Report.IsTrue(ColumnsareTheSame, "ProductTableColumnNames and ColumnSelectorColumnNames does not match", " Successfully ProductTableColumnNames and ColumnSelectorColumnNames matched");
         }
-        [RegexStepDefinition(@"I use mouse to select the hamburger icon for the column name: (.*)")]
+        [StepDefinition(@"I use mouse to select the hamburger icon for the column name: (.*)")]
 
         public void IIuseMouseToSelectHamburgerIcon(string columnName)
         {
             Report.IsTrue( new ProductLookUp.ColumnSelectorPopup().InTheColumnSelectorPopupISelectHamBurger(),"Failed to use mouse","Sucessfully used mouse");
         }
-        [RegexStepDefinition(@"I use mouse to place the coluum: (.*) into a new position in the list")]
+        [StepDefinition(@"I use mouse to place the coluum: (.*) into a new position in the list")]
 
         public void IuseMouseToPlaceTheColumnInNewPosition(string columnName)
         {
@@ -579,7 +583,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             new ProductLookUp.ColumnSelectorPopup().InTheColumnSelectorPopupPlaceTheColumnInNewPosition();
             
         }
-        [RegexStepDefinition(@"I confirm below the menu links banner I see the Product Lookup main page body")]
+        [StepDefinition(@"I confirm below the menu links banner I see the Product Lookup main page body")]
 
         public void IconfirmProductLookupMainBodyIsDisplayed()
         {
@@ -587,7 +591,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(new ProductLookUp().MainPageBodyDisplayed(), "The main page body is not present", "The main page body is present");
 
         }
-        [RegexStepDefinition(@"I confirm the Product Lookup background color is: grey")]
+        [StepDefinition(@"I confirm the Product Lookup background color is: grey")]
 
         public void ConfirmProductLookupBackgroundColorIsGrey()
         {
@@ -600,7 +604,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I confirm the Product Lookup Text color is: darker grey")]
+        [StepDefinition(@"I confirm the Product Lookup Text color is: darker grey")]
 
         public void ConfirmProductLookupTextColorIsGrey()
         {
@@ -613,21 +617,21 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I confirm the Product Lookup search box is shown")]
+        [StepDefinition(@"I confirm the Product Lookup search box is shown")]
 
         public void ConfirmProductLookupSearchBoxIsPresent()
         {
             Report.IsTrue(new ProductLookUp().SearchBoxPresent(), "The search box was not present", "The search box was present");
         }
 
-        [RegexStepDefinition(@"I confirm that the Product Lookup search box place holder text reads: (.*)")]
+        [StepDefinition(@"I confirm that the Product Lookup search box place holder text reads: (.*)")]
 
         public void IConfirmThatProductLookupSearchBoxPlaceHolderTextReads(string placeholderText)
         {
             Report.IsTrue(new ProductLookUp().SearchBoxPlaceHolderText() == placeholderText, "The place holder text did not match the expected", "The place holder text was as expected");
         }
 
-        [RegexStepDefinition(@"In the Product Lookup page I confirm to the right of the buttons I do not see three trends")]
+        [StepDefinition(@"In the Product Lookup page I confirm to the right of the buttons I do not see three trends")]
 
         public void GivenInThProductLookupPageIConfirmToTheRightOfTheButtonsIDoNotSeeThreeTrends(Table table)
         {
@@ -635,14 +639,14 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
       
 
-        [RegexStepDefinition(@"I Check that the Product Lookup Products Table is showing")]
+        [StepDefinition(@"I Check that the Product Lookup Products Table is showing")]
 
         public void CheckProductLookupProductsTable()
         {
             Report.IsTrue(new ProductLookUp().ProductTableIsPresent(), "The products table is not showing", "The products table is showing");
         }
 
-        [RegexStepDefinition(@"I confirm that the  Product Lookup page headings row has a grey background color")]
+        [StepDefinition(@"I confirm that the  Product Lookup page headings row has a grey background color")]
 
         public void IConfirmThatProductLookupPageHeadingsShowGrey()
         {
@@ -653,7 +657,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }      
 
-        [RegexStepDefinition(@"In the Product Lookup page, I confirm that the main table shows data rows")]
+        [StepDefinition(@"In the Product Lookup page, I confirm that the main table shows data rows")]
 
         public void InTheProductLookupPageIConfirmThatTableShowsDataRows()
         {
@@ -662,14 +666,14 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"In the Product Lookup page, below the Product Lookup table I confirm: page footer is shown")]
+        [StepDefinition(@"In the Product Lookup page, below the Product Lookup table I confirm: page footer is shown")]
 
         public void InTheProductLookupPageICheckThatTheTableFooterIsShown()
         {
             Report.IsTrue(new ProductLookUp().ProductsGridFooterPresent(), "The table footer was not shown", "The table footer was shown");
         }
 
-        [RegexStepDefinition(@"In the Product Lookup page, I confirm that the main table does not show data rows")]
+        [StepDefinition(@"In the Product Lookup page, I confirm that the main table does not show data rows")]
 
         public void InTheProductLookupPageIConfirmThatTableDoesNotShowDataRows()
         {
@@ -677,7 +681,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(rowCount == 0, "Data Rows are showing", "Data Rows are not showing");
         }
 
-        [RegexStepDefinition(@"I confirm the product I searched for is shown with the ID: (.*)")]
+        [StepDefinition(@"I confirm the product I searched for is shown with the ID: (.*)")]
         public void CheckProductsGridDisplaysProductWithID(string productID)
         {
 
@@ -695,7 +699,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I confirm the product I searched for is shown: (.*)")]
+        [StepDefinition(@"I confirm the product I searched for is shown: (.*)")]
         public void CheckProductsGridDisplaysProductISearched(string productName)
         {
 
@@ -712,14 +716,14 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [RegexStepDefinition(@"Select any UPC shown on the page and save as: (.*)")]
+        [StepDefinition(@"Select any UPC shown on the page and save as: (.*)")]
         public void SelectAnyUPCAndSaveTheNumber(string savedAs)
         {
             string upcNumber = new ProductLookUp().TakeNoteOfUPCNumber(savedAs);
             Context.AddToContext(savedAs, upcNumber);
         }
 
-        [RegexStepDefinition(@"I Enter UPC Number : (.*) in Search field")]
+        [StepDefinition(@"I Enter UPC Number : (.*) in Search field")]
         public void InTheProductLookUpSearchtheProductByUPCNumber(string savedAs)
         {
             string upcNumber = new ProductLookUp().TakeNoteOfUPCNumber(savedAs);
@@ -729,7 +733,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I confirm the UPC I saved: (.*) is shown in Product Table")]
+        [StepDefinition(@"I confirm the UPC I saved: (.*) is shown in Product Table")]
         public void InTheProductLookUpSeartheProductByUPCNumber(string savedAs)
         {
             string upcNumber = new ProductLookUp().TakeNoteOfUPCNumber(savedAs);
@@ -742,14 +746,14 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(new ProductLookUp().GetSearchedProductInGridByUPC() == savedpUpcNumber, "UPC Number searched for is not displayed", "UPC Number searched for is displayed successfully");
         }
 
-        [RegexStepDefinition(@"Select first 4 digits of UPC  shown on the page and save as: (.*)")]
+        [StepDefinition(@"Select first 4 digits of UPC  shown on the page and save as: (.*)")]
         public void SelectFirstFourDigitsOfUPCAndSaveTheNumber(string savedAs)
         {
             string upcNumber = new ProductLookUp().TakeNoteOfFirstFourDigitsOfUPCNumber(savedAs);
             Context.AddToContext(savedAs, upcNumber);
         }
 
-        [RegexStepDefinition(@"I Enter first 4 digits of UPC Number : (.*) in Search field")]
+        [StepDefinition(@"I Enter first 4 digits of UPC Number : (.*) in Search field")]
         public void InTheProductLookUpSearchtheProductByPartialUPCNumber(string savedAs)
         {
             string upcNumber = new ProductLookUp().TakeNoteOfFirstFourDigitsOfUPCNumber(savedAs);
@@ -761,27 +765,27 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [RegexStepDefinition(@"I confirm the UPC Number I saved: (.*) is shown in Product Table")]
+        [StepDefinition(@"I confirm the UPC Number I saved: (.*) is shown in Product Table")]
         public void InTheProductLookUpSearchTheProductByUPCNumberOrWPSOrSupplierName(string savedAs)
         {
             Report.IsTrue(new ProductLookUp().SearchMatchWithUPC(savedAs), "UPC Number searched for is not displayed", "UPC Number searched for is displayed successfully");
 
         }
 
-        [RegexStepDefinition(@"In the search field enter a product ID, product name or UPC and click Enter button: (.*)")]
+        [StepDefinition(@"In the search field enter a product ID, product name or UPC and click Enter button: (.*)")]
         public void InTheProductLookUpSearchtheProductAndClickEnter(string text)
         {
             Report.Info("Attempting to Enter the product ID");
             new ProductLookUp().InTheProductLookUpSearchProductAndClickEnter(text);
         }
 
-        [RegexStepDefinition(@"I confirm the trends graphics do show the % figure")]
+        [StepDefinition(@"I confirm the trends graphics do show the % figure")]
         public void InTheProductLookUpIConfirmTrendGraphicsShowFigure()
         {
             Report.IsTrue(new ProductLookUp().InTheProductLookUpIConfirmTrendGraphicsShowFigure(), "Trend Graphics does not show % figure", "Trend Graphics displays % figure");
         }
 
-        [RegexStepDefinition(@"I confirm the trends graphics (shows|do not show) the % figure")]
+        [StepDefinition(@"I confirm the trends graphics (shows|do not show) the % figure")]
         public void InTheProductLookUpIConfirmTrendGraphicsShowFigure(string seeOrDoesNotSee)
         {
             if (seeOrDoesNotSee == "show")
@@ -796,14 +800,14 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I save the Product Name shown for the product as: (.*) I am working with")]
+        [StepDefinition(@"I save the Product Name shown for the product as: (.*) I am working with")]
         public void SaveTheProductname(string savedAs)
         {
             string productName = new ProductLookUp().TakeNoteOfProductName(savedAs);
             Context.AddToContext(savedAs, productName);
         }
 
-        [RegexStepDefinition(@"I confirm that the UPC name saved: (.*) is shown in Product Information pop up")]
+        [StepDefinition(@"I confirm that the UPC name saved: (.*) is shown in Product Information pop up")]
         public void InTheProductInformationUPCNameisDisplayedSameAsSavedValue(string savedAs)
         {
             string upcName = new ProductLookUp().TakeNoteOfProductName(savedAs);
@@ -814,7 +818,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I confirm that the Product name saved: (.*) matches with the product name in Documentations pop up")]
+        [StepDefinition(@"I confirm that the Product name saved: (.*) matches with the product name in Documentations pop up")]
         public void InTheDocumentationPopUpProductNameisDisplayedSameAsSavedValue(string savedAs)
         {
             string productName = new ProductLookUp().TakeNoteOfProductName(savedAs);
@@ -826,7 +830,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I confirm the name shown matches the name I made a note : (.*)")]
+        [StepDefinition(@"I confirm the name shown matches the name I made a note : (.*)")]
         public void InTheProductInformationProductNameisDisplayedSameAsSavedValue(string savedAs)
         {
             string productName = new ProductLookUp().TakeNoteOfProductName(savedAs);
@@ -836,27 +840,27 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(new ProductInformation().GetProductNameinProductInformation() == savedProductName, "Product Name is not matched", "Product Name is matched successfully");
 
         }
-        [RegexStepDefinition(@"I confirm the text I entered : (.*) into the search field is still shown")]
+        [StepDefinition(@"I confirm the text I entered : (.*) into the search field is still shown")]
         public void InTheProductLookUpSearchFieldTextIEnteredIsStillShown(string text)
         {
             Report.IsTrue(new ProductLookUp().GetSearchFieldValue(text), "Text I Entered is not shown", "Text I entered is shown successfully");
 
         }
 
-        [RegexStepDefinition(@"In the Products table I click the Reset Button")]
+        [StepDefinition(@"In the Products table I click the Reset Button")]
         public void InProductsTableIClickReset()
         {
             Report.IsTrue(new ProductLookUp().ClickResetButton(), "Failed to click reset", "Successfully clicked the reset button");
         }
 
-        [RegexStepDefinition(@"Select any WPSID shown on the page and save as: (.*)")]
+        [StepDefinition(@"Select any WPSID shown on the page and save as: (.*)")]
         public void SelectAnyWPSIDAndSaveTheNumber(string savedAs)
         {
             string wpsidNumber = new ProductLookUp().TakeNoteOfWPSIDNumber(savedAs);
             Context.AddToContext(savedAs, wpsidNumber);
         }
 
-        [RegexStepDefinition(@"I Enter WPSID Number : (.*) in Search field")]
+        [StepDefinition(@"I Enter WPSID Number : (.*) in Search field")]
         public void InTheProductLookUpSearchtheProductByWPSIDNumber(string savedAs)
         {
             string wpsidNumber = new ProductLookUp().TakeNoteOfWPSIDNumber(savedAs);
@@ -866,7 +870,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I confirm the WPSID I saved: (.*) is shown in Product Table")]
+        [StepDefinition(@"I confirm the WPSID I saved: (.*) is shown in Product Table")]
         public void InTheProductLookUpSeartheProductByWPSIDNumber(string savedAs)
         {
             string wpsNumber = new ProductLookUp().TakeNoteOfWPSIDNumber(savedAs);
@@ -879,7 +883,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(savedpWpsNumber.Contains(wpsidNumber), "WPSID Number searched for is not displayed", "WPSID Number searched for is displayed successfully");
         }
 
-        [RegexStepDefinition(@"I confirm below the column selector pop up header I see 3 panels: Applied Columns, Filter Categories, Filters")]
+        [StepDefinition(@"I confirm below the column selector pop up header I see 3 panels: Applied Columns, Filter Categories, Filters")]
         public void InTheColumnSelectorPopUpIVerify3Panels()
         {
             List <string> displayedPanels = new ProductLookUp.ColumnSelectorPopup().IConfirm3PanelsIsDisplayedInSelectorColumnPopup();
@@ -889,7 +893,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I confirm the selected category (.*) is highlighted in blue")]
+        [StepDefinition(@"I confirm the selected category (.*) is highlighted in blue")]
         public void ConfirmSelectedCategoryBackgroundColorIsBlue(string category)
         {
 
@@ -900,7 +904,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I confirm the selected filter (.*) is highlighted in blue")]
+        [StepDefinition(@"I confirm the selected filter (.*) is highlighted in blue")]
         public void ConfirmSelectedFilterBackgroundColorIsBlue(string filter)
         {
 
@@ -911,7 +915,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I confirm in the Filters Panel a list of filters populate")]
+        [StepDefinition(@"I confirm in the Filters Panel a list of filters populate")]
         public void ConfirmListOfFiltersPopulate()
         {
 
@@ -920,7 +924,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I confirm I see (.*) or more entries show in the Applied Columns panel")]
+        [StepDefinition(@"I confirm I see (.*) or more entries show in the Applied Columns panel")]
         public void Confirm1OrMoreEntriesIsDisplayedInAppliedColumn(int number)
         {
 
@@ -929,62 +933,62 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I confirm a new filter was added to the applied columns panel: (.*)")]
+        [StepDefinition(@"I confirm a new filter was added to the applied columns panel: (.*)")]
         public void ConfirmFilterAddedIsDisplayedToAppliedColumnsPanel(string filter)
         {
             Report.IsTrue(new ProductLookUp.ColumnSelectorPopup().IConfirmTheFilterAddedIsDisplayedInAppliedColumnPanel(filter), "Filter does not display in Applied Columns panel", "Filter popluate in Applied Column panel");
 
         }
 
-        [RegexStepDefinition(@"In the product lookup page, I click the Save Report Button")]
+        [StepDefinition(@"In the product lookup page, I click the Save Report Button")]
         public void GivenInTheProductLookupPageIClickTheSaveReportButton()
         {
             Report.IsTrue(new ProductLookUp().ClickSaveReportOptionButton(), "Failed to click the Save Report button", "Successfully clicked the Save Report button");
         }
 
-        [RegexStepDefinition(@"I confirm the Report popup displays the following title: (.*)")]
+        [StepDefinition(@"I confirm the Report popup displays the following title: (.*)")]
         public void ThenIConfirmTheSaveReportPopupDisplaysTheFollowingTitleSaveReport(string reportTitle)
         {
             Report.IsTrue(new ProductLookUp.ReportPopup().IConfirmTheSaveReportPopupDisplaysTheFollowingTitleSaveReport(reportTitle), $"Failed to find the following title in the Save Report popup: " + reportTitle, $"Successfully found the following title in the Save Report popup: " + reportTitle);
         }
 
-        [RegexStepDefinition(@"In Save Report popup I Enter Name: (.*) in Name field")]
+        [StepDefinition(@"In Save Report popup I Enter Name: (.*) in Name field")]
         public void InTheSaveReportPopupEnterName(string text)
         {
             Report.IsTrue(new ProductLookUp.ReportPopup().InTheReportPopupEnterName(text), "Failed to enter name in save report popup", $"Successfully entered name in save report popup");
         }
 
-        [RegexStepDefinition(@"In Save Report popup, I click Save button")]
+        [StepDefinition(@"In Save Report popup, I click Save button")]
         public void InTheSaveReportPopupIClickSaveButton()
         {
             Report.IsTrue(new ProductLookUp.ReportPopup().InTheSaveReportPopupClickSaveButton(), $"Failed to click Save Button in Save Report Popup" , "Successfully clicked Save Button in Save Report Popup");
         }
 
-        [RegexStepDefinition(@"In the Product Lookup Page, The Report Popup is not showing")]
+        [StepDefinition(@"In the Product Lookup Page, The Report Popup is not showing")]
         public void InTheProductLookupPageSaveReportPopupIsNotShowing()
         {
             Report.IsTrue(new ProductLookUp.ReportPopup().WaitForContainerToBeInvisible(), "The More filters popup was showing", "The More filters popup was not showing");
         }
 
-        [RegexStepDefinition(@"In the product lookup page, I click the Open Report Button")]
+        [StepDefinition(@"In the product lookup page, I click the Open Report Button")]
         public void GivenInTheProductLookupPageIClickTheOpenReportButton()
         {
             Report.IsTrue(new ProductLookUp().ClickOpenReportOptionButton(), "Failed to click the Open Report button", "Successfully clicked the Open Report button");
         }
 
-        [RegexStepDefinition(@"In Open Report popup, I click Open button")]
+        [StepDefinition(@"In Open Report popup, I click Open button")]
         public void InTheOpenReportPopupIClickOpenButton()
         {
             Report.IsTrue(new ProductLookUp.ReportPopup().InTheOpenReportPopupClickOpenButton(), $"Failed to click Open Button in Open Report Popup", "Successfully clicked Open Button in Open Report Popup");
         }
 
-        [RegexStepDefinition(@"In Open Report popup, I Select Report:(.*)")]
+        [StepDefinition(@"In Open Report popup, I Select Report:(.*)")]
         public void InTheOpenReportPopupISelecReport(string reportName)
         {
             Report.IsTrue(new ProductLookUp.ReportPopup().InTheOpenReportPopupClickISelectReport(reportName), $"Failed to Select Report in Open Report Popup", "Successfully Selected Report  in Open Report Popup");
         }
 
-        [RegexStepDefinition(@"In Open Report popup, Report:(.*) is displayed")]
+        [StepDefinition(@"In Open Report popup, Report:(.*) is displayed")]
         public void InTheOpenReportPopupVerifyReportNameIsDisplayed(string reportName)
         {
             Report.IsTrue(new ProductLookUp.ReportPopup().InTheOpenReportPopupVerifyReportNameIsDisplayed(reportName), $"Failed to display Report in Open Report Popup", "Successfully displayed Report  in Open Report Popup");

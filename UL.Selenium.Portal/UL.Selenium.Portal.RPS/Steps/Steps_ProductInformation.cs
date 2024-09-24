@@ -2,7 +2,6 @@
 using OpenQA.Selenium;
 using Reqnroll;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
 using UL.Automation.ReqnrollHelpers.Classes;
@@ -14,7 +13,7 @@ namespace UL.Selenium.Portal.RPS.Steps
     class Steps_ProductInformation
     {
 
-        [RegexStepDefinition(@"I save the Product Information for the current Product as: (.*)")]
+        [StepDefinition(@"I save the Product Information for the current Product as: (.*)")]
         public void ISaveTheProductInformationForCurrentProduct(string productSavedAs)
         {
             Report.IsTrue(new ProductInformation().WaitForContainerToBeVisible(), "The product Information popup did not load", "The Product Information popup was loaded");
@@ -74,7 +73,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [RegexStepDefinition(@"I save the information for the first product in the product list of widget: (.*) that contains data to context as: (.*)")]
+        [StepDefinition(@"I save the information for the first product in the product list of widget: (.*) that contains data to context as: (.*)")]
         public void SaveProductInfromationForProductWithData(string widgetTitle, string productSavedAs)
         {
             Report.Info("Getting all the product numbers being shown in the Product List");
@@ -142,7 +141,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         
 
-        [RegexStepDefinition(@"I Close the Product Information Popup")]
+        [StepDefinition(@"I Close the Product Information Popup")]
         public void ICloseProductInformationPopup()
         {
             Report.Info("I Click the Close Button on the Product Infromation Popup");
@@ -151,7 +150,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I Check that two sets of ProductInformation Saved as: (.*) and (.*) are the same")]
+        [StepDefinition(@"I Check that two sets of ProductInformation Saved as: (.*) and (.*) are the same")]
         public void ICheckThatTwoSetsOfProductInformationAreTheSame(string savedInformation1, string savedInformation2)
         {
             Report.Info("I Start to check that the two sets of Product Information are the same");
@@ -164,7 +163,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [RegexStepDefinition(@"I open the Product Information popup for products in the Product list of widget: (.*) until one has enough data")]
+        [StepDefinition(@"I open the Product Information popup for products in the Product list of widget: (.*) until one has enough data")]
         public void OpenProductInformationFromProductListUntilOneHasData(string widgetTitle)
         {
             Report.Info("Getting all the product numbers being shown in the Product List");
@@ -234,27 +233,27 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I wait for the Product Information Popup to load")]
+        [StepDefinition(@"I wait for the Product Information Popup to load")]
         public void IWaitForTheProductInformationPopupToLoad()
         {
             Report.IsTrue(new ProductInformation().WaitForContainerToBeVisible(), "The product Information popup did not load", "The Product Information popup was loaded");
          
         }
 
-        [RegexStepDefinition(@"I wait for the Product Information Popup to dissapear")]
+        [StepDefinition(@"I wait for the Product Information Popup to dissapear")]
         public void IWaitForTheProductInformationPopupToDissapear()
         {
             Report.IsTrue(new ProductInformation().WaitUntilProductInformationPopupNotPresent(), "The product information popup was still Presen!", "The Product Information popup was not present");
 
         }
 
-        [RegexStepDefinition(@"I wait for the Product Information Popup Table to load")]
+        [StepDefinition(@"I wait for the Product Information Popup Table to load")]
         public void IWaitForTheProductInformationPopupTableToLoad()
         {           
             Report.IsTrue(new ProductInformation().WaitForProductInformationToLoad(), "The Product Information Table did not Load", "The Product Information Table Loaded");
         }
 
-        [RegexStepDefinition(@"In the Product Infromation Popup I call shared step 109167 if there is data, and 111879 if there is no data")]
+        [StepDefinition(@"In the Product Infromation Popup I call shared step 109167 if there is data, and 111879 if there is no data")]
         public void InTheProductInformationScreenICall109167or111879()
         {
          
@@ -264,42 +263,42 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [RegexStepDefinition(@"In the Product Infromation Popup I Click the 'x' Close icon")]
+        [StepDefinition(@"In the Product Infromation Popup I Click the 'x' Close icon")]
         public void InTheProductInformationPopupPopupIClickTheXCloseicon()
         {            
             Report.IsTrue(new ProductInformation().ClickCrossCloseIcon(), "Failed to Click the 'x' Close icon", "Successfully clicked the 'x' Close icon");
 
         }
 
-        [RegexStepDefinition(@"In the Product Information pop up, I click: Collapse All")]
+        [StepDefinition(@"In the Product Information pop up, I click: Collapse All")]
         public void InTheProductInformationPopupPopupIClickCollapseAll()
         {
             Report.IsTrue(new ProductInformation().ClickCollapseAll(), "Failed to Click the Collpase All", "Successfully clicked the Collapse ALl");
 
         }
 
-        [RegexStepDefinition(@"I Confirm that Product Information pop up is shown")]
+        [StepDefinition(@"I Confirm that Product Information pop up is shown")]
         public void IConfirmProductInformationPopupIsShown()
         {
             Report.IsTrue(new ProductInformation().ProductInformationPopUpIsDisplayed(), "Product Information pop up is not displayed", "Successfully Product Information pop up is displayed");
 
         }
 
-        [RegexStepDefinition(@"I confirm I  see both a product name and a UPC name")]
+        [StepDefinition(@"I confirm I  see both a product name and a UPC name")]
         public void IConfirmProductNameIsShown()
         {
             Report.IsTrue(new ProductInformation().ProductNameDisplayed(), "Product Name is not displayed", "Successfully Product Name is displayed");
 
         }
 
-        [RegexStepDefinition(@"In the Product Information pop up I confirm the Product line shows the product name before the WPS ID")]
+        [StepDefinition(@"In the Product Information pop up I confirm the Product line shows the product name before the WPS ID")]
         public void IConfirmProductNameIsShownBeforeWPSID()
         {
             Report.IsTrue(new ProductInformation().ProductNameIsDisplayedBeforeWPSId(), "Product Name is not displayed before WPS ID", "Successfully Product Name is displayed befor WPS ID");
 
         }
 
-        [RegexStepDefinition(@"In the Product Information popup Additional Data heading I confirm background color: Orange")]
+        [StepDefinition(@"In the Product Information popup Additional Data heading I confirm background color: Orange")]
 
         public void ConfirmAdditionalDataBackgroundColorIsOrange()
         {
@@ -312,7 +311,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [RegexStepDefinition(@"In the Additional Data heading I confirm font color: white")]
+        [StepDefinition(@"In the Additional Data heading I confirm font color: white")]
 
         public void ConfirmAdditionalDataHeadingColorIsWhite()
         {

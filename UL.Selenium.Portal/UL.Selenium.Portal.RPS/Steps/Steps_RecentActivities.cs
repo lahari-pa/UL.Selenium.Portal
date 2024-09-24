@@ -8,7 +8,6 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using Reqnroll;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.RPS.Classes;
@@ -21,8 +20,8 @@ namespace UL.Selenium.Portal.RPS.Steps
 	class Steps_RecentActivities
 	{
 
-		[RegexStepDefinition(@"I confirm the Recent Activities tab has loaded")]
-		[RegexStepDefinition(@"I confirm the Recent Activities page refreshes")]
+		[StepDefinition(@"I confirm the Recent Activities tab has loaded")]
+		[StepDefinition(@"I confirm the Recent Activities page refreshes")]
 		public void HomeTabLoaded()
 		{
 			Report.IsTrue(new TopBar().WaitForContainerToBeVisible(), "Top bar did not load!");
@@ -33,19 +32,19 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(new RecentActivities().WaitForContainerToBeVisible(), "Page content did not load", "Page content loaded");
 		}
 
-		[RegexStepDefinition(@"I Check that the current page title is 'Recent Activities'")]
+		[StepDefinition(@"I Check that the current page title is 'Recent Activities'")]
 		public void CheckRecentActivitiesTitle()
 		{
 			Report.IsTrue(new RecentActivities().GetCurrentPageTitle() == "Recent Activities", "The Page title was not as expected", "The page title was as expected");
 		}
 
-		[RegexStepDefinition(@"I Check that the Recent Activities Products Table is showing")]
+		[StepDefinition(@"I Check that the Recent Activities Products Table is showing")]
 		public void CheckRecentActivitiesProductsTable()
 		{
 			Report.IsTrue(new RecentActivities().ProductTableIsPresent(), "The recent Activities products table was not showing", "The recent Activities products table was showing");
 		}
 
-		[RegexStepDefinition(@"I confirm the Recent Activities background color is: grey")]
+		[StepDefinition(@"I confirm the Recent Activities background color is: grey")]
 		public void ConfirmRecentActivitiesBackgroundColorIsGrey()
 		{
 
@@ -56,7 +55,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"I confirm the Recent Activities Text color is: darker grey")]
+		[StepDefinition(@"I confirm the Recent Activities Text color is: darker grey")]
 		public void ConfirmRecentActivitiesTextColorIsGrey()
 		{
 
@@ -67,19 +66,19 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"I confirm the Recent Activities search box is shown")]
+		[StepDefinition(@"I confirm the Recent Activities search box is shown")]
 		public void ConfirmRecentActivitiesSearchBoxIsPresent()
 		{
 			Report.IsTrue(new RecentActivities().SearchBoxPresent(), "The search box was not present", "The search box was present");
 		}
 
-		[RegexStepDefinition(@"I confirm that the recent activities search box place holder text reads: (.*)")]
+		[StepDefinition(@"I confirm that the recent activities search box place holder text reads: (.*)")]
 		public void IConfirmThatRecentActivitiesSearchBoxPlaceHolderTextReads(string placeholderText)
 		{
 			Report.IsTrue(new RecentActivities().SearchBoxPlaceHolderText() == placeholderText, "The place holder text did not match the expected", "The place holder text was as expected");
 		}
 
-		[RegexStepDefinition(@"I confirm that the recent activities page buttons to the right of the search box are as follows:")]
+		[StepDefinition(@"I confirm that the recent activities page buttons to the right of the search box are as follows:")]
 		public void IConfirmThatTheRecentActivitiesPageButtonsAreAsFollows(Table table)
 		{
 			List<string> buttons = new List<string>();
@@ -95,13 +94,13 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"I confirm that the recent activities page shows the bread crumb area")]
+		[StepDefinition(@"I confirm that the recent activities page shows the bread crumb area")]
 		public void IConfirmThatTheRecentActivitiesPageShowsBreadCrumbArea()
 		{
 			Report.IsTrue(new RecentActivities().ConfirmBreadCrumbAreaIsPresent(), "The breadcrumb area was not present", "The bread crumb area was present");
 		}
 
-		[RegexStepDefinition(@"I confirm that the recent activities page bread crumb area contains the label: (.*)")]
+		[StepDefinition(@"I confirm that the recent activities page bread crumb area contains the label: (.*)")]
 		public void IConfirmThatTheRecentActivitiesPageBreadCrumbAreaContainsLabel(string label)
 		{
 
@@ -124,7 +123,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(new RecentActivities().ConfirmBreadCrumbAreaContainsLabel(label), "The Bread crumb area did not contain the label", "The bread crumb are contained the label");
 		}
 
-		[RegexStepDefinition(@"I confirm that the recent activities page bread crumb area (does|does not) contain the label: (.*)")]
+		[StepDefinition(@"I confirm that the recent activities page bread crumb area (does|does not) contain the label: (.*)")]
 		public void IConfirmThatTheRecentActivitiesPageBreadCrumbAreaDoesNotContainLabel(string doesOrDoesNot, string label)
 		{
 			if (label.Contains("SavedProduct"))
@@ -144,31 +143,31 @@ namespace UL.Selenium.Portal.RPS.Steps
  
         }
 
-		[RegexStepDefinition(@"I confirm that the recent activities page bread crumb area contains the label 'Start Date:'")]
+		[StepDefinition(@"I confirm that the recent activities page bread crumb area contains the label 'Start Date:'")]
 		public void IConfrimThatTheRecentActivitiesPagenBreadCrumbAreaContainsLabelStartDate()
 		{
 			Report.IsTrue(new RecentActivities().ConfirmBreadCrumbAreaContainsStartDatelabel(), "The Start Date: label was not found", "The Start Date: label was found");
 		}
 
-		[RegexStepDefinition(@"I confirm that the recent activities page bread crumb area does not contain the label 'Start Date:'")]
+		[StepDefinition(@"I confirm that the recent activities page bread crumb area does not contain the label 'Start Date:'")]
 		public void IConfrimThatTheRecentActivitiesPagenBreadCrumbAreaDoesNotContainLabelStartDate()
 		{
 			Report.IsTrue(!new RecentActivities().ConfirmBreadCrumbAreaContainsStartDatelabel(), "The Start Date: label was found", "The Start Date: label was not found");
 		}
 
-		[RegexStepDefinition(@"I confirm that the recent activities page bread crumb area contains the label 'End Date:'")]
+		[StepDefinition(@"I confirm that the recent activities page bread crumb area contains the label 'End Date:'")]
 		public void IConfrimThatTheRecentActivitiesPagenBreadCrumbAreaContainsLabelEndDate()
 		{
 			Report.IsTrue(new RecentActivities().ConfirmBreadCrumbAreaContainsEndDatelabel(), "The End Date: label was not found", "The End Date: label was found");
 		}
 
-		[RegexStepDefinition(@"I confirm that the recent activities page shows the headings row in the table")]
+		[StepDefinition(@"I confirm that the recent activities page shows the headings row in the table")]
 		public void IConfirmThatTheRecentActivitiesPageShowsHeadingsRow()
 		{
 			Report.IsTrue(new RecentActivities().ConfirmTableHeadingRowIsPresent(), "The headings row was not found", "The headings row was found");
 		}
 
-        [RegexStepDefinition(@"I confirm that the recent activities page headings row has a grey background color")]
+        [StepDefinition(@"I confirm that the recent activities page headings row has a grey background color")]
         public void IConfirmThatRecentActivitiesPageHeadingsShowGrey()
         {
             string expectedColorString = "rgba(201, 201, 201, 1)";
@@ -178,13 +177,13 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"In the recent activities page, I confirm the column labels show a colon \(:\) icon as the column resize anchor")]
+        [StepDefinition(@"In the recent activities page, I confirm the column labels show a colon \(:\) icon as the column resize anchor")]
 		public void InTheRecentActivitiesPageConfirmLabelsShowColonAsResizeAnchor()
 		{
 			Report.IsTrue(new RecentActivities().CheckColumnSesizeAnchorShowsSymbol(), "not all columns showed a colon as the resize anchor in the main table", "All columns showed a colon as ther reize anchor in the main table");
 		}
 
-		[RegexStepDefinition(@"In the recent activities page, I confirm that the main table has the following columns:")]
+		[StepDefinition(@"In the recent activities page, I confirm that the main table has the following columns:")]
 		public void InRecentActivitiesPageIConfirmColumnsNames(Table table)
 		{
 			List<string> expectedHeadings = new List<string>();
@@ -197,7 +196,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(differences.IsNullOrEmpty(), "The headings found were not as expected", "The headings found matched the expected headings");
 		}
 
-		[RegexStepDefinition(@"In the recent activities page, I confirm that the main table includes the following columns:")]
+		[StepDefinition(@"In the recent activities page, I confirm that the main table includes the following columns:")]
 		public void InRecentActivitiesPageIConfirmColumnsIncluded(Table table)
 		{
 			List<string> expectedHeadings = new List<string>();
@@ -209,7 +208,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			var differences = expectedHeadings.Except(foundHeadings);
 			Report.IsTrue(differences.IsNullOrEmpty(), "The headings were not all included", "The headings were all included");
 		}
-		[RegexStepDefinition(@"In the Recent Activities page, I confirm that the main table shows data rows")]
+		[StepDefinition(@"In the Recent Activities page, I confirm that the main table shows data rows")]
 		public void InTheRecentActivitiesPageIConfirmThatTableShowsDataRows()
 		{
 			int rowCount = new RecentActivities().ProductsCount();
@@ -217,13 +216,13 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities page, I confirm that In the data row to the far left I confirm I see a right facing arrow \(Expand arrow\)")]
+		[StepDefinition(@"In the recent activities page, I confirm that In the data row to the far left I confirm I see a right facing arrow \(Expand arrow\)")]
 		public void InTheRecentActivitiesPageIConfirmThatTheTableContainsRightFacingArrow()
 		{
 			Report.IsTrue(new RecentActivities().SubGridColumnContainsRightFacingArrow(), "The first column did not contain a right facing arrow in every row", "The first column did contain a right facing arrow in every row");
 		}
 
-		[RegexStepDefinition(@"In the Recent Activities page, I confirm that to the right of the expand arrow I see the product ID")]
+		[StepDefinition(@"In the Recent Activities page, I confirm that to the right of the expand arrow I see the product ID")]
 		public void InTheRecentActivitiesPageConfirmProductIDToRightOfExpandArrow()
 		{
 			Report.IsTrue(new RecentActivities().HeadingCheckIDColumnIsToRightOfExpandArrow(), "The ID column heading was not to the right of the expand arrow column heading", "The ID column heading was to the right of the expand arrow column heading");
@@ -231,25 +230,25 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(new RecentActivities().CheckColumnContainsProductID(), "The column to the right of the expand arrow column did not containProduct IDs in all rows", "The column to the right of the expand arrow column contained Product IDs in all rows");
 		}
 
-		[RegexStepDefinition(@"~~MANUAL CHECK~~ In the Recent Activities page, I confirm that each column of data is aligned to the left of the column")]
+		[StepDefinition(@"~~MANUAL CHECK~~ In the Recent Activities page, I confirm that each column of data is aligned to the left of the column")]
 		public void InTheRecentActivitiesPageConfirmDataAlignedToLeft()
 		{
 			Report.Warning("MANAUAL CHECK: In the data row I confirm each column of data is aligned to the left of the column");
 		}
 
-		[RegexStepDefinition(@"In the Recent Activities page, I confirm that the table shows alternating background color \(grey to white\)")]
+		[StepDefinition(@"In the Recent Activities page, I confirm that the table shows alternating background color \(grey to white\)")]
 		public void InTheRecentActivitiesPageIConfirmTableShowsAlternatingBackgroundColor()
 		{
 			Report.IsTrue(new RecentActivities().CheckTableAlternatesBetweenGreyAndWhite(), "the table background color was not alternating between grey and white", "the table background color was alternating between grey and white");
 		}
 
-		[RegexStepDefinition(@"In the Recent Activities page, below the Most Recent Activity table I confirm: page footer is shown")]
+		[StepDefinition(@"In the Recent Activities page, below the Most Recent Activity table I confirm: page footer is shown")]
 		public void InTheRecentActivitiesPageICheckThatTheTableFooterIsShown()
 		{
 			Report.IsTrue(new RecentActivities().ProductsGridFooterPresent(), "The table footer was not shown", "The table footer was shown");
 		}
 
-		[RegexStepDefinition(@"In the recent activities page, I confirm that the main table contains data in the following columns:")]
+		[StepDefinition(@"In the recent activities page, I confirm that the main table contains data in the following columns:")]
 		public void InRecentActivitiesPageIConfirmColumnsContainData(Table table)
 		{
 			List<string> expectedHeadings = new List<string>();
@@ -264,7 +263,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent Activities page, In the Start Date breadcrumb, I confirm text shown: (.*)")]
+		[StepDefinition(@"In the recent Activities page, In the Start Date breadcrumb, I confirm text shown: (.*)")]
 		public void InTheRecentActivitiesPageInTheStartDateBreadcrumbConfirmText(string searchText)
 		{
 			if (searchText == "<CurrentDate>")
@@ -289,14 +288,14 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(new RecentActivities().CheckStartDateTagContainsText(searchText), "Failed to find the text", "The text was showing in the start date breadcrumb");
 		}
 
-		[RegexStepDefinition(@"In the recent Activities page, In the start date breadcrumb, confirm X is showing")]
+		[StepDefinition(@"In the recent Activities page, In the start date breadcrumb, confirm X is showing")]
 		public void InTheRecentActivitiesPageInTheStartDateBreadcrumbConfirmXShowing()
 		{
 			Report.IsTrue(new RecentActivities().CheckStartDateTagHasCloseX(), "The X was not showing", "The X was showing in the start date breadcrumb");
 
 		}
 
-		[RegexStepDefinition(@"In the recent Activities page, In the start date breadcrumb the background color is grey")]
+		[StepDefinition(@"In the recent Activities page, In the start date breadcrumb the background color is grey")]
 		public void IConfirmThatRecentActivitiesPageStartDateBreadCrumbBackroundColorIsGrey()
 		{
 			string expectedColorString = "rgba(229, 232, 236, 1)";
@@ -307,7 +306,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		}
 
 
-		[RegexStepDefinition(@"In the recent Activities page, In the end Date breadcrumb, I confirm text shown: (.*)")]
+		[StepDefinition(@"In the recent Activities page, In the end Date breadcrumb, I confirm text shown: (.*)")]
 		public void InTheRecentActivitiesPageInTheEndDateBreadcrumbConfirmText(string searchText)
 		{
 			if (searchText == "<CurrentDate>")
@@ -325,14 +324,14 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(new RecentActivities().CheckEndDateTagContainsText(searchText), "Failed to find the text", "The text was showing in the end date breadcrumb");
 		}
 
-		[RegexStepDefinition(@"In the recent Activities page, In the end date breadcrumb, confirm X is showing")]
+		[StepDefinition(@"In the recent Activities page, In the end date breadcrumb, confirm X is showing")]
 		public void InTheRecentActivitiesPageInTheEndDateBreadcrumbConfirmXShowing()
 		{
 			Report.IsTrue(new RecentActivities().CheckEndDateTagHasCloseX(), "The X was not showing", "The X was showing in the end date breadcrumb");
 
 		}
 
-		[RegexStepDefinition(@"In the recent Activities page, In the end date breadcrumb the background color is grey")]
+		[StepDefinition(@"In the recent Activities page, In the end date breadcrumb the background color is grey")]
 		public void IConfirmThatRecentActivitiesPageEndDateBreadCrumbBackroundColorIsGrey()
 		{
 			string expectedColorString = "rgba(229, 232, 236, 1)";
@@ -342,21 +341,21 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent Activities page, Confirm the breadcrumbs are in the correct order")]
+		[StepDefinition(@"In the recent Activities page, Confirm the breadcrumbs are in the correct order")]
 		public void IConfirmThatRecentActivitiesPageConfirmBreadCrumbsCorrectOrder()
 		{
 			Report.IsTrue(new RecentActivities().ConfirmFilterTagsCorrectOrder(), "The order of the tags was not correct", "The order of the tags was correct");
 		}
 
 
-		[RegexStepDefinition(@"In the recent Activities page, Confirm Reset Date breadcrumb displays text 'Reset'")]
+		[StepDefinition(@"In the recent Activities page, Confirm Reset Date breadcrumb displays text 'Reset'")]
 		public void InTheRecentActivitiesPageInTheResetBreadcrumbConfirmText()
 		{
 
 			Report.IsTrue(new RecentActivities().CheckResetTagContainsText("Reset"), "Failed to find the text", "The text was showing in the reset breadcrumb");
 		}
 
-		[RegexStepDefinition(@"In the recent Activities page, In the reset breadcrumb the background color is white")]
+		[StepDefinition(@"In the recent Activities page, In the reset breadcrumb the background color is white")]
 		public void IConfirmThatRecentActivitiesPageResetBreadCrumbBackroundColorIsWhite()
 		{
 			string expectedColorString = "rgba(255, 255, 255, 1)";
@@ -366,7 +365,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent Activities page, In the reset breadcrumb the text color is black")]
+		[StepDefinition(@"In the recent Activities page, In the reset breadcrumb the text color is black")]
 		public void IConfirmThatRecentActivitiesPageResetBreadCrumbTextColorIsBlack()
 		{
 			string expectedColorString = "rgba(51, 51, 51, 1)";
@@ -377,7 +376,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		}
 
 
-		[RegexStepDefinition(@"In the recent Activities page, In the Search Options, the More Filters button has a background color of white")]
+		[StepDefinition(@"In the recent Activities page, In the Search Options, the More Filters button has a background color of white")]
 		public void IConfirmThatRecentActivitiesPageMoreFiltersButtonIsWhite()
 		{
 			string expectedColorString = "rgba(255, 255, 255, 1)";
@@ -388,7 +387,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent Activities page, In the Search Options, the More Filters button has a text color of brown")]
+		[StepDefinition(@"In the recent Activities page, In the Search Options, the More Filters button has a text color of brown")]
 		public void IConfirmThatRecentActivitiesPageMoreFiltersTextIsBrown()
 		{
 			string expectedColorString = "rgba(91, 4, 40, 1)";
@@ -399,7 +398,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent Activities page, In the Search Options, the Export button has a background color of white")]
+		[StepDefinition(@"In the recent Activities page, In the Search Options, the Export button has a background color of white")]
 		public void IConfirmThatRecentActivitiesPageExportButtonIsWhite()
 		{
 			string expectedColorString = "rgba(255, 255, 255, 1)";
@@ -410,7 +409,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent Activities page, In the Search Options, the Export button has a text color of brown")]
+		[StepDefinition(@"In the recent Activities page, In the Search Options, the Export button has a text color of brown")]
 		public void IConfirmThatRecentActivitiesPageExportTextIsBrown()
 		{
 			string expectedColorString = "rgba(91, 4, 40, 1)";
@@ -421,7 +420,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent Activities page, In the Search Options, the Reset button has a background color of white")]
+		[StepDefinition(@"In the recent Activities page, In the Search Options, the Reset button has a background color of white")]
 		public void IConfirmThatRecentActivitiesPageResetButtonIsWhite()
 		{
 			string expectedColorString = "rgba(255, 255, 255, 1)";
@@ -432,7 +431,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent Activities page, In the Search Options, the Reset button has a text color of brown")]
+		[StepDefinition(@"In the recent Activities page, In the Search Options, the Reset button has a text color of brown")]
 		public void IConfirmThatRecentActivitiesPageResetTextIsBrown()
 		{
 			string expectedColorString = "rgba(91, 4, 40, 1)";
@@ -443,7 +442,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent Activities page, In the Search Options, the Status button has a background color of white")]
+		[StepDefinition(@"In the recent Activities page, In the Search Options, the Status button has a background color of white")]
 		public void IConfirmThatRecentActivitiesPageStatusButtonIsWhite()
 		{
 			string expectedColorString = "rgba(255, 255, 255, 1)";
@@ -453,7 +452,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent Activities page, In the Search Options, the Status button has a text color of black")]
+		[StepDefinition(@"In the recent Activities page, In the Search Options, the Status button has a text color of black")]
 		public void IConfirmThatRecentActivitiesPageStatusTextIsBlack()
 		{
 			string expectedColorString = "rgba(51, 51, 51, 1)";
@@ -463,7 +462,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the Recent Activities page, In Confirm the following search buttons are showing:")]
+		[StepDefinition(@"In the Recent Activities page, In Confirm the following search buttons are showing:")]
 		public void InTheRecentActivitiesPageConfirmSearchButtons(Table table)
 		{
 			List<string> expectedButtons = new List<string>();
@@ -476,33 +475,33 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(expectedButtons.All(i => foundButtons.Contains(i)), "The buttons found were not as expected", "The buttons found matched the expected headings");
 		}
 
-		[RegexStepDefinition(@"In the Recent Activities page, I expand the first row of the products table")]
+		[StepDefinition(@"In the Recent Activities page, I expand the first row of the products table")]
 		public void InTheRecentActivitiesPageIExpandFirstRow()
 		{
 			Report.IsTrue(new RecentActivities().ExpandFirstRow(), "Failed to expand the first row", "The first row was expanded successfully");
 		}
 
-		[RegexStepDefinition(@"In the Recent Activities page, I collapse the first row of the products table")]
+		[StepDefinition(@"In the Recent Activities page, I collapse the first row of the products table")]
 		public void InTheRecentActivitiesPageICollapseFirstRow()
 		{
 			Report.IsTrue(new RecentActivities().CollapseFirstRow(), "Failed to collapse the first row", "The first row was collapsed successfully");
 		}
 
-		[RegexStepDefinition(@"In the recent Activities page, I check that there are additional rows below the expanded version of the first row in the products table.")]
+		[StepDefinition(@"In the recent Activities page, I check that there are additional rows below the expanded version of the first row in the products table.")]
 		public void InTheRecentActivitiesPageCheckFirstRowExpandedAdditionalRows()
 		{
 			IWebElement row = new RecentActivities().GetRowByExpandedProductID(new RecentActivities().GetFirstProductID());
 			Report.IsTrue(row != null, "There was not any additional rows below the expanded first row", "There was additional rows below the expanded first row");
 		}
 
-		[RegexStepDefinition(@"In the recent Activities page, I check that there are no additional rows below the expanded version of the first row in the products table.")]
+		[StepDefinition(@"In the recent Activities page, I check that there are no additional rows below the expanded version of the first row in the products table.")]
 		public void InTheRecentActivitiesPageCheckFirstRowExpandedNoAdditionalRows()
 		{
 			IWebElement row = new RecentActivities().GetRowByExpandedProductID(new RecentActivities().GetFirstProductID());
 			Report.IsTrue(row == null, "There was additional rows below the expanded first row", "There was not any additional rows below the expanded first row");
 		}
 
-		[RegexStepDefinition(@"In the recent activities page, I confirm that the expanded first row has following columns in the sub table:")]
+		[StepDefinition(@"In the recent activities page, I confirm that the expanded first row has following columns in the sub table:")]
 		public void InRecentActivitiesPageIConfirmExapndedFirstRowColumnsNames(Table table)
 		{
 			IWebElement row = new RecentActivities().GetRowByExpandedProductID(new RecentActivities().GetFirstProductID());
@@ -516,7 +515,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(differences.IsNullOrEmpty() && expectedHeadings.Count() == foundHeadings.Count(), "The headings found were not as expected", "The headings found matched the expected headings");
 		}
 
-		[RegexStepDefinition(@"In the recent Activities page, I confirm that the expanded first row column headings show the ':' resize anchor")]
+		[StepDefinition(@"In the recent Activities page, I confirm that the expanded first row column headings show the ':' resize anchor")]
 		public void InRecentActivitiesPageConfrimExpandedFirstRowResizeAnchor()
 		{
 			IWebElement row = new RecentActivities().GetRowByExpandedProductID(new RecentActivities().GetFirstProductID());
@@ -524,7 +523,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(new RecentActivities().CheckRowSubTableColumnResizeAnchorShowsSymbol(row), "not all columns showed a colon as the resize anchor in the main table", "All columns showed a colon as ther reize anchor in the main table");
 		}
 
-		[RegexStepDefinition(@"In the recent activities page, I confirm that the expanded first row does not have the column: (.*)")]
+		[StepDefinition(@"In the recent activities page, I confirm that the expanded first row does not have the column: (.*)")]
 		public void InRecentActivitiesPageIConfirmExapndedFirstRowColumnDoesNotContainColumn(string header)
 		{
 			IWebElement row = new RecentActivities().GetRowByExpandedProductID(new RecentActivities().GetFirstProductID());
@@ -534,21 +533,21 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(!foundHeadings.Contains(header), "The heading was found", "The heading was not found");
 		}
 
-		[RegexStepDefinition(@"In the recent activities page, I confirm that in the expanded first row I see the expanded menu icon to the left")]
+		[StepDefinition(@"In the recent activities page, I confirm that in the expanded first row I see the expanded menu icon to the left")]
 		public void InTheRecentActivitiesPageIConfirmThatInExpandedFirstRowIseeExpandedMenuIcon()
 		{
 			IWebElement row = new RecentActivities().GetRowByExpandedProductID(new RecentActivities().GetFirstProductID());
 			Report.IsTrue(new RecentActivities().RowSubTableContainsExpandedMenuIcon(row), "The expanded first row did not contain an expanded menu icon the the left", "The expanded first row did contain an expanded menu icon the the left");
 		}
 
-		[RegexStepDefinition(@"In the recent activities page, I click the label 'Start Date'")]
+		[StepDefinition(@"In the recent activities page, I click the label 'Start Date'")]
 		public void InTheRecentActivitiesPageIClickTheLabelStartDate()
 		{
 			Report.IsTrue(new RecentActivities().ClickStartDateLabel(), "Failed to click the start date label", "Successfully clicked the start date label");
 			this.HomeTabLoaded();
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table I confirm the Most Recent Activity column displays in date order, newest first")]
+		[StepDefinition(@"In the recent activities Page, In the Products table I confirm the Most Recent Activity column displays in date order, newest first")]
 		public void InTheRecentActivitiesPageInProductsTableIConfirmRecentActivityColumnInDateOrder()
 		{
 			List<string> datesAsStrings = new RecentActivities().GetColumnData("Most Recent Activity");
@@ -581,7 +580,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			}
 			Report.IsTrue(orderCorrect, "The dates were not in the correct order", " The dates were in the correct order");
 		}
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table I confirm the Most Recent Activity column displays dates in the format of yyyy-mm-dd")]
+		[StepDefinition(@"In the recent activities Page, In the Products table I confirm the Most Recent Activity column displays dates in the format of yyyy-mm-dd")]
 		public void InTheRecentActivitiesPageInProductsTableIConfirmRecentActivityColumnContainsOnlyDates()
 		{
 			List<string> datesAsStrings = new RecentActivities().GetColumnData("Most Recent Activity");
@@ -616,7 +615,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(correctFormat, "Not all dates were in the correct format", "All dates were in the correct format");
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table I select a random product and save product Data to context as: (.*)")]
+		[StepDefinition(@"In the recent activities Page, In the Products table I select a random product and save product Data to context as: (.*)")]
 		public void InTheRecentActivitiesPageInProductsTableISelectRandomProductsAndSaveDataAs(string savedAs)
 		{
 			string iD = GeneralUtilities.SelectRandomFromListOfStrings(new RecentActivities().GetCurrentProductIDs());
@@ -625,7 +624,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		}
 
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table I select 2 random products and save product Data to context as: (.*) and (.*)")]
+		[StepDefinition(@"In the recent activities Page, In the Products table I select 2 random products and save product Data to context as: (.*) and (.*)")]
 		public void InTheRecentActivitiesPageInProductsTableISelectRandomProductsAndSaveDataAs(string savedAs1, string savedAs2)
 		{
 			string iD = GeneralUtilities.SelectRandomFromListOfStrings(new RecentActivities().GetCurrentProductIDs());
@@ -658,7 +657,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table footer I click on the Last Page Button")]
+		[StepDefinition(@"In the recent activities Page, In the Products table footer I click on the Last Page Button")]
 	
 		public void InTheRecentActivitiesPageInProductsTableFooterAndClickLastPageButton()
 		{
@@ -667,8 +666,8 @@ namespace UL.Selenium.Portal.RPS.Steps
 			this.HomeTabLoaded();
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table footer I check that the current page is the same as the last page number")]
-		[RegexStepDefinition(@"In the Products table footer I check that the current page number is the same as the last page number")]
+		[StepDefinition(@"In the recent activities Page, In the Products table footer I check that the current page is the same as the last page number")]
+		[StepDefinition(@"In the Products table footer I check that the current page number is the same as the last page number")]
 
 		public void InTheRecentActivitiesPageInProductsTableFooterCheckFinalPageActive()
 		{
@@ -677,7 +676,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(currentNumber == finalNumber, "The current page number did not match the last page number", "The current page number matched the last page number");
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table footer I click on the Next Page Button")]
+		[StepDefinition(@"In the recent activities Page, In the Products table footer I click on the Next Page Button")]
 		public void InTheRecentActivitiesPageInProductsTableFooterAndClickNextPageButton()
 		{
 			Report.IsTrue(new RecentActivities().NextPageButtonExists(), "Failed to find the Next page button", "Successfully found the Next page button");
@@ -686,7 +685,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table footer I click on the Previous Page Button")]
+		[StepDefinition(@"In the recent activities Page, In the Products table footer I click on the Previous Page Button")]
 		public void InTheRecentActivitiesPageInProductsTableFooterAndClickPreviousPageButton()
 		{
 			Report.IsTrue(new RecentActivities().PreviousPageButonExists(), "Failed to find the Previous page button", "Successfully found the Previous page button");
@@ -695,7 +694,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table footer I click on the First Page Button")]
+		[StepDefinition(@"In the recent activities Page, In the Products table footer I click on the First Page Button")]
 		public void InTheRecentActivitiesPageInProductsTableFooterAndClickFirstPageButton()
 		{
 			Report.IsTrue(new RecentActivities().FirstPageButonExists(), "Failed to find the First page button", "Successfully found the First page button");
@@ -704,14 +703,14 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table footer I check that the current page is: (.*)")]
+		[StepDefinition(@"In the recent activities Page, In the Products table footer I check that the current page is: (.*)")]
 		public void InTheRecentActivitiesPageInProductsTableFooterCheckCurrentPageExpected(string expectedPage)
 		{
 			string currentNumber = new RecentActivities().GetCurrentPageNumber();
 			Report.IsTrue(currentNumber == expectedPage, "The current page number was not as expected", "The current page number was as expected");
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, I check the full page is visible")]
+		[StepDefinition(@"In the recent activities Page, I check the full page is visible")]
 		public void InTheRecentActivitiesPageCheckFullPageIsVisible()
 		{
 			this.CheckRecentActivitiesTitle();
@@ -747,22 +746,22 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table I scroll down to the bottom product and check its interactable")]
+		[StepDefinition(@"In the recent activities Page, In the Products table I scroll down to the bottom product and check its interactable")]
 		public void InTheRecentActivitiesPageInProductsTableScrollToBottomProduct()
 		{
 			Report.IsTrue(new RecentActivities().ScrollToAndCheckBottomProductInteractable(), "Failed to scroll to and interact with the bottom product", "Successfully scrolled to and interact with the bottom product");
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table I scroll down to the top product and check its interactable")]
+		[StepDefinition(@"In the recent activities Page, In the Products table I scroll down to the top product and check its interactable")]
 		public void InTheRecentActivitiesPageInProductsTableScrollToTopProduct()
 		{
 			Report.IsTrue(new RecentActivities().ScrollToAndCheckTopProductInteractable(), "Failed to scroll to and interact with the top product", "Successfully scrolled to and interact with the top product");
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table the total number of pages is correct")]
-		[RegexStepDefinition(@"In the Products table the total number of pages is correct")]
+		[StepDefinition(@"In the recent activities Page, In the Products table the total number of pages is correct")]
+		[StepDefinition(@"In the Products table the total number of pages is correct")]
 		public void InTheRecentActivitiesPageInProductsTableTotalNoPagesCorrect()
 		{
 			int totalProducts = new RecentActivities().GetTotalProducts();
@@ -773,8 +772,8 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(foundPages == expectedPageTotal, "The number of pages found was not as expected", "The number of pages found was as expected");
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table footer, the number of items per page shows the following options:")]
-		[RegexStepDefinition(@"In the Products table footer, the number of items per page shows the following options:")]
+		[StepDefinition(@"In the recent activities Page, In the Products table footer, the number of items per page shows the following options:")]
+		[StepDefinition(@"In the Products table footer, the number of items per page shows the following options:")]
 		public void InTheRecentActivitiesPageInProductsTableFooterNoItemsPerPageOptionsMatch(Table table)
 		{
 			List<string> options = new List<string>();
@@ -785,28 +784,28 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(new RecentActivities().ItemsPerPageOptionsMatch(options), "The options did not match", "The options matched");
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table footer, select the items per page option: (.*)")]
+		[StepDefinition(@"In the recent activities Page, In the Products table footer, select the items per page option: (.*)")]
 		public void InTheRecentActivitiesPageInProductsTableFooterSelectItemPerPageOption(string option)
 		{
 			Report.IsTrue(new RecentActivities().SelectOptionFromItemsPerPageSelector(option), "The Option was not selected", "The option was selected successfully");
 			this.HomeTabLoaded();
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table I click the Reset Button")]
+		[StepDefinition(@"In the recent activities Page, In the Products table I click the Reset Button")]
 		public void InTheRecentActivitiesPageInProductsTableIClickReset()
 		{
 			Report.IsTrue(new RecentActivities().ClickResetButton(), "Failed to click reset", "Successfully clicked the reset button");
 			this.HomeTabLoaded();
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table footer I confirm the current Items Per page is: (.*)")]
+		[StepDefinition(@"In the recent activities Page, In the Products table footer I confirm the current Items Per page is: (.*)")]
 		public void InTheRecentActivitiesPageInProductsTableFooterCurrentItemsPerPageIs(int option)
 		{
 			Report.IsTrue(new RecentActivities().GetCurrentItemsPerPage() == option, "The current items per page was not as expected", "The current items per page was as expected");
 		}
 
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table footer I enter the page number value of: (.*)")]
+		[StepDefinition(@"In the recent activities Page, In the Products table footer I enter the page number value of: (.*)")]
 		public void InTheRecentActivitiesPageInProductsTableFooterEnterPageNumber(string value)
 		{
 			new RecentActivities().EnterCurrentPageValue(value);
@@ -814,7 +813,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			this.InTheRecentActivitiesPageInProductsTableFooterCheckCurrentPageExpected(value);
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table footer I confirm the product count range reflects the page I am on")]
+		[StepDefinition(@"In the recent activities Page, In the Products table footer I confirm the product count range reflects the page I am on")]
 		public void InTheRecentActivitiesPageInProductsTableFooteProducsAccountCorrect()
 		{
 			var recentActivities = new RecentActivities();
@@ -823,7 +822,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table I search for the product with ID: (.*)")]
+		[StepDefinition(@"In the recent activities Page, In the Products table I search for the product with ID: (.*)")]
 		public void InTheRecentActivitiesPageInProductsTableSearchForProductID(string productID)
 		{
 			if (productID.ToLower().Contains("recentproductdata"))
@@ -836,14 +835,14 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Delay.Seconds(5);
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table I search for the product with ID saved to context as: (.*)")]
+		[StepDefinition(@"In the recent activities Page, In the Products table I search for the product with ID saved to context as: (.*)")]
 		public void InTheRecentActivitiesPageInProductsTableSearchForProductIDSavedAs(string savedAs)
         {
 			string productID = Context.GetFromContext(savedAs).ToString();
 			InTheRecentActivitiesPageInProductsTableSearchForProductID(productID);
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table I search for the product with Name: (.*)")]
+		[StepDefinition(@"In the recent activities Page, In the Products table I search for the product with Name: (.*)")]
 		public void InTheRecentActivitiesPageInProductsTableSearchForProductName(string productName)
 		{
 
@@ -856,7 +855,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table I enter name search text: (.*) and press the Enter Key")]
+		[StepDefinition(@"In the recent activities Page, In the Products table I enter name search text: (.*) and press the Enter Key")]
 		public void InTheRecentActivitiesPageInProductsTableSearchForProductNameAndPressEnter(string productName)
 		{
 			if (productName.ToLower().Contains("recentproductdata"))
@@ -871,7 +870,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		}
 
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table I search for the Partial Name of a comma product saved as: (.*)")]
+		[StepDefinition(@"In the recent activities Page, In the Products table I search for the Partial Name of a comma product saved as: (.*)")]
 		public void InTheRecentActivitiesPageInProductsTableSearchForProductPartialCommaName(string productName)
 		{  
 			if (productName.ToLower().Contains("recentproductdata"))
@@ -890,7 +889,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table I search for the product with UPC: (.*)")]
+		[StepDefinition(@"In the recent activities Page, In the Products table I search for the product with UPC: (.*)")]
 		public void InTheRecentActivitiesPageInProductsTableSearchForProductUPC(string productUPC)
 		{
 			if (productUPC.ToLower().Contains("recentproductdata"))
@@ -903,7 +902,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table the first result matches the product ID: (.*)")]
+		[StepDefinition(@"In the recent activities Page, In the Products table the first result matches the product ID: (.*)")]
 		public void InTheRecentActivitiesPageInProductsTableFirstResultMatchesID(string productID)
 		{
 			if (productID.ToLower().Contains("recentproductdata"))
@@ -921,7 +920,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(gridTable.ProductInfoCellWPSIDGet(gridTable.ProductInfoCellGet(1)) == productID, "The product Ids did not match", "The product Ids matched");
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table the first result matches the product ID saved to context as: (.*)")]
+		[StepDefinition(@"In the recent activities Page, In the Products table the first result matches the product ID saved to context as: (.*)")]
 		public void InTheRecentActivitiesPageInProductsTableFirstResultMatchesIDSavedAs(string savedAs)
         {
 			string productID = Context.GetFromContext(savedAs).ToString();
@@ -929,7 +928,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table the first result matches the product Name: (.*)")]
+		[StepDefinition(@"In the recent activities Page, In the Products table the first result matches the product Name: (.*)")]
 		public void InTheRecentActivitiesPageInProductsTableFirstResultMatchesName(string productName)
 		{
 			if (productName.ToLower().Contains("recentproductdata"))
@@ -941,7 +940,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(new RecentActivities().GetFirstProductName() == productName, "The product names did not match", "The product names matched");
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table the results contain the product with Name: (.*)")]
+		[StepDefinition(@"In the recent activities Page, In the Products table the results contain the product with Name: (.*)")]
 		public void InTheRecentActivitiesPageInProductsTableResultContainName(string productName)
 		{
 			if (productName.ToLower().Contains("recentproductdata"))
@@ -952,7 +951,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(new RecentActivities().CheckProductNameInResults(productName), "The product name was not found in resultsh", "The product name was found in the results");
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table the First result matches the UPCs saved as: (.*)")]
+		[StepDefinition(@"In the recent activities Page, In the Products table the First result matches the UPCs saved as: (.*)")]
 		public void InTheRecentActivitiesPageInProductsTableFirstResultMatchesUPC(string productUPCs)
 		{
 			List<string> savedUPCs = new List<string>();
@@ -971,7 +970,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(!differences.Any() && savedUPCs.Count() == foundUPCs.Count(), "The product UPCs did not match", "The product UPCs matched");
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table the first result matches the product data: (.*)")]
+		[StepDefinition(@"In the recent activities Page, In the Products table the first result matches the product data: (.*)")]
 		public void InTheRecentActivitiesPageInProductsTableFirstResultMatchesData(string productID)
 		{
 
@@ -982,19 +981,19 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(currentData.Equals(productData), "The Two sets of recent product data did not match", "The two sets of recent product data matched");
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table there is only 1 result showing")]
+		[StepDefinition(@"In the recent activities Page, In the Products table there is only 1 result showing")]
 		public void InTheRecentActivitiesPageInProductsTableThereIsOnly1Result()
 		{
 			Report.IsTrue(new RecentActivities().ProductsCount() == 1, "The was not just 1 product in the table", "The was just 1 product in the table");
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table there is more than 1 result showing")]
+		[StepDefinition(@"In the recent activities Page, In the Products table there is more than 1 result showing")]
 		public void InTheRecentActivitiesPageInProductsTableThereIsMoreThan1Result()
 		{
 			Report.IsTrue(new RecentActivities().ProductsCount() > 1, "The was not more than 1 product in the table", "The was more than 1 product in the table");
 		}
 
-		[RegexStepDefinition(@"In the Recent Activities page, I expand the row for Product with ID: (.*)")]
+		[StepDefinition(@"In the Recent Activities page, I expand the row for Product with ID: (.*)")]
 		public void InTheRecentActivitiesPageIExpandRow(string productID)
 		{
 			if (productID.ToLower().Contains("recentproductdata"))
@@ -1005,7 +1004,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(new RecentActivities().ExpandRowByID(productID), "Failed to expand the first row", "The first row was expanded successfully");
 		}
 
-		[RegexStepDefinition(@"In the Recent Activities page, I collapse the row for Product with ID: (.*)")]
+		[StepDefinition(@"In the Recent Activities page, I collapse the row for Product with ID: (.*)")]
 		public void InTheRecentActivitiesPageICollapseRow(string productID)
 		{
 			if (productID.ToLower().Contains("recentproductdata"))
@@ -1016,7 +1015,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(new RecentActivities().CollapseRowByID(productID), "Failed to collapse the first row", "The first row was collapse successfully");
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table I confirm that all displayed results contain (.*) in their product name")]
+		[StepDefinition(@"In the recent activities Page, In the Products table I confirm that all displayed results contain (.*) in their product name")]
 		public void InTheRecentActivitiesPageInProductsTableConfirmAllProductNamesContain(string productName)
 		{
 			Report.IsTrue(new RecentActivities().ConfirmAllNamesContain(productName), "Not all products contained the search text", "All product names contained the search text");
@@ -1025,7 +1024,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table I confirm that all displayed results contain (.*) in their Supplier name")]
+		[StepDefinition(@"In the recent activities Page, In the Products table I confirm that all displayed results contain (.*) in their Supplier name")]
 		public void InTheRecentActivitiesPageInProductsTableConfirmAllSupplierNamesContain(string productName)
 		{
 			if (productName.Contains("SavedProduct"))
@@ -1035,14 +1034,14 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(new RecentActivities().ConfirmAllSuppliers(productName), "Not all Suppliers contained the search text", "All Suppliers names contained the search text");
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table I confirm that all displayed results match the Supplier name (.*) exactly")]
+		[StepDefinition(@"In the recent activities Page, In the Products table I confirm that all displayed results match the Supplier name (.*) exactly")]
 		public void InTheRecentActivitiesPageInProductsTableConfirmAllSupplierNamesExact(string productName)
 		{
 			Report.IsTrue(new RecentActivities().ConfirmAllSuppliersMatchExactly(productName), "Not all Suppliers exactly matched the search text", "All Suppliers names exactly matched the search text");
 		}
 
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table I confirm that not all displayed results contain (.*) in their Supplier name")]
+		[StepDefinition(@"In the recent activities Page, In the Products table I confirm that not all displayed results contain (.*) in their Supplier name")]
 		public void InTheRecentActivitiesPageInProductsTableConfirmNotAllSupplierNamesContain(string productName)
 		{
 			if (productName.Contains("SavedProduct"))
@@ -1052,7 +1051,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(!new RecentActivities().ConfirmAllSuppliers(productName), "All Suppliers names contained the search text", "Not all Suppliers contained the search text");
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table I confirm that all displayed results show (.*) as their status")]
+		[StepDefinition(@"In the recent activities Page, In the Products table I confirm that all displayed results show (.*) as their status")]
 		public void InTheRecentActivitiesPageInProductsTableConfirmAllStatusShow(string status)
 		{
 			if (status.Contains("SavedProduct"))
@@ -1063,7 +1062,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		}
 
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table I confirm that not all displayed results show (.*) as their status")]
+		[StepDefinition(@"In the recent activities Page, In the Products table I confirm that not all displayed results show (.*) as their status")]
 		public void InTheRecentActivitiesPageInProductsTableConfirmNotAllStatusShow(string status)
 		{
 			Report.IsTrue(!new RecentActivities().ConfirmAllStatus(status), "Not all Suppliers contained the search text", "All Suppliers names contained the search text");
@@ -1071,21 +1070,21 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 
 
-		[RegexStepDefinition(@"In the recent activities Page, I click the More Filters Button")]
+		[StepDefinition(@"In the recent activities Page, I click the More Filters Button")]
 		public void InTheRecentActivitiesPageIClickTheMoreFiltersOption()
 		{
 			Report.IsTrue(new RecentActivities().ClickMoreFiltersOptionButton(), "Failed to click the more filters button", "Successfully clicked the more filters button");
 		}
 
 		 
-		[RegexStepDefinition(@"In the recent activities page, I click the Breadcrumb: (.*)")]
+		[StepDefinition(@"In the recent activities page, I click the Breadcrumb: (.*)")]
 		public void InTheRecentActivitiesPageIClickTheBreadCrumb(string breadcrumb)
 		{
 			Report.IsTrue(new RecentActivities().ClickGivenBreadcrumb(breadcrumb), "Failed to click the given breadcrumb", "Successfully clicked the given breadcrumb");
 			this.HomeTabLoaded();
 		}
 
-		[RegexStepDefinition(@"In the recent activities page, I click the 'X' for Breadcrumb: (.*)")]
+		[StepDefinition(@"In the recent activities page, I click the 'X' for Breadcrumb: (.*)")]
 		public void InTheRecentActivitiesPageIClickTheBreadCrumbX(string breadcrumb)
 		{
 			Report.IsTrue(new RecentActivities().ClickGivenBreadcrumbRightSideX(breadcrumb), "Failed to click the x at the far right of the breadcrumb button", "Successfully clicked the x at the far right of the breadcrumb button");
@@ -1095,7 +1094,7 @@ namespace UL.Selenium.Portal.RPS.Steps
  
   
 		 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table I select a random product and save the supplier name to context as: (.*)")]
+		[StepDefinition(@"In the recent activities Page, In the Products table I select a random product and save the supplier name to context as: (.*)")]
 		public void InTheRecentActivitiesPageInProductsTableISelectRandomProductsAndSaveSupplierNameAs(string savedAs)
 		{
 			string iD = GeneralUtilities.SelectRandomFromListOfStrings(new RecentActivities().GetCurrentProductIDs());
@@ -1103,7 +1102,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Context.AddToContext(savedAs, currentData);
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table I select a random product with where the supplier contains: (.*) and save the supplier name to context as: (.*)")]
+		[StepDefinition(@"In the recent activities Page, In the Products table I select a random product with where the supplier contains: (.*) and save the supplier name to context as: (.*)")]
 		public void InTheRecentActivitiesPageInProductsTableISelectRandomProductsAndSaveSupplierNameAsIfContains(string value, string savedAs)
 		{
 			int x = 0;
@@ -1125,7 +1124,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, I confirm the Start Date breadcrumb shows a date 6 months before today as default")]
+		[StepDefinition(@"In the recent activities Page, I confirm the Start Date breadcrumb shows a date 6 months before today as default")]
 		public void InTheRecentActivitiesPageConfirmStateDateBreadcrumbShowsDate6MonthsInPast()
 		{
 			//Might need to convert the Today date to same timezone as RPS?
@@ -1142,7 +1141,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, I confirm the End Date breadcrumb shows todays date as default")]
+		[StepDefinition(@"In the recent activities Page, I confirm the End Date breadcrumb shows todays date as default")]
 		public void InTheRecentActivitiesPageConfirmEndDatebreadcrumbShowsTodaysDate()
 		{
 			//Might need to convert the Today date to same timezone as RPS?
@@ -1160,7 +1159,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table I select the first product and save the supplier name to context as: (.*)")]
+		[StepDefinition(@"In the recent activities Page, In the Products table I select the first product and save the supplier name to context as: (.*)")]
 		public void InTheRecentActivitiesPageInProductsTableISelectFirstProductsAndSaveSupplierNameAs(string savedAs)
 		{
 			string iD = new RecentActivities().FirstProductInGridID();
@@ -1168,7 +1167,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Context.AddToContext(savedAs, currentData);
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table I select the first product and save the status to context as: (.*)")]
+		[StepDefinition(@"In the recent activities Page, In the Products table I select the first product and save the status to context as: (.*)")]
 		public void InTheRecentActivitiesPageInProductsTableISelectFirstProductsAndSaveStatusNameAs(string savedAs)
 		{
 			string iD = new RecentActivities().FirstProductInGridID();
@@ -1176,14 +1175,14 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Context.AddToContext(savedAs, currentData);
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table I click the Reset Breadcrumb")]
+		[StepDefinition(@"In the recent activities Page, In the Products table I click the Reset Breadcrumb")]
 		public void InTheRecentActivitiesPageInProductsTableIClickResetBreadCrumb()
 		{
 			Report.IsTrue(new RecentActivities().ClickResetBreadCrumb(), "Failed to click the reset breadcrumb", "Successfully clicked the reset breadcrumb");
 			this.HomeTabLoaded();
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table Breadcrumb area only Start Date and End Date labels are shown")]
+		[StepDefinition(@"In the recent activities Page, In the Products table Breadcrumb area only Start Date and End Date labels are shown")]
 		public void InTheRecentActivitiesPageInProductsTableOnlyStartAndEndDateBreadcrumbsShown()
 		{
 			string expectedFullText = "";
@@ -1201,7 +1200,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table I select the second product and save the supplier name to context as: (.*)")]
+		[StepDefinition(@"In the recent activities Page, In the Products table I select the second product and save the supplier name to context as: (.*)")]
 		public void InTheRecentActivitiesPageInProductsTableISelectSecondProductsAndSaveSupplierNameAs(string savedAs)
 		{
 			string iD = new RecentActivities().SecondProductInGridID();
@@ -1210,7 +1209,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		}
 
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table I select the second product and save the status to context as: (.*)")]
+		[StepDefinition(@"In the recent activities Page, In the Products table I select the second product and save the status to context as: (.*)")]
 		public void InTheRecentActivitiesPageInProductsTableISelectSecondProductsAndSaveStatusNameAs(string savedAs)
 		{
 			string iD = new RecentActivities().SecondProductInGridID();
@@ -1218,7 +1217,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Context.AddToContext(savedAs, currentData);
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table I confirm that all displayed results have (.*) as their Product ID")]
+		[StepDefinition(@"In the recent activities Page, In the Products table I confirm that all displayed results have (.*) as their Product ID")]
 		public void InTheRecentActivitiesPageInProductsTableConfirmAllProductIDsMatch(string productID)
 		{
 			if (productID.Contains("SavedProduct"))
@@ -1235,7 +1234,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		}
 
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table I confirm that Not all displayed results have (.*) as their Product ID")]
+		[StepDefinition(@"In the recent activities Page, In the Products table I confirm that Not all displayed results have (.*) as their Product ID")]
 		public void InTheRecentActivitiesPageInProductsTableConfirmNotAllProductIDsMatch(string productID)
 		{
 			if (productID.Contains("SavedProduct"))
@@ -1250,7 +1249,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(!new RecentActivities().ConfirmAllIDsMatch(productID), "All IDs contained the search text", "Not all IDs contained the search text");
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, I save all the Results to context as: (.*)")]
+		[StepDefinition(@"In the recent activities Page, I save all the Results to context as: (.*)")]
 		public void InTheRecentActivitiesPageInProductsTableISaveAllTheResultsToContextAs(string savedAs)
 		{
 
@@ -1267,7 +1266,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Context.AddToContext(savedAs, currentResults);
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, I check the current results (match|do not match) the results saved as (.*)")]
+		[StepDefinition(@"In the recent activities Page, I check the current results (match|do not match) the results saved as (.*)")]
 		public void InTheRecentActivitiesPageInProductsTableICheckTheCurrentResultsMatchTheResultsSavedAs(string matching, string savedAs)
 		{
 
@@ -1315,25 +1314,25 @@ namespace UL.Selenium.Portal.RPS.Steps
 		}
 
 
-		[RegexStepDefinition(@"In the recent activities Page, I click the Export To Excel Button")]
+		[StepDefinition(@"In the recent activities Page, I click the Export To Excel Button")]
 		public void InTheRecentActivitiesPageIClickTheExportToExcelButton()
 		{
 			Report.IsTrue(new RecentActivities().ClickExportToExcelButton(), "Failed to click the Export To Excel button", "Successfully clicked the Export To Excel button");
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, The Export to Excel Popup is showing")]
+		[StepDefinition(@"In the recent activities Page, The Export to Excel Popup is showing")]
 		public void InTheRecentActivitiesPageIClickTheExportToExcelPopupIsShowing()
 		{
 			Report.IsTrue(new RecentActivities.ExportToExcelPopup().WaitForContainerToBeVisible(), "The Export to Excel popup was not showing", "The Export to Excel popup was showing");
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, The Export to Excel Popup is not showing")]
+		[StepDefinition(@"In the recent activities Page, The Export to Excel Popup is not showing")]
 		public void InTheRecentActivitiesPageIClickTheExportToExcelPopupIsNotShowing()
 		{
 			Report.IsTrue(new RecentActivities.ExportToExcelPopup().WaitForContainerToBeInvisible(), "The Export to Excel popup was showing", "The Export to Excel popup was not showing");
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Export to Excel popup I Confirm the header text reads: (.*)")]
+		[StepDefinition(@"In the recent activities Page, In the Export to Excel popup I Confirm the header text reads: (.*)")]
 		public void InTheRecentActivitiesPageInTheExportToExcelPopupIConfirmHeaderTextReads(string expectedText)
 		{
 			var titleText = new RecentActivities.ExportToExcelPopup().GetHeaderTitleText();
@@ -1341,14 +1340,14 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(titleText == expectedText, "The header text did not match", "The header text matched");
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Export to Excel popup I Confirm the 'x' Close icon is shown")]
+		[StepDefinition(@"In the recent activities Page, In the Export to Excel popup I Confirm the 'x' Close icon is shown")]
 		public void InTheRecentActivitiesPageInTheExportToExcelPopupIConfirmTheXCloseiconIsShown()
 		{
 			Report.IsTrue(new RecentActivities.ExportToExcelPopup().HeaderCrossFound(), "The Header Cross was not found", "The Header Cross was found");
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Export to Excel popup I Confirm the main body text reads: (.*)")]
+		[StepDefinition(@"In the recent activities Page, In the Export to Excel popup I Confirm the main body text reads: (.*)")]
 		public void InTheRecentActivitiesPageInTheExportToExcelPopupIConfirmTheMainBodyTextReads(string expectedText)
 		{
 			var bodyText = new RecentActivities.ExportToExcelPopup().GetBodyText();
@@ -1358,14 +1357,14 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Export to Excel popup I Confirm the Export to Excel Button shows")]
+		[StepDefinition(@"In the recent activities Page, In the Export to Excel popup I Confirm the Export to Excel Button shows")]
 		public void InTheRecentActivitiesPageInTheExportToExcelPopupIConfirmTHeExportToExcelButtonShows()
 		{
 			Report.IsTrue(new RecentActivities.ExportToExcelPopup().ExportButtonFound(), "The Export to Excel Button  was not found", "The Export to Excel Button  was not found");
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Export to Excel popup I Confirm the Export Button text reads: (.*)")]
+		[StepDefinition(@"In the recent activities Page, In the Export to Excel popup I Confirm the Export Button text reads: (.*)")]
 		public void InTheRecentActivitiesPageInTheExportToExcelPopupIConfirmTheExportButtontReads(string expectedText)
 		{
 			var buttonText = new RecentActivities.ExportToExcelPopup().GetExportButtonText();
@@ -1375,7 +1374,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Export to Excel popup footer I confirm there is only 1 button shown")]
+		[StepDefinition(@"In the recent activities Page, In the Export to Excel popup footer I confirm there is only 1 button shown")]
 		public void InTheRecentActivitiesPageInTheExportToExcelPopupFooterIConfirmThereIsOnly1ButtonShown()
 		{
 
@@ -1384,7 +1383,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Export to Excel popup footer I confirm the Close button is shown")]
+		[StepDefinition(@"In the recent activities Page, In the Export to Excel popup footer I confirm the Close button is shown")]
 		public void InTheRecentActivitiesPageInTheExportToExcelPopupFooterIConfirmTheCloseButtonIsShown()
 		{
 			var footerButtons = new RecentActivities.ExportToExcelPopup().GetAllFooterButtons();
@@ -1393,7 +1392,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Export to Excel popup I click away from the export pop up")]
+		[StepDefinition(@"In the recent activities Page, In the Export to Excel popup I click away from the export pop up")]
 		public void InTheRecentActivitiesPageInTheExportToExcelPopupIClickAwayFromTheExportPopupUp()
 		{
 			Report.Info($"Attempting to click away from the popup");
@@ -1405,28 +1404,28 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Export to Excel popup footer I click Close")]
+		[StepDefinition(@"In the recent activities Page, In the Export to Excel popup footer I click Close")]
 		public void InTheRecentActivitiesPageInTheExportToExcelPopupFooterIClickCloseButton()
 		{
 			Report.IsTrue(new RecentActivities.ExportToExcelPopup().ClickCloseButton(), "Failed to Click Close", "Successfully clicked Close");
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Export to Excel popup I click the 'x' Close icon")]
+		[StepDefinition(@"In the recent activities Page, In the Export to Excel popup I click the 'x' Close icon")]
 		public void InTheRecentActivitiesPageInTheExportToExcelPopupIClickXCloseIcon()
 		{
 			Report.IsTrue(new RecentActivities.ExportToExcelPopup().ClickHeaderCross(), "Failed to Click the 'x' Close icon", "Successfully clicked the 'x' Close icon");
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Export to Excel popup I click the Export All Values")]
+		[StepDefinition(@"In the recent activities Page, In the Export to Excel popup I click the Export All Values")]
 		public void InTheRecentActivitiesPageInTheExportToExcelPopupIClickExportAllValues()
 		{
 			Report.IsTrue(new RecentActivities.ExportToExcelPopup().ClickExportAllValues(), "Failed to Click Export All Values", "Successfully clicked Export All Values");
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, I confirm the Products shown in the export file saved as: (.*)  match the products saved as: (.*)")]
+		[StepDefinition(@"In the recent activities Page, I confirm the Products shown in the export file saved as: (.*)  match the products saved as: (.*)")]
 		public void InTheRecentActivitiesPageIConfirmProductsInExportFileMatchSavedProducts(string fileSavedAs, string valuesSavedAs)
 		{
 
@@ -1561,19 +1560,19 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, I click the Legend Status Button")]
+		[StepDefinition(@"In the recent activities Page, I click the Legend Status Button")]
 		public void InTheRecentActivitiesPageIClickTheLegendStatusButton()
 		{
 			Report.IsTrue(new RecentActivities().ClickLegendStatusButton(), "Failed to click the Legend Status button", "Successfully clicked the Legend To Status button");
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, The Status Column Key Popup is showing")]
+		[StepDefinition(@"In the recent activities Page, The Status Column Key Popup is showing")]
 		public void InTheRecentActivitiesPageIClickTheStatusColumnKeyPopupIsShowing()
 		{
 			Report.IsTrue(new RecentActivities.StatusColumnKeyPopup().WaitForContainerToBeVisible(), "The Status Column Key popup was not showing", "The Status Column Key popup was showing");
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Status Column Key popup I Confirm the header text reads: (.*)")]
+		[StepDefinition(@"In the recent activities Page, In the Status Column Key popup I Confirm the header text reads: (.*)")]
 		public void InTheRecentActivitiesPageInTheStatusColumnKeyPopupIConfirmHeaderTextReads(string expectedText)
 		{
 			var titleText = new RecentActivities.StatusColumnKeyPopup().GetHeaderTitleText();
@@ -1581,14 +1580,14 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(titleText == expectedText, "The header text did not match", "The header text matched");
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Status Column Key popup I Confirm the 'x' Close icon is shown")]
+		[StepDefinition(@"In the recent activities Page, In the Status Column Key popup I Confirm the 'x' Close icon is shown")]
 		public void InTheRecentActivitiesPageInTheStatusColumnKeyPopupIConfirmTheXCloseiconIsShown()
 		{
 			Report.IsTrue(new RecentActivities.StatusColumnKeyPopup().HeaderCrossFound(), "The Header Cross was not found", "The Header Cross was found");
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Status Column Key popup I Confirm the section: (.*) has description text: (.*)")]
+		[StepDefinition(@"In the recent activities Page, In the Status Column Key popup I Confirm the section: (.*) has description text: (.*)")]
 		public void InTheRecentActivitiesPageInTheStatusColumnKeyPopupIConfirmSectionXHasMatchingDescription(string section, string expectedDescription)
 		{
 			var foundDescription = new RecentActivities.StatusColumnKeyPopup().GetDescriptionForStatusSection(section);
@@ -1599,38 +1598,38 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Status Column Key popup footer I click Close")]
+		[StepDefinition(@"In the recent activities Page, In the Status Column Key popup footer I click Close")]
 		public void InTheRecentActivitiesPageInTheStatusColumnKeyPopupFooterIClickCloseButton()
 		{
 			Report.IsTrue(new RecentActivities.StatusColumnKeyPopup().ClickCloseButton(), "Failed to Click Close", "Successfully clicked Close");
 
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, The Status Column Key popup is not showing")]
+		[StepDefinition(@"In the recent activities Page, The Status Column Key popup is not showing")]
 		public void InTheRecentActivitiesPageIClickTheStatusColumnKeyPopupIsNotShowing()
 		{
 			Report.IsTrue(new RecentActivities.StatusColumnKeyPopup().WaitForContainerToBeInvisible(), "The Status Column Key popup was showing", "The Status Column Key popup was not showing");
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, I confirm for all products the Action column includes: Contact Supplier")]
+		[StepDefinition(@"In the recent activities Page, I confirm for all products the Action column includes: Contact Supplier")]
 		public void InTheRecentActivitiesPageIConfirmForAllProductsActionsColumnContainsContactSupplier()
 		{
 			Report.IsTrue(new RecentActivities().CheckAllProductsContainContactSupplierInActionsColumn(), "Not all rows contained the text: 'Contact Supplier'", "All rows contained the text: 'Contact Supplier'");
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, I confirm for all products the Action column includes option: (.*)")]
+		[StepDefinition(@"In the recent activities Page, I confirm for all products the Action column includes option: (.*)")]
 		public void InTheRecentActivitiesPageIConfirmForAllProductsActionsColumnContainsGivenOption(string value)
 		{
 			Report.IsTrue(new RecentActivities().CheckAllProductsContaisGivenOptionInActionsColumn(value), $"Not all rows contained the text: '{value}'", $"All rows contained the text: '{value}'");
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, I confirm for all products the Action column does not include option: (.*)")]
+		[StepDefinition(@"In the recent activities Page, I confirm for all products the Action column does not include option: (.*)")]
 		public void InTheRecentActivitiesPageIConfirmForAllProductsActionsColumnDoesNotContainGivenOption(string value)
 		{
 			Report.IsTrue(new RecentActivities().CheckAllProductsDoNotContainGivenOptionInActionsColumn(value), $"At least 1 row contained the text: '{value}'", $"None of the rows contained the text: '{value}'");
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, In the Products table I select the first product and save the Product Information to context as: (.*)")]
+		[StepDefinition(@"In the recent activities Page, In the Products table I select the first product and save the Product Information to context as: (.*)")]
 		public void InTheRecentActivitiesPageInProductsTableISelectFirstProductAndSaveProductInformationAs(string savedAs)
 		{
 
@@ -1639,13 +1638,13 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Context.AddToContext(savedAs, currentData);
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, I Click the Row actions: (.*) for the first product in the Products Grid")]
+		[StepDefinition(@"In the recent activities Page, I Click the Row actions: (.*) for the first product in the Products Grid")]
 		public void InTheRecentActivitiesPageInProductsTableIClickRowActionForFirstProduct(string action)
 		{
 			Report.IsTrue(new RecentActivities().ClickActionForFirstResultInGrid(action), "Failed to click the action for the first product", "Successfully clicked the action for the first product");
 		}
 
-		[RegexStepDefinition(@"In the recent activities Page, I Click the Row actions: (.*) for the product: (.*)")]
+		[StepDefinition(@"In the recent activities Page, I Click the Row actions: (.*) for the product: (.*)")]
 		public void InTheRecentActivitiesPageInProductsTableIClickRowActionForGivenProduct(string action, string productID)
 		{
 
@@ -1657,7 +1656,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(new RecentActivities().ClickActionForGivenProductInResultsGrid(productID, action), "Failed to click the action for the first product", "Successfully clicked the action for the first product");
 		}
 
-		[RegexStepDefinition(@"In the Recent Activity Page, I Click Away from the Product Information Popup")]
+		[StepDefinition(@"In the Recent Activity Page, I Click Away from the Product Information Popup")]
 		public void InTheRecentActivitiesPageInTheProductInformationPopupIClickAway()
 		{
 			Report.Info($"Attempting to click away from the popup");
@@ -1669,13 +1668,13 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"In the Recent Activity Product table  - I confirm the Most Recent Activity column displays in date order, newest first")]
+		[StepDefinition(@"In the Recent Activity Product table  - I confirm the Most Recent Activity column displays in date order, newest first")]
 		public void GivenInTheRecentActivityProductTable_IConfirmTheMostRecentActivityColumnDisplaysInDateOrderNewestFirst()
 		{
 			Report.IsTrue(new RecentActivities().ConfirmRecentActivityColumnDisplaysDatesInOrder(), "Failed to click the action for the first product", "Successfully clicked the action for the first product");
 		}
 
-        [RegexStepDefinition(@"In the recent page, I confirm for all products the Action column (does|does not) include option: (.*)")]
+        [StepDefinition(@"In the recent page, I confirm for all products the Action column (does|does not) include option: (.*)")]
         public void InTheRecentActivitiesPageIConfirmForAllProductsActionsColumnDoesOrDoesNotContainGivenOption(string doesOrDoesNot, string value)
         {
             if (doesOrDoesNot == "does")
@@ -1688,27 +1687,27 @@ namespace UL.Selenium.Portal.RPS.Steps
             }
         }
 
-        [RegexStepDefinition(@"I confirm in the Recent Activities page the product grid Most Recent Activity column displays the following format: (.*)")]
+        [StepDefinition(@"I confirm in the Recent Activities page the product grid Most Recent Activity column displays the following format: (.*)")]
         public void ThenIConfirmInTheRecentActivitiesPageTheProductGridMostRecentActivityColumnDisplaysTheFollowingFormat(string dateFormat)
         {
             Report.IsTrue(new RecentActivities().ConfirmInTheRecentActivitiesPageTheProductGridMostRecentActivityColumnDisplaysTheFollowingFormat(dateFormat), $"At least 1 date had the incorrect format: '{dateFormat}'", $"None of the dates had the incorrect format: '{dateFormat}'");
         }
 
-        [RegexStepDefinition(@"In the recent activities page, I take note of the number of products in the footer area and save as: (.*)")]
+        [StepDefinition(@"In the recent activities page, I take note of the number of products in the footer area and save as: (.*)")]
         public void ThenInTheRecentActivitiesPageITakeNoteOfTheNumberOfProductsInTheFooterAreaAndSaveAsProductAmount(string savedAs)
         {
             string totalNumberOfProducts = new RecentActivities().TakeNotOfNumberOfProductsInFooterArea(savedAs);
             Context.AddToContext(savedAs, totalNumberOfProducts);
         }
         
-        [RegexStepDefinition(@"I confirm that the recent activities Page bread crumb area contains the label: (.*)")]
+        [StepDefinition(@"I confirm that the recent activities Page bread crumb area contains the label: (.*)")]
         public void IConfirmThatTheProductLookupPageBreadCrumbAreaContainsLabel(string label)
         {
 
             Report.IsTrue(new ProductLookUp().ConfirmBreadCrumbAreaContainsLabel(label), "The Bread crumb area did not contain the label", "The bread crumb are contained the label");
         }
 
-        [RegexStepDefinition(@"In the recent activites page, I check if the number of products in the footer area (is greater than|is less than|matches) amount saved as: (.*)")]
+        [StepDefinition(@"In the recent activites page, I check if the number of products in the footer area (is greater than|is less than|matches) amount saved as: (.*)")]
         public void GivenInTheRecentActivitesPageICheckIfTheNumberOfProductsInTheFooterAreaMatchesAmountSavedAsProductAmount(string option, string savedAs)
         {
             string totalNumberOfProducts = new RecentActivities().TakeNotOfNumberOfProductsInFooterArea(savedAs);
@@ -1743,7 +1742,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"In the Recent Activites page, I confirm I (see|do not see) the breadcrumbs area under the search field")]
+        [StepDefinition(@"In the Recent Activites page, I confirm I (see|do not see) the breadcrumbs area under the search field")]
         public void GivenIConfirmIDoNotSeeTheBredcrumbsAreaUnderTheSearchField(string seeOrDoesNotSee)
         {
             if (seeOrDoesNotSee == "see")
@@ -1756,44 +1755,44 @@ namespace UL.Selenium.Portal.RPS.Steps
             }
         }
  
-        [RegexStepDefinition(@"I confirm that the Lookup Page bread crumb area does not contain the label: (.*)")]
+        [StepDefinition(@"I confirm that the Lookup Page bread crumb area does not contain the label: (.*)")]
         public void ThenIConfirmThatTheLookupPageBreadCrumbAreaDoesNotContainTheLabelPackagingTypeGlassContainer(string breadCrumbName)
         {
             Report.IsTrue(new RecentActivities().IConfirmThatTheLookupPageBreadCrumbAreaDoesNotContainTheLabelPackagingTypeGlassContainer(breadCrumbName), "Failed to not find the breadcrumb label", "Successfully didn't find the breadcrumb label");
         }
 
 
-        [RegexStepDefinition(@"In the recent activities page, I confirm the products shown have the supplier name chosen: (.*)")]
+        [StepDefinition(@"In the recent activities page, I confirm the products shown have the supplier name chosen: (.*)")]
         public void GivenInTheRecentActivitiesPageIConfirmTheProductsShownHaveTheSupplierNameChosen(string supplierName)
         {
             Report.IsTrue(new RecentActivities().InTheRecentActivitiesPageIConfirmTheProductsShownHaveTheSupplierNameChosen(supplierName), "Failed to find the supplier name chosen", "Successfully found the supplier name chosen");
         }
 
 
-        [RegexStepDefinition(@"In the recent activities Page, I click the x icon for the bread crumb: Supplier Name: (.*)")]
+        [StepDefinition(@"In the recent activities Page, I click the x icon for the bread crumb: Supplier Name: (.*)")]
         public void ThenInTheRecentActivitiesPageIClickTheXIconForTheBreadCrumbSupplierNameTheWERCSLTD(string supplierName)
         {
             Report.IsTrue(new RecentActivities().InTheRecentActivitiesPageIClickTheXIconForTheBreadCrumbSupplierName(supplierName), "Failed to click the x icon for the chosen breadcrumb", "Successfully clicked the x icon for the chosen breadcrumb");
         }
 
-		[RegexStepDefinition(@"In the recent activities page, I confirm that the product table  has the following column:(.*)")]
+		[StepDefinition(@"In the recent activities page, I confirm that the product table  has the following column:(.*)")]
 		public void InRecentActivitiesPageIConfirmColumnsNameTimeAroundTime(string columnName)
 		{
 			Report.IsTrue(new RecentActivities().InTheRecentActivitiesPageTurnAroundTimeColumnFound(columnName), "Failed to find the Column name TurnAround Time" , "Successfully found the Column name TurnAround Time");
 		}
 
-		[RegexStepDefinition(@"I click on the entry in the Turnaround Time column")]
+		[StepDefinition(@"I click on the entry in the Turnaround Time column")]
 		public void InRecentActivitiesPageIClickTurnAroundTimeValue()
 		{
 			Report.IsTrue(new RecentActivities().InTheRecentActivitiesPageIClickTheTurnAroundTimeValue(), "Failed to click TurnAround Time", "Successfully clicked onTurnAround Time");
 		}
-		[RegexStepDefinition(@"I confirm a Turnaround time popup displays")]
+		[StepDefinition(@"I confirm a Turnaround time popup displays")]
 		public void InTheRecentActivitiesPageIConfirmTurnAroundTimePopupIsDisplayed()
 		{
 			Report.IsTrue(new RecentActivities().InTheRecentActivitiesPageIConfirmTurnAroundTimePopupIsDisplayed(), "Failed to open TurnAround Time popup", "Successfully opened TurnAround Time Popup");
 		}
 
-		[RegexStepDefinition(@"I confirm the TurnAround Time Pop up has loaded")]
+		[StepDefinition(@"I confirm the TurnAround Time Pop up has loaded")]
 		
 		public void TurnAroundTimePopupLoaded()
 		{
@@ -1804,7 +1803,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(new RecentActivities().WaitForContainerToBeVisible(), "Page content did not load", "Page content loaded");
 		}
 
-		[RegexStepDefinition(@"I confirm a Turnaround time popup displays date and Status")]
+		[StepDefinition(@"I confirm a Turnaround time popup displays date and Status")]
 		public void InTheRecentActivitiesPageIConfirmTurnAroundTimePopupDisplaysDateAndStatus()
 		{
 			Report.IsTrue(new RecentActivities.TurnAroundTimePopup().InTheRecentActivitiesPageIConfirmTurnAroundTimePopupDisplaysDate(), "Failed to display TurnAround Time date", "Successfully opened TurnAround Time date");
@@ -1813,51 +1812,51 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 
 
-		[RegexStepDefinition(@"I confirm I see a Turn Around Time popup Export button")]
+		[StepDefinition(@"I confirm I see a Turn Around Time popup Export button")]
 		public void InTheRecentActivitiesPageIConfirmTurnAroundTimePopUpExportbuttonIsDisplayed()
 		{
 			Report.IsTrue(new RecentActivities.TurnAroundTimePopup().InTheRecentActivitiesPageIConfirmTurnAroundTimePopupDisplaysExportButton(), "Failed to display TurnAround Time export", "Successfully opened TurnAround Time export button");
 		}
 
 
-		[RegexStepDefinition(@"I confirm I see a Close button in Turnaround time popup")]
+		[StepDefinition(@"I confirm I see a Close button in Turnaround time popup")]
 		public void InTheRecentActivitiesPageIConfirmTurnAroundTimePopupCloseButtonIsDisplayed()
 		{
 			Report.IsTrue(new RecentActivities.TurnAroundTimePopup().InTheRecentActivitiesPageIConfirmTurnAroundTimePopupDisplaysCloseButton(), "Failed to display TurnAround Time close button", "Successfully opened TurnAround Time Close button");
 		}
 
 
-		[RegexStepDefinition(@"I click the Turn Around Time Export button")]
+		[StepDefinition(@"I click the Turn Around Time Export button")]
 		public void InTheRecentActivitiesPageIClickTurnAroundTimeExportButton()
 		{
 			Report.IsTrue(new RecentActivities.TurnAroundTimePopup().InTheRecentActivitiesPageIClickTurnAroundTimePopupExportButton(), "Failed to click TurnAround Time export button", "Successfully  clicked TurnAround Export button");
 		}
 
-		[RegexStepDefinition(@"I close the turn around time Product Status History popup using the x at the upper right corner")]
+		[StepDefinition(@"I close the turn around time Product Status History popup using the x at the upper right corner")]
 		public void InTheRecentActivitiesPageICloseTurnAroundTimePopupUsingXAtTheRightCorner()
 		{
 			Report.IsTrue(new RecentActivities.TurnAroundTimePopup().InTheRecentActivitiesPageIClickTurnAroundTimePopupXButton(), "Failed to click TurnAround X button", "Successfully clicked TurnAround Export button");
 		}
 
-		[RegexStepDefinition(@"I confirm the Turn Around Time pop up header is displayed")]
+		[StepDefinition(@"I confirm the Turn Around Time pop up header is displayed")]
 		public void InTheRecentActivitiesPageIConfirmTurnAroundTimePopupHeaderIsDisplayed()
 		{
 			Report.IsTrue(new RecentActivities.TurnAroundTimePopup().InTheRecentActivitiesPageIConfirmTurnAroundTimePopupHeaderIsDisplayed(), "Failed to display TurnAround Time pop up header", "Successfully opened TurnAround Time pop up header");
 		}
 
-		[RegexStepDefinition(@"I click on the View Data Link")]
+		[StepDefinition(@"I click on the View Data Link")]
 		public void InTheProductTableIClickViewDataLink()
 		{
 			Report.IsTrue(new RecentActivities().InTheProductTableIClickTheViewDataLink(), "Failed to click View Data Link", "Successfully clicked View Data Link");
 		}
 
-		[RegexStepDefinition(@"I click on the Documents Link")]
+		[StepDefinition(@"I click on the Documents Link")]
 		public void InTheProductTableIClickDocumentsLink()
 		{
 			Report.IsTrue(new RecentActivities().InTheProductTableIClickTheDocumentsLink(), "Failed to click Documents Link", "Successfully clicked Docuements Link");
 		}
 
-		[RegexStepDefinition(@"I confirm the Product Information Pop up has loaded")]
+		[StepDefinition(@"I confirm the Product Information Pop up has loaded")]
 		public void ProductInformationPopupLoaded()
 		{
 			Report.IsTrue(new TopBar().WaitForContainerToBeVisible(), "Pop Up did not load!");
@@ -1867,20 +1866,20 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(new RecentActivities().WaitForContainerToBeVisible(), "Page content did not load", "Page content loaded");
 		}
 
-		[RegexStepDefinition(@"I verify that Product Information pop up is displayed")]
+		[StepDefinition(@"I verify that Product Information pop up is displayed")]
 		public void InTheProductTableProductInformationPopupDisplayed()
 		{
 			Report.IsTrue(new RecentActivities().InTheProductTableIConfirmViewDataPopupIsDisplayed(), "Failed to display View Data pop up", "Successfully opened View Data pop up");
 		}
 
-		[RegexStepDefinition(@"I verify that Documents pop up is displayed")]
+		[StepDefinition(@"I verify that Documents pop up is displayed")]
 		public void InTheProductTableDocumentsPopupDisplayed()
 		{
 			Report.IsTrue(new RecentActivities().InTheProductTableIConfirmDocumentsPopupIsDisplayed(), "Failed to display Documents pop up", "Successfully opened Documents pop up");
 		}
 
 
-		[RegexStepDefinition(@"In the product table, I confirm for all products the Action column (does|does not) include option: (.*)")]
+		[StepDefinition(@"In the product table, I confirm for all products the Action column (does|does not) include option: (.*)")]
 		public void InTheProductTableIConfirmForAllProductsActionsColumnDoesOrDoesNotContainGivenOption(string doesOrDoesNot, string value)
 		{
 			if (doesOrDoesNot == "does")
@@ -1890,20 +1889,20 @@ namespace UL.Selenium.Portal.RPS.Steps
 			
 		}
 		
-		[RegexStepDefinition(@"In the Recent Activities page I confirm to the right of the buttons I do not see three trends")]
+		[StepDefinition(@"In the Recent Activities page I confirm to the right of the buttons I do not see three trends")]
 		public void GivenInTheRecentActivitiesPageIConfirmToTheRightOfTheButtonsIDoNotSeeThreeTrends(Table table)
 		{
 			Report.IsTrue(new NavBar().InRecentActivitiesIConfirmTheFollowingTrendsAreNotDisplayed(table), "Failed to find all three trends", "Successfully found all three trends");
 		}
 
-		[RegexStepDefinition(@"I confirm the last page icon in the footer area")]
+		[StepDefinition(@"I confirm the last page icon in the footer area")]
 
 		public void IConfirmLastPageIconIsDisplayedInFooterArea()
 		{
 			Report.IsTrue(new RecentActivities().LastPageButtonExists(), "Failed to find the last page button", "Successfully found the last page button");
 		}
 
-		[RegexStepDefinition(@"In the Products table footer I click on the last page icon")]
+		[StepDefinition(@"In the Products table footer I click on the last page icon")]
 
 		public void InProductsTableFooterAndClickLastPageButton()
 		{
@@ -1911,7 +1910,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(new RecentActivities().ClickLastPageButton(), "Failed to click last page button", "Successfully clicked the last page button");
 		}
 
-		[RegexStepDefinition(@"I click the next page icon in page footer")]
+		[StepDefinition(@"I click the next page icon in page footer")]
 		public void InProductsTableFooterClickNextPageButton()
 		{
 			Report.IsTrue(new RecentActivities().NextPageButtonExists(), "Failed to find the Next page button", "Successfully found the Next page button");
@@ -1920,7 +1919,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		}
 
 
-		[RegexStepDefinition(@"I click the previous page icon in page footer")]
+		[StepDefinition(@"I click the previous page icon in page footer")]
 		public void InProductsTableFooterClickPreviousPageButton()
 		{
 			Report.IsTrue(new RecentActivities().PreviousPageButonExists(), "Failed to find the Previous page button", "Successfully found the Previous page button");
@@ -1928,7 +1927,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"I confirm page number is: (.*)")]
+		[StepDefinition(@"I confirm page number is: (.*)")]
 		public void InProductsTableFooterIConfirmPageNumber(string pageNumber)
 		{
 			string currentNumber = new RecentActivities().GetCurrentPageNumber();
@@ -1936,19 +1935,19 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 		 
-		[RegexStepDefinition(@"I confirm the first page icon in the footer area")]
+		[StepDefinition(@"I confirm the first page icon in the footer area")]
 
 		public void IConfirmFirstPageIconIsDisplayedInFooterArea()
 		{
 			Report.IsTrue(new RecentActivities().FirstPageButonExists(), "Failed to find the first page button", "Successfully found the first page button");
 		}
-		[RegexStepDefinition(@"In the Products table footer I click on the first page icon")]
+		[StepDefinition(@"In the Products table footer I click on the first page icon")]
 		public void InProductsTableFooterClickFirstPageButton()
 		{
 			Report.IsTrue(new RecentActivities().ClickFirstPageButton(), "Failed to click First page button", "Successfully clicked the First page button");
 		
 		}
-		[RegexStepDefinition(@"In the page footer, I change the page number: (.*)")]
+		[StepDefinition(@"In the page footer, I change the page number: (.*)")]
 		public void InProductsTableFooterIChangePageNumber(string value)
 		{
 			new RecentActivities().ChangePageValue(value);
@@ -1956,126 +1955,126 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 
 		}
-		[RegexStepDefinition(@"In the Products table footer, select the items per page option: (.*)")]
+		[StepDefinition(@"In the Products table footer, select the items per page option: (.*)")]
 		public void InProductsTableFooterSelectItemPerPageOption(string option)
 		{
 			Report.IsTrue(new RecentActivities().SelectOptionFromItemsPerPageSelector(option), "The Option was not selected", "The option was selected successfully");
 		}
 
-		[RegexStepDefinition(@"I confirm number of items per page selection box is shown")]
+		[StepDefinition(@"I confirm number of items per page selection box is shown")]
 		public void InProductsTableIConfirmNumberOfItemsPerPageSelectionBox()
 		{
 			Report.IsTrue(new RecentActivities().ItemsPerPageSelectorExists(), "The number of items per page selection box is not shown", "The number of items per page selection box is shown");
 		}
 
-		[RegexStepDefinition(@"In the page footer I click the number of items per page selection box")]
+		[StepDefinition(@"In the page footer I click the number of items per page selection box")]
 		public void InPageFooterIClickNumberOfItemsPerPageSelectionBox()
 		{
 			Report.IsTrue(new RecentActivities().ClickItemsPerPageSelector(), "Failed to click the number of items per page selection box", "Successfully clicked the number of items per page selection box");
 		}
 
 
-		[RegexStepDefinition(@"In the Page footer area I confirm Rows per page selector displays: (.*)")]
+		[StepDefinition(@"In the Page footer area I confirm Rows per page selector displays: (.*)")]
 		public void InProductsTableFooterIConfirmRowsPerPageSelectorDisplays(string expectedNumber)
 		{
 			string currentNumber = new RecentActivities().GetRowsPerPageNumber();
 			Report.IsTrue(currentNumber == expectedNumber, "The Rows per page selector number was not as expected", "The Rows per page selector number was as expected");
 		}
  
-		[RegexStepDefinition(@"I confirm the Too Many Pages pop up is shown")]
+		[StepDefinition(@"I confirm the Too Many Pages pop up is shown")]
 		public void InTheRecentActivitiesPageTooManyPagesPopupIsDisplayed()
 		{
 			Report.IsTrue(new RecentActivities().InTheProductTableIConfirmTooManyPagesPopupIsDisplayed(), "The Too Many Pages Pop Up is not displayed", "Too Many Pages Pop Up is displayed successfully");
 		}
 
-		[RegexStepDefinition(@"In the Too Many Pages pop up, I confirm the heading reads Too Many Pages")]
+		[StepDefinition(@"In the Too Many Pages pop up, I confirm the heading reads Too Many Pages")]
 		public void InTheRecentActivitiesPageTooManyPagesPopUpHeadingIsDisplayed()
 		{
 			Report.IsTrue(new RecentActivities.TooManyPagesPopup().GetTooManyPagesPopUpHeadingContent() == "Too Many Pages", "The Too Many Pages Pop Up heading is not displayed as expected", "Too Many Pages Pop Up heading is displayed successfully as expected");
 		}
 
-		[RegexStepDefinition(@"In the Too Many Pages pop up, at the far right of the pop up heading area, I confirm I see the X icon")]
+		[StepDefinition(@"In the Too Many Pages pop up, at the far right of the pop up heading area, I confirm I see the X icon")]
 		public void InTheRecentActivitiesPageTooManyPagePopUpXIsDisplayed()
 		{
 			Report.IsTrue(new RecentActivities.TooManyPagesPopup().InTheTooManyPagesPopUpXButtonIsDisplayed(), "In Too Many Pages Pop Up X button is not displayed", "In Too Many Pages Pop Up X button is displayed successfully");
 		}
 
-		[RegexStepDefinition(@"In the Too Many Pages pop up in the heading area, I click the X icon")]
+		[StepDefinition(@"In the Too Many Pages pop up in the heading area, I click the X icon")]
 		public void InTheRecentActivitiesPageTooManyPagePopUpIClickXButton()
 		{
 			Report.IsTrue(new RecentActivities.TooManyPagesPopup().InTheTooManyPagesPopUpIClickXButton(), "Failed to click X button in The Too Many Pages Pop Up", "Successfully clicked X Button in the Too Many Pages Pop Up ");
 		}
 
-		[RegexStepDefinition(@"I confirm the Too Many Pages pop up closes")]
+		[StepDefinition(@"I confirm the Too Many Pages pop up closes")]
 		public void InTheRecentActivitiesPageTooManyPagesPopUpIsClosed()
 		{
 			Report.IsTrue(new RecentActivities.TooManyPagesPopup().WaitForContainerToBeInvisible(), "The Too Many Pages popup is not displayed", "The Too Many Pages popup is displayed successfully");
 		}
 
-		[RegexStepDefinition(@"In the Too Many Rows pop up footer area, I click in the Close button")]
+		[StepDefinition(@"In the Too Many Rows pop up footer area, I click in the Close button")]
 		public void InTheRecentActivitiesPageTooManyPagesPopUpIClickCloseButton()
 		{
 			Report.IsTrue(new RecentActivities.TooManyPagesPopup().InTheTooManyPagesPopUpIClickCloseButton(), "Failed to click Close Button in Too Many Pages Pop Up", "Sucessfully clicked Close button in Too Many Pages Pop Up");
 		}
 
-		[RegexStepDefinition(@"In the Too Many Rows pop up footer area, I click Show Filters")]
+		[StepDefinition(@"In the Too Many Rows pop up footer area, I click Show Filters")]
 		public void InTheRecentActivitiesPageTooManyPagesPopUpIClickShowFilters()
 		{
 			Report.IsTrue(new RecentActivities.TooManyPagesPopup().InTheTooManyPagesPopUpIClickShowFiltersButton(), "Failed to click Show Filters Button in Too Many Pages Pop Up", "Sucessfully clicked Show Filters button in Too Many Pages Pop Up");
 		
 		}
 
-		[RegexStepDefinition(@"In the Too Many Pages pop up, below the pop up heading I confirm I see the message")]
+		[StepDefinition(@"In the Too Many Pages pop up, below the pop up heading I confirm I see the message")]
 		public void InTheRecentActivitiesPageTooManyPagesPopUpMessageIsDisplayed()
 		{
 			Report.IsTrue(new RecentActivities.TooManyPagesPopup().GetTooManyPagesPopUpBodyContent() == "We are unable to page past 100,000 records. However, you may add a filter to show records that are not currently visible.", "The Too Many Pages Pop Up body is not displayed as expected", "Too Many Pages Pop Up body is displayed successfully as expected");
 		}
 
-		[RegexStepDefinition(@"In the Too Many Pages pop up, I confirm I see the pop up footer area")]
+		[StepDefinition(@"In the Too Many Pages pop up, I confirm I see the pop up footer area")]
 		public void InTheRecentActivitiesPageTooManyPagesPopUpISeeFooterArea()
 		{
 			Report.IsTrue(new RecentActivities.TooManyPagesPopup().InTheTooManyPagesPopUpFooterAreaIsDisplayed(), "The Too Many Pages Pop Up Footer is not displayed", "Too Many Pages Pop Up Footer is displayed successfully");
 		}
 
-		[RegexStepDefinition(@"In the Too Many Pages pop up footer area, I confirm I see two buttons:Show Filters, Close")]
+		[StepDefinition(@"In the Too Many Pages pop up footer area, I confirm I see two buttons:Show Filters, Close")]
 		public void InTheRecentActivitiesPageTooManyPagesPopUpButtonsAreDisplayed()
 		{
 			Report.IsTrue(new RecentActivities.TooManyPagesPopup().InTheTooManyPagesPopUpFooterButtonsAreDisplayed(), "The Too Many Pages Pop Up buttons is not displayed", "Too Many Pages Pop Up buttons is displayed successfully");
 		}
  
 
-		[RegexStepDefinition(@"In the Documents pop up, I confirm Product Name is displayed")]
+		[StepDefinition(@"In the Documents pop up, I confirm Product Name is displayed")]
 		public void InTheRecentActivitiesPageDocuemntsPopUpIConfirmProductNameIsDisplayed()
 		{
 			Report.IsTrue(new RecentActivities.DocumentsPopup().InTheDocumentsPopUpProductName(), "Failed to display Product Name", "Successfully displayed Product Name");
 		}
 
-		[RegexStepDefinition(@"I Verify List of File Names is displayed in Documentation Popup")]
+		[StepDefinition(@"I Verify List of File Names is displayed in Documentation Popup")]
 		public void InTheDocumentationPopUpIVerifyListOfFileNamesIsDisplayed()
 		{
 			Report.IsTrue(new RecentActivities.DocumentsPopup().InTheDocumentsPopUpFileNameListIsDisplayed(), "Failed to display files list", "Successfully displayed Files list");
 		}
 
-		[RegexStepDefinition(@"I Verify document type label: SDS is displayed in Documentation Popup")]
+		[StepDefinition(@"I Verify document type label: SDS is displayed in Documentation Popup")]
 		public void InTheDocumentationPopUpIVerifyDocuemntTypeLabelSDSIsDisplayed()
 		{
 			Report.IsTrue(new RecentActivities.DocumentsPopup().InTheDocumentsPopUpDocumentTypeLabelSDSIsDisplayed(), "Failed to display document type label", "Successfully displayed document type label");
 		}
 
-		[RegexStepDefinition(@"I Verify File name is clickable in Documentation Popup")]
+		[StepDefinition(@"I Verify File name is clickable in Documentation Popup")]
 		public void InTheDocumentationPopUpIVerifyFileNameIsClickable()
 		{
 			Report.IsTrue(new RecentActivities.DocumentsPopup().InTheDocumentsPopUpFileNameIsClickable(), "Failed to verify that file name is clickable", "Successfully verified that file name is clickable");
 		}
 
-		[RegexStepDefinition(@"Click on the filename link")]
+		[StepDefinition(@"Click on the filename link")]
 		public void InTheDocumentationPopUpClickOnFileName()
 		{
 			Report.IsTrue(new RecentActivities.DocumentsPopup().InTheDocumentsPopUpClickFileName(), "Failed to click file name", "Successfully clicked file name");
 		}
 
 
-		[RegexStepDefinition(@"Confirm the filename shown to the left of the SDS label is the same as the product ID you noted for the product in Studio followed by .PDF")]
+		[StepDefinition(@"Confirm the filename shown to the left of the SDS label is the same as the product ID you noted for the product in Studio followed by .PDF")]
 		public void InTheDocumentationPopUpConfirmTheFileNameAsNotesInStudio(string savedAs)
 		{
 			string productCode = new StudioDocuments().TakeNoteOfProductCode(savedAs);
@@ -2084,7 +2083,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(new RecentActivities.DocumentsPopup().GetFileName() == productCode + ".pdf", "Product ID  is not matched with file name", "Product ID is matched with file name successfully");
 		}
 
-		[RegexStepDefinition(@"Confirm the file that is opened is the same as the NGHS file you opened in Studio")]
+		[StepDefinition(@"Confirm the file that is opened is the same as the NGHS file you opened in Studio")]
 		public void FileOpenedIsSameAsNGHSFileOpenedInStudio()
 		{
 			var widgetPage = new WidgetPage();
@@ -2105,7 +2104,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			}
 		}
 
-		[RegexStepDefinition(@"Confirm the filename shown to the left of the SDS file label matches the filename you noted in SHA manager")]
+		[StepDefinition(@"Confirm the filename shown to the left of the SDS file label matches the filename you noted in SHA manager")]
 		public void InTheDocumentationPopUpConfirmTheFileNameAsNotedInStudio(string savedAs)
 		{
 			string fileName = new StudioDocuments().TakeNoteOfFileName(savedAs);
@@ -2114,7 +2113,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(new RecentActivities.DocumentsPopup().GetFileName() == fileName + ".pdf", "File name  is not matched with file name in sha", "File name is matched with sha file name successfully");
 		}
 
-		[RegexStepDefinition(@"Confirm the Alias Product you selected is shown in the Product ID field saved as: (.*)")]
+		[StepDefinition(@"Confirm the Alias Product you selected is shown in the Product ID field saved as: (.*)")]
 		public void GivenInDocumentsPageICheckIfTheAliasNameMatchesProductSavedAsProductID(string savedAs, string retailer)
 		{
 			string productID = new SelectProduct().TakeNoteOfAliasPrroductID(savedAs, retailer);
@@ -2122,27 +2121,27 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		}
 
-		[RegexStepDefinition(@"I close the document list pop up")]
+		[StepDefinition(@"I close the document list pop up")]
 		public void ICloseTheDocumentListPopUp()
 		{
 			Report.IsTrue(new RecentActivities.DocumentsPopup().InTheDocumentsPopUpClickClose(), "Failed to close the document popup", "Successfully closed the document popup");
 		}
 
-		[RegexStepDefinition(@"I confirm For WVs TC 146009 - US & Canada , PLP No, GenDoc 1, GENDocCA 1, Doc Accepted Yes product shows the documents type: SDS")]
+		[StepDefinition(@"I confirm For WVs TC 146009 - US & Canada , PLP No, GenDoc 1, GENDocCA 1, Doc Accepted Yes product shows the documents type: SDS")]
 		public void IConfirmSDSIsDisplayedForTC146009AcceptedYes()
 		{
 			string documentType = "SDS";
 			Report.IsTrue(new RecentActivities.DocumentsPopup().InTheDocumentsPopUpSDSIsDisplayedForTC146009AcceptedYes() == documentType, "Document type is not SDS", "Document type is SDS");
 		}
 
-		[RegexStepDefinition(@"I confirm For WVs TC 146064 - US & Canada , PLP No, GenDoc 1, GenDocCA 1 Doc Accepted No \(User rejects published SDS and uploads his own\) product shows the documents type: SDS")]
+		[StepDefinition(@"I confirm For WVs TC 146064 - US & Canada , PLP No, GenDoc 1, GenDocCA 1 Doc Accepted No \(User rejects published SDS and uploads his own\) product shows the documents type: SDS")]
 		public void IConfirmSDSIsDisplayedForTC146009AcceptedNo()
 		{
 			string documentType = "SDS";
 			Report.IsTrue(new RecentActivities.DocumentsPopup().InTheDocumentsPopUpSDSIsDisplayedForTC146009AcceptedNo() == documentType, "Document type is not SDS", "Document type is SDS");
 		}
 
-		[RegexStepDefinition(@"I confirm For WVs TC 146098 - US & Canada , PLP No, GenDoc 0, GenDocCA 0 product shows the documents type: SDS")]
+		[StepDefinition(@"I confirm For WVs TC 146098 - US & Canada , PLP No, GenDoc 0, GenDocCA 0 product shows the documents type: SDS")]
 		public void IConfirmSDSIsDisplayedForTC146009()
 		{
 			string documentType = "SDS";
@@ -2150,7 +2149,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		}
 
 
-		[RegexStepDefinition(@"I confirm  in the Document List pop up, below the main product and the SDS document confirm you see the following three battery products: For WVs TC 1460009 - US & Canada , PLP No, GenDoc 1, GENDocCA 1, Doc Accepted Yes; For WVs TC 146064 - US & Canada , PLP No, GenDoc 1, GenDocCA 1 Doc Accepted No \(User rejects published SDS and uploads his own\); For WVs TC 146098 - US & Canada , PLP No, GenDoc 0, GenDocCA 0")]
+		[StepDefinition(@"I confirm  in the Document List pop up, below the main product and the SDS document confirm you see the following three battery products: For WVs TC 1460009 - US & Canada , PLP No, GenDoc 1, GENDocCA 1, Doc Accepted Yes; For WVs TC 146064 - US & Canada , PLP No, GenDoc 1, GenDocCA 1 Doc Accepted No \(User rejects published SDS and uploads his own\); For WVs TC 146098 - US & Canada , PLP No, GenDoc 0, GenDocCA 0")]
 		public void IConfirmBatteryProductsAreDisplayedBelowMainProductForNotPLP()
 		{
 			var batteryProducts = new List<string>() { "Test case 1460009 US & Canada , PLP No, GenDoc 1, GENDocCA 1, Doc Accepted Yes", "Test Case 146064 - US & Canada , PLP No, GenDoc 1, GenDocCA 1 Doc Accepted No (User rejects published SDS and uploads his own)", "Test case 146098 - US & Canada , PLP No, GenDoc 0, GenDocCA 0" };
@@ -2160,7 +2159,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(differences.IsNullOrEmpty(), "The battery products are not displayed", "The battery products are displayed");
 		}
 
-		[RegexStepDefinition(@"I confirm  in the Document List pop up, below the main product and the SDS document confirm you see the following two battery products: Test Case 146102 - PLP name for xx wehere xx is retailer name; Test Case 146206 - PLP name for xx wehere xx is retailer name: (.*)")]
+		[StepDefinition(@"I confirm  in the Document List pop up, below the main product and the SDS document confirm you see the following two battery products: Test Case 146102 - PLP name for xx wehere xx is retailer name; Test Case 146206 - PLP name for xx wehere xx is retailer name: (.*)")]
 		public void IConfirmBatteryProductsAreDisplayedBelowMainProductsForPLP(string retailer)
 		{
 			retailer = retailer.Substring(4);
@@ -2170,21 +2169,21 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(differences.IsNullOrEmpty(), "The battery products are not displayed", "The battery products are displayed");
 		}
 
-		[RegexStepDefinition(@"I confirm Test Case 146102 - PLP name shows the documents type: SDS")]
+		[StepDefinition(@"I confirm Test Case 146102 - PLP name shows the documents type: SDS")]
 		public void IConfirmSDSIsDisplaydForTC146102()
 		{
 			string documentType = "SDS";
 			Report.IsTrue(new RecentActivities.DocumentsPopup().InTheDocumentsPopUpSDSIsDisplayedForTC1TC146102() == documentType, "Document type is not SDS", "Document type is SDS");
 		}
 
-		[RegexStepDefinition(@"I confirm Test Case 146206 - PLP name shows the documents type: SDS")]
+		[StepDefinition(@"I confirm Test Case 146206 - PLP name shows the documents type: SDS")]
 		public void IConfirmSDSIsDisplaydForTC146206()
 		{
 			string documentType = "SDS";
 			Report.IsTrue(new RecentActivities.DocumentsPopup().InTheDocumentsPopUpSDSIsDisplayedForTC146206() == documentType, "Document type is not SDS", "Document type is SDS");
 		}
 
-		[RegexStepDefinition(@"Confirm the file that is opened is the same as the SDS SUmmary Sheet file you opened in Studio")]
+		[StepDefinition(@"Confirm the file that is opened is the same as the SDS SUmmary Sheet file you opened in Studio")]
 		public void FileOpenedIsSameAsSDSSummarySheetFileOpenedInStudio()
 		{
 			var widgetPage = new WidgetPage();
@@ -2205,13 +2204,13 @@ namespace UL.Selenium.Portal.RPS.Steps
 			}
 		}
 
-		[RegexStepDefinition(@"Confirm you see the message: No documents found for this UPC in Documentation Popup")]
+		[StepDefinition(@"Confirm you see the message: No documents found for this UPC in Documentation Popup")]
 		public void InTheDocumentationPopUpIVerifyDocumentNotFoundIsDisplayed()
 		{
 			Report.IsTrue(new RecentActivities.DocumentsPopup().InTheDocumentsPopUpDocumentsNotFound(), "Failed to display the message", "Successfully displayed the message");
 		}
 
-		[RegexStepDefinition(@"Confirm the Consumar Label file that is opened is the same as the file you opened in Studio related documents earlier")]
+		[StepDefinition(@"Confirm the Consumar Label file that is opened is the same as the file you opened in Studio related documents earlier")]
 		public void FileOpenedIsSameAsConsumerLabelFileOpenedInStudio()
 		{
 			var widgetPage = new WidgetPage();
@@ -2232,20 +2231,20 @@ namespace UL.Selenium.Portal.RPS.Steps
 			}
 		}
 
-		[RegexStepDefinition(@"In the documents list, confirm you see the document type label: Consumer Label")]
+		[StepDefinition(@"In the documents list, confirm you see the document type label: Consumer Label")]
 		public void InTheDocumentationPopUpIVerifyDocuemntTypeLabelConsumerlabelIsDisplayed()
 		{
 			Report.IsTrue(new RecentActivities.DocumentsPopup().InTheDocumentsPopUpDocumentTypeLabelConsumerLabelIsDisplayed(), "Failed to display document type label", "Successfully displayed document type label");
 		}
 
-		[RegexStepDefinition(@"Confirm the filename shown to the left of the Consumer Label file label is the same as you saw earlier in: Studio")]
+		[StepDefinition(@"Confirm the filename shown to the left of the Consumer Label file label is the same as you saw earlier in: Studio")]
 		public void IConfirmTheFileNameShownLeftOfConsumerlabelIsSameAsNotedInStudio(string savedAs)
 		{
 			string fileName = new RelatedDocuments().MakeANoteOfFileNameWithUserTypeSHAMANAGER(savedAs);
 			Report.IsTrue(new RecentActivities.DocumentsPopup().GetFileName().Contains(fileName), "failed to match file name", "Matched the filename successfully");
 		}
 
-		[RegexStepDefinition(@"Confirm the file that is opened is the same as the SDS file you opened in Studio")]
+		[StepDefinition(@"Confirm the file that is opened is the same as the SDS file you opened in Studio")]
 		public void FileOpenedIsSameAsSDSFileOpenedInStudio()
 		{
 			var widgetPage = new WidgetPage();
@@ -2266,15 +2265,15 @@ namespace UL.Selenium.Portal.RPS.Steps
 			}
 		}
 
-		[RegexStepDefinition(@"I confirm that I do not see a document type label of SDS")]
+		[StepDefinition(@"I confirm that I do not see a document type label of SDS")]
 		public void InTheDocumentationPopUpIVerifyDocuemntTypeLabelSDSIsNotDisplayed()
 		{
 			Report.IsFalse(new RecentActivities.DocumentsPopup().InTheDocumentsPopUpDocumentTypeLabelSDSIsDisplayed(), "SDS label is displayed", "Successfully SDS document type label is not displayed");
 		}
 
-		[RegexStepDefinition(@"I confirm Test Case 146102 - PLP name shows the documents types:")]
-		[RegexStepDefinition(@"I confirm For Test Battery - TC 145494 - Lithium Ion Battery, PLP, with Uploaded SDS, PLP name shows the two documents types:")]
-		[RegexStepDefinition(@"I confirm For WVs TC 146009 - US & Canada , PLP No, GenDoc 1, GENDocCA 1, Doc Accepted Yes product shows the documents type:")]
+		[StepDefinition(@"I confirm Test Case 146102 - PLP name shows the documents types:")]
+		[StepDefinition(@"I confirm For Test Battery - TC 145494 - Lithium Ion Battery, PLP, with Uploaded SDS, PLP name shows the two documents types:")]
+		[StepDefinition(@"I confirm For WVs TC 146009 - US & Canada , PLP No, GenDoc 1, GENDocCA 1, Doc Accepted Yes product shows the documents type:")]
 		public void IConfirmListOfSDSIsDisplayedForTC146009AcceptedYes(Table table)
 		{
 			List<string> expectedDocumentTypes = new List<string>();
@@ -2289,9 +2288,9 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(differences.IsNullOrEmpty(), "The documents types found were not as expected", "The documents types found matched the expected document types");
 		}
 
-		[RegexStepDefinition(@"I confirm Test Case 146206 - PLP name shows the documents types:")]
-		[RegexStepDefinition(@"I confirm For Test Battery - TC 145489 - Lithium Ion Battery, PLP, with Authored SDS, PLP name shows the two documents types :")]
-		[RegexStepDefinition(@"I confirm For WVs TC 146064 - US & Canada , PLP No, GenDoc 1, GenDocCA 1 Doc Accepted No \(User rejects published SDS and uploads his own\) product shows the documents type:")]
+		[StepDefinition(@"I confirm Test Case 146206 - PLP name shows the documents types:")]
+		[StepDefinition(@"I confirm For Test Battery - TC 145489 - Lithium Ion Battery, PLP, with Authored SDS, PLP name shows the two documents types :")]
+		[StepDefinition(@"I confirm For WVs TC 146064 - US & Canada , PLP No, GenDoc 1, GenDocCA 1 Doc Accepted No \(User rejects published SDS and uploads his own\) product shows the documents type:")]
 		public void IConfirmListOfSDSIsDisplayedForTC146064AcceptedNo(Table table)
 		{
 			List<string> expectedDocumentTypes = new List<string>();
@@ -2305,8 +2304,8 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(differences.IsNullOrEmpty(), "The documents types found were not as expected", "The documents types found matched the expected document types");
 		}
 
-		[RegexStepDefinition(@"I confirm For Test Battery - TC 145493 - Lithium Ion Battery, PLP, with Uploaded AIS, PLP name shows one document types:")]
-		[RegexStepDefinition(@"I confirm For WVs TC 146098 - US & Canada , PLP No, GenDoc 0, GenDocCA 0 product shows the documents type:")]
+		[StepDefinition(@"I confirm For Test Battery - TC 145493 - Lithium Ion Battery, PLP, with Uploaded AIS, PLP name shows one document types:")]
+		[StepDefinition(@"I confirm For WVs TC 146098 - US & Canada , PLP No, GenDoc 0, GenDocCA 0 product shows the documents type:")]
 		public void IConfirmListOfSDSIsDisplayedForTC146098(Table table)
 		{
 			List<string> expectedDocumentTypes = new List<string>();
@@ -2320,7 +2319,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(differences.IsNullOrEmpty(), "The documents types found were not as expected", "The documents types found matched the expected document types");
 		}
 
-		[RegexStepDefinition(@"I confirm  In the Document List pop up, below the main product and the SDS document confirm you see the following three battery products:")]
+		[StepDefinition(@"I confirm  In the Document List pop up, below the main product and the SDS document confirm you see the following three battery products:")]
 		public void IConfirmListOfBatteryProductsAreDisplayed(Table table)
 		{
 			List<string> expectedDocumentTypes = new List<string>();
@@ -2334,9 +2333,8 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(differences.IsNullOrEmpty(), "The documents list found were not as expected", "The documents list found matched the expected document list");
 		}
 
- 
-
-		[RegexStepDefinition(@"Confirm the file that is opened is the same as the HGHS file you opened in Studio")]
+        
+		[StepDefinition(@"Confirm the file that is opened is the same as the HGHS file you opened in Studio")]
 		public void FileOpenedIsSameAsHGHSFileOpenedInStudio()
 		{
 			var widgetPage = new WidgetPage();
@@ -2357,7 +2355,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			}
 		}
 
-        [RegexStepDefinition(@"In the product table, in the Actions column, I click: View Data")]
+        [StepDefinition(@"In the product table, in the Actions column, I click: View Data")]
         public void InTheProductTableActionsColumnClickViewData()
         {
             Report.IsTrue(new ProductLookUp().ClickActionForFirstResultInGrid("View Data"), "Failed to click the action for the first product", "Successfully clicked the action for the first product");
@@ -2365,7 +2363,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
  
 
-        [RegexStepDefinition(@"In the recent activities Page, In the Products table I search for the product: (.*)")]
+        [StepDefinition(@"In the recent activities Page, In the Products table I search for the product: (.*)")]
         public void InTheRecentActivitiesPageInProductsTableSearchForProduct(string productName)
         {
             new RecentActivities().EnterSearchBoxText(productName);
@@ -2373,19 +2371,12 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"In the recent activities Page, In the Products table I enter product text: (.*) and press the Enter Key")]
+        [StepDefinition(@"In the recent activities Page, In the Products table I enter product text: (.*) and press the Enter Key")]
         public void InTheRecentActivitiesPageInProductsTableSearchForProducAndPressEnter(string productName)
         {
             new RecentActivities().EnterSearchBoxTextAndpressEnterKey(productName);
             Report.IsTrue(new RecentActivities().CheckSearchBoxContains(productName), "The search box did not contain the text that was searched for", "The search box contained the text that was searched for");
 
-        }
-
-        [RegexStepDefinition(@"I confirm that the recent activities Page, I click bread crumb area")]
-        public void IClickInTheProductLookupPageBreadCrumbAreal()
-        {
-
-            Report.IsTrue(new ProductLookUp().IClickBreadCrumbArea(), "Failed to click The Bread crumb area ", "Successfull clicked The bread crumb area");
         }
 
     }

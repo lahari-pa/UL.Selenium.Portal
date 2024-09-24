@@ -114,11 +114,11 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 			return null;
 		}
 
-		public string DocumentText(string address) => WercsmartPdfHelpers.GetTextFromPdfUri(address, new SimpleTextExtractionStrategy());
+        public string DocumentText(string address) => WercsmartPdfHelpers.GetTextFromPdfUri(address, new SimpleTextExtractionStrategy());
 
-		#endregion
+        #endregion
 
-		public class Widget : SeleniumBaseObject
+        public class Widget : SeleniumBaseObject
 		{
 			#region Page Objects
 

@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
@@ -7,6 +9,8 @@ using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
+using UL.Selenium.Portal.RPS.Classes;
+using UL.Selenium.Portal.RPS.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using GeneralUtilities = UL.Selenium.Portal.RPS.Classes.GeneralUtilities;
 using UL.Automation.ReqnrollHelpers.Classes;

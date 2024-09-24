@@ -2,7 +2,6 @@
 using Reqnroll;
 using UL.Automation.Reporting;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.RPS.Classes;
 using UL.Selenium.Portal.RPS.Selenium_Classes;
@@ -12,7 +11,7 @@ namespace UL.Selenium.Portal.RPS.Steps
     [Binding, Scope(Tag = "HelpAndSupport")]
     class Steps_HelpAndSupport
     {
-        [RegexStepDefinition(@"I Confirm the Help & Support Popup is displayed")]
+        [StepDefinition(@"I Confirm the Help & Support Popup is displayed")]
         public void HelpAndSupportPopupDisplayed()
         {
             GeneralUtilities.WaitForLoadingToFinish();
@@ -21,7 +20,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(new HelpAndSupport().ConfirmHelpAndSupportFormContentsLoaded(), "The Help & Support main contents was not loaded", "The Help & Support main contents was loaded");
         }
 
-        [RegexStepDefinition(@"I Confirm the Help & Support Popup is not displayed")]
+        [StepDefinition(@"I Confirm the Help & Support Popup is not displayed")]
         public void HelpAndSupportPopupNotDisplayed()
         {
             GeneralUtilities.WaitForLoadingToFinish();
@@ -29,7 +28,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I Confirm the Help & Support Popup contains the text 'Search Articles' in the header")]
+        [StepDefinition(@"I Confirm the Help & Support Popup contains the text 'Search Articles' in the header")]
         public void ConfirmTheHelpAndSupportPopupContainsTheTextSearchArticlesInTheHeader()
         {
             Report.IsTrue(new HelpAndSupport().ConfirmSearchArticlesPresent(), "The Help & Support Popup header did not contain 'Search Articles'", "The Help & Support Popup header did contain 'Search Articles'");
@@ -37,7 +36,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [RegexStepDefinition(@"I Confirm the Help & Support Popup contains the Search Icon in the header")]
+        [StepDefinition(@"I Confirm the Help & Support Popup contains the Search Icon in the header")]
         public void ConfirmTheHelpAndSupportPopupContainsTheSearchIconInTheHeader()
         {
             Report.IsTrue(new HelpAndSupport().ConfirmSearchIconPresent(), "The Help & Support Popup did not contain the search Icon", "The Help & Support header did contain the search Icon");
@@ -45,14 +44,14 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [RegexStepDefinition(@"I Confirm the Help & Support Popup contains the Customer Contact Input Field")]
+        [StepDefinition(@"I Confirm the Help & Support Popup contains the Customer Contact Input Field")]
         public void ConfirmTheHelpAndSupportPopupContainsTheCustomerContactInputField()
         {
             Report.IsTrue(new HelpAndSupport().ConfirmCustomerContactEntryFieldPresent(), "The Help & Support Popup did not contain the Customer Contact Input Field", "The Help & Support Popup did contain the Customer Contact Input Field");
             Report.IsTrue(new HelpAndSupport().ConfirmCustomerContactLabelTextPresent(), "The Help & Support Popup did not contain the label text 'Customer Contact'", "The Help & Support Popup did contain the label text 'Customer Contact'");
         }
 
-        [RegexStepDefinition(@"I Confirm the Help & Support Popup contains the Subject Input Field")]
+        [StepDefinition(@"I Confirm the Help & Support Popup contains the Subject Input Field")]
         public void ConfirmTheHelpAndSupportPopupContainsTheSubjectInputField()
         {
             Report.IsTrue(new HelpAndSupport().ConfirmSubjectEntryFieldPresent(), "The Help & Support Popup did not contain the Subject Input Field", "The Help & Support Popup did contain the Subject Input Field");
@@ -61,7 +60,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I Confirm the Help & Support Popup contains the Text Decription Field")]
+        [StepDefinition(@"I Confirm the Help & Support Popup contains the Text Decription Field")]
         public void ConfirmTheHelpAndSupportPopupContainsTheTextDescriptionField()
         {
             Report.IsTrue(new HelpAndSupport().ConfirmTextDescriptionInputPresent(), "The Help & Support Popup did not contain the Text Description Field", "The Help & Support Popup did contain the Text Description Field");
@@ -69,7 +68,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [RegexStepDefinition(@"I Confirm the Help & Support Popup contains the Need an Ingredient area")]
+        [StepDefinition(@"I Confirm the Help & Support Popup contains the Need an Ingredient area")]
         public void ConfirmTheHelpAndSupportPopupContainsTheNeedAnIngredientArea()
         {
             Report.IsTrue(new HelpAndSupport().ConfirmNeedAnIngredientInputPresent(), "The Help & Support Popup did not contain the Need an Ingredient area", "The Help & Support Popup did contain the Need an Ingredient area");
@@ -78,14 +77,14 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I Confirm the Help & Support Popup can be scrolled to the bottom")]
+        [StepDefinition(@"I Confirm the Help & Support Popup can be scrolled to the bottom")]
         public void ConfirmTheHelpAndSupportPopupCanBeScrolledToTheBottom()
         {
             Report.IsTrue(new HelpAndSupport().CheckHelpAndSupportPopupContainsScrollBar(), "The Help & Support Popup was not correctly scrolled to the bottom", "The Help & Support Popup was correctly scrolled to the bottom");
 
         }
 
-        [RegexStepDefinition(@"I Confirm the Help & Support Popup contains the Priority Input Field")]
+        [StepDefinition(@"I Confirm the Help & Support Popup contains the Priority Input Field")]
         public void ConfirmTheHelpAndSupportPopupContainsThePriorityInputField()
         {
             Report.IsTrue(new HelpAndSupport().ConfirmPriorityDropFieldPresent(), "The Help & Support Popup did not contain the Priority Input Field", "The Help & Support Popup did contain the Priority Input Field");
@@ -96,7 +95,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I Confirm the Help & Support Popup contains the currently selected Priority option of: (.*)")]
+        [StepDefinition(@"I Confirm the Help & Support Popup contains the currently selected Priority option of: (.*)")]
         public void ConfirmTheHelpAndSupportPopupContainsThePriorityInputField(string expectedPriority)
         {
             Report.IsTrue(new HelpAndSupport().GetCurrentPriority() == expectedPriority, "The Help & Support Popup did not contain the expected currently selected Priority", "The Help & Support Popup did contain the expected currently selected Priority");
@@ -104,7 +103,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I Confirm in the Help & Support Popup, the Priority Drop down displays the following options:")]
+        [StepDefinition(@"I Confirm in the Help & Support Popup, the Priority Drop down displays the following options:")]
         public void ConfirmTheHelpAndSupportPopupPriorityOptions(Table table)
         {
             Delay.Seconds(5);
@@ -122,7 +121,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I Confirm the Help & Support Popup contains the a captcha with text 'I'm not a robot'")]
+        [StepDefinition(@"I Confirm the Help & Support Popup contains the a captcha with text 'I'm not a robot'")]
         public void ConfirmTheHelpAndSupportPopupContainCaptchaWithImNotARobot()
         {
             Report.IsTrue(new HelpAndSupport().CaptchaContainsIAmNotARobot(), "The Help & Support Popup did not contain a captcha with text 'I'm not a robot'", "The Help & Support Popup did contain a captcha with text 'I'm not a robot'");
@@ -131,7 +130,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [RegexStepDefinition(@"I Confirm the Help & Support Popup footer contains a Submit Button")]
+        [StepDefinition(@"I Confirm the Help & Support Popup footer contains a Submit Button")]
         public void ConfirmTheHelpAndSupportPopupFooterContainsASubmitButton()
         {
             Report.IsTrue(new HelpAndSupport().ConfirmSubmitButtonPresent(), "The Help & Support Popup footer did not contain a submit button", "The Help & Support Popup footer did contain a submit button");
@@ -139,21 +138,21 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [RegexStepDefinition(@"I Confirm the Help & Support Popup Contains an X Icon")]
+        [StepDefinition(@"I Confirm the Help & Support Popup Contains an X Icon")]
         public void ConfirmTheHelpAndSupportPopupContainsXIcon()
         {
             Report.IsTrue(new HelpAndSupport().ConfirmXIconPresent(), "The Help & Support Popup did not contain an X Icon", "The Help & Support Popup did contain an X Icon");
 
         }
 
-        [RegexStepDefinition(@"In the Help & Support Popup I click the X Icon")]
+        [StepDefinition(@"In the Help & Support Popup I click the X Icon")]
         public void ClickTheIconInTheHelpAndSupportPopup()
         {
             Report.Info("Attempting to click the X Icon in the Help & Support Popup");
             new HelpAndSupport().ClickXIcon();
         }
 
-        [RegexStepDefinition(@"In The Help & Support Popup I perform 107996 MANUAL LAYOUT CHECKS using screenshots")]
+        [StepDefinition(@"In The Help & Support Popup I perform 107996 MANUAL LAYOUT CHECKS using screenshots")]
         public void InTheHelpAndSupportPopupPerform107996MANUALLAYOUTCHECKS()
         {
             ReportSettings.UseSubSteps = true;
@@ -209,14 +208,14 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"In the Help & Support Popup I click the scroll bar")]
+        [StepDefinition(@"In the Help & Support Popup I click the scroll bar")]
         public void ClickScrollBarInTheHelpAndSupportPopup()
         {
             Report.Info("Attempting to click the Scroll bar in the Help & Support Popup");
             new HelpAndSupport().ClickAndDragScrollBarDown();
         }
 
-        [RegexStepDefinition(@"In the Help & Support Popup I Check that the mouse can drag the scroll bar up and down")]
+        [StepDefinition(@"In the Help & Support Popup I Check that the mouse can drag the scroll bar up and down")]
         public void CheckMouseCanDragScrollBarInTheHelpAndSupportPopup()
         {
            
@@ -234,14 +233,14 @@ namespace UL.Selenium.Portal.RPS.Steps
            
         }
 
-        [RegexStepDefinition(@"In the Help & Support Popup I Click the search articles link")]
+        [StepDefinition(@"In the Help & Support Popup I Click the search articles link")]
         public void InTheHelpAndSupportPopupIClickSearchArticlesLink()
         {
             Report.IsTrue(new HelpAndSupport().ClickSearchArticlesLink(), "Failed to click the link", "Succesfully clicked the link");
             
         }
 
-        [RegexStepDefinition(@"In the Help & Support Popup I Check that the side panel is open")]
+        [StepDefinition(@"In the Help & Support Popup I Check that the side panel is open")]
         public void InTheHelpAndSupportPopupICheckTheSidePanelIsOpen()
         {
             Report.IsTrue(new HelpAndSupport().CheckSidePanelIsOpen(), "The side panel was not open", "The side panel was open");
@@ -249,35 +248,35 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"In the Help & Support Popup I confirm that the the side panel input box contains placeholder text: (.*)")]
+        [StepDefinition(@"In the Help & Support Popup I confirm that the the side panel input box contains placeholder text: (.*)")]
         public void InTheHelpAndSupportPopupICheckSidePanelInputPlaceholderText(string exptected)
         {
             Report.IsTrue(new HelpAndSupport().ConfirmSidePanelSearchText(exptected), "The side panel input placeholder text did not match", "The side panel input placeholder text did match");
 
         }
 
-        [RegexStepDefinition(@"In the Help & Support Popup I confirm that the the side panel Main body contains text: (.*)")]
+        [StepDefinition(@"In the Help & Support Popup I confirm that the the side panel Main body contains text: (.*)")]
         public void InTheHelpAndSupportPopupICheckSidePanelMainBodyText(string exptected)
         {
             Report.IsTrue(new HelpAndSupport().ConfirmSidePanelMainBodyText(exptected), "The side panel main body text did not match", "The side panel main body text did match");
 
         }
 
-        [RegexStepDefinition(@"In the Help & Support Popup I confirm that the the side panel Main body link contains text: (.*)")]
+        [StepDefinition(@"In the Help & Support Popup I confirm that the the side panel Main body link contains text: (.*)")]
         public void InTheHelpAndSupportPopupICheckSidePanelMainBodyLinkText(string exptected)
         {
             Report.IsTrue(new HelpAndSupport().ConfirmSidePanelMainBodyLinkText(exptected), "The side panel main body link text did not match", "The side panel main body link text did match");
 
         }
 
-        [RegexStepDefinition(@"MANUAL STEP - In the Help & Support Popup I confirm that the the side panel Main body link is a link")]
+        [StepDefinition(@"MANUAL STEP - In the Help & Support Popup I confirm that the the side panel Main body link is a link")]
         public void InTheHelpAndSupportPopupICheckSidePanelMainBodyLinkIsALink()
         {
             Report.IsTrue(new HelpAndSupport().ConfirmSidePanelMainBodyLinkIsLink(), "The side panel main body link text did not contain a link", "The side panel main body link text contained a link");
 
         }
 
-        [RegexStepDefinition(@"In the Help & Support Popup I Click the or Browse articles link")]
+        [StepDefinition(@"In the Help & Support Popup I Click the or Browse articles link")]
         public void InTheHelpAndSupportPopupIClickOrBrowseArticlesLink()
         {
             Report.IsTrue(new HelpAndSupport().ClickOrBrowseArticlesLink(), "Failed to click the or Browse articles Link", "Successfully clicked the or Browse articles Link");
@@ -285,7 +284,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [RegexStepDefinition(@"In the Help & Support Popup The Close Search button is present")]
+        [StepDefinition(@"In the Help & Support Popup The Close Search button is present")]
         public void InTheHelpAndSupportPopupTheCloseSearchButtonIsPresent()
         {
             Report.IsTrue(new HelpAndSupport().CloseSearchPresent(), "The Close search button was not found", "The close search button was found");
@@ -294,13 +293,13 @@ namespace UL.Selenium.Portal.RPS.Steps
           
         }
 
-        [RegexStepDefinition(@"In the Help & Support Popup I Click the close search button")]
+        [StepDefinition(@"In the Help & Support Popup I Click the close search button")]
         public void InTheHelpAndSupportPopupIClickTheCloseSearchButton()
         {            
             Report.IsTrue(new HelpAndSupport().ClickCloseSeearch(), "Failed to click the Close Search Button", "Successfully clicked Close Search Button");
         }
 
-        [RegexStepDefinition(@"In The Help & Support Popup I perform 108014 MANUAL LAYOUT CHECKS using screenshots")]
+        [StepDefinition(@"In The Help & Support Popup I perform 108014 MANUAL LAYOUT CHECKS using screenshots")]
         public void InTheHelpAndSupportPopupPerform108014MANUALLAYOUTCHECKS()
         {
             ReportSettings.UseSubSteps = true;
@@ -321,7 +320,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"In The Help & Support Popup I perform 108015 MANUAL LAYOUT CHECKS using screenshots")]
+        [StepDefinition(@"In The Help & Support Popup I perform 108015 MANUAL LAYOUT CHECKS using screenshots")]
         public void InTheHelpAndSupportPopupPerform108015MANUALLAYOUTCHECKS()
         {
             ReportSettings.UseSubSteps = true;
@@ -337,13 +336,13 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 
 
-        [RegexStepDefinition(@"In the Help & Support Popup I Click the Submit button")]
+        [StepDefinition(@"In the Help & Support Popup I Click the Submit button")]
         public void InTheHelpAndSupportPopupIClickTheSubmitButton()
         {
             Report.IsTrue(new HelpAndSupport().ClickSubmit(), "Failed to click the Submit Button", "Successfully clicked Submit Button");
         }
 
-        [RegexStepDefinition(@"In the Help & Support Popup I confirm there is an error displaying below the customer contact field that reads: (.*)")]
+        [StepDefinition(@"In the Help & Support Popup I confirm there is an error displaying below the customer contact field that reads: (.*)")]
         public void InTheHelpAndSupportPopupIConfirmThereIsAnErrorBelowTheCustomerContactField(string errorText)
         {
            string foundText=  new HelpAndSupport().GetCustomerContactErrorText();
@@ -351,7 +350,7 @@ namespace UL.Selenium.Portal.RPS.Steps
            Report.IsTrue(foundText == errorText, "The error text found was not a match", "The error text found was a match");
         }
 
-        [RegexStepDefinition(@"In the Help & Support Popup I confirm there is an error displaying below the Subject field: (.*)")]
+        [StepDefinition(@"In the Help & Support Popup I confirm there is an error displaying below the Subject field: (.*)")]
         public void InTheHelpAndSupportPopupIConfirmThereIsAnErrorBelowTheSubjectField(string errorText)
         {
             string foundText = new HelpAndSupport().GetSubjectErrorText();
@@ -359,7 +358,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(foundText == errorText, "The error text found was not a match", "The error text found was a match");
         }
 
-        [RegexStepDefinition(@"I Confirm the Help & Support Popup contains the I am a dropdown Field")]
+        [StepDefinition(@"I Confirm the Help & Support Popup contains the I am a dropdown Field")]
         public void ConfirmTheHelpAndSupportPopupContainsTheIAmADropdownField()
         {
             Report.IsTrue(new HelpAndSupport().ConfirmIAmADropDownFieldPresent(), "The Help & Support Popup did not contain the I am a dropdown Field", "The Help & Support Popup did contain the I am a dropdown Field");
@@ -368,7 +367,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(new HelpAndSupport().ConfirmOpenIAmADropDownFieldPresent(), "The Help & Support Popup did not contain the open I am a drop down menu", "The Help & Support Popup did contain the open I am a drop down menu");
         }
 
-        [RegexStepDefinition(@"In the Help & Support pop up, I confirm the heading shows: (.*)")]
+        [StepDefinition(@"In the Help & Support pop up, I confirm the heading shows: (.*)")]
         public void ConfirmTheHelpAndSupportPopupHeadingShowsHelpAndSupport(string heading)
         {
 

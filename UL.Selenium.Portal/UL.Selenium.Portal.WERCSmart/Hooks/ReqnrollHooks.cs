@@ -1,19 +1,14 @@
 ﻿using BoDi;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Reqnroll;
+using System;
 using TReVor.Integrations.Classes;
 using TReVor.Integrations.Classes.Configuration;
 using UL.Automation.Helpers;
 
-namespace UL.Selenium.Portal.WERCSmart.SpecFlow
+namespace UL.Selenium.Portal.WERCSmart.Hooks
 {
 	[Binding]
-	internal class SpecFlowHooks
+	internal class ReqnrollHooks
 	{
 		private string GetBranchName() => TReVorSettings.BranchInfo?.BranchName ?? TReVorConfig.CurrentSettings?.TReVorSettings?.SoftwareBranch;
 

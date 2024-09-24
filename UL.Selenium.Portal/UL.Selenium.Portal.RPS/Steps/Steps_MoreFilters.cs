@@ -3,12 +3,18 @@ using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Selenium.Portal.RPS.Classes;
 using UL.Selenium.Portal.RPS.Selenium_Classes;
 using System;
 using System.Linq;
+using System.Text.RegularExpressions;
+using Castle.Core.Internal;
+using UL.Selenium.Portal.WERCSmart.Classes;
+using NPOI.SS.Formula.Functions;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Automation.Reporting.Classes;
-using UL.Automation.ReqnrollHelpers.Attributes;
 using GeneralUtilities = UL.Selenium.Portal.RPS.Classes.GeneralUtilities;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.RPS.Steps
@@ -18,32 +24,32 @@ namespace UL.Selenium.Portal.RPS.Steps
     {
 		 
 
-		[RegexStepDefinition(@"In the Product Lookup Page, The More Filters Popup is showing")]
+		[StepDefinition(@"In the Product Lookup Page, The More Filters Popup is showing")]
 		public void InTheProductLookupPageIClickTheMoreFiltersPopupIsShowing()
 		{
 			Report.IsTrue(new MoreFiltersPopup().WaitForContainerToBeVisible(), "The More filters popup was not showing", "The More filters popup was showing");
 		}
 
-		[RegexStepDefinition(@"In the Product Lookup Page, The More Filters Popup is not showing")]
+		[StepDefinition(@"In the Product Lookup Page, The More Filters Popup is not showing")]
 		public void InTheProductLookupPageIClickTheMoreFiltersPopupIsNotShowing()
 		{
 			Report.IsTrue(new MoreFiltersPopup().WaitForContainerToBeInvisible(), "The More filters popup was showing", "The More filters popup was not showing");
 		}
 
-		[RegexStepDefinition(@"In the Product Lookup Page More Filters Popup, I click the (.*) Filter")]
+		[StepDefinition(@"In the Product Lookup Page More Filters Popup, I click the (.*) Filter")]
 		public void InTheProductLookupMoreFiltersPageIClickFilter(string value)
 		{
 			Report.IsTrue(new MoreFiltersPopup().ClickFilterOption(value), "Failed to select the filter", "Successfully selected the filter");
 			Delay.Seconds(3);
 		}
 
-		[RegexStepDefinition(@"In the Product Lookup Page More Filters Popup, I enter the parameter (.*)")]
+		[StepDefinition(@"In the Product Lookup Page More Filters Popup, I enter the parameter (.*)")]
 		public void InTheProductLookupMoreFiltersPageIEnterParameter(string value)
 		{
 			Report.IsTrue(new MoreFiltersPopup().EnterParameterForSearch(value), "Failed to enter parameter", "Successfully entered parameter");
 		}
 
-		[RegexStepDefinition(@"In the Product Lookup Page More Filters Popup, I select the parameter (.*)")]
+		[StepDefinition(@"In the Product Lookup Page More Filters Popup, I select the parameter (.*)")]
 		public void InTheProductLookupMoreFiltersPageISelectParameter(string value)
 		{
 			new  MoreFiltersPopup().WaitForParametersToShow();
@@ -51,27 +57,27 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Delay.Seconds(3);
 		}
 
-		[RegexStepDefinition(@"In the Product Lookup Page More Filters Popup, I select the first parameter")]
+		[StepDefinition(@"In the Product Lookup Page More Filters Popup, I select the first parameter")]
 		public void InTheProductLookupMoreFiltersPageISelectTheFirstParameter()
 		{
 			Report.IsTrue(new MoreFiltersPopup().ClickFirstParameterOption(), "Failed to select the first parameter", "Successfully selected the first parameter");
 		}
 
-		[RegexStepDefinition(@"In the Product Lookup Page More Filters Popup, I Click the the OK Button")]
+		[StepDefinition(@"In the Product Lookup Page More Filters Popup, I Click the the OK Button")]
 		public void InTheProductLookupMoreFiltersPageClickOKButton()
 		{
 			Report.IsTrue(new MoreFiltersPopup().ClickOKButton(), "The OK button was not clicked", "The OK button was clicked successfully");
 		}
          
 
-		[RegexStepDefinition(@"In the product lookup page More Filters Popup, I Click the the Apply Filter Button")]
+		[StepDefinition(@"In the product lookup page More Filters Popup, I Click the the Apply Filter Button")]
 		public void InTheProductLookUpPageMoreFiltersPopupClickApplyFilterButton()
 		{
 			Report.IsTrue(new MoreFiltersPopup().ClickApplyFiltersButton(), "The Apply Filter button was not clicked", "The Apply Filter button was clicked successfully");
 			Delay.Seconds(10);
 		}
 
-		[RegexStepDefinition(@"In the product lookup page, I select the option: (.*) from the status drop down menu")]
+		[StepDefinition(@"In the product lookup page, I select the option: (.*) from the status drop down menu")]
 		public void InTheProductLookUpPageISelectStatusOption(string option)
 		{
 			if (option.Contains("SavedProduct"))
@@ -82,7 +88,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Delay.Seconds(3);
 		}
 
-		[RegexStepDefinition(@"In the product lookup page, I select the option: (.*) from the parameters drop down menu")]
+		[StepDefinition(@"In the product lookup page, I select the option: (.*) from the parameters drop down menu")]
 		public void InTheProductLookUpPageISelectParameterOption(string option)
 		{
             Delay.Seconds(3);
@@ -93,7 +99,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(new MoreFiltersPopup().SelectParameterOption(option), "The option was not selected", "The option was selected successfully");
 		}
 
-        [RegexStepDefinition(@"In the product lookup page, I select the Supplier Name option: (.*) from the parameters drop down menu")]
+        [StepDefinition(@"In the product lookup page, I select the Supplier Name option: (.*) from the parameters drop down menu")]
 		public void InTheProductLookUpPageISelectSupplierNameParameterOption(string option)
 		{
 			if (option.Contains("SavedProduct"))
@@ -105,20 +111,20 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 		 
 
-        [RegexStepDefinition(@"In the product lookup page, The More Filters Popup is showing")]
+        [StepDefinition(@"In the product lookup page, The More Filters Popup is showing")]
         public void InTheProductLookUpPageIClickTheMoreFiltersPopupIsShowing()
         {
             Report.IsTrue(new MoreFiltersPopup().WaitForContainerToBeVisible(), "The More filters popup was not showing", "The More filters popup was showing");
         }
 
-        [RegexStepDefinition(@"In the product lookup page, The More Filters Popup is not showing")]
+        [StepDefinition(@"In the product lookup page, The More Filters Popup is not showing")]
         public void InTheProductLookUpPageIClickTheMoreFiltersPopupIsNotShowing()
         {
             Report.IsTrue(new MoreFiltersPopup().WaitForContainerToBeInvisible(), "The More filters popup was showing", "The More filters popup was not showing");
         }
  
 
-        [RegexStepDefinition(@"I confirm I (see|do not see) the bredcrumbs area under the search field")]
+        [StepDefinition(@"I confirm I (see|do not see) the bredcrumbs area under the search field")]
         public void GivenIConfirmIDoNotSeeTheBredcrumbsAreaUnderTheSearchField(string seeOrDoesNotSee)
         {
             if (seeOrDoesNotSee == "see")
@@ -131,31 +137,31 @@ namespace UL.Selenium.Portal.RPS.Steps
             }
         }
 
-        [RegexStepDefinition(@"In the product lookup page, I confirm the More Filters body is between the top and bottom of the page")]
+        [StepDefinition(@"In the product lookup page, I confirm the More Filters body is between the top and bottom of the page")]
         public void GivenInTheProductLookupPageIConfirmTheMoreFiltersBodyIsBetweenTheTopAndBottomOfThePage()
         {
             Report.IsTrue(new MoreFiltersPopup().InTheProductLookupPageIConfirmTheMoreFiltersBodyIsBetweenTheTopAndBottomOfThePage(), $"Failed to confirm the More Filters body is between the top and bottom of the page", $"Successfully confirmed the More Filters body is between the top and bottom of the page");
         }
 
-        [RegexStepDefinition(@"In the recent activites page, in the more filters popup I click reset all filters")]
+        [StepDefinition(@"In the recent activites page, in the more filters popup I click reset all filters")]
         public void GivenInTheMoreFiltersPopupClickResetAllFilters()
         {
             Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupClickResetAllFilters(), "Failed to click Remove all filters", "Successfully clicked Remove all filters");
         }
 
-        [RegexStepDefinition(@"In the product lookup page, I confirm the More Filters header contains the following title: (.*)")]
+        [StepDefinition(@"In the product lookup page, I confirm the More Filters header contains the following title: (.*)")]
         public void GivenInTheProductLookupPageIConfirmTheMoreFiltersHeaderContainsTheFollowingTitleMoreFilters(string title)
         {
             Report.IsTrue(new MoreFiltersPopup().InTheProductLookupPageIConfirmTheMoreFiltersHeaderContainsTheFollowingTitleMoreFilters(title), $"Failed to confirm the More Filters popup title is: " + title, $"Successfully confirmed the More Filters popup title is: " + title);
         }
 
-        [RegexStepDefinition(@"In the product lookup page, I click the x icon in the More Filters popup")]
+        [StepDefinition(@"In the product lookup page, I click the x icon in the More Filters popup")]
         public void GivenInTheProductLookupPageIClickTheXIconInTheMoreFiltersPopup()
         {
             Report.IsTrue(new MoreFiltersPopup().InTheProductLookupPageIClickTheXIconInTheMoreFiltersPopup(), $"Failed to click the x icon in the More Filters popup", $"Successfully clicked the x icon in the More Filters popup");
         }
 
-        [RegexStepDefinition(@"In the product lookup page, I confirm the More Filters popup (is|is not) displayed")]
+        [StepDefinition(@"In the product lookup page, I confirm the More Filters popup (is|is not) displayed")]
         public void GivenInTheProductLookupPageIConfirmTheMoreFiltersPopupIsNotDisplayed(string isOrisNot)
         {
             if (isOrisNot == "is")
@@ -168,37 +174,37 @@ namespace UL.Selenium.Portal.RPS.Steps
             }
         }
 
-        [RegexStepDefinition(@"In the product lookup page, I confirm I see a dropdown field selector")]
+        [StepDefinition(@"In the product lookup page, I confirm I see a dropdown field selector")]
         public void GivenInTheProductLookupPageIConfirmISeeADropdownFieldSelector()
         {
             Report.IsTrue(new MoreFiltersPopup().InTheProductLookupPageIConfirmISeeADropdownFieldSelector(), $"Failed to confirm the dropdown selector is displayed", $"Successfully confirmed the dropdown selector is displayed");
         }
 
-        [RegexStepDefinition(@"In the product lookup page, I confirm I see the footer area")]
+        [StepDefinition(@"In the product lookup page, I confirm I see the footer area")]
         public void GivenInTheProductLookupPageIConfirmISeeTheFooterArea()
         {
             Report.IsTrue(new MoreFiltersPopup().InTheProductLookupPageIConfirmISeeTheFooterArea(), $"Failed to confirm the footer area is displayed in the More Filters popu", $"Successfully confirmed the footer area is displayed in the More Filters popup");
         }
 
-        [RegexStepDefinition(@"In the product lookup page, I confirm I see the following buttons in the footer:")]
+        [StepDefinition(@"In the product lookup page, I confirm I see the following buttons in the footer:")]
         public void GivenInTheProductLookupPageIConfirmISeeTheFollowingButtonsInTheFooter(Table table)
         {
             Report.IsTrue(new MoreFiltersPopup().InTheProductLookupPageIConfirmISeeTheFollowingButtonsInTheFooter(table), $"Failed to find all buttons in the More Filters popup", $"Successfully confirmed the all buttons were found in the More Filters popup");
         }
 
-        [RegexStepDefinition(@"In the product lookup page More Filters Popup, I Click the Close button")]
+        [StepDefinition(@"In the product lookup page More Filters Popup, I Click the Close button")]
         public void GivenInTheProductLookupPageMoreFiltersPopupIClickTheCloseButton()
         {
             Report.IsTrue(new MoreFiltersPopup().InTheProductLookupPageMoreFiltersPopupIClickTheCloseButton(), $"Failed to the clicked button in the More Filters popup", $"Successfully clicked the close button in the More Filters popup");
         }
 
-        [RegexStepDefinition(@"In the More Filters popup I click Reset filters")]
+        [StepDefinition(@"In the More Filters popup I click Reset filters")]
         public void GivenInTheMoreFiltersPopupIClickResetFilters()
         {
             Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupIClickResetFilters(), $"Failed to click the Reset Filters button", $"Successfully clicked the Reset Filters button");
         }
 
-        [RegexStepDefinition(@"In the More Filters popup I (see|do not see) the Selected Filters area")]
+        [StepDefinition(@"In the More Filters popup I (see|do not see) the Selected Filters area")]
         public void GivenInTheMoreFiltersPopupIDoNotSeeTheSelectedFiltersArea(string seeOrDoNotSee)
         {
             if (seeOrDoNotSee == "see")
@@ -212,41 +218,41 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"In the More Filters Filter in the Filter By field I see the following text: (.*)")]
+        [StepDefinition(@"In the More Filters Filter in the Filter By field I see the following text: (.*)")]
         public void GivenInTheMoreFiltersFilterInTheFilterByFieldISeeTheFollowingText(string text)
         {
             Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersFilterInTheFilterByFieldISeeTheFollowingText(text), $"Failed to find text in Filter By field", $"Successfully found text in Filter By field");
         }
 
-        [RegexStepDefinition(@"In the More Filters Filter underneath the Filter By field I see the following text: (.*)")]
+        [StepDefinition(@"In the More Filters Filter underneath the Filter By field I see the following text: (.*)")]
         public void GivenInTheMoreFiltersFilterUnderneathTheFilterByFieldISeeTheFollowingText(string text)
         {
             Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersFilterUnderneathTheFilterByFieldISeeTheFollowingText(text) == false, $"Failed to find text underneath Filter By field", $"Successfully found text undernearth Filter By field");
         }
  
 
-        [RegexStepDefinition(@"In the Product Lookup page I confirm to the right of the buttons I do not see three trends")]
+        [StepDefinition(@"In the Product Lookup page I confirm to the right of the buttons I do not see three trends")]
 
         public void GivenInThProductLookupPageIConfirmToTheRightOfTheButtonsIDoNotSeeThreeTrends(Table table)
         {
             Report.IsTrue(new NavBar().InProductLookupIConfirmTheFollowingTrendsAreNotDisplayed(table), "Failed to find all three trends", "Successfully found all three trends");
         }
     
-        [RegexStepDefinition(@"In the More Filters pop up, I click  General Filters from the Filter Categories column")]
+        [StepDefinition(@"In the More Filters pop up, I click  General Filters from the Filter Categories column")]
         public void InTheTheMoreFiltersOptionClickGeneralFilters()
         {
             Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupIClickGeneralFilters(), "Failed to click General Filters", "Successfully clicked General Filters");
         }
 
 
-        [RegexStepDefinition(@"In the More Filters pop up, I click Supplier Name from the Filters column")]
+        [StepDefinition(@"In the More Filters pop up, I click Supplier Name from the Filters column")]
         public void InTheTheMoreFiltersOptionClickSupplierName()
         {
             Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupIClickSupplierName(), "Failed to click Supplier Name", "Successfully clicked Supplier name");
 
         }
 
-        [RegexStepDefinition(@"In the Filter parameters list I select an entry for the Supplier Name Parmeter list: (.*)")]
+        [StepDefinition(@"In the Filter parameters list I select an entry for the Supplier Name Parmeter list: (.*)")]
         public void InTheTheMoreFiltersOptionSelectEntryForSupplierName(string supplierName)
         {
             GeneralUtilities.WaitForLoadingToFinish();
@@ -254,7 +260,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"In the More Filters pop up, In the Selected Filters area I click Clear All to remove all filters")]
+        [StepDefinition(@"In the More Filters pop up, In the Selected Filters area I click Clear All to remove all filters")]
         public void InTheSelectedFiltersClickClearAll()
         {
             Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupInTheSelectedFiltersIClickClearAll(), "Failed to click Clear All in the Selected Filters", "Successfully clicked Clear All in the Selected Filters");
@@ -262,7 +268,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [RegexStepDefinition(@"In the More Filters pop up, I confirm in the Selected Filters area, that breadcrumb shows with the selected value: (.*)")]
+        [StepDefinition(@"In the More Filters pop up, I confirm in the Selected Filters area, that breadcrumb shows with the selected value: (.*)")]
         public void InTheMoreFiltersPopupSelectedFiltersAreaIVerifyBreadcrumbIsDisplayedWithSelectedValues(string searchedText)
         {
             if (searchedText.Contains("savedAs"))
@@ -273,7 +279,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"In the More Filters pop up, I enter value in search box in the Filter Categories column: (.*)")]
+        [StepDefinition(@"In the More Filters pop up, I enter value in search box in the Filter Categories column: (.*)")]
         public void InTheMoreFiltersIEnterValueInSearchBoxOfFilterCategory(string value)
         {
             Report.Info("Attempting to Enter value in search box in the Filter Categories column");
@@ -282,21 +288,21 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"In the More Filters pop up, I confirm searched filter is displayed in Filters Panel : (.*)")]
+        [StepDefinition(@"In the More Filters pop up, I confirm searched filter is displayed in Filters Panel : (.*)")]
         public void InTheMoreFiltersPopupIConfirmFilterIsDisplayedInFilterPanel(string searchedText)
         {
             Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupIConfirmFilterIsDisplayedInFilterPanel(searchedText), "Failed to display searched value in Filters Panel", "Successfully displayed searched value in Filters Panel");
 
         }
 
-        [RegexStepDefinition(@"In the More Filters pop up, I select Has any value paramater value")]
+        [StepDefinition(@"In the More Filters pop up, I select Has any value paramater value")]
         public void InTheRecentActivitiesPageMoreFiltersPopUpISelectHasAnyValueParameter()
         {
             Report.IsTrue(new  MoreFiltersPopup().InTheMoreFiltersPopUpHasAnyValueParameterIsSelected(), "Failed to click Has Any value checkbox in the More Filters Pop Up", "Successfully clicked Has Any value checkbox in the More Filters");
         }
 
 
-        [RegexStepDefinition(@"In the More Filters pop up, I click on searched filter in Filters Panel : (.*)")]
+        [StepDefinition(@"In the More Filters pop up, I click on searched filter in Filters Panel : (.*)")]
         public void InTheMoreFiltersPopupIClickFilterFromFilterPanel(string filter)
         {
             Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupIClickFilterFromFilterPanel(filter), "Failed to click on searched value in Filters Panel", "Successfully click on searched value in Filters Panel");
@@ -304,16 +310,16 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [RegexStepDefinition(@"In the More Filters pop up, I confirm the Filter Parameter panel shows the search field for UPCs")]
+        [StepDefinition(@"In the More Filters pop up, I confirm the Filter Parameter panel shows the search field for UPCs")]
         public void InTheMoreFiltersPopupInFilterParameterPanelIVerifyUPCSearchFieldIsDisplayed()
         {
             Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIVerifyUPCSearchFieldIsDisplayed(), "Failed to display UPC Search Field", "Successfully displayed UPC Search Field");
 
         }
 
-        [RegexStepDefinition(@"In the More Filters pop up, I now type a string of numbers in UPC Number search field: (.*)")]
-        [RegexStepDefinition(@"In the More Filters pop up, I now type a string  in Supplier Name search field: (.*)")]
-        [RegexStepDefinition(@"In the More Filters pop up, I now type a string  in DPCI search field: (.*)")]
+        [StepDefinition(@"In the More Filters pop up, I now type a string of numbers in UPC Number search field: (.*)")]
+        [StepDefinition(@"In the More Filters pop up, I now type a string  in Supplier Name search field: (.*)")]
+        [StepDefinition(@"In the More Filters pop up, I now type a string  in DPCI search field: (.*)")]
         public void InTheMoreFiltersPopupInFilterParameterPanelIEnterUPCValue(string value)
         {
             Report.Info("Attempting to Enter value in UPC Number search box");
@@ -322,7 +328,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [RegexStepDefinition(@"I confirm I see the No results found message below the drop down and Search field")]
+        [StepDefinition(@"I confirm I see the No results found message below the drop down and Search field")]
         public void InTheMoreFiltersPopupInFilterParameterPanelIConfirmListForSearchedUPCNumberIsDisplayed()
         {
             GeneralUtilities.WaitForLoadingToFinish();
@@ -330,7 +336,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"In the More Filters pop up, UPCs I selected earlier are shown at the top of the Search results area with a minus icon in a circle next to each selected UPCs")]
+        [StepDefinition(@"In the More Filters pop up, UPCs I selected earlier are shown at the top of the Search results area with a minus icon in a circle next to each selected UPCs")]
         public void InTheMoreFiltersPopupIConfirmUPCsSelectedIsShownWithMinusIcon()
         {
             GeneralUtilities.WaitForLoadingToFinish();
@@ -338,8 +344,8 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"In the More Filters pop up, I confirm the Filters Parameter panel populates with a list of Supplier Names")]
-        [RegexStepDefinition(@"In the More Filters pop up, I confirm the Filters Parameter panel populates with a list of DPCI values")]
+        [StepDefinition(@"In the More Filters pop up, I confirm the Filters Parameter panel populates with a list of Supplier Names")]
+        [StepDefinition(@"In the More Filters pop up, I confirm the Filters Parameter panel populates with a list of DPCI values")]
 
         public void InTheTheMoreFiltersIConfirmListOfSupplierNameIsDisplayed()
         {
@@ -348,28 +354,28 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"In the More Filters pop up, I confirm I see Search under the filter parameter heading")]
+        [StepDefinition(@"In the More Filters pop up, I confirm I see Search under the filter parameter heading")]
         public void InTheTheMoreFiltersIConfirmSearchIsDisplayed()
         {
             Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupIConfirmBoldtextIsDisplayedInFilterPanel("Search"), "Failed to display Search under the filter parameter heading", "Successfully displayed Search under the filter parameter heading");
 
         }
 
-        [RegexStepDefinition(@"In the More Filters pop up, I confirm the left side of the search box, there is a dropdown box")]
+        [StepDefinition(@"In the More Filters pop up, I confirm the left side of the search box, there is a dropdown box")]
         public void InTheTheMoreFiltersIConfirmdropdownSelectorIsDisplayed()
         {
             Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIVerifyUPCdropdownSelectorIsDisplayed( ), "Failed to display Selector dropdown box", "Successfully displayed Selector dropdown box");
 
         }
 
-        [RegexStepDefinition(@"In the More Filters pop up, I confirm default value of the dropdown box is Contains")]
+        [StepDefinition(@"In the More Filters pop up, I confirm default value of the dropdown box is Contains")]
         public void InTheTheMoreFiltersIConfirmContainsIsDefaultInSelectordropdown()
         {
             Report.IsTrue(new MoreFiltersPopup().IConfirmISeeContainsAsDefaultInSelectorDropdown(), "Failed to display Contains as Default In Selector dropdown", "Successfully displayed Contains as Default In Selector dropdown");
 
         }
 
-        [RegexStepDefinition(@"In the More Filters pop up, I confirm in the Filter Parameter Panel Selector three options are : Contains, Start With and Is are displayed")]
+        [StepDefinition(@"In the More Filters pop up, I confirm in the Filter Parameter Panel Selector three options are : Contains, Start With and Is are displayed")]
         public void InTheTheMoreFiltersIConfirmISeeAListOfAvailableOptionsInFilterParameterPanelSelectorIsDisplayed()
         {
             List<string> options = new List<string> { "Contains", "Starts with", "Is" };
@@ -378,7 +384,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [RegexStepDefinition(@"In the More Filters pop up, I confirm the list of items shown is narrowed based on the characters I enter: (.*)")]
+        [StepDefinition(@"In the More Filters pop up, I confirm the list of items shown is narrowed based on the characters I enter: (.*)")]
         public void InTheTheMoreFiltersInFilterParameterPanelIConfirmListStartsWithForSearchedSupplierNameIsDisplayed(string supplierName)
         {
             GeneralUtilities.WaitForLoadingToFinish();
@@ -386,7 +392,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"In the More Filters pop up, I confirm a blue box with text No results found  is shown under search box")]
+        [StepDefinition(@"In the More Filters pop up, I confirm a blue box with text No results found  is shown under search box")]
         public void InTheTheMoreFiltersInFilterParameterPanelIConfirmNoResultsFoundMessageIsDisplayed()
         {
             GeneralUtilities.WaitForLoadingToFinish();
@@ -395,8 +401,8 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [RegexStepDefinition(@"In the More Filters pop up, In the Filter parameters list I select the searched entry for the Supplier Name Parmeter list")]
-        [RegexStepDefinition(@"In the More Filters pop up, In the Filter parameters list I select the searched entry for the DPCI Parmeter list")]
+        [StepDefinition(@"In the More Filters pop up, In the Filter parameters list I select the searched entry for the Supplier Name Parmeter list")]
+        [StepDefinition(@"In the More Filters pop up, In the Filter parameters list I select the searched entry for the DPCI Parmeter list")]
         public void InTheMoreFiltersPopupISelectRandomEntryFromListOfSupplierName()
         {
             GeneralUtilities.WaitForLoadingToFinish();
@@ -404,7 +410,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"In the More Filters pop up, I type the parameter value: (.*)")]
+        [StepDefinition(@"In the More Filters pop up, I type the parameter value: (.*)")]
         public void InTheRecentActivitiesPageITypeParameterValue(string value)
         {
             new MoreFiltersPopup().EnterValueIntoParameterField(value);
@@ -412,7 +418,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"In the More Filters pop up, I select the option from the Parameters drop down list: (.*)")]
+        [StepDefinition(@"In the More Filters pop up, I select the option from the Parameters drop down list: (.*)")]
         public void InTheTheMoreFiltersInTheFilterParameterPanelSelectOptionInDropdown(string option)
         {
             GeneralUtilities.WaitForLoadingToFinish();
@@ -421,7 +427,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [RegexStepDefinition(@"In the More Filters pop up, In the search field in the Filter Parameters panel, In the search box, I enter full Supplier Name: (.*)")]
+        [StepDefinition(@"In the More Filters pop up, In the search field in the Filter Parameters panel, In the search box, I enter full Supplier Name: (.*)")]
         public void InTheTheMoreFiltersInFilterParameterPanelIEnterFullSupplierName(string savedAs)
         {
             GeneralUtilities.WaitForLoadingToFinish();
@@ -434,8 +440,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             new MoreFiltersPopup().InFilterParameterPanelIEnterUPCValue(supplierName);
         }
 
-        [RegexStepDefinition(@"I confirm I see the Supplier Name I was searching for: (.*)")]
-        [RegexStepDefinition(@"I confirm I see the DPCI I was searching for: (.*)")]
+        [StepDefinition(@"I confirm I see the Supplier Name I was searching for: (.*)")]
         public void InTheTheMoreFiltersInFilterParameterPanelIConfirmListMachtesExactlyForSearchedSupplierNameIsDisplayed(string supplierName)
         {
             if (supplierName.Contains("savedAs"))
@@ -447,8 +452,8 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"In the More Filters pop up, I confirm the Filter Parameter panel shows the WPS Id list")]
-        [RegexStepDefinition(@"In the More Filters pop up, I confirm the Filter Parameter panel shows the DPCI list")]
+        [StepDefinition(@"In the More Filters pop up, I confirm the Filter Parameter panel shows the WPS Id list")]
+        [StepDefinition(@"In the More Filters pop up, I confirm the Filter Parameter panel shows the DPCI list")]
         public void InTheMoreFiltersPopupIConfirmFilterParameterPanelDPCIListIsDisplayed()
         {
             GeneralUtilities.WaitForLoadingToFinish();
@@ -456,7 +461,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"In the More Filters pop up, In Filter Parameter panel I confirm the Search field shows the default text: Search")]
+        [StepDefinition(@"In the More Filters pop up, In Filter Parameter panel I confirm the Search field shows the default text: Search")]
         public void InFilterParameterPanelIVerifyDPCIdropdownPlaceholderIsDisplayed()
         {
             GeneralUtilities.WaitForLoadingToFinish();
@@ -464,7 +469,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"In the More Filters pop up, In Filter Parameter panel I confirm each item for selection shows a check box before the DPCI value")]
+        [StepDefinition(@"In the More Filters pop up, In Filter Parameter panel I confirm each item for selection shows a check box before the DPCI value")]
         public void InFilterParameterPanelIConfirmCheckBoxBeforeValueForListIsDisplayed()
         {
             GeneralUtilities.WaitForLoadingToFinish();
@@ -472,7 +477,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"In the More Filters pop up, In Filter Parameter panel I clear the DPCI value in search box")]
+        [StepDefinition(@"In the More Filters pop up, In Filter Parameter panel I clear the DPCI value in search box")]
         public void  InFilterParameterPanelIClearValue()
         {
             GeneralUtilities.WaitForLoadingToFinish();
@@ -481,7 +486,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [RegexStepDefinition(@"In the More Filters pop up, In the search field in the Filter Parameters panel, In the search box, I enter full WPS ID: (.*)")]
+        [StepDefinition(@"In the More Filters pop up, In the search field in the Filter Parameters panel, In the search box, I enter full WPS ID: (.*)")]
         public void InTheTheMoreFiltersInFilterParameterPanelIEnterFullWPSID(string savedAs)
         {
  
@@ -494,7 +499,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             new MoreFiltersPopup().InFilterParameterPanelIEnterUPCValue(wpsid);
         }
 
-        [RegexStepDefinition(@"In the More Filters pop up, below the pop up heading I confirm I see 3 panels: Filter Categories, Filters, Filter Parameters")]
+        [StepDefinition(@"In the More Filters pop up, below the pop up heading I confirm I see 3 panels: Filter Categories, Filters, Filter Parameters")]
         public void InTheMoreFiltersPopUpIVerify3Panels()
         {
             List<string> displayedPanels = new MoreFiltersPopup().IConfirm3PanelsIsDisplayedInMoreFiltersPopup();
@@ -504,7 +509,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"In theMore Filters pop up, I select Status: Completed")]
+        [StepDefinition(@"In theMore Filters pop up, I select Status: Completed")]
         public void IConfirmThatISelectStatusCompletedInMoreFiltersPopUp()
         {
             new MoreFiltersPopup().InTheMoreFiltersPopUpSearchForFilter("Status");
@@ -513,7 +518,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"In the More Filters pop up, I select Status: (.*)")]
+        [StepDefinition(@"In the More Filters pop up, I select Status: (.*)")]
         public void IConfirmThatISelectStatusFilterOptionInMoreFiltersPopUp(string filter)
         {
             new MoreFiltersPopup().InTheMoreFiltersPopUpSearchForFilter("Status");
@@ -522,7 +527,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"In the recent activities page, I select the option: (.*) from the status drop down menu")]
+        [StepDefinition(@"In the recent activities page, I select the option: (.*) from the status drop down menu")]
         public void InTheRecentActivitiesPageISelectStatusOption(string option)
         {
             if (option.Contains("SavedProduct"))
@@ -533,7 +538,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Delay.Seconds(10);
         }
 
-        [RegexStepDefinition(@"In the recent activities page, I select the option: (.*) from the parameters drop down menu")]
+        [StepDefinition(@"In the recent activities page, I select the option: (.*) from the parameters drop down menu")]
         public void InTheRecentActivitiesPageISelectParameterOption(string option)
         {
             if (option.Contains("SavedProduct"))
@@ -543,7 +548,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(new MoreFiltersPopup().SelectParameterOption(option), "The option was not selected", "The option was selected successfully");
         }
 
-        [RegexStepDefinition(@"I confirm, under the search box, has value checkbox is displayed: (.*)")]
+        [StepDefinition(@"I confirm, under the search box, has value checkbox is displayed: (.*)")]
         public void IConfirmThatInTheMoreFiltersPopupHasValueCheckboxIsDisplayed(string value)
         {
  
@@ -551,7 +556,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"In the More Filters pop up, I Click has value checkbox: (.*)")]
+        [StepDefinition(@"In the More Filters pop up, I Click has value checkbox: (.*)")]
         public void IConfirmThatInTheMoreFiltersPopupClickHasValueCheckbox(string value)
         {
 
@@ -559,7 +564,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"In the More Filters pop up, I (check|uncheck) the checkbox with value: (.*)")]
+        [StepDefinition(@"In the More Filters pop up, I (check|uncheck) the checkbox with value: (.*)")]
         public void ICheckTheCheckboxWithDescription(string check, string value)
         {
  
@@ -590,7 +595,7 @@ namespace UL.Selenium.Portal.RPS.Steps
                 $"The checkbox is {check}ed as expected");
         }
 
-        [RegexStepDefinition(@"In the More Filters pop up, I confirm Search Control Panel is greyed out and disabled")]
+        [StepDefinition(@"In the More Filters pop up, I confirm Search Control Panel is greyed out and disabled")]
         public void IConfirmThatInTheMoreFiltersPopupSearchBoxDisabled( )
         {
 
@@ -598,83 +603,11 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"In the More Filters pop up, I select item shown below the drop down and Search field")]
-        public void ISelectItemInDropDownInTheMoreFilters()
-        {
-
-            Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupISelectRandomEntryFromListOfUPCs(), "Failed to select upc from the list ", "Successfully selected upc from the list");
-            GeneralUtilities.WaitForLoadingToFinish();
-        }
-
-        [RegexStepDefinition(@"In the More Filters pop up, I click on Search UPCs box")]
-        public void InTheMoreFiltersIClickSearchUPCs()
-        {
-
-            Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIClickUPCdropdown(), "Failed to click on Search UPCs box", "Successfully clicked on Search UPCs box");
-            GeneralUtilities.WaitForLoadingToFinish();
-        }
-
-        [RegexStepDefinition(@"In the More Filters pop up, I select one or more of the items shown below the drop down and Search field")]
-        public void InTheMoreFiltersISelectItem()
-        {
-            Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupISelectRandomEntryFromListOfItemsInFilterPanel(), "Failed to select  value from the list ", "Successfully selected value from the list");
-            GeneralUtilities.WaitForLoadingToFinish();
-        }
-
-        [RegexStepDefinition(@"Under Filter Parameters text, I verify there are two search boxes separated by text to")]
-        public void InTheMoreFiltersUnderFilterParameterVerifySearchBoxes()
-        {
-            Report.IsTrue(new MoreFiltersPopup().UnderFilterParamterVeifyTheTwoTextBoxes(), "Failed to display the 2 search sboxes under filter panels", "Successfully displayed the 2 search boxes under filter panels");
-            GeneralUtilities.WaitForLoadingToFinish();
-        }
-
-        [RegexStepDefinition(@"Under the search boxes, there are two check boxes: Has Any Value and Has No Value")]
-        public void InTheMoreFiltersUnderFilterParameterVerifyHasAnyValueAndHasNoValueIsDisplayed()
-        {
-            List<string> checkboxoptions = new List<string> { "Has Any Value", "Has No Value" }; 
-            Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIConfirmListOfCheckboxesAreDisplayed(checkboxoptions), "Failed to display two checkbox field: Has Any Value and Has No Value", "Successfully displayed two checkbox field: Has Any Value and Has No Value");
-
-        }
-
-        [RegexStepDefinition(@"Search field on left contains text 'Lower Bound' and search field on right contains text 'Upper Bound'")]
-        public void InTheMoreFiltersUnderFilterParameterVerifyPlaceHolderValues()
-        {
-            Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIVerifyLowerBoundPlaceholderIsDisplayed("Lower Bound"), "Failed to display the placeholder lower bound", "Successfully displayed the placeholder lower bound");
-            Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIVerifyUpperBoundPlaceholderIsDisplayed("Upper Bound"), "Failed to display the placeholder upper bound", "Successfully displayed the placeholder upper bound");
-        }
-
-        [RegexStepDefinition(@"In the More Filters pop up, I now type a string in (.*) bound field: (.*)")]
-        public void InTheMoreFiltersPopupInFilterParameterPanelIboundValue(string boundvalue, string searchText)
-        {
-            Report.Info($"Attempting to Enter value in {boundvalue} bound search box");
-            new MoreFiltersPopup().InFilterParameterPanelIEnterBound( boundvalue, searchText);
-             
-        }
-
-        [RegexStepDefinition(@"In the More Filters pop up, I confirm New Range text now switches to (.*) text with -sign in a circle in front of it")]
-        public void InTheMoreFiltersPopupVerifyNewRangeText(string value)
-        {
-            Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIVerifyNewRangeText(value), "Failed to display the range value as expected", "Successfully displayed the range value expected");
-            Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIVerifyMinusSignIsDisplayed(), "Failed to display -sign", "Successfully displayed -sign");
-
-        }
-
-        [RegexStepDefinition(@"I confirm below the Selected Ranges text, I see a + sign in a circle with Add a Range text right next to it")]
-        public void InTheMoreFiltersPopupVerifyAddRange(string value)
-        {
-            Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIVerifyNewRangeText("< 5"), "Failed to display the range value as expected", "Successfully displayed the range value expected");
-            Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIVerifyMinusSignIsDisplayed(), "Failed to display -sign", "Successfully displayed -sign");
-
-        }
-
-
-
-
 
 
         #region Shared Steps
 
-        [RegexStepDefinition(@"I call Shared Step 235551 \(More Filters - Apply Is UPC archived = true\)")]
+        [StepDefinition(@"I call Shared Step 235551 \(More Filters - Apply Is UPC archived = true\)")]
         public void SharedStep235551()
         {
             ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -694,7 +627,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             InTheProductLookUpPageMoreFiltersPopupClickApplyFilterButton();
         }
 
-        [RegexStepDefinition(@"I call Shared Step 235552 \(RPS & WV - More Filters - Apply Status = Pending\)")]
+        [StepDefinition(@"I call Shared Step 235552 \(RPS & WV - More Filters - Apply Status = Pending\)")]
         public void SharedStep235552()
         {
             ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -714,7 +647,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [RegexStepDefinition(@"I call Shared Step 153388 \(RPS & WV > More Filters > Facet Counts\)")]
+        [StepDefinition(@"I call Shared Step 153388 \(RPS & WV > More Filters > Facet Counts\)")]
         public void SharedStep153388()
         {
             ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -758,7 +691,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I call Shared Step 153323 \(RPS & WV > More Filters > Supplier Name > exact match\) for Supplier Name: (.*)")]
+        [StepDefinition(@"I call Shared Step 153323 \(RPS & WV > More Filters > Supplier Name > exact match\) for Supplier Name: (.*)")]
         public void SharedStep153323(string savedAs)
         {
             ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -790,7 +723,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I call Shared Step 153324 \(RPS & WV > More Filters > Supplier Name > Partial search\) for Supplier Name: (.*)")]
+        [StepDefinition(@"I call Shared Step 153324 \(RPS & WV > More Filters > Supplier Name > Partial search\) for Supplier Name: (.*)")]
         public void SharedStep153324(string savedAs)
         {
             ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -824,7 +757,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I call Shared Step 205641 \(More Filters > UPC Number > Format checks\)")]
+        [StepDefinition(@"I call Shared Step 205641 \(More Filters > UPC Number > Format checks\)")]
         public void SharedStep205641()
         {
             ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -843,7 +776,10 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIVerifyUPCSearchFieldIsDisplayed(), "Failed to display UPC Search Field", "Successfully displayed UPC Search Field");
             Report.StartSubStep("In the More Filters pop up, I confirm the Filter Parameter panel shows the dropdown Selector for UPCs");
             Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIVerifyUPCdropdownSelectorIsDisplayed(), "Failed to display UPC dropdown Selector", "Successfully displayed UPC dropdown Selector");
-             Report.StartSubStep("I confirm the Search field shows the default text: Search UPCs");
+            List<string> options = new List<string> { "Contains", "Starts with", "Is" };
+            Report.StartSubStep("I confirm the drop down selector shows three options: Contains, Starts with,Is");
+            Report.IsTrue(new MoreFiltersPopup().IConfirmISeeAListOfAvailableOptionsInFilterParameterPanelUPCdropdownSelectorIsDisplayed(options), "Failed to display UPC dropdown Selector options", "Successfully displayed UPC dropdown Selector options");
+            Report.StartSubStep("I confirm the Search field shows the default text: Search UPCs");
             Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIVerifyUPCdropdownPlaceholderIsDisplayed("Search UPCs"), "Failed to display Search field default text: Search UPCs", "Successfully displayed Search field default text: Search UPCs");
             Report.StartSubStep("I click on Search UPCs box");
             Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIClickUPCdropdown(), "Failed to click on Search UPCs box", "Successfully clicked on Search UPCs box");
@@ -853,7 +789,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I call Shared Step 205643 \(More Filters > UPC Number > Select filter values and apply\)")]
+        [StepDefinition(@"I call Shared Step 205643 \(More Filters > UPC Number > Select filter values and apply\)")]
         public void SharedStep205643()
         {
             ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -868,7 +804,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I call Shared Step 205642 \(More Filters > UPC Number > Contains check\)")]
+        [StepDefinition(@"I call Shared Step 205642 \(More Filters > UPC Number > Contains check\)")]
         public void SharedStep205642()
         {
             ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -897,7 +833,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [RegexStepDefinition(@"I call Shared Step 205648 \(More Filters > UPC Number > Starts with check\)")]
+        [StepDefinition(@"I call Shared Step 205648 \(More Filters > UPC Number > Starts with check\)")]
         public void SharedStep205648()
         {
             ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -927,7 +863,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I call Shared Step 205650 \(More Filters > UPC Number - Is check\) for UPC Number: (.*)")]
+        [StepDefinition(@"I call Shared Step 205650 \(More Filters > UPC Number - Is check\) for UPC Number: (.*)")]
         public void SharedStep205650(string savedAs)
         {
             ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -961,7 +897,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [RegexStepDefinition(@"I call Shared Step 205105 \(More Filters > Checklist Field > Format checks\)")]
+        [StepDefinition(@"I call Shared Step 205105 \(More Filters > Checklist Field > Format checks\)")]
         public void SharedStep205105()
         {
             ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1002,7 +938,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [RegexStepDefinition(@"I call Shared Step 205106 \(More Filters > Checklist Field - Contains check\)")]
+        [StepDefinition(@"I call Shared Step 205106 \(More Filters > Checklist Field - Contains check\)")]
         public void SharedStep205106()
         {
             ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1027,7 +963,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I call Shared Step 205107 \(More Filters > Checklist Fields - Select filter values and Apply\)")]
+        [StepDefinition(@"I call Shared Step 205107 \(More Filters > Checklist Fields - Select filter values and Apply\)")]
         public void SharedStep205107()
         {
             ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1043,7 +979,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [RegexStepDefinition(@"I call Shared Step 205108 \(More Filters > Checklist Field > Starts with check\)")]
+        [StepDefinition(@"I call Shared Step 205108 \(More Filters > Checklist Field > Starts with check\)")]
         public void SharedStep205108()
         {
             ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1072,7 +1008,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [RegexStepDefinition(@"I call Shared Step 205111 \(More Filters > Checklist Field - Is check\) for Packaging Type: (.*)")]
+        [StepDefinition(@"I call Shared Step 205111 \(More Filters > Checklist Field - Is check\) for Packaging Type: (.*)")]
         public void SharedStep205111(string savedAs)
         {
             ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1101,7 +1037,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIConfirmListOfItemsForSelectionIsDisplayed(), "Failed to display list of items for selection under the search box", "Successfully displayed list of items for selection under the search box");
         }
 
-        [RegexStepDefinition(@"I call Shared Step 153317 \(RPS & WV > More Filters pop up - Display & Close\)")]
+        [StepDefinition(@"I call Shared Step 153317 \(RPS & WV > More Filters pop up - Display & Close\)")]
         public void SharedStep153317()
         {
             ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1136,7 +1072,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I call Shared Step 163728 \(More Filters - Select Status - Apply - Confirm Actions column does show View Data\) on page: (Recent Activities|Product Lookup) for status: (.*)")]
+        [StepDefinition(@"I call Shared Step 163728 \(More Filters - Select Status - Apply - Confirm Actions column does show View Data\) on page: (Recent Activities|Product Lookup) for status: (.*)")]
         public void ThenICallSharedStepMoreFilters_SelectStatus_Apply_ConfirmActionsColumnDoesShowViewDataForStatusXxx(string page, string status)
         {
             Report.UseSubSteps = true;
@@ -1177,7 +1113,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             }
         }
 
-        [RegexStepDefinition(@"I call Shared Step 106901 \(More Filters - Select Status - Apply - Confirm Actions column does NOT show View Data\) for status: (.*)")]
+        [StepDefinition(@"I call Shared Step 106901 \(More Filters - Select Status - Apply - Confirm Actions column does NOT show View Data\) for status: (.*)")]
         public void SharedStep106901a(string status)
         {
 
@@ -1199,7 +1135,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I call Shared Step 106901b \(More Filters - Select Status - Apply - Confirm Actions column does NOT show View Data\) for status: (.*)")]
+        [StepDefinition(@"I call Shared Step 106901b \(More Filters - Select Status - Apply - Confirm Actions column does NOT show View Data\) for status: (.*)")]
         public void SharedStep106901b(string status)
         {
 
@@ -1222,7 +1158,7 @@ namespace UL.Selenium.Portal.RPS.Steps
  
         }
 
-        [RegexStepDefinition(@"I call Shared Step 146428 \(RPS & WV > More Filters > Select Multiple \(for Status viewer & Recent Activities\)")]
+        [StepDefinition(@"I call Shared Step 146428 \(RPS & WV > More Filters > Select Multiple \(for Status viewer & Recent Activities\)")]
         public void ThenICallSharedStepRPSWVMoreFiltersSelectMultipleForStatusViewerRecentActivities()
         {
             new Steps_RecentActivities().InTheRecentActivitiesPageIClickTheMoreFiltersOption();
@@ -1237,7 +1173,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             new Steps_RecentActivities().InTheRecentActivitiesPageIClickTheMoreFiltersOption();
         }
 
-        [RegexStepDefinition(@"I call Shared Step 153326 \(RPS & WV > More Filters > Select Multiple \(RUCC and RU\)\)")]
+        [StepDefinition(@"I call Shared Step 153326 \(RPS & WV > More Filters > Select Multiple \(RUCC and RU\)\)")]
         public void GivenICallSharedStepRPSWVMoreFiltersSelectMultipleRUCCAndRU()
         {
             Report.UseSubSteps = true;
@@ -1276,7 +1212,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I call Shared Step 146595 \(RPS & WV > More Filters > Status - select multiple\)")]
+        [StepDefinition(@"I call Shared Step 146595 \(RPS & WV > More Filters > Status - select multiple\)")]
         public void GivenICallSharedStepRPSWVMoreFiltersStatus_SelectMultiple()
         {
             new Steps_RecentActivities().InTheRecentActivitiesPageIClickTheMoreFiltersOption();
@@ -1293,7 +1229,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             new Steps_RecentActivities().IConfirmThatTheProductLookupPageBreadCrumbAreaContainsLabel("Recommended Use: Shampoo (Liquid)");
         }
 
-        [RegexStepDefinition(@"I call Shared Step 153337 \(RPS & WV > More Filters > Packaging type - select multiple\)")]
+        [StepDefinition(@"I call Shared Step 153337 \(RPS & WV > More Filters > Packaging type - select multiple\)")]
         public void GivenICallSharedStepRPSWVMoreFiltersPackagingType_SelectMultiple()
         {
             bool expected = true;
@@ -1304,7 +1240,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(GeneralUtilities.NetworkRequestAtTimeConfirmAttributeValue("POST", dtNow, "showAllStatuses", true_false), $"Failure, showAllStatus:{(expected ? "false" : "true")}.", $"Success, showAllStatuses:{true_false}.");
         }
 
-        [RegexStepDefinition(@"I call Shared Step 153320 \(RPS & WV > More Filters >  Clear All Removes all filters\)")]
+        [StepDefinition(@"I call Shared Step 153320 \(RPS & WV > More Filters >  Clear All Removes all filters\)")]
         public void GivenICallSharedStepRPSWVMoreFiltersRemoveAllFilters()
         {
             Report.UseSubSteps = true;
@@ -1339,7 +1275,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I call Shared Step 167119 \(RPS & WV > More Filters > Supplier Name, Packaging Type and Packaging Size > Apply filter\)")]
+        [StepDefinition(@"I call Shared Step 167119 \(RPS & WV > More Filters > Supplier Name, Packaging Type and Packaging Size > Apply filter\)")]
         public void GivenICallSharedStepRPSWVMoreFiltersSupplierNamePackagingTypeAndPackagingSizeApplyFilter()
         {
             ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1384,7 +1320,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [RegexStepDefinition(@"I call Shared Step 180343 \(RPS & WV > More Filters > Select Field from parameters\)")]
+        [StepDefinition(@"I call Shared Step 180343 \(RPS & WV > More Filters > Select Field from parameters\)")]
         public void GivenICallSharedStepRPSWVMoreFiltersSelectFieldFromParameters()
         {
             Report.UseSubSteps = true;
@@ -1404,7 +1340,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [RegexStepDefinition(@"I call Shared Step 153321 \(RPS & WV > More Filters > Select Supplier\): (.*)")]
+        [StepDefinition(@"I call Shared Step 153321 \(RPS & WV > More Filters > Select Supplier\): (.*)")]
         public void GivenICallSharedStepRPSWVMoreFiltersSelectSupplier(string supplierName)
         {
             Report.UseSubSteps = true;
@@ -1429,7 +1365,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 
 
-        [RegexStepDefinition(@"I call Shared Step 163792 \(More Filters - Select any Less than 100,000 > Apply Filter\)")]
+        [StepDefinition(@"I call Shared Step 163792 \(More Filters - Select any Less than 100,000 > Apply Filter\)")]
         public void ThenICallSharedStepMoreFilters_Select_ApplyFilter()
         {
             ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1452,7 +1388,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I call Shared Step 204769 \(More Filters > Select 19 parameters > confirm breadcrumbs tags\)")]
+        [StepDefinition(@"I call Shared Step 204769 \(More Filters > Select 19 parameters > confirm breadcrumbs tags\)")]
         public void SharedStep204769()
         {
             ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1478,7 +1414,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             new Steps_ProductLookUP().GivenIConfirmISeeTheBreadcrumbsAreaUnderTheSearchField("see");
         }
 
-        [RegexStepDefinition(@"I call Shared Step 163524 \(More Filters > limit filters selected checks\): (.*)")]
+        [StepDefinition(@"I call Shared Step 163524 \(More Filters > limit filters selected checks\): (.*)")]
         public void SharedStep163524(string value)
         {
             ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1496,7 +1432,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        [RegexStepDefinition(@"I call Shared Step 203036 \(RPS>More Filters>Verify Phrase Not Found is not shown\)")]
+        [StepDefinition(@"I call Shared Step 203036 \(RPS>More Filters>Verify Phrase Not Found is not shown\)")]
         public void SharedStep203036()
         {
             ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1527,7 +1463,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        [RegexStepDefinition(@"I call Shared Step 204659 \(RPS More Filters filter by Packaging Type")]
+        [StepDefinition(@"I call Shared Step 204659 \(RPS More Filters filter by Packaging Type")]
         public void SharedStep204659(string value)
         {
             ReportDetails.CurrentDetails.UseSubSteps = true;
@@ -1546,74 +1482,6 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.StartSubStep("I confirm below the All Parameters text, I see a list of items for selection");
             Report.IsTrue(new MoreFiltersPopup().InFilterParameterPanelIConfirmListOfItemsForSelectionIsDisplayed(), "Failed to display list of items for selection", "Successfully displayed list of items for selection");
  
-        }
-
-
-        [RegexStepDefinition(@"I call Shared Step 243836 \(RPS- More Filters- Select All- Contains\): (.*)")]
-        public void SharedStep243836(string value)
-        {
-            ReportDetails.CurrentDetails.UseSubSteps = true;
-
-            Report.StartSubStep("I confirm the very first displayed list is shown as: Select All: Contains \"xxxx\" (xx)");
-            Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupSelectAllFilterDisplayed("Contains",value), "Failed to display  Select All: Contains \"xxxx\" (xx)", "Successfully displayed  Select All: Contains \"xxxx\" (xx)");
-            Report.StartSubStep($"I verify \"xxxx\" matches the value I searched for");
-            Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupSelectAllValueMatchestheSearch(value), "Failed to match the value I searched for", "Successfully matched the value I searched for");
-            Report.StartSubStep("I verify \"xx\" is the count of list based the search text");
-            Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupSelectAllCountMatchestheListDisplayed(), "Failed to match the value count of list based the search text", "Successfully matched the value count of list based the search text");
-            Report.StartSubStep("Given, I click Select All checkbox");
-            Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupClickiSelectAllCheckBox(), "Failed to click Select All checkbox", "Successfully clicked Select All checkbox");
-            Report.StartSubStep("I confirm, Select All badge is shown under the Selected filters section");
-            InTheMoreFiltersPopupSelectedFiltersAreaIVerifyBreadcrumbIsDisplayedWithSelectedValues("Select All");
-            Report.StartSubStep("Given, I click Apply Filters button");
-            InTheProductLookUpPageMoreFiltersPopupClickApplyFilterButton();
-            Report.StartSubStep("I confirm pop is removed and page is refreshed");
-            InTheProductLookupPageIClickTheMoreFiltersPopupIsNotShowing();
-        }
-
-        [RegexStepDefinition(@"I call Shared Step 243837 \(RPS- More Filters- Select All- Is\): (.*)")]
-        public void SharedStep243837(string value)
-        {
-            ReportDetails.CurrentDetails.UseSubSteps = true;
-            if (value.Contains("savedAs"))
-            {
-                value = (string)Context.GetFromContext(value);
-            }
-
-            Report.StartSubStep("I confirm the very first displayed list is shown as: Select All: Is \"xxxx\" (xx)");
-            Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupSelectAllFilterDisplayed("Is", value), "Failed to display  Select All: Contains \"xxxx\" (xx)", "Successfully displayed  Select All: Contains \"xxxx\" (xx)");
-            Report.StartSubStep($"I verify \"xxxx\" matches the value I searched for");
-            Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupSelectAllValueMatchestheSearch(value), "Failed to match the value I searched for", "Successfully matched the value I searched for");
-            Report.StartSubStep("I verify \"xx\" is the count of list based the search text");
-            Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupSelectAllCountMatchestheListDisplayed(), "Failed to match the value count of list based the search text", "Successfully matched the value count of list based the search text");
-            Report.StartSubStep("Given, I click Select All checkbox");
-            Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupClickiSelectAllCheckBox(), "Failed to click Select All checkbox", "Successfully clicked Select All checkbox");
-            Report.StartSubStep("I confirm, Select All badge is shown under the Selected filters section");
-            InTheMoreFiltersPopupSelectedFiltersAreaIVerifyBreadcrumbIsDisplayedWithSelectedValues("Select All");
-            Report.StartSubStep("Given, I click Apply Filters button");
-            InTheProductLookUpPageMoreFiltersPopupClickApplyFilterButton();
-            Report.StartSubStep("I confirm pop is removed and page is refreshed");
-            InTheProductLookupPageIClickTheMoreFiltersPopupIsNotShowing();
-        }
-
-        [RegexStepDefinition(@"I call Shared Step 243838 \(RPS- More Filters- Select All- Starts with\): (.*)")]
-        public void SharedStep243838(string value)
-        {
-            ReportDetails.CurrentDetails.UseSubSteps = true;
-
-            Report.StartSubStep("I confirm the very first displayed list is shown as: Select All: Starts with \"xxxx\" (xx)");
-            Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupSelectAllFilterDisplayed("Starts with", value), "Failed to display  Select All: Contains \"xxxx\" (xx)", "Successfully displayed  Select All: Contains \"xxxx\" (xx)");
-            Report.StartSubStep($"I verify \"xxxx\" matches the value I searched for");
-            Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupSelectAllValueMatchestheSearch(value), "Failed to match the value I searched for", "Successfully matched the value I searched for");
-            Report.StartSubStep("I verify \"xx\" is the count of list based the search text");
-            Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupSelectAllCountMatchestheListDisplayed(), "Failed to match the value count of list based the search text", "Successfully matched the value count of list based the search text");
-            Report.StartSubStep("Given, I click Select All checkbox");
-            Report.IsTrue(new MoreFiltersPopup().InTheMoreFiltersPopupClickiSelectAllCheckBox(), "Failed to click Select All checkbox", "Successfully clicked Select All checkbox");
-            Report.StartSubStep("I confirm, Select All badge is shown under the Selected filters section");
-            InTheMoreFiltersPopupSelectedFiltersAreaIVerifyBreadcrumbIsDisplayedWithSelectedValues("Select All");
-            Report.StartSubStep("Given, I click Apply Filters button");
-            InTheProductLookUpPageMoreFiltersPopupClickApplyFilterButton();
-            Report.StartSubStep("I confirm pop is removed and page is refreshed");
-            InTheProductLookupPageIClickTheMoreFiltersPopupIsNotShowing();
         }
 
         #endregion

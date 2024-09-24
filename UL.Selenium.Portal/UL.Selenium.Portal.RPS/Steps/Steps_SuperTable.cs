@@ -1,10 +1,14 @@
 ﻿using System;
 using Reqnroll;
+using TReVor.Api.Wrapper.Classes;
+using UL.Automation.Reporting;
+using UL.Automation.Reporting.Classes;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Classes;
+using TReVor.Integrations.Classes;
 using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.RPS.Selenium_Classes;
-using UL.Automation.ReqnrollHelpers.Attributes;
+using TReVor.Core.Classes.Software;
 using UL.Automation.TReVor.Classes;
 
 namespace UL.Selenium.Portal.RPS.Steps
@@ -12,7 +16,7 @@ namespace UL.Selenium.Portal.RPS.Steps
     [Binding, Scope(Tag = "SuperTable")]
     class Steps_SuperTable
     {
-        [RegexStepDefinition(@"In the table, I confirm that row #([1-9][0-9]*) (does|does not) exists")]
+        [StepDefinition(@"In the table, I confirm that row #([1-9][0-9]*) (does|does not) exists")]
         public void InTableConfirmRowExists(string rowNumberString, string does_doesnot)
         {
             int rowNumber = int.Parse(rowNumberString);
@@ -21,7 +25,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(!(gridTable.GridTableRowExists(rowNumber) ^ expected), $"Failure, row #{rowNumber} {(expected ? "does not" : "does")} exist.", $"Success, row #{rowNumber} {does_doesnot} exist as expected.");
         }
 
-        [RegexStepDefinition(@"In the table, in row #(.*), I save the (Product Name|UPC|WPSID|Supplier Name) as: (.*)")]
+        [StepDefinition(@"In the table, in row #(.*), I save the (Product Name|UPC|WPSID|Supplier Name) as: (.*)")]
         public void InTableRowSaveValueAs(string rowNumberString, string valueLabel, string savedAs)
         {
             var gridTable = new GridTable();
@@ -55,14 +59,14 @@ namespace UL.Selenium.Portal.RPS.Steps
             Context.AddToContext(savedAs, value);
         }
 
-        [RegexStepDefinition(@"In the table footer, I save the total number of rows as: (.*)")]
+        [StepDefinition(@"In the table footer, I save the total number of rows as: (.*)")]
         public void InTableSaveTotalNumberOfRowsAs(string savedAs)
         {
             Report.Info($"Attempting to save the total number of rows as: '{savedAs}'.");
             Context.AddToContext(savedAs, new SuperTableFooter().RowIndexValueGet("total"));
         }
 
-        [RegexStepDefinition(@"In the table footer, I confirm the total number of rows (does|does not) match: ([1-9][0-9]*)")]
+        [StepDefinition(@"In the table footer, I confirm the total number of rows (does|does not) match: ([1-9][0-9]*)")]
         public void InTableConfirmTotalNumberOfRows(string does_doesnot, string expectedValueString)
         {
             Report.Info($"Attempting to confirm total number of rows {does_doesnot} match '{expectedValueString}'.");
@@ -70,7 +74,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(!((expectedValueString == new SuperTableFooter().RowIndexValueGet("total")) ^ expected), $"Failure, total number of rows should {(expected ? "match" : "not match")} {expectedValueString}.", $"Success, total number of rows {does_doesnot} match {expectedValueString} as expected.");
         }
 
-        [RegexStepDefinition(@"In the table footer, I confirm the total number of rows (does|does not) match value saved as: (.*)")]
+        [StepDefinition(@"In the table footer, I confirm the total number of rows (does|does not) match value saved as: (.*)")]
         public void InTableConfirmTotalNumberOfRowsSavedAs(string does_doesnot, string savedAs)
         {
             Report.Info($"Attempting to get '{savedAs}' from context.");
@@ -78,7 +82,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             InTableConfirmTotalNumberOfRows(does_doesnot, expectedValueString);
         }
 
-        [RegexStepDefinition(@"In the table footer, I confirm the rows per page selector (does|does not) exist")]
+        [StepDefinition(@"In the table footer, I confirm the rows per page selector (does|does not) exist")]
         public void InTableFooterConfirmRowsPerPageSelectorDoesDoesNotExist(string does_doesnot)
         {
             Report.Info($"Attempting to confirm rows per page selector {does_doesnot} exist.");
@@ -86,7 +90,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(!(new SuperTableFooter().RowsPerPageSelectorExists() ^ expected), $"Failure, rows per page selector {(expected ? "does not" : "does")} exist and {(expected?"should":"should not")}.", $"Success, rows per page selector {does_doesnot} exist, as expected.");
         }
 
-        [RegexStepDefinition(@"In the table footer, I confirm the page navigation controls (do|do not) exist")]
+        [StepDefinition(@"In the table footer, I confirm the page navigation controls (do|do not) exist")]
         public void InTableFooterConfirmPageNavigationCotrolsnDoDoNotExist(string do_donot)
         {
             Report.Info($"Attempting to confirm page navigation controls {do_donot} exist.");
@@ -101,7 +105,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(result, $"Failure, page navigation controls {(expected ? "do not" : "do")} exist and {(expected ? "should" : "should not")}.", $"Success, page navigation controls {do_donot} exist as expected.");
         }
 
-        [RegexStepDefinition(@"In the table footer, I confirm the row index (does|does not) exist")]
+        [StepDefinition(@"In the table footer, I confirm the row index (does|does not) exist")]
         public void InTableFooterConfirmRowIndexDoesDoesNotExist(string does_doesnot)
         {
             Report.Info($"Attempting to confirm row index {does_doesnot} exist.");
@@ -109,7 +113,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(!(new SuperTableFooter().RowIndexExists() ^ expected), $"Failure, row index {(expected ? "does not" : "does")} exist and {(expected ? "should" : "should not")}.");
         }
 
-        [RegexStepDefinition(@"In the table navigation bar, I click the '(.*)' button")]
+        [StepDefinition(@"In the table navigation bar, I click the '(.*)' button")]
         public void InTableHeaderClickButton(string buttonLabel)
         {
             var superTableNav = new SuperTableNav();
@@ -118,7 +122,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Delay.Seconds(5);
         }
 
-        [RegexStepDefinition(@"In the table navigation bar, I click the '(.*)' button and save the time to context as: (.*)")]
+        [StepDefinition(@"In the table navigation bar, I click the '(.*)' button and save the time to context as: (.*)")]
         public void InTableHeaderClickButtonAndSaveAs(string buttonLabel, string savedAs)
         {
             var superTableNav = new SuperTableNav();
@@ -129,21 +133,21 @@ namespace UL.Selenium.Portal.RPS.Steps
             Delay.Seconds(5);
         }
 
-        [RegexStepDefinition(@"I confirm the More Filters modal is (open|closed)")]
+        [StepDefinition(@"I confirm the More Filters modal is (open|closed)")]
         public void ConfirmMoreFiltersModalOpenClosed(string open_closed)
         {
             bool expected = open_closed == "open";
             Report.IsTrue(!(new BaseModalDialog().ContainerVisible() ^ expected), $"Failure, More Filters modal should be {open_closed} and is not.", $"Success, More Filters modal is {open_closed}.");
         }
 
-        [RegexStepDefinition(@"In the More Filters Modal, I open the Filter By selector")]
+        [StepDefinition(@"In the More Filters Modal, I open the Filter By selector")]
         public void InMoreFiltersModalOpenFilterBySelector()
         {
             Report.Info("Attempting to open the Filter By selector.");
             new MoreFiltersModal().FilterBySelectorClick();
         }
 
-        [RegexStepDefinition(@"In the More Filters Modal Filter By Selector, I select the (.*) option")]
+        [StepDefinition(@"In the More Filters Modal Filter By Selector, I select the (.*) option")]
         public void InMoreFitlersModalFilterBySelectorSelectOption(string optionLabel)
         {
             Report.Info($"Attempting to open the '{optionLabel}' option in the Filter By selector.");
@@ -156,7 +160,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(moreFiltersModal.ModalSpinnerWaitToDisappear(), "Failure, results failed to load in time.", "Success, results loaded in time.");
         }
 
-        [RegexStepDefinition(@"In the More Filters Modal, I confirm the (.*) Options list is shown")]
+        [StepDefinition(@"In the More Filters Modal, I confirm the (.*) Options list is shown")]
         public void InMoreFilterModalConfirmOptionListShownNotShown(string optionLabel)
         {
             var moreFiltersModal = new MoreFiltersModal();
@@ -166,7 +170,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(moreFiltersModal.FilterOptionOptionsListExists(), "Failure, Filter Option Options List does not exist.", "Success, Filter Option Options List exists.");
         }
 
-        [RegexStepDefinition(@"In the More Filters Modal Filter Option Options List, I save Option #([1-9][0-9]*) to context as: (.*)")]
+        [StepDefinition(@"In the More Filters Modal Filter Option Options List, I save Option #([1-9][0-9]*) to context as: (.*)")]
         public void InMoreFiltersModalFilterOptionOptionsListSaveOptionNumberAs(string iOptionString, string saveAs)
         {
             var moreFiltersModal = new MoreFiltersModal();
@@ -181,7 +185,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(Context.Contains(saveAs), $"Failure, failed to save Option #{iOptionString}: '{optionLabel}' to context as '{saveAs}'.", $"Success, saved Option #{iOptionString}: '{optionLabel}' to context as '{saveAs}'");
         }
 
-        [RegexStepDefinition(@"In the More Filters Modal Filter Option Options List, I add Option #([1-9][0-9]*) to the filter list")]
+        [StepDefinition(@"In the More Filters Modal Filter Option Options List, I add Option #([1-9][0-9]*) to the filter list")]
         public void InMoreFiltersModalFilterOptionOptionsListClickOptionNumber(string iOptionString)
         {
             var moreFiltersModal = new MoreFiltersModal();
@@ -197,7 +201,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(moreFiltersModal.BreadcrumbExists(optionLabel), $"Failure, '{optionLabel}' breadcrumb does not exist.", $"Success, '{optionLabel}' breadcrumb exists.");
         }
 
-        [RegexStepDefinition(@"In the More Filters Modal, I click the (.*) button")]
+        [StepDefinition(@"In the More Filters Modal, I click the (.*) button")]
         public void InMoreFiltersModalClickButton(string buttonLabel)
         {
             var moreFiltersModal = new MoreFiltersModal();
@@ -207,7 +211,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Delay.Seconds(5);
         }
 
-        [RegexStepDefinition(@"In the Product Info Cell in row #([1-9][0-9]*), the (.*) value (does|does not) match: (.*)")]
+        [StepDefinition(@"In the Product Info Cell in row #([1-9][0-9]*), the (.*) value (does|does not) match: (.*)")]
         public void InProductInfoCellInRowValueDoesDoesNotMatch(string rowNumberString, string picLabel, string does_doesnot, string valueExpected)
         {
             var gridTable = new GridTable();
@@ -242,7 +246,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             }
         }
 
-        [RegexStepDefinition(@"In the Product Info Cell in row #([1-9][0-9]*), the (.*) value (does|does not) match value saved to context as: (.*)")]
+        [StepDefinition(@"In the Product Info Cell in row #([1-9][0-9]*), the (.*) value (does|does not) match value saved to context as: (.*)")]
         public void InProductInfoCellInRowValueDoesDoesNotMatchSavedToContext(string rowNumberString, string picLabel, string does_doesnot, string savedAs)
         {
             if (Report.IsTrue(Context.Contains(savedAs), $"Failure, no variable saved as '{savedAs}' in context.", $"Success, found variable saved as '{savedAs}' in context."))
@@ -252,7 +256,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             }
         }
 
-        [RegexStepDefinition(@"In the Product Info Cell in row #([1-9][0-9]*), the (.*) colored (.*) tag (does|does not) show after the (Product Name|UPC|WPSID|Supplier Name)")]
+        [StepDefinition(@"In the Product Info Cell in row #([1-9][0-9]*), the (.*) colored (.*) tag (does|does not) show after the (Product Name|UPC|WPSID|Supplier Name)")]
         public void InTheRecentActivitesPageInProductTableFirstResultShowsTag(string rowNumberString, string tagColor, string tagLabel, string does_doesnot, string valueLabel)
         {
             var gridTable = new GridTable();
@@ -264,21 +268,21 @@ namespace UL.Selenium.Portal.RPS.Steps
             }
         }
 
-        [RegexStepDefinition(@"In the table navigation area, I confirm the Breadcrumb List (does|does not) exist")]
+        [StepDefinition(@"In the table navigation area, I confirm the Breadcrumb List (does|does not) exist")]
         public void InTableNavigationAreaConfirmBreadcrumbListExists(string does_doesnot)
         {
             bool expected = does_doesnot == "does";
             Report.IsTrue(!(new SuperTableNav().BreadcrumbListExists() ^ expected), $"Failure, breadcrumb list {(expected ? "does not" : "does")} exist.", $"Success, breadcrumb list {does_doesnot} exist.");
         }
 
-        [RegexStepDefinition(@"In the table navigation area, I confirm the Breadcrumb List (does|does not) contain the Breadcrumb labeled: (.*)")]
+        [StepDefinition(@"In the table navigation area, I confirm the Breadcrumb List (does|does not) contain the Breadcrumb labeled: (.*)")]
         public void InTableNavigationAreaConfirmBreadcrumbListContainsBreadcrumbLabeled(string does_doesnot, string breadcrumbLabel)
         {
             bool expected = does_doesnot == "does";
             Report.IsTrue(!(new SuperTableNav().BreadcrumbExists(breadcrumbLabel) ^ expected), $"Failure, breadcrumb '{breadcrumbLabel}' {(expected ? "does not" : "does")} appear in the breadcrumb list.", $"Success, breadcrumb '{breadcrumbLabel}' {does_doesnot} appear in the breadcrumb list.");
         }
 
-        [RegexStepDefinition(@"In the table navigation area, I confirm the Breadcrumb List (does|does not) contain the Breadcrumb label saved to context as: (.*)")]
+        [StepDefinition(@"In the table navigation area, I confirm the Breadcrumb List (does|does not) contain the Breadcrumb label saved to context as: (.*)")]
         public void InTableNavigationAreaConfirmBreadcrumbListContainsBreadcrumbLabelSavedAs(string does_doesnot, string savedAs)
         {
             if (Report.IsTrue(Context.Contains(savedAs), $"Failure, no variable saved as '{savedAs}' in context.", $"Success, found variable saved as '{savedAs}' in context."))
@@ -288,7 +292,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             }
         }
 
-        [RegexStepDefinition(@"In the table navigation area, in the Search Input, I enter: (.*)")]
+        [StepDefinition(@"In the table navigation area, in the Search Input, I enter: (.*)")]
         public void InTableNavigationAreaSearchInputEnter(string textString)
         {
             var superTableNav = new SuperTableNav();

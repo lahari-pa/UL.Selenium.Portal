@@ -313,12 +313,6 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             return el.Text.Contains(label);
         }
 
-        public bool IClickBreadCrumbArea()
-        {
-            var el = this.BreadCrumbArea; 
-            return el.TryClick();
-        }
-
         public bool ConfirmBreadCrumbAreaContainsStartDatelabel()
         {
             var el = this.BreadCrumbArea;
