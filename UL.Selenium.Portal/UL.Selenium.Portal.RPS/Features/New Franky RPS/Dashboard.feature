@@ -794,6 +794,8 @@ Scenario Outline: [169334] Select Columns -  Add Column
 #		| [#169334g] Select Columns -  Add Column | RPS.TG   | Product Lookup           |
 #		| [#169334h] Select Columns -  Add Column | RPS.CT   | Program Health           |
 
+# Removed from regression: 2024/08
+@ignore
 Scenario Outline: [169333] Select Columns -  Pop up layout
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
 	Then I confirm the active tab is: <LandingTab>
@@ -844,6 +846,8 @@ Scenario Outline: [169108] Recent Activities - Most Recent Activity Column shows
 		| [#169108g] Recent Activities - Most Recent Activity Column shows date only (not time) | RPS.TG   | Product Lookup           |
 		| [#169108h] Recent Activities - Most Recent Activity Column shows date only (not time) | RPS.CT   | Program Health           |
 
+# Removed from regression: 2024/08
+@ignore
 Scenario Outline: [169336] Select Columns -  Add Column - smart search
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
 	Then I confirm the active tab is: <LandingTab>
@@ -873,6 +877,8 @@ Scenario Outline: [169336] Select Columns -  Add Column - smart search
 		| [#169336g] Select Columns -  Add Column - smart search | RPS.TG   | Product Lookup           |
 		| [#169336h] Select Columns -  Add Column - smart search | RPS.CT   | Program Health           |
 
+# Removed from regression: 2024/08
+@ignore
 Scenario Outline: [169337] Select Columns -  Make changes, Close (not Apply)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
 	Then I confirm the active tab is: <LandingTab>

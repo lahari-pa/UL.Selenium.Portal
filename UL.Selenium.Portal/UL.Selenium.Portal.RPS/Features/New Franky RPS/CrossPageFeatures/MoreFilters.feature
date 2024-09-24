@@ -1099,9 +1099,9 @@ Scenario Outline: [224810] 3 Panel-More Filters- Has Any/No Value- Open/Save Rep
  		| [#224810c]  3 Panel-More Filters- Has Any/No Value- Open/Save Report     | RPS.CT          | Product Lookup          | No          |
 		| [#224810d]  3 Panel-More Filters- Has Any/No Value- Open/Save Report     | RPS.CV          | Product Lookup          | No          |
  		| [#224810e]  3 Panel-More Filters- Has Any/No Value- Open/Save Report     | RPS.LW          | Product Lookup          | No          |
-	
-	
-Scenario Outline: [243835] 3 Panel-More Filters- Suppliers Name- Select All 
+
+
+		Scenario Outline: [243835] 3 Panel-More Filters- Suppliers Name- Select All 
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer> 
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>

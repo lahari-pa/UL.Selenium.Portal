@@ -14,6 +14,8 @@
 
 Feature: Menu Items
 
+#Removed from regression: 2023/06
+@ignore
 Scenario Outline: [169070] Menu Links Banner - layout
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
 	Then I confirm the active tab is: <LandingTab>
