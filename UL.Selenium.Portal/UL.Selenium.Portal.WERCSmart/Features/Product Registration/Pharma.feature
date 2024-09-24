@@ -488,7 +488,7 @@ Scenario: [128671] Pharma - Prescription Pharmaceutical - Liquid Core Product
 	Then I should see the New Product Page
 	Then In the New Product Section, set the radio option in section: 'Would you like to Create a New Product?': to: Yes, create a new product
 	Then in the New Product page, I click Continue
-	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Prescription Pharmaceutical, Solid
+updates	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Prescription Pharmaceutical with Liquid Core
 	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Prescription Pharmaceutical with Liquid Core
 	Given in the Product Type page I click Continue
 	Given I should see the Product Information Page
