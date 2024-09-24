@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Castle.Core.Internal;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using UL.Automation.Reporting.Functions;

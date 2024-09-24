@@ -1,14 +1,9 @@
 ﻿using System;
 using Reqnroll;
-using TReVor.Api.Wrapper.Classes;
-using UL.Automation.Reporting;
-using UL.Automation.Reporting.Classes;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Classes;
-using TReVor.Integrations.Classes;
 using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.RPS.Selenium_Classes;
-using TReVor.Core.Classes.Software;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.TReVor.Classes;
 

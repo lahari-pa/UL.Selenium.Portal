@@ -1,5 +1,4 @@
 using System.Linq;
-using Castle.Core.Internal;
 using OpenQA.Selenium;
 using Reqnroll;
 using UL.Automation.Reporting;

@@ -1,18 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading;
-using Castle.Core.Internal;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
 using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.ReqnrollHelpers.Classes;
-using UL.Selenium.Portal.RPS.Classes;
 using UL.Selenium.Portal.RPS.Selenium_Classes;
 
 namespace UL.Selenium.Portal.RPS.Steps

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Castle.Core.Internal;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using UL.Automation.Reporting.Functions;
@@ -11,7 +10,6 @@ using UL.Selenium.Portal.RPS.Classes;
 using UL.Automation.WebDriver.Extensions;
 using UL.Automation.WebDriver.Classes;
 using System.Globalization;
-using System.IO;
 using System.Collections.ObjectModel;
 using UL.Selenium.Portal.WERCSmart.Classes;
 

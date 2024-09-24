@@ -1,9 +1,7 @@
 using System;
 using Reqnroll;
-using TReVor.Api.Wrapper.Classes;
 using TReVor.Core.Classes.Software;
 using TReVor.Integrations.Classes;
-using UL.Automation.Reporting;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.WebDriver.Classes;

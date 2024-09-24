@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Castle.Core.Internal;
 using OpenQA.Selenium;
 using Reqnroll;
 using UL.Automation.Reporting.Functions;

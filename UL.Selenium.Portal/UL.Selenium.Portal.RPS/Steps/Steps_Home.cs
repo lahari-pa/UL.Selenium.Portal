@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Castle.Core.Internal;
 using OpenQA.Selenium;
 using Reqnroll;
 using UL.Automation.Reporting;
@@ -13,7 +12,6 @@ using UL.Selenium.Portal.RPS.Selenium_Classes;
 using UL.Automation.Reporting.Classes;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Classes;
-using static UL.Selenium.Portal.RPS.Selenium_Classes.WidgetPage;
 
 namespace UL.Selenium.Portal.RPS.Steps
 {
