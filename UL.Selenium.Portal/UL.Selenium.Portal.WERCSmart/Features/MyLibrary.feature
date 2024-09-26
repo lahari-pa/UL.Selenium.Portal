@@ -20,22 +20,6 @@
 @run_MyLibrary
 Feature: MyLibrary
 
-#Removed from regression 2023/08
-@ignore
-@TestCase:64884
-Scenario: [64884] My Library
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
-	Then The home screen should load
-	Given I click on My Account
-	Given In the My Account page I navigate to the My Library page
-	Then I should see the following tabs in the My Library page
-		| Tab                            |
-		| My Packaging Types             |
-		| My Brands                      |
-		| My Distributors                |
-		| My Ingredients                 |
-		| Contact Information per SDS(s) |
-
 @TestCase:70535
 Scenario: [70535] Add Brand
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
