@@ -121,5 +121,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string text = "Exceeds the limits specified by the Ozone Transport Commission";
 			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);
 		}
+		[RegexStepDefinition(@"In the Volatile Organic Compound Summary Section, the statement 'Does not exceed the limits specified in the California Consumer Products Regulation' (is|is not) displayed")]
+		public void StatemantDoesNotExeedTheLimitsSpecifiedTnTheCalifornia(string is_isnot)
+		{
+			string text = "Does not exceed the limits specified in the California Consumer Products Regulation";
+			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);
+		}
+		[RegexStepDefinition(@"In the Volatile Organic Compound Summary Section, the statement 'Does not exceed the limits specified by the Ozone Transport Commission' (is|is not) displayed")]
+		public void StatemantDoesNotExeedTheLimitsOzoneTransport(string is_isnot)
+		{
+			string text = "Does not exceed the limits specified by the Ozone Transport Commission";
+			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);
+		}
 	}	
 }

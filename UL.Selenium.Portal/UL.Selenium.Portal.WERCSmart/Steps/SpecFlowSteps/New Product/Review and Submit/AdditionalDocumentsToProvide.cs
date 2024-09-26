@@ -167,6 +167,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string section = "Provide Full Product Label (required)";
 			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, shouldShouldNot, pipeDelimitedErrorMessages);
 		}
-
+		[RegexStepDefinition(@"In the Additional Documents to Provide, section 'Volatile Organic Compounds' error message (should|should not) display: (.*)")]
+		public void VolitileOrganicCompoundsShouldShouldNotDisplayError(string shouldShouldNot, string pipeDelimitedErrorMessages)
+		{
+			string section = "Volatile Organic Compounds";
+			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, shouldShouldNot, pipeDelimitedErrorMessages);
+		}
 	}
 }
