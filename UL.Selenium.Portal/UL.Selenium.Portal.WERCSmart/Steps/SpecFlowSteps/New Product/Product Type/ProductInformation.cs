@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 using Reqnroll;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.WebDriver.Classes;
+using UL.Automation.Reporting.Functions;
+using UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 {
@@ -87,6 +91,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		{
 			string section = "Select countries the product may be sold in";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+
+		[RegexStepDefinition(@"In the Product Information Section, for section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer...': the following options (should|should not) be (displayed|displayed exclusively):")]
+		public void OptionsDisplayedProductIsShippedBySupplier(string condition, string displayed, Table table)
+		{
+			string section = "Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.";
+			new Steps_Prototype().CheckOptionsInSection(condition, displayed, section, table);
 		}
 
 		[RegexStepDefinition(@"In the Product Information Section, set the option in section: 'Does the product contain fertilizer \(N, P, K\)\?' to: (Yes|No)")]
@@ -179,7 +190,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			{
 				new Steps_Prototype().ICheckTheCheckboxWithDescription(section, option);
 			}
-			else if(section == "uncheck")
+			else if (section == "uncheck")
 			{
 				new Steps_Prototype().ICheckTheCheckboxWithDescription(section, option);
 			}
@@ -197,6 +208,42 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string title = "Warning";
 			string button = "Ok";
 			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(title, button);
+		}
+
+		[RegexStepDefinition(@"In the Product Information Section, enter the value in section: 'Enter NDC #': (.*)")]
+		public void EnterNDCNumber(string option)
+		{
+			Steps_ProductPrototype productPrototype = new Steps_ProductPrototype();
+			string section = "Enter NDC #";
+			productPrototype.InSectionClickSearchText(section);
+			SearchBoxPrototype searchBoxPrototype = new SearchBoxPrototype();
+			Report.IsTrue(searchBoxPrototype.SearchInputExists(), $"Failure, search input box does not exist.", $"Success, search input box exists.");
+			Report.IsTrue(searchBoxPrototype.SearchInputEnterText(option), $"Failure, failed to enter '{option}' in search input box.", $"Success, entered '{option}' in search input box.");
+			GeneralUtilities.Wait_for_load_finish();
+			Report.IsTrue(searchBoxPrototype.SearchResultTextExists(option), $"Failure, '{option}' search result is not displayed.", $"Success, '{option}' search result is displayed.");
+			Report.IsTrue(searchBoxPrototype.SearchResultTextGetContains(option).Click(), $"Failure, failed to click '{option}' search result.", $"Success, clicked '{option}' search result.");
+			searchBoxPrototype.WaitForContainerToBeInvisible();
+		}
+
+		[RegexStepDefinition(@"In the Product Information Section, verify section: 'Enter NDC #' contains value: (.*)")]
+		public void VerifyEnterNDC(string value)
+		{
+			string is_isnot = "is";
+			string section = "Enter NDC #";
+			new Steps_Prototype().CheckingFieldInputIsCorrect(section, value);
+		}
+		[RegexStepDefinition(@"In the Product Information Section, verify section: 'Product Name' contains value: (.*)")]
+		public void VerifyProductName(string value)
+		{
+			string section = "Product Name";
+			new Steps_ProductPrototype().InSectionConfirmTextIsIsNotDisplayedAsOption(section, value, "is");
+			//new Steps_Prototype().CheckingFieldInputIsCorrect(section, value);
+		}
+		[RegexStepDefinition(@"In the Product Information Section, verify section: 'Generic Name' contains value: (.*)")]
+		public void VerifyGenericName(string value)
+		{
+			string section = "Generic Name";
+			new Steps_ProductPrototype().InSectionConfirmTextIsIsNotDisplayedAsOption(section, value, "is");
 		}
 	}
 }

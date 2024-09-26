@@ -315,7 +315,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         public bool IClickBreadCrumbArea()
         {
-            var el = this.BreadCrumbArea; 
+            var el = this.BreadCrumbArea;
             return el.TryClick();
         }
 

@@ -72,6 +72,8 @@ Scenario: [111074] Lowe's- Drum Log - Search > Product Name
 	And I call Shared Step 106194 (RPS Sign out)
 	#part of name?
 
+# Removed from regression: 2024/08
+@ignore
 @ScenarioId:10239
 Scenario: [108294] Lowe's- Drum Log - Search > Region
 	Given I call Shared Step 98339 (RPS Lowe's Login)

@@ -166,7 +166,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return this.TextInputGet().GetValue();
 		}
 		#endregion
+		#region Text Area Methods
+		private IWebElement TextFieldGet()
+		{
+			Report.Info($"Attempting to get text area.");
+			return this.FindElement(By.XPath($".//div[contains(@data-bind, 'field.field')]"), 1);
+		}
 
+		public bool TextFieldExists()
+		{
+			Report.Info($"Attempting to confirm text input exists.");
+			var test = this.TextInputGet();
+			return this.TextFieldGet() != null;
+		}
+		public string TextFieldGetText()
+		{
+			Report.Info($"Attempting to get current text in text input.");
+			return this.TextFieldGet().GetValue();
+		}
+		#endregion
 		#region Error Message Methods
 		private IWebElement ErrorMessageGet(string errorMessage)
 		{
@@ -311,7 +329,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			Report.Info($"Attempting to get text: '{searchText}' search result.");
 			return this.SearchResultList.Where(x => x.ResultText.Equals(searchText, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
 		}
-
+		public SearchBoxResult SearchResultTextGetContains(string searchText)
+		{
+			Report.Info($"Attempting to get text: '{searchText}' search result.");
+			return this.SearchResultList.Where(x => x.ResultText.Contains(searchText, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+		}
 		public SearchBoxResult SearchComponentGet(string searchText)
 		{
 			Report.Info($"Attempting to get component name: '{searchText}' search result.");

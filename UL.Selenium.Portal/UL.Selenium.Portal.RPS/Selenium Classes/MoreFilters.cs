@@ -915,7 +915,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
         {
             IWebElement lowerbound_textbox = this.FindElement(By.XPath($"//div[@class='input-group']//input[@id='lowerBound']"), 2);
             IWebElement upperbound_textbox = this.FindElement(By.XPath($"//div[@class='input-group']//input[@id='upperBound']"), 2);
-            IWebElement to_textbox = this.FindElement(By.XPath($"//div[@class='input-group']//p"), 2); 
+            IWebElement to_textbox = this.FindElement(By.XPath($"//div[@class='input-group']//p"), 2);
             return lowerbound_textbox.Displayed && upperbound_textbox.Displayed && to_textbox.Text == "to";
         }
 
@@ -968,10 +968,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             return plusSign.Displayed;
         }
 
-
-
         #endregion
-
     }
 }
 
