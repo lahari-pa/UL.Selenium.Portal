@@ -21,24 +21,24 @@ namespace UL.Selenium.Portal.RPS.Steps
 		[RegexStepDefinition(@"I call Shared Step 104950 \(RPS Login - Base Functionality\) for TReVor account: (.*)")]
 		public void GivenICallSharedStepRPSLogin_BaseFunctionalityForTReVorAccountRPS_CV(string savedAs)
 		{
-			Report.UseSubSteps = true;
-			Report.StartSubStep("I navigate to the landing page");
-			new Global_Steps().NavigateToTheLandingPage();
-			Report.StartSubStep("I confirm the Landing Page has loaded");
-			new Steps_LandingPage().ConfirmLandingPageHasLoaded();
-			if (!TReVor.Integrations.Classes.TReVorSettings.Credentials.AllCredentials.TryGetValue(savedAs, out var user))
-			{
-				throw new Exception("Failed to find user saved as: " + savedAs);
-			}
-			Report.StartSubStep("I enter the account username for: " + savedAs);
-			new Steps_Login().EnterUserNameForTrevorTestUser(user);
-			Report.StartSubStep("I enter the account password for: " + savedAs);
-			new Steps_Login().EnterPasswordForTrevorTestUser(user);
-			Report.StartSubStep("I click Log In");
-			new Steps_Login().ClickLogIn();
-			GeneralUtilities.WaitForLoadingToFinish();
-			Context.AddToContext("ActiveUser", user);
-		}
+            Report.UseSubSteps = true;
+            Report.StartSubStep("I navigate to the landing page");
+            new Global_Steps().NavigateToTheLandingPage();
+            Report.StartSubStep("I confirm the Landing Page has loaded");
+            new Steps_LandingPage().ConfirmLandingPageHasLoaded();
+            if (!TReVor.Integrations.Classes.TReVorSettings.Credentials.AllCredentials.TryGetValue(savedAs, out var user))
+            {
+                throw new Exception("Failed to find user saved as: " + savedAs);
+            }
+            Report.StartSubStep("I enter the account username for: " + savedAs);
+            new Steps_Login().EnterUserNameForTrevorTestUser(user);
+            Report.StartSubStep("I enter the account password for: " + savedAs);
+            new Steps_Login().EnterPasswordForTrevorTestUser(user);
+            Report.StartSubStep("I click Log In");
+            new Steps_Login().ClickLogIn();
+            GeneralUtilities.WaitForLoadingToFinish();
+            Context.AddToContext("ActiveUser", user);
+        }
 
 		[RegexStepDefinition(@"I call Shared Step 106194 \(RPS Sign out\)")]
 		public void SharedStep106194()
@@ -54,72 +54,64 @@ namespace UL.Selenium.Portal.RPS.Steps
 		[RegexStepDefinition(@"I call Shared Step 134361 \(RPS Login - User does not have access to ItemSync\)")]
 		public void Shared134361()
 		{
-			Report.UseSubSteps = true;
-			Report.StartSubStep("I navigate to the landing page");
-			new Global_Steps().NavigateToTheLandingPage();
-			Report.StartSubStep("I confirm the Landing Page has loaded");
-			new Steps_LandingPage().ConfirmLandingPageHasLoaded();
 			string savedAs = "RPS.HD";
-			if (TReVor.Integrations.Classes.TReVorSettings.Credentials.AllCredentials.TryGetValue(savedAs, out var user))
-			{
-				throw new Exception("Failed to find user saved as: " + savedAs);
-			}
-			Report.StartSubStep("I enter the account username for: " + savedAs);
-			new Steps_Login().EnterUserNameForTrevorTestUser(user);
-			Report.StartSubStep("I enter the account password for: " + savedAs);
-			new Steps_Login().EnterPasswordForTrevorTestUser(user);
-			Report.StartSubStep("I click Log In");
-			new Steps_Login().ClickLogIn();
-			GeneralUtilities.WaitForLoadingToFinish();
-			Context.AddToContext("ActiveUser", user);
-		}
+            Report.UseSubSteps = true;
+            Report.StartSubStep("I navigate to the landing page");
+            new Global_Steps().NavigateToTheLandingPage();
+            Report.StartSubStep($"I login as user {savedAs}");
+            Report.IsTrue(new LandingPlatform().WaitForContainerToBeVisible(), "Landing Page did not load!", "Landing Page loaded");
+            var user = TReVor.Integrations.Classes.TReVorSettings.VaultRecords.GetCredential(savedAs);
+            if (Report.IsTrue(user != null, $"Failed to find user saved as: {savedAs}",
+                $"Successfully found user saved as: {savedAs}", true)) ;
+
+            Report.IsTrue(new LandingPlatform().SignIn(user.UserName, user.Password), $"Failed to Log In as {savedAs}", $"Successfully Logged In as {savedAs}", true);
+            new CookiesFooter().AcceptCookies();
+
+            GeneralUtilities.WaitForLoadingToFinish();
+            Context.AddToContext("ActiveUser", user);
+        }
 
 
 		[RegexStepDefinition(@"I call Shared Step 134359 \(RPS Login - User has Standard ItemSync Access\)")]
 		public void Shared134359()
 		{
 			Report.UseSubSteps = true;
-			Report.StartSubStep("I navigate to the landing page");
+            string savedAs = "RPS.LW";
+            Report.StartSubStep("I navigate to the landing page");
 			new Global_Steps().NavigateToTheLandingPage();
-			Report.StartSubStep("I confirm the Landing Page has loaded");
-			new Steps_LandingPage().ConfirmLandingPageHasLoaded();
-			string savedAs = "RPS.LW";
-			if (TReVor.Integrations.Classes.TReVorSettings.Credentials.AllCredentials.TryGetValue(savedAs, out var user))
-			{
-				throw new Exception("Failed to find user saved as: " + savedAs);
-			}
-			Report.StartSubStep("I enter the account username for: " + savedAs);
-			new Steps_Login().EnterUserNameForTrevorTestUser(user);
-			Report.StartSubStep("I enter the account password for: " + savedAs);
-			new Steps_Login().EnterPasswordForTrevorTestUser(user);
-			Report.StartSubStep("I click Log In");
-			new Steps_Login().ClickLogIn();
-			GeneralUtilities.WaitForLoadingToFinish();
+            Report.StartSubStep($"I login as user {savedAs}");
+            Report.IsTrue(new LandingPlatform().WaitForContainerToBeVisible(), "Landing Page did not load!", "Landing Page loaded");
+            var user = TReVor.Integrations.Classes.TReVorSettings.VaultRecords.GetCredential(savedAs);
+			if (Report.IsTrue(user != null, $"Failed to find user saved as: {savedAs}",
+				$"Successfully found user saved as: {savedAs}", true)) ;
+
+            Report.IsTrue(new LandingPlatform().SignIn(user.UserName, user.Password), $"Failed to Log In as {savedAs}", $"Successfully Logged In as {savedAs}", true);
+            new CookiesFooter().AcceptCookies();
+
+            GeneralUtilities.WaitForLoadingToFinish();
 			Context.AddToContext("ActiveUser", user);
 		}
 
 		[RegexStepDefinition(@"I call Shared Step 134362 \(RPS Login - User has Subscription ItemSync access\)")]
 		public void Shared134362()
 		{
-			Report.UseSubSteps = true;
-			Report.StartSubStep("I navigate to the landing page");
-			new Global_Steps().NavigateToTheLandingPage();
-			Report.StartSubStep("I confirm the Landing Page has loaded");
-			new Steps_LandingPage().ConfirmLandingPageHasLoaded();
 			string savedAs = "RPS.99";
-			if (TReVor.Integrations.Classes.TReVorSettings.Credentials.AllCredentials.TryGetValue(savedAs, out var user))
-			{
-				throw new Exception("Failed to find user saved as: " + savedAs);
-			}
-			Report.StartSubStep("I enter the account username for: " + savedAs);
-			new Steps_Login().EnterUserNameForTrevorTestUser(user);
-			Report.StartSubStep("I enter the account password for: " + savedAs);
-			new Steps_Login().EnterPasswordForTrevorTestUser(user);
-			Report.StartSubStep("I click Log In");
-			new Steps_Login().ClickLogIn();
-			GeneralUtilities.WaitForLoadingToFinish();
-			Context.AddToContext("ActiveUser", user);
-		}
+            Report.UseSubSteps = true;
+            Report.StartSubStep("I navigate to the landing page");
+            new Global_Steps().NavigateToTheLandingPage();
+            Report.StartSubStep($"I login as user {savedAs}");
+            Report.IsTrue(new LandingPlatform().WaitForContainerToBeVisible(), "Landing Page did not load!", "Landing Page loaded");
+            var user = TReVor.Integrations.Classes.TReVorSettings.VaultRecords.GetCredential(savedAs);
+            if (Report.IsTrue(user != null, $"Failed to find user saved as: {savedAs}",
+                $"Successfully found user saved as: {savedAs}", true)) ;
+
+            Report.IsTrue(new LandingPlatform().SignIn(user.UserName, user.Password), $"Failed to Log In as {savedAs}", $"Successfully Logged In as {savedAs}", true);
+            new CookiesFooter().AcceptCookies();
+
+            GeneralUtilities.WaitForLoadingToFinish();
+            Context.AddToContext("ActiveUser", user);
+
+        }
 
 
 		[RegexStepDefinition(@"I call Shared Step 106517 \(Home > Replace an original widget\) for widget: (.*)")]
@@ -862,23 +854,18 @@ namespace UL.Selenium.Portal.RPS.Steps
 		{
 			Report.UseSubSteps = true;
 			string savedAs = "RPS.LW";
-			Report.StartSubStep("I navigate to the landing page");
-			new Global_Steps().NavigateToTheLandingPage();
-			Report.StartSubStep("I confirm the Landing Page has loaded");
-			new Steps_LandingPage().ConfirmLandingPageHasLoaded();
-			if (TReVor.Integrations.Classes.TReVorSettings.Credentials.AllCredentials.TryGetValue(savedAs, out var user))
-			{
-				throw new Exception("Failed to find user saved as: " + savedAs);
-			}
-			Report.StartSubStep("I enter the account username for: " + savedAs);
-			new Steps_Login().EnterUserNameForTrevorTestUser(user);
-			Report.StartSubStep("I enter the account password for: " + savedAs);
-			new Steps_Login().EnterPasswordForTrevorTestUser(user);
-			Report.StartSubStep("I click Log In");
-			new Steps_Login().ClickLogIn();
-			GeneralUtilities.WaitForLoadingToFinish();
-			Context.AddToContext("ActiveUser", user);
-		}
+            Report.StartSubStep("I navigate to the landing page");
+            new Global_Steps().NavigateToTheLandingPage();
+            Report.StartSubStep($"I login as user {savedAs}");
+            Report.IsTrue(new LandingPlatform().WaitForContainerToBeVisible(), "Landing Page did not load!", "Landing Page loaded");
+            var user = TReVor.Integrations.Classes.TReVorSettings.VaultRecords.GetCredential(savedAs);
+            if (Report.IsTrue(user != null, $"Failed to find user saved as: {savedAs}",
+                $"Successfully found user saved as: {savedAs}", true)) ;
+            Report.IsTrue(new LandingPlatform().SignIn(user.UserName, user.Password), $"Failed to Log In as {savedAs}", $"Successfully Logged In as {savedAs}", true);
+            new CookiesFooter().AcceptCookies();
+            GeneralUtilities.WaitForLoadingToFinish();
+            Context.AddToContext("ActiveUser", user);
+        }
 
 		[RegexStepDefinition(@"I call Shared Step 125598 \(ItemSync - Upload a File - Remove icon - page refreshes\)")]
 		public void Shared125598()

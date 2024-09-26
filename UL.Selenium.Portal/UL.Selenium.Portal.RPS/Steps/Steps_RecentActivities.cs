@@ -2334,8 +2334,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			Report.IsTrue(differences.IsNullOrEmpty(), "The documents list found were not as expected", "The documents list found matched the expected document list");
 		}
 
- 
-
+        
 		[RegexStepDefinition(@"Confirm the file that is opened is the same as the HGHS file you opened in Studio")]
 		public void FileOpenedIsSameAsHGHSFileOpenedInStudio()
 		{
@@ -2384,11 +2383,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         [RegexStepDefinition(@"I confirm that the recent activities Page, I click bread crumb area")]
         public void IClickInTheProductLookupPageBreadCrumbAreal()
         {
-
             Report.IsTrue(new ProductLookUp().IClickBreadCrumbArea(), "Failed to click The Bread crumb area ", "Successfull clicked The bread crumb area");
         }
-
     }
-
-
 }
