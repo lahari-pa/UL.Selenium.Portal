@@ -268,7 +268,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		protected override By ContainerElementLocator => By.XPath($"//div[@class='modal fade in']");
 		#region Header
 		IWebElement ModalHeader => this.ContainerElement.FindElement(By.XPath(".//div[@class='modal-header']"), 1);
-		string HeaderTitle => this.ModalHeader.FindElement(By.XPath(".//h3[@class='modal-title']"), 1).Text;
+		string HeaderTitle => this.ModalHeader.FindElement(By.XPath(".//h3[@class='modal-title'] | .//h4[@class='modal-title']"), 1).Text;
 		IWebElement HeaderCloseButton => this.ModalHeader.FindElement(By.XPath(".//button[.//span[text()='×']]"), 1);
 		#endregion
 		#region Body
