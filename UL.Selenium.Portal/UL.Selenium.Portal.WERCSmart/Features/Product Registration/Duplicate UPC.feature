@@ -171,7 +171,7 @@ Scenario: [82536] Soap (Bar, Liquid) for Body (RU000211) - GTIN/UPC - Verify Dup
 	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Given I click continue
 	#252877 Regulatory Information 3 - Applicable Only to Type of Product:  Soap (Bar, Liquid) for Body (RU000211)
-	Given I should see the Regulatory Information 3 Page
+	Given I should see the Product Labeling Page
 	Given I click continue
 	Then In the Regulatory Information 3 Section, the error 'Please select at least one option from above.' is displayed for section 'Refer to your Product Label. From the options, select those that appear on the Label.'
 	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
