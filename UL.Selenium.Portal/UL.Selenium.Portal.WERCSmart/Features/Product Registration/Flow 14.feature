@@ -39,7 +39,7 @@ Feature: Flow 14
 
 @TestCase:58736
 Scenario: [58736] Sanitizer Wipes for Use on Domesticated Animals (Solid)- RU001240
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC58736
 	Given I delete all products with UPC Number: saved as UPC58736
@@ -112,7 +112,7 @@ Scenario: [58736] Sanitizer Wipes for Use on Domesticated Animals (Solid)- RU001
 	Then in the Transportation Details 1 page I click Continue
 
 	#Given I call Shared Step 34455 (U. S. Department of Transportation (DOT) Classification - Enter all valid data)
-	Given I should see the U. S. Department of Transportation (DOT) Classification Page
+	Given I should see the U.S. Department of Transportation (DOT) Classification Page
 	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1170
 	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Ethanol
 	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Technical Name (if applicable)': to: Technical Test Name
@@ -137,8 +137,8 @@ Scenario: [58736] Sanitizer Wipes for Use on Domesticated Animals (Solid)- RU001
 
 	#Given I call Shared Step 60931 (Additional Documents to Provide - Exemption - Special Permit - Product Label)
 	Given I should see the Additional Documents to Provide Page
-	Then I upload PDF document to Upload Transportation Exemption Letter or Special Permit field
-	Then I upload PDF document to Provide Full Product Label (required) field
+	Then In the Additional Documents to Provide, upload PDF document to Upload Transportation Exemption Letter or Special Permit field
+	Then In the Additional Documents to Provide, upload PDF document to Provide Full Product Label (required) field
 	Then in the Additional Documents to Provide page I click Continue
 
 	Given I should see the Optional Reports and Documents Available for Purchase Page

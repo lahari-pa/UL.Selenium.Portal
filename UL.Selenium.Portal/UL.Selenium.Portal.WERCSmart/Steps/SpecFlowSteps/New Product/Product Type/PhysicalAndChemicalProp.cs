@@ -255,6 +255,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 			string section = "Flash Point (in Celsius)";
 			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
 		}
+		[RegexStepDefinition(@"In the Physical and Chemical Properties Section, confirm for section: 'Primary Physical State' error (is|is not) displayed: (.*)")]
+		public void PrimaryStateErrorIsIsNotDisplayed(string is_isnot, string error)
+		{
+			string section = "Primary Physical State";
+			new Steps_ProductPrototype().InSectionErrorMessageIsIsNotDisplayed(section, error, is_isnot);
+		}
 		[RegexStepDefinition(@"In the Physical and Chemical Properties Section, confirm for section: 'Secondary Physical State' error (is|is not) displayed: (.*)")]
 		public void SecondaryDtateErrorIsIsNotDisplayed(string is_isnot, string error)
 		{
@@ -266,6 +272,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		{
 			string section = "Select the best Water Solubility description";
 			new Steps_ProductPrototype().InSectionErrorMessageIsIsNotDisplayed(section, error, is_isnot);
+		}
+		[RegexStepDefinition(@"In the Physical and Chemical Properties Section, the confirm section: 'Select the best Water Solubility description' (is|is not) displayed")]
+		public void ConfirmSelectWaterSolubilityIsNotDisplayed(string is_isnot)
+		{
+			string section = "Select the best Water Solubility description";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
 		}
 		[RegexStepDefinition(@"In the Physical and Chemical Properties Section, confirm for section: 'Relative Density' error (is|is not) displayed: (.*)")]
 		public void RelativeDensityErrorIsIsNotDisplayed(string is_isnot, string error)

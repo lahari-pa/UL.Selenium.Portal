@@ -177,10 +177,9 @@ Scenario: [60774] Food Item Dispensed by Compressed Gas - Dairy Topping - RU0012
 Scenario: [60775] Cooking oil - Non-Aerosol - RU000942
 
 	#Logging in as the correct user
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 
 	#Just checks that the correct page loads
-	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 	Then The home screen should load
 
 	#Test Setup - Generating + Saving UPC Number and ensuring no duplicates exist
@@ -194,9 +193,8 @@ Scenario: [60775] Cooking oil - Non-Aerosol - RU000942
 
 	#And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Food Item Dispensed by Compressed Gas - Dairy Topping
 	And I should see the The Product Page
-	And I set 'Product Name' to: Cooking oil - Non-Aerosol_#60775
-	#And In the Product Type tab of the New Product Page, I enter: Food Item Dispensed by Compressed Gas - Dairy Topping in the Type of Product select field
-	And I set 'Type of Product' to: Cooking oil - Non-Aerosol
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Cooking oil - Non-Aerosol_#60775
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Cooking oil - Non-Aerosol
 	And in the The Product page I click Continue
 	Then I save the product information as: TestCase60775
 
@@ -250,15 +248,15 @@ Scenario: [60775] Cooking oil - Non-Aerosol - RU000942
 	Given in the Inventory Status, Prop 65 (US) page I click Continue
 
 	#Given I call Shared Step 57571 (Regulatory Information 3 - None of the Above Option)
-	Given I should see the Regulatory Information 3 Page
-	Given in the Regulatory Information 3 page I click Continue
-	Then In the Regulatory Information 3 Section, the error 'Please select at least one option from above.' is displayed for section 'Refer to your Product Label. From the options, select those that appear on the Label.'
-	Then In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California.  Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
-	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above
-	Then In the Regulatory Information 3 Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
-	Then In the Regulatory Information 3 Section, the following link: Nutritional and Supplement Labels should be displayed
-	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
-	Given in the Regulatory Information 3 page I click Continue
+	Given I should see the Product Labeling Page
+	Given in the Product Labeling page I click Continue
+	Then In the Product Labeling Section, the error 'Please select at least one option from above.' is displayed for section 'Refer to your Product Label. From the options, select those that appear on the Label.'
+	Then In the Product Labeling Section, the statement 'Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California.  Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
+	Then In the Product Labeling Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above
+	Then In the Product Labeling Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
+	Then In the Product Labeling Section, the following link: Nutritional and Supplement Labels should be displayed
+	Then In the Product Labeling Section, the following link: Dietary Supplements Label should be displayed
+	Given in the Product Labeling page I click Continue
 
 	#Following the steps from 'Shared Step' 57506
 	And I should see the Transportation Details 1 Page
