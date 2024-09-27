@@ -3630,11 +3630,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public IWebElement StandaloneCheckbox(string description)
 		{
-			IWebElement el = this.ContainerElement.FindElement(By.XPath($@".//div[@class='checkbox' and (.//span[contains(text(),""{description}"")])]/label/input | .//div[span[text() = '{description}']]/input"), 2);
+			IWebElement el = this.ContainerElement.FindElement(By.XPath($@".//div[@class='checkbox' and (.//span[contains(text(),'{description}')])]/label/input | .//div[span[text() = '{description}']]/input"), 2);
+			IWebElement el2 = this.ContainerElement.FindElement(By.XPath($@".//input[@type='checkbox'][.//following-sibling::span[text()='{description}']]"));
 			if (el == null)
 			{
-				Report.Info($"Could not find checkbox with description: '{description}'");
-				return null;
+				if (el2 == null)
+				{
+					Report.Info($"Could not find checkbox with description: '{description}'");
+					return null;
+				}
+				return el2;
 			}
 			return el;
 		}

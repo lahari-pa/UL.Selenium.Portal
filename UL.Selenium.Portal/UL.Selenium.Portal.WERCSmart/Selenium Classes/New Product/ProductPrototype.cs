@@ -30,7 +30,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 	{
 		#region Page Objects
 		private string _label;
-		protected override By ContainerElementLocator => By.XPath($"//div[contains(@class,'wizard-step-panel')][.//h3[text()='{_label}']]");
+		protected override By ContainerElementLocator => By.XPath($"//div[contains(@class,'wizard-step-panel')][.//h3[normalize-space(text())='{_label}']]");
 		private IWebElement PanelExpandButton => this.FindElement(By.XPath(".//a[@href]"), 1);
 		private IWebElement PanelButton(string buttonLabel) => this.FindElement(By.XPath($".//a[contains(@class,'btn')][text()='{buttonLabel}']"), 1);
 		private IWebElement PanelDescription => this.FindElement(By.XPath(".''//div[contains(@data-bind,'html: description')]"), 1);

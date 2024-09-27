@@ -25,30 +25,6 @@ Feature: Home Page
 
 Background:
 
-#Removed from regression 2023/08
-@ignore
-@TestCase:55817
-Scenario: [55817] Product Information Panel - No Alerts/No Products
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
-	Then the WERCSmart homepage should load
-	When I click on the triangle next to Product Information to collapse the section
-	Then the Product Information dialog should be hidden
-	And the Alerts dialog should be hidden
-	And the Announcements dialog should be hidden
-	When I click on the triangle next to Product Information to expand the section
-	Then the Product Information dialog should be visible
-	And the Alerts dialog should be visible
-	And the Announcements dialog should be visible
-	And I should see a Pie Chart and Legend under Product Information
-	And I should see the following states in the Legend:
-		| State                  | Colour |
-		| Not Yet Submitted      | Grey   |
-		| Assessment in Progress | Yellow |
-		| Sending to Retailers   | Blue   |
-		| Accepted by Retailers  | Green  |
-		| Needs Your Attention   | Red    |
-	Given I see notifications in the Announcement Panel
-
 #pass
 @TestCase:55938
 Scenario: [55938] My Products grid
@@ -87,19 +63,6 @@ Scenario: [56020] Bulk Actions
 		| Delete Products              |
 	And I click on the close button on Bulk Actions
 	Then I should see the Subheading My Products in the products grid
-
-#pass - staging 4.10
-#Removed from regression 2023/08
-@ignore
-@TestCase:56149
-Scenario: [56149] Click Register Product button from home page - Navigation
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
-	Then the WERCSmart homepage should load
-	Then I click the Register New Product icon in the QuickLinks Pane
-	And I should see the header New Product
-	And I should see the statement Select the type of product to create:
-	And I should see the radio button: Create a New Registration
-	And I should see the radio button: Copy from an Existing Registration
 
 #pass - staging 4.10
 @TestCase:56206
@@ -207,29 +170,6 @@ Scenario: [65886] My Products - Pagination
 	Given I click ... in the products grid
 	Given I enter the down arrow into the products grid page navigation input then the correct page is shown
 
-#Removed from regression 2023/08
-@ignore
-@TestCase:65617
-Scenario: [65617] Correct Order of Statuses
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
-	And I should see a Pie Chart and Legend under Product Information
-	And I should see the following states in the following order in the Legend:
-		| State                  |
-		| Not Yet Submitted      |
-		| Assessment in Progress |
-		| Sending to Retailers   |
-		| Accepted by Retailers  |
-		| Needs Your Attention   |
-	And I should see the following filters in the following order under My products:
-		| Filter                 |
-		| All                    |
-		| Not Yet Submitted      |
-		| Assessment in Progress |
-		| Sending to Retailers   |
-		| Accepted by Retailers  |
-		| Needs Your Attention   |
-		| Canceled               |
-
 @TestCase:231100
 Scenario: [231100] Announcements - Add
 	Given I navigate to Studio
@@ -313,55 +253,3 @@ Scenario: [73791] My Products grid - Retailers Column Alphabetical Order
 	Then The home screen should load
 	Given I filter the products by: Accepted by Retailers
 	And I check for all items in the grid that the retailers are alphabetically listed
-
-#Removed from regression: 2023/08
-@ignore
-@TestCase:55796
-Scenario: [55796] Navigate to Home Page
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
-	Then the WERCSmart homepage should load
-	# Check correct items are showing in header bar
-	Then I should see the UL/WERCSmart Logo in the header bar
-	And I should see the User Icon in the header bar
-	# Check correct items are showing in the User dropdown menu
-	Then I click the User Icon
-	And I should see My Account in the user dropdown
-	And I should see Sign Out in the user dropdown
-	# Checking that the navigation bar is showing
-	Then I should see the Navigation Menu Icon in the navigation bar
-	# Expands the navigation bar and checks that the correct icons and labels are showing
-	Then I expand the Navigation Menu
-	And the following icons and labels should be found in the navigation bar
-		| Item                 |
-		| Home                 |
-		| Register New Product |
-		| My Messages          |
-		| Retail Partners      |
-		| My Reports           |
-		| UL Solution Center   |
-		| Shopping Cart        |
-		| Support              |
-	# Collapses the navigation bar and checks that only the icons are displayed on the screen (not the labels!)
-	Then I collapse the Navigation Menu
-	And the following icons should be found in the navigation bar
-		| Item                 |
-		| Home                 |
-		| Register New Product |
-		| My Messages          |
-		| Retail Partners      |
-		| My Reports           |
-		| UL Solution Center   |
-		| Shopping Cart        |
-		| Support              |
-	# Checks that the top menu can be collapsed successfully
-	Then I click on the triangle next to Product Information to collapse the section
-	And I scroll to the top of the page
-	And I should see the Subheading Product Information in the main window
-	And I should see the Subheading Alerts in the main window
-	And I should see the Subheading Announcements in the main window
-	And I should see the Subheading My Products in the products grid
-	# Checks that the correct items are showing when the section is expanded
-	Then I click on the triangle next to Product Information to expand the section
-	And I should see the Subheading Product Information expanded in the main window
-	And I should see the Subheading Alerts expanded in the main window
-	And I should see the Subheading Announcements expanded in the main window
