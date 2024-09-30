@@ -132,6 +132,8 @@ Scenario: [56907] Retailer Detail Page - Retailer does require Supplier ID but d
 	And I confirm that there is a section labeled: Data Consent Tiers
 	Given I call Shared Step 56967 (Confirm Retailer & You information is shown correctly) for retailer: Sears/K-Mart
 
+#Removed from regression: 2024/09
+@ignore
 @TestCase:56981
 Scenario: [56981] Retailer & You - layout
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -245,6 +247,8 @@ Scenario: [56931] What are the Data Usage Tiers? - Tier 3: Supplemental Reports 
 	And I navigate to the home page
 
 # NB logged ticket for spelling error, waiting for correction
+#Removed from regression: 2024/09
+@ignore
 @TestCase:56933
 Scenario: [56933] What are the Data Usage Tiers? - Tier 4: Public Disclosure Options - wording check
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
