@@ -57,6 +57,8 @@ Feature: Duplicate UPC
 # Created by Abbie Zullo
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\UPC
+#Removed from regression: 2024/09
+@ignore
 @TestCase:91076
 Scenario: [91076] Duplicate UPC is not permitted within account - New Product registration - single UPC
 
@@ -516,6 +518,8 @@ Scenario: [91800] Duplicate UPC is not permitted within account - Forward Produc
 	And In the Case UPC modal window I click Save
 	Then I check that the alert displayed contains text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review.
 
+#Removed from regression: 2024/09
+@ignore
 @TestCase:91741
 Scenario: [91741] Duplicate UPC is not permitted within account - New Product registration - Case UPC
 	Given I find an existing UPC number in trevor account saved as: ProductAccount using feature context: ExistingUPC_ProductAccount_1
@@ -777,7 +781,8 @@ Scenario: [91157] Duplicate UPC is not permitted within account - Forward Produc
 	Then I click the Home navigation icon and accept the alert popup
 	Then The home screen should load
 
-
+#Removed from regression: 2024/09
+@ignore
 @TestCase:91077
 Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New Product registration - Single UPC
 	Given I find an existing UPC number in trevor account saved as: ProductAccount using feature context: ExistingUPC_ProductAccount_1
