@@ -103,6 +103,10 @@ Scenario: [60671] Computer (Combination of Monitor & Desktop) - RU001177
 	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page I click Continue
 
+	Given I should see the Battery State of Charge Page
+	
+	Then in the Battery State of Charge page I click Continue
+
 	Given I should see the Lithium Battery Characteristics Page
 	Then In the Lithium Battery Characteristics Section, in 'Type of Battery' select Battery
 	Then In the Lithium Battery Characteristics Section, in 'Watt-hour of the battery' enter 100
