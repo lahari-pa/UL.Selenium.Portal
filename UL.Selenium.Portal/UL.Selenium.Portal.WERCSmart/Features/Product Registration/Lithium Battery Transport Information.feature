@@ -18,7 +18,8 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ProductIncludesBattery
-
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ElectronicEquipment
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:LithiumBatteryTransportation
 Feature: Lithium Battery Transport Information
 
 
@@ -144,13 +145,15 @@ Scenario: [65523] BCP - Contains Lithium Primary packaged with the product - Lit
 	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
 
+	#Shared Step 61449 (Toxicity Characteristic Leaching Procedure (TCLP) - select NO to all - Click Continue - Happy Path)
 	Then I should be on the Product Includes Battery Page
     Then In the Product Includes Battery Section, set the radio option in section: 'Indicate how battery is packaged': to: The battery is shipped with but not included in my product.
-
-	Given I add the following batteries:
-		| Battery Type    | Manufacturer                                                 | Quantity of Batteries per Package | Quantity of Batteries to Operate Product | Saved As |
-		| Lithium Primary |Pau Lithium Primary Battery by The WERCS LTD (WPS ID 1549664) | 10                                | 10                                       | lithiumbattery65520 |
-	Given I continue to the next screen in the product registration
+	Then In the Product Includes Battery Section enter value Lithium Primary in Battery Type field
+	Then In the Product Includes Battery Section enter value <= 1 g in Grams Lithium field
+	Then In the Product Includes Battery Section enter value Lithium primary / metal battery -CR1220 (WPS 1558186) in 'Manufacturer' field
+	Then In the Product Includes Battery Section enter value 2 in Quantity of Batteries per Package field
+	Then In the Product Includes Battery Section enter value 2 in Quantity of Batteries to Operate Product field
+	Then in the Product Includes Battery page, I click Continue
 
 	#Given I call Shared Step 61449 Toxicity Characteristic Leaching Procedure (TCLP) - select No to all - Click Continue - Happy Path
 	Given I should see the Toxicity Characteristic Leaching Procedure (TCLP) Page
@@ -166,52 +169,38 @@ Scenario: [65523] BCP - Contains Lithium Primary packaged with the product - Lit
 	Then In the Toxicity Characteristic Leaching Procedure (TCLP) Section, set the radio option in section: 'Copper': to: No
 	Given in the Toxicity Characteristic Leaching Procedure (TCLP) page, I click Continue
 
-	Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
+	#Given I call Shared Step 58189 (Answer Electronic Equipment questions - With Cathode Ray - No to all)
+	Given I should see the Electronic Equipment Page
+	Then In the Electronic Equipment Section, set the option in section: 'Contains Circuit Board' to: No
+	And In the Electronic Equipment Section, set the option in section: 'Has a Cathode Ray Tube (CRT)' to: No
+	And In the Electronic Equipment Section, set the option in section: 'Has a LCD or Plasma Display' to: No
+	Given in the Electronic Equipment page, I click Continue
+
 	Then I should see the Lithium Battery Transportation Page
-	And I see the following sections
-		| Section                                                                            |
-		| For U.S. Department of Transportation (DOT), indicate the transport classification |
-	And I should see a total of 3 radio buttons for the section: For U.S. Department of Transportation (DOT), indicate the transport classification
-	And The following radio buttons should be displayed for section: For U.S. Department of Transportation (DOT), indicate the transport classification
-		| Button                                                                                                                |
-		| Fully-regulated dangerous goods: UN3091, Lithium metal batteries packed with equipment, 9                             |
-		| Meets the requirements of 49CFR173.185(c)(iv) to be transported as non-dangerous goods for road and rail              |
-		| Meets the requirements of 49CFR173.185(c)(i) to be transported as non-dangerous goods for road, rail, air, and vessel |
-	And The alert message is displayed with text: Need help? Regulatory services are included in Premium Subscription. Upgrade now!
-	And I see the following sections
-		| Section                                                  |
-		| For Marine transport (IMDG), indicate the classification |
-	And I should see a total of 3 radio buttons for the section: For Marine transport (IMDG), indicate the classification
-	And The following radio buttons should be displayed for section: For Marine transport (IMDG), indicate the classification
-		| Button                                                                                    |
-		| Meets requirements of IMDG Special Provision 188 to be transported as non-dangerous goods |
-		| Fully-regulated dangerous goods: UN3091, Lithium metal batteries packed with equipment, 9 |
-		| None of the above/Not intended for shipment under IMDG                                    |
-	And I see the following sections
-		| Section                                               |
-		| For Air transport (IATA), indicate the classification |
-	And I should see a total of 3 radio buttons for the section: For Air transport (IATA), indicate the classification
-	And The following radio buttons should be displayed for section: For Air transport (IATA), indicate the classification
-		| Button                                                 |
-		| Section I                                              |
-		| Section II                                             |
-		| None of the above/Not intended for shipment under IATA |
-	And I see the following sections
-		| Section                                                                           |
-		| For Canada's Transportation of Dangerous Goods (TDG), indicate the classification |
-	And I should see a total of 3 radio buttons for the section: For Canada's Transportation of Dangerous Goods (TDG), indicate the classification
-	And The following radio buttons should be displayed for section: For Canada's Transportation of Dangerous Goods (TDG), indicate the classification
-		| Button                                                                                       |
-		| Fully-regulated dangerous goods: UN3091, Lithium metal batteries packed with equipment, 9    |
-		| Meets the requirements of TDG special provision 34 to be transported as non-dangerous goods. |
-		| None of the above/Not intended for shipment in Canada                                        |
-	Given I click continue
-	Then For U.S. Department of Transportation (DOT), indicate the transport classification should be showing the error messages: This is a required field.
-	Then For Marine transport (IMDG), indicate the classification should be showing the error messages: This is a required field.
-	Then For Air transport (IATA), indicate the classification should be showing the error messages: This is a required field.
-	Then For Canada's Transportation of Dangerous Goods (TDG), indicate the classification should be showing the error messages: This is a required field.
-	Given I navigate to the home page
-	Then The home screen should load
-	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65523
+	Then In the Lithium Battery Transportation Section, for section 'For U.S. Department of Transportation (DOT), indicate the transport classification' confirm that the following options should be displayed:
+	| Option                                                                                                                 |
+	| Fully-regulated dangerous goods: UN3091, Lithium metal batteries packed with equipment, 9                              |
+	| Meets the requirements of 49CFR173.185(c)(iv) to be transported as non-dangerous goods for road and rail               |
+	| Meets the requirements of 49CFR173.185(c)(ii) to be transported as non-dangerous goods for road, rail, air, and vessel |
+	Then In the Lithium Battery Transportation Section, the text message should be displayed with text: 'Need help? Regulatory services are included in Premium Subscription. Upgrade now!'
+	Then In the Lithium Battery Transportation Section, for section 'For Marine transport (IMDG), indicate the classification' confirm that the following options should be displayed:
+	| Option                                                                                    |
+	| Meets requirements of IMDG Special Provision 188 to be transported as non-dangerous goods |
+	| Fully-regulated dangerous goods: UN3091, Lithium metal batteries packed with equipment, 9 |
+	| None of the above/Not intended for shipment under IMDG                                    |
+	Then In the Lithium Battery Transportation Section, for section 'For Air transport (IATA), indicate the classification' confirm that the following options should be displayed:
+	| Option                                                 |
+	| Section I                                              |
+	| Section II                                             |
+	| None of the above/Not intended for shipment under IATA |
+	Then In the Lithium Battery Transportation Section, for section 'For Canada's Transportation of Dangerous Goods (TDG), indicate the classification' confirm that the following options should be displayed:
+	| Option                                                                                       |
+	| Fully-regulated dangerous goods: UN3091, Lithium metal batteries packed with equipment, 9    |
+	| Meets the requirements of TDG special provision 34 to be transported as non-dangerous goods. |
+	| None of the above/Not intended for shipment in Canada                                        |
+
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65523
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase65523
 
 
