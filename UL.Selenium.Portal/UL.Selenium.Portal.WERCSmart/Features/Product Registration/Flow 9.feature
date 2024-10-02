@@ -474,7 +474,8 @@ Scenario: [58073] Footwear - Gel Insert - RU000854
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Footwear - Gel Insert
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58073
 	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase58073	
+	Then In the Product Grid, delete the product saved as: TestCase58073
+
 @TestCase:63325
 Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking SDS step shows only product label and Additional documents to provide shows SDS as optional)
 	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -516,7 +517,7 @@ Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking S
 	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page I click Continue
 	#Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
-	Given I should see the Regulatory Information 3 Page
+	Given I should see the Product Labeling Page
 	Then In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California.  Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
 	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
 	| Option                 |

@@ -30,7 +30,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		IWebElement CellButton(string columnTitle, string buttonLabel) => this.RowColumnCell(columnTitle).FindElement(By.XPath($".//a[text() = '{buttonLabel}']"), 1);
 		IWebElement CellErrorMessage(string columnTitle) => this.RowColumnCell(columnTitle).FindElement(By.XPath(".//p[@class='form-error']"), 1);
 		IWebElement CellTextInput(string columnTitle) => this.RowColumnCell(columnTitle).FindElement(By.XPath(".//input[@type='text']"), 1);
-		IWebElement CellSelect(string columnTitle) => this.RowColumnCell(columnTitle).FindElement(By.XPath(".//select[@class = 'form-control']"), 1);
+		IWebElement CellSelect(string columnTitle) => this.RowColumnCell(columnTitle).FindElement(By.XPath(".//select[contains(@class, 'form-control')]"), 1);
 		IWebElement CellMultiSelect(string columnTitle) => this.RowColumnCell(columnTitle).FindElement(By.XPath(".//span[contains(@class,'select2-selection--multiple')]"), 1);
 		List<IWebElement> CellMultiSelectSelectedList(string columnTitle) => this.CellMultiSelect(columnTitle).FindElements(By.XPath(".//li[@title]"), 1).ToList();
         IWebElement OptionDeleteIcon(string columnTitle, string option) => this.RowColumnCell(columnTitle).FindElement(By.XPath($".//li[text() = '{option}']//span"), 1);
@@ -268,7 +268,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		protected override By ContainerElementLocator => By.XPath($"//div[@class='modal fade in']");
 		#region Header
 		IWebElement ModalHeader => this.ContainerElement.FindElement(By.XPath(".//div[@class='modal-header']"), 1);
-		string HeaderTitle => this.ModalHeader.FindElement(By.XPath(".//h3[@class='modal-title']"), 1).Text;
+		string HeaderTitle => this.ModalHeader.FindElement(By.XPath(".//h3[@class='modal-title'] | .//h4[@class='modal-title']"), 1).Text;
 		IWebElement HeaderCloseButton => this.ModalHeader.FindElement(By.XPath(".//button[.//span[text()='×']]"), 1);
 		#endregion
 		#region Body

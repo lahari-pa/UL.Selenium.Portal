@@ -229,14 +229,10 @@ Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU0
 	And I should see the Regulatory Documents to Provide Page
 	And In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
     Then in the Regulatory Documents to Provide page I click Continue
-
-    Given I upload PDF document to Upload SDS (Optional) field
 	Then in the Additional Documents To Provide page I click Continue
-
-	# Optional Reports and Documents Available for Purchase Page
+	#183652 Click CONTINUE on the Additional Documents to Provide Page / Click CONTINUE on the Optional Reports and Documents Available for Purchase / Click CONTINUE on the Optional Comments - (General Shared-Step)
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment:Comment Text
 	Then in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: Comment Text
 	Then in the Optional Comments page I click Continue
 
 	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Seasonings, Spices or Flavoring for Food - Salts (Liquid)

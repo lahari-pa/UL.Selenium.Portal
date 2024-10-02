@@ -124,15 +124,19 @@ Scenario: [31804] Physical and Chemical Properties - Gas only navigation
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31804
 
 @TestCase:85157
-Scenario: [85157] Physical and Chemical Properties - All navigation
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Scenario: [85157] Physical and Chemical Properties for 'Bonding Agent' Type of Product - Validation
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
-#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bonding agent
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bonding agent
+	Given I should see the The Product Page
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bonding agent
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Bonding agent
+ 	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase85157
 	#Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I should see the Product Information Page
@@ -142,14 +146,19 @@ Scenario: [85157] Physical and Chemical Properties - All navigation
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page I click Continue
+	#168000 Physical and Chemical Properties - Primary Physical State Validation for 'BONDING AGENT' Type of Product
 	And I should see the Physical and Chemical Properties Page
-	And I should see following statement: Primary Physical State
-	And I should only see the following options for Primary Physical State:
-		| State       |
-		| Aerosol     |
-		| Gas         |
-		| Liquid      |
-		| Solid       |
-	And I should see following statement: Secondary Physical State
-	And I should see following statement: Select the best Water Solubility description
+	Then In the Physical and Chemical Properties Section, for section: 'Primary Physical State': the following options should be displayed exclusively:
+	| Option  |
+	| Aerosol |
+	| Gas     |
+	| Liquid  |
+	| Solid   |
+	Then In the Physical and Chemical Properties Section, the confirm section: 'Secondary Physical State' is displayed
+	Then In the Physical and Chemical Properties Section, the confirm section: 'Select the best Water Solubility description' is displayed
+	#168038 Physical and Chemical Properties - Required Field Validation
+	Then in the Physical and Chemical Properties page I click Continue
+	Then In the Physical and Chemical Properties Section, confirm for section: 'Primary Physical State' error is displayed: This is a required field.
+	Then In the Physical and Chemical Properties Section, confirm for section: 'Secondary Physical State' error is displayed: This is a required field.
+	Then In the Physical and Chemical Properties Section, confirm for section: 'Select the best Water Solubility description' error is displayed: This is a required field.
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85157

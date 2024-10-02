@@ -447,9 +447,6 @@ When In the Product Information Section, set the option in section: 'Product is 
 When In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 When In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 Then in the Product Information page, I click Continue
-Then I should see the Regulatory Documents to Provide Page
-Then I set the OSHA-compliant Safety Data Sheet, English field to: Request to author	
-Then I click continue
 #Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
 Then I should see the Physical and Chemical Properties Page
 Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid

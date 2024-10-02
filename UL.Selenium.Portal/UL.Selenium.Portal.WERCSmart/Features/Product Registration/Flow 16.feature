@@ -1218,6 +1218,8 @@ Scenario: [110324] Alkaline Battery - Check Regulatory Documents To Provide Erro
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase110324
 
+#Removed from regression: 2024/09
+@ignore
 @TestCase:122366
 Scenario:[122366] Battery Containing Product (BCP) (Transportation override at UPC level- New Feature)
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
