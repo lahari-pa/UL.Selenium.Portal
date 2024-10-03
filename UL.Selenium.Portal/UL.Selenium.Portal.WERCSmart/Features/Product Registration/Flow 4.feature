@@ -36,6 +36,8 @@
 @run_Flow4
 @UPC
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:USDepartamentOfTransportationDOT
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
 
 Feature: Flow 4
 
@@ -50,9 +52,9 @@ Scenario: [57950] Conditioner - Leave In (RU001272) 4-L
 	Given in the New Product page I click Continue
 
 	#And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Conditioner - Leave In (Liquid, Non Aerosol)
-    And I should see the The Product Page
-    And I set 'Product Name' to: Conditioner - Leave In (Liquid, Non Aerosol)
-    And I set 'Type of Product' to: Conditioner - Leave In (Liquid, Non Aerosol)
+	Given I should see the The Product Page
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Conditioner - Leave In (Liquid, Non Aerosol)
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Conditioner - Leave In (Liquid, Non Aerosol)
     And in the The Product page I click Continue
     Then I save the product information as: TestCase57950
 
@@ -67,16 +69,9 @@ Scenario: [57950] Conditioner - Leave In (RU001272) 4-L
 	And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	And in the Product Information page I click Continue
 
-	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	Given I should see the Regulatory Documents to Provide Page
-	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
-	Then in the Regulatory Documents to Provide page I click Continue
-
-
 	#Given I call Shared Step 73629 (Physical and Chemical Properties - Liquid - select any options(enter pH, boiling point, flash point))
 	#| Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
 	#| Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
-
 	And I should see the Physical and Chemical Properties Page
     And In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
     And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
@@ -91,13 +86,10 @@ Scenario: [57950] Conditioner - Leave In (RU001272) 4-L
     #And I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
     #		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
     #		| Butane        | 100     | false               | false       |            |
-    And I should see the Ingredients Page
-    When in the Ingredients page I click Continue
-    Then I should see the ingredients error message
-    Then In the Ingredients section, add the following ingredients:
-    		| SearchType     | SearchValue | SearchText | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-    		| component name | Butane      | Butane     | 100     | False                 | false         | false       |
-    And in the Ingredients page I click Continue
+   	Given I should see the Ingredients Page
+	Then In the Ingredients section, add component with component name: Water
+	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
+	Given I click continue
 
     #Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I should see the Inventory Status, Prop 65 (US) Page
@@ -113,36 +105,42 @@ Scenario: [57950] Conditioner - Leave In (RU001272) 4-L
     Given in the Transportation Details 1 page I click Continue
 
 	#Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
-    Then I should see the U. S. Department of Transportation (DOT) Classification Page
-    And In the International Marine (IMDG) Classification Section, set the option in section: 'UN Number': to: UN1950
-    And In the International Marine (IMDG) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
-    And In the International Marine (IMDG) Classification Section, set the option in section: 'Technical Name (if applicable)': to: My Safe Product
-    And In the International Marine (IMDG) Classification Section, set the option in section: 'Hazard Class (select)': to: 2.1
-    And In the International Marine (IMDG) Classification Section, set the option in section: 'Packing Group': to: None
-    Given in the U. S. Department of Transportation (DOT) Classification page I click Continue
-
+    Then I should see the U.S. Department of Transportation (DOT) Classification Page
+    And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
+    And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
+    And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Technical Name (if applicable)': to: My Safe Product
+    And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
+    And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
+    Given in the U.S. Department of Transportation (DOT) Classification page I click Continue
 	#Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)
 	#		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |
 	#		| No                                       | 2                     | 2                          | Yes           |
+	Then I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
 	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.': to: No
 	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB': to: 2
 	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule': to: 2
 	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?': to: Yes
-	And I click continue
-
+	Given in the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) page I click Continue
+	Then I should see the Volatile Organic Compound Summary Page
 	Given In the Volatile Organic Compound Summary Section, for 'Your acknowledgement of this registration includes that your product..' set 'Yes, I Acknowledge'
 	Given in the Volatile Organic Compound Summary page I click Continue
 
 	#Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
+	Then I should see the Retailer Page
+	Then In the Retailer Section, following retailers should be displayed:
+	| Retailer                   |
+	| No Retailer/No UPC Product |
 	Given in the Retailer page I click Continue
 
-	#Given I call Shared Step 60567 (Upload Product Label only)
+	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
-	Given in the Regulatory Documents to Provide page I click Continue
-	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
-	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
-	Given in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then in the Regulatory Documents to Provide page I click Continue
 
+	#Given I call Shared Step 60567 (Upload Product Label only)
+	Given I should see the Additional Documents to Provide Page
+	Then In the Additional Documents to Provide, upload PDF document to Upload Volatile Organic Compounds field
+	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
 	#Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
@@ -169,10 +167,17 @@ Scenario: [57950] Conditioner - Leave In (RU001272) 4-L
 	Given In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Conditioner - Leave In (Liquid, Non Aerosol)
 	Given I close the tab with Data Summary page
     Given I should see the Data Acceptance Page
-	#Your acknowledgement of this registration includes tha
-#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57950
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button and don't click 'Confirm Order' button
+	Then In the Purchase Summary Page, confirm heading 'Product Billing' is displayed
+	Then In the Purchase Summary Page, confirm Product Billing table is displayed
+	Then In the Purchase Summary Page, the 'Prices and Payment' text message should be displayed
+	Then In the Purchase Summary Page, the 'Confirm Order' button is displayed
+	Then In the Purchase Summary Page, the 'Save for Later' button is displayed
+	Then In the Purchase Summary Page, click the 'Confirm Order' button
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57950
 	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase57950
+	#Then In the Product Grid, delete the product saved as: TestCase57950
 @ignore
 @TestCase:57922
 Scenario: [57922] Odor Remover/Eliminator - Aerosol (RU001086) - 4A
