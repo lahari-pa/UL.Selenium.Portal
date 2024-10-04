@@ -998,6 +998,7 @@ Scenario: [147447] Sears - Authoring option ONLY available
 # Created by Saikiran Chittampally
 @TestCase:50863
 Scenario: [50863] WERCSmart Portal Verification on Required Selections for the "Inventory Status, Prop 65" Page Using the Type of Product: Lip Balm
+
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
