@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
+
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_and_Submit
 {
@@ -90,6 +93,42 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 		{
 			string button = "Save for Later";
 			new Steps_Prototype().ClickButton(button);
+		}
+
+		[RegexStepDefinition(@"In the Purchase Summary Page, verify 'Item Description' shows Product's Name: (.*)")]
+		public void VerifyItemDescriptionProductName(string productName)
+		{
+			var productDetails = (Selenium_Classes.New_Product.ProductInformation)Context.GetFromContext("TestCase57950");
+			string id = productDetails.Id;
+			productName = productName + $" ({id})";
+		
+			Report.IsTrue(new PurchaseSummary().GetProductName() == productName, $"Failed to confirm product's name '{productName}' is displayed", $"Successfully confirmed product's name '{productName}' is displayed");
+		}
+
+		[RegexStepDefinition(@"In the Purchase Summary Page, verify the 'Chemical Assessment' for NR \(No Retailer\/No UPC\) not have a charge")]
+		public void VerifyItemDescriptionCharge()
+		{
+			string itemDescription = "Chemical assessment";
+			string retailer = "No Retailer/No UPC Product";
+			string amount = "$0.00";
+			if(Report.IsTrue(new PurchaseSummary().TableRowExists(itemDescription), $"Failed to confirm table row with Item Description {itemDescription} exists", $"Successfully confirmed row with Item Description {itemDescription} exists"))
+			{
+				Report.IsTrue(new PurchaseSummary().GetRetailerName(itemDescription) == retailer, $"Failed to confirm the displayed retailer for {itemDescription} is {retailer}", $"Successfully confirmed the displayed retailer for {itemDescription} is {retailer}");
+				Report.IsTrue(new PurchaseSummary().GetAmount(itemDescription).Equals(amount), $"Failed to confirm the amount for {itemDescription} is {amount}", $"Successfully confirmed the amount for {itemDescription} is {amount}");
+
+			}
+		}
+		[RegexStepDefinition(@"In the Purchase Summary Page, verify the 'SDS authoring North American Combined GHS SDS ENGLISH \(USA\)' for NR \(No Retailer\/No UPC\) have a charge")]
+		public void VerifyItemDescriptionIsCharged()
+		{
+			string itemDescription = "SDS authoring North American Combined GHS SDS ENGLISH (USA)";
+			string retailer = "No Retailer/No UPC Product";
+			string amount = "$0.00";
+			if (Report.IsTrue(new PurchaseSummary().TableRowExists(itemDescription), $"Failed to confirm table row with Item Description {itemDescription} exists", $"Successfully confirmed row with Item Description {itemDescription} exists"))
+			{
+				Report.IsTrue(new PurchaseSummary().GetRetailerName(itemDescription) == retailer, $"Failed to confirm the displayed retailer for {itemDescription} is {retailer}", $"Successfully confirmed the displayed retailer for {itemDescription} is {retailer}");
+				Report.IsFalse(new PurchaseSummary().GetAmount(itemDescription).Equals(amount), $"Failed to confirm the amount for {itemDescription} is not {amount}", $"Successfully confirmed the amount for {itemDescription} is not {amount}");
+			}
 		}
 	}
 }
