@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Reqnroll;
+using RestSharp;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
@@ -25,6 +26,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		public void CheckOptionsInPrimaryPhysicalStateSection(string condition, string displayed, Table table)
 		{
 			string section = "Primary Physical State";
+			new Steps_Prototype().CheckOptionsInSection(condition, displayed, section, table);
+		}
+
+		[RegexStepDefinition(@"In the Physical and Chemical Properties Section, for section: 'When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then': the following options (should|should not) be (displayed|displayed exclusively):")]
+		public void CheckOptionsInWhenTheProductHasAFlammableSection(string condition, string displayed, Table table)
+		{
+			string section = "When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then";
 			new Steps_Prototype().CheckOptionsInSection(condition, displayed, section, table);
 		}
 
@@ -246,6 +254,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		public void ConfirmBoilingPointIsIsNotDisplayed(string is_isnot)
 		{
 			string section = "Boiling Point (in Celsius)";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
+
+		[RegexStepDefinition(@"In the Physical and Chemical Properties Section, the confirm section: 'Flash Point Testing Method Used' (is|is not) displayed")]
+		public void ConfirmFlashPointTestingMethodUsedIsIsNotDisplayed(string is_isnot)
+		{
+			string section = "Flash Point Testing Method Used";
 			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
 		}
 
