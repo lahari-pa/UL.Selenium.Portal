@@ -518,18 +518,18 @@ Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking S
 	Then in the Inventory Status, Prop 65 (US) page I click Continue
 	#Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
 	Given I should see the Product Labeling Page
-	Then In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California.  Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
-	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
+	Then In the Product Labeling Section, the statement 'Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California.  Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
+	Then In the Product Labeling Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
 	| Option                 |
 	| Drug Facts Panel       |
 	| Supplement Facts Panel |
 	| Nutrition Facts Panel  |
 	| None of the Above      |
-	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above 
-	Then In the Regulatory Information 3 Section, the following link: Nutritional and Supplement Labels should be displayed
-	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
-	Then In the Regulatory Information 3 Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
-	Then in the Regulatory Information 3 page I click Continue
+	Then In the Product Labeling Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above 
+	Then In the Product Labeling Section, the following link: Nutritional and Supplement Labels should be displayed
+	Then In the Product Labeling Section, the following link: Dietary Supplements Label should be displayed
+	Then In the Product Labeling Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
+	Then in the Product Labeling page I click Continue
 	#Given I call Shared Step 26900 (Transportation Details 1 > Not Regulated)
 	Given I should see the Transportation Details 1 Page
 	Then in the Transportation Details 1  page I click Continue
