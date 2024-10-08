@@ -96,16 +96,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 				string section = "If the product carries a custom warning, please provide the exact text that is being used:";
 				new Steps_Prototype().SetTheSectionOptionTo(section, option);
 			}
-
-
 			[RegexStepDefinition(@"In the Inventory Status, Prop 65 \(US\) Section, the following sections (should only|should|should not) be displayed:")]
 			public void CheckSectionsDisplayedInventoryStatusPage(string condition , Table sections)
 			{
 				
 				new Steps_Prototype().CheckDisplayedSections(condition, sections);
 			}
-
-
+			[RegexStepDefinition(@"In the Inventory Status, Prop 65 \(US\) Section, the section 'U.S. Toxic Substances Control Act \(TSCA\) status' (should|should not) display an error message: (.*)")]
+			public void ConfirmErrorMessageForTSCA(string condition, string errorMessage)
+			{
+				string section = "U.S. Toxic Substances Control Act (TSCA) status";
+				new Steps_Prototype().ErrorMessagesAreShowingForItem(section, condition, errorMessage);
+			}
+			[RegexStepDefinition(@"In the Inventory Status, Prop 65 \(US\) Section, the section 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 \(commonly known as California Proposition 65\)\?' (should|should not) display an error message: (.*)")]
+			public void ConfirmErrorMessageForCaliProp65(string condition, string errorMessage)
+			{
+				string section = "Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?";
+				new Steps_Prototype().ErrorMessagesAreShowingForItem(section, condition, errorMessage);
+			}
 		}
 	}
 }
