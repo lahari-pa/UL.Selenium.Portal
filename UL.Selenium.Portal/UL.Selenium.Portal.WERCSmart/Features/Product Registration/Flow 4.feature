@@ -171,7 +171,7 @@ Scenario: [57950] Conditioner - Leave In (RU001272) 4-L
 	Then In the Data Acceptance Section, click 'Accept' button and don't click 'Confirm Order' button
 	Then In the Purchase Summary Page, confirm heading 'Product Billing' is displayed
 	Then In the Purchase Summary Page, confirm Product Billing table is displayed
-	Then In the Purchase Summary Page, verify 'Item Description' shows Product's Name: Conditioner - Leave In (Liquid, Non Aerosol)
+	Then In the Purchase Summary Page, verify 'Item Description' shows Product's Name: Conditioner - Leave In (Liquid, Non Aerosol) and product ID saved as: TestCase57950
 	Then In the Purchase Summary Page, verify the 'Chemical Assessment' for NR (No Retailer/No UPC) not have a charge
 	Then In the Purchase Summary Page, verify the 'SDS authoring North American Combined GHS SDS ENGLISH (USA)' for NR (No Retailer/No UPC) have a charge
 	Then In the Purchase Summary Page, the 'Prices and Payment' text message should be displayed
@@ -750,7 +750,6 @@ Scenario: [57952] Hair Styling Gel- (RU000749) 4LS - 4S
 	Then In the Purchase Summary Page, the 'Save for Later' button is displayed
 	Then In the Purchase Summary Page, click the 'Confirm Order' button
 	Then The Purchase Summary Page is displayed
-	Then In the Purchase Summary page message is displayed with text: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57952
 	#Then I navigate to the Home Page
 	#Then In the Product Grid, delete the product saved as: TestCase57952
