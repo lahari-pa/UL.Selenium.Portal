@@ -14,6 +14,7 @@
 @NewProduct
 @run_ProductRegistration
 @StepsPrototype
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
@@ -26,7 +27,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 @RegulatoryInformation3
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
-
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 Feature: Product Registration
 
 @tfs_design
@@ -998,19 +999,27 @@ Scenario: [147447] Sears - Authoring option ONLY available
 # Created by Saikiran Chittampally
 @TestCase:50863
 Scenario: [50863] WERCSmart Portal Verification on Required Selections for the "Inventory Status, Prop 65" Page Using the Type of Product: Lip Balm
+
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC50863
+
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
+	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Lip Balm_#50863
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Lip Balm
+	Then in the The Product page, I click Continue
+
 	Then I save the product information as: TestCase50863
-	Given I should see the Product Information Page
+
 	#Given I call Shared Step 59680a (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Then I should be on the Product Information Page
 	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
 	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
 	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
@@ -1018,13 +1027,56 @@ Scenario: [50863] WERCSmart Portal Verification on Required Selections for the "
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page I click Continue
-	Given I call Shared Step 213796 (Physical and Chemical Properties - Applicable Only to Lip Balm (RU000246))
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Cocos Nucifera Oil  | 50      | false               | false       |            |
-		| White Mineral Oil (petroleum)       | 50       | false               | false       |            |
-	Given I call Shared Step 234333 (Inventory Status, Prop 65 (US) - Applicable Only to Lip Balm (RU000246))
-	Given I call Shared Step 234334 (Regulatory Information 3 - Applicable Only to Lip Balm (RU000246))
+
+	#Given I call Shared Step 213796 (Physical and Chemical Properties - Applicable Only to Lip Balm (RU000246))
+	Then I should be on the Physical and Chemical Properties Page
+	And In the Physical and Chemical Properties Section, for section: 'Primary Physical State': the following options should be displayed exclusively:
+	| Option |
+	| Liquid |
+	| Solid  |
+	And In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
+	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	And In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	And In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: No data available
+	Then in the Physical and Chemical Properties page, I click Continue
+
+	#Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Cocos Nucifera Oil  | 50      | false               | false       |            |
+	#	| White Mineral Oil (petroleum)       | 50       | false               | false       |            |
+	Then I should be on the Ingredients Page
+	And In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue                   | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Cocos Nucifera Oil            | 50      | False               | False         |             |
+	| component name | White Mineral Oil (petroleum) | 50      | False               | False         |             |
+	Then in the Ingredients page, I click Continue
+
+	#Given I call Shared Step 234333 (Inventory Status, Prop 65 (US) - Applicable Only to Lip Balm (RU000246))
+	Then I should be on the Inventory Status, Prop 65 (US) Page
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+	And In the Inventory Status, Prop 65 (US) Section, the section 'U.S. Toxic Substances Control Act (TSCA) status' should display an error message: This is a required field.
+	And In the Inventory Status, Prop 65 (US) Section, the section 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' should display an error message: This is a required field.
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is exempt from TSCA chemical Inventory listing requirements.
+	And In the Inventory Status, Prop 65 (US) Section, the section 'U.S. Toxic Substances Control Act (TSCA) status' should not display an error message: This is a required field.
+	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	And In the Inventory Status, Prop 65 (US) Section, the section 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' should not display an error message: This is a required field.
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+
+	#Given I call Shared Step 234334 (Regulatory Information 3 - Applicable Only to Lip Balm (RU000246))
+	Then I should be on the Product Labeling Page
+	And In the Product Labeling Section, the statement 'Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California.  Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
+	And In the Product Labeling Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
+	| Option                 |
+	| Drug Facts Panel       |
+	| Supplement Facts Panel |
+	| Nutrition Facts Panel  |
+	| None of the Above      |
+	And In the Product Labeling Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above
+	And In the Product Labeling Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
+	And In the Product Labeling Section, the following link: Nutritional and Supplement Labels should be displayed
+	And In the Product Labeling Section, the following link: Dietary Supplements Label should be displayed
+	Then in the Product Labeling page, I click Continue
+
 #	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase50863
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase50863
