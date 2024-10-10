@@ -1028,7 +1028,7 @@ Scenario: [57982] Bonding agent (RU000023) - 4All - 4G
 	Given In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Bonding agent
 	Given In the Summary Page, the 'Primary Physical State' section should be showing the following value: Liquid
 	Given In the Summary Page, the 'Secondary Physical State' section should be showing the following value: Liquid
-	Then In the Summary Page, the 'Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.' section should be showing the following value: No
+	Then In the Summary Page, the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. section should be showing the following value: No
 	Given In the Summary Page, the 'CARB' section should be showing the following value: 10
 	Given In the Summary Page, the 'OTC Model Rule' section should be showing the following value: 6
 	Then In the Summary Page, verify table data in column Container Type showing the value: Plastic Container
@@ -1042,7 +1042,7 @@ Scenario: [57982] Bonding agent (RU000023) - 4All - 4G
 	Given I close the tab with Data Summary page
     Given I should see the Data Acceptance Page
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57982
-	Then I nvigate to the Home Page
+	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase57982
 
 @TestCase:57983
