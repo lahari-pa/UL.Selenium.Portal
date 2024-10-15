@@ -2177,6 +2177,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 
 		public bool Thank_You_TextExists(string thankYouText)
 		{
+			Delay.Seconds(3 * Delay.SpeedFactor);
 			IWebElement tyTextElement = this.ContainerElement.FindElement(By.XPath($".//div[@class='panel-body']//p[contains(text(), '{thankYouText}')]"), 1);
 			return tyTextElement != null;
 		}

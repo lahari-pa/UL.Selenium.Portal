@@ -95,10 +95,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 			new Steps_Prototype().ClickButton(button);
 		}
 
-		[RegexStepDefinition(@"In the Purchase Summary Page, verify 'Item Description' shows Product's Name: (.*)")]
-		public void VerifyItemDescriptionProductName(string productName)
+		[RegexStepDefinition(@"In the Purchase Summary Page, verify 'Item Description' shows Product's Name: (.*) and product ID saved as: (.*)")]
+		public void VerifyItemDescriptionProductName(string productName, string savedAs)
 		{
-			var productDetails = (Selenium_Classes.New_Product.ProductInformation)Context.GetFromContext("TestCase57950");
+			var productDetails = (Selenium_Classes.New_Product.ProductInformation)Context.GetFromContext(savedAs);
 			string id = productDetails.Id;
 			productName = productName + $" ({id})";
 		
