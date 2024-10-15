@@ -1511,12 +1511,12 @@ Scenario: [57991] Glue sticks for glue guns- (RU000300) - 4S
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 
-	 # ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
     Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
 
-	# ====== And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Footwear or Leather Care Product - Aerosol ====== #
+	#And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Footwear or Leather Care Product - Aerosol
     And I should see the The Product Page
     And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Glue sticks for glue guns
     And In the Product Section, set the option in section: 'Type of Product (select)' to: Glue sticks for glue guns
@@ -1524,9 +1524,9 @@ Scenario: [57991] Glue sticks for glue guns- (RU000300) - 4S
     Then I save the product information as: TestCase57991
 	Then I generate a random UPC number and save as: UPC57991
 
-	# ====== Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR)) ====== #
-	# ====== | Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale | ====== #
-	# ====== | No                                                             | No                           | No                     | No                  | ====== #
+	#Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR)) 
+	# | Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale | ====== #
+	# | No                                                             | No                           | No                     | No                  | ====== #
 	And I should see the Product Information Page
 	And In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
 	And In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
@@ -1534,11 +1534,6 @@ Scenario: [57991] Glue sticks for glue guns- (RU000300) - 4S
 	And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	And in the Product Information page I click Continue
-
-	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	Given I should see the Regulatory Documents to Provide Page
-	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
-	Then in the Regulatory Documents to Provide page I click Continue
 
 	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I should see the Physical and Chemical Properties Page
@@ -1549,11 +1544,11 @@ Scenario: [57991] Glue sticks for glue guns- (RU000300) - 4S
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Then in the Physical and Chemical Properties page I click Continue
 
-	# ====== And I call Shared Step 57570 (Enter Ingredients) and add the following ingredients: ====== #
-    # ======    | CASNumber        | Percent | PublicallyDisclosed | TradeSecret | PublicName | ====== #
-	# ======	| 24937-78-8	   | 40      | false               | false       |            | ====== #
-	# ======	| 68131-77-1	   | 45      | false               | false       |            | ====== #
-	# ======	| 8002-74-2        | 15      | false               | false       |            | ====== #
+	# And I call Shared Step 57570 (Enter Ingredients) and add the following ingredients: 
+    #   | CASNumber        | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| 24937-78-8	   | 40      | false               | false       |            | 
+	#	| 68131-77-1	   | 45      | false               | false       |            |
+	#	| 8002-74-2        | 15      | false               | false       |            | 
     And I should see the Ingredients Page
     When in the Ingredients page I click Continue
     Then I should see the ingredients error message
@@ -1570,30 +1565,27 @@ Scenario: [57991] Glue sticks for glue guns- (RU000300) - 4S
 	Given In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Given in the Inventory Status, Prop 65 (US) page I click Continue
 
-    #Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+    #Given I call Shared Step 214816 Transportation Details 1 - Applicable Only to Glue Sticks for Glue Guns (RU000300)
     Then I should see the Transportation Details 1 Page
-    Given In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Yes
-    Given In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: DOT
-    Given In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping with limited quantity
+    Given In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
     Given in the Transportation Details 1 page I click Continue
 
-    # ====== Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path) ====== #
-    Then I should see the U. S. Department of Transportation (DOT) Classification Page
-    And In the International Marine (IMDG) Classification Section, set the option in section: 'UN Number': to: UN1950
-    And In the International Marine (IMDG) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
-    And In the International Marine (IMDG) Classification Section, set the option in section: 'Technical Name (if applicable)': to: My Safe Product
-    And In the International Marine (IMDG) Classification Section, set the option in section: 'Hazard Class (select)': to: 2.1
-    And In the International Marine (IMDG) Classification Section, set the option in section: 'Packing Group': to: None
-    Given in the U. S. Department of Transportation (DOT) Classification page I click Continue
-
-	# ====== Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)  ====== #
-	# ====== 		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |  ====== #
-	# ====== 		| No                                       | 10                    | 10                         | Yes           |  ====== #
+	#214817 VOC - OTC and/or CARB - Applicable Only to Glue Sticks for Glue Guns (RU000300)
 	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.': to: No
 	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB': to: 10
 	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule': to: 10
+	#Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?': to: Yes
 	Given I click continue
 
+	#214818 Volatile Organic Compound Summary - Applicable Only to Glue Sticks for Glue Guns (RU000300)
+	Then In the Volatile Organic Compound Summary Section, confirm that I see todays 'VOC Analysis Date'
+	Then In the Volatile Organic Compound Summary Section, confirm 'Limits' table should exists
+	Then In the Volatile Organic Compound Summary Section, confirm 'VOC content as weight percentage of total formula, minus exempt compounds, for each of the following states.' table should exists
+	Then In the Volatile Organic Compound Summary Section, confirm that I see the following 'CARB' value: 10
+	Then In the Volatile Organic Compound Summary Section, confirm that I see the following 'OTC Model Rule' value: 10
+	Then In the Volatile Organic Compound Summary Section, the statement 'Based on the type of product, this must comply with the most restrictive VOC limit.' is displayed
+	Then In the Volatile Organic Compound Summary Section, the statement 'Does not exceed the limits specified in the California Consumer Products Regulation' is displayed
+	Then In the Volatile Organic Compound Summary Section, the statement 'Does not exceed the limits specified by the Ozone Transport Commission' is displayed
 	Given In the Volatile Organic Compound Summary Section, for 'Your acknowledgement of this registration includes that your product..' set 'Yes, I Acknowledge'
 	Given in the Volatile Organic Compound Summary page I click Continue
 
@@ -1606,11 +1598,11 @@ Scenario: [57991] Glue sticks for glue guns- (RU000300) - 4S
 
 	Then I click continue
 
-	# ====== Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC57991, container type: Plastic Container and size: 13.2 ====== #
+	#Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC57991, container type: Plastic Container and size: 13.2
 	And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
 	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC57991 enter Size: 13.2 and enter Container Type: Plastic Container 
-	Given I should see following container type from the drop down list
+	Given In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, the following container types should be displayed from the drop down list:
 	|Container Type|
 	|Cardboard|
 	|Cardboard with Gas Cylinder|
@@ -1629,27 +1621,43 @@ Scenario: [57991] Glue sticks for glue guns- (RU000300) - 4S
 	|Vial - Medical|
 	|Wooden box|
 	|Wooden crate|
-	And I confirm that retailer "WG" is present under the 'Destination Retailers' column in the UPC table
+	And In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, verify retailer 'WG' is present under the 'Destination Retailers' column
 	Then I click continue	
 
-	# ====== Given I call Shared step 214825 (Additional Documents to Provide - Upload Product Label - Continue) ====== #
+	#Then I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Yes, I certify that I have an OSHA-compliant SDS for this product and would like to upload it.
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'OSHA SDS'
+	Then in the Regulatory Documents to Provide page I click Continue
+	Given in the Additional Documents to Provide page I click Continue
+
+	#Given I call Shared step 214825 (Additional Documents to Provide - Upload Product Label - Continue)
 	And I should see the Additional Documents to Provide Page
-	Given I upload PDF document to Generic Private Label (all sides) field
+	Then in the Additional Documents to Provide page I click Continue
+	Then In the Additional Documents to Provide, section 'Volatile Organic Compounds' error message should display: Document is required: Product Label
+	Then In the Additional Documents to Provide, upload PDF document to Upload Volatile Organic Compounds field
     Then in the Additional Documents to Provide page I click Continue
 
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given in the Optional Comments page I click Continue
 
-	# ====== Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Glue sticks for glue guns ====== #
+	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Glue sticks for glue guns 
 	Given I should see the Data Acceptance Page
 	Given In the Data Acceptance Section, click 'Summary' button
 	Given I switch to the tab with Data Summary page
 	Given In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Glue sticks for glue guns
+	Given In the Summary Page, the 'Primary Physical State' section should be showing the following value: Solid
+	Given In the Summary Page, the 'Secondary Physical State' section should be showing the following value: Solid
+	Given In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Glue sticks for glue guns
+	Given In the Summary Page, the 'CARB' section should be showing the following value: 10
+	Given In the Summary Page, the 'OTC Model Rule' section should be showing the following value: 10
+	Then In the Summary Page, verify table data in column Container Type showing the value: Plastic Container
+	Then In the Summary Page, verify table data in column Size (Ounces) showing the value: 13.2
+	Then In the Summary Page, verify table data in column Retailers showing the value: WG
+	Then In the Summary Page, verify table data for 'Document' section Supplier Uploaded in column File Name showing the value: testdoc.pdf
+	Then In the Summary Page, verify table data for 'Document' section Supplier Uploaded in column Actions showing the value: View
 	Given I close the tab with Data Summary page
     Given I should see the Data Acceptance Page
-	#Your acknowledgement of this registration includes tha
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57991
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Glue sticks for glue guns
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57991
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase57991
