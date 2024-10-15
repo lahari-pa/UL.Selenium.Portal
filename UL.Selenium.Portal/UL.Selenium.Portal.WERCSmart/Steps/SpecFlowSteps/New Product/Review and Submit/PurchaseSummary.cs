@@ -24,6 +24,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 		{
 			new Steps_PaymentMethods().ThenInTheThankYouScreenIClickHome();
 		}
+
 		[RegexStepDefinition("In the Purchase Summary page message is displayed with text: (.*)")]
 		public void ThenInThePurchaseSummaryPageMessageIsDisplayedWithText( string text)
 		{

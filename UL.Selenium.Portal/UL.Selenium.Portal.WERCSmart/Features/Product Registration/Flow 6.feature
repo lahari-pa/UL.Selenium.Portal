@@ -305,14 +305,14 @@ Scenario: [57647] Insecticide-Flying Bug-Moth Proofing Product containing <98% P
 	Then In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping with limited quantity
 	Then in the Transportation Details 1 page I click Continue
 
-	#Given I call Shared Step 34455 (U. S. Department of Transportation (DOT) Classification - Enter all valid data)
-	Given I should see the U. S. Department of Transportation (DOT) Classification Page
-	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN3159
-	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: 1,1,1,2-Tetrafluoroethane
-	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Technical Name (if applicable)': to: Technical Test Name
-	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.2
-	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
-	Then in the U. S. Department of Transportation (DOT) Classification page I click Continue
+	#Given I call Shared Step 34455 (U.S. Department of Transportation (DOT) Classification - Enter all valid data)
+	Given I should see the U.S. Department of Transportation (DOT) Classification Page
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN3159
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: 1,1,1,2-Tetrafluoroethane
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Technical Name (if applicable)': to: Technical Test Name
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.2
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
+	Then in the U.S. Department of Transportation (DOT) Classification page I click Continue
 
 	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples
 	Given I should see the Retailer Page

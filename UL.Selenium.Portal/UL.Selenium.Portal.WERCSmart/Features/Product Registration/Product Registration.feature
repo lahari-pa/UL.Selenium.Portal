@@ -401,8 +401,8 @@ Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Availa
 		| DOT                            |
 		| Shipping with limited quantity |
 	Given in the New Product page I click Continue
-	# U. S. Department of Transportation (DOT) Classification Page
-	Then I should see the U. S. Department of Transportation (DOT) Classification Page
+	# U.S. Department of Transportation (DOT) Classification Page
+	Then I should see the U.S. Department of Transportation (DOT) Classification Page
 	And I set the UN Number field to: UN1944
 	And I set the Proper Shipping Name field to: Matches, safety
 	And I set the Technical Name (if applicable) field to: My Safe Product

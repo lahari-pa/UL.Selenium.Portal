@@ -634,8 +634,8 @@ Scenario: [56484] VOC - Aero checks
 		| DOT                              |
 		| Shipping with limited quantity   |
 	Given in the New Product page I click Continue
-	# U. S. Department of Transportation (DOT) Classification Page
-	Then I should see the U. S. Department of Transportation (DOT) Classification Page
+	# U.S. Department of Transportation (DOT) Classification Page
+	Then I should see the U.S. Department of Transportation (DOT) Classification Page
 	And I set the UN Number field to: UN1950
 	And I set the Proper Shipping Name field to: Aerosols
 	And I set the Technical Name (if applicable) field to: Clear Coating - Aerosol

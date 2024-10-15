@@ -168,7 +168,7 @@ Scenario: [56214] My Products grid Actions - Submit navigation
 	Then in the Inventory Status, Prop 65 (US) page I click Continue
 
 	#And I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
-	#And I call Shared Step 71618 (U. S. Department of Transportation (DOT) Classification - For Alcohol (Packaging III))
+	#And I call Shared Step 71618 (U.S. Department of Transportation (DOT) Classification - For Alcohol (Packaging III))
 	#And I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
 
 	#Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)

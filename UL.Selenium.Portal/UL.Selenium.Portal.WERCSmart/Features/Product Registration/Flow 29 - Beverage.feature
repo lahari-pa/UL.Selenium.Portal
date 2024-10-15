@@ -88,13 +88,13 @@ Scenario: [60694] Alcoholic Beverages - Wine - RU001418 - (More than 24% but Les
 	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: IATA
 	Then In the Transportation Details 1 Section, set the option for IATA mode of transport to: Shipping with limited quantity
 	Then in the Transportation Details 1 page, I click Continue
-	#Then I call Shared Step 71618 (U. S. Department of Transportation (DOT) Classification - For Alcohol (Packaging III))
-	Then I should be on the U. S. Department of Transportation (DOT) Classification Page
-	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN3065
-	Then In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Alcoholic beverages
-	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 3
-	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: III
-	Then in the U. S. Department of Transportation (DOT) Classification page, I click Continue
+	#Then I call Shared Step 71618 (U.S. Department of Transportation (DOT) Classification - For Alcohol (Packaging III))
+	Then I should be on the U.S. Department of Transportation (DOT) Classification Page
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN3065
+	Then In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Alcoholic beverages
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 3
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: III
+	Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
 	Then I should be on the International Air Transport (IATA) Classification Page
 	Then In the International Air Transport (IATA) Classification Section, set the option in section: 'UN Number': to: UN3065
 	Then In the International Air Transport (IATA) Classification Section, verify section: 'Proper Shipping Name' contains value: Alcoholic beverages
@@ -199,7 +199,7 @@ Scenario: [73085] Wine - RU001418 - Walgreens and No Retailer only for Retailers
 	Then In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping with limited quantity
 	Then in the Transportation Details 1 page I click Continue
 
-	Given I call Shared Step 71618 (U. S. Department of Transportation (DOT) Classification - For Alcohol (Packaging III))
+	Given I call Shared Step 71618 (U.S. Department of Transportation (DOT) Classification - For Alcohol (Packaging III))
 	Then the 'Select Retailers' window appears
 	Then In the 'Select retailers' window I should only see the following retailers:
 		| Retailer									|
@@ -413,13 +413,13 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: DOT
 	Then In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping with limited quantity
 	Then in the Transportation Details 1 page, I click Continue
-	#Then I call Shared Step 92982 (U. S. Department of Transportation (DOT) Classification - For Alcoholic Beverages - Spirits (RU001434) - Packaging Group should pre-select Packaging Group II)
-	Then I should be on the U. S. Department of Transportation (DOT) Classification Page
-	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN3065
-	Then In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Alcoholic beverages
-	Then In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
-	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: II
-	Then in the U. S. Department of Transportation (DOT) Classification page, I click Continue
+	#Then I call Shared Step 92982 (U.S. Department of Transportation (DOT) Classification - For Alcoholic Beverages - Spirits (RU001434) - Packaging Group should pre-select Packaging Group II)
+	Then I should be on the U.S. Department of Transportation (DOT) Classification Page
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN3065
+	Then In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Alcoholic beverages
+	Then In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: II
+	Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
 	#Given I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
 	#I call Shared Step 242171 (Retailer - Add Retailers - Publix and Walgreens - Applicable Only to Alcoholic Beverages - SPIRITS (RU001434) - (Greater than 70% Alcohol))(Step has not created yet)
 	Then I should be on the Retailer Page

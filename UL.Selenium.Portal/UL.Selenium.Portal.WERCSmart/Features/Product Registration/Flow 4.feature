@@ -113,13 +113,13 @@ Scenario: [57950] Conditioner - Leave In (RU001272) 4-L
     Given in the Transportation Details 1 page I click Continue
 
 	#Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
-    Then I should see the U. S. Department of Transportation (DOT) Classification Page
+    Then I should see the U.S. Department of Transportation (DOT) Classification Page
     And In the International Marine (IMDG) Classification Section, set the option in section: 'UN Number': to: UN1950
     And In the International Marine (IMDG) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
     And In the International Marine (IMDG) Classification Section, set the option in section: 'Technical Name (if applicable)': to: My Safe Product
     And In the International Marine (IMDG) Classification Section, set the option in section: 'Hazard Class (select)': to: 2.1
     And In the International Marine (IMDG) Classification Section, set the option in section: 'Packing Group': to: None
-    Given in the U. S. Department of Transportation (DOT) Classification page I click Continue
+    Given in the U.S. Department of Transportation (DOT) Classification page I click Continue
 
 	#Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)
 	#		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |
@@ -674,13 +674,13 @@ Scenario: [57952] Hair Styling Gel- (RU000749) 4LS - 4S
     Given in the Transportation Details 1 page I click Continue
 
 	# ====== Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path) ====== #
-    Then I should see the U. S. Department of Transportation (DOT) Classification Page
+    Then I should see the U.S. Department of Transportation (DOT) Classification Page
     And In the International Marine (IMDG) Classification Section, set the option in section: 'UN Number': to: UN1950
     And In the International Marine (IMDG) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
     And In the International Marine (IMDG) Classification Section, set the option in section: 'Technical Name (if applicable)': to: My Safe Product
     And In the International Marine (IMDG) Classification Section, set the option in section: 'Hazard Class (select)': to: 2.1
     And In the International Marine (IMDG) Classification Section, set the option in section: 'Packing Group': to: None
-    Given in the U. S. Department of Transportation (DOT) Classification page I click Continue
+    Given in the U.S. Department of Transportation (DOT) Classification page I click Continue
 
 	# ====== Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)  ====== #
 	# ====== 		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |  ====== #
@@ -1202,13 +1202,13 @@ Scenario: [57985] Footwear or Leather Care Product - Aerosol (RU000744) - Testin
     Given in the Transportation Details 1 page I click Continue
 
 	# ====== Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path) ====== #
-    Then I should see the U. S. Department of Transportation (DOT) Classification Page
+    Then I should see the U.S. Department of Transportation (DOT) Classification Page
     And In the International Marine (IMDG) Classification Section, set the option in section: 'UN Number': to: UN1950
     And In the International Marine (IMDG) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
     And In the International Marine (IMDG) Classification Section, set the option in section: 'Technical Name (if applicable)': to: My Safe Product
     And In the International Marine (IMDG) Classification Section, set the option in section: 'Hazard Class (select)': to: 2.1
     And In the International Marine (IMDG) Classification Section, set the option in section: 'Packing Group': to: None
-    Given in the U. S. Department of Transportation (DOT) Classification page I click Continue
+    Given in the U.S. Department of Transportation (DOT) Classification page I click Continue
 
 	# ====== Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)  ====== #
 	# ====== 		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |  ====== #
@@ -1568,13 +1568,13 @@ Scenario: [57991] Glue sticks for glue guns- (RU000300) - 4S
     Given in the Transportation Details 1 page I click Continue
 
     # ====== Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path) ====== #
-    Then I should see the U. S. Department of Transportation (DOT) Classification Page
+    Then I should see the U.S. Department of Transportation (DOT) Classification Page
     And In the International Marine (IMDG) Classification Section, set the option in section: 'UN Number': to: UN1950
     And In the International Marine (IMDG) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
     And In the International Marine (IMDG) Classification Section, set the option in section: 'Technical Name (if applicable)': to: My Safe Product
     And In the International Marine (IMDG) Classification Section, set the option in section: 'Hazard Class (select)': to: 2.1
     And In the International Marine (IMDG) Classification Section, set the option in section: 'Packing Group': to: None
-    Given in the U. S. Department of Transportation (DOT) Classification page I click Continue
+    Given in the U.S. Department of Transportation (DOT) Classification page I click Continue
 
 	# ====== Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)  ====== #
 	# ====== 		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |  ====== #

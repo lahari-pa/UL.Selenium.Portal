@@ -119,12 +119,12 @@ Scenario: [63521] Kit Product - One or more inputs is regulated for transport - 
 	Given I set the Select all modes of transport field to: DOT
 	Given I set the Select all modes of transport field to: Shipping fully regulated
 	Then in the Transport Details 1 page I click Continue
-	And I should see the U. S. Department of Transportation (DOT) Classification Page
+	And I should see the U.S. Department of Transportation (DOT) Classification Page
 	Given I set the UN Number field to: UN1950
 	Given I set the Proper Shipping Name field to: Aerosols
 	Given I set the Hazard Class field to: 2.1
 	Given I set the Packing Group field to: None
-	Then in the U. S. Department of Transportation (DOT) Classification page I click Continue
+	Then in the U.S. Department of Transportation (DOT) Classification page I click Continue
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)	
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	And  I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)

@@ -11,31 +11,31 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 	[Binding, Scope(Tag = "Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:USDepartamentOfTransportationDOT")]
 	class WERCSmart_Distributor_NewProducts_USDepartamentOfTransportationDOT
 	{
-		[RegexStepDefinition(@"In the U. S. Department of Transportation \(DOT\) Classification Section, set the option in section: 'UN Number': to: (.*)")]
+		[RegexStepDefinition(@"In the U.S. Department of Transportation \(DOT\) Classification Section, set the option in section: 'UN Number': to: (.*)")]
 		public void SetUNNumberIMDG(string option)
 		{
 			string section = "UN Number";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
-		[RegexStepDefinition(@"In the U. S. Department of Transportation \(DOT\) Classification Section, set the option in section: 'Proper Shipping Name': to: (.*)")]
+		[RegexStepDefinition(@"In the U.S. Department of Transportation \(DOT\) Classification Section, set the option in section: 'Proper Shipping Name': to: (.*)")]
 		public void SetProperShippingNameIMDG(string option)
 		{
 			string section = "Proper Shipping Name";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
-		[RegexStepDefinition(@"In the U. S. Department of Transportation \(DOT\) Classification Section, set the option in section: 'Technical Name \(if applicable\)': to: (.*)")]
+		[RegexStepDefinition(@"In the U.S. Department of Transportation \(DOT\) Classification Section, set the option in section: 'Technical Name \(if applicable\)': to: (.*)")]
 		public void SetTechnicalNameIMDG(string option)
 		{
 			string section = "Technical Name (if applicable)";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
-		[RegexStepDefinition(@"In the U. S. Department of Transportation \(DOT\) Classification Section, set the option in section: 'Hazard Class': to: (.*)")]
+		[RegexStepDefinition(@"In the U.S. Department of Transportation \(DOT\) Classification Section, set the option in section: 'Hazard Class': to: (.*)")]
 		public void SetHazardClassIMDG(string option)
 		{
 			string section = "Hazard Class (select)";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
-		[RegexStepDefinition(@"In the U. S. Department of Transportation \(DOT\) Classification Section, set the option in section: 'Packing Group': to: (.*)")]
+		[RegexStepDefinition(@"In the U.S. Department of Transportation \(DOT\) Classification Section, set the option in section: 'Packing Group': to: (.*)")]
 		public void SetPackingGroupIMDG(string option)
 		{
 			string section = "Packing Group (select)";
