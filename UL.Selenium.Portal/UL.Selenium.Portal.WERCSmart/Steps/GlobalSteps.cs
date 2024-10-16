@@ -36,6 +36,7 @@ using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.Utilities;
 using UL.Selenium.Portal.WERCSmart.Helpers;
 using UL.Selenium.Portal.WERCSmart.Classes.Configuration;
+using TReVor.Integrations.Classes.Configuration;
 
 [assembly: Apartment(ApartmentState.STA)]
 
@@ -180,6 +181,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[RegexStepDefinition(@"I log in with the account saved in TReVor as: (.*)")]
 		public void ILogInWithTheAccountSavedInTrevorAs(string accountSavedAs)
 		{
+
 			this.LoginToAccount(accountSavedAs);
 		}
 
@@ -202,9 +204,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			return user.UserName;
 		}
-
+	
 		public void LoginToAccount(string alias)
 		{
+
 			//SoftwareCredentialBasic user = TReVor.Integrations.Classes.TReVorSettings.Credentials.GetCredential(alias);
 			SoftwareCredentialBasic user = TReVor.Integrations.Classes.TReVorSettings.VaultRecords.GetCredential(alias).ToSoftwareCredentialBasic();
 			if (user == null)
@@ -222,7 +225,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					return;
 				}
 			}
-			this.GivenILogInWithEmailXAndPasswordY(user.UserName, user.Password);
+			string GetBranchName() => TReVor.Integrations.Classes.TReVorSettings.BranchInfo?.BranchName ?? TReVorConfig.CurrentSettings?.TReVorSettings?.SoftwareBranch;
+			if(GetBranchName() == "QA-Integration")
+			{
+				this.GivenILogInWithEmailXAndPasswordY(user.UserName, user.Password);
+			}
+			else
+			{
+			    Report.IsTrue(new LandingPage().Click_Login(), "Failed to click Log In", "Successfully clicked Log In");
+				Report.IsTrue(new LandingPlatform().WaitForContainerToBeVisible(), "Landing Page did not load!", "Landing Page loaded");
+				Report.IsTrue(new LandingPlatform().SignIn(user.UserName, user.Password), $"Failed to Log In as {alias}", $"Successfully Logged In as {alias}", true);
+			}
 			new StepsHomepage().IfDataConsentRequestsModalIsShowingAddRequiredTiers();
 		}
 
