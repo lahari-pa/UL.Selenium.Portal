@@ -21,7 +21,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Click_Login()
 		{
 			IWebElement loginButton = this.Login ?? this.containerElement.FindElement(By.XPath(".//a[contains (@href, 'ssologin')]"), 2);
-			return loginButton.TryClick() && new Login().WaitForContainerToBeVisible();
+			return loginButton.TryClick();
 		}
 
 		public bool Click_SignUp() => this.SignUp.TryClick();

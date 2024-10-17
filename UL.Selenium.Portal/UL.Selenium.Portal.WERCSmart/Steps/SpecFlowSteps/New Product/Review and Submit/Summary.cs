@@ -22,6 +22,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 		{
 			new StepsDataSummarySheet().ShouldBeShowingFollowing(section, value);
 		}
+		[RegexStepDefinition(@"In the Summary Page, the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. section should be showing the following value: (.*)")]
+		public void InTheSummarySectionCheckProductHasBeen(string value)
+		{
+			string section = "Product has been granted an";
+			new StepsDataSummarySheet().ShouldBeShowingFollowing(section, value);
+		}
 		[RegexStepDefinition(@"I switch to the tab with Data Summary page")]
 		public void SwitchToTheSummary()
 		{
