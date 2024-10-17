@@ -450,7 +450,7 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then The Upload SDS (Optional) question is displayed
 	Then The Flash Point Testing Report question is displayed
 	Then The Transportation Exemption Letter or Special Permit question is displayed
-	Then I upload PDF document to Upload SDS (Optional) field
+	Then In the Additional Documents to Provide, upload PDF document to Upload SDS (Optional) field
 	Then In the Additional Documents to Provide, for section OSHA SDS button View should exists
 	Then In the Additional Documents to Provide, for section OSHA SDS button Remove should exists
 	Then In the Additional Documents to Provide, for section OSHA SDS I click button 'View'

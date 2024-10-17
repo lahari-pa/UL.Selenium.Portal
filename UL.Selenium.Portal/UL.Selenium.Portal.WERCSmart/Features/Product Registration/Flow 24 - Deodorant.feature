@@ -314,28 +314,26 @@ Scenario: [159880] Antiperspirant for Women (Non-Aerosol) RU001256
 
 Given I log in with the account saved in TReVor as: ProductAccount
 
-    # ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
+    #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
     Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
 
-	# ====== Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Antiperspirant for Women (Non-Aerosol) ====== #
+	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Antiperspirant for Women (Non-Aerosol)
 	Given I should see the The Product Page
+	Then In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Antiperspirants - Non-aerosol_#159880
 	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Antiperspirants - Non-aerosol
 	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase159880
 
-    # ======Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path) ====== #
+    #Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
     Given I should see the Product Information Page
 	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
 	Given In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 	Given In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
-	Given In the Product Information Section, set the option in section: 'Product is a Retailer's Private Label or Brand' to: No
+	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Given In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Given in the Product Information page I click Continue
-
-	Given In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
-	Given in the Regulatory Documents To Provide page I click Continue
 
 	Given I save the product information as: TestProduct
 	Given in the Product Characteristics page I click Continue
@@ -349,47 +347,47 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	And I should see the Ingredients Page
 	Then In the Ingredients section, add the following ingredients:
-		| SearchType     | SearchText | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-		| component name | Water      |  100    | false                | false        |   Water    |
+		| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+		| component name | Water       | 100     | false               | false         | Water       |
 	And in the Ingredients page I click Continue
 
-	# ====== Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path) ====== #
+	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Inventory Status, Prop 65 (US) Page
 	Given In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
 	Given In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
     Given in the Inventory Status, Prop 65 (US) page I click Continue
 
-	Given I should see the Regulatory Information 3 Page
+	Given I should see the Product Labeling Page
 	Given In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above
-	Given in the Regulatory Information 3 page I click Continue
+	Given in the Product Labeling page I click Continue
 
-	# ====== Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path) ====== #
+	#Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Given I should see the Transportation Details 1 Page
 	Given In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
 	Given in the Transportation Details 1 page I click Continue
 
-Given in the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) page I click Continue
-Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.': to: No
-And In the VOC - Ozone Transport Commission Section, set the option in section: HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error message: This is a required field.
-And In the VOC - Ozone Transport Commission Section, set the option in section: MVOC (medium volatile organic compound) content as weight percentage of the total formulation should be showing the error message: This is a required field.
-Given In the VOC - Ozone Transport Commission Section, set the option in section: 'HVOC (high volatile organic compound) content as weight percent of the total formulation': to: abc
-And In the VOC - Ozone Transport Commission Section, set the option in section: HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error message: Enter a valid number
-And In the VOC - Ozone Transport Commission Section, set the option in section: HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error message: Invalid number. 2 decimal places allowed
-Given In the VOC - Ozone Transport Commission Section, set the option in section: 'HVOC (high volatile organic compound) content as weight percent of the total formulation': to: !@
-And In the VOC - Ozone Transport Commission Section, set the option in section: HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error message: Enter a valid number
-And In the VOC - Ozone Transport Commission Section, set the option in section: HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error message: Invalid number. 2 decimal places allowed
-Given In the VOC - Ozone Transport Commission Section, set the option in section: 'HVOC (high volatile organic compound) content as weight percent of the total formulation': to: 123.456
-And In the VOC - Ozone Transport Commission Section, set the option in section: HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error message: Invalid number. 2 decimal places allowed
-Given In the VOC - Ozone Transport Commission Section, set the option in section: 'HVOC (high volatile organic compound) content as weight percent of the total formulation': to: 12.34
-Given In the VOC - Ozone Transport Commission Section, set the option in section: 'MVOC (medium volatile organic compound) content as weight percentage of the total formulation': to: abc
-And In the VOC - Ozone Transport Commission Section, set the option in section: MVOC (medium volatile organic compound) content as weight percentage of the total formulation should be showing the error message: Enter a valid number
-And In the VOC - Ozone Transport Commission Section, set the option in section: MVOC (medium volatile organic compound) content as weight percentage of the total formulation should be showing the error message: Invalid number. 2 decimal places allowed
-Given In the VOC - Ozone Transport Commission Section, set the option in section: 'MVOC (medium volatile organic compound) content as weight percentage of the total formulation': to: !@
-And In the VOC - Ozone Transport Commission Section, set the option in section: MVOC (medium volatile organic compound) content as weight percentage of the total formulation should be showing the error message: Enter a valid number
-And In the VOC - Ozone Transport Commission Section, set the option in section: MVOC (medium volatile organic compound) content as weight percentage of the total formulation should be showing the error message: Invalid number. 2 decimal places allowed
-Given In the VOC - Ozone Transport Commission Section, set the option in section: 'MVOC (medium volatile organic compound) content as weight percentage of the total formulation': to: 123.456
-And In the VOC - Ozone Transport Commission Section, set the option in section: MVOC (medium volatile organic compound) content as weight percentage of the total formulation should be showing the error message: Invalid number. 2 decimal places allowed
-Given In the VOC - Ozone Transport Commission Section, set the option in section: 'MVOC (medium volatile organic compound) content as weight percentage of the total formulation': to: 12.34
+	Given in the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) page I click Continue
+	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.': to: No
+	And In the VOC - Ozone Transport Commission Section, set the option in section: HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error message: This is a required field.
+	And In the VOC - Ozone Transport Commission Section, set the option in section: MVOC (medium volatile organic compound) content as weight percentage of the total formulation should be showing the error message: This is a required field.
+	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'HVOC (high volatile organic compound) content as weight percent of the total formulation': to: abc
+	And In the VOC - Ozone Transport Commission Section, set the option in section: HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error message: Enter a valid number
+	And In the VOC - Ozone Transport Commission Section, set the option in section: HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error message: Invalid number. 2 decimal places allowed
+	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'HVOC (high volatile organic compound) content as weight percent of the total formulation': to: !@
+	And In the VOC - Ozone Transport Commission Section, set the option in section: HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error message: Enter a valid number
+	And In the VOC - Ozone Transport Commission Section, set the option in section: HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error message: Invalid number. 2 decimal places allowed
+	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'HVOC (high volatile organic compound) content as weight percent of the total formulation': to: 123.456
+	And In the VOC - Ozone Transport Commission Section, set the option in section: HVOC (high volatile organic compound) content as weight percent of the total formulation should be showing the error message: Invalid number. 2 decimal places allowed
+	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'HVOC (high volatile organic compound) content as weight percent of the total formulation': to: 12.34
+	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'MVOC (medium volatile organic compound) content as weight percentage of the total formulation': to: abc
+	And In the VOC - Ozone Transport Commission Section, set the option in section: MVOC (medium volatile organic compound) content as weight percentage of the total formulation should be showing the error message: Enter a valid number
+	And In the VOC - Ozone Transport Commission Section, set the option in section: MVOC (medium volatile organic compound) content as weight percentage of the total formulation should be showing the error message: Invalid number. 2 decimal places allowed
+	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'MVOC (medium volatile organic compound) content as weight percentage of the total formulation': to: !@
+	And In the VOC - Ozone Transport Commission Section, set the option in section: MVOC (medium volatile organic compound) content as weight percentage of the total formulation should be showing the error message: Enter a valid number
+	And In the VOC - Ozone Transport Commission Section, set the option in section: MVOC (medium volatile organic compound) content as weight percentage of the total formulation should be showing the error message: Invalid number. 2 decimal places allowed
+	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'MVOC (medium volatile organic compound) content as weight percentage of the total formulation': to: 123.456
+	And In the VOC - Ozone Transport Commission Section, set the option in section: MVOC (medium volatile organic compound) content as weight percentage of the total formulation should be showing the error message: Invalid number. 2 decimal places allowed
+	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'MVOC (medium volatile organic compound) content as weight percentage of the total formulation': to: 12.34
 
 #Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestProduct
 	Then I navigate to the Home Page
