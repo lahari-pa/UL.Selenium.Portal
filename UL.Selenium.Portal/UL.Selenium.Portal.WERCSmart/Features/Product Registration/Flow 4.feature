@@ -1650,12 +1650,15 @@ Scenario: [57991] Glue sticks for glue guns- (RU000300) - 4S
 	Given In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Glue sticks for glue guns
 	Given In the Summary Page, the 'Primary Physical State' section should be showing the following value: Solid
 	Given In the Summary Page, the 'Secondary Physical State' section should be showing the following value: Solid
-	Given In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Glue sticks for glue guns
+	Given In the Summary Page, the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. section should be showing the following value: No
 	Given In the Summary Page, the 'CARB' section should be showing the following value: 10
 	Given In the Summary Page, the 'OTC Model Rule' section should be showing the following value: 10
 	Then In the Summary Page, verify table data in column Container Type showing the value: Plastic Container
 	Then In the Summary Page, verify table data in column Size (Ounces) showing the value: 13.2
 	Then In the Summary Page, verify table data in column Retailers showing the value: WG
+	Then In the Summary page, the statement 'Does not exceed the limits specified in the California Consumer Products Regulation' is displayed
+	Then In the Summary page, the statement 'Does not exceed the limits specified by the Ozone Transport Commission' is displayed
+	Then In the Summary page, the table 'VOC Compliance Limit' is displayed
 	Then In the Summary Page, verify table data for 'Document' section Supplier Uploaded in column File Name showing the value: testdoc.pdf
 	Then In the Summary Page, verify table data for 'Document' section Supplier Uploaded in column Actions showing the value: View
 	Given I close the tab with Data Summary page
