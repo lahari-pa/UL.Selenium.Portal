@@ -99,7 +99,19 @@ Scenario: [56216] My Products grid Actions - Delete Navigation
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Soap (Bar, Liquid) for Body
 	Then I save the product information as: TestCase56216
 	Given I call Shared Step 217669 (Product Information - Pesticide(NO), Sold(US), Child(YES), OSHA(NO), DSV(NO), PL(NO), GNFR(NO))
-	Given I call Shared Step 213796 (Physical and Chemical Properties - Applicable Only to Lip Balm (RU000246))
+
+#	Given I call Shared Step 213796 (Physical and Chemical Properties - Applicable Only to Lip Balm (RU000246))
+	Then I should be on the Physical and Chemical Properties Page
+	And In the Physical and Chemical Properties Section, for section: 'Primary Physical State': the following options should be displayed exclusively:
+	| Option |
+	| Liquid |
+	| Solid  |
+	And In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
+	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	And In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	And In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: No data available
+	Then in the Physical and Chemical Properties page, I click Continue
+
 	Then I click the My Products icon in the Navigation Pane
 	Then the WERCSmart homepage should load
 	Given I search for the product saved as: TestCase56216

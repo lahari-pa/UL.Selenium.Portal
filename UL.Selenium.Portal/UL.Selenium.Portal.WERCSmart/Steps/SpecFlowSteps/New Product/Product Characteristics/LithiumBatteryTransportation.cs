@@ -47,5 +47,33 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string alertText = "Confirm that this product is manufactured in a facility that meets criteria outline in IATA 3.9.2.6€.";
 			new Steps_Prototype().AlertMessageDisplayed(condition, alertText);
 		}
+		[RegexStepDefinition(@"In the Lithium Battery Transportation Section, for section 'For U.S. Department of Transportation \(DOT\), indicate the transport classification' confirm that the following options (should|should not) be displayed:")]
+		public void ConfirmDOTTransportOptions(string condition, Table options)
+		{
+			string section = "For U.S. Department of Transportation (DOT), indicate the transport classification";
+			string exclusive = "displayed";
+			new Steps_Prototype().CheckOptionsInSection(condition, exclusive, section, options);
+		}
+		[RegexStepDefinition(@"In the Lithium Battery Transportation Section, for section 'For Marine transport \(IMDG\), indicate the classification' confirm that the following options (should|should not) be displayed:")]
+		public void ConfirmIMDGTransportOptions(string condition, Table options)
+		{
+			string section = "For Marine transport (IMDG), indicate the classification";
+			string exclusive = "displayed";
+			new Steps_Prototype().CheckOptionsInSection(condition, exclusive, section, options);
+		}
+		[RegexStepDefinition(@"In the Lithium Battery Transportation Section, for section 'For Air transport \(IATA\), indicate the classification' confirm that the following options (should|should not) be displayed:")]
+		public void ConfirmIATATransportOptions(string condition, Table options)
+		{
+			string section = "For Air transport (IATA), indicate the classification";
+			string exclusive = "displayed";
+			new Steps_Prototype().CheckOptionsInSection(condition, exclusive, section, options);
+		}
+		[RegexStepDefinition(@"In the Lithium Battery Transportation Section, for section 'For Canada's Transportation of Dangerous Goods \(TDG\), indicate the classification' confirm that the following options (should|should not) be displayed:")]
+		public void ConfirmTDGTransportOptions(string condition, Table options)
+		{
+			string section = "For Canada's Transportation of Dangerous Goods (TDG), indicate the classification";
+			string exclusive = "displayed";
+			new Steps_Prototype().CheckOptionsInSection(condition, exclusive, section, options);
+		}
 	}
 }

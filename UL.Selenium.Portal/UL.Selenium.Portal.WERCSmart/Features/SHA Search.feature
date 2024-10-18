@@ -503,7 +503,18 @@ Scenario: [193958] CA Cleaning Right-to-Know - SB 258 Target Phase 2 - Create an
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
 	Then in the Regulatory Documents to Provide page I click Continue
 
-	Given I call Shared Step 213796 (Physical and Chemical Properties - Applicable Only to Lip Balm (RU000246))
+	#Given I call Shared Step 213796 (Physical and Chemical Properties - Applicable Only to Lip Balm (RU000246))
+	Then I should be on the Physical and Chemical Properties Page
+	And In the Physical and Chemical Properties Section, for section: 'Primary Physical State': the following options should be displayed exclusively:
+	| Option |
+	| Liquid |
+	| Solid  |
+	And In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
+	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	And In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	And In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: No data available
+	Then in the Physical and Chemical Properties page, I click Continue
+
 	#Given I call Shared Step 193979 California Cleaning Product Disclosure - Final Domestic Distributor
 	Given I should see the California Cleaning Product Disclosure Page
 	Then In the California Cleaning Product Disclosure Section, set the radio option in section: 'Who is publicly identified on the product label as responsible for the product?': to: Final Domestic Distributor

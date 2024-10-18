@@ -98,7 +98,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Beginning Payment_Method_Exists: " + payment_method);
 
-			Delay.Seconds(2 * Delay.SpeedFactor);
+			Delay.Seconds(5 * Delay.SpeedFactor);
 
 			var allProducts = this.ContainerElement.FindElements(By.XPath(".//div[@class='col-sm-4']//h4")).ToList();
 
@@ -2177,6 +2177,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 
 		public bool Thank_You_TextExists(string thankYouText)
 		{
+			Delay.Seconds(3 * Delay.SpeedFactor);
 			IWebElement tyTextElement = this.ContainerElement.FindElement(By.XPath($".//div[@class='panel-body']//p[contains(text(), '{thankYouText}')]"), 1);
 			return tyTextElement != null;
 		}
