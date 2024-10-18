@@ -282,8 +282,6 @@ Scenario: [58738] Sanitizer Wipes for Use on Domesticated Animals (Liquid)- RU00
 	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 4.1
 	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: II
 	Then in the U.S. Department of Transportation (DOT) Classification page I click Continue
-
-
 	
 	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	Then I should be on the Retailer Page
@@ -305,7 +303,6 @@ Scenario: [58738] Sanitizer Wipes for Use on Domesticated Animals (Liquid)- RU00
 	Then in the Additional Documents to Provide page I click Continue
 
 	And I should see the Optional Reports and Documents Available for Purchase Page
-	
 	Then In the Optional Reports and Documents Available for Purchase page, the footer text contains: Additional documents are not subject to standard two day turnaround.
 	#Then I check for the following text: Additional documents are not subject to standard two day turnaround. in the Optional Reports and Documents Available for Purchase Page
 	And in the Optional Reports and Documents Available for Purchase page I click Continue
