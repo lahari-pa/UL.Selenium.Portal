@@ -139,8 +139,8 @@ Then in the Regulatory Documents to Provide page, I click Continue
 
 #Given I call Shared Step 60931 (Additional Documents to Provide - Exemption - Special Permit - Product Label)
 Given I should be on the Additional Documents to Provide Page
-Then I upload PDF document to Upload Transportation Exemption Letter or Special Permit field
-Then I upload PDF document to Provide Full Product Label (required) field
+Then In the Additional Documents to Provide, upload PDF document to Upload Transportation Exemption Letter or Special Permit field
+Then In the Additional Documents to Provide, upload PDF document to Provide Full Product Label (required) field
 Then in the Additional Documents to Provide page, I click Continue
 
 Then in the Optional Reports and Documents Available for Purchase page, I click Continue
