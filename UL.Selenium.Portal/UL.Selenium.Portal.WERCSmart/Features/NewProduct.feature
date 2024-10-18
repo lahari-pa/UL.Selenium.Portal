@@ -57,12 +57,12 @@ Scenario: [31344] New Product Screen validation
 
 @TestCase:82750
 Scenario: [82750] Copy from an Existing Registration validation
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Copy from an Existing Registration
 	Then in the New Product page, I click Continue
-	Then Error message in section: Please select the source product should be showing the error messages: This is a required field.
+	Then In the New Product Section, confirm for section: 'Please select the source product' error is displayed: This is a required field.
 
 
 @TestCase:87295
@@ -349,7 +349,7 @@ Scenario: [128694] DSV Option Available for Electronic - Peripherals - RU001162
 @TestCase:128721
 Scenario: [128721] DSV Option Available for Appliance - Hot Water Tank (Standard, no electronic components) - RU001206
 
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
@@ -381,7 +381,7 @@ Scenario: [128703] DSV Option Available for Auto Parts - Engine Parts and Compon
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 
-#	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
