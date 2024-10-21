@@ -277,9 +277,11 @@ Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 	Then In the Additional Documents to Provide, section 'OSHA-compliant Safety Data Sheet (Optional)' is displayed
 	Then In the Additional Documents to Provide, section 'Toxicity Characteristic Leaching Procedure (TCLP)' is displayed
 	Then In the Additional Documents to Provide, upload PDF document to Upload Full Product Label (required) field
+	Then I save the current window handle to context as: MainWindowHandle
 	Then In the Additional Documents to Provide, for section Product Label I click button 'View'
 	Then In the Additional Documents to Provide, after clicking 'View' button I confirm pdf file is downloaded
 	Then in the Additional Documents to Provide  page I click Continue
+	Then I close All the current windows except the Main Window
 	Given I should see the Optional Reports and Documents Available for Purchase Page
 	Then in the Optional Reports and Documents Available for Purchase  page I click Continue
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58078. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
