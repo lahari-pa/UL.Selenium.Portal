@@ -12,6 +12,7 @@ using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -29,6 +30,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			string section = "Would you like to Create a New Product?";
 			new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
+		}
+		[RegexStepDefinition(@"In the New Product Section, confirm for section: 'Please select the source product' error (is|is not) displayed: (.*)")]
+		public void PleaseSelectTheSourceErrorIsIsNotDisplayed(string is_isnot, string error)
+		{
+			string section = "Please select the source product";
+			new Steps_ProductPrototype().InSectionErrorMessageIsIsNotDisplayed(section, error, is_isnot);
 		}
 	}
 }

@@ -9,6 +9,7 @@ using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.ForwardProductRegistration;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_and_Submit
@@ -103,6 +104,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 		public void InTheSummaryPageVerifyIngredientsTable(Table table)
 		{
 			new StepsDataSummarySheet().InTheDataSummaryPageIConfirmThatIngredientsMatches(table);
+		}
+
+		[RegexStepDefinition(@"In the Summary page, the statement 'Does not exceed the limits specified in the California Consumer Products Regulation' (is|is not) displayed")]
+		public void StatemantDoesNotExeedTheLimitsSpecifiedTnTheCaliforniaOnSummary(string is_isnot)
+		{
+			string text = "Does not exceed the limits specified in the California Consumer Products Regulation";
+			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);
+		}
+		[RegexStepDefinition(@"In the Summary page, the statement 'Does not exceed the limits specified by the Ozone Transport Commission' (is|is not) displayed")]
+		public void StatemantDoesNotExeedTheLimitsOzoneTransportOnSummary(string is_isnot)
+		{
+			string text = "Does not exceed the limits specified by the Ozone Transport Commission";
+			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);
+		}
+		[RegexStepDefinition(@"In the Summary page, the table 'VOC Compliance Limit' (is|is not) displayed")]
+		public void TableVOCOComplianceLimitSummary(string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			Report.IsTrue(new SummaryPage().VOCComplianceLimitsTableExists() == expected, $"Failure, failed to confirm the table: 'VOC Compliance Limit' {is_isnot} displayed.", $"Success, confirmed the table: 'VOC Compliance Limit' {is_isnot} displayed.");
 		}
 
 	}
