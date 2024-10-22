@@ -127,9 +127,9 @@ Scenario: [127870] Pharma - Tablet or Capsule Count Field is Available for Solid
 	Then In the Ingredients Section ingredients table, confirm row with component name: Saccharin sodium dihydrate is displayed
 	Then In the Ingredients Table row with component name: Saccharin sodium dihydrate, in Percent column text input enter: 50
 	Given in the Ingredients page I click Continue
-	Given I should see the Transportation - Refrigeration Page
-	Then In the Transportation - Refrigeration Section, set the option in section: 'Should this product be refrigerated for transport or storage?' to: No
-	Given in the Transportation - Refrigeration page I click Continue
+	Given I should see the Temperature Requirements for Storage and Transport Page
+	Then In the Temperature Requirements for Storage and Transport Section, set the option in section: 'Does the product have temperature storage requirements?' to: No
+	Given in the Temperature Requirements for Storage and Transport page I click Continue
 	Given I should see the Transportation Classification Page
 	Then In the Transportation Classification Section, set the option in section: 'Is the product regulated for transport (before exceptions or exemptions)' to: No, not regulated
 	Given in the Transportation Classification page I click Continue
@@ -345,9 +345,9 @@ Scenario: [127847] Pharma - Tablet or Capsule Count Field is Available for Solid
 	Given in the Ingredients page I click Continue
 	Then In the Ingredients Section, I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
 	Then In displayed modal, click Confirm footer button
-	Given I should see the Transportation - Refrigeration Page
-	Then In the Transportation - Refrigeration Section, set the option in section: 'Should this product be refrigerated for transport or storage?' to: No
-	Given in the Transportation - Refrigeration page I click Continue
+	Given I should see the Temperature Requirements for Storage and Transport Page
+	Then In the Temperature Requirements for Storage and Transport Section, set the option in section: 'Does the product have temperature storage requirements?' to: No
+	Given in the Temperature Requirements for Storage and Transport page I click Continue
 	Given I should see the Transportation Classification Page
 	Then In the Transportation Classification Section, set the option in section: 'Is the product regulated for transport (before exceptions or exemptions)' to: No, not regulated
 	Given in the Transportation Classification page I click Continue
@@ -401,9 +401,9 @@ Scenario: [127854] Pharma - Tablet or Capsule Count Field is Available for Solid
 	Then In the Ingredients Section ingredients table, confirm row with component name: Saccharin sodium dihydrate is displayed
 	Then In the Ingredients Table row with component name: Saccharin sodium dihydrate, in Percent column text input enter: 50
 	Given in the Ingredients page I click Continue
-	Given I should see the Transportation - Refrigeration Page
-	Then In the Transportation - Refrigeration Section, set the option in section: 'Should this product be refrigerated for transport or storage?' to: No
-	Given in the Transportation - Refrigeration page I click Continue
+	Given I should see the Temperature Requirements for Storage and Transport Page
+	Then In the Temperature Requirements for Storage and Transport Section, set the option in section: 'Does the product have temperature storage requirements?' to: No
+	Given in the Temperature Requirements for Storage and Transport page I click Continue
 	Given I should see the Transportation Classification Page
 	Then In the Transportation Classification Section, set the option in section: 'Is the product regulated for transport (before exceptions or exemptions)' to: No, not regulated
 	Given in the Transportation Classification page I click Continue
