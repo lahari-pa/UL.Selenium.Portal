@@ -41,9 +41,6 @@ Scenario: [216819] Container Types - Primary Physical State Liquid - Engine Moto
 	When In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	When In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page, I click Continue
-	Then I should see the Regulatory Documents to Provide Page
-	Then I set the OSHA-compliant Safety Data Sheet, English field to: Request to author	
-	Then I click continue	
 	#Then I call Shared Step 217668 (Physical and Chemical Properties - Applicable Only to Engine Motor Oil for Auto or Boat (RU000269))
 	Then I should see the Physical and Chemical Properties Page
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
