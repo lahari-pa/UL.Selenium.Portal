@@ -35,6 +35,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:BatteryStateOfCharge
 
 Feature: [64732] Flow 26 - Electronic
 
@@ -104,15 +105,13 @@ Scenario: [60671] Computer (Combination of Monitor & Desktop) - RU001177
 	Then in the Inventory Status, Prop 65 (US) page I click Continue
 
 	Given I should see the Battery State of Charge Page
-	
+	Then In the Battery State of Charge Section, set the option in section: 'What is the state of charge of the battery?' to: Exact value is not available but does not exceed 30% of the rated capacity.
 	Then in the Battery State of Charge page I click Continue
 
-	Given I should see the Lithium Battery Characteristics Page
-	Then In the Lithium Battery Characteristics Section, in 'Type of Battery' select Battery
-	Then In the Lithium Battery Characteristics Section, in 'Watt-hour of the battery' enter 100
-	Then In the Lithium Battery Characteristics Section, in 'Weight of the single unit' enter 2
-	Then In the Lithium Battery Characteristics Section, in 'Battery is manufactured under a Quality Management Program outlined in IATA 3.9.2.6' enter Unknown
-	Then in the Lithium Battery Characteristics page I click Continue
+	Given I should see the Battery Characteristics Page
+	Then In the Lithium Battery Characteristics Section, in 'Type of Battery' select Cell
+	Then In the Lithium Battery Characteristics Section, in 'Battery is manufactured under a Quality Management Program outlined in IATA 3.9.2.6' enter YES
+	Then in the Battery Characteristics page I click Continue
 
 	Given I should see the Lithium Battery Transportation Page
 	Then In the Lithium Battery Transportation Section, set the radio option in section: 'For U.S. Department of Transportation (DOT), indicate the transport classification': to: Meets the requirements of 49CFR173.185(c)(iv) to be transported as non-dangerous goods for road and rail

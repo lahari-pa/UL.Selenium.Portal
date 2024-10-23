@@ -327,9 +327,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public SearchBoxResult SearchResultTextGet(string searchText)
 		{
 			Report.Info($"Attempting to get text: '{searchText}' search result.");
-			var test2 = this.SearchResultList.Select(x=>x.ResultText).ToList();
-			var test = this.SearchResultList.Where(x => x.ResultText.Equals(Regex.Replace(searchText, @"\s+", " "), StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
-			return test;
+			return this.SearchResultList.Where(x => x.ResultText.Equals(Regex.Replace(searchText, @"\s+", " "), StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
 		}
 		public SearchBoxResult SearchResultTextGetContains(string searchText)
 		{
