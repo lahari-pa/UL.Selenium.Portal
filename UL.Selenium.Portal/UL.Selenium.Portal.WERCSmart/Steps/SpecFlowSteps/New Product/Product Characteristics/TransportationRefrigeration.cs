@@ -18,5 +18,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string section = "Should this product be refrigerated for transport or storage?";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
+		[RegexStepDefinition(@"In the Temperature Requirements for Storage and Transport Section, set the option in section: 'Does the product have temperature storage requirements\?' to: (Yes|No)")]
+		public void DoesThisProductBerefrigerated(string option)
+		{
+			string section = "Does the product have temperature storage requirements?";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
 	}
 }
