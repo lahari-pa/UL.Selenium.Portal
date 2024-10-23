@@ -107,26 +107,26 @@ Then in the Transportation Details 1 page, I click Continue
 
 
 #And I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue)
-Then I should be on the U. S. Department of Transportation (DOT) Classification Page
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
-Then in the U. S. Department of Transportation (DOT) Classification page, I click Continue
+Then I should be on the U.S. Department of Transportation (DOT) Classification Page
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
+Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
 
 
 #And section: UN Number is highlighed in red indicating an error
 #And UN Number should be showing the error messages: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (50C - less than or equal to 60C) must only be used with Hazard Class 3
-And In the U. S. Department of Transportation (DOT) Classification Section, verify that the section: 'UN Number' is highlighted in red indicating an error
-And In the U. S. Department of Transportation (DOT) Classification Section, the section: 'UN Number' should be showing error message: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (50C - less than or equal to 60C) must only be used with Hazard Class 3
+And In the U.S. Department of Transportation (DOT) Classification Section, verify that the section: 'UN Number' is highlighted in red indicating an error
+And In the U.S. Department of Transportation (DOT) Classification Section, the section: 'UN Number' should be showing error message: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (50C - less than or equal to 60C) must only be used with Hazard Class 3
 
 
 #And I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select radio button - Continue)
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1206
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Heptanes
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: II
-Then in the U. S. Department of Transportation (DOT) Classification page, I click Continue
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1206
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Heptanes
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: II
+Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
 
 #new prototype step for error checks 
 Then I should not see any error messages on the page
@@ -256,25 +256,25 @@ And In the Transportation Details 1 Section, set the option for DOT mode of tran
 Then in the Transportation Details 1 page, I click Continue
 
 #And I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue)
-Then I should be on the U. S. Department of Transportation (DOT) Classification Page
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
-Then in the U. S. Department of Transportation (DOT) Classification page, I click Continue
+Then I should be on the U.S. Department of Transportation (DOT) Classification Page
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
+Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
 
 #And section: UN Number is highlighed in red indicating an error
 #And UN Number should be showing the error messages: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (50C - less than or equal to 60C) must only be used with Hazard Class 3
-And In the U. S. Department of Transportation (DOT) Classification Section, verify that the section: 'UN Number' is highlighted in red indicating an error
-And In the U. S. Department of Transportation (DOT) Classification Section, the section: 'UN Number' should be showing error message: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (50C - less than or equal to 60C) must only be used with Hazard Class 3
+And In the U.S. Department of Transportation (DOT) Classification Section, verify that the section: 'UN Number' is highlighted in red indicating an error
+And In the U.S. Department of Transportation (DOT) Classification Section, the section: 'UN Number' should be showing error message: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (50C - less than or equal to 60C) must only be used with Hazard Class 3
 
 
 #And I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select radio button - Continue)
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1206
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Heptanes
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: II
-Then in the U. S. Department of Transportation (DOT) Classification page, I click Continue
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1206
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Heptanes
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: II
+Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
 
 And I should not see any error messages on the page
 
@@ -530,24 +530,24 @@ And In the Transportation Details 1 Section, set the option for DOT mode of tran
 Then in the Transportation Details 1 page, I click Continue
 
 #And I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select radio button - Continue)
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1206
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Heptanes
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: II
-Then in the U. S. Department of Transportation (DOT) Classification page, I click Continue
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1206
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Heptanes
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: II
+Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
 
 #And section: UN Number is highlighed in red indicating an error
 #And UN Number should be showing the error messages: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (50C - less than or equal to 60C) must only be used with Hazard Class 3
-And In the U. S. Department of Transportation (DOT) Classification Section, verify that the section: 'UN Number' is highlighted in red indicating an error
-And In the U. S. Department of Transportation (DOT) Classification Section, the section: 'UN Number' should be showing error message: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (80C - greater than 60C) must not be used with Hazard Class 3
+And In the U.S. Department of Transportation (DOT) Classification Section, verify that the section: 'UN Number' is highlighted in red indicating an error
+And In the U.S. Department of Transportation (DOT) Classification Section, the section: 'UN Number' should be showing error message: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (80C - greater than 60C) must not be used with Hazard Class 3
 
 #And I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue)
-Then I should be on the U. S. Department of Transportation (DOT) Classification Page
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
-Then in the U. S. Department of Transportation (DOT) Classification page, I click Continue
+Then I should be on the U.S. Department of Transportation (DOT) Classification Page
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
+Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
 
 
 And I should not see any error messages on the page
@@ -676,25 +676,25 @@ And In the Transportation Details 1 Section, set the option for DOT mode of tran
 Then in the Transportation Details 1 page, I click Continue
 
 #And I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select radio button - Continue)
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1206
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Heptanes
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: II
-Then in the U. S. Department of Transportation (DOT) Classification page, I click Continue
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1206
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Heptanes
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: II
+Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
 
 
 #And section: UN Number is highlighed in red indicating an error
 #And UN Number should be showing the error messages: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (50C - less than or equal to 60C) must only be used with Hazard Class 3
-And In the U. S. Department of Transportation (DOT) Classification Section, verify that the section: 'UN Number' is highlighted in red indicating an error
-And In the U. S. Department of Transportation (DOT) Classification Section, the section: 'UN Number' should be showing error message: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (80C - greater than 60C) must not be used with Hazard Class 3
+And In the U.S. Department of Transportation (DOT) Classification Section, verify that the section: 'UN Number' is highlighted in red indicating an error
+And In the U.S. Department of Transportation (DOT) Classification Section, the section: 'UN Number' should be showing error message: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (80C - greater than 60C) must not be used with Hazard Class 3
 
 #And I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue)
-Then I should be on the U. S. Department of Transportation (DOT) Classification Page
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
-Then in the U. S. Department of Transportation (DOT) Classification page, I click Continue
+Then I should be on the U.S. Department of Transportation (DOT) Classification Page
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
+Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
 
 
 And I should not see any error messages on the page
@@ -823,25 +823,25 @@ And In the Transportation Details 1 Section, set the option for DOT mode of tran
 Then in the Transportation Details 1 page, I click Continue
 
 #And I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select radio button - Continue)
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1206
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Heptanes
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: II
-Then in the U. S. Department of Transportation (DOT) Classification page, I click Continue
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1206
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Heptanes
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: II
+Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
 
 
 #And section: UN Number is highlighed in red indicating an error
 #And UN Number should be showing the error messages: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (50C - less than or equal to 60C) must only be used with Hazard Class 3
-And In the U. S. Department of Transportation (DOT) Classification Section, verify that the section: 'UN Number' is highlighted in red indicating an error
-And In the U. S. Department of Transportation (DOT) Classification Section, the section: 'UN Number' should be showing error message: Flash Point is required with Hazard Class 3
+And In the U.S. Department of Transportation (DOT) Classification Section, verify that the section: 'UN Number' is highlighted in red indicating an error
+And In the U.S. Department of Transportation (DOT) Classification Section, the section: 'UN Number' should be showing error message: Flash Point is required with Hazard Class 3
 
 #And I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue)
-Then I should be on the U. S. Department of Transportation (DOT) Classification Page
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
-Then in the U. S. Department of Transportation (DOT) Classification page, I click Continue
+Then I should be on the U.S. Department of Transportation (DOT) Classification Page
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
+Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
 
 
 And I should not see any error messages on the page
@@ -1094,24 +1094,24 @@ And In the Transportation Details 1 Section, set the option for DOT mode of tran
 Then in the Transportation Details 1 page, I click Continue
 
 #And I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue)
-Then I should be on the U. S. Department of Transportation (DOT) Classification Page
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
-Then in the U. S. Department of Transportation (DOT) Classification page, I click Continue
+Then I should be on the U.S. Department of Transportation (DOT) Classification Page
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
+Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
 
 #And section: UN Number is highlighed in red indicating an error
 #And UN Number should be showing the error messages: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (50C - less than or equal to 60C) must only be used with Hazard Class 3
-And In the U. S. Department of Transportation (DOT) Classification Section, verify that the section: 'UN Number' is highlighted in red indicating an error
-And In the U. S. Department of Transportation (DOT) Classification Section, the section: 'UN Number' should be showing error message: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (22C - less than or equal to 60C) must only be used with Hazard Class 3
+And In the U.S. Department of Transportation (DOT) Classification Section, verify that the section: 'UN Number' is highlighted in red indicating an error
+And In the U.S. Department of Transportation (DOT) Classification Section, the section: 'UN Number' should be showing error message: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (22C - less than or equal to 60C) must only be used with Hazard Class 3
 
 #And I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select radio button - Continue)
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1206
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Heptanes
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: II
-Then in the U. S. Department of Transportation (DOT) Classification page, I click Continue
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1206
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Heptanes
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: II
+Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
 
 And I should not see any error messages on the page
 
@@ -1238,23 +1238,23 @@ And In the Transportation Details 1 Section, set the option for DOT mode of tran
 Then in the Transportation Details 1 page, I click Continue
 
 #And I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue)
-Then I should be on the U. S. Department of Transportation (DOT) Classification Page
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
-Then in the U. S. Department of Transportation (DOT) Classification page, I click Continue
+Then I should be on the U.S. Department of Transportation (DOT) Classification Page
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
+Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
 
 #And section: UN Number is highlighed in red indicating an error
 #And UN Number should be showing the error messages: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (50C - less than or equal to 60C) must only be used with Hazard Class 3
-And In the U. S. Department of Transportation (DOT) Classification Section, verify that the section: 'UN Number' is highlighted in red indicating an error
-And In the U. S. Department of Transportation (DOT) Classification Section, the section: 'UN Number' should be showing error message: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (23C - less than or equal to 60C) must only be used with Hazard Class 3
+And In the U.S. Department of Transportation (DOT) Classification Section, verify that the section: 'UN Number' is highlighted in red indicating an error
+And In the U.S. Department of Transportation (DOT) Classification Section, the section: 'UN Number' should be showing error message: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (23C - less than or equal to 60C) must only be used with Hazard Class 3
 #And I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select radio button - Continue)
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1206
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Heptanes
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: II
-Then in the U. S. Department of Transportation (DOT) Classification page, I click Continue
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1206
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Heptanes
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: II
+Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
 
 And I should not see any error messages on the page
 
@@ -1374,23 +1374,23 @@ And In the Transportation Details 1 Section, set the option for DOT mode of tran
 Then in the Transportation Details 1 page, I click Continue
 
 #And I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue)
-Then I should be on the U. S. Department of Transportation (DOT) Classification Page
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
-Then in the U. S. Department of Transportation (DOT) Classification page, I click Continue
+Then I should be on the U.S. Department of Transportation (DOT) Classification Page
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
+Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
 
 #And section: UN Number is highlighed in red indicating an error
 #And UN Number should be showing the error messages: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (50C - less than or equal to 60C) must only be used with Hazard Class 3
-And In the U. S. Department of Transportation (DOT) Classification Section, verify that the section: 'UN Number' is highlighted in red indicating an error
-And In the U. S. Department of Transportation (DOT) Classification Section, the section: 'UN Number' should be showing error message: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (39C - less than or equal to 60C) must only be used with Hazard Class 3
+And In the U.S. Department of Transportation (DOT) Classification Section, verify that the section: 'UN Number' is highlighted in red indicating an error
+And In the U.S. Department of Transportation (DOT) Classification Section, the section: 'UN Number' should be showing error message: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (39C - less than or equal to 60C) must only be used with Hazard Class 3
 #And I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select radio button - Continue)
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1206
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Heptanes
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: II
-Then in the U. S. Department of Transportation (DOT) Classification page, I click Continue
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1206
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Heptanes
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: II
+Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
 
 And I should not see any error messages on the page
 
@@ -1513,23 +1513,23 @@ And In the Transportation Details 1 Section, set the option in section: 'Select 
 And In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping fully regulated
 Then in the Transportation Details 1 page, I click Continue
 #And I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select radio button - Continue)
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1206
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Heptanes
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: II
-Then in the U. S. Department of Transportation (DOT) Classification page, I click Continue
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1206
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Heptanes
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: II
+Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
 
 #And section: UN Number is highlighed in red indicating an error
 #And UN Number should be showing the error messages: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (50C - less than or equal to 60C) must only be used with Hazard Class 3
-And In the U. S. Department of Transportation (DOT) Classification Section, verify that the section: 'UN Number' is highlighted in red indicating an error
-And In the U. S. Department of Transportation (DOT) Classification Section, the section: 'UN Number' should be showing error message: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (61C - greater than 60C) must not be used with Hazard Class 3
+And In the U.S. Department of Transportation (DOT) Classification Section, verify that the section: 'UN Number' is highlighted in red indicating an error
+And In the U.S. Department of Transportation (DOT) Classification Section, the section: 'UN Number' should be showing error message: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (61C - greater than 60C) must not be used with Hazard Class 3
 #And I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue)
-Then I should be on the U. S. Department of Transportation (DOT) Classification Page
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
-Then in the U. S. Department of Transportation (DOT) Classification page, I click Continue
+Then I should be on the U.S. Department of Transportation (DOT) Classification Page
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
+Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
 
 And I should not see any error messages on the page
 
@@ -1652,23 +1652,23 @@ And In the Transportation Details 1 Section, set the option in section: 'Select 
 And In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping fully regulated
 Then in the Transportation Details 1 page, I click Continue
 #And I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select radio button - Continue)
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1206
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Heptanes
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: II
-Then in the U. S. Department of Transportation (DOT) Classification page, I click Continue
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1206
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Heptanes
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: II
+Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
 
 #And section: UN Number is highlighed in red indicating an error
 #And UN Number should be showing the error messages: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (50C - less than or equal to 60C) must only be used with Hazard Class 3
-And In the U. S. Department of Transportation (DOT) Classification Section, verify that the section: 'UN Number' is highlighted in red indicating an error
-And In the U. S. Department of Transportation (DOT) Classification Section, the section: 'UN Number' should be showing error message: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (94C - greater than 60C) must not be used with Hazard Class 3
+And In the U.S. Department of Transportation (DOT) Classification Section, verify that the section: 'UN Number' is highlighted in red indicating an error
+And In the U.S. Department of Transportation (DOT) Classification Section, the section: 'UN Number' should be showing error message: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (94C - greater than 60C) must not be used with Hazard Class 3
 #And I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue)
-Then I should be on the U. S. Department of Transportation (DOT) Classification Page
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
-Then in the U. S. Department of Transportation (DOT) Classification page, I click Continue
+Then I should be on the U.S. Department of Transportation (DOT) Classification Page
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
+Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
 
 And I should not see any error messages on the page
 
@@ -1790,23 +1790,23 @@ And In the Transportation Details 1 Section, set the option in section: 'Select 
 And In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping fully regulated
 Then in the Transportation Details 1 page, I click Continue
 #And I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select radio button - Continue)
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1206
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Heptanes
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: II
-Then in the U. S. Department of Transportation (DOT) Classification page, I click Continue
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1206
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Heptanes
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: II
+Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
 
 #And section: UN Number is highlighed in red indicating an error
 #And UN Number should be showing the error messages: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (50C - less than or equal to 60C) must only be used with Hazard Class 3
-And In the U. S. Department of Transportation (DOT) Classification Section, verify that the section: 'UN Number' is highlighted in red indicating an error
-And In the U. S. Department of Transportation (DOT) Classification Section, the section: 'UN Number' should be showing error message: Flash Point is required with Hazard Class 3
+And In the U.S. Department of Transportation (DOT) Classification Section, verify that the section: 'UN Number' is highlighted in red indicating an error
+And In the U.S. Department of Transportation (DOT) Classification Section, the section: 'UN Number' should be showing error message: Flash Point is required with Hazard Class 3
 #And I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue)
-Then I should be on the U. S. Department of Transportation (DOT) Classification Page
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
-Then in the U. S. Department of Transportation (DOT) Classification page, I click Continue
+Then I should be on the U.S. Department of Transportation (DOT) Classification Page
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
+Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
 
 And I should not see any error messages on the page
 
@@ -1925,23 +1925,23 @@ And In the Transportation Details 1 Section, set the option in section: 'Select 
 And In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping fully regulated
 Then in the Transportation Details 1 page, I click Continue
 #And I call Shared Step 81311 (UN Number - enter UN1206 - confirm pre-populated select radio button - Continue)
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1206
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Heptanes
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
-And In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: II
-Then in the U. S. Department of Transportation (DOT) Classification page, I click Continue
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1206
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Heptanes
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: II
+Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
 
 #And section: UN Number is highlighed in red indicating an error
 #And UN Number should be showing the error messages: The UN-Number (DOT) is invalid with the selected Hazard Class and Flash Point value.|The Flash Point (50C - less than or equal to 60C) must only be used with Hazard Class 3
-And In the U. S. Department of Transportation (DOT) Classification Section, verify that the section: 'UN Number' is highlighted in red indicating an error
-And In the U. S. Department of Transportation (DOT) Classification Section, the section: 'UN Number' should be showing error message: Flash Point is required with Hazard Class 3
+And In the U.S. Department of Transportation (DOT) Classification Section, verify that the section: 'UN Number' is highlighted in red indicating an error
+And In the U.S. Department of Transportation (DOT) Classification Section, the section: 'UN Number' should be showing error message: Flash Point is required with Hazard Class 3
 #And I call Shared Step 81310 (UN Number - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue)
-Then I should be on the U. S. Department of Transportation (DOT) Classification Page
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
-And In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
-Then in the U. S. Department of Transportation (DOT) Classification page, I click Continue
+Then I should be on the U.S. Department of Transportation (DOT) Classification Page
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
+Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
 
 And I should not see any error messages on the page
 

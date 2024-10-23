@@ -111,10 +111,10 @@ Scenario: [60116] Anti-Static Product - Aerosol - RU000656
 
 	#Given I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
 	Given I should see the U.S. Department of Transportation (DOT) Classification Page
-	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
-	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols, flammable, n.o.s.
-	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
-	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols, flammable, n.o.s.
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
 	Then in the U.S. Department of Transportation (DOT) Classification page I click Continue
 
 	Given I should see the International Air Transport (IATA) Classification Page

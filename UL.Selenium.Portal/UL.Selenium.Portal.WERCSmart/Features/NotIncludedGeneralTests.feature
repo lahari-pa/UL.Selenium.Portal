@@ -1940,7 +1940,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	And I set the Select all modes of transport that you've classified the product for field to: DOT
 	And I select option: Shipping fully regulated under section: Select all modes of transport that you've classified the product for and subsection: DOT
 	And I click continue
-	And I should see the U. S. Department of Transportation (DOT) Classification Page
+	And I should see the U.S. Department of Transportation (DOT) Classification Page
 	And I set the UN Number field to: UN2762
 	And I set the Technical Name field to: Technical Name UN2762
 	And I set the Packing Group (select) field to: II

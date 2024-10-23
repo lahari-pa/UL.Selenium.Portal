@@ -144,8 +144,8 @@ Scenario: [58759] Servers, Small-Scale - RU001183
 	# 	| Alkaline     | <any>        | 4                               | 2                                  |
 	Given I should see the Product Includes Battery Page
 	Given In the Product Includes Battery Section enter the values in the table:
-          | Battery Is Packaged      | Battery Type | Manufacturer                                                       | Quantity of Batteries per Package | Quantity of Batteries to Operate Product |
-          | Installed in the product | Alkaline     | FM - Alkaline Battery (RU000344) by The WERCS LTD (WPS ID 1777820) | 4                                 | 2                                        |
+          | Battery Is Packaged      | Battery Type | Manufacturer                                                        | Quantity of Batteries per Package | Quantity of Batteries to Operate Product |
+          | Installed in the product | Alkaline     | FM - Alkaline Battery (RU000344)  by The WERCS LTD (WPS ID 1775597) | 4                                 | 2                                        |
 	Given in the Product Includes Battery page I click Continue
 
 	#Given I call Shared Step 104083 Toxicity Characteristics Leaching Procedure TCLP - NO to ALL - NO COPPER LISTED
