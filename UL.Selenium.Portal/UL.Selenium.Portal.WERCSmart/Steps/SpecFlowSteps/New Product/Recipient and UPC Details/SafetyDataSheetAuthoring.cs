@@ -20,7 +20,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 
-		[RegexStepDefinition(@"In the Safety Data Sheet Authoring - Additional Data \(Optional\), for the section: 'Autoignition Temperature \(°C\)' enter text: (.*)")]
+		[RegexStepDefinition(@"In the Safety Data Sheet Authoring - Additional Data \(Optional\), for the section: 'Autoignition Temperature' enter text: (.*)")]
 		public void EnterAutoignitionTemperature(string text)
 		{
 			string section = "Autoignition Temperature (°C)";

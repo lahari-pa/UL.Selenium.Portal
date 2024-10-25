@@ -2559,26 +2559,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 	}
 
-	class RightClickProductMenu : BaseObject
+	class RightClickProductMenu : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[@id='jqContextMenu']";
 
 		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public bool MenuExists()
 		{
-			return this.containerElement.Displayed;
+			return this.ContainerElement.Displayed;
 		}
 
 		public List<string> GetAllOptions()
 		{
-			return this.containerElement.FindElements(By.XPath(".//li[not(contains(@style, 'none'))]")).Select(x => x.GetValue()).ToList();
+			return this.ContainerElement.FindElements(By.XPath(".//li[not(contains(@style, 'none'))]")).Select(x => x.GetValue()).ToList();
 		}
 
 		public bool SelectOption(string selectOption)
 		{
-			ReadOnlyCollection<IWebElement> listOfOptions = this.containerElement.FindElements(By.XPath(".//li[not(contains(@style, 'none'))]"));
+			ReadOnlyCollection<IWebElement> listOfOptions = this.ContainerElement.FindElements(By.XPath(".//li[not(contains(@style, 'none'))]"));
 			IWebElement matchingOption = listOfOptions.FirstOrDefault(x => x.GetValue().Contains(selectOption));
 			if (matchingOption == null)
 			{
