@@ -38,11 +38,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			selNewProduct.SetTheSectionOptionTo("For ingredients used in cleaning products its Business-to-Consumer name must comply with the requirements of the California Cleaning Product Right to Know Act.  Manufacturer must use a name that is only as generic as necessary to protect the confidential identity of the ingredient. In developing the generic name- the manufacturer must use the generic name framework provided by the Federal Environmental Protection Agency (EPA) guidance for the Toxic Substances Control Act (TSCA) Confidential Inventory.", value);
 		}
 
-		[RegexStepDefinition(@"In the Formulation Names section, for section: 'Formula Name for the WERCSmart Ingredient Directory' confirm that the textbox field is populated with: (.*)")]
+		[RegexStepDefinition(@"In the Formulation Names section, for section: 'Formula Name for the WERCSmart Ingredient Directory' confirm that the textbox field is populated with: '(.*)'")]
 		public void ConfirmTextFieldValueForFormulaName(string value)
 		{
 			string section = "Formula Name for the WERCSmart Ingredient Directory";
-			new Steps_Prototype().CheckingFieldInputIsCorrect(section, value);
+			new Steps_ProductPrototype().InSectionConfirmTextIsIsNotDisplayed(section, value, "is");
 		}
 
 		[RegexStepDefinition(@"In the Formulation Names section, for section: 'Formula Name for the WERCSmart Ingredient Directory' enter text: (.*)")]
@@ -74,6 +74,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, condition);
 		}
 
+		[RegexStepDefinition(@"In the Formulation Names section, confirm that the text: 'Provide the name\(s\) to be used to identify the formula' (is|is not) displayed")]
+		public void ConfirmSectionTextDisplayed(string condition)
+		{
+			string section = "Provide the name(s) to be used to identify the formula";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, condition);
+		}
+		[RegexStepDefinition(@"In the Formulation Names section, confirm that the question: 'Preliminary Chemical Abstract Number \(CAS\) if available' (is|is not) displayed")]
+		public void ConfirmSectionPreliminaryChemicalAbstractNameDisplayed(string condition)
+		{
+			string section = "Preliminary Chemical Abstract Number (CAS) if available";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, condition);
+		}
+
+		[RegexStepDefinition(@"In the Formulation Names section, confirm that the text: 'The product name registered initially with the formula' (is|is not) displayed")]
+		public void ConfirmSectionTextTheProductNameDisplayed(string condition)
+		{
+			string section = "The product name registered initially with the formula";
+			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(section, condition);
+		}
 		[RegexStepDefinition(@"In the Formulation Names section, for section: 'Provide Public Name\(s\) of the formula you're registering.' confirm that the textbox option: (Public Name 1|Public Name 2|Public Name 3) displays the shadow text: (Public Name 1|Public Name 2|Public Name 3)")]
 		public void ConfirmTextFieldValueForFormulaName(string section, string shadowTextOption)
 		{
