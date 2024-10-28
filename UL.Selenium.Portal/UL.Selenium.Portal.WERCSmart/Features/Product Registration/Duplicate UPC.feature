@@ -778,7 +778,8 @@ Scenario: [91157] Duplicate UPC is not permitted within account - Forward Produc
 	Then In The Add UPC modal verify for UPC Number error message 'This UPC Number is duplicated' is displayed
 	Then In The Add UPC modal verify for Retailers error message 'This UPC Number is duplicated' is displayed
 	Then In the UPC modal window I click Cancel
-	Then I click the Home navigation icon and accept the alert popup
+	Then I navigate to the home page
+	#Then I click the Home navigation icon and accept the alert popup
 	Then The home screen should load
 
 #Removed from regression: 2024/09
