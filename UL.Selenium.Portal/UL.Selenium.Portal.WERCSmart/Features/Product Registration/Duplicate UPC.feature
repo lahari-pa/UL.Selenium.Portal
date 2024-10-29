@@ -750,6 +750,7 @@ Scenario: [91157] Duplicate UPC is not permitted within account - Forward Produc
 	#Shared Step 157174 Purchase Summary - Thank You for Registering Message - Click Home to Continue
 	Given The Purchase Summary Page is displayed
 	Then In the Purchase Summary page message is displayed with text: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
+	Then I logout
 	Then I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then In the SHA manager grid I see the WPS ID I have saved as product: TestCase91157 and its status is: Assigned
 	Then I call Shared Step 65969 (Go to Power Designer Plus - Select your product & CKLT - Continue)
