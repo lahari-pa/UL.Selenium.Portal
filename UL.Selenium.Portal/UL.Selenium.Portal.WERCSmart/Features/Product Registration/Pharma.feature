@@ -127,9 +127,9 @@ Scenario: [127870] Pharma - Tablet or Capsule Count Field is Available for Solid
 	Then In the Ingredients Section ingredients table, confirm row with component name: Saccharin sodium dihydrate is displayed
 	Then In the Ingredients Table row with component name: Saccharin sodium dihydrate, in Percent column text input enter: 50
 	Given in the Ingredients page I click Continue
-	Given I should see the Transportation - Refrigeration Page
-	Then In the Transportation - Refrigeration Section, set the option in section: 'Should this product be refrigerated for transport or storage?' to: No
-	Given in the Transportation - Refrigeration page I click Continue
+	Given I should see the Temperature Requirements for Storage and Transport Page
+	Then In the Temperature Requirements for Storage and Transport Section, set the option in section: 'Does the product have temperature storage requirements?' to: No
+	Given in the Temperature Requirements for Storage and Transport page I click Continue
 	Given I should see the Transportation Classification Page
 	Then In the Transportation Classification Section, set the option in section: 'Is the product regulated for transport (before exceptions or exemptions)' to: No, not regulated
 	Given in the Transportation Classification page I click Continue
@@ -345,9 +345,9 @@ Scenario: [127847] Pharma - Tablet or Capsule Count Field is Available for Solid
 	Given in the Ingredients page I click Continue
 	Then In the Ingredients Section, I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
 	Then In displayed modal, click Confirm footer button
-	Given I should see the Transportation - Refrigeration Page
-	Then In the Transportation - Refrigeration Section, set the option in section: 'Should this product be refrigerated for transport or storage?' to: No
-	Given in the Transportation - Refrigeration page I click Continue
+	Given I should see the Temperature Requirements for Storage and Transport Page
+	Then In the Temperature Requirements for Storage and Transport Section, set the option in section: 'Does the product have temperature storage requirements?' to: No
+	Given in the Temperature Requirements for Storage and Transport page I click Continue
 	Given I should see the Transportation Classification Page
 	Then In the Transportation Classification Section, set the option in section: 'Is the product regulated for transport (before exceptions or exemptions)' to: No, not regulated
 	Given in the Transportation Classification page I click Continue
@@ -401,9 +401,9 @@ Scenario: [127854] Pharma - Tablet or Capsule Count Field is Available for Solid
 	Then In the Ingredients Section ingredients table, confirm row with component name: Saccharin sodium dihydrate is displayed
 	Then In the Ingredients Table row with component name: Saccharin sodium dihydrate, in Percent column text input enter: 50
 	Given in the Ingredients page I click Continue
-	Given I should see the Transportation - Refrigeration Page
-	Then In the Transportation - Refrigeration Section, set the option in section: 'Should this product be refrigerated for transport or storage?' to: No
-	Given in the Transportation - Refrigeration page I click Continue
+	Given I should see the Temperature Requirements for Storage and Transport Page
+	Then In the Temperature Requirements for Storage and Transport Section, set the option in section: 'Does the product have temperature storage requirements?' to: No
+	Given in the Temperature Requirements for Storage and Transport page I click Continue
 	Given I should see the Transportation Classification Page
 	Then In the Transportation Classification Section, set the option in section: 'Is the product regulated for transport (before exceptions or exemptions)' to: No, not regulated
 	Given in the Transportation Classification page I click Continue
@@ -479,71 +479,119 @@ Scenario: [127791] Pharma - Retailer Default
 	Then In the Product Grid, delete the product saved as: TestCase127791
 
 
-
-
 @TestCase:128671
 Scenario: [128671] Pharma - Prescription Pharmaceutical - Liquid Core Product
 
-Given I log in with the account saved in TReVor as: PharmaAccount
-Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
-Given I generate a random UPC number and save as: UPC127847
-Given I click continue
-Then I should see the Product Type Page
-Then I set 'Product Name' to: Prescription Pharmaceutical with Liquid Core
-Then I set 'Type of Product' to: Prescription Pharmaceutical with Liquid Core
-Then I click continue
-Given I enter the NDC number: 10866-0885-2
-Then I save the product information as: TestCase127847
-Then I click continue
-Then I click continue
-Given I fill all empty fields in the SPL Information screen
-Then I click continue
-#Given I call Shared Step 32931 (Liquid Core Product - select  No - Happy Path)
-Given I should see the Liquid Core Product Page
+	Given I log in with the account saved in TReVor as: PharmaAccount
+	Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
+	Given I generate a random UPC number and save as: UPC128671
+	Then I should see the New Product Page
+	Then In the New Product Section, set the radio option in section: 'Would you like to Create a New Product?': to: Yes, create a new product
+	Then in the New Product page, I click Continue
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Prescription Pharmaceutical with Liquid Core
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Prescription Pharmaceutical with Liquid Core
+	Given in the Product Type page I click Continue
+	Given I should see the Product Information Page
+	Then In the Product Information Section, enter the value in section: 'Enter NDC #': 0904-7056-99
+	Then In the Product Information Section, verify section: 'Enter NDC #' contains value: (0904-7056-99 - ASPIRIN AND EXTENDED - RELEASE DIPYRIDAMOLE CAPSULES, 25 MG / 200 MG (ASPIRIN AND EXTENDED - RELEASE DIPYRIDAMOLE) CAPSULE [MAJOR PHARMACEUTICALS]
+	Then In the Product Information Section, verify section: 'Product Name' contains value: Aspirin and Extended - Release Dipyridamole Capsules, 25 mg / 200 mg
+	Then In the Product Information Section, verify section: 'Generic Name' contains value: Aspirin and Extended - Release Dipyridamole
+	Then I save the product information as: TestCase128671
+	Given in the Product Information page I click Continue
+	Given I should see the SPL Information Page
+	Then In the SPL Information Section, verify section: 'Manufacturer' contains value: Major Pharmaceuticals
+	Then In the SPL Information Section, verify section: 'Prescription Dosage Form' contains value: CAPSULE
+	Then In the SPL Information Section, verify section: 'DEA Schedule' contains value: None
+	Then In the SPL Information Section, verify section: 'Marketing Category' contains value: ANDA
+	Then In the SPL Information Section, verify section: 'Marketing End Date' contains value: None
+	Then In the SPL Information Section, verify section: 'NDA Number' contains value: None
+	Then In the SPL Information Section, for section: 'Distributor' enter value: Distributor
+	Given in the SPL Information page I click Continue
+	Given I should see the Liquid Core Product Page
 	Then In the Liquid Core Product Section, set the option in section: 'Is there a free liquid in the Product's container that is 10ml or greater?' to: No
 	Then in the Liquid Core Product page I click Continue
-
-And I set the Secondary Physical State to be: Solid
-And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-And I set the Select the best Water Solubility description to be: Dispersible
-Then I click continue
-Then I click continue
-Given I fill all empty fields in the Pharma Ingredients screen
-Given I add the following ingredients:
-		| ComponentName    | Percent |
-		| Propane             | 100     |
-And I click continue
-Given I click the Ok button in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
-  Given In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
-Given I set the Should this product be refrigerated for transport or storage? option to: No
-Then I click continue
-Given I set the Is the product regulated for transport (before exceptions or exemptions) option to exactly match: No, not regulated
-Then I click continue
-Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
-Then I click continue
-Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC127847, container type: Plastic Container, capsule count: 50 and size: 1
-When I click continue
-When I click continue
-Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
-And I call Shared Step 60567 (Upload Product Label only) for section: Upload Full Product Label (required)
-Then I check for the following options in the Additonal Documents to Provide section
-| Option                       |
-| Safety Data Sheet (Optional) |
-When I click continue
-Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-When I click continue
-#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-Given I should see the Data Acceptance Page
+	Given I should see the Product Characteristics Page
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid containing liquid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Given in the Product Characteristics page I click Continue
+	Given I should see the Ingredients Page
+	Then In the Ingredients Section ingredients table, confirm row with component name: Acetylsalicylic acid (Aspirin) is displayed
+	Then In the Ingredients Table row with component name: Acetylsalicylic acid (Aspirin), in Percent column text input enter: 5
+	Then In the Ingredients Section ingredients table, confirm row with component name: Dipyridamole is displayed
+	Then In the Ingredients Table row with component name: Dipyridamole, in Percent column text input enter: 5
+	Then In the Ingredients Section ingredients table, confirm row with component name: Glycerol triacetate is displayed
+	Then In the Ingredients Table row with component name: Glycerol triacetate, in Percent column text input enter: 5
+	Then In the Ingredients Section ingredients table, confirm row with component name: Ci 77491 is displayed
+	Then In the Ingredients Table row with component name: Ci 77491, in Percent column text input enter: 5
+	Then In the Ingredients Section ingredients table, confirm row with component name: Potassium hydroxide is displayed
+	Then In the Ingredients Table row with component name: Potassium hydroxide, in Percent column text input enter: 5
+	Then In the Ingredients Section ingredients table, confirm row with component name: Ferric oxide black is displayed
+	Then In the Ingredients Table row with component name: Ferric oxide black, in Percent column text input enter: 5
+	Then In the Ingredients Section ingredients table, confirm row with component name: Titanium dioxide is displayed
+	Then In the Ingredients Table row with component name: Titanium dioxide, in Percent column text input enter: 5
+	Then In the Ingredients Section ingredients table, confirm row with component name: Talc is displayed
+	Then In the Ingredients Table row with component name: Talc, in Percent column text input enter: 5
+	Then In the Ingredients Section ingredients table, confirm row with component name: SODIUM LAURYL SULFATE is displayed
+	Then In the Ingredients Table row with component name: SODIUM LAURYL SULFATE, in Percent column text input enter: 5
+	Then In the Ingredients Section ingredients table, confirm row with component name: Ci 16035 is displayed
+	Then In the Ingredients Table row with component name: Ci 16035, in Percent column text input enter: 5
+	Then In the Ingredients Section ingredients table, confirm row with component name: Ci 15985 is displayed
+	Then In the Ingredients Table row with component name: Ci 15985, in Percent column text input enter: 5
+	Then In the Ingredients Section ingredients table, confirm row with component name: Ci 77492 is displayed
+	Then In the Ingredients Table row with component name: Ci 77492, in Percent column text input enter: 5
+	Then In the Ingredients Section ingredients table, confirm row with component name: Octadecanoic acid is displayed
+	Then In the Ingredients Table row with component name: Octadecanoic acid, in Percent column text input enter: 5
+	Then In the Ingredients Section ingredients table, confirm row with component name: .beta.-D-Lactose is displayed
+	Then In the Ingredients Table row with component name: .beta.-D-Lactose, in Percent column text input enter: 5
+	Then In the Ingredients Section ingredients table, confirm row with component name: Silicon Dioxide - hydrated is displayed
+	Then In the Ingredients Table row with component name: Silicon Dioxide - hydrated, in Percent column text input enter: 5
+	Then In the Ingredients Section ingredients table, confirm row with component name: Water is displayed
+	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 5
+	Then In the Ingredients Section ingredients table, confirm row with component name: Tartaric acid (d, I) is displayed
+	Then In the Ingredients Table row with component name: Tartaric acid (d, I), in Percent column text input enter: 5
+	Then In the Ingredients Section ingredients table, confirm row with component name: Gum arabic is displayed
+	Then In the Ingredients Table row with component name: Gum arabic, in Percent column text input enter: 5
+	Then In the Ingredients Section ingredients table, confirm row with component name: Shellac is displayed
+	Then In the Ingredients Table row with component name: Shellac, in Percent column text input enter: 3
+	Then In the Ingredients Section ingredients table, confirm row with component name: Gelatin is displayed
+	Then In the Ingredients Table row with component name: Gelatin, in Percent column text input enter: 1
+	Then In the Ingredients Section ingredients table, confirm row with component name: Polyvinyl alcohol is displayed
+	Then In the Ingredients Table row with component name: Polyvinyl alcohol, in Percent column text input enter: 1
+	Then In the Ingredients Section ingredients table, confirm row with component name: Alginic acid is displayed
+	Then In the Ingredients Table row with component name: Alginic acid, in Percent column text input enter: 5
+	Given in the Ingredients page I click Continue
+	Then Confirm displayed modal has title: Product Contains Ingredients Typical of a Pesticide
+	Then In the Ingredients Section, I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate.
+	Then In displayed modal, click Confirm footer button
+	Then In the Transportation - Refrigeration Section, set the option in section: 'Should this product be refrigerated for transport or storage?' to: No
+	Given in the Transportation - Refrigeration page I click Continue
+	Given I should see the Transportation Classification Page
+	Then In the Transportation Classification Section, set the option in section: 'Is the product regulated for transport (before exceptions or exemptions)' to: No, not regulated
+	Given in the Transportation Classification page I click Continue
+	Given I should see the Retailer Association Page
+	Then In the Retailer Section, for retailer: Wal-Mart/SAM'S CLUB select 'Select Vendor' option: any
+	Given in the Retailer Association page I click Continue
+	Given I should see the Universal Product Code (UPC) Page
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Tablet or Capsule Count' enter the value: 25
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC128671 enter Size: 1 and enter Container Type: Plastic Container
+	Given in the Universal Product Code (UPC) page I click Continue
+	Then in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+	Then in the Regulatory Documents to Provide page I click Continue
+	Given I should see the Additional Documents to Provide Page
+	Then in the Additional Documents to Provide page I click Continue
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	Given I should see the Data Acceptance Page
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
 	Then In the Data Acceptance Section, click 'Accept' button
+	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
+	Then In the Purchase Summary screen I click Confirm Order
+	Then In the Thank You screen I click Home
 
-And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
-Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
-Then In the Purchase Summary screen I click Confirm Order
-Then In the Thank You screen I click Home
-#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127847
-	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase127847
 
 
 @TestCase:128677

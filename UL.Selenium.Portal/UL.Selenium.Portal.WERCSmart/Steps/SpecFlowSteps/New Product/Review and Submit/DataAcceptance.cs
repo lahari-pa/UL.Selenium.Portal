@@ -28,6 +28,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 			string button = "Summary";
 			new Steps_Prototype().ClickButton(button);
 		}
+		//If Subscription Enrollment page is displayed, step adds subscription and clicks 'Confirm Order'
 		[RegexStepDefinition(@"In the Data Acceptance Section, click 'Accept' button")]
 		public void ClickAcceptButton()
 		{
@@ -104,6 +105,76 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 					GeneralUtilities.WaitForRefreshToDisappear(new PaymentMethods_Subscription_Billing().Btn_confirm);
 					GeneralUtilities.Wait_for_load_finish();
 					Report.Screenshot();
+				}
+			}
+		}
+		//Step doesn't click 'Confirm Order'
+		[RegexStepDefinition(@"In the Data Acceptance Section, click 'Accept' button and don't click 'Confirm Order' button")]
+		public void ClickAcceptButtonWithoutClickingConfirmOrder()
+		{
+			string button = "Accept";
+			new Steps_Prototype().ClickButton(button);
+			Report.UseSubSteps = true;
+			var MyStepsPaymentMethods = new Steps_PaymentMethods();
+			var sub = new SubscriptionEnrollment();
+			var myPay = new Steps_PaymentMethods();
+
+			if (new SubscriptionEnrollment_new().WaitForContainerToBeVisible())
+			{
+				var subEnrollment = new SubscriptionEnrollment_new();
+				if (Report.IsTrue(subEnrollment.EnrollmentFooterExists(), $"Failure, enrollment footer does not exist.", $"Success, enrollment footer exists."))
+				{
+					if (Report.IsTrue(subEnrollment.EnrollmentFooterButtonExists("PROCEED"), $"Failure, in enrollment footer 'PROCEED' button does not exist.", $"Success, in enrollment footer 'PROCEED' button exists."))
+					{
+						Report.IsTrue(subEnrollment.EnrollmentFooterButtonClick("PROCEED"), $"Failure, in enrollment footer failed to click 'PROCEED' button.", $"Success, in enrollment footer clicked 'PROCEED' button.");
+						new SubscriptionEnrollmentModal().WaitForContainerToBeVisible();
+						if (Report.IsTrue(new SubscriptionEnrollmentModal().ModalButtonExists("Checkout"), $"Failure, in the Subscription Enrollment modal, I confirm 'Checkout' button does not exists.", $"Success, in the Subscription Enrollment modal, I confirm 'Checkout' button does exist."))
+						{
+							Report.IsTrue(new SubscriptionEnrollmentModal().ModalButtonClick("Checkout"), $"Failure, in the Subscription Enrollment modal, failed to click 'Checkout' button.", $"Success, in the Subscription Enrollment modal, successfully clicked 'Checkout' button.");
+						}
+					}
+				}
+				new PaymentMethods().WaitForContainerToBeVisible();
+
+				if (new PaymentMethods().Payment_Method_Exists("Credit Card"))
+				{
+					Report.Info("Credit card details is already added");
+					if (!new PaymentMethods().Credit_Card_Default())
+					{
+						Report.IsTrue(new PaymentMethods().ClickMakeDeaultForPaymentMetod("Credit Card"), "Failed to make Credit Card as Default Payment Method",
+							"Successfully made Credit Card as Default Payment Method");
+					}
+					Report.StartSubStep("In the Payment Methods screen I click Continue");
+					MyStepsPaymentMethods.ThenIClickContinue();
+				}
+				else
+				{
+					foreach (string address in new PaymentMethods().Get_Billing_Address())
+					{
+						if (address.Contains("undefined"))
+						{
+							Report.Info("The state is undefined in Billing Address");
+							Report.Info("Attempt to edit state");
+							Report.IsTrue(new PaymentMethods().Change_click(), "Failed to Click Change Button", "Change Button Clicked");
+							Report.IsTrue(new PaymentMethods_Edit_Address().EditState("New York"), "Failed to select state", "Successfully selected state");
+							Report.IsTrue(new PaymentMethods_Edit_Address().Save_click(), "Failed to Click Save Button", "Save Button Clicked");
+						}
+					}
+					var myCreditCardTable = new Table("Card Type", "Card Number", "Expiration Month", "Expiration Year", "CVV", "Cardholder Name", "Postal Code");
+					myCreditCardTable.AddRow("Visa", "4111 1111 1111 1111", "08", "2028", "1111", "WERCS_QA_Automation", "12205");
+
+					if (!new PaymentMethods().Select_Payment_Method("Credit Card"))
+					{
+						new PaymentMethods().Add_A_New_Payment_Method("Credit Card");
+						myPay.ThenIEnterCreditCardDetails(myCreditCardTable);
+						Report.IsTrue(new PaymentMethods().ClickSubmitButton(), "Failed to click Submit button", "Successfully clicked Submit button");
+					}
+					else
+					{
+						myPay.ThenIEnterCreditCardDetails(myCreditCardTable);
+						Report.IsTrue(new PaymentMethods().ClickSubmitButton(), "Failed to click Submit button", "Successfully clicked Submit button");
+						Report.StartSubStep("In the Payment Methods screen I click Continue");
+					}
 				}
 			}
 		}

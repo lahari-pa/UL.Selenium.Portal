@@ -5,6 +5,8 @@ using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using UL.Automation.Reporting.Functions;
+using UL.Selenium.Portal.WERCSmart.Steps;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -163,4 +165,130 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 	}
+	public class LandingPlatform : SeleniumBaseObject
+	{
+		protected override By ContainerElementLocator => By.Id("container");
+		private IWebElement EmailInput => this.ContainerElement.FindElement(By.Id("signInName"), 2);
+		private IWebElement PasswordInput => this.ContainerElement.FindElement(By.Id("password"), 2);
+		private IWebElement EmailReadOnly => this.ContainerElement.FindElement(By.Id("readonlyEmailAnchor"), 2);
+		private IWebElement PageHeader => this.ContainerElement.FindElement(By.XPath(".//div[@class='content-box']/descendant::h1"), 1);
+		private IWebElement SubHeader => this.ContainerElement.FindElement(By.XPath(".//div[@class='content-box']/descendant::h2"), 1);
+		private IWebElement SignInOrNextBtn => this.ContainerElement.FindElement(By.Id("continue"), 1);
+		private IWebElement Loading => this.ContainerElement.FindElement(By.Id("api"), 2);
+		public bool EnterEmailId(string email)
+		{
+			if (this.PageHeader?.Text != "UL Solutions Account" && this.SubHeader?.Text != "Sign in to your account")
+			{
+				Report.Error($"Expected 'UL Solutions Account' but displayed :'{this.PageHeader.Text}', Expected 'Sign in to your account' but displayed :'{SubHeader.Text}'");
+			}
+			if (!this.LoadingWait())
+			{
+				Report.Info("Still Loading...");
+				return false;
+			}
+			Report.Info($"Entering Email Address: '{email}");
+			this.EmailInput.EnterText(email);
+			Report.Screenshot();
+			Report.Info("Clicking Next button");
+			return this.SignInOrNextBtn.TryClick();
+		}
+		public bool SignIn(string email, string password)
+		{
+			this.WaitForContainerToBeVisible();
+			if (!this.EnterEmailId(email))
+			{
+				Report.Info("Not able to sign in");
+				return false;
+			}
+			if (!this.OverLayer())
+			{
+				Report.Info("Still Overlay...");
+				return false;
+			}
+			if (this.PageHeader?.Text != "UL Solutions Account" && this.SubHeader?.Text != "Enter your password")
+			{
+				Report.Error("Header or Sub-header text are mismatched");
+			}
+			if (!this.LoadingWait())
+			{
+				Report.Info("Still Loading...");
+				return false;
+			}
+			if (!string.Equals(this.EmailReadOnly?.Text.Replace("arrow_back", "", StringComparison.CurrentCultureIgnoreCase), email,
+					StringComparison.CurrentCultureIgnoreCase))
+			{
+				Report.Info($"Entered {email} mail is not shown {this.EmailReadOnly?.Text}");
+				return false;
+			}
+			Report.Info($"Entering Password: '{password}");
+			this.PasswordInput.EnterText(password);
+			Report.Screenshot();
+			Report.Info("Clicking sign-in button");
+			this.SignInOrNextBtn.TryClick();
+			return new Homepage().WaitForContainerToBeVisible();
+		}
+		public bool OverLayer(int attempt = 60)
+		{
+			Report.Info("Verify the Overlay...");
+			IWebElement overLay = this.WebDriver.FindElement(By.Id("simplemodal-overlay"), 2);
+			int counter = 0;
+			while (overLay != null && counter < attempt)
+			{
+				overLay = this.WebDriver.FindElement(By.Id("simplemodal-overlay"), 2);
+				this.WaitForContainerToBeInvisible(3);
+				counter++;
+			}
+			return overLay == null;
+		}
+		public bool LoadingWait(int attempt = 60)
+		{
+			Report.Info("Verify the Loading...");
+			string loadWheel = this.Loading?.GetAttribute("class");
+			int counter = 0;
+			while (loadWheel != string.Empty && counter < attempt)
+			{
+				loadWheel = this.Loading?.GetAttribute("class");
+				this.WaitForContainerToBeInvisible(2);
+				counter++;
+			}
+			return loadWheel == string.Empty;
+		}
+	}
+	public class CookiesFooter : SeleniumBaseObject
+	{
+		protected override By ContainerElementLocator => By.XPath(".//div[@id='truste-consent-track' and not(contains(@style,'display: none;'))]");
+		private IWebElement AcceptCookiesBtn => this.ContainerElement.FindElement(By.XPath(".//button[text()='Accept All Cookies']"), 1);
+		public bool AcceptCookiesClick()
+		{
+			Report.Info("Attempting to Click Accept Cookies Button");
+			this.AcceptCookiesBtn.TryClick();
+			return true;
+		}
+		public bool AcceptCookies()
+		{
+			Delay.Seconds(2);
+			if (this.ContainerVisible())
+			{
+				if (!this.AcceptCookiesClick())
+				{
+					Report.Info("Failed to Click Accept Cookies Button");
+					Report.Screenshot();
+					return false;
+				}
+				Delay.Seconds(2);
+				if (this.ContainerVisible())
+				{
+					Report.Info("Failed to Remove Cookies Bar");
+					Report.Screenshot();
+					return false;
+				}
+				Report.Success("Cookies Accepted");
+				Report.Screenshot();
+				return true;
+			}
+			Report.Info("Cookies Bar not Showing");
+			return true;
+		}
+	}
 }
+

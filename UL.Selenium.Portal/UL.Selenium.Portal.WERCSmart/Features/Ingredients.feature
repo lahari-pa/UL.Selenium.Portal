@@ -1480,13 +1480,13 @@ Scenario: [207581] Oven Cleaner - Pump Spray - (RU000798) - New Flow Testing
 	Then In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping with limited quantity
 	Then In the Transportation Details 1 Section, set the option for IMDG mode of transport to: Shipping with limited quantity
 	Then in the Transportation Details 1 page, I click Continue
-	And I should see the U. S. Department of Transportation (DOT) Classification Page
-	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1719
-	Then In the U. S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Caustic alkali liquids, n.o.s.
-	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Technical Name (if applicable)': to: Sodium Hydroxide
-	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 8
-	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: II
-	Then in the U. S. Department of Transportation (DOT) Classification page, I click Continue	
+	And I should see the U.S. Department of Transportation (DOT) Classification Page
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1719
+	Then In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Caustic alkali liquids, n.o.s.
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Technical Name (if applicable)': to: Sodium Hydroxide
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 8
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: II
+	Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue	
 	And I should see the International Marine (IMDG) Classification Page
 	Then In the International Marine (IMDG) Classification Section, I check checkbox 'Copy information from my U.S. Department of Transportation data'
 	Then In the International Marine (IMDG) Classification Section, verify section: 'UN Number' contains value: UN1719

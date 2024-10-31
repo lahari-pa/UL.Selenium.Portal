@@ -302,7 +302,7 @@ And I set the Product is Regulated for Transport field to: Yes
 And I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
 And I call Shared Step 65701 (Transport - Select TDG & Limited Shipping - No Continue)
 And I click continue
-And I should see the U. S. Department of Transportation (DOT) Classification Page
+And I should see the U.S. Department of Transportation (DOT) Classification Page
 And I set the UN Number field to: UN1975
 And Proper Shipping Name should be showing the value: Nitric oxide and dinitrogen tetroxide mixtures
 And The following options should be displayed exclusively for section: Proper Shipping Name
@@ -394,7 +394,7 @@ And I select option: Shipping fully regulated under section: Select all modes of
 And I set the Select all modes of transport that you've classified the product for field to: TDG
 And I select option: Shipping fully regulated under section: Select all modes of transport that you've classified the product for and subsection: TDG
 And I click continue
-And I should see the U. S. Department of Transportation (DOT) Classification Page
+And I should see the U.S. Department of Transportation (DOT) Classification Page
 And I set the UN Number field to: UN2762
 And The following options should be displayed exclusively for section: Proper Shipping Name
 | Option                                              |
@@ -649,8 +649,8 @@ Given I should see the Transportation Details 1 Page
 	Then in the Transportation Details 1 page I click Continue
 
 Then I call Shared Step 126160 (U.S. Department of Transportation (DOT) Classification - Enter UN1057 - Lighter Fluid)
-Then in page U. S. Department of Transportation (DOT) Classification I should see no errors
-And I click the page heading: U. S. Department of Transportation (DOT) Classification
+Then in page U.S. Department of Transportation (DOT) Classification I should see no errors
+And I click the page heading: U.S. Department of Transportation (DOT) Classification
 And For the lighter, provide the DOT Approval Number (LAA) should be showing the value: 123
 #Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase126286
 	Then I navigate to the Home Page

@@ -57,6 +57,8 @@ Feature: Duplicate UPC
 # Created by Abbie Zullo
 # Test case can be found at the following paths:
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\UPC
+#Removed from regression: 2024/09
+@ignore
 @TestCase:91076
 Scenario: [91076] Duplicate UPC is not permitted within account - New Product registration - single UPC
 
@@ -171,19 +173,19 @@ Scenario: [82536] Soap (Bar, Liquid) for Body (RU000211) - GTIN/UPC - Verify Dup
 	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Given I click continue
 	#252877 Regulatory Information 3 - Applicable Only to Type of Product:  Soap (Bar, Liquid) for Body (RU000211)
-	Given I should see the Regulatory Information 3 Page
+	Given I should see the Product Labeling Page
 	Given I click continue
-	Then In the Regulatory Information 3 Section, the error 'Please select at least one option from above.' is displayed for section 'Refer to your Product Label. From the options, select those that appear on the Label.'
-	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
+	Then In the Product Labeling Section, the error 'Please select at least one option from above.' is displayed for section 'Refer to your Product Label. From the options, select those that appear on the Label.'
+	Then In the Product Labeling Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
 	| Option                 |
 	| Drug Facts Panel       |
 	| Supplement Facts Panel |
 	| Nutrition Facts Panel  |
 	| None of the Above      |
-	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above
-	Then In the Regulatory Information 3 Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
-	Then In the Regulatory Information 3 Section, the following link: Nutritional and Supplement Labels should be displayed
-	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
+	Then In the Product Labeling Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above
+	Then In the Product Labeling Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
+	Then In the Product Labeling Section, the following link: Nutritional and Supplement Labels should be displayed
+	Then In the Product Labeling Section, the following link: Dietary Supplements Label should be displayed
 	Given I click continue
 	#And I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	Given I should see the Retailer Page
@@ -516,6 +518,8 @@ Scenario: [91800] Duplicate UPC is not permitted within account - Forward Produc
 	And In the Case UPC modal window I click Save
 	Then I check that the alert displayed contains text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review.
 
+#Removed from regression: 2024/09
+@ignore
 @TestCase:91741
 Scenario: [91741] Duplicate UPC is not permitted within account - New Product registration - Case UPC
 	Given I find an existing UPC number in trevor account saved as: ProductAccount using feature context: ExistingUPC_ProductAccount_1
@@ -777,7 +781,8 @@ Scenario: [91157] Duplicate UPC is not permitted within account - Forward Produc
 	Then I click the Home navigation icon and accept the alert popup
 	Then The home screen should load
 
-
+#Removed from regression: 2024/09
+@ignore
 @TestCase:91077
 Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New Product registration - Single UPC
 	Given I find an existing UPC number in trevor account saved as: ProductAccount using feature context: ExistingUPC_ProductAccount_1

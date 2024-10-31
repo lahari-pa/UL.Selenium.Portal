@@ -303,7 +303,7 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| Shipping with limited quantity |
 		And I click continue
 
-		Then I should see the U. S. Department of Transportation (DOT) Classification Page
+		Then I should see the U.S. Department of Transportation (DOT) Classification Page
 		And I set the UN Number field to: UN1439
 		
 		And I set the Hazard Class (select) field to: 5.1
@@ -664,8 +664,8 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		| Shipping with limited quantity   |
 		And I click continue
 
-		# U. S. Department of Transportation (DOT) Classification Page
-		Then I should see the U. S. Department of Transportation (DOT) Classification Page
+		# U.S. Department of Transportation (DOT) Classification Page
+		Then I should see the U.S. Department of Transportation (DOT) Classification Page
 		And I set the UN Number field to: UN1108
 		And I set the Technical Name (if applicable) field to: My Safe Product
 		And I set the Hazard Class (select) field to: 3
@@ -726,8 +726,8 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		# 20464 || 14188 
 		And I click continue
 
-		# U. S. Department of Transportation (DOT) Classification Page
-		Then I should see the U. S. Department of Transportation (DOT) Classification Page
+		# U.S. Department of Transportation (DOT) Classification Page
+		Then I should see the U.S. Department of Transportation (DOT) Classification Page
 		And I set the UN Number field to: UN3159
 		And I set the Technical Name (if applicable) field to: My Safe Product
 		And I set the Hazard Class (select) field to: 2.2
@@ -798,8 +798,8 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 
 		And I click continue
 
-		# U. S. Department of Transportation (DOT) Classification Page
-		Then I should see the U. S. Department of Transportation (DOT) Classification Page
+		# U.S. Department of Transportation (DOT) Classification Page
+		Then I should see the U.S. Department of Transportation (DOT) Classification Page
 		And I set the UN Number field to: UN3102
 		And I set the Proper Shipping Name field to: Organic peroxide type B, solid
 		And I set the Technical Name (if applicable) field to: My Safe Product
@@ -860,8 +860,8 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 
 		And I click continue
 
-		# U. S. Department of Transportation (DOT) Classification Page
-		Then I should see the U. S. Department of Transportation (DOT) Classification Page
+		# U.S. Department of Transportation (DOT) Classification Page
+		Then I should see the U.S. Department of Transportation (DOT) Classification Page
 		And I set the UN Number field to: UN1950
 		And I set the Proper Shipping Name field to: Aerosols
 		And I set the Technical Name (if applicable) field to: My Safe Product
@@ -954,8 +954,8 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 		
 		And I click continue
 
-		## U. S. Department of Transportation (DOT) Classification Page
-		Then I should see the U. S. Department of Transportation (DOT) Classification Page
+		## U.S. Department of Transportation (DOT) Classification Page
+		Then I should see the U.S. Department of Transportation (DOT) Classification Page
 		And I set the UN Number field to: UN1439
 		And I set the Proper Shipping Name field to: Ammonium dichromate
 		And I set the Technical Name (if applicable) field to: My Safe Product
@@ -1044,8 +1044,8 @@ Scenario: [122304] UPC Transportation Error - Mode 7 - Scenario 4
 			
 		And I click continue
 
-		## U. S. Department of Transportation (DOT) Classification Page
-		Then I should see the U. S. Department of Transportation (DOT) Classification Page
+		## U.S. Department of Transportation (DOT) Classification Page
+		Then I should see the U.S. Department of Transportation (DOT) Classification Page
 		And I set the UN Number field to: UN1990		
 		And I set the Technical Name (if applicable) field to: My Safe Product
 		And I set the Hazard Class (select) field to: 9

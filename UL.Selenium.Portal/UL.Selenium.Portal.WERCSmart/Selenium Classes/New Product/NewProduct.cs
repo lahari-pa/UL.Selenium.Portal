@@ -28,10 +28,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
 	public class NewProduct : SeleniumBaseObject
 	{
-		protected override By ContainerElementLocator => By.XPath("//div[@id='dataentry']");
+		protected override By ContainerElementLocator => By.XPath("//body");
 		IWebElement InputField(string fieldName) => this.ContainerElement.FindElement(By.XPath($".//input[@placeholder='{fieldName}']"), 2);
 		IWebElement LinkElement(string linkText) => this.ContainerElement.FindElement(By.XPath($".//a[text()='{linkText}'] | .//a//span[text()='{linkText}']"), 2);
-		IWebElement Button(string button) => this.ContainerElement.FindElement(By.XPath($"//button//span[text() = '{button}'] | .//a[text() = '{button}']"), 2);
+		IWebElement Button(string button) => this.ContainerElement.FindElement(By.XPath($"//button//span[text() = '{button}'] | .//a[text() = '{button}'] | //button[text() = '{button}']"), 2);
 		IWebElement Table(string tableName) => this.ContainerElement.FindElement(By.XPath($"//div[div[text() = '{tableName}']]/following-sibling::table"), 2);
 		IWebElement TextOnThePage(string text) => this.ContainerElement.FindElement(By.XPath($"//div//*[text() = \"{text}\"]"),2);
 
@@ -3630,11 +3630,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public IWebElement StandaloneCheckbox(string description)
 		{
-			IWebElement el = this.ContainerElement.FindElement(By.XPath($@".//div[@class='checkbox' and (.//span[contains(text(),""{description}"")])]/label/input | .//div[span[text() = '{description}']]/input"), 2);
+			IWebElement el = this.ContainerElement.FindElement(By.XPath($@".//div[@class='checkbox' and (.//span[contains(text(),'{description}')])]/label/input | .//div[span[text() = '{description}']]/input"), 2);
+			IWebElement el2 = this.ContainerElement.FindElement(By.XPath($@".//input[@type='checkbox'][.//following-sibling::span[text()='{description}']]"));
 			if (el == null)
 			{
-				Report.Info($"Could not find checkbox with description: '{description}'");
-				return null;
+				if (el2 == null)
+				{
+					Report.Info($"Could not find checkbox with description: '{description}'");
+					return null;
+				}
+				return el2;
 			}
 			return el;
 		}

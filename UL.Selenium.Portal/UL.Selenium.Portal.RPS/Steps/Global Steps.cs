@@ -15,6 +15,7 @@ using TReVor.Integrations.Classes;
 using UL.Automation.Utilities.Functions;
 using UL.Selenium.Portal.RPS.Classes;
 using UL.Selenium.Portal.RPS.Selenium_Classes;
+using static UL.Selenium.Portal.RPS.Selenium_Classes.WidgetPage.Widget;
 using System.Configuration;
 using System.Collections.Specialized;
 using UL.Automation.ReqnrollHelpers.Attributes;
@@ -481,7 +482,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		[RegexStepDefinition(@"OLD I find the Product List Pie Chart export csv saved as (.*) and check if the values saved as (.*) are found.")]
 		public void ICheckProductListPieCSVContainsValuesOld(string fileSavedAs, string valuesSavedAs)
 		{
-			var savedItems = (WidgetPage.Widget.ProductListItems)Context.GetFromContext(valuesSavedAs);
+			var savedItems = (ProductListItems)Context.GetFromContext(valuesSavedAs);
 			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
 			var lines = System.IO.File.ReadAllLines(File);
 
@@ -539,7 +540,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		[RegexStepDefinition(@"I find the Product List Bar Graph export csv saved as (.*) and check if the values saved as (.*) are found.")]
 		public void ICheckProductListBarCSVContainsValues(string fileSavedAs, string valuesSavedAs)
 		{
-			var savedItems = (WidgetPage.Widget.ProductListItems)Context.GetFromContext(valuesSavedAs);
+			var savedItems = (ProductListItems)Context.GetFromContext(valuesSavedAs);
 			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
 			var lines = System.IO.File.ReadAllLines(File);
 
@@ -606,7 +607,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		[RegexStepDefinition(@"I find the Product List Pie Chart export csv saved as (.*) and check if the values saved as (.*) are found.")]
 		public void ICheckProductListPieCSVContainsValues(string fileSavedAs, string valuesSavedAs)
 		{
-			var savedItems = (WidgetPage.Widget.ProductListItems)Context.GetFromContext(valuesSavedAs);
+			var savedItems = (ProductListItems)Context.GetFromContext(valuesSavedAs);
 			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
 			var lines = System.IO.File.ReadAllLines(File);
 
@@ -779,7 +780,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		[RegexStepDefinition(@"I find the Supplier List export csv saved as (.*) and check if the values saved as (.*) are found.")]
 		public void ICheckSupplierListCSVContainsValues(string fileSavedAs, string valuesSavedAs)
 		{
-			var savedItems = (WidgetPage.Widget.SupplierListItems)Context.GetFromContext(valuesSavedAs);
+			var savedItems = (SupplierListItems)Context.GetFromContext(valuesSavedAs);
 			string File = Context.GetFromContext(fileSavedAs)?.ToString() ?? "";
 			var lines = System.IO.File.ReadAllLines(File);
 			List<string> suppliersStr = new List<string>();

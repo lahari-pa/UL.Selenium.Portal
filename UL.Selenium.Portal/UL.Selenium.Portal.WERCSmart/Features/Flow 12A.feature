@@ -117,7 +117,7 @@ Scenario: [98077] 3rd Party Exclusive Use Option
 @TestCase:119476
 Scenario: [119476] Mixture, Blend, Formulation, Solution Verifying Formula Name Updates- RU000722
 	
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC119476
 	Then In the Product Grid, delete all products with UPC Number: saved as UPC119476
@@ -149,7 +149,9 @@ Scenario: [119476] Mixture, Blend, Formulation, Solution Verifying Formula Name 
 
 	#Given I call Shared Step 48948 (Formulation > 3rd Party - Select all)
 	Then I should be on the Formulation > 3rd Party Page
+	Then In the Formulation > 3rdParty Section, I confirm text 'Chemical Assessments and SDS Authoring' should be displayed
 	And In the Formulation > 3rdParty Section, set the radio option in section: 'By clicking Accept, I certify the formulation information entered is complete and accurate': to: Accept
+	Then In the Formulation > 3rdParty Section, I confirm text 'Data Use Consents' should be displayed
 	And In the Formulation > 3rdParty Section, set the radio option in section: 'Consent to Tier 2.1, 2.2, 4.2 Data Uses': to: Granted
 	Then in the Formulation > 3rd Party page, I click Continue
 
@@ -163,15 +165,16 @@ Scenario: [119476] Mixture, Blend, Formulation, Solution Verifying Formula Name 
 	Then I should be on the Regulatory Information 2 Page
 	And In the Regulatory Information 2 Section, set the option in section: 'Product contains microbeads' to: No
 	Then in the Regulatory Information 2 page, I click Continue
-
 	Then in the Additional Documents to Provide page, I click Continue
 
-	And I should see following statement: Provide the name(s) to be used to identify the formula
 	Then I should be on the Formulation Names Page
+	Then In the Formulation Names section, confirm that the text: 'Provide the name(s) to be used to identify the formula' is displayed
+	Then In the Formulation Names section, confirm that the text: 'The product name registered initially with the formula' is displayed
 	And In the Formulation Names section, confirm that the full text for section: 'Provide Public Name(s) of the formula you're registering.' is displayed
-	And In the Formulation Names section, for section: 'Formula Name for the WERCSmart Ingredient Directory' confirm that the textbox field is populated with: Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party
+	And In the Formulation Names section, for section: 'Formula Name for the WERCSmart Ingredient Directory' confirm that the textbox field is populated with: 'Mixture  Blend  Formula  Polymer or Solution from '
 	And In the Formulation Names section, for section: 'Formula Name for the WERCSmart Ingredient Directory' clear the textbox field
 	And In the Formulation Names section, for section: 'Formula Name for the WERCSmart Ingredient Directory' enter text: Aerosol
+	Then In the Formulation Names section, confirm that the question: 'Preliminary Chemical Abstract Number (CAS) if available' is displayed
 	And In the Formulation Names section, for section: 'Provide Public Name(s) of the formula you're registering.' confirm that the textbox option: Public Name 1 displays the shadow text: Public Name 1
 	And In the Formulation Names section, for section: 'Provide Public Name(s) of the formula you're registering.' confirm that the textbox option: Public Name 2 displays the shadow text: Public Name 2
 	And In the Formulation Names section, for section: 'Provide Public Name(s) of the formula you're registering.' confirm that the textbox option: Public Name 3 displays the shadow text: Public Name 3

@@ -29,11 +29,17 @@
 @Product:WERCSmart_Account:Distributor_Page:NewProducts_Tab:ReciewAndSubmit_Section:OptionalReportsAndDocumentsAvailableForPurchase
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
-
+@Steps_ProductPrototype
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails2
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:USDepartamentOfTransportationDOT
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InternationalAirTransportClassification
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InternationalMarineClassification
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOC_OzoneTransportCommission
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOC_Summary
+@GTINAndUPC
+
 Feature: Flow 18
 
-@ignore
 @tfsdesign
 @TestCase:60116
 Scenario: [60116] Anti-Static Product - Aerosol - RU000656
@@ -41,12 +47,21 @@ Scenario: [60116] Anti-Static Product - Aerosol - RU000656
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC60116
 	Given I delete all products with UPC Number: saved as UPC60116
-	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Anti-Static Product - Aerosol
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Anti-Static Product - Aerosol
+	Then I should see the The Product Page
+	Then In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Anti-Static Product - Aerosol_#60116
+	Then In the Product Section, set the option in section: 'Type of Product (select)' to: Anti-Static Product - Aerosol
+	Then in the The Product page, I click Continue
+
 	Then I save the product information as: TestCase60116
+
 	#Given I call Shared Step 60310 (Product Information - Without Child question)
 	Given I should see the Product Information Page
-	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
 	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
 	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
@@ -54,13 +69,32 @@ Scenario: [60116] Anti-Static Product - Aerosol - RU000656
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Given in the Product Information page I click Continue
 
-	Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
-	Given I click continue
-	Then I should see an error message: ALERT! The ingredient table does not include a compressed gas (Bag-On-Valve) or a propellant. Please update your ingredients to include the propellant before proceeding.
-	Given I call Shared Step 69557 (Enter Ingredients for Aerosol Propellent)
+	#Given I call Shared Step 253461 (Product Information - Applicable Only to Type of Product:  Anti-Static Product - Aerosol (RU000656) with Secondary Physical State:  Bag-on-Valve (BOV))
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Aerosol
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Aerosol
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Bag-on-valve (BOV)
+	Then In the Physical and Chemical Properties Section, for section: 'pH' select the checkbox option: 'I do not have exact pH data available to me'
+	Then In the Physical and Chemical Properties Section, set the option in section: 'pH' to: Not tested/Unknown
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: No data available
+	Then In the Physical and Chemical Properties Section, set the option in section: 'When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then' to: This product is not classified as D001 or D003 Hazardous Waste under RCRA
+	Then in the Physical and Chemical Properties page I click Continue
+
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+		| SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+		| CAS number | 64-17-5     | 100     |                     |               |             |
+	Then in the Ingredients page I click Continue
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Then Expand the Ingredients panel
+	Then In the Ingredients section, add the following ingredients:
+		| SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+		| CAS number | 61789-80-8  | 1       |                     |               |             |
+	Then in the Ingredients page I click Continue
+
 	#Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I should see the Inventory Status, Prop 65 (US) Page
-	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is exempt from TSCA chemical Inventory listing requirements.
 	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page I click Continue
 
@@ -69,48 +103,133 @@ Scenario: [60116] Anti-Static Product - Aerosol - RU000656
 	Then In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Yes
 	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: DOT
 	Then In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping with limited quantity
+	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: IMDG
+	Then In the Transportation Details 1 Section, set the option for IMDG mode of transport to: Shipping with limited quantity
+	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: IATA
+	Then In the Transportation Details 1 Section, set the option for IATA mode of transport to: Shipping with limited quantity
 	Then in the Transportation Details 1 page I click Continue
 
-	Given I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
-	Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
-	Given I call Shared Step 60468 (VOC - CARB only required - enter value - Continue - Happy Path)
-	Given I click continue
+	#Given I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
+	Given I should see the U.S. Department of Transportation (DOT) Classification Page
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols, flammable, n.o.s.
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
+	Then in the U.S. Department of Transportation (DOT) Classification page I click Continue
+
+	Given I should see the International Air Transport (IATA) Classification Page
+	Then In the International Air Transport (IATA) Classification Section, set the option in section: 'UN Number': to: UN1950
+	Then In the International Air Transport (IATA) Classification Section, set the option in section: 'Hazard Class (select)': to: 2.1
+	Then In the International Air Transport (IATA) Classification Section, set the option in section: 'Packing Group': to: None
+	Then In the International Air Transport (IATA) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols, flammable
+	Then in the International Air Transport (IATA) Classification page I click Continue
+
+	Given I should see the International Marine (IMDG) Classification Page
+	Then In the International Marine (IMDG) Classification Section, set the option in section: 'UN Number': to: UN1950
+	Then In the International Marine (IMDG) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
+	Then In the International Marine (IMDG) Classification Section, set the option in section: 'Hazard Class (select)': to: 2
+	Then In the International Marine (IMDG) Classification Section, set the option in section: 'Packing Group': to: None
+	Then in the International Marine (IMDG) Classification page I click Continue
+
+	#Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
+	Given I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
+	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.': to: No
+	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB': to: 79.44
+	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule': to: 79.44
+	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?': to: Yes
+	Then in the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) page I click Continue
+
+	#Given I call Shared Step 60468 (VOC - CARB only required - enter value - Continue - Happy Path)
+	Given I should see the Volatile Organic Compound Summary Page
+	Then In the Volatile Organic Compound Summary Section, confirm that I see todays 'VOC Analysis Date'
+	Then In the Volatile Organic Compound Summary Section, confirm 'Limits' table should exists
+	Then In the Volatile Organic Compound Summary Section, confirm that I see the following 'CARB' value: 79.44
+	Then In the Volatile Organic Compound Summary Section, confirm that I see the following 'OTC Model Rule' value: 79.44
+	Then In the Volatile Organic Compound Summary Section, the statement 'Does not exceed the limits specified in the California Consumer Products Regulation' is displayed
+	Then In the Volatile Organic Compound Summary Section, the statement 'Does not exceed the limits specified by the Ozone Transport Commission' is displayed
+	Then In the Volatile Organic Compound Summary Section, for 'Your acknowledgement of this registration includes that your product..' set 'Yes, I Acknowledge'
+	Then in the Volatile Organic Compound Summary page I click Continue
+
 	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples
 	Then I should be on the Retailer Page
 	And In the Retailer Section, click 'Add Retailers' button
-	And In the Select Retailers window, select retailer: Staples
+	And In the Select Retailers window, select retailer: The Home Depot
 	And In the Select Retailers window, click 'Done' button
 	Then in the Retailer page, I click Continue
 
-	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60116, container type: Aerosol Can and size: 1
+	Then I should be on the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC60116 enter Size: 6.3 and enter Container Type: Aerosol Can - Metal
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, under Transportation column the checkbox 'DOT' is checked
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, under Transportation column the checkbox 'IMDG' is checked
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, under Transportation column the checkbox 'IATA' is checked
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, verify retailer 'HD' is present under the 'Destination Retailers' column
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page, I click Continue
+
+	#Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60116, container type: Aerosol Can and size: 1
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
-	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Yes, I certify that I have an OSHA-compliant SDS for this product and would like to upload it.
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'OSHA SDS'
 	Then in the Regulatory Documents to Provide page I click Continue
 
-	Given I call Shared Step 60567 (Upload Product Label only) for section: Volatile Organic Compounds
-	And in the Optional Reports and Documents Available for Purchase page I click Continue
-	#Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-	#	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
-	#	| Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
-	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Mask
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 150
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 44
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.7
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: White
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor' to: Floral
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor Threshold' to: No data available
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Partition Coefficient' enter text: 12
-	Then in the Safety Data Sheet Authoring - Additional Data (Optional) page, I click Continue
+	Given I should see the Additional Documents to Provide Page
+	Then in the Additional Documents to Provide page I click Continue
+	Then In the Additional Documents to Provide, section 'Volatile Organic Compounds' error message should display: Document is required: Product Label
+	Then In the Additional Documents to Provide, upload PDF document to Upload Volatile Organic Compounds field
+	Then in the Additional Documents to Provide page I click Continue
 
+	Given I should see the Optional Reports and Documents Available for Purchase Page
+	Then in the Optional Reports and Documents Available for Purchase page I click Continue
 
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 60116. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I should see the Optional Comments Page
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
 	Then in the Optional Comments page I click Continue
 
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Anti-Static Product - Aerosol
+	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Anti-Static Product - Aerosol
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, click 'Summary' button
+	Then I switch to the tab with Data Summary page
+	Then In the Summary Page, the 'Type of Product' section should be showing the following value: Anti-Static Product - Aerosol
+	Then In the Summary Page, the 'Primary Physical State' section should be showing the following value: Aerosol
+	Then In the Summary Page, the 'Secondary Physical State' section should be showing the following value: Bag-on-valve (BOV)
+	#Then In the Summary Page, verify table data in column CAS Number/ChemicalName showing the value: 64-17-5
+	Then In the Summary page, I confirm the Ingredients table matches the following:
+	| CAS Number/ChemicalName                                                          | Percent | Publicly Disclosed? | Trade Secret? | INCI Name |
+	| Ethyl alcohol                                                                    | 100     | No                  | No            |           |
+	| Quaternary ammonium compounds, bis(hydrogenated tallow alkyl)dimethyl, chlorides | 1       | No                  | No            |           |
+
+	Then In the Summary Page, the 'Product is Regulated for Transport' section should be showing the following value: Yes
+
+	Then In the Summary Page, the 'Select all modes of transport that you've classified the product for' section should be showing the following value: DOT
+	Then In the Summary Page, the 'Select all modes of transport that you've classified the product for' section should be showing the following value: Shipping with limited quantity
+	Then In the Summary Page, the 'Select all modes of transport that you've classified the product for' section should be showing the following value: IMDG
+	Then In the Summary Page, the 'Select all modes of transport that you've classified the product for' section should be showing the following value: Shipping with limited quantity
+	Then In the Summary Page, the 'Select all modes of transport that you've classified the product for' section should be showing the following value: IATA
+	Then In the Summary Page, the 'Select all modes of transport that you've classified the product for' section should be showing the following value: Shipping with limited quantity
+
+
+	Then In the Summary Page, the 'UN Number' section should be showing the following value: UN1950
+	Then In the Summary Page, the 'Proper Shipping Name' section should be showing the following value: Aerosols, flammable, n.o.s.
+	Then In the Summary Page, the 'Hazard Class' section should be showing the following value: 2.1
+	Then In the Summary Page, the 'Packing Group' section should be showing the following value: None
+	Then In the Summary Page, the 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by' section should be showing the following value: 79.44
+	Then In the Summary Page, the 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule' section should be showing the following value: 79.44
+
+	Then In the Summary Page, verify table data in column UPC Transportation showing the value: DOT
+	Then In the Summary Page, verify table data in column UPC Transportation showing the value: -- Shipping with limited quantity
+	Then In the Summary Page, verify table data in column UPC Transportation showing the value: IMDG
+	Then In the Summary Page, verify table data in column UPC Transportation showing the value: -- Shipping with limited quantity
+	Then In the Summary Page, verify table data in column UPC Transportation showing the value: IATA
+	Then In the Summary Page, verify table data in column UPC Transportation showing the value: -- Shipping with limited quantity
+
+
+	Then In the Summary Page, verify table data in column Container Type showing the value: Aerosol Can - Metal
+	Then In the Summary Page, verify table data in column Size (Ounces) showing the value: 6.3
+	Then In the Summary Page, verify table data in column Retailers showing the value: HD
+	Then I close the tab with Data Summary page
+
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60116
 
 # Created by Saikiran Chittampally

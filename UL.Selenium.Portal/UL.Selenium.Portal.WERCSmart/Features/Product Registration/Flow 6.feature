@@ -30,6 +30,8 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:PesticideDetailsUS
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:USDepartamentOfTransportationDOT
 @RegulatoryInformation3
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
 
 
 Feature: Flow 6
@@ -305,14 +307,14 @@ Scenario: [57647] Insecticide-Flying Bug-Moth Proofing Product containing <98% P
 	Then In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping with limited quantity
 	Then in the Transportation Details 1 page I click Continue
 
-	#Given I call Shared Step 34455 (U. S. Department of Transportation (DOT) Classification - Enter all valid data)
-	Given I should see the U. S. Department of Transportation (DOT) Classification Page
-	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN3159
-	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: 1,1,1,2-Tetrafluoroethane
-	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Technical Name (if applicable)': to: Technical Test Name
-	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.2
-	Then In the U. S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
-	Then in the U. S. Department of Transportation (DOT) Classification page I click Continue
+	#Given I call Shared Step 34455 (U.S. Department of Transportation (DOT) Classification - Enter all valid data)
+	Given I should see the U.S. Department of Transportation (DOT) Classification Page
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN3159
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: 1,1,1,2-Tetrafluoroethane
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Technical Name (if applicable)': to: Technical Test Name
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.2
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
+	Then in the U.S. Department of Transportation (DOT) Classification page I click Continue
 
 	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Staples
 	Given I should see the Retailer Page
@@ -544,89 +546,79 @@ Scenario: [57986] Footwear or Leather Care Product - All other forms - (RU000746
 	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
-
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
     Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
-
 	#And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Footwear or Leather Care Product - All other forms
 	And I should see the The Product Page
     And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Footwear or Leather Care Product - All other forms
     And In the Product Section, set the option in section: 'Type of Product (select)' to: Footwear or Leather Care Product - All other forms
 	And in the The Product page I click Continue
 	Then I save the product information as: TestCase57986
-
-	Then I should see the following radio buttons:
-		| Button                                                                                                                                                                               |
+	#228838  Product Information - Applicable Only to Footwear or Leather Care Product - All Other Forms (RU000746)                                             
+	And I should see the Product Information Page
+	Then In the Product Information Section, confirm following options should be exclusively displayed for section: 'Which best describes your product, including when FIFRA 25(b) Exempt'
+		| Option                                                                                                                                                                               |
 		| Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)                        |
 		| Product is intended for use as a plant regulator (controls growth), defoliant (removes leaves), or desiccant (dehydrates plants to control growth)                                   |
 		| Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial) |
-	And I set the Which best describes your product, including when FIFRA 25(b) Exempt field to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
-
-	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
-		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
-		| No                                                             | No                           | No                     | No                  |
-
-	#Then I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
-	Given In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Yes, I certify that I have an OSHA-compliant SDS for this product and would like to upload it.
-	Given In the Regulatory Documents to Provide Section, upload file in section: 'OSHA SDS'
-	And in the Regulatory Documents to Provide page I click Continue
-
-	 #Given I call Shared Step 228844 (Physical and Chemical Properties - Aerosol, solid, liquid & Gas available - Select Solid - Continue - Happy Path)
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+	#Given I call Shared Step 228844 (Physical and Chemical Properties - Aerosol, solid, liquid & Gas available - Select Solid - Continue - Happy Path)
 	And I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, for section: 'Primary Physical State': the following options should be displayed exclusively:
+	| Option  |
+	| Aerosol |
+	| Gas     |
+	| Liquid  |
+	| Solid   |
 	And In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Aerosol
+	Then In the Physical and Chemical Properties Section, the confirm section: 'Secondary Physical State' is displayed
 	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid spray
-	And In the Physical and Chemical Properties Section, for section: 'pH' enter text: 10.4
-	And In the Physical and Chemical Properties Section, set the option in section: 'When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then' to: This product is classified as a D001 Hazardous Waste under RCRA (as per Section 13 or 15 of the SDS).
+	Then In the Physical and Chemical Properties Section, the confirm section: 'pH' is displayed
+	Then In the Physical and Chemical Properties Section, for section: 'When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then': the following options should be displayed exclusively:
+	| Option                                                                                                |
+	| This product is classified as a D001 Hazardous Waste under RCRA (as per Section 13 or 15 of the SDS). |
+	| This product is classified as a D003 Hazardous Waste under RCRA.                                      |
+	| This product is not classified as D001 or D003 Hazardous Waste under RCRA                             |
 	And In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Gas
 	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Gas
 	And In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
-	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
+	Then In the Physical and Chemical Properties Section, the confirm section: 'Secondary Physical State' is displayed
+	Then In the Physical and Chemical Properties Section, the confirm section: 'pH' is displayed
+	Then In the Physical and Chemical Properties Section, the confirm section: 'Relative Density' is displayed
+	Then In the Physical and Chemical Properties Section, the confirm section: 'Boiling Point (in Celsius)' is displayed
+	Then In the Physical and Chemical Properties Section, the confirm section: 'Flash Point (in Celsius)' is displayed
+	Then In the Physical and Chemical Properties Section, the confirm section: 'Flash Point Testing Method Used' is displayed
 	And In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
 	And In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
 	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid Gel Consistency
 	And in the Physical and Chemical Properties page I click Continue
-
-	# ====== 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue ====== #
-	# ====== 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |      ====== #
-	# ====== 		| Paraffin      | 25      | false               | false       |            |      ====== #
-	# ====== 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue ====== #
-	# ====== 		| ComponentName   | Percent | PublicallyDisclosed | TradeSecret | PublicName |    ====== #
-	# ====== 		| Isostearic Acid | 10      | false               | false       |            |    ====== #
-	# ====== 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue ====== #
-	# ====== 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |      ====== #
-	# ====== 		| Toluene       | 23      | false               | false       |            |      ====== #
-	# ====== 	Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue ====== #
-	# ====== 		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |      ====== #
-	# ====== 		| Water         | 42      | false               | false       |            |      ====== #
 	And I should see the Ingredients Page
-	When in the Ingredients page I click Continue
-	Then In the Ingredients section, add the following ingredients:
-			| SearchType     | SearchText | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-			| component name | Paraffin   |  25    | false                | false        |   Paraffin    |
-	Then In the Ingredients section, add the following ingredients:
-			| SearchType     | SearchText      | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-			| component name | Isostearic Acid |  10    | false                | false        |   Isostearic Acid    |
-	Then In the Ingredients section, add the following ingredients:
-			| SearchType     | SearchText | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-			| component name | Toluene    |  23    | false                | false        |   Toluene    |
-	Then In the Ingredients section, add the following ingredients:
-			| SearchType     | SearchText | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-			| component name | Water      |  42    | false                | false        |   Water    |
+	Then In the Ingredients section, add component with component name: Paraffin
+	Then In the Ingredients Table row with component name: Paraffin, in Percent column text input enter: 25
+	Then In the Ingredients section, add component with component name: Isostearic Acid
+	Then In the Ingredients Table row with component name: Isostearic Acid, in Percent column text input enter: 10
+	Then In the Ingredients section, add component with component name: Toluene
+	Then In the Ingredients Table row with component name: Toluene, in Percent column text input enter: 23
+	Then In the Ingredients section, add component with component name: Water
+	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 42
 	And in the Ingredients page I click Continue
-
 	#I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should see the Inventory Status, Prop 65 (US) Page
 	Given In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
 	Given In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Given in the Inventory Status, Prop 65 (US) page I click Continue
-
 	#Given I call Shared Step 57984 (Transportation Details - All options available - Select Not regulated - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page
 	Given In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
 	And in the Transportation Details 1 page I click Continue
-
 	#Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)
 	#		| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states | 
 	#		| No                                       | 15                     | 15                         | Yes           | 
@@ -635,33 +627,32 @@ Scenario: [57986] Footwear or Leather Care Product - All other forms - (RU000746
 	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule': to: 15
 	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?': to: Yes
 	And I click continue
-
 	#Given I call Shared Step 57801 (Confirm VOC Summary step shown and VOC analysis date is shown - Happy Path)
 	Given I should see the Volatile Organic Compound Summary Page
 	Given In the Volatile Organic Compound Summary Section, confirm that I see todays 'VOC Analysis Date'
 	Given In the Volatile Organic Compound Summary Section, for 'Your acknowledgement of this registration includes that your product..' set 'Yes, I Acknowledge'
 	Given in the Volatile Organic Compound Summary page I click Continue
-
 	#Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Given I should see the Retailer Page
 	Given in the Retailer page I click Continue
-
+	#Then I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	And I should see the Regulatory Documents to Provide Page
+	Given In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Yes, I certify that I have an OSHA-compliant SDS for this product and would like to upload it.
+	Given In the Regulatory Documents to Provide Section, upload file in section: 'OSHA SDS'
+	And in the Regulatory Documents to Provide page I click Continue
 	#Given I call Shared Step 60567 (Upload Product Label only)
-	Given I should see the Regulatory Documents to Provide Page
+	Given I should see the Additional Documents to Provide Page
+	Given in the Additional Documents to Provide page I click Continue
+	Then In the Additional Documents to Provide, section 'Volatile Organic Compounds' error message should display: Document is required: Product Label
+	Then In the Additional Documents to Provide, upload PDF document to Upload Volatile Organic Compounds field
 	Given in the Regulatory Documents to Provide page I click Continue
-	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
-	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
-	Given in the Regulatory Documents to Provide page I click Continue
-
 	# Optional Reports and Documents Available for Purchase Page
 	And I should see the Optional Reports and Documents Available for Purchase Page
 	Then in the Optional Reports and Documents Available for Purchase page I click Continue
-
 	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comments Field Text
 	And I should see the Optional Comments Page
-	And In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: Comments Field Text
+	Then In the Optional Comments Section, section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' is availiable
 	Then in the Optional Comments page I click Continue
-
 	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type:  Footwear or Leather Care Product - All other forms
 	Given I should see the Data Acceptance Page
 	Given In the Data Acceptance Section, click 'Summary' button
@@ -669,7 +660,6 @@ Scenario: [57986] Footwear or Leather Care Product - All other forms - (RU000746
 	Given In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Footwear or Leather Care Product - All other forms
 	Given I close the tab with Data Summary page
     Given I should see the Data Acceptance Page
-
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57986
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase57986

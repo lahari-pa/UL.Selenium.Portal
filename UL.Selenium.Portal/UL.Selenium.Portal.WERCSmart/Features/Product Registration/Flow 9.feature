@@ -247,17 +247,17 @@ Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 	Then in the Inventory Status, Prop 65 (US) page I click Continue
 
 	#Then I call Shared Step 132473 (Regulatory Information 3 - Nutritional Category)
-	Given I should see the Regulatory Information 3 Page
-	Then In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible Nutritional Supplement. Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
-	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
+	Given I should see the Product Labeling Page
+	Then In the Product Labeling Section, the statement 'Based on the product's recommended use and formulation, this is a possible Nutritional Supplement. Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
+	Then In the Product Labeling Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
 	| Option                 |
 	| Supplement Facts Panel |
 	| Nutrition Facts Panel  |
 	| None of the Above      |
-	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: Nutrition Facts Panel
-	Then In the Regulatory Information 3 Section, the following link: Nutritional and Supplement Labels should be displayed
-	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
-	Then in the Regulatory Information 3 page I click Continue
+	Then In the Product Labeling Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: Nutrition Facts Panel
+	Then In the Product Labeling Section, the following link: Nutritional and Supplement Labels should be displayed
+	Then In the Product Labeling Section, the following link: Dietary Supplements Label should be displayed
+	Then in the Product Labeling page I click Continue
 
 	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: CVS
 	Then I should be on the Retailer Page
@@ -277,9 +277,11 @@ Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 	Then In the Additional Documents to Provide, section 'OSHA-compliant Safety Data Sheet (Optional)' is displayed
 	Then In the Additional Documents to Provide, section 'Toxicity Characteristic Leaching Procedure (TCLP)' is displayed
 	Then In the Additional Documents to Provide, upload PDF document to Upload Full Product Label (required) field
+	Then I save the current window handle to context as: MainWindowHandle
 	Then In the Additional Documents to Provide, for section Product Label I click button 'View'
 	Then In the Additional Documents to Provide, after clicking 'View' button I confirm pdf file is downloaded
 	Then in the Additional Documents to Provide  page I click Continue
+	Then I close All the current windows except the Main Window
 	Given I should see the Optional Reports and Documents Available for Purchase Page
 	Then in the Optional Reports and Documents Available for Purchase  page I click Continue
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58078. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
@@ -342,17 +344,17 @@ Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
 	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page I click Continue
 	#Then I call Shared Step 132473 (Regulatory Information 3 - Nutritional Category)
-	Given I should see the Regulatory Information 3 Page
-	Then In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible Nutritional Supplement. Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
-	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
+	Given I should see the Product Labeling Page
+	Then In the Product Labeling Section, the statement 'Based on the product's recommended use and formulation, this is a possible Nutritional Supplement. Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
+	Then In the Product Labeling Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
 	| Option                 |
 	| Supplement Facts Panel |
 	| Nutrition Facts Panel  |
 	| None of the Above      |
-	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: Nutrition Facts Panel
-	Then In the Regulatory Information 3 Section, the following link: Nutritional and Supplement Labels should be displayed
-	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
-	Then in the Regulatory Information 3 page I click Continue
+	Then In the Product Labeling Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: Nutrition Facts Panel
+	Then In the Product Labeling Section, the following link: Nutritional and Supplement Labels should be displayed
+	Then In the Product Labeling Section, the following link: Dietary Supplements Label should be displayed
+	Then in the Product Labeling page I click Continue
 	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Save Mart Supermarkets
 	Then I should be on the Retailer Page
 	And In the Retailer Section, click 'Add Retailers' button
@@ -369,7 +371,7 @@ Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
 	Given I should see the Additional Documents to Provide Page
 	Then In the Additional Documents to Provide, section 'OSHA-compliant Safety Data Sheet (Optional)' is displayed
 	Then In the Additional Documents to Provide, section 'Toxicity Characteristic Leaching Procedure (TCLP)' is displayed
-	Then In the Additional Documents to Provide, upload PDF document to Provide Full Product Label (required) field
+	Then In the Additional Documents to Provide, upload PDF document to Upload Full Product Label (required) field
 	Then I save the current window handle to context as: MainWindowHandle
 	Then In the Additional Documents to Provide, for section Product Label I click button 'View'
 	Then In the Additional Documents to Provide, after clicking 'View' button I confirm pdf file is downloaded
@@ -474,7 +476,8 @@ Scenario: [58073] Footwear - Gel Insert - RU000854
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Footwear - Gel Insert
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58073
 	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase58073	
+	Then In the Product Grid, delete the product saved as: TestCase58073
+
 @TestCase:63325
 Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking SDS step shows only product label and Additional documents to provide shows SDS as optional)
 	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -516,19 +519,19 @@ Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking S
 	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page I click Continue
 	#Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
-	Given I should see the Regulatory Information 3 Page
-	Then In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California.  Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
-	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
+	Given I should see the Product Labeling Page
+	Then In the Product Labeling Section, the statement 'Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California.  Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
+	Then In the Product Labeling Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
 	| Option                 |
 	| Drug Facts Panel       |
 	| Supplement Facts Panel |
 	| Nutrition Facts Panel  |
 	| None of the Above      |
-	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above 
-	Then In the Regulatory Information 3 Section, the following link: Nutritional and Supplement Labels should be displayed
-	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
-	Then In the Regulatory Information 3 Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
-	Then in the Regulatory Information 3 page I click Continue
+	Then In the Product Labeling Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above 
+	Then In the Product Labeling Section, the following link: Nutritional and Supplement Labels should be displayed
+	Then In the Product Labeling Section, the following link: Dietary Supplements Label should be displayed
+	Then In the Product Labeling Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
+	Then in the Product Labeling page I click Continue
 	#Given I call Shared Step 26900 (Transportation Details 1 > Not Regulated)
 	Given I should see the Transportation Details 1 Page
 	Then in the Transportation Details 1  page I click Continue

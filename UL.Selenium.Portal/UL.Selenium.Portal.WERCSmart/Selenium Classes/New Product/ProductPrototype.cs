@@ -30,7 +30,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 	{
 		#region Page Objects
 		private string _label;
-		protected override By ContainerElementLocator => By.XPath($"//div[contains(@class,'wizard-step-panel')][.//h3[text()='{_label}']]");
+		protected override By ContainerElementLocator => By.XPath($"//div[contains(@class,'wizard-step-panel')][.//h3[normalize-space(text())='{_label}']]");
 		private IWebElement PanelExpandButton => this.FindElement(By.XPath(".//a[@href]"), 1);
 		private IWebElement PanelButton(string buttonLabel) => this.FindElement(By.XPath($".//a[contains(@class,'btn')][text()='{buttonLabel}']"), 1);
 		private IWebElement PanelDescription => this.FindElement(By.XPath(".''//div[contains(@data-bind,'html: description')]"), 1);
@@ -327,7 +327,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public SearchBoxResult SearchResultTextGet(string searchText)
 		{
 			Report.Info($"Attempting to get text: '{searchText}' search result.");
-			return this.SearchResultList.Where(x => x.ResultText.Equals(searchText, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+			return this.SearchResultList.Where(x => x.ResultText.Equals(Regex.Replace(searchText, @"\s+", " "), StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
 		}
 		public SearchBoxResult SearchResultTextGetContains(string searchText)
 		{

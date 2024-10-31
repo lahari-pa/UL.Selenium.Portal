@@ -597,7 +597,7 @@ Scenario: [123436] UPC Transportation - Recertification - Transportation Details
 	And I set the Select all modes of transport that you've classified the product for field to: DOT
 	And I select option: Shipping fully regulated under section: Select all modes of transport that you've classified the product for and subsection: DOT
 	And I click continue
-	And I should see the U. S. Department of Transportation (DOT) Classification Page
+	And I should see the U.S. Department of Transportation (DOT) Classification Page
 	And I set the UN Number field to: UN2762
 	And I set the Technical Name field to: Technical Name UN2762
 	And I set the Packing Group (select) field to: II
@@ -708,7 +708,7 @@ Scenario: [125533] UPC Transportation - Recertification - iRules
 	And I set the Select all modes of transport that you've classified the product for field to: DOT
 	And I select option: Shipping with limited quantity under section: Select all modes of transport that you've classified the product for and subsection: DOT
 	And I click continue
-	And I should see the U. S. Department of Transportation (DOT) Classification Page
+	And I should see the U.S. Department of Transportation (DOT) Classification Page
 	And I set the UN Number field to: UN1702
 	And I set the Packing Group (select) field to: II
 	#And I select the first option in section: Product has a boiling point of <=35⁰C  and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.
@@ -802,8 +802,8 @@ Scenario: [125536] UPC transportation - Recertification - Upgrade and Downgrade 
 		| DOT                              |
 		| Shipping with limited quantity   |
 	And I click continue
-	# U. S. Department of Transportation (DOT) Classification Page
-	Then I should see the U. S. Department of Transportation (DOT) Classification Page
+	# U.S. Department of Transportation (DOT) Classification Page
+	Then I should see the U.S. Department of Transportation (DOT) Classification Page
 	And I set the UN Number field to: UN1702
 	And I set the Packing Group (select) field to: II
 	Given in the New Product page I click Continue	
@@ -901,8 +901,8 @@ Scenario: [125702] UPC transportation - Recertification - Upgrade and Downgrade 
 		| Shipping with limited quantity   |
 		| Shipping with consumer commodity |
     And I click continue
-	# U. S. Department of Transportation (DOT) Classification Page
-	Then I should see the U. S. Department of Transportation (DOT) Classification Page
+	# U.S. Department of Transportation (DOT) Classification Page
+	Then I should see the U.S. Department of Transportation (DOT) Classification Page
 	And I set the UN Number field to: UN1702
 	And I set the Packing Group (select) field to: II
 	Given in the New Product page I click Continue	
@@ -992,8 +992,8 @@ Scenario: [125703] UPC transportation - Recertification - Upgrade and Downgrade 
 		| DOT                      |
 		| Shipping fully regulated |
 	And I click continue
-	# U. S. Department of Transportation (DOT) Classification Page
-	Then I should see the U. S. Department of Transportation (DOT) Classification Page
+	# U.S. Department of Transportation (DOT) Classification Page
+	Then I should see the U.S. Department of Transportation (DOT) Classification Page
 	And I set the UN Number field to: UN1702
 	And I set the Packing Group (select) field to: II
 	Given in the New Product page I click Continue	

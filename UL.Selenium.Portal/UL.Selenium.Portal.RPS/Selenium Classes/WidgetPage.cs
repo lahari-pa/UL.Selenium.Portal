@@ -1,10 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
-using iText.Kernel.Pdf;
-using iText.Kernel.Pdf.Canvas.Parser;
 using iText.Kernel.Pdf.Canvas.Parser.Listener;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
@@ -114,11 +111,11 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 			return null;
 		}
 
-		public string DocumentText(string address) => WercsmartPdfHelpers.GetTextFromPdfUri(address, new SimpleTextExtractionStrategy());
+        public string DocumentText(string address) => WercsmartPdfHelpers.GetTextFromPdfUri(address, new SimpleTextExtractionStrategy());
 
-		#endregion
+        #endregion
 
-		public class Widget : SeleniumBaseObject
+        public class Widget : SeleniumBaseObject
 		{
 			#region Page Objects
 

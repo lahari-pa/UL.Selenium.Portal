@@ -12,18 +12,24 @@ using UL.Automation.WebDriver.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class SummaryPage : BaseObject
+	class SummaryPage : SeleniumBaseObject
 	{
 		public const string BasePath = "//body[@class='summary']";
 
 		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
+		protected IWebElement VOCComplianceLimitsTable => this.ContainerElement.FindElement(By.XPath(".//table[thead//div[text()='VOC Compliance Limit']]"));
+
+		public bool VOCComplianceLimitsTableExists()
+		{
+			return this.VOCComplianceLimitsTable != null;
+		}
 		public bool WaitForSummaryPageToLoad(int secondsToWait = 30)
 		{
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				IWebElement sumPageEl = this.containerElement;
+				IWebElement sumPageEl = this.ContainerElement;
 
 				if (sumPageEl != null)
 				{
@@ -39,15 +45,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> ListOfButtons()
 		{
-			return this.containerElement.FindElements(By.XPath(".//button")).Select(x => x.GetValue()).ToList();
+			return this.ContainerElement.FindElements(By.XPath(".//button")).Select(x => x.GetValue()).ToList();
 		}
 		public string UPCNumber()
 		{
-			return this.containerElement.FindElement(By.XPath(@"//div[./h2[starts-with(text(),""Provide the product's UPC(s)"")]]//tr/td[1]/div"), 2)?.Text.Trim();
+			return this.ContainerElement.FindElement(By.XPath(@"//div[./h2[starts-with(text(),""Provide the product's UPC(s)"")]]//tr/td[1]/div"), 2)?.Text.Trim();
 		}
 		public string ProductID()
 		{
-			string headerText = this.containerElement.FindElement(By.XPath(".//span[contains(@data-bind,'text: dataEntry.pname')]"), 2)?.Text;
+			string headerText = this.ContainerElement.FindElement(By.XPath(".//span[contains(@data-bind,'text: dataEntry.pname')]"), 2)?.Text;
 			if (headerText == null)
 			{
 				return null;
@@ -62,7 +68,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string GetAnswerToQuestion(string question)
 		{
-			ReadOnlyCollection<IWebElement> allQuestions = this.containerElement.FindElements(By.XPath(".//div[@class='summary-question-container']/h3"));
+			ReadOnlyCollection<IWebElement> allQuestions = this.ContainerElement.FindElements(By.XPath(".//div[@class='summary-question-container']/h3"));
 			if (allQuestions.Count == 0)
 			{
 				return null;
@@ -85,7 +91,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public List<string> GetKitContents()
 		{
 			var lGetKitContents = new List<string>();
-			ReadOnlyCollection<IWebElement> allTableQuestions = this.containerElement.FindElements(By.XPath(".//div[@class='summary-question-container']/h2"));
+			ReadOnlyCollection<IWebElement> allTableQuestions = this.ContainerElement.FindElements(By.XPath(".//div[@class='summary-question-container']/h2"));
 			if (allTableQuestions.Count == 0)
 			{
 				return lGetKitContents;
@@ -108,7 +114,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public List<SummaryDocument> GetAdditionalDocuments()
 		{
 			var listOfDocuments = new List<SummaryDocument>();
-			ReadOnlyCollection<IWebElement> allTableQuestions = this.containerElement.FindElements(By.XPath(".//div[@class='summary-question-container']/h2"));
+			ReadOnlyCollection<IWebElement> allTableQuestions = this.ContainerElement.FindElements(By.XPath(".//div[@class='summary-question-container']/h2"));
 			if (allTableQuestions.Count == 0)
 			{
 				return listOfDocuments;
@@ -139,10 +145,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public IWebElement LoadingSpinner()
 		{
-			return this.containerElement.FindElement(By.XPath(@".//span[contains(@data-bind,""dataEntry.pname() === 'undefined (undefined)"") and contains(text(),'Loading')]"), 2);
+			return this.ContainerElement.FindElement(By.XPath(@".//span[contains(@data-bind,""dataEntry.pname() === 'undefined (undefined)"") and contains(text(),'Loading')]"), 2);
 		}
 
-		private List<IWebElement> UpcHeadings => this.containerElement.FindElements(By.XPath(".//div[contains(text(),'UPC')]//ancestor::div[contains(@class,'summary-question-container')]/table/thead/tr[contains(@data-bind,'values')]/th"), 2).ToList();
+		private List<IWebElement> UpcHeadings => this.ContainerElement.FindElements(By.XPath(".//div[contains(text(),'UPC')]//ancestor::div[contains(@class,'summary-question-container')]/table/thead/tr[contains(@data-bind,'values')]/th"), 2).ToList();
 
 		private string[] UPCHeadingTitles => this.UpcHeadings.Select(x => x.FindElement(By.XPath("./div"), 2).Text).ToArray();
 

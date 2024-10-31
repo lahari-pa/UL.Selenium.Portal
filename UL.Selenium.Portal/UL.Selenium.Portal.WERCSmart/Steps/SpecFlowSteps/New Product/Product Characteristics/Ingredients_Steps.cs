@@ -617,7 +617,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 					this.IngredientsTableRowCheckUncheckCheckBox(inputRow["SearchType"], inputRow["SearchValue"], "Publicly Disclosed?", "checked");
 					Report.StartSubStep($"Then In the Ingredients Table row with {inputRow["SearchType"]}: {inputRow["SearchValue"]}, in 'Public Name' column select option {inputRow["Public Name"]}");
 					this.IngredientsTableRowSelectOptionSelect(inputRow["SearchType"], inputRow["SearchValue"], "Public Name", inputRow["Public Name"]);
-					if (inputRow["Ingredient Type"] != null)
+					if (inputTable.ContainsColumn("Ingredient Type") && inputRow["Ingredient Type"] != null)
 					{
 						Report.StartSubStep($"Then In the Ingredients Table row with {inputRow["SearchType"]}: {inputRow["SearchValue"]}, in 'Ingredient Type' column select option {inputRow["Ingredient Type"]}");
 						this.IngredientsTableRowSelectOptionSelect(inputRow["SearchType"], inputRow["SearchValue"], "Ingredient Type", inputRow["Ingredient Type"]);
