@@ -650,54 +650,69 @@ And I navigate to the home page
 
 @TestCase:128134
 Scenario: [128134] Pharma -  Product in Recertification
-Given I call Shared Step (Login to WERCSmart - Pharma Account)
+Given I log in with the account saved in TReVor as: PharmaAccount
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC128134
-Given I click continue
-Given I call Shared Step 57500a (Prescription Pharmaceutical - The Product- Enter name, select product type - Continue - Happy Path): prescription pharmaceutical, solid
-Given I enter the NDC number: 10866-0885-2
+Then In the New Product Section, set the radio option in section: 'Would you like to Create a New Product?': to: Yes, create a new product
+Then in the New Product page, I click Continue
+Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Prescription Pharmaceutical, Solid
+Given In the Product Section, set the option in section: 'Type of Product (select)' to: Prescription Pharmaceutical, Solid
+Given in the Product Type page I click Continue
 Then I save the product information as: TestCase128134
-Then I click continue
-Then I click continue
-Given I fill all empty fields in the SPL Information screen
-Then I click continue
-And I set the Secondary Physical State to be: Solid
-And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-And I set the Select the best Water Solubility description to be: Dispersible
-Then I click continue
-Then I click continue
-Given I fill all empty fields in the Pharma Ingredients screen
-Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-	| Propane       | 100     | false               | false       |            |
-Given I set the Should this product be refrigerated for transport or storage? option to: No
-Then I click continue
-Given I set the Is the product regulated for transport (before exceptions or exemptions) option to exactly match: No, not regulated
-Then I click continue
-Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
-Then I click continue
-Then I call Shared Step 131303 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128134, container type: Plastic Container, capsule count: 50 and size: 1
-
-Given I call Shared Step (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-Then I click continue
-Then I check for the following options in the Additonal Documents to Provide section
-| Option                       |
-| Safety Data Sheet (Optional) |
-Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Safety Data Sheet and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-Then I click continue
+Given I should see the Product Information Page
+Then In the Product Information Section, enter the value in section: 'Enter NDC #': 10866-0885-2
+Then In the Product Information Section, verify section: 'Enter NDC #' contains value: (10866-0885-2 - 60 SECOND TASTE CHOCOLATE VANILLA (TOPICAL APF FLUORIDE GEL) GEL [PASCAL COMPANY, INC.]
+Then In the Product Information Section, verify section: 'Product Name' contains value: 60 Second Taste Chocolate Vanilla
+Then In the Product Information Section, verify section: 'Generic Name' contains value: Topical APF Fluoride Gel
+Given in the Product Information page I click Continue
+Given I should see the SPL Information Page
+Then In the SPL Information Section, verify section: 'Manufacturer' contains value: Pascal Company  Inc.
+Then In the SPL Information Section, verify section: 'Prescription Dosage Form' contains value: GEL
+Then In the SPL Information Section, verify section: 'DEA Schedule' contains value: None
+Then In the SPL Information Section, verify section: 'Marketing Category' contains value: Unapproved drug other
+Then In the SPL Information Section, verify section: 'Marketing End Date' contains value: None
+Then In the SPL Information Section, verify section: 'NDA Number' contains value: None
+Then In the SPL Information Section, for section: 'Distributor' enter value: Distributor
+Given in the SPL Information page I click Continue
+Given I should see the Product Characteristics Page
+Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+Given in the Product Characteristics page I click Continue
+Given I should see the Ingredients Page
+Then In the Ingredients Section ingredients table, confirm row with component name: Sodium fluoride is displayed
+Then In the Ingredients Table row with component name: Sodium fluoride, in Percent column text input enter: 50
+Then In the Ingredients Section ingredients table, confirm row with component name: Saccharin sodium dihydrate is displayed
+Then In the Ingredients Table row with component name: Saccharin sodium dihydrate, in Percent column text input enter: 50
+Given in the Ingredients page I click Continue
+Then In the Temperature Requirements for Storage and Transport Section, set the option in section: 'Does the product have temperature storage requirements?' to: No
+Given in the Temperature Requirements for Storage and Transport page I click Continue
+Given I should see the Transportation Classification Page
+Then In the Transportation Classification Section, set the option in section: 'Is the product regulated for transport (before exceptions or exemptions)' to: No, not regulated
+Given in the Transportation Classification page I click Continue
+Given I should see the Retailer Association Page
+Then In the Retailer Section, for retailer: Wal-Mart/SAM'S CLUB select 'Select Vendor' option: any
+Given in the Retailer Association page I click Continue
+Given I should see the Universal Product Code (UPC) Page
+Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Tablet or Capsule Count' enter the value: 25
+Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC128134 enter Size: 1 and enter Container Type: Plastic Container
+Given in the Universal Product Code (UPC) page I click Continue
+Then in the Regulatory Documents to Provide page I click Continue
+Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
+Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+Then in the Regulatory Documents to Provide page I click Continue
+Given I should see the Additional Documents to Provide Page
+Then In the Additional Documents to Provide, section 'Safety Data Sheet (Optional)' is displayed
+Then in the Additional Documents to Provide page I click Continue
 #Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given I should see the Data Acceptance Page
-	Then In the Data Acceptance Section, check 'Agreed' checkbox
-	Then In the Data Acceptance Section, click 'Accept' button
-
+Then In the Data Acceptance Section, check 'Yes, Agreed' checkbox
+Then In the Data Acceptance Section, click 'Accept' button
 And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
-And I navigate to the home page
-Given I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
-And I enter the text: saved as TestCase128134 in the 'Search by WPS ID or Product Name' field
-And In the Foward Product Registration Screen I should not see product: saved as TestCase128134
-And I click the Home navigation icon and accept the alert popup 
-
+Then In the Purchase Summary screen I click Confirm Order
+Then In the Thank You screen I click Home
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase128134)
 Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase128134)
@@ -712,12 +727,12 @@ Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Comple
 		| Retailer |
 		| Wal-Mart/SAM'S CLUB      |
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Completed Status for saved as: TestCase128134)
+Then I call Shared Step 43587 - SHA Manager > Completed Product - Add Recert reason 20 for product saved as: (.*)
 And I call Shared Step Completed Product - Add Recert reason 20 for product saved as: TestCase128134
 Given I navigate to the landing page
-Given I call Shared Step (Login to WERCSmart - Pharma Account)
+Given I log in with the account saved in TReVor as: PharmaAccount
 And I filter for the product saved as: TestCase128134
 And I click Row Actions for the first product returned
-
 And I click on the Row Action: Update Required
 And I set the Secondary Physical State to be: Solid spray
 And I click Save in The Product Page
@@ -731,9 +746,8 @@ And I click Save in The Product Page
 And I click the page heading: Data Acceptance
 #Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given I should see the Data Acceptance Page
-	Then In the Data Acceptance Section, check 'Agreed' checkbox
-	Then In the Data Acceptance Section, click 'Accept' button
-
+Then In the Data Acceptance Section, check 'Agreed' checkbox
+Then In the Data Acceptance Section, click 'Accept' button
 And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 And I navigate to the home page
