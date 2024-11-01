@@ -119,7 +119,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 			string section = "Flash Point (in Celsius)";
 			new Steps_Prototype().SetTheSectionOptionTo(section, text);
 		}
-
+		[RegexStepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Specific Gravity' enter text: (.*)")]
+		public void EnterTextForSpecificGravity(string text)
+		{
+			string section = "Specific Gravity";
+			new Steps_Prototype().SetTheSectionOptionTo(section, text);
+		}
 
 		[RegexStepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Flash Point \(in Celsius\)' select the checkbox option: 'I do not have exact Flash Point data available to me'")]
 		public void SelectCheckboxForFlashPoint()
