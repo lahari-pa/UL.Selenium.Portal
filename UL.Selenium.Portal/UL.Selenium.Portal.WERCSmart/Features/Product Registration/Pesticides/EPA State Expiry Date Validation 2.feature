@@ -26,6 +26,8 @@
 @LiquidCoreProduct
 @StepsPrototype
 @RegulatoryInformation3
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
+
 
 Feature:  EPA State Expiry Date Validation 2 (Suite ID: 56545)
 
@@ -113,7 +115,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 
 @TestCase:26827
 	Scenario: [26827] UPC Assessment Details
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC26827
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
@@ -159,17 +161,18 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page I click Continue
 
-	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
-		| Retailer |
-		| CVS      |
-
-	#Given I should see the Retailers Page
-	#Then in the Retailers page I click Continue
-	
-	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC26827, container type: Plastic Container and size: 12 do not click continue
-	#Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
-	#Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
-	#Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC26827 enter Size: 12 enter Container Type: Plastic Container and enter Quantity: 1
+	#Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+	#	| Retailer |
+	#	| CVS      |
+	Given I should see the Retailer Page
+	Given In the Retailer Section, click 'Add Retailers' button
+	Given In the Select Retailers window, select retailer: CVS
+	Given In the Select Retailers window, click 'Done' button
+	Given in the Retailer page I click Continue
+	#Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC26827, container type: Plastic Container and size: 12 do not click continue
+	And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC26827 enter Size: 12 and enter Container Type: Plastic Container	
 	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
 
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
@@ -189,7 +192,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 	
 	Given I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
 	Then In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Mask
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 300
+	Then In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature' enter text: 300
 	Then In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 1.005
 	Then In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 20
 	Then In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Black
@@ -207,29 +210,29 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 	Given I should see the Data Acceptance Page
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
 	Then In the Data Acceptance Section, click 'Accept' button
-
-	Given If purchase details are showing click confirm order
 	And I navigate to the home page
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase26827)
 	Then I call Shared Step 134404 (SHA > Select Product > UPC Assessment Details) for product saved as: TestCase26827
 	And I confirm the Product UPC window has opened
 	Then I check for the following columns in UPC Retailer and Feed
-		| Column Name |
-		| UPC Number  |
-		| Container   |
-		| Size        |
-		| WeightSize  |
-		| Fluid Size  |
-		| Added       |
-		| Archived    |
-		| My Pkg ID   |
-		| CasePack    |
-		| Qty In Case |
-		| NEM         |
+		| Column Name      |
+		| UPC Number       |
+		| Container        |
+		| Size             |
+		| Weight Size (oz) |
+		| Fluid Size (oz)  |
+		| Gas Size (kg)    |
+		| Gas Name         |
+		| Added            |
+		| Archived         |
+		| Label            |
+		| My Pkg ID        |
+		| CasePack         |
+		| Qty In Case      |
 	Then In UPC Retailer and Feed I check that the following sections contain the corresponding titles: 
 		| Section Name | Column Names													   | Column Numbers       |
-		| DOT          | UN,HazClass,Pkg Group,Ltd Qty,DOT Pkging Code,Exception,Sp Permit | 12,13,14,15,16,17,18 |
-		| IMDG         | UN,HazClass,Pkg Group,Ltd Qty									   | 19,20,21,22          |
-		| IATA         | UN,HazClass,Pkg Group,Ltd Qty									   | 23,24,25,26          |
-		| TDG		   | UN,HazClass,Pkg Group,Ltd Qty									   | 27,28,29,30          |
+		| DOT          | NEM,UN,HazClass,Pkg Group,Ltd Qty,DOT Pkging Code,Exception	   | 14,15,16,17,18,19,20 |
+		| IMDG         | Sp Permit,UN,HazClass,Pkg Group								   | 21,22,23,24          |
+		| IATA         | Ltd Qty,UN,HazClass,Pkg Group									   | 25,26,27,28          |
+		| TDG		   | Ltd Qty,UN,HazClass,Pkg Group,Ltd Qty							   | 29,30,31,32,33       |
