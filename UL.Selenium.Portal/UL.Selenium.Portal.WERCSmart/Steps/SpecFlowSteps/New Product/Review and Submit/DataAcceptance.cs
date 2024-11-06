@@ -22,14 +22,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 			string checkbox = "Agreed";
 			new Steps_Prototype().ICheckTheCheckboxWithDescription(checked_unchecked, checkbox);
 		}
-		[RegexStepDefinition(@"In the Data Acceptance Section, (check|uncheck) 'Yes, Agreed' checkbox")]
-		public void CheckUncheckYesAgreedCheckbox(string checked_unchecked)
-		{
-			string checkbox = "Yes, Agreed";
-			new Steps_Prototype().ICheckTheCheckboxWithDescription(checked_unchecked, checkbox);
-		}
-
-			[RegexStepDefinition(@"In the Data Acceptance Section, click 'Summary' button")]
+		[RegexStepDefinition(@"In the Data Acceptance Section, click 'Summary' button")]
 		public void ClickSummaryButton()
 		{
 			string button = "Summary";

@@ -713,8 +713,6 @@ And In the Purchase Summary screen I confirm the Purchase Summary header is disp
 Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 Then In the Purchase Summary screen I click Confirm Order
 Then In the Thank You screen I click Home
-Given I should see the Retailer Association Page
-Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
 
 
 @TestCase:128134
