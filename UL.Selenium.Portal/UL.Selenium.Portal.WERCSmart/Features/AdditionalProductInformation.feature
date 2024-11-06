@@ -17,6 +17,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 
 Feature: Product Information
 
@@ -160,33 +161,39 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 
 
 @TestCase:133161
-Scenario: [133161] Fertilizer - P, N, or K question
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Scenario: [133161] Product Information Screen - Fertilizer - N, P, or K question
+	Given I log in with the account saved in TReVor as: ProductAccount
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-
-	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
+	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Fertilizer
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Fertilizer
+	Then in the The Product page, I click Continue
 	Given I should see the Product Information Page
-	Given I set the Does the product contain fertilizer (N, P, K)? option to: No
-	And I should not see following statement: Phosphates /Phosphorous (“P”)
-	And I should not see following statement: Nitrogen /Nitrates (“N”)
-	And I should not see following statement: Potassium(“K”)
-	Given I set the Does the product contain fertilizer (N, P, K)? option to: Yes
-	And I should see following statement: Phosphates /Phosphorous (“P”)
-	And I should see following statement: Nitrogen /Nitrates (“N”)
-	And I should see following statement: Potassium(“K”)
-	Then I should see the PNK section title in the Product Information with the following text: Provide the amount (Percent) of each of the following within the product
-	And I see the following sections
-		| Section                       |
-		| Phosphates /Phosphorous (“P”) |
-		| Nitrogen /Nitrates (“N”)      |
-		| Potassium(“K”)                |
-	Then I set the Phosphates /Phosphorous (“P”) field to: 1000000
-	Then I set the Nitrogen /Nitrates (“N”) field to: 10.1232123 
-	Then I set the Potassium(“K”) field to: 100
-	Then I click continue
+	Then In the Product Information Section, confirm the question: 'Which best describes your product, including when FIFRA 25(b) Exempt' is displayed
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for use as a plant regulator (controls growth), defoliant (removes leaves), or desiccant (dehydrates plants to control growth)
+	Then In the Product Information Section, confirm the question: 'Does the product contain fertilizer (N, P, K)?' is displayed
+	Then In the Product Information Section, set the option in section: 'Does the product contain fertilizer (N, P, K)?' to: No
+	Then In the Product Information Section, confirm the question: 'Nitrogen /Nitrates (“N”)' is not displayed
+	Then In the Product Information Section, confirm the question: 'Phosphates /Phosphorous (“P”)' is not displayed
+	Then In the Product Information Section, confirm the question: 'Phosphates /Phosphorous (“P”)' is not displayed
+	Then In the Product Information Section, confirm the question: 'Potassium(“K”)' is not displayed
+	Then In the Product Information Section, confirm the question: 'Slow-Release Agent' is not displayed
+	Then In the Product Information Section, set the option in section: 'Does the product contain fertilizer (N, P, K)?' to: Yes
+	Then In the Product Information Section, the statement 'Provide the amount (Percent) of each of the following within the product.' is displayed
+	Then In the Product Information Section, confirm the question: 'Nitrogen /Nitrates (“N”)' is displayed
+	Then In the Product Information Section, confirm the question: 'Phosphates /Phosphorous (“P”)' is displayed
+	Then In the Product Information Section, confirm the question: 'Phosphates /Phosphorous (“P”)' is displayed
+	Then In the Product Information Section, confirm the question: 'Potassium(“K”)' is displayed
+	Then In the Product Information Section, confirm the question: 'Slow-Release Agent' is displayed
+	Then In the Product Information Section, set the option in section: 'Nitrogen /Nitrates (“N”)' to: 10.121253
+	Then In the Product Information Section, set the option in section: 'Phosphates /Phosphorous (“P”)' to: 1000000
+	Then In the Product Information Section, set the option in section: 'Potassium(“K”)' to: 100
+	Then In the Product Information Section, set the option in section: 'Slow-Release Agent' to: 25
+	Then in the Product Information page I click Continue
 	Then a Warning popup dialog should appear with the message: The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of the product in Pinellas County, Florida (Restricted). This is informational only and does not restrict your registration to the Retailer.
 	And Phosphates /Phosphorous (“P”) should be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
 	And Nitrogen /Nitrates (“N”) should be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place

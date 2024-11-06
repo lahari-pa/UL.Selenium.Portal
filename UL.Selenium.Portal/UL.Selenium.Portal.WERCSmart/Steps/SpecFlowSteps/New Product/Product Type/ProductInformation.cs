@@ -106,6 +106,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string section = "Does the product contain fertilizer (N, P, K)?";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
+		[RegexStepDefinition(@"In the Product Information Section, confirm the question: 'Does the product contain fertilizer \(N, P, K\)\?' (is|is not) displayed")]
+		public void ConfirmNPKIsNotDisplayed(string is_isnot)
+		{
+			string section = "Does the product contain fertilizer (N, P, K)?";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
 
 		[RegexStepDefinition(@"In the Product Information Section, set the option in section: 'Nitrogen /Nitrates \(“N”\)' to: (.*)")]
 		public void SetNitrogen(string option)
@@ -113,26 +119,47 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string section = "Nitrogen /Nitrates (“N”)";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
-
+		[RegexStepDefinition(@"In the Product Information Section, confirm the question: 'Nitrogen /Nitrates \(“N”\)' (is|is not) displayed")]
+		public void ConfirmNitrogenIsNotDisplayed(string is_isnot)
+		{
+			string section = "Nitrogen /Nitrates (“N”)";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
 		[RegexStepDefinition(@"In the Product Information Section, set the option in section: 'Phosphates \/Phosphorous \(“P”\)' to: (.*)")]
 		public void SetPhosphates(string option)
 		{
 			string section = "Phosphates /Phosphorous (“P”)";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
-
+		[RegexStepDefinition(@"In the Product Information Section, confirm the question: 'Phosphates \/Phosphorous \(“P”\)' (is|is not) displayed")]
+		public void ConfirmPhosphatesIsNotDisplayed(string is_isnot)
+		{
+			string section = "Phosphates /Phosphorous (“P”)";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
 		[RegexStepDefinition(@"In the Product Information Section, set the option in section: 'Potassium\(“K”\)' to: (.*)")]
 		public void SetPotassium(string option)
 		{
 			string section = "Potassium(“K”)";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
-
+		[RegexStepDefinition(@"In the Product Information Section, confirm the question: 'Potassium\(“K”\)' (is|is not) displayed")]
+		public void ConfirmPotassiumIsNotDisplayed(string is_isnot)
+		{
+			string section = "Potassium(“K”)";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
 		[RegexStepDefinition(@"In the Product Information Section, set the option in section: 'Slow-Release Agent' to: (.*)")]
 		public void SetSlowReleaseAgent(string option)
 		{
 			string section = "Slow-Release Agent";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+		[RegexStepDefinition(@"In the Product Information Section, confirm the question: 'Slow-Release Agent' (is|is not) displayed")]
+		public void ConfirmSlowReleaseAgentIsNotDisplayed(string is_isnot)
+		{
+			string section = "Slow-Release Agent";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
 		}
 		[RegexStepDefinition(@"In the Product Information Section, set the option in section: 'Select one option below' to: (Battery is packaged for Retail Sale|Battery is not packaged for Retail Sale)")]
 		public void SelectOneOptionBelow(string option)
@@ -244,6 +271,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		{
 			string section = "Generic Name";
 			new Steps_ProductPrototype().InSectionConfirmTextIsIsNotDisplayedAsOption(section, value, "is");
+		}
+		[RegexStepDefinition(@"In the Product Information Section, the statement 'Provide the amount \(Percent\) of each of the following within the product.' (is|is not) displayed")]
+		public void StatemantProvideTheAmount(string is_isnot)
+		{
+			string text = "Provide the amount (Percent) of each of the following within the product.";
+			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);
 		}
 	}
 }
