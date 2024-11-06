@@ -28,7 +28,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
-
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:USDepartamentOfTransportationDOT
 Feature: Pharma
 
 @TestCase:128085
@@ -594,58 +594,125 @@ Scenario: [128671] Pharma - Prescription Pharmaceutical - Liquid Core Product
 
 
 
-
-
-
 @TestCase:128677
 Scenario: [128677] Pharma - Prescription Pharmaceutical - Liquid Product
 
-Given I call Shared Step (Login to WERCSmart - Pharma Account)
+Given I log in with the account saved in TReVor as: PharmaAccount
 Given I click the Prescription Pharmaceutical icon in the QuickLinks Pane
 Given I generate a random UPC number and save as: UPC128677
-Given I click continue
-Then I should see the Product Type Page
-Then I set 'Product Name' to: prescription pharmaceutical, solid
-Then I set 'Type of Product' to: prescription pharmaceutical, solid
-Then I click continue
-Given I enter the NDC number: 10866-0885-2
+Then I should see the New Product Page
+Then In the New Product Section, set the radio option in section: 'Would you like to Create a New Product?': to: Yes, create a new product
+Then in the New Product page, I click Continue
+Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Prescription Pharmaceutical, Liquid
+Given In the Product Section, set the option in section: 'Type of Product (select)' to: Prescription Pharmaceutical, Liquid
+Given in the Product Type page I click Continue
+Given I should see the Product Information Page
+Then In the Product Information Section, enter the value in section: 'Enter NDC #': 13630-0089-3
+Then In the Product Information Section, verify section: 'Enter NDC #' contains value: (13630-0089-3 - OCCULUS SOLOXIDE 30 BROAD SPECTRUM SPF 30 (AVOBENZONE, HOMOSALATE, OCTISALATE, OCTOCRYLENE, AND OXYBENZONE) AEROSOL [PRIME PACKAGING, INC.]
+Then In the Product Information Section, verify section: 'Product Name' contains value: Occulus
+Then In the Product Information Section, verify section: 'Generic Name' contains value: Avobenzone, Homosalate, Octisalate, Octocrylene, and Oxybenzone
 Then I save the product information as: TestCase128677
-Then I click continue
-Then I click continue
-Given I fill all empty fields in the SPL Information screen
-Then I click continue
-Given I set the Secondary Physical State field to: Liquid
-And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
-Given I set the Select the best Water Solubility description field to: Dispersible
-Then I click continue
-Then I click continue
-Given I fill all empty fields in the Pharma Ingredients screen
-Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-	| Propane       | 100     | false               | false       |            |
-Given I set the Should this product be refrigerated for transport or storage? option to: No
-Then I click continue
-Given I set the Is the product regulated for transport (before exceptions or exemptions) option to: Yes, Agree
-Given I call Shared Step 130543 (Transport - Pharma Flow - Select DOT & Limited Shipping - No Continue)
-Then I click continue
-Given I call Shared Step 130542 (UN Number - Pharma Flow - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue)
-Given In the Retailers tab, I select the first Vendor option for retailer: Wal-Mart/SAM'S CLUB
-Then I click continue
-Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128677, container type: Plastic Container and size: 1
-When I click continue
-When I click continue
-Then Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) should be showing the error messages: Document is required: Product Label
-And I call Shared Step 60567 (Upload Product Label only) for section: Upload Full Product Label (required)
-When I click continue
-Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-When I click continue
+Given in the Product Information page I click Continue
+Given I should see the SPL Information Page
+Then In the SPL Information Section, verify section: 'Manufacturer' contains value: Prime Packaging  Inc.
+Then In the SPL Information Section, verify section: 'Prescription Dosage Form' contains value: AEROSOL
+Then In the SPL Information Section, verify section: 'DEA Schedule' contains value: None
+Then In the SPL Information Section, verify section: 'Marketing Category' contains value: OTC monograph final
+Then In the SPL Information Section, verify section: 'Marketing End Date' contains value: None
+Then In the SPL Information Section, verify section: 'NDA Number' contains value: None
+Then In the SPL Information Section, for section: 'Distributor' enter value: Distributor
+Given in the SPL Information page I click Continue
+#Given I should see the Liquid Core Product Page
+#Then In the Liquid Core Product Section, set the option in section: 'Is there a free liquid in the Product's container that is 10ml or greater?' to: No
+#Then in the Liquid Core Product page I click Continue
+Given I should see the Product Characteristics Page
+Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Suspension
+Then In the Physical and Chemical Properties Section, for section: 'Specific Gravity' enter text: 1
+Then In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: 85
+Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: 65
+Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Closed cup method
+Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+Given in the Product Characteristics page I click Continue
+Given I should see the Ingredients Page
+Then In the Ingredients Section ingredients table, confirm row with component name: Benzoic acid, 2-hydroxy-, 3,3,5-trimethylcyclohexyl ester is displayed
+Then In the Ingredients Table row with component name: Benzoic acid, 2-hydroxy-, 3,3,5-trimethylcyclohexyl ester, in Percent column text input enter: 5
+Then In the Ingredients Section ingredients table, confirm row with component name: 2-Ethylhexyl salicylate is displayed
+Then In the Ingredients Table row with component name: 2-Ethylhexyl salicylate, in Percent column text input enter: 5
+Then In the Ingredients Section ingredients table, confirm row with component name: Benzophenone-3 is displayed
+Then In the Ingredients Table row with component name: Benzophenone-3, in Percent column text input enter: 5
+Then In the Ingredients Section ingredients table, confirm row with component name: 2-Propenoic acid, 2-cyano-3,3-diphenyl-, 2-ethylhexyl ester is displayed
+Then In the Ingredients Table row with component name: 2-Propenoic acid, 2-cyano-3,3-diphenyl-, 2-ethylhexyl ester, in Percent column text input enter: 5
+Then In the Ingredients Section ingredients table, confirm row with component name: 1,3-Propanedione, 1-[4-(1,1-dimethylethyl)phenyl]-3-(4-methoxyphenyl)- is displayed
+Then In the Ingredients Table row with component name: 1,3-Propanedione, 1-[4-(1,1-dimethylethyl)phenyl]-3-(4-methoxyphenyl)-, in Percent column text input enter: 5
+Then In the Ingredients Section ingredients table, confirm row with component name: Triethanolamine is displayed
+Then In the Ingredients Table row with component name: Triethanolamine, in Percent column text input enter: 5
+Then In the Ingredients Section ingredients table, confirm row with component name: Ethyl p-hydroxybenzoate is displayed
+Then In the Ingredients Table row with component name: Ethyl p-hydroxybenzoate, in Percent column text input enter: 5
+Then In the Ingredients section, delete component with component name: 2-phenoxyethanol (NOPT)
+Then In the Ingredients Section ingredients table, confirm row with component name: 1H-Isoindole-1,3(2H)-dione, 2-butyl- is displayed
+Then In the Ingredients Table row with component name: 1H-Isoindole-1,3(2H)-dione, 2-butyl-, in Percent column text input enter: 5
+Then In the Ingredients Section ingredients table, confirm row with component name: 1H-Isoindole-1,3(2H)-dione, 2-(1-methylethyl)- is displayed
+Then In the Ingredients Table row with component name: 1H-Isoindole-1,3(2H)-dione, 2-(1-methylethyl)-, in Percent column text input enter: 5
+Then In the Ingredients Section ingredients table, confirm row with component name: 2-Pyrrolidinone, 1-ethenyl-, polymer with 1-hexadecene is displayed
+Then In the Ingredients Table row with component name: 2-Pyrrolidinone, 1-ethenyl-, polymer with 1-hexadecene, in Percent column text input enter: 5
+Then In the Ingredients Section ingredients table, confirm row with component name: Isobutylparaben is displayed
+Then In the Ingredients Table row with component name: Isobutylparaben, in Percent column text input enter: 5
+Then In the Ingredients Section ingredients table, confirm row with component name: Glycerol is displayed
+Then In the Ingredients Table row with component name: Glycerol, in Percent column text input enter: 5
+Then In the Ingredients Section ingredients table, confirm row with component name: Octadecanoic acid is displayed
+Then In the Ingredients Table row with component name: Octadecanoic acid, in Percent column text input enter: 5
+Then In the Ingredients Section ingredients table, confirm row with component name: Propylene Glycol is displayed
+Then In the Ingredients Table row with component name: Propylene Glycol, in Percent column text input enter: 5
+Then In the Ingredients Section ingredients table, confirm row with component name: EDTA disodium salt, dihydrate is displayed
+Then In the Ingredients Table row with component name: EDTA disodium salt, dihydrate, in Percent column text input enter: 5
+Then In the Ingredients Section ingredients table, confirm row with component name: Water is displayed
+Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 5
+Then In the Ingredients Section ingredients table, confirm row with component name: Acrylic acid is displayed
+Then In the Ingredients Table row with component name: Acrylic acid, in Percent column text input enter: 5
+Then In the Ingredients Section ingredients table, confirm row with component name: Propyl-p-hydroxybenzoate is displayed
+Then In the Ingredients Table row with component name: Propyl-p-hydroxybenzoate, in Percent column text input enter: 5
+Then In the Ingredients Section ingredients table, confirm row with component name: Butyl paraban is displayed
+Then In the Ingredients Table row with component name: Butyl paraban, in Percent column text input enter: 5
+Then In the Ingredients Section ingredients table, confirm row with component name: Methyl p-hydroxybenzoate is displayed
+Then In the Ingredients Table row with component name: Methyl p-hydroxybenzoate, in Percent column text input enter: 5
+Given in the Ingredients page I click Continue
+Then In the Temperature Requirements for Storage and Transport Section, set the option in section: 'Does the product have temperature storage requirements?' to: No
+Given in the Temperature Requirements for Storage and Transport page I click Continue
+Given I should see the Transportation Classification Page
+Then In the Transportation Classification Section, set the option in section: 'Is the product regulated for transport (before exceptions or exemptions)' to: Yes, Agree
+#Given I call Shared Step 130543 (Transport - Pharma Flow - Select DOT & Limited Shipping - No Continue)
+Then In the Transportation Classification Section, set the option for DOT mode of transport to: Yes, Shipped with Limited quantity
+Given in the Transportation Classification page I click Continue
+#Given I call Shared Step 130542 (UN Number - Pharma Flow - enter UN1950 select Aerosol & Haz class, confirm Packing group - Continue)
+Then I should see the U. S. Department of Transportation (DOT) Classification Page
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Technical Name (if applicable)': to: My Safe Product
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Select Hazard Class (if available)': to: 2.1
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Select Packing Group (if available)': to: None
+Given in the U.S. Department of Transportation (DOT) Classification page I click Continue
+Given I should see the Retailer Association Page
+Then In the Retailer Section, for retailer: Wal-Mart/SAM'S CLUB select 'Select Vendor' option: any
+Given in the Retailer Association page I click Continue
+#Given I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC128677, container type: Plastic Container and size: 1
+Given I should see the Universal Product Code (UPC) Page
+Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC128677 enter Size: 1 and enter Container Type: Plastic Container
+Given in the Universal Product Code (UPC) page I click Continue
+Then in the Regulatory Documents to Provide page I click Continue
+Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
+Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
+Then in the Regulatory Documents to Provide page I click Continue
+Given I should see the Additional Documents to Provide Page
+Then in the Additional Documents to Provide page I click Continue
 #Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 Given I should see the Data Acceptance Page
-	Then In the Data Acceptance Section, check 'Agreed' checkbox
-	Then In the Data Acceptance Section, click 'Accept' button
-
-Then In the Subscription Issue screen I confirm the following statement is shown: This order cannot be processed due to an issue with your subscription. You may need to upgrade to process this registration.
-And I navigate to the home page
+Then In the Data Acceptance Section, check 'Yes, Agreed' checkbox
+Then In the Data Acceptance Section, click 'Accept' button
+And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
+Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
+Then In the Purchase Summary screen I click Confirm Order
+Then In the Thank You screen I click Home
 
 
 @TestCase:128134

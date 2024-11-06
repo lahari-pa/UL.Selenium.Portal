@@ -35,10 +35,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string section = "Hazard Class (select)";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
+		[RegexStepDefinition(@"In the U.S. Department of Transportation \(DOT\) Classification Section, set the option in section: 'Select Hazard Class \(if available\)': to: (.*)")]
+		public void SelectHazardClassIMDG(string option)
+		{
+			string section = "Select Hazard Class (if available)";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
 		[RegexStepDefinition(@"In the U.S. Department of Transportation \(DOT\) Classification Section, set the option in section: 'Packing Group': to: (.*)")]
 		public void SetPackingGroupIMDG(string option)
 		{
 			string section = "Packing Group (select)";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+		[RegexStepDefinition(@"In the U.S. Department of Transportation \(DOT\) Classification Section, set the option in section: 'Select Packing Group \(if available\)': to: (.*)")]
+		public void SelectPackingGroupIMDG(string option)
+		{
+			string section = "Select Packing Group (if available)";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 		[RegexStepDefinition(@"In the U.S. Department of Transportation \(DOT\) Classification Section, set the option in section: 'Special Provision Number': to: (.*)")]
