@@ -349,6 +349,10 @@ Scenario: [208099] Fabric Softener - Single-Use Dryer Product Only (RU000808)
 Scenario: [207582] Personal Fragrance product (more than 20% fragrance) - Liquid (RU000756) - New Flow Testing
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+	Given I generate a random UPC number and save as: UPC207582
+	Given I delete all products with UPC Number: saved as UPC207582
+
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
@@ -374,19 +378,25 @@ Scenario: [207582] Personal Fragrance product (more than 20% fragrance) - Liquid
 	Given I should see the Physical and Chemical Properties Page
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
-	Then In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 1.0
-	Then In the Physical and Chemical Properties Section, for section: 'pH' enter text: 10.2
-	Then In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: 120
-	Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: 55
+	Then In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 1.0180
+	Then In the Physical and Chemical Properties Section, for section: 'pH' select the checkbox option: 'I do not have exact pH data available to me'
+	Then In the Physical and Chemical Properties Section, set the option in section: 'pH' to: 7.1 - 9.9
+	Then In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' select the checkbox option: 'I do not have exact Boiling Point data available to me'
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Boiling Point (in Celsius)' to: Not tested/Unknown
+	Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: 93
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Closed cup method
-	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: No data available
 	Then in the Physical and Chemical Properties page, I click Continue
 
 	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Propane
 	Given I should see the Ingredients Page
 	Then In the Ingredients section, add the following ingredients:
-	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-	| component name | Water       | 100     |                     |               |             |
+	| SearchType     | SearchValue       | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Diethyl phthalate | 20      |                     |               |             |
+	| CAS number     | 63500-71-0        | 10      |                     |               |             |
+	| component name | Linalool          | 10      |                     |               |             |
+	| component name | Benzyl Benzoate   | 10      |                     |               |             |
+	| CAS number     | 24851-98-7        | 50      |                     |               |             |
 	Then in the Ingredients page I click Continue
 
 	#Given I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
@@ -394,73 +404,90 @@ Scenario: [207582] Personal Fragrance product (more than 20% fragrance) - Liquid
 	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'Canadian Environmental Protection Act (CEPA) status' to: Compliant with Domestic Substances List (DSL)
 	Then in the Inventory Status, Prop 65 (US) page I click Continue
 
-	Then I should see the Pesticide Details - Canada Page
-	Given I set the Provide Canada's 5-Digit Pest Control Number (PCN) or 8-Digit Drug Identification Number (DIN) for this product field to: 27925
-	And The following options should be displayed for section: Product's packaging includes a Poison Danger symbol
-		| Option |
-		| Yes    |
-		| No     |
-	Given I set the Product's packaging includes a Poison Danger symbol option to: No
-	Given I set the Alberta option to: Schedule 1
-	Given I set the British Columbia option to: Commercial
-	Given I set the Manitoba option to: Commercial
-	Given I set the New Brunswick option to: None
-	Given I set the New Foundland and Labrador option to: Domestic
-	Given I set the Nova Scotia option to: Commercial
-	Given I set the Ontario option to: Class A: Manufacturing Products
-	Given I set the Prince Edward Island option to: Controlled Purchase
-	Given I set the Quebec option to: Class 1
-	Given I set the Saskatchewan option to: Commercial
-	Given I set the Northwest Territory option to: Not Applicable 
-	Given I set the Yukon Territory option to: Commercial
-	Then I click continue
 	#Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 	Then I should be on the Transportation Details 1 Page
-	And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: No, due to an exemption or exception
-	And In the Transportation Details 1 Section, set the option in section: 'Please select DOT Exceptions if applicable?': to: 173.120(b)(3):  Combustible liquid that does not sustain combustion
+	And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Yes
+	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: IMDG
+	Then In the Transportation Details 1 Section, set the option for IMDG mode of transport to: Shipping with limited quantity
 	Then in the Transportation Details 1 page, I click Continue
 
-	#Given I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
-	Then I should be on the Transportation Details 2 Page
-	And In the Transportation Details 2 Section, set the option in section: 'International Shipping when DOT Exemption taken?': to: I do not ship internationally and I do not know the classification
-	Then in the Transportation Details 2 page, I click Continue
+	Then I should be on the International Marine (IMDG) Classification Page
+	Then In the International Marine (IMDG) Classification Section, set the option in section: 'UN Number': to: UN3082
+	Then In the International Marine (IMDG) Classification Section, set the option in section: 'Proper Shipping Name': to: Environmentally hazardous substance, liquid, n.o.s.
+	Then In the International Marine (IMDG) Classification Section, set the option in section: 'Hazard Class (select)': to: 9
+	Then In the International Marine (IMDG) Classification Section, set the option in section: 'Packing Group': to: III
+	Then in the International Marine (IMDG) Classification page, I click Continue
 
-	And I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
-	Then I click continue
-	Given Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB should be showing the error messages: This is a required field.
-	And I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB option to: 50
-	Then Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB should should not be showing any error messages
-	Then I click continue
-	Given I call Shared Step 57801 (Confirm VOC Summary step shown and VOC analysis date is shown - Happy Path)
-	And I confirm that statement with text: 'Based on your selection, you have verified your product contains VOC with intended uses as follows.  The CARB VOC compliance limit(s) for the intended use you identified is/are:' is not displayed
-	Then in the VOC Limits table, the Use column should contain the value: Personal Fragrance Product (more than 20% fragrance) - Liquid
-	Then in the VOC Limits table, the VOC Compliance Limit column should contain the value: 65
-	Then in the VOC Limits table, the Regulation column should contain the value: CARB limit
-	And I should see the following Voc percent for each state:
-		| State           | Regulation            | VOC Value | State VOC Threshold | Message                          |
-		| Canada          | State Allowable Limit | 0         | 65                  | Does not exceed the State Limits |
-	Then I confirm that I see the following CARB value: 50
-	Then The VOC Summary page contains the statement with the text: Based on the type of product, this must comply with the most restrictive VOC limit.
-	Then The VOC Summary page contains the statement with the text: Does not exceed the limits specified in the California Consumer Products Regulation
-	Given I set the Your acknowledgement of this registration includes that your product option to: Yes, I Acknowledge
-	Given in the Volatile Organic Compound Summary page I click Continue
-	Given I call Shared Step 150905 (Retailer - NR selected by default)
-	Given I call Shared Step 78884 - Regulatory Documents to Provide - Canada only - request authoring, upload label - Continue
-	Given in the Additional Documents to Provide page I click Continue
-	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	#And I call Shared Step 64097 - Additional Documents -> Contact Information - Add any Name, address, phone and emergency phone - Happy Path
-	Then I should be on the Additional Documents -> Contact Information Page
-	And In the Additional Documents -> Contact Information section, for section: 'Manufacturer Name' enter text: Manufacturer
-	And In the Additional Documents -> Contact Information section, for section: 'Address' enter text: Address
-	And In the Additional Documents -> Contact Information section, for section: 'Phone' enter text: Phone
-	And In the Additional Documents -> Contact Information section, for section: 'Emergency Phone' enter text: Emergency Phone
-	Then in the Additional Documents -> Contact Information page, I click Continue
+	Then I should be on the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
+	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.': to: No
+	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB': to: 8.17
+	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?': to: Yes
+	Then in the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) page, I click Continue
 
-	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
-		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
-		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	Given in the Optional Comments page I click Continue
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Personal Fragrance Product (more than 20% fragrance) - Liquid
+	Then I should be on the Volatile Organic Compound Summary Page
+	Then In the Volatile Organic Compound Summary Section, confirm that I see todays 'VOC Analysis Date'
+	Then In the Volatile Organic Compound Summary Section, confirm 'Limits' table should exists
+	Then In the Volatile Organic Compound Summary Section, confirm 'VOC content as weight percentage of total formula, minus exempt compounds, for each of the following states.' table should exists
+	Then In the Volatile Organic Compound Summary Section, confirm that I see the following 'CARB' value: 8.17
+	Then In the Volatile Organic Compound Summary Section, the statement 'Does not exceed the limits specified in the California Consumer Products Regulation' is displayed
+	Then In the Volatile Organic Compound Summary Section, the statement 'Does not exceed the limits specified by the Ozone Transport Commission' is displayed
+	Then In the Volatile Organic Compound Summary Section, for 'Your acknowledgement of this registration includes that your product..' set 'Yes, I Acknowledge'
+	Then in the Volatile Organic Compound Summary page, I click Continue
+
+	Then I should be on the Retailer Page
+	Then In the Retailer Section, click 'Add Retailers' button
+	Then In the Select Retailers window, select retailer: Canadian Tire
+	Then In the Select Retailers window, click 'Done' button
+	Then in the Retailer page, I click Continue
+
+	Then I should be on the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC207582 enter Size: 2.3 and enter Container Type: Glass Container
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, under Transportation column the checkbox 'IMDG' is checked
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, under Transportation column the checkbox 'Shipping with limited quantity' is checked
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, verify retailer 'CT' is present under the 'Destination Retailers' column
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page, I click Continue
+
+	Then I should be on the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: I certify that I have a WHMIS-Compliant Safety Data Sheet (SDS) for this product.
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'Dual-Language WHMIS SDS, in French Canadian and English'
+	Then In the Regulatory Documents to Provide Section, for section 'Dual-Language WHMIS SDS, in French Canadian and English': enter WHMIS SDS Docmument Date: 2024-10-30
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'Label in both French and English'
+	Then in the Regulatory Documents to Provide page, I click Continue
+
+	Then I should be on the Additional Documents to Provide Page
+	Then in the Additional Documents to Provide page, I click Continue
+	Then In the Additional Documents to Provide, section 'Volatile Organic Compounds' error message should display: Document is required: Product Label
+	Then In the Additional Documents to Provide, upload PDF document to Upload Volatile Organic Compounds field
+	Then in the Additional Documents to Provide page, I click Continue
+
+	Then I should be on the Optional Reports and Documents Available for Purchase Page
+	Then in the Optional Reports and Documents Available for Purchase page, I click Continue
+
+	Then I should be on the Optional Comments Page
+	Then In the Optional Comments Section, section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' is availiable
+	Then in the Optional Comments page, I click Continue
+
+	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Personal Fragrance Product (more than 20% fragrance) - Liquid
+	Then I should be on the Data Acceptance Page
+	Then In the Data Acceptance Section, click 'Summary' button
+	Then I switch to the tab with Data Summary page
+	Then In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Personal Fragrance Product (more than 20% fragrance) - Liquid
+	Then In the Summary Page, the 'Retailers will be selling my product at their store locations in (select either or both)' section should be showing the following value: Canada
+	Then In the Summary Page, the 'Canadian Environmental Protection Act (CEPA) status' section should be showing the following value: This product complies with DSL chemical Inventory listing requirements
+	Then In the Summary Page, the 'Product is Regulated for Transport' section should be showing the following value: Yes
+	Then In the Summary Page, the 'Select all modes of transport that you've classified the product for' section should be showing the following value: IMDG
+	Then In the Summary Page, the 'Select all modes of transport that you've classified the product for' section should be showing the following value: Shipping with limited quantity
+	Then In the Summary Page, the 'UN Number' section should be showing the following value: UN3082
+	Then In the Summary Page, the 'Proper Shipping Name' section should be showing the following value: Environmentally hazardous substance, liquid, n.o.s.
+	Then In the Summary Page, the 'Hazard Class (select)' section should be showing the following value: 9
+	Then In the Summary Page, the 'Packing Group (select)' section should be showing the following value: III
+	Then In the Summary Page, the 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB' section should be showing the following value: 8.17
+	Then In the Summary Page, verify table data in column Container Type showing the value: Glass Container
+	Then In the Summary Page, verify table data in column Size (Ounces) showing the value: 2.3
+	Then In the Summary Page, verify table data in column Retailers showing the value: CT
+	Then I close the tab with Data Summary page
+
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase207582
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase207582

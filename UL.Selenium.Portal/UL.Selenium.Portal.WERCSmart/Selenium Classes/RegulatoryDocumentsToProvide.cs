@@ -5,6 +5,7 @@ using UL.Automation.WebDriver.Extensions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using Reqnroll;
+using UL.Automation.WebDriver.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit
 {
@@ -81,7 +82,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit
 		{
 			try
 			{
-				IWebElement el = this.ContainerElement.FindElement(By.XPath(".//label[text()='WHMIS SDS Document Date']/../following-sibling::div//input"), 2);
+				IWebElement el = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@class='form-group'][.//label[text()='WHMIS SDS Document Date']]//input[@type='text']"), 2);
 
 				if (el != null)
 				{
