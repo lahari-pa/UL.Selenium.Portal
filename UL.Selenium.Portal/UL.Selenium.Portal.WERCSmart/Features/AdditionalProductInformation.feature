@@ -172,6 +172,7 @@ Scenario: [133161] Product Information Screen - Fertilizer - N, P, or K question
 	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Fertilizer
 	And In the Product Section, set the option in section: 'Type of Product (select)' to: Fertilizer
 	Then in the The Product page, I click Continue
+	Then I save the product information as: TestCase133161
 	Given I should see the Product Information Page
 	Then In the Product Information Section, confirm the question: 'Which best describes your product, including when FIFRA 25(b) Exempt' is displayed
 	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for use as a plant regulator (controls growth), defoliant (removes leaves), or desiccant (dehydrates plants to control growth)
@@ -194,15 +195,22 @@ Scenario: [133161] Product Information Screen - Fertilizer - N, P, or K question
 	Then In the Product Information Section, set the option in section: 'Potassium(“K”)' to: 100
 	Then In the Product Information Section, set the option in section: 'Slow-Release Agent' to: 25
 	Then in the Product Information page I click Continue
-	Then a Warning popup dialog should appear with the message: The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of the product in Pinellas County, Florida (Restricted). This is informational only and does not restrict your registration to the Retailer.
-	And Phosphates /Phosphorous (“P”) should be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
-	And Nitrogen /Nitrates (“N”) should be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
-	And Potassium(“K”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
-	Then I set the Phosphates /Phosphorous (“P”) field to: 35.24
-	Then I set the Nitrogen /Nitrates (“N”) field to: .05
-	And Phosphates /Phosphorous (“P”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
-	And Nitrogen /Nitrates (“N”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
-	And Potassium(“K”) should not be showing the error messages: Invalid number. 3 total spaces maximum and 2 decimal place
+	Then In the Product Information Section, a warning pop-up should be displayed with text: 'The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.'
+	Then In the Product Information Section Section, in Warning modal window click 'Ok' button
+	Then In the Product Information Section, the section: 'Nitrogen /Nitrates (“N”)' should be showing error message: Invalid number. 3 total spaces maximum and 2 decimal places
+	Then In the Product Information Section, the section: 'Phosphates /Phosphorous (“P”)' should be showing error message: Invalid number. 3 total spaces maximum and 2 decimal places
+	Then In the Product Information Section, the section: 'Potassium(“K”)' should not be showing error message: Invalid number. 3 total spaces maximum and 2 decimal places
+	Then In the Product Information Section, the section: 'Slow-Release Agent' should not be showing error message: Invalid number. 3 total spaces maximum and 2 decimal places
+	Then In the Product Information Section, set the option in section: 'Nitrogen /Nitrates (“N”)' to: 0.05
+	Then In the Product Information Section, set the option in section: 'Phosphates /Phosphorous (“P”)' to: 35.24
+	Then in the Product Information page I click Continue
+	Then In the Product Information Section, a warning pop-up should be displayed with text: 'The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.'
+	Then In the Product Information Section Section, in Warning modal window click 'Ok' button
+	Then In the Product Information Section, the section: 'Nitrogen /Nitrates (“N”)' should not be showing error message: Invalid number. 3 total spaces maximum and 2 decimal places
+	Then In the Product Information Section, the section: 'Phosphates /Phosphorous (“P”)' should not be showing error message: Invalid number. 3 total spaces maximum and 2 decimal places
+	Then In the Product Information Section, the section: 'Potassium(“K”)' should not be showing error message: Invalid number. 3 total spaces maximum and 2 decimal places
+	Then In the Product Information Section, the section: 'Slow-Release Agent' should not be showing error message: Invalid number. 3 total spaces maximum and 2 decimal places
+	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase133161
 
 # Created by Saikiran Chittampally
 @TestCase:211384
