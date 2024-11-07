@@ -357,11 +357,14 @@ Scenario: [213919] Product Information Screen - Warning Message < 50% for NPK Pr
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-
-	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Soil Conditioner (no VOC or Pesticide)
+	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Soil Conditioner (no VOC or Pesticide)
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Soil Conditioner (no VOC or Pesticide)
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Soil Conditioner (no VOC or Pesticide)
+	Then in the The Product page, I click Continue
 	Then I save the product information as: TestCase213919
 	Given I should see the Product Information Page
-	Given I set the Does the product contain fertilizer (N, P, K) option to: Yes
+	Then In the Product Information Section, set the option in section: 'Does the product contain fertilizer (N, P, K)?' to: No
 	Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
 	Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No
 	Given I set the Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product option to: No
