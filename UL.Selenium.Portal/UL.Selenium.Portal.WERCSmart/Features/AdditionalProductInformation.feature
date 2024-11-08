@@ -371,15 +371,15 @@ Scenario: [213919] Product Information Screen - Warning Message < 50% for NPK Pr
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page I click Continue
-	Given I should see the Product Characteristics Page
-	And I click the page heading: The Product
+	Then I should see the Physical and Chemical Properties Page
+	And I click the page heading: Product Information
 	Then In the Product Information Section, set the option in section: 'Does the product contain fertilizer (N, P, K)?' to: Yes
 	Then In the Product Information Section, set the option in section: 'Nitrogen /Nitrates (“N”)' to: 10
 	Then In the Product Information Section, set the option in section: 'Phosphates /Phosphorous (“P”)' to: 25
 	Then In the Product Information Section, set the option in section: 'Potassium(“K”)' to: 36.36
 	Then In the Product Information Section, set the option in section: 'Slow-Release Agent' to: 0
 	Then in the Product Information page I click Continue
-	Then In the Product Information Section, a warning pop-up should be displayed with text: 'The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.'
+	Then In the Product Information Section, a warning pop-up should be displayed with text: 'The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of the product in Pinellas County, Florida (Restricted). This is informational only and does not restrict your registration to the Retailer.'
 	Then In the Product Information Section Section, in Warning modal window click 'Ok' button
 	Then I should see the Physical and Chemical Properties Page
 	Then I click the My Products icon in the Navigation Pane
