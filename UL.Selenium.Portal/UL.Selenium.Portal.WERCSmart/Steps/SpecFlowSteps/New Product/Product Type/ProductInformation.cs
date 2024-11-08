@@ -106,6 +106,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string section = "Does the product contain fertilizer (N, P, K)?";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
+		[RegexStepDefinition(@"In the Product Information Section, confirm the question: 'Does the product contain fertilizer \(N, P, K\)\?' (is|is not) displayed")]
+		public void ConfirmNPKIsNotDisplayed(string is_isnot)
+		{
+			string section = "Does the product contain fertilizer (N, P, K)?";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
 
 		[RegexStepDefinition(@"In the Product Information Section, set the option in section: 'Nitrogen /Nitrates \(“N”\)' to: (.*)")]
 		public void SetNitrogen(string option)
@@ -113,26 +119,71 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string section = "Nitrogen /Nitrates (“N”)";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
-
+		[RegexStepDefinition(@"In the Product Information Section, confirm the question: 'Nitrogen /Nitrates \(“N”\)' (is|is not) displayed")]
+		public void ConfirmNitrogenIsNotDisplayed(string is_isnot)
+		{
+			string section = "Nitrogen /Nitrates (“N”)";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
+		[RegexStepDefinition(@"In the Product Information Section, the section: 'Nitrogen /Nitrates \(“N”\)' (should|should not) be showing error message: (.*)")]
+		public void CheckNitrogenSectionsWithErrorMessages(string condition, string message)
+		{
+			string section = "Nitrogen /Nitrates (“N”)";
+			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, condition, message);
+		}
 		[RegexStepDefinition(@"In the Product Information Section, set the option in section: 'Phosphates \/Phosphorous \(“P”\)' to: (.*)")]
 		public void SetPhosphates(string option)
 		{
 			string section = "Phosphates /Phosphorous (“P”)";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
-
+		[RegexStepDefinition(@"In the Product Information Section, confirm the question: 'Phosphates \/Phosphorous \(“P”\)' (is|is not) displayed")]
+		public void ConfirmPhosphatesIsNotDisplayed(string is_isnot)
+		{
+			string section = "Phosphates /Phosphorous (“P”)";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
+		[RegexStepDefinition(@"In the Product Information Section, the section: 'Phosphates \/Phosphorous \(“P”\)' (should|should not) be showing error message: (.*)")]
+		public void CheckPhosphatesSectionsWithErrorMessages(string condition, string message)
+		{
+			string section = "Phosphates /Phosphorous (“P”)";
+			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, condition, message);
+		}
 		[RegexStepDefinition(@"In the Product Information Section, set the option in section: 'Potassium\(“K”\)' to: (.*)")]
 		public void SetPotassium(string option)
 		{
 			string section = "Potassium(“K”)";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
-
+		[RegexStepDefinition(@"In the Product Information Section, confirm the question: 'Potassium\(“K”\)' (is|is not) displayed")]
+		public void ConfirmPotassiumIsNotDisplayed(string is_isnot)
+		{
+			string section = "Potassium(“K”)";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
+		[RegexStepDefinition(@"In the Product Information Section, the section: 'Potassium\(“K”\)' (should|should not) be showing error message: (.*)")]
+		public void CheckPotassiumSectionsWithErrorMessages(string condition, string message)
+		{
+			string section = "Potassium(“K”)";
+			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, condition, message);
+		}
 		[RegexStepDefinition(@"In the Product Information Section, set the option in section: 'Slow-Release Agent' to: (.*)")]
 		public void SetSlowReleaseAgent(string option)
 		{
 			string section = "Slow-Release Agent";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+		[RegexStepDefinition(@"In the Product Information Section, confirm the question: 'Slow-Release Agent' (is|is not) displayed")]
+		public void ConfirmSlowReleaseAgentIsNotDisplayed(string is_isnot)
+		{
+			string section = "Slow-Release Agent";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
+		[RegexStepDefinition(@"In the Product Information Section, the section: 'Slow-Release Agent' (should|should not) be showing error message: (.*)")]
+		public void CheckSlowReleaseAgentSectionsWithErrorMessages(string condition, string message)
+		{
+			string section = "Slow-Release Agent";
+			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, condition, message);
 		}
 		[RegexStepDefinition(@"In the Product Information Section, set the option in section: 'Select one option below' to: (Battery is packaged for Retail Sale|Battery is not packaged for Retail Sale)")]
 		public void SelectOneOptionBelow(string option)
@@ -202,6 +253,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string text = "The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of the product in Pinellas County, Florida (Restricted). This is informational only and does not restrict your registration to the Retailer.";
 			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeadingAndText(condition, title, text);
 		}
+		[RegexStepDefinition(@"In the Product Information Section, a warning pop-up (should|should not) be displayed with text: 'The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed \(June 1 through September 30\). This is informational only and will not restrict your registration to the Retailer.'")]
+		public void WarningPopupSlowReleaseIsDisplayedInProductInformation(string condition)
+		{
+			string title = "Warning";
+			string text = "The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.";
+			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeadingAndText(condition, title, text);
+		}
 		[RegexStepDefinition("In the Product Information Section Section, in Warning modal window click 'Ok' button")]
 		public void ThenInTheProductInfoSectionInWarningModalWindowClickButton()
 		{
@@ -244,6 +302,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		{
 			string section = "Generic Name";
 			new Steps_ProductPrototype().InSectionConfirmTextIsIsNotDisplayedAsOption(section, value, "is");
+		}
+		[RegexStepDefinition(@"In the Product Information Section, the statement 'Provide the amount \(Percent\) of each of the following within the product.' (is|is not) displayed")]
+		public void StatemantProvideTheAmount(string is_isnot)
+		{
+			string text = "Provide the amount (Percent) of each of the following within the product.";
+			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);
 		}
 	}
 }
