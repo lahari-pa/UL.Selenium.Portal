@@ -112,21 +112,6 @@ And I should see following statement: Product has been classified using OSHA (US
 And I should see following statement: Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85367
 
-@ignore
-#Removed from regression 2023/11
-@TestCase:85368
-Scenario: [85368] Which one best describes your product question- validation
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-Then The home screen should load
-Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
-Then I save the product information as: TestCase85368
-When I click continue
-And Which best describes your product, including when FIFRA 25(b) Exempt should be showing the error messages: This is a required field.
-And Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) should be showing the error messages: This is a required field.
-And Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. should be showing the error messages: This is a required field.
-Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85368
-
 #Removed from regression 2024/03
 @ignore
 @TestCase:85488
