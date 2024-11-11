@@ -208,50 +208,50 @@ Scenario: [211384] Product Information Screen - General Validation for N, P, K, 
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-
-	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Plant Food
+	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Plant Food
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Plant Food
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Plant Food
+	Then in the The Product page, I click Continue
 	Then I save the product information as: TestCase211384
 	Given I should see the Product Information Page
-	Given I set the Does the product contain fertilizer (N, P, K) option to: Yes
-	Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
-	Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No
-	Given I set the Product is a Retailer's Private Label or Brand option to: No
-	Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
-	Then I click continue
-	Then a Warning popup dialog should appear with the message: The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.	
-	And I see the following sections
-		| Section                       |
-		| Phosphates /Phosphorous (“P”) |
-		| Nitrogen /Nitrates (“N”)      |
-		| Potassium(“K”)                |
-		| Slow-Release Agent            |
-	Then I set the Phosphates /Phosphorous (“P”) field to: 14
-	Then I set the Nitrogen /Nitrates (“N”) field to: 8
-	Then I set the Potassium(“K”) field to: 14
-	Then I set the Slow-Release Agent field to: 3
-	Then I click continue
-	Then a Warning popup dialog should appear with the message: The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of the product in Pinellas County, Florida (Restricted). This is informational only and does not restrict your registration to the Retailer.
+	Then In the Product Information Section, set the option in section: 'Does the product contain fertilizer (N, P, K)?' to: Yes
+	Then In the Product Information Section, set the option in section: 'Nitrogen /Nitrates (“N”)' to: 2
+	Then In the Product Information Section, set the option in section: 'Phosphates /Phosphorous (“P”)' to: 1
+	Then In the Product Information Section, set the option in section: 'Potassium(“K”)' to: 3
+	Then In the Product Information Section, set the option in section: 'Slow-Release Agent' to: 5
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+	Then In the Product Information Section, a warning pop-up should be displayed with text: 'The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.'
+	Then In the Product Information Section Section, in Warning modal window click 'Ok' button
 	Then I should see the Physical and Chemical Properties Page
 	And I click the page heading: The Product
-	Then I set 'Type of Product' to: Soil Conditioner
-	And I click continue
-	Then I click continue
-	Then a Warning popup dialog should appear with the message: The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of the product in Pinellas County, Florida (Restricted). This is informational only and does not restrict your registration to the Retailer.
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Soil Conditioner (no VOC or Pesticide)
+	Then in the The Product page, I click Continue
+	Then in the Product Information page I click Continue
+	Then In the Product Information Section, a warning pop-up should be displayed with text: 'The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.'
+	Then In the Product Information Section Section, in Warning modal window click 'Ok' button
 	Then I should see the Physical and Chemical Properties Page
 	And I click the page heading: The Product
-	Then I set 'Type of Product' to: Soil (No Additives, Fertilizers, or Inhibitors)
-	And I click continue
-	Then I click continue
-	Then a Warning popup dialog should appear with the message: The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of the product in Pinellas County, Florida (Restricted). This is informational only and does not restrict your registration to the Retailer.
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Soil (No Additives, Fertilizers, or Inhibitors)
+	Then in the The Product page, I click Continue
+	Then in the Product Information page I click Continue
+	Then In the Product Information Section, a warning pop-up should be displayed with text: 'The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.'
+	Then In the Product Information Section Section, in Warning modal window click 'Ok' button
 	Then I should see the Physical and Chemical Properties Page
 	And I click the page heading: The Product
-	Then I set 'Type of Product' to: Fertilizer
-	And I click continue
-	And I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
-	Then I click continue
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Fertilizer
+	Then in the The Product page, I click Continue
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
+	Then in the Product Information page I click Continue
+	Then In the Product Information Section, a warning pop-up should be displayed with text: 'The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.'
+	Then In the Product Information Section Section, in Warning modal window click 'Ok' button
 	Then I should see the Physical and Chemical Properties Page
-	Then I click the My Products icon in the Navigation Pane
-	Given I delete the product: TestCase211384
+	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase211384
 
 #Created by Saikiran Chittampally
 @TestCase:217076
