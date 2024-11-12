@@ -9,7 +9,7 @@
 @ProductInformation
 @ProductLookUP
 @Dashboard
-
+@MoreFilters
 
 Feature: Product Lookup
 
@@ -39,14 +39,14 @@ Scenario Outline: [169335]Select Columns -  Re-order Columns
 	Then I confirm columns shown in the Column Selector Popup: ColumnPopupOrder1  match with columns shown in the Product Table: ProductTableColumnOrder1
 	And I call Shared Step 106194 (RPS Sign out)
 	
-	Examples:
-	| Scenario Name                                | Retailer | LandingTab               |
-	| [#169335a]Select Columns -  Re-order Columns | RPS.LW   | LWLandingtab             |
-	| [#169335b]Select Columns -  Re-order Columns | RPS.CV   | Program Health           |
+Examples:
+	| Scenario Name                                | Retailer | LandingTab     |
+	| [#169335a]Select Columns -  Re-order Columns | RPS.LW   | LWLandingtab   |
+	| [#169335b]Select Columns -  Re-order Columns | RPS.CV   | Program Health |
 #	| [#169335c]Select Columns -  Re-order Columns | RPS.HD   | Program Health           |
-	| [#169335d]Select Columns -  Re-order Columns | RPS.SF   | Program Health           |
-	| [#169335e]Select Columns -  Re-order Columns | RPS.TG   | Product Lookup           |
+	| [#169335d]Select Columns -  Re-order Columns | RPS.SF   | Program Health |
+	| [#169335e]Select Columns -  Re-order Columns | RPS.TG   | Product Lookup |
 #	| [#169335f]Select Columns -  Re-order Columns | RPS.PX   | Program Health           |
 #	| [#169335g]Select Columns -  Re-order Columns | RPS.WM   | Program Health           |
-	| [#169335h]Select Columns -  Re-order Columns | RPS.CT   | Program Health           |
+	| [#169335h]Select Columns -  Re-order Columns | RPS.CT   | Program Health |
 	

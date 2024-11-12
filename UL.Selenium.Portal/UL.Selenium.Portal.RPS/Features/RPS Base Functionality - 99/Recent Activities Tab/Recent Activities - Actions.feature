@@ -11,7 +11,7 @@
 @Dashboard
 @RecentActivities
 @RPSSHA
-
+@MoreFilters
 Feature: Recent Activities - Actions
 
 @ScenarioId:9379
@@ -23,13 +23,13 @@ Scenario: [99212] Base Functionality - Recent Activities - Contact Supplier -  d
 	Then In the recent activities Page, I confirm for all products the Action column includes option: Contact Supplier
 	And I call Shared Step 106194 (RPS Sign out)
 
-	Examples:  
-		| Scenario Name                                                                                      | Retailer | LandingTab               |
-		| [#99212a]  Base Functionality - Recent Activities - Contact Supplier -  displays for all products  | RPS.LW   | LWLandingtab             |
-		| [#99212b]  Base Functionality - Recent Activities - Contact Supplier -  displays for all products  | RPS.SF   | Program Health           |
+Examples:
+	| Scenario Name                                                                                     | Retailer | LandingTab     |
+	| [#99212a]  Base Functionality - Recent Activities - Contact Supplier -  displays for all products | RPS.LW   | LWLandingtab   |
+	| [#99212b]  Base Functionality - Recent Activities - Contact Supplier -  displays for all products | RPS.SF   | Program Health |
 #		| [#99212c]  Base Functionality - Recent Activities - Contact Supplier -  displays for all products  | RPS.WM   | Program Health           |
 #		| [#99212d]  Base Functionality - Recent Activities - Contact Supplier -  displays for all products  | RPS.PX   | Program Health           |
-		| [#99212e]  Base Functionality - Recent Activities - Contact Supplier -  displays for all products  | RPS.CV   | Program Health           |
+	| [#99212e]  Base Functionality - Recent Activities - Contact Supplier -  displays for all products | RPS.CV   | Program Health |
 #		| [#99212f]  Base Functionality - Recent Activities - Contact Supplier -  displays for all products  | RPS.HD   | Program Health           |
 
 
@@ -49,20 +49,20 @@ Scenario: [99211] Base Functionality - Recent Activities - View Data displays fo
 	Then In the recent activities Page, I confirm for all products the Action column includes option: View Data
 	And I call Shared Step 106194 (RPS Sign out)
 
-	Examples:  
-		| Scenario Name                                                                                  | Retailer | LandingTab               |
-		| [#99211a]  Base Functionality - Recent Activities - View Data displays for Completed products  | RPS.LW   | LWLandingtab             |
-		| [#99211b]  Base Functionality - Recent Activities - View Data displays for Completed products  | RPS.SF   | Program Health           |
+Examples:
+	| Scenario Name                                                                                 | Retailer | LandingTab     |
+	| [#99211a]  Base Functionality - Recent Activities - View Data displays for Completed products | RPS.LW   | LWLandingtab   |
+	| [#99211b]  Base Functionality - Recent Activities - View Data displays for Completed products | RPS.SF   | Program Health |
 #		| [#99211c]  Base Functionality - Recent Activities - View Data displays for Completed products  | RPS.WM   | Program Health           |
 #		| [#99211d]  Base Functionality - Recent Activities - View Data displays for Completed products  | RPS.PX   | Program Health           |
-		| [#99211e]  Base Functionality - Recent Activities - View Data displays for Completed products  | RPS.CV   | Program Health           |
+	| [#99211e]  Base Functionality - Recent Activities - View Data displays for Completed products | RPS.CV   | Program Health |
 #		| [#99211f]  Base Functionality - Recent Activities - View Data displays for Completed products  | RPS.HD   | Program Health           |
-		| [#99211g]  Base Functionality - Recent Activities - View Data displays for Completed products  | RPS.TG   | Program Health           |
+	| [#99211g]  Base Functionality - Recent Activities - View Data displays for Completed products | RPS.TG   | Program Health |
 
 # Removed from regression: 2024/08
 @ignore
 @ScenarioId:9382
-Scenario: [99210] Base Functionality - Recent Activities - View Data does not display for non-completed products 
+Scenario: [99210] Base Functionality - Recent Activities - View Data does not display for non-completed products
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
 	Then I confirm the Home tab has loaded
 	Given I click the main tab: Recent Activities
@@ -115,9 +115,9 @@ Scenario: [106919] Base Functionality - Recent Activities - View Data  - Product
 	And I Close the Product Information Popup
 	And I call Shared Step 106194 (RPS Sign out)
 
-	Examples:
-		| Scenario Name                                                                                              | Retailer | LandingTab               |
-		| [#106919a] Base Functionality - Recent Activities - View Data  - Product Data codes - confirm fields shown | RPS.LW   | LWLandingtab             |
+Examples:
+	| Scenario Name                                                                                              | Retailer | LandingTab   |
+	| [#106919a] Base Functionality - Recent Activities - View Data  - Product Data codes - confirm fields shown | RPS.LW   | LWLandingtab |
 #		| [#106919b] Base Functionality - Recent Activities - View Data  - Product Data codes - confirm fields shown | RPS.SF   | Program Health           |
 #		| [#106919c] Base Functionality - Recent Activities - View Data  - Product Data codes - confirm fields shown | RPS.WM   | Program Health           |
 #		| [#106919d] Base Functionality - Recent Activities - View Data  - Product Data codes - confirm fields shown | RPS.PX   | Program Health           |
@@ -125,7 +125,7 @@ Scenario: [106919] Base Functionality - Recent Activities - View Data  - Product
 # Removed from regression: 2024/08
 @ignore
 @ScenarioId:9741
-Scenario: [106920] Base Functionality - Recent Activities - View Data  - Transportation Data - confirm fields shown 
+Scenario: [106920] Base Functionality - Recent Activities - View Data  - Transportation Data - confirm fields shown
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
 	Then I confirm the active tab is: <LandingTab>
 	Given I click the main tab: Recent Activities
@@ -141,9 +141,9 @@ Scenario: [106920] Base Functionality - Recent Activities - View Data  - Transpo
 	And I Close the Product Information Popup
 	And I call Shared Step 106194 (RPS Sign out)
 
-	Examples:  
-		| Scenario Name                                                                                                | Retailer | LandingTab               |
-		| [#106920a] Base Functionality - Recent Activities - View Data  - Transportation Data - confirm fields shown  | RPS.LW   | LWLandingtab             |
+Examples:
+	| Scenario Name                                                                                               | Retailer | LandingTab   |
+	| [#106920a] Base Functionality - Recent Activities - View Data  - Transportation Data - confirm fields shown | RPS.LW   | LWLandingtab |
 #		| [#106920b] Base Functionality - Recent Activities - View Data  - Transportation Data - confirm fields shown  | RPS.SF   | Program Health           |
 #		| [#106920c] Base Functionality - Recent Activities - View Data  - Transportation Data - confirm fields shown  | RPS.WM   | Program Health           |
 #		| [#106920d] Base Functionality - Recent Activities - View Data  - Transportation Data - confirm fields shown  | RPS.PX   | Program Health           |
@@ -151,7 +151,7 @@ Scenario: [106920] Base Functionality - Recent Activities - View Data  - Transpo
 # Removed from regression: 2024/08
 @ignore
 @ScenarioId:9742
-Scenario: [106943] Base Functionality - Recent Activities - View Data  - Storage Data - confirm fields shown 
+Scenario: [106943] Base Functionality - Recent Activities - View Data  - Storage Data - confirm fields shown
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
 	Then I confirm the active tab is: <LandingTab>
 	Given I click the main tab: Recent Activities
@@ -167,9 +167,9 @@ Scenario: [106943] Base Functionality - Recent Activities - View Data  - Storage
 	And I Close the Product Information Popup
 	And I call Shared Step 106194 (RPS Sign out)
 
-	Examples:  
-		| Scenario Name                                                                                          | Retailer | LandingTab               |
-		| [#106943a]  Base Functionality - Recent Activities - View Data  - Storage Data - confirm fields shown  | RPS.LW   | LWLandingtab             |
+Examples:
+	| Scenario Name                                                                                         | Retailer | LandingTab   |
+	| [#106943a]  Base Functionality - Recent Activities - View Data  - Storage Data - confirm fields shown | RPS.LW   | LWLandingtab |
 #		| [#106943b]  Base Functionality - Recent Activities - View Data  - Storage Data - confirm fields shown  | RPS.SF   | Program Health           |
 #		| [#106943c]  Base Functionality - Recent Activities - View Data  - Storage Data - confirm fields shown  | RPS.WM   | Program Health           |
 #		| [#106943d]  Base Functionality - Recent Activities - View Data  - Storage Data - confirm fields shown  | RPS.PX   | Program Health           |
@@ -193,9 +193,9 @@ Scenario: [106945] Base Functionality - Recent Activities - View Data  - Battery
 	And I Close the Product Information Popup
 	And I call Shared Step 106194 (RPS Sign out)
 
-	Examples:  
-		| Scenario Name                                                                                          | Retailer | LandingTab               |
-		| [#106945a]  Base Functionality - Recent Activities - View Data  - Battery Data - confirm fields shown  | RPS.LW   | LWLandingtab             |
+Examples:
+	| Scenario Name                                                                                         | Retailer | LandingTab   |
+	| [#106945a]  Base Functionality - Recent Activities - View Data  - Battery Data - confirm fields shown | RPS.LW   | LWLandingtab |
 #		| [#106945b]  Base Functionality - Recent Activities - View Data  - Battery Data - confirm fields shown  | RPS.SF   | Program Health           |
 #		| [#106945c]  Base Functionality - Recent Activities - View Data  - Battery Data - confirm fields shown  | RPS.WM   | Program Health           |
 #		| [#106945d]  Base Functionality - Recent Activities - View Data  - Battery Data - confirm fields shown  | RPS.PX   | Program Health           |
@@ -220,11 +220,11 @@ Scenario: [106947] Base Functionality - Recent Activities - View Data  - only 1 
 	And I Close the Product Information Popup
 	And I call Shared Step 106194 (RPS Sign out)
 
-	Examples:  
-		| Scenario Name                                                                                         | Retailer | LandingTab               |
-		| [#106947a]  Base Functionality - Recent Activities - View Data  - only 1 expanded data section shows  | RPS.LW   | LWLandingtab             |
+Examples:
+	| Scenario Name                                                                                        | Retailer | LandingTab     |
+	| [#106947a]  Base Functionality - Recent Activities - View Data  - only 1 expanded data section shows | RPS.LW   | LWLandingtab   |
 #		| [#106947b]  Base Functionality - Recent Activities - View Data  - only 1 expanded data section shows  | RPS.SF   | Program Health           |
 #		| [#106947c]  Base Functionality - Recent Activities - View Data  - only 1 expanded data section shows  | RPS.WM   | Program Health           |
 #		| [#106947d]  Base Functionality - Recent Activities - View Data  - only 1 expanded data section shows  | RPS.PX   | Program Health           |
-		| [#106947e]  Base Functionality - Recent Activities - View Data  - only 1 expanded data section shows  | RPS.CV   | Program Health           |
+	| [#106947e]  Base Functionality - Recent Activities - View Data  - only 1 expanded data section shows | RPS.CV   | Program Health |
 #		| [#106947f]  Base Functionality - Recent Activities - View Data  - only 1 expanded data section shows  | RPS.HD   | Program Health           |
