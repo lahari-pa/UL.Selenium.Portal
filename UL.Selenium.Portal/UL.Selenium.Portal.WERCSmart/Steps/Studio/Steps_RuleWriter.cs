@@ -57,7 +57,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Screenshot();
 				return;
 			}
-			Actions actions = new Actions(SeleniumBrowser.WebBrowser);
+			Actions actions = new Actions(SeleniumWebDriver.CurrentDriver);
 			actions.MoveToElement(baseRuleRow);
 			actions.ContextClick();
 			actions.Perform();

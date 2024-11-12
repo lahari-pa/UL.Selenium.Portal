@@ -219,12 +219,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public string FooterText()
 		{
-			return SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//footer/p"), 2).Text;
+			return SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//footer/p"), 2).Text;
 		}
 
 		public bool ClickTermsOfUse()
 		{
-			return SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//footer/p/a"), 2).TryClick();
+			return SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//footer/p/a"), 2).TryClick();
 		}
 
 		public List<string> GetAnnouncements()
@@ -256,7 +256,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickResolveButton()
 		{
-			IWebElement ResolveButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='panel panel-default messaging']//p[contains(text(), 'AGHS document')]/../../following-sibling::td//a[text()='Resolve ']"), 2);
+			IWebElement ResolveButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@class='panel panel-default messaging']//p[contains(text(), 'AGHS document')]/../../following-sibling::td//a[text()='Resolve ']"), 2);
 			return ResolveButton.TryClick();
 		}
 

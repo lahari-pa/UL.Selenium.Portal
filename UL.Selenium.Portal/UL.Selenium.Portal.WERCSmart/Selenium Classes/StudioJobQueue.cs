@@ -32,17 +32,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info("Beginning wait for job list");
 
 			//get all iframes, try them on by one for the table
-			SeleniumBrowser.WebBrowser.SwitchTo().DefaultContent();
-			IList<IWebElement> iframes = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//iframe[@id]"), 1);
+			SeleniumWebDriver.CurrentDriver.SwitchTo().DefaultContent();
+			IList<IWebElement> iframes = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath("//iframe[@id]"), 1);
 			var iframeIds = iframes.Select(x => x.GetAttribute("id")).ToList();
 
 			foreach (string iframeId in iframeIds)
 			{
-				SeleniumBrowser.WebBrowser.SwitchTo().DefaultContent();
-				SeleniumBrowser.WebBrowser.SwitchTo().Frame(iframeId);
+				SeleniumWebDriver.CurrentDriver.SwitchTo().DefaultContent();
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(iframeId);
 				try
 				{
-					if (SeleniumBrowser.WebBrowser.FindElement(By.XPath("//table[@id='jobListGrid-grid']"), 10) != null)
+					if (SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//table[@id='jobListGrid-grid']"), 10) != null)
 					{
 						return true;
 					}
@@ -58,7 +58,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public List<Job> GetFirstXJobs(int firstX)
 		{
 			Report.Info("Get first " + firstX.ToString() + " jobs.");
-			IList<IWebElement> tableRows = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//table[@id='jobListGrid-grid']//tr[not(@class='jqgfirstrow')]"), 10);
+			IList<IWebElement> tableRows = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath("//table[@id='jobListGrid-grid']//tr[not(@class='jqgfirstrow')]"), 10);
 			Report.Info("Found " + tableRows.Count.ToString() + " rows");
 			var listOfJobs = new List<Job>();
 			for (int i = 0; i < Math.Min(tableRows.Count, firstX); i++)
@@ -105,7 +105,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info("Beginning click job queue menu option: " + option);
 			try
 			{
-				ReadOnlyCollection<IWebElement> ListJobOptions = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//ul[@id='jobListSelector']/li/span"));
+				ReadOnlyCollection<IWebElement> ListJobOptions = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath("//ul[@id='jobListSelector']/li/span"));
 
 				IWebElement matchingOption = ListJobOptions.FirstOrDefault(x => x.GetValue().Trim() == option);
 

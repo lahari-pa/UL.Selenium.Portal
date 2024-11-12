@@ -20,7 +20,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 	class Distributor : NewProduct
 	{
 
-		private IWebElement DistSearchInput => SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='table-search col-sm-4']//input[@id='inputGroup']"), 2);
+		private IWebElement DistSearchInput => SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@class='table-search col-sm-4']//input[@id='inputGroup']"), 2);
 
 		public string SearchIdNameField {
 			get
@@ -47,7 +47,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public int ProductsInMyDistCount()
 		{
-			IList<IWebElement> productRows = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@id='distributor']//table[contains(@class, 'table')]//tbody/tr"), 2);
+			IList<IWebElement> productRows = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath("//div[@id='distributor']//table[contains(@class, 'table')]//tbody/tr"), 2);
 			if (productRows == null || !productRows.Any())
 			{
 				return 0;
@@ -59,7 +59,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				IList<IWebElement> distRow = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//table[@class='table']//tr"), 1).ToList();
+				IList<IWebElement> distRow = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(".//table[@class='table']//tr"), 1).ToList();
 				IWebElement button = distRow.FirstOrDefault()?.FindElement(By.XPath("//a[contains(@class,'btn btn-link btn-xs') and contains(text(),'Approve')]"), 1);
 				return button.TryClick();
 			}
@@ -73,7 +73,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				IList<IWebElement> distRow = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//table[@class='table table-hover upc-table']//tr"), 1).ToList();
+				IList<IWebElement> distRow = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(".//table[@class='table table-hover upc-table']//tr"), 1).ToList();
 				IWebElement button = distRow.FirstOrDefault()?.FindElement(By.XPath("//em[contains(@class,'fa fa-chevron-right')]"), 1);
 				return button.TryClick();
 			}

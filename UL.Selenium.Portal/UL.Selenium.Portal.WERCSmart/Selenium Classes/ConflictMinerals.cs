@@ -31,19 +31,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 
 				Delay.Seconds(1);
-				IWebElement password = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@id='Password']"), 2);
+				IWebElement password = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[@id='Password']"), 2);
 				password.EnterText(value);
 				Delay.Seconds(1);
 
 			}
-			get => SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@id='Password']"), 2).GetValue();
+			get => SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[@id='Password']"), 2).GetValue();
 		}
 
 		public bool ErrorMessageShowing()
 		{
 			try
 			{
-				IWebElement error = SeleniumBrowser.WebBrowser.FindElements(By.XPath(
+				IWebElement error = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(
 						".//div[@class='validation-summary-errors']/span"), 2)
 					.FirstOrDefault(x => x.Text.Contains("Log in was unsuccessful"));
 				if (error != null)
@@ -185,7 +185,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			get => this.containerElement.FindElement(By.XPath(".//*[@id='Accepted']"), 2).Checked();
 			set
 			{
-				IWebElement chkAccepted = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//*[@id='Accepted']"), 2);
+				IWebElement chkAccepted = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//*[@id='Accepted']"), 2);
 				chkAccepted.Check(value);
 			}
 		}
@@ -204,7 +204,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickContinue()
 		{
 			Delay.Seconds(1);
-			IWebElement continueButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//*[@type='submit']"), 2);
+			IWebElement continueButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//*[@type='submit']"), 2);
 			if (continueButton != null)
 			{
 				return continueButton.TryClick();
@@ -215,7 +215,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickCongratulationsLogin()
 		{
-			IWebElement loginButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//button[@id='cmdSupplierLogin']"), 2);
+			IWebElement loginButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//button[@id='cmdSupplierLogin']"), 2);
 			if (loginButton != null)
 			{
 				return loginButton.TryClick();
@@ -286,7 +286,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickVerify()
 		{
 			Delay.Seconds(1);
-			IWebElement verifyButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//*[@id='cmdVerify']"), 2);
+			IWebElement verifyButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//*[@id='cmdVerify']"), 2);
 
 			if (verifyButton != null)
 			{
@@ -299,7 +299,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				IWebElement CompanyNameField = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='txtCompanyName']"), 2);
+				IWebElement CompanyNameField = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//input[@id='txtCompanyName']"), 2);
 
 				if (CompanyNameField != null)
 				{
@@ -315,7 +315,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				IWebElement Contents = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//div[@class='legends']"), 2).FirstOrDefault(x => x.Text.Contains("Congratulations! You have successfully"));
+				IWebElement Contents = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath("//div[@class='legends']"), 2).FirstOrDefault(x => x.Text.Contains("Congratulations! You have successfully"));
 
 				if (Contents != null)
 				{
@@ -333,7 +333,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				try
 				{
-					IWebElement VerificationField = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//*[@id='VerificationCode']"), 2);
+					IWebElement VerificationField = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//*[@id='VerificationCode']"), 2);
 					if (VerificationField != null)
 					{
 						return true;
@@ -355,7 +355,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				try
 				{
-					IWebElement AcceptedCheckField = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='Accepted']"), 2);
+					IWebElement AcceptedCheckField = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//input[@id='Accepted']"), 2);
 
 					if (AcceptedCheckField != null)
 					{
@@ -378,7 +378,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				try
 				{
-					IWebElement h1Dashboard = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//h1"), 2).FirstOrDefault(x => x.Text.Contains("Dashboard"));
+					IWebElement h1Dashboard = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath("//h1"), 2).FirstOrDefault(x => x.Text.Contains("Dashboard"));
 
 					if (h1Dashboard != null)
 					{
@@ -400,7 +400,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				IWebElement ContactNameField = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='txtContactName']"), 2);
+				IWebElement ContactNameField = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//input[@id='txtContactName']"), 2);
 
 				if (ContactNameField != null)
 				{
@@ -416,7 +416,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				IWebElement emailField = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@id='txtEmail']"), 2);
+				IWebElement emailField = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//input[@id='txtEmail']"), 2);
 
 				if (emailField != null)
 				{
@@ -430,7 +430,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string GetCompanyNameSignedIn()
 		{
-			IWebElement username = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[contains(@class, 'username')]"), 2);
+			IWebElement username = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//a[contains(@class, 'username')]"), 2);
 			if (username != null)
 			{
 				return username.Text;
@@ -442,7 +442,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string GetEmailSignedIn()
 		{
-			IWebElement username = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//i[@class='fa fa-user']"), 2);
+			IWebElement username = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//i[@class='fa fa-user']"), 2);
 			if (username != null)
 			{
 				return username.GetValue();
@@ -454,12 +454,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool GoodGuideDashboardLoads()
 		{
-			return SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//header//p[contains(text(),'GoodGuide')]"), 2) != null;
+			return SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//header//p[contains(text(),'GoodGuide')]"), 2) != null;
 		}
 
 		public bool UlToysDashboardLoads()
 		{
-			return SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h2[text()='My Company Details']"), 30) != null;
+			return SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//h2[text()='My Company Details']"), 30) != null;
 		}
 	}
 }

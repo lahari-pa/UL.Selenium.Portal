@@ -64,14 +64,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				//var test = containerElement.FindElement(By.XPath(".//label[contains(text(),'User Role')]"));
 				//var test2 = test.FindElement(By.XPath("following-sibling::select"));
 				//this.RefreshPageObject();
-				this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+				this.containerElement = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(BasePath));
 				IWebElement el = this.containerElement.FindElement(By.XPath(".//select[contains(@data-bind, 'userRole')]"));
 				return el.GetValue();
 			}
 			set
 			{
 				//var el = this.containerElement.FindElement(By.XPath(".//label[contains(text(),'User Role')]/following-sibling::select"), 2);
-				this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+				this.containerElement = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(BasePath));
 				IWebElement el = this.containerElement.FindElement(By.XPath(".//select[contains(@data-bind, 'userRole')]"), 2);
 				el.Select(value);
 			}
@@ -108,7 +108,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			get
 			{
 				//var el = this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Country')]/following-sibling::select"), 2);
-				this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+				this.containerElement = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(BasePath));
 				IWebElement el = this.containerElement.FindElement(By.XPath(".//select[@id='regCountry']"));
 				return el.GetValue();
 			}
@@ -122,7 +122,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string CountryCode {
 			get
 			{
-				this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+				this.containerElement = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(BasePath));
 				return this._sCountryCode.GetValue();
 			}
 
@@ -147,7 +147,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickButtonOnAddUserDialog(string buttonToClick)
 		{
-			IWebElement addUserDialog = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='add-user-dialog']"));
+			IWebElement addUserDialog = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//div[@id='add-user-dialog']"));
 			ReadOnlyCollection<IWebElement> buttons = addUserDialog.FindElements(By.XPath(".//button"));
 			IWebElement matchingButton = buttons.FirstOrDefault(x => x.Text.ToLower().Trim() == buttonToClick.ToLower());
 			if (matchingButton != null)
@@ -240,7 +240,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool Add_User_Thank_You()
 		{
 			Report.Info("Beginning Add_User_Thank_You");
-			//containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+			//containerElement = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(BasePath));
 			IWebElement myText = this.containerElement.FindElements(By.XPath(".//div/p[@class='marBot-20']"), 10).FirstOrDefault();
 
 			if (myText == null)

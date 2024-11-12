@@ -1013,9 +1013,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Error("No item saved in context as: " + retailerSavedAs);
 				return;
 			}
-			//SeleniumBrowser.WebBrowser.WaitForPageLoad();
+			//SeleniumWebDriver.CurrentDriver.WaitForPageLoad();
 			//         Delay.Seconds(5);
-			//if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='upcTableOutter']"), 10) ==null)
+			//if (SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@class='upcTableOutter']"), 10) ==null)
 			//{
 			//	Report.Failure("View UPC table was not displayed");
 			//	return;

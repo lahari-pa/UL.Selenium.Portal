@@ -395,13 +395,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[RegexStepDefinition(@"I switch to tab: (.*)")]
 		public void ThenISwitchToDataAcceptancePage(string option)
 		{
-			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			string currentHandle = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
 			Context.AddToContext("MainWindowHandle", currentHandle);
-			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			ReadOnlyCollection<string> allHandles = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			foreach (string handle in allHandles)
 			{
-				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
-				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//title"), 2) != null)
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle);
+				if (SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//title"), 2) != null)
 				{
 					Report.Success("Tab was switched successfully!");
 					return;

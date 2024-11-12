@@ -1398,7 +1398,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         public void InTheRecentActivitiesPageInTheExportToExcelPopupIClickAwayFromTheExportPopupUp()
         {
             Report.Info($"Attempting to click away from the popup");
-            Actions action = new Actions(SeleniumBrowser.WebBrowser);
+            Actions action = new Actions(SeleniumWebDriver.CurrentDriver);
             action.MoveByOffset(200, 200).Perform();
             Thread.Sleep(10000);
             action.Click();
@@ -1662,7 +1662,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         public void InTheRecentActivitiesPageInTheProductInformationPopupIClickAway()
         {
             Report.Info($"Attempting to click away from the popup");
-            Actions action = new Actions(SeleniumBrowser.WebBrowser);
+            Actions action = new Actions(SeleniumWebDriver.CurrentDriver);
             action.MoveByOffset(300, 300).Perform();
             Thread.Sleep(10000);
             action.Click();

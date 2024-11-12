@@ -98,14 +98,14 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 		public string DocumentWindowOpen()
 		{
 			Report.Info("Switch to File window");
-			//string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			//string currentHandle = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
 			//Context.AddToContext("MainWindowHandle", currentHandle);
-			ReadOnlyCollection<string> handles = SeleniumBrowser.WebBrowser.WindowHandles;
+			ReadOnlyCollection<string> handles = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			foreach (string handle in handles)
 			{
-				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Url.Contains("chart"))
+				if (SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle).Url.Contains("chart"))
 				{
-					return SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Url;
+					return SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle).Url;
 				}
 			}
 			return null;
@@ -1733,7 +1733,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 				element.ScrollElementIntoView();
 				Delay.Seconds(2);
 				var originalSize = this.Panel.Size;
-				//  (new Actions(SeleniumBrowser.WebBrowser)).DragAndDrop(element, target).Perform();
+				//  (new Actions(SeleniumWebDriver.CurrentDriver)).DragAndDrop(element, target).Perform();
 
 				Actions builder = new Actions(SeleniumWebDriver.CurrentDriver);
 				builder.MoveToElement(this.Panel).Build().Perform();

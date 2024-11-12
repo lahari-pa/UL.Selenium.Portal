@@ -20,7 +20,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				IWebElement popupEditor = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 2);
+				IWebElement popupEditor = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(BasePath), 2);
 				if (popupEditor != null)
 				{
 					return true;
@@ -50,7 +50,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public List<string> GetHeaders()
 		{
 			//Report.Info("Beginning get headers");
-			return SeleniumBrowser.WebBrowser
+			return SeleniumWebDriver.CurrentDriver
 				.FindElements(By.XPath("//div[@id='dialog-MessageCenter']//table//th"), 2).ToList()
 				.Select(x => x.GetValue()).ToList();
 
@@ -214,7 +214,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool OrderNotificationsByDate(string ascendingOrDescending)
 		{
-			IWebElement notificationSortDateHeader = SeleniumBrowser.WebBrowser
+			IWebElement notificationSortDateHeader = SeleniumWebDriver.CurrentDriver
 				.FindElement(
 					By.XPath(
 						"//div[@id='dialog-MessageCenter']//table//th[@id='tblViewNotificationHistory_NotificationDate']//span[@class='s-ico']/span[not(contains(@class, 'disabled'))]"),

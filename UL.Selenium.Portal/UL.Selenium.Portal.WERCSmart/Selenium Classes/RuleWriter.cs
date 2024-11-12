@@ -30,7 +30,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			//GeneralUtilities.SwitchToFrame($"<contains(@data-frameid,'Rule Writer')>");
 			GeneralUtilities.SwitchToDefaultContent();
 			var el = this.ContainerElement;
-			//var thing = SeleniumBrowser.WebBrowser.FindElement(By.XPath($"//body[//div[@id='Widget1HEA' and contains(text(),'Rule Writer')]]"), 5);
+			//var thing = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//body[//div[@id='Widget1HEA' and contains(text(),'Rule Writer')]]"), 5);
 			if (el!=null)
 			{
 				Report.Info($"The el was found as expected...");
@@ -50,7 +50,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 
 			GeneralUtilities.SwitchToDefaultContent();
-			//SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			//SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 			var containerEl = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//body[//div[@id='Widget1HEA']]"), 5);
 			if (containerEl != null)
 			{

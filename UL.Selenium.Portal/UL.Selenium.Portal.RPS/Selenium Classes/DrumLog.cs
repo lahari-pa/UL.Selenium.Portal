@@ -352,7 +352,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             IWebElement resizeIcon = wantedColumn.FindElement(By.XPath(".//span[contains(@class,'ui-jqgrid-resize ui-jqgrid-resize-ltr')]"), 2);
             int startWidth = Int32.Parse(wantedColumn.GetAttribute("style").Replace("width: ", "").Replace("px;", ""));
 
-            Actions action = new Actions(SeleniumBrowser.WebBrowser);
+            Actions action = new Actions(SeleniumWebDriver.CurrentDriver);
             try
             {
                 
@@ -392,7 +392,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             IWebElement resizeIcon = wantedColumn.FindElement(By.XPath(".//span[contains(@class,'ui-jqgrid-resize ui-jqgrid-resize-ltr')]"), 2);
             int startWidth = Int32.Parse(wantedColumn.GetAttribute("style").Replace("width: ", "").Replace("px;", ""));
 
-            Actions action = new Actions(SeleniumBrowser.WebBrowser);
+            Actions action = new Actions(SeleniumWebDriver.CurrentDriver);
             action.ClickAndHold(resizeIcon).MoveByOffset(30, 0).Release().Build().Perform();
             int endWidth = Int32.Parse(wantedColumn.GetAttribute("style").Replace("width: ", "").Replace("px;", ""));
             return startWidth < endWidth;

@@ -61,13 +61,13 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         public bool SelectWebViewersDropDownOption(string dropDownOption)
         {
-            IWebElement dropDownOptionEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='dropdown-menu show']//a[@class='dropdown-item '][contains(text(), '" + dropDownOption + "')]"), 1);
+            IWebElement dropDownOptionEl = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@class='dropdown-menu show']//a[@class='dropdown-item '][contains(text(), '" + dropDownOption + "')]"), 1);
             return dropDownOptionEl.TryClick();
         }
 
         public bool PageNotFoundErrorDisplayed()
         {
-            IWebElement errorPage = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div//h1[text()='404 Not Found']"), 1);
+            IWebElement errorPage = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//div//h1[text()='404 Not Found']"), 1);
             return errorPage.Displayed;
         }
 

@@ -524,8 +524,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[RegexStepDefinition(@"I navigate to ChooseGoodGuide")]
 		public void GivenINavigateToChooseGoodGuide()
 		{
-			SeleniumBrowser.WebBrowser.Url = TestVariables.GetVariableSavedAs("ChooseGGUrl");
-			SeleniumBrowser.WebBrowser.WaitForPageLoad();
+			SeleniumWebDriver.CurrentDriver.Url = TestVariables.GetVariableSavedAs("ChooseGGUrl");
+			SeleniumWebDriver.CurrentDriver.WaitForPageLoad();
 		}
 
 		[RegexStepDefinition(@"I login to ChooseGoodGuide as Administrator")]

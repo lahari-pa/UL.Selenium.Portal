@@ -18,8 +18,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		//events, announcements, regulatory, technical
 		public bool ClickSection(string section)
 		{
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame("dashboard");
-			return SeleniumBrowser.WebBrowser
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("dashboard");
+			return SeleniumWebDriver.CurrentDriver
 				.FindElement(By.XPath(".//div[@id='sections-index']//li[@class='" + section.ToLower() + "']//a"))
 				.TryClick();
 		}
@@ -36,13 +36,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool WaitForLoad()
 		{
-			var el = SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath(".//div[@class='modal-title' and text()='Password Expiration Notice']"), 2);
+			var el = SeleniumWebDriver.CurrentDriver.WaitUntilElementVisible(By.XPath(".//div[@class='modal-title' and text()='Password Expiration Notice']"), 2);
 			return el != null;
 		}
 
 		public bool ClickButton(string buttonName)
 		{
-			return SeleniumBrowser.WebBrowser.FindElement(By.XPath($".//button[text()='{buttonName}']"), 2).TryClick();
+			return SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($".//button[text()='{buttonName}']"), 2).TryClick();
 		}
 	}
 

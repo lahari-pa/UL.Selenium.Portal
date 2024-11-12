@@ -502,7 +502,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				if (SeleniumBrowser.Alert.WaitForAlert(300))
 				{
-					SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+					SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
 				}
 			}
 
@@ -522,7 +522,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					if (SeleniumBrowser.Alert.WaitForAlert(200))
 					{
 						Report.Info($"Attempting to switch to alert 1");
-						SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+						SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
 					}
 				}
 				else
@@ -532,7 +532,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					if (SeleniumBrowser.Alert.WaitForAlert(200))
 					{
 						Report.Info($"Attempting to switch to alert 1");
-						SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+						SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
 					}
 					else
 					{
@@ -755,7 +755,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			try
 			{
 				SeleniumBrowser.Alert.WaitForAlert(3);
-				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
 				Delay.Seconds(1);
 			}
 			catch (Exception)
@@ -1042,10 +1042,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Beginning click save in create component page.");
 			thisCreateComponentPage.ClickButton("Save");
 
-			//string currentURL = SeleniumBrowser.WebBrowser.Url;
+			//string currentURL = SeleniumWebDriver.CurrentDriver.Url;
 
 			Delay.Seconds(1);
-			//((IJavaScriptExecutor)SeleniumBrowser.WebBrowser).ExecuteScript("ConfirmBadCAS(null)");
+			//((IJavaScriptExecutor)SeleniumWebDriver.CurrentDriver).ExecuteScript("ConfirmBadCAS(null)");
 			/*
 			Report.Info("Checking for alert - reloading");
 
@@ -1070,7 +1070,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.Info("Found an alert");
 				string alertText = SeleniumBrowser.Alert.GetText();
-				SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
 				Report.Info("Got an alert: " + alertText);
 			}
 			else

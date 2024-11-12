@@ -230,13 +230,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 			Report.Info("Switching to iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame("z_hppm_iframe");
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("z_hppm_iframe");
 
-			IWebElement _lbl_card_type = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//label[@id='form-label-creditCardType']"), 2);
-			IWebElement _lbl_card_no = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//label[@id='form-label-creditCardNumber']"), 2);
-			IWebElement _lbl_ex_date = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//label[@id='form-label-creditCardExpirationMonth']"), 2);
-			IWebElement _lbl_cvv = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//label[@id='form-label-cardSecurityCode']"), 2);
-			IWebElement _lbl_cardholder_name = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//label[@id='form-label-creditCardHolderName']"), 2);
+			IWebElement _lbl_card_type = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//label[@id='form-label-creditCardType']"), 2);
+			IWebElement _lbl_card_no = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//label[@id='form-label-creditCardNumber']"), 2);
+			IWebElement _lbl_ex_date = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//label[@id='form-label-creditCardExpirationMonth']"), 2);
+			IWebElement _lbl_cvv = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//label[@id='form-label-cardSecurityCode']"), 2);
+			IWebElement _lbl_cardholder_name = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//label[@id='form-label-creditCardHolderName']"), 2);
 
 
 			foreach (string field in myList)
@@ -300,7 +300,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 			}
 			Report.Info("Exiting iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 			Report.Info("Credit Card Fields are Correct");
 			Report.Screenshot();
 			return true;
@@ -319,12 +319,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 			Report.Info("Switching to iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame("z_hppm_iframe");
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("z_hppm_iframe");
 
-			IWebElement _err_card_no = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='error-creditCardNumber']"), 2);
-			IWebElement _err_ex_date = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='error-creditCardExpirationMonth']"), 2);
-			IWebElement _err_cvv = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='error-cardSecurityCode']"), 2);
-			IWebElement _err_cardholder_name = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='error-creditCardHolderName']"), 2);
+			IWebElement _err_card_no = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@id='error-creditCardNumber']"), 2);
+			IWebElement _err_ex_date = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@id='error-creditCardExpirationMonth']"), 2);
+			IWebElement _err_cvv = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@id='error-cardSecurityCode']"), 2);
+			IWebElement _err_cardholder_name = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@id='error-creditCardHolderName']"), 2);
 
 
 			foreach (string field in myList)
@@ -378,7 +378,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 			}
 			Report.Info("Exiting iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 			Report.Info("Credit Card Errors are Correct");
 			Report.Screenshot();
 			return true;
@@ -414,18 +414,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 			Report.Info("Switching to iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame("z_hppm_iframe");
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("z_hppm_iframe");
 
-			IWebElement _pic_card_type_visa = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='card-image-container-Visa']"), 2);
-			IWebElement _pic_card_type_master = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='card-image-container-MasterCard']"), 2);
-			IWebElement _pic_card_type_american = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='card-image-container-AmericanExpress']"), 2);
-			IWebElement _pic_card_type_discover = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='card-image-container-Discover']"), 2);
-			IWebElement _txt_card_no = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@id='input-creditCardNumber']"), 2);
-			IWebElement _sel_exp_month = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//select[@id='input-creditCardExpirationMonth']"), 2);
-			IWebElement _sel_exp_year = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//select[@id='input-creditCardExpirationYear']"), 2);
-			IWebElement _txt_cvv = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@id='input-cardSecurityCode']"), 2);
-			IWebElement _txt_cardholder_name = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@id='input-creditCardHolderName']"), 2);
-			IWebElement _txt_postal_code = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@id='input-creditCardPostalCode']"), 2);
+			IWebElement _pic_card_type_visa = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@id='card-image-container-Visa']"), 2);
+			IWebElement _pic_card_type_master = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@id='card-image-container-MasterCard']"), 2);
+			IWebElement _pic_card_type_american = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@id='card-image-container-AmericanExpress']"), 2);
+			IWebElement _pic_card_type_discover = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@id='card-image-container-Discover']"), 2);
+			IWebElement _txt_card_no = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[@id='input-creditCardNumber']"), 2);
+			IWebElement _sel_exp_month = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//select[@id='input-creditCardExpirationMonth']"), 2);
+			IWebElement _sel_exp_year = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//select[@id='input-creditCardExpirationYear']"), 2);
+			IWebElement _txt_cvv = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[@id='input-cardSecurityCode']"), 2);
+			IWebElement _txt_cardholder_name = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[@id='input-creditCardHolderName']"), 2);
+			IWebElement _txt_postal_code = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[@id='input-creditCardPostalCode']"), 2);
 
 			switch (card_type)
 			{
@@ -462,7 +462,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info($"Entering Postal Code: {postal_code}");
 			_txt_postal_code.EnterText(postal_code);
 			Report.Info("Exiting iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 			Report.Info("Credit Card Details Entered");
 			Report.Screenshot();
 			return true;
@@ -484,13 +484,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 			Report.Info("Switching to iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame("z_hppm_iframe");
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("z_hppm_iframe");
 
-			IWebElement _lbl_aba_rout_no = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//label[@id='form-label-achBankABACode']"), 2);
-			IWebElement _lbl_bank_acc_no = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//label[@id='form-label-achBankAccountNumber']"), 2);
-			IWebElement _lbl_acc_type = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//label[@id='form-label-achBankAccountType']"), 2);
-			IWebElement _lbl_bank_name = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//label[@id='form-label-achBankName']"), 2);
-			IWebElement _lbl_acc_holder_name = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//label[@id='form-label-achBankAccountName']"), 2);
+			IWebElement _lbl_aba_rout_no = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//label[@id='form-label-achBankABACode']"), 2);
+			IWebElement _lbl_bank_acc_no = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//label[@id='form-label-achBankAccountNumber']"), 2);
+			IWebElement _lbl_acc_type = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//label[@id='form-label-achBankAccountType']"), 2);
+			IWebElement _lbl_bank_name = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//label[@id='form-label-achBankName']"), 2);
+			IWebElement _lbl_acc_holder_name = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//label[@id='form-label-achBankAccountName']"), 2);
 
 			foreach (string field in myList)
 			{
@@ -553,7 +553,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 			}
 			Report.Info("Exiting iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 			Report.Info("ACH Fields are Correct");
 			Report.Screenshot();
 			return true;
@@ -572,13 +572,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 			Report.Info("Switching to iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame("z_hppm_iframe");
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("z_hppm_iframe");
 
-			IWebElement _err_aba_rout_no = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='error-achBankABACode']"), 2);
-			IWebElement _err_bank_acc_no = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='error-achBankAccountNumber']"), 2);
-			IWebElement _err_acc_type = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='error-achBankAccountType']"), 2);
-			IWebElement _err_bank_name = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='error-achBankName']"), 2);
-			IWebElement _err_acc_holder_name = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='error-achBankAccountName']"), 2);
+			IWebElement _err_aba_rout_no = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@id='error-achBankABACode']"), 2);
+			IWebElement _err_bank_acc_no = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@id='error-achBankAccountNumber']"), 2);
+			IWebElement _err_acc_type = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@id='error-achBankAccountType']"), 2);
+			IWebElement _err_bank_name = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@id='error-achBankName']"), 2);
+			IWebElement _err_acc_holder_name = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@id='error-achBankAccountName']"), 2);
 
 			foreach (string field in myList)
 			{
@@ -641,7 +641,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 			}
 			Report.Info("Exiting iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 			Report.Info("ACH Error Messages are Correct");
 			Report.Screenshot();
 			return true;
@@ -2077,7 +2077,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 
 		public List<string> GetRowsBelowProduct()
 		{
-			ReadOnlyCollection<IWebElement> headerRows = SeleniumBrowser.WebBrowser.FindElements(
+			ReadOnlyCollection<IWebElement> headerRows = SeleniumWebDriver.CurrentDriver.FindElements(
 				By.XPath("//h3[contains(text(),'Product Billing')]/..//table/tbody/tr/td/b"));
 
 			if (headerRows.Count > 1)
@@ -2086,7 +2086,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 			}
 			else
 			{
-				ReadOnlyCollection<IWebElement> subRows = SeleniumBrowser.WebBrowser.FindElements(
+				ReadOnlyCollection<IWebElement> subRows = SeleniumWebDriver.CurrentDriver.FindElements(
 					By.XPath("//h3[contains(text(),'Product Billing')]/..//table/tbody/tr/td[2]"));
 				return subRows.Select(x => x.GetValue()).ToList();
 
