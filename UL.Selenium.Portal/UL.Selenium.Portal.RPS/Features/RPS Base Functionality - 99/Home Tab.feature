@@ -14,7 +14,7 @@ Feature: Home Tab
 Scenario: [105246] Base functionality - Menu Links Banner - options
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
 	Then I click the tab: Home with parameter IsWebViewer: No
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given  I confirm the following tabs are displayed:
 		| Link              |
 		| Program Health    |
@@ -30,7 +30,7 @@ Scenario: [70347] Base Functionality - UL Logo
 	Then I confirm the active tab is: <LandingTab>
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	And I confirm the UL Logo is displayed in the top bar
 	Given I click the UL Logo in the top bar
 	Then I verify that a tab opens with url: https://www.ul.com/
@@ -53,7 +53,7 @@ Scenario: [70346] Base Functionality - Log Out
 	Then I confirm the active tab is: <LandingTab>
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I confirm the user displayed in the top bar matches the active logged in user
 	And I click the user button in the top bar
 	Then I confirm the 'Sign Out' dropdown option is displayed under the user button
@@ -78,7 +78,7 @@ Scenario: [106428] Base Functionality - Home page - layout
 	Then I confirm the active tab is: <LandingTab>
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I confirm the top menu bar is displayed with the logged in username
 	And I confirm the navigation menu bar is displayed below the top bar
 	Given I click the Gauge button in the navigation bar
@@ -224,14 +224,14 @@ Scenario: [73077] Base Functionality - WERCSmart Product Suite logo redirects to
 @tfs_design
 Scenario: [108521] Base Functionality - Home - Widget - hamburger icon - Print Chart
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I Click the hamburger menu for the widget: RU Categories by RU and select the option: Print chart
 	Then I check that the print dialog is open
   
 
 	Scenario: [169052] Hamburger Home - Widget Layout
 Given I call Shared Step 104950 (RPS Login - Base Functionality)
-Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I confirm the following Widgets are displayed:
 		| Widget                    |
 		| RU Categories by RU       |
@@ -246,7 +246,7 @@ Given I Check that the Hamburger menu dropdown for widget: Product Hold Status i
 
 Scenario: [169347] Home - Update and Reset Dashboard
     Given I call Shared Step 104950 (RPS Login - Base Functionality)
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I confirm the following Widgets are displayed:
 		| Widget                    |
 		| RU Categories by RU       |

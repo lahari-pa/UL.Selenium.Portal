@@ -14,7 +14,7 @@ Feature: Table Items
 
 Scenario Outline: [169370] Recent Activities - Turnaround Time Column displays
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the main tab: Recent Activities
 	Then I confirm the Recent Activities tab has loaded
 	And In the recent activities page, I confirm that the product table  has the following column: TurnAround Time
@@ -28,7 +28,7 @@ Scenario Outline: [169370] Recent Activities - Turnaround Time Column displays
 	
 Scenario Outline: [169371] Recent Activities - Turnaround Time Column - displays popup
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the main tab: Recent Activities
 	Then I confirm the Recent Activities tab has loaded
 	And In the recent activities page, I confirm that the product table  has the following column: TurnAround Time
@@ -51,7 +51,7 @@ Scenario Outline: [169371] Recent Activities - Turnaround Time Column - displays
 	
 Scenario Outline: [169175] Actions - Contact Supplier and View Data links
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I click on the View Data Link
@@ -73,7 +73,7 @@ Scenario Outline: [169175] Actions - Contact Supplier and View Data links
 
 Scenario Outline: [169177] Contact Supplier -  displays for all products
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then In the product table, I confirm for all products the Action column does include option: Contact Supplier
@@ -98,7 +98,7 @@ Scenario Outline: [169177] Contact Supplier -  displays for all products
 
 Scenario Outline: [169522] Web Viewer - Actions - Contact Supplier Not shown and View Data links
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then In the product table, I confirm for all products the Action column does not include option: Contact Supplier

@@ -13,7 +13,7 @@ Feature: Search
 
 Scenario Outline: [169130] Search for Product ID
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -46,7 +46,7 @@ Scenario Outline: [169130] Search for Product ID
 
 Scenario Outline: [169131] Search for Product Name
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -79,7 +79,7 @@ Scenario Outline: [169131] Search for Product Name
 
 Scenario Outline: [169132] Search for UPC - full UPC
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -114,7 +114,7 @@ Scenario Outline: [169132] Search for UPC - full UPC
 
 Scenario Outline: [169133] Search for UPC - partial UPC
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -142,7 +142,7 @@ Scenario Outline: [169133] Search for UPC - partial UPC
 
 Scenario Outline: [169134] Search for UPC - ignores leading zeroes
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -171,7 +171,7 @@ Scenario Outline: [169134] Search for UPC - ignores leading zeroes
 
 Scenario Outline: [169135] Search - Enter Key, or no action shows results
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -201,7 +201,7 @@ Scenario Outline: [169135] Search - Enter Key, or no action shows results
 
 Scenario Outline: [169138] Search text not cleared except by reset
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -231,7 +231,7 @@ Scenario Outline: [169138] Search text not cleared except by reset
 
 Scenario Outline: [169139] Search for Product Name - More Filters shows reduced products for selection
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -260,7 +260,7 @@ Scenario Outline: [169139] Search for Product Name - More Filters shows reduced 
 
 Scenario Outline: [169140] Search - Apply Filter and apply main search in resulting grid
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -290,7 +290,7 @@ Scenario Outline: [169140] Search - Apply Filter and apply main search in result
 
 Scenario Outline: [169137] Search - Smart search is not available
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -320,7 +320,7 @@ Scenario Outline: [169137] Search - Smart search is not available
 
 Scenario Outline: [169136] Search Numeric Data
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded

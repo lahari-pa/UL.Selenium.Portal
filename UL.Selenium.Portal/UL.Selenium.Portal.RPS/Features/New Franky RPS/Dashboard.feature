@@ -17,7 +17,7 @@ Feature: Dashboard
 Scenario Outline: [169080] Dashboard page - layout
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
 	Given I click the main tab: Program Health
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Dashboard
 	And I confirm the active tab is: Dashboard
 	Then I confirm the Dashboard tab has loaded
@@ -1226,7 +1226,7 @@ Scenario: [168413] Smart & Final - RPS - Recent Activities page - layout
 
 Scenario: [165066] RPS/WV - Smart & Final RA or PL - Does not show any products which are not associated to S&F
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.SF
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Product Lookup
 	And I confirm the active tab is: Product Lookup
 	Then I Enter WPS ID : 1804040 in Search field

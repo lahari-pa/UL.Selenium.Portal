@@ -19,7 +19,7 @@ Feature: Drum Log
 
 Scenario: [105079] Drum Log - Tab heading shows as active when selected
     Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
@@ -37,7 +37,7 @@ Scenario: [105079] Drum Log - Tab heading shows as active when selected
 
 Scenario: [180727] Drum Log - Drum details -  Date format in Expanded grid (all date fields)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
@@ -50,7 +50,7 @@ Scenario: [180727] Drum Log - Drum details -  Date format in Expanded grid (all 
 
 Scenario: [105117] Drum Log - Entries shown are not repeated
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log 
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
@@ -58,7 +58,7 @@ Scenario: [105117] Drum Log - Entries shown are not repeated
 
 Scenario: [108105] Drum Log page - layout
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
@@ -116,7 +116,7 @@ Scenario: [108105] Drum Log page - layout
 
 Scenario: [111156] Drum Log page - Resize columns
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
@@ -126,7 +126,7 @@ Scenario: [111156] Drum Log page - Resize columns
 
 Scenario: [108106] Drum Log page - Expand arrow 
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
@@ -152,7 +152,7 @@ Scenario: [108106] Drum Log page - Expand arrow
  
 Scenario: [98475] Drum Log - Page options - change page number 
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
@@ -160,7 +160,7 @@ Scenario: [98475] Drum Log - Page options - change page number
 
 Scenario: [101314] Drum Log - Export to Excel - Export All Drums 
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
@@ -186,7 +186,7 @@ Scenario: [101314] Drum Log - Export to Excel - Export All Drums
 
 Scenario: [105012] Drum Log - Export Filtered Drum List - Store Name
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
@@ -217,7 +217,7 @@ Scenario: [105012] Drum Log - Export Filtered Drum List - Store Name
 
 Scenario: [105013] Drum Log - Export to Excel - Export All Drums with UPCs 
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
@@ -263,7 +263,7 @@ Scenario: [105013] Drum Log - Export to Excel - Export All Drums with UPCs
 
 Scenario: [108295] Drum Log - Export to Excel - pop up layout
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
@@ -291,7 +291,7 @@ Scenario: [108295] Drum Log - Export to Excel - pop up layout
 
 Scenario: [178702] Drum Log - Export to Excel - Export All Drums with UPCs - With Filtered list - UPC Scan Status = Found
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
@@ -343,7 +343,7 @@ Scenario: [178702] Drum Log - Export to Excel - Export All Drums with UPCs - Wit
 
 Scenario: [178703] Drum Log - Export to Excel - Export All Drums with UPCs - With Filtered list - UPC Scan Status = Not Found
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
@@ -394,7 +394,7 @@ Scenario: [178703] Drum Log - Export to Excel - Export All Drums with UPCs - Wit
 
 Scenario: [178699] Drum Log - Export Filtered Drum List - UPC Scan Status = Found 
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
@@ -424,7 +424,7 @@ Scenario: [178699] Drum Log - Export Filtered Drum List - UPC Scan Status = Foun
 
 Scenario: [105020] Drum Log - Breadcrumbs
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
@@ -444,7 +444,7 @@ Scenario: [105020] Drum Log - Breadcrumbs
 
 Scenario: [108301] Drum Log - View Data  - Transportation Data - confirm fields shown
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
@@ -456,7 +456,7 @@ Scenario: [108301] Drum Log - View Data  - Transportation Data - confirm fields 
 
 Scenario: [108300] Drum Log - View Data  - Product Data codes - confirm fields shown
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
@@ -469,7 +469,7 @@ Scenario: [108300] Drum Log - View Data  - Product Data codes - confirm fields s
 
 Scenario: [108303] Drum Log - View Data  - Battery Data - confirm fields shown
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log

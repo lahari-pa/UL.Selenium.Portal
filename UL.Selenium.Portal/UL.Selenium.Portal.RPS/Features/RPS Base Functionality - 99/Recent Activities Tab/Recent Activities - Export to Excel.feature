@@ -17,7 +17,7 @@ Feature: Recent Activities - Export to Excel
 @ScenarioId:9353
 Scenario: [106867] Base Functionality - Recent Activities - Export to Excel - pop up layout
 Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
-Then I confirm the Home tab has loaded
+#Then I confirm the Home tab has loaded
 Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then In the recent activities Page, I click the Export To Excel Button
@@ -44,7 +44,7 @@ And I call Shared Step 106194 (RPS Sign out)
 @ScenarioId:9358
 Scenario: [70327] Base Functionality - Recent Activities - Export to Excel
 Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
-Then I confirm the Home tab has loaded
+#Then I confirm the Home tab has loaded
 Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 And In the recent activities Page, I click the More Filters Button

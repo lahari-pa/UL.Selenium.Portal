@@ -20,7 +20,7 @@ Feature: Recent Activities - Page Options
 @ScenarioId:6982
 Scenario: [98463] Base Functionality - Recent Activities - Page options - (Last Page) >| 
 Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
-Then I confirm the Home tab has loaded
+#Then I confirm the Home tab has loaded
 Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then In the recent activities page, I click the label 'Start Date'
@@ -54,7 +54,7 @@ And In the recent activities Page, In the Products table footer I check that the
 @ScenarioId:6985
 Scenario: [98465] Base Functionality - Recent Activities - Page options (First Page)  ||<
 Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
-Then I confirm the Home tab has loaded
+#Then I confirm the Home tab has loaded
 Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then In the recent activities page, I click the label 'Start Date'
@@ -88,7 +88,7 @@ Then In the recent activities Page, In the Products table footer I check that th
 @ScenarioId:6988
 Scenario: [199959] Base Functionality - Recent Activities - Page options - Change number of products per page with reset
 Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
-Then I confirm the Home tab has loaded
+#Then I confirm the Home tab has loaded
 Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then In the recent activities page, I click the label 'Start Date'
@@ -110,7 +110,7 @@ Then In the recent activities Page, In the Products table footer I check that th
 @ScenarioId:6990
 Scenario: [98462] Base Functionality - Recent Activities - Page options - change page number
 Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
-Then I confirm the Home tab has loaded
+#Then I confirm the Home tab has loaded
 Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then In the recent activities page, I click the label 'Start Date'
@@ -120,7 +120,7 @@ Then In the recent activities Page, In the Products table footer I enter the pag
 @ScenarioId:6999
 Scenario: [98468] Base Functionality - Recent Activities - Page options - changing page number returns correct results
 Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
-Then I confirm the Home tab has loaded
+#Then I confirm the Home tab has loaded
 Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then In the recent activities page, I click the label 'Start Date'

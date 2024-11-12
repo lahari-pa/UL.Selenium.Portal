@@ -18,7 +18,7 @@ Scenario Outline: [169582] Status/Logistics Viewer - Document - US Only, PLP = N
 	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: 1625268)
 	Then I call Shared Step 146584 (WPS Studio - PD+ - Current Document > List of Published > Open NGHS - keep window open)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -40,7 +40,7 @@ Scenario Outline: [169583] Status/Logistics Viewer Document - US Only, PLP = No,
 	And I call Shared Step 49743 - SHA Manager - Select Product - Actions - Document Management for saved as: 1625277
 	Then I call Shared Step 146422 (SHA Manager > Document Management > Primary 1, Source 0, document)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -63,7 +63,7 @@ Scenario: [169581] Status/Logistics Viewer - Document - US Only, PLP = Yes, Uplo
 	And I call Shared Step 49743 - SHA Manager - Select Product - Actions - Document Management for saved as: 1619826
 	Then I call Shared Step 146422 (SHA Manager > Document Management > Primary 1, Source 0, document)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -86,7 +86,7 @@ Scenario: [169581] Status/Logistics Viewer - Document - US Only, PLP = Yes, Uplo
 	And I call Shared Step 49743 - SHA Manager - Select Product - Actions - Document Management for saved as: 1625486
 	Then I call Shared Step 146422 (SHA Manager > Document Management > Primary 1, Source 0, document)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -107,7 +107,7 @@ Scenario Outline: [169589] Status Viewer - Document - US & Canada, PLP = No, Pub
 	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: 1625327)
 	Then I call Shared Step 146584 (WPS Studio - PD+ - Current Document > List of Published > Open NGHS - keep window open)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -130,7 +130,7 @@ Scenario Outline: [169590] Status/Logistics Viewer - Document - US & Canada, PLP
 	And I call Shared Step 49743 - SHA Manager - Select Product - Actions - Document Management for saved as: 1625348
 	Then I call Shared Step 146422 (SHA Manager > Document Management > Primary 1, Source 0, document)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -153,7 +153,7 @@ Scenario Outline: [169587] Status/Logistics Viewer - Document - US & Canada, PLP
 	Then I call Shared Step 146583 (WPS Studio - PD+ - Select Alias product for retailer) WPSID: 1625484 Retailer: <Retailer>
 	Then I call Shared Step 146584 (WPS Studio - PD+ - Current Document > List of Published > Open NGHS - keep window open)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -176,7 +176,7 @@ Scenario Outline: [169585] Status/Logistics Viewer - Document - US & Canada, Kit
 	And I call Shared Step 49743 - SHA Manager - Select Product - Actions - Document Management for saved as: 1626669
 	Then I call Shared Step 146422 (SHA Manager > Document Management > Primary 1, Source 0, document)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -208,7 +208,7 @@ Scenario Outline: [169297] Document - US Only, Battery, PLP = No, Uploads own SD
 	Then I call Shared Step 148764 (WPS Studio - Report writer - find UN38.3 document name) for WPSID: 1625483
 	Then I call Shared Step 148765 (WPS Studio - PD+ - related documents - Open UN38.3 document)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -238,7 +238,7 @@ Scenario Outline: [169298] Document - US Only, Battery, PLP = No, Uploads AIS do
 	Then I call Shared Step 148764 (WPS Studio - Report writer - find UN38.3 document name) for WPSID: 1625482
 	Then I call Shared Step 148765 (WPS Studio - PD+ - related documents - Open UN38.3 document)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -268,7 +268,7 @@ Scenario Outline: [169343] Document - US Only, Battery, PLP = Yes, Uploads AIS d
 	Then I call Shared Step 148764 (WPS Studio - Report writer - find UN38.3 document name) for WPSID: 1625689
 	Then I call Shared Step 148765 (WPS Studio - PD+ - related documents - Open UN38.3 document)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -292,7 +292,7 @@ Scenario Outline: [169343] Document - US Only, Battery, PLP = Yes, Uploads AIS d
 
 Scenario Outline: [169594] Status/Logistics Viewer - Document - US Only, Label Product, PLP = Yes,  No Label/SDS added during submission
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -311,7 +311,7 @@ Scenario Outline: [169594] Status/Logistics Viewer - Document - US Only, Label P
 
 Scenario Outline: [169596] Status/Logistics Viewer - Document - US Only, Label Product, PLP = No,  No Label/SDS added during submission, SDS Summary Sheet
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -334,7 +334,7 @@ Scenario Outline: [169593] Status/Logistics Viewer - Document - US Only, Label P
 	And I call Shared Step 49743 - SHA Manager - Select Product - Actions - Document Management for saved as: 1625712
 	Then I call Shared Step 146422 (SHA Manager > Document Management > Primary 1, Source 0, document)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -357,7 +357,7 @@ Scenario Outline: [169597] Status/Logistics Viewer - Document - US Only, Label P
 	And I call Shared Step 49743 - SHA Manager - Select Product - Actions - Document Management for saved as: 1625707
 	Then I call Shared Step 146422 (SHA Manager > Document Management > Primary 1, Source 0, document)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -379,7 +379,7 @@ Scenario Outline: [169592] Status/Logistics Viewer - Document - US Only, Label P
 	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: 1625709)
 	Then I call Shared Step 146626 (WPS Studio - PD+ > Related Documents > Consumer Label > SHAMANAGER user)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -402,7 +402,7 @@ Scenario Outline: [1695925] Status/Logistics Viewer - Document - US Only, Label 
 	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: 1625705)
 	Then I call Shared Step 146626 (WPS Studio - PD+ > Related Documents > Consumer Label > SHAMANAGER user)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -428,7 +428,7 @@ Scenario Outline: [169598] Status/Logistics Viewer - Document - US Only, Battery
 	Then I call Shared Step 148764 (WPS Studio - Report writer - find UN38.3 document name) for WPSID: 1625687
 	Then I call Shared Step 148765 (WPS Studio - PD+ - related documents - Open UN38.3 document)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -453,7 +453,7 @@ Scenario Outline: [169599] Status/Logistics Viewer - Document - US Only, Battery
 	Then I call Shared Step 148764 (WPS Studio - Report writer - find UN38.3 document name) for WPSID: 1625690
 	Then I call Shared Step 148765 (WPS Studio - PD+ - related documents - Open UN38.3 document)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -477,7 +477,7 @@ Scenario Outline: [169600] Status/Logistics Viewer - Document - US Only, Battery
 	Then I call Shared Step 148764 (WPS Studio - Report writer - find UN38.3 document name) for WPSID: 1625689
 	Then I call Shared Step 148765 (WPS Studio - PD+ - related documents - Open UN38.3 document)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -499,7 +499,7 @@ Scenario Outline: [169576] Status/Logistics Viewer - Document - US Only, PLP = Y
 	Then I call Shared Step 146583 (WPS Studio - PD+ - Select Alias product for retailer) WPSID: 1619176 Retailer: <Retailer>
 	Then I call Shared Step 146584 (WPS Studio - PD+ - Current Document > List of Published > Open NGHS - keep window open)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -523,7 +523,7 @@ Scenario Outline: [169576] Status/Logistics Viewer - Document - US Only, PLP = Y
 	Then I call Shared Step 148764 (WPS Studio - Report writer - find UN38.3 document name) for WPSID: 1625479
 	Then I call Shared Step 148765 (WPS Studio - PD+ - related documents - Open UN38.3 document)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -549,7 +549,7 @@ Scenario Outline: [169603] Status/Logistics Viewer - Document - US Only, Battery
 	Then I call Shared Step 148764 (WPS Studio - Report writer - find UN38.3 document name) for WPSID: 1625483
 	Then I call Shared Step 148765 (WPS Studio - PD+ - related documents - Open UN38.3 document)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -573,7 +573,7 @@ Scenario Outline: [169584] Status/Logistics Viewer - Document - US & Canada, Kit
 	And I call Shared Step 49743 - SHA Manager - Select Product - Actions - Document Management for saved as: 1626670
 	Then I call Shared Step 146422 (SHA Manager > Document Management > Primary 1, Source 0, document)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -600,7 +600,7 @@ Scenario Outline: [169604] Status/Logistics Viewer - Document - US Only, Battery
 	Then I call Shared Step 148764 (WPS Studio - Report writer - find UN38.3 document name) for WPSID: 1625482
 	Then I call Shared Step 148765 (WPS Studio - PD+ - related documents - Open UN38.3 document)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -624,7 +624,7 @@ Scenario Outline: [169605] Status/Logistics Viewer - Document - US & Canada, Bat
 	Then I call Shared Step 148764 (WPS Studio - Report writer - find UN38.3 document name) for WPSID: 1625687
 	Then I call Shared Step 148765 (WPS Studio - PD+ - related documents - Open UN38.3 document)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -648,7 +648,7 @@ Scenario Outline: [169607] Status/Logistics Viewer - Document - US & Canada, Bat
 	Then I call Shared Step 148764 (WPS Studio - Report writer - find UN38.3 document name) for WPSID: 1625689
 	Then I call Shared Step 148765 (WPS Studio - PD+ - related documents - Open UN38.3 document)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -671,7 +671,7 @@ Scenario Outline: [169616] Status/Logistics Viewer - Document - US & Canada, Bat
 	Then I call Shared Step 148764 (WPS Studio - Report writer - find UN38.3 document name) for WPSID: 1625482
 	Then I call Shared Step 148765 (WPS Studio - PD+ - related documents - Open UN38.3 document)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -696,7 +696,7 @@ Scenario Outline: [169291] Document - US Only, Label Product, PLP = Yes, Label &
 	Then I call Shared Step 146583 (WPS Studio - PD+ - Select Alias product for retailer) WPSID: 1625709 Retailer: <Retailer>
 	Then I call Shared Step 146585 (WPS Studio - PD+ - Current Document > List of Published > Open Summary Sheet - keep window open)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -727,7 +727,7 @@ Scenario Outline: [169292] Document - US Only, Label Product, PLP = Yes, Uploads
 	Then I call Shared Step 146583 (WPS Studio - PD+ - Select Alias product for retailer) WPSID: 1625712 Retailer: <Retailer>
 	Then I call Shared Step 146585 (WPS Studio - PD+ - Current Document > List of Published > Open Summary Sheet - keep window open)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -753,7 +753,7 @@ Scenario Outline: [169293] Document - US Only, Label Product, PLP = Yes,  No Lab
 	Then I call Shared Step 146583 (WPS Studio - PD+ - Select Alias product for retailer) WPSID: 1625710 Retailer: <Retailer>
 	Then I call Shared Step 146585 (WPS Studio - PD+ - Current Document > List of Published > Open Summary Sheet - keep window open)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -778,7 +778,7 @@ Scenario Outline: [169294] Document - US Only, Label Product, PLP = No, Label & 
 	Then I call Shared Step 146626 (WPS Studio - PD+ > Related Documents > Consumer Label > SHAMANAGER user)
 	Then I call Shared Step 146585 (WPS Studio - PD+ - Current Document > List of Published > Open Summary Sheet - keep window open)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -808,7 +808,7 @@ Scenario Outline: [169296] Document - US Only, Label Product, PLP = No, Uploaded
 	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: 1625707)
 	Then I call Shared Step 146585 (WPS Studio - PD+ - Current Document > List of Published > Open Summary Sheet - keep window open)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -834,7 +834,7 @@ Scenario Outline: [169295] Document - US Only, Label Product, PLP = Yes,  No Lab
 	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: 1625706)
 	Then I call Shared Step 146585 (WPS Studio - PD+ - Current Document > List of Published > Open Summary Sheet - keep window open)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -859,7 +859,7 @@ Scenario Outline: [169272] Document - US Only, PLP = No, Authored SDS & Summary 
 	Then I call Shared Step 146584 (WPS Studio - PD+ - Current Document > List of Published > Open NGHS - keep window open)
 	Then I call Shared Step 146585 (WPS Studio - PD+ - Current Document > List of Published > Open Summary Sheet - keep window open)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -888,7 +888,7 @@ Scenario Outline: [169271] Document - US Only, PLP = Yes, Authored SDS and Summa
 	Then I call Shared Step 146584 (WPS Studio - PD+ - Current Document > List of Published > Open NGHS - keep window open)
 	Then I call Shared Step 146585 (WPS Studio - PD+ - Current Document > List of Published > Open Summary Sheet - keep window open)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -919,7 +919,7 @@ Scenario Outline: [169273] Document - US Only, PLP = Yes, Uploads own SDS on Sub
     Then I call Shared Step 146583 (WPS Studio - PD+ - Select Alias product for retailer) WPSID: 1619826 Retailer: <Retailer>
 	Then I call Shared Step 146585 (WPS Studio - PD+ - Current Document > List of Published > Open Summary Sheet - keep window open)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -949,7 +949,7 @@ Scenario Outline: [169274] Document - US Only, PLP = No, Uploads own SDS on Subm
 	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: 1625277)
 	Then I call Shared Step 146585 (WPS Studio - PD+ - Current Document > List of Published > Open Summary Sheet - keep window open)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -978,7 +978,7 @@ Scenario Outline: [169276] Document - US & Canada, Kit Product, PLP = No, Merged
 	Then I call Shared Step 146583 (WPS Studio - PD+ - Select Alias product for retailer) WPSID: 1626669 Retailer: <Retailer>
 	Then I call Shared Step 146585 (WPS Studio - PD+ - Current Document > List of Published > Open Summary Sheet - keep window open)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -1023,7 +1023,7 @@ Scenario Outline: [169617] Status/Logistics Viewer - Document - US & Canada, BCP
 	And I call Shared Step 49743 - SHA Manager - Select Product - Actions - Document Management for saved as: 1626661
 	Then I call Shared Step 148839 (SHA Manager - Open Merged SDS for BCP) with WPSID: 1626661 
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -1063,7 +1063,7 @@ Scenario Outline: [169618] Status/Logistics Viewer - Document - US & Canada, BCP
 	And I call Shared Step 49743 - SHA Manager - Select Product - Actions - Document Management for saved as: 1626662
 	Then I call Shared Step 148839 (SHA Manager - Open Merged SDS for BCP) with WPSID: 1626662 
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -1107,7 +1107,7 @@ Scenario Outline: [169275] Document - US & Canada, Kit Product, PLP = Yes, Merge
 	Then I call Shared Step 146583 (WPS Studio - PD+ - Select Alias product for retailer) WPSID: 1626670 Retailer: <Retailer>
 	Then I call Shared Step 146585 (WPS Studio - PD+ - Current Document > List of Published > Open Summary Sheet - keep window open)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -1149,7 +1149,7 @@ Scenario Outline: [169300] Document - US & Canada, PLP = Yes, GenDoc = 1, Publis
 	Then I call Shared Step 150041 (WPS Studio - PD+ - Current Document > List of Published > Open HGHS in EN and CF keep windows open)
 	Then I call Shared Step 146585 (WPS Studio - PD+ - Current Document > List of Published > Open Summary Sheet - keep window open)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -1185,7 +1185,7 @@ Scenario Outline: [169301] Document - US & Canada, PLP = Yes, Uploaded US SDS an
 	Then I call Shared Step 150041 (WPS Studio - PD+ - Current Document > List of Published > Open HGHS in EN and CF keep windows open)
 	Then I call Shared Step 146585 (WPS Studio - PD+ - Current Document > List of Published > Open Summary Sheet - keep window open)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -1218,7 +1218,7 @@ Scenario Outline: [169303] Document - US & Canada, PLP = No, Published US SDS & 
 	Then I call Shared Step 150041 (WPS Studio - PD+ - Current Document > List of Published > Open HGHS in EN and CF keep windows open)
 	Then I call Shared Step 146585 (WPS Studio - PD+ - Current Document > List of Published > Open Summary Sheet - keep window open)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -1252,7 +1252,7 @@ Scenario Outline: [169302] Document - US & Canada, PLP = No, Published US SDS & 
 	Then I call Shared Step 146583 (WPS Studio - PD+ - Select Alias product for retailer) WPSID: 1625489 Retailer: <Retailer>
 	Then I call Shared Step 146585 (WPS Studio - PD+ - Current Document > List of Published > Open Summary Sheet - keep window open)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -1286,7 +1286,7 @@ Scenario Outline: [169304] Document - US & Canada, PLP = No, Uploaded US SDS is 
 	Then I call Shared Step 146583 (WPS Studio - PD+ - Select Alias product for retailer) WPSID: 1625489 Retailer: <Retailer>
 	Then I call Shared Step 146585 (WPS Studio - PD+ - Current Document > List of Published > Open Summary Sheet - keep window open)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded

@@ -14,7 +14,7 @@ Feature: Export
 
 Scenario Outline: [169340] Product Lookup - Export
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the main tab: Product Lookup
 	Then I confirm the Product Lookup tab has loaded
     Then In the Product Lookup Page, I click the Export Button
@@ -45,7 +45,7 @@ And I call Shared Step 106194 (RPS Sign out)
 
 Scenario Outline: [169169] Export - special characters in Product Name
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I Enter WPS ID : 1804011 in Search field

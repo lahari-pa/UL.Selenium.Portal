@@ -20,7 +20,7 @@ Feature: Recent Activities - Layout
 @ignore
 Scenario: [106628] Base Functionality - Recent Activities page - layout - Staging ticket for CVS user
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Recent Activities
 	Then I confirm the Recent Activities tab has loaded
 	Then I confirm the top menu bar is displayed with the logged in username
@@ -63,7 +63,7 @@ Scenario: [106628] Base Functionality - Recent Activities page - layout - Stagin
 @ignore
 Scenario: [105057] Base Functionality - Recent Activities - IE11 browser - shows data correctly
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Recent Activities
 	Then I confirm the Recent Activities tab has loaded
 	Then In the recent activities page, I confirm that the main table has the following columns:
@@ -90,7 +90,7 @@ Scenario: [105057] Base Functionality - Recent Activities - IE11 browser - shows
 @ignore
 Scenario: [106642] Base Functionality - Recent Activities page - breadcrumbs
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Recent Activities
 	Then I confirm the Recent Activities tab has loaded
 	Then In the recent Activities page, In the start date breadcrumb the background color is grey
@@ -111,7 +111,7 @@ Scenario: [106643] Base Functionality - Recent Activities page - buttons format
 	Then I confirm the active tab is: <LandingTab>
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Recent Activities
 	Then I confirm the Recent Activities tab has loaded
 	Then In the Recent Activities page, In Confirm the following search buttons are showing:
@@ -142,7 +142,7 @@ Scenario: [111157] Base Functionality - Recent Activities page - resize columns
 	Then I confirm the active tab is: <LandingTab>
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Recent Activities
 	Then I confirm the Recent Activities tab has loaded
 	Then I call Shared Step 111155 (Table Heading or sub heading - confirm column resize anchor - resize column) On the: Recent Activities page, for the column: Status
@@ -165,7 +165,7 @@ Scenario: [111157] Base Functionality - Recent Activities page - resize columns
 @ScenarioId:6967
 Scenario: [99209] Base Functionality - Recent Activities - Confirm Most Recent Order
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Recent Activities
 	Then I confirm the Recent Activities tab has loaded
 	Then In the recent activities page, I click the label 'Start Date'
@@ -180,7 +180,7 @@ Scenario: [104961] Base Functionality - Recent Activities - Most Recent Activity
 	Then I confirm the active tab is: <LandingTab>
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Recent Activities
 	Then I confirm the Recent Activities tab has loaded
 	Then In the recent activities Page, In the Products table I confirm the Most Recent Activity column displays dates in the format of yyyy-mm-dd

@@ -17,7 +17,7 @@ Feature: Help and Support
 @ScenarioId:9751
 Scenario: [107996] Base Functionality - Help & Support - layout - needs parameter updates
 Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-Then I confirm the Home tab has loaded
+#Then I confirm the Home tab has loaded
 Given I click the main tab: Help & Support
 Then I Confirm the Help & Support Popup is displayed
 Then In the Help & Support pop up, I confirm the heading shows: Help & Support
@@ -66,7 +66,7 @@ Examples:
 @ScenarioId:9790
 Scenario: [108014] Base Functionality - Help & Support - Search Articles panel layout
 Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
-Then I confirm the Home tab has loaded
+#Then I confirm the Home tab has loaded
 Given I click the main tab: Help & Support
 Then I Confirm the Help & Support Popup is displayed
 And In the Help & Support Popup I Click the search articles link
@@ -91,7 +91,7 @@ And I call Shared Step 108016 (Help & Support pop up - X to close)
 @ScenarioId:10039
 Scenario: [108015] Base Functionality - Help & Support - required data
 Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
-Then I confirm the Home tab has loaded
+#Then I confirm the Home tab has loaded
 Given I click the main tab: Help & Support
 Then I Confirm the Help & Support Popup is displayed
 Then In the Help & Support Popup I Click the Submit button

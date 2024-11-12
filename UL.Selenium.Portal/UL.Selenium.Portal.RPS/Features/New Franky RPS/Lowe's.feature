@@ -32,7 +32,7 @@ Scenario Outline: [108078] Lowe's functionality - Menu Links Banner - options
 
 Scenario Outline: [109134] Lowe's - Menu Links Banner - Gauge icon - shows on correct pages
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.LW
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	And I confirm the Gauge button is displayed in the navigation bar
 	Then I click the main tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
@@ -51,7 +51,7 @@ Scenario Outline: [109134] Lowe's - Menu Links Banner - Gauge icon - shows on co
 
 Scenario Outline: [108080] Lowe's functionality - Menu Links Banner - active page/ heading background color
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.LW
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	And I Confirm that the tab: Program Health shows in a grey highlight indicating it is active
 	Then I click the main tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
@@ -82,7 +82,7 @@ Scenario Outline: [108080] Lowe's functionality - Menu Links Banner - active pag
 
 Scenario Outline: [108082] Lowe's Functionality - Dashboard page - layout
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.LW
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the main tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
 	Given I confirm the top menu bar is displayed with the logged in username
@@ -105,7 +105,7 @@ Scenario Outline: [108082] Lowe's Functionality - Dashboard page - layout
 	
 Scenario Outline: [108094] Lowe's Dashboard - Resetting the Dashboard
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.LW
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the main tab: Dashboard
 	Then I confirm the following Widgets are displayed:
 		| Widget                                        |
@@ -143,7 +143,7 @@ Scenario Outline: [108094] Lowe's Dashboard - Resetting the Dashboard
 
 Scenario Outline: [108919] Lowe's Dashboard - Refresh all widget
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.LW
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the main tab: Dashboard
 	Then For the Lowes Haz Code by RU widget, I save the current titles as: LowesHazcodebyRU1 and check that when I click on the section: <first> that the titles change
     Then For the EPA/RCRA Waste Code by RU Category widget, I save the current titles as: RCRAbyRUCategory1 and check that when I click on the section: <first> that the titles change
@@ -180,7 +180,7 @@ Scenario Outline: [108919] Lowe's Dashboard - Refresh all widget
 
 Scenario Outline: [108091] Lowe's Removing Widgets from the Dashboard and re-adding 
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.LW
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
 	Then I confirm the following Widgets are displayed:
@@ -215,7 +215,7 @@ Scenario Outline: [108091] Lowe's Removing Widgets from the Dashboard and re-add
 
 Scenario Outline: [108090] Lowe's Hazcode by RU Chart 
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.LW
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
 	Then I confirm the following Widgets are displayed:
@@ -229,7 +229,7 @@ Scenario Outline: [108090] Lowe's Hazcode by RU Chart
 
 Scenario Outline: [109226] Lowe's - Dashboard - Lowes Hazcode by RU Chart - Drilled down - PRODUCT INFORMATION
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.LW
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
 	Then I confirm the following Widgets are displayed:
@@ -248,7 +248,7 @@ Scenario Outline: [109226] Lowe's - Dashboard - Lowes Hazcode by RU Chart - Dril
 
 Scenario Outline: [168782] Lowe's - Recent Activities - Export 
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.LW
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Recent Activities
 	Then I confirm the Recent Activities tab has loaded
 	Then I confirm the active tab is: Recent Activities

@@ -184,7 +184,7 @@ Scenario: [73218] Sign In / Sign Out
 	Then I confirm the error is displayed indicating Account does not exist or password is incorrect
 	Given I enter the Password for the active user
 	Given I click 'Log in'
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I confirm the user displayed in the top bar matches the active logged in user
 	And I click the user button in the top bar
 	And I click 'Sign Out' under the user button

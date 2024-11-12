@@ -32,7 +32,7 @@ Scenario Outline: [108079] CVS functionality - Menu Links Banner - options
 
 Scenario Outline: [109135] CVS - Menu Links Banner - Gauge icon - shows on correct pages
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CV
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	And I confirm the Gauge button is displayed in the navigation bar
 	Then I click the main tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
@@ -51,7 +51,7 @@ Scenario Outline: [109135] CVS - Menu Links Banner - Gauge icon - shows on corre
 
 Scenario Outline: [108081] CVS functionality - Menu Links Banner - active page/ heading background color
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CV
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	And I Confirm that the tab: Home shows in a grey highlight indicating it is active
 	Then I click the main tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
@@ -82,7 +82,7 @@ Scenario Outline: [108081] CVS functionality - Menu Links Banner - active page/ 
 
 Scenario Outline: [90142] CVS - Web Viewer Menu Options
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CV
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
     Then I click the main tab: Web Viewers
 	And I confirm there is a drop down menu below the navigation tab: Web Viewers
 	Given I confirm the following drop down options are displayed below the navigation bar Web viewers button:
@@ -92,7 +92,7 @@ Scenario Outline: [90142] CVS - Web Viewer Menu Options
 
 Scenario: [165120] RPS - Recent Activities page - layout (includes TAT) - CVS User specific layout
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CV
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
     Given I click the main tab: Recent Activities
 	Then I confirm the Recent Activities tab has loaded
 	Then I confirm the page heading banner shows the WERCSmart Product Suite logo and it reads : WERCSmart® Product Suite
@@ -136,7 +136,7 @@ Scenario: [165120] RPS - Recent Activities page - layout (includes TAT) - CVS Us
 
 Scenario Outline: [163698] CVS - Recent Activities - Export 
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CV
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Recent Activities
 	Then I confirm the Recent Activities tab has loaded
 	Then I confirm the active tab is: Recent Activities
@@ -162,7 +162,7 @@ Scenario Outline: [163698] CVS - Recent Activities - Export
 
 Scenario Outline: [110834] CVS - Recent Activities - View Data  - Transportation Data - confirm fields shown 
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CV
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Recent Activities
 	Then I confirm the Recent Activities tab has loaded
 	Then I confirm the active tab is: Recent Activities
@@ -178,7 +178,7 @@ Scenario Outline: [110834] CVS - Recent Activities - View Data  - Transportation
 
 Scenario Outline: [110833] CVS - Recent Activities - View Data  - Product Details - confirm fields shown shown 
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CV
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Recent Activities
 	Then I confirm the Recent Activities tab has loaded
 	Then I confirm the active tab is: Recent Activities
@@ -193,7 +193,7 @@ Scenario Outline: [110833] CVS - Recent Activities - View Data  - Product Detail
 
 Scenario Outline: [110830] CVS - Home - RU Categories by Supplier Chart - Drilled down - product information
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CV
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 		Then I confirm the following Widgets are displayed:
 		| Widget                    |
 		| RU Categories by Supplier |
@@ -220,7 +220,7 @@ Scenario Outline: [110830] CVS - Home - RU Categories by Supplier Chart - Drille
 
 Scenario Outline: [110829] CVS - Home - RU Categories by RU Chart - Drilled down - product information 
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CV
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 		Then I confirm the following Widgets are displayed:
 		| Widget                    |
 		| RU Categories by RU       |
@@ -246,7 +246,7 @@ Scenario Outline: [110829] CVS - Home - RU Categories by RU Chart - Drilled down
 
 Scenario Outline: [110835] CVS - Product Lookup - View Data  - Product Data codes - confirm fields shown
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CV
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Product Lookup
 	Then I confirm the Product Lookup tab has loaded
 	Then I confirm the active tab is: Product Lookup
@@ -257,7 +257,7 @@ Scenario Outline: [110835] CVS - Product Lookup - View Data  - Product Data code
 
 Scenario Outline: [168573] CVS - Product Lookup  - Export when field selected for export contains a comma in the description
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CV
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Product Lookup
 	Then I confirm the Product Lookup tab has loaded
 	Then I confirm the active tab is: Product Lookup

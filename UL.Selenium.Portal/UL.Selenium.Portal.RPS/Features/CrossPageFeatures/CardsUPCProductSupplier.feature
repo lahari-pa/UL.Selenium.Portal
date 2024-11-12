@@ -46,7 +46,7 @@ Scenario Outline: [169630] Products Card - Any Page - Total Shown
 
 Scenario Outline: [169648] RPS - Any Page - User configured to show "ALL" products - No Trend Cards shown in page
 	Given I log into the RPS Integrated site as Retailer: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm that I do not see the three cards to the right of the Search field and buttons

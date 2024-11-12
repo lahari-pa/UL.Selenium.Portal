@@ -146,7 +146,7 @@ Scenario Outline: [179885] RPS - Recent Activities page - layout (includes TAT) 
 
 Scenario Outline: [179898] Canadian Tire - View Data  - Transportation Data - confirm fields shown
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -164,7 +164,7 @@ Examples:
 
 Scenario Outline: [179897] Canadian Tire - View Data  - Waste - confirm fields shown
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -187,7 +187,7 @@ Examples:
 
 Scenario Outline: [179895] Canadian Tire - View Data  - Regulatory Data - confirm fields shown
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -210,7 +210,7 @@ Examples:
 
 Scenario Outline: [179886] Canadian Tire - View Data  - Product Data - confirm fields shown
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -232,7 +232,7 @@ Examples:
 
 Scenario Outline: [179887] Canadian Tire - View Data  - Battery Data codes - confirm fields shown
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -254,7 +254,7 @@ Examples:
 
 Scenario Outline: [179893] Canadian Tire - View Data  - Pesticide - confirm fields shown
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded

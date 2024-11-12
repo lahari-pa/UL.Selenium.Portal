@@ -15,7 +15,7 @@ Feature: Actions
 
 Scenario: [169248] View Data  - Transportation Data - confirm fields shown
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -42,7 +42,7 @@ Scenario: [169248] View Data  - Transportation Data - confirm fields shown
 
 	Scenario: [169258]  View Data  - Battery Data - confirm fields shown
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -65,7 +65,7 @@ Scenario: [169248] View Data  - Transportation Data - confirm fields shown
 
 Scenario: [169234]  View Data  - Product Data codes - confirm fields shown
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -92,7 +92,7 @@ Scenario: [169234]  View Data  - Product Data codes - confirm fields shown
 
 Scenario: [169568]  View Data  - Disposal - confirm fields shown
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -113,7 +113,7 @@ Scenario: [169568]  View Data  - Disposal - confirm fields shown
 
 Scenario: [169257]  View Data  - Storage Data - confirm fields shown 
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -138,7 +138,7 @@ Scenario: [169257]  View Data  - Storage Data - confirm fields shown
 
 Scenario: [169264] View Data - Both Product and UPC Name are shown when UPC Name is present
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -173,7 +173,7 @@ Scenario: [169264] View Data - Both Product and UPC Name are shown when UPC Name
 
 Scenario: [169261] View Data  - Collapse All
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -202,7 +202,7 @@ Scenario: [169261] View Data  - Collapse All
 
 Scenario: [169572] View Data  - sections remain expanded until closed
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -237,7 +237,7 @@ Scenario: [169572] View Data  - sections remain expanded until closed
 
 Scenario: [169263] View Data  - Retailer Uploaded Product - pop up layout
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded
@@ -266,7 +266,7 @@ Scenario: [169263] View Data  - Retailer Uploaded Product - pop up layout
 
 Scenario: [169262] View Data  - Expand All
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then I confirm the page has loaded

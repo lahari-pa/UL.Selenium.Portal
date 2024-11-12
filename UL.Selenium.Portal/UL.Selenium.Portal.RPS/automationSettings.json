@@ -19,9 +19,9 @@
   "TReVorSettings": {
     "ApiEndpoint": "https://trevor.global.ul.com/api/",
     "LinkedSoftwareId": 21,
-    "SoftwareBranch": "Staging-New",
+    "SoftwareBranch": "Staging",
     "BuildOperationSettings": {
-      "PerformBuildOperations": true
+      "PerformBuildOperations": false
     }
   }
 }
