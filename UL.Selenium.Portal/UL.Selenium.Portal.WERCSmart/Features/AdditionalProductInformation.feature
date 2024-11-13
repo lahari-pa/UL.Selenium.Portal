@@ -258,42 +258,45 @@ Scenario: [211384] Product Information Screen - General Validation for N, P, K, 
 Scenario: [217076] Product Information Screen - Error Messages for NPK and Slow Release Agent
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then the WERCSmart homepage should load
-	Then I click the Add Product icon in the Navigation Pane
-	And the Product Editor page should be loaded
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-
-	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
+	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Fertilizer
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Fertilizer
+	Then in the The Product page, I click Continue
 	Then I save the product information as: TestCase217076
 	Given I should see the Product Information Page
-	And I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
-	Given I set the Does the product contain fertilizer (N, P, K) option to: Yes
-	Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
-	Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No
-	Given I set the Product is a Retailer's Private Label or Brand option to: No
-	Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
-	Then I click continue
-	Then a Warning popup dialog should appear with the message: The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.	
-	Then If a modal dialog opens I close it
-	Then I should see an error message: You have indicated the product is a type that may contain, or is, a fertilizer. Be sure to provide percentages for Nitrogen, Phosphates, Potassium and Slow-Release Agent. If there is no Slow-Release Agent in the product, you must enter "0" as the percentage.
-	And I see the following sections
-		| Section                       |
-		| Phosphates /Phosphorous (“P”) |
-		| Nitrogen /Nitrates (“N”)      |
-		| Potassium(“K”)                |
-		| Slow-Release Agent            |
-	Then I set the Phosphates /Phosphorous (“P”) field to: 20.85
-	Then I set the Nitrogen /Nitrates (“N”) field to: 0
-	Then I set the Potassium(“K”) field to: 100
-	Then I set the Slow-Release Agent field to: 35.75
-	Then I click continue
-	Then a Warning popup dialog should appear with the message: The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.	
-	Then I should see an error message: You have indicated the product contains a Slow Release Agent but no Nitrogen/Nitrates (N). Nitrogen/Nitrates (N) is required when Slow Release Agent is present.
-	Then I set the Nitrogen /Nitrates (“N”) field to: 12.89
-	Then I click continue
-	Then a Warning popup dialog should appear with the message: The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.	
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
+	Then In the Product Information Section, set the option in section: 'Does the product contain fertilizer (N, P, K)?' to: Yes
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+	Then In the Product Information Section, a warning pop-up should be displayed with text: 'The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.'
+	Then In the Product Information Section Section, in Warning modal window click 'Ok' button
+	#Then In the Product Information Section Section, in Warning modal window click 'X' button
+	Then In the Product Information Section, the section: 'Nitrogen /Nitrates (“N”)' should be showing error message: You have indicated the product is a type that may contain, or is, a fertilizer. Be sure to provide percentages for Nitrogen, Phosphates, Potassium and Slow-Release Agent. If there is no Slow-Release Agent in the product, you must enter "0" as the percentage.
+	Then In the Product Information Section, the section: 'Phosphates /Phosphorous (“P”)' should be showing error message: You have indicated the product is a type that may contain, or is, a fertilizer. Be sure to provide percentages for Nitrogen, Phosphates, Potassium and Slow-Release Agent. If there is no Slow-Release Agent in the product, you must enter "0" as the percentage.
+	Then In the Product Information Section, the section: 'Potassium(“K”)' should be showing error message: You have indicated the product is a type that may contain, or is, a fertilizer. Be sure to provide percentages for Nitrogen, Phosphates, Potassium and Slow-Release Agent. If there is no Slow-Release Agent in the product, you must enter "0" as the percentage.
+	Then In the Product Information Section, the section: 'Slow-Release Agent' should be showing error message: You have indicated the product is a type that may contain, or is, a fertilizer. Be sure to provide percentages for Nitrogen, Phosphates, Potassium and Slow-Release Agent. If there is no Slow-Release Agent in the product, you must enter "0" as the percentage.
+	Then In the Product Information Section, set the option in section: 'Nitrogen /Nitrates (“N”)' to: 0
+	Then In the Product Information Section, set the option in section: 'Phosphates /Phosphorous (“P”)' to: 20.85
+	Then In the Product Information Section, set the option in section: 'Potassium(“K”)' to: 100
+	Then In the Product Information Section, set the option in section: 'Slow-Release Agent' to: 35.75
+	Then in the Product Information page I click Continue
+	Then In the Product Information Section, a warning pop-up should be displayed with text: 'The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.'
+	Then In the Product Information Section Section, in Warning modal window click 'Ok' button
+	Then In the Product Information Section, the section: 'Nitrogen /Nitrates (“N”)' should be showing error message: You have indicated the product contains a Slow Release Agent but no Nitrogen/Nitrates (N). Nitrogen/Nitrates (N) is required when Slow Release Agent is present.
+	Then In the Product Information Section, set the option in section: 'Nitrogen /Nitrates (“N”)' to: 12.89
+	Then In the Product Information Section, the section: 'Nitrogen /Nitrates (“N”)' should not be showing error message: You have indicated the product contains a Slow Release Agent but no Nitrogen/Nitrates (N). Nitrogen/Nitrates (N) is required when Slow Release Agent is present.
+	Then in the Product Information page I click Continue
+	Then In the Product Information Section, a warning pop-up should be displayed with text: 'The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.'
+	Then In the Product Information Section Section, in Warning modal window click 'Ok' button
 	Then I should see the Physical and Chemical Properties Page
 	Then I click the My Products icon in the Navigation Pane
 	Given I delete the product: TestCase217076
