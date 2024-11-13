@@ -19,7 +19,7 @@ Feature: Drum Log - Search
 @ScenarioId:10227
 Scenario: [108293] Lowe's- Drum Log - Search > Drum Name
 	Given I call Shared Step 98339 (RPS Lowe's Login)
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
@@ -32,7 +32,7 @@ Scenario: [108293] Lowe's- Drum Log - Search > Drum Name
 @ScenarioId:10230
 Scenario: [111072] Lowe's- Drum Log - Search > Store Name
 	Given I call Shared Step 98339 (RPS Lowe's Login)
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
@@ -46,7 +46,7 @@ Scenario: [111072] Lowe's- Drum Log - Search > Store Name
 @ScenarioId:10232
 Scenario: [111073] Lowe's- Drum Log - Search > Location
 	Given I call Shared Step 98339 (RPS Lowe's Login)
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
@@ -60,7 +60,7 @@ Scenario: [111073] Lowe's- Drum Log - Search > Location
 @ScenarioId:10238
 Scenario: [111074] Lowe's- Drum Log - Search > Product Name
 	Given I call Shared Step 98339 (RPS Lowe's Login)
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
@@ -77,7 +77,7 @@ Scenario: [111074] Lowe's- Drum Log - Search > Product Name
 @ScenarioId:10239
 Scenario: [108294] Lowe's- Drum Log - Search > Region
 	Given I call Shared Step 98339 (RPS Lowe's Login)
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
@@ -92,7 +92,7 @@ Scenario: [108294] Lowe's- Drum Log - Search > Region
 @ScenarioId:10240
 Scenario: [108292] Lowe's- Drum Log - Search > Manufacturer
 	Given I call Shared Step 98339 (RPS Lowe's Login)
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log

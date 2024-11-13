@@ -16,8 +16,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool Wait_for_load()
 		{
-			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"), 5);
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
+			IWebElement frame = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//iframe"), 5);
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
 			return base.WaitForContainerToBeVisible();
 		}
 

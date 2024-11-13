@@ -2690,14 +2690,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[RegexStepDefinition(@"I confirm that a new Notice of Adoption Article tab opens and navigate to it")]
 		public void ConfirmThatANewTabOpensAndNavigateToIt()
 		{
-			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			string currentHandle = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
 			UL.Automation.ReqnrollHelpers.Classes.Context.AddToContext("MainWindowHandle", currentHandle);
-			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			ReadOnlyCollection<string> allHandles = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			foreach (string handle in allHandles)
 			{
 				Report.Info("Switching tab");
-				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
-				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h1[contains(text(),'Notice of Adoption Article')]"), 2) != null)
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle);
+				if (SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//h1[contains(text(),'Notice of Adoption Article')]"), 2) != null)
 				{
 					Report.Success("The Notice of Adoption Article page opened in a new tab. Successfully switched to that tab.");
 					Report.Screenshot();
@@ -2716,7 +2716,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			foreach (string url in OpenBrowsers)
 			{
 				SeleniumBrowser.SwitchToTabWithURL(url);
-				if (SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h1[contains(text(),'Notice of Adoption Article')]"), 2) != null)
+				if (SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//h1[contains(text(),'Notice of Adoption Article')]"), 2) != null)
 				{
 					Report.IsTrue(SeleniumBrowser.CloseTabWithURL(url), "Failed to close tab with url: " + url,
 										"Closed tab with url: " + url);

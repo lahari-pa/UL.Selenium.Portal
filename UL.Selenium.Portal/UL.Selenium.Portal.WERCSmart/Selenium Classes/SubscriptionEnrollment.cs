@@ -113,7 +113,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool RefreshContainerElement()
 		{
-			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.Id("enrollment"), 2);
+			this.containerElement = SeleniumWebDriver.CurrentDriver.FindElement(By.Id("enrollment"), 2);
 			return this.containerElement != null;
 		}
 
@@ -125,7 +125,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool HoverOverInformationElement(string label)
 		{
 			IWebElement el = this.containerElement.FindElement(By.XPath(".//label[starts-with(text(),'" + label + "')]//i[contains(@class,'info-circle')]"), 2);
-			var actions = new Actions(SeleniumBrowser.WebBrowser);
+			var actions = new Actions(SeleniumWebDriver.CurrentDriver);
 			actions.MoveToElement(el).Build().Perform();
 			Delay.Seconds(Delay.SpeedFactor * 3);
 			return true;
@@ -394,7 +394,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> GetAllPlanNames()
 		{
-			return SeleniumBrowser.WebBrowser
+			return SeleniumWebDriver.CurrentDriver
 				.FindElements(By.XPath(".//div[contains(@class, 'subscription')]/div[contains(@class, 'heading')]/label"), 2)
 				.Select(x => this.Extract_Before_Return(x.Text)).ToList();
 
@@ -498,7 +498,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						{
 							//refinding because link text is missing
 							IWebElement refoundLink =
-								SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[contains(@href, '" + link.GetAttribute("href") + "')]"), 2);
+								SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//a[contains(@href, '" + link.GetAttribute("href") + "')]"), 2);
 							Report.Info("Adding new link: " + link.Text + " " + refoundLink.Text);
 							thisInfoPoint.Info_Links.Add(new Info_Link(refoundLink.Text, refoundLink.GetAttribute("href")));
 						}

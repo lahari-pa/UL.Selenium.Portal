@@ -19,8 +19,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			//get the window
 			StudioUtilites.SwitchToWindow("Wercs Studio");
-			SeleniumBrowser.WebBrowser.SwitchTo().DefaultContent();
-			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+			SeleniumWebDriver.CurrentDriver.SwitchTo().DefaultContent();
+			this.containerElement = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(BasePath));
 			return base.Wait_for_load(30);
 		}
 
@@ -28,7 +28,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		//My Wercs, UL Secure Connect, Authoring, Management, Distribution, System, Window, Help
 		public bool ClickTopMenuItem(string item)
 		{
-			IWebElement navBar = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='navmenu']"));
+			IWebElement navBar = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//div[@id='navmenu']"));
 			navBar.ScrollElementIntoView();
 			ReadOnlyCollection<IWebElement> ListOfOptions = this.containerElement.FindElements(By.XPath(".//li//a"));
 			return ListOfOptions.FirstOrDefault(x => x.Text.Trim().ToLower() == item.Trim().ToLower()).TryClick();
@@ -38,7 +38,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickSubMenu(string menuItem, string submenuItem)
 		{
 
-			IWebElement navBar = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='navmenu']"));
+			IWebElement navBar = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//div[@id='navmenu']"));
 			navBar.ScrollElementIntoView();
 			ReadOnlyCollection<IWebElement> ListOfOptions = this.containerElement.FindElements(By.XPath(".//li//a"));
 			IWebElement topMenuItem = ListOfOptions.FirstOrDefault(x => x.Text.Trim().ToLower() == menuItem.Trim().ToLower());

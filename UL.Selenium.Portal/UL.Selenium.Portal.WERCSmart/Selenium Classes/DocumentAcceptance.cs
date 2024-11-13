@@ -171,12 +171,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool DocumentWindowOpen(string option)
 		{
 			Report.Info("Switch to Wercs Document window");
-			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			string currentHandle = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
 			Context.AddToContext("MainWindowHandle", currentHandle);
-			System.Collections.ObjectModel.ReadOnlyCollection<string> handles = SeleniumBrowser.WebBrowser.WindowHandles;
+			System.Collections.ObjectModel.ReadOnlyCollection<string> handles = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			foreach (string handle in handles)
 			{
-				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Url.Contains(option))
+				if (SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle).Url.Contains(option))
 				{
 					return true;
 				}
@@ -187,14 +187,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool CloseDocumentWindow(string option)
 		{
 			Report.Info("Close the document window");
-			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			string currentHandle = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
 			Context.AddToContext("MainWindowHandle", currentHandle);
-			System.Collections.ObjectModel.ReadOnlyCollection<string> handles = SeleniumBrowser.WebBrowser.WindowHandles;
+			System.Collections.ObjectModel.ReadOnlyCollection<string> handles = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			foreach (string handle in handles)
 			{
-				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Url.Contains(option))
+				if (SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle).Url.Contains(option))
 				{
-					SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Close();
+					SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle).Close();
 					return true;
 				}
 			}
@@ -203,10 +203,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool SwitchToMainWindow()
 		{
-			ReadOnlyCollection<string> handles = SeleniumBrowser.WebBrowser.WindowHandles;
+			ReadOnlyCollection<string> handles = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			foreach (string handle in handles)
 			{
-				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Url.Contains("WercSmart"))
+				if (SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle).Url.Contains("WercSmart"))
 				{
 					return true;
 				}
@@ -218,7 +218,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ConfirmDocumentAcceptancePageIsShowing()
 		{
-			IWebElement DocumentAcceptancePageTitle = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@class='page-inner-header affix-top']//h2[text()='Document Acceptance']"), 2);
+			IWebElement DocumentAcceptancePageTitle = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@class='page-inner-header affix-top']//h2[text()='Document Acceptance']"), 2);
 			if (DocumentAcceptancePageTitle == null)
 			{
 				return false;

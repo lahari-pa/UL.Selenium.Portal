@@ -19,11 +19,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			//get the window
 			StudioUtilites.SwitchToWindow("Wercs Studio");
-			SeleniumBrowser.WebBrowser.SwitchTo().DefaultContent();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().DefaultContent();
 			IWebElement frame =
-				SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='Widget1']//iframe"));
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
-			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+				SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//div[@id='Widget1']//iframe"));
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
+			this.containerElement = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(BasePath));
 			return base.Wait_for_load(30);
 		}
 

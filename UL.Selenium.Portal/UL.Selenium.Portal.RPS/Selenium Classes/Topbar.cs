@@ -51,7 +51,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
 		public bool BrandNameDisplayedInRPS()
 		{
-			IWebElement brandNameElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@class='nav-link ul-logo']"), 1);
+			IWebElement brandNameElement = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//a[@class='nav-link ul-logo']"), 1);
 
 			if (brandNameElement != null)
 			{
@@ -63,7 +63,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
 		public bool ClickBrandNameInRPS()
 		{
-			IWebElement brandNameElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@class='navbar-brand brand']"), 1);
+			IWebElement brandNameElement = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//a[@class='navbar-brand brand']"), 1);
 			return brandNameElement.TryClick();
 		}
 
@@ -108,7 +108,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
 		public void RefocusGraph()
 		{
-			var action = new Actions(SeleniumBrowser.WebBrowser);
+			var action = new Actions(SeleniumWebDriver.CurrentDriver);
 			try
 			{
 				action.MoveToElement(ContainerElement).Perform();

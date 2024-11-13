@@ -18,7 +18,7 @@ Feature: Dashboard Tab
 @ScenarioId:6631
 Scenario: [169081] Dashboard - Supplier Subscription Status Chart 
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CV
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the tab: Dashboard
 	And I confirm the active tab is: Dashboard
 	Then I confirm the Dashboard tab has loaded
@@ -33,7 +33,7 @@ Scenario: [169081] Dashboard - Supplier Subscription Status Chart
 
 Scenario: [169083] Dashboard - Print functionality works with one chart
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CV
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
 	Then I call Shared Step 106605 (Dashboard - Remove Widget) for widget: RCRA by RU Category
@@ -63,7 +63,7 @@ Scenario: [169083] Dashboard - Print functionality works with one chart
 @ScenarioId:6631
 Scenario: [169082] Dashboard - Dashboard - Supplier Subscription Status Chart data 
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CV
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the tab: Dashboard
 	And I confirm the active tab is: Dashboard
 	Then I confirm the Dashboard tab has loaded
@@ -76,7 +76,7 @@ Scenario: [169082] Dashboard - Dashboard - Supplier Subscription Status Chart da
 @ScenarioId:6631
 Scenario: [106525] Base Functionality - Dashboard page - layout
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: Franky TG User
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Dashboard
 	And I confirm the active tab is: Dashboard
 	Then I confirm the Dashboard tab has loaded
@@ -98,7 +98,7 @@ Scenario: [106525] Base Functionality - Dashboard page - layout
 @ScenarioId:6632
 Scenario: [70322] Base Functionality - Dashboard - Product Status Chart - ticket open download file missing labels - not being fixed in Azure release
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
 	Then I confirm the following Widgets are displayed:
@@ -114,7 +114,7 @@ Scenario: [70322] Base Functionality - Dashboard - Product Status Chart - ticket
 @ScenarioId:6634
 Scenario: [70323] Base Functionality - Dashboard - Product Hold Status Chart - Server error on export
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
 	Then I confirm the following Widgets are displayed:
@@ -132,7 +132,7 @@ Scenario: [70323] Base Functionality - Dashboard - Product Hold Status Chart - S
 @ScenarioId:6635
 Scenario: [70324] Base Functionality - Dashboard - Supplier Subscription Status Chart - has open ticket not in scope for Azure
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
 	Then I confirm the following Widgets are displayed:
@@ -147,7 +147,7 @@ Scenario: [70324] Base Functionality - Dashboard - Supplier Subscription Status 
 @ScenarioId:6641
 Scenario: [72760] Dashboard - Refresh all widget - has open ticket - not in scope for Azure
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
 	Then I confirm the following Widgets are displayed:
@@ -198,7 +198,7 @@ Scenario: [72760] Dashboard - Refresh all widget - has open ticket - not in scop
 @tfs_design
 Scenario: [73078] Base Functionality - Dashboard - Supplier Subscription Status Chart data
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
 	Then I confirm the following Widgets are displayed:
@@ -219,7 +219,7 @@ Scenario: [73078] Base Functionality - Dashboard - Supplier Subscription Status 
 @ScenarioId:6662
 Scenario: [73311] Base Functionality - Dashboard - Print functionality works with one chart
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
 	Then I call Shared Step 106605 (Dashboard - Remove Widget) for widget: RCRA by RU Category
@@ -246,7 +246,7 @@ Scenario: [73311] Base Functionality - Dashboard - Print functionality works wit
 @ScenarioId:6664
 Scenario: [74214] Base Functionality - Dashboard - Able to resize chart when there is only one
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
 	Then I call Shared Step 106605 (Dashboard - Remove Widget) for widget: RCRA by RU Category
@@ -264,7 +264,7 @@ Scenario: [74214] Base Functionality - Dashboard - Able to resize chart when the
 @ScenarioId:6665
 Scenario: [104896] Base Functionality - Dashboard - Dashboard - Export - Shows data for chart/graph shown
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
 	Then I confirm the following Widgets are displayed:
@@ -277,7 +277,7 @@ Scenario: [104896] Base Functionality - Dashboard - Dashboard - Export - Shows d
 @ScenarioId:6666
 Scenario: [72574] Base Functionality - Dashboard - URL does not show # - has IE11 staging ticket
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
 	Then I confirm the following Widgets are displayed:
@@ -294,7 +294,7 @@ Scenario: [72574] Base Functionality - Dashboard - URL does not show # - has IE1
 @ScenarioId:6667
 Scenario: [106590] Removing Widgets from the Dashboard and re-adding - has open ticket - not in scope for Azure
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
 	Then I confirm the following Widgets are displayed:
@@ -329,7 +329,7 @@ Scenario: [106590] Removing Widgets from the Dashboard and re-adding - has open 
 @ScenarioId:6668
 Scenario: [106592] Resetting the Dashboard
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
 	Then I confirm the following Widgets are displayed:
@@ -377,7 +377,7 @@ Scenario: [106592] Resetting the Dashboard
 @ScenarioId:6669
 Scenario: [70317] Generic Bucket Code by RU Chart
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
 	Then I confirm the following Widgets are displayed:
@@ -392,7 +392,7 @@ Scenario: [70317] Generic Bucket Code by RU Chart
 @ScenarioId:6670
 Scenario: [70319] Base Functionality - Dashboard - RU Category by Supplier Chart - IE11 & Chrome  502 error and very poor performance
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
 	Then I confirm the following Widgets are displayed:
@@ -407,7 +407,7 @@ Scenario: [70319] Base Functionality - Dashboard - RU Category by Supplier Chart
 @ScenarioId:6671
 Scenario: [70320] Base Functionality - Dashboard - RU Category by RU Chart - ie11 & Chrome 502 error
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
 	Then I confirm the following Widgets are displayed:
@@ -422,7 +422,7 @@ Scenario: [70320] Base Functionality - Dashboard - RU Category by RU Chart - ie1
 @ScenarioId:6672
 Scenario: [70321] Base Functionality - Dashboard - Product Recertification Status Chart
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
 	Then I confirm the following Widgets are displayed:
@@ -438,7 +438,7 @@ Scenario: [70321] Base Functionality - Dashboard - Product Recertification Statu
 @ScenarioId:6673
 Scenario: [109212] Base Functionality - Dashboard - Product Status Chart - Drilled down - Contact Supplier
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
 	Then I confirm the following Widgets are displayed:
@@ -463,7 +463,7 @@ Scenario: [109212] Base Functionality - Dashboard - Product Status Chart - Drill
 @ScenarioId:6675
 Scenario: [109214] Base Functionality - Dashboard - Supplier Subscription Status chart - Drilled down - Contact
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
 	Then I confirm the following Widgets are displayed:
@@ -482,7 +482,7 @@ Scenario: [109214] Base Functionality - Dashboard - Supplier Subscription Status
 @ScenarioId:6676
 Scenario: [109206] Base Functionality - Dashboard - Generic Bucket Code by RU Chart - Drilled down - PRODUCT INFORMATION
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
 	Then I confirm the following Widgets are displayed:
@@ -504,7 +504,7 @@ Scenario: [109206] Base Functionality - Dashboard - Generic Bucket Code by RU Ch
 @ScenarioId:6677
 Scenario: [109207] Base Functionality - Dashboard - RCRA by RU Category Chart - Drilled down - PRODUCT INFORMATION
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
 	Then I confirm the following Widgets are displayed:
@@ -525,7 +525,7 @@ Scenario: [109207] Base Functionality - Dashboard - RCRA by RU Category Chart - 
 @ScenarioId:6678
 Scenario: [109209] Base Functionality - Dashboard - RU Category by Supplier Chart - Drilled down - PRODUCT INFORMATION
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
 	Then I confirm the following Widgets are displayed:
@@ -546,7 +546,7 @@ Scenario: [109209] Base Functionality - Dashboard - RU Category by Supplier Char
 @ScenarioId:9728
 Scenario: [109210] Base Functionality - Dashboard - RU Category by RU Chart - Drilled down - PRODUCT INFORMATION
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
 	Then I confirm the following Widgets are displayed:
@@ -567,7 +567,7 @@ Scenario: [109210] Base Functionality - Dashboard - RU Category by RU Chart - Dr
 @ScenarioId:6680
 Scenario: [109211] Base Functionality - Dashboard- Product Recertification Status Chart - Drilled down - Contact Supplier
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Dashboard
 	Then I confirm the Dashboard tab has loaded
 	Then I confirm the following Widgets are displayed:

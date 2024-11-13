@@ -895,7 +895,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			IWebElement pubDisSummaryspan = this.ContainerElement.FindElement(By.XPath(".//td[@id='transparency-score']/span"), 2);
 			if (pubDisSummaryspan == null)
 			{
-				pubDisSummaryspan = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[@id='transparency-score']/span"), 2);
+				pubDisSummaryspan = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//td[@id='transparency-score']/span"), 2);
 				if (pubDisSummaryspan == null)
 				{
 					Report.Error("The transparency score is not found");
@@ -921,7 +921,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				string pubDisSummary = this.ContainerElement.FindElement(By.XPath(".//td[@id='transparency-score']/span"), 2).Text;
 				if (pubDisSummary == null)
 				{
-					pubDisSummary = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[@id='transparency-score']/span"), 2).Text;
+					pubDisSummary = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//td[@id='transparency-score']/span"), 2).Text;
 				}
 				string pattern = @"([0123456789\.]*)\s\/\s([0123456789\.]*)";
 				Match regMatch = Regex.Match(pubDisSummary, pattern);
@@ -1596,7 +1596,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CloseCACleaningIngredientsPopupWindow()
 		{
-			IWebElement closeButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//h4[text()='California Cleaning Right to Know']/../following-sibling::div/following-sibling::div//button"), 2);
+			IWebElement closeButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//h4[text()='California Cleaning Right to Know']/../following-sibling::div/following-sibling::div//button"), 2);
 			return closeButton.TryClick();
 		}
 		public bool CheckForTwoErrorMessagesInPopupWithTitle(Table table, string popupTitle)

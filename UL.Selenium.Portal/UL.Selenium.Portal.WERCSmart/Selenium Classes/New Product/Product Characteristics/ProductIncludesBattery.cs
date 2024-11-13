@@ -245,7 +245,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 
 			while (emptyBatteryRowsExist)
 			{
-				ReadOnlyCollection<IWebElement> listOfManufacturerTypes = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//tbody//tr//td[" + batteryTypeIndex.ToString() + "]//select"));
+				ReadOnlyCollection<IWebElement> listOfManufacturerTypes = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(".//tbody//tr//td[" + batteryTypeIndex.ToString() + "]//select"));
 				if (listOfManufacturerTypes != null)
 				{
 					IEnumerable<IWebElement> unselectedManufacturerTypes = listOfManufacturerTypes.Where(x => x.SelectedOption() == "Choose...");

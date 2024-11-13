@@ -24,7 +24,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				IWebElement popupEditor = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 2);
+				IWebElement popupEditor = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(BasePath), 2);
 				if (popupEditor != null)
 				{
 					return true;
@@ -40,19 +40,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool WaitForPreparingReportPopup()
 		{
 			Report.Info("Switching to iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
 
 			int counter = 0;
 			while (counter < 20)
 			{
 				Report.Info("Checking to see if Preparing Report popup has disappeared. Try " + counter + ".");
-				IWebElement popup = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//div//div//span[contains(text(), 'Preparing report...')]/../.."), 10);
+				IWebElement popup = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(@"//div//div//span[contains(text(), 'Preparing report...')]/../.."), 10);
 				if (popup != null)
 				{
 					if (popup.GetCssValue("display") == "none")
 					{
 						Report.Info("Exiting iFrame");
-						SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+						SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 						return true;
 					}
 					Delay.Seconds(10);
@@ -68,20 +68,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			Report.Info("Exiting iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 			return false;
 		}
 
 		public bool ClickReport(string report)
 		{
 			Report.Info("Switching to iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
-			IWebElement reportButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//table//td[contains(text(), """ + report + @""")]"), 2);
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement reportButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(@"//table//td[contains(text(), """ + report + @""")]"), 2);
 
 			bool canClick = reportButton.TryClick();
 
 			Report.Info("Exiting iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 
 			return canClick;
 		}
@@ -89,13 +89,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickReportNoSwitchBack(string report)
 		{
 			Report.Info("Switching to iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
-			IWebElement reportButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//table//td[contains(text(), """ + report + @""")]"), 2);
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement reportButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(@"//table//td[contains(text(), """ + report + @""")]"), 2);
 
 			bool canClick = reportButton.TryClick();
 
 			Report.Info("Exiting iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 
 			return canClick;
 		}
@@ -103,20 +103,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickSubmit()
 		{
 			Report.Info("Switching to iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
-			IWebElement submitButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//input[@name='Submit']"), 2);
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement submitButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(@"//input[@name='Submit']"), 2);
 
 			bool canClick = submitButton.TryClick();
 
 			Report.Info("Exiting iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 
 			return canClick;
 		}
 
 		public bool ClickClose()
 		{
-			IWebElement closeButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//div[@id='dialog-AdvancedReports']/following-sibling::div[contains(@class, 'ui-dialog-buttonpane')]//span"));
+			IWebElement closeButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(@"//div[@id='dialog-AdvancedReports']/following-sibling::div[contains(@class, 'ui-dialog-buttonpane')]//span"));
 
 			bool canClick = closeButton.TryClick();
 
@@ -126,39 +126,39 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ConfirmTableName(string tableName)
 		{
 			Report.Info("Switching to iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
-			IWebElement tableTitle = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[@class='ui-jqgrid-title']"), 2);
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement tableTitle = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(@"//span[@class='ui-jqgrid-title']"), 2);
 			string text = tableTitle.Text;
 			Report.Info("Exiting iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 			return text == tableName;
 		}
 
 		public bool ConfirmHeader(string header)
 		{
 			Report.Info("Switching to iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
-			IList<IWebElement> foundHeaders = SeleniumBrowser.WebBrowser.FindElements(By.XPath(@"//tr[@class='ui-jqgrid-labels']//th[@id!='listAdvancedReports_Id']"), 2);
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
+			IList<IWebElement> foundHeaders = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(@"//tr[@class='ui-jqgrid-labels']//th[@id!='listAdvancedReports_Id']"), 2);
 			var headerTextList = new List<string>();
 			foreach (IWebElement foundHeader in foundHeaders)
 			{
 				headerTextList.Add(foundHeader.Text.Trim());
 			}
 			Report.Info("Exiting iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 			return headerTextList.Contains(header);
 		}
 
 		public bool ConfirmAdvancedReportingOptions(string name, string desc)
 		{
 			Report.Info("Switching to iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
 
-			IList<IWebElement> foundNames = SeleniumBrowser.WebBrowser.FindElements(By.XPath(@"//table[@id='listAdvancedReports']//tr[@class!='jqgfirstrow']//td[2]"), 2);
+			IList<IWebElement> foundNames = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(@"//table[@id='listAdvancedReports']//tr[@class!='jqgfirstrow']//td[2]"), 2);
 			var dict = new Dictionary<string, string>();
 			foreach (IWebElement foundName in foundNames)
 			{
-				IWebElement foundDescription = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//table[@id='listAdvancedReports']//tr[@class!='jqgfirstrow']//td[text()='" + foundName.Text.Trim() + @"']/following-sibling::td"), 2);
+				IWebElement foundDescription = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(@"//table[@id='listAdvancedReports']//tr[@class!='jqgfirstrow']//td[text()='" + foundName.Text.Trim() + @"']/following-sibling::td"), 2);
 				if (foundDescription != null)
 				{
 					dict.Add(foundName.Text.Trim(), foundDescription.Text.Trim());
@@ -171,7 +171,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			Report.Info("Exiting iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 
 			if (!(dict.ContainsKey(name) && dict[name] == desc))
 			{
@@ -197,14 +197,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		internal bool CheckReportDescription(string report, string description, out string actualDescription)
 		{
-			IWebDriver frame = SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebDriver frame = SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
 			IWebElement container = frame.FindElement(By.XPath(@"//*[@id='gbox_listAdvancedReports']"));
 			string path = @"//*[@id='listAdvancedReports']//td[contains(text(),'" + report + "')]//..//td[@aria-describedby='listAdvancedReports_Description']";
 
 			IWebElement tableDescription = container.FindElement(By.XPath(path), 2);
 			actualDescription = tableDescription.Text.Trim();
 
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 
 			return actualDescription == description;
 		}
@@ -212,39 +212,39 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		internal bool VerifyReportSelectable(string reportName, bool expected)
 		{
 			Report.Info("Switching to iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
-			IWebElement reportButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//table//td[contains(text(), """ + reportName + @""")]"), 2);
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement reportButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(@"//table//td[contains(text(), """ + reportName + @""")]"), 2);
 
 			bool canClick = reportButton.TryClick();
 
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 
 			return canClick == expected;
 		}
 
 		internal bool ReportDescriptionNotAvailable(string reportDescription)
 		{
-			IWebDriver frame = SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebDriver frame = SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
 			IWebElement container = frame.FindElement(By.XPath(@"//*[@id='gbox_listAdvancedReports']"));
 			string path = @"//*[@id='listAdvancedReports']//td[contains(text(),'" + reportDescription + "')]//..//td[@aria-describedby='listAdvancedReports_Description']";
 
 			IWebElement tableDescription = container.FindElement(By.XPath(path), 2);
 
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 
 			return tableDescription == null;
 		}
 
 		public bool ConfirmReportNamesAlphebeticalOrder(string order)
 		{
-			IWebDriver frame = SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebDriver frame = SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
 			IList<IWebElement> namesElems = frame.FindElements(By.XPath(@"//table[@id='listAdvancedReports']//tr[@class!='jqgfirstrow']//td[2]"), 2).ToList();
 			var names = new List<string>();
 			foreach (IWebElement nameElem in namesElems)
 			{
 				names.Add(nameElem.Text);
 			}
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 			switch (order)
 			{
 				case "abc":
@@ -259,14 +259,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ConfirmReportDescriptionsAlphabeticalOrder(string order)
 		{
-			IWebDriver frame = SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebDriver frame = SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
 			IList<IWebElement> namesElems = frame.FindElements(By.XPath(@"//table[@id='listAdvancedReports']//tr[@class!='jqgfirstrow']//td[3]"), 2).ToList();
 			var names = new List<string>();
 			foreach (IWebElement nameElem in namesElems)
 			{
 				names.Add(nameElem.Text);
 			}
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 			switch (order)
 			{
 				case "abc":
@@ -280,38 +280,38 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickReportNameHeader()
 		{
-			IWebDriver frame = SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebDriver frame = SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
 
 			IWebElement reportNameHeader = frame.FindElement(By.XPath("//div[@id='jqgh_listAdvancedReports_Name']"), 2);
 			bool canClick = reportNameHeader.TryClick();
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 			return canClick;
 		}
 
 		public bool ClickReportDescriptionHeader()
 		{
-			IWebDriver frame = SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebDriver frame = SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
 			IWebElement reportNameHeader = frame.FindElement(By.XPath("//div[@id='jqgh_listAdvancedReports_Description']"), 2);
 			bool canClick = reportNameHeader.TryClick();
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 			return canClick;
 		}
 
 		public bool CheckIfReportNameUpArrowActive(string active)
 		{
-			IWebDriver frame = SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebDriver frame = SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
 			IWebElement upArrow = frame.FindElement(By.XPath("//div[@id='jqgh_listAdvancedReports_Name']//span//span[1]"), 2);
 			bool isActive = upArrow.GetAttribute("class").Contains("ui-state-disabled");
 			switch (active)
 			{
 				case "active":
-					SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+					SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 					return !isActive;
 				case "inactive":
-					SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+					SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 					return isActive;
 				default:
-					SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+					SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 					Report.Failure("Found unexpected parameter " + active);
 					return false;
 			}
@@ -319,19 +319,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckIfReportNameDownArrowActive(string active)
 		{
-			IWebDriver frame = SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebDriver frame = SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
 			IWebElement downArrow = frame.FindElement(By.XPath("//div[@id='jqgh_listAdvancedReports_Name']//span//span[2]"), 2);
 			bool isActive = downArrow.GetAttribute("class").Contains("ui-state-disabled");
 			switch (active)
 			{
 				case "active":
-					SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+					SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 					return !isActive;
 				case "inactive":
-					SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+					SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 					return isActive;
 				default:
-					SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+					SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 					Report.Failure("Found unexpected parameter " + active);
 					return false;
 			}
@@ -339,7 +339,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckIfReportDescriptionUpArrowActive(string active)
 		{
-			IWebDriver frame = SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebDriver frame = SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
 
 			if (frame == null)
 			{
@@ -357,13 +357,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			switch (active)
 			{
 				case "active":
-					SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+					SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 					return !isActive;
 				case "inactive":
-					SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+					SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 					return isActive;
 				default:
-					SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+					SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 					Report.Failure("Found unexpected parameter " + active);
 					return false;
 			}
@@ -371,19 +371,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckIfReportDescriptionDownArrowActive(string active)
 		{
-			IWebDriver frame = SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			IWebDriver frame = SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
 			IWebElement downArrow = frame.FindElement(By.XPath("//div[@id='jqgh_listAdvancedReports_Description']//span//span[2]"), 2);
 			bool isActive = downArrow.GetAttribute("class").Contains("ui-state-disabled");
 			switch (active)
 			{
 				case "active":
-					SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+					SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 					return !isActive;
 				case "inactive":
-					SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+					SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 					return isActive;
 				default:
-					SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+					SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 					Report.Failure("Found unexpected parameter " + active);
 					return false;
 			}
@@ -398,8 +398,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Switching to iFrame");
 			Delay.Seconds(2);
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
-			IWebElement endDateField = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[text()='End Date']//ancestor::td[1]//following-sibling::td//input"), 2);
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement endDateField = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(@"//span[text()='End Date']//ancestor::td[1]//following-sibling::td//input"), 2);
 			if (endDateField == null)
 			{
 				Report.Info("Could not find the input element!");
@@ -408,7 +408,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			if(value=="NA")
 			{
 				Report.Info("Exiting iFrame");
-				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+				SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 				return true;
 			}
 			if(value== "Future")
@@ -441,7 +441,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 
 				Report.Info("Exiting iFrame");
-				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+				SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 				return matchingFutureDate;
 
 			}
@@ -462,7 +462,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			Report.Info("Exiting iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 			return matching;
 		}
 
@@ -470,8 +470,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Switching to iFrame");
 			Delay.Seconds(5);
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
-			IWebElement startDateField = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[text()='Start Date']//ancestor::td//following-sibling::td//input"), 2);
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement startDateField = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(@"//span[text()='Start Date']//ancestor::td//following-sibling::td//input"), 2);
 			if (startDateField == null)
 			{
 				Report.Info("Could not find the input element!");
@@ -496,7 +496,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			Report.Info("Exiting iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 			return matching;
 
 
@@ -505,13 +505,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ReportDescriptionIsCorrect(string reportName, string expectedText)
 		{
 			Report.Info($"Finding the Report Descritpion for: {reportName}");
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
-			IWebElement descriptionTextFoundEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath($@"//td[text()='{reportName}']//following-sibling::td"), 2);
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement descriptionTextFoundEl = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($@"//td[text()='{reportName}']//following-sibling::td"), 2);
 			string descriptionTextFoundStr = descriptionTextFoundEl.Text;
 			Report.Info($"Expected Text: {expectedText}");
 			Report.Info($"Found Text: {descriptionTextFoundStr}");
 			Report.Info("Exiting iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 			return descriptionTextFoundStr == expectedText;
 
 		}
@@ -520,8 +520,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Switching to iFrame");
 			Delay.Seconds(4);
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
-			IWebElement startDateField = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[text()='WPSID']//ancestor::td//following-sibling::td//input"), 2);
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement startDateField = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(@"//span[text()='WPSID']//ancestor::td//following-sibling::td//input"), 2);
 			if (startDateField == null)
 			{
 				Report.Info("Could not find the input element!");
@@ -541,7 +541,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			Report.Info("Exiting iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 			return matching;
 
 		}
@@ -550,9 +550,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Switching to iFrame");
 			Delay.Seconds(2);
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
-			//IWebElement retailerOption = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[text()='WPSID']//ancestor::td//following-sibling::td//input"), 2);
-			IWebElement retailerOption = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@".//span[text()='Retailer']/ancestor::td/following-sibling::td//div//select"), 2);
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
+			//IWebElement retailerOption = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(@"//span[text()='WPSID']//ancestor::td//following-sibling::td//input"), 2);
+			IWebElement retailerOption = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(@".//span[text()='Retailer']/ancestor::td/following-sibling::td//div//select"), 2);
 			if (retailerOption == null)
 			{
 				Report.Info("Failed to select Retailer from the Retialer Options drop down");
@@ -564,7 +564,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				retailerOption.Select(value);
 				string selectedOption = retailerOption.SelectedOption();
 				Report.Info("Exiting iFrame");
-				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+				SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 				return selectedOption == value;
 			}
 
@@ -578,8 +578,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Switching to iFrame");
 			Delay.Seconds(2);
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");			
-			IWebElement upcSizeField = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//*[text()='UPC Size']/parent::td//following-sibling::td//input"), 2);
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");			
+			IWebElement upcSizeField = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(@"//*[text()='UPC Size']/parent::td//following-sibling::td//input"), 2);
 			if (upcSizeField == null)
 			{
 				Report.Info("Could not find the input element!");
@@ -600,7 +600,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			Report.Info("Exiting iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 			return matching;
 
 		}
@@ -609,8 +609,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Switching to iFrame");
 			Delay.Seconds(2);
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
-			IWebElement containsAlcoholBox = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//*[text()='Contains Alcohol']/parent::td//following-sibling::td//input"), 2);
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement containsAlcoholBox = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(@"//*[text()='Contains Alcohol']/parent::td//following-sibling::td//input"), 2);
 			if (containsAlcoholBox == null)
 			{
 				Report.Info("Could not find the input element!");
@@ -621,7 +621,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Screenshot();			
 
 			Report.Info("Exiting iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 			return selected;
 		}
 
@@ -629,8 +629,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Switching to iFrame");
 			Delay.Seconds(2);
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
-			IWebElement containsWater = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//*[text()='Includes 7732-18-5 / Water']/parent::td//following-sibling::td//input"), 2);
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement containsWater = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(@"//*[text()='Includes 7732-18-5 / Water']/parent::td//following-sibling::td//input"), 2);
 			if (containsWater == null)
 			{
 				Report.Info("Could not find the input element!");
@@ -641,7 +641,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Screenshot();
 
 			Report.Info("Exiting iFrame");
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 			return selected;
 		}
 
@@ -649,14 +649,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Switching to iFrame");
 			Delay.Seconds(2);
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
-			//IWebElement retailerOption = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//span[text()='WPSID']//ancestor::td//following-sibling::td//input"), 2);
-			IWebElement recipientOption = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@".//span[text()='WERCSmart Retail Recipient Code']/ancestor::td/following-sibling::td//div//select"), 2);
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
+			//IWebElement retailerOption = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(@"//span[text()='WPSID']//ancestor::td//following-sibling::td//input"), 2);
+			IWebElement recipientOption = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(@".//span[text()='WERCSmart Retail Recipient Code']/ancestor::td/following-sibling::td//div//select"), 2);
 			if (recipientOption == null)
 			{
 				Report.Info("Failed to select The Recipient Code from the Options drop down menu");
 				Report.Info("Exiting iFrame");
-				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+				SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 				return false;
 			}
 			else
@@ -665,7 +665,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				recipientOption.Select(value);
 				var selectedOption = recipientOption.SelectedOption();
 				Report.Info("Exiting iFrame");
-				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+				SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 				return selectedOption==value;
 			}
 
@@ -692,7 +692,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool EnterStartEndDates(string start, string end)
 		{
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
 
 			IWebElement startDate = this.FindElement(By.XPath("//span[contains(text(),'Start Date')]//..//..//input"), 2);
 			IWebElement endDate = this.containerElement.FindElement(By.XPath("//span[contains(text(),'End Date')]//..//..//input"), 2);
@@ -714,7 +714,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.IsTrue(endDate.TryEnterText(end), "End date was not able to be changed", "End date entered: " + end);
 			Report.IsTrue(submitBtn.TryClick(), "Submit button was not clicked", "Submit button clicked");
 
-			//ReadOnlyCollection<IWebElement> fields = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//input"));
+			//ReadOnlyCollection<IWebElement> fields = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath("//input"));
 
 			//if (fields.Count < 2)
 			//{
@@ -729,7 +729,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			//fields[2].TryClick();
 			//fields[3].TryClick();
 
-			//SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			//SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 
 
 
@@ -755,31 +755,31 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool SelectOption(string option)
 		{
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
-			IWebElement select = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//select"));
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement select = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//select"));
 
 			if (select != null)
 			{
 				select.Select(option);
-				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+				SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 				return true;
 			}
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 			return false;
 		}
 
 		public bool ClickSubmit()
 		{
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
-			IWebElement submit = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input"));
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement submit = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//input"));
 			if (submit.TryClick())
 			{
-				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+				SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 				return true;
 			}
 			else
 			{
-				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+				SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 				return false;
 			}
 
@@ -794,25 +794,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool EnterText(string text)
 		{
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
-			IWebElement textInput = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@type='text']"));
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement textInput = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//input[@type='text']"));
 			bool canEnterText = textInput.TryEnterText(text);
-			SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 			return canEnterText;
 		}
 
 		public bool ClickSubmit()
 		{
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame("frmAdvancedReports");
-			IWebElement submit = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@type='submit']"));
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
+			IWebElement submit = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//input[@type='submit']"));
 			if (submit.TryClick())
 			{
-				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+				SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 				return true;
 			}
 			else
 			{
-				SeleniumBrowser.WebBrowser.SwitchTo().ParentFrame();
+				SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 				return false;
 			}
 

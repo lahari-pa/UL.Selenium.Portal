@@ -117,7 +117,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[RegexStepDefinition(@"I confirm the WERCSmart Terms of Use page has loaded")]
 		public void TermsOfUsePageHasLoaded()
 		{
-			Report.IsTrue(SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//h1[contains(text(),'Terms of Use')]"), 30) != null,
+			Report.IsTrue(SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//h1[contains(text(),'Terms of Use')]"), 30) != null,
 				"The WERCSmart Terms of Use Page did not load after 30 seconds!",
 				"The WERCSmart Terms of Use Page loaded as expected");
 		}

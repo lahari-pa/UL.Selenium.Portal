@@ -26,7 +26,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			for (int i = 0; i < secondsToWait; i++)
 			{
-				IWebElement popupEditor = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 2);
+				IWebElement popupEditor = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(BasePath), 2);
 				if (popupEditor != null)
 				{
 					return true;
@@ -56,7 +56,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				matchingTD.TryDoubleClick();
 				Report.Info($"attempting back up double click");
-				Actions actions = new Actions(SeleniumBrowser.WebBrowser);
+				Actions actions = new Actions(SeleniumWebDriver.CurrentDriver);
 				actions.MoveToElement(matchingTD);
 				Delay.Seconds(2);
 				actions.MoveByOffset(0, -60);
@@ -92,15 +92,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string DocumentWindowOpen()
 		{
 			Report.Info("Switch to SHA Document window");
-			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			string currentHandle = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
 			Context.AddToContext("MainWindowHandle", currentHandle);
-			ReadOnlyCollection<string> handles = SeleniumBrowser.WebBrowser.WindowHandles;
+			ReadOnlyCollection<string> handles = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			foreach (string handle in handles)
 			{
-				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Url.Contains("GetDocument"))
+				if (SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle).Url.Contains("GetDocument"))
 				{
 					Report.Info("Found the URL Containing 'GetDocument'");
-					return SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Url;
+					return SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle).Url;
 				}
 			}
 			return null;
@@ -109,15 +109,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string TemporaryPDFWindowOpen()
 		{
 			Report.Info("Switch to SHA Document Temp PDF window");
-			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			string currentHandle = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
 			Context.AddToContext("MainWindowHandle", currentHandle);
-			ReadOnlyCollection<string> handles = SeleniumBrowser.WebBrowser.WindowHandles;
+			ReadOnlyCollection<string> handles = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			foreach (string handle in handles)
 			{
-				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Url.Contains("GetDocument"))
+				if (SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle).Url.Contains("GetDocument"))
 				{
 					Report.Info("Found the URL Containing 'GetDocument'");
-					return SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Url;
+					return SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle).Url;
 				}
 			}
 			return null;

@@ -59,7 +59,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 						if (switchToFirstFrame && SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//body/iframe"), 2) != null)
 						{
-							SeleniumBrowser.WebBrowser.SwitchTo().Frame(SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//body/iframe"), 2));
+							SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//body/iframe"), 2));
 						}
 
 						Report.Success("Found window containing title: " + popupTitle);

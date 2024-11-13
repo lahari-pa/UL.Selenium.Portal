@@ -787,7 +787,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							break;
 						case "...":
 							//navEl = this.containerElement.FindElement(By.XPath(".//span[@class='ellipse clickable' and parent::li]|//span[text()='...' and parent::li]"), 2);
-							navEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//span[@class='ellipse clickable' and parent::li]|//span[text()='...' and parent::li]"), 2);
+							navEl = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//span[@class='ellipse clickable' and parent::li]|//span[text()='...' and parent::li]"), 2);
 							break;
 						default:
 							Report.Info("An invalid navigation option was provided. Must either be 'next' or 'previous'");
@@ -1257,7 +1257,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			Report.Info("Popup id is: " + popoverId);
 			// Use the ID to find the popup container (if it exists)
-			IWebElement popover = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id= '" + popoverId + "']"), 2);
+			IWebElement popover = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//div[@id= '" + popoverId + "']"), 2);
 			return popover != null;
 		}
 
@@ -1276,7 +1276,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			bool popupdisplayed = false;
 			while (x < 30 && popupdisplayed == false)
 			{
-				IWebElement popover = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id= '" + popoverId + "']"), 2);
+				IWebElement popover = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//div[@id= '" + popoverId + "']"), 2);
 				popupdisplayed = popover != null;
 				x++;
 				Delay.Seconds(2);
@@ -1300,7 +1300,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			bool popupdisplayed = true;
 			while (x < 30 && popupdisplayed == true)
 			{
-				IWebElement popover = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id= '" + popoverId + "']"), 2);
+				IWebElement popover = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//div[@id= '" + popoverId + "']"), 2);
 				popupdisplayed = popover != null;
 				x++;
 				Delay.Seconds(2);
@@ -1893,7 +1893,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool CheckIfProductIsMissing(string wpsID)
 		{
-			IWebElement product = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//td[@data-bind='text: Product.ProductID'][text()='" + wpsID + "']"), 2);
+			IWebElement product = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//td[@data-bind='text: Product.ProductID'][text()='" + wpsID + "']"), 2);
 			if (product == null)
 			{
 				return true;

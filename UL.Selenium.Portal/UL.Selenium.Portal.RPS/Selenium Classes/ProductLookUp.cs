@@ -936,7 +936,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             IWebElement resizeIcon = wantedColumn.FindElement(By.XPath(".//span[contains(@class,'ui-jqgrid-resize ui-jqgrid-resize-ltr')]"), 2);
             int startWidth = Int32.Parse(wantedColumn.GetAttribute("style").Replace("width: ", "").Replace("px;", ""));
 
-            Actions action = new Actions(SeleniumBrowser.WebBrowser);
+            Actions action = new Actions(SeleniumWebDriver.CurrentDriver);
             try
             {
                 action.ClickAndHold(resizeIcon).MoveByOffset(-30, 0).Release().Build().Perform();
@@ -975,7 +975,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             IWebElement resizeIcon = wantedColumn.FindElement(By.XPath(".//span[contains(@class,'ui-jqgrid-resize ui-jqgrid-resize-ltr')]"), 2);
             int startWidth = Int32.Parse(wantedColumn.GetAttribute("style").Replace("width: ", "").Replace("px;", ""));
 
-            Actions action = new Actions(SeleniumBrowser.WebBrowser);
+            Actions action = new Actions(SeleniumWebDriver.CurrentDriver);
             action.ClickAndHold(resizeIcon).MoveByOffset(30, 0).Release().Build().Perform();
             int endWidth = Int32.Parse(wantedColumn.GetAttribute("style").Replace("width: ", "").Replace("px;", ""));
             return startWidth < endWidth;
@@ -2272,7 +2272,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             {
                 IWebElement firstColumn = this.ContainerElement.FindElement(By.XPath("//*[@id='sortableColumnSelector']/li[3]/div/span[1]"), 2);
                 IWebElement secondColumn = this.ContainerElement.FindElement(By.XPath("//*[@id='sortableColumnSelector']/li[1]/div/span[1]"), 2);
-                Actions actions = new Actions(SeleniumBrowser.WebBrowser);
+                Actions actions = new Actions(SeleniumWebDriver.CurrentDriver);
 
           
                 actions.MoveToElement(firstColumn);

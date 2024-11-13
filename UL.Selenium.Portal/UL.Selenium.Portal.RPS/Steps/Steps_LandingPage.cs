@@ -144,7 +144,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 			switch (element)
 			{
 				case "Good business with I'd like to learn more button":
-					el = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//h2[starts-with(text(),'Good business')]//ancestor::div[starts-with(@class,'row')]"), 2);
+					el = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(@"//h2[starts-with(text(),'Good business')]//ancestor::div[starts-with(@class,'row')]"), 2);
 					if (Report.IsTrue(el != null, "Failed to find section titled Good business!", "Successfully found section titled Good business", false, false))
 					{
 						var buttonEl = el.FindElement(By.XPath(@".//a[contains(text(),'like to learn more')]"), 2);
@@ -153,7 +153,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 					return;
 
 				case ("Instant Access displaying a graph"):
-					el = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//h2[starts-with(text(),'Instant Access')]//ancestor::div[starts-with(@class,'row')]"), 2);
+					el = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(@"//h2[starts-with(text(),'Instant Access')]//ancestor::div[starts-with(@class,'row')]"), 2);
 					if (Report.IsTrue(el != null, "Failed to find section titled Instant Access!", "Successfully found section titled Instant Access", false, false))
 					{
 						var graphEl = el.FindElements(By.XPath(@".//div"), 2).FirstOrDefault(x => !string.IsNullOrEmpty(x.GetCssValue("background")));
@@ -163,7 +163,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 					return;
 
 				case ("Let's talk with I'd like to learn more button"):
-					el = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//h2[starts-with(text(),""Let's talk"")]//ancestor::div[starts-with(@class,""row"")]"), 2);
+					el = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(@"//h2[starts-with(text(),""Let's talk"")]//ancestor::div[starts-with(@class,""row"")]"), 2);
 					if (Report.IsTrue(el != null, "Failed to find section titled Let's talk!", "Successfully found section titled Let's talk", false, false))
 					{
 						var buttonEl = el.FindElement(By.XPath(@".//button[contains(text(),'like to learn more')]"), 2);
@@ -177,7 +177,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		[RegexStepDefinition(@"I verify that under offerings there is a section for (UL Audit|UL PurView|Item Scan) with 'request more information' button")]
 		public void VerifyOfferingsSection(string heading)
 		{
-			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@"//h2[starts-with(text(),'Offerings')]//ancestor::div[starts-with(@class,'row')]"), 2);
+			IWebElement el = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(@"//h2[starts-with(text(),'Offerings')]//ancestor::div[starts-with(@class,'row')]"), 2);
 			if (Report.IsTrue(el != null, "Failed to find section for Offerings", "Successfully found section for Offerings", false, false))
 			{
 				var sectionEl = el.FindElement(By.XPath(string.Format(@"./following-sibling::div[1]//div[starts-with(@class,'col') and (.//h3[contains(text(),'{0}')])]", heading)), 2);
@@ -235,7 +235,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 		[RegexStepDefinition(@"I click on the ""I'd like to learn more"" button in the (Good business|Let's talk) section")]
 		public void IClickIdLikeToLearnMoreButtonInGoodBusinessSection(string section)
 		{
-			var el = SeleniumBrowser.WebBrowser.FindElement(By.XPath($@"//h2[contains(text(),""{section}"")]//ancestor::div[starts-with(@class,'row')]"), 2);
+			var el = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($@"//h2[contains(text(),""{section}"")]//ancestor::div[starts-with(@class,'row')]"), 2);
 			if (Report.IsTrue(el != null, $"Failed to find section titled {section}!", $"Successfully found section titled {section}", false, false))
 			{
 				IWebElement buttonEl = null;

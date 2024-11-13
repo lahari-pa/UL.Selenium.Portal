@@ -1,4 +1,4 @@
-﻿using BoDi;
+﻿using UL.Automation.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,19 +18,19 @@ namespace UL.Selenium.Portal.WERCSmart.SpecFlow
 		private string GetBranchName() => TReVorSettings.BranchInfo?.BranchName ?? TReVorConfig.CurrentSettings?.TReVorSettings?.SoftwareBranch;
 
 		[BeforeScenario("OnlyInIntegration")]
-		public void OnlyInStagingLogic(IObjectContainer container)
+		public void OnlyInStagingLogic(IGenericContainer container)
 		{
 			this.PerformBranchSkipLogic(container, "Staging");
 		}
 
 		[BeforeScenario("OnlyInStaging")]
-		public void RunOnlyInStagingLogic(IObjectContainer container)
+		public void RunOnlyInStagingLogic(IGenericContainer container)
 		{
 			this.PerformBranchSkipLogic(container, "QA-Integration");
 			this.PerformBranchSkipLogic(container, "QA-Integration-New");
 		}
 
-		private void PerformBranchSkipLogic(IObjectContainer container, string targetBranchName)
+		private void PerformBranchSkipLogic(IGenericContainer container, string targetBranchName)
 		{
 			string branchName = this.GetBranchName();
 			if (!string.IsNullOrEmpty(branchName) && string.Equals(branchName, targetBranchName, StringComparison.InvariantCultureIgnoreCase))
