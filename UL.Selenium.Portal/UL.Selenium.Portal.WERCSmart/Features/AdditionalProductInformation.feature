@@ -302,6 +302,7 @@ Scenario: [217076] Product Information Screen - Error Messages for NPK and Slow 
 	Given I delete the product: TestCase217076
 
 
+	
 	# Created by Saikiran Chittampally
 @TestCase:213920
 Scenario: [213920] Product Information Screen - Warning Message >= 50% for NPK Product Types
@@ -313,39 +314,35 @@ Scenario: [213920] Product Information Screen - Warning Message >= 50% for NPK P
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-
-	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
+	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Fertilizer
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Fertilizer
+	Then in the The Product page, I click Continue
 	Then I save the product information as: TestCase213920
 	Given I should see the Product Information Page
-	And I set the Which best describes your product, including when FIFRA 25(b) Exempt option to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
-	Given I set the Does the product contain fertilizer (N, P, K) option to: Yes
-	Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
-	Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No
-	Given I set the Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product option to: No
-	Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
-	And I see the following sections
-		| Section                       |
-		| Phosphates /Phosphorous (“P”) |
-		| Nitrogen /Nitrates (“N”)      |
-		| Potassium(“K”)                |
-		| Slow-Release Agent            |
-	Then I set the Phosphates /Phosphorous (“P”) field to: 25
-	Then I set the Nitrogen /Nitrates (“N”) field to: 205.36
-	Then I set the Potassium(“K”) field to: 71.25
-	Then I set the Slow-Release Agent field to: 400.36
-	Then I click continue
-	Then a Warning popup dialog should appear with the message: The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.
-	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	Given I should see the Regulatory Documents to Provide Page
-	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
-	Then in the Regulatory Documents to Provide page I click Continue
-
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
+	Then In the Product Information Section, set the option in section: 'Does the product contain fertilizer (N, P, K)?' to: Yes
+	Then In the Product Information Section, the statement 'Provide the amount (Percent) of each of the following within the product.' is displayed
+	Then In the Product Information Section, set the option in section: 'Nitrogen /Nitrates (“N”)' to: 205.36
+	Then In the Product Information Section, set the option in section: 'Phosphates /Phosphorous (“P”)' to: 25
+	Then In the Product Information Section, set the option in section: 'Potassium(“K”)' to: 71.25
+	Then In the Product Information Section, set the option in section: 'Slow-Release Agent' to: 400.36
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+	Then In the Product Information Section, a warning pop-up should be displayed with text: 'The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.'
+	Then In the Product Information Section, in the Warning modal window click the 'X' button
 	Then I should see the Physical and Chemical Properties Page
 	And I click the page heading: Product Information
-	Then I set the Nitrogen /Nitrates (“N”) field to: 0
-	Then I set the Slow-Release Agent field to: 0
-	And I click continue
-	Then a Warning popup dialog should appear with the message: The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.
+	Then In the Product Information Section, set the option in section: 'Nitrogen /Nitrates (“N”)' to: 0
+	Then In the Product Information Section, set the option in section: 'Slow-Release Agent' to: 0
+	Then in the Product Information page I click Continue
+	Then In the Product Information Section, a warning pop-up should be displayed with text: 'The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.'
+	Then In the Product Information Section, in the Warning modal window click the 'Ok' button
+	Then I should see the Physical and Chemical Properties Page
 	Then I click the My Products icon in the Navigation Pane
 	Given I delete the product: TestCase213920
 
@@ -360,32 +357,31 @@ Scenario: [213919] Product Information Screen - Warning Message < 50% for NPK Pr
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-
-	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Soil Conditioner (no VOC or Pesticide)
+	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Soil Conditioner (no VOC or Pesticide)
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Soil Conditioner (no VOC or Pesticide)
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Soil Conditioner (no VOC or Pesticide)
+	Then in the The Product page, I click Continue
 	Then I save the product information as: TestCase213919
 	Given I should see the Product Information Page
-	Given I set the Does the product contain fertilizer (N, P, K) option to: Yes
-	Given I set the Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada) option to: No
-	Given I set the Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns. option to: No
-	Given I set the Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product option to: No
-	Given I set the Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) option to: No
-	And I see the following sections
-		| Section                       |
-		| Phosphates /Phosphorous (“P”) |
-		| Nitrogen /Nitrates (“N”)      |
-		| Potassium(“K”)                |
-		| Slow-Release Agent            |
-	Then I set the Phosphates /Phosphorous (“P”) field to: 25
-	Then I set the Nitrogen /Nitrates (“N”) field to: 10
-	Then I set the Potassium(“K”) field to: 36.36
-	Then I set the Slow-Release Agent field to: 0
-	Then I click continue
-	Then a Warning popup dialog should appear with the message: The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of the product in Pinellas County, Florida (Restricted). This is informational only and does not restrict your registration to the Retailer.
-	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	Given I should see the Regulatory Documents to Provide Page
-	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
-	Then in the Regulatory Documents to Provide page I click Continue
-
+	Then In the Product Information Section, set the option in section: 'Does the product contain fertilizer (N, P, K)?' to: No
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+	Then In the Product Information Section, a warning pop-up should not be displayed with text: 'The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of the product in Pinellas County, Florida (Restricted). This is informational only and does not restrict your registration to the Retailer.'
+	Then I should see the Physical and Chemical Properties Page
+	And I click the page heading: Product Information
+	Then In the Product Information Section, set the option in section: 'Does the product contain fertilizer (N, P, K)?' to: Yes
+	Then In the Product Information Section, set the option in section: 'Nitrogen /Nitrates (“N”)' to: 10
+	Then In the Product Information Section, set the option in section: 'Phosphates /Phosphorous (“P”)' to: 25
+	Then In the Product Information Section, set the option in section: 'Potassium(“K”)' to: 36.36
+	Then In the Product Information Section, set the option in section: 'Slow-Release Agent' to: 0
+	Then in the Product Information page I click Continue
+	Then In the Product Information Section, a warning pop-up should be displayed with text: 'The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of the product in Pinellas County, Florida (Restricted). This is informational only and does not restrict your registration to the Retailer.'
+	Then In the Product Information Section, in the Warning modal window click the 'Ok' button
 	Then I should see the Physical and Chemical Properties Page
 	Then I click the My Products icon in the Navigation Pane
 	Given I delete the product: TestCase213919
