@@ -276,14 +276,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string text = "The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.";
 			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeadingAndText(condition, title, text);
 		}
-		[RegexStepDefinition("In the Product Information Section Section, in Warning modal window click 'Ok' button")]
+		[RegexStepDefinition("In the Product Information Section, in the Warning modal window click the 'Ok' button")]
 		public void ThenInTheProductInfoSectionInWarningModalWindowClickButton()
 		{
 			string title = "Warning";
 			string button = "Ok";
 			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(title, button);
 		}
-		[RegexStepDefinition("In the Product Information Section Section, in Warning modal window click 'X' button")]
+		[RegexStepDefinition("In the Product Information Section, in the Warning modal window click the 'X' button")]
 		public void ThenInTheProductInfoSectionInWarningModalWindowClickButtonX()
 		{
 			Report.IsTrue(new ModalDialog().Click_Closex(), "Failed to click close button", "Clicked close button");
