@@ -267,7 +267,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string button = "Ok";
 			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(title, button);
 		}
-
+		[RegexStepDefinition("In the Product Information Section Section, in Warning modal window click 'X' button")]
+		public void ThenInTheProductInfoSectionInWarningModalWindowClickButtonX()
+		{
+			Report.IsTrue(new ModalDialog().Click_Closex(), "Failed to click close button", "Clicked close button");
+		}
 		[RegexStepDefinition(@"In the Product Information Section, enter the value in section: 'Enter NDC #': (.*)")]
 		public void EnterNDCNumber(string option)
 		{
