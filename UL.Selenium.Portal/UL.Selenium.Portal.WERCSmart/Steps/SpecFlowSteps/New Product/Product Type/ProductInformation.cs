@@ -50,12 +50,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string section = "Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
-
+		[RegexStepDefinition(@"In the Product Information Section, confirm the question: 'Product has been classified using OSHA \(US\) Globally Harmonized Standards \(GHS\) under 29 CFR 1910\.1200 and\/or CCOHS WHMIS Standards \(Canada\)' (is|is not) displayed")]
+		public void ConfirmProductHasBeenClassifiedUsingOSHAIsIsNotDisplayed(string is_isnot)
+		{
+			string section = "Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
 		[RegexStepDefinition(@"In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: (Yes|No)")]
 		public void SelectProductIsShippedDirectly(string option)
 		{
 			string section = "Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+		[RegexStepDefinition(@"In the Product Information Section, confirm the question: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' (is|is not) displayed")]
+		public void ConfirmProductIsShippedIsIsNotDisplayed(string is_isnot)
+		{
+			string section = "Product is shipped directly by supplier to the consumer.  Retailer sells online and does not ship, or otherwise distribute, the product to the consumer.  Retailer may accept product for returns.";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
 		}
 
 		[RegexStepDefinition(@"In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand \(Private Label, Store Brand\) product' to: (Yes|No)")]
@@ -199,7 +210,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string option = "Yes - Add to Item Preview";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
-
+		[RegexStepDefinition(@"In the Product Information Section, confirm the question: 'Retailers will be selling my product at their store locations in \(select either or both\)' (is|is not) displayed")]
+		public void ConfirmRetailersWillBeSellingIsNotDisplayed(string is_isnot)
+		{
+			string section = "Retailers will be selling my product at their store locations in (select either or both) ";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
 		[RegexStepDefinition(@"In the Product Information Section, set the option in section: 'Select the product's Country of Origin' to: (.*)")]
 		public void SelectTheCountryOfOrigin(string option)
 		{
@@ -308,6 +324,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		{
 			string text = "Provide the amount (Percent) of each of the following within the product.";
 			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);
+		}
+		[RegexStepDefinition(@"In the Product Information Section, for question 'Retailers will be selling my product at their store locations' confirm info icon 'i' (is|is not) displayed")]
+		public void ThenInThePageIShouldOrShouldNotSeeIcon(string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			string question = "Retailers will be selling my product at their store locations in (select either or both) ";
+			Report.IsTrue(new ProductPrototype(question).InfoIconExists() == expected,
+				$"Failure, icon 'i' {(expected ? "is not" : "is")} displayed", $"Success, icon 'i' {is_isnot} displayed.");
+		}
+		[RegexStepDefinition(@"In the Product Information Section, for question 'Retailers will be selling my product at their store locations' when hover icon 'i' displayed text is: (.*)")]
+		public void ThenInThePageIShouldOrShouldNotSeeIconText(string text)
+		{
+			string question = "Retailers will be selling my product at their store locations in (select either or both) ";
+			Report.IsTrue(new ProductPrototype(question).GetInfoIconText() == text,
+				$"Failure, icon 'i' displayed text is not '{text}'", $"Success, icon 'i' displayed text is '{text}'.");
 		}
 	}
 }
