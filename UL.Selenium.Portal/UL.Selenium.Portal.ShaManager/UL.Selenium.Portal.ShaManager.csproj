@@ -8,17 +8,18 @@
 	<ItemGroup>
 		<!-- ===== UL.AUTOMATION PACKAGE(S) ===== -->
 
-		<PackageReference Include="UL.Automation" Version="5.2.17" />
-		<PackageReference Include="UL.Automation.Framework.NUnit" Version="5.2.17" />
-		<PackageReference Include="UL.Automation.Reporting.Html" Version="5.2.17" />
-		<PackageReference Include="UL.Automation.Reporting.ProgressDialog.WPF" Version="5.2.17" />
-		<PackageReference Include="UL.Automation.TReVor" Version="5.2.17" />
-		<PackageReference Include="UL.Automation.Utilities" Version="5.2.17" />
-		<PackageReference Include="UL.Automation.WebDriver" Version="5.2.17" />
+		<PackageReference Include="UL.Automation" Version="6.0.54" />
+		<PackageReference Include="UL.Automation.Framework.NUnit" Version="6.0.54" />
+		<PackageReference Include="UL.Automation.Reporting.Html" Version="6.0.54" />
+		<PackageReference Include="UL.Automation.Reporting.ProgressDialog.WPF" Version="6.0.54" Condition="'$(TargetFramework)' == 'net8.0-windows'" />
+		<PackageReference Include="UL.Automation.TReVor" Version="6.0.54" />
+		<PackageReference Include="UL.Automation.Utilities" Version="6.0.54" />
+		<PackageReference Include="UL.Automation.Utilities.PDF" Version="6.0.54" />
+		<PackageReference Include="UL.Automation.WebDriver" Version="6.0.54" />
 
 		<!-- ===== TREVOR PACKAGE(S) ===== -->
 
-		<PackageReference Include="TReVor.Integrations" Version="3.1.6" />
+		<PackageReference Include="TReVor.Integrations" Version="3.1.16" />
 		<PackageReference Include="TReVor.Integrations.BuildOperations" Version="3.1.3">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -26,10 +27,10 @@
 
 		<!-- ===== REQNROLL PACKAGE(S) ===== -->
 
-		<PackageReference Include="UL.Automation.Reqnroll" Version="5.2.17" Condition="'$(UseReqnroll)' == 'true'" />
-		<PackageReference Include="UL.Automation.Reqnroll.Plugin.NUnit" Version="5.2.17" Condition="'$(UseReqnroll)' == 'true'" />
-		<PackageReference Include="Reqnroll.NUnit" Version="1.0.1" Condition="'$(UseReqnroll)' == 'true'" />
-		<PackageReference Include="Reqnroll.Tools.MsBuild.Generation" Version="1.0.1" Condition="'$(UseReqnroll)' == 'true'" />
+		<PackageReference Include="UL.Automation.Reqnroll" Version="6.0.54" Condition="'$(UseReqnroll)' == 'true'" />
+		<PackageReference Include="UL.Automation.Reqnroll.Plugin.NUnit" Version="6.0.54" Condition="'$(UseReqnroll)' == 'true'" />
+		<PackageReference Include="Reqnroll.NUnit" Version="2.2.1" Condition="'$(UseReqnroll)' == 'true'" />
+		<PackageReference Include="Reqnroll.Tools.MsBuild.Generation" Version="2.2.1" Condition="'$(UseReqnroll)' == 'true'" />
 
 		<!-- ===== SPECFLOW PACKAGE(S) ===== -->
 
