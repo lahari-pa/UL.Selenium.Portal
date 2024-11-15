@@ -329,7 +329,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string text = "Provide the amount (Percent) of each of the following within the product.";
 			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);
 		}
-		[RegexStepDefinition(@"In the Product Information Section, for question 'Retailers will be selling my product at their store locations' confirm info icon 'i' (is|is not) displayed")]
+		[RegexStepDefinition(@"In the Product Information Section, for question 'Retailers will be selling my product at their store locations' confirm the info icon 'i' (is|is not) displayed")]
 		public void ThenInThePageIShouldOrShouldNotSeeIcon(string is_isnot)
 		{
 			bool expected = is_isnot == "is";
@@ -337,7 +337,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			Report.IsTrue(new ProductPrototype(question).InfoIconExists() == expected,
 				$"Failure, icon 'i' {(expected ? "is not" : "is")} displayed", $"Success, icon 'i' {is_isnot} displayed.");
 		}
-		[RegexStepDefinition(@"In the Product Information Section, for question 'Retailers will be selling my product at their store locations' when hover icon 'i' displayed text is: (.*)")]
+		[RegexStepDefinition(@"In the Product Information Section, for question 'Retailers will be selling my product at their store locations' when hovering over the 'i' icon, the displayed text is: (.*)")]
 		public void ThenInThePageIShouldOrShouldNotSeeIconText(string text)
 		{
 			string question = "Retailers will be selling my product at their store locations in (select either or both) ";
