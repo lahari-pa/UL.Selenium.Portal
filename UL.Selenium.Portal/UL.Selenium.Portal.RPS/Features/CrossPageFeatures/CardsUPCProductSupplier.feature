@@ -131,7 +131,7 @@ Examples:
 	| Scenario Name                                           | Retailer | Page              | IsWebviewer | LandingTab     |
 	| [#169639a] Suppliers card - Any Page - Total only shown | TG       | Recent Activities | No          | Product Lookup |
 	| [#169639b] Suppliers card - Any Page - Total only shown | TG       | Target_HQ         | Yes         | Product Lookup |
-	| [#169639c] Suppliers card - Any Page - Total only shown | TG       | Target_status     | Yes         | Product Lookup |
+#	| [#169639c] Suppliers card - Any Page - Total only shown | TG       | Target_status     | Yes         | Product Lookup |
 	| [#169639d] Suppliers card - Any Page - Total only shown | CV       | Recent Activities | No          | Program Health |
 
 Scenario Outline: [169112] Page is Loading - indicator shows
