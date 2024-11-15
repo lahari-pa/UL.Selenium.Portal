@@ -170,13 +170,13 @@ Scenario Outline: [169113] Check for showAllStatuses = true
 
 Examples:
 	| Scenario Name                               | Retailer | Page              | IsWebviewer | LandingTab     |
-#		| [#169113a] Check for showAllStatuses = true | CV       | Recent Activities | No          | Program Health         |
+#	| [#169113a] Check for showAllStatuses = true | CV       | Recent Activities | No          | Program Health |
 	| [#169113b] Check for showAllStatuses = true | LW       | Recent Activities | No          | LWLandingtab   |
 	| [#169113c] Check for showAllStatuses = true | TG       | Recent Activities | No          | Product Lookup |
-#`		| [#169113d] Check for showAllStatuses = true | SF       | Recent Activities | No          | Program Health         |
-	| [#169113e] Check for showAllStatuses = true | TG       | Target_status     | Yes         | Product Lookup |
+#	| [#169113d] Check for showAllStatuses = true | SF       | Recent Activities | No          | Program Health |
+#	| [#169113e] Check for showAllStatuses = true | TG       | Target_status     | Yes         | Product Lookup |
 	| [#169113f] Check for showAllStatuses = true | TG       | Target_HQ         | Yes         | Product Lookup |
-#		| [#169113g] Check for showAllStatuses = true | CT       | Recent Activities | No          |
+#	| [#169113g] Check for showAllStatuses = true | CT       | Recent Activities | No          |
 
 Scenario Outline: [169325] Check for showAllStatuses = false
 	Given I log into the RPS Integrated site as Retailer: <Retailer>
