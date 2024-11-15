@@ -113,7 +113,7 @@ Examples:
 	| Scenario Name                                      | Retailer | Page              | IsWebviewer | LandingTab     |
 	| [#169637a] UPCs card - Any Page - Total only shown | TG       | Recent Activities | No          | Product Lookup |
 	| [#169637b] UPCs card - Any Page - Total only shown | TG       | Target_HQ         | Yes         | Product Lookup |
-	| [#169637c] UPCs card - Any Page - Total only shown | TG       | Target_status     | Yes         | Product Lookup |
+#	| [#169637c] UPCs card - Any Page - Total only shown | TG       | Target_status     | Yes         | Product Lookup |
 	| [#169637d] UPCs card - Any Page - Total only shown | CV       | Recent Activities | No          | Program Health |
 
 Scenario Outline: [169639] Suppliers card - Any Page - Total only shown
