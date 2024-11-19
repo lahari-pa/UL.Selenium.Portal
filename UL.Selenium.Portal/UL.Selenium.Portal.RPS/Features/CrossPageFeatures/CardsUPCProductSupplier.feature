@@ -214,8 +214,8 @@ Scenario Outline: [169167] Reset
 
 Examples:
 	| Scenario Name    | Retailer | Page              | IsWebviewer | LandingTab     | Supplier      |
-#	| [#169167a] Reset | CV       | Recent Activities | No          | Program Health | The WERCS LTD |
-	| [#169167b] Reset | CV       | Product Lookup    | No          | Program Health | The WERCS LTD |
+	| [#169167a] Reset | CV       | Recent Activities | No          | Program Health | The WERCS LTD |
+#	| [#169167b] Reset | CV       | Product Lookup    | No          | Program Health | The WERCS LTD |
 	| [#169167c] Reset | LW       | Recent Activities | No          | Program Health | The WERCS LTD |
 	| [#169167d] Reset | LW       | Product Lookup    | No          | Program Health | The WERCS LTD |
 	| [#169167e] Reset | LW       | Lowes_store       | Yes         | Program Health | The WERCS LTD |
