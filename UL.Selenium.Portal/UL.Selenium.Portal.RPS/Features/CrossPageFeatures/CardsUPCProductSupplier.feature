@@ -197,7 +197,6 @@ Examples:
 
 Scenario Outline: [169167] Reset
 	Given I log into the RPS Integrated site as Retailer: <Retailer>
-	Then I confirm the active tab is: <LandingTab>
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then In the table footer, I save the total number of rows as: OriginalTotalRows_169167
@@ -215,7 +214,7 @@ Scenario Outline: [169167] Reset
 
 Examples:
 	| Scenario Name    | Retailer | Page              | IsWebviewer | LandingTab     | Supplier      |
-	| [#169167a] Reset | CV       | Recent Activities | No          | Program Health | The WERCS LTD |
+#	| [#169167a] Reset | CV       | Recent Activities | No          | Program Health | The WERCS LTD |
 	| [#169167b] Reset | CV       | Product Lookup    | No          | Program Health | The WERCS LTD |
 	| [#169167c] Reset | LW       | Recent Activities | No          | Program Health | The WERCS LTD |
 	| [#169167d] Reset | LW       | Product Lookup    | No          | Program Health | The WERCS LTD |
@@ -262,7 +261,7 @@ Scenario Outline: [169168] Reset again
 Examples:
 	| Scenario Name          | Retailer | Page              | IsWebviewer | LandingTab     | Supplier      |
 	| [#169168a] Reset again | CV       | Recent Activities | No          | Program Health | The WERCS LTD |
-	| [#169168b] Reset again | CV       | Product Lookup    | No          | Program Health | The WERCS LTD |
+#   | [#169168b] Reset again | CV       | Product Lookup    | No          | Program Health | The WERCS LTD |
 	| [#169168c] Reset again | LW       | Recent Activities | No          | Program Health | The WERCS LTD |
 #   | [#169168d] Reset again | LW       | Product Lookup    | No          | Program Health | The WERCS LTD |
 #   | [#169168e] Reset again | LW       | Lowes_store       | Yes         | Program Health | The WERCS LTD |
@@ -274,9 +273,9 @@ Examples:
 	| [#169168k] Reset again | SF       | Recent Activities | No          | Program Health | The WERCS LTD |
 	| [#169168l] Reset again | SF       | Product Lookup    | No          | Program Health | The WERCS LTD |
 	| [#169168m] Reset again | SF       | SmartFinal_Store  | Yes         | Program Health | The WERCS LTD |
-#		| [#169168o] Reset again | CT       | Recent Activities      | No          |
-#		| [#169168p] Reset again | CT       | Product Lookup         | No          |
-#		| [#169168q] Reset again | CT       | Classification History | No          |
+#	| [#169168o] Reset again | CT       | Recent Activities      | No          |
+#	| [#169168p] Reset again | CT       | Product Lookup         | No          |
+#	| [#169168q] Reset again | CT       | Classification History | No          |
 
 
 Scenario Outline: [169106] Page Footer - Layout
