@@ -146,5 +146,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			new Steps_Retailer().SelectedRetailersShouldBe(condition, table);
 		}
+		[RegexStepDefinition("In the Select Retailers window, confirm that (.*) is listed as a retailer")]
+		public void ThenInTheSelectRetailersWindowConfirmThatCanadianTireIsListedAsARetailer(string retailer)
+		{
+			Report.IsTrue(new SelectRetailers().GetListOfRetailers().Contains(retailer),
+							$"Retailer is not listed: {retailer}", $"Retailer is listed as expected: {retailer}");
+		}
+
 	}
 }
