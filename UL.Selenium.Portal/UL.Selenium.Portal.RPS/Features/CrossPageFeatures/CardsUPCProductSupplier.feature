@@ -217,12 +217,12 @@ Examples:
 	| [#169167a] Reset | CV       | Recent Activities | No          | Program Health | The WERCS LTD |
 #	| [#169167b] Reset | CV       | Product Lookup    | No          | Program Health | The WERCS LTD |
 	| [#169167c] Reset | LW       | Recent Activities | No          | Program Health | The WERCS LTD |
-	| [#169167d] Reset | LW       | Product Lookup    | No          | Program Health | The WERCS LTD |
-	| [#169167e] Reset | LW       | Lowes_store       | Yes         | Program Health | The WERCS LTD |
+#	| [#169167d] Reset | LW       | Product Lookup    | No          | Program Health | The WERCS LTD |
+#	| [#169167e] Reset | LW       | Lowes_store       | Yes         | Program Health | The WERCS LTD |
 	| [#169167f] Reset | TG       | Recent Activities | No          | TGlandingtab   | The WERCS LTD |
 	| [#169167g] Reset | TG       | Product Lookup    | No          | TGlandingtab   | The WERCS LTD |
 	| [#169167h] Reset | TG       | Target_store      | Yes         | TGlandingtab   | The WERCS LTD |
-	| [#169167i] Reset | TG       | Target_status     | Yes         | TGlandingtab   | The WERCS LTD |
+#	| [#169167i] Reset | TG       | Target_status     | Yes         | TGlandingtab   | The WERCS LTD |
 	| [#169167j] Reset | TG       | Target_HQ         | Yes         | TGlandingtab   | The WERCS LTD |
 	| [#169167k] Reset | SF       | Recent Activities | No          | Program Health | The WERCS LTD |
 	| [#169167l] Reset | SF       | Product Lookup    | No          | Program Health | The WERCS LTD |
