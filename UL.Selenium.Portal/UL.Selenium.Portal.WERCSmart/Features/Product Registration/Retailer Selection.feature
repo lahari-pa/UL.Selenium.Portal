@@ -24,6 +24,7 @@
 @Ingredients
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 @RegulatoryInformation3
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 Feature: Retailer Selection
@@ -405,28 +406,38 @@ Scenario: [133311] Retailer Private Label List Appear in Alphabetical Order
 
 @TestCase:125130
 Scenario: [125130] Canadian Tire Available for Selection for Articles
-	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Candy, Chewing Gum
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Candy, Chewing Gum
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Candy, Chewing Gum
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Candy, Chewing Gum
+ 	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase125130
-	And Select countries the product may be sold in should be showing the value: United States
-	And I set the Select countries the product may be sold in field to: Canada
-	Given I set the Product is a Retailer's Private Label or Brand option to exactly match: No
-	Then I click continue
-	Given I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, Check or Uncheck for the section check: Retailers will be selling my product at their store locations in (select either or both) to : Canada
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then in the Product Information page I click Continue
+	#Given I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Given In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Given In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'Canadian Environmental Protection Act (CEPA) status' to: Compliant with Domestic Substances List (DSL)
+	Given in the Inventory Status, Prop 65 (US) page I click Continue
 	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Canadian Tire
 	Given I should see the Retailer Page
 	Then In the Retailer Section, click 'Add Retailers' button
-	Then In the Select Retailers window, select retailer: Canadian Tire
+	Then In the Select Retailers window, confirm that Canadian Tire is listed as a retailer
 	Then In the Select Retailers window, click 'Done' button
 	Then in the Retailer page I click Continue
-
-#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase125130
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase125130
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase125130
+
 @TestCase:128920
 Scenario: [128920] Electronics - Dollar Tree/Family Dollar Retailers Available for Selection
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
