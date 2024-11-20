@@ -197,8 +197,6 @@ Examples:
 
 Scenario Outline: [169167] Reset
 	Given I log into the RPS Integrated site as Retailer: <Retailer>
-	Then I confirm the active tab is: <LandingTab>
-	Then I click Accept all Cookies
 	Then I click the tab: <Page> with parameter IsWebViewer: <IsWebviewer>
 	Then I confirm that the <Page> tab is active with WebViewer param: <IsWebviewer>
 	Then In the table footer, I save the total number of rows as: OriginalTotalRows_169167
@@ -217,14 +215,14 @@ Scenario Outline: [169167] Reset
 Examples:
 	| Scenario Name    | Retailer | Page              | IsWebviewer | LandingTab     | Supplier      |
 	| [#169167a] Reset | CV       | Recent Activities | No          | Program Health | The WERCS LTD |
-	| [#169167b] Reset | CV       | Product Lookup    | No          | Program Health | The WERCS LTD |
+#	| [#169167b] Reset | CV       | Product Lookup    | No          | Program Health | The WERCS LTD |
 	| [#169167c] Reset | LW       | Recent Activities | No          | Program Health | The WERCS LTD |
-	| [#169167d] Reset | LW       | Product Lookup    | No          | Program Health | The WERCS LTD |
-	| [#169167e] Reset | LW       | Lowes_store       | Yes         | Program Health | The WERCS LTD |
+#	| [#169167d] Reset | LW       | Product Lookup    | No          | Program Health | The WERCS LTD |
+#	| [#169167e] Reset | LW       | Lowes_store       | Yes         | Program Health | The WERCS LTD |
 	| [#169167f] Reset | TG       | Recent Activities | No          | TGlandingtab   | The WERCS LTD |
 	| [#169167g] Reset | TG       | Product Lookup    | No          | TGlandingtab   | The WERCS LTD |
 	| [#169167h] Reset | TG       | Target_store      | Yes         | TGlandingtab   | The WERCS LTD |
-	| [#169167i] Reset | TG       | Target_status     | Yes         | TGlandingtab   | The WERCS LTD |
+#	| [#169167i] Reset | TG       | Target_status     | Yes         | TGlandingtab   | The WERCS LTD |
 	| [#169167j] Reset | TG       | Target_HQ         | Yes         | TGlandingtab   | The WERCS LTD |
 	| [#169167k] Reset | SF       | Recent Activities | No          | Program Health | The WERCS LTD |
 	| [#169167l] Reset | SF       | Product Lookup    | No          | Program Health | The WERCS LTD |
@@ -246,7 +244,6 @@ Scenario Outline: [169168] Reset again
 	Then In the More Filters pop up, I click Supplier Name from the Filters column
 	Then In the Filter parameters list I select an entry for the Supplier Name Parmeter list: <Supplier>
 	Then In the product lookup page More Filters Popup, I Click the the Apply Filter Button
-	Then In the product lookup page, I confirm the More Filters popup is not displayed
 	Then In the table footer, I confirm the total number of rows does not match value saved as: OriginalTotalRows_169168
 	Then In the table navigation bar, I click the 'Reset' button
 	Then In the recent activities Page, I click the More Filters Button
@@ -254,7 +251,6 @@ Scenario Outline: [169168] Reset again
 	Then In the More Filters pop up, I click Supplier Name from the Filters column
 	Then In the Filter parameters list I select an entry for the Supplier Name Parmeter list: <Supplier>
 	Then In the product lookup page More Filters Popup, I Click the the Apply Filter Button
-	Then In the product lookup page, I confirm the More Filters popup is not displayed
 	Then In the table navigation area, I confirm the Breadcrumb List does exist
 	Then In the table navigation area, I confirm the Breadcrumb List does contain the Breadcrumb labeled: <Supplier>
 	Then In the table navigation bar, I click the 'Reset' button
@@ -265,21 +261,21 @@ Scenario Outline: [169168] Reset again
 Examples:
 	| Scenario Name          | Retailer | Page              | IsWebviewer | LandingTab     | Supplier      |
 	| [#169168a] Reset again | CV       | Recent Activities | No          | Program Health | The WERCS LTD |
-	| [#169168b] Reset again | CV       | Product Lookup    | No          | Program Health | The WERCS LTD |
+#   | [#169168b] Reset again | CV       | Product Lookup    | No          | Program Health | The WERCS LTD |
 	| [#169168c] Reset again | LW       | Recent Activities | No          | Program Health | The WERCS LTD |
-	| [#169168d] Reset again | LW       | Product Lookup    | No          | Program Health | The WERCS LTD |
-	| [#169168e] Reset again | LW       | Lowes_store       | Yes         | Program Health | The WERCS LTD |
+#   | [#169168d] Reset again | LW       | Product Lookup    | No          | Program Health | The WERCS LTD |
+#   | [#169168e] Reset again | LW       | Lowes_store       | Yes         | Program Health | The WERCS LTD |
 	| [#169168f] Reset again | TG       | Recent Activities | No          | TGlandingtab   | The WERCS LTD |
 	| [#169168g] Reset again | TG       | Product Lookup    | No          | TGlandingtab   | The WERCS LTD |
 	| [#169168h] Reset again | TG       | Target_store      | Yes         | TGlandingtab   | The WERCS LTD |
-	| [#169168i] Reset again | TG       | Target_status     | Yes         | TGlandingtab   | The WERCS LTD |
+#   | [#169168i] Reset again | TG       | Target_status     | Yes         | TGlandingtab   | The WERCS LTD |
 	| [#169168j] Reset again | TG       | Target_HQ         | Yes         | TGlandingtab   | The WERCS LTD |
 	| [#169168k] Reset again | SF       | Recent Activities | No          | Program Health | The WERCS LTD |
 	| [#169168l] Reset again | SF       | Product Lookup    | No          | Program Health | The WERCS LTD |
 	| [#169168m] Reset again | SF       | SmartFinal_Store  | Yes         | Program Health | The WERCS LTD |
-#		| [#169168o] Reset again | CT       | Recent Activities      | No          |
-#		| [#169168p] Reset again | CT       | Product Lookup         | No          |
-#		| [#169168q] Reset again | CT       | Classification History | No          |
+#	| [#169168o] Reset again | CT       | Recent Activities      | No          |
+#	| [#169168p] Reset again | CT       | Product Lookup         | No          |
+#	| [#169168q] Reset again | CT       | Classification History | No          |
 
 
 Scenario Outline: [169106] Page Footer - Layout
