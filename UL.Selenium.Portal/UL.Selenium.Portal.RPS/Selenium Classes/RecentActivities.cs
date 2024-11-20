@@ -21,8 +21,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
 		protected override By ContainerElementLocator => By.XPath("//*[@id = 'supertable_main' or @id='status-check-page']");
 
-
-		private IWebElement SearchBox => FindElement(By.XPath(".//input[@placeholder='Product Name / UPC Number / Supplier Name / WPS ID']"), 2);
+        private IWebElement SearchBox => FindElement(By.XPath(".//input[contains(@placeholder,'Product Name')]"), 2);
 
 		private IWebElement ProductTable => ContainerElement.FindElement(By.XPath(".//table[@id='dataGrid']"), 1);
 

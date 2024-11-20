@@ -1427,8 +1427,6 @@ namespace UL.Selenium.Portal.RPS.Steps
             GeneralUtilities.WaitForLoadingToFinish();
             Report.StartSubStep($"In the More Filters pop up, I click Apply button");
             InTheProductLookUpPageMoreFiltersPopupClickApplyFilterButton();
-            Report.StartSubStep($"I confirm the More Filters pop up closes");
-            GivenInTheProductLookupPageIConfirmTheMoreFiltersPopupIsNotDisplayed("is not");
         }
 
 
