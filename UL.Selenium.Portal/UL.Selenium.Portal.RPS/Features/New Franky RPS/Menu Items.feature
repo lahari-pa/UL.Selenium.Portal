@@ -11,7 +11,7 @@
 @Dashboard
 @RecentActivities
 @HelpAndSupport
-
+@MoreFilters
 Feature: Menu Items
 
 #Removed from regression: 2023/06
@@ -28,16 +28,16 @@ Scenario Outline: [169070] Menu Links Banner - layout
 	# Check right alignment of navbar dropdown item
 	Given I call Shared Step 106194 (RPS Sign out)
 
-	Examples:
-	| Scenario Name                         | Retailer | LandingTab               |
-	| [#169070a] Menu Links Banner - layout | RPS.LW   | LWLandingtab             |
-	| [#169070b] Menu Links Banner - layout | RPS.CV   | Program Health           |
+Examples:
+	| Scenario Name                         | Retailer | LandingTab     |
+	| [#169070a] Menu Links Banner - layout | RPS.LW   | LWLandingtab   |
+	| [#169070b] Menu Links Banner - layout | RPS.CV   | Program Health |
 #	| [#169070c] Menu Links Banner - layout | RPS.WM   | Program Health           |
 #	| [#169070d] Menu Links Banner - layout | RPS.HD   | Program Health           |
-	| [#169070e] Menu Links Banner - layout | RPS.SF   | Program Health           |
+	| [#169070e] Menu Links Banner - layout | RPS.SF   | Program Health |
 #	| [#169070f] Menu Links Banner - layout | RPS.PX   | Program Health           |
-	| [#169070g] Menu Links Banner - layout | RPS.TG   | Product Lookup           |
-	| [#169070h] Menu Links Banner - layout | RPS.CT   | Program Health           |
+	| [#169070g] Menu Links Banner - layout | RPS.TG   | Product Lookup |
+	| [#169070h] Menu Links Banner - layout | RPS.CT   | Program Health |
 
 Scenario Outline: [169071] Menu Links Banner - Gauge icon - menu items display
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
@@ -54,16 +54,16 @@ Scenario Outline: [169071] Menu Links Banner - Gauge icon - menu items display
 	Then I confirm the down down options box is not displayed below the navigation bar Gauge button
 	Given I call Shared Step 106194 (RPS Sign out)
 
-	Examples:
-	| Scenario Name                                                         | Retailer | LandingTab               | TestingTab           | 
-	| [#169071a] Menu Links Banner - Gauge icon - menu items display - Home | RPS.LW   | LWLandingtab             | Dashboard            |
-	| [#169071b] Menu Links Banner - Gauge icon - menu items display - Home | RPS.CV   | Program Health           | Dashboard            |
+Examples:
+	| Scenario Name                                                         | Retailer | LandingTab     | TestingTab |
+	| [#169071a] Menu Links Banner - Gauge icon - menu items display - Home | RPS.LW   | LWLandingtab   | Dashboard  |
+	| [#169071b] Menu Links Banner - Gauge icon - menu items display - Home | RPS.CV   | Program Health | Dashboard  |
 #	| [#169071c] Menu Links Banner - Gauge icon - menu items display - Home | RPS.WM   | Program Health           | Dashboard            |
 #	| [#169071d] Menu Links Banner - Gauge icon - menu items display - Home | RPS.HD   | Program Health           | Dashboard            |
-	| [#169071e] Menu Links Banner - Gauge icon - menu items display - Home | RPS.SF   | Program Health           | Dashboard            |
+	| [#169071e] Menu Links Banner - Gauge icon - menu items display - Home | RPS.SF   | Program Health | Dashboard  |
 #	| [#169071f] Menu Links Banner - Gauge icon - menu items display - Home | RPS.PX   | Program Health           | Dashboard            |
-	| [#169071g] Menu Links Banner - Gauge icon - menu items display - Home | RPS.TG   | Product Lookup           | Dashboard            |
-	| [#169071h] Menu Links Banner - Gauge icon - menu items display - Home | RPS.CT   | Program Health           | Dashboard            |
+	| [#169071g] Menu Links Banner - Gauge icon - menu items display - Home | RPS.TG   | Product Lookup | Dashboard  |
+	| [#169071h] Menu Links Banner - Gauge icon - menu items display - Home | RPS.CT   | Program Health | Dashboard  |
 
 Scenario Outline: [169073] Menu Links Banner - active page/ heading background color
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
@@ -101,12 +101,12 @@ Scenario Outline: [169073] Menu Links Banner - active page/ heading background c
 	And I Confirm that the tab: Product Lookup shows in a white highlight indicating it is active
 	Given I call Shared Step 106194 (RPS Sign out)
 
-	Examples:
-	| Scenario Name                                                        | Retailer | LandingTab              |
+Examples:
+	| Scenario Name                                                        | Retailer | LandingTab     |
 #	| [#169073a] Menu Links Banner - active page/ heading background color | RPS.WM   | Program Health          |
-	| [#169073b] Menu Links Banner - active page/ heading background color | RPS.TG   | Product Lookup          |
+	| [#169073b] Menu Links Banner - active page/ heading background color | RPS.TG   | Product Lookup |
 #	| [#169073c] Menu Links Banner - active page/ heading background color | RPS.HD   | Program Health          |
-	| [#169073d] Menu Links Banner - active page/ heading background color | RPS.SF   | Program Health          |
+	| [#169073d] Menu Links Banner - active page/ heading background color | RPS.SF   | Program Health |
 #	| [#169073e] Menu Links Banner - active page/ heading background color | RPS.PX   | Program Health          |
 
 Scenario Outline: [169074] Menu Links Banner - Gauge icon - shows on correct pages
@@ -129,13 +129,13 @@ Scenario Outline: [169074] Menu Links Banner - Gauge icon - shows on correct pag
 	And I confirm the Gauge button is not displayed in the navigation bar
 	Given I call Shared Step 106194 (RPS Sign out)
 
-	Examples:
-	| Scenario Name                                                      | Retailer | LandingTab               |
-	| [#169074a] Menu Links Banner - Gauge icon - shows on correct pages | RPS.LW   | LWLandingtab             |
-	| [#169074b] Menu Links Banner - Gauge icon - shows on correct pages | RPS.CV   | Program Health           |
+Examples:
+	| Scenario Name                                                      | Retailer | LandingTab     |
+	| [#169074a] Menu Links Banner - Gauge icon - shows on correct pages | RPS.LW   | LWLandingtab   |
+	| [#169074b] Menu Links Banner - Gauge icon - shows on correct pages | RPS.CV   | Program Health |
 #	| [#169074c] Menu Links Banner - Gauge icon - shows on correct pages | RPS.WM   | Program Health           |
 #	| [#169074d] Menu Links Banner - Gauge icon - shows on correct pages | RPS.HD   | Program Health           |
-	| [#169074e] Menu Links Banner - Gauge icon - shows on correct pages | RPS.SF   | Program Health           |
+	| [#169074e] Menu Links Banner - Gauge icon - shows on correct pages | RPS.SF   | Program Health |
 #	| [#169074f] Menu Links Banner - Gauge icon - shows on correct pages | RPS.PX   | Program Health           |
-	| [#169074g] Menu Links Banner - Gauge icon - shows on correct pages | RPS.TG   | Product Lookup           |
-	| [#169074h] Menu Links Banner - Gauge icon - shows on correct pages | RPS.CT   | Program Health           |
+	| [#169074g] Menu Links Banner - Gauge icon - shows on correct pages | RPS.TG   | Product Lookup |
+	| [#169074h] Menu Links Banner - Gauge icon - shows on correct pages | RPS.CT   | Program Health |

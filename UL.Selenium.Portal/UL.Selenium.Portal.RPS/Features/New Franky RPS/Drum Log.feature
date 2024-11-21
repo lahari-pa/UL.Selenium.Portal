@@ -13,13 +13,13 @@
 @HelpAndSupport
 @run_DrumgLogLayout
 @RecentActivities
-
+@MoreFilters
 
 Feature: Drum Log
 
 Scenario: [105079] Drum Log - Tab heading shows as active when selected
-    Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
@@ -37,7 +37,7 @@ Scenario: [105079] Drum Log - Tab heading shows as active when selected
 
 Scenario: [180727] Drum Log - Drum details -  Date format in Expanded grid (all date fields)
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
@@ -50,15 +50,15 @@ Scenario: [180727] Drum Log - Drum details -  Date format in Expanded grid (all 
 
 Scenario: [105117] Drum Log - Entries shown are not repeated
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
-	Given I click the main tab: Drum Log 
+	#Then I confirm the Home tab has loaded
+	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
 	And In the Drum Log page, I check that the data shown is not repeated
 
 Scenario: [108105] Drum Log page - layout
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
@@ -75,7 +75,7 @@ Scenario: [108105] Drum Log page - layout
 	Then I confirm that the Drum Log Page buttons to the right of the search box are as follows:
 		| Buttons         |
 		| More Filters    |
-        | Reset           |
+		| Reset           |
 		| Export to Excel |
  
 	Then I confirm that the Drum Log page does not show the bread crumb area
@@ -84,17 +84,17 @@ Scenario: [108105] Drum Log page - layout
 	#Then I confirm that the Drum Log page headings row has a grey background color
 	Then In the Drum Log page, I confirm the column labels show a colon (:) icon as the column resize anchor
 	Then In the Drum Log page, I confirm that the main table has the following columns:
-		| Headings        |
-		| Drum Name       |
-		| Drum Category   |
-		| Drum Type       |
-		| Drum Status     |
-		| Store Name      |
-		| Region Name     |
-		| Location        |
-		| Date Opened     |
-		| Date Closed     |
-		| Date Hauled     |
+		| Headings      |
+		| Drum Name     |
+		| Drum Category |
+		| Drum Type     |
+		| Drum Status   |
+		| Store Name    |
+		| Region Name   |
+		| Location      |
+		| Date Opened   |
+		| Date Closed   |
+		| Date Hauled   |
 	Then I call Shared Step 111155 (Table Heading or sub heading - confirm column resize anchor - resize column) On the: Drum Log page, for the column: Drum Name
 	Then I call Shared Step 111155 (Table Heading or sub heading - confirm column resize anchor - resize column) On the: Drum Log page, for the column: Drum Type
 	Then I call Shared Step 111155 (Table Heading or sub heading - confirm column resize anchor - resize column) On the: Drum Log page, for the column: Drum Status
@@ -116,7 +116,7 @@ Scenario: [108105] Drum Log page - layout
 
 Scenario: [111156] Drum Log page - Resize columns
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
@@ -124,9 +124,9 @@ Scenario: [111156] Drum Log page - Resize columns
 	And In the Drum Log page, I expand the first row of the products table
 	And I call Shared Step 111155 (Table Heading or sub heading - confirm column resize anchor - resize column) On the: Drum Log page, for the column: Scan Date
 
-Scenario: [108106] Drum Log page - Expand arrow 
+Scenario: [108106] Drum Log page - Expand arrow
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
@@ -150,292 +150,292 @@ Scenario: [108106] Drum Log page - Expand arrow
 	Then In the Drum Log page, I confirm data is shown in the column:Volume
 	Then In the Drum Log page, I confirm that in the expanded first row I see the expanded menu icon to the left
  
-Scenario: [98475] Drum Log - Page options - change page number 
+Scenario: [98475] Drum Log - Page options - change page number
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
 	Then In the Drum Log Page, In the Products table footer I enter the page number value of: 3
 
-Scenario: [101314] Drum Log - Export to Excel - Export All Drums 
+Scenario: [101314] Drum Log - Export to Excel - Export All Drums
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
 	Then In the Drum Log Page, I save all the Results to context as: savedFile
 	Then I call Shared Step 108297 (Drum Log - Export to Excel - Export All Drums - open file)
-    Then I check that the file saved as: drumlogfile contains the following column headings:
-| Heading                   |
-| Drum Name                 |
-| Drum Category             |
-| Drum Type                 |
-| Drum Status               |
-| Store Name                |
-| Region Name               |
-| Location                  |
-| Date Opened               |
-| Date Closed               |
-| Date Hauled               |
+	Then I check that the file saved as: drumlogfile contains the following column headings:
+		| Heading       |
+		| Drum Name     |
+		| Drum Category |
+		| Drum Type     |
+		| Drum Status   |
+		| Store Name    |
+		| Region Name   |
+		| Location      |
+		| Date Opened   |
+		| Date Closed   |
+		| Date Hauled   |
    #Step that checks the cvs file for data in products grid
-   Then In the Drum log Page, I confirm the Products shown in the export file saved as: drumlogfile  match the products saved as: savedFile
-   Then I delete the file saved as drumlogfile
-   And I call Shared Step 106194 (RPS Sign out)
+	Then In the Drum log Page, I confirm the Products shown in the export file saved as: drumlogfile  match the products saved as: savedFile
+	Then I delete the file saved as drumlogfile
+	And I call Shared Step 106194 (RPS Sign out)
 
 
 Scenario: [105012] Drum Log - Export Filtered Drum List - Store Name
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
-    Then In the Drum Log Page, I click the More Filters Button
-    And In the Drum Log Page, The More Filters Popup is showing
-    Then In the Drum Log Page More Filters Popup, I check that the: Store Name field is a drop down field
-    And In the Drum Log page, I select the option: Bolton from the: Store Name drop down menu
-    Then In the Drum Log Page More Filters Popup, I Click the the Apply Filter Button
+	Then In the Drum Log Page, I click the More Filters Button
+	And In the Drum Log Page, The More Filters Popup is showing
+	Then In the Drum Log Page More Filters Popup, I check that the: Store Name field is a drop down field
+	And In the Drum Log page, I select the option: Bolton from the: Store Name drop down menu
+	Then In the Drum Log Page More Filters Popup, I Click the the Apply Filter Button
 	Then I confirm the Drum Log tab has loaded
 	Then In the Drum Log Page, I save all the Results to context as: savedFile
 	Then I call Shared Step 108297 (Drum Log - Export to Excel - Export All Drums - open file)
-    Then I check that the file saved as: drumlogfile contains the following column headings:
-| Heading                   |
-| Drum Name                 |
-| Drum Category             |
-| Drum Type                 |
-| Drum Status               |
-| Store Name                |
-| Region Name               |
-| Location                  |
-| Date Opened               |
-| Date Closed               |
-| Date Hauled               |
+	Then I check that the file saved as: drumlogfile contains the following column headings:
+		| Heading       |
+		| Drum Name     |
+		| Drum Category |
+		| Drum Type     |
+		| Drum Status   |
+		| Store Name    |
+		| Region Name   |
+		| Location      |
+		| Date Opened   |
+		| Date Closed   |
+		| Date Hauled   |
    #Step that checks the cvs file for data in products grid
-   Then In the Drum log Page, I confirm the Products shown in the export file saved as: drumlogfile  match the products saved as: savedFile
-   Then I delete the file saved as drumlogfile
-   And I call Shared Step 106194 (RPS Sign out)
+	Then In the Drum log Page, I confirm the Products shown in the export file saved as: drumlogfile  match the products saved as: savedFile
+	Then I delete the file saved as drumlogfile
+	And I call Shared Step 106194 (RPS Sign out)
 
-Scenario: [105013] Drum Log - Export to Excel - Export All Drums with UPCs 
+Scenario: [105013] Drum Log - Export to Excel - Export All Drums with UPCs
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
 	Then In the Drum Log Page, I save all the Results to context as: savedFile
 	Then I call Shared Step 108298 (Drum Log - Export to Excel - Export all Drums with UPCs - open file)
-    Then I check that the file saved as: drumlogfile contains the following column headings:
-| Heading                   |
-| Drum Name                 |
-| Drum Category             |
-| Drum Type                 |
-| Drum Status               |
-| Store Name                |
-| Region Name               |
-| Location                  |
-| Date Opened               |
-| Date Closed               |
-| Date Hauled               |
+	Then I check that the file saved as: drumlogfile contains the following column headings:
+		| Heading              |
+		| Drum Name            |
+		| Drum Category        |
+		| Drum Type            |
+		| Drum Status          |
+		| Store Name           |
+		| Region Name          |
+		| Location             |
+		| Date Opened          |
+		| Date Closed          |
+		| Date Hauled          |
 
-| Scan Date                 |
-| Date in Drum              |
-| Date Removed              |
-| Found/Not Found           |
-| Manufacturer              |
-| Product Name              |
-| ProductID                 |
-| UPC                       |
-| Quantity                  | 
-| Volume                    |
-| Orginal Drum Type         |
-| Selected Drum Type        |
-| Reason for Change         |
-| Flagged Product Name      |
-| Flagged Product UPC       |
-| Contested Category        | 
-| Contested Type            |
-| Contesting User           |
-| Contested Date UTC        |
+		| Scan Date            |
+		| Date in Drum         |
+		| Date Removed         |
+		| Found/Not Found      |
+		| Manufacturer         |
+		| Product Name         |
+		| ProductID            |
+		| UPC                  |
+		| Quantity             |
+		| Volume               |
+		| Orginal Drum Type    |
+		| Selected Drum Type   |
+		| Reason for Change    |
+		| Flagged Product Name |
+		| Flagged Product UPC  |
+		| Contested Category   |
+		| Contested Type       |
+		| Contesting User      |
+		| Contested Date UTC   |
 
    #Step that checks the cvs file for data in products grid
-   Then In the Drum log Page, I confirm the Products shown in the export file saved as: drumlogfile  match the products saved as: savedFile
-   Then I delete the file saved as drumlogfile
-   And I call Shared Step 106194 (RPS Sign out)
+	Then In the Drum log Page, I confirm the Products shown in the export file saved as: drumlogfile  match the products saved as: savedFile
+	Then I delete the file saved as drumlogfile
+	And I call Shared Step 106194 (RPS Sign out)
 
 Scenario: [108295] Drum Log - Export to Excel - pop up layout
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
-    Then In the Drum Log page, I click the Export To Excel Button
-    Then In the recent activities Page, The Export to Excel Popup is showing
-    Then In the Drum Log Page, In the Export to Excel popup I Confirm the header text reads: Export
-    Then In the Drum Log page, In the Export to Excel popup I Confirm the 'x' Close icon is shown
-    And In the recent activities Page, In the Export to Excel popup I Confirm the main body text reads: This export may take some time to complete. Do you wish to proceed?
-    And In the Drum Log Page, In the Export to Excel popup main body I confirm there are 2 buttons displayed
-    Then In the Drum Log page, In the Export to Excel popup I Confirm the Export All Drums button is shown
+	Then In the Drum Log page, I click the Export To Excel Button
+	Then In the recent activities Page, The Export to Excel Popup is showing
+	Then In the Drum Log Page, In the Export to Excel popup I Confirm the header text reads: Export
+	Then In the Drum Log page, In the Export to Excel popup I Confirm the 'x' Close icon is shown
+	And In the recent activities Page, In the Export to Excel popup I Confirm the main body text reads: This export may take some time to complete. Do you wish to proceed?
+	And In the Drum Log Page, In the Export to Excel popup main body I confirm there are 2 buttons displayed
+	Then In the Drum Log page, In the Export to Excel popup I Confirm the Export All Drums button is shown
 	Then In the Drum Log page, In the Export to Excel popup I Confirm the Export All Drums with UPCs button is shown
-    And In the recent activities Page, In the Export to Excel popup footer I confirm there is only 1 button shown
-    Then In the recent activities Page, In the Export to Excel popup footer I confirm the Close button is shown
-    Then In the recent activities Page, In the Export to Excel popup I click away from the export pop up
-    Then In the recent activities Page, The Export to Excel Popup is not showing
-    Then In the Drum Log page, I click the Export To Excel Button
-    Then In the recent activities Page, The Export to Excel Popup is showing
-    And In the recent activities Page, In the Export to Excel popup footer I click Close
-    Then In the recent activities Page, The Export to Excel Popup is not showing
-    Then In the Drum Log page, I click the Export To Excel Button
-    Then In the recent activities Page, The Export to Excel Popup is showing
-    And In the Drum Log page, In the Export to Excel popup I click the 'x' Close icon
-    Then In the recent activities Page, The Export to Excel Popup is not showing
-    And I call Shared Step 106194 (RPS Sign out)
+	And In the recent activities Page, In the Export to Excel popup footer I confirm there is only 1 button shown
+	Then In the recent activities Page, In the Export to Excel popup footer I confirm the Close button is shown
+	Then In the recent activities Page, In the Export to Excel popup I click away from the export pop up
+	Then In the recent activities Page, The Export to Excel Popup is not showing
+	Then In the Drum Log page, I click the Export To Excel Button
+	Then In the recent activities Page, The Export to Excel Popup is showing
+	And In the recent activities Page, In the Export to Excel popup footer I click Close
+	Then In the recent activities Page, The Export to Excel Popup is not showing
+	Then In the Drum Log page, I click the Export To Excel Button
+	Then In the recent activities Page, The Export to Excel Popup is showing
+	And In the Drum Log page, In the Export to Excel popup I click the 'x' Close icon
+	Then In the recent activities Page, The Export to Excel Popup is not showing
+	And I call Shared Step 106194 (RPS Sign out)
 
 Scenario: [178702] Drum Log - Export to Excel - Export All Drums with UPCs - With Filtered list - UPC Scan Status = Found
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
-    Then In the Drum Log Page, I click the More Filters Button
-    And In the Drum Log Page, The More Filters Popup is showing
-    And In the Drum Log page, I select the option: Found from the: UPC Scan Status drop down menu
-    Then In the Drum Log Page More Filters Popup, I Click the the Apply Filter Button
+	Then In the Drum Log Page, I click the More Filters Button
+	And In the Drum Log Page, The More Filters Popup is showing
+	And In the Drum Log page, I select the option: Found from the: UPC Scan Status drop down menu
+	Then In the Drum Log Page More Filters Popup, I Click the the Apply Filter Button
 	Then I confirm the Drum Log tab has loaded
 	Then In the Drum Log Page, I save all the Results to context as: savedFile
 	Then I call Shared Step 108298 (Drum Log - Export to Excel - Export all Drums with UPCs - open file)
-    Then I check that the file saved as: drumlogfile contains the following column headings:
-| Heading                   |
-| Drum Name                 |
-| Drum Category             |
-| Drum Type                 |
-| Drum Status               |
-| Store Name                |
-| Region Name               |
-| Location                  |
-| Date Opened               |
-| Date Closed               |
-| Date Hauled               |
+	Then I check that the file saved as: drumlogfile contains the following column headings:
+		| Heading              |
+		| Drum Name            |
+		| Drum Category        |
+		| Drum Type            |
+		| Drum Status          |
+		| Store Name           |
+		| Region Name          |
+		| Location             |
+		| Date Opened          |
+		| Date Closed          |
+		| Date Hauled          |
 
-| Scan Date                 |
-| Date in Drum              |
-| Date Removed              |
-| Found/Not Found           |
-| Manufacturer              |
-| Product Name              |
-| ProductID                 |
-| UPC                       |
-| Quantity                  | 
-| Volume                    |
-| Orginal Drum Type         |
-| Selected Drum Type        |
-| Reason for Change         |
-| Flagged Product Name      |
-| Flagged Product UPC       |
-| Contested Category        | 
-| Contested Type            |
-| Contesting User           |
-| Contested Date UTC        |
+		| Scan Date            |
+		| Date in Drum         |
+		| Date Removed         |
+		| Found/Not Found      |
+		| Manufacturer         |
+		| Product Name         |
+		| ProductID            |
+		| UPC                  |
+		| Quantity             |
+		| Volume               |
+		| Orginal Drum Type    |
+		| Selected Drum Type   |
+		| Reason for Change    |
+		| Flagged Product Name |
+		| Flagged Product UPC  |
+		| Contested Category   |
+		| Contested Type       |
+		| Contesting User      |
+		| Contested Date UTC   |
 
    #Step that checks the cvs file for data in products grid
-   Then In the Drum log Page, I confirm the Products shown in the export file saved as: drumlogfile  match the products saved as: savedFile
-   Then I delete the file saved as drumlogfile
-   And I call Shared Step 106194 (RPS Sign out)
+	Then In the Drum log Page, I confirm the Products shown in the export file saved as: drumlogfile  match the products saved as: savedFile
+	Then I delete the file saved as drumlogfile
+	And I call Shared Step 106194 (RPS Sign out)
 
 
 Scenario: [178703] Drum Log - Export to Excel - Export All Drums with UPCs - With Filtered list - UPC Scan Status = Not Found
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
-    Then In the Drum Log Page, I click the More Filters Button
-    And In the Drum Log Page, The More Filters Popup is showing
-    And In the Drum Log page, I select the option: Not Found from the: UPC Scan Status drop down menu
-    Then In the Drum Log Page More Filters Popup, I Click the the Apply Filter Button
+	Then In the Drum Log Page, I click the More Filters Button
+	And In the Drum Log Page, The More Filters Popup is showing
+	And In the Drum Log page, I select the option: Not Found from the: UPC Scan Status drop down menu
+	Then In the Drum Log Page More Filters Popup, I Click the the Apply Filter Button
 	Then I confirm the Drum Log tab has loaded
 	Then In the Drum Log Page, I save all the Results to context as: savedFile
 	Then I call Shared Step 108298 (Drum Log - Export to Excel - Export all Drums with UPCs - open file)
-    Then I check that the file saved as: drumlogfile contains the following column headings:
-| Heading                   |
-| Drum Name                 |
-| Drum Category             |
-| Drum Type                 |
-| Drum Status               |
-| Store Name                |
-| Region Name               |
-| Location                  |
-| Date Opened               |
-| Date Closed               |
-| Date Hauled               |
+	Then I check that the file saved as: drumlogfile contains the following column headings:
+		| Heading              |
+		| Drum Name            |
+		| Drum Category        |
+		| Drum Type            |
+		| Drum Status          |
+		| Store Name           |
+		| Region Name          |
+		| Location             |
+		| Date Opened          |
+		| Date Closed          |
+		| Date Hauled          |
 
-| Scan Date                 |
-| Date in Drum              |
-| Date Removed              |
-| Found/Not Found           |
-| Manufacturer              |
-| Product Name              |
-| ProductID                 |
-| UPC                       |
-| Quantity                  | 
-| Volume                    |
-| Orginal Drum Type         |
-| Selected Drum Type        |
-| Reason for Change         |
-| Flagged Product Name      |
-| Flagged Product UPC       |
-| Contested Category        | 
-| Contested Type            |
-| Contesting User           |
-| Contested Date UTC        |
+		| Scan Date            |
+		| Date in Drum         |
+		| Date Removed         |
+		| Found/Not Found      |
+		| Manufacturer         |
+		| Product Name         |
+		| ProductID            |
+		| UPC                  |
+		| Quantity             |
+		| Volume               |
+		| Orginal Drum Type    |
+		| Selected Drum Type   |
+		| Reason for Change    |
+		| Flagged Product Name |
+		| Flagged Product UPC  |
+		| Contested Category   |
+		| Contested Type       |
+		| Contesting User      |
+		| Contested Date UTC   |
 
    #Step that checks the cvs file for data in products grid
-   Then In the Drum log Page, I confirm the Products shown in the export file saved as: drumlogfile  match the products saved as: savedFile
-   Then I delete the file saved as drumlogfile
-   And I call Shared Step 106194 (RPS Sign out)
+	Then In the Drum log Page, I confirm the Products shown in the export file saved as: drumlogfile  match the products saved as: savedFile
+	Then I delete the file saved as drumlogfile
+	And I call Shared Step 106194 (RPS Sign out)
 
-Scenario: [178699] Drum Log - Export Filtered Drum List - UPC Scan Status = Found 
+Scenario: [178699] Drum Log - Export Filtered Drum List - UPC Scan Status = Found
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
-    Then In the Drum Log Page, I click the More Filters Button
-    And In the Drum Log Page, The More Filters Popup is showing
-    And In the Drum Log page, I select the option: Found from the: UPC Scan Status drop down menu
-    Then In the Drum Log Page More Filters Popup, I Click the the Apply Filter Button
+	Then In the Drum Log Page, I click the More Filters Button
+	And In the Drum Log Page, The More Filters Popup is showing
+	And In the Drum Log page, I select the option: Found from the: UPC Scan Status drop down menu
+	Then In the Drum Log Page More Filters Popup, I Click the the Apply Filter Button
 	Then I confirm the Drum Log tab has loaded
 	Then In the Drum Log Page, I save all the Results to context as: savedFile
 	Then I call Shared Step 108297 (Drum Log - Export to Excel - Export All Drums - open file)
-    Then I check that the file saved as: drumlogfile contains the following column headings:
-| Heading                   |
-| Drum Name                 |
-| Drum Category             |
-| Drum Type                 |
-| Drum Status               |
-| Store Name                |
-| Region Name               |
-| Location                  |
-| Date Opened               |
-| Date Closed               |
-| Date Hauled               |
+	Then I check that the file saved as: drumlogfile contains the following column headings:
+		| Heading       |
+		| Drum Name     |
+		| Drum Category |
+		| Drum Type     |
+		| Drum Status   |
+		| Store Name    |
+		| Region Name   |
+		| Location      |
+		| Date Opened   |
+		| Date Closed   |
+		| Date Hauled   |
    #Step that checks the cvs file for data in products grid
-   Then In the Drum log Page, I confirm the Products shown in the export file saved as: drumlogfile  match the products saved as: savedFile
-   Then I delete the file saved as drumlogfile
-   And I call Shared Step 106194 (RPS Sign out)
+	Then In the Drum log Page, I confirm the Products shown in the export file saved as: drumlogfile  match the products saved as: savedFile
+	Then I delete the file saved as drumlogfile
+	And I call Shared Step 106194 (RPS Sign out)
 
 Scenario: [105020] Drum Log - Breadcrumbs
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
-    Then In the Drum Log Page, I click the More Filters Button
-    And In the Drum Log Page, The More Filters Popup is showing
-    Then In the Drum Log Page More Filters Popup, I check that the: Store Name field is a drop down field
-    And In the Drum Log page, I select the option: Bolton from the: Store Name drop down menu
-    Then In the Drum Log page, I select the option: 146.01 Lightbulbs from the: Drum Type drop down menu
-    Then In the Drum Log Page More Filters Popup, I Click the the Apply Filter Button
-    Then I confirm that the Drum Log page bread crumb area contains the label: Bolton 
-    Then I confirm that the Drum Log page bread crumb area contains the label: 146.01 Lightbulbs
+	Then In the Drum Log Page, I click the More Filters Button
+	And In the Drum Log Page, The More Filters Popup is showing
+	Then In the Drum Log Page More Filters Popup, I check that the: Store Name field is a drop down field
+	And In the Drum Log page, I select the option: Bolton from the: Store Name drop down menu
+	Then In the Drum Log page, I select the option: 146.01 Lightbulbs from the: Drum Type drop down menu
+	Then In the Drum Log Page More Filters Popup, I Click the the Apply Filter Button
+	Then I confirm that the Drum Log page bread crumb area contains the label: Bolton
+	Then I confirm that the Drum Log page bread crumb area contains the label: 146.01 Lightbulbs
 	Then In the Drum Log Page, In the Products table I click the Reset Button
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm that the Drum Log page does not show the bread crumb area
@@ -444,11 +444,11 @@ Scenario: [105020] Drum Log - Breadcrumbs
 
 Scenario: [108301] Drum Log - View Data  - Transportation Data - confirm fields shown
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
-    Then I call Shared Step 108305 (Drum Log - Select Row and Expand > Actions - View Data)
+	Then I call Shared Step 108305 (Drum Log - Select Row and Expand > Actions - View Data)
 	Then I wait for the Product Information Popup to load
 	Then I Confirm that Product Information pop up is shown
 	Then I call Shared Step 149247 (Canadian Tire - Product Information pop up - Expand Transportation Data - Confirm rows)
@@ -456,11 +456,11 @@ Scenario: [108301] Drum Log - View Data  - Transportation Data - confirm fields 
 
 Scenario: [108300] Drum Log - View Data  - Product Data codes - confirm fields shown
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
-    Then I call Shared Step 108305 (Drum Log - Select Row and Expand > Actions - View Data)
+	Then I call Shared Step 108305 (Drum Log - Select Row and Expand > Actions - View Data)
 	Then I wait for the Product Information Popup to load
 	Then I Confirm that Product Information pop up is shown
 	Then I call Shared Step 149021 (Canadian Tire - Product Information pop up - Expand Product Data - Confirm rows)
@@ -469,11 +469,11 @@ Scenario: [108300] Drum Log - View Data  - Product Data codes - confirm fields s
 
 Scenario: [108303] Drum Log - View Data  - Battery Data - confirm fields shown
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.CT
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: Drum Log
 	Then I confirm the Drum Log tab has loaded
 	Then I confirm the active tab is: Drum Log
-    Then I call Shared Step 108305 (Drum Log - Select Row and Expand > Actions - View Data)
+	Then I call Shared Step 108305 (Drum Log - Select Row and Expand > Actions - View Data)
 	Then I wait for the Product Information Popup to load
 	Then I Confirm that Product Information pop up is shown
 	Then I call Shared Step 163151 (Product Information pop up - New version - Battery Data - confirm rows)

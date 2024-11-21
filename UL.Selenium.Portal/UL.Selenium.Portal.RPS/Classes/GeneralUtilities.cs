@@ -18,11 +18,11 @@ namespace UL.Selenium.Portal.RPS.Classes
 
         public static void WaitForLoadingToFinish(int secondsToWait = 10)
         {
-            int x = 0; 
+            int x = 0;
             while (x < secondsToWait)
             {
-                IWebElement PaceLoadingBar = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@class='pace pace-active']"), 2);
-                IWebElement PaceLoadingBar_Inactive = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[contains(@class,'pace-inactive')]"), 2);
+                IWebElement PaceLoadingBar = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//div[@class='pace pace-active']"), 2);
+                IWebElement PaceLoadingBar_Inactive = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//div[contains(@class,'pace-inactive')]"), 2);
 
                 if (PaceLoadingBar == null && PaceLoadingBar_Inactive != null)
                 {
@@ -77,16 +77,16 @@ namespace UL.Selenium.Portal.RPS.Classes
 
         public static void OpenNewTabAndNavigateTo(string url)
         {
-            string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+            string currentHandle = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
             Context.AddToContext("MainWindowHandle", currentHandle);
-            ((IJavaScriptExecutor)SeleniumBrowser.WebBrowser).ExecuteScript("window.open();");
-            SeleniumBrowser.WebBrowser.SwitchTo().Window(SeleniumBrowser.WebBrowser.WindowHandles.Last());
+            ((IJavaScriptExecutor)SeleniumWebDriver.CurrentDriver).ExecuteScript("window.open();");
+            SeleniumWebDriver.CurrentDriver.SwitchTo().Window(SeleniumWebDriver.CurrentDriver.WindowHandles.Last());
             if (url.ToLower().Contains("savedas"))
             {
                 url = (string)Context.GetFromContext(url);
             }
-            SeleniumBrowser.WebBrowser.Url = url;
-            SeleniumBrowser.WebBrowser.WaitForPageLoad();
+            SeleniumWebDriver.CurrentDriver.Url = url;
+            SeleniumWebDriver.CurrentDriver.WaitForPageLoad();
         }
 
         public static Bitmap CreateBitmapFromURL(string url)
@@ -129,7 +129,7 @@ namespace UL.Selenium.Portal.RPS.Classes
             while (i < 50)
             {
 
-                if (SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath("pace pace-active"), 0) != null)
+                if (SeleniumWebDriver.CurrentDriver.WaitUntilElementVisible(By.XPath("pace pace-active"), 0) != null)
                 {
                     return true;
                 }

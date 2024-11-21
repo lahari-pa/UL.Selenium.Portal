@@ -32,7 +32,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			//Report.UseSubSteps = true;
 			var thisNewProduct = new NewProduct();
-			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[contains(@id,'DistributorUPC')]"), 2);
+			IWebElement el = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[contains(@id,'DistributorUPC')]"), 2);
 			if (!thisNewProduct.WaitForContainerToBeVisible(3))
 			{
 				Report.Failure("The new product page is not showing");
@@ -47,8 +47,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ClickCheckbox()
 		{
 			var thisNewProduct = new NewProduct();
-			IWebElement checkBox = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[contains(@type,'checkbox')]"), 2);
-			IWebElement SendtoManu = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//a[contains(@id,'sendToManufacturer')]"), 2);
+			IWebElement checkBox = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[contains(@type,'checkbox')]"), 2);
+			IWebElement SendtoManu = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//a[contains(@id,'sendToManufacturer')]"), 2);
 			if (checkBox == null || SendtoManu == null)
 			{
 				Report.Info("Not able to find checkbox or manufacturer button");

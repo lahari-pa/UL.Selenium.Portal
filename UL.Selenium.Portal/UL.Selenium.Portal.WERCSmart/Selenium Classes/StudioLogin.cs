@@ -40,7 +40,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickSignIn()
 		{
-			string currentWindow = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			string currentWindow = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
 			Context.AddToContext("BaseWindow", currentWindow);
 			return this.containerElement.FindElement(By.XPath(".//input[@id='cmdLogin']"), 2).TryClick();
 		}

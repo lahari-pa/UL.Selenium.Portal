@@ -402,13 +402,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				if (alertAction == "accept")
 				{
 					Report.Info("Accepting the pop up alert");
-					SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+					SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
 				}
 
 				if (alertAction == "dismiss")
 				{
 					Report.Info("Dismissing the pop up alert");
-					SeleniumBrowser.WebBrowser.SwitchTo().Alert().Dismiss();
+					SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Dismiss();
 				}
 				GeneralUtilities.Wait_for_load_finish();
 				var selHomepage = new Homepage();
@@ -899,7 +899,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					{
 						Delay.Seconds(10);
 						counter++;
-						SeleniumBrowser.WebBrowser.Navigate().Refresh();
+						SeleniumWebDriver.CurrentDriver.Navigate().Refresh();
 						GeneralUtilities.Wait_for_load_finish();
 						MessagesOnHomepage = myHomepage.GetAnnouncements();
 					}

@@ -25,11 +25,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				IList<IWebElement> spinner = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//img[@class='spinner-overlay']"), 2);
+				IList<IWebElement> spinner = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(".//img[@class='spinner-overlay']"), 2);
 				while (spinner.Any(x => x.Displayed))
 				{
 					Delay.Seconds(Delay.SpeedFactor * 1);
-					spinner = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//img[@class='spinner-overlay']"), 2);
+					spinner = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(".//img[@class='spinner-overlay']"), 2);
 				}
 
 				return true;
@@ -72,7 +72,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				for (int i = 0; i < maxSecondsToWait; i++)
 				{
-					IList<IWebElement> spinner = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//img[@class='spinner-overlay']"), 2);
+					IList<IWebElement> spinner = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(".//img[@class='spinner-overlay']"), 2);
 					if (!spinner.Any(x => x.Displayed))
 					{
 						return true;
@@ -90,26 +90,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public static bool Wait_for_load_finish()
 		{
 			// wait up to 2 seconds for the loading bar to become visible
-			SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath("//body[contains(@class,'pace-running')]"), 2);
+			SeleniumWebDriver.CurrentDriver.WaitUntilElementVisible(By.XPath("//body[contains(@class,'pace-running')]"), 2);
 			// waits up to 60 seconds for the loading bar to then become invisible
-			return SeleniumBrowser.WebBrowser.WaitUntilElementInvisible(By.XPath("//body[contains(@class,'pace-running')]"), 60);
+			return SeleniumWebDriver.CurrentDriver.WaitUntilElementInvisible(By.XPath("//body[contains(@class,'pace-running')]"), 60);
 		}
 
 		public static bool Loading_Active()
 		{
-			return SeleniumBrowser.WebBrowser.FindElement(By.XPath("//body[contains(@class,'pace')]")) != null;
+			return SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//body[contains(@class,'pace')]")) != null;
 		}
 
 
 
 		public static void ScrollToBottomOfPage()
 		{
-			((IJavaScriptExecutor)SeleniumBrowser.WebBrowser).ExecuteScript("window.scrollTo(0, document.body.scrollHeight)");
+			((IJavaScriptExecutor)SeleniumWebDriver.CurrentDriver).ExecuteScript("window.scrollTo(0, document.body.scrollHeight)");
 		}
 
 		public static void ScrollToTopOfPage()
 		{
-			((IJavaScriptExecutor)SeleniumBrowser.WebBrowser).ExecuteScript("window.scrollTo(0, 0)");
+			((IJavaScriptExecutor)SeleniumWebDriver.CurrentDriver).ExecuteScript("window.scrollTo(0, 0)");
 		}
 
 		public static bool WaitForRefreshToDisappear(IWebElement button, int maxWaitTime = 60)
@@ -138,12 +138,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public static bool CloseAjaxPopup()
 		{
-			return SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//button[@data-dismiss = 'modal' and text()='Close']"), 2).TryClick();
+			return SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//button[@data-dismiss = 'modal' and text()='Close']"), 2).TryClick();
 		}
 
 		public static bool AjaxPopupExists()
 		{
-			return SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//p[contains(text(),'There was an error processing your request. Please try again.')]"), 2) != null;
+			return SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//p[contains(text(),'There was an error processing your request. Please try again.')]"), 2) != null;
 		}
 
 		public static List<string> CvsUpcs()
@@ -393,16 +393,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public static void OpenNewTabAndNavigateTo(string url)
 		{
-			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			string currentHandle = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
 			Context.AddToContext("MainWindowHandle", currentHandle);
-			((IJavaScriptExecutor)SeleniumBrowser.WebBrowser).ExecuteScript("window.open();");
-			SeleniumBrowser.WebBrowser.SwitchTo().Window(SeleniumBrowser.WebBrowser.WindowHandles.Last());
+			((IJavaScriptExecutor)SeleniumWebDriver.CurrentDriver).ExecuteScript("window.open();");
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Window(SeleniumWebDriver.CurrentDriver.WindowHandles.Last());
 			if (url.ToLower().Contains("savedas"))
 			{
 				url = (string)Context.GetFromContext(url);
 			}
-			SeleniumBrowser.WebBrowser.Url = url;
-			SeleniumBrowser.WebBrowser.WaitForPageLoad();
+			SeleniumWebDriver.CurrentDriver.Url = url;
+			SeleniumWebDriver.CurrentDriver.WaitForPageLoad();
 		}
 
 		public static void SaveMiddle5DigitsOfUPCAS(string upc, string savedAs)

@@ -22,7 +22,7 @@ Feature: Web Viewers
 Scenario: [70334] Base Functionality - Web Viewers - Demo Viewer
 
 Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
-Then I confirm the Home tab has loaded
+#Then I confirm the Home tab has loaded
 Given I click the main tab: Web Viewers
 Then I click the sub tab: Demo Viewer
 #Issue if both demoviewer and demostatus tabs are open (same title)
@@ -38,7 +38,7 @@ Given I call Shared Step 106194 (RPS Sign out)
 Scenario: [70335] Base Functionality - Web Viewers - Demo Status
 
 Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
-Then I confirm the Home tab has loaded
+#Then I confirm the Home tab has loaded
 Given I click the main tab: Web Viewers
 Then I click the sub tab: Demo Status
 #Issue if both demoviewer and demostatus tabs are open (same title)

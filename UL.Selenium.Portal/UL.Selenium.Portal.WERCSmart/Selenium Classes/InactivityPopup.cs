@@ -18,7 +18,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool IsVisible()
 		{
-			//this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 2);
+			//this.containerElement = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(BasePath), 2);
 			return this.containerElement.GetAttribute("class") != "modal fade";
 		}
 

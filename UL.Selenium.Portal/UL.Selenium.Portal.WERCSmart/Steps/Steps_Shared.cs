@@ -8820,7 +8820,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I right click the product");
 			shaSteps.GivenInTheSHAManagerGridIRightClickAgainstProductSavedAs(savedAs);
 			// saving the current window so we can naviate back from UPC List
-			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			string currentHandle = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
 			Context.AddToContext("MainWindowHandle", currentHandle);
 			Report.StartSubStep("I click 'UPC Retailer and Feed'");
 			shaSteps.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC Retailer and Feed");
@@ -8837,7 +8837,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I right click the product");
 			shaSteps.GivenInTheSHAManagerGridIRightClickFirstProduct();
 			// saving the current window so we can naviate back from UPC List
-			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			string currentHandle = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
 			Context.AddToContext("MainWindowHandle", currentHandle);
 			Report.StartSubStep("I click 'UPC Retailer and Feed'");
 			shaSteps.GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption("UPC Retailer and Feed");
@@ -13832,7 +13832,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				if (new ApplyRulesPage().Wait_for_load(1))
 				{
 					Report.Error("Apply rules popup did not close after two attempts");
-					SeleniumBrowser.WebBrowser.Close();
+					SeleniumWebDriver.CurrentDriver.Close();
 				}
 			}
 		}
@@ -14016,19 +14016,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
 				"Power designer has opened");
 			Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.ClickSearchFormatSubformat(), "Failed to click Search button", "Successfully clicked Search button");
-			ReadOnlyCollection<string> urls = SeleniumBrowser.WebBrowser.WindowHandles;
+			ReadOnlyCollection<string> urls = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			foreach (string handle in urls)
 			{
-				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("Format"))
+				if (SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle).Title.Contains("Format"))
 				{
-					SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+					SeleniumWebDriver.CurrentDriver.Manage().Window.Maximize();
 					Report.Success("Found window containing title: Format/SubFormat");
 					Report.Screenshot();
 					break;
 				}
 			}
-			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
+			IWebElement frame = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//iframe"));
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
 			Report.IsTrue(thisPowerDesignerPlus.SelectFormat("BATT", "MTR"), "Failed to set format option",
 				"Set format option");
 			var selStepsStudio = new Steps_Studio();
@@ -14633,7 +14633,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		//	Delay.Seconds(10);
 		//	if (SeleniumBrowser.Alert.IsAlertPresent())
 		//	{
-		//		SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+		//		SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
 		//		Delay.Seconds(1);
 		//	}
 
@@ -14650,7 +14650,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		//		if (new ApplyRulesPage().Wait_for_load(1))
 		//		{
 		//			Report.Error("Apply rules popup did not close after two attempts");
-		//			SeleniumBrowser.WebBrowser.Close();
+		//			SeleniumWebDriver.CurrentDriver.Close();
 		//		}
 		//	}
 
@@ -15061,7 +15061,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				if (new ApplyRulesPage().Wait_for_load(1))
 				{
 					Report.Error("Apply rules popup did not close after two attempts");
-					SeleniumBrowser.WebBrowser.Close();
+					SeleniumWebDriver.CurrentDriver.Close();
 				}
 			}
 
@@ -15682,7 +15682,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartSubStep("I select  product in the SHA grid saved as " + savedAs);
 			shaSteps.GivenInSHAManagerISelectTheProduct(savedAs);
 			// saving the current window so we can naviate back
-			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			string currentHandle = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
 			Context.AddToContext("MainWindowHandle", currentHandle);
 			Report.StartSubStep("I click 'Review'");
 			selStepsStudio.InSHAManagerIClickOnBottomMenuItem("Review");

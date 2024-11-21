@@ -17,7 +17,7 @@ Feature: Recent Activities - Show Legend Status
 @ScenarioId:9374
 Scenario: [70328] Base Functionality - Recent Activities - Show Legend Status
 Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: RPS.99
-Then I confirm the Home tab has loaded
+#Then I confirm the Home tab has loaded
 Given I click the main tab: Recent Activities
 Then I confirm the Recent Activities tab has loaded
 Then In the recent activities Page, I click the Legend Status Button

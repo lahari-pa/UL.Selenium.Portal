@@ -25,8 +25,8 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 		{
 			//get the window
 			StudioUtilites.SwitchToWindow("Wercs Studio");
-			SeleniumBrowser.WebBrowser.SwitchTo().DefaultContent();
-			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+			SeleniumWebDriver.CurrentDriver.SwitchTo().DefaultContent();
+			this.containerElement = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(BasePath));
 			return base.Wait_for_load(30);
 		}
 
@@ -34,7 +34,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 		//My Wercs, UL Secure Connect, Authoring, Management, Distribution, System, Window, Help
 		public bool ClickTopMenuItem(string item)
 		{
-			IWebElement navBar = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='navmenu']"));
+			IWebElement navBar = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//div[@id='navmenu']"));
 			navBar.ScrollElementIntoView();
 			ReadOnlyCollection<IWebElement> ListOfOptions = this.containerElement.FindElements(By.XPath(".//li//a"));
 			return ListOfOptions.FirstOrDefault(x => x.Text.Trim().ToLower() == item.Trim().ToLower()).TryClick();
@@ -44,7 +44,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 		public bool ClickSubMenu(string menuItem, string submenuItem)
 		{
 
-			IWebElement navBar = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//div[@id='navmenu']"));
+			IWebElement navBar = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//div[@id='navmenu']"));
 			navBar.ScrollElementIntoView();
 			ReadOnlyCollection<IWebElement> ListOfOptions = this.containerElement.FindElements(By.XPath(".//li//a"));
 			IWebElement topMenuItem = ListOfOptions.FirstOrDefault(x => x.Text.Trim().ToLower() == menuItem.Trim().ToLower());
@@ -92,13 +92,13 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 		public bool Wait_for_load(int secondsToWait = 60)
 		{
 			
-			ReadOnlyCollection<string> urls = SeleniumBrowser.WebBrowser.WindowHandles;
+			ReadOnlyCollection<string> urls = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			bool foundPopup = false;
 			foreach (string handle in urls)
 			{
-				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("Current Document"))
+				if (SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle).Title.Contains("Current Document"))
 				{
-					SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+					SeleniumWebDriver.CurrentDriver.Manage().Window.Maximize();
 					Report.Success("Found window containing title: Current Document");
 					Report.Screenshot();
 					foundPopup = true;
@@ -112,12 +112,12 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 				return false;
 			}
 
-			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
-		    IWebElement containerElement =  SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 1);
+			IWebElement frame = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//iframe"));
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
+		    IWebElement containerElement =  SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(BasePath), 1);
 			if (base.Wait_for_load(secondsToWait))
 			{
-				//Context.AddToContext("BaseWindow", SeleniumBrowser.WebBrowser.CurrentWindowHandle);
+				//Context.AddToContext("BaseWindow", SeleniumWebDriver.CurrentDriver.CurrentWindowHandle);
 				Report.Info(" Pop up is displayed");
 				return true;
 			}
@@ -166,13 +166,13 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 		public bool Wait_for_load(int secondsToWait = 60)
 		{
 
-			ReadOnlyCollection<string> urls = SeleniumBrowser.WebBrowser.WindowHandles;
+			ReadOnlyCollection<string> urls = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			bool foundPopup = false;
 			foreach (string handle in urls)
 			{
-				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("Published Documents"))
+				if (SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle).Title.Contains("Published Documents"))
 				{
-					SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+					SeleniumWebDriver.CurrentDriver.Manage().Window.Maximize();
 					Report.Success("Found window containing title: Published Documents");
 					Report.Screenshot();
 					foundPopup = true;
@@ -186,12 +186,12 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 				return false;
 			}
 
-			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
-			IWebElement containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 1);
+			IWebElement frame = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//iframe"));
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
+			IWebElement containerElement = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(BasePath), 1);
 			if (base.Wait_for_load(secondsToWait))
 			{
-				//Context.AddToContext("BaseWindow", SeleniumBrowser.WebBrowser.CurrentWindowHandle);
+				//Context.AddToContext("BaseWindow", SeleniumWebDriver.CurrentDriver.CurrentWindowHandle);
 				Report.Info("Pop up is displayed successfully");
 				return true;
 			}
@@ -262,13 +262,13 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 		public bool Wait_for_load(int secondsToWait = 60)
 		{
 
-			ReadOnlyCollection<string> urls = SeleniumBrowser.WebBrowser.WindowHandles;
+			ReadOnlyCollection<string> urls = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			bool foundPopup = false;
 			foreach (string handle in urls)
 			{
-				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("viewPublishedDoc"))
+				if (SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle).Title.Contains("viewPublishedDoc"))
 				{
-					SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+					SeleniumWebDriver.CurrentDriver.Manage().Window.Maximize();
 					Report.Success("Found window containing title: viewPublishedDoc");
 					Report.Screenshot();
 					foundPopup = true;
@@ -282,12 +282,12 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 				return false;
 			}
 
-			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//embed"));
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
-			IWebElement containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 1);
+			IWebElement frame = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//embed"));
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
+			IWebElement containerElement = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(BasePath), 1);
 			if (base.Wait_for_load(secondsToWait))
 			{
-				//Context.AddToContext("BaseWindow", SeleniumBrowser.WebBrowser.CurrentWindowHandle);
+				//Context.AddToContext("BaseWindow", SeleniumWebDriver.CurrentDriver.CurrentWindowHandle);
 				Report.Info("Pop up is displayed successfully");
 				return true;
 			}
@@ -334,13 +334,13 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 		public bool Wait_for_document_load(int secondsToWait = 60)
 		{
 
-			ReadOnlyCollection<string> urls = SeleniumBrowser.WebBrowser.WindowHandles;
+			ReadOnlyCollection<string> urls = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			bool foundPopup = false;
 			foreach (string handle in urls)
 			{
-				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("GetDocument"))
+				if (SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle).Title.Contains("GetDocument"))
 				{
-					SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+					SeleniumWebDriver.CurrentDriver.Manage().Window.Maximize();
 					Report.Success("Found window containing title: GetDocument");
 					Report.Screenshot();
 					foundPopup = true;
@@ -354,12 +354,12 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 				return false;
 			}
 
-			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//embed"));
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
-			IWebElement containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 1);
+			IWebElement frame = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//embed"));
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
+			IWebElement containerElement = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(BasePath), 1);
 			if (base.Wait_for_load(secondsToWait))
 			{
-				//Context.AddToContext("BaseWindow", SeleniumBrowser.WebBrowser.CurrentWindowHandle);
+				//Context.AddToContext("BaseWindow", SeleniumWebDriver.CurrentDriver.CurrentWindowHandle);
 				Report.Info("Pop up is displayed");
 				return true;
 			}
@@ -376,13 +376,13 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 		public bool Wait_for_load(int secondsToWait = 60)
 		{
 
-			ReadOnlyCollection<string> urls = SeleniumBrowser.WebBrowser.WindowHandles;
+			ReadOnlyCollection<string> urls = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			bool foundPopup = false;
 			foreach (string handle in urls)
 			{
-				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("Select product"))
+				if (SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle).Title.Contains("Select product"))
 				{
-					SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+					SeleniumWebDriver.CurrentDriver.Manage().Window.Maximize();
 					Report.Success("Found window containing title: Select product");
 					Report.Screenshot();
 					foundPopup = true;
@@ -396,12 +396,12 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 				return false;
 			}
 
-			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
-			IWebElement containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 1);
+			IWebElement frame = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//iframe"));
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
+			IWebElement containerElement = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(BasePath), 1);
 			if (base.Wait_for_load(secondsToWait))
 			{
-				//Context.AddToContext("BaseWindow", SeleniumBrowser.WebBrowser.CurrentWindowHandle);
+				//Context.AddToContext("BaseWindow", SeleniumWebDriver.CurrentDriver.CurrentWindowHandle);
 				Report.Info("Pop up is  displayed successfully");
 				return true;
 			}
@@ -497,13 +497,13 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 		public bool Wait_for_load(int secondsToWait = 60)
 		{
 
-			ReadOnlyCollection<string> urls = SeleniumBrowser.WebBrowser.WindowHandles;
+			ReadOnlyCollection<string> urls = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			bool foundPopup = false;
 			foreach (string handle in urls)
 			{
-				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("viewPublishedDoc"))
+				if (SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle).Title.Contains("viewPublishedDoc"))
 				{
-					SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+					SeleniumWebDriver.CurrentDriver.Manage().Window.Maximize();
 					Report.Success("Found window containing title: viewPublishedDoc");
 					Report.Screenshot();
 					foundPopup = true;
@@ -517,12 +517,12 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 				return false;
 			}
 
-			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//embed"));
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
-			IWebElement containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 1);
+			IWebElement frame = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//embed"));
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
+			IWebElement containerElement = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(BasePath), 1);
 			if (base.Wait_for_load(secondsToWait))
 			{
-				//Context.AddToContext("BaseWindow", SeleniumBrowser.WebBrowser.CurrentWindowHandle);
+				//Context.AddToContext("BaseWindow", SeleniumWebDriver.CurrentDriver.CurrentWindowHandle);
 				Report.Info("Pop up is displayed successfully");
 				return true;
 			}
@@ -563,13 +563,13 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 		public bool Wait_for_document_load(int secondsToWait = 60)
 		{
 
-			ReadOnlyCollection<string> urls = SeleniumBrowser.WebBrowser.WindowHandles;
+			ReadOnlyCollection<string> urls = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			bool foundPopup = false;
 			foreach (string handle in urls)
 			{
-				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("GetDocument"))
+				if (SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle).Title.Contains("GetDocument"))
 				{
-					SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+					SeleniumWebDriver.CurrentDriver.Manage().Window.Maximize();
 					Report.Success("Found window containing title: GetDocument");
 					Report.Screenshot();
 					foundPopup = true;
@@ -583,12 +583,12 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 				return false;
 			}
 
-			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//embed"));
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
-			IWebElement containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 1);
+			IWebElement frame = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//embed"));
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
+			IWebElement containerElement = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(BasePath), 1);
 			if (base.Wait_for_load(secondsToWait))
 			{
-				//Context.AddToContext("BaseWindow", SeleniumBrowser.WebBrowser.CurrentWindowHandle);
+				//Context.AddToContext("BaseWindow", SeleniumWebDriver.CurrentDriver.CurrentWindowHandle);
 				Report.Info("Pop up is displayed");
 				return true;
 			}
@@ -685,13 +685,13 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 		public bool Wait_for_load(int secondsToWait = 60)
 		{
 
-			ReadOnlyCollection<string> urls = SeleniumBrowser.WebBrowser.WindowHandles;
+			ReadOnlyCollection<string> urls = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			bool foundPopup = false;
 			foreach (string handle in urls)
 			{
-				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("Related Document"))
+				if (SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle).Title.Contains("Related Document"))
 				{
-					SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+					SeleniumWebDriver.CurrentDriver.Manage().Window.Maximize();
 					Report.Success("Found window containing title: Related Document");
 					Report.Screenshot();
 					foundPopup = true;
@@ -705,12 +705,12 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 				return false;
 			}
 
-			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
-			IWebElement containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 1);
+			IWebElement frame = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//iframe"));
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
+			IWebElement containerElement = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(BasePath), 1);
 			if (base.Wait_for_load(secondsToWait))
 			{
-				//Context.AddToContext("BaseWindow", SeleniumBrowser.WebBrowser.CurrentWindowHandle);
+				//Context.AddToContext("BaseWindow", SeleniumWebDriver.CurrentDriver.CurrentWindowHandle);
 				Report.Info(" Pop up is displayed");
 				return true;
 			}
@@ -768,13 +768,13 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 		public bool Wait_for_document_load(int secondsToWait = 60)
 		{
 
-			ReadOnlyCollection<string> urls = SeleniumBrowser.WebBrowser.WindowHandles;
+			ReadOnlyCollection<string> urls = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			bool foundPopup = false;
 			foreach (string handle in urls)
 			{
-				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("ViewRelatedDocument"))
+				if (SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle).Title.Contains("ViewRelatedDocument"))
 				{
-					SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+					SeleniumWebDriver.CurrentDriver.Manage().Window.Maximize();
 					Report.Success("Found window containing title: ViewRelatedDocument");
 					Report.Screenshot();
 					foundPopup = true;
@@ -788,12 +788,12 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 				return false;
 			}
 
-			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//embed"));
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
-			IWebElement containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 1);
+			IWebElement frame = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//embed"));
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
+			IWebElement containerElement = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(BasePath), 1);
 			if (base.Wait_for_load(secondsToWait))
 			{
-				//Context.AddToContext("BaseWindow", SeleniumBrowser.WebBrowser.CurrentWindowHandle);
+				//Context.AddToContext("BaseWindow", SeleniumWebDriver.CurrentDriver.CurrentWindowHandle);
 				Report.Info("Pop up is displayed");
 				return true;
 			}
@@ -864,13 +864,13 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 		public bool Wait_for_load(int secondsToWait = 60)
 		{
 
-			ReadOnlyCollection<string> urls = SeleniumBrowser.WebBrowser.WindowHandles;
+			ReadOnlyCollection<string> urls = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			bool foundPopup = false;
 			foreach (string handle in urls)
 			{
-				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("viewPublishedDoc"))
+				if (SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle).Title.Contains("viewPublishedDoc"))
 				{
-					SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+					SeleniumWebDriver.CurrentDriver.Manage().Window.Maximize();
 					Report.Success("Found window containing title: viewPublishedDoc");
 					Report.Screenshot();
 					foundPopup = true;
@@ -884,12 +884,12 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 				return false;
 			}
 
-			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//embed"));
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
-			IWebElement containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 1);
+			IWebElement frame = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//embed"));
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
+			IWebElement containerElement = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(BasePath), 1);
 			if (base.Wait_for_load(secondsToWait))
 			{
-				//Context.AddToContext("BaseWindow", SeleniumBrowser.WebBrowser.CurrentWindowHandle);
+				//Context.AddToContext("BaseWindow", SeleniumWebDriver.CurrentDriver.CurrentWindowHandle);
 				Report.Info("Pop up is displayed successfully");
 				return true;
 			}
@@ -943,13 +943,13 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 		public bool Wait_for_document_load(int secondsToWait = 60)
 		{
 
-			ReadOnlyCollection<string> urls = SeleniumBrowser.WebBrowser.WindowHandles;
+			ReadOnlyCollection<string> urls = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			bool foundPopup = false;
 			foreach (string handle in urls)
 			{
-				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("GetDocument"))
+				if (SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle).Title.Contains("GetDocument"))
 				{
-					SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+					SeleniumWebDriver.CurrentDriver.Manage().Window.Maximize();
 					Report.Success("Found window containing title: GetDocument");
 					Report.Screenshot();
 					foundPopup = true;
@@ -963,12 +963,12 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 				return false;
 			}
 
-			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//embed"));
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
-			IWebElement containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath), 1);
+			IWebElement frame = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//embed"));
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
+			IWebElement containerElement = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(BasePath), 1);
 			if (base.Wait_for_load(secondsToWait))
 			{
-				//Context.AddToContext("BaseWindow", SeleniumBrowser.WebBrowser.CurrentWindowHandle);
+				//Context.AddToContext("BaseWindow", SeleniumWebDriver.CurrentDriver.CurrentWindowHandle);
 				Report.Info("Pop up is displayed");
 				return true;
 			}

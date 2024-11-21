@@ -40,7 +40,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public void ClickOutside()
 		{
 			IWebElement el = this.containerElement.FindElement(By.XPath("//div[contains(@class,'panel-body')]"), 2);
-			var actionClass = new Actions(SeleniumBrowser.WebBrowser);
+			var actionClass = new Actions(SeleniumWebDriver.CurrentDriver);
 			actionClass.MoveToElement(el, -100, -100).Click().Perform();
 		}
 

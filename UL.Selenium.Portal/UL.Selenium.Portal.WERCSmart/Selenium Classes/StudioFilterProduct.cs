@@ -18,10 +18,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool Wait_for_load(int secondsToWait = 60)
 		{
-			ReadOnlyCollection<string> urls = SeleniumBrowser.WebBrowser.WindowHandles;
+			ReadOnlyCollection<string> urls = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			for (int i = 0; i < 30; i++)
 			{
-				urls = SeleniumBrowser.WebBrowser.WindowHandles;
+				urls = SeleniumWebDriver.CurrentDriver.WindowHandles;
 				if (urls.Count > 1)
 				{
 					break;
@@ -35,23 +35,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 
-			string current = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			string current = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
 			Context.AddToContext("BaseWindow", current);
 
 			foreach (string handle in urls)
 			{
-				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("Select product"))
+				if (SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle).Title.Contains("Select product"))
 				{
-					SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+					SeleniumWebDriver.CurrentDriver.Manage().Window.Maximize();
 					Report.Success("Found window containing title: Select product");
 					Report.Screenshot();
 					break;
 				}
 			}
 
-			IWebElement frame = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//iframe"));
-			SeleniumBrowser.WebBrowser.SwitchTo().Frame(frame);
-			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+			IWebElement frame = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//iframe"));
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
+			this.containerElement = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(BasePath));
 			return base.Wait_for_load(30);
 		}
 

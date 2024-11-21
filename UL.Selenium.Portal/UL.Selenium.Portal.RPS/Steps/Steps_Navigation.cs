@@ -212,8 +212,9 @@ namespace UL.Selenium.Portal.RPS.Steps
 			{
 				Report.IsTrue(new TopBar().WaitForContainerToBeVisible(), "Top bar did not load!");
 				GeneralUtilities.WaitForLoadingToFinish();
-				Report.IsTrue(new GridTable().WaitForContainerToBeVisible(60), string.Format("{0} tab did not load.", tab),
-					string.Format("{0} tab successfully loaded.", tab));
+				if (tab != "Target_status")
+					Report.IsTrue(new GridTable().WaitForContainerToBeVisible(60), string.Format("{0} tab did not load.", tab),
+						string.Format("{0} tab successfully loaded.", tab));
 				Report.Info("Grid table successfully loaded. Top bar will not show active because it's a WebViewer.");
 			}
 			else

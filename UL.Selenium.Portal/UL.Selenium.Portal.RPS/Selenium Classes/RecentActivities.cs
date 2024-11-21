@@ -21,8 +21,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
 		protected override By ContainerElementLocator => By.XPath("//*[@id = 'supertable_main' or @id='status-check-page']");
 
-
-		private IWebElement SearchBox => FindElement(By.XPath(".//input[@placeholder='Product Name / UPC Number / Supplier Name / WPS ID']"), 2);
+        private IWebElement SearchBox => FindElement(By.XPath(".//input[contains(@placeholder,'Product Name')]"), 2);
 
 		private IWebElement ProductTable => ContainerElement.FindElement(By.XPath(".//table[@id='dataGrid']"), 1);
 
@@ -944,7 +943,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 			IWebElement resizeIcon = wantedColumn.FindElement(By.XPath(".//span[contains(@class,'ui-jqgrid-resize ui-jqgrid-resize-ltr')]"), 2);
 			int startWidth = Int32.Parse(wantedColumn.GetAttribute("style").Replace("width: ", "").Replace("px;", ""));
 
-			Actions action = new Actions(SeleniumBrowser.WebBrowser);
+			Actions action = new Actions(SeleniumWebDriver.CurrentDriver);
 			action.ClickAndHold(resizeIcon).MoveByOffset(10, 0).Release().Build().Perform();
 			int endWidth = Int32.Parse(wantedColumn.GetAttribute("style").Replace("width: ", "").Replace("px;", ""));
 
@@ -2659,13 +2658,13 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
 			public bool DocumentIsDisplayed()
 			{
-				ReadOnlyCollection<string> urls = SeleniumBrowser.WebBrowser.WindowHandles;
+				ReadOnlyCollection<string> urls = SeleniumWebDriver.CurrentDriver.WindowHandles;
 				bool foundPopup = false;
 				foreach (string handle in urls)
 				{
-					if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("viewPublishedDoc"))
+					if (SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle).Title.Contains("viewPublishedDoc"))
 					{
-						SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+						SeleniumWebDriver.CurrentDriver.Manage().Window.Maximize();
 						Report.Success("Found window containing title: viewPublishedDoc");
 						Report.Screenshot();
 						foundPopup = true;

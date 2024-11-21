@@ -175,7 +175,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public void CheckIfRetailersInTableDisplayErrorMessage(Table table)
 		{
-			IList<IWebElement> AllRetailerErrorMessages = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//span[@data-bind='html: $data']/../../../preceding-sibling::td[1]"), 2);
+			IList<IWebElement> AllRetailerErrorMessages = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(".//span[@data-bind='html: $data']/../../../preceding-sibling::td[1]"), 2);
 			List<string> ReatilersThatDidNotDisplayErrorMessages = new List<string>();
 
 			foreach (TableRow row in table.Rows)

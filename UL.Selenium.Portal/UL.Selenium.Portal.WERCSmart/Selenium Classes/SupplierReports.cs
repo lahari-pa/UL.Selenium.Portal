@@ -75,8 +75,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			this.containerElement.FindElement(By.XPath(".//span[contains(@id, 'select2-autocomplete')]")).TryClick();
 			Delay.Seconds(1);
-			ReadOnlyCollection<IWebElement> Searches = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//input"));
-			IWebElement Search = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//input[@type='search']"), 2);
+			ReadOnlyCollection<IWebElement> Searches = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(".//input"));
+			IWebElement Search = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[@type='search']"), 2);
 
 			if (Search == null)
 			{
@@ -97,7 +97,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			IList<IWebElement> Matches =
-			SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
+			SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
 
 			/*
 			while (Matches.FirstOrDefault().FindElement(By.XPath(".//span[@class='text-muted']"), 2) == null)
@@ -371,8 +371,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool SelectFromSelectFileType(string excelOrCSV)
 		{
-			IWebElement select = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//select[@id='fileTypeDDL']"), 2);
-			IWebElement option = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//select[@id='fileTypeDDL']//option[text()='" + excelOrCSV + "']"), 2);
+			IWebElement select = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//select[@id='fileTypeDDL']"), 2);
+			IWebElement option = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//select[@id='fileTypeDDL']//option[text()='" + excelOrCSV + "']"), 2);
 			bool selectSelected = false;
 			bool optionSelected = false;
 

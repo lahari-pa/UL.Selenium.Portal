@@ -1201,7 +1201,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			//Data entry in automation causes the datepickers to stay open, Automation does not click save if date pickers are open, so first need to click off the date pickers to close them. Clicking the container in this case fixes the issue.
 			this.ContainerElement.Click();			
-			IWebElement SaveButton = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@data-bind='with: stewardshipNumberModel']//a[@class='btn btn-xs btn-success pull-right marLeft-5']"), 2);
+			IWebElement SaveButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@data-bind='with: stewardshipNumberModel']//a[@class='btn btn-xs btn-success pull-right marLeft-5']"), 2);
 			return SaveButton.TryClick();
 		}
 
@@ -1993,7 +1993,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ConfirmErrorInStewardshipInfoTable(string error, string province)
 		{
 			Delay.Seconds(5);
-			IWebElement ErrorMessage = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//td[text()='" + province + "']/following-sibling::td//span[text()='" + error + "']"), 2);
+			IWebElement ErrorMessage = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//td[text()='" + province + "']/following-sibling::td//span[text()='" + error + "']"), 2);
 
 			if (error == "No Error")
 			{

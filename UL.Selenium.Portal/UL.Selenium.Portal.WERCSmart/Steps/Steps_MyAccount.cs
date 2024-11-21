@@ -1154,10 +1154,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ConfirmANewTabOpensToYouTubeWithVideoTitled(string videoTitle)
 		{
 			var selYoutube = new YouTube();
-			System.Collections.ObjectModel.ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			System.Collections.ObjectModel.ReadOnlyCollection<string> allHandles = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			foreach (string handle in allHandles)
 			{
-				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle);
 				if (selYoutube.Wait_for_load(10))
 				{
 					Report.Success("The YouTube tab was opened");
