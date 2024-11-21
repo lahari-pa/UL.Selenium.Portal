@@ -783,58 +783,109 @@ Scenario: [57088] Engine (motor) oil for Auto or Boat - 8L
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Engine (motor) oil for Auto or Boat
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Engine (motor) oil for Auto or Boat
+	Given I should see the The Product Page
+	Then In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Engine (motor) oil for Auto or Boat_#57088
+	Then In the Product Section, set the option in section: 'Type of Product (select)' to: Engine (motor) oil for Auto or Boat
+	Then in the The Product page I click Continue
 	Then I save the product information as: TestCase57088
-	Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
-		| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
-		| No                                                             | No                           | No                     | No                  |
-		Given I call Shared Step 73629 (Physical and Chemical Properties - Liquid - select any options(enter pH, boiling point, flash point))
-		| Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
-		| Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Cocoa butter  | 100     | false               | false       |            |
+	Given I generate a random UPC number and save as: UPC57088
+	#Given I call Shared Step 63804 (Product Information - US, No(OSHA), No(DSV), Yes (PLP), No(GNFR))
+	#	| Classified using OSHA (US) Globally Harmonized Standards (GHS) | Shipped directly by supplier | Private Label or Brand | Good Not for resale |
+	#	| No                                                             | No                           | No                     | No                  |
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
+	#Given I call Shared Step 73629 (Physical and Chemical Properties - Liquid - select any options(enter pH, boiling point, flash point))
+	#	| Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+	#	| Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
+	Given I should see the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Liquid
+	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Liquid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
+	Then In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 0.87
+	Then In the Physical and Chemical Properties Section, for section: 'pH' select the checkbox option: 'I do not have exact pH data available to me'
+	Then In the Physical and Chemical Properties Section, set the option in section: 'pH' to: Not tested/Unknown
+	Then In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' select the checkbox option: 'I do not have exact Boiling Point data available to me'
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Boiling Point (in Celsius)' to: Not tested/Unknown
+	Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: 204
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Closed cup method
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Insoluble in water
+	Then in the Physical and Chemical Properties page I click Continue
+
+	#Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Cocoa butter  | 100     | false               | false       |            |
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+		| SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+		| CAS number | 64741-88-4  | 30      | false               | false         |             |
+		| CAS number | 178603-64-0 | 30      | false               | false         |             |
+		| CAS number | 178603-66-2 | 40      | false               | false         |             |
+	Then in the Ingredients page I click Continue
+
 	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should be on the Inventory Status, Prop 65 (US) Page
-	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is exempt from TSCA chemical Inventory listing requirements.
 	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
 
-	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
-	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
+	#Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+	Then I should be on the Transportation Details 1 Page
+	Then In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
+	Then in the Transportation Details 1 page, I click Continue
 
 #	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Then I should be on the Retailer Page
+	Then In the Retailer Section, click 'Add Retailers' button
+	Then In the Select Retailers window, select retailer: Autozone
+	Then In the Select Retailers window, click 'Done' button
 	Then in the Retailer page, I click Continue
+
+	Then I should be on the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC57088 enter Size: 16.8 and enter Container Type: Plastic Liner/Corrugate
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, verify retailer 'AZ' is present under the 'Destination Retailers' column
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page, I click Continue
 
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
-	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Yes, I certify that I have an OSHA-compliant SDS for this product and would like to upload it.
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'OSHA SDS'
 	Then in the Regulatory Documents to Provide page I click Continue
 
+	Given I should see the Additional Documents to Provide Page
 	Given in the Additional Documents to Provide page I click Continue
+
+	Given I should see the Optional Reports and Documents Available for Purchase Page
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-#	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-#		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
-#		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
-	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 501.827328
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor' to: Orange
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor Threshold' to: No data available
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Partition Coefficient' enter text: 41.3005
-	Then in the Safety Data Sheet Authoring - Additional Data (Optional) page, I click Continue
 
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I should see the Optional Comments Page
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
 	Then in the Optional Comments page I click Continue
 
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Engine (motor) oil for Auto or Boat
-#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57088
+	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Engine (motor) oil for Auto or Boat
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance Section, click 'Summary' button
+	Then I switch to the tab with Data Summary page
+	Then In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Engine (motor) oil for Auto or Boat
+	Then In the Summary Page, the 'Retailers will be selling my product at their store locations in (select either or both)' section should be showing the following value: United States
+	Then In the Summary Page, the 'Primary Physical State' section should be showing the following value: Liquid
+	Then In the Summary Page, verify table data in column Container Type showing the value: Plastic Liner/Corrugate
+	Then In the Summary Page, verify table data in column Retailers showing the value: AZ
+	Then In the Summary Page, the Product Document section Supplier Uploaded should be showing the following document: testdoc.pdf
+	Then In the Summary Page, the Product Document section Supplier Uploaded click the view link for the following document: testdoc.pdf
+	Then In the Summary Page, after clicking 'View' button I confirm pdf file is downloaded
+	Then I close the tab with Data Summary page
+	Then I should see the Data Acceptance Page
+
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57088
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase57088
 
