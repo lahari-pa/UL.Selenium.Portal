@@ -381,6 +381,7 @@ Scenario: [133311] Retailer Private Label List Appear in Alphabetical Order
 	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: chalk
 	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
  	Given in the The Product page I click Continue
+	Then I save the product information as: TestCase133311
 	#Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
 	Given I should see the Product Information Page
 	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
@@ -413,9 +414,14 @@ Scenario: [133311] Retailer Private Label List Appear in Alphabetical Order
 	Given I should see the Retailer Page
 	Then In the Retailer Section, click 'Add Retailers' button
 	Then In the Select Retailers window, select retailer: Wal-Mart/SAM'S CLUB
-	Then I confirm that the product names from the drop down for: Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin) for Wal-Mart appear in alphabetical order
 	Then In the Select Retailers window, click 'Done' button
+	Then In the Retailer Section confirm that the product names from the drop down for: Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin) for Wal-Mart appear in alphabetical order
+	#Then I confirm that the product names from the drop down for: Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin) for Wal-Mart appear in alphabetical order
+	Then In the Retailer Section, for retailer: Wal-Mart/SAM'S CLUB select 'Select Vendor' option: any
+	Then In the Retailer Section, for retailer: Wal-Mart/SAM'S CLUB select 'Indicate full name of product, as sold, via this retailer' option: Equate
 	Then in the Retailer page I click Continue
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase133311
 	
 
 @TestCase:125130
