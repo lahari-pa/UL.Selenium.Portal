@@ -407,7 +407,7 @@ Scenario: [133311] Retailer Private Label List Appear in Alphabetical Order
 	Given I should see the Ingredients Page
 	Then In the Ingredients section, add component with component name: Water
 	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
-	Then in the IngredientsPhysical and Chemical Properties page I click Continue
+	Then in the Ingredients page I click Continue
 	#Given I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
 	Given I should see the Inventory Status, Prop 65 (US) Page
 	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.

@@ -225,17 +225,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					return;
 				}
 			}
-			string GetBranchName() => TReVor.Integrations.Classes.TReVorSettings.BranchInfo?.BranchName ?? TReVorConfig.CurrentSettings?.TReVorSettings?.SoftwareBranch;
-			if(GetBranchName() == "QA-Integration")
-			{
-				this.GivenILogInWithEmailXAndPasswordY(user.UserName, user.Password);
-			}
-			else
-			{
-			    Report.IsTrue(new LandingPage().Click_Login(), "Failed to click Log In", "Successfully clicked Log In");
-				Report.IsTrue(new LandingPlatform().WaitForContainerToBeVisible(), "Landing Page did not load!", "Landing Page loaded");
-				Report.IsTrue(new LandingPlatform().SignIn(user.UserName, user.Password), $"Failed to Log In as {alias}", $"Successfully Logged In as {alias}", true);
-			}
+			Report.IsTrue(new LandingPage().Click_Login(), "Failed to click Log In", "Successfully clicked Log In");
+			Report.IsTrue(new LandingPlatform().WaitForContainerToBeVisible(), "Landing Page did not load!", "Landing Page loaded");
+			Report.IsTrue(new LandingPlatform().SignIn(user.UserName, user.Password), $"Failed to Log In as {alias}", $"Successfully Logged In as {alias}", true);
 			new StepsHomepage().IfDataConsentRequestsModalIsShowingAddRequiredTiers();
 		}
 
