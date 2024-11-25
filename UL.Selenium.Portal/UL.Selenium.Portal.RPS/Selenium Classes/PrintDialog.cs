@@ -24,10 +24,10 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         public static IWebElement GetShadowRoot(IWebElement shadowHost)
         {
-            IJavaScriptExecutor js = (IJavaScriptExecutor)SeleniumBrowser.WebBrowser;
+            IJavaScriptExecutor js = (IJavaScriptExecutor)SeleniumWebDriver.CurrentDriver;
             return (IWebElement)js.ExecuteScript("return arguments[0].shadowRoot", shadowHost);
         }
-        public static IWebElement ShadowHost = SeleniumBrowser.WebBrowser.FindElement(By.CssSelector("shadowHost_CSS"));
+        public static IWebElement ShadowHost = SeleniumWebDriver.CurrentDriver.FindElement(By.CssSelector("shadowHost_CSS"));
 
         public static IWebElement ShadowRoot = GetShadowRoot(ShadowHost);
 
@@ -47,7 +47,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         public void PrintTest()
         {
-            IJavaScriptExecutor executor = ((IJavaScriptExecutor)SeleniumBrowser.WebBrowser);            
+            IJavaScriptExecutor executor = ((IJavaScriptExecutor)SeleniumWebDriver.CurrentDriver);            
             executor.ExecuteScript("document.querySelector(\"print-preview-app\").shadowRoot.querySelector(\"print-preview-header\").shadowRoot.querySelector(\"paper-button.cancel-button\").click();");
         }
 

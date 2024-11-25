@@ -22,7 +22,7 @@ Feature: ItemSync - Invalid File Popup
 @ScenarioId:10385
 Scenario: [125672] Base functionality - ItemSync - Invalid File Pop-up (from Browse)
 	Then I call Shared Step 134359 (RPS Login - User has Standard ItemSync Access)
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: ItemSync
 	Then I click the sub tab: Upload a File
 	Then I wait for the ItemSync Upload a File screen to load

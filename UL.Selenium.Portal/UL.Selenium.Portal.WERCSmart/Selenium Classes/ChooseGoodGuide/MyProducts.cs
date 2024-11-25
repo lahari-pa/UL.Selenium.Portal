@@ -20,7 +20,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 			{
 				if (searchBy.Length > 0)
 				{
-					IWebElement searchBySelect = SeleniumBrowser.WebBrowser.FindElement(By.XPath(
+					IWebElement searchBySelect = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(
 						"//section[@id='productGridSection']//label[contains(text(), 'Search By')]/following-sibling::select"), 2);
 					
 					if (searchBySelect == null)
@@ -33,7 +33,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 
 				if (filter.Length > 0)
 				{
-					SeleniumBrowser.WebBrowser
+					SeleniumWebDriver.CurrentDriver
 						.FindElement(
 							By.XPath("//section[@id='productGridSection']//label[contains(text(), 'Filter')]/following-sibling::input"), 2)
 						.EnterText(filter);
@@ -41,13 +41,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 
 				if (upc.Length > 0)
 				{
-					SeleniumBrowser.WebBrowser.FindElement(By.XPath(
+					SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(
 						"//section[@id='productGridSection']//label[contains(text(), 'UPC')]/following-sibling::input"), 2).EnterText(upc);
 				}
 
 				if (status.Length > 0)
 				{
-					SeleniumBrowser.WebBrowser.FindElement(By.XPath(
+					SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(
 							"//section[@id='productGridSection']//label[contains(text(), 'Status')]/following-sibling::select"), 2)
 						.Select(status);
 				}
@@ -65,7 +65,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 
 		public bool ClickFilter()
 		{
-			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//button[@id='cmdFilterProducts']"), 2);
+			IWebElement el = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//button[@id='cmdFilterProducts']"), 2);
 			
 			if (el == null)
 			{
@@ -90,7 +90,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 			try
 			{
 				System.Collections.Generic.IEnumerable<string> ListOfHeaders =
-					SeleniumBrowser.WebBrowser.FindElements(
+					SeleniumWebDriver.CurrentDriver.FindElements(
 							By.XPath(".//table[@class='ui-jqgrid-htable']//th[not(contains(@style, 'none'))]/div"), 2)
 						.Select(x => x.Text.Trim());
 
@@ -105,7 +105,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 
 				if (i > -1)
 				{
-					return SeleniumBrowser.WebBrowser
+					return SeleniumWebDriver.CurrentDriver
 						.FindElements(
 							By.XPath("//table[@id='tblProducts']//td[not(contains(@style, 'none'))][" + (i + 1).ToString() + "]"), 2)
 						.FirstOrDefault(x => x.Text.Trim() == findValue).TryClick();
@@ -125,7 +125,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 			if (this.FindAndClickProduct(findBy, findValue))
 			{
 				Delay.Seconds(2);
-				IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//a[@class='editdata']"), 2);
+				IWebElement el = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//a[@class='editdata']"), 2);
 
 				if (el == null)
 				{
@@ -149,7 +149,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 			{
 				Report.Screenshot();
 				Delay.Seconds(2);
-				return SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//a[@title='Delete Product']"), 2).TryClick();
+				return SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//a[@title='Delete Product']"), 2).TryClick();
 			}
 
 			return false;
@@ -163,7 +163,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 				try
 				{
 					IWebElement invisibleLoading =
-						SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//div[@id='load_tblProducts' and contains(@style,'none')]"), 2);
+						SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@id='load_tblProducts' and contains(@style,'none')]"), 2);
 					
 					if (invisibleLoading == null)
 					{

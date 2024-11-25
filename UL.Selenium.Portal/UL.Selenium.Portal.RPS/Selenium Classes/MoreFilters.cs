@@ -145,7 +145,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
         {
 
             // string xPathTest = @"(//ul//li//span[@data-bind='text: translatedValue'] | //ul//li)";
-            //List<IWebElement> elList = SeleniumBrowser.WebBrowser.FindElements(By.XPath(xPathTest), 10).ToList();
+            //List<IWebElement> elList = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(xPathTest), 10).ToList();
 
             List<IWebElement> parameterElList = ContainerElement.FindElements(By.XPath(".//ul//li//span[@data-bind='text: translatedValue']"), 4).ToList();
             if (parameterElList.IsNullOrEmpty())

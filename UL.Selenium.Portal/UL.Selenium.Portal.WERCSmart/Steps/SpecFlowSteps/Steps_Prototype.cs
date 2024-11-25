@@ -1,41 +1,20 @@
-﻿using OpenQA.Selenium;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using Reqnroll;
-using Reqnroll.Assist;
-using UL.Automation.Reporting;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.Classes;
-using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Extensions;
 using UL.Automation.ReqnrollHelpers.Classes;
-using UL.Automation.TReVor.Classes;
 using UL.Automation.Utilities.Functions;
-using UL.Selenium.Portal.WERCSmart.Classes;
-using UL.Selenium.Portal.WERCSmart.Extensions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.GenerateIntentionallyBadData;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
-using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit;
 using UL.Automation.Utilities.Helpers;
-using Mailosaur;
-using ReportDetails = UL.Automation.Reporting.Classes.ReportDetails;
 using System.IO;
 using System.Drawing.Imaging;
-using BoDi;
 using System.Drawing;
 using System.Reflection;
 using UL.Automation.Utilities;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
-using System.Runtime.InteropServices;
-using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.PesticideDetailsState;
-using NPOI.SS.Formula.Functions;
-using RestSharp.Extensions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -566,7 +545,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			bool expected = is_isnot == "is";
 			bool isChecked = new NewProduct().StandaloneCheckbox(description).Checked();
-			Report.IsTrue(isChecked == expected, $"Failed to confirm the checkbox with description: '{description} {(expected ? "is not" : "is")} checked'!",$"Successfully confirmed the checkbox with description: '{description}' {is_isnot} checked");
+			Report.IsTrue(isChecked == expected, $"Failed to confirm the checkbox with description: '{description} {(expected ? "is not" : "is")} checked'!", $"Successfully confirmed the checkbox with description: '{description}' {is_isnot} checked");
 		}
 
 		//[RegexStepDefinition(@"(.*) should be showing the value: (.*)")]
@@ -730,11 +709,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 			}
 		}
-		
+
 		[RegexStepDefinition(@"In (.*) section, clear the textbox field with the placeholder value: (.*)")]
 		public void ClearTextBoxField(string section, string placeholderValue)
 		{
-			if(Report.IsTrue(new NewProduct().ConfirmTextboxDisplayed(placeholderValue), $"Failed to locate a textbox under the section: {section}!",$"Successfully located a textbox under the section: {section}"))
+			if (Report.IsTrue(new NewProduct().ConfirmTextboxDisplayed(placeholderValue), $"Failed to locate a textbox under the section: {section}!", $"Successfully located a textbox under the section: {section}"))
 			{
 				Report.IsTrue(new NewProduct().ClearTextBox(placeholderValue), $"Failed to clear the textbox!", $"Successfully cleared the textbox!");
 			}
@@ -794,7 +773,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[RegexStepDefinition(@"In the (.*) section, confirm that the shadow text: '(.*)' is displayed in the textbox")]
 		public void ShadowTextDisplayed(string section, string shadowText)
 		{
-			Report.IsTrue(new NewProduct().ConfirmTextboxDisplayed(shadowText), $"The shadow text: {shadowText}, was not displayed in the section: {section}!", $"The shadow text: {shadowText} was successfully displayed in section: {section}!");	
+			Report.IsTrue(new NewProduct().ConfirmTextboxDisplayed(shadowText), $"The shadow text: {shadowText}, was not displayed in the section: {section}!", $"The shadow text: {shadowText} was successfully displayed in section: {section}!");
 		}
 
 		[RegexStepDefinition(@"I navigate to the Home Page")]
@@ -836,7 +815,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure($"Error message was showing when it wasn't expected to! Error(s): {string.Join(", ", errors)}");
 				Report.Screenshot();
 			}
-		}	
+		}
 
 		[RegexStepDefinition(@"I confirm I see the error message types in the popup with the following titles: (.*)")]
 		public void ThenIConfirmISeeTheTwoErrorMessagesInThePopupWithTheFollowingTitleCaliforniaCleaningRightToKnow(string popupTitle, Table table)

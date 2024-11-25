@@ -661,12 +661,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Delay.Seconds(3);
 			Report.Info("Attemping to rightclick product by id: " + id);
-			//int index = SeleniumBrowser.WebBrowser
+			//int index = SeleniumWebDriver.CurrentDriver
 			//	.FindElements(By.XPath(
 			//		"//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]"))
 			//	.Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
 
-			//IWebElement matchingTD = SeleniumBrowser.WebBrowser
+			//IWebElement matchingTD = SeleniumWebDriver.CurrentDriver
 			//	.FindElements(By.XPath(".//table[@id='list']//tr//td[" + (index + 1).ToString() + "]"))
 			//	.FirstOrDefault(x => x.GetValue().Trim() == id);
 			IWebElement matchingTD2 = this.containerElement.FindElement(By.XPath(".//table[@id='list']//tr//td[@aria-describedby='list_Product' and @title = '" + id + "']//span"), 5);
@@ -706,12 +706,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Delay.Seconds(3);
 			Report.Info("Attemping to rightclick first product");
-			//int index = SeleniumBrowser.WebBrowser
+			//int index = SeleniumWebDriver.CurrentDriver
 			//	.FindElements(By.XPath(
 			//		"//div[@id='gview_list']//table/thead/tr[contains(@class, 'labels') and @role='rowheader']/th[not(contains(@style, 'none'))]"))
 			//	.Select(x => x.GetValue().Trim()).ToList().FindIndex(a => a == "Product");
 
-			//IWebElement matchingTD = SeleniumBrowser.WebBrowser
+			//IWebElement matchingTD = SeleniumWebDriver.CurrentDriver
 			//	.FindElements(By.XPath(".//table[@id='list']//tr//td[" + (index + 1).ToString() + "]"))
 			//	.FirstOrDefault(x => x.GetValue().Trim() == id);
 			IWebElement matchingTD2 = this.containerElement.FindElement(By.XPath(".//table[@id='list']//tr//td[@aria-describedby='list_Product']//span"), 5);

@@ -21,10 +21,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Delay.Seconds(2);
 			Report.Info("Wait for dashboard page");
-			ReadOnlyCollection<string> urls = SeleniumBrowser.WebBrowser.WindowHandles;
+			ReadOnlyCollection<string> urls = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			for (int i = 0; i < 30; i++)
 			{
-				urls = SeleniumBrowser.WebBrowser.WindowHandles;
+				urls = SeleniumWebDriver.CurrentDriver.WindowHandles;
 				if (urls.Count > 1)
 				{
 					break;
@@ -35,19 +35,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				return false;
 			}
-			//var current = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			//var current = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
 			foreach (string handle in urls)
 			{
-				if (SeleniumBrowser.WebBrowser.SwitchTo().Window(handle).Title.Contains("Dashboard"))
+				if (SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle).Title.Contains("Dashboard"))
 				{
-					SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+					SeleniumWebDriver.CurrentDriver.Manage().Window.Maximize();
 					Report.Success("Found window containing title: Dashboard");
 					Delay.Seconds(3);
 					Report.Screenshot();
 					break;
 				}
 			}
-			this.containerElement = SeleniumBrowser.WebBrowser.FindElement(By.XPath(BasePath));
+			this.containerElement = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(BasePath));
 			if (base.Wait_for_load(30))
 			{
 				return true;
@@ -57,7 +57,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public void Close()
 		{
-			SeleniumBrowser.WebBrowser.Close();
+			SeleniumWebDriver.CurrentDriver.Close();
 		}
 
 		//public bool ClickMenuAndSubMenuOption(string menu, string submenu = "")
@@ -107,7 +107,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		//	{
 		//		matchingMenuOption.Click();
 		//		Delay.Seconds(1);
-		//		submenuOptions = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//ul[contains(@class, 'subnav')]/li/a/span"), 2);
+		//		submenuOptions = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath("//ul[contains(@class, 'subnav')]/li/a/span"), 2);
 
 		//		matchingSubMenuOption =
 		//			submenuOptions.FirstOrDefault(x => x.GetValue().ToLower() == submenu.ToLower());
@@ -121,7 +121,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		//		parentUL = matchingSubMenuOption.FindElement(By.XPath("../../ul"), 2);
 		//		if (parentUL.GetAttribute("aria-expanded") == "false")
 		//		{
-		//			menuOptions = SeleniumBrowser.WebBrowser.FindElements(By.XPath("//nav/ul/li/a/span"), 2);
+		//			menuOptions = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath("//nav/ul/li/a/span"), 2);
 		//			if (menuOptions.Count == 0)
 		//			{
 		//				Report.Error("No menu options were found");

@@ -131,14 +131,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					break;
 			}
 			Report.Info("Switch to Tab: " + string.Join(", ", urls));
-			string currentHandle = SeleniumBrowser.WebBrowser.CurrentWindowHandle;
+			string currentHandle = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
 			Context.AddToContext("MainWindowHandle", currentHandle);
-			ReadOnlyCollection<string> allHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+			ReadOnlyCollection<string> allHandles = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			foreach (string handle in allHandles)
 			{
-				SeleniumBrowser.WebBrowser.SwitchTo().Window(handle);
-				SeleniumBrowser.WebBrowser.WaitForPageLoad(10);
-				var currentUrl = SeleniumBrowser.WebBrowser.Url;
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle);
+				SeleniumWebDriver.CurrentDriver.WaitForPageLoad(10);
+				var currentUrl = SeleniumWebDriver.CurrentDriver.Url;
 				Report.Info("Checking URL: " + currentUrl);
 				if (urls.Any(x => currentUrl.Contains(x)))
 				{

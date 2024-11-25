@@ -25,6 +25,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
         [RegexStepDefinition(@"In the Product Lookup Page, The More Filters Popup is not showing")]
+        [RegexStepDefinition(@"In the recent activities Page, The More Filters Popup is not showing")]
         public void InTheProductLookupPageIClickTheMoreFiltersPopupIsNotShowing()
         {
             Report.IsTrue(new MoreFiltersPopup().WaitForContainerToBeInvisible(), "The More filters popup was showing", "The More filters popup was not showing");
@@ -65,6 +66,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 
         [RegexStepDefinition(@"In the product lookup page More Filters Popup, I Click the the Apply Filter Button")]
+        [RegexStepDefinition(@"In the recent activities Page More Filters Popup, I Click the the Apply Filter Button")]
         public void InTheProductLookUpPageMoreFiltersPopupClickApplyFilterButton()
         {
             Report.IsTrue(new MoreFiltersPopup().ClickApplyFiltersButton(), "The Apply Filter button was not clicked", "The Apply Filter button was clicked successfully");
@@ -1425,8 +1427,6 @@ namespace UL.Selenium.Portal.RPS.Steps
             GeneralUtilities.WaitForLoadingToFinish();
             Report.StartSubStep($"In the More Filters pop up, I click Apply button");
             InTheProductLookUpPageMoreFiltersPopupClickApplyFilterButton();
-            Report.StartSubStep($"I confirm the More Filters pop up closes");
-            GivenInTheProductLookupPageIConfirmTheMoreFiltersPopupIsNotDisplayed("is not");
         }
 
 

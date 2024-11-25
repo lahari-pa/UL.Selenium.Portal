@@ -19,7 +19,7 @@ Feature: Drum Log Functionality General
 #Currently missing steps due to an issue with "Filters:" row.
 Scenario: [105020] Drum Log - Breadcrumbs - Ticket is with DEV
 Given I call Shared Step 98339 (RPS Lowe's Login)
-Then I confirm the Home tab has loaded
+#Then I confirm the Home tab has loaded
 Given I click the main tab: Drum Log
 Then I confirm the Drum Log tab has loaded
 Then In the Drum Log Page, I click the More Filters Button

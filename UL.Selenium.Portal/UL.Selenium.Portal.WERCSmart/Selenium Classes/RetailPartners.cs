@@ -46,7 +46,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool RetailerShowingInAdditionalDataConsentRequests(string retailer)
 		{
 			var AdditionalDataConsentRequests = new List<string>();
-			IWebElement MyDataAndRecipients = SeleniumBrowser.WebBrowser.FindElements(By.XPath(".//h2"), 2).FirstOrDefault(x => x.Text.Contains("My Data & Recipients"));
+			IWebElement MyDataAndRecipients = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(".//h2"), 2).FirstOrDefault(x => x.Text.Contains("My Data & Recipients"));
 			if (MyDataAndRecipients != null)
 			{
 				AdditionalDataConsentRequests = MyDataAndRecipients.FindElements(By.XPath("../ div[2]//a//span")).Select(x => x.Text).ToList();
@@ -144,7 +144,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool FindRadioButton(string shouldOrShouldNot, string radioButtonText)
 		{
-			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//input[@type='radio']//following-sibling::span[contains(text(), \"" + radioButtonText + "\")]"), 2);
+			IWebElement el = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//input[@type='radio']//following-sibling::span[contains(text(), \"" + radioButtonText + "\")]"), 2);
 
 			if (shouldOrShouldNot.ToLower() == "should")
 			{
@@ -175,7 +175,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckIfAISIsUploaded()
 		{
-			IWebElement el = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//label[contains(text(), 'Article Information Sheet (AIS)')]/..//following-sibling::div//div[@class='dropzone']//strong[contains(text(), 'Drop .pdf file here or click ')]"), 2);
+			IWebElement el = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//label[contains(text(), 'Article Information Sheet (AIS)')]/..//following-sibling::div//div[@class='dropzone']//strong[contains(text(), 'Drop .pdf file here or click ')]"), 2);
 			if (el == null)
 			{
 				return false;
@@ -305,7 +305,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickBackButton()
 		{
-			return SeleniumBrowser.WebBrowser.WaitUntilElementVisible(By.XPath(".//div[@class='header-with-back']//a/i"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
+			return SeleniumWebDriver.CurrentDriver.WaitUntilElementVisible(By.XPath(".//div[@class='header-with-back']//a/i"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
 		}
 
 		public bool ClickInfoButton(string text)

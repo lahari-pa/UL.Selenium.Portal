@@ -165,7 +165,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CalenderDatePickerDisplayed(string state)
 		{
-			IWebElement calendar = SeleniumBrowser.WebBrowser.FindElement(By.XPath(@".//div[@class='datepicker-days']"), 2);
+			IWebElement calendar = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(@".//div[@class='datepicker-days']"), 2);
 			return calendar != null && calendar.Displayed;
 		}
 
@@ -207,7 +207,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					if (state == "NY")
 					{
 						Report.Info("Attempting to access the NY calendar button by scolling the page down again");
-						new Actions(SeleniumBrowser.WebBrowser).SendKeys(Keys.ArrowDown).Perform();
+						new Actions(SeleniumWebDriver.CurrentDriver).SendKeys(Keys.ArrowDown).Perform();
 						if (calendarButton.TryClick())
 						{
 							break;
@@ -265,7 +265,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			while (date.Year > activeYear || date.Year == activeYear && date.Month > activeMonth)
 			{
 				// Click next month
-				SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//table[parent::div[@class='datepicker-days']]//th[@class='next']"), 2).TryClick();
+				SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//table[parent::div[@class='datepicker-days']]//th[@class='next']"), 2).TryClick();
 				//activeDate = this.CalendarActiveDate();
 				if (!this.GetCalendarActiveDate(out string month, out string year))
 				{
@@ -277,12 +277,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				activeMonth = DateTime.ParseExact(month, "MMMM", CultureInfo.CurrentCulture).Month;
 			}
 			// Select day
-			return SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//table[parent::div[@class='datepicker-days']]//td[@class='day' and text()='" + date.Day + "']"), 2).TryClick();
+			return SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//table[parent::div[@class='datepicker-days']]//td[@class='day' and text()='" + date.Day + "']"), 2).TryClick();
 		}
 
 		public bool GetCalendarActiveDate(out string month, out string year)
 		{
-			IWebElement calendarTable = SeleniumBrowser.WebBrowser.FindElement(By.XPath(".//table[parent::div[@class='datepicker-days']]"), 2);
+			IWebElement calendarTable = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//table[parent::div[@class='datepicker-days']]"), 2);
 			IWebElement datePicker = calendarTable?.FindElement(By.XPath(".//th[@class='datepicker-switch']"), 2);
 			var dates = datePicker?.Text.Split(' ').Select(x => x.Trim()).ToList();
 			month = "";

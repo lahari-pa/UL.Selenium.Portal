@@ -144,7 +144,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
 		public bool WaitUntilUploadAFilePageLoaded()
 		{
-			IWebElement loadingBarEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//body[@class=' pace-running']"), 5);
+			IWebElement loadingBarEl = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//body[@class=' pace-running']"), 5);
 			if (loadingBarEl == null)
 			{
 				Report.Info($"The loading bar was not showing");
@@ -153,7 +153,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 			int x = 1;
 			while (x < 30)
 			{
-				loadingBarEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//body[@class=' pace-running']"), 1);
+				loadingBarEl = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//body[@class=' pace-running']"), 1);
 				if (loadingBarEl == null)
 				{
 					Report.Info($"The loading bar was not showing");
@@ -178,7 +178,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
 		public bool WaitUntilManuaEntryPageLoaded()
 		{
-			IWebElement loadingBarEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//body[@class=' pace-running']"), 5);
+			IWebElement loadingBarEl = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//body[@class=' pace-running']"), 5);
 			if (loadingBarEl == null)
 			{
 				Report.Info($"The loading bar was not showing");
@@ -187,7 +187,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 			int x = 1;
 			while (x < 30)
 			{
-				loadingBarEl = SeleniumBrowser.WebBrowser.FindElement(By.XPath("//body[@class=' pace-running']"), 1);
+				loadingBarEl = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//body[@class=' pace-running']"), 1);
 				if (loadingBarEl == null)
 				{
 					Report.Info($"The loading bar was not showing");
@@ -240,7 +240,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
 			try
 			{
-				var test = SeleniumBrowser.WebBrowser.FindElement(By.Id("__RequestVerificationToken"), 2);
+				var test = SeleniumWebDriver.CurrentDriver.FindElement(By.Id("__RequestVerificationToken"), 2);
 			}
 			catch
 			{

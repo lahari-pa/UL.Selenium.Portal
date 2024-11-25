@@ -1,4 +1,4 @@
-﻿using BoDi;
+﻿using UL.Automation.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System;
@@ -21,7 +21,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		internal Homepage Homepage { get; }
 		internal WebDriverInterface WebDriverInterface { get; }
 
-		internal StepsTReVor(IObjectContainer container)
+		internal StepsTReVor(IGenericContainer container)
 		{
 			this.WebDriverInterface = container.Resolve<WebDriverInterface>();
 			this.GlobalSteps = container.Resolve<GlobalSteps>();

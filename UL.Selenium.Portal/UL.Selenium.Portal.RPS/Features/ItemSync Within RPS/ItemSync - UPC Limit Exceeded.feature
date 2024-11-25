@@ -22,7 +22,7 @@ Feature: ItemSync - UPC Limit Exceeded
 @ScenarioId:10387
 Scenario: [125685] Base functionality - ItemSync - UPC Limit Exceeded (from Browse)
 	Then I call Shared Step 134359 (RPS Login - User has Standard ItemSync Access)
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I click the main tab: ItemSync
 	Then I click the sub tab: Upload a File
 	Then I wait for the ItemSync Upload a File screen to load

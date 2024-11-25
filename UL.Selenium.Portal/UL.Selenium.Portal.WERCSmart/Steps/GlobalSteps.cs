@@ -561,10 +561,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					//Report.Info("Attempting to initialize the chrome driver");
 					//var chromeDriverService = ChromeDriverService.CreateDefaultService();
 					Report.Info("Attempting to Open a chrome window");
-					//SeleniumBrowser.WebBrowser =  new ChromeDriver(chromeDriverService, new ChromeOptions());
+					//SeleniumWebDriver.CurrentDriver =  new ChromeDriver(chromeDriverService, new ChromeOptions());
 					//Report.Info("Attempting to maximize the window");
 					SeleniumBrowser.StartBrowser(WebDriverType.Chrome);
-					//SeleniumBrowser.WebBrowser.Manage().Window.Maximize();
+					//SeleniumWebDriver.CurrentDriver.Manage().Window.Maximize();
 				}
 
 				SeleniumWebDriver.CurrentDriver.Navigate(SeleniumWebDriver.BaseTestUrl);

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using BoDi;
+using UL.Automation.Interfaces;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Extensions;
 using OpenQA.Selenium;

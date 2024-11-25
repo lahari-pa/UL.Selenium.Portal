@@ -374,13 +374,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				Delay.Seconds(10);
 				
-				Context.AddToContext("MainWindowHandle", SeleniumBrowser.WebBrowser.CurrentWindowHandle);
+				Context.AddToContext("MainWindowHandle", SeleniumWebDriver.CurrentDriver.CurrentWindowHandle);
 			
-				ReadOnlyCollection<string> windowHandles = SeleniumBrowser.WebBrowser.WindowHandles;
+				ReadOnlyCollection<string> windowHandles = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			
-				string newTab = windowHandles.FirstOrDefault(x => x != SeleniumBrowser.WebBrowser.CurrentWindowHandle);
+				string newTab = windowHandles.FirstOrDefault(x => x != SeleniumWebDriver.CurrentDriver.CurrentWindowHandle);
 			
-				SeleniumBrowser.WebBrowser.SwitchTo().Window(newTab);
+				SeleniumWebDriver.CurrentDriver.SwitchTo().Window(newTab);
 		
 				Report.Success("Window switched successfully!");
 				Report.Screenshot();
@@ -1173,7 +1173,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[RegexStepDefinition(@"I confirm in the browser popup")]
 		public void GivenIConfirmInTheBrowserPopup()
 		{
-			SeleniumBrowser.WebBrowser.SwitchTo().Alert().Accept();
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Accept();
 		}
 
 		[RegexStepDefinition(@"I confirm that the CSV file saved as: (.*) contains the following columns:")]

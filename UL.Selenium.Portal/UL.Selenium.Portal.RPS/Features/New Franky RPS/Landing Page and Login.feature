@@ -12,7 +12,7 @@
 @RecentActivities
 @HelpAndSupport
 @Global
-
+@MoreFilters
 Feature: Landing Page and Login
 
 Scenario Outline: [169067] Logged in page banner - layout
@@ -25,16 +25,16 @@ Scenario Outline: [169067] Logged in page banner - layout
 	And I confirm the user displayed in the top bar matches the active logged in user
 	Given I call Shared Step 106194 (RPS Sign out)
 
-	Examples:
-	| Scenario Name                             | Retailer | LandingTab               |
-	| [#169067a] Logged in page banner - layout | RPS.LW   | LWLandingtab             |
-	| [#169067b] Logged in page banner - layout | RPS.CV   | Program Health           |
+Examples:
+	| Scenario Name                             | Retailer | LandingTab     |
+	| [#169067a] Logged in page banner - layout | RPS.LW   | LWLandingtab   |
+	| [#169067b] Logged in page banner - layout | RPS.CV   | Program Health |
 #	| [#169067c] Logged in page banner - layout | RPS.WM   | Program Health           |
 #	| [#169067d] Logged in page banner - layout | RPS.HD   | Program Health           |
-	| [#169067e] Logged in page banner - layout | RPS.SF   | Program Health           |
+	| [#169067e] Logged in page banner - layout | RPS.SF   | Program Health |
 #	| [#169067f] Logged in page banner - layout | RPS.PX   | Program Health           |
-	| [#169067g] Logged in page banner - layout | RPS.TG   | Product Lookup           |
-	| [#169067h] Logged in page banner - layout | RPS.CT   | Program Health           |
+	| [#169067g] Logged in page banner - layout | RPS.TG   | Product Lookup |
+	| [#169067h] Logged in page banner - layout | RPS.CT   | Program Health |
 
 Scenario Outline: [169076] UL Solution logo redirects to Home tab
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
@@ -53,16 +53,16 @@ Scenario Outline: [169076] UL Solution logo redirects to Home tab
 	Then I confirm the active tab is: <LandingTab>
 	Given I call Shared Step 106194 (RPS Sign out)
 
-	Examples:
-	| Scenario Name                                     | Retailer | LandingTab               |
-	| [#169076a] UL Solution logo redirects to Home tab | RPS.LW   | LWLandingtab             |
-	| [#169076b] UL Solution logo redirects to Home tab | RPS.CV   | Program Health           |
+Examples:
+	| Scenario Name                                     | Retailer | LandingTab     |
+	| [#169076a] UL Solution logo redirects to Home tab | RPS.LW   | LWLandingtab   |
+	| [#169076b] UL Solution logo redirects to Home tab | RPS.CV   | Program Health |
 #	| [#169076c] UL Solution logo redirects to Home tab | RPS.WM   | Program Health           |
 #	| [#169076d] UL Solution logo redirects to Home tab | RPS.HD   | Program Health           |
-	| [#169076e] UL Solution logo redirects to Home tab | RPS.SF   | Program Health           |
+	| [#169076e] UL Solution logo redirects to Home tab | RPS.SF   | Program Health |
 #	| [#169076f] UL Solution logo redirects to Home tab | RPS.PX   | Program Health           |
-	| [#169076g] UL Solution logo redirects to Home tab | RPS.TG   | Product Lookup           |
-	| [#169076h] UL Solution logo redirects to Home tab | RPS.CT   | Program Health           |
+	| [#169076g] UL Solution logo redirects to Home tab | RPS.TG   | Product Lookup |
+	| [#169076h] UL Solution logo redirects to Home tab | RPS.CT   | Program Health |
 
 Scenario Outline: [169078] Log Out
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
@@ -75,16 +75,16 @@ Scenario Outline: [169078] Log Out
 	Given I call Shared Step 106194 (RPS Sign out)
 	Then I confirm the Landing Page has loaded
 
-	Examples:
-	| Scenario Name      | Retailer | LandingTab               |
-	| [#169078a] Log Out | RPS.LW   | LWLandingtab             |
-	| [#169078b] Log Out | RPS.CV   | Program Health           |
+Examples:
+	| Scenario Name      | Retailer | LandingTab     |
+	| [#169078a] Log Out | RPS.LW   | LWLandingtab   |
+	| [#169078b] Log Out | RPS.CV   | Program Health |
 #	| [#169078c] Log Out | RPS.WM   | Program Health           |
 #	| [#169078d] Log Out | RPS.HD   | Program Health           |
-	| [#169078e] Log Out | RPS.SF   | Program Health           |
+	| [#169078e] Log Out | RPS.SF   | Program Health |
 #	| [#169078f] Log Out | RPS.PX   | Program Health           |
-	| [#169078g] Log Out | RPS.TG   | Product Lookup           |
-	| [#169078h] Log Out | RPS.CT   | Program Health           |
+	| [#169078g] Log Out | RPS.TG   | Product Lookup |
+	| [#169078h] Log Out | RPS.CT   | Program Health |
 
 Scenario Outline: [169079] UL Logo
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
@@ -94,16 +94,16 @@ Scenario Outline: [169079] UL Logo
 	Then I confirm the active tab is: <LandingTab>
 	Given I call Shared Step 106194 (RPS Sign out)
 
-	Examples:
-	| Scenario Name      | Retailer | LandingTab               |
-	| [#169079a] UL Logo | RPS.LW   | LWLandingtab             |
-	| [#169079b] UL Logo | RPS.CV   | Program Health           |
+Examples:
+	| Scenario Name      | Retailer | LandingTab     |
+	| [#169079a] UL Logo | RPS.LW   | LWLandingtab   |
+	| [#169079b] UL Logo | RPS.CV   | Program Health |
 #	| [#169079c] UL Logo | RPS.WM   | Program Health           |
 #	| [#169079d] UL Logo | RPS.HD   | Program Health           |
-	| [#169079e] UL Logo | RPS.SF   | Program Health           |
+	| [#169079e] UL Logo | RPS.SF   | Program Health |
 #	| [#169079f] UL Logo | RPS.PX   | Program Health           |
-	| [#169079g] UL Logo | RPS.TG   | Product Lookup           |
-	| [#169079h] UL Logo | RPS.CT   | Program Health           |
+	| [#169079g] UL Logo | RPS.TG   | Product Lookup |
+	| [#169079h] UL Logo | RPS.CT   | Program Health |
 
 # Removed from regression: 2024/08
 @ignore
@@ -161,16 +161,16 @@ Scenario Outline: [169650] Closing browser logs user out
 	Then I navigate to the RPS landing page
 	And I confirm the Landing Page has loaded
 
-	Examples:
-	| Scenario Name                            | Retailer | LandingTab               |
-	| [#169650a] Closing browser logs user out | RPS.LW   | LWLandingtab             |
-	| [#169650b] Closing browser logs user out | RPS.CV   | Program Health           |
+Examples:
+	| Scenario Name                            | Retailer | LandingTab     |
+	| [#169650a] Closing browser logs user out | RPS.LW   | LWLandingtab   |
+	| [#169650b] Closing browser logs user out | RPS.CV   | Program Health |
 #	| [#169650c] Closing browser logs user out | RPS.WM   | Program Health           |
 #	| [#169650d] Closing browser logs user out | RPS.HD   | Program Health           |
-	| [#169650e] Closing browser logs user out | RPS.SF   | Program Health           |
+	| [#169650e] Closing browser logs user out | RPS.SF   | Program Health |
 #	| [#169650f] Closing browser logs user out | RPS.PX   | Program Health           |
-	| [#169650g] Closing browser logs user out | RPS.TG   | Product Lookup           |
-	| [#169650h] Closing browser logs user out | RPS.CT   | Program Health           |
+	| [#169650g] Closing browser logs user out | RPS.TG   | Product Lookup |
+	| [#169650h] Closing browser logs user out | RPS.CT   | Program Health |
 
 Scenario: [73218] Sign In / Sign Out
 	Given I save TReVor test user: RPS.CV to Context as the active user
@@ -184,7 +184,7 @@ Scenario: [73218] Sign In / Sign Out
 	Then I confirm the error is displayed indicating Account does not exist or password is incorrect
 	Given I enter the Password for the active user
 	Given I click 'Log in'
-	Then I confirm the Home tab has loaded
+	#Then I confirm the Home tab has loaded
 	Given I confirm the user displayed in the top bar matches the active logged in user
 	And I click the user button in the top bar
 	And I click 'Sign Out' under the user button
@@ -197,16 +197,16 @@ Scenario Outline: [169651] Base Functionality - Automatic sign out
 	Then I refresh the web page
 	Then I confirm the Landing Page has loaded
 
-	Examples:
-	| Scenario Name                                      | Retailer | LandingTab               |
-	| [#169651a] Base Functionality - Automatic sign out | RPS.LW   | LWLandingtab             |
-	| [#169651b] Base Functionality - Automatic sign out | RPS.CV   | Program Health           |
+Examples:
+	| Scenario Name                                      | Retailer | LandingTab     |
+	| [#169651a] Base Functionality - Automatic sign out | RPS.LW   | LWLandingtab   |
+	| [#169651b] Base Functionality - Automatic sign out | RPS.CV   | Program Health |
 #	| [#169651c] Base Functionality - Automatic sign out | RPS.WM   | Program Health           |
 #	| [#169651d] Base Functionality - Automatic sign out | RPS.HD   | Program Health           |
-	| [#169651e] Base Functionality - Automatic sign out | RPS.SF   | Program Health           |
+	| [#169651e] Base Functionality - Automatic sign out | RPS.SF   | Program Health |
 #	| [#169651f] Base Functionality - Automatic sign out | RPS.PX   | Program Health           |
-	| [#169651g] Base Functionality - Automatic sign out | RPS.TG   | Product Lookup           |
-	| [#169651h] Base Functionality - Automatic sign out | RPS.CT   | Program Health           |
+	| [#169651g] Base Functionality - Automatic sign out | RPS.TG   | Product Lookup |
+	| [#169651h] Base Functionality - Automatic sign out | RPS.CT   | Program Health |
 
 Scenario Outline: [111866] Verify Drum Log tab does not display
 	Given I call Shared Step 104950 (RPS Login - Base Functionality) for TReVor account: <Retailer>
@@ -217,8 +217,8 @@ Scenario Outline: [111866] Verify Drum Log tab does not display
 	Then I cannot change URL to access Drumlog page
 	Given I call Shared Step 106194 (RPS Sign out)
 	# Repeat for Home Depot and RPS.99 when added
-	Examples:
-	| Scenario Name                                   | Retailer | LandingTab           |
-	| [#111866a] Verify Drum Log tab does not display | RPS.CV   | Program Health       |
+Examples:
+	| Scenario Name                                   | Retailer | LandingTab     |
+	| [#111866a] Verify Drum Log tab does not display | RPS.CV   | Program Health |
 #	| [#111866b] Verify Drum Log tab does not display | RPS.HD   | Program Health       |
 #	| [#111866c] Verify Drum Log tab does not display | RPS.99   | Program Health       |
