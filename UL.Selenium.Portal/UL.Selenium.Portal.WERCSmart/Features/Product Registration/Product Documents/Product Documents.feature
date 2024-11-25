@@ -101,14 +101,23 @@ Scenario: [59322] Upload document - VOC exemption letter & VOC product label
 
 @TestCase:59320
 Scenario: [59320] Upload Document - IFRA certificate
+
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
+
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
-	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Crayon 
+
+	#And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Crayon
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Crayon_#59320
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Crayon
+	Then in the The Product page, I click Continue
+
 	Then I save the product information as: TestCase59320
+
 	#And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I should see the Product Information Page
 	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
@@ -128,10 +137,20 @@ Scenario: [59320] Upload Document - IFRA certificate
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Then in the Physical and Chemical Properties page I click Continue
 
-	And I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name) and save ingredient as: shared79436
-		| CASNumber | ComponentName                                                                  | Percentage |
-		| FRAGRANCE | Fragrance - Awapuhi - Skin sens 1, Repro 2, Aquatic acute 2, Aquatic chronic 2 | 100        |
-	Given in the Ingredients page I click Continue
+	#And I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name) and save ingredient as: shared79436
+	#	| CASNumber | ComponentName                                                                  | Percentage |
+	#	| FRAGRANCE | Fragrance - Awapuhi - Skin sens 1, Repro 2, Aquatic acute 2, Aquatic chronic 2 | 100        |
+	Then I should be on the Ingredients Page
+	And In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue                           | Percent | Publicly Disclosed? | Trade Secret? | Public Name                           |
+	| component name | Water                                 | 88      | True                | False         | WATER                                 |
+	| component name | SODIUM LAURYL SULFATE                 | 10      | True                | False         | SODIUM LAURYL SULFATE                 |
+	| component name | FRAGRANCE - TANGERINE WITH LEMONGRASS | 2       | True                | False         | FRAGRANCE - TANGERINE WITH LEMONGRASS |
+	Then in the Ingredients page, I click Continue
+	And In the Ingredients Section, I confirm I check the checkbox in the popup view with the following text: The Product Type, Pest Selection, and Ingredients listed are accurate
+
+
+
 	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	And I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
 	#And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
