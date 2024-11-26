@@ -644,7 +644,7 @@ Scenario: [57986] Footwear or Leather Care Product - All other forms - (RU000746
 	Given I should see the Additional Documents to Provide Page
 	Given in the Additional Documents to Provide page I click Continue
 	Then In the Additional Documents to Provide, section 'Volatile Organic Compounds' error message should display: Document is required: Product Label
-	Then In the Additional Documents to Provide, upload PDF document to Upload Volatile Organic Compounds field
+	Then In the Additional Documents to Provide, upload PDF document for section: Volatile Organic Compounds - Product Label
 	Given in the Regulatory Documents to Provide page I click Continue
 	# Optional Reports and Documents Available for Purchase Page
 	And I should see the Optional Reports and Documents Available for Purchase Page
