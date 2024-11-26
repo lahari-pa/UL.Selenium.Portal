@@ -41,7 +41,7 @@ Background:
 # Created by Beverly Barrett
 @TestCase:65702
 Scenario: [65702] Transportation - Confirm Copy information from my U.S. Department of Transportation data check box shows for IATA and is NOT a required field
-Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I click the Add Product icon in the Navigation Pane
 Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
@@ -83,7 +83,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Created by Beverly Barrett
 @TestCase:65703
 Scenario: [65703] Transportation - Transportation - Confirm Copy information from my U.S. Department of Transportation data check box shows for IMDG and is NOT a required field
-Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I click the Add Product icon in the Navigation Pane
 Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
@@ -123,7 +123,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Created by Beverly Barrett
 @TestCase:65706
 Scenario: [65706] Transportation - Confirm Copy information from my U.S. Department of Transportation data check box shows for TDG and is NOT a required field
-Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
@@ -163,7 +163,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Created by Beverly Barrett
 @TestCase:65754
 Scenario: [65754] Transportation - Copy information from my U.S. Department of Transportation data check box &  IATA data
-Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I click the Add Product icon in the Navigation Pane
 Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
@@ -220,7 +220,7 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 # Created by Beverly Barrett
 @TestCase:65940
 Scenario: [65940] Transportation - Copy information from my U.S. Department of Transportation data check box &  IMDG data
-Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
@@ -278,12 +278,11 @@ And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product -
 @TestCase:65944
 Scenario: [65944] Transportation - Copy information from my U.S. Department of Transportation data check box &  TDG data
     #Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-    Given I log in with the account saved in TReVor as: ProductAccount
-	Then The home screen should load
-    #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-    Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
-	Then in the New Product page, I click Continue
+	Given I log in with the account saved in TReVor as: ProductAccount
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I click the Add Product icon in the Navigation Pane
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page I click Continue
     #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
     Then I should be on the The Product Page
 	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bleach
