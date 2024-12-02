@@ -418,7 +418,6 @@ Scenario: [133311] Retailer Private Label List Appear in Alphabetical Order
 	Then In the Select Retailers window, select retailer: Wal-Mart/SAM'S CLUB
 	Then In the Select Retailers window, click 'Done' button
 	Then In the Retailer Section confirm that the product names from the drop down for: Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin) for Wal-Mart appear in alphabetical order
-	#Then I confirm that the product names from the drop down for: Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin) for Wal-Mart appear in alphabetical order
 	Then In the Retailer Section, for retailer: Wal-Mart/SAM'S CLUB select 'Select Vendor' option: any
 	Then In the Retailer Section, for retailer: Wal-Mart/SAM'S CLUB select 'Indicate full name of product, as sold, via this retailer' option: Equate
 	Then in the Retailer page I click Continue
