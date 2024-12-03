@@ -129,7 +129,7 @@ Scenario: [85695] California Proposition 65 - select Yes - navigation
 	And In the Inventory Status, Prop 65 (US) Section, the following sections should be displayed:
 	| Section                                                                                                                                                                      |
 	| Is the need to warn triggered by                                                                                                                                             |
-	| How is the exposure warning transmitted? For more information, see                                                                                                           |
+	| How is the exposure warning transmitted? For more information, see Notice of Adoption Article                                                                                |
 	| Is your exposure warning compliant with Proposition 65 regulations applicable to products manufactured                                                                       |
 	| If the product carries a safe-harbor short-form warning, indicate which of the following is provided:                                                                        |
 	| If the product carries a safe-harbor long-form warning, indicate which of the following is used and enter the names of the Proposition 65 chemicals included in the warning: |
