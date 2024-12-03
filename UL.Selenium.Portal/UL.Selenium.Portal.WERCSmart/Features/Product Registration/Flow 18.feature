@@ -176,7 +176,7 @@ Scenario: [60116] Anti-Static Product - Aerosol - RU000656
 	Given I should see the Additional Documents to Provide Page
 	Then in the Additional Documents to Provide page I click Continue
 	Then In the Additional Documents to Provide, section 'Volatile Organic Compounds' error message should display: Document is required: Product Label
-	Then In the Additional Documents to Provide, upload PDF document to Upload Volatile Organic Compounds field
+	Then In the Additional Documents to Provide, upload PDF document for section: Volatile Organic Compounds - Product Label
 	Then in the Additional Documents to Provide page I click Continue
 
 	Given I should see the Optional Reports and Documents Available for Purchase Page
@@ -322,7 +322,7 @@ Scenario: [208099] Fabric Softener - Single-Use Dryer Product Only (RU000808)
 	Then in the Regulatory Documents to Provide page, I click Continue
 
 	Then I should be on the Additional Documents to Provide Page
-	Then In the Additional Documents to Provide, upload PDF document to Upload Volatile Organic Compounds field
+	Then In the Additional Documents to Provide, upload PDF document for section: Volatile Organic Compounds - Product Label
 	Then in the Additional Documents to Provide page, I click Continue
 
 	Then I should be on the Optional Reports and Documents Available for Purchase Page
@@ -458,7 +458,7 @@ Scenario: [207582] Personal Fragrance product (more than 20% fragrance) - Liquid
 	Then I should be on the Additional Documents to Provide Page
 	Then in the Additional Documents to Provide page, I click Continue
 	Then In the Additional Documents to Provide, section 'Volatile Organic Compounds' error message should display: Document is required: Product Label
-	Then In the Additional Documents to Provide, upload PDF document to Upload Volatile Organic Compounds field
+	Then In the Additional Documents to Provide, upload PDF document for section: Volatile Organic Compounds - Product Label
 	Then in the Additional Documents to Provide page, I click Continue
 
 	Then I should be on the Optional Reports and Documents Available for Purchase Page

@@ -15,7 +15,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		[RegexStepDefinition(@"In the VOC - Ozone Transport Commission Section, set the option in section: 'Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.': to: (Yes|No)")]
 		public void SetProductHasBennGranted(string option)
 		{
-			string section = "Product has been granted an ";
+			string section = "Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 		[RegexStepDefinition(@"In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB': to: (.*)")]
