@@ -20,6 +20,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		public void UploadPDFDocumentToPackagedProductPhotoFrontAndBack()
 		{
 			var selNewProduct = new Steps_Prototype();
+			string section = "Packaged Product Photo (front and back)";
+			string pdfFile = "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf";
 			selNewProduct.UploadPDFFile("Packaged Product Photo (front and back)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
@@ -48,14 +50,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		public void UploadPDFDocumentToInternationalFragranceAssociationIFRA()
 		{
 			var selNewProduct = new Steps_Prototype();
-			selNewProduct.UploadPDFFile("International Fragrance Association (IFRA)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			string section = "IFRA Certificate (Perfumery Products)";
+			string pdfFile = "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf";
+			selNewProduct.UploadPDFFile(section, pdfFile);
 		}
 
 		[RegexStepDefinition(@"In the Additional Documents to Provide, upload PDF document to Generally Recognized as Safe \(GRAS\) field")]
 		public void UploadPDFDocumentToGenerallyRecognizedAsSafeGRAS()
 		{
 			var selNewProduct = new Steps_Prototype();
-			selNewProduct.UploadPDFFile("Generally Recognized as Safe (GRAS)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			string section = "GRAS Certificate (Flavor Products)";
+			string pdfFile = "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf";
+			selNewProduct.UploadPDFFile(section, pdfFile);
 		}
 
 		[RegexStepDefinition(@"In the Additional Documents to Provide, upload PDF document to Toxicity Characteristic Leaching Procedure \(TCLP\) field")]
@@ -65,11 +71,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			selNewProduct.UploadPDFFile("Toxicity Characteristic Leaching Procedure (TCLP)", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
-		[RegexStepDefinition(@"In the Additional Documents to Provide, upload PDF document to Upload Volatile Organic Compounds field")]
+		[RegexStepDefinition(@"In the Additional Documents to Provide, upload PDF document for section: Volatile Organic Compounds - Product Label")]
 		public void UploadPDFDocumentToVolatileOrganicCompoundsRequired()
 		{
 			var selNewProduct = new Steps_Prototype();
-			selNewProduct.UploadPDFFile("Product Label", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			string section = "Product Label";
+			string pdfFile = "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf";
+			selNewProduct.UploadPDFFile(section, pdfFile);
+		}
+		[RegexStepDefinition(@"In the Additional Documents to Provide, upload PDF document for section: Volatile Organic Compounds - VOC Exemption Letter")]
+		public void UploadPDFDocumentToVOCExemptionLetter()
+		{
+			var selNewProduct = new Steps_Prototype();
+			string section = "VOC Exemption Letter";
+			string pdfFile = "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf";
+			selNewProduct.UploadPDFFile(section,pdfFile);
 		}
 
 		[RegexStepDefinition(@"In the Additional Documents to Provide, upload PDF document to Upload Full Product Label \(required\) field")]
@@ -174,10 +190,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, shouldShouldNot, pipeDelimitedErrorMessages);
 		}
 		[RegexStepDefinition(@"In the Additional Documents to Provide, section 'Volatile Organic Compounds' error message (should|should not) display: (.*)")]
-		public void VolitileOrganicCompoundsShouldShouldNotDisplayError(string shouldShouldNot, string pipeDelimitedErrorMessages)
+		public void VolatileOrganicCompoundsShouldShouldNotDisplayError(string shouldShouldNot, string pipeDelimitedErrorMessages)
 		{
 			string section = "Volatile Organic Compounds";
 			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, shouldShouldNot, pipeDelimitedErrorMessages);
+		}
+		[RegexStepDefinition(@"In the Additional Documents to Provide, section 'International Fragrance Association \(IFRA\)' error message (should|should not) display: (.*)")]
+		public void IFRASectionShouldNotDisplayError(string shouldShouldNot, string pipeDelimitedErrorMessages)
+		{
+			string section = "International Fragrance Association (IFRA)";
+			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, shouldShouldNot, pipeDelimitedErrorMessages);
+		}
+		[RegexStepDefinition(@"In the Additional Documents to Provide, for section 'Generally Recognized as Safe \(GRAS\)' error message (should|should not) display: (.*)")]
+		public void GRASectionShouldNotDisplayError(string shouldShouldNot, string pipeDelimitedErrorMessages)
+		{
+			string section = "Generally Recognized as Safe (GRAS)";
+			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, shouldShouldNot, pipeDelimitedErrorMessages);
+		}
+		[RegexStepDefinition(@"In the Additional Documents to Provide Section, for section (Product Label|IFRA Certificate \(Perfumery Products\)|TCLP Test Results \(Optional\)|STLC/TTLC Results for California \(Optional\)|Toxicology or Eco-Tox Testing Data \(Optional\)) I click button 'Browse'")]
+		public void ClickBrowseButton(string section)
+		{
+			string button = "Browse";
+			new Steps_Prototype().ClickButtonForSection(section, button);
+		}
+		[RegexStepDefinition(@"In the Additional Documents to Provide, for section (.*) the 'Browse' button (should|should not) exists")]
+		public void CheckBrowseButtonExistsForSection(string section, string condition)
+		{
+			string button = "Browse";
+			new Steps_Prototype().CheckButtonExistsForSection(section, condition, button);
 		}
 	}
 }
