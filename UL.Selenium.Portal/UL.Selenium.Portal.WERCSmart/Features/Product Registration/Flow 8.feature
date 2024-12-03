@@ -1148,7 +1148,7 @@ Scenario: [128744] Ammunition - DOT Exceptions Saved
 	Given in the Safety Data Sheet Authoring - Additional Data (Optional) page I click Continue
 
 	Given I should see the Optional Comments Page
-	Then In the Optional Comments Section, section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' is availiable
+	Then In the Optional Comments Section, section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' is available
 	Given in the Optional Comments page I click Continue
 
 	Given I should see the Data Acceptance Page

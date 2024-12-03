@@ -109,7 +109,7 @@ Scenario: [209162] WERCSmart Portal Test Flow for Type of Product:  Light Bulb -
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58078. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I should see the Optional Comments Page
-	Then In the Optional Comments Section, section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' is availiable
+	Then In the Optional Comments Section, section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' is available
 	Then in the Optional Comments page I click Continue
 	#234319 Summary Tab - Data Verification - Applicable Only to Light Bulbs - Germicidal Ultra Violet (RU000962)
 	Given I should see the Data Acceptance Page

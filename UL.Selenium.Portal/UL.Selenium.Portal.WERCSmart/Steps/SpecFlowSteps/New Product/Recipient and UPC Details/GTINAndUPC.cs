@@ -466,5 +466,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			var selNewProduct = new NewProduct();
 			Report.IsTrue(selNewProduct.UPCSectionFieldsAvailable(section) == expected, $"Failed to Confirm the '{section}' field {(expected ? "is not" : "is")} available", $"I Confirm the '{section}' field {is_isnot} available");
 		}
+		[RegexStepDefinition("In the Global Trade Item Number \\(GTIN\\) / Universal Product Code \\(UPC\\) Section, delete the retailer (.*) from the UPC")]
+		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionDeleteTheRetailerAmazonFromTheUPC(string retailer)
+		{
+			Report.IsTrue(new UPC().DeleteRetailer(retailer), $"Failed to delete the retailer {retailer}",
+						$"Successfully deleted retailer {retailer}");
+		}
+
 	}
 }

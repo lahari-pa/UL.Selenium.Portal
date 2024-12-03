@@ -465,7 +465,7 @@ Scenario: [207582] Personal Fragrance product (more than 20% fragrance) - Liquid
 	Then in the Optional Reports and Documents Available for Purchase page, I click Continue
 
 	Then I should be on the Optional Comments Page
-	Then In the Optional Comments Section, section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' is availiable
+	Then In the Optional Comments Section, section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' is available
 	Then in the Optional Comments page, I click Continue
 
 	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Personal Fragrance Product (more than 20% fragrance) - Liquid

@@ -286,7 +286,7 @@ Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 	Then in the Optional Reports and Documents Available for Purchase  page I click Continue
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58078. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I should see the Optional Comments Page
-	Then In the Optional Comments Section, section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' is availiable
+	Then In the Optional Comments Section, section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' is available
 	Then in the Optional Comments page I click Continue
 	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Energy or Nutritional Bars
 	Given I should see the Data Acceptance Page
@@ -381,7 +381,7 @@ Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
 	Then in the Optional Reports and Documents Available for Purchase  page I click Continue
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58078. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I should see the Optional Comments Page
-	Then In the Optional Comments Section, section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' is availiable
+	Then In the Optional Comments Section, section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' is available
 	Then in the Optional Comments page I click Continue
 	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Energy or Nutritional Bars
 	Given I should see the Data Acceptance Page
