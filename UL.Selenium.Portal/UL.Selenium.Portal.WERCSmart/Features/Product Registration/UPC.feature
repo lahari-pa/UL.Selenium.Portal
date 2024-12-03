@@ -806,7 +806,9 @@ Scenario: [101023] UPC Step - Add Part Number
 	Then In the Summary Page, verify table data in column UPC Number showing the value: PART NUMBER
 	And I close the tab with Data Summary page
 	And I navigate to the home page
-	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase101023
+	#And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase101023
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase102023
 
 @TestCase:87628
 Scenario: [87628] Universal Product Code (UPC) Step - Add Casepack - Case UPC field validation
