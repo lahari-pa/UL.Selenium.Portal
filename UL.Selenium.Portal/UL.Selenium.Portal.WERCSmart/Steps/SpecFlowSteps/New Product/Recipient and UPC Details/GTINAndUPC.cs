@@ -440,10 +440,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Size \(Fluid Ounces\)' enter the value: (.*)")]
 		public void EnterUPCSize(string option)
 		{
-			//string section = "Size (Fluid Ounces)";
-			//new Steps_Prototype().SetTheSectionOptionTo(section, option);
 			Report.IsTrue(new NewProduct().InputUPCSize(option), $"Failed to enter size: {option}", $"Entered size: {option}");
-
 		}
 
 		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Internal SKU' enter the value: (.*)")]
