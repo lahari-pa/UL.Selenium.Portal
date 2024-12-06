@@ -584,5 +584,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			IWebElement AddNewSupplierButton = this.ContainerElement.FindElement(By.XPath(".//a[text() = 'Add New Supplier']"), 2);
 			return AddNewSupplierButton.TryClick();
 		}
+		public bool EnterSelectName(string vendor)
+		{
+			IWebElement VendorField = this.ContainerElement.FindElement(By.XPath(".//div[label[text() = 'Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin)']]//select"), 2);
+			VendorField.Select(vendor);
+			return VendorField.SelectedOption() == vendor;
+		}
 	}
 }
