@@ -657,6 +657,9 @@ Scenario: [109516] Archive Retailer should Archive UPC
 	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'Canadian Environmental Protection Act (CEPA) status' to: Compliant with Domestic Substances List (DSL)
 	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+	Then I should be on the Transportation Details 1 Page
+	Then In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
+	Then in the Transportation Details 1 page, I click Continue
 	#Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 	#	| Retailer  |
 	#	| Amazon    |
@@ -711,8 +714,9 @@ Scenario: [109516] Archive Retailer should Archive UPC
 	Given I should see the Data Acceptance Page
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
 	Then In the Data Acceptance Section, click 'Accept' button
-
-	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto29 and Open SHA manager)
+	Then I logout
+	Then I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	#And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto29 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase109516)
 	Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase109516)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase109516)
@@ -723,18 +727,19 @@ Scenario: [109516] Archive Retailer should Archive UPC
 	Given I call Shared Step 59066 (Go to SHA Manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109516)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109516 and its status is: Accepted or Completed
-	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109516)
-	#Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase109516) for
-	#	| Retailer  |
-	#	| Amazon    |
-	#	| Walgreens |
-	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109516)
-	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109516 and its status is: Completed
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109516)
+	Given I call Shared Step 51664 (SHA - Accepted Product - set Retailers to Completed for saved as: TestCase109516) for
+		| Retailer  |
+		| Amazon    |
+		| Walgreens |
 	#Given I call Shared Step (SHA - Assgined Product - set Retailers to Completed for saved as: TestCase109516) for
 	#	| Retailer                   |
 	#	| No Retailer/No UPC Product |
 	#	| Amazon                     |
 	#	| Walgreens                  |
+	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109516)
+	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase109516 and its status is: Completed
+	Then I open the new tab in browser
 	Given I navigate to the landing page
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -744,7 +749,8 @@ Scenario: [109516] Archive Retailer should Archive UPC
 	And In the Archive Retailers popup, I select the checkbox next to the retailer Walgreens
 	And In the Archive Retailers popup click on: ARCHIVE
 	And I handle the Alert for Archive by answering Ok
-	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto29 and Open SHA manager)
+	Then I call Shared Step 65080 (Login to Studio and Open SHA manager)
+	#And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto29 and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109516)
 	And I confirm that the retailer Walgreens is archived for product saved as: TestCase109516
 	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase109516
