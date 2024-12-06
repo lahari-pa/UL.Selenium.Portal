@@ -21,7 +21,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 			string section = "Primary Physical State";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
-
+		// Table input --> |Option|
 		[RegexStepDefinition(@"In the Physical and Chemical Properties Section, for section: 'Primary Physical State': the following options (should|should not) be (displayed|displayed exclusively):")]
 		public void CheckOptionsInPrimaryPhysicalStateSection(string condition, string displayed, Table table)
 		{

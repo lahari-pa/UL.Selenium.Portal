@@ -140,7 +140,7 @@ Scenario: [57950] Conditioner - Leave In (RU001272) 4-L
 
 	#Given I call Shared Step 60567 (Upload Product Label only)
 	Given I should see the Additional Documents to Provide Page
-	Then In the Additional Documents to Provide, upload PDF document to Upload Volatile Organic Compounds field
+	Then In the Additional Documents to Provide, upload PDF document for section: Volatile Organic Compounds - Product Label
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
@@ -709,7 +709,7 @@ Scenario: [57952] Hair Styling Gel- (RU000749) 4LS - 4S
 
 	#Given I call Shared Step 60567 (Upload Product Label only)
 	Given I should see the Additional Documents to Provide Page
-	Then In the Additional Documents to Provide, upload PDF document to Upload Volatile Organic Compounds field
+	Then In the Additional Documents to Provide, upload PDF document for section: Volatile Organic Compounds - Product Label
 	Then In the Additional Documents to Provide, upload PDF document to Upload Transportation Exemption Letter or Special Permit field
 	Given in the Additional Documents to Provide page I click Continue
 
@@ -1006,7 +1006,7 @@ Scenario: [57982] Bonding agent (RU000023) - 4All - 4G
 	Given I should see the Additional Documents to Provide Page
 	Given in the Additional Documents to Provide page I click Continue
 	Then In the Additional Documents to Provide, section 'Volatile Organic Compounds' error message should display: Document is required: Product Label
-	Then In the Additional Documents to Provide, upload PDF document to Upload Volatile Organic Compounds field
+	Then In the Additional Documents to Provide, upload PDF document for section: Volatile Organic Compounds - Product Label
 	Given in the Regulatory Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	#  Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional)) 
@@ -1638,7 +1638,7 @@ Scenario: [57991] Glue sticks for glue guns- (RU000300) - 4S
 	And I should see the Additional Documents to Provide Page
 	Then in the Additional Documents to Provide page I click Continue
 	Then In the Additional Documents to Provide, section 'Volatile Organic Compounds' error message should display: Document is required: Product Label
-	Then In the Additional Documents to Provide, upload PDF document to Upload Volatile Organic Compounds field
+	Then In the Additional Documents to Provide, upload PDF document for section: Volatile Organic Compounds - Product Label
     Then in the Additional Documents to Provide page I click Continue
 
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
