@@ -752,6 +752,7 @@ Scenario: [109516] Archive Retailer should Archive UPC
 	#Then I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	#And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto29 and Open SHA manager)
 	Then I navigate to Studio
+	Then I call Shared Step 59066 (Go to SHA Manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase109516)
 	And I confirm that the retailer Walgreens is archived for product saved as: TestCase109516
 	Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase109516
