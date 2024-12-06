@@ -1008,6 +1008,9 @@ Scenario: [115330] Target - Bulk UPC - DPCI - is no longer required
 	Given In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is exempt from TSCA chemical Inventory listing requirements.
 	Given In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Given in the Inventory Status, Prop 65 (US) page I click Continue
+	Then I should be on the Transportation Details 1 Page
+	Then In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
+	Then in the Transportation Details 1 page, I click Continue
 	#Given I select the following retailers in the Select Retailers popup list view:
 	#	| Retailer |
 	#	| Target   |
@@ -1024,22 +1027,24 @@ Scenario: [115330] Target - Bulk UPC - DPCI - is no longer required
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, section: 'DPCI Number' is displayed
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'DPCI Number' enter the value: 74415789264789 
-	#Then I generate a random UPC number and save as: UPC#115330_1
-	#Then I generate a random UPC number and save as: UPC#115330_2
-	#Then I generate a random UPC number and save as: UPC#115330_3
-	#Then I generate a random UPC number and save as: UPC#115330_4
-	#Then I generate a random UPC number and save as: UPC#115330_5
-	#Then I generate a random UPC number and save as: UPC#115330_6
-	#Then I generate a random UPC number and save as: UPC#115330_7
+	Then I generate a random UPC number and save as: UPC#115330_1
+	Then I generate a random UPC number and save as: UPC#115330_2
+	Then I generate a random UPC number and save as: UPC#115330_3
+	Then I generate a random UPC number and save as: UPC#115330_4
+	Then I generate a random UPC number and save as: UPC#115330_5
+	Then I generate a random UPC number and save as: UPC#115330_6
+	Then I generate a random UPC number and save as: UPC#115330_7
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, click 'sample file' link to download file
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm 'sample file' is downloaded and save as: test115330
 	And I edit the testdoc.xlsx, and save its filepath as: Bulktest115330 and verify it contains the UPC data in the table saved as: UPCTable115330, (Base Data Only: true)
-		| UPC          | Name | Quantity | Size | Net Explosive Mass | US: Part Number | US: Item Number | GP: Part Number | SP: Part Number | TG: DPCI    | HD: OMSID | CT: Item Number   | Green Good Housekeeping | Green Seal | EPA Safer Choice | Cradle to Cradle | UL Ecologo | EWG Verified | Green Tick | Madesafe | NSF Sustainability Certified |
-		| %RandomUPC1% | 1    | 1        | 32   | 1.22               | 00AA01          | 2001            | 1111            | F0001           | 111-22-0001 | 100000001 | 123-1234,123-1230 |                         |            |                  |                  |            |              |            |          |                              |
-		| %RandomUPC2% | 2    | 3        | 32   | 3.44               | 00CC03          | 2003            | 1113            | H0003           | 111-22-0003 | 100000003 | 123-1234,123-1232 |                         |            |                  |                  |            |              |            |          |                              |
-		| %RandomUPC3% | 3    | 5        | 32   | 5.66               | 00EE05          | 2005            | 1115            | J0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |                         |            |                  |                  |            |              |            |          |                              |
-		| %RandomUPC4% | 4    | 1        | 32   | 1.22               | 00AA01          | 2001            | 1111            | F0001           | 111-22-0001 | 100000001 | 123-1234,123-1230 |                         |            |                  |                  |            |              |            |          |                              |
-		| %RandomUPC5% | 5    | 1        | 32   | 1.22               | 00AA01          | 2001            | 1111            | F0001           | 111-22-0001 | 100000001 | 123-1234,123-1230 |                         |            |                  |                  |            |              |            |          |                              |
+		| UPC            | Name     | Quantity | Size | Internal SKU | US: Part Number | US: Item Number | GP: Part Number | SP: Part Number | TG: DPCI | HD: OMSID | CT: Item Number   |
+		| %UPC#115330_1% | MyChalk1 | 1        | 32   |               | 00AA01          | 2001            | 1111            | F0001           |          | 100000001 | 123-1234,123-1230 |
+		| %UPC#115330_2% | MyChalk2 | 2        | 32   |               | 00BB02          | 2002            | 1112            | G0002           |          | 100000002 | 123-1234,123-1231 |
+		| %UPC#115330_3% | MyChalk3 | 3        | 32   |               | 00CC03          | 2003            | 1113            | H0003           |          | 100000003 | 123-1234,123-1232 |
+		| %UPC#115330_4% | MyChalk4 | 4        | 32   |               | 00DD04          | 2004            | 1114            | I0004           |          | 100000004 | 123-1234,123-1233 |
+		| %UPC#115330_5% | MyChalk5 | 5        | 32   |               | 00EE05          | 2005            | 1115            | J0005           |          | 100000005 | 123-1234,123-1234 |
+		| %UPC#115330_6% | MyChalk6 | 6        | 32   |               | 00FF06          | 2006            | 1116            | K0006           |          | 100000006 | 123-1234,123-1235 |
+		| %UPC#115330_7% | MyChalk7 | 7        | 32   |               | 00GG07          | 2007            | 1117            | L0007           |          | 100000007 | 123-1234,123-1236 |
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, click 'Upload File' button and upload file saved as: Bulktest115330
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm 'Add Multiple' modal window should be displayed
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal check All UPCs checkbox
@@ -1061,15 +1066,7 @@ Scenario: [115330] Target - Bulk UPC - DPCI - is no longer required
 	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
 
 
-	And I edit the testdoc.xlsx, and save its filepath as: Bulktest115330 and verify it contains the UPC data in the table saved as: UPCTable115330, (Base Data Only: true)
-		| UPC            | Name     | Quantity | Size | Internal SKU | US: Part Number | US: Item Number | GP: Part Number | SP: Part Number | TG: DPCI | HD: OMSID | CT: Item Number   |
-		| %UPC#115330_1% | MyChalk1 | 1        | 32   |               | 00AA01          | 2001            | 1111            | F0001           |          | 100000001 | 123-1234,123-1230 |
-		| %UPC#115330_2% | MyChalk2 | 2        | 32   |               | 00BB02          | 2002            | 1112            | G0002           |          | 100000002 | 123-1234,123-1231 |
-		| %UPC#115330_3% | MyChalk3 | 3        | 32   |               | 00CC03          | 2003            | 1113            | H0003           |          | 100000003 | 123-1234,123-1232 |
-		| %UPC#115330_4% | MyChalk4 | 4        | 32   |               | 00DD04          | 2004            | 1114            | I0004           |          | 100000004 | 123-1234,123-1233 |
-		| %UPC#115330_5% | MyChalk5 | 5        | 32   |               | 00EE05          | 2005            | 1115            | J0005           |          | 100000005 | 123-1234,123-1234 |
-		| %UPC#115330_6% | MyChalk6 | 6        | 32   |               | 00FF06          | 2006            | 1116            | K0006           |          | 100000006 | 123-1234,123-1235 |
-		| %UPC#115330_7% | MyChalk7 | 7        | 32   |               | 00GG07          | 2007            | 1117            | L0007           |          | 100000007 | 123-1234,123-1236 |
+	
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, click 'Upload File' button and upload file saved as: Bulktest115330
 
 	Then I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: UPCTable115330

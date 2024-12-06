@@ -213,6 +213,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			Report.IsTrue(UploadDialog.UploadFile(excelFile), "Failed to enter file name!", "Successfully entered file name");
 
 		}
+
 		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, confirm 'Add Multiple' modal window (should|should not) be displayed")]
 		public void ThenInTheU_S_DepartmentOfTransportationDOTClassificationSectionAddMultipleIsDisplayed(string condition)
 		{
