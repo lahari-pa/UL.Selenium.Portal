@@ -418,9 +418,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(title, button);
 		}
 		
-		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'GTIN/UPC (include check digit)' enter the value: (.*)")]
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'GTIN/UPC \(include check digit\)' enter the value: (.*)")]
 		public void EnterUPCGTIN(string option)
 		{
+
+			if (option.ToLower().Contains("saved as"))
+			{
+					string savedUPC = Context
+						.GetFromContext(option.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+						.ToString();
+					option = savedUPC;		
+			}
+
 			string section = "GTIN/UPC (include check digit)";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
@@ -432,7 +441,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 
-		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Size (Fluid Ounces)' enter the value: (.*)")]
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Size \(Fluid Ounces\)' enter the value: (.*)")]
 		public void EnterUPCSize(string option)
 		{
 			string section = "Size (Fluid Ounces)";
