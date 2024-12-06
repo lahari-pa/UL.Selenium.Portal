@@ -466,5 +466,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			var selNewProduct = new NewProduct();
 			Report.IsTrue(selNewProduct.UPCSectionFieldsAvailable(section) == expected, $"Failed to Confirm the '{section}' field {(expected ? "is not" : "is")} available", $"I Confirm the '{section}' field {is_isnot} available");
 		}
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, section: 'DPCI Number' (is|is not) displayed")]
+		public void PartNumberIsDisplayed(string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			string section = "DPCI Number (must be formatted like xxx-xx-xxxx), if multiple separate by ',' with no spaces.Part Number";
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.UPCSectionFieldsAvailable(section) == expected, $"Failed to Confirm the '{section}' field {(expected ? "is not" : "is")} available", $"I Confirm the '{section}' field {is_isnot} available");
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+
+		}
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'DPCI Number' enter the value: (.*)")]
+		public void EnterPartNumber(string option)
+		{
+			string section = "DPCI Number (must be formatted like xxx-xx-xxxx), if multiple separate by ',' with no spaces.";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
 	}
 }
