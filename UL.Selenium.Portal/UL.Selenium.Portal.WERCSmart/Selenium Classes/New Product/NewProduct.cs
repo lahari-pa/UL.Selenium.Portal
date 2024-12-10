@@ -915,7 +915,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				IWebElement Field = this.ContainerElement.FindElement(By.XPath($".//input[@placeholder='{field}']  | .//label[text()={field}]]"), 2);
+				IWebElement Field = this.ContainerElement.FindElement(By.XPath($".//input[@placeholder='{field}'] | .//div[@class='form-group']//label[text()='{field}']"), 2);
 				return Field != null;
 			}
 			catch (Exception)
@@ -1090,14 +1090,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return false;
 			}
 
-			IWebElement upcNumberField = container.FindElement(By.XPath(".//label[contains(text(),'GTIN/UPC')]/..//input"), 2);
 			IWebElement containsType = container.FindElement(By.XPath(".//select[contains(@data-bind,'Container Type')]"), 2);
-
-			if (upcNumberField == null)
-			{
-				Report.Failure("UPC Number Field Element returned null");
-				return false;
-			}
 
 			if (containsType == null)
 			{

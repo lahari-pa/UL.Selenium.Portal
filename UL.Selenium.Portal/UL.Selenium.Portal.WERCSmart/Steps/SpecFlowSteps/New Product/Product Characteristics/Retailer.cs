@@ -71,18 +71,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		[RegexStepDefinition(@"In the Retailer Section, for retailer: (.*) select 'Indicate full name of product, as sold, via this retailer' option: (.*)")]
 		public void SelectPrivateNameForRetailer(string retailer, string option)
 		{
-			Report.IsTrue(new Retailer().RetailerPrivateLabelOptionSelect(retailer, option), $"Failed to set the Private label name to be: {option} for retailer: {retailer}", $"Successfully set private label name to be: {option} for retailer: {retailer}");
+			Report.IsTrue(new RetailersRow(retailer).EnterSelectName(option), $"Failed to select full name {option} for {retailer} retailer", $"Successfully selected full name {option} for {retailer} retailer");
+
+			//Report.IsTrue(new Retailer().RetailerPrivateLabelOptionSelect(retailer, option), $"Failed to set the Private label name to be: {option} for retailer: {retailer}", $"Successfully set private label name to be: {option} for retailer: {retailer}");
 		}
 		[RegexStepDefinition(@"In the Retailer Section, for retailer: (.*) select 'Select Vendor' option: (.*)")]
 		public void SelectVendorOption(string retailer, string option)
 		{
 			if (option == "any")
 			{
-				Report.IsTrue(new RetailersRow(retailer).EnterSelectAnyVendor(), $"Failed to select Vendor for {retailer} retailer", $"Successfully selected Vedor for {retailer} retailer");
+				Report.IsTrue(new RetailersRow(retailer).EnterSelectAnyVendor(), $"Failed to select Vendor for {retailer} retailer", $"Successfully selected Vendor for {retailer} retailer");
 			}
 			else
 			{
-				Report.IsTrue(new RetailersRow(retailer).EnterSelectVendor(option), $"Failed to select Vendor {option} for {retailer} retailer", $"Successfully selected Vedor {option} for {retailer} retailer");
+				Report.IsTrue(new RetailersRow(retailer).EnterSelectVendor(option), $"Failed to select Vendor {option} for {retailer} retailer", $"Successfully selected Vendor {option} for {retailer} retailer");
 			}
 		}
 		[RegexStepDefinition(@"In the Retailer Section, for retailer: (.*) click 'Add New Supplier' button")]
@@ -151,6 +153,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			Report.IsTrue(new SelectRetailers().GetListOfRetailers().Contains(retailer),
 							$"Retailer is not listed: {retailer}", $"Retailer is listed as expected: {retailer}");
+		}
+		[RegexStepDefinition(@"In the Retailer Section confirm that the product names from the drop down for: Indicate full name of product, as sold, via this retailer \(e.g. Private Label Aspirin\) for Wal-Mart appear in alphabetical order")]
+		public void ThenInTheRetailerSectionConfirmThatTheProductNamesFromTheDropDownForIndicateFullNameOfProductAsSoldViaThisRetailerE_G_PrivateLabelAspirinForWal_MartAppearInAlphabeticalOrder()
+		{
+
+			string dropDownTitle = "Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin)";
+			string retailer = "Wal-Mart";
+			var retailerObject = new Retailer();
+			Report.IsTrue(retailerObject.ConfirmDropDownOptionsAreInAlphabeticalOrderForRetailer(dropDownTitle, retailer), "Drop down options were not in alphabetical order", "Drop down options were in alphabetical order");
 		}
 
 	}

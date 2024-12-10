@@ -31,6 +31,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 		{
 			Report.IsTrue(new NewProduct().ClickAddUpcButton(), "Failed to click the 'Add' button!", "Successfully clicked the 'Add' button");
 		}
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, I click the 'Add Part Number' button")]
+		public void ClickAddPartNumberButton()
+		{
+			Report.IsTrue(new NewProduct().ClickAddPartNumber(), "Failed to click the 'Add Part Number' button!", "Successfully clicked the 'Add Part Number' button");
+		}
 
 		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Provide the product's UPC\(s\)- including container type and size \(ounces\)' enter UPC Number: (.*) enter Size: (.*) and enter Container Type: (.*)")]
 		public void EnterUPCInformation(string upc, string size, string containerType)
@@ -433,11 +438,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 
-		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Size (Fluid Ounces)' enter the value: (.*)")]
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Size \(Fluid Ounces\)' enter the value: (.*)")]
 		public void EnterUPCSize(string option)
 		{
-			string section = "Size (Fluid Ounces)";
-			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+			Report.IsTrue(new NewProduct().InputUPCSize(option), $"Failed to enter size: {option}", $"Entered size: {option}");
 		}
 
 		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Internal SKU' enter the value: (.*)")]
@@ -466,6 +470,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			string section = "Tablet or Capsule Count";
 			var selNewProduct = new NewProduct();
 			Report.IsTrue(selNewProduct.UPCSectionFieldsAvailable(section) == expected, $"Failed to Confirm the '{section}' field {(expected ? "is not" : "is")} available", $"I Confirm the '{section}' field {is_isnot} available");
+		}
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, section: 'Part Number' (is|is not) displayed")]
+		public void PartNumberIsDisplayed(string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			string section = "Part Number";
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.UPCSectionFieldsAvailable(section) == expected, $"Failed to Confirm the '{section}' field {(expected ? "is not" : "is")} available", $"I Confirm the '{section}' field {is_isnot} available");
+		}
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Part Number' enter the value: (.*)")]
+		public void EnterPartNumber(string option)
+		{
+			string section = "Part Number";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Container Type' select the value: (.*)")]
+		public void EnterContainerType(string option)
+		{
+			Report.IsTrue(new NewProduct().SelectContainerType(option),
+				$"Failed to select: {option}", $"Selected: {option}");
 		}
 		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, section: 'DPCI Number' (is|is not) displayed")]
 		public void PartNumberIsDisplayed(string is_isnot)

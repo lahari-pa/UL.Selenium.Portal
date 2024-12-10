@@ -25,6 +25,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 @RegulatoryInformation3
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
+@GTINAndUPC
 
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ElectronicEquipment
@@ -291,13 +292,17 @@ Scenario: [96708] Beverage RU - No Walmart
 
 @TestCase:136057
 Scenario: [136057] Select Retailers - Removing Retailer(s) Selected
-	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): chalk
-	Then I save the product information as: TestCase1234
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): chalk
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
+ 	Given in the The Product page I click Continue
+	Then I save the product information as: TestCase136057
 	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I should see the Product Information Page
 	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
@@ -307,7 +312,6 @@ Scenario: [136057] Select Retailers - Removing Retailer(s) Selected
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page I click Continue
-
 	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I should see the Physical and Chemical Properties Page
 	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
@@ -316,30 +320,27 @@ Scenario: [136057] Select Retailers - Removing Retailer(s) Selected
 	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Then in the Physical and Chemical Properties page I click Continue
-
 	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Calcium
 	Given I should see the Ingredients Page
 	Then In the Ingredients section, add the following ingredients:
 	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-	| component name | Calcium       | 100     |                     |               |             |
+	| component name | Calcium       | 100   |                     |               |             |
 	Then in the Ingredients page I click Continue
-
-	#And I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
-	Given I should see the Inventory Status, Prop 65 (US) Page
-	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
-	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
-	Then in the Inventory Status, Prop 65 (US) page I click Continue
-
-	Given I select the following retailers in the Select Retailers popup list view:
-		| Retailer              |
-		| CVS                   |
-		| Dollar General        |
-		| Family Dollar         |
-		| Dick's Sporting Goods |
-		| Amazon                |
-		| Best Buy              |
-	Given I click Done in the Select Retailers popup
-	And The selected retailers on the Retailer page should be:
+	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I should be on the Inventory Status, Prop 65 (US) Page
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+	Given I should see the Retailer Page
+	Then In the Retailer Section, click 'Add Retailers' button
+	Then In the Select Retailers window, select retailer: CVS
+	Then In the Select Retailers window, select retailer: Dollar General
+	Then In the Select Retailers window, select retailer: Family Dollar
+	Then In the Select Retailers window, select retailer: Dick's Sporting Goods
+	Then In the Select Retailers window, select retailer: Amazon
+	Then In the Select Retailers window, select retailer: Best Buy
+	Then In the Select Retailers window, click 'Done' button
+	And In the Retailer Section, following retailers should be displayed:
 		| Retailer                   |
 		| CVS                        |
 		| Dollar General             |
@@ -348,37 +349,48 @@ Scenario: [136057] Select Retailers - Removing Retailer(s) Selected
 		| Amazon                     |
 		| Best Buy                   |
 		| No Retailer/No UPC Product |
-	Then I select the following retailers in the Retailer page
-		| Retailers      |
-		| CVS            |
-		| Dollar General |
-	Then I click the delete icon in the Retailer page
-	And The selected retailers on the Retailer page should not be:
+	Then In the Retailer Section, check the retailer: Family Dollar
+	Then In the Retailer Section, check the retailer: CVS
+	Then In the Retailer Section, click 'Delete' icon
+	And In the Retailer Section, following retailers should not be displayed:
 		| Retailer              |
 		| CVS                   |
-		| Dollar General        |
-	Given I click 'Add Retailers' in the Retailers page
-	Then The following retailers in the Select Retailers popup list view should not be selected
-		| Retailers      |
-		| CVS            |
-		| Dollar General |
-	Given I click Done in the Select Retailers popup
-	Given I click continue
-	And I click the 'Add' button
-	And I confirm that retailer "CV" is not present under the 'Destination Retailers' column in the UPC table
-	And I confirm that retailer "DG" is not present under the 'Destination Retailers' column in the UPC table
+		| Family Dollar         |
+	Then In the Retailer Section, click 'Add Retailers' button
+	Then In the Retailer Section is not selected retailer: CVS
+	Then In the Retailer Section is not selected retailer: Family Dollar
+	Then In the Select Retailers window, click 'Done' button
+	Then in the Retailer page I click Continue
+	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, verify retailer 'CV' is not present under the 'Destination Retailers' column
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, verify retailer 'FD' is not present under the 'Destination Retailers' column
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase1234
 	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase1234
+	Then In the Product Grid, delete the product saved as: TestCase136057
+
 @TestCase:133311
 Scenario: [133311] Retailer Private Label List Appear in Alphabetical Order
-	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page I click Continue
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): chalk
-	Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): chalk
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: chalk
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
+ 	Given in the The Product page I click Continue
+	Then I save the product information as: TestCase133311
+	#Given I call Shared Step 63860 (Product Information - US, No(child), No(OSHA), No(DSV), Yes(PLP), No(GNFR))
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: Yes
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
 	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I should see the Physical and Chemical Properties Page
 	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
@@ -387,24 +399,29 @@ Scenario: [133311] Retailer Private Label List Appear in Alphabetical Order
 	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Then in the Physical and Chemical Properties page I click Continue
-
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
-		|           | calcium       | 100     |                     |            |             |
+	#Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	#	| CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
+	#	|           | calcium       | 100     |                     |            |             |
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add component with component name: Water
+	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
+	Then in the Ingredients page I click Continue
 	#Given I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
 	Given I should see the Inventory Status, Prop 65 (US) Page
 	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
 	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page I click Continue
-
-	Then In the 'Select Retailers' window I select the retailer: Ace Hardware Corporation
-	Then I confirm that the product names from the drop down for: Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin) for Ace Hardware Corporation appear in alphabetical order
-	Then I select the following retailers in the Retailer page
-		| Retailers                |
-		| Ace Hardware Corporation |
-	Then I click the delete icon in the Retailer page
-	Then In the 'Select Retailers' window I select the retailer: Wal-Mart/SAM'S CLUB
-	Then I confirm that the product names from the drop down for: Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin) for Wal-Mart appear in alphabetical order
+	Given I should see the Retailer Page
+	Then In the Retailer Section, click 'Add Retailers' button
+	Then In the Select Retailers window, select retailer: Wal-Mart/SAM'S CLUB
+	Then In the Select Retailers window, click 'Done' button
+	Then In the Retailer Section confirm that the product names from the drop down for: Indicate full name of product, as sold, via this retailer (e.g. Private Label Aspirin) for Wal-Mart appear in alphabetical order
+	Then In the Retailer Section, for retailer: Wal-Mart/SAM'S CLUB select 'Select Vendor' option: any
+	Then In the Retailer Section, for retailer: Wal-Mart/SAM'S CLUB select 'Indicate full name of product, as sold, via this retailer' option: Equate
+	Then in the Retailer page I click Continue
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase133311
+	
 
 @TestCase:125130
 Scenario: [125130] Canadian Tire Available for Selection for Articles
