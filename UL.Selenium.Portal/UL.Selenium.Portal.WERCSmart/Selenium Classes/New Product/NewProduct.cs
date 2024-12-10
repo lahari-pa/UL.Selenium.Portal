@@ -915,7 +915,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				IWebElement Field = this.ContainerElement.FindElement(By.XPath(".//input[@placeholder='"+ field +"']"), 2);
+				IWebElement Field = this.ContainerElement.FindElement(By.XPath($".//input[@placeholder='{field}']  | .//label[text()={field}]]"), 2);
 				return Field != null;
 			}
 			catch (Exception)

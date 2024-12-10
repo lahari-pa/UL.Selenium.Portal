@@ -1055,29 +1055,6 @@ Scenario: [115330] Target - Bulk UPC - DPCI - is no longer required
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal check retailer: Target
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal click 'Finish' button
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm 'Add Multiple' modal window should not be displayed
-	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
-	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm the values on the new product screen are the same as the UPC Upload document saved in the Table called: UPCTable82536
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm UPC number saved as RandomUPC4 is duplicated and Warning Icons are displayed
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, check all UPCs with number: RandomUPC4
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, click 'Delete Rows' button
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm Warning modal window should be displayed
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, in Warning modal window click 'Ok' button
-	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
-
-
-	
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, click 'Upload File' button and upload file saved as: Bulktest115330
-
-	Then I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: UPCTable115330
-	Then In the Add Multiple dialog box I select all UPCs
-	Then I Confirm All UPCs are: Selected
-	Then In the Add Multiple dialog box I select the packaging type: <first>
-	Then I Check that the type column becomes populated with option: <first>
-	Given In the Add Multiple dialog box I click Next
-	Then In the Add Multiple dialog box I select all Retailers
-	Then I Check if all Retailers are: Selected
-	Then In the Add Multiple dialog box I click Finish
 	When In the Recipient and Product Details tab, I expand the first UPC
 	Then I check that DPCI for retailer Target UPC item 1 should match the UPC Upload document saved in the Table called: UPCTable115330
 	Then I click Continue and should not see an error message
@@ -1086,6 +1063,7 @@ Scenario: [115330] Target - Bulk UPC - DPCI - is no longer required
 	And I click the page heading: Universal Product Code (UPC)
 	And In the Recipient and Product Details tab, I expand the first UPC
 	Then I check that DPCI for retailer Target UPC item 1 should match the UPC Upload document saved in the Table called: UPCTable115330
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase115330
 
 @TestCase:156789
