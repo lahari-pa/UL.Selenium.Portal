@@ -301,6 +301,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 				}
 			}
 		}
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, at 'Add Multiple' verify Retailer column (is|is not) populated with: (.*)")]
+		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionAtVerifyRetailerColumnIsPopulatedWithTG(string is_isnot, string retailer)
+		{
+			bool expected = is_isnot == "is";
+			Report.IsTrue(new MultipleUPC().CheckRetailerValueForEachRow(retailer) == expected,
+				$"Failure, the Retailer column {(expected ? "is not" : "is")} populated with '{retailer}'", $"Success, the Retailer column {is_isnot} populated with '{retailer}'.");
+		}
 
 		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, error message (should|should not) be displayed with text: 'You have added UPCs to the registration that are already in use within your WERCSmart account. Duplicate UPCs are not permitted, as they may provide conflicting Assessment information to your retailer recipients. Please remove the instances of duplicate UPC\(s\) from the necessary registration data.'")]
 		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionErrorMessageShouldBeDisplayedWithText(string condition)
@@ -309,7 +316,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			new Steps_Prototype().AlertMessageDisplayed(condition, alertText);
 		}
 
-		[RegexStepDefinition("In the Global Trade Item Number \\(GTIN\\) / Universal Product Code \\(UPC\\) Section, confirm the values on the new product screen are the same as the UPC Upload document saved in the Table called: (.*)")]
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, confirm the values on the new product screen are the same as the UPC Upload document saved in the Table called: (.*)")]
 		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionConfirmTheValuesOnTheNewProductScreenAreTheSameAsTheUPCUploadDocumentSavedInTheTableCalledUPCTable(string tableSavedAs)
 		{
 			Report.StartStep("I confirm the UPC numbers and sizes are the same as the upload document");
@@ -497,13 +504,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			bool expected = is_isnot == "is";
 			string section = "DPCI Number (must be formatted like xxx-xx-xxxx), if multiple separate by ',' with no spaces.";
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.UPCSectionFieldsAvailable(section) == expected, $"Failed to Confirm the '{section}' field {(expected ? "is not" : "is")} available", $"I Confirm the '{section}' field {is_isnot} available");
+			Report.IsTrue(selNewProduct.UPCSectionFieldIsAvailable(section) == expected, $"Failed to Confirm the '{section}' field {(expected ? "is not" : "is")} available", $"I Confirm the '{section}' field {is_isnot} available");
 		}
-		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'DPCI Number' enter the value: (.*)")]
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'DPCI Number' enter the value: '(.*)'")]
 		public void EnterDPCINumber(string option)
 		{
 			string section = "DPCI Number (must be formatted like xxx-xx-xxxx), if multiple separate by ',' with no spaces.";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, (expand|collapse) the first UPC")]
+		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionExpandTheFirstUPC(string expand_collapse)
+		{
+			new StepsNewProduct().IExpandFirstUPC(expand_collapse);
+		}
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, section: 'DPCI Number' (is|is not) populated with value: '(.*)'")]
+		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionSectionIsPopulatedWithValue(string is_isnot, string option)
+		{
+			string section = "DPCI Number (must be formatted like xxx-xx-xxxx), if multiple separate by ',' with no spaces.";
+			new Steps_Prototype().CheckingFieldInputIsCorrect(section, option);
+		}
+
+
 	}
 }

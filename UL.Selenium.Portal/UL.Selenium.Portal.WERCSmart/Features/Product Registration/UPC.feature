@@ -1043,16 +1043,12 @@ Scenario: [115330] Target - Bulk UPC - DPCI - is no longer required
 	| Target                     |
 	Then in the Retailer page, I click Continue
 	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, section: 'DPCI Number' is displayed
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'DPCI Number' enter the value: 74415789264789 
+	#Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
 	Then I generate a random UPC number and save as: UPC#115330_1
 	Then I generate a random UPC number and save as: UPC#115330_2
 	Then I generate a random UPC number and save as: UPC#115330_3
 	Then I generate a random UPC number and save as: UPC#115330_4
 	Then I generate a random UPC number and save as: UPC#115330_5
-	Then I generate a random UPC number and save as: UPC#115330_6
-	Then I generate a random UPC number and save as: UPC#115330_7
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, click 'sample file' link to download file
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm 'sample file' is downloaded and save as: test115330
 	And I edit the testdoc.xlsx, and save its filepath as: Bulktest115330 and verify it contains the UPC data in the table saved as: UPCTable115330, (Base Data Only: true)
@@ -1062,8 +1058,6 @@ Scenario: [115330] Target - Bulk UPC - DPCI - is no longer required
 		| %UPC#115330_3% | MyChalk3 | 3        | 32   |               | 00CC03          | 2003            | 1113            | H0003           |          | 100000003 | 123-1234,123-1232 |
 		| %UPC#115330_4% | MyChalk4 | 4        | 32   |               | 00DD04          | 2004            | 1114            | I0004           |          | 100000004 | 123-1234,123-1233 |
 		| %UPC#115330_5% | MyChalk5 | 5        | 32   |               | 00EE05          | 2005            | 1115            | J0005           |          | 100000005 | 123-1234,123-1234 |
-		| %UPC#115330_6% | MyChalk6 | 6        | 32   |               | 00FF06          | 2006            | 1116            | K0006           |          | 100000006 | 123-1234,123-1235 |
-		| %UPC#115330_7% | MyChalk7 | 7        | 32   |               | 00GG07          | 2007            | 1117            | L0007           |          | 100000007 | 123-1234,123-1236 |
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, click 'Upload File' button and upload file saved as: Bulktest115330
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm 'Add Multiple' modal window should be displayed
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal check All UPCs checkbox
@@ -1072,17 +1066,21 @@ Scenario: [115330] Target - Bulk UPC - DPCI - is no longer required
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal click 'Next' button
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal confirm all UPCs are selected
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal check retailer: Target
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' verify Retailer column is populated with: TG
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal click 'Finish' button
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm 'Add Multiple' modal window should not be displayed
-	When In the Recipient and Product Details tab, I expand the first UPC
-	Then I check that DPCI for retailer Target UPC item 1 should match the UPC Upload document saved in the Table called: UPCTable115330
-	Then I click Continue and should not see an error message
-	And In the New Product page I should be on tab: Review and Submit
-	When In the New Product page I click tab: Recipient and UPC Details
-	And I click the page heading: Universal Product Code (UPC)
-	And In the Recipient and Product Details tab, I expand the first UPC
-	Then I check that DPCI for retailer Target UPC item 1 should match the UPC Upload document saved in the Table called: UPCTable115330
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm the values on the new product screen are the same as the UPC Upload document saved in the Table called: UPCTable115330
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, verify retailer 'TG' is present under the 'Destination Retailers' column
+	Then There are not any error messages displayed
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, expand the first UPC
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, section: 'DPCI Number' is displayed
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, section: 'DPCI Number' is populated with value: ''
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'DPCI Number' enter the value: '74415789264789' 
+	Then There are not any error messages displayed
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'DPCI Number' enter the value: '' 
+	Then There are not any error messages displayed
 	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	Then I should be on the Regulatory Documents to Provide Page
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase115330
 
 @TestCase:156789

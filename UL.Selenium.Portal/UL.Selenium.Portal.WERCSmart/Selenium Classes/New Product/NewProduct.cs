@@ -73,7 +73,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		private IWebElement ErrorMessage => this.ContainerElement.FindElement(By.XPath(".//p[@class='form-error']//span"), 1);
 
-		private IEnumerable<IWebElement> ErrorMessages => this.ContainerElement.FindElements(By.XPath(".//p[@class='form-error']//span"), 1);
+		private IEnumerable<IWebElement> ErrorMessages => this.ContainerElement.FindElements(By.XPath(".//p[@class='form-error' and not(contains(@style,'display: none'))]//span"), 1);
 
 		private IWebElement ContinueButton => this.ContainerElement.WaitUntilElementClickable(By.XPath(".//a[contains(@class,'continue-button')]"), 5);
 
@@ -922,6 +922,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{
 				return false;
 			}
+		}
+		public bool UPCSectionFieldIsAvailable(string field)
+		{
+
+			IWebElement Field = this.ContainerElement.FindElement(By.XPath($".//div[@class='form-group']//label[text()=\"{field}\"]"), 2);
+			return Field != null;
 		}
 
 		public string GetValidOptionForUPCPackageType()
