@@ -1123,19 +1123,18 @@ Scenario: [156789] UPC Screen - Internal SKU field - Check field parameters and 
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'GTIN/UPC (include check digit)' enter the value: saved as: UPC156789
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Size (Fluid Ounces)' enter the value: 2
-	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Container Type' select the value: Plastic Container
 	Given I confirm SKU field is blank
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
 	Then I should see the Regulatory Documents to Provide Page
 	Given In the New Product page I click tab: Recipient and UPC Details
 	Given I click the page heading: Universal Product Code (UPC)
-	Given I delete UPC: saved as UPC156789
-	Given I call Shared Step 163416 (Enter Universal Product Code (UPC) - Battery - Confirm SKU - No Package Type - Do Not Click Continue) for UPC saved as: UPC156789 with container type: Metal Container size: 40.0 and SKU: 12345!@#$%12
-	Given In the Universal Product Code (UPC) page I click Save
-	Then I check for the appropriate alert: Only 8 to 12 letters and/or numbers allowed
-	Given I delete UPC: saved as UPC156789
-	Given I call Shared Step 163416 (Enter Universal Product Code (UPC) - Battery - Confirm SKU - No Package Type - Do Not Click Continue) for UPC saved as: UPC156789 with container type: Metal Container size: 40.0 and SKU: 123456
-	Given In the Universal Product Code (UPC) page I click Save
-	Then I check for the appropriate alert: Only 8 to 12 letters and/or numbers allowed
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Internal SKU' enter the value: 12345!@#$%12
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, section: 'Internal SKU' should display error message: Only 8 to 12 letters and/or numbers allowed
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Internal SKU' enter the value: 123456
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, section: 'Internal SKU' should display error message: Only 8 to 12 letters and/or numbers allowed
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase156789
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase156789
