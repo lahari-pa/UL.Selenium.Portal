@@ -985,7 +985,7 @@ Scenario: [115334] Target - Add UPC - DPCI - is no longer required
 	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase115334
 
 @TestCase:115330
-Scenario: [115330] Target - Bulk UPC - DPCI - is no longer required
+Scenario: [115330] WERCSmart Portal - UPC - Verify the DPCI Field is NO Longer Required for TARGET
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
