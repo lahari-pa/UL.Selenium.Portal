@@ -499,5 +499,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			Report.IsTrue(new NewProduct().SelectContainerType(option),
 				$"Failed to select: {option}", $"Selected: {option}");
 		}
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, click 'Save' button")]
+		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionClickButtonSave()
+		{
+			string button = "Save";
+			new Steps_Prototype().ClickButton(button);
+		}
 	}
 }

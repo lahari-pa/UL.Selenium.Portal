@@ -1110,6 +1110,9 @@ Scenario: [156789] UPC Screen - Internal SKU field - Check field parameters and 
 	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
 	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+	Then I should be on the Transportation Details 1 Page
+	Then In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
+	Then in the Transportation Details 1 page, I click Continue
 	#Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
 	#	| Retailer  |
 	#	| Walgreens |
@@ -1121,7 +1124,7 @@ Scenario: [156789] UPC Screen - Internal SKU field - Check field parameters and 
 	#Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC156789, container type: Plastic Container and size: 2 do not click continue
 	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'GTIN/UPC (include check digit)' enter the value: saved as: UPC156789
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'GTIN/UPC (include check digit)' enter the value: saved as UPC156789
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Size (Fluid Ounces)' enter the value: 2
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Container Type' select the value: Plastic Container
 	Given I confirm SKU field is blank
@@ -1130,10 +1133,10 @@ Scenario: [156789] UPC Screen - Internal SKU field - Check field parameters and 
 	Given In the New Product page I click tab: Recipient and UPC Details
 	Given I click the page heading: Universal Product Code (UPC)
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Internal SKU' enter the value: 12345!@#$%12
-	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, click 'Save' button
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, section: 'Internal SKU' should display error message: Only 8 to 12 letters and/or numbers allowed
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Internal SKU' enter the value: 123456
-	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, click 'Save' button
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, section: 'Internal SKU' should display error message: Only 8 to 12 letters and/or numbers allowed
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase156789
 	Then I navigate to the Home Page
