@@ -34,6 +34,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		IWebElement Button(string button) => this.ContainerElement.FindElement(By.XPath($"//button//span[text() = '{button}'] | .//a[text() = '{button}'] | //button[text() = '{button}']"), 2);
 		IWebElement Table(string tableName) => this.ContainerElement.FindElement(By.XPath($"//div[div[text() = '{tableName}']]/following-sibling::table"), 2);
 		IWebElement TextOnThePage(string text) => this.ContainerElement.FindElement(By.XPath($"//div//*[text() = \"{text}\"]"),2);
+		IWebElement ButtonSave(string button) => this.ContainerElement.FindElement(By.XPath($".//div[@id='collapse1']//a[text() = '{button}']"), 2);
 
 		public bool TextExistsOnThePage(string text)
 		{
@@ -48,7 +49,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			return this.Button(button).TryClick();
 		}
-
+		public bool ButtonSaveExists(string button)
+		{
+			return this.ButtonSave(button) != null;
+		}
+		public bool ButtonSaveClick(string button)
+		{
+			return this.ButtonSave(button).TryClick();
+		}
 		public bool InputFieldExists(string fieldName)
 		{
 			return this.InputField(fieldName) != null;

@@ -451,6 +451,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"Successfully clicked button {button}");
 			}
 		}
+		//[RegexStepDefinition(@"I click button: (.*)")]
+		public void ClickButtonSave(string button)
+		{
+			if (Report.IsTrue(new NewProduct().ButtonSaveExists(button),
+				$"Failed to find button {button}",
+				$"Successfully found button {button}"))
+			{
+				Report.IsTrue(new NewProduct().ButtonSaveClick(button),
+				$"Failed to click button {button}",
+				$"Successfully clicked button {button}");
+			}
+		}
 
 		[RegexStepDefinition(@"I confirm that I see the following (.*) value: (.*)")]
 		public void ThenIConfirmThatISeeTheFollowingCARBValue(string category, string expectedValue)

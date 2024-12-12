@@ -503,7 +503,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionClickButtonSave()
 		{
 			string button = "Save";
-			new Steps_Prototype().ClickButton(button);
+			new Steps_Prototype().ClickButtonSave(button);
 		}
 	}
 }
