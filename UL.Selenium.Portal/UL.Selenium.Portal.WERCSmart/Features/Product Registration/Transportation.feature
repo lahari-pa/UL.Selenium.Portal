@@ -232,19 +232,16 @@ Scenario: [65940] Transportation - Copy information from my U.S. Department of T
 	Then I should be on the Product Information Page
 	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
 	Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
-
 	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
 	Then In the Product Information Section, set the option in section: 'Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
-
 	Then in the Product Information page, I click Continue
     #And I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
     #| Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
     #| Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
 	And I should be on the Physical and Chemical Properties Page
-
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
 	Then In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 1
@@ -271,44 +268,70 @@ Scenario: [65940] Transportation - Copy information from my U.S. Department of T
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
     And I should be on the Transportation Details 1 Page
     And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Yes
-
     #And I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
     Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: DOT
     Then In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping with limited quantity
+    #And I call Shared Step 65699 (Transport - Select IMDG & Limited Shipping - No Continue)
+    Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: IMDG
+    Then In the Transportation Details 1 Section, set the option for IMDG mode of transport to: Shipping with limited quantity
+    Then in the Transportation Details 1 page, I click Continue
+    And I should be on the U.S. Department of Transportation (DOT) Classification Page
+	#And I click continue
+    #And I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
+	 And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1970
+	 And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Aerosols
+	 And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Technical Name (if applicable)': to: Technical Test Name
+     And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
+	 And In the U.S. Department of Transportation \(DOT\) Classification Section, verify section: 'Packing Group (select)' contains value: None
+	 And Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
+     #And I should see the International Marine (IMDG) Classification Page
+	And I should be on the International Marine (IMDG) Classification Page
+    #And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
+	And In the International Marine \(IMDG\) Classification Section, I check checkbox 'Copy information from my U.S. Department of Transportation data
+    #And UN Number should be showing the value: UN1950
+    And In the International Marine (IMDG) Classification Section, verify section: 'UN Number' contains value: UN1970
+    #And Proper Shipping Name should be showing the value: Aerosols
+	And In the International Marine (IMDG) Classification Section, verify section: 'Proper Shipping Name' contains value: Aerosols
+   #And Hazard Class (select) should be showing the value: 2
+   And In the International Marine (IMDG) Classification Section, verify section: 'Hazard Class (select)' contains value: 2
+   #And The following options should be displayed exclusively for section: Hazard Class (select)
+   #| Option |
+   #| 2      |
+   #And Packing Group (select) should be showing the value: None
+   And In the International Marine (IMDG) Classification Section, verify section: 'Packing Group (select)' contains value: None
+   #And The following options should be displayed exclusively for section: Packing Group (select)
+   #| Option |
+   #| None   |
 
+   #And I call Shared Step 65939 (Go To Transport DOT Step - Enter UN1966, Confirm data - NO CONTINUE)
+    And I click the page heading: Transportation Details 1
+    Then I should be on the U.S. Department of Transportation (DOT) Classification Page
+    And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1966
+    And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Hydrogen, refrigerated liquid
+    And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Technical Name (if applicable)': to: Technical Test Name
+    And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
+	And In the U.S. Department of Transportation \(DOT\) Classification Section, verify section: 'Packing Group (select)' contains value: None
+   #And I click continue
+   Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
+   And I should be on the International Marine (IMDG) Classification Page
+   #And I confirm the checkbox with description: Copy information from my U.S. Department of Transportation data is displayed
+   #And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
+   And In the International Marine (IMDG) Classification Section, I check checkbox 'Copy information from my U.S. Department of Transportation data'
+   #And UN Number should be showing the value: UN1966
+   And In the International Marine (IMDG) Classification Section, verify section: 'UN Number' contains value: UN1966
+   #And I uncheck the checkbox with description: Copy information from my U.S. Department of Transportation data
+   #And Proper Shipping Name should be showing the value: Hydrogen, refrigerated liquid
+   And In the International Marine (IMDG) Classification Section, verify section: 'Proper Shipping Name' contains value: Hydrogen, refrigerated liquid
+   #And Technical Name should be showing the value: Technical Name Test
+   #And Hazard Class (select) should be showing the value: 2.1
+   And In the International Marine (IMDG) Classification Section, verify section: 'Hazard Class (select)' contains value: 2.1
+   #And Packing Group should be showing the value: None
+   And In the International Marine (IMDG) Classification Section, verify section: 'Packing Group (select)' contains value: None
+   And I navigate to the home page
+   #And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65940
+   Then In the Product Grid, delete the product saved as: TestCase65940
+	
 
-
-
-
-And I call Shared Step 65699 (Transport - Select IMDG & Limited Shipping - No Continue)
-And I click continue
-And I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
-And I should see the International Marine (IMDG) Classification Page
-And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
-And UN Number should be showing the value: UN1950
-And Proper Shipping Name should be showing the value: Aerosols
-And Hazard Class (select) should be showing the value: 2
-And The following options should be displayed exclusively for section: Hazard Class (select)
-| Option |
-| 2      |
-And Packing Group (select) should be showing the value: None
-And The following options should be displayed exclusively for section: Packing Group (select)
-| Option |
-| None   |
-And I call Shared Step 65939 (Go To Transport DOT Step - Enter UN1966, Confirm data - NO CONTINUE)
-And I click continue
-And I confirm the checkbox with description: Copy information from my U.S. Department of Transportation data is displayed
-And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
-And UN Number should be showing the value: UN1966
-And I uncheck the checkbox with description: Copy information from my U.S. Department of Transportation data
-And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
-And UN Number should be showing the value: UN1966
-And Proper Shipping Name should be showing the value: Hydrogen, refrigerated liquid
-And Technical Name should be showing the value: Technical Name Test
-And Hazard Class (select) should be showing the value: 2.1
-And Packing Group should be showing the value: None
-And I navigate to the home page
-And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65940
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
