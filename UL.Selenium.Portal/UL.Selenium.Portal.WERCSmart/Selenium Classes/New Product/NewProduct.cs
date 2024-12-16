@@ -915,13 +915,25 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				IWebElement Field = this.ContainerElement.FindElement(By.XPath($".//input[@placeholder='{field}'] | .//div[@class='form-group']//label[text()='{field}']"), 2);
+				IWebElement Field = this.ContainerElement.FindElement(By.XPath($".//input[@placeholder='{field}'] | .//div[@class='form-group']//label[text()='{field}'] | .//select[contains(@data-bind, '{field}')]"), 2);
 				return Field != null;
 			}
 			catch (Exception)
 			{
 				return false;
 			}
+		}
+		public string UPCSectionCheckError(string field)
+		{
+			IWebElement FieldError = this.ContainerElement.FindElement(By.XPath($".//input[@placeholder='{field}']/following-sibling::p | .//div[@class='form-group']//label[text()='{field}']/following-sibling::p | .//select[contains(@data-bind, '{field}')]/following-sibling::p"), 2);
+			if (FieldError == null)
+			{
+				Report.Failure("Cannot find section");
+			}
+
+			string getError = FieldError.Text;
+			return getError;
+			
 		}
 
 		public string GetValidOptionForUPCPackageType()

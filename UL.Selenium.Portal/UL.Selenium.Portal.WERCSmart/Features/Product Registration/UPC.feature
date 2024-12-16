@@ -929,20 +929,22 @@ Scenario: [87598]- Universal Product Code (UPC) Step - Add Casepack - fields req
 	And In the Select Retailers window, click 'Done' button
 	Then in the Retailer page, I click Continue
 	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
-
-	Given I click Add Casepack
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the 'Add Casepack' button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, section: 'GTIN or UPC (include check digit)' is displayed
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, section: 'Container Type' is displayed
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, section: 'Size (Weight Ounces)' is displayed
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, section: 'Quantity of Units within the Case' is displayed
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, section: 'Individual UPC contained in the Case Pack' is displayed
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, section: 'Transportation Options' is displayed
+	#Given I click Add Casepack
 	Given in the Universal Product Code (UPC) page I click Continue
-	Then I check if the textfields with the following placeholders display the error 'This is a required field.' bottom
-		| Placeholder                       |
-		| GTIN or UPC (include check digit) |
-		| Size (Weight Ounces)              |
-		| Quantity of Units within the Case |
-	Then I check if the dropdowns with the following default options display the error 'This is a required field.' bottom
-		| Default Option         |
-		| Container Type         |
-		| Transportation Options |
-	Then I confirm no error is shown below the Individual UPC contained in the Case Pack field
-#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87598
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, the error: 'This is a required field.' is displayed for the section: 'GTIN or UPC (include check digit)'
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, the error: 'This is a required field.' is displayed for the section: 'Container Type'
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, the error: 'This is a required field.' is displayed for the section: 'Size (Weight Ounces)'
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, the error: 'This is a required field.' is displayed for the section: 'Quantity of Units within the Case'
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, the error: 'This is a required field.' is not displayed for the section: 'Individual UPC contained in the Case Pack'
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, the error: 'This is a required field.' is displayed for the section: 'Transportation Options'
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87598
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase87598
 
