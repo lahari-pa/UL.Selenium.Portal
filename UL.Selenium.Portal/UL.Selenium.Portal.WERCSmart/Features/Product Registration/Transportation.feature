@@ -967,23 +967,46 @@ And I click alias subsection option TDGCP and confirm data as:
 @TestCase:126286
 Scenario: [126286] Transportation Details DOT - UN1057 Prompts the 'For the Lighter, Provide the DOT Approval Number' Field
 
-Given I call Shared Step 67284 (Login into WERCSmart Portal - Visual Automation Account)
-	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
-	Given in the New Product page I click Continue
-Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): LIGHTER FLUID
-Given I generate a random UPC number and save as: UPC126286
-Then I save the product information as: TestCase126286
+    #Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+    Given I log in with the account saved in TReVor as: ProductAccount
+	Then The home screen should load
+    #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+    Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+    #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
+    Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bleach
+    And In the Product Section, set the option in section: 'Type of Product (select)' to: Bleach
+    Then in the The Product page, I click Continue
+    Given I generate a random UPC number and save as: UPC126286
+    Then I save the product information as: TestCase126286
+
 #Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-Given I should see the Product Information Page
+Then I should be on the The Product Information Page
 Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
 Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
 Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
-Then in the Product Information page I click Continue
-Given I call Shared Step 57441 (Physical and Chemical Properties - Primary Physical Property - Liquid)
+Then in the The Product Information page, I click Continue
+#Given I call Shared Step 57441 (Physical and Chemical Properties - Primary Physical Property - Liquid)
+And I should be on the Physical and Chemical Properties Page
+Then In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
+Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
+Then In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 1
+Then In the Physical and Chemical Properties Section, set the option in section: 'Relative Density' to: g/ml (grams per milliliter)
+Then In the Physical and Chemical Properties Section, for section: 'pH' select the checkbox option: 'I do not have exact pH data available to me'
+Then In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' select the checkbox option: 'I do not have exact Boiling Point data available to me'
+Then In the Physical and Chemical Properties Section, set the option in section: 'Boiling Point (in Celsius)' to: Not tested/Unknown
+Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' select the checkbox option: 'I do not have exact Flash Point data available to me'
+Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point (in Celsius)' to: >=93C and <=815C
+Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Closed cup method
+Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Cloth not soluble
+Then in the Physical and Chemical Properties page, I click Continue
+
+
+
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | CASNumber  | ComponentName                                                               | Percent | PublicallyDisclosed | PublicName | TradeSecret |
 | 68410-97-9 | Distillates, petroleum, light distillate hydrotreating process, low-boiling | 70      |                     |            |             |
