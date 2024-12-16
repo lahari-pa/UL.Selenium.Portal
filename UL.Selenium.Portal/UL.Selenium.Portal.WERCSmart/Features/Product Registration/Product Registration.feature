@@ -652,22 +652,42 @@ Scenario: [122123] Sustainability Screen - Descriptions, Icons and Indicators
 
 @TestCase:122261
 	Scenario: [122261] Sustainability Screen - Consent Not Granted Message
-	Given I generate a random UPC number and save as: UPC79428
+
+	Given I generate a random UPC number and save as: UPC122261
+
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
-	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Raw Material
-	Then I save the product information as: TestCase79428
-	Given I call Shared Step 79431 (Ingredients - Add FLAVOR component, Publicly Disclosed = Yes, Select Public Name) and save ingredients as: Ing79428Flav
-		| CASNumber  | ComponentName | Percentage |
-		| RR-38669-6 | FLAVORS       | 35         |
-	And I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name) and save ingredient as: Ing79428Frag
-		| CASNumber | ComponentName                                                                  | Percentage |
-		| FRAGRANCE | Fragrance - Awapuhi - Skin sens 1, Repro 2, Aquatic acute 2, Aquatic chronic 2 | 35         |
-	And I call Shared Step 79490 (Ingredients - Add non-generic component - Public Disclosed = Yes, select Name Continue) and save ingredient as: Ing79428NG
-		| CASNumber | ComponentName | Percentage |
-		| 50-00-0   | Formaldehyde  | 30         |
-	Then in the Ingredients page I click Continue 
+
+	#And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+
+	#And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Raw Material
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party_#122261
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Mixture, Blend, Formula, Polymer or Solution from Third (3rd, 3d) Party
+	Then in the The Product page, I click Continue
+
+	Then I save the product information as: TestCase122261
+
+	#Given I call Shared Step 79431 (Ingredients - Add FLAVOR component, Publicly Disclosed = Yes, Select Public Name) and save ingredients as: Ing79428Flav
+	#	| CASNumber  | ComponentName | Percentage |
+	#	| RR-38669-6 | FLAVORS       | 35         |
+	#And I call Shared Step 79436 (Ingredients - Add FRAGRANCE component, Publicly Disclosed = Yes,  Select Public Name) and save ingredient as: Ing79428Frag
+	#	| CASNumber | ComponentName                                                                  | Percentage |
+	#	| FRAGRANCE | Fragrance - Awapuhi - Skin sens 1, Repro 2, Aquatic acute 2, Aquatic chronic 2 | 35         |
+	#And I call Shared Step 79490 (Ingredients - Add non-generic component - Public Disclosed = Yes, select Name Continue) and save ingredient as: Ing79428NG
+	#	| CASNumber | ComponentName | Percentage |
+	#	| 50-00-0   | Formaldehyde  | 30         |
+	Then I should be on the Ingredients Page
+	And In the Ingredients section, add the following ingredients:
+	| SearchType | SearchValue                                                                                                                                                    | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| CAS number | RR-38669-6                                                                                                                                                     | 50      | True                | False         | FLAVORS     |
+	| CAS number | Fragrance - Gardenia: Skin irritant 2, Eye damage 1, Skin sensitization 1, Carcinogen 1A, reproductive toxin 2, Aquatic acute 2, Aquatic Chronic 2 / FRAGRANCE | 50      | True                | False         | Fragrance   |
+	Then in the Ingredients page, I click Continue
+
+
 	Then The Formulation 3rd Party Step is shown
     Then I call Shared Step 79507 (Formulation > 3rd Party - Accept formulation - Grant Tier 2 - Continue)
 	When I click continue
