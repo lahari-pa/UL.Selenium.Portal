@@ -530,8 +530,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			new Steps_Prototype().CheckingFieldInputIsCorrect(section, option);
 		}
 
-
-	}
 		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, section: '(GTIN or UPC \(include check digit\)|Container Type|Size \(Weight Ounces\)|Quantity of Units within the Case|Individual UPC contained in the Case Pack|Transportation Options)' (is|is not) displayed")]
 		public void GTINOrUPCIsDisplayed(string section, string is_isnot)
 		{
