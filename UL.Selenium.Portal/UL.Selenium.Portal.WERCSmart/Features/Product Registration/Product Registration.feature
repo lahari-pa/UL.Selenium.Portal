@@ -27,7 +27,12 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 @RegulatoryInformation3
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Formulation3rdParty
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+@Product:WERCSmart_Account:Distributor_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryInformation2
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
+@Product:WERCSmart_Account:Distributor_Page:NewProducts_Tab:ProductCharacteristics_Section:RestrictUse
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:Sustainability
 Feature: Product Registration
 
 @tfs_design
@@ -682,31 +687,59 @@ Scenario: [122123] Sustainability Screen - Descriptions, Icons and Indicators
 	#	| 50-00-0   | Formaldehyde  | 30         |
 	Then I should be on the Ingredients Page
 	And In the Ingredients section, add the following ingredients:
-	| SearchType | SearchValue                                                                                                                                                    | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-	| CAS number | RR-38669-6                                                                                                                                                     | 50      | True                | False         | FLAVORS     |
-	| CAS number | Fragrance - Gardenia: Skin irritant 2, Eye damage 1, Skin sensitization 1, Carcinogen 1A, reproductive toxin 2, Aquatic acute 2, Aquatic Chronic 2 / FRAGRANCE | 50      | True                | False         | Fragrance   |
+	| SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| CAS number | RR-38669-6  | 50      | True                | False         | FLAVORS     |
+	| CAS number | FRAGRANCE   | 50      | True                | False         | Fragrance   |
 	Then in the Ingredients page, I click Continue
 
+#    Then I call Shared Step 79507 (Formulation > 3rd Party - Accept formulation - Grant Tier 2 - Continue)
+	Then I should be on the Formulation > 3rd Party Page
+	And In the Formulation > 3rdParty Section, set the radio option in section: 'By clicking Accept, I certify the formulation information entered is complete and accurate': to: Accept
+	And In the Formulation > 3rdParty Section, set the radio option in section: 'Consent to Tier 2.1, 2.2, 4.2 Data Uses': to: Declined
+	Then in the Formulation > 3rd Party page, I click Continue
 
-	Then The Formulation 3rd Party Step is shown
-    Then I call Shared Step 79507 (Formulation > 3rd Party - Accept formulation - Grant Tier 2 - Continue)
-	When I click continue
 	#And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-	Given I should see the Inventory Status, Prop 65 (US) Page
+	Given I should be on the Inventory Status, Prop 65 (US) Page
 	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
 	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page I click Continue
 
-	And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
-	And I should see the Additional Documents to Provide Page
-	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate (Perfumery Products) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-	And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: GRAS Certificate (Flavor Products) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-	Then in the Additional documents page I click Continue
-	When I click continue
-	And I call Shared Step 58610 (Confirm Restrict Use - Restrict)
-	And I should see the Sustainability Page
-	Then I check if alert message displays the following text: You have not granted consent to requested Data Use Tiers for this component.  Your customer's products will not be fully screened and evaluated by any relevant WERCSmart Recipient chemical policy or product qualification program.  The results for each program is displayed above.  If you wish to update your consents for this component, please go to Product Characteristics / Formulation > Third-Party
-	When I click continue
+	#And I call Shared Step 60932 (Regulatory Information 2 - Microbeads - No)
+	Then I should be on the Regulatory Information 2 Page
+	And In the Regulatory Information 2 Section, set the option in section: 'Product contains microbeads' to: No
+	Then in the Regulatory Information 2 page, I click Continue
+
+	Then I should be on the Transportation Details 1 Page
+	And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: No, due to an exemption or exception
+	And In the Transportation Details 1 Section, set the option in section: 'Please select DOT Exceptions if applicable?': to: 173.120(b)(3):  Combustible liquid that does not sustain combustion
+	Then in the Transportation Details 1 page, I click Continue
+
+	#And I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: IFRA Certificate (Perfumery Products) and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
+	Then I should be on the Additional Documents to Provide Page
+	And In the Additional Documents to Provide, upload PDF document to International Fragrance Association (IFRA) field
+	And In the Additional Documents to Provide, upload PDF document to Generally Recognized as Safe (GRAS) field
+	Then in the Additional Documents to Provide page, I click Continue
+
+	Then in the Formulation Names page, I click Continue
+
+	#Given I call Shared Step 58610 (Confirm Restrict Use - Restrict)
+	Then I should be on the Restrict Use Page
+	And In the Restrict Use Section, set the option in section: 'Do you want to restrict searchable access to your registered formula?': to: Restrict
+	And In the Restrict Use Section, I enter the text of Access Code field to: 12345678
+	Then in the Restrict Use page, I click Continue
+
+	Then I should be on the Sustainability Page
+	And In the Sustainability section, the following alert message should be displayed: You have not granted consent to requested Data Use Tiers for this component. Your customer's products will not be fully screened and evaluated by any relevant WERCSmart Recipient chemical policy or product qualification program. The results for each program is displayed above. If you wish to update your consents for this component, please go to Product Characteristics / Formulation > Third-Party.
+	Then in the Sustainability page, I click Continue
+
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
+
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59280
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase122261
 
 @ignore
 @TestCase:128754

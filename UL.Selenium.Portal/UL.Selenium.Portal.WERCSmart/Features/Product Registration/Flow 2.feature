@@ -483,6 +483,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 @71274
 @TestCase:71274
 Scenario: [71274] Flea or Tick Repellent (L) - RU000323
+
 	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
