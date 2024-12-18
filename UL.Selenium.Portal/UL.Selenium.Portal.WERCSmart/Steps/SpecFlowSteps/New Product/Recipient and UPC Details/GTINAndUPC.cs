@@ -553,7 +553,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			string getError = new NewProduct().UPCSectionCheckError(section);
 			Report.IsTrue(getError == errorMessage == expected, $"Failed to confirm the error '{errorMessage}' {(expected ? "is not" : "is")} displayed for the section '{section}'", $"Successfully confirmed the error ' {errorMessage}' {is_isnot} displayed for the section '{section}'");
 		}
-	}
 
 		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, click 'Save' button")]
 		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionClickButtonSave()
