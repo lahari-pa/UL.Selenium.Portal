@@ -121,16 +121,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 				string linkText = "Notice of Adoption Article";
 				new Steps_Prototype().ClickLinkElement(linkText);
 			}
-			[RegexStepDefinition(@"In the Inventory Status, Prop 65 \(US\) Section, close the tab titled: 'Notice of Adoption Article'")]
-			public void CloseLinkNoticeOfAdoptionArticle()
+			[RegexStepDefinition(@"In the Inventory Status, Prop 65 \(US\) Section, close the tab with the url link: (.*)")]
+			public void CloseLinkNoticeOfAdoptionArticle(string linkUrl)
 			{
-				string linkUrl = "https://oehha.ca.gov/proposition-65/crnr/notice-adoption-article-6-clear-and-reasonable-warnings";
 				new Steps_Prototype().CloseTabWithUrl(linkUrl);
 			}
-			[RegexStepDefinition(@"In the Inventory Status, Prop 65 \(US\) Section, switch to the tab titled: 'Notice of Adoption Article'")]
-			public void SwitchToTabNoticeOfAdoptionArticle()
+			[RegexStepDefinition(@"In the Inventory Status, Prop 65 \(US\) Section, switch to the tab with url link: (.*)")]
+			public void SwitchToTabNoticeOfAdoptionArticle(string linkUrl)
 			{
-				string linkUrl = "https://oehha.ca.gov/proposition-65/crnr/notice-adoption-article-6-clear-and-reasonable-warnings";
 				new Steps_Prototype().ConfirmNewTabOpenWithUrl(linkUrl);
 			}
 		}

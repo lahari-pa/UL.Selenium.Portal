@@ -135,8 +135,8 @@ Scenario: [85695] California Proposition 65 - select Yes - navigation
 	| If the product carries a safe-harbor long-form warning, indicate which of the following is used and enter the names of the Proposition 65 chemicals included in the warning: |
 	| If the product carries a custom warning, please provide the exact text that is being used:                                                                                   |
 	Then In the Inventory Status, Prop 65 (US) Section, for section 'How is the exposure warning transmitted? For more information, see' click the link titled: 'Notice of Adoption Article'
-	And In the Inventory Status, Prop 65 (US) Section, switch to the tab titled: 'Notice of Adoption Article'
-	Then In the Inventory Status, Prop 65 (US) Section, close the tab titled: 'Notice of Adoption Article'
+	And In the Inventory Status, Prop 65 (US) Section, switch to the tab with url link: https://oehha.ca.gov/proposition-65/crnr/notice-adoption-article-6-clear-and-reasonable-warnings
+	Then In the Inventory Status, Prop 65 (US) Section, close the tab with the url link: https://oehha.ca.gov/proposition-65/crnr/notice-adoption-article-6-clear-and-reasonable-warnings
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85695
 	Then I navigate to the Home Page
