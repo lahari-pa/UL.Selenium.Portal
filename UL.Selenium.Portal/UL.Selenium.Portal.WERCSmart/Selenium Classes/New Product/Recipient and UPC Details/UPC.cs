@@ -572,9 +572,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			get
 			{
 				var listOfUPCNewProducts = new List<UPCNewProduct>();
-				IWebElement thisTable = this.ContainerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
-				List<KeyValuePair<int, string>> th = this.TableHeaders(thisTable); //?
-				ReadOnlyCollection<IWebElement> listOfRows = this.ContainerElement.FindElements(By.XPath(".//tbody//tr"));
+				IWebElement ThisTable = this.ContainerElement.FindElement(By.XPath(".//table[@class='table table-hover upc-table']"), 2);
+				List<KeyValuePair<int, string>> th = this.TableHeaders(ThisTable); //?
+				ReadOnlyCollection<IWebElement> listOfRows = ThisTable.FindElements(By.XPath(".//tbody//tr"));
 				int isCheckedIndex = th.FirstOrDefault(x => x.Value == "").Key;
 				int upcNumberIndex = th.FirstOrDefault(x => x.Value.Contains("UPC")).Key;
 				int retailerIndex = th.FirstOrDefault(x => x.Value.Contains("Destination Retailers")).Key;
@@ -975,13 +975,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		protected override By ContainerElementLocator => By.XPath(@"//h4[@class='modal-title' and contains(text(),'Add Multiple')]/ancestor::div[@class='modal-content']");
 
 		public IWebElement SelectAllUpcsButton => this.ContainerElement.FindElement(By.XPath("//tr//th//input[@type='checkbox' and contains(@data-bind,'areAllRowsSelected')]"), 2);
-		public IWebElement ContainsType => ContainerElement.FindElement(By.XPath(".//select[contains(@data-bind,'packagingChanged')]"), 2);
-		public IWebElement NextButton => ContainerElement.FindElement(By.XPath("//button[@type='button' and text()='Next']"), 2);
-		public IWebElement SelectAllRetailersButton => ContainerElement.FindElement(By.XPath("//tr//th//input[@type='checkbox' and contains(@data-bind,'retailers')]"), 2);
-		public IWebElement SelectXRetailersButton => ContainerElement.FindElement(By.XPath("//tr//th//input[@type='checkbox' and contains(@data-bind,'retailers')]"), 2);
-		public IWebElement FinishButton => ContainerElement.FindElement(By.XPath("//button[@type='button' and text()='Finish']"), 2);
+		public IWebElement ContainsType => this.ContainerElement.FindElement(By.XPath(".//select[contains(@data-bind,'packagingChanged')]"), 2);
+		public IWebElement NextButton => this.ContainerElement.FindElement(By.XPath("//button[@type='button' and text()='Next']"), 2);
+		public IWebElement SelectAllRetailersButton => this.ContainerElement.FindElement(By.XPath("//tr//th//input[@type='checkbox' and contains(@data-bind,'retailers')]"), 2);
+		public IWebElement SelectXRetailersButton => this.ContainerElement.FindElement(By.XPath("//tr//th//input[@type='checkbox' and contains(@data-bind,'retailers')]"), 2);
+		public IWebElement FinishButton => this.ContainerElement.FindElement(By.XPath("//button[@type='button' and text()='Finish']"), 2);
 		public IWebElement RetailerCheckbox(string retailer) => this.ContainerElement.FindElement(By.XPath($"//tr[td//span[text()='{retailer}']]//input"), 2);
-
+		List<IWebElement> ListOfRows => this.ContainerElement.FindElements(By.XPath(".//tr[td//span[contains(@data-bind, 'upc')]]"),2).ToList();
 		public bool RetailerExists(string retailer)
 		{
 			return this.RetailerCheckbox(retailer) != null;
@@ -1013,6 +1013,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool AllUpcCheckboxSelected()
 		{
 			return this.SelectAllUpcsButton.Selected;
+		}
+		public bool CheckRetailerValueForEachRow(string value)
+		{
+			bool result = true;
+			if(this.ListOfRows == null)
+			{
+				Report.Info("Cannot find any rows in the 'Add Multiple' table");
+				return false;
+			}
+			foreach (IWebElement element in this.ListOfRows)
+			{
+				IWebElement Retailer = element.FindElement(By.XPath(".//td//span[contains(@data-bind, 'clients')]"),2);
+				string getRetailer = Retailer.Text;
+				if (getRetailer != value)
+				{
+					result = false;
+				}
+			}
+			return result;
+
 		}
 
 		public bool CheckAllUPCsAreSelected()

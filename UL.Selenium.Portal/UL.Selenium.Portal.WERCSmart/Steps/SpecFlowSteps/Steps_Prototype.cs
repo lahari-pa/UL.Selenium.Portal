@@ -16,6 +16,7 @@ using System.Drawing;
 using System.Reflection;
 using UL.Automation.Utilities;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -857,6 +858,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			bool expected = is_isnot == "is";
 			Report.IsTrue(new NewProduct().TextExistsOnThePage(text) == expected, $"Failure, failed to confirm the statement: '{text}' {is_isnot} displayed.", $"Success, confirmed the statement: '{text}' {is_isnot} displayed.");
+		}
+		[RegexStepDefinition(@"There are not any error messages displayed")]
+		public void ThereAreNoErrorMessages()
+		{
+			new StepsNewProduct().NoErrorMessages();
+
 		}
 
 	}
