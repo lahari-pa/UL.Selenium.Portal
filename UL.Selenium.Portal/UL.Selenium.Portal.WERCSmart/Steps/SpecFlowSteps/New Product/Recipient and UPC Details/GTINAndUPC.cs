@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Media3D;
 using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
@@ -36,7 +37,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 		{
 			Report.IsTrue(new NewProduct().ClickAddPartNumber(), "Failed to click the 'Add Part Number' button!", "Successfully clicked the 'Add Part Number' button");
 		}
-
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, I click the 'Add Casepack' button")]
+		public void ClickAddCasepackButton()
+		{
+			string button = "Add Casepack ";
+			new Steps_Prototype().ClickButton(button);
+		}
 		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Provide the product's UPC\(s\)- including container type and size \(ounces\)' enter UPC Number: (.*) enter Size: (.*) and enter Container Type: (.*)")]
 		public void EnterUPCInformation(string upc, string size, string containerType)
 		{
@@ -59,15 +65,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			}
 
 			var upcInfo = new UpcInformation {
-					ContainerType = containerType,
-					Size = size,
-					UpcNumber = upc,
+				ContainerType = containerType,
+				Size = size,
+				UpcNumber = upc,
 			};
 
 			var NP = new NewProduct();
-				NP.WaitForContainerToBeVisible(30);
-				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
-					"Successfully inputted UPC information!");
+			NP.WaitForContainerToBeVisible(30);
+			Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
+				"Successfully inputted UPC information!");
 		}
 
 		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Provide the product's UPC\(s\)- including container type and size \(ounces\)' enter UPC Number: (.*) enter Size: (.*) enter Container Type: (.*) and enter Quantity: (.*)")]
@@ -446,7 +452,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			string section = "GTIN/UPC (include check digit)";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
-		
+
 		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Product Name on Label' enter the value: (.*)")]
 		public void EnterUPCProductNameOnLabel(string option)
 		{
@@ -533,6 +539,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			new Steps_Prototype().CheckingFieldInputIsCorrect(section, option);
 		}
 
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, section: '(GTIN or UPC \(include check digit\)|Container Type|Size \(Weight Ounces\)|Quantity of Units within the Case|Individual UPC contained in the Case Pack|Transportation Options)' (is|is not) displayed")]
+		public void GTINOrUPCIsDisplayed(string section, string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.UPCSectionFieldsAvailable(section) == expected, $"Failed to Confirm the '{section}' field {(expected ? "is not" : "is")} available", $"I Confirm the '{section}' field {is_isnot} available");
+		}
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, the error: '(.*)' (is|is not) displayed for the section: '(GTIN or UPC \(include check digit\)|Container Type|Size \(Weight Ounces\)|Quantity of Units within the Case|Individual UPC contained in the Case Pack|Transportation Options)'")]
+		public void GTINOrUPCShouldDisplayErrorMessage(string is_isnot, string errorMessage, string section)
+		{
+			bool expected = is_isnot == "is";
+			string getError = new NewProduct().UPCSectionCheckError(section);
+			Report.IsTrue(getError == errorMessage == expected, $"Failed to confirm the error '{errorMessage}' {(expected ? "is not" : "is")} displayed for the section '{section}'", $"Successfully confirmed the error ' {errorMessage}' {is_isnot} displayed for the section '{section}'");
+		}
 
 		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, click 'Save' button")]
 		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionClickButtonSave()
