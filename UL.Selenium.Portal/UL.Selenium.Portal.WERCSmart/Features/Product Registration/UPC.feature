@@ -816,6 +816,7 @@ Scenario: [87628] Universal Product Code (UPC) Step - Add Casepack - Case UPC fi
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then the WERCSmart homepage should load
+	Given I generate a random UPC number and save as: UPC87628
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
@@ -868,26 +869,28 @@ Scenario: [87628] Universal Product Code (UPC) Step - Add Casepack - Case UPC fi
 	And In the Select Retailers window, click 'Done' button
 	Then in the Retailer page, I click Continue
 	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
-	Given I click the 'Add' button
-	Given I fill in the UPC data; UPC:ABCDEF, Product Type:Paper bag, Product Weight:5
-	When I click continue
-	Given I check for the appropriate alert: UPC must be between 12 and 14 characters long.
-	Given I check for the appropriate alert: This field must be a number
-	Given I fill in the UPC data; UPC:12345, Product Type:Paper bag, Product Weight:5
-	When I click continue
-	Given I check for the appropriate alert: UPC must be between 12 and 14 characters long.
-	Given I fill in the UPC data; UPC:12345678910111213, Product Type:Paper bag, Product Weight:5
-	When I click continue
-	Given I check for the appropriate alert: UPC must be between 12 and 14 characters long.
-	Given I fill in the UPC data; UPC:111111111111, Product Type:Paper bag, Product Weight:5
-	When I click continue
-	Then I check for the appropriate alert: Please ensure your UPC is 12 or 14 digits and contains leading zeroes and check digit
-	Given I fill in the UPC data; UPC:0079400861603, Product Type:Paper bag, Product Weight:5
-	When I click continue
-	Then I check for the appropriate alert: No error
-	Given in the Universal Product Code (UPC) page I click Continue
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the 'Add Casepack' button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'GTIN/UPC (include check digit)' enter the value: abc45
+	Given in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, the error: 'UPC must be between 12 and 14 characters long.  This field must be a number' is displayed for the section: 'GTIN or UPC (include check digit)'
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'GTIN/UPC (include check digit)' enter the value: 12345678910
+	Given in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, the error: 'UPC must be between 12 and 14 characters long.' is displayed for the section: 'GTIN or UPC (include check digit)'
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'GTIN/UPC (include check digit)' enter the value: 123456789101235
+	Given in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, the error: 'UPC must be between 12 and 14 characters long.' is displayed for the section: 'GTIN or UPC (include check digit)'
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'GTIN/UPC (include check digit)' enter the value: 111111111111
+	Given in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, the error: 'UPC must be between 12 and 14 characters long.' is not displayed for the section: 'GTIN or UPC (include check digit)'
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Size (Fluid Ounces)' enter the value: 2
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Container Type' select the value: Plastic Container
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Quantity of Units within the Case' enter the value: 5
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Transportation Options' enter the value: 1A2: removable head steel drum
+	Given in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, error message should be displayed with text: 'Please ensure your UPC is 12 or 14 digits and contains leading zeroes and check digit'
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'GTIN/UPC (include check digit)' enter the value: saved as UPC87628
+	Given in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
 	Then I check if the Regulatory Documents page is shown
-	Then I navigate to the home page
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87628
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase87628

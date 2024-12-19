@@ -322,6 +322,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			new Steps_Prototype().AlertMessageDisplayed(condition, alertText);
 		}
 
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, error message should be displayed with text: 'Please ensure your UPC is 12 or 14 digits and contains leading zeroes and check digit'")]
+		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionErrorMessageShouldBeDisplayed()
+		{
+			string alertText = "Please ensure your UPC is 12 or 14 digits and contains leading zeroes and check digit";
+			UPC UPCObject = new UPC();
+			Report.IsTrue(UPCObject.CheckForAlertWithThisTextInUPCPage(alertText), $"The appropriate alert: {alertText}, was not shown", $"The appropriate alert: {alertText}, was shown");
+		}
+
 		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, confirm the values on the new product screen are the same as the UPC Upload document saved in the Table called: (.*)")]
 		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionConfirmTheValuesOnTheNewProductScreenAreTheSameAsTheUPCUploadDocumentSavedInTheTableCalledUPCTable(string tableSavedAs)
 		{
@@ -559,6 +567,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 		{
 			string button = "Save";
 			new Steps_Prototype().ClickButtonSave(button);
+		}
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Quantity of Units within the Case' enter the value: (.*)")]
+		public void EnterQuantityOfUnits(string option)
+		{
+			string section = "Quantity of Units within the Case";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Transportation Options' enter the value: (.*)")]
+		public void EnterTransportationOptions(string option)
+		{
+			string section = "Transportation Options";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 	}
 }
