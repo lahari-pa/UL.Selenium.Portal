@@ -15,19 +15,30 @@
 @PhysicalAndChemicalProp
 @StepsPrototype
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
+@Ingredients
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 Feature: Regulatory Information 1
 
 @TestCase:85693
 Scenario: [85693] Regulatory Information 1 - validation
+
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk_#85693
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
+	Then in the The Product page, I click Continue
+
 	Then I save the product information as: TestCase85693
+
 	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I should see the Product Information Page
 	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
@@ -47,25 +58,43 @@ Scenario: [85693] Regulatory Information 1 - validation
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Then in the Physical and Chemical Properties page I click Continue
 
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Water         | 100     | false               | false       |            |
-	When I click continue
-	And U.S. Toxic Substances Control Act (TSCA) status should be showing the error messages: This is a required field.
-	And Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? should be showing the error messages: This is a required field.
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85693
+	#Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Water         | 100     | false               | false       |            |
+	Then I should see the Ingredients Page
+	And In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     | False               | False         |             |
+	Then in the Ingredients page, I click Continue
+
+	Then I should see the Inventory Status, Prop 65 (US) Page
+	And in the Inventory Status, Prop 65 (US) page, I click Continue
+	Then In the Inventory Status, Prop 65 (US) Section, the section 'U.S. Toxic Substances Control Act (TSCA) status' should display an error message: This is a required field.
+	Then In the Inventory Status, Prop 65 (US) Section, the section 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' should display an error message: This is a required field.
+
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85693
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase85693
 
 @TestCase:85695
 Scenario: [85695] California Proposition 65 - select Yes - navigation
+
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk_#85695
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
+	Then in the The Product page, I click Continue
+
 	Then I save the product information as: TestCase85695
+
 	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I should see the Product Information Page
 	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
@@ -85,21 +114,32 @@ Scenario: [85695] California Proposition 65 - select Yes - navigation
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Then in the Physical and Chemical Properties page I click Continue
 
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Water         | 100     | false               | false       |            |
-	And I set the U.S. Toxic Substances Control Act (TSCA) status option to: Compliant
-	And I set the Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)? option to: Yes
-	And I should see following statement: Is the need to warn triggered by
-	And I should see following statement: How is the exposure warning transmitted? For more information, see Notice of Adoption Article
-	Then I click on the Notice of Adoption Article link
-	And I confirm that a new Notice of Adoption Article tab opens and navigate to it
-	And I close the Notice of Adoption Article tab
-	And I should see following statement: Is your exposure warning compliant with Proposition 65 regulations applicable to products manufactured
-	And I should see following statement: If the product carries a safe-harbor short-form warning, indicate which of the following is provided:
-	And I should see following statement: If the product carries a safe-harbor long-form warning, indicate which of the following is used and enter the names of the Proposition 65 chemicals included in the warning:
-	And I should see following statement: If the product carries a custom warning, please provide the exact text that is being used:
-	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85695
+	#Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Water         | 100     | false               | false       |            |
+	Then I should see the Ingredients Page
+	And In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     | False               | False         |             |
+	Then in the Ingredients page, I click Continue
 
+	Then I should see the Inventory Status, Prop 65 (US) Page
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is exempt from TSCA chemical Inventory listing requirements.
+	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: Yes
+	And In the Inventory Status, Prop 65 (US) Section, the following sections should be displayed:
+	| Section                                                                                                                                                                      |
+	| Is the need to warn triggered by                                                                                                                                             |
+	| How is the exposure warning transmitted? For more information, see Notice of Adoption Article                                                                                |
+	| Is your exposure warning compliant with Proposition 65 regulations applicable to products manufactured                                                                       |
+	| If the product carries a safe-harbor short-form warning, indicate which of the following is provided:                                                                        |
+	| If the product carries a safe-harbor long-form warning, indicate which of the following is used and enter the names of the Proposition 65 chemicals included in the warning: |
+	| If the product carries a custom warning, please provide the exact text that is being used:                                                                                   |
+	Then In the Inventory Status, Prop 65 (US) Section, for section 'How is the exposure warning transmitted? For more information, see' click the link titled: 'Notice of Adoption Article'
+	And In the Inventory Status, Prop 65 (US) Section, switch to the tab with url link: https://oehha.ca.gov/proposition-65/crnr/notice-adoption-article-6-clear-and-reasonable-warnings
+	Then In the Inventory Status, Prop 65 (US) Section, close the tab with the url link: https://oehha.ca.gov/proposition-65/crnr/notice-adoption-article-6-clear-and-reasonable-warnings
+
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85695
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase85695
 
 

@@ -96,6 +96,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 				string section = "If the product carries a custom warning, please provide the exact text that is being used:";
 				new Steps_Prototype().SetTheSectionOptionTo(section, option);
 			}
+			// table input --> |Section|
 			[RegexStepDefinition(@"In the Inventory Status, Prop 65 \(US\) Section, the following sections (should only|should|should not) be displayed:")]
 			public void CheckSectionsDisplayedInventoryStatusPage(string condition , Table sections)
 			{
@@ -113,6 +114,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			{
 				string section = "Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?";
 				new Steps_Prototype().ErrorMessagesAreShowingForItem(section, condition, errorMessage);
+			}
+			[RegexStepDefinition(@"In the Inventory Status, Prop 65 \(US\) Section, for section 'How is the exposure warning transmitted\? For more information, see' click the link titled: 'Notice of Adoption Article'")]
+			public void ClickLinkNoticeOfAdoptionArticle()
+			{
+				string linkText = "Notice of Adoption Article";
+				new Steps_Prototype().ClickLinkElement(linkText);
+			}
+			[RegexStepDefinition(@"In the Inventory Status, Prop 65 \(US\) Section, close the tab with the url link: (.*)")]
+			public void CloseLinkNoticeOfAdoptionArticle(string linkUrl)
+			{
+				new Steps_Prototype().CloseTabWithUrl(linkUrl);
+			}
+			[RegexStepDefinition(@"In the Inventory Status, Prop 65 \(US\) Section, switch to the tab with url link: (.*)")]
+			public void SwitchToTabNoticeOfAdoptionArticle(string linkUrl)
+			{
+				new Steps_Prototype().ConfirmNewTabOpenWithUrl(linkUrl);
 			}
 		}
 	}

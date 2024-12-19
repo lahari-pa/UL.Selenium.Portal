@@ -762,7 +762,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			if (condition == "should")
 			{
-				Report.IsTrue(expectedNormalised.All(actualNormalised.Contains), $"The displayed sections: '{string.Join("; ", ActualSections)}' did not match the expected sections: '{string.Join("; ", expectedSections)}'", $"The displayed sections: '{string.Join("; ", ActualSections)}' matched the expected sections");
+				Report.IsTrue(expectedSections.All(ActualSections.Contains), $"The displayed sections: '{string.Join("; ", ActualSections)}' did not match the expected sections: '{string.Join("; ", expectedSections)}'", $"The displayed sections: '{string.Join("; ", ActualSections)}' matched the expected sections");
 				return;
 			}
 			if (condition == "should not")
