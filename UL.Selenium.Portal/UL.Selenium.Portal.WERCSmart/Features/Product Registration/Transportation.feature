@@ -155,7 +155,7 @@ Scenario: [65703] Transportation - Transportation - Confirm Copy information fro
 	#And I call Shared Step 84554 (Physical and Chemical Properties - Liquid & Solid - Enter all data - Continue - Happy Path)
 	And I should be on the Physical and Chemical Properties Page
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
-	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Semi-solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Semi-Solid
 	Then In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 1
 	Then In the Physical and Chemical Properties Section, for section: 'pH' enter text: 7
 	Then In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: 85
@@ -243,7 +243,7 @@ Then in the Product Information page, I click Continue
 #And I call Shared Step 84554 (Physical and Chemical Properties - Liquid & Solid - Enter all data - Continue - Happy Path)
 And I should be on the Physical and Chemical Properties Page
 Then In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
-Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Semi-solid
+Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Semi-Solid
 Then In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 1
 Then In the Physical and Chemical Properties Section, for section: 'pH' enter text: 7
 Then In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: 85
