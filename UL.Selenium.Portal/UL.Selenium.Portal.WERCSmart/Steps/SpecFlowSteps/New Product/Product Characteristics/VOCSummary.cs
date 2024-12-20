@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using iText.Commons.Utils;
 using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
@@ -45,7 +46,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			new Steps_Prototype().ThenIConfirmThatISeeTheFollowingCARBValue(section, value);
 		}
 		[RegexStepDefinition(@"In the Volatile Organic Compound Summary Section, confirm that I see todays 'VOC Analysis Date'")]
-		public void VOCAnalsisDate()
+		public void VOCAnalysisDate()
 		{
 			string date = DateTime.Now.ToString("MM/dd/yyyy");
 			var newProductpage = new NewProduct();
@@ -104,33 +105,45 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			new Steps_Prototype().ThenIConfirmThatTableExists(tableName, condition);
 		}
 		[RegexStepDefinition(@"In the Volatile Organic Compound Summary Section, the statement 'Based on the type of product, this must comply with the most restrictive VOC limit.' (is|is not) displayed")]
-		public void StatemantBasedOnTheTypeOfProduct(string is_isnot)
+		public void StatementBasedOnTheTypeOfProduct(string is_isnot)
 		{
 			string text = "Based on the type of product, this must comply with the most restrictive VOC limit.";
 			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);
 		}
 		[RegexStepDefinition(@"In the Volatile Organic Compound Summary Section, the statement 'Exceeds the limits specified in the California Consumer Products Regulation' (is|is not) displayed")]
-		public void StatemantExeedsTheLimitsSpecifiedTnTheCalifornia(string is_isnot)
+		public void StatementExceedsTheLimitsSpecifiedTnTheCalifornia(string is_isnot)
 		{
 			string text = "Exceeds the limits specified in the California Consumer Products Regulation";
 			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);
 		}
 		[RegexStepDefinition(@"In the Volatile Organic Compound Summary Section, the statement 'Exceeds the limits specified by the Ozone Transport Commission' (is|is not) displayed")]
-		public void StatemantExeedsTheLimitsOzoneTransport(string is_isnot)
+		public void StatementExceedsTheLimitsOzoneTransport(string is_isnot)
 		{
 			string text = "Exceeds the limits specified by the Ozone Transport Commission";
 			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);
 		}
 		[RegexStepDefinition(@"In the Volatile Organic Compound Summary Section, the statement 'Does not exceed the limits specified in the California Consumer Products Regulation' (is|is not) displayed")]
-		public void StatemantDoesNotExeedTheLimitsSpecifiedTnTheCalifornia(string is_isnot)
+		public void StatementDoesNotExceedTheLimitsSpecifiedTnTheCalifornia(string is_isnot)
 		{
 			string text = "Does not exceed the limits specified in the California Consumer Products Regulation";
 			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);
 		}
 		[RegexStepDefinition(@"In the Volatile Organic Compound Summary Section, the statement 'Does not exceed the limits specified by the Ozone Transport Commission' (is|is not) displayed")]
-		public void StatemantDoesNotExeedTheLimitsOzoneTransport(string is_isnot)
+		public void StatementDoesNotExceedTheLimitsOzoneTransport(string is_isnot)
 		{
 			string text = "Does not exceed the limits specified by the Ozone Transport Commission";
+			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);
+		}
+		[RegexStepDefinition(@"In the Volatile Organic Compound Summary Section, the statement 'Based on your previous selections, the product is an architectural coating with the following intended use. The SCAQMD VOC compliant limits for this intended use are:' (is|is not) displayed")]
+		public void StatementBasedOnYourPrevious(string is_isnot)
+		{
+			string text = "Based on your previous selections, the product is an architectural coating with the following intended use. The SCAQMD VOC compliant limits for this intended use are:";
+			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);
+		}
+		[RegexStepDefinition(@"In the Volatile Organic Compound Summary Section, the statement 'Does not exceed the limits specified by the California Air District\(s\)' (is|is not) displayed")]
+		public void StatementDoesNotExceedTheLimitsCaliforniaAirDistrict(string is_isnot)
+		{
+			string text = "Does not exceed the limits specified by the California Air District(s)";
 			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);
 		}
 	}	
