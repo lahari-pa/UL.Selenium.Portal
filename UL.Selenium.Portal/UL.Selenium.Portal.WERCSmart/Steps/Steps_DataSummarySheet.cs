@@ -322,35 +322,35 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			List<Ingredients.Ingredient> listOfIngredients = thisDataSummary.GetIngredients();
 			foreach (TableRow row in table.Rows)
 			{
-				Ingredients.Ingredient ingredient = listOfIngredients.Find(x => x.ComponentName == row["CAS Number/ChemicalName"]);
+				Ingredients.Ingredient ingredient = listOfIngredients.Find(x => (x.ComponentName == row["CAS Number/ChemicalName"] | x.CASNumber == row["CAS Number/ChemicalName"]));
 
 				Report.IsTrue(ingredient.Percent == row["Percent"], "Failed to match percentage for ingredient " + ingredient.ComponentName + ".",
 					"Successfully matched percentage for ingredient " + ingredient.ComponentName);
 
 				if (ingredient.PublicallyDisclosed)
 				{
-					Report.IsTrue(row["Publicly Disclosed?"] == "Yes", "Failed to match value for Publicly Disclosed for Ingredient " + ingredient.ComponentName + ".",
-						"Successfully matched value for Publicly Disclosed for Ingredient " + ingredient.ComponentName + ".");
+					Report.IsTrue(row["Publicly Disclosed?"] == "Yes", $"Failed to match value for Publicly Disclosed for Ingredient {ingredient.ComponentName}.",
+						$"Successfully matched value for Publicly Disclosed for Ingredient {ingredient.ComponentName}.");
 				}
 				else
 				{
-					Report.IsTrue(row["Publicly Disclosed?"] == "No", "Failed to match value for Publicly Disclosed for Ingredient " + ingredient.ComponentName + ".",
-						"Successfully matched value for Publicly Disclosed for Ingredient " + ingredient.ComponentName + ".");
+					Report.IsTrue(row["Publicly Disclosed?"] == "No", $"Failed to match value for Publicly Disclosed for Ingredient {ingredient.ComponentName}.",
+						$"Successfully matched value for Publicly Disclosed for Ingredient {ingredient.ComponentName}.");
 				}
 
 				if (ingredient.TradeSecret)
 				{
-					Report.IsTrue(row["Trade Secret?"] == "Yes", "Failed to match value for Trade Secret for Ingredient " + ingredient.ComponentName + ".",
-						"Successfully matched value for Trade Secret for Ingredient " + ingredient.ComponentName + ".");
+					Report.IsTrue(row["Trade Secret?"] == "Yes", $"Failed to match value for Trade Secret for Ingredient {ingredient.ComponentName}.",
+						$"Successfully matched value for Trade Secret for Ingredient {ingredient.ComponentName}.");
 				}
 				else
 				{
-					Report.IsTrue(row["Trade Secret?"] == "No", "Failed to match value for Trade Secret for Ingredient " + ingredient.ComponentName + ".",
-						 "Successfully matched value for Trade Secret for Ingredient " + ingredient.ComponentName + ".");
+					Report.IsTrue(row["Trade Secret?"] == "No", $"Failed to match value for Trade Secret for Ingredient {ingredient.ComponentName}.",
+						 $"Successfully matched value for Trade Secret for Ingredient {ingredient.ComponentName}.");
 				}
 
-				Report.IsTrue(row["INCI Name"] == ingredient.PublicName, "Failed to match INCI Name for Ingredient " + ingredient.ComponentName + ".",
-					"Successfully matched INCI Name for Ingredient " + ingredient.ComponentName + ".");
+				Report.IsTrue(row["INCI Name"] == ingredient.PublicName, $"Failed to match INCI Name for Ingredient {ingredient.ComponentName}.",
+					$"Successfully matched INCI Name for Ingredient {ingredient.ComponentName}.");
 
 			}
 		}

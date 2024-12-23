@@ -525,6 +525,30 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(ingredientsModal.FooterButtonExists(buttonLabel), $"Failure, in the displayed modal '{buttonLabel}' button is not displayed.", $"Success, in the displayed modal '{buttonLabel}' button is displayed.");
 			Report.IsTrue(ingredientsModal.FooterButtonClick(buttonLabel), $"Failure, in the displayed modal failed to click '{buttonLabel}' button.", $"Success, in the displayed modal clicked '{buttonLabel}' button.");
 		}
+
+		[RegexStepDefinition(@"In displayed modal, confirm (.*) footer checkbox (is|is not) displayed")]
+		public void IngredientsModalFooterCheckboxIsIsNotDisplayed(string checkboxLabel, string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			IngredientsModal ingredientsModal = new IngredientsModal();
+			Report.IsTrue(ingredientsModal.WaitForContainerToBeVisible(), $"Failure, modal is not displayed.", $"Success, modal is displayed.");
+			Report.IsTrue(ingredientsModal.FooterCheckboxExists(checkboxLabel) == expected, $"Failure, in the displayed modal '{checkboxLabel}' checkbox {(expected ? "is not" : "is")} displayed.", $"Success, in the displayed modal '{checkboxLabel}' checkbox {is_isnot} displayed.");
+		}
+
+		[RegexStepDefinition(@"In displayed modal, (check|uncheck) (.*) footer checkbox")]
+		public void IngredientsModalCheckUncheckFooterButton(string check_uncheck, string checkboxLabel)
+		{
+			bool expected = check_uncheck == "check";
+			IngredientsModal ingredientsModal = new IngredientsModal();
+			Report.IsTrue(ingredientsModal.WaitForContainerToBeVisible(), $"Failure, modal is not displayed.", $"Success, modal is displayed.");
+			Report.IsTrue(ingredientsModal.FooterCheckboxExists(checkboxLabel), $"Failure, in the displayed modal '{checkboxLabel}' checkbox is not displayed.", $"Success, in the displayed modal '{checkboxLabel}' checkbox is displayed.");
+			if(expected != ingredientsModal.FooterCheckboxChecked(checkboxLabel))
+			{
+				Report.IsTrue(ingredientsModal.FooterCheckboxClick(checkboxLabel), $"Failure, in the displayed modal failed to click '{checkboxLabel}' checkbox.", $"Success, in the displayed modal clicked '{checkboxLabel}' checkbox.");
+			}
+			Report.IsTrue((ingredientsModal.FooterCheckboxChecked(checkboxLabel) == expected), $"Failure, in the displayed modal failed to confirm '{checkboxLabel}' checkbox is {check_uncheck}ed.", $"Success, in the displayed modal confirmed '{checkboxLabel}' checkbox is {check_uncheck}ed.");
+		}
+
 		[RegexStepDefinition("In the Ingredients section confirm a list of regulations associated with the component is displayed in the modal window")]
 		public void ThenInTheIngredientsSectionConfirmAListOfRegulationsAssociatedWithTheComponentIsDisplayedInTheModalWindow()
 		{
