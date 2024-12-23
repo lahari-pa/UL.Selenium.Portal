@@ -997,7 +997,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			public string TransportationOptions {
 				get
 				{
-					IWebElement input = this.containerElement.FindElement(By.XPath(".//select[contains(@data-bind,'options: row.control.transportOptions()')]"), 2);
+					IWebElement input = this.ContainerElement.FindElement(By.XPath(".//select[contains(@data-bind,'options: row.control.transportOptions()')]"), 2);
 					if (input == null)
 					{
 						Report.Info("The Transportation Options select box could not be found!");
