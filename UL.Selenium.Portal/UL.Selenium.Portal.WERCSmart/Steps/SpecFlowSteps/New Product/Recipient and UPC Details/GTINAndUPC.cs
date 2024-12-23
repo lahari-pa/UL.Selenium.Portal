@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Media3D;
 using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
@@ -36,7 +37,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 		{
 			Report.IsTrue(new NewProduct().ClickAddPartNumber(), "Failed to click the 'Add Part Number' button!", "Successfully clicked the 'Add Part Number' button");
 		}
-
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, I click the 'Add Casepack' button")]
+		public void ClickAddCasepackButton()
+		{
+			string button = "Add Casepack ";
+			new Steps_Prototype().ClickButton(button);
+		}
 		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Provide the product's UPC\(s\)- including container type and size \(ounces\)' enter UPC Number: (.*) enter Size: (.*) and enter Container Type: (.*)")]
 		public void EnterUPCInformation(string upc, string size, string containerType)
 		{
@@ -59,15 +65,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			}
 
 			var upcInfo = new UpcInformation {
-					ContainerType = containerType,
-					Size = size,
-					UpcNumber = upc,
+				ContainerType = containerType,
+				Size = size,
+				UpcNumber = upc,
 			};
 
 			var NP = new NewProduct();
-				NP.WaitForContainerToBeVisible(30);
-				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
-					"Successfully inputted UPC information!");
+			NP.WaitForContainerToBeVisible(30);
+			Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
+				"Successfully inputted UPC information!");
 		}
 
 		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Provide the product's UPC\(s\)- including container type and size \(ounces\)' enter UPC Number: (.*) enter Size: (.*) enter Container Type: (.*) and enter Quantity: (.*)")]
@@ -218,6 +224,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			Report.IsTrue(UploadDialog.UploadFile(excelFile), "Failed to enter file name!", "Successfully entered file name");
 
 		}
+
 		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, confirm 'Add Multiple' modal window (should|should not) be displayed")]
 		public void ThenInTheU_S_DepartmentOfTransportationDOTClassificationSectionAddMultipleIsDisplayed(string condition)
 		{
@@ -300,6 +307,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 				}
 			}
 		}
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, at 'Add Multiple' verify Retailer column (is|is not) populated with: (.*)")]
+		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionAtVerifyRetailerColumnIsPopulatedWithTG(string is_isnot, string retailer)
+		{
+			bool expected = is_isnot == "is";
+			Report.IsTrue(new MultipleUPC().CheckRetailerValueForEachRow(retailer) == expected,
+				$"Failure, the Retailer column {(expected ? "is not" : "is")} populated with '{retailer}'", $"Success, the Retailer column {is_isnot} populated with '{retailer}'.");
+		}
 
 		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, error message (should|should not) be displayed with text: 'You have added UPCs to the registration that are already in use within your WERCSmart account. Duplicate UPCs are not permitted, as they may provide conflicting Assessment information to your retailer recipients. Please remove the instances of duplicate UPC\(s\) from the necessary registration data.'")]
 		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionErrorMessageShouldBeDisplayedWithText(string condition)
@@ -308,7 +322,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			new Steps_Prototype().AlertMessageDisplayed(condition, alertText);
 		}
 
-		[RegexStepDefinition("In the Global Trade Item Number \\(GTIN\\) / Universal Product Code \\(UPC\\) Section, confirm the values on the new product screen are the same as the UPC Upload document saved in the Table called: (.*)")]
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, confirm the values on the new product screen are the same as the UPC Upload document saved in the Table called: (.*)")]
 		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionConfirmTheValuesOnTheNewProductScreenAreTheSameAsTheUPCUploadDocumentSavedInTheTableCalledUPCTable(string tableSavedAs)
 		{
 			Report.StartStep("I confirm the UPC numbers and sizes are the same as the upload document");
@@ -423,13 +437,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(title, button);
 		}
 		
-		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'GTIN/UPC (include check digit)' enter the value: (.*)")]
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'GTIN/UPC \(include check digit\)' enter the value: (.*)")]
 		public void EnterUPCGTIN(string option)
 		{
+
+			if (option.ToLower().Contains("saved as"))
+			{
+					string savedUPC = Context
+						.GetFromContext(option.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+						.ToString();
+					option = savedUPC;		
+			}
+
 			string section = "GTIN/UPC (include check digit)";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
-		
+
 		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Product Name on Label' enter the value: (.*)")]
 		public void EnterUPCProductNameOnLabel(string option)
 		{
@@ -489,6 +512,53 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 		{
 			Report.IsTrue(new NewProduct().SelectContainerType(option),
 				$"Failed to select: {option}", $"Selected: {option}");
+		}
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, section: 'DPCI Number' (is|is not) displayed")]
+		public void DPCINumberIsDisplayed(string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			string section = "DPCI Number (must be formatted like xxx-xx-xxxx), if multiple separate by ',' with no spaces.";
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.UPCSectionFieldIsAvailable(section) == expected, $"Failed to Confirm the '{section}' field {(expected ? "is not" : "is")} available", $"I Confirm the '{section}' field {is_isnot} available");
+		}
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'DPCI Number' enter the value: '(.*)'")]
+		public void EnterDPCINumber(string option)
+		{
+			string section = "DPCI Number (must be formatted like xxx-xx-xxxx), if multiple separate by ',' with no spaces.";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, (expand|collapse) the first UPC")]
+		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionExpandTheFirstUPC(string expand_collapse)
+		{
+			new StepsNewProduct().IExpandFirstUPC(expand_collapse);
+		}
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, section: 'DPCI Number' (is|is not) populated with value: '(.*)'")]
+		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionSectionIsPopulatedWithValue(string is_isnot, string option)
+		{
+			string section = "DPCI Number (must be formatted like xxx-xx-xxxx), if multiple separate by ',' with no spaces.";
+			new Steps_Prototype().CheckingFieldInputIsCorrect(section, option);
+		}
+
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, section: '(GTIN or UPC \(include check digit\)|Container Type|Size \(Weight Ounces\)|Quantity of Units within the Case|Individual UPC contained in the Case Pack|Transportation Options)' (is|is not) displayed")]
+		public void GTINOrUPCIsDisplayed(string section, string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.UPCSectionFieldsAvailable(section) == expected, $"Failed to Confirm the '{section}' field {(expected ? "is not" : "is")} available", $"I Confirm the '{section}' field {is_isnot} available");
+		}
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, the error: '(.*)' (is|is not) displayed for the section: '(GTIN or UPC \(include check digit\)|Container Type|Size \(Weight Ounces\)|Quantity of Units within the Case|Individual UPC contained in the Case Pack|Transportation Options)'")]
+		public void GTINOrUPCShouldDisplayErrorMessage(string is_isnot, string errorMessage, string section)
+		{
+			bool expected = is_isnot == "is";
+			string getError = new NewProduct().UPCSectionCheckError(section);
+			Report.IsTrue(getError == errorMessage == expected, $"Failed to confirm the error '{errorMessage}' {(expected ? "is not" : "is")} displayed for the section '{section}'", $"Successfully confirmed the error ' {errorMessage}' {is_isnot} displayed for the section '{section}'");
+		}
+
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, click 'Save' button")]
+		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionClickButtonSave()
+		{
+			string button = "Save";
+			new Steps_Prototype().ClickButtonSave(button);
 		}
 	}
 }
