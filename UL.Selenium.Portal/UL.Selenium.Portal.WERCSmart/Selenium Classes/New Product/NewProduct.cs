@@ -3669,6 +3669,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),""" + value + @""") and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
 						@"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and @type='text'] | " +
 						@"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")])] | " +
+						@"//select[contains(@data-bind,""" + section + @""")] |" +
 						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),""" + value + @""") and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
 
 			IWebElement el = this.ContainerElement.FindElement(By.XPath(xPath), 10);

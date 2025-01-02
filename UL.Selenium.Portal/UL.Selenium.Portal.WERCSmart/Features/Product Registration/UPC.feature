@@ -878,23 +878,29 @@ Scenario: [101023] UPC Step - Add Part Number
 
 @TestCase:87628
 Scenario: [87628] Universal Product Code (UPC) Step - Add Casepack - Case UPC field validation
-#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then the WERCSmart homepage should load
-#	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I generate a random UPC number and save as: UPC87628
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Then in the New Product page, I click Continue
-
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Given I should see the The Product Page
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
+ 	Given in the The Product page I click Continue
 	Then I save the product information as: TestCase87628
-	And I should see the Product Information Page
-	And I should see following statement: Select countries the product may be sold in
-	And I should see following statement: Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)
-	And I should see following statement: Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)
-	And I should see following statement: Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.
-	Given I set all product information options to No
-	Given in the Product Information page I click Continue
+	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
 	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I should see the Physical and Chemical Properties Page
 	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
@@ -903,39 +909,53 @@ Scenario: [87628] Universal Product Code (UPC) Step - Add Casepack - Case UPC fi
 	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Then in the Physical and Chemical Properties page I click Continue
-
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Propane       | 100     | false               | false       |            |
+	#Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Propane       | 100     | false               | false       |            |
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add component with component name: Chalk
+	Then In the Ingredients Table row with component name: Chalk, in Percent column text input enter: 100
+	Given I click continue
 	#And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
+	#Then 231938 Inventory Status, Prop 65 (US) - Compliant - Prop 65 (NO)
 	Given I should see the Inventory Status, Prop 65 (US) Page
 	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
 	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page I click Continue
-
-	And I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
-		| Retailer |
-		| Amazon   |
-	Given I click the 'Add' button
-	Given I fill in the UPC data; UPC:ABCDEF, Product Type:Paper bag, Product Weight:5
-	When I click continue
-	Given I check for the appropriate alert: UPC must be between 12 and 14 characters long.
-	Given I check for the appropriate alert: This field must be a number
-	Given I fill in the UPC data; UPC:12345, Product Type:Paper bag, Product Weight:5
-	When I click continue
-	Given I check for the appropriate alert: UPC must be between 12 and 14 characters long.
-	Given I fill in the UPC data; UPC:12345678910111213, Product Type:Paper bag, Product Weight:5
-	When I click continue
-	Given I check for the appropriate alert: UPC must be between 12 and 14 characters long.
-	Given I fill in the UPC data; UPC:111111111111, Product Type:Paper bag, Product Weight:5
-	When I click continue
-	Then I check for the appropriate alert: Please ensure your UPC is 12 or 14 digits and contains leading zeroes and check digit
-	Given I fill in the UPC data; UPC:0079400861603, Product Type:Paper bag, Product Weight:5
-	When I click continue
-	Then I check for the appropriate alert: No error
-	Given in the Universal Product Code (UPC) page I click Continue
+	Then I should be on the Transportation Details 1 Page
+	Then In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
+	Then in the Transportation Details 1 page, I click Continue
+	#And I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+	#	| Retailer |
+	#	| Amazon   |
+	Then I should be on the Retailer Page
+	And In the Retailer Section, click 'Add Retailers' button
+	And In the Select Retailers window, select retailer: Amazon
+	And In the Select Retailers window, click 'Done' button
+	Then in the Retailer page, I click Continue
+	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the 'Add Casepack' button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'GTIN/UPC (include check digit)' enter the value: abc45
+	Given in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, the error: 'UPC must be between 12 and 14 characters long.  This field must be a number' is displayed for the section: 'GTIN or UPC (include check digit)'
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'GTIN/UPC (include check digit)' enter the value: 12345678910
+	Given in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, the error: 'UPC must be between 12 and 14 characters long.' is displayed for the section: 'GTIN or UPC (include check digit)'
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'GTIN/UPC (include check digit)' enter the value: 123456789101235
+	Given in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, the error: 'UPC must be between 12 and 14 characters long.' is displayed for the section: 'GTIN or UPC (include check digit)'
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'GTIN/UPC (include check digit)' enter the value: 111111111111
+	Given in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, the error: 'UPC must be between 12 and 14 characters long.' is not displayed for the section: 'GTIN or UPC (include check digit)'
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Size (Fluid Ounces)' enter the value: 2
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Container Type' select the value: Plastic Container
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Quantity of Units within the Case' enter the value: 5
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Transportation Options' enter the value: 1A2: removable head steel drum
+	Given in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, error message should be displayed with text: 'Please ensure your UPC is 12 or 14 digits and contains leading zeroes and check digit'
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'GTIN/UPC (include check digit)' enter the value: saved as UPC87628
+	Given in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
 	Then I check if the Regulatory Documents page is shown
-	Then I navigate to the home page
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87628
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase87628
