@@ -9,6 +9,7 @@ using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.Utilities.Functions;
+using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Functions;
 using UL.Selenium.Portal.RPS.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
@@ -42,6 +43,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 		{
 			string button = "Add Casepack ";
 			new Steps_Prototype().ClickButton(button);
+			Delay.Seconds(3);
+
 		}
 		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Provide the product's UPC\(s\)- including container type and size \(ounces\)' enter UPC Number: (.*) enter Size: (.*) and enter Container Type: (.*)")]
 		public void EnterUPCInformation(string upc, string size, string containerType)
