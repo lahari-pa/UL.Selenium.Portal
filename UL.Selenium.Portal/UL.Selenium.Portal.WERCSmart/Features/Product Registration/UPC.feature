@@ -569,7 +569,7 @@ Scenario: [87825] Summary Shows Case UPC Data
 	And In the Data Acceptance Section, click 'Summary' button
 	And I switch to the tab with Data Summary page
 	And In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Repair and Maintenance Cleaning, General, Aerosol
-	And The Data Summary section should be showing the following UPC table:
+	Then In the Summary Page, the 'UPC' table should be showing the following:
 		| UPC Number         | Associated UPC     | Container Type      | Size (Ounces) | Quantity | Transport                      | Retailers |
 		| saved as UPC878251 | saved as UPC878251 | Aerosol Can - Metal | 2             | 5        | 1A2: removable head steel drum | AM        |
 		| saved as UPC87825  |                    | Aerosol Can - Metal | 2             |          |                                | AM        |

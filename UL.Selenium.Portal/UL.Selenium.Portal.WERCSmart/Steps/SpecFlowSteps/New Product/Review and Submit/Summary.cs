@@ -124,6 +124,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 			bool expected = is_isnot == "is";
 			Report.IsTrue(new SummaryPage().VOCComplianceLimitsTableExists() == expected, $"Failure, failed to confirm the table: 'VOC Compliance Limit' {is_isnot} displayed.", $"Success, confirmed the table: 'VOC Compliance Limit' {is_isnot} displayed.");
 		}
+		[RegexStepDefinition("In the Summary Page, the 'UPC' table should be showing the following:")]
+		public void ThenInTheSummaryPageTheTableShouldBeShowingTheFollowing(Table table)
+		{
+			new StepsDataSummarySheet().ShouldBeShowingTheFollowingTable(table);
+		}
+
 
 	}
 }
