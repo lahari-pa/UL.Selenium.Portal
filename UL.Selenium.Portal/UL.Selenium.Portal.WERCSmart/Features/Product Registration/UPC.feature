@@ -44,7 +44,10 @@
 @GTINAndUPC
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 @LiquidCoreProduct
-
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:PesticideDetailsUS
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOC_OzoneTransportCommission
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOC_Summary
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
 
 
 Feature: UPC
@@ -354,7 +357,7 @@ Scenario: [87832] View Shows Case UPC Data
 	Then The home screen should load
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Given I should see the The Product Page
@@ -399,32 +402,87 @@ Scenario: [87832] View Shows Case UPC Data
 	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
 	#Then I call Shared Step 29183 (Pesticide Details - U.S. - No EPA number)
-	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
-		| Retailer |
-		| Amazon   |
-	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87832, container type: Paper bag and size: 2 do not click continue
-	Given I call Shared Step 87641 (Enter Universal Product Code - case information) for UPC: saved as UPC878321, container type: Paper bag and size: 2 and Quantity: 2 and Associated UPC: UPC87832 and Transportation option: 4A: steel box
+	Then I should be on the Pesticide Details - U.S. Page
+	Then In the Pesticide Details - U.S. Section, in 'Product has an Environmental Protection Agency (EPA) Registration Number' enter No
+	Then In the Pesticide Details - U.S. Section, in 'Product has a State Registration' enter No
+	Then In the Pesticide Details - U.S. Section, in 'Select the applicable exemption' enter Product is FIFRA 25(b) Exempt.
+	Then in the Pesticide Details - U.S. page, I click Continue
+	#Then I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+	Then I should be on the Transportation Details 1 Page
+	And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
+	Then in the Transportation Details 1 page, I click Continue
+	#Then 230789 VOC - OTC and/or CARB - Alternative Control Plan (NO) - VOC percentages (YES)
+	Then I should be on the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) Page
+	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.': to: No
+	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB': to: 15
+	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule': to: 15
+	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?': to: Yes
+	Then in the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) page, I click Continue
+	#Then 230939 VOC Summary - Applicable to Cleaning Wipes (with chemical) - Exceeds Limits for California Consumer - DOES NOT exceed limits for OTC
+	Then I should see the Volatile Organic Compound Summary Page
+	Then In the Volatile Organic Compound Summary Section, confirm that I see todays 'VOC Analysis Date'
+	#Then In the Volatile Organic Compound Summary Section, the statement 'Based on your previous selections, the product is an architectural coating with the following intended use. The SCAQMD VOC compliant limits for this intended use are:' is displayed
+	Then In the Volatile Organic Compound Summary Section, confirm 'Limits' table should exists
+	Then In the Volatile Organic Compound Summary Section, confirm 'VOC Content (g/L minus water and exempt compounds for high solids; g/L with water and exempts for low solids)' table should exists
+	Then In the Volatile Organic Compound Summary Section, confirm that I see the following 'CARB' value: 15.00
+	Then In the Volatile Organic Compound Summary Section, confirm that I see the following 'VOC content in g/L' value: 15.00
+	Then In the Volatile Organic Compound Summary Section, the statement 'Based on the type of product, this must comply with the most restrictive VOC limit.' is displayed
+	Then In the Volatile Organic Compound Summary Section, the statement 'Exceeds the limits specified in the California Consumer Products Regulation' is displayed
+	Then In the Volatile Organic Compound Summary Section, the statement 'Does not exceed the limits specified by the Ozone Transport Commission' is displayed
+	Given In the Volatile Organic Compound Summary Section, for 'Your acknowledgement of this registration includes that your product..' set 'Yes, I Acknowledge'
+	Given in the Volatile Organic Compound Summary page I click Continue
+	#Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+	#	| Retailer |
+	#	| Amazon   |
+	Then I should be on the Retailer Page
+	And In the Retailer Section, click 'Add Retailers' button
+	And In the Select Retailers window, select retailer: Amazon
+	And In the Select Retailers window, click 'Done' button
+	Then in the Retailer page, I click Continue
+	#Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC156789, container type: Plastic Container and size: 2 do not click continue
+	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'GTIN/UPC (include check digit)' enter the value: saved as UPC87832
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Size (Fluid Ounces)' enter the value: 2
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Container Type' select the value: Paper bag 
+	#Then ^I call Shared Step 87829 \(UPC - Add Casepack - All Data > Continue\) for UPC: saved as UPC(.*), container type: (.*) and size: (.*) and Quantity: (.*) and Individual Upc Case Pack saved As: (.*) and Transportation option: (.*)$
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the 'Add Casepack' button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'GTIN/UPC (include check digit)' enter the value: saved as UPC878321
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Size (Fluid Ounces)' enter the value: 2
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Container Type' select the value: Paper bag
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Quantity of Units within the Case' enter the value: 5
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Transportation Options' enter the value: 1A2: removable head steel drum
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
 	Then in the Regulatory Documents to Provide page I click Continue
-
+	#Then 230922 Additional Documents to Provide - Applicable Only to Card Games, non-powered - Packaged Product Photo (front and back) UPLOAD
+	Given I should see the Additional Documents to Provide Page
+	Then In the Additional Documents to Provide, upload PDF document for section: Volatile Organic Compounds - Product Label
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
-		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
-		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+	#Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+	#	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+	#	| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature' enter text: 501.827328
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor' to: Orange
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor Threshold' to: No data available
+	Then In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Product's Dispensing Method' select option: Aerosol
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Partition Coefficient' enter text: 41.3005
+	Then in the Safety Data Sheet Authoring - Additional Data (Optional) page, I click Continue
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I should see the Optional Comments Page
-	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
 	Then in the Optional Comments page I click Continue
-
 	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given I should see the Data Acceptance Page
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
 	Then In the Data Acceptance Section, click 'Accept' button
-
-	Given If purchase details are showing click confirm order
 	Given I navigate to the home page
 	And I filter for the product saved as: TestCase87832
 	And I click Row Actions for the first product returned
