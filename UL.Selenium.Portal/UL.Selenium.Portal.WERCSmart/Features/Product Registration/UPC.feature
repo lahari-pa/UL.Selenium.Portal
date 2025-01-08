@@ -492,7 +492,7 @@ Scenario: [87832] View Shows Case UPC Data
 	And I click Row Actions for the first product returned
 	And I click on the Row Action: View
 	Then I switch to the Data Summary page
-	And The Data Summary section should be showing the following UPC table:
+	And In the Summary Page, the 'UPC' table should be showing the following:
 		| UPC Number         | Associated UPC     | Container Type | Size (Ounces) | Quantity | Transport                      | Retailers |
 		| saved as UPC878321 | saved as UPC878321 | Paper bag      | 2             | 5        | 1A2: removable head steel drum | AM        |
 		| saved as UPC87832  |                    | Paper bag      | 2             |          |                                | AM        |
@@ -506,7 +506,7 @@ Scenario: [87825] Summary Shows Case UPC Data
 	Then The home screen should load
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Given I should see the The Product Page
