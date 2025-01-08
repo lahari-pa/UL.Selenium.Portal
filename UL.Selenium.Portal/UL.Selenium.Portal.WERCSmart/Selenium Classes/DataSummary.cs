@@ -338,7 +338,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 								break;
 
 							case 4:
-								tableEle = caseUPCRow.FindElement(By.XPath($"(.//div[text()='{rowValues[i]}'])[2]"), 2);
+								tableEle = caseUPCRow.FindElement(By.XPath($"(.//div[text()='{rowValues[i]}'])"), 2);
 								caseUPCValue = tableEle.Text.Trim();
 								break;
 

@@ -382,7 +382,6 @@ Scenario: [87832] View Shows Case UPC Data
 	Given I should see the Physical and Chemical Properties Page
 	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
 	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
-	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
 	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Then in the Physical and Chemical Properties page I click Continue
@@ -405,7 +404,7 @@ Scenario: [87832] View Shows Case UPC Data
 	Then I should be on the Pesticide Details - U.S. Page
 	Then In the Pesticide Details - U.S. Section, in 'Product has an Environmental Protection Agency (EPA) Registration Number' enter No
 	Then In the Pesticide Details - U.S. Section, in 'Product has a State Registration' enter No
-	Then In the Pesticide Details - U.S. Section, in 'Select the applicable exemption' enter Product is FIFRA 25(b) Exempt.
+	Then In the Pesticide Details - U.S. Section, in 'Select the applicable exemption' enter Food Based Pesticides - Exempt from EPA Registration
 	Then in the Pesticide Details - U.S. page, I click Continue
 	#Then I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Then I should be on the Transportation Details 1 Page
@@ -423,12 +422,11 @@ Scenario: [87832] View Shows Case UPC Data
 	Then In the Volatile Organic Compound Summary Section, confirm that I see todays 'VOC Analysis Date'
 	#Then In the Volatile Organic Compound Summary Section, the statement 'Based on your previous selections, the product is an architectural coating with the following intended use. The SCAQMD VOC compliant limits for this intended use are:' is displayed
 	Then In the Volatile Organic Compound Summary Section, confirm 'Limits' table should exists
-	Then In the Volatile Organic Compound Summary Section, confirm 'VOC Content (g/L minus water and exempt compounds for high solids; g/L with water and exempts for low solids)' table should exists
-	Then In the Volatile Organic Compound Summary Section, confirm that I see the following 'CARB' value: 15.00
-	Then In the Volatile Organic Compound Summary Section, confirm that I see the following 'VOC content in g/L' value: 15.00
+	Then In the Volatile Organic Compound Summary Section, confirm that I see the following 'CARB' value: 15
+	Then In the Volatile Organic Compound Summary Section, confirm that I see the following 'OTC Model Rule' value: 15
 	Then In the Volatile Organic Compound Summary Section, the statement 'Based on the type of product, this must comply with the most restrictive VOC limit.' is displayed
 	Then In the Volatile Organic Compound Summary Section, the statement 'Exceeds the limits specified in the California Consumer Products Regulation' is displayed
-	Then In the Volatile Organic Compound Summary Section, the statement 'Does not exceed the limits specified by the Ozone Transport Commission' is displayed
+	Then In the Volatile Organic Compound Summary Section, the statement 'Exceeds the limits specified by the Ozone Transport Commission' is displayed
 	Given In the Volatile Organic Compound Summary Section, for 'Your acknowledgement of this registration includes that your product..' set 'Yes, I Acknowledge'
 	Given in the Volatile Organic Compound Summary page I click Continue
 	#Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
@@ -459,23 +457,23 @@ Scenario: [87832] View Shows Case UPC Data
 	Then in the Regulatory Documents to Provide page I click Continue
 	#Then 230922 Additional Documents to Provide - Applicable Only to Card Games, non-powered - Packaged Product Photo (front and back) UPLOAD
 	Given I should see the Additional Documents to Provide Page
-	Then In the Additional Documents to Provide, upload PDF document for section: Volatile Organic Compounds - Product Label
+	Then In the Additional Documents to Provide, upload PDF document to Provide Full Product Label (required) field
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	#Given I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
 	#	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
 	#	| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
-	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature' enter text: 501.827328
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor' to: Orange
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor Threshold' to: No data available
-	Then In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Product's Dispensing Method' select option: Aerosol
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Partition Coefficient' enter text: 41.3005
-	Then in the Safety Data Sheet Authoring - Additional Data (Optional) page, I click Continue
+	#Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
+	#And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
+	#And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature' enter text: 501.827328
+	#And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
+	#And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
+	#And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
+	#And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor' to: Orange
+	#And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor Threshold' to: No data available
+	#Then In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Product's Dispensing Method' select option: Aerosol
+	#And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Partition Coefficient' enter text: 41.3005
+	#Then in the Safety Data Sheet Authoring - Additional Data (Optional) page, I click Continue
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
 	Given I should see the Optional Comments Page
 	Then in the Optional Comments page I click Continue
@@ -489,9 +487,9 @@ Scenario: [87832] View Shows Case UPC Data
 	And I click on the Row Action: View
 	Then I switch to the Data Summary page
 	And The Data Summary section should be showing the following UPC table:
-		| UPC Number         | Associated UPC    | Container Type | Size (Ounces) | Quantity | Transport     | Retailers |
-		| saved as UPC878321 | saved as UPC87832 | Paper bag      | 2             | 2        | 4A: steel box | AM        |
-		| saved as UPC87832  |                   | Paper bag      | 2             |          |               | AM        |
+		| UPC Number         | Associated UPC     | Container Type | Size (Ounces) | Quantity | Transport                      | Retailers |
+		| saved as UPC878321 | saved as UPC878321 | Paper bag      | 2             | 5        | 1A2: removable head steel drum | AM        |
+		| saved as UPC87832  |                    | Paper bag      | 2             |          |                                | AM        |
 
 @TestCase:87825
 Scenario: [87825] Summary Shows Case UPC Data
