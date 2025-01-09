@@ -16,6 +16,7 @@
 @StepsPrototype
 @ProductSetUp
 @run_Transportation
+@PhysicalAndChemicalProp
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
@@ -23,327 +24,679 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @Ingredients
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
-
-
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationClassification
 
 Feature: Transportation
-
-
-Background:
-	Given I verify the following users exist and if not I create them using SHAUser
-		| username    | FirstName | LastName   | Role         | EmailAddress                |
-		| SHAQAAuto28 | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
-
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
 @TestCase:65702
 Scenario: [65702] Transportation - Confirm Copy information from my U.S. Department of Transportation data check box shows for IATA and is NOT a required field
-Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I click the Add Product icon in the Navigation Pane
-Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
-Given in the New Product page I click Continue
-And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-Given I generate a random UPC number and save as: UPC65702
-Then I save the product information as: TestCase65702
-	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-| Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
-| Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
-#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
-Given I should see the Ingredients Page
-	Then In the Ingredients section, add the following ingredients:
-	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-	| component name | Water       | 100     |                     |               |             |
-	Then in the Ingredients page I click Continue
+#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+ Given I log in with the account saved in TReVor as: ProductAccount
+ Then The home screen should load
+ #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+ Then I click the Add Product icon in the Navigation Pane
+ Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+ Then in the New Product page, I click Continue
+ #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
+ Then I should be on the The Product Page
+ And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bleach
+ And In the Product Section, set the option in section: 'Type of Product (select)' to: Bleach
+ Then in the The Product page, I click Continue
+ Given I generate a random UPC number and save as: UPC65702
+ Then I save the product information as: TestCase65702
+ #And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+ Then I should be on the Product Information Page
+ Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+ Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
+ Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+ Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+ Then In the Product Information Section, set the option in section: 'Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.' to: No
+ Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+ Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+ Then in the Product Information page, I click Continue
 
-And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-And I should see the Transportation Details 1 Page
-And I set the Product is Regulated for Transport field to: Yes
-And I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
-And I call Shared Step 65700 (Transportation Details 1 - Select IATA & Limited Shipping)
-And I click continue
-And I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
-And I should see the International Air Transport (IATA) Classification Page
-And I confirm the checkbox with description: Copy information from my U.S. Department of Transportation data is displayed
-And I click continue
-And Copy information from my U.S. Department of Transportation data should not be showing any error messages
-And Technical Name (if applicable) should not be showing any error messages
-And UN Number should be showing the error messages: This is a required field.
-And Proper Shipping Name should be showing the error messages: This is a required field.
-And Hazard Class (select) should be showing the error messages: This is a required field.
-And Packing Group (select) should be showing the error messages: This is a required field.
-And I navigate to the home page
-And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65702
+ #And I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
+    #| Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+    #| Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
+ And I should be on the Physical and Chemical Properties Page
+ Then In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
+ Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
+ Then In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 1
+ Then In the Physical and Chemical Properties Section, for section: 'pH' enter text: 7
+ Then In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: 85
+ Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: 65
+ Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Closed cup method
+ Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Cloth not soluble
+ Then in the Physical and Chemical Properties page, I click Continue
+
+ #And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+ Given I should be on the Ingredients Page
+ #Then In the Ingredients section, add the following ingredients:
+ #| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+ #| component name | Chlorine       | 100     |                     |               |             |
+ Then In the Ingredients Section, click the component search box
+ Then In the component search box, enter text: Chlorine
+ Then In the component search box, click result where component name contains: Chlorine
+ Then In the Ingredients Table row with component name: Chlorine, in percentage column text input enter: 100
+ Then in the Ingredients page, I click Continue
+ #And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+ Given I should be on the Inventory Status, Prop 65 (US) Page
+ Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+ Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+ Then in the Inventory Status, Prop 65 (US) page, I click Continue
+ #And I should see the Transportation Details 1 Page
+ And I should be on the Transportation Details 1 Page
+ #And I set the Product is Regulated for Transport field to: Yes
+ And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Yes
+ #And I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
+ Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: DOT
+ Then In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping with limited quantity
+ #And I call Shared Step 65700 (Transportation Details 1 - Select IATA & Limited Shipping)
+ #And I click continue
+ Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: IATA
+ Then In the Transportation Details 1 Section, set the option for IATA mode of transport to: Shipping with limited quantity
+ Then in the Transportation Details 1 page, I click Continue
+ And I should be on the U.S. Department of Transportation (DOT) Classification Page
+ #And I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
+ And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1970
+ And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Aerosols
+ And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Technical Name (if applicable)': to: Technical Test Name
+ And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
+ And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: None
+ Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
+ #And I should see the International Air Transport (IATA) Classification Page
+ And I should be on the International Air Transport (IATA) Classification Page
+ #And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
+ And In the International Air Transport (IATA) Classification Section, I check checkbox 'Copy information from my U.S. Department of Transportation data'
+ Then in the International Air Transport (IATA) Classification page, I click Continue
+ #And Copy information from my U.S. Department of Transportation data should not be showing any error messages
+ #And Technical Name (if applicable) should not be showing any error messages
+ #And UN Number should be showing the error messages: This is a required field.
+ #And Proper Shipping Name should be showing the error messages: This is a required field.
+ #And Hazard Class (select) should be showing the error messages: This is a required field.
+ #And Packing Group (select) should be showing the error messages: This is a required field.
+ And I navigate to the home page
+ #And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65702
+ Then In the Product Grid, delete the product saved as: TestCase65702
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
 @TestCase:65703
 Scenario: [65703] Transportation - Transportation - Confirm Copy information from my U.S. Department of Transportation data check box shows for IMDG and is NOT a required field
-Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I click the Add Product icon in the Navigation Pane
-Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
-Given in the New Product page I click Continue
-And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-Given I generate a random UPC number and save as: UPC65703
-Then I save the product information as: TestCase65703
-	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 84554 (Physical and Chemical Properties - Liquid & Solid - Enter all data - Continue - Happy Path)
-#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
-Given I should see the Ingredients Page
-	Then In the Ingredients section, add the following ingredients:
-	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-	| component name | Water       | 100     |                     |               |             |
-	Then in the Ingredients page I click Continue
+    #Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+    Given I log in with the account saved in TReVor as: ProductAccount
+	Then The home screen should load
+    #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+    Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+    #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
+    Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bleach
+    And In the Product Section, set the option in section: 'Type of Product (select)' to: Bleach
+    Then in the The Product page, I click Continue
+    Given I generate a random UPC number and save as: UPC65703
+    Then I save the product information as: TestCase65703
+	#And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+	Then I should be on the Product Information Page
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+	Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page, I click Continue
+	#And I call Shared Step 84554 (Physical and Chemical Properties - Liquid & Solid - Enter all data - Continue - Happy Path)
+	And I should be on the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Semi-Solid
+	Then In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 1
+	Then In the Physical and Chemical Properties Section, for section: 'pH' enter text: 7
+	Then In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: 85
+	Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: 65
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Closed cup method
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Cloth not soluble
+	Then in the Physical and Chemical Properties page, I click Continue
+	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+    Given I should be on the Ingredients Page
+    #Then In the Ingredients section, add the following ingredients:
+    #| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+    #| component name | Chlorine       | 100     |                     |               |             |
+	Then In the Ingredients Section, click the component search box
+	Then In the component search box, enter text: Chlorine
+	Then In the component search box, click result where component name contains: Chlorine
+    Then In the Ingredients Table row with component name: Chlorine, in percentage column text input enter: 100
+    Then in the Ingredients page, I click Continue
+	#And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I should be on the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+    And I should be on the Transportation Details 1 Page
+    And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Yes
+	#And I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
+    Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: DOT
+    Then In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping with limited quantity
+    #And I call Shared Step 65699 (Transport - Select IMDG & Limited Shipping - No Continue)
+    Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: IMDG
+    Then In the Transportation Details 1 Section, set the option for IMDG mode of transport to: Shipping with limited quantity
+    Then in the Transportation Details 1 page, I click Continue
+    And I should be on the U.S. Department of Transportation (DOT) Classification Page
+	#And I click continue
+    #And I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
+	And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1970
+	And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Aerosols
+	And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Technical Name (if applicable)': to: Technical Test Name
+    And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
+	And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: None
+	Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
+    #And I should see the International Marine (IMDG) Classification Page
+	And I should be on the International Marine (IMDG) Classification Page
+    #And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
+	And In the International Marine (IMDG) Classification Section, I check checkbox 'Copy information from my U.S. Department of Transportation data
+	Then in the International Marine (IMDG) Classification page, I click Continue
+	#And Copy information from my U.S. Department of Transportation data should not be showing any error messages
+	#And Technical Name (if applicable) should not be showing any error messages
+	#And UN Number should be showing the error messages: This is a required field.
+	#And Proper Shipping Name should be showing the error messages: This is a required field.
+	#And Hazard Class (select) should be showing the error messages: This is a required field.
+	#And Packing Group (select) should be showing the error messages: This is a required field.
+	And I navigate to the home page
+   #And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65703
+    Then In the Product Grid, delete the product saved as: TestCase65703
 
-And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-And I should see the Transportation Details 1 Page
-And I set the Product is Regulated for Transport field to: Yes
-And I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
-And I call Shared Step 65699 (Transport - Select IMDG & Limited Shipping - No Continue)
-And I click continue
-And I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
-And I should see the International Marine (IMDG) Classification Page
-And I confirm the checkbox with description: Copy information from my U.S. Department of Transportation data is displayed
-And I click continue
-And Copy information from my U.S. Department of Transportation data should not be showing any error messages
-And Technical Name (if applicable) should not be showing any error messages
-And UN Number should be showing the error messages: This is a required field.
-And Proper Shipping Name should be showing the error messages: This is a required field.
-And Hazard Class (select) should be showing the error messages: This is a required field.
-And Packing Group (select) should be showing the error messages: This is a required field.
-And I navigate to the home page
-And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65703
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
 @TestCase:65706
 Scenario: [65706] Transportation - Confirm Copy information from my U.S. Department of Transportation data check box shows for TDG and is NOT a required field
-Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
-	Given in the New Product page I click Continue
-And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
+#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+Given I log in with the account saved in TReVor as: ProductAccount
+Then The home screen should load
+#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+Then I click the Add Product icon in the Navigation Pane
+Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Then in the New Product page, I click Continue
+#And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
+Then I should be on the The Product Page
+And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bleach
+And In the Product Section, set the option in section: 'Type of Product (select)' to: Bleach
+Then in the The Product page, I click Continue
 Given I generate a random UPC number and save as: UPC65706
 Then I save the product information as: TestCase65706
-	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 84554 (Physical and Chemical Properties - Liquid & Solid - Enter all data - Continue - Happy Path)
-#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
-Given I should see the Ingredients Page
-	Then In the Ingredients section, add the following ingredients:
-	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-	| component name | Water       | 100     |                     |               |             |
-	Then in the Ingredients page I click Continue
-
-And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-And I should see the Transportation Details 1 Page
-And I set the Product is Regulated for Transport field to: Yes
-And I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
-And I call Shared Step 65701 (Transport - Select TDG & Limited Shipping - No Continue)
-And I click continue
-And I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
-And I should see the Canada - Transportation of Dangerous Goods (TDG) Classification Page
-And I confirm the checkbox with description: Copy information from my U.S. Department of Transportation data is displayed
-And I click continue
-And Copy information from my U.S. Department of Transportation data should not be showing any error messages
-And Technical Name (if applicable) should not be showing any error messages
-And UN Number should be showing the error messages: This is a required field.
-And Proper Shipping Name should be showing the error messages: This is a required field.
-And Hazard Class (select) should be showing the error messages: This is a required field.
-And Packing Group (select) should be showing the error messages: This is a required field.
+#And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+Then I should be on the Product Information Page
+Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
+Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+Then In the Product Information Section, set the option in section: 'Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.' to: No
+Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+Then in the Product Information page, I click Continue
+#And I call Shared Step 84554 (Physical and Chemical Properties - Liquid & Solid - Enter all data - Continue - Happy Path)
+And I should be on the Physical and Chemical Properties Page
+Then In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
+Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Semi-Solid
+Then In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 1
+Then In the Physical and Chemical Properties Section, for section: 'pH' enter text: 7
+Then In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: 85
+Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: 65
+Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Closed cup method
+Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Cloth not soluble
+Then in the Physical and Chemical Properties page, I click Continue
+ #And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+ Given I should be on the Ingredients Page
+ #Then In the Ingredients section, add the following ingredients:
+ #| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+ #| component name | Chlorine       | 100     |                     |               |             |
+Then In the Ingredients Section, click the component search box
+Then In the component search box, enter text: Chlorine
+Then In the component search box, click result where component name contains: Chlorine
+Then In the Ingredients Table row with component name: Chlorine, in percentage column text input enter: 100
+Then in the Ingredients page, I click Continue
+#And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+Given I should be on the Inventory Status, Prop 65 (US) Page
+Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+Then in the Inventory Status, Prop 65 (US) page, I click Continue
+And I should be on the Transportation Details 1 Page
+And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Yes
+#And I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
+Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: DOT
+Then In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping with limited quantity
+#And I call Shared Step 65701 (Transport - Select TDG & Limited Shipping - No Continue)
+Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: TDG
+Then In the Transportation Details 1 Section, set the option for TDG mode of transport to: Shipping with limited quantity
+Then in the Transportation Details 1 page, I click Continue
+And I should be on the U.S. Department of Transportation (DOT) Classification Page
+#And I click continue
+#And I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1970
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Aerosols
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Technical Name (if applicable)': to: Technical Test Name
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
+And In the U.S. Department of Transportation \(DOT\) Classification Section, verify section: 'Packing Group (select)' contains value: None
+And Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
+#And I should see the Canada - Transportation of Dangerous Goods (TDG) Classification Page
+And I should be on the Canada - Transportation of Dangerous Goods (TDG) Classification Page
+#And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
+And In the Canada - Transportation of Dangerous Goods (TDG) Classification Section, I check checkbox 'Copy information from my U.S. Department of Transportation data'
+#And I click continue
+And Then in the Canada - Transportation of Dangerous Goods (TDG) Classification page, I click Continue
+#And Copy information from my U.S. Department of Transportation data should not be showing any error messages
+#And Technical Name (if applicable) should not be showing any error messages
+#And UN Number should be showing the error messages: This is a required field.
+#And Proper Shipping Name should be showing the error messages: This is a required field.
+#And Hazard Class (select) should be showing the error messages: This is a required field.
+#And Packing Group (select) should be showing the error messages: This is a required field.
 And I navigate to the home page
-And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65706
+#And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65706
+Then In the Product Grid, delete the product saved as: TestCase65706
+
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
 @TestCase:65754
 Scenario: [65754] Transportation - Copy information from my U.S. Department of Transportation data check box &  IATA data
-Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I click the Add Product icon in the Navigation Pane
-Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
-Given in the New Product page I click Continue
-And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-Given I generate a random UPC number and save as: UPC65754
-Then I save the product information as: TestCase65754
-	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
-Given I should see the Ingredients Page
-	Then In the Ingredients section, add the following ingredients:
-	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-	| component name | Water       | 100     |                     |               |             |
-	Then in the Ingredients page I click Continue
-
-And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-And I should see the Transportation Details 1 Page
-And I set the Product is Regulated for Transport field to: Yes
-And I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
-And I call Shared Step 65700 (Transportation Details 1 - Select IATA & Limited Shipping)
-And I click continue
-And I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
-And I should see the International Air Transport (IATA) Classification Page
-And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
-And UN Number should be showing the value: UN1950
-And Proper Shipping Name should be showing the value: Choose...
-And The following options should not be displayed for section: Proper Shipping Name
-| Option   |
-| Aerosols |
-And Hazard Class (select) should be showing the value: 2.1
-And I set the Proper Shipping Name field to: Aerosols, flammable
-And Hazard Class (select) should be showing the value: 2.1
-And I set the Proper Shipping Name field to: Aerosols, non-flammable, containing substances in Division 6.1, Packing Group III
-And Hazard Class (select) should be showing the value: 2.2
-And Packing Group (select) should be showing the value: None
-And The following options should be displayed exclusively for section: Packing Group (select)
-| Option |
-| None   |
+ #Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+ Given I log in with the account saved in TReVor as: ProductAccount
+ Then The home screen should load
+ #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+ Then I click the Add Product icon in the Navigation Pane
+ Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+ Then in the New Product page, I click Continue
+ #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
+ Then I should be on the The Product Page
+ And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bleach
+ And In the Product Section, set the option in section: 'Type of Product (select)' to: Bleach
+ Then in the The Product page, I click Continue
+ Given I generate a random UPC number and save as: UPC65754
+ Then I save the product information as: TestCase65754
+ #And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+ Then I should be on the Product Information Page
+ Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+ Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
+ Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+ Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+ Then In the Product Information Section, set the option in section: 'Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.' to: No
+ Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+ Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+ Then in the Product Information page, I click Continue
+ #And I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
+ And I should be on the Physical and Chemical Properties Page
+ Then In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
+ Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+ Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+ Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+ Then in the Physical and Chemical Properties page, I click Continue
+ #And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+ Given I should be on the Ingredients Page
+ #Then In the Ingredients section, add the following ingredients:
+ #| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+ #| component name | Chlorine       | 100     |                     |               |             |
+ Then In the Ingredients Section, click the component search box
+ Then In the component search box, enter text: Chlorine
+ Then In the component search box, click result where component name contains: Chlorine
+ Then In the Ingredients Table row with component name: Chlorine, in percentage column text input enter: 100
+ Then in the Ingredients page, I click Continue
+ #And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+ Given I should be on the Inventory Status, Prop 65 (US) Page
+ Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+ Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+ Then in the Inventory Status, Prop 65 (US) page, I click Continue
+ And I should be on the Transportation Details 1 Page
+ And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Yes
+ #And I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
+ Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: DOT
+ Then In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping with limited quantity
+ #And I call Shared Step 65700 (Transportation Details 1 - Select IATA & Limited Shipping)
+ #And I click continue
+ Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: IATA
+ Then In the Transportation Details 1 Section, set the option for IATA mode of transport to: Shipping with limited quantity
+ Then in the Transportation Details 1 page, I click Continue
+ And I should be on the U.S. Department of Transportation (DOT) Classification Page
+ #And I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
+ And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1970
+ And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Aerosols
+ And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Technical Name (if applicable)': to: Technical Test Name
+ And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
+ And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: None
+ Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
+ #And I should see the International Air Transport (IATA) Classification Page
+ And I should be on the International Air Transport (IATA) Classification Page
+ #And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
+ And In the International Air Transport (IATA) Classification Section, I check checkbox 'Copy information from my U.S. Department of Transportation data'
+ #And UN Number should be showing the value: UN1950
+ And In the International Air Transport (IATA) Classification Section, verify section: 'UN Number' contains value: UN1970
+ #And Proper Shipping Name should be showing the value: Choose...
+ And In the International Air Transport (IATA) Classification Section, verify section: 'Proper Shipping Name' contains value: Choose...
+ #And The following options should not be displayed for section: Proper Shipping Name
+ #| Option   |
+ #| Aerosols |
+#And Hazard Class (select) should be showing the value: 2.1
+And In the International Air Transport (IATA) Classification Section, verify section: 'Hazard Class (select)' contains value: 2.1
+#And I set the Proper Shipping Name field to: Aerosols, flammable
+And In the International Air Transport (IATA) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols, flammable
+#And Hazard Class (select) should be showing the value: 2.1
+And In the International Air Transport (IATA) Classification Section, verify section: 'Hazard Class (select)' contains value: 2.1
+#And I set the Proper Shipping Name field to: Aerosols, non-flammable, containing substances in Division 6.1, Packing Group III
+And In the International Air Transport (IATA) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols, non-flammable, containing substances in Division 6.1, Packing Group III
+#And Hazard Class (select) should be showing the value: 2.2
+And In the International Air Transport (IATA) Classification Section, verify section: 'Hazard Class (select)' contains value: 2.2
+#And Packing Group (select) should be showing the value: None
+And In the International Air Transport (IATA) Classification Section, verify section: 'Packing Group (select)' contains value: None
+#And The following options should be displayed exclusively for section: Packing Group (select)
+#| Option |
+#| None   |
 And I call Shared Step 65939 (Go To Transport DOT Step - Enter UN1966, Confirm data - NO CONTINUE)
-And I click continue
-And I confirm the checkbox with description: Copy information from my U.S. Department of Transportation data is displayed
+And I click the page heading: Transportation Details 1
+Then I should be on the U.S. Department of Transportation (DOT) Classification Page
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1966
+And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Hydrogen, refrigerated liquid
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Technical Name (if applicable)': to: Technical Test Name
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
+And In the U.S. Department of Transportation \(DOT\) Classification Section, verify section: 'Packing Group (select)' contains value: None
+#And I click continue
+Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
+#And I confirm the checkbox with description: Copy information from my U.S. Department of Transportation data is displayed
+And In the International Air Transport (IATA) Classification Section, I check checkbox 'Copy information from my U.S. Department of Transportation data'
 #Confirm that ^ checkbox is selected (failing currently)?
-And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
-And UN Number should be showing the value: UN1966
-And Proper Shipping Name should be showing the value: Hydrogen, refrigerated liquid
-And Technical Name should be showing the value: Technical Name Test
-And Hazard Class (select) should be showing the value: 2.1
-And Packing Group should be showing the value: None
+#And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
+#And UN Number should be showing the value: UN1966
+And In the International Air Transport (IATA) Classification Section, verify section: 'UN Number' contains value: UN1966
+#And Proper Shipping Name should be showing the value: Hydrogen, refrigerated liquid
+And In the International Air Transport (IATA) Classification Section, verify section: 'Proper Shipping Name' contains value: Hydrogen, refrigerated liquid
+#And Technical Name should be showing the value: Technical Name Test
+And In the International Air Transport (IATA) Classification Section, verify section: 'Technical Name (if applicable)' contains value: Technical Name Test
+#And Hazard Class (select) should be showing the value: 2.1
+And In the International Air Transport (IATA) Classification Section, verify section: 'Hazard Class (select)' contains value: 2.1
+#And Packing Group should be showing the value: None
+And In the International Air Transport (IATA) Classification Section, verify section: 'Packing Group (select)' contains value: None
 And I navigate to the home page
-And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65754
+#And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65754
+Then In the Product Grid, delete the product saved as: TestCase65754
+
+
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
 @TestCase:65940
 Scenario: [65940] Transportation - Copy information from my U.S. Department of Transportation data check box &  IMDG data
-Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
-	Given in the New Product page I click Continue
-And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
-Given I generate a random UPC number and save as: UPC65940
-Then I save the product information as: TestCase65940
-	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-| Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
-| Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
-#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
-Given I should see the Ingredients Page
-	Then In the Ingredients section, add the following ingredients:
-	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-	| component name | Water       | 100     |                     |               |             |
-	Then in the Ingredients page I click Continue
+    #Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+    Given I log in with the account saved in TReVor as: ProductAccount
+	Then The home screen should load
+    #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+    Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+    #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
+    Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bleach
+    And In the Product Section, set the option in section: 'Type of Product (select)' to: Bleach
+    Then in the The Product page, I click Continue
+    Given I generate a random UPC number and save as: UPC65940
+    Then I save the product information as: TestCase65940
+	#And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+	Then I should be on the Product Information Page
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+	Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page, I click Continue
+    #And I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
+    #| Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+    #| Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
+	And I should be on the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
+	Then In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 1
+	Then In the Physical and Chemical Properties Section, for section: 'pH' enter text: 7
+	Then In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: 85
+	Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: 65
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Closed cup method
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Cloth not soluble
+	Then in the Physical and Chemical Properties page, I click Continue
+    #And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+    Given I should be on the Ingredients Page
+    #Then In the Ingredients section, add the following ingredients:
+    #| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+    #| component name | Chlorine       | 100     |                     |               |             |
+	Then In the Ingredients Section, click the component search box
+	Then In the component search box, enter text: Chlorine
+	Then In the component search box, click result where component name contains: Chlorine
+    Then In the Ingredients Table row with component name: Chlorine, in percentage column text input enter: 100
+    Then in the Ingredients page, I click Continue
+    #And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I should be on the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+    And I should be on the Transportation Details 1 Page
+    And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Yes
+    #And I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
+    Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: DOT
+    Then In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping with limited quantity
+    #And I call Shared Step 65699 (Transport - Select IMDG & Limited Shipping - No Continue)
+    Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: IMDG
+    Then In the Transportation Details 1 Section, set the option for IMDG mode of transport to: Shipping with limited quantity
+    Then in the Transportation Details 1 page, I click Continue
+    And I should be on the U.S. Department of Transportation (DOT) Classification Page
+	#And I click continue
+    #And I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
+	 And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1970
+	 And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Aerosols
+	 And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Technical Name (if applicable)': to: Technical Test Name
+     And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
+	 And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: None
+	 Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
+     #And I should see the International Marine (IMDG) Classification Page
+	And I should be on the International Marine (IMDG) Classification Page
+    #And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
+	And In the International Marine (IMDG) Classification Section, I check checkbox 'Copy information from my U.S. Department of Transportation data
+    #And UN Number should be showing the value: UN1950
+    And In the International Marine (IMDG) Classification Section, verify section: 'UN Number' contains value: UN1970
+    #And Proper Shipping Name should be showing the value: Aerosols
+	And In the International Marine (IMDG) Classification Section, verify section: 'Proper Shipping Name' contains value: Aerosols
+   #And Hazard Class (select) should be showing the value: 2
+   And In the International Marine (IMDG) Classification Section, verify section: 'Hazard Class (select)' contains value: 2
+   #And The following options should be displayed exclusively for section: Hazard Class (select)
+   #| Option |
+   #| 2      |
+   #And Packing Group (select) should be showing the value: None
+   And In the International Marine (IMDG) Classification Section, verify section: 'Packing Group (select)' contains value: None
+   #And The following options should be displayed exclusively for section: Packing Group (select)
+   #| Option |
+   #| None   |
 
-And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-And I should see the Transportation Details 1 Page
-And I set the Product is Regulated for Transport field to: Yes
-And I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
-And I call Shared Step 65699 (Transport - Select IMDG & Limited Shipping - No Continue)
-And I click continue
-And I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
-And I should see the International Marine (IMDG) Classification Page
-And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
-And UN Number should be showing the value: UN1950
-And Proper Shipping Name should be showing the value: Aerosols
-And Hazard Class (select) should be showing the value: 2
-And The following options should be displayed exclusively for section: Hazard Class (select)
-| Option |
-| 2      |
-And Packing Group (select) should be showing the value: None
-And The following options should be displayed exclusively for section: Packing Group (select)
-| Option |
-| None   |
-And I call Shared Step 65939 (Go To Transport DOT Step - Enter UN1966, Confirm data - NO CONTINUE)
-And I click continue
-And I confirm the checkbox with description: Copy information from my U.S. Department of Transportation data is displayed
-And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
-And UN Number should be showing the value: UN1966
-And I uncheck the checkbox with description: Copy information from my U.S. Department of Transportation data
-And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
-And UN Number should be showing the value: UN1966
-And Proper Shipping Name should be showing the value: Hydrogen, refrigerated liquid
-And Technical Name should be showing the value: Technical Name Test
-And Hazard Class (select) should be showing the value: 2.1
-And Packing Group should be showing the value: None
-And I navigate to the home page
-And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65940
+   #And I call Shared Step 65939 (Go To Transport DOT Step - Enter UN1966, Confirm data - NO CONTINUE)
+    And I click the page heading: Transportation Details 1
+    Then I should be on the U.S. Department of Transportation (DOT) Classification Page
+    And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1966
+    And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Hydrogen, refrigerated liquid
+    And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Technical Name (if applicable)': to: Technical Test Name
+    And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
+	And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: None
+   #And I click continue
+   Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
+   And I should be on the International Marine (IMDG) Classification Page
+   #And I confirm the checkbox with description: Copy information from my U.S. Department of Transportation data is displayed
+   #And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
+   And In the International Marine (IMDG) Classification Section, I check checkbox 'Copy information from my U.S. Department of Transportation data'
+   #And UN Number should be showing the value: UN1966
+   And In the International Marine (IMDG) Classification Section, verify section: 'UN Number' contains value: UN1966
+   #And I uncheck the checkbox with description: Copy information from my U.S. Department of Transportation data
+   #And Proper Shipping Name should be showing the value: Hydrogen, refrigerated liquid
+   And In the International Marine (IMDG) Classification Section, verify section: 'Proper Shipping Name' contains value: Hydrogen, refrigerated liquid
+   #And Technical Name should be showing the value: Technical Name Test
+   #And Hazard Class (select) should be showing the value: 2.1
+   And In the International Marine (IMDG) Classification Section, verify section: 'Hazard Class (select)' contains value: 2.1
+   #And Packing Group should be showing the value: None
+   And In the International Marine (IMDG) Classification Section, verify section: 'Packing Group (select)' contains value: None
+   And I navigate to the home page
+   #And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65940
+   Then In the Product Grid, delete the product saved as: TestCase65940
+	
+
 
 # Assigned to Beverly Barrett
 # Created by Beverly Barrett
 @TestCase:65944
 Scenario: [65944] Transportation - Copy information from my U.S. Department of Transportation data check box &  TDG data
-Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
-	Given in the New Product page I click Continue
-And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Water
-Given I generate a random UPC number and save as: UPC65944
-Then I save the product information as: TestCase65944
-	And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
-And I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-| Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
-| Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
-#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
-Given I should see the Ingredients Page
-	Then In the Ingredients section, add the following ingredients:
-	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-	| component name | Chlorine       | 100     |                     |               |             |
-	Then in the Ingredients page I click Continue
+    #Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+    Given I log in with the account saved in TReVor as: ProductAccount
+	Then The home screen should load
+    #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+    Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+    #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
+    Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bleach
+    And In the Product Section, set the option in section: 'Type of Product (select)' to: Bleach
+    Then in the The Product page, I click Continue
+    Given I generate a random UPC number and save as: UPC65944
+    Then I save the product information as: TestCase65944
+	#And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
+	Then I should be on the Product Information Page
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+	Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
 
-And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-And I should see the Transportation Details 1 Page
-And I set the Product is Regulated for Transport field to: Yes
-And I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
-And I call Shared Step 65701 (Transport - Select TDG & Limited Shipping - No Continue)
-And I click continue
-And I should see the U.S. Department of Transportation (DOT) Classification Page
-And I set the UN Number field to: UN1975
-And Proper Shipping Name should be showing the value: Nitric oxide and dinitrogen tetroxide mixtures
-And The following options should be displayed exclusively for section: Proper Shipping Name
-| Option                                         |
-| Nitric oxide and dinitrogen tetroxide mixtures |
-And I set the Technical Name field to: Technical Test Name
-And Hazard Class (select) should be showing the value: 2.3
-And The following options should be displayed exclusively for section: Hazard Class (select)
-| Option |
-| 2.3    |
-And Packing Group (select) should be showing the value: None
-And The following options should be displayed exclusively for section: Packing Group (select)
-| Option |
-| None   |
-And I click continue
-And I should see the Canada - Transportation of Dangerous Goods (TDG) Classification Page
-And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
-And UN Number should be showing the value: UN1975
-And Proper Shipping Name should be showing the value: Nitric oxide and dinitrogen tetroxide mixture
-And Hazard Class (select) should be showing the value: 2.3, (5.1), (8)
-And The following options should be displayed exclusively for section: Hazard Class (select)
-| Option          |
-| 2.3, (5.1), (8) |
-And Packing Group (select) should be showing the value: None
-And The following options should be displayed exclusively for section: Packing Group (select)
-| Option |
-| None   |
-And I call Shared Step 65939 (Go To Transport DOT Step - Enter UN1966, Confirm data - NO CONTINUE)
-And I click continue
-And I confirm the checkbox with description: Copy information from my U.S. Department of Transportation data is displayed
-And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
-And UN Number should be showing the value: UN1966
-And I uncheck the checkbox with description: Copy information from my U.S. Department of Transportation data
-And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
-And UN Number should be showing the value: UN1966
-And Proper Shipping Name should be showing the value: Hydrogen, refrigerated liquid
-And Technical Name should be showing the value: Technical Name Test
-And Hazard Class (select) should be showing the value: 2.1
-And Packing Group should be showing the value: None
-And I navigate to the home page
-And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65944
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+
+	Then in the Product Information page, I click Continue
+    #And I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
+    #| Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+    #| Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
+	And I should be on the Physical and Chemical Properties Page
+
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
+	Then In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 1
+	Then In the Physical and Chemical Properties Section, for section: 'pH' enter text: 7
+	Then In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: 85
+	Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: 65
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Closed cup method
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Cloth not soluble
+	Then in the Physical and Chemical Properties page, I click Continue
+    #And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+    Given I should be on the Ingredients Page
+    #Then In the Ingredients section, add the following ingredients:
+    #| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+    #| component name | Chlorine       | 100     |                     |               |             |
+	Then In the Ingredients Section, click the component search box
+	Then In the component search box, enter text: Chlorine
+	Then In the component search box, click result where component name contains: Chlorine
+    Then In the Ingredients Table row with component name: Chlorine, in percentage column text input enter: 100
+    Then in the Ingredients page, I click Continue
+    #And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given I should be on the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+    And I should be on the Transportation Details 1 Page
+    And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Yes
+
+    #And I call Shared Step 65698 (Transport - Select DOT & Limited Shipping - No Continue)
+    Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: DOT
+    Then In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping with limited quantity
+
+    #And I call Shared Step 65701 (Transport - Select TDG & Limited Shipping - No Continue)
+    Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: TDG
+    Then In the Transportation Details 1 Section, set the option for TDG mode of transport to: Shipping with limited quantity
+    Then in the Transportation Details 1 page, I click Continue
+    And I should be on the U.S. Department of Transportation (DOT) Classification Page
+    #And I set the UN Number field to: UN1975
+    And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1975
+
+    #And Proper Shipping Name should be showing the value: Nitric oxide and dinitrogen tetroxide mixtures
+    And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Nitric oxide and dinitrogen tetroxide  mixtures
+
+    #And The following options should be displayed exclusively for section: Proper Shipping Name
+    #| Option                                         |
+    #| Nitric oxide and dinitrogen tetroxide mixtures |
+
+    #And I set the Technical Name field to: Technical Test Name
+    And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Technical Name (if applicable)': to: Technical Test Name
+
+    #And Hazard Class (select) should be showing the value: 2.3
+    And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.3
+
+    #And The following options should be displayed exclusively for section: Hazard Class (select)
+    #| Option |
+    #| 2.3    |
+
+
+    #And Packing Group (select) should be showing the value: None
+	And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: None
+
+    #And The following options should be displayed exclusively for section: Packing Group (select)
+    #| Option |
+    #| None   |
+
+    #And I click continue
+    Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
+
+    #And I should see the Canada - Transportation of Dangerous Goods (TDG) Classification Page
+    And I should be on the Canada - Transportation of Dangerous Goods (TDG) Classification Page
+
+    #And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
+    And In the Canada - Transportation of Dangerous Goods (TDG) Classification Section, I check checkbox 'Copy information from my U.S. Department of Transportation data'
+
+
+    #And UN Number should be showing the value: UN1975
+    And In the Canada - Transportation of Dangerous Goods (TDG) Classification Section, verify section: 'UN Number' contains value: UN1975
+
+    #And Proper Shipping Name should be showing the value: Nitric oxide and dinitrogen tetroxide mixture
+    And In the Canada - Transportation of Dangerous Goods (TDG) Classification Section, verify section: 'Proper Shipping Name' contains value: Nitric oxide and dinitrogen tetroxide mixture
+
+    #And Hazard Class (select) should be showing the value: 2.3, (5.1), (8)
+    And In the Canada - Transportation of Dangerous Goods (TDG) Classification Section, verify section: 'Hazard Class (select)' contains value: 2.3, (5.1), (8)
+
+    #And The following options should be displayed exclusively for section: Hazard Class (select)
+    #| Option          |
+    #| 2.3, (5.1), (8) |
+
+    #And Packing Group (select) should be showing the value: None
+    And In the Canada - Transportation of Dangerous Goods (TDG) Classification Section, verify section: 'Packing Group (select)' contains value: None
+
+    #And The following options should be displayed exclusively for section: Packing Group (select)
+    #| Option |
+    #| None   |
+
+    #And I call Shared Step 65939 (Go To Transport DOT Step - Enter UN1966, Confirm data - NO CONTINUE)
+    And I click the page heading: Transportation Details 1
+    Then I should be on the U.S. Department of Transportation (DOT) Classification Page
+    And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1966
+    And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Hydrogen, refrigerated liquid
+    And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Technical Name (if applicable)': to: Technical Test Name
+    And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
+	And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: None
+    #And I click continue
+    Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
+    And I should be on the Canada - Transportation of Dangerous Goods (TDG) Classification Page
+    And In the Canada - Transportation of Dangerous Goods (TDG) Classification Section, I check checkbox 'Copy information from my U.S. Department of Transportation data'
+    And In the Canada - Transportation of Dangerous Goods (TDG) Classification Section, verify section: 'UN Number' contains value: UN1966
+    And In the Canada - Transportation of Dangerous Goods (TDG) Classification Section, verify section: 'Proper Shipping Name' contains value: Hydrogen, refrigerated liquid
+    And In the Canada - Transportation of Dangerous Goods (TDG) Classification Section, verify section: 'Hazard Class (select)' contains value: 2.1
+    And In the Canada - Transportation of Dangerous Goods (TDG) Classification Section, verify section: 'Packing Group (select)' contains value: None
+
+    And I navigate to the home page
+    #And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65944
+	Then In the Product Grid, delete the product saved as: TestCase65944
 
 
 # Assigned to Beverly Barrett
@@ -614,23 +967,46 @@ And I click alias subsection option TDGCP and confirm data as:
 @TestCase:126286
 Scenario: [126286] Transportation Details DOT - UN1057 Prompts the 'For the Lighter, Provide the DOT Approval Number' Field
 
-Given I call Shared Step 67284 (Login into WERCSmart Portal - Visual Automation Account)
-	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
-	Given in the New Product page I click Continue
-Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): LIGHTER FLUID
-Given I generate a random UPC number and save as: UPC126286
-Then I save the product information as: TestCase126286
+    #Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+    Given I log in with the account saved in TReVor as: ProductAccount
+	Then The home screen should load
+    #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+    Then I click the Add Product icon in the Navigation Pane
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then in the New Product page, I click Continue
+    #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
+    Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bleach
+    And In the Product Section, set the option in section: 'Type of Product (select)' to: Bleach
+    Then in the The Product page, I click Continue
+    Given I generate a random UPC number and save as: UPC126286
+    Then I save the product information as: TestCase126286
+
 #Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
-Given I should see the Product Information Page
+Then I should be on the The Product Information Page
 Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
 Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
 Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
-Then in the Product Information page I click Continue
-Given I call Shared Step 57441 (Physical and Chemical Properties - Primary Physical Property - Liquid)
+Then in the The Product Information page, I click Continue
+#Given I call Shared Step 57441 (Physical and Chemical Properties - Primary Physical Property - Liquid)
+And I should be on the Physical and Chemical Properties Page
+Then In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
+Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
+Then In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 1
+Then In the Physical and Chemical Properties Section, set the option in section: 'Relative Density' to: g/ml (grams per milliliter)
+Then In the Physical and Chemical Properties Section, for section: 'pH' select the checkbox option: 'I do not have exact pH data available to me'
+Then In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' select the checkbox option: 'I do not have exact Boiling Point data available to me'
+Then In the Physical and Chemical Properties Section, set the option in section: 'Boiling Point (in Celsius)' to: Not tested/Unknown
+Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' select the checkbox option: 'I do not have exact Flash Point data available to me'
+Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point (in Celsius)' to: >=93C and <=815C
+Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Closed cup method
+Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Cloth not soluble
+Then in the Physical and Chemical Properties page, I click Continue
+
+
+
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | CASNumber  | ComponentName                                                               | Percent | PublicallyDisclosed | PublicName | TradeSecret |
 | 68410-97-9 | Distillates, petroleum, light distillate hydrotreating process, low-boiling | 70      |                     |            |             |
