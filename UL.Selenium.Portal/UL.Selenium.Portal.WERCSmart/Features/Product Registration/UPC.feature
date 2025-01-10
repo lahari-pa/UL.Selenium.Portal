@@ -50,6 +50,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOCForCaliforniaAirDistrictAndCanada
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ECOLOGO
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
+@AdditionalDocsContactInfo
 
 Feature: UPC
 
@@ -698,7 +699,7 @@ Scenario: [109516] Archive Retailer should Archive UPC
 	Given I generate a random UPC number and save as: UPC109516_2
 	#And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue
 	#And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I should be on the The Product Page
