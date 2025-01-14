@@ -41,7 +41,7 @@ Scenario: [84109] Create Electronic - process to Completed (Answering machine, n
 	And the WERCSmart homepage should load
 	And I click the Add Product icon in the Navigation Pane
 	And I should see the New Product Page
-	And In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	And In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	And in the New Product page I click Continue
 	#And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Answering machine, No battery included
 	And I should see the The Product Page
