@@ -39,7 +39,7 @@ Scenario: [78933] Select Retailers - Show List View
 	Then The home screen should load
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
 	Then I save the product information as: TestCase78933
@@ -98,7 +98,7 @@ Scenario: [78936] Select Retailers - Show Logo Tile View
 	Then The home screen should load
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
 	Then I save the product information as: TestCase78936
@@ -149,7 +149,7 @@ Scenario: [78937] Select Retailers - Select All
 	Then The home screen should load
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase78937
@@ -198,7 +198,7 @@ Scenario: [85276] Select Retailers - Errors highlighted
 	Given I log in with the account saved in TReVor as: ProductAccount
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
 	And I should see the Product Information Page
@@ -296,7 +296,7 @@ Scenario: [136057] Select Retailers - Removing Retailer(s) Selected
 	Given I log in with the account saved in TReVor as: ProductAccount
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): chalk
 	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk
@@ -375,7 +375,7 @@ Scenario: [133311] Retailer Private Label List Appear in Alphabetical Order
 	Given I log in with the account saved in TReVor as: ProductAccount
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): chalk
 	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: chalk
@@ -429,7 +429,7 @@ Scenario: [125130] Canadian Tire Available for Selection for Articles
 	Given I log in with the account saved in TReVor as: ProductAccount
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Candy, Chewing Gum
 	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Candy, Chewing Gum
@@ -464,7 +464,7 @@ Scenario: [128920] Electronics - Dollar Tree/Family Dollar Retailers Available f
 	Then The home screen should load
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Stereo Equipment / Radio, Not Portable, No Battery Included
 	Given I should see the The Product Page
@@ -522,7 +522,7 @@ Scenario: [128769] Battery Product - Dollar Tree/ Family Dollar Retailers Availa
 	Given I delete all products with UPC Number: saved as UPC59273
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alkaline battery
@@ -576,7 +576,7 @@ Scenario: [181979] Single Retailer Checkbox Checks
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 	Then I save the product information as: TestCase181979
@@ -662,7 +662,7 @@ Given I log in with the account saved in TReVor as: SingleRetailerAccount
 Then The home screen should load
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 Given I generate a random UPC number and save as: UPC183582
@@ -717,7 +717,7 @@ Given I should see the Data Acceptance Page
 Given In the Thank You screen I click Home
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 #Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
@@ -768,7 +768,7 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I click the Add Product icon in the Navigation Pane
-Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 Given in the New Product page I click Continue
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 Given I generate a random UPC number and save as: UPC184381
@@ -840,7 +840,7 @@ Given I log in with the account saved in TReVor as: SingleRetailerAccount
 Then The home screen should load
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I click the Add Product icon in the Navigation Pane
-Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 Given in the New Product page I click Continue
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
 Given I generate a random UPC number and save as: UPC184567

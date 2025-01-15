@@ -452,6 +452,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"Successfully clicked button {button}");
 			}
 		}
+		//[RegexStepDefinition(@"I click button: (.*)")]
+		public void ClickButtonSave(string button)
+		{
+			if (Report.IsTrue(new NewProduct().ButtonSaveExists(button),
+				$"Failed to find button {button}",
+				$"Successfully found button {button}"))
+			{
+				Report.IsTrue(new NewProduct().ButtonSaveClick(button),
+				$"Failed to click button {button}",
+				$"Successfully clicked button {button}");
+			}
+		}
 
 		[RegexStepDefinition(@"I confirm that I see the following (.*) value: (.*)")]
 		public void ThenIConfirmThatISeeTheFollowingCARBValue(string category, string expectedValue)
@@ -750,7 +762,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			if (condition == "should")
 			{
-				Report.IsTrue(expectedNormalised.All(actualNormalised.Contains), $"The displayed sections: '{string.Join("; ", ActualSections)}' did not match the expected sections: '{string.Join("; ", expectedSections)}'", $"The displayed sections: '{string.Join("; ", ActualSections)}' matched the expected sections");
+				Report.IsTrue(expectedSections.All(ActualSections.Contains), $"The displayed sections: '{string.Join("; ", ActualSections)}' did not match the expected sections: '{string.Join("; ", expectedSections)}'", $"The displayed sections: '{string.Join("; ", ActualSections)}' matched the expected sections");
 				return;
 			}
 			if (condition == "should not")

@@ -25,7 +25,7 @@ Scenario: [31833] Physical and Chemical Properties - Liquid - Validation
 	Then The home screen should load
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Conditioner
 	Given I should see the The Product Page
@@ -71,7 +71,7 @@ Scenario: [31826] Physical and Chemical Properties -  Gas - Validation
 	Then The home screen should load
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Compressed gas
 	Given I should see the The Product Page
@@ -130,7 +130,7 @@ Scenario: [85157] Physical and Chemical Properties for 'Bonding Agent' Type of P
 	Then The home screen should load
 	#Given I call Shared Step 57408 (Create a New Registration via Register New
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bonding agent
 	Given I should see the The Product Page

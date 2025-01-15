@@ -277,6 +277,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		#region Footer
 		IWebElement ModalFooter => this.ContainerElement.FindElement(By.XPath(".//div[@class='modal-footer']"), 1);
 		IWebElement FooterButton(string buttonLabel) => this.ContainerElement.FindElement(By.XPath($".//button[text()='{buttonLabel}']"), 1);
+		IWebElement FooterCheckbox(string checkboxLabel) => this.ContainerElement.FindElement(By.XPath($".//div[contains(@class,'checkbox')][.//*[text()='{checkboxLabel}']]//input[@type='checkbox']"), 1);
 		#endregion
 		#endregion
 
@@ -312,6 +313,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		{
 			Report.Info($"Attempting to click '{buttonLabel}' modal footer button.");
 			return this.FooterButton(buttonLabel).TryClick();
+		}
+
+		public bool FooterCheckboxExists(string checkboxLabel)
+		{
+			Report.Info($"Attempting to confrim '{checkboxLabel}' modal footer checkbox exists.");
+			return this.FooterCheckbox(checkboxLabel) != null;
+		}
+
+		public bool FooterCheckboxClick(string checkboxLabel)
+		{
+			Report.Info($"Attempting to click '{checkboxLabel}' modal footer checkbox.");
+			return this.FooterCheckbox(checkboxLabel).TryClick();
+		}
+
+		public bool FooterCheckboxChecked(string checkboxLabel)
+		{
+			Report.Info($"Attempting to confrim '{checkboxLabel}' modal footer checkbox is checked.");
+			return this.FooterCheckbox(checkboxLabel).Checked();
 		}
 		#endregion
 		#endregion

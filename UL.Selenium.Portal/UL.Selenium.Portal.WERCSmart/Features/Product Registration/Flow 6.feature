@@ -50,7 +50,7 @@ Given I delete all products with UPC Number: saved as UPC78731
 
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide - Crawling Bug - Aerosol
@@ -151,7 +151,7 @@ Given I delete all products with UPC Number: saved as UPC57711
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Antifungal - Aerosol
 
@@ -264,7 +264,7 @@ Scenario: [57647] Insecticide-Flying Bug-Moth Proofing Product containing <98% P
     Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide-Flying Bug-Moth Proofing Product containing >98% Para-Dichlorobenzene
@@ -374,7 +374,7 @@ Scenario: [57134] Insecticide - Flea and Tick (RU001407) - Aerosol - PESTICIDE w
 	Given I delete all products with UPC Number: saved as UPC57134
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide - Flea and Tick
 	Then I save the product information as: TestCase57134
@@ -463,7 +463,7 @@ Scenario: [208260]  Insecticide - Flea and Tick (RU001407) - Aerosol - PESTICIDE
 	Given I delete all products with UPC Number: saved as UPC208260
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide - Flea and Tick
 	Then I save the product information as: TestCase208260
@@ -548,7 +548,7 @@ Scenario: [57986] Footwear or Leather Care Product - All other forms - (RU000746
 	Then The home screen should load
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
     Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue
 	#And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Footwear or Leather Care Product - All other forms
 	And I should see the The Product Page
@@ -651,7 +651,7 @@ Scenario: [57986] Footwear or Leather Care Product - All other forms - (RU000746
 	Then in the Optional Reports and Documents Available for Purchase page I click Continue
 	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comments Field Text
 	And I should see the Optional Comments Page
-	Then In the Optional Comments Section, section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' is availiable
+	Then In the Optional Comments Section, section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' is available
 	Then in the Optional Comments page I click Continue
 	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type:  Footwear or Leather Care Product - All other forms
 	Given I should see the Data Acceptance Page

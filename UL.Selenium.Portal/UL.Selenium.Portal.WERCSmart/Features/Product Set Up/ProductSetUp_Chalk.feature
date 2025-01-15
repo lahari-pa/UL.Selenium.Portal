@@ -39,7 +39,7 @@ Scenario: [75335] Create a new simple product (Chalk) and submit thru to Complet
 	Given I delete all products with UPC Number: saved as UPC75335
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase75335
@@ -129,7 +129,7 @@ Scenario: [75142] Create a new simple product (Chalk) and submit thru to SHA - S
 	Given I delete all products with UPC Number: saved as UPC75142
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase75142
@@ -198,7 +198,7 @@ Scenario: [75651] Create a new simple product (Chalk) and submit thru to SHA  - 
 	Given I delete all products with UPC Number: saved as UPC75651
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase75651
@@ -270,7 +270,7 @@ Scenario: [85965] Create a new simple product (Chalk) with SOLD = US Only, PL = 
 	Given I delete all products with UPC Number: saved as UPC85965
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase85965

@@ -43,7 +43,7 @@ Scenario: [57295] Absorbent solid - Automotive(RU000939) - 8-S
 	Then The home screen should load
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Absorbent Solid
@@ -116,7 +116,7 @@ Scenario: [57332] Automotive Accessories containing Gel (Seat Cushions, etc) - 8
 	Then The home screen should load
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Automotive Accessories containing Gel (Seat Cushions, etc.)
@@ -182,7 +182,7 @@ Scenario: [58187] Matches (RU000317) - 8-S
 	Then The home screen should load
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Matches
@@ -249,7 +249,7 @@ Scenario: [58293] Engines for Model Rockets(RU000338) - 8-S
 	Then The home screen should load
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Engines for Model Rockets
@@ -314,7 +314,7 @@ Scenario: [58297] Fireworks (RU000330) - 8-S
 	Then The home screen should load
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Fireworks
@@ -431,27 +431,69 @@ Scenario: [58104] Fabric Dye - Liquid or Solid - 8-L
 	Then The home screen should load
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Fabric Dye - Liquid or Solid
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Fabric Dye - Liquid or Solid
+	Then I should be on the The Product Page
+	Then In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Fabric Dye - Liquid or Solid_#58104
+	Then In the Product Section, set the option in section: 'Type of Product (select)' to: Fabric Dye - Liquid or Solid
+	Then in the The Product page, I click Continue
 	Then I save the product information as: TestCase58104
-	Given I call Shared Step 73748 (Product Information - US only - No to GHS - No to shipped supplier - No to Private Label - No to Sold to retailer)
-	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-		| Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
-		| Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
-	Then I add the following ingredients:
-		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Water         | 100     | false               | false       |            |
-	Given in the New Product page I click Continue
+
+	#Given I call Shared Step 261417 (Product Information - US only - No to GHS - No to shipped supplier - No to Private Label - No to Sold to retailer)
+	Then I should be on the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page, I click Continue
+
+	#Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
+	#	| Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+	#	| Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
+	Then I should be on the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, for section: 'Primary Physical State': the following options should be displayed exclusively:
+		| Option |
+		| Liquid |
+		| Solid  |
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Relative Density' to: lb./gal. (pounds per gallon)
+	Then In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 2
+	Then In the Physical and Chemical Properties Section, for section: 'pH' enter text: 7.5
+	Then In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: 100
+	Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' select the checkbox option: 'I do not have exact Flash Point data available to me'
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point (in Celsius)' to: None, No Flash Point
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page, I click Continue
+
+	#Then I add the following ingredients:
+	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Water         | 100     | false               | false       |            |
+	Then I should be on the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+		| SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+		| CAS number | 7732-18-5   | 85      |                     |               |             |
+		| CAS number | 7647-14-5   | 15      |                     |               |             |
+	Then in the Ingredients page, I click Continue
+	Then Confirm a modal is displayed
+	Then Confirm displayed modal has title: Product Contains Ingredients Typical of a Pesticide
+	Then In displayed modal, check The Product Type, Pest Selection, and Ingredients listed are accurate. footer checkbox
+	Then In displayed modal, click Confirm footer button
+	
 	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should be on the Inventory Status, Prop 65 (US) Page
 	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
 	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
 
-	Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
-	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
+	#Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
+	Then I should be on the Transportation Details 1 Page
+	Then In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
+	Then in the Transportation Details 1 page, I click Continue
 
 	#Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
 	Then I should be on the Retailer Page
@@ -459,32 +501,44 @@ Scenario: [58104] Fabric Dye - Liquid or Solid - 8-L
 
 	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
-	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Yes, I certify that I have an OSHA-compliant SDS for this product and would like to upload it.
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'OSHA SDS'
 	Then in the Regulatory Documents to Provide page I click Continue
 
+	Given I should see the Additional Documents to Provide Page
 	Given in the Additional Documents to Provide page I click Continue
-	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-#	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-#		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient |
-#		| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | 41.3005               |
-	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 501.827328
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor' to: Orange
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor Threshold' to: No data available
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Partition Coefficient' enter text: 41.3005
-	Then in the Safety Data Sheet Authoring - Additional Data (Optional) page, I click Continue
 
+	Given I should see the Optional Reports and Documents Available for Purchase Page
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test data
 	Given I should see the Optional Comments Page
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
 	Then in the Optional Comments page I click Continue
 
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Fabric Dye - Liquid or Solid
+	Then I should be on the Data Acceptance Page
+	Then In the Data Acceptance Section, click 'Summary' button
+	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Fabric Dye - Liquid or Solid
+	Then I switch to the tab with Data Summary page
+	Then In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Fabric Dye - Liquid or Solid
+	Then In the Summary Page, the 'Retailers will be selling my product at their store locations in (select either or both)' section should be showing the following value: United States
+	Then In the Summary Page, the 'Primary Physical State' section should be showing the following value: Liquid
+	Then In the Summary Page, the 'Secondary Physical State' section should be showing the following value: Liquid
+	Then In the Summary Page, the 'Relative Density' section should be showing the following value: 2
+	Then In the Summary Page, the 'Relative Density' section should be showing the following value: lb./gal. (pounds per gallon)
+	Then In the Summary Page, the 'pH' section should be showing the following value: 7.5
+	Then In the Summary Page, the 'Boiling Point (in Celsius)' section should be showing the following value: 100
+	Then In the Summary Page, the 'Flash Point (in Celsius)' section should be showing the following value: I do not have exact Flash Point data available to me
+	Then In the Summary Page, the 'Flash Point (in Celsius)' section should be showing the following value: None, No Flash Point
+	Then In the Summary Page, the 'Flash Point Testing Method Used' section should be showing the following value: The flash point value is not available, as we do not do flash point testing on our product
+	And In the Data Summary page, I confirm that the Ingredients table matches the following:
+		| CAS Number/ChemicalName | Percent | Publicly Disclosed? | Trade Secret? | INCI Name |
+		| 7732-18-5               | 85      | No                  | No            |           |
+		| 7647-14-5               | 15      | No                  | No            |           |
+	Then In the Summary Page, the 'Product is Regulated for Transport' section should be showing the following value: Not Regulated
+	Then I close the tab with Data Summary page
+	Then I should be on the Data Acceptance Page
+
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58104
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase58104
@@ -495,7 +549,7 @@ Scenario: [58210] Antibiotic, Liquid or Cream, Non-Aerosol - 8-L
 	Then The home screen should load
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Antibiotic, Liquid or Cream, Non-Aerosol
@@ -578,7 +632,7 @@ Scenario: [58285] Toothpaste - Whitening (RU001359) - 8-L
 	Then The home screen should load
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Toothpaste - Whitening
@@ -642,7 +696,7 @@ Scenario: [58401] Correction Fluid(RU000201) - 8L
 	Then The home screen should load
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Correction fluid
@@ -710,7 +764,7 @@ Scenario: [57339] Craft Kits containing Glues and Paints - Crafts - 8-All - 8L
 	Then The home screen should load
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Craft kits containing paints and glues
@@ -780,7 +834,7 @@ Scenario: [57088] Engine (motor) oil for Auto or Boat - 8L
 	Then The home screen should load
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Engine (motor) oil for Auto or Boat
@@ -895,7 +949,7 @@ Scenario: [57709] Training aid repellant (RU000326) - 8LS -8L
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Training aid repellant
@@ -1046,7 +1100,7 @@ Scenario: [128744] Ammunition - DOT Exceptions Saved
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Ammunition
@@ -1148,7 +1202,7 @@ Scenario: [128744] Ammunition - DOT Exceptions Saved
 	Given in the Safety Data Sheet Authoring - Additional Data (Optional) page I click Continue
 
 	Given I should see the Optional Comments Page
-	Then In the Optional Comments Section, section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' is availiable
+	Then In the Optional Comments Section, section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' is available
 	Given in the Optional Comments page I click Continue
 
 	Given I should see the Data Acceptance Page
@@ -1307,7 +1361,7 @@ Scenario: [214039] Test Case 214039: WERCSmart Portal and SHA Manager Test Flow 
 	Given I generate a random UPC number and save as: UPC214039
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Soil (No Additives, Fertilizers, or Inhibitors)

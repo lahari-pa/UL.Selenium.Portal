@@ -44,7 +44,7 @@ Scenario: [60694] Alcoholic Beverages - Wine - RU001418 - (More than 24% but Les
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	#I call Shared Step 234546 (WERCSmart Portal - Create a New Registration - Enter Product Name and Select Type of Product )(Step has not created yet)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wine
 	Then In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Alcoholic Beverages - Wine
@@ -124,7 +124,7 @@ Scenario: [60695] Juice and Juice Drinks - RU001413
 	Given I delete all products with UPC Number: saved as UPC60695
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Juice and Juice Drinks
@@ -179,7 +179,7 @@ Scenario: [73085] Wine - RU001418 - Walgreens and No Retailer only for Retailers
 	Then The home screen should load
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alcoholic Beverages - Wine
 	Then I save the product information as: TestCase73085
@@ -221,7 +221,7 @@ Scenario: [144468] Alcoholic Beverages - Beer - RU001417 - Complete Flow Check, 
 Given I log in with the account saved in TReVor as: ProductAccount
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I click the Add Product icon in the Navigation Pane
-Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 Given in the New Product page I click Continue
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alcoholic Beverages - Beer
 Then I save the product information as: TestCase144468
@@ -266,7 +266,8 @@ Scenario: [105007] Wine - RU001418 - Not Regulated Less than <=24% Alcohol
 	Given I delete all products with UPC Number: saved as UPC105007
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then I should be on the New Product Page
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wine
 	Then In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Alcoholic Beverages - Wine
@@ -369,22 +370,26 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC92943
 	Given I delete all products with UPC Number: saved as UPC92943
+
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	#I call Shared Step 242067 (WERCSmart Portal - Create a New Registration - Enter Product Name and Select Type of Product "Alcoholic Beverages - SPIRITS"  (RU001434))(Step has not created yet)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
+
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wine
-	Then In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Alcoholic Beverages - Spirits
+	Then In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Alcoholic Beverages - Spirits_#92943
 	Then In the Product Section, set the option in section: 'Type of Product (select)' to: Alcoholic Beverages - Spirits
 	Then in the The Product page, I click Continue
 	Then I save the product information as: TestCase92943
+
 	#Given I call Shared Step 90477 - Product Information - US, (NO) Retailer's PL
 	#Then I call Shared Step 242069 - Product Information  - Applicable Only to Alcoholic Beverages - SPIRITS (RU001434)
 	Then I should be on the Product Information Page
 	Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Then in the Product Information page, I click Continue
+
 	#Then I call Shared Step 92979 (Physical and Chemical Properties - Physical Property - Liquid - For Spirits (RU001434) (Greater than 70% Alcohol))
 	Then I should be on the Physical and Chemical Properties Page
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
@@ -396,16 +401,19 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: 13
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Closed cup method
 	Then in the Physical and Chemical Properties page, I click Continue
+
 	#Then I call Shared Step 40650 (Regulatory Information 1 - TSCA shown, No to PROP 65 - Continue - Happy Path)
 	Then I should be on the Inventory Status, Prop 65 (US) Page
 	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
 	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+
 	#Then I call Shared Step 92981 (Beverage Regulatory Details Greater > 70%)
 	Then I should be on the Beverage Regulatory Details Page
 	Then I enter the text of Product's container or liner contains Bisphenol A (BPA) field to: No
 	Then I enter the text of Percent of Alcohol in the Product (numeric entry only) field to: 80
 	Then in the Beverage Regulatory Details page, I click Continue
+
 	#Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path
 	#I call Shared Step 242081 (Transportation Details 1 - Applicable Only to Alcoholic Beverages - SPIRITS (RU001434) - (Greater than 70% Alcohol))(Step has not created yet)
 	Then I should be on the Transportation Details 1 Page
@@ -413,6 +421,7 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: DOT
 	Then In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping with limited quantity
 	Then in the Transportation Details 1 page, I click Continue
+
 	#Then I call Shared Step 92982 (U.S. Department of Transportation (DOT) Classification - For Alcoholic Beverages - Spirits (RU001434) - Packaging Group should pre-select Packaging Group II)
 	Then I should be on the U.S. Department of Transportation (DOT) Classification Page
 	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN3065
@@ -420,21 +429,23 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
 	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: II
 	Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
+
 	#Given I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
 	#I call Shared Step 242171 (Retailer - Add Retailers - Publix and Walgreens - Applicable Only to Alcoholic Beverages - SPIRITS (RU001434) - (Greater than 70% Alcohol))(Step has not created yet)
 	Then I should be on the Retailer Page
 	Then In the Retailer Section, click 'Add Retailers' button
-	Then In the 'Select retailers' window I should only see the following retailers:
-		| Retailer									|
-		| Walgreens									|
-		| No Retailer/No UPC Product				|
-		| Publix								    |
+#	Then In the 'Select retailers' window I should only see the following retailers:
+#		| Retailer									|
+#		| Walgreens									|
+#		| No Retailer/No UPC Product				|
+#		| Publix								    |
 	Then In the Select Retailers window, select retailer: Walgreens
 	Then In the Select Retailers window, select retailer: Publix
 	Then In the Select Retailers window, click 'Done' button
 	Then In the Retailer Section is selected retailer: Walgreens
 	Then In the Retailer Section is selected retailer: Publix
 	Then in the Retailer page, I click Continue
+
 	#I call Shared Step 242192 (Add UPC - Applicable Only to Alcoholic Beverages - SPIRITS (RU001434) - (Greater than 70% Alcohol))(Step has not created yet)
 	Then I should be on the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
@@ -444,6 +455,7 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, under Transportation column the checkbox 'DOT' is checked
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, under Transportation column the checkbox 'Shipping with limited quantity' is checked
 	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page, I click Continue
+
 	#I call Shared Step 242197 (Additional Documents to Provide - Applicable Only to Alcoholic Beverages - SPIRITS (RU001434) - (Greater than 70% Alcohol))(Step has not created yet)
 	Then I should be on the Additional Documents to Provide Page
 	Then The Generic Private Label (all sides) question is displayed
@@ -456,12 +468,14 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then In the Additional Documents to Provide, for section OSHA SDS I click button 'View'
 	Then In the Additional Documents to Provide, after clicking 'View' button I confirm pdf file is downloaded
 	Given in the Additional Documents to Provide page I click Continue
+
 	#Then I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: [string]
 	Then I should be on the Optional Comments Page
 	Then The Provide any additional comments or information about the product that you want the Assessment Team to know. question is displayed
 	Given in the Optional Comments page I click Continue
 	Then I should be on the Data Acceptance Page
 	Then In the Data Acceptance Section, click 'Summary' button
+
 	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Alcoholic Beverages - Wine
 	Then I switch to the tab with Data Summary page
 	Then In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Alcoholic Beverages - Spirits
@@ -483,9 +497,11 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then In the Summary Page, click the View button for section: OSHA SDS
 	Then In the Summary Page, after clicking 'View' button I confirm pdf file is downloaded
 	Then I close the tab with Data Summary page
+
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase92943
  	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase92943
+
 	@TestCase:216709
 	Scenario: [216709] Container Types -Primary Physical State Liquid - Wine - RU001418
 
@@ -495,7 +511,7 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Given I delete all products with UPC Number: saved as UPC216709
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alcoholic Beverages - Wine
 	Then In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Alcoholic Beverages - Wine

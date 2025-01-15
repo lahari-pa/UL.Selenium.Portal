@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Media3D;
 using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.Utilities.Functions;
+using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Functions;
 using UL.Selenium.Portal.RPS.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
@@ -36,7 +38,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 		{
 			Report.IsTrue(new NewProduct().ClickAddPartNumber(), "Failed to click the 'Add Part Number' button!", "Successfully clicked the 'Add Part Number' button");
 		}
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, I click the 'Add Casepack' button")]
+		public void ClickAddCasepackButton()
+		{
+			string button = "Add Casepack ";
+			new Steps_Prototype().ClickButton(button);
+			Delay.Seconds(3);
 
+		}
 		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Provide the product's UPC\(s\)- including container type and size \(ounces\)' enter UPC Number: (.*) enter Size: (.*) and enter Container Type: (.*)")]
 		public void EnterUPCInformation(string upc, string size, string containerType)
 		{
@@ -59,15 +68,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			}
 
 			var upcInfo = new UpcInformation {
-					ContainerType = containerType,
-					Size = size,
-					UpcNumber = upc,
+				ContainerType = containerType,
+				Size = size,
+				UpcNumber = upc,
 			};
 
 			var NP = new NewProduct();
-				NP.WaitForContainerToBeVisible(30);
-				Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
-					"Successfully inputted UPC information!");
+			NP.WaitForContainerToBeVisible(30);
+			Report.IsTrue(new NewProduct().InputUpcInformation(upcInfo), "Failed to input UPC Information!",
+				"Successfully inputted UPC information!");
 		}
 
 		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Provide the product's UPC\(s\)- including container type and size \(ounces\)' enter UPC Number: (.*) enter Size: (.*) enter Container Type: (.*) and enter Quantity: (.*)")]
@@ -316,6 +325,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			new Steps_Prototype().AlertMessageDisplayed(condition, alertText);
 		}
 
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, error message should be displayed with text: 'Please ensure your UPC is 12 or 14 digits and contains leading zeroes and check digit'")]
+		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionErrorMessageShouldBeDisplayed()
+		{
+			string alertText = "Please ensure your UPC is 12 or 14 digits and contains leading zeroes and check digit";
+			UPC UPCObject = new UPC();
+			Report.IsTrue(UPCObject.CheckForAlertWithThisTextInUPCPage(alertText), $"The appropriate alert: {alertText}, was not shown", $"The appropriate alert: {alertText}, was shown");
+		}
+
 		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, confirm the values on the new product screen are the same as the UPC Upload document saved in the Table called: (.*)")]
 		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionConfirmTheValuesOnTheNewProductScreenAreTheSameAsTheUPCUploadDocumentSavedInTheTableCalledUPCTable(string tableSavedAs)
 		{
@@ -431,13 +448,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(title, button);
 		}
 		
-		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'GTIN/UPC (include check digit)' enter the value: (.*)")]
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'GTIN/UPC \(include check digit\)' enter the value: (.*)")]
 		public void EnterUPCGTIN(string option)
 		{
+
+			if (option.ToLower().Contains("saved as"))
+			{
+					string savedUPC = Context
+						.GetFromContext(option.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+						.ToString();
+					option = savedUPC;		
+			}
+
 			string section = "GTIN/UPC (include check digit)";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
-		
+
 		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Product Name on Label' enter the value: (.*)")]
 		public void EnterUPCProductNameOnLabel(string option)
 		{
@@ -524,6 +550,45 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			new Steps_Prototype().CheckingFieldInputIsCorrect(section, option);
 		}
 
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, section: '(GTIN or UPC \(include check digit\)|Container Type|Size \(Weight Ounces\)|Quantity of Units within the Case|Individual UPC contained in the Case Pack|Transportation Options)' (is|is not) displayed")]
+		public void GTINOrUPCIsDisplayed(string section, string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.UPCSectionFieldsAvailable(section) == expected, $"Failed to Confirm the '{section}' field {(expected ? "is not" : "is")} available", $"I Confirm the '{section}' field {is_isnot} available");
+		}
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, the error: '(.*)' (is|is not) displayed for the section: '(GTIN or UPC \(include check digit\)|Container Type|Size \(Weight Ounces\)|Quantity of Units within the Case|Individual UPC contained in the Case Pack|Transportation Options)'")]
+		public void GTINOrUPCShouldDisplayErrorMessage(string is_isnot, string errorMessage, string section)
+		{
+			bool expected = is_isnot == "is";
+			string getError = new NewProduct().UPCSectionCheckError(section);
+			Report.IsTrue(getError == errorMessage == expected, $"Failed to confirm the error '{errorMessage}' {(expected ? "is not" : "is")} displayed for the section '{section}'", $"Successfully confirmed the error ' {errorMessage}' {is_isnot} displayed for the section '{section}'");
+		}
+
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, click 'Save' button")]
+		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionClickButtonSave()
+		{
+			string button = "Save";
+			new Steps_Prototype().ClickButtonSave(button);
+		}
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Quantity of Units within the Case' enter the value: (.*)")]
+		public void EnterQuantityOfUnits(string option)
+		{
+			string section = "Quantity of Units within the Case";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'Transportation Options' enter the value: (.*)")]
+		public void EnterTransportationOptions(string option)
+		{
+			string section = "Transportation Options";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+		[RegexStepDefinition("In the Global Trade Item Number \\(GTIN\\) / Universal Product Code \\(UPC\\) Section, delete the retailer (.*) from the UPC")]
+		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionDeleteTheRetailerAmazonFromTheUPC(string retailer)
+		{
+			Report.IsTrue(new UPC().DeleteRetailer(retailer), $"Failed to delete the retailer {retailer}",
+						$"Successfully deleted retailer {retailer}");
+		}
 
 	}
 }

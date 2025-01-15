@@ -45,7 +45,7 @@ Scenario: [58736] Sanitizer Wipes for Use on Domesticated Animals (Solid)- RU001
 	Given I delete all products with UPC Number: saved as UPC58736
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Sanitizer Wipes for Use on Domesticated Animals
 	Given I should see the The Product Page
@@ -176,7 +176,7 @@ Scenario: [58738] Sanitizer Wipes for Use on Domesticated Animals (Liquid)- RU00
 	Given I delete all products with UPC Number: saved as UPC58738
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Sanitizer for Use on Domesticated Animals
