@@ -1,15 +1,7 @@
-﻿using NPOI.POIFS.Crypt.Dsig;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Reqnroll;
+﻿using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
-using static NPOI.HSSF.Util.HSSFColor;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using System.Windows;
+
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 {
