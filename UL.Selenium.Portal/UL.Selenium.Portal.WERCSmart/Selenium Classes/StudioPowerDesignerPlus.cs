@@ -3996,13 +3996,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	}
 
 
-	class PhraseEditor : BaseObject
+	class PhraseEditor : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[@id='editor-text-container']";
 
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
-
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 		public bool Wait_for_load(int secondsToWait = 60)
 		{
 			for (int i = 0; i < secondsToWait; i++)
@@ -4021,7 +4019,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		//Save, Clear, Cancel, Previous, Next
 		public bool ClickButton(string button)
 		{
-			IList<IWebElement> varButtons = this.containerElement.FindElements(By.XPath(".//input[@type='button']"), 2);
+			IList<IWebElement> varButtons = this.ContainerElement.FindElements(By.XPath(".//input[@type='button']"), 2);
 			IWebElement matchingButton = varButtons.FirstOrDefault(x => x.GetAttribute("title").ToLower() == button.ToLower());
 			if (matchingButton == null)
 			{
@@ -4056,7 +4054,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 			}
 
-			var listOfColumnItems = this.containerElement
+			var listOfColumnItems = this.ContainerElement
 				.FindElements(By.XPath(".//tbody[@id='sortable-list2']/tr/td[" + indexOfHeader + "]"), 2).ToList();
 
 			var sValues = listOfColumnItems.Select(x => x.GetValue().Trim()).ToList();
@@ -4073,16 +4071,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				for (int i = 0; i < 5; i++)
 				{
 					Report.Info("Trying to select with double click");
-					listOfColumnItems = this.containerElement
+					listOfColumnItems = this.ContainerElement
 						.FindElements(By.XPath(".//tbody[@id='sortable-list2']/tr/td[" + indexOfHeader + "]"), 2).ToList();
 					matchingItem = listOfColumnItems.FirstOrDefault(x => x.GetValue().Trim() == value);
 					matchingItem.TryClick();
 					Delay.Seconds(4);
-					var selectedItem = this.containerElement
+					var selectedItem = this.ContainerElement
 						.FindElement(By.XPath(".//tbody[@id='sortable-list2']/tr[contains(@class,'Selected')]"), 2);
 					bool test = selectedItem.TryDoubleClick();
 					Delay.Seconds(2);
-					var listOfSelectedColumnItems = this.containerElement
+					var listOfSelectedColumnItems = this.ContainerElement
 						.FindElements(By.XPath(".//table[@id='tblPicked']//tr/td[" + indexOfHeader + "]"), 2).ToList();
 
 					IWebElement matchingSelectedItem = listOfSelectedColumnItems.FirstOrDefault(x => x.GetValue().Trim() == value);
@@ -4095,7 +4093,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 				for (int i = 0; i < 5; i++)
 				{
-					listOfColumnItems = this.containerElement
+					listOfColumnItems = this.ContainerElement
 						.FindElements(By.XPath(".//tbody[@id='sortable-list2']/tr/td[" + indexOfHeader + "]"), 2).ToList();
 
 					matchingItem = listOfColumnItems.FirstOrDefault(x => x.GetValue().Trim() == value);
@@ -4104,7 +4102,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					matchingItem.Click();
 					matchingItem.Click();
 					Delay.Seconds(2);
-					var listOfSelectedColumnItems = this.containerElement
+					var listOfSelectedColumnItems = this.ContainerElement
 						.FindElements(By.XPath(".//table[@id='tblPicked']/tr/td[" + indexOfHeader + "]"), 2).ToList();
 
 					IWebElement matchingSelectedItem = listOfSelectedColumnItems.FirstOrDefault(x => x.GetValue().Trim() == value);
@@ -4153,7 +4151,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					indexOfNotes = i + 1;
 				}
 			}
-			IList<IWebElement> selectedRows = this.containerElement.FindElements(By.XPath(".//table[@id='tblPicked']//tr"), 2);
+			IList<IWebElement> selectedRows = this.ContainerElement.FindElements(By.XPath(".//table[@id='tblPicked']//tr"), 2);
 			var listOfPhrases = new List<Phrase>();
 			if (selectedRows == null)
 			{
@@ -4178,7 +4176,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public List<Phrase> GetAvailablePhrases()
 		{
 			List<string> headers = this.GetHeaders();
-			ReadOnlyCollection<IWebElement> selectedRows = this.containerElement.FindElements(By.XPath(".//tbody[@id='sortable-list2']//tr"));
+			ReadOnlyCollection<IWebElement> selectedRows = this.ContainerElement.FindElements(By.XPath(".//tbody[@id='sortable-list2']//tr"));
 			int indexOfCode = this.GetHeaders().IndexOf("Code");
 			int indexOfText = this.GetHeaders().IndexOf("Text");
 			int indexOfType = this.GetHeaders().IndexOf("Type");
@@ -4200,7 +4198,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool FilterSelectPhrases(string filter)
 		{
-			IWebElement input = this.containerElement.FindElement(By.XPath(".//input[@id='AttrEditPager_txtPhraseFilter']"), 2);
+			IWebElement input = this.ContainerElement.FindElement(By.XPath(".//input[@id='AttrEditPager_txtPhraseFilter']"), 2);
 
 			if (input == null)
 			{
@@ -4214,13 +4212,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 	}
 
-	class ValueEditor : BaseObject
+	class ValueEditor : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[@id='koPopup']";
 
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
-
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 		public bool Wait_for_load(int secondsToWait = 60)
 		{
 			for (int i = 0; i < secondsToWait; i++)
@@ -4239,7 +4235,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		//Save, Clear, Cancel, Previous, Next
 		public bool ClickButton(string button)
 		{
-			IList<IWebElement> varButtons = this.containerElement.FindElements(By.XPath(".//input[@type='button']"), 2);
+			IList<IWebElement> varButtons = this.ContainerElement.FindElements(By.XPath(".//input[@type='button']"), 2);
 			IWebElement matchingButton = varButtons.FirstOrDefault(x => x.GetAttribute("title").ToLower() == button.ToLower());
 			if (matchingButton == null)
 			{
@@ -4253,7 +4249,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string GetSelectedValue()
 		{
 			Report.Info("Beginning get selected value");
-			IWebElement oldValue = this.containerElement.FindElement(By.XPath(".//textarea[@id='oldValue']"), 2);
+			IWebElement oldValue = this.ContainerElement.FindElement(By.XPath(".//textarea[@id='oldValue']"), 2);
 			if (oldValue == null)
 			{
 				Report.Info("Value item was not found.");
@@ -4265,16 +4261,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public IWebElement EditPopupBox => this.containerElement.FindElement(By.XPath(".//div[@id='koPopup']"), 2);
+		public IWebElement EditPopupBox => this.ContainerElement.FindElement(By.XPath(".//div[@id='koPopup']"), 2);
 
 		public bool IClickNextUntilISeeSection(string sectionName)
 		{
 			try
 			{
-				IWebElement displayedElement = this.containerElement.FindElement(By.XPath(".//input[@name='edit-next-ko']"), 2);
-				while (!this.containerElement.GetAttribute("style").Contains("none"))
+				IWebElement displayedElement = this.ContainerElement.FindElement(By.XPath(".//input[@name='edit-next-ko']"), 2);
+				while (!this.ContainerElement.GetAttribute("style").Contains("none"))
 				{
-					string currentSectionName = this.containerElement.FindElement(By.XPath(".//div[@class='pull-left']"), 2).Text;
+					string currentSectionName = this.ContainerElement.FindElement(By.XPath(".//div[@class='pull-left']"), 2).Text;
 					if (currentSectionName == sectionName)
 					{
 						Report.Info($"The section name found matched the expected section name:{sectionName}");
@@ -4329,7 +4325,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Delay.Seconds(2);
 			try
 			{
-				IWebElement topOption = this.containerElement.FindElement(By.XPath(".//tbody[@id='sortable-list2']//tr"), 2);
+				IWebElement topOption = this.ContainerElement.FindElement(By.XPath(".//tbody[@id='sortable-list2']//tr"), 2);
 				return topOption.TryDoubleClick();
 			}
 			catch (Exception)
@@ -4338,14 +4334,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public IWebElement NewValueBox => this.containerElement.FindElement(By.XPath(".//textarea[@id='ssValue']"), 2);
+		public IWebElement NewValueBox => this.ContainerElement.FindElement(By.XPath(".//textarea[@id='ssValue']"), 2);
 
 		public bool EnterValueIntoField(string value)
 		{
 			Delay.Seconds(2);
 			try
 			{
-				IWebElement newValueBox = this.containerElement.FindElement(By.XPath(".//textarea[@id='ssValue']"), 2);
+				IWebElement newValueBox = this.ContainerElement.FindElement(By.XPath(".//textarea[@id='ssValue']"), 2);
 				newValueBox.EnterText(value);
 				Report.Info($"The Text entered was: {newValueBox.Text}");
 				if (newValueBox.Text == value)
@@ -4362,7 +4358,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickSaveButton()
 		{
-			IList<IWebElement> varButtons = this.containerElement.FindElements(By.XPath(".//input[@type='button' and @title='Save']"), 2);
+			IList<IWebElement> varButtons = this.ContainerElement.FindElements(By.XPath(".//input[@type='button' and @title='Save']"), 2);
 
 			foreach (var item in varButtons)
 			{
