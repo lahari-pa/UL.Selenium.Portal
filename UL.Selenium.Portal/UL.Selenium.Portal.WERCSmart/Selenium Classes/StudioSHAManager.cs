@@ -2449,17 +2449,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			this.ContainerElement.FindElement(By.XPath("//*[@aria-labelledby='ui-dialog-title-dialog-IsArchiveProduct']//span[@class='ui-button-text']")).TryClick();
 	}
 
-	class ProcessProducts : BaseObject
+	class ProcessProducts : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[@id='dialog-status-update']";
 
-		[FindsBy(How = How.XPath, Using = BasePath)]
-		protected override IWebElement containerElement { get; set; }
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 
 		public List<string> GetAllRetailers()
 		{
-			string retailerSpan = this.containerElement.FindElement(By.XPath(".//input[@id='clients']/..")).GetInnerHTML();
+			string retailerSpan = this.ContainerElement.FindElement(By.XPath(".//input[@id='clients']/..")).GetInnerHTML();
 			string regexSplitPattern = @"\<input\stype.*?value=.*?\>";
 
 			var Retailers = Regex.Split(retailerSpan, regexSplitPattern)
@@ -2487,7 +2486,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				if (matchID.Success)
 				{
 					string validID = matchID.Value;
-					IWebElement matchInput = this.containerElement.FindElement(By.XPath(".//input[@value='" + validID + "']"));
+					IWebElement matchInput = this.ContainerElement.FindElement(By.XPath(".//input[@value='" + validID + "']"));
 					if (matchInput != null)
 					{
 						return matchInput.TryCheck();
@@ -2518,7 +2517,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				IWebElement statusDD = this.containerElement.FindElement(By.XPath(".//select[@id='statusupdate']"));
+				IWebElement statusDD = this.ContainerElement.FindElement(By.XPath(".//select[@id='statusupdate']"));
 				statusDD.Select(status);
 				return statusDD.SelectedOption() == status;
 			}
@@ -2533,7 +2532,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				IWebElement updateStatusButton = this.containerElement.FindElement(By.XPath(".//select[@id='statusupdate']/following-sibling::a"));
+				IWebElement updateStatusButton = this.ContainerElement.FindElement(By.XPath(".//select[@id='statusupdate']/following-sibling::a"));
 				return updateStatusButton.TryClick();
 			}
 			catch (Exception)
@@ -2547,7 +2546,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				IWebElement refeedToClient = this.containerElement.FindElement(By.XPath(".//fieldset[@id='fldFeedClient']/a"));
+				IWebElement refeedToClient = this.ContainerElement.FindElement(By.XPath(".//fieldset[@id='fldFeedClient']/a"));
 				return refeedToClient.TryClick();
 			}
 			catch (Exception)

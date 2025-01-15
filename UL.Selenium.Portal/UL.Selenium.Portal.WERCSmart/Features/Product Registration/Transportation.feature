@@ -40,7 +40,7 @@ Scenario: [65702] Transportation - Confirm Copy information from my U.S. Departm
  Then The home screen should load
  #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
  Then I click the Add Product icon in the Navigation Pane
- Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+ Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
  Then in the New Product page, I click Continue
  #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
  Then I should be on the The Product Page
@@ -133,7 +133,7 @@ Scenario: [65703] Transportation - Transportation - Confirm Copy information fro
 	Then The home screen should load
     #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
     Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
     #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
     Then I should be on the The Product Page
@@ -221,7 +221,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 Then The home screen should load
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Then I click the Add Product icon in the Navigation Pane
-Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 Then in the New Product page, I click Continue
 #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
 Then I should be on the The Product Page
@@ -310,7 +310,7 @@ Scenario: [65754] Transportation - Copy information from my U.S. Department of T
  Then The home screen should load
  #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
  Then I click the Add Product icon in the Navigation Pane
- Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+ Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
  Then in the New Product page, I click Continue
  #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
  Then I should be on the The Product Page
@@ -434,7 +434,7 @@ Scenario: [65940] Transportation - Copy information from my U.S. Department of T
 	Then The home screen should load
     #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
     Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
     #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
     Then I should be on the The Product Page
@@ -557,7 +557,7 @@ Scenario: [65944] Transportation - Copy information from my U.S. Department of T
 	Then The home screen should load
     #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
     Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
     #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
     Then I should be on the The Product Page
@@ -708,7 +708,7 @@ Scenario: [65947] Transportation - Copy information from DOT for all modes - con
 Given I log in with the account saved in TReVor as: ProductAccount
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
 Then I call Shared Step 143418 (Product Information - Pesticide= Not considered, Fertilizer=NO, SOLD=US, everything else = No - Continue)
@@ -972,7 +972,7 @@ Scenario: [126286] Transportation Details DOT - UN1057 Prompts the 'For the Ligh
 	Then The home screen should load
     #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
     Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
     #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
     Then I should be on the The Product Page

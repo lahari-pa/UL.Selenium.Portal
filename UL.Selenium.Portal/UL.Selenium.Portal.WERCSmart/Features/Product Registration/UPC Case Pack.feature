@@ -38,6 +38,19 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:USDepartamentOfTransportationDOT
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
+@SafetyDataSheetAuthoring
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ElectronicEquipment
+@GTINAndUPC
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InternationalMarineClassification
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:USDepartamentOfTransportationDOT
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOC_Summary
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOCForCaliforniaAirDistrictAndCanada
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ECOLOGO
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
 
 Feature: UPC Case Pack
 
@@ -55,7 +68,7 @@ Scenario: [87640] UPC - Case Pack Only Present in product
 	Given I generate a random UPC number and save as: UPC87640
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
@@ -146,7 +159,7 @@ Scenario: [87650] Battery Product - limit of 5 UPCs for Lithium ion battery- Cas
 	Given I generate a random UPC number and save as: UPC876504
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lithium Ion Battery
@@ -254,7 +267,7 @@ Scenario: [87676] UPC - Case Pack can be removed from new product
 	Given I generate a random UPC number and save as: UPC876761
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
@@ -359,7 +372,7 @@ Scenario: [87685] UPC - Case Pack & Regular UPC present in Product - Process to 
 	Given I generate a random UPC number and save as: UPC876851
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
@@ -454,7 +467,7 @@ Scenario: [87686] UPC - Case Pack Only Present in Product - Process to Complete
 	Given I generate a random UPC number and save as: UPC87686
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
@@ -600,7 +613,7 @@ Scenario: [87835] View UPCs shows Case UPC Data
 	Given I generate a random UPC number and save as: UPC87835-2
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	#And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
@@ -669,19 +682,24 @@ Scenario: [87835] View UPCs shows Case UPC Data
 
 @TestCase:87631
 	Scenario: [87631] Universal Product Code (UPC) Step - Add Casepack - Size (Weight Ounces) field validation
-	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I log in with the account saved in TReVor as: ProductAccount
-
-#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I generate a random UPC number and save as: UPC87631
+	Then The home screen should load
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
-
-Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
-Given I generate a random UPC number and save as: UPC87631
-Then I save the product information as: TestCase87631
-#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-Given I should see the Product Information Page
+	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk_#87631
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
+ 	Given in the The Product page I click Continue
+	Then I save the product information as: TestCase87631
+    Given I generate a random UPC number and save as: UPC87631
+    Then I save the product information as: TestCase87631
+	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+    Then I should be on the Product Information Page
 	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
 	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
 	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
@@ -689,66 +707,76 @@ Given I should see the Product Information Page
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page I click Continue
-
-#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-Given I should see the Physical and Chemical Properties Page
+    #Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+    Given I should be on the Physical and Chemical Properties Page
 	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
 	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
 	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Then in the Physical and Chemical Properties page I click Continue
-
-#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
-Given I should see the Ingredients Page
-	Then In the Ingredients section, add the following ingredients:
-	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-	| component name | Chlorine       | 100     |                     |               |             |
-	Then in the Ingredients page I click Continue
-
-Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
-| Retailer  |
-| Walgreens |
-And I should see the Universal Product Code Page
-Given I click the 'Add Casepack' button
-Given I add the following into the UPC case fields
-		| UPC Number          | Container Type | Size | Quantity | Individual Upc Case Pack | Transportation Option |
-		| saved as UPC87631   | Cardboard      | 6    | abc      |                          | 4A: steel box         |
-Then I click continue
-Given I check for the appropriate alert: Enter a valid number (no decimals allowed or [+ -] signs)
-
-Given I add the following into the UPC case fields
-		| UPC Number          | Container Type | Size | Quantity | Individual Upc Case Pack | Transportation Option |
-		| saved as UPC87631   | Cardboard      | 6    | 32.101   |                          | 4A: steel box         |
-Then I click continue
-Given I check for the appropriate alert: Enter a valid number (no decimals allowed or [+ -] signs)
-
-Given I add the following into the UPC case fields
-		| UPC Number          | Container Type | Size | Quantity | Individual Upc Case Pack | Transportation Option |
-		| saved as UPC87631   | Cardboard      | 6    | 32       |                          | 4A: steel box         |
-Then I click continue
-Then I check for the appropriate alert: No error
-And I should see the Regulatory Documents to Provide Page
-And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87631
-
+    #And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+    Then I should be on the Ingredients Page
+    And In the Ingredients section, add the following ingredients:
+    | SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+    | component name | Chalk       | 100     | False               | False         |             |
+    Then in the Ingredients page, I click Continue
+	#Then 231938 Inventory Status, Prop 65 (US) - Compliant - Prop 65 (NO)
+	Given I should be on the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page I click Continue
+	Then I should be on the Transportation Details 1 Page
+	Then In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
+	Then in the Transportation Details 1 page, I click Continue
+    #Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+    #| Retailer  |
+    #| Walgreens |
+    Then I should be on the Retailer Page
+	And In the Retailer Section, click 'Add Retailers' button
+	And In the Select Retailers window, select retailer: Amazon
+	And In the Select Retailers window, click 'Done' button
+	Then in the Retailer page, I click Continue
+    Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+    Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the 'Add Casepack' button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'GTIN/UPC (include check digit)' enter the value: saved as UPC87631
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Size (Fluid Ounces)' enter the value: 2
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Container Type' select the value: Plastic Container
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Quantity of Units within the Case' enter the value: abcd
+	Given in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, the error: 'Enter a valid Number (no decimals allowed or [+ -] signs)' is displayed for the section: 'Quantity of Units within the Case'
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Quantity of Units within the Case' enter the value: 12.23
+	Given in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, the error: 'Enter a valid number (no decimals allowed or {+ -] signs)' is displayed for the section: 'Quantity of Units within the Case'
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Quantity of Units within the Case' enter the value: 5
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Transportation Options' enter the value: 1A2: removable head steel drum
+	Given in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	Then I check if the Regulatory Documents page is shown
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87631
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase87631
 
 
 @TestCase:87633
 Scenario: [87633] Universal Product Code (UPC) Step - Add Casepack - Size (Weight Ounces) field validation
-	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I log in with the account saved in TReVor as: ProductAccount
-
-#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Given I generate a random UPC number and save as: UPC87633
+	Then The home screen should load
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
-
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
-Given I generate a random UPC number and save as: UPC87633
-Then I save the product information as: TestCase87633
-#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-Given I should see the Product Information Page
+	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk_#87633
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
+ 	Given in the The Product page I click Continue
+	Then I save the product information as: TestCase87633
+    Given I generate a random UPC number and save as: UPC87633
+    Then I save the product information as: TestCase87633
+	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+    Then I should be on the Product Information Page
 	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
 	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
 	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
@@ -756,39 +784,56 @@ Given I should see the Product Information Page
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page I click Continue
-
-#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-Given I should see the Physical and Chemical Properties Page
+    #Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
+    Given I should be on the Physical and Chemical Properties Page
 	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
 	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
 	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Then in the Physical and Chemical Properties page I click Continue
+    #And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
+    Then I should be on the Ingredients Page
+    And In the Ingredients section, add the following ingredients:
+    | SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+    | component name | Chalk       | 100     | False               | False         |             |
+    Then in the Ingredients page, I click Continue
+	#Then 231938 Inventory Status, Prop 65 (US) - Compliant - Prop 65 (NO)
+	Given I should be on the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page I click Continue
+	Then I should be on the Transportation Details 1 Page
+	Then In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
+	Then in the Transportation Details 1 page, I click Continue
+    #Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+    #| Retailer  |
+    #| Walgreens |
+    Then I should be on the Retailer Page
+	And In the Retailer Section, click 'Add Retailers' button
+	And In the Select Retailers window, select retailer: Amazon
+	And In the Select Retailers window, click 'Done' button
+	Then in the Retailer page, I click Continue
+	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+    Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the 'Add Casepack' button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'GTIN/UPC (include check digit)' enter the value: saved as UPC87633
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Container Type' select the value: Plastic Container
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Size (Fluid Ounces)' enter the value: abc
+	Given in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, the error: 'This field must be a number.' is displayed for the section: 'Size (Weight Ounces)'
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Size (Fluid Ounces)' enter the value: 1+1
+	Given in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, the error: 'This field must be a number.' is displayed for the section: 'Size (Weight Ounces)'
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Size (Fluid Ounces)' enter the value: 2
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, the error: 'This field must be a number.' is not displayed for the section: 'Size (Weight Ounces)'
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Quantity of Units within the Case' enter the value: 5
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Transportation Options' enter the value: 1A2: removable head steel drum
+	Given in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+	Then I check if the Regulatory Documents page is shown
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87628
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase87633
 
-#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Chlorine
-Given I should see the Ingredients Page
-	Then In the Ingredients section, add the following ingredients:
-	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-	| component name | Chlorine       | 100     |                     |               |             |
-	Then in the Ingredients page I click Continue
-
-Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
-| Retailer  |
-| Walgreens |
-And I should see the Universal Product Code Page
-And I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87633, container type: Plastic Container and size: abc do not click continue
-Then I click continue
-Given I check for the appropriate alert: This field must be a number
-And I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87633, container type: Plastic Container and size: +6 do not click continue
-Then I click continue
-Given I check for the appropriate alert: This field must be a number
-And I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87633, container type: Plastic Container and size: 6 do not click continue
-Then I click continue
-Then I check for the appropriate alert: No error
-And I should see the Regulatory Documents to Provide Page
-And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87633
 
 
 @ScenarioId:10145
@@ -798,7 +843,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble solution
@@ -852,7 +897,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
@@ -894,7 +939,7 @@ Scenario: [112487] Case Pack UPC: Transportation Option Selected Stays the Same 
 	Given I generate a random UPC number and save as: UPC112487
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
@@ -956,7 +1001,7 @@ Scenario: [163564] SHA Automation - Create a Chalk Product and Submit thru Compl
 	Given I generate a random UPC number and save as: UPC163564
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
@@ -1043,7 +1088,7 @@ Scenario: [209159] UPC Assessment Details - Edit UPC updates - the Added column 
 	Given I generate a random UPC number and save as: UPC209159A
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase209159
@@ -1149,7 +1194,7 @@ Scenario: [119633] Case Pack UPC: UPC Becomes Archived, Case UPC Becomes Archive
 	Given I generate a random UPC number and save as: UPC1196332
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
@@ -1256,7 +1301,7 @@ Scenario: [217540]	Registration: Canada only/Canada and US/US only: UPC Level Da
 	Given I generate a random UPC number and save as: UPC217540
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue	
 	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I should see the The Product Page
@@ -1339,7 +1384,7 @@ Scenario: [217540]	Registration: Canada only/Canada and US/US only: UPC Level Da
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue	
 	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I should see the The Product Page
@@ -1416,7 +1461,7 @@ Scenario: [217540]	Registration: Canada only/Canada and US/US only: UPC Level Da
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue	
 	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I should see the The Product Page
