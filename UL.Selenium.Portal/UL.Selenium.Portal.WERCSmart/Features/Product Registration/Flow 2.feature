@@ -51,7 +51,7 @@ Then In the Product Grid, delete all products with UPC Number: saved as UPC57439
 
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I click the Add Product icon in the Navigation Pane
-Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 Given in the New Product page I click Continue
 
 #Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Anti-Transpirant
@@ -184,7 +184,7 @@ Scenario: [57646] Plant Growth regulator (Liquid or Solid) (RU000291) 2-L
 	Given I delete all products with UPC Number: saved as UPC57646
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Plant Growth regulator (Liquid or Solid)
@@ -277,7 +277,7 @@ Scenario: [57649] Cosmetics (RU000034) 2LS - 2L
 	Then The home screen should load
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Cosmetics
@@ -372,7 +372,7 @@ Scenario: [57731] Aquarium maintenance chemicals (RU000327) - 2LS - 2S
 	Given I delete all products with UPC Number: saved as UPC57731
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Aquarium maintenance chemicals
@@ -486,7 +486,7 @@ Scenario: [71274] Flea or Tick Repellent (L) - RU000323
 	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue
 	#20 June 2019 changed product name from Pest repellant for Use on Animals - liquid to Pest (Flea, Tick, etc.) repellant for Use on Animals - liquid
 	And I call Shared Step 57561a (The Product - Enter Product Name: Pest repellant for Use on Animals - liquid and select Type of Product): Pest (Flea, Tick, etc.) repellant for Use on Animals - liquid
@@ -584,7 +584,7 @@ Scenario: [57647] Insecticide-Flying Bug-Moth Proofing Product containing <98% P
 	Given I delete all products with UPC Number: saved as UPC57647
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide-Flying Bug-Moth Proofing Product containing >98% Para-Dichlorobenzene
@@ -691,7 +691,7 @@ Scenario: [63666] New Product - Food/ Nutritional Drug Fact Panel Questions
 	Given I delete all products with UPC Number: saved as UPC63666
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Pet Shampoo
@@ -762,7 +762,7 @@ Scenario: [217787] Container Types - Primary Physical State Liquid - Dishwashing
 	Given I generate a random UPC number and save as: UPC217787
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
 	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Liquid Dishwashing Soap

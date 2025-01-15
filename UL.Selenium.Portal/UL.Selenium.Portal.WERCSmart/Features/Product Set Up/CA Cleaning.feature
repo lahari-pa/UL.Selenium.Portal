@@ -36,7 +36,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I click the Add Product icon in the Navigation Pane
-Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 Given in the New Product page I click Continue
 
 #Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
@@ -96,7 +96,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I click the Add Product icon in the Navigation Pane
-Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 Given in the New Product page I click Continue
 
 #Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
@@ -160,7 +160,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I click the Add Product icon in the Navigation Pane
-Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 Given in the New Product page I click Continue
 
 #Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
@@ -221,7 +221,7 @@ Scenario: [139387] CA Cleaning - 100% Formula Total (Minimum)
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue
 
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
@@ -286,7 +286,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I click the Add Product icon in the Navigation Pane
-Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 Given in the New Product page I click Continue
 
 #Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
@@ -346,7 +346,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I click the Add Product icon in the Navigation Pane
-Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 Given in the New Product page I click Continue
 
 #Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
@@ -427,7 +427,7 @@ Scenario: [139193] CA Cleaning - Initial Message to Registrant for Ingredients
 Given I log in with the account saved in TReVor as: ProductAccount
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I click the Add Product icon in the Navigation Pane
-Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 Given in the New Product page I click Continue
 #Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
 Then I should see the The Product Page
@@ -476,7 +476,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I click the Add Product icon in the Navigation Pane
-Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 Given in the New Product page I click Continue
 
 #Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): General Purpose Cleaner - Non-aerosol
@@ -544,7 +544,7 @@ Scenario: [158172] CA Cleaning - Ingredients Screen - Trade Secret Validation -
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I click the Add Product icon in the Navigation Pane
-Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 Given in the New Product page I click Continue
 And I save the product information as: TestCase158172
 Given I call Shared Step 57561a (The Product - Enter Product Name: Trade Secret Validation Product and select Type of Product): General Purpose Cleaner - Non-aerosol
