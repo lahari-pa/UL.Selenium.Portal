@@ -583,5 +583,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			string section = "Transportation Options";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
+		[RegexStepDefinition("In the Global Trade Item Number \\(GTIN\\) / Universal Product Code \\(UPC\\) Section, delete the retailer (.*) from the UPC")]
+		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionDeleteTheRetailerAmazonFromTheUPC(string retailer)
+		{
+			Report.IsTrue(new UPC().DeleteRetailer(retailer), $"Failed to delete the retailer {retailer}",
+						$"Successfully deleted retailer {retailer}");
+		}
+
 	}
 }

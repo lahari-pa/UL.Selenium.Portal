@@ -651,7 +651,7 @@ Scenario: [57986] Footwear or Leather Care Product - All other forms - (RU000746
 	Then in the Optional Reports and Documents Available for Purchase page I click Continue
 	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comments Field Text
 	And I should see the Optional Comments Page
-	Then In the Optional Comments Section, section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' is availiable
+	Then In the Optional Comments Section, section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' is available
 	Then in the Optional Comments page I click Continue
 	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type:  Footwear or Leather Care Product - All other forms
 	Given I should see the Data Acceptance Page
