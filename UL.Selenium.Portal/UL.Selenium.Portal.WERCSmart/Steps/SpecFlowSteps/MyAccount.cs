@@ -17,11 +17,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			string linkText = "Company Information";
 			new Steps_Prototype().ClickLinkElement(linkText);
 		}
+		[RegexStepDefinition(@"In the My Account section, the 'Company Information' link (should|should not) exist")]
+		public void ClickTheCompanyInformationLinkIsDisplayed(string condition)
+		{
+			string linkText = "Company Information";
+			new Steps_Prototype().LinkElementExists(condition, linkText);
+		}
 		[RegexStepDefinition(@"In the My Account section, click the 'Subscription Information' link")]
 		public void ClickTheSubscriptionInformationLink()
 		{
 			string linkText = "Subscription Information";
 			new Steps_Prototype().ClickLinkElement(linkText);
+		}
+		[RegexStepDefinition(@"In the My Account section, the 'Subscription Information' link (should|should not) exist")]
+		public void ClickTheSubscriptionInformationLinkIsDisplayed(string condition)
+		{
+			string linkText = "Subscription Information";
+			new Steps_Prototype().LinkElementExists(condition, linkText);
 		}
 		[RegexStepDefinition(@"In the My Account section, click the 'Payment Methods' link")]
 		public void ClickThePaymentMethodsLink()
@@ -29,11 +41,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			string linkText = "Payment Methods";
 			new Steps_Prototype().ClickLinkElement(linkText);
 		}
+		[RegexStepDefinition(@"In the My Account section, the 'Payment Methods' link (should|should not) exist")]
+		public void ClickThePaymentMethodsIsDisplayed(string condition)
+		{
+			string linkText = "Payment Methods";
+			new Steps_Prototype().LinkElementExists(condition, linkText);
+		}
 		[RegexStepDefinition(@"In the My Account section, click the 'Order History' link")]
 		public void ClickTheOrderHistoryLink()
 		{
 			string linkText = "Order History";
 			new Steps_Prototype().ClickLinkElement(linkText);
+		}
+		[RegexStepDefinition(@"In the My Account section, the 'Order History' link (should|should not) exist")]
+		public void ClickTheOrderHistoryIsDisplayed(string condition)
+		{
+			string linkText = "Order History";
+			new Steps_Prototype().LinkElementExists(condition, linkText);
 		}
 		[RegexStepDefinition(@"In the My Account section, click the 'My Library' link")]
 		public void ClickTheMyLibraryLink()
@@ -41,17 +65,98 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			string linkText = "My Library";
 			new Steps_Prototype().ClickLinkElement(linkText);
 		}
+		[RegexStepDefinition(@"In the My Account section, the 'My Library' link (should|should not) exist")]
+		public void ClickTheMyLibraryIsDisplayed(string condition)
+		{
+			string linkText = "My Library";
+			new Steps_Prototype().LinkElementExists(condition, linkText);
+		}
 		[RegexStepDefinition(@"In the My Account section, click the 'Subscription Price List' link")]
 		public void ClickTheSubscriptionPriceListLink()
 		{
 			string linkText = "Subscription Price List";
 			new Steps_Prototype().ClickLinkElement(linkText);
 		}
+		[RegexStepDefinition(@"In the My Account section, the 'Subscription Price List' link (should|should not) exist")]
+		public void ClickTheSubscriptionPriceListIsDisplayed(string condition)
+		{
+			string linkText = "Subscription Price List";
+			new Steps_Prototype().LinkElementExists(condition, linkText);
+		}
+		[RegexStepDefinition(@"In the My Account section, after clicking the 'Subscription Price List' link, confirm pdf file is downloaded")]
+		public void AfterClickingHR1321PdfIsDownloaded()
+		{
+			string file = "GetActiveSubscriptionPriceList.pdf";
+			string savedAs = "SubscriptionPriceList";
+			new Steps_Prototype().ConfirmFileAppearsInDownloadsFolder(file, savedAs);
+		}
 		[RegexStepDefinition(@"In the My Account section, click the 'Invite New User' link")]
 		public void ClickTheInviteNewUserLink()
 		{
 			string linkText = "Invite New User";
 			new Steps_Prototype().ClickLinkElement(linkText);
+		}
+		[RegexStepDefinition(@"In the My Account section, the 'Invite New User' link (should|should not) exist")]
+		public void ClickTheInviteNewUserIsDisplayed(string condition)
+		{
+			string linkText = "Invite New User";
+			new Steps_Prototype().LinkElementExists(condition, linkText);
+		}
+
+		[RegexStepDefinition(@"In the My Account section, the 'Add New User' modal window (should|should not) be displayed")]
+		public void TheAddNewUserModalIsDisplayed(string condition)
+		{
+			string modalTitle = "Add New User";
+			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeading(condition, modalTitle);
+		}
+		[RegexStepDefinition(@"In the My Account section, the 'Add New User' modal window (should|should not) be displayed with 'Thank You' text")]
+		public void TheAddNewUserModalIsDisplayedWithText(string condition)
+		{
+			string title = "×\r\nAdd New User";
+			string text = "Thank You\r\nThe user has been provided an invitation via email. User must respond to the invitation to finalize the addition to the account.";
+			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeadingAndText(condition, title, text);
+		}
+		[RegexStepDefinition(@"In the My Account section, in the 'Add New User' modal window for section 'WERCSmart Role:' set option (User|PowerUser)")]
+		public void TheInAddNewUserModalSetOption(string value)
+		{
+			string section = "WERCSmart Role:";
+			new Steps_ProductPrototype().InSectionSetOption(section, value);
+		}
+		[RegexStepDefinition(@"In the My Account section, in the 'Add New User' modal window for section 'Country' set option (.*)")]
+		public void TheInAddNewUserModalSetOptionCountry(string value)
+		{
+			string section = "Country:";
+			new Steps_ProductPrototype().InSectionSetOption(section, value);
+		}
+		[RegexStepDefinition(@"In the My Account section, in the 'Add New User' modal window for section '(First Name:|Last Name:|Title:|Company Role:|Email Address:|Confirm Email:|Company Phone:|Extension:|Mobile Phone:|WERCSmart Role:|Country:)' enter value: (.*)")]
+		public void TheInAddNewUserModalEnterValue(string section, string value)
+		{
+			new Steps_Prototype().SetTheSectionOptionTo(section, value);
+		}
+		[RegexStepDefinition(@"In the My Account section, in the 'Add New User' click the button (Cancel|Send Invite|Close)")]
+		public void TheInAddNewUserModalClickButton(string button)
+		{
+			string popupTitle = "Add New User";
+			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(popupTitle, button);
+		}
+		[RegexStepDefinition(@"In the My Account section, in the 'Add New User' (check|uncheck) checkbox 'Send Notifications'")]
+		public void TheInAddNewUserModalCheckbox(string check_uncheck)
+		{
+			string checkbox = "Send Notifications";
+			new Steps_Prototype().ICheckTheCheckboxWithDescription(check_uncheck, checkbox);
+		}
+
+		[RegexStepDefinition(@"In the My Account section, click the 'Upgrade' button")]
+		public void ClickTheUpgradeButton()
+		{
+			string button = "Upgrade";
+			new Steps_Prototype().ClickButton(button);
+		}
+		[RegexStepDefinition(@"In the My Account section, click the 'Sync Zuora' refresh button")]
+		public void ClickTheSyncZuoraButton()
+		{
+			string button = "Sync Zuora";
+			new Steps_Prototype().ClickButton(button);
 		}
 	}
 }
