@@ -27,7 +27,7 @@
 @SafetyDataSheetAuthoring
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails2
 @RegulatoryInformation3
-
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @PhysicalAndChemicalProp
@@ -39,7 +39,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ECOLOGO
 @GTINAndUPC
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
-
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:PesticideDetailsUS
 Feature: Flow 2
 
 @TestCase:57439
@@ -483,15 +483,23 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 @71274
 @TestCase:71274
 Scenario: [71274] Flea or Tick Repellent (L) - RU000323
-	And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+
+	Given I log in with the account saved in TReVor as: ProductAccount
+
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
-	Given in the New Product page I click Continue
-	#20 June 2019 changed product name from Pest repellant for Use on Animals - liquid to Pest (Flea, Tick, etc.) repellant for Use on Animals - liquid
-	And I call Shared Step 57561a (The Product - Enter Product Name: Pest repellant for Use on Animals - liquid and select Type of Product): Pest (Flea, Tick, etc.) repellant for Use on Animals - liquid
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
+	Given in the New Product page, I click Continue
+
+	#And I call Shared Step 57561a (The Product - Enter Product Name: Pest repellant for Use on Animals - liquid and select Type of Product): Pest (Flea, Tick, etc.) repellant for Use on Animals - liquid
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Pest (Flea, Tick, etc.) repellant for Use on Animals - liquid_#71274
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Pest (Flea, Tick, etc.) repellant for Use on Animals - liquid
+	Then in the The Product page, I click Continue
+
 	Then I save the product information as: TestCase71274
-	And I call Shared Step 56799 (Confirm Product Information shows Pesticide question and its radio buttons)
+
+	#And I call Shared Step 56799 (Confirm Product Information shows Pesticide question and its radio buttons)
 	#Given I call Shared Step 57865 (Product Information - Pesticide shown, US only, select No for everything else - Happy Path)
 	Given I should see the Product Information Page
 	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
@@ -500,76 +508,122 @@ Scenario: [71274] Flea or Tick Repellent (L) - RU000323
 	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
-	Then in the Product Information page I click Continue
+	Then in the Product Information page, I click Continue
 
-	Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
-		| Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
-		| Liquid                 | Liquid                   | 2                | 8  | 100                        | 80                       | Not applicable/available        | Dispersible                                  |
-	#CLF 26 Feb 2019. This appears to  be the wrong step so changed it to: 57865
-	# JS 13/03 - TFS test case changed to use shared 57865
-	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName    | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-		| Triclosan        | 24.94   | false               | false       |            |
-		| Hydrogen         | 30.2    | false               | false       |            |
-		| Propylene Glycol | 19.8    | false               | false       |            |
-		| Butane           | 25.06   | false               | false       |            |
-	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	#Given I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
+	#	| Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
+	#	| Liquid                 | Liquid                   | 2                | 8  | 100                        | 80                       | Not applicable/available        | Dispersible                                  |
+	Then I should be on the Physical and Chemical Properties Page
+	And In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Liquid
+	And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
+	And In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 1.04
+	And In the Physical and Chemical Properties Section, for section: 'pH' enter text: 8
+	And In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: 100
+	And In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' select the checkbox option: 'I do not have exact Flash Point data available to me'
+	And In the Physical and Chemical Properties Section, set the option in section: 'Flash Point (in Celsius)' to: None, No Flash Point
+	And In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page, I click Continue
+
+	#Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	#	| ComponentName    | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Triclosan        | 24.94   | false               | false       |            |
+	#	| Hydrogen         | 30.2    | false               | false       |            |
+	#	| Propylene Glycol | 19.8    | false               | false       |            |
+	#	| Butane           | 25.06   | false               | false       |            |
+	Then I should be on the Ingredients Page
+	And In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue      | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Glycerol         | 50      | False               | False         |             |
+	| component name | Oils, Clove      | 10      | False               | False         |             |
+	| component name | Potassium Oleate | 20      | False               | False         |             |
+	| component name | Water            | 20      | False               | False         |             |
+	Then in the Ingredients page, I click Continue
+
+	#And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Then I should be on the Inventory Status, Prop 65 (US) Page
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is exempt from TSCA chemical Inventory listing requirements.
+	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+
 	#Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
-	Given I should see the Regulatory Information 3 Page
-	Then In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California.  Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
-	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
+	Given I should be on the Product Labeling Page
+	Then In the Product Labeling Section, the statement 'Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California.  Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
+	Then In the Product Labeling Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
 	| Option                 |
 	| Drug Facts Panel       |
 	| Supplement Facts Panel |
 	| Nutrition Facts Panel  |
 	| None of the Above      |
-	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above 
-	Then In the Regulatory Information 3 Section, the following link: Nutritional and Supplement Labels should be displayed
-	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
-	Then In the Regulatory Information 3 Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
-	Then in the Regulatory Information 3 page I click Continue
-	# JS 13/03 Change shared step used to match tfs test case change
-	And I call Shared Step 29183 (Pesticide Details - U.S. - No EPA number)
+	Then In the Product Labeling Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above 
+	Then In the Product Labeling Section, the following link: Nutritional and Supplement Labels should be displayed
+	Then In the Product Labeling Section, the following link: Dietary Supplements Label should be displayed
+	Then In the Product Labeling Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
+	Then in the Product Labeling page, I click Continue
+
+	#And I call Shared Step 29183 (Pesticide Details - U.S. - No EPA number)
+	Given I should be on the Pesticide Details - U.S. Page
+	And In the Pesticide Details - U.S. Section, in 'Product has an Environmental Protection Agency (EPA) Registration Number' enter No
+	And In the Pesticide Details - U.S. Section, in 'Product has a State Registration' enter No
+	And In the Pesticide Details - U.S. Section, in 'Select the applicable exemption' enter Product is FIFRA 25(b) Exempt.
+	Then in the Pesticide Details - U.S. page, I click Continue
+
 	#And I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Then I should be on the Transportation Details 1 Page
 	And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
 	Then in the Transportation Details 1 page, I click Continue
 
-	And I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
+	#And I call Shared Step 63219 (Retailer Association - Select No Retailer - Click continue)
+	Then I should be on the Retailer Page
+	Then in the Retailer page, I click Continue
+
 	#And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	Given I should see the Regulatory Documents to Provide Page
-	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
-	Then in the Regulatory Documents to Provide page I click Continue
+	Given I should be on the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Yes, I certify that I have an OSHA-compliant SDS for this product and would like to upload it.
+	And In the Regulatory Documents to Provide Section, upload file in section: 'OSHA SDS'
+	Then in the Regulatory Documents to Provide page, I click Continue
 
-	#CLF the below step also seemed to be missing
-	# JS 13/03 Additonal Documents To Provide steps were added to tfs test case
 	Then I should see the Additional Documents to Provide Page
-	# TFS test case change - added shared step
-	Given I call Shared Step 59042 (Browse for File > select > click Open - Happy Path) for document type: Please upload a PDF of the product label (full label). and file: UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf
-	Given in the Additional Documents to Provide page I click Continue
-	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-#	Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-#		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Partition Coefficient | Product's Dispensing Method |
-#		| Mask                          | 150                      | 44                      | 10.7      | White      | Floral | No data available | 12                    | Aerosol                     |
-	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Mask
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 150
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 44
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.7
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: White
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor' to: Floral
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor Threshold' to: No data available
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Partition Coefficient' enter text: 12
-	Then in the Safety Data Sheet Authoring - Additional Data (Optional) page, I click Continue
+	And in the Additional Documents to Provide page, I click Continue
+	Then In the Additional Documents to Provide, section 'Provide Full Product Label (required)' error message should display: Document is required:  Please upload a PDF of the Product Label (Full Label).
+	And In the Additional Documents to Provide, upload PDF document to Provide Full Product Label (required) field
+	Then in the Additional Documents to Provide page, I click Continue
 
+	Given in the Optional Reports and Documents Available for Purchase page, I click Continue
 
 	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test comment
 	Given I should see the Optional Comments Page
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
 	Then in the Optional Comments page I click Continue
 
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Pest (Flea, Tick, etc.) repellant for Use on Animals - liquid
-	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71274
+	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Pest (Flea, Tick, etc.) repellant for Use on Animals - liquid
+	Then I should be on the Data Acceptance Page
+	And In the Data Acceptance Section, click 'Summary' button
+	And I switch to the tab with Data Summary page
+	And In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Pest (Flea, Tick, etc.) repellant for Use on Animals - liquid
+	And In the Summary Page, the 'Which best describes your product, including when FIFRA 25(b) Exempt' section should be showing the following value: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+	And In the Summary Page, the 'U.S. Toxic Substances Control Act (TSCA) Status' section should be showing the following value: This product is exempt from TSCA chemical Inventory listing requirements.
+	And In the Summary Page, the 'Refer to your Product Label.  From the options, select those that appear on the Label.' section should be showing the following value: None of the Above
+	And In the Summary Page, the 'Product has an Environmental Protection Agency (EPA) Registration Number' section should be showing the following value: No
+	And In the Summary Page, the 'Product has a State Registration' section should be showing the following value: No
+	And In the Summary Page, the 'Select the applicable exemption' section should be showing the following value: Product is FIFRA 25(b) Exempt.
+	And In the Summary Page, the 'Product is Regulated for Transport' section should be showing the following value: Not Regulated
+	And In the Summary Page, click the View button for section: Please upload a PDF of the product label (full label).
+	Then In the Summary Page, after clicking 'View' button I confirm pdf file is downloaded
+	And In the Summary Page, click the View button for section: OSHA-SDS
+	Then In the Summary Page, after clicking 'View' button I confirm pdf file is downloaded
+	And I close the tab with Data Summary page
+	Then I should be on the Data Acceptance Page
+
+	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
+	#Given I should see the Data Acceptance Page
+	#Then In the Data Acceptance Section, check 'Agreed' checkbox
+	#Then In the Data Acceptance Section, click 'Accept' button
+
+	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71274
+	#Then In the Purchase Summary page message is displayed with text: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
+	#Then In the Purchase Summary Page, click the 'Home' button
+	#Then The home screen should load
+
 
 
 	

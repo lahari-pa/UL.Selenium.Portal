@@ -1,13 +1,7 @@
-﻿using NPOI.POIFS.Crypt.Dsig;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Reqnroll;
+﻿using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
-using static NPOI.HSSF.Util.HSSFColor;
+
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 {
@@ -38,6 +32,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.SetTheSectionOptionTo("If your customers use this component in products sold on the U.S. Retail Market- they are required to register their products in WERCSmart. In addition to regulatory evaluations- a growing number of WERCSmart Recipients conduct chemical policy or product qualification assessments of the products they sell", value);
 		}
+		[RegexStepDefinition(@"In the Sustainability section, the following alert message (should|should not) be displayed: (.*)")]
+		public void ConfirmAlretMessageOnSustainabilityPage(string condition, string errorMessage)
+		{
+			var selNewProduct = new Steps_Prototype();
+			selNewProduct.AlertMessageDisplayed(condition, errorMessage);
+		}
+
 	}
 
 }
