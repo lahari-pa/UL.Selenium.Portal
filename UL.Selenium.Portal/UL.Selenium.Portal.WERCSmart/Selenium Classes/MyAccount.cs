@@ -15,6 +15,7 @@ using Reqnroll;
 using UL.Automation.Utilities;
 using UL.Automation.Utilities.Mailosaur.Classes;
 using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.RetailerAbbreviations;
+using System.Windows;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -38,6 +39,45 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		List<IWebElement> OrderNumClearFilter => this.ContainerElement.FindElements(By.XPath(".//span[contains(@data-bind, 'OrderNumber')]"), 2).ToList();
 		IWebElement ViewDetailsLink => this.ContainerElement.FindElement(By.XPath(".//table//td/a[contains(text(), 'View details')]"), 2);
 		IWebElement ProductSearch => this.ContainerElement.FindElement(By.XPath(".//input[contains(@placeholder, 'WPS ID (Exact)/Product Name')]"), 2);
+		IWebElement PesticideExpirationToggle => this.ContainerElement.FindElement(By.XPath("//tr[td[contains(text(), 'Pesticide Expiration')]]//input"), 2);
+		IWebElement PesticideExpirationToggleSpan => this.ContainerElement.FindElement(By.XPath(".//tr[td[contains(text(), 'Pesticide Expiration')]]//span"), 2);
+		IWebElement SubscriptionRow(string option) => this.ContainerElement.FindElement(By.XPath($".//div[@class='col-sm-3 subscription']//div[@class='row'][div//strong[text()='{option}']]"), 2);
+		IWebElement CompanyInfo(string option) => this.ContainerElement.FindElement(By.XPath($"//span[@class ='text-label'][contains(text(), '{option}')]/following-sibling::span"), 2);
+
+		public bool CompanyInfoExists(string option)
+		{
+			return this.CompanyInfo(option) != null;
+		}
+		public bool CheckCompanyInfo(string option, string value)
+		{
+			string getValue = this.CompanyInfo(option).Text;
+			return getValue == value;
+		}
+		public bool PesticideExpirationToggleExists()
+		{
+			return this.PesticideExpirationToggle != null;
+		}
+		public bool PesticideExpirationToggleOn_Off(string on_off)
+		{
+			bool expected = on_off == "On";
+			bool Checked = this.PesticideExpirationToggle.Selected;
+			return Checked == expected || this.PesticideExpirationToggleSpan.TryClick() && Checked == expected;
+		}
+		public bool VerifySubscriptionValues(string option, string value)
+		{
+			if (this.SubscriptionRow(option) == null)
+			{
+				Report.Info($"There is no Subscription row with '{option}' data");
+				return false;
+			}
+			else
+			{
+				IWebElement OptionValue(string value) => this.SubscriptionRow(option).FindElement(By.XPath($".//div[contains(text(),'{value}')]"));
+				return OptionValue(value) != null;
+			}
+
+
+		}
 		public bool HeaderExists(string header)
 		{
 			Report.Info($"Starting looking for header {header}");
