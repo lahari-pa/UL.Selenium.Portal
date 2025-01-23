@@ -1,10 +1,14 @@
-﻿using Reqnroll;
+﻿using OpenQA.Selenium.BiDi;
+using Reqnroll;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 {
@@ -157,6 +161,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		{
 			string button = "Sync Zuora";
 			new Steps_Prototype().ClickButton(button);
+		}
+
+		[RegexStepDefinition(@"In the My Account section, set the 'Pesticide Expiration' option to (On|Off)")]
+		public void ClickThePesticideExpiration(string on_off)
+		{
+			if(Report.IsTrue(new MyAccount().PesticideExpirationToggleExists(), "Failed to find the 'Pesticide Expiration' toggle", "Successfully found the 'Pesticide Expiration' toggle"))
+			{
+				Report.IsTrue(new MyAccount().PesticideExpirationToggleOn_Off(on_off), $"Failed to set the 'Pesticide Expiration' toggle to {on_off}", $"Successfully set the 'Pesticide Expiration' toggle to {on_off}");
+			}
+		}
+		[RegexStepDefinition(@"In the My Account section, verify the Subscription option '(Level:|Agent Support:|Formulated:|Enhanced:|Article:|Single-Retailer:)' is (.*)")]
+		public void CheckSubscriptionData(string option, string value)
+		{
+			Report.IsTrue(new MyAccount().VerifySubscriptionValues(option, value), $"Failed to confirm the Subscription option '{option}' is '{value}'", $"Successfully confirmed the Subscription option '{option}' is '{value}'");
+		
+		}
+		[RegexStepDefinition(@"In the My Account section, verify the Company Information: '(Administrator Name|Administrator Email|Company Domain Name)' is (.*)")]
+		public void CheckCompanyInformation(string option, string value)
+		{
+			Report.IsTrue(new MyAccount().CheckCompanyInfo(option, value), $"Failed to confirm the Company Information: '{option}' is '{value}'", $"Successfully confirmed the Company Information: '{option}' is '{value}'");
+
 		}
 	}
 }
