@@ -79,7 +79,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string GetTitle()
 		{
-			return this.containerElement.FindElements(By.XPath("//*[@class='modal-title']")).FirstOrDefault(x => x.Displayed)?.Text;
+			return this.containerElement.FindElements(By.XPath("//*[@class='modal-title' or @class='modal-header']")).FirstOrDefault(x => x.Displayed)?.Text;
 		}
 
 		public void EnterLoginPassword(string password)
@@ -127,7 +127,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool ClickTheButtonInThePopupView(string popupTitle, string buttonTitle)
 		{
-			IWebElement button = this.ContainerElement.FindElement(By.XPath($".//div[@class='modal-content']//h4[text()='{popupTitle}']/../following-sibling::div[@class='modal-footer']//button[text()='{buttonTitle}'] | .//div[@class='modal-content']//h3[text()='{popupTitle}']/../following-sibling::div[@class='modal-footer']//button[text()='{buttonTitle}']"), 2);
+			IWebElement button = this.ContainerElement.FindElement(By.XPath($".//div[@class='modal-content']//h4[text()='{popupTitle}']/../following-sibling::div[@class='modal-footer']//button[text()='{buttonTitle}'] | .//div[@class='modal-content']//h3[text()='{popupTitle}']/../following-sibling::div[@class='modal-footer']//button[text()='{buttonTitle}'] | .//div[@class='modal-content']//h3[text()='{popupTitle}']/../following-sibling::div[@class='modal-footer']//a[text()='{buttonTitle}']"), 2);
 			return button.TryClick();
 		}
 

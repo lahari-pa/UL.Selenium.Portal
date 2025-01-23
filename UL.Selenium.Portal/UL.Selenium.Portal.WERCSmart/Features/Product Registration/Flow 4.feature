@@ -1022,7 +1022,7 @@ Scenario: [57982] Bonding agent (RU000023) - 4All - 4G
 	Then in the Safety Data Sheet Authoring - Additional Data (Optional) page I click Continue
 	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comments Text
     And I should see the Optional Comments Page
-    And In the Optional Comments Section, section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' is availiable
+    And In the Optional Comments Section, section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' is available
     Then in the Optional Comments page I click Continue
 	#  Then I call Shared Step 214662 (Summary Tab - Data Verification - Applicable Only to Bonding Agent (RU000023)) 
 	#  | Section                                              | Value             | 
