@@ -25,7 +25,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 	[Binding, Scope(Tag = "AlertsPage")]
 	class Steps_AlertsPage
 	{
-		[RegexStepDefinition(@"In the Alerts section, set the 'WPS ID' to: (.*)")]
+		[RegexStepDefinition(@"In the Alerts Page, set the 'WPS ID' to: (.*)")]
 		public void EnterWpsID(string wpsId)
 		{
 			Report.StartStep("Verify WPS ID field is displayed");
@@ -36,7 +36,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 
 		}
 
-		[RegexStepDefinition(@"In the Alerts section, set the 'Product Name' to: (.*)")]
+		[RegexStepDefinition(@"In the Alerts Page, set the 'Product Name' to: (.*)")]
 		public void EnterProductName(string productName)
 		{
 			Report.StartStep("Verify Product name field is displayed");
@@ -47,7 +47,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 
 		}
 
-		[RegexStepDefinition(@"In the Alerts section, set the 'Notification Date' in format yyyy-mm-dd to: (.*)")]
+		[RegexStepDefinition(@"In the Alerts Page, set the 'Notification Date' in format yyyy-mm-dd to: (.*)")]
 		public void EnterNotificationDate(string date)
 		{
 			Report.StartStep("Verify Notification Date field is displayed");
@@ -57,14 +57,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 
 		}
 
-		[RegexStepDefinition(@"In the Alerts section, set the option of 'Search Type' to: (.*)")]
+		[RegexStepDefinition(@"In the Alerts Page, set the option of 'Search Type' to: (.*)")]
 		public void SelectSearchType(string option)
 		{
 			string label = "Search Pattern";
 			new AlertsPage().SelectDropdownValue(label, option);
 		}
 
-		[RegexStepDefinition(@"In the Alerts section, set the option of 'Alert Type' to: (.*)")]
+		[RegexStepDefinition(@"In the Alerts Page, set the option of 'Alert Type' to: (.*)")]
 		public void SelectAlertType(string option)
 		{
 			string label = "Alert Type";
@@ -76,7 +76,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			new AlertsPage().SelectDropdownValue(label, option);
 		}
 
-		[RegexStepDefinition(@"In the Alerts section, set the option of 'Brand Name' to: (.*)")]
+		[RegexStepDefinition(@"In the Alerts Page, set the option of 'Brand Name' to: (.*)")]
 		public void SelectBrandName(string option)
 		{
 			string label = "Brand Name";
@@ -88,34 +88,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			new AlertsPage().SelectDropdownValue(label, option);
 		}
 
-		[RegexStepDefinition(@"In the Alerts section,  click the 'Filter' button")]
+		[RegexStepDefinition(@"In the Alerts Page,  click the 'Filter' button")]
 		public void ClickTheFilterButton()
 		{
 			string buttonText = "Filter";
 			new AlertsPage().ButtonClick(buttonText);
 		}
 
-		[RegexStepDefinition(@"In the Alerts section,  click the 'Clear Filter' button")]
+		[RegexStepDefinition(@"In the Alerts Page,  click the 'Clear Filter' button")]
 		public void ClickTheClearFilterButton()
 		{
 			string buttonText = "ClearFilter";
 			new AlertsPage().ButtonClick(buttonText);
 		}
 
-		[RegexStepDefinition(@"In the Alerts section,  click the 'Export' button")]
+		[RegexStepDefinition(@"In the Alerts Page,  click the 'Export' button")]
 		public void ClickTheExportButton()
 		{
 			string buttonText = "Export";
 			new AlertsPage().ButtonClick(buttonText);
 		}
 
-		[RegexStepDefinition(@"In the Alerts section, click the ' More Filter' button")]
+		[RegexStepDefinition(@"In the Alerts Page, click the ' More Filter' button")]
 		public void ClickTheMoreFilterButton()
 		{
 			new AlertsPage().MoreFiltersButtonClick();
 		}
 
-		[RegexStepDefinition(@"In the Alerts section, (check|uncheck) the show archived checkbox")]
+		[RegexStepDefinition(@"In the Alerts Page, (check|uncheck) the show archived checkbox")]
 		public void ICheckTheCheckboxShowArchived(string check)
 		{
 			bool toCheck = false;
@@ -144,12 +144,36 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 				$"The checkbox was not {check}ed after",
 				$"The checkbox is {check}ed as expected");
 		}
-		[RegexStepDefinition(@"In the Alerts section, Confirm the checkbox show archived (is|is not) checked")]
+		[RegexStepDefinition(@"In the Alerts Page, Confirm the checkbox show archived (is|is not) checked")]
 		public void TheCheckboxShowArchivedIsIsNotChecked(string is_isnot)
 		{
 			bool expected = is_isnot == "is";
 			bool isChecked = new AlertsPage().ArchivedCheckbox().Checked();
 			Report.IsTrue(isChecked == expected, $"Failed to confirm the checkbox show archives {(expected ? "is not" : "is")} checked'!", $"Successfully confirmed the checkbox checkbox show archives {is_isnot} checked");
+		}
+
+		[RegexStepDefinition(@"In the Alerts Page,  (.*) field  (should|should not) be displayed")]
+		public void ThenInThePageIShouldOrShouldNotSeeQuestion(string field_name, string shouldOrNot)
+		{
+			var thisAlertsPage = new AlertsPage();
+
+			Report.IsTrue(thisAlertsPage.SelectOptionExists(field_name) == (shouldOrNot == "should"),
+				"Field is not showing as expected", "Field is showing as expected");
+		}
+
+
+		[RegexStepDefinition(@"In the Alerts Page, the confirm field: 'Brand Name' (is|is not) displayed")]
+		public void ConfirmBrandNameIsIsNotDisplayed(string is_isnot)
+		{
+			string field_name = "Brand Name";
+			ThenInThePageIShouldOrShouldNotSeeQuestion(field_name, is_isnot);
+		}
+
+		[RegexStepDefinition(@"In the Alerts Page, the confirm field: 'Alert Type' (is|is not) displayed")]
+		public void ConfirmAlertTypeIsIsNotDisplayed(string is_isnot)
+		{
+			string field_name = "Alert Type";
+			ThenInThePageIShouldOrShouldNotSeeQuestion(field_name, is_isnot);
 		}
 
 
