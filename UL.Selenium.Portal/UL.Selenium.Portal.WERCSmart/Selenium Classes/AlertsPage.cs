@@ -24,6 +24,7 @@ using OpenQA.Selenium.Chrome;
 using System.Net.NetworkInformation;
 
 
+
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	public class AlertsPage : SeleniumBaseObject
@@ -124,6 +125,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			IWebElement el = this.ContainerElement.FindElement(By.XPath(@".//label[contains(text(),'archived messages')]/following-sibling::input[@type='checkbox']"), 2);
 			return el.TryClick() && GeneralUtilities.Wait_for_load_finish();
+		}
+
+		public IWebElement ArchivedCheckbox()
+		{
+			IWebElement el = this.ContainerElement.FindElement(By.XPath(@".//label[contains(text(),'archived messages')]/following-sibling::input[@type='checkbox']"), 2);
+			if (el == null)
+			{
+				Report.Info($"Could not find checkbox");
+				return null;
+				
+			}
+			return el;
 		}
 
 		#endregion

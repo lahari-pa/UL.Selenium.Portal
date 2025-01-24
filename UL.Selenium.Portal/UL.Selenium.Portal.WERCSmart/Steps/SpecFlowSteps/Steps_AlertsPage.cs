@@ -5,11 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using Reqnroll;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.Utilities.Functions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Automation.ReqnrollHelpers.Classes;
-
+using UL.Automation.Utilities.Helpers;
+using System.IO;
+using System.Drawing.Imaging;
+using System.Drawing;
+using System.Reflection;
+using UL.Automation.Utilities;
+using UL.Automation.ReqnrollHelpers.Attributes;
 
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
@@ -123,7 +131,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			{
 				throw new Exception("Specflow paramater must be equal to 'check' or 'uncheck'");
 			}
-			bool isChecked = new AlertsPage().CheckArchivedCheckbox().Checked();
+			bool isChecked = new AlertsPage().ArchivedCheckbox().Checked();
 			if (isChecked == toCheck)
 			{
 				Report.Success($"The checkbox was already {check}ed");
@@ -132,7 +140,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			Report.IsTrue(new AlertsPage().CheckArchivedCheckbox(),
 				$"Failed to check the checkbox!",
 				$"Successfully checked the checkbox");
-			Report.IsTrue(new AlertsPage().CheckArchivedCheckbox().Checked() == toCheck,
+			Report.IsTrue(new AlertsPage().ArchivedCheckbox().Checked() == toCheck,
 				$"The checkbox was not {check}ed after",
 				$"The checkbox is {check}ed as expected");
 		}
@@ -140,9 +148,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		public void TheCheckboxShowArchivedIsIsNotChecked(string is_isnot)
 		{
 			bool expected = is_isnot == "is";
-			bool isChecked = new AlertsPage().CheckArchivedCheckbox().Checked();
+			bool isChecked = new AlertsPage().ArchivedCheckbox().Checked();
 			Report.IsTrue(isChecked == expected, $"Failed to confirm the checkbox show archives {(expected ? "is not" : "is")} checked'!", $"Successfully confirmed the checkbox checkbox show archives {is_isnot} checked");
 		}
+
 
 	}
 }
