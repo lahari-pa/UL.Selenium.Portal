@@ -11,7 +11,6 @@
 @subUpgrade
 @RetailPartners
 @run_MyAccount
-@Product:WERCSmart_Page:MyAccount
 Feature: MyAccount
 
 @TestCase:61796
@@ -78,10 +77,6 @@ Scenario: [65887] Pagination
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	Given I navigate to the MyAccount page
-	Then In the My Account section, click action Details for user: WERCS ProductAccount
-	Then In the My Account section, in the 'User Details' uncheck checkbox 'Send Notifications'
-	Then In the My Account section, in the 'User Details' check checkbox 'Send Notifications'
-	Then In the My Account section, in the 'User Details' click the button Cancel
 	Then I Create new users in the My Account page via the user Grid until there are atleast: 2 pages present
 	Then The My Account user grid is currently on page number: 1
 	Given I click next in the My Account user grid
