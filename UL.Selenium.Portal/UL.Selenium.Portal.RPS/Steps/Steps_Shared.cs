@@ -24,18 +24,14 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.UseSubSteps = true;
             Report.StartSubStep("I navigate to the landing page");
             new Global_Steps().NavigateToTheLandingPage();
-            Report.StartSubStep("I confirm the Landing Page has loaded");
-            new Steps_LandingPage().ConfirmLandingPageHasLoaded();
-            if (!TReVor.Integrations.Classes.TReVorSettings.Credentials.AllCredentials.TryGetValue(savedAs, out var user))
-            {
-                throw new Exception("Failed to find user saved as: " + savedAs);
-            }
-            Report.StartSubStep("I enter the account username for: " + savedAs);
-            new Steps_Login().EnterUserNameForTrevorTestUser(user);
-            Report.StartSubStep("I enter the account password for: " + savedAs);
-            new Steps_Login().EnterPasswordForTrevorTestUser(user);
-            Report.StartSubStep("I click Log In");
-            new Steps_Login().ClickLogIn();
+            Report.StartSubStep($"I login as user {savedAs}");
+            Report.IsTrue(new LandingPlatform().WaitForContainerToBeVisible(), "Landing Page did not load!", "Landing Page loaded");
+            var user = TReVor.Integrations.Classes.TReVorSettings.VaultRecords.GetCredential(savedAs);
+            if (Report.IsTrue(user != null, $"Failed to find user saved as: {savedAs}",
+                $"Successfully found user saved as: {savedAs}", true));
+
+            Report.IsTrue(new LandingPlatform().SignIn(user.UserName, user.Password), $"Failed to Log In as {savedAs}", $"Successfully Logged In as {savedAs}", true);
+            new CookiesFooter().AcceptCookies();
             GeneralUtilities.WaitForLoadingToFinish();
             Context.AddToContext("ActiveUser", user);
         }
