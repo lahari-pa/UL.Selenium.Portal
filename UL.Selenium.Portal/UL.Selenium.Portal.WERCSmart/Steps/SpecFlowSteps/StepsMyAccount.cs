@@ -183,5 +183,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			Report.IsTrue(new MyAccount().CheckCompanyInfo(option, value), $"Failed to confirm the Company Information: '{option}' is '{value}'", $"Successfully confirmed the Company Information: '{option}' is '{value}'");
 
 		}
+		[RegexStepDefinition(@"In the My Account section, filter users by the (User Accounts|Division Accounts|All|Approved|Rejected|Invited|Invite Expired|Requested By User|New and Active) option")]
+		public void FilterUserByOption(string button)
+		{
+			new Steps_Prototype().ClickButton(button);
+		}
+		[RegexStepDefinition(@"In the My Account section, click the 'Clear' refresh button")]
+		public void ClickTheClearButton()
+		{
+			string button = "Clear";
+			new Steps_Prototype().ClickButton(button);
+		}
+		[RegexStepDefinition(@"In the My Account section, search user by entering Name or Email Address: (.*)")]
+		public void SearchUserByNameOrEmail(string name_email)
+		{
+			Report.IsTrue(new MyAccount().EnterSearchTextAndClickFind(name_email), $"Failed to enter Name or Email Address and click the 'Search' icon", $"Successfully entered Name or Email Address and clicked the 'Search' icon");
+		}
 	}
+
 }
