@@ -166,14 +166,43 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		public void ConfirmBrandNameIsIsNotDisplayed(string is_isnot)
 		{
 			string field_name = "Brand Name";
-			ThenInThePageIShouldOrShouldNotSeeQuestion(field_name, is_isnot);
+			this.ThenInThePageIShouldOrShouldNotSeeQuestion(field_name, is_isnot);
 		}
 
 		[RegexStepDefinition(@"In the Alerts Page, the confirm field: 'Alert Type' (is|is not) displayed")]
 		public void ConfirmAlertTypeIsIsNotDisplayed(string is_isnot)
 		{
 			string field_name = "Alert Type";
-			ThenInThePageIShouldOrShouldNotSeeQuestion(field_name, is_isnot);
+			this.ThenInThePageIShouldOrShouldNotSeeQuestion(field_name, is_isnot);
+		}
+
+		[RegexStepDefinition(@"In the My Alerts Page, click action (Details |Resolve |UPC(s) Provided ) for product name: (.*)")]
+		public void ClickActionForProduct(string action, string productname)
+		{
+			Report.IsTrue(new AlertsPage().ForProductClickAction(productname, action),
+				$"Failed to click action:{action} for product: {productname}",
+				$"Successfully clicked action: {action} for product: {productname}");
+		}
+
+		[RegexStepDefinition(@"In the Alerts Page, In the Products table for the product name: (.*) selected save the type to context as: (.*)")]
+		public void InAlertsPageSaveTypeForAProductName(string savedAs, string productName)
+		{
+			string type = new AlertsPage().GetTypeForAProduct(productName);
+			Context.AddToContext(savedAs, type);
+		}
+
+		[RegexStepDefinition(@"In the Alerts Page, for Product Type: (.*) Resolve redirects to: (.*)")]
+		public void ConfirmResolvePage(string type, string pageTitle)
+		{
+
+			if (type.ToLower().Contains("savedas"))
+			{
+				type = (string)Context.GetFromContext(type);
+				Report.Info($"Type of the product is: {type}");
+			}
+
+			Report.IsTrue(new AlertsPage().GetResolvePageTitle() == pageTitle, "The search box did not contain the text that was searched for", "The search box contained the text that was searched for");
+
 		}
 
 
