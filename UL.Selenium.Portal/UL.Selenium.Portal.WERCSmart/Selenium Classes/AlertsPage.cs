@@ -139,6 +139,68 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return el;
 		}
 
+		//Valid Actions: Details, Resolve
+		public bool ForProductClickAction(string name, string action)
+		{
+			IWebElement productsTable = this.ContainerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]"), 2);
+			ReadOnlyCollection<IWebElement> listOfProcuttsRows = productsTable.FindElements(By.XPath(".//tbody/tr"));
+			var listOfProducts = listOfProcuttsRows.Select(x => x.FindElement(By.XPath(".//td[2]/span"), 2).Text).ToList();
+			if (!listOfProducts.Contains(name))
+			{
+				Report.Error($"Product Name:{name} does not show in the list. The full list is: " +
+											  string.Join(",", listOfProducts));
+				return false;
+			}
+			IWebElement actionsButtonTd = productsTable.FindElement(By.XPath(".//tbody/tr/td[./span[contains(text(),'" + name + "')]]"), 2);
+			if (actionsButtonTd == null)
+			{
+				IList<IWebElement> actionTds = productsTable.FindElements(By.XPath(".//tbody/tr/td[./span]"), 2);
+				actionsButtonTd = actionTds.First(x => x.Text.Replace(" ", "") == name.Replace(" ", ""));
+			}
+			IWebElement actionsButton = actionsButtonTd?.FindElement(By.XPath("..//td//button"), 2);
+			if (!actionsButton.TryClick())
+			{
+				Report.Error("Failed to click actions button!");
+				return false;
+			}
+			Report.Info("Clicked actions button");
+			//Actions drop down menu should now open
+			IWebElement dropDownMenu = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//button[@aria-expanded='true']/following-sibling::ul[contains(@class,'dropdown-menu')]"), 2);
+			var actionLink = (IWebElement)dropDownMenu?.FindElements(By.XPath("./li/a"), 2).FirstOrDefault(x => x.Text == action);
+			if (!actionLink.TryClick())
+			{
+				Report.Error($"Failed to click action: {action}");
+				return false;
+			}
+			Report.Info($"Clicked action: {action}");
+			return true;
+		}
+
+		//Valid Actions: Details, Resolve
+		public string GetTypeForAProduct(string name)
+		{
+			IWebElement productsTable = this.ContainerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]"), 2);
+			ReadOnlyCollection<IWebElement> listOfProcuttsRows = productsTable.FindElements(By.XPath(".//tbody/tr"));
+			var listOfProducts = listOfProcuttsRows.Select(x => x.FindElement(By.XPath(".//td[2]/span"), 2).Text).ToList();
+			if (!listOfProducts.Contains(name))
+			{
+				Report.Error($"Product Name:{name} does not show in the list. The full list is: " +
+											  string.Join(",", listOfProducts));
+			}
+			IWebElement typeFieldTd = productsTable.FindElement(By.XPath(".//tbody/tr/td[./span[contains(text(),'" + name + "')]]"), 2);
+			IWebElement typeValue = typeFieldTd?.FindElement(By.XPath("..//td[4]/span[1]"), 2);
+			return typeValue.Text;
+		
+		}
+
+		public string GetResolvePageTitle()
+		{
+			IWebElement resolvepagetitle = this.FindElement(By.XPath("//div[contains(@class,'inner-header')]//h2"), 2);
+			return resolvepagetitle.Text;
+
+		}
+
+
 		#endregion
 
 
