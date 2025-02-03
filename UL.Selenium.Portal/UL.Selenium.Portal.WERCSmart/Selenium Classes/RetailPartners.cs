@@ -21,6 +21,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		protected override By ContainerElementLocator => By.XPath(BasePath);
 
+		public bool RetailerDisplayedBelowHeading(string heading, string retailer)
+		{
+			IWebElement Retailer = this.FindElement(By.XPath($".//div[starts-with(@class,'col-sm-3') and ../parent::div[@class='" + heading + "']]//a//span[contains(text(),'" + retailer + "')]"), 2);
+			return Retailer.Displayed;
+		}
 		public string HeaderShowing()
 		{
 			return this.containerElement.FindElement(By.XPath("..//h2"), 2).Text;

@@ -19,6 +19,7 @@ using System.Reflection;
 using UL.Automation.Utilities;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using Mailosaur.Operations;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
@@ -116,6 +117,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		{
 			string buttonText = "Save";
 			new Steps_Prototype().ClickLinkElement(buttonText);
+		}
+
+
+		[RegexStepDefinition(@"In the Retail Partners page, confirm Retailer (.*) is displayed under Most Recent Retailers")]
+		public void RetailerDisplayedUnderMostRecentRetailers(string retailer)
+		{
+			string heading = "most-recent";
+			var selRetailPartners = new RetailPartners();
+			
+			Report.IsTrue(new RetailPartners().RetailerDisplayedBelowHeading(heading,retailer), "Retailer is displayed under Most Recent Retailers: " + retailer, "Retailer is displayed under Most Recent Retailers: " + retailer);
+		}
+
+		[RegexStepDefinition(@"In the Retail Partners page, confirm Retailer (.*) is displayed under All Retailers")]
+		public void RetailerDisplayedUnderAllRetailers(string retailer)
+		{
+			string heading = "all-retailers";
+			var selRetailPartners = new RetailPartners();
+
+			Report.IsTrue(new RetailPartners().RetailerDisplayedBelowHeading(heading, retailer), "Retailer is displayed under All Retailers: " + retailer, "Retailer is displayed under All Retailers: " + retailer);
 		}
 
 
