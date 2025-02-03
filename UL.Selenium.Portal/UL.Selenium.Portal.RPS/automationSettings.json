@@ -21,7 +21,7 @@
     "LinkedSoftwareId": 21,
     "SoftwareBranch": "Staging",
     "BuildOperationSettings": {
-      "PerformBuildOperations": false
+      "PerformBuildOperations": true
     }
   }
 }
