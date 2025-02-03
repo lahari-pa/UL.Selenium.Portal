@@ -205,6 +205,28 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 
 		}
 
+		[RegexStepDefinition(@"In the Alerts Page, Details popup (is|is not) displayed")]
+		public void DetailsPopupIsIsNotDisplayed(string is_isnot)
+		{
+			bool displayed = false;
+			if (is_isnot == "is")
+			{
+				displayed = true;
+			}
+			else if (is_isnot != "is not")
+			{
+				Report.Failure("Step parameter must either be 'is' or 'is not'!");
+				return;
+			}
+
+			Report.IsTrue(new AlertsPage().DetailsPopUpDisplayed() == displayed, $"Details popup{(displayed ? "was not" : "was")} displayed when it {(displayed ? "was" : "was not")} expected to be!", $"Details popup {(displayed ? "was" : "was not")} displayed as expected");
+		}
+
+		[RegexStepDefinition(@"In the Alerts Page,  Details Popup click the 'Close' button")]
+		public void ClickTheCloseButton()
+		{
+			Report.IsTrue(new AlertsPage().ClickCloseInDetailsPopUp(), "The close button was not clicked successfully", "The close button was clicked successfully");
+		}
 
 	}
 }

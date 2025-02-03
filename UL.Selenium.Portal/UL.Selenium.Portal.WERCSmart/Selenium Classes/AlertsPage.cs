@@ -36,7 +36,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		IWebElement WpsId => this.ContainerElement.FindElement(By.XPath("//input[contains(@data-bind,'wpsId')]"), 2);
 		IWebElement NotificationDate => this.ContainerElement.FindElement(By.XPath("//input[contains(@data-bind,'date.field')]"), 2);
 		IWebElement ProductName => this.ContainerElement.FindElement(By.XPath("//input[contains(@data-bind,'productName.field')]"), 2);
-		private IWebElement selectDropdown(string label_name) => this.ContainerElement.FindElement(By.XPath($".//label[contains(text(),'{label_name}')]/..//following-sibling::select"), 1);
+		private IWebElement SelectDropdown(string label_name) => this.ContainerElement.FindElement(By.XPath($".//label[contains(text(),'{label_name}')]/..//following-sibling::select"), 1);
 		private IWebElement Buttons(string buttonLabel) => this.FindElement(By.XPath($".//button[contains(@class,'btn')][text()='{buttonLabel}']"), 1);
 		IWebElement MoreFiltersButton => this.ContainerElement.FindElement(By.XPath(".//a[contains(@class,'btn')]//span[text()='More Filters']"), 2);
 
@@ -81,14 +81,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool SelectOptionExists(string label)
 		{
 			Report.Info($"Attempting to confirm {label}  select option exists.");
-			return this.selectDropdown(label) != null;
+			return this.SelectDropdown(label) != null;
 		}
 
 		public bool SelectDropdownValue(string label, string item)
 		{
 			try
 			{
-				this.selectDropdown(label).Select(item);
+				this.SelectDropdown(label).Select(item);
 				return true;
 			}
 			catch (Exception)
@@ -200,6 +200,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		public bool DetailsPopUpDisplayed()
+		{
+			IWebElement DisplayPopup = this.FindElement(By.XPath("//div[contains(@class,'modal-content')]//h4[text()='Notification Details']"), 2);
+
+			Report.Info($"Verifying detailspop up is displayed");
+			return DisplayPopup.Displayed;
+		}
+
+		public bool ClickCloseInDetailsPopUp()
+		{
+			IWebElement CloseButton = this.FindElement(By.XPath("//div[contains(@class,'modal-footer')]//button[text()='Close']"), 2);
+			Report.Info($"Clicking close button");
+			return CloseButton.TryClick();
+		}
 
 		#endregion
 
