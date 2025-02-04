@@ -23,7 +23,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool RetailerDisplayedBelowHeading(string heading, string retailer)
 		{
-			IWebElement Retailer = this.FindElement(By.XPath($".//div[starts-with(@class,'col-sm-3') and ../parent::div[@class='" + heading + "']]//a//span[contains(text(),'" + retailer + "')]"), 2);
+			IWebElement Retailer = this.FindElement(By.XPath($".//div[starts-with(@class,'col-sm-3') and ../parent::div[@class='{heading}']]//a//span[contains(text(),'{retailer}')]"), 2);
 			return Retailer.Displayed;
 		}
 		public string HeaderShowing()

@@ -38,8 +38,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		public void ConfirmRetailerPageIsDisplayed(string page)
 		{
 			Report.IsTrue(new RetailPartnersDetails().HeaderShowing(page),
-				"Retailer'" + page + "' was not showing!",
-				"Retailer '" + page + "' was showing, as expected!");
+				$"Retailer'{page }' was not showing!",
+				$"Retailer '{page}' was showing, as expected!");
 		}
 
 		[RegexStepDefinition(@"In the Retail Partners Details page, click 'What are the Data Usage Tiers?' button")]
@@ -126,7 +126,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			string heading = "most-recent";
 			var selRetailPartners = new RetailPartners();
 			
-			Report.IsTrue(new RetailPartners().RetailerDisplayedBelowHeading(heading,retailer), "Retailer is displayed under Most Recent Retailers: " + retailer, "Retailer is displayed under Most Recent Retailers: " + retailer);
+			Report.IsTrue(new RetailPartners().RetailerDisplayedBelowHeading(heading,retailer), $"Retailer '{retailer}' is displayed under Most Recent Retailers ", $"Retailer '{retailer}' is displayed under Most Recent Retailers");
 		}
 
 		[RegexStepDefinition(@"In the Retail Partners page, confirm Retailer (.*) is displayed under All Retailers")]
@@ -135,7 +135,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			string heading = "all-retailers";
 			var selRetailPartners = new RetailPartners();
 
-			Report.IsTrue(new RetailPartners().RetailerDisplayedBelowHeading(heading, retailer), "Retailer is displayed under All Retailers: " + retailer, "Retailer is displayed under All Retailers: " + retailer);
+			Report.IsTrue(new RetailPartners().RetailerDisplayedBelowHeading(heading, retailer), $"Retailer '{retailer}' is displayed under All Retailers ", $"Retailer  '{retailer}' is displayed under All Retailers ");
 		}
 
 
