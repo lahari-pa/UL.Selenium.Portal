@@ -68,7 +68,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		}
 
 
-		[RegexStepDefinition(@"In the My Reports page,search WPSID by entering value: (.*)")]
+		[RegexStepDefinition(@"In the My Reports page, search WPSID by entering value: (.*)")]
 		public void SearchWPSId(string text)
 		{
 			SupplierReports supplierReportsObject = new SupplierReports();
@@ -76,6 +76,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			Report.IsTrue(supplierReportsObject.SelectFirstResultInWPSIDTextFieldSearchResultsInMyReportsPage(), "Failed to select first result in the WPSID textfield search results", "Successfully selected the first result in the WPSID textfield search results");
 		}
 
+		[RegexStepDefinition(@"In the My Reports page, click Download button for the report with Report Name: (.*) File Type: (CSV|XLSX|CSV \(Zip\)|XLSX \(Zip\)) Requested By: (.*)")]
+		public void ClickTheDownloadButtonForTheReportWithReportNameFileTypeRequestedBy(string reportName, string type, string requestedBy)
+		{
+			GeneralUtilities.Wait_for_load_finish();
+			SupplierReports supplierReportsObject = new SupplierReports();
+			Report.IsTrue(supplierReportsObject.ReportHistroryTableFilterByColumn("DateRequested", "descending"), "The column was not set to the correct filter direction", "The column was set to the correct filter direction");
+			Report.IsTrue(supplierReportsObject.SelectDownloadButtonForTheMostRecentReport(reportName, type, requestedBy), "Failed to click Download button", "Successfully clicked Download button");
+			GeneralUtilities.Wait_for_load_finish();
+		}
+
+		[RegexStepDefinition(@"In the My Reports page, Verify the report information Report Name: (.*) File Type: (CSV|XLSX|CSV \(Zip\)|XLSX \(Zip\)) Requested By: (.*)")]
+		public void VerifyReportIsDisplayedInTable(string reportName, string type, string requestedBy)
+		{
+			SupplierReports supplierReportsObject = new SupplierReports();
+			GeneralUtilities.Wait_for_load_finish();
+			Report.IsTrue(supplierReportsObject.ReportHistroryTableFilterByColumn("DateRequested", "descending"), "The column was not set to the correct filter direction", "The column was set to the correct filter direction");
+			GeneralUtilities.Wait_for_load_finish();
+			Report.IsTrue(supplierReportsObject.CheckReportDataForMostRecentFile(reportName, type, requestedBy), "Failed to display report in table", "Successfully displayed report in table");
+		}
 
 	}
 }
