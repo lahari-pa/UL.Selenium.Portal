@@ -616,7 +616,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				if (Report.IsTrue(new ModalDialog().WaitForContainerToBeVisible(), "The modal was not visible", "The modal was visible"))
 				{
-					string actualTitle = new ModalDialog().GetTitle();
+					string actualTitle = new ModalDialog().GetTitleH3();
 					Report.IsTrue(actualTitle == title, $"Title is {actualTitle}, but should be: {title}",
 						$"Title is showing as expected: {title}");
 				}

@@ -21,6 +21,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		protected override By ContainerElementLocator => By.XPath(BasePath);
 
+		public bool RetailerDisplayedBelowHeading(string heading, string retailer)
+		{
+			IWebElement Retailer = this.FindElement(By.XPath($".//div[starts-with(@class,'col-sm-3') and ../parent::div[@class='{heading}']]//a//span[contains(text(),'{retailer}')]"), 2);
+			return Retailer.Displayed;
+		}
 		public string HeaderShowing()
 		{
 			return this.containerElement.FindElement(By.XPath("..//h2"), 2).Text;
@@ -191,12 +196,27 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	class RetailPartnersDetails : SeleniumBaseObject
 	{
 		public const string BasePath = "//div[@id='retailDetails']";
+
+		IWebElement DataConsentTierToggle(string name) => this.FindElement(By.XPath($"//tr[td//div[contains(text(), '{name}')]]//following-sibling::td//input"), 2);
+		IWebElement DataConsentTierToggleSpan(string name) => this.FindElement(By.XPath($"//tr[td//div[contains(text(), '{name}')]]//following-sibling::td//span"), 2);
 		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public bool HeaderShowing(string header, bool exact = true)
 		{
-			IList<IWebElement> headers = this.containerElement.FindElements(By.XPath(".//h3"), 2);
+			IList<IWebElement> headers = this.FindElements(By.XPath("//div[@id='mainBody']//h2"), 2);
 			return headers.Any(x => x.Text.Contains(header));
+		}
+
+		public bool DataConsentTierToggleExists(string tiername)
+		{
+			return this.DataConsentTierToggle(tiername) != null;
+		}
+
+		public bool DataConsentTierToggleOn_Off(string tiername, string on_off)
+		{
+			bool expected = on_off == "On";
+			bool Checked = this.DataConsentTierToggle(tiername).Selected;
+			return Checked == expected || this.DataConsentTierToggleSpan(tiername).TryClick() && Checked == expected;
 		}
 
 		public string GetSectionText(string section)

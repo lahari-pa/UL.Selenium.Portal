@@ -21,7 +21,7 @@
     "LinkedSoftwareId": 20,
     "SoftwareBranch": "QA-Integration",
     "BuildOperationSettings": {
-      "PerformBuildOperations": false
+      "PerformBuildOperations": true
     }
   },
   "MailosaurSettings": {
