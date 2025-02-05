@@ -25,15 +25,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 	[Binding, Scope(Tag = "CartPage")]
 	class Steps_ShoppingCart
 	{
-		[RegexStepDefinition(@"In the Shopping Cart, Validate popup when cart is empty")]
-		public void CValidatePopupWhenCartIsEmpty()
+		[RegexStepDefinition(@"In the Shopping Cart, Validate empty cart popup (should| should not) be displayed")]
+		public void ValidatePopupWhenCartIsEmpty(string condition)
 		{
-			GeneralUtilities.Wait_for_load_finish();
-			Report.Info("Checking that Cart is Empty window appears");
-			var selCartEmpty = new CartIsEmptyDialog();
-			string showing = selCartEmpty.HeaderShowing();
-			Report.IsTrue(showing == "Cart is Empty",$"Cart is Empty header was not as expected!but found: '{showing}' instead!",
-					"Cart is Empty header was showing 'Cart is Empty', as expected!");
+			string title = "Cart is Empty";
+			string text = "There are no items in the shopping cart.";
+			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeadingAndText(condition, title, text);
+		}
+
+		[RegexStepDefinition(@"In the Shopping cart, in the 'empty cart' pop up click Close button")]
+		public void ClickCloseInRemoveDocumentPopUp()
+		{
+			string popupTitle = "Cart is Empty";
+			string button = "Close";
+			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(popupTitle, button);
 		}
 
 
