@@ -96,5 +96,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			Report.IsTrue(supplierReportsObject.CheckReportDataForMostRecentFile(reportName, type, requestedBy), "Failed to display report in table", "Successfully displayed report in table");
 		}
 
+
+
+		[RegexStepDefinition(@"In the My Reports Page, set the 'Start Date' in format mm-dd-yyyy to: (.*)")]
+		public void EnterStartDate(string date)
+		{
+			string label = "Start Date";
+			Report.StartStep($"Attempting to enter '{date}' into Start Date search input.");
+			new SupplierReports().DateText(label, date);
+
+		}
+
+		[RegexStepDefinition(@"In the My Reports Page, set the 'End Date' in format mm-dd-yyyy to: (.*)")]
+		public void EnterEndDate(string date)
+		{
+			string label = "End Date";
+			Report.StartStep($"Attempting to enter '{date}' into End Date search input.");
+			new SupplierReports().DateText(label, date);
+
+		}
 	}
 }
