@@ -903,6 +903,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			new StepsNewProduct().NoErrorMessages();
 
 		}
+		[RegexStepDefinition(@"Click on the following page heading: (.*)")]
+		public void ClickPageHeading(string section)
+		{
+			Delay.Seconds(10);
+			GeneralUtilities.Wait_for_load_finish();
+
+			if (new NewProduct().ActivePanelHeadingText() == section)
+			{
+				Report.Info($"The panel: {section} is already active");
+				return;
+			}
+			Report.IsTrue(new NewProduct().ClickSection(section), $"Failed to click section: {section}", $"Successfully clicked section: {section}");
+			GeneralUtilities.Wait_for_load_finish();
+		}
 
 	}
 }

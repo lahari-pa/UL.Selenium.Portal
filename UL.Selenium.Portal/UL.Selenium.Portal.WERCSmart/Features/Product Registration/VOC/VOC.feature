@@ -958,8 +958,8 @@ Scenario: [73503] VOC - ACP Plan = Yes and CARB Value Above Limit for RU - VOC R
 
 	Given I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)  Page
 	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.': to: Yes
-	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB': to: Value" >45 (greater than 45)
-	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule': to: Value" >45 (greater than 45)
+	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB': to: 50
+	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule': to: 40
 	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?': to: Yes
 	Then in the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)  page I click Continue
 
@@ -967,65 +967,22 @@ Scenario: [73503] VOC - ACP Plan = Yes and CARB Value Above Limit for RU - VOC R
 	And In the Volatile Organic Compound Summary Section, the statement 'Based on the type of product, this must comply with the most restrictive VOC limit.' is displayed
 	And In the Volatile Organic Compound Summary Section, the statement 'Does not exceed the limits specified in the California Consumer Products Regulation' is not displayed
 	And In the Volatile Organic Compound Summary Section, the statement 'Exceeds the limits specified in the California Consumer Products Regulation' is not displayed
-
-
-	And In the Volatile Organic Compound Summary Section, confirm 'Limits' table should exists
-	And In the Volatile Organic Compound Summary Section, confirm 'VOC content as weight percentage of total formula, minus exempt compounds, for each of the following states.' table should exists
-	And In the Volatile Organic Compound Summary Section, confirm that I see the following 'CARB' value: 2
-	And In the Volatile Organic Compound Summary Section, confirm that I see the following 'OTC Model Rule' value: 2
-	And In the Volatile Organic Compound Summary Section, the statement 'Based on the type of product, this must comply with the most restrictive VOC limit.' is displayed
-	And In the Volatile Organic Compound Summary Section, the statement 'Does not exceed the limits specified in the California Consumer Products Regulation' is displayed
+	And In the Volatile Organic Compound Summary Section, confirm the statement 'Alternative Control Plan' is displayed
 	And In the Volatile Organic Compound Summary Section, the statement 'Does not exceed the limits specified by the Ozone Transport Commission' is displayed
-	And In the Volatile Organic Compound Summary Section, for 'Your acknowledgement of this registration includes that your product..' set 'Yes, I Acknowledge'
-	Then in the Volatile Organic Compound Summary page, I click Continue
-	And In the Volatile Organic Compound Summary Section, for the table 'VOC content as weight percentage of total formula, minus exempt compounds, for each of the following states.' confirm the following values displays in the table:
-		| State                | Regulation            | VOC Value | State VOC Threshold | Message                          |
-		| Colorado             | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
-		| Connecticut          | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
-		| District of Columbia | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
-		| Delaware             | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
-		| Illinois             | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
-		| Indiana              | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
-		| Massachusetts        | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
-		| Maryland             | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
-		| Maine                | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
-		| Michigan             | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
-		| New Hampshire        | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
-		| New Jersey           | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
-		| New York             | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
-		| Ohio                 | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
-		| Pennsylvania         | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
-		| Rhode Island         | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
-		| Utah                 | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
-		| Virginia             | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
-		| Vermont              | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
 
+	Then Click on the following page heading: Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) 
+	And In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB': to: 40
+	Then in the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)  page I click Continue
+	And In the Volatile Organic Compound Summary Section, confirm the statement 'Alternative Control Plan' is not displayed
+	And In the Volatile Organic Compound Summary Section, the statement 'Does not exceed the limits specified in the California Consumer Products Regulation' is displayed
 
-	And I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
-    And I set the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. option to: Yes
-	And I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB option to: 50
-	And I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule option to: 40
-	And I set the Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison? option to: Yes
-	And I click continue
-	And I should see the Volatile Organic Compound Summary Page
-	Given I scroll to the bottom of the page
-	And I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
-	And I confirm that statement with text: 'Does not exceed the limits specified by the California Consumer Products Regulation' is not displayed
-	And I confirm that statement with text: 'Exceeds the limit specified by the California Consumer Products Regulation' is not displayed
-	And The VOC Summary page contains the statement with the text: Alternative Control Plan
-	And The VOC Summary page contains the statement with the text: Does not exceed the limits specified by the Ozone Transport Commission
-	And I click the page heading: Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)
-	And I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB option to: 40
-	And I click continue
-	Given I scroll to the bottom of the page
-	And I confirm that statement with text: 'Alternative Control Plan' is not displayed
-	And The VOC Summary page contains the statement with the text: Does not exceed the limits specified in the California Consumer Products Regulation
-	And I click the page heading: Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)
-	And I set the Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations. option to: No
-	And I set the Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB option to: 55
-	And I click continue
-	Given I scroll to the bottom of the page
-	And I confirm that statement with text: 'Alternative Control Plan' is not displayed
-	And The VOC Summary page contains the statement with the text: Exceeds the limits specified in the California Consumer Products Regulation
-	And I navigate to the home page
-	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase73503
+	Then Click on the following page heading: Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) 
+	And In the VOC - Ozone Transport Commission Section, set the option in section: 'Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.': to: No
+	And In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB': to: 50
+	Then in the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB)  page I click Continue
+	And In the Volatile Organic Compound Summary Section, confirm the statement 'Alternative Control Plan' is not displayed
+	And In the Volatile Organic Compound Summary Section, the statement 'Exceeds the limits specified in the California Consumer Products Regulation' is displayed
+
+	#And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase73503
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase73503

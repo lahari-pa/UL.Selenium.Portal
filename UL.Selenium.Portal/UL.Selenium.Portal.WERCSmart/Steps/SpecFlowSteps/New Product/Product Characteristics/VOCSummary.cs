@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using iText.Commons.Utils;
+using NPOI.SS.Formula.Functions;
 using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
@@ -152,5 +153,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			new Steps_Prototype().ThenIShouldSeeTheFollowingVocPercentForEachState(table);
 		}
+		[RegexStepDefinition(@"In the Volatile Organic Compound Summary Section, confirm the statement 'Alternative Control Plan' (is|is not) displayed")]
+		public void ConfirmStatementAlternativeControlPlanIsOrIsNotDisplayed(string is_isnot)
+		{
+			string text = "Alternative Control Plan";
+			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);
+		}
+
 	}	
 }
