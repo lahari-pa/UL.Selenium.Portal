@@ -61,6 +61,58 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			string modalTitle = "Are you sure you wish to cancel?";
 			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(modalTitle, button);
 		}
+		[RegexStepDefinition(@"In the Company Information section, verify the (Company Name|Contact Email|Contact|Supplier Type|Country|Address|City|State|Zip|Country Code|Company Phone) is (.*)")]
+		public void VerifyCompanyInformation(string field, string value)
+		{
+			string section = "Company Name";
+			if (Report.IsTrue(new CompanyInformationSection(section).FindCompanyData(field, value), $"Failed to find the '{field}' is '{value}'", $"Successfully found the 'the '{field}' is '{value}'"))
+			{
+				Report.IsTrue(new CompanyInformationSection(section).VerifyCompanyData(field, value), $"Failed to confirm the '{field}' is displayed with value: '{value}'", $"Successfully confirmed the '{field}' is displayed with value: '{value}'");
+			}
+		}
+		[RegexStepDefinition(@"In the Company Information section, in the '(Billing Address|Shipping Address|Canada Supplier Address)' verify the (Country|Address|City|State|Zip|Country Code|Company Phone|Province|Postal Code) is (.*)")]
+		public void VerifyCompanyInformationBillingAddress(string section, string field, string value)
+		{
+			if (Report.IsTrue(new CompanyInformationSection(section).FindCompanyData(field, value), $"Failed to find the '{field}' is '{value}'", $"Successfully found the 'the '{field}' is '{value}'"))
+			{
+				Report.IsTrue(new CompanyInformationSection(section).VerifyCompanyData(field, value), $"Failed to confirm the '{field}' is displayed with value: '{value}'", $"Successfully confirmed the '{field}' is displayed with value: '{value}'");
+			}
+		}
+		[RegexStepDefinition(@"In the Company Information section, in the 'Company' section for the (Company Name|Address|Address 2|Address 3|City|Zip|Country Code|Company Phone|State) enter text (.*)")]
+		public void EnterTextForCompanyAddress(string field, string value)
+		{
+			string section = "Company Name";
+			if (Report.IsTrue(new CompanyInformationSection(section).AddressInputFieldExists(field), $"Failed to find the '{field}' input field", $"Successfully found the 'the '{field}' input field."))
+			{
+				Report.IsTrue(new CompanyInformationSection(section).AddressInputFieldEnterText(field, value), $"Failed to enter '{value}' in the '{field}' input field.", $"Successfully entered '{value}' in the '{field}' input field.");
+			}
+		}
+		[RegexStepDefinition(@"In the Company Information section, in the '(Billing Address|Shipping Address|Canada Supplier Address)' for the (Address|Address 2|City|Zip|Country Code|Company Phone|Postal Code|State) enter text (.*)")]
+		public void EnterTextForCompanyInformationAddress(string section, string field, string value)
+		{
+			if (Report.IsTrue(new CompanyInformationSection(section).AddressInputFieldExists(field), $"Failed to find the '{field}' input field", $"Successfully found the 'the '{field}' input field."))
+			{
+				Report.IsTrue(new CompanyInformationSection(section).AddressInputFieldEnterText(field, value), $"Failed to enter '{value}' in the '{field}' input field.", $"Successfully entered '{value}' in the '{field}' input field.");
+			}
+		}
+		[RegexStepDefinition(@"In the Company Information section, in the 'Company' section for the (Country|Supplier Type|State) select option (.*)")]
+		public void SelectStateOptionForCompanyAddress(string field, string value)
+		{
+			string section = "Company Name";
+			if (Report.IsTrue(new CompanyInformationSection(section).AddressSelectFieldExists(field), $"Failed to find the '{field}' select field", $"Successfully found the 'the '{field}' select field."))
+			{
+				Report.IsTrue(new CompanyInformationSection(section).AddressSelectFieldSelectOption(field, value), $"Failed to select '{value}' in the '{field}' field.", $"Successfully selected '{value}' in the '{field}' field.");
+			}
+		}
+		[RegexStepDefinition(@"In the Company Information section, in the '(Billing Address|Shipping Address|Canada Supplier Address)' for the (Country|State|Province) select option (.*)")]
+		public void SelectOptionForCompanyInformationAddress(string section, string field, string value)
+		{
+			if (Report.IsTrue(new CompanyInformationSection(section).AddressSelectFieldExists(field), $"Failed to find the '{field}' select field", $"Successfully found the 'the '{field}' select field."))
+			{
+				Report.IsTrue(new CompanyInformationSection(section).AddressSelectFieldSelectOption(field, value), $"Failed to select '{value}' in the '{field}' field.", $"Successfully selected '{value}' in the '{field}' field.");
+			}
+		}
+
 	}
 }
 
