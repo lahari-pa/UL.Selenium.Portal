@@ -9,8 +9,6 @@ using System.Threading.Tasks;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
