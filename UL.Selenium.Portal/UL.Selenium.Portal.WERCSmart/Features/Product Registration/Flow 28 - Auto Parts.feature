@@ -51,9 +51,10 @@ Scenario: [60673] Gasoline Container, Portable - RU001419
 
 	#And I call Shared Step 69687 (Product Information - US, No(PL))
 	Given I should see the Product Information Page
-	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
-	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: Yes
-    Given in the Product Information page I click Continue
+	And In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
+	And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page, I click Continue
 
 	Given I should see the Inventory Status, Prop 65 (US) Page
 	Given In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
