@@ -49,8 +49,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		[RegexStepDefinition(@"In the My Reports page, (check|uncheck) checkbox in 'Zip Report?'")]
 		public void ZipReportCheckbox(string option)
 		{
-			string section = "Zip Report?";
-			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+			SupplierReports supplierReportsObject = new SupplierReports();
+			Report.IsTrue(supplierReportsObject.SelectZipReportCheckbox(), "Failed to select Zip Report Checkbox", "Successfully selected Zip Report Checkbox");
 		}
 
 		[RegexStepDefinition(@"In the My Reports page, the 'Report Download' modal window (should|should not) be displayed")]
