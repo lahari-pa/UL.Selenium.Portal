@@ -45,10 +45,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			new Steps_Prototype().ClickLinkElement(linkText);
 		}
 
+		[RegexStepDefinition(@"In the My Library section, Validate Delete Product popup (should| should not) be displayed")]
+		public void ValidateDeleteProductPopup(string condition)
+		{
+			string title = "Delete Product";
+			string text = "Are you sure you want to remove this item?";
+			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeadingAndText(condition, title, text);
+		}
 
-
-
-
+		[RegexStepDefinition(@"In the My Library section, in the 'Delete Product' pop up click (Delete|Close) button")]
+		public void ClickDeleteCloseInDeleteProductPopUp(string button)
+		{
+			string popupTitle = "Delete Product";
+			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(popupTitle, button);
+		}
 
 	}
 
