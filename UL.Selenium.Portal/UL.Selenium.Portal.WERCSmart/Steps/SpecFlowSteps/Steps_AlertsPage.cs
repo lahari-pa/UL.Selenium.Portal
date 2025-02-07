@@ -31,7 +31,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			Report.StartStep("Verify WPS ID field is displayed");
 			new AlertsPage().WpsIdFieldExists();
 			Report.StartStep($"Attempting to enter '{wpsId}' into wps id search text input.");
-			new AlertsPage().NotificationDateText(wpsId);
+			new AlertsPage().WpsIdText(wpsId);
 
 
 		}
