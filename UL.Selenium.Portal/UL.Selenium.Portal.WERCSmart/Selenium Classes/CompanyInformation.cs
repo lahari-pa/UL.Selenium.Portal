@@ -161,9 +161,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				int columnIndex = new CompanyInfoStewardshipTable().GetColumnIndex(columnName);
 				IWebElement Cell = this.ContainerElement.FindElement(By.XPath($".//td[{columnIndex+1}]//input"));
-				IWebElement ClickCell = this.ContainerElement.FindElement(By.XPath($".//td[2]"));
+				IWebElement OutsideClick = this.ContainerElement.FindElement(By.XPath($"//body"));
 				result = Cell.TryEnterText(value);
-				ClickCell.Click();
+				OutsideClick.Click();
 				return result;
 			}
 			else
