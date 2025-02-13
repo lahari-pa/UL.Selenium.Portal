@@ -81,6 +81,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			return this.containerElement.FindElements(By.XPath("//*[@class='modal-title' or @class='modal-header']")).FirstOrDefault(x => x.Displayed)?.Text;
 		}
+		public string GetTitleH3()
+		{
+			return this.ContainerElement.FindElements(By.XPath("//*[@class='modal-title' or @class='modal-header']//h3")).FirstOrDefault(x => x.Displayed)?.Text;
+		}
 
 		public void EnterLoginPassword(string password)
 		{

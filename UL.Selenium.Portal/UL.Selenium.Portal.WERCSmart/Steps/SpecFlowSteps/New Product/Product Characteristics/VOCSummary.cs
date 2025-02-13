@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using iText.Commons.Utils;
+using NPOI.SS.Formula.Functions;
 using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
@@ -83,7 +84,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		[RegexStepDefinition(@"In the Volatile Organic Compound Summary Section, for 'Your acknowledgement of this registration includes that your product..' set 'Yes, I Acknowledge'")]
 		public void SetYesIAcknowledge()
 		{
-			string section = "Your acknowledgement of this registration includes that your product";
+			string section = "Your acknowledgement of this registration includes that your product (exceeds/does not exceed) the limits specified by the noted regulations and understand these statements of exceeding, or not exceeding, will be provided to the recipients for which the product is registered and assessed.  Recipients may take action based on these statements.";
 			new Steps_Prototype().SetTheSectionOptionTo(section, "Yes, I Acknowledge");
 		}
 		[RegexStepDefinition(@"In the Volatile Organic Compound Summary Section, confirm 'Limits' table (should|should not) exists")]
@@ -146,5 +147,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string text = "Does not exceed the limits specified by the California Air District(s)";
 			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);
 		}
+		//| State | Regulation  | VOC Value | State VOC Threshold | Message |
+		[RegexStepDefinition(@"In the Volatile Organic Compound Summary Section, for the table 'VOC content as weight percentage of total formula, minus exempt compounds, for each of the following states.' confirm the following values displays in the table:")]
+		public void ConfirmValuesInVocContentTable(Table table)
+		{
+			new Steps_Prototype().ThenIShouldSeeTheFollowingVocPercentForEachState(table);
+		}
+		[RegexStepDefinition(@"In the Volatile Organic Compound Summary Section, confirm the statement 'Alternative Control Plan' (is|is not) displayed")]
+		public void ConfirmStatementAlternativeControlPlanIsOrIsNotDisplayed(string is_isnot)
+		{
+			string text = "Alternative Control Plan";
+			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);
+		}
+
 	}	
 }

@@ -33,7 +33,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		IWebElement LinkElement(string linkText) => this.ContainerElement.FindElement(By.XPath($".//a[text()='{linkText}'] | .//a//span[text()='{linkText}']"), 2);
 		IWebElement Button(string button) => this.ContainerElement.FindElement(By.XPath($"//button//span[text() = '{button}'] | .//a[text() = '{button}'] | //button[text() = '{button}'] | //button[@title = '{button}']"), 2);
 		IWebElement Table(string tableName) => this.ContainerElement.FindElement(By.XPath($"//div[div[text() = '{tableName}']]/following-sibling::table"), 2);
-		IWebElement TextOnThePage(string text) => this.ContainerElement.FindElement(By.XPath($"//div//*[text() = \"{text}\"] | //div//b[contains(text(), \"{text}\")]"),2);
+		IWebElement TextOnThePage(string text) => this.ContainerElement.FindElement(By.XPath($"//div//*[contains(text(), \"{text}\")] | //div//b[contains(text(), \"{text}\")]"),2);
 		IWebElement ButtonSave(string button) => this.ContainerElement.FindElement(By.XPath($".//div[@id='collapse1']//a[text() = '{button}']"), 2);
 
 		public bool TextExistsOnThePage(string text)
@@ -3649,15 +3649,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public IWebElement StandaloneCheckbox(string description)
 		{
-			IWebElement el = this.ContainerElement.FindElement(By.XPath($@".//div[@class='checkbox' and (.//span[contains(text(),'{description}')])]/label/input | .//div[span[text() = '{description}']]/input"), 2);
-			IWebElement el2 = this.ContainerElement.FindElement(By.XPath($@".//input[@type='checkbox'][.//following-sibling::span[text()='{description}']]"));
+			IWebElement el = this.ContainerElement.FindElement(By.XPath($@".//div[@class='checkbox' and (.//span[contains(text(),'{description}')])]/label/input | .//div[span[text() = '{description}']]/input | //label[contains(@class, 'checkbox') and normalize-space(text()='{description}')]//input[@type='checkbox']"), 2);
+			IWebElement el2 = this.ContainerElement.FindElement(By.XPath($@".//input[@type='checkbox'][.//following-sibling::span[normalize-space(text()='{description}')]]"));
+			IWebElement el3 = this.ContainerElement.FindElement(By.XPath($@"..//input[@type='checkbox'][.//following-sibling::span[normalize-space(text()='{description}')]]"));
 			if (el == null)
+
 			{
 				if (el2 == null)
 				{
-					Report.Info($"Could not find checkbox with description: '{description}'");
-					return null;
+					if (el3 == null)
+					{
+						Report.Info($"Could not find checkbox with description: '{description}'");
+						return null;
+					}
+					return el3;
 				}
+
 				return el2;
 			}
 			return el;
@@ -3665,13 +3672,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool SetOptionInSection(string section, string value)
 		{
-			string xPath = @"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),""" + value + @""") and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox'] | " +
-						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),""" + value + @""") and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
-						@"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and @type='text'] | " +
-						@"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and @type='email'] | " +
-						@"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")])] | " +
-						@"//select[contains(@data-bind,""" + section + @""")] |" +
-						@"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),""" + section + @""")]) and contains(text(),""" + value + @""") and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input)";
+			string xPath = $"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),'{section}')]) and contains(text(),'{value}') and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox'] | " +
+						$"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),'{section}')]) and contains(text(),'{value}') and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
+						$"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),'{section}')]) and @type='text'] | " +
+						$"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),'{section}')]) and @type='email'] | " +
+						$"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),'{section}')])] | " +
+						$"//select[contains(@data-bind,'{section}')] |" +
+						$"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),'{section}')]) and contains(text(),'{value}') and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input) |" +
+						$"//select[(.//ancestor::div//label[contains(text(),'{section}')])] |" +
+						$"//input[(.//following-sibling::label[contains(text(),'{section}')])]";
 
 			IWebElement el = this.ContainerElement.FindElement(By.XPath(xPath), 10);
 
