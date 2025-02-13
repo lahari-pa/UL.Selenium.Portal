@@ -224,7 +224,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		#region Class Objects
 		protected override By ContainerElementLocator => By.XPath("//table[not(@id)][@class='table table-hover products-table']");
 		private List<IWebElement> ColumnLabelsList => this.FindElements(By.XPath(".//th[text()]"),1).ToList();
-		private IWebElement ColumnLabel(string columnLabel) => this.ColumnLabelsList.Where(x => x.Text == columnLabel).FirstOrDefault();
+		private IWebElement ColumnLabel(string columnLabel) => this.ColumnLabelsList.FirstOrDefault(x => x.Text == columnLabel);
 		private List<MyProductsTableRow> ProductTableRowsList => this.ContainerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: products']//tr"), 1).Select(x => new MyProductsTableRow(x)).ToList();
 		#endregion
 
@@ -266,7 +266,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public MyProductsTableRow ProductRowByNameGet(string productName)
 		{
 			Report.Info($"Attempting to get product row with '{productName}' product name.");
-			return this.ProductTableRowsList.Where(x=>x.ProductName == productName).FirstOrDefault();
+			return this.ProductTableRowsList.FirstOrDefault(x=>x.ProductName == productName);
 		}
 
 		public MyProductsTableRow ProductRowByIDGet(string productID)
