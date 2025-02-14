@@ -579,6 +579,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				$"The checkbox was not {check}ed after",
 				$"The checkbox is {check}ed as expected");
 		}
+
+		[RegexStepDefinition(@"I click the checkbox with description: (.*)")]
+		public void ClickTheCheckboxWithDescription(string description)
+		{
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.CheckStandaloneCheckbox(description),
+				$"Failed to click the checkbox with description: '{description}'!",
+				$"Successfully clicked the checkbox with description: '{description}'");
+		}
 		[RegexStepDefinition(@"Confirm the checkbox with description: (.*) (is|is not) checked")]
 		public void TheCheckboxWithDescriptionIsIsNotChecked(string description, string is_isnot)
 		{
