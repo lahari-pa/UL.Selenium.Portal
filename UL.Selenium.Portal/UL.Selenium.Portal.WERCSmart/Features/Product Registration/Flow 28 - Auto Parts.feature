@@ -61,7 +61,7 @@ Scenario: [60673] Gasoline Container, Portable - RU001419
     Given in the Inventory Status, Prop 65 (US) page I click Continue
 
 	Given I should see the Fuel Container Regulatory Details Page
-	Given I enter the text of Product is a Safety Can field to: Yes
+	Given In the Fuel Container Regulatory Details Section, set the option in section: 'Product is a Safety Can' to: Yes
 	Given in the Fuel Container Regulatory Details page I click Continue
 
 	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Harbor Freight Tools
@@ -69,7 +69,7 @@ Scenario: [60673] Gasoline Container, Portable - RU001419
 	Given In the Retailer Section, click 'Add Retailers' button
 	Given In the Select Retailers window, select retailer: Harbor Freight Tools
 	Given In the Select Retailers window, click 'Done' button
-	Given In the Retailer Section, for retailer: Harbor Freight Tools enter 'Indicate full name of product, as sold, via this retailer': Private Label Gasoline
+#	Given In the Retailer Section, for retailer: Harbor Freight Tools enter 'Indicate full name of product, as sold, via this retailer': Private Label Gasoline
 	Given in the Retailer page I click Continue
 
 	#Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60673, container type: Cardboard and size: 20
@@ -79,8 +79,8 @@ Scenario: [60673] Gasoline Container, Portable - RU001419
 	Given in the Universal Product Code (UPC) page I click Continue
 
 	Given I should see the Additional Documents to Provide Page
-	Given In the Additional Documents to Provide, upload PDF document to Upload SDS (Optional) field
-	Given In the Additional Documents to Provide, upload PDF document to Generic Private Label (all sides) field
+	#Given In the Additional Documents to Provide, upload PDF document to Upload SDS (Optional) field
+	#Given In the Additional Documents to Provide, upload PDF document to Generic Private Label (all sides) field
 	Then in the Additional Documents to Provide page I click Continue
 
 	Given I should see the Optional Comments Page

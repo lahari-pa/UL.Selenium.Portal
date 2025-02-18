@@ -207,6 +207,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string section = "Generally Recognized as Safe (GRAS)";
 			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, shouldShouldNot, pipeDelimitedErrorMessages);
 		}
+		[RegexStepDefinition(@"In the Additional Documents to Provide, for section 'OSHA-compliant Safety Data Sheet \(Optional\)' error message (should|should not) display: (.*)")]
+		public void OSHACompliantSectionShouldNotDisplayError(string shouldShouldNot, string pipeDelimitedErrorMessages)
+		{
+			string section = "OSHA-compliant Safety Data Sheet (Optional)";
+			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, shouldShouldNot, pipeDelimitedErrorMessages);
+		}
 		[RegexStepDefinition(@"In the Additional Documents to Provide Section, for section (Product Label|IFRA Certificate \(Perfumery Products\)|TCLP Test Results \(Optional\)|STLC/TTLC Results for California \(Optional\)|Toxicology or Eco-Tox Testing Data \(Optional\)) I click button 'Browse'")]
 		public void ClickBrowseButton(string section)
 		{
