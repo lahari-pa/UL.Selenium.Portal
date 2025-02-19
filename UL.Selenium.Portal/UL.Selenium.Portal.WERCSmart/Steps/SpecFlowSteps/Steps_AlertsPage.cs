@@ -177,7 +177,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		}
 
 		[RegexStepDefinition(@"In the My Alerts Page, click action (Details |Resolve |UPC(s) Provided ) for product name: (.*)")]
-		public void ClickActionForProduct(string action, string productname)
+		public void ClickActionForProduct(string productname, string action)
 		{
 			Report.IsTrue(new AlertsPage().ForProductClickAction(productname, action),
 				$"Failed to click action:{action} for product: {productname}",

@@ -60,6 +60,93 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(popupTitle, button);
 		}
 
+		[RegexStepDefinition(@"In the My Library - Bill of Materials Section, click 'Add Row' button")]
+		public void SetClickAddRow()
+		{
+			string button = "Add Row";
+			new Steps_Prototype().ClickButton(button);
+		}
+
+		[RegexStepDefinition(@"In the My Library section, click action (Edit |Delete ) for product name: (.*)")]
+		public void ClickActionForProduct(string productname, string action)
+		{
+			Report.IsTrue(new MyLibraryPage().ForProductClickAction(productname, action),
+				$"Failed to click action:{action} for product: {productname}",
+				$"Successfully clicked action: {action} for product: {productname}");
+		}
+
+
+		[RegexStepDefinition(@"In the My Library section, I filter by Product ID/Name for product: (.*)")]
+		public void FilterProduct(string value)
+		{
+			string fieldname = "Product ID/ Name";
+			new MyLibraryPage().EnterText(fieldname, value);
+			Report.IsTrue(new MyLibraryPage().ClickSearch(),
+				$"Failed to search for product: {value}",
+				$"Successfully searched for product: {value}");
+		}
+
+		[RegexStepDefinition(@"In the My Library section, Enter Packaging Type Name: (.*)")]
+		public void EnterPackageTypeName(string value)
+		{
+			string fieldname = "Package Type Name";
+			new MyLibraryPage().EnterText(fieldname, value);
+		}
+
+		[RegexStepDefinition(@"In the My Library section, click 'Continue' button")]
+		public void ClickContinue()
+		{
+			string button = "Continue";
+			new Steps_Prototype().ClickButton(button);
+		}
+
+		[RegexStepDefinition(@"In the My Library section, 'Package Type Name' section  should be displayed")]
+		public void ThenInThePageIShouldSeePackageTypeName()
+		{
+			string section_name = "Package Type Name";
+			Report.IsTrue(new MyLibraryPage().SectionExists(section_name),
+				"Package Type Name Field is not showing as expected", "Package Type Name Field is showing as expected");
+		}
+
+		[RegexStepDefinition(@"In the My Library section, 'Bill of Materials' section should be displayed")]
+		public void ThenInThePageIShouldSeeBillOfMaterials()
+		{
+			string section_name = "Bill of Materials";
+			Report.IsTrue(new MyLibraryPage().SectionExists(section_name),
+				"Bill of Materials section is not showing", "Bill of Materials section is showing");
+		}
+
+		[RegexStepDefinition(@"In the My Library - Bill of Materials Section, set the option in section: 'Does your container or any packaging in contact with food or drink \(including cap\) contain Bisphenol A \(BPA\)' to: (Yes|No)")]
+		public void SelectPackagingInContact(string option)
+		{
+			string section = "Does your container or any packaging in contact with food or drink (including cap) contain Bisphenol A (BPA)";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+
+		[RegexStepDefinition(@"In the My Library - Bill of Materials Section, set the option in section: 'Do you have a CONEG Certificate for this package?' to: (Yes|No)")]
+		public void SelectCONEGCertificateForPackage(string option)
+		{
+			string section = "Do you have a CONEG Certificate for this package?";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+
+		[RegexStepDefinition(@"In the My Library - Bill of Materials Section, confirm the question: 'Do you have a CONEG Certificate for this package?' (is|is not) displayed")]
+		public void ConfirmCONEGCertificateForPackageIsIsNotDisplayed(string is_isnot)
+		{
+			string section = "Do you have a CONEG Certificate for this package?";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
+
+		[RegexStepDefinition(@"In the My Library - Bill of Materials Section, confirm the question: 'Does your container or any packaging in contact with food or drink \(including cap\) contain Bisphenol A \(BPA\)' (is|is not) displayed")]
+		public void ConfirmPackagingInContactIsIsNotDisplayed(string is_isnot)
+		{
+			string section = "Does your container or any packaging in contact with food or drink (including cap) contain Bisphenol A (BPA)";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
+
+
+
+
 	}
 
 }
