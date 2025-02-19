@@ -18,6 +18,7 @@ using System.Drawing;
 using System.Reflection;
 using UL.Automation.Utilities;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
@@ -164,6 +165,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		{
 			string section = "Packaging Component Recyclable Number";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
+
+		[RegexStepDefinition(@"In the My Library section, confirm the packaging type: (.*) (is|is not) deleted")]
+		public void InSectionPackagingTypetIsIsNotDeleted(string text, string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			Report.IsTrue(new MyLibraryPage().ProductNameDisplayed(text) != expected,
+				$"Failure, '{text}'packaging type is not deleted", $"Success, '{text}' packaging type is deleted");
 		}
 	}
 

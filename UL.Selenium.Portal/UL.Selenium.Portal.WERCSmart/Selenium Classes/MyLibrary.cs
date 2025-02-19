@@ -97,6 +97,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.SearchButon.TryClick();
 		}
 
+		public bool ProductNameDisplayed(string name)
+		{
+			IWebElement productsTable = this.ContainerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]"), 2);
+			IWebElement productName = productsTable.FindElement(By.XPath($".//tbody/tr/td[./div[contains(text(),'{name}')]]"), 2);
+			return productName.Displayed;
+		}
+
+
+
 		#endregion
 
 
