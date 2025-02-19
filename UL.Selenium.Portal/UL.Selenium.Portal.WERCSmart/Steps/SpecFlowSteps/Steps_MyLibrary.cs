@@ -144,9 +144,27 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
 		}
 
+		[RegexStepDefinition(@"In the My Library - Bill of Materials Section, confirm the question: 'Does your container contain the following?' (is|is not) displayed")]
+		public void ConfirmContainerContainFollowingIsIsNotDisplayed(string is_isnot)
+		{
+			string section = "Does your container contain the following?";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
 
 
+		[RegexStepDefinition(@"In the My Library - Bill of Materials Section, confirm the question: 'Packaging Component Recyclable Number' (is|is not) displayed")]
+		public void ConfirmPackagingComponentRecyclableNumberIsIsNotDisplayed(string is_isnot)
+		{
+			string section = "Packaging Component Recyclable Number";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
 
+		[RegexStepDefinition(@"In the My Library - Bill of Materials Section, set the option in section: 'Packaging Component Recyclable Number' to: (.*)")]
+		public void SetPotassium(string option)
+		{
+			string section = "Packaging Component Recyclable Number";
+			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+		}
 	}
 
 }
