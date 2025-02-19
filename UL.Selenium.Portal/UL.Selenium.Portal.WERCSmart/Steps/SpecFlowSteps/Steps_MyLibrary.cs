@@ -117,35 +117,35 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 				"Bill of Materials section is not showing", "Bill of Materials section is showing");
 		}
 
-		[RegexStepDefinition(@"In the My Library - Bill of Materials Section, set the option in section: 'Does your container or any packaging in contact with food or drink \(including cap\) contain Bisphenol A \(BPA\)' to: (Yes|No)")]
+		[RegexStepDefinition(@"In the My Library - CONEG Section, set the option in section: 'Does your container or any packaging in contact with food or drink \(including cap\) contain Bisphenol A \(BPA\)' to: (Yes|No)")]
 		public void SelectPackagingInContact(string option)
 		{
 			string section = "Does your container or any packaging in contact with food or drink (including cap) contain Bisphenol A (BPA)";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 
-		[RegexStepDefinition(@"In the My Library - Bill of Materials Section, set the option in section: 'Do you have a CONEG Certificate for this package?' to: (Yes|No)")]
+		[RegexStepDefinition(@"In the My Library - CONEG Section, set the option in section: 'Do you have a CONEG Certificate for this package?' to: (Yes|No)")]
 		public void SelectCONEGCertificateForPackage(string option)
 		{
 			string section = "Do you have a CONEG Certificate for this package?";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 
-		[RegexStepDefinition(@"In the My Library - Bill of Materials Section, confirm the question: 'Do you have a CONEG Certificate for this package?' (is|is not) displayed")]
+		[RegexStepDefinition(@"In the My Library - CONEG Section, confirm the question: 'Do you have a CONEG Certificate for this package?' (is|is not) displayed")]
 		public void ConfirmCONEGCertificateForPackageIsIsNotDisplayed(string is_isnot)
 		{
 			string section = "Do you have a CONEG Certificate for this package?";
 			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
 		}
 
-		[RegexStepDefinition(@"In the My Library - Bill of Materials Section, confirm the question: 'Does your container or any packaging in contact with food or drink \(including cap\) contain Bisphenol A \(BPA\)' (is|is not) displayed")]
+		[RegexStepDefinition(@"In the My Library - CONEG Section, confirm the question: 'Does your container or any packaging in contact with food or drink \(including cap\) contain Bisphenol A \(BPA\)' (is|is not) displayed")]
 		public void ConfirmPackagingInContactIsIsNotDisplayed(string is_isnot)
 		{
 			string section = "Does your container or any packaging in contact with food or drink (including cap) contain Bisphenol A (BPA)";
 			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
 		}
 
-		[RegexStepDefinition(@"In the My Library - Bill of Materials Section, confirm the question: 'Does your container contain the following?' (is|is not) displayed")]
+		[RegexStepDefinition(@"In the My Library - CONEG Section, confirm the question: 'Does your container contain the following?' (is|is not) displayed")]
 		public void ConfirmContainerContainFollowingIsIsNotDisplayed(string is_isnot)
 		{
 			string section = "Does your container contain the following?";
@@ -153,26 +153,48 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		}
 
 
-		[RegexStepDefinition(@"In the My Library - Bill of Materials Section, confirm the question: 'Packaging Component Recyclable Number' (is|is not) displayed")]
+		[RegexStepDefinition(@"In the My Library - CONEG Section, confirm the question: 'Packaging Component Recyclable Number' (is|is not) displayed")]
 		public void ConfirmPackagingComponentRecyclableNumberIsIsNotDisplayed(string is_isnot)
 		{
 			string section = "Packaging Component Recyclable Number";
 			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
 		}
 
-		[RegexStepDefinition(@"In the My Library - Bill of Materials Section, set the option in section: 'Packaging Component Recyclable Number' to: (.*)")]
+		[RegexStepDefinition(@"In the My Library - CONEG Section, set the option in section: 'Packaging Component Recyclable Number' to: (.*)")]
 		public void SetPotassium(string option)
 		{
 			string section = "Packaging Component Recyclable Number";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 
-		[RegexStepDefinition(@"In the My Library section, confirm the packaging type: (.*) (is|is not) deleted")]
+		[RegexStepDefinition(@"In the My Library - CONEG section, confirm the packaging type: (.*) (is|is not) deleted")]
 		public void InSectionPackagingTypetIsIsNotDeleted(string text, string is_isnot)
 		{
 			bool expected = is_isnot == "is";
 			Report.IsTrue(new MyLibraryPage().ProductNameDisplayed(text) != expected,
 				$"Failure, '{text}'packaging type is not deleted", $"Success, '{text}' packaging type is deleted");
+		}
+
+		[RegexStepDefinition(@"In the My Library - CONEG section, Check or Uncheck for the section (.*): Does your container contain the following? to : (Lead|Mercury|Cadmium|Hexavalent Chromium|None of the Above)")]
+		public void CheckOrUncheckRetailersSellingLocation(string section, string option)
+		{
+			if (section == "check")
+			{
+				new Steps_Prototype().ICheckTheCheckboxWithDescription(section, option);
+			}
+			else if (section == "uncheck")
+			{
+				new Steps_Prototype().ICheckTheCheckboxWithDescription(section, option);
+			}
+		}
+
+		[RegexStepDefinition(@"In the My Library - CONEG section, How much in PPM? for section: (Lead|Mercury|Cadmium|Hexavalent Chromium|None of the Above), Enter value:(.*)")]
+		public void EnterPPMValueForOption(string option, string value)
+		{
+			Report.StartStep($"Attempting to enter '{value}' into How much in PPM? text input.");
+			new MyLibraryPage().EnterValueforPPM(option,value);
+
+
 		}
 	}
 

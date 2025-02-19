@@ -104,6 +104,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return productName.Displayed;
 		}
 
+		public void EnterValueforPPM(string option, string value)
+		{
+			IWebElement ppmfield = this.FindElement(By.XPath($"//div[@class='form-group cb-ctl has-success']//span[text()='{option}']/ancestor::div[@class='checkbox']/parent::div//input[@type='text']"), 2);
+			ppmfield.EnterText(value);
+		}
 
 
 		#endregion
