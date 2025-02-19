@@ -47,7 +47,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ForProductClickAction(string name, string action)
 		{
 			IWebElement productsTable = this.ContainerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]"), 2);
-			ReadOnlyCollection<IWebElement> listOfProcuttsRows = productsTable.FindElements(By.XPath(".//tbody/tr"));
+			ReadOnlyCollection<IWebElement> listOfProcuttsRows = productsTable.FindElements(By.XPath(".//tbody//tr"));
 			var listOfProducts = listOfProcuttsRows.Select(x => x.FindElement(By.XPath(".//td//div[contains(@data-bind,'Name')]"), 2).Text).ToList();
 			if (!listOfProducts.Contains(name))
 			{
@@ -55,10 +55,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 											  string.Join(",", listOfProducts));
 				return false;
 			}
-			IWebElement actionsButtonTd = productsTable.FindElement(By.XPath($".//tbody[contains(@data-bind,'products')]/tr/td/div[contains(@data-bind,'Name')][contains(text(),'{name}')]"), 2);
+			IWebElement actionsButtonTd = productsTable.FindElement(By.XPath($".//tbody[contains(@data-bind,'products')]//tr//td//div[contains(@data-bind,'Name')][contains(text(),'{name}')]"), 2);
 			if (actionsButtonTd == null)
 			{
-				IList<IWebElement> actionTds = productsTable.FindElements(By.XPath(".//tbody[contains(@data-bind,'products')]/tr/td//div[contains(@data-bind,'Name')]"), 2);
+				IList<IWebElement> actionTds = productsTable.FindElements(By.XPath(".//tbody[contains(@data-bind,'products')]//tr//td//div[contains(@data-bind,'Name')]"), 2);
 				actionsButtonTd = actionTds.First(x => x.Text.Replace(" ", "") == name.Replace(" ", ""));
 			}
 			IWebElement actionsButton = actionsButtonTd?.FindElement(By.XPath("..//td//button"), 2);
@@ -70,7 +70,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info("Clicked actions button");
 			//Actions drop down menu should now open
 			IWebElement dropDownMenu = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//button[@aria-expanded='true']/following-sibling::ul[contains(@class,'dropdown-menu')]"), 2);
-			var actionLink = (IWebElement)dropDownMenu?.FindElements(By.XPath("./li/a[contains(@data-bind,'click')]"), 2).FirstOrDefault(x => x.Text == action);
+			var actionLink = (IWebElement)dropDownMenu?.FindElements(By.XPath(".//li//a[contains(@data-bind,'click')]"), 2).FirstOrDefault(x => x.Text == action);
 			if (!actionLink.TryClick())
 			{
 				Report.Error($"Failed to click action: {action}");
@@ -100,7 +100,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ProductNameDisplayed(string name)
 		{
 			IWebElement productsTable = this.ContainerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]"), 2);
-			IWebElement productName = productsTable.FindElement(By.XPath($".//tbody[contains(@data-bind,'products')]/tr/td/div[contains(@data-bind,'Name')][contains(text(),'{name}')]"), 2);
+			IWebElement productName = productsTable.FindElement(By.XPath($".//tbody[contains(@data-bind,'products')]//tr//td//div[contains(@data-bind,'Name')][contains(text(),'{name}')]"), 2);
 			return productName.Displayed;
 		}
 
