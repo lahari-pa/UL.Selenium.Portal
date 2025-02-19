@@ -48,6 +48,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info($"Attempting to confirm page info icon text is displayed.");
 			return this.PageInfoIcon.GetAttribute("aria-describedby") != null;
 		}
+
+		public bool PageInfoMoreFiltersPanelExpanded()
+		{
+			Report.Info($"Attempting to confirm More Filters panel is expanded");
+			return this.MoreFiltersPanel.GetAttribute("aria-expanded") == "true";
+		}
 		#endregion
 
 		#region Status Filter List Methods
@@ -356,7 +362,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.PaginationButton(buttonLabel).FindElement(By.XPath(".//ancestor-or-self::li[@class = 'disabled']"), 1) != null;
 		}
 
-		public bool PagiationButtonCurrent(string buttonLabel)
+		public bool PaginationButtonCurrent(string buttonLabel)
 		{
 			Report.Info($"Attempting to confirm '{buttonLabel}' pagination button is current page.");
 			return this.PaginationButton(buttonLabel).GetAttribute("class").Contains("current");
