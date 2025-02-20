@@ -291,14 +291,43 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			this.ClickLinkElement(tableName, linkText);
 		}
 
-		[RegexStepDefinition(@"In the My Library - My Brands section, Enter Product Line / Brand Line : (.*)")]
+		[RegexStepDefinition(@"In the My Library - My Brands section, Add or Edit  Product Line /Brand Line : (.*)")]
 		public void EnterValueInProductLine(string productLineValue)
 		{
 			Report.StartStep($"Attempting to enter '{productLineValue}' into Product Line / Brand Line");
 			new MyLibraryPage().EnterProductLine(productLineValue);
 
-		
 
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Brands section, (check|uncheck) the 'Active?' checkbox")]
+		public void ICheckTheCheckboxActive(string check)
+		{
+			bool toCheck = false;
+			if (check == "check")
+			{
+				toCheck = true;
+			}
+			else if (check == "uncheck")
+			{
+				toCheck = false;
+			}
+			else
+			{
+				throw new Exception("Specflow paramater must be equal to 'check' or 'uncheck'");
+			}
+			bool isChecked = new MyLibraryPage().ActiveCheckbox().Checked();
+			if (isChecked == toCheck)
+			{
+				Report.Success($"The checkbox was already {check}ed");
+				return;
+			}
+			Report.IsTrue(new MyLibraryPage().CheckActiveCheckbox(),
+				$"Failed to check the checkbox!",
+				$"Successfully checked the checkbox");
+			Report.IsTrue(new MyLibraryPage().ActiveCheckbox().Checked() == toCheck,
+				$"The checkbox was not {check}ed after",
+				$"The checkbox is {check}ed as expected");
 		}
 
 

@@ -24,7 +24,7 @@ using OpenQA.Selenium.Chrome;
 using System.Net.NetworkInformation;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using static iText.IO.Codec.TiffWriter;
-using NPOI.SS.Formula.Functions;
+using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.MyBrands;
 
 
 
@@ -191,6 +191,24 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			ProductLineTextField.EnterText(value);
 		}
 
+		public bool CheckActiveCheckbox()
+		{
+			IWebElement el = this.FindElement(By.XPath(@"//div[contains(@id,'brand')]//input[@type='checkbox']"), 2);
+			return el.TryClick() && GeneralUtilities.Wait_for_load_finish();
+		}
+
+		public IWebElement ActiveCheckbox()
+		{
+			IWebElement el = this.ContainerElement.FindElement(By.XPath(@"//div[contains(@id,'brand')]//input[@type='checkbox']"), 2);
+			if (el == null)
+			{
+				Report.Info($"Could not find checkbox");
+				return null;
+			}
+			return el;
+		}
+
+		
 		#endregion
 
 
