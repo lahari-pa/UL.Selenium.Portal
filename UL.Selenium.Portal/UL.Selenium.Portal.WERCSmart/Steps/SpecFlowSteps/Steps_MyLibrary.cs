@@ -196,6 +196,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 
 
 		}
+
+		[RegexStepDefinition(@"In the My Library - Bill of Materials Section, In row: (.*) - I Enter My Packaging Materials value: (.*) and My Packaging Weight value:(.*)")]
+		public void EnterValueInBillOfMaterials(string row, string packagingmaterialvalue, string weightvalue)
+		{
+			Report.StartStep($"Attempting to enter '{packagingmaterialvalue}' into My Packaging Materials input on row {row}.");
+			new MyLibraryPage().EnterMyPackagingMaterials(row, packagingmaterialvalue);
+
+			Report.StartStep($"Attempting to enter '{weightvalue}' into Packaging Weight input on row {row}.");
+			new MyLibraryPage().EnterMyPackagingWeight(row, weightvalue);
+
+		}
 	}
 
 }

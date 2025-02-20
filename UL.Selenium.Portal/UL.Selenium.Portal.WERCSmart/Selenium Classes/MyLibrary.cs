@@ -24,6 +24,7 @@ using OpenQA.Selenium.Chrome;
 using System.Net.NetworkInformation;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using static iText.IO.Codec.TiffWriter;
+using NPOI.SS.Formula.Functions;
 
 
 
@@ -109,6 +110,28 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement ppmfield = this.FindElement(By.XPath($"//div[@class='form-group cb-ctl has-success']//span[text()='{option}']/ancestor::div[@class='checkbox']/parent::div//input[@type='text']"), 2);
 			ppmfield.EnterText(value);
 		}
+
+
+		public bool EnterMyPackagingMaterials(string row, string value)
+		{
+			IWebElement PackagingMaterialsfield = this.FindElement(By.XPath($"//table//tbody//tr[contains(@class,'rpds')][{row}]//td//select[@class ='form-control']"), 2);
+			try
+			{
+				PackagingMaterialsfield.Select(value);
+				return true;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+		public void EnterMyPackagingWeight(string row, string value)
+		{
+			IWebElement MyPackagingWeightTextField = this.FindElement(By.XPath($"//table//tbody//tr[contains(@class,'rpds')][{row}]//td//input[@type ='text']"), 2);
+			MyPackagingWeightTextField.EnterText(value);
+		}
+
 
 
 		#endregion
