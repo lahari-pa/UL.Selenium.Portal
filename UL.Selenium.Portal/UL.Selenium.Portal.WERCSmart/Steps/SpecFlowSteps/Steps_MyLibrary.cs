@@ -42,6 +42,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			new Steps_Prototype().ClickLinkElement(linkText);
 		}
 
+		#region  Packaging Type section
+
 		[RegexStepDefinition(@"In the My Library - My Packaging Type section, click the 'Clear' button")]
 		public void ClickTheClearButton()
 		{
@@ -89,12 +91,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		}
 
 
-		[RegexStepDefinition(@"In the My Library - My Packaging Type section, I filter by Product ID/Name for product: (.*)")]
+		[RegexStepDefinition(@"In the My Library - My Packaging Type section,Filter by Product ID/Name for product: (.*)")]
 		public void FilterProduct(string value)
 		{
 			string fieldname = "Product ID/ Name";
+			string tablename = "Library";
 			new MyLibraryPage().EnterText(fieldname, value);
-			Report.IsTrue(new MyLibraryPage().ClickSearch(),
+			Report.IsTrue(new MyLibraryPage().ClickSearch(tablename),
 				$"Failed to search for product: {value}",
 				$"Successfully searched for product: {value}");
 		}
@@ -209,7 +212,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 
 		}
 
-		[RegexStepDefinition(@"In the My Library - My Packaging Type section - Bill of Materials Section, In row: (.*) - I Enter My Packaging Materials value: (.*) and My Packaging Weight value:(.*)")]
+		[RegexStepDefinition(@"In the My Library - My Packaging Type section - Bill of Materials Section, In row: (.*) - Enter My Packaging Materials value: (.*) and My Packaging Weight value:(.*)")]
 		public void EnterValueInBillOfMaterials(string row, string packagingmaterialvalue, string weightvalue)
 		{
 			Report.StartStep($"Attempting to enter '{packagingmaterialvalue}' into My Packaging Materials input on row {row}.");
@@ -220,12 +223,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 
 		}
 
-		[RegexStepDefinition(@"In the My Library - My Brands section, I filter by Product Line for product: (.*)")]
+        #endregion
+
+		#region My Brands section
+
+		[RegexStepDefinition(@"In the My Library - My Brands section, Filter by Product Line for product: (.*)")]
 		public void FilterProductLine(string value)
 		{
 			string fieldname = "Product Line";
+			string tablename = "brand";
 			new MyLibraryPage().EnterText(fieldname, value);
-			Report.IsTrue(new MyLibraryPage().ClickSearchProductLine(),
+			Report.IsTrue(new MyLibraryPage().ClickSearch(tablename),
 				$"Failed to search for product: {value}",
 				$"Successfully searched for product: {value}");
 		}
@@ -356,6 +364,53 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			}
 		}
 
+        #endregion
+
+
+		#region My Distributors section
+
+		[RegexStepDefinition(@"In the My Library - My Distributors section, click the 'Clear' button")]
+		public void ClickTheClearButtoninDistributorsSection()
+		{
+			string tableName = "distributor";
+			string linkText = "Clear";
+			this.ClickLinkElement(tableName, linkText);
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Distributors section, Verify table is displayed")]
+		public void VerifyDistributorsTableIsDisplayed()
+		{
+			string name = "distributor";
+			Report.IsTrue(new MyLibraryPage().ProductTableExists(name), $"{name} table is not displayed", $"Successfully {name} table is displayed");
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Distributors section, Search by Id or product name : (.*)")]
+		public void FilterByIdorName(string value)
+		{
+			string fieldname = "Search by ID or Name";
+			string tablename = "distributor";
+			new MyLibraryPage().EnterText(fieldname, value);
+			Report.IsTrue(new MyLibraryPage().ClickSearch(tablename),
+				$"Failed to search for product: {value}",
+				$"Successfully searched for product: {value}");
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Distributors section, Filter product by (All|Pending|Approved|Rejected)")]
+		public void FilterProductByPendingApprovedRejected(string filter)
+		{
+			string tableName = "distributor";
+			this.ClickLinkElement(tableName, filter);
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Distributors section, click action (Approve |Reject ) for product name: (.*)")]
+		public void ClickActionForDistributorsSection(string productname, string action)
+		{
+			Report.IsTrue(new MyLibraryPage().ForDistributorClickAction(productname, action),
+				$"Failed to click action:{action} for product: {productname}",
+				$"Successfully clicked action: {action} for product: {productname}");
+		}
+
+		#endregion
 
 	}
 
