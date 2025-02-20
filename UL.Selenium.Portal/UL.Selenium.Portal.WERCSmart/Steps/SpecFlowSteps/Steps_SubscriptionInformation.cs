@@ -82,5 +82,45 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 				Report.IsTrue(new SubscriptionInformation().GetNumberOfProducts(submittedOrInCart, productType) == value, $"Failed to confirm the number of {productType} products under the '{submittedOrInCart}' section is '{value}'", $"Successfully confirmed the number of {productType} products under the '{submittedOrInCart}' section is '{value}'");
 			}
 		}
+		[RegexStepDefinition(@"In the Subscription Information section, verify for (.*) Subscription Level Status, the Effective Start date is (.*)")]
+		public void VerifyTheEffectiveStartDate(string subscriptionLevel, string value)
+		{
+			if (Report.IsTrue(new SubscriptionHistoryTableRow(subscriptionLevel).EffectiveStartExists(), $"Failed to find the Effective Start date for '{subscriptionLevel}'", $"Successfully found the Effective Start date for '{subscriptionLevel}'"))
+			{
+				Report.IsTrue(new SubscriptionHistoryTableRow(subscriptionLevel).GetEffectiveStartDate() == value, $"Failed to confirm the Effective Start date for '{subscriptionLevel}' is '{value}'", $"Successfully confirmed the Effective Start date for '{subscriptionLevel}' is '{value}'");
+			}
+		}
+		[RegexStepDefinition(@"In the Subscription Information section, verify for (.*) Subscription Level Status, the Effective End date is (.*)")]
+		public void VerifyTheEffectiveEndDate(string subscriptionLevel, string value)
+		{
+			if (Report.IsTrue(new SubscriptionHistoryTableRow(subscriptionLevel).EffectiveEndExists(), $"Failed to find the Effective End date for '{subscriptionLevel}'", $"Successfully found the Effective End date for '{subscriptionLevel}'"))
+			{
+				Report.IsTrue(new SubscriptionHistoryTableRow(subscriptionLevel).GetEffectiveEndDate() == value, $"Failed to confirm the Effective End date for '{subscriptionLevel}' is '{value}'", $"Successfully confirmed the Effective End date for '{subscriptionLevel}' is '{value}'");
+			}
+		}
+		[RegexStepDefinition(@"In the Subscription Information section, verify for (.*) Subscription Level Status, the Bill Cycle is (.*)")]
+		public void VerifyTheBillCycle(string subscriptionLevel, string value)
+		{
+			if (Report.IsTrue(new SubscriptionHistoryTableRow(subscriptionLevel).BillCycleExists(), $"Failed to find the Bill Cycle for '{subscriptionLevel}'", $"Successfully found the Bill Cycle for '{subscriptionLevel}'"))
+			{
+				Report.IsTrue(new SubscriptionHistoryTableRow(subscriptionLevel).GetBillCycle() == value, $"Failed to confirm the Bill Cycle for '{subscriptionLevel}' is '{value}'", $"Successfully confirmed the Bill Cycle for '{subscriptionLevel}' is '{value}'");
+			}
+		}
+		[RegexStepDefinition(@"In the Subscription Information section, verify for (.*) Subscription Level Status, the Quantity is (.*)")]
+		public void VerifyTheQuantity(string subscriptionLevel, string value)
+		{
+			if (Report.IsTrue(new SubscriptionHistoryTableRow(subscriptionLevel).QuantityExists(), $"Failed to find the Quantity for '{subscriptionLevel}'", $"Successfully found the Quantity for '{subscriptionLevel}'"))
+			{
+				Report.IsTrue(new SubscriptionHistoryTableRow(subscriptionLevel).GetQuantity() == value, $"Failed to confirm the Quantity for '{subscriptionLevel}' is '{value}'", $"Successfully confirmed the Quantity for '{subscriptionLevel}' is '{value}'");
+			}
+		}
+		[RegexStepDefinition(@"In the Subscription Information section, verify for (.*) Subscription Level Status, the Annual Price is (.*)")]
+		public void VerifyTheAnnualPrice(string subscriptionLevel, string value)
+		{
+			if (Report.IsTrue(new SubscriptionHistoryTableRow(subscriptionLevel).AnnualPriceExists(), $"Failed to find the Annual Price for '{subscriptionLevel}'", $"Successfully found the Annual Price for '{subscriptionLevel}'"))
+			{
+				Report.IsTrue(new SubscriptionHistoryTableRow(subscriptionLevel).GetAnnualPrice() == value, $"Failed to confirm the Annual Price for '{subscriptionLevel}' is '{value}'", $"Successfully confirmed the Annual Price for '{subscriptionLevel}' is '{value}'");
+			}
+		}
 	}
 }

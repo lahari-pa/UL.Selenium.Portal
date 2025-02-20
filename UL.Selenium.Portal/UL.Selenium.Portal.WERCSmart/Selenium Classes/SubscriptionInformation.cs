@@ -98,7 +98,78 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		#endregion
 
 
+	}
+	class SubscriptionHistoryTableRow : SeleniumBaseObject
+	{
+		#region Page Objects
+		private string _subscriptionStatus;
 
+		protected override By ContainerElementLocator => By.XPath($"//tbody//tr[td[normalize-space()='{_subscriptionStatus}']]");
+		IWebElement EffectiveStart => this.ContainerElement.FindElement(By.XPath(".//td[comment()[contains(., 'Start')]]"));
+		IWebElement EffectiveEnd => this.ContainerElement.FindElement(By.XPath(".//td[comment()[contains(., 'End')]]"));
+		IWebElement BillCycle => this.ContainerElement.FindElement(By.XPath(".//td[comment()[contains(., 'BillCycle')]]"));
+		IWebElement Quantity => this.ContainerElement.FindElement(By.XPath(".//td[comment()[contains(., 'Quantity')]]"));
+		IWebElement AnnualPrice => this.ContainerElement.FindElement(By.XPath(".//td[comment()[contains(., 'AnnualPrice')]]"));
+
+		#endregion
+
+		#region Methods
+		public SubscriptionHistoryTableRow(string subscriptionStatus)
+		{
+			Report.Info($"Attempt to get '{subscriptionStatus}' section");
+			_subscriptionStatus = subscriptionStatus;
+		}
+		public bool EffectiveStartExists()
+		{
+			Report.Info($"Attempt to find the 'Effective Start' date");
+			return this.EffectiveStart != null;
+		}
+		public string GetEffectiveStartDate()
+		{
+			Report.Info($"Attempt to get the 'Effective Start' date");
+			return this.EffectiveStart.Text;
+		}
+		public bool EffectiveEndExists()
+		{
+			Report.Info($"Attempt to find the 'Effective End' date");
+			return this.EffectiveEnd != null;
+		}
+		public string GetEffectiveEndDate()
+		{
+			Report.Info($"Attempt to get the 'Effective End' date");
+			return this.EffectiveEnd.Text;
+		}
+		public bool BillCycleExists()
+		{
+			Report.Info($"Attempt to find the 'Bill Cycle' value");
+			return this.BillCycle != null;
+		}
+		public string GetBillCycle()
+		{
+			Report.Info($"Attempt to get the 'Bill Cycle' value");
+			return this.BillCycle.Text;
+		}
+		public bool QuantityExists()
+		{
+			Report.Info($"Attempt to find the 'Quantity' value");
+			return this.Quantity != null;
+		}
+		public string GetQuantity()
+		{
+			Report.Info($"Attempt to get the 'Quantity' value");
+			return this.Quantity.Text;
+		}
+		public bool AnnualPriceExists()
+		{
+			Report.Info($"Attempt to find the 'Annual Price' value");
+			return this.AnnualPrice != null;
+		}
+		public string GetAnnualPrice()
+		{
+			Report.Info($"Attempt to get the 'Annual Price' value");
+			return this.AnnualPrice.Text;
+		}
+		#endregion
 
 	}
 }
