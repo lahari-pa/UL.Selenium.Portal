@@ -330,6 +330,31 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 				$"The checkbox is {check}ed as expected");
 		}
 
+		[RegexStepDefinition(@"In the My Library - My Brands section, Under Active? it displays Yes/No")]
+		public void VerifyActiveDisplaysYesorNo()
+		{
+			Report.IsTrue(new MyLibraryPage().ActiveDisplaysYesOrNo(),
+				$"Failed to display Yes/No in Active column value?",
+				$"Successfully displayed Yes/No in Active column value?");
+
+
+		}
+
+
+		[RegexStepDefinition(@"In the My Library - My Brands section, 'Product Line/ Brand Name' value: (.*) (is|is not) updated ")]
+		public void VerifyProductLineValueUpdated(string value, string is_isnot)
+		{
+			if (is_isnot == "is")
+			{
+				Report.IsTrue(new MyLibraryPage().GetProductLineValue(value),
+				$"Failed to update Product Line/ Brand Name",
+				$"Successfully updated Product Line/ Brand Name");
+			}
+			else
+			{
+				Report.IsFalse(new MyLibraryPage().GetProductLineValue(value), " Product Line/ Brand Name is updated", " Product Line/ Brand Name is not updated");
+			}
+		}
 
 
 	}
