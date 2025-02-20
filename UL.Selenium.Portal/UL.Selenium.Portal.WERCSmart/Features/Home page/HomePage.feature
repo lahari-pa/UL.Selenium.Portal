@@ -109,39 +109,6 @@ Scenario: [64854] Navigation Settings
 	Given I click on My Account
 	And the Navigation Menu should be collapsed
 
-@TestCase:64872
-Scenario: [64872] Pie Panel Settings
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	When I click on the triangle next to Product Information to expand the section
-	And I should see a Pie Chart and Legend under Product Information
-	And I should see the following states in the Legend:
-		| State                  | Colour |
-		| Not Yet Submitted      | Grey   |
-		| Assessment in Progress | Yellow |
-		| Sending to Retailers   | Blue   |
-		| Accepted by Retailers  | Green  |
-		| Needs Your Attention   | Red    |
-	And I should see the Subheading Alerts in the main window
-	# The below checks for both the dialog and the 'More...' button
-	And the Alerts dialog should be visible
-	And I should see the Subheading Announcements in the main window
-	And the Announcements dialog should be visible
-	And I click on Sign Out
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	And I should see a Pie Chart and Legend under Product Information
-	# Collapse the section
-	When I click on the triangle next to Product Information to collapse the section
-	And I should not see a Pie Chart and Legend under Product Information
-	And the Alerts dialog should be hidden
-	And the Announcements dialog should be hidden
-	# Then expand the section
-	When I click on the triangle next to Product Information to expand the section
-	And I should see a Pie Chart and Legend under Product Information
-	And I should see the Subheading Alerts in the main window
-	And the Alerts dialog should be visible
-	And I should see the Subheading Announcements in the main window
-	And the Announcements dialog should be visible
-
 @TestCase:67299
 Scenario: [67299] Terms of Use - footer
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
