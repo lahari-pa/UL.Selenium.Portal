@@ -39,11 +39,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		protected override By ContainerElementLocator => By.XPath("//div[@class='body-content']");
 		IWebElement InputText(string text) => this.ContainerElement.FindElement(By.XPath($"//input[contains(@placeholder,'{text}')]"), 2);
 
-		IWebElement SearchButon => this.ContainerElement.FindElement(By.XPath("//div[@class='input-group']//span[contains(@data-bind,'searchProducts')]"), 2);
+		IWebElement SearchButon(string idname) => this.ContainerElement.FindElement(By.XPath($"//div[contains(@id,'{idname}')]//div[@class='input-group']//span[contains(@data-bind,'Click')]"), 2);
 
 		IWebElement Section(string name) => this.ContainerElement.FindElement(By.XPath($"//div[@class='panel-heading']//h3[text()='{name}']"), 2);
 
-		IWebElement Table(string idname) => this.ContainerElement.FindElement(By.XPath($"//div[contains(@id,'{idname}')]//table[contains(@class,'products-table')]"), 2);
+		IWebElement Table(string idname) => this.ContainerElement.FindElement(By.XPath($"//div[contains(@id,'{idname}')]//table"), 2);
 
 		IWebElement LinkElement(string tablename, string linkText) => this.ContainerElement.FindElement(By.XPath($".//div[contains(@id,'{tablename}')]//a[text()='{linkText}'] | .//div[contains(@id,'{tablename}')]//a//span[text()='{linkText}']"), 2);
 		#endregion
@@ -97,9 +97,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info("Enter the value for search");
 			this.InputText(fieldname).EnterText(text);
 		}
-		public bool ClickSearch()
+		public bool ClickSearch(string tablename)
 		{
-			return this.SearchButon.TryClick();
+			return this.SearchButon(tablename).TryClick();
 		}
 
 		public bool ProductNameDisplayed(string name)
@@ -134,12 +134,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			IWebElement MyPackagingWeightTextField = this.FindElement(By.XPath($"//table//tbody//tr[contains(@class,'rpds')][{row}]//td//input[@type ='text']"), 2);
 			MyPackagingWeightTextField.EnterText(value);
-		}
-
-		public bool ClickSearchProductLine()
-		{
-			IWebElement SearchProductLineButon = this.FindElement(By.XPath("//div[@class='input-group']//span[contains(@data-bind,'getProductLine')]"), 2);
-			return SearchProductLineButon.TryClick();
 		}
 
 		public bool ProductTableExists(string tablename)
@@ -246,6 +240,34 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 
 		}
+
+		public bool ForDistributorClickAction(string name, string action)
+		{
+			IWebElement productsTable = this.ContainerElement.FindElement(By.XPath(".//div[@id='distributor']//table"), 2);
+			ReadOnlyCollection<IWebElement> listOfProcuttsRows = productsTable.FindElements(By.XPath(".//tbody//tr"));
+			var listOfProducts = listOfProcuttsRows.Select(x => x.FindElement(By.XPath(".//td[2]]"), 2).Text).ToList();
+			if (!listOfProducts.Contains(name))
+			{
+				Report.Error($"Product Name:{name} does not show in the list. The full list is: " +
+											  string.Join(",", listOfProducts));
+				return false;
+			}
+			IWebElement actionsButtonTd = productsTable.FindElement(By.XPath($".//tbody[contains(@data-bind,'DistList')]//tr//td[2]"), 2);
+			if (actionsButtonTd == null)
+			{
+				IList<IWebElement> actionTds = productsTable.FindElements(By.XPath(".//tbody[contains(@data-bind,'DistList')]/tr//td[2]"), 2);
+				actionsButtonTd = actionTds.First(x => x.Text.Replace(" ", "") == name.Replace(" ", ""));
+			}
+			IWebElement actionsButton = actionsButtonTd?.FindElements(By.XPath("..//td//a"), 2).FirstOrDefault(x => x.Text == action);
+			if (!actionsButton.TryClick())
+			{
+				Report.Error($"Failed to click action: {action}");
+				return false;
+			}
+			Report.Info($"Clicked action: {action}");
+			return true;
+		}
+
 
 		#endregion
 
