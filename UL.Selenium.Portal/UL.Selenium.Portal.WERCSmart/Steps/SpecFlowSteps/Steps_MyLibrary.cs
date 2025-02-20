@@ -26,27 +26,39 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 	[Binding, Scope(Tag = "MyLibraryPage")]
 	class Steps_MyLibrary
 	{
+		//[RegexStepDefinition(@"Click link element with test: (.*)")]
+		public void ClickLinkElement(string tableName, string linkText)
+		{
+			if (Report.IsTrue(new MyLibraryPage().LinkElementExists(tableName, linkText), $"Failed to find link element with text {linkText}", $"Successfully found link element with text {linkText}"))
+			{
+				Report.IsTrue(new MyLibraryPage().LinkElementClick(tableName, linkText), $"Failed to click link element with text {linkText}", $"Successfully clicked link element with text {linkText}");
+			}
+		}
+
+
 		[RegexStepDefinition(@"In the My Library section, click the '(My Packaging Types|My Brands|My Distributors|My Ingredients|Contact Information per SDS(s))' link")]
 		public void ClickTheLibraryLink(string linkText)
 		{
 			new Steps_Prototype().ClickLinkElement(linkText);
 		}
 
-		[RegexStepDefinition(@"In the My Library section, click the 'Clear' button")]
+		[RegexStepDefinition(@"In the My Library - My Packaging Type section, click the 'Clear' button")]
 		public void ClickTheClearButton()
 		{
+			string tableName = "myLibrary";
 			string linkText = "Clear";
-			new Steps_Prototype().ClickLinkElement(linkText);
+			this.ClickLinkElement(tableName, linkText);
 		}
 
-		[RegexStepDefinition(@"In the My Library section, click the 'Add New' button")]
+		[RegexStepDefinition(@"In the My Library - My Packaging Type section, click the 'Add New' button")]
 		public void ClickTheAddNewButton()
 		{
+			string tableName = "myLibrary";
 			string linkText = "Add New";
-			new Steps_Prototype().ClickLinkElement(linkText);
+			this.ClickLinkElement(tableName,linkText);
 		}
 
-		[RegexStepDefinition(@"In the My Library section, Validate Delete Product popup (should| should not) be displayed")]
+		[RegexStepDefinition(@"In the My Library - My Packaging Type section, Validate Delete Product popup (should| should not) be displayed")]
 		public void ValidateDeleteProductPopup(string condition)
 		{
 			string title = "Delete Product";
@@ -54,21 +66,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeadingAndText(condition, title, text);
 		}
 
-		[RegexStepDefinition(@"In the My Library section, in the 'Delete Product' pop up click (Delete|Close) button")]
+		[RegexStepDefinition(@"In the My Library - My Packaging Type section, in the 'Delete Product' pop up click (Delete|Close) button")]
 		public void ClickDeleteCloseInDeleteProductPopUp(string button)
 		{
 			string popupTitle = "Delete Product";
 			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(popupTitle, button);
 		}
 
-		[RegexStepDefinition(@"In the My Library - Bill of Materials Section, click 'Add Row' button")]
+		[RegexStepDefinition(@"In the My Library - My Packaging Type section - Bill of Materials Section, click 'Add Row' button")]
 		public void SetClickAddRow()
 		{
 			string button = "Add Row";
 			new Steps_Prototype().ClickButton(button);
 		}
 
-		[RegexStepDefinition(@"In the My Library section, click action (Edit |Delete ) for product name: (.*)")]
+		[RegexStepDefinition(@"In the My Library - My Packaging Type section, click action (Edit |Delete ) for product name: (.*)")]
 		public void ClickActionForProduct(string productname, string action)
 		{
 			Report.IsTrue(new MyLibraryPage().ForProductClickAction(productname, action),
@@ -77,7 +89,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		}
 
 
-		[RegexStepDefinition(@"In the My Library section, I filter by Product ID/Name for product: (.*)")]
+		[RegexStepDefinition(@"In the My Library - My Packaging Type section, I filter by Product ID/Name for product: (.*)")]
 		public void FilterProduct(string value)
 		{
 			string fieldname = "Product ID/ Name";
@@ -87,21 +99,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 				$"Successfully searched for product: {value}");
 		}
 
-		[RegexStepDefinition(@"In the My Library section, Enter Packaging Type Name: (.*)")]
+		[RegexStepDefinition(@"In the My Library - My Packaging Type section, Enter Packaging Type Name: (.*)")]
 		public void EnterPackageTypeName(string value)
 		{
 			string fieldname = "Package Type Name";
 			new MyLibraryPage().EnterText(fieldname, value);
 		}
 
-		[RegexStepDefinition(@"In the My Library section, click 'Continue' button")]
+		[RegexStepDefinition(@"In the My Library - My Packaging Type section, click 'Continue' button")]
 		public void ClickContinue()
 		{
 			string button = "Continue";
 			new Steps_Prototype().ClickButton(button);
 		}
 
-		[RegexStepDefinition(@"In the My Library section, 'Package Type Name' section  should be displayed")]
+		[RegexStepDefinition(@"In the My Library - My Packaging Type section, 'Package Type Name' section  should be displayed")]
 		public void ThenInThePageIShouldSeePackageTypeName()
 		{
 			string section_name = "Package Type Name";
@@ -109,7 +121,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 				"Package Type Name Field is not showing as expected", "Package Type Name Field is showing as expected");
 		}
 
-		[RegexStepDefinition(@"In the My Library section, 'Bill of Materials' section should be displayed")]
+		[RegexStepDefinition(@"In the My Library - My Packaging Type section, 'Bill of Materials' section should be displayed")]
 		public void ThenInThePageIShouldSeeBillOfMaterials()
 		{
 			string section_name = "Bill of Materials";
@@ -117,35 +129,35 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 				"Bill of Materials section is not showing", "Bill of Materials section is showing");
 		}
 
-		[RegexStepDefinition(@"In the My Library - CONEG Section, set the option in section: 'Does your container or any packaging in contact with food or drink \(including cap\) contain Bisphenol A \(BPA\)' to: (Yes|No)")]
+		[RegexStepDefinition(@"In the My Library - My Packaging Type section - CONEG Section, set the option in section: 'Does your container or any packaging in contact with food or drink \(including cap\) contain Bisphenol A \(BPA\)' to: (Yes|No)")]
 		public void SelectPackagingInContact(string option)
 		{
 			string section = "Does your container or any packaging in contact with food or drink (including cap) contain Bisphenol A (BPA)";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 
-		[RegexStepDefinition(@"In the My Library - CONEG Section, set the option in section: 'Do you have a CONEG Certificate for this package?' to: (Yes|No)")]
+		[RegexStepDefinition(@"In the My Library - My Packaging Type section - CONEG Section, set the option in section: 'Do you have a CONEG Certificate for this package?' to: (Yes|No)")]
 		public void SelectCONEGCertificateForPackage(string option)
 		{
 			string section = "Do you have a CONEG Certificate for this package?";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 
-		[RegexStepDefinition(@"In the My Library - CONEG Section, confirm the question: 'Do you have a CONEG Certificate for this package?' (is|is not) displayed")]
+		[RegexStepDefinition(@"In the My Library - My Packaging Type section - CONEG Section, confirm the question: 'Do you have a CONEG Certificate for this package?' (is|is not) displayed")]
 		public void ConfirmCONEGCertificateForPackageIsIsNotDisplayed(string is_isnot)
 		{
 			string section = "Do you have a CONEG Certificate for this package?";
 			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
 		}
 
-		[RegexStepDefinition(@"In the My Library - CONEG Section, confirm the question: 'Does your container or any packaging in contact with food or drink \(including cap\) contain Bisphenol A \(BPA\)' (is|is not) displayed")]
+		[RegexStepDefinition(@"In the My Library - My Packaging Type section - CONEG Section, confirm the question: 'Does your container or any packaging in contact with food or drink \(including cap\) contain Bisphenol A \(BPA\)' (is|is not) displayed")]
 		public void ConfirmPackagingInContactIsIsNotDisplayed(string is_isnot)
 		{
 			string section = "Does your container or any packaging in contact with food or drink (including cap) contain Bisphenol A (BPA)";
 			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
 		}
 
-		[RegexStepDefinition(@"In the My Library - CONEG Section, confirm the question: 'Does your container contain the following?' (is|is not) displayed")]
+		[RegexStepDefinition(@"In the My Library - My Packaging Type section - CONEG Section, confirm the question: 'Does your container contain the following?' (is|is not) displayed")]
 		public void ConfirmContainerContainFollowingIsIsNotDisplayed(string is_isnot)
 		{
 			string section = "Does your container contain the following?";
@@ -153,21 +165,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		}
 
 
-		[RegexStepDefinition(@"In the My Library - CONEG Section, confirm the question: 'Packaging Component Recyclable Number' (is|is not) displayed")]
+		[RegexStepDefinition(@"In the My Library - My Packaging Type section - CONEG Section, confirm the question: 'Packaging Component Recyclable Number' (is|is not) displayed")]
 		public void ConfirmPackagingComponentRecyclableNumberIsIsNotDisplayed(string is_isnot)
 		{
 			string section = "Packaging Component Recyclable Number";
 			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
 		}
 
-		[RegexStepDefinition(@"In the My Library - CONEG Section, set the option in section: 'Packaging Component Recyclable Number' to: (.*)")]
+		[RegexStepDefinition(@"In the My Library - My Packaging Type section - CONEG Section, set the option in section: 'Packaging Component Recyclable Number' to: (.*)")]
 		public void SetPotassium(string option)
 		{
 			string section = "Packaging Component Recyclable Number";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 
-		[RegexStepDefinition(@"In the My Library - CONEG section, confirm the packaging type: (.*) (is|is not) deleted")]
+		[RegexStepDefinition(@"In the My Library - My Packaging Type section - CONEG section, confirm the packaging type: (.*) (is|is not) deleted")]
 		public void InSectionPackagingTypetIsIsNotDeleted(string text, string is_isnot)
 		{
 			bool expected = is_isnot == "is";
@@ -175,7 +187,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 				$"Failure, '{text}'packaging type is not deleted", $"Success, '{text}' packaging type is deleted");
 		}
 
-		[RegexStepDefinition(@"In the My Library - CONEG section, Check or Uncheck for the section (.*): Does your container contain the following? to : (Lead|Mercury|Cadmium|Hexavalent Chromium|None of the Above)")]
+		[RegexStepDefinition(@"In the My Library - My Packaging Type section - CONEG section, Check or Uncheck for the section (.*): Does your container contain the following? to : (Lead|Mercury|Cadmium|Hexavalent Chromium|None of the Above)")]
 		public void CheckOrUncheckRetailersSellingLocation(string section, string option)
 		{
 			if (section == "check")
@@ -188,7 +200,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			}
 		}
 
-		[RegexStepDefinition(@"In the My Library - CONEG section, How much in PPM? for section: (Lead|Mercury|Cadmium|Hexavalent Chromium|None of the Above), Enter value:(.*)")]
+		[RegexStepDefinition(@"In the My Library - My Packaging Type section - CONEG section, How much in PPM? for section: (Lead|Mercury|Cadmium|Hexavalent Chromium|None of the Above), Enter value:(.*)")]
 		public void EnterPPMValueForOption(string option, string value)
 		{
 			Report.StartStep($"Attempting to enter '{value}' into How much in PPM? text input.");
@@ -197,7 +209,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 
 		}
 
-		[RegexStepDefinition(@"In the My Library - Bill of Materials Section, In row: (.*) - I Enter My Packaging Materials value: (.*) and My Packaging Weight value:(.*)")]
+		[RegexStepDefinition(@"In the My Library - My Packaging Type section - Bill of Materials Section, In row: (.*) - I Enter My Packaging Materials value: (.*) and My Packaging Weight value:(.*)")]
 		public void EnterValueInBillOfMaterials(string row, string packagingmaterialvalue, string weightvalue)
 		{
 			Report.StartStep($"Attempting to enter '{packagingmaterialvalue}' into My Packaging Materials input on row {row}.");
@@ -207,6 +219,90 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			new MyLibraryPage().EnterMyPackagingWeight(row, weightvalue);
 
 		}
+
+		[RegexStepDefinition(@"In the My Library - My Brands section, I filter by Product Line for product: (.*)")]
+		public void FilterProductLine(string value)
+		{
+			string fieldname = "Product Line";
+			new MyLibraryPage().EnterText(fieldname, value);
+			Report.IsTrue(new MyLibraryPage().ClickSearchProductLine(),
+				$"Failed to search for product: {value}",
+				$"Successfully searched for product: {value}");
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Brands section, click the 'Clear' button")]
+		public void ClickClearButtonInBrandsSection()
+		{
+			string tableName = "brand";
+			string linkText = "Clear";
+			this.ClickLinkElement(tableName, linkText);
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Brands section, click the 'Add New' button")]
+		public void ClickTheAddNewButtonInBrandsSection()
+		{
+			string tableName = "brand";
+			string linkText = "Add New";
+			this.ClickLinkElement(tableName,linkText);
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Brands section, Verify Products table is displayed")]
+		public void VerifyProductsTableIsDisplayed()
+		{
+			string name = "brand";
+			Report.IsTrue(new MyLibraryPage().ProductTableExists(name), $"{name} table is not displayed", $"Successfully {name} table is displayed");
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Brands section, in the 'cancel' pop up click (Yes|No) button")]
+		public void ClickYesNoCancelPopUp(string button)
+		{
+			string popupTitle = "Are you sure you wish to cancel?";
+			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(popupTitle, button);
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Brands section, the 'Are you sure you wish to cancel?' popup (should|should not) be displayed")]
+		public void AreYouSureYouWishToCancelIsDisplayed(string condition)
+		{
+			string modalTitle = "Are you sure you wish to cancel?";
+			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeading(condition, modalTitle);
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Brands section, click action Edit for product name: (.*)")]
+		public void ClickActionForProductLine(string productname)
+		{
+			Report.IsTrue(new MyLibraryPage().ForBrandsClickEditInAction(productname),
+				$"Failed to click action:Edit for product: {productname}",
+				$"Successfully clicked action: Edit for product: {productname}");
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Brands section, Under Actions click the 'Save' button")]
+		public void ClickTheSaveButtonInBrandsSection()
+		{
+			string tableName = "brand";
+			string linkText = "Save";
+			this.ClickLinkElement(tableName,linkText);
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Brands section, Under Actions click the 'Cancel' button")]
+		public void ClickTheCancelButtonInBrandsSection()
+		{
+			string tableName = "brand";
+			string linkText = "Cancel";
+			this.ClickLinkElement(tableName, linkText);
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Brands section, Enter Product Line / Brand Line : (.*)")]
+		public void EnterValueInProductLine(string productLineValue)
+		{
+			Report.StartStep($"Attempting to enter '{productLineValue}' into Product Line / Brand Line");
+			new MyLibraryPage().EnterProductLine(productLineValue);
+
+		
+
+		}
+
+
+
 	}
 
 }
