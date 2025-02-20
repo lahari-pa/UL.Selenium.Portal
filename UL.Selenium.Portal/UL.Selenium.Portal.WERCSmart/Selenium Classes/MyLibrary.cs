@@ -25,6 +25,7 @@ using System.Net.NetworkInformation;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using static iText.IO.Codec.TiffWriter;
 using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.MyBrands;
+using NPOI.SS.Formula.Functions;
 
 
 
@@ -208,7 +209,44 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return el;
 		}
 
-		
+		public bool ActiveDisplaysYesOrNo()
+		{
+			List<IWebElement> activeElement = this.FindElements(By.XPath("//tbody[contains(@data-bind,'productLines')]//tr//td//span[contains(@data-bind,'IsActive')]"), 2).ToList();
+			foreach (var element in activeElement)
+			{
+				string getActiveName = element.Text;
+				if (getActiveName == "Yes" || getActiveName == "No")
+				{
+					Report.Info($"Active value is Yes or No");
+					return true;
+				}
+				return false;
+			}
+			Report.Info($"Failed to find Active column value");
+			return false;
+
+
+		}
+
+		public bool GetProductLineValue(string name)
+		{
+			List<IWebElement> productLineElement = this.FindElements(By.XPath("//tbody[contains(@data-bind,'productLines')]//tr//td//span[contains(@data-bind,'Phrase')]"), 2).ToList();
+			foreach (var element in productLineElement)
+			{
+				string getProductLineName = element.Text;
+				if (getProductLineName == name)
+				{
+					Report.Info($"ProductLine value is updated");
+					return true;
+				}
+				return false;
+			}
+			Report.Info($"Failed to find ProductLine column value");
+			return false;
+
+
+		}
+
 		#endregion
 
 
