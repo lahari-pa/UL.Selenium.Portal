@@ -14,14 +14,14 @@
 
 		<!-- ===== UL.AUTOMATION PACKAGE(S) ===== -->
 
-		<PackageReference Include="UL.Automation" Version="6.0.54" />
-		<PackageReference Include="UL.Automation.Framework.NUnit" Version="6.0.54" />
-		<PackageReference Include="UL.Automation.Reporting.Html" Version="6.0.54" />
-		<PackageReference Include="UL.Automation.Reporting.ProgressDialog.WPF" Version="6.0.54" Condition="'$(TargetFramework)' == 'net8.0-windows'" />
-		<PackageReference Include="UL.Automation.TReVor" Version="6.0.54" />
-		<PackageReference Include="UL.Automation.Utilities" Version="6.0.54" />
-		<PackageReference Include="UL.Automation.Utilities.PDF" Version="6.0.54" />
-		<PackageReference Include="UL.Automation.WebDriver" Version="6.0.54" />
+		<PackageReference Include="UL.Automation" Version="6.0.60" />
+		<PackageReference Include="UL.Automation.Framework.NUnit" Version="6.0.60" />
+		<PackageReference Include="UL.Automation.Reporting.Html" Version="6.0.60" />
+		<PackageReference Include="UL.Automation.Reporting.ProgressDialog.WPF" Version="6.0.60" Condition="'$(TargetFramework)' == 'net8.0-windows'" />
+		<PackageReference Include="UL.Automation.TReVor" Version="6.0.60" />
+		<PackageReference Include="UL.Automation.Utilities" Version="6.0.60" />
+		<PackageReference Include="UL.Automation.Utilities.PDF" Version="6.0.60" />
+		<PackageReference Include="UL.Automation.WebDriver" Version="6.0.60" />
 
 		<!-- ===== TREVOR PACKAGE(S) ===== -->
 
@@ -32,8 +32,8 @@
 
 		<!-- ===== REQNROLL PACKAGE(S) ===== -->
 
-		<PackageReference Include="UL.Automation.Reqnroll" Version="6.0.54" Condition="'$(UseReqnroll)' == 'true'" />
-		<PackageReference Include="UL.Automation.Reqnroll.Plugin.NUnit" Version="6.0.54" Condition="'$(UseReqnroll)' == 'true'" />
+		<PackageReference Include="UL.Automation.Reqnroll" Version="6.0.60" Condition="'$(UseReqnroll)' == 'true'" />
+		<PackageReference Include="UL.Automation.Reqnroll.Plugin.NUnit" Version="6.0.60" Condition="'$(UseReqnroll)' == 'true'" />
 		<PackageReference Include="Reqnroll.NUnit" Version="2.2.1" Condition="'$(UseReqnroll)' == 'true'" />
 		<PackageReference Include="Reqnroll.Tools.MsBuild.Generation" Version="2.2.1" Condition="'$(UseReqnroll)' == 'true'" />
 
@@ -55,7 +55,7 @@
 		<!-- ===== MISC. PACKAGE(S) ===== -->
 
 		<PackageReference Include="Castle.Core" Version="5.1.1" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
 		<PackageReference Include="Wercs.StyleCop.Settings" Version="3.0.10">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

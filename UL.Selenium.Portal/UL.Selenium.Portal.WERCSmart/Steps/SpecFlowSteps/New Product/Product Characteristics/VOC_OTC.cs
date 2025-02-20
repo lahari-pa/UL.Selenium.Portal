@@ -117,5 +117,36 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string section = "MVOC (medium volatile organic compound) content as weight percentage of the total formulation";
 			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, condition, alertText);
 		}
+		// table input --> |Section|
+		[RegexStepDefinition(@"In the VOC - Ozone Transport Commission Section, the following sections (should only|should|should not) be displayed:")]
+		public void CheckSectionsDisplayedOnVOCOTCPage(string condition, Table sections)
+		{
+			new Steps_Prototype().CheckDisplayedSections(condition, sections);
+		}
+		[RegexStepDefinition(@"In the VOC - Ozone Transport Commission Section, for section 'Would you like to use the VOC percentages entered for all areas \(e.g. country, state, local\) for comparison\?' confirm that the following options (should|should not) be displayed:")]
+		public void ConfirmVOCPercentOptions(string condition, Table options)
+		{
+			string section = "Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?";
+			string exclusive = "displayed";
+			new Steps_Prototype().CheckOptionsInSection(condition, exclusive, section, options);
+		}
+		[RegexStepDefinition(@"In the VOC - Ozone Transport Commission Section, 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB' (should|should not) be showing the error message: (.*)")]
+		public void VOCCARBPercentSectionDisplayingErrorMessage(string condition, string alertText)
+		{
+			string section = "Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB";
+			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, condition, alertText);
+		}
+		[RegexStepDefinition(@"In the VOC - Ozone Transport Commission Section, 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule' (should|should not) be showing the error message: (.*)")]
+		public void VOCOTCPercentSectionDisplayingErrorMessage(string condition, string alertText)
+		{
+			string section = "Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule";
+			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, condition, alertText);
+		}
+		[RegexStepDefinition(@"In the VOC - Ozone Transport Commission Section, 'Would you like to use the VOC percentages entered for all areas \(e.g. country, state, local\) for comparison\?' (should|should not) be showing the error message: (.*)")]
+		public void VOCPercentComparisonSectionDisplayingErrorMessage(string condition, string alertText)
+		{
+			string section = "Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?";
+			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, condition, alertText);
+		}
 	}
 }

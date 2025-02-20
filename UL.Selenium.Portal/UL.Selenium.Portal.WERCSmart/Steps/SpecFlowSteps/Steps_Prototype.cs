@@ -487,8 +487,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsFalse(newProductpage.TableExists(tableName), $"Failed to confirm '{tableName}' table does not exist", $"Successsfully confirmed '{tableName}' table does not exist");
 			}
 		}
+		[RegexStepDefinition(@"I should see the following Voc percent for each state:")]
+		public void ThenIShouldSeeTheFollowingVocPercentForEachState(Table information)
+		{
+			var expectedStates = information.CreateSet<VocPercentForStates>();
+			var vocLimits = new NewProduct();
+			var displayedStates = vocLimits.GetDisplayedVocPercentForEachState();
 
+			foreach (var expected in expectedStates)
+			{
+				Report.Info($"Checking State: {expected.State} and Regulation: {expected.Regulation} and VOC value: {expected.VocValue} and State VOC Threshold: {expected.StateVocThreshold} and Message: {expected.Message}");
 
+				var matchingStates = displayedStates.Where(x => x.State == expected.State);
+
+				if (!matchingStates.Any())
+				{
+					Report.Failure($"No State data displayed: {expected.State} were displayed!");
+					continue;
+				}
+
+				var matched = matchingStates.Any(m => m.State == expected.State &&
+													  m.Regulation == expected.Regulation &&
+													  m.VocValue == expected.VocValue &&
+													  m.StateVocThreshold == expected.StateVocThreshold &&
+													  m.Message == expected.Message);
+
+				Report.IsTrue(matched, $"Voc percent data did not match for state: {expected.State}", $"Voc percent data matched for state: {expected.State}");
+			}
+		}
 		[RegexStepDefinition(@"Click the following button in the popup video: (.*) I click the (.*) button")]
 		public void ClickTheFollowingButtonInThePopupView(string popupTitle, string buttonTitle)
 		{
@@ -552,6 +578,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(selNewProduct.StandaloneCheckbox(description).Checked() == toCheck,
 				$"The checkbox was not {check}ed after",
 				$"The checkbox is {check}ed as expected");
+		}
+
+		[RegexStepDefinition(@"I click the checkbox with description: (.*)")]
+		public void ClickTheCheckboxWithDescription(string description)
+		{
+			var selNewProduct = new NewProduct();
+			Report.IsTrue(selNewProduct.CheckStandaloneCheckbox(description),
+				$"Failed to click the checkbox with description: '{description}'!",
+				$"Successfully clicked the checkbox with description: '{description}'");
 		}
 		[RegexStepDefinition(@"Confirm the checkbox with description: (.*) (is|is not) checked")]
 		public void TheCheckboxWithDescriptionIsIsNotChecked(string description, string is_isnot)
@@ -876,6 +911,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			new StepsNewProduct().NoErrorMessages();
 
+		}
+		[RegexStepDefinition(@"Click on the following page heading: (.*)")]
+		public void ClickPageHeading(string section)
+		{
+			Delay.Seconds(10);
+			GeneralUtilities.Wait_for_load_finish();
+
+			if (new NewProduct().ActivePanelHeadingText() == section)
+			{
+				Report.Info($"The panel: {section} is already active");
+				return;
+			}
+			Report.IsTrue(new NewProduct().ClickSection(section), $"Failed to click section: {section}", $"Successfully clicked section: {section}");
+			GeneralUtilities.Wait_for_load_finish();
 		}
 
 	}

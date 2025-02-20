@@ -1481,6 +1481,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			subCompanyInfo.AddRow($"{savedAs.Replace(" ","")}_<random>", "UNITED STATES", "WERCS", $"{savedAs}", "Welcome1!", $"{address}", "", "Latham", "Florida", "12205", $"QA_{savedAs}_{rnd.Next()}", phonenumber,
 				phonenumber, $"{accountType}", "PhoneQuestion", "PhoneHint", "MentorQuestion", "MentorHint", "FriendQuestion", "FriendHint", "AnimalQuestion", "AnimalHint", "CollegeQuestion", "CollegeHint", "1234");
 			WERCSmartUser account = this.SaveUser(subCompanyInfo, savedAs);
+
+
 			if (this.BasicSignup(savedAs))
 			{
 				this.SaveUserToTReVor(savedAs, account);

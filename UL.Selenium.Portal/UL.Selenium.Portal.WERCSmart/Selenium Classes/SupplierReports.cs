@@ -684,5 +684,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return el.TryClick();
 		}
 
+		public void DateText(string labelValue, string date)
+		{
+			IWebElement DateField = this.FindElement(By.XPath($"//div[./label[contains(text(), '{labelValue}')]]//following-sibling::div//input[@type=\"date\"]"), 2);
+
+			DateField.EnterText(date);
+		}
+
 	}
 }
