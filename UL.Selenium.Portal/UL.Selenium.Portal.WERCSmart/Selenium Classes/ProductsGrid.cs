@@ -316,11 +316,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return null;
 			}
 			Delay.Seconds(5);
-			IWebElement productRow = this.containerElement.FindElement(By.XPath(".//tbody/tr[1]"), 2);
+			IWebElement productRow = this.containerElement.FindElement(By.XPath(".//div[@class='panel panel-default']//table[@class='table table-hover products-table']//tbody/tr[1]"), 2);
 			if (productRow == null || !productRow.Displayed)
 			{
 				return null;
 			}
+
+	
 			string productId = productRow.FindElement(By.XPath(".//small"), 2).Text.Trim();
 			string dateCreated = productRow.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 2).Text.Trim();
 			var retailers = new List<string>();
@@ -620,11 +622,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool DeleteFirstRow(string savedas)
 		{
-			IWebElement row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
-			IWebElement toggleButton = row.FindElement(By.XPath(".//button[@data-toggle='dropdown']"), 2);
+			IWebElement row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody[@data-bind='foreach: products']"), 2);
+			IWebElement toggleButton = row.FindElement(By.XPath(".//div[@class='btn-group']//button[@class='btn btn-default ellipsis-button dropdown-toggle']"), 2); //.//table[@class='table table-hover products-table']//tbody[@data-bind='foreach: products']//button[@class='btn btn-default ellipsis-button dropdown-toggle']
 			if (toggleButton.TryClick())
 			{
-				IWebElement deleteButton = row.FindElement(By.XPath(".//ul[@class='dropdown-menu']//a[contains(text(),'Delete')]"), 2);
+				IWebElement deleteButton = row.FindElement(By.XPath("//ul[@class='dropdown-menu']//a[contains(text(),'Delete')]"), 2);
 				if (deleteButton == null)
 				{
 					Report.Info("Failed to find 'delete' element");
@@ -676,8 +678,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 									{
 										delDialog.ClickDelete();
 									}
-									row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
-									if (row == null)
+									row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody[@data-bind='foreach: products']"), 2);
+									if (row == null || !row.Displayed)
 									{
 										Report.Info($"The products grid was emtpy");
 										return true;
@@ -685,9 +687,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 									try
 									{
 
-										toggleButton = row.FindElement(By.XPath(".//button[@data-toggle='dropdown']"), 2);
+										toggleButton = row.FindElement(By.XPath("//div[@class='btn-group']//button[@class='btn btn-default ellipsis-button dropdown-toggle']"), 2);
 										toggleButton.TryClick();
-										deleteButton = row.FindElement(By.XPath(".//ul[@class='dropdown-menu']//a[contains(text(),'Delete')]"), 10);
+										deleteButton = row.FindElement(By.XPath("//ul[@class='dropdown-menu']//a[contains(text(),'Delete')]"), 10);
 										deleteButton.TryClick();
 										delDialog.WaitForContainerToBeVisible();
 										Delay.Seconds(10);
@@ -696,8 +698,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 										{
 											delDialog.ClickDelete();
 										}
-										row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
-										if (row == null)
+										row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody[@data-bind='foreach: products']"), 2);
+										if (row == null || !row.Displayed)
 										{
 											Report.Info($"The products grid was emtpy");
 											return true;
@@ -710,8 +712,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 									catch
 									{
 										Report.Info($"Exception thrown during product deletion. Checking to see if product was removed between attempts");
-										row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody//tr"), 2);
-										if (row == null)
+										row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody[@data-bind='foreach: products']"), 2);
+										if (row == null || !row.Displayed)
 										{
 											Report.Info($"The products grid was emtpy");
 											return true;
