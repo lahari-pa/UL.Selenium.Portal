@@ -42,6 +42,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		IWebElement Section(string name) => this.ContainerElement.FindElement(By.XPath($"//div[@class='panel-heading']//h3[text()='{name}']"), 2);
 
+		IWebElement Table(string idname) => this.ContainerElement.FindElement(By.XPath($"//div[contains(@id,'{idname}')]//table[contains(@class,'products-table')]"), 2);
+
+		IWebElement LinkElement(string tablename, string linkText) => this.ContainerElement.FindElement(By.XPath($".//div[contains(@id,'{tablename}')]//a[text()='{linkText}'] | .//div[contains(@id,'{tablename}')]//a//span[text()='{linkText}']"), 2);
 		#endregion
 
 		#region Page Methods
@@ -56,7 +59,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 											  string.Join(",", listOfProducts));
 				return false;
 			}
-			IWebElement actionsButtonTd = productsTable.FindElement(By.XPath($".//tbody[contains(@data-bind,'products')]//tr//td//div[contains(@data-bind,'Name')][contains(text(),'{name}')]"), 2);
+			IWebElement actionsButtonTd = productsTable.FindElement(By.XPath($".//tbody[contains(@data-bind,'products')]//tr//td[div[contains(@data-bind,'Name')][contains(text(),'{name}')]]"), 2);
 			if (actionsButtonTd == null)
 			{
 				IList<IWebElement> actionTds = productsTable.FindElements(By.XPath(".//tbody[contains(@data-bind,'products')]//tr//td//div[contains(@data-bind,'Name')]"), 2);
@@ -132,7 +135,61 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			MyPackagingWeightTextField.EnterText(value);
 		}
 
+		public bool ClickSearchProductLine()
+		{
+			IWebElement SearchProductLineButon = this.FindElement(By.XPath("//div[@class='input-group']//span[contains(@data-bind,'getProductLine')]"), 2);
+			return SearchProductLineButon.TryClick();
+		}
 
+		public bool ProductTableExists(string tablename)
+		{
+			Report.Info("Starting looking for Table");
+			return this.Table(tablename) != null;
+		}
+
+		public bool ForBrandsClickEditInAction(string name)
+		{
+			IWebElement productsTable = this.ContainerElement.FindElement(By.XPath("//div[@id='brandContainer']//table[contains(@class,'products-table')]"), 2);
+			ReadOnlyCollection<IWebElement> listOfProcuttsRows = productsTable.FindElements(By.XPath(".//tbody//tr"));
+			var listOfProducts = listOfProcuttsRows.Select(x => x.FindElement(By.XPath(".//td//span[contains(@data-bind,'Phrase')]"), 2).Text).ToList();
+			if (!listOfProducts.Contains(name))
+			{
+				Report.Error($"Product Name:{name} does not show in the list. The full list is: " +
+											  string.Join(",", listOfProducts));
+				return false;
+			}
+			IWebElement actionsButtonTd = productsTable.FindElement(By.XPath($".//tbody[contains(@data-bind,'productLines')]//tr//td[span[contains(@data-bind,'Phrase')][contains(text(),'{name}')]]"), 2);
+			if (actionsButtonTd == null)
+			{
+				IList<IWebElement> actionTds = productsTable.FindElements(By.XPath(".//tbody[contains(@data-bind,'productLines')]//tr//td[span[contains(@data-bind,'Phrase')]"), 2);
+				actionsButtonTd = actionTds.First(x => x.Text.Replace(" ", "") == name.Replace(" ", ""));
+			}
+			IWebElement editButton = actionsButtonTd?.FindElement(By.XPath("..//td//a[text()='Edit']"), 2);
+			if (!editButton.TryClick())
+			{
+				Report.Error("Failed to click Edit button!");
+				return false;
+			}
+			Report.Info("Clicked Edit button");
+			return true;
+		}
+
+		public bool LinkElementClick(string tableName, string linkText)
+		{
+			return this.LinkElement(tableName, linkText).TryClick();
+		}
+
+		public bool LinkElementExists(string tableName, string linkText)
+		{
+			return this.LinkElement(tableName, linkText) != null;
+		}
+
+		public void EnterProductLine(string value)
+		{
+			IWebElement ProductLineTextField = this.FindElement(By.XPath($"//div[contains(@id,'brand')]//input[contains(@data-bind,'Phrase')]"), 2);
+			ProductLineTextField.ClearTextBox();
+			ProductLineTextField.EnterText(value);
+		}
 
 		#endregion
 
