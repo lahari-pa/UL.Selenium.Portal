@@ -1,31 +1,13 @@
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text.RegularExpressions;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Utilities.Functions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using UL.Automation.ReqnrollHelpers.Classes;
-using System.Collections.ObjectModel;
-using UL.Selenium.Portal.WERCSmart.Classes;
-using Reqnroll;
-using TReVor.Api.Wrapper.Classes;
-using UL.Automation.Reporting;
 using UL.Automation.WebDriver.Functions;
-using UL.Automation.TReVor.Classes;
-using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
-using OpenQA.Selenium.Support.UI;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Chrome;
-using System.Net.NetworkInformation;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using static iText.IO.Codec.TiffWriter;
-using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.MyBrands;
-using NPOI.SS.Formula.Functions;
 
 
 
@@ -245,7 +227,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			IWebElement productsTable = this.ContainerElement.FindElement(By.XPath(".//div[@id='distributor']//table"), 2);
 			ReadOnlyCollection<IWebElement> listOfProcuttsRows = productsTable.FindElements(By.XPath(".//tbody//tr"));
-			var listOfProducts = listOfProcuttsRows.Select(x => x.FindElement(By.XPath(".//td[2]]"), 2).Text).ToList();
+			var listOfProducts = listOfProcuttsRows.Select(x => x.FindElement(By.XPath(".//td[2]"), 2).Text).ToList();// Hard coded the row as td as it does not have any class to define it uniquely.
 			if (!listOfProducts.Contains(name))
 			{
 				Report.Error($"Product Name:{name} does not show in the list. The full list is: " +
