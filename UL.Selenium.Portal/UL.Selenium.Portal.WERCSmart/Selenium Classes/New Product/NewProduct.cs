@@ -149,7 +149,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			else
 			{
-				els = this.ContainerElement.FindElements(By.XPath(@$".//span[(.//ancestor::p[@class='form-error']) and (.//ancestor::div[starts-with(@class, 'form-group')]//label[starts-with(normalize-space(text()),'{section}')])]"), 2);
+				els = this.ContainerElement.FindElements(By.XPath($".//span[(.//ancestor::p[@class='form-error']) and (.//ancestor::div[starts-with(@class, 'form-group')]//label[starts-with(normalize-space(text()),\"{section}\")])]"), 2);
 			}			
 			return els.Count == 0 ? new List<string>() : els.Select(x => x.Text).ToList();
 		}
@@ -1756,7 +1756,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool FieldValueRadioIsSelected(string field, string value)
 		{
-			IWebElement el = this.ContainerElement.FindElement(By.XPath($".//label[text()='{field}']/../..//span[text()='{value}']/../input"), 2);
+			IWebElement el = this.ContainerElement.FindElement(By.XPath($".//label[text()='{field}']/../..//span[text()=\"{value}\"]/../input"), 2);
 			if (el == null)
 			{
 				Report.Info($"Section {field} does not have input {value}");
@@ -1768,7 +1768,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool SelectFieldValueRadio(string field, string value)
 		{
-			IWebElement el = this.ContainerElement.FindElement(By.XPath($".//label[text()='{field}']/../..//span[text()='{value}']/../input"), 2);
+			IWebElement el = this.ContainerElement.FindElement(By.XPath($".//label[text()='{field}']/../..//span[text()=\"{value}\"]/../input"), 2);
 			if (el == null)
 			{
 				Report.Info($"Section {field} does not have input {value}");
@@ -2791,7 +2791,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CheckButtonExistsInSection(string section, string button)
 		{
-			string path = $".//span[contains(text(),'{section}')]//..//a[@data-bind[contains(.,'{button}')]] | .//span[contains(text(),'{section}')]//..//a[contains(text(), '{button}')]";
+			string path = $".//span[contains(text(),\"{section}\")]//..//a[@data-bind[contains(.,'{button}')]] | .//span[contains(text(),\"{section}\")]//..//a[contains(text(), '{button}')]";
 			IWebElement el = this.ContainerElement.FindElement(By.XPath(path), 2);
 			Report.Info($"Checking button {button} exists for section: {section}");
 			Report.Screenshot();
@@ -2799,7 +2799,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		}
 		public bool ClickButton(string section, string button)
 		{
-			string path = $".//span[contains(text(),'{section}')]//..//a[@data-bind[contains(.,'{button}')]] | .//span[contains(text(),'{section}')]//..//a[contains(text(), '{button}')]";
+			string path = $".//span[contains(text(),\"{section}\")]//..//a[@data-bind[contains(.,'{button}')]] | .//span[contains(text(),\"{section}\")]//..//a[contains(text(), '{button}')]";
 			IWebElement el = this.ContainerElement.FindElement(By.XPath(path), 2);
 			Report.Info($"Clicking {button} for document type: {section}");
 			Report.Screenshot();
@@ -3540,7 +3540,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool SetOptionInSectionSubSection(string section, string subSection, string value)
 		{
-			string xPath = $@"//div[preceding-sibling::div[./label[contains(text(),""{section}"")]]]//div[@class='form-subgroup' and preceding-sibling::div[.//span[contains(text(),'{subSection}')]]]//input[./following-sibling::span[contains(text(),'{value}')]]";
+			string xPath = $"//div[preceding-sibling::div[./label[contains(text(),\"{section}\")]]]//div[@class='form-subgroup' and preceding-sibling::div[.//span[contains(text(),\"{subSection}\")]]]//input[./following-sibling::span[contains(text(),\"{value}\")]]";
 			IWebElement el = this.ContainerElement.FindElement(By.XPath(xPath), 10);
 			if (el == null)
 			{
@@ -3558,7 +3558,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool UnsetOptionInSectionSubSection(string section, string subSection, string value)
 		{
-			string xPath = $@"//div[preceding-sibling::div[./label[contains(text(),""{section}"")]]]//div[@class='form-subgroup' and preceding-sibling::div[.//span[contains(text(),'{subSection}')]]]//input[./following-sibling::span[contains(text(),'{value}')]]";
+			string xPath = $"//div[preceding-sibling::div[./label[contains(text(),\"{section}\")]]]//div[@class='form-subgroup' and preceding-sibling::div[.//span[contains(text(),\"{subSection}\")]]]//input[./following-sibling::span[contains(text(),\"{value}\")]]";
 			IWebElement el = this.ContainerElement.FindElement(By.XPath(xPath), 10);
 			if (el == null)
 			{
@@ -3584,7 +3584,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool UnsetOptionInSection(string section, string value)
 		{
-			string xPath = $@"//div[preceding-sibling::div[./label[contains(text(),""{section}"")]]]//input[./following-sibling::span[contains(text(),'{value}')]]";
+			string xPath = $"//div[preceding-sibling::div[./label[contains(text(),\"{section}\")]]]//input[./following-sibling::span[contains(text(),\"{value}\")]]";
 			IWebElement el = this.ContainerElement.FindElement(By.XPath(xPath), 10);
 			if (el == null)
 			{
@@ -3672,15 +3672,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool SetOptionInSection(string section, string value)
 		{
-			string xPath = $"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),'{section}')]) and contains(text(),'{value}') and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox'] | " +
-						$"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),'{section}')]) and contains(text(),'{value}') and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
-						$"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),'{section}')]) and @type='text'] | " +
-						$"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),'{section}')]) and @type='email'] | " +
-						$"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),'{section}')])] | " +
-						$"//select[contains(@data-bind,'{section}')] |" +
-						$"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),'{section}')]) and contains(text(),'{value}') and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input) |" +
-						$"//select[(.//ancestor::div//label[contains(text(),'{section}')])] |" +
-						$"//input[(.//following-sibling::label[contains(text(),'{section}')])]";
+			string xPath = $"(//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),\"{section}\")]) and contains(text(),\"{value}\") and (./preceding-sibling::input[@type='checkbox'])]/preceding-sibling::input[@type='checkbox'] | " +
+						$"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),\"{section}\")]) and contains(text(),\"{value}\") and (./preceding-sibling::input[@type='radio'])]/parent::label | " +
+						$"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),\"{section}\")]) and @type='text'] | " +
+						$"//input[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),\"{section}\")]) and @type='email'] | " +
+						$"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),\"{section}\")])] | " +
+						$"//select[contains(@data-bind,\"{section}\")] |" +
+						$"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),\"{section}\")]) and contains(text(),\"{value}\") and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input) |" +
+						$"//select[(.//ancestor::div//label[contains(text(),\"{section}\")])] |" +
+						$"//input[(.//following-sibling::label[contains(text(),\"{section}\")])]";
 
 			IWebElement el = this.ContainerElement.FindElement(By.XPath(xPath), 10);
 
@@ -3694,7 +3694,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 				var elsFound = this.ContainerElement.FindElements(By.XPath("//ancestor::div[starts-with(@class,'form-group')]//div[@class='col-sm-4']"), 2).ToList();
 				var upperEl = elsFound.First(x => x.Text.Contains(section));
-				el = upperEl.FindElement(By.XPath($".//following-sibling::div[1]//label[.//span[contains(text(),'{value}')]]"), 2);
+				el = upperEl.FindElement(By.XPath($".//following-sibling::div[1]//label[.//span[contains(text(),\"{value}\")]]"), 2);
 
 			}
 
@@ -3906,12 +3906,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				string xPath = string.Format($"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),\"{section}\")]) and contains(text(),'{value}') and (./preceding-sibling::input[@type='radio'])]");
+				string xPath = string.Format($"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),\"{section}\")]) and contains(text(),\"{value}\") and (./preceding-sibling::input[@type='radio'])]");
 				IWebElement el;
 
 				if (section == "Select the type of product to create" && value == "Create a New Registration")
 				{
-					xPath = string.Format($"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),'{section}')]) and text()='{value}' and (./preceding-sibling::input[@type='radio'])]");
+					xPath = string.Format($"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),\"{section}\")]) and text()=\"{value}\" and (./preceding-sibling::input[@type='radio'])]");
 					el = this.ContainerElement.FindElement(By.XPath(xPath), 2);
 
 				}
@@ -3920,7 +3920,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 					var elsFound = this.ContainerElement.FindElements(By.XPath("//ancestor::div[starts-with(@class,'form-group')]//div[@class='col-sm-4']"), 2).ToList();
 					var upperEl = elsFound.First(x => x.Text.Contains(section));
-					el = upperEl.FindElement(By.XPath($".//following-sibling::div[1]//label[.//span[contains(text(),'{value}')]]"), 2);
+					el = upperEl.FindElement(By.XPath($".//following-sibling::div[1]//label[.//span[contains(text(),\"{value}\")]]"), 2);
 
 				}
 				else
