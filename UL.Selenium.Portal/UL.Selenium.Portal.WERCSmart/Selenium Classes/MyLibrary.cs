@@ -257,5 +257,57 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 	}
 
+	public class MyIngredientsPage : SeleniumBaseObject
+	{
+
+		#region Page Objects
+		protected override By ContainerElementLocator => By.XPath("//div[@class='body-content']");
+		IWebElement ComponentSearchBox => this.ContainerElement.FindElement(By.XPath(".//span[@class='select2-selection__placeholder' and contains(text(),'Start typing a component name to search')]"), 1);
+		IWebElement TableCheckbox(string componentname, string checkboxlabel) => this.ContainerElement.FindElement(By.XPath($".//div[contains(@id,'settings')]//table//tr//td//span[contains(@data-bind,'component.name')][text()='{componentname}']//ancestor::tr//td//input[contains(@data-bind,'checked: {checkboxlabel}')]"), 1);
+		#endregion
+
+		#region Methods
+
+
+		public bool ComponentSearchBoxExists()
+		{
+			Report.Info($"Attempting to confirm component search box exists.");
+			return this.ComponentSearchBox != null;
+		}
+
+		public bool ComponentSearchBoxClick()
+		{
+			Report.Info($"Attempting to click the component search box.");
+			return this.ComponentSearchBox.TryClick();
+		}
+
+
+		public bool TableCheckboxExists(string componentname, string checkboxLabel)
+		{
+			Report.Info($"Attempting to confrim '{checkboxLabel}'  checkbox for '{componentname}' exists.");
+			return this.TableCheckbox(componentname, checkboxLabel) != null;
+		}
+
+		public bool TableCheckboxClick(string componentname, string checkboxLabel)
+		{
+			Report.Info($"Attempting to click '{checkboxLabel}' checkboxfor '{componentname}'.");
+			return this.TableCheckbox(componentname, checkboxLabel).TryClick();
+		}
+
+		public bool TableCheckboxChecked(string componentname, string checkboxLabel)
+		{
+			Report.Info($"Attempting to confrim '{checkboxLabel}' checkbox for '{componentname}' is checked.");
+			return this.TableCheckbox(componentname, checkboxLabel).Checked();
+		}
+
+
+
+
+
+
+
+		#endregion
+
+	}
 
 }
