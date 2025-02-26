@@ -555,14 +555,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		}
 
 		[RegexStepDefinition(@"In the My Library - My Ingredients section, Validate Remove Component popup (should| should not) be displayed")]
-		public void ValidateDeleteProductPopup(string condition)
+		public void ValidateDeleteIngredientPopup(string condition)
 		{
 			string modalTitle = "Remove Component from My Ingredients?";
 			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeading(condition, modalTitle);
 		}
 
 		[RegexStepDefinition(@"In the My Library - My Ingredients section, in the 'Remove Component' pop up click (Yes|No) button")]
-		public void ClickDeleteCloseInDeleteProductPopUp(string button)
+		public void ClickDeleteCloseInDeleteIngredientPopUp(string button)
 		{
 			string popupTitle = "Remove Component from My Ingredients?";
 			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(popupTitle, button);
