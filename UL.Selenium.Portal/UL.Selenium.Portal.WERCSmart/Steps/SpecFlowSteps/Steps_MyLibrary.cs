@@ -507,8 +507,66 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			Report.IsTrue((ingredientsTable.TableCheckboxChecked(componentname, checkboxLabel) == expected), $"Failure, in the displayed table failed to confirm '{checkboxLabel}' checkbox is {check_uncheck}ed.", $"Success, in the displayed table confirmed '{checkboxLabel}' checkbox is {check_uncheck}ed.");
 		}
 
+		[RegexStepDefinition(@"In the My Library - My Ingredients section, From the Public Name dropdown for component (.*) - I select option: (.*)")]
+		public void PublicNameSelectOption(string componentname, string optionValue)
+		{
+			MyIngredientsPage ingredientsTable = new MyIngredientsPage();
+			Report.IsTrue(ingredientsTable.PublicNameDropdownExists(componentname), $"Failed, Pubic Name dropdown is not displayed for component {componentname}", $"Successfully displayed Public name dropdown for component {componentname} ");
+			Report.IsTrue(ingredientsTable.PublicNameDropdownClick(componentname), $"Failed to click Pubic Name dropdown for component {componentname}", $"Successfully clicked Public name dropdown for component {componentname} ");
+			Report.IsTrue(ingredientsTable.PublicNameDropdownOptionExists(componentname, optionValue), $"Failed, Pubic Name dropdown option {optionValue} is not displayed for component {componentname}", $"Successfully displayed Public name dropdown option {optionValue} for component {componentname} ");
+			Report.IsTrue(ingredientsTable.PublicNameDropdownOptionClick(componentname, optionValue), $"Failed to click option {optionValue} in Pubic Name dropdown for component {componentname}", $"Successfully clicked option {optionValue}in Public name dropdown for component {componentname} ");
+		}
 
+		[RegexStepDefinition(@"In the My Library - My Ingredients section- Under Bulk Product Management , Verify Products table is displayed")]
+		public void VerifyBulkProductManagementTableIsDisplayed()
+		{
+			string name = "settings";
+			Report.IsTrue(new MyLibraryPage().ProductTableExists(name), $"Bulk Product Management table is not displayed", $"Successfully Bulk Product Management table is displayed");
+		}
 
+		[RegexStepDefinition(@"In the My Library - My Ingredients section, click action (Remove |Bulk Update ) for component name: (.*)")]
+		public void ClickActionForcomponent(string productname, string action)
+		{
+			Report.IsTrue(new MyIngredientsPage().ForIngredientsClickAction(productname, action),
+				$"Failed to click action:{action} for component: {productname}",
+				$"Successfully clicked action: {action} for component: {productname}");
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section - Under Bulk Product Management , In New Disclosure click (Select All |Deselect All )")]
+		public void ClickSelectAllOrDeselectAllInNewDiscolsure(string action)
+		{
+			Report.IsTrue(new MyIngredientsPage().ForBulkProductManagementClickSelectAllOrUnselectAll(action),
+				$"Failed to click action:{action}",
+				$"Successfully clicked action: {action}");
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section - Under Bulk Product Management, click 'Save' button")]
+		public void SetClickSave()
+		{
+			string button = "Save";
+			new Steps_Prototype().ClickButton(button);
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section - Under Bulk Product Management, click 'Go Back' button")]
+		public void SetClickSave()
+		{
+			string button = "Go Back";
+			new Steps_Prototype().ClickButton(button);
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section, Validate Remove Component popup (should| should not) be displayed")]
+		public void ValidateDeleteProductPopup(string condition)
+		{
+			string modalTitle = "Remove Component from My Ingredients?";
+			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeading(condition, modalTitle);
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section, in the 'Remove Component' pop up click (Yes|No) button")]
+		public void ClickDeleteCloseInDeleteProductPopUp(string button)
+		{
+			string popupTitle = "Remove Component from My Ingredients?";
+			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(popupTitle, button);
+		}
 
 
 
