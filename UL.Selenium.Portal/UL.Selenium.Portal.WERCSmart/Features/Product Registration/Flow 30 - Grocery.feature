@@ -118,6 +118,7 @@ Scenario: [60724] Condiments, Sauces - RU001454
 	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
 	Given In the Product Information Section, set the option in section: 'Select the product's Country of Origin' to: United States of America
 	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Given In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Given in the Product Information page I click Continue
 
 	#Given I call Shared Step 60747 (Select Primary Physical Property - Liquid - With Ingredients)
