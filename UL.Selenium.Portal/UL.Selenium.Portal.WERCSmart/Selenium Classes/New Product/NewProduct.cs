@@ -3674,7 +3674,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 						$"//select[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),\"{section}\")])] | " +
 						$"//select[contains(@data-bind,\"{section}\")] |" +
 						$"//span[(.//ancestor::div[starts-with(@class,'form-group')]//label[contains(text(),\"{section}\")]) and contains(text(),\"{value}\") and not(.//parent::label[contains(@class,'btn')])]/preceding-sibling::input) |" +
-						$"//select[(.//ancestor::div//label[contains(text(),\"{section}\")])] |" +
+						//$"//select[(.//ancestor::div//label[contains(text(),\"{section}\")])] |" +
 						$"//input[(.//following-sibling::label[contains(text(),\"{section}\")])]";
 
 			IWebElement el = this.ContainerElement.FindElement(By.XPath(xPath), 10);
