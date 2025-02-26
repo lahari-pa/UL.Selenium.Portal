@@ -254,8 +254,98 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		#endregion
 
 
-
 	}
 
+	public class MyIngredientsPage : SeleniumBaseObject
+	{
+
+		#region Page Objects
+		protected override By ContainerElementLocator => By.XPath("//div[@class='body-content']");
+		IWebElement ComponentSearchBox => this.ContainerElement.FindElement(By.XPath(".//span[@class='select2-selection__placeholder' and contains(text(),'Start typing a component name to search')]"), 1);
+		IWebElement TableCheckbox(string componentname, string checkboxlabel) => this.ContainerElement.FindElement(By.XPath($".//div[contains(@id,'settings')]//table//tr//td//span[contains(@data-bind,'component.name')][contains(text(),'{componentname}')]//ancestor::tr//td//input[contains(@data-bind,'checked: {checkboxlabel}')]"), 1);
+		private IWebElement PublicNameDropdown(string componentname) => this.ContainerElement.FindElement(By.XPath($".//div[contains(@id,'settings')]//table//tr//td//span[contains(@data-bind,'component.name')][contains(text(),'{componentname}')]//ancestor::tr//td//select[contains(@data-bind,'publicName')]"), 1);
+		private List<IWebElement> PublicNameDropdownOptionsList(string componentname) => this.PublicNameDropdown(componentname).FindElements(By.XPath("//option"), 1).ToList();
+		private IWebElement PublicNameDropdownOption(string componentname, string dropdownOption) => this.PublicNameDropdownOptionsList(componentname).Where(x => x.Text.Trim() == dropdownOption).FirstOrDefault();
+		IWebElement actionbutton(string name, string action) => this.FindElement(By.XPath($".//div[contains(@id,'settings')]//table//tr//td//span[contains(@data-bind,'component.name')][contains(text(),'{name}')]//ancestor::tr//td//button[@title='{action}']"), 2);
+		IWebElement disclosurebutton(string action) => this.FindElement(By.XPath($".//div[contains(@data-bind,'model')]//table//tr//th//p//a[text()='{action}']"), 2);
+		#endregion
+
+		#region Methods
+
+
+		public bool ComponentSearchBoxExists()
+		{
+			Report.Info($"Attempting to confirm component search box exists.");
+			return this.ComponentSearchBox != null;
+		}
+
+		public bool ComponentSearchBoxClick()
+		{
+			Report.Info($"Attempting to click the component search box.");
+			return this.ComponentSearchBox.TryClick();
+		}
+
+
+		public bool TableCheckboxExists(string componentname, string checkboxLabel)
+		{
+			Report.Info($"Attempting to confrim '{checkboxLabel}'  checkbox for '{componentname}' exists.");
+			return this.TableCheckbox(componentname, checkboxLabel) != null;
+		}
+
+		public bool TableCheckboxClick(string componentname, string checkboxLabel)
+		{
+			Report.Info($"Attempting to click '{checkboxLabel}' checkboxfor '{componentname}'.");
+			return this.TableCheckbox(componentname, checkboxLabel).TryClick();
+		}
+
+		public bool TableCheckboxChecked(string componentname, string checkboxLabel)
+		{
+			Report.Info($"Attempting to confrim '{checkboxLabel}' checkbox for '{componentname}' is checked.");
+			return this.TableCheckbox(componentname, checkboxLabel).Checked();
+		}
+
+
+		public bool PublicNameDropdownExists(string componentname)
+		{
+			Report.Info($"Attempting to confirm Public Name dropdown exists for {componentname}.");
+			return this.PublicNameDropdown(componentname) != null;
+		}
+
+		public bool PublicNameDropdownClick(string componentname)
+		{
+			Report.Info($"Attempting to click Public Name dropdown for {componentname}.");
+			return this.PublicNameDropdown(componentname).TryClick();
+		}
+
+
+		public bool PublicNameDropdownOptionExists(string componentname, string dropdownOption)
+		{
+			Report.Info($"Attempting to confirm Public Name dropdown contains '{dropdownOption}' option.");
+			return this.PublicNameDropdownOption(componentname, dropdownOption) != null;
+		}
+
+		public bool PublicNameDropdownOptionClick(string componentname, string dropdownOption)
+		{
+			Report.Info($"Attempting to click Public Name dropdown '{dropdownOption}' option.");
+			return this.PublicNameDropdownOption(componentname, dropdownOption).TryClick();
+		}
+
+		public bool ForIngredientsClickAction(string name, string action)
+		{
+			
+			return this.actionbutton(name, action).TryClick();
+
+		}
+
+		public bool ForBulkProductManagementClickSelectAllOrUnselectAll(string action)
+		{
+
+			return this.disclosurebutton(action).TryClick();
+
+		}
+
+		#endregion
+
+	}
 
 }
