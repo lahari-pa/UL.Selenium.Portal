@@ -583,7 +583,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		}
 
 		[RegexStepDefinition(@"In the My Library - My Ingredients section, in the 'Remove (.*) Components from My Ingredients' pop up click (Yes|No) button")]
-		public void ClickyesNoInRemoveIngredientPopUp(string button)
+		public void ClickyesNoInRemoveIngredientPopUp(string count, string button)
 		{
 			string popupTitle = $"Remove {count} Components from My Ingredients?";
 			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(popupTitle, button);
@@ -603,7 +603,35 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			Report.IsTrue((ingredientsTable.TableCheckboxChecked(componentname, checkboxLabel) == expected), $"Failure, in the displayed table failed to confirm '{checkboxLabel}' checkbox is {check_uncheck}ed.", $"Success, in the displayed table confirmed '{checkboxLabel}' checkbox is {check_uncheck}ed.");
 		}
 
+		[RegexStepDefinition(@"In the My Library - My Ingredients section - Under Bulk Product Management, (check|uncheck) New Disclosure checkbox for product name: (.*)")]
+		public void NewDisclosureCheckUncheckFooterButton(string check_uncheck, string productname)
+		{
+			bool expected = check_uncheck == "check";
+			MyIngredientsPage ingredientsTable = new MyIngredientsPage();
+			Report.IsTrue(ingredientsTable.NewDisclosureCheckboxExists(productname), $"Failure, in the displayed table ' New Disclosure' checkbox is not displayed.", $"Success, in the displayed table ' New Disclosure' checkbox is displayed.");
+			if (expected != ingredientsTable.NewDisclosureCheckboxChecked(productname))
+			{
+				Report.IsTrue(ingredientsTable.NewDisclosureCheckboxClick(productname), $"Failure, in the displayed table failed to click 'New Disclosure' checkbox.", $"Success, in the displayed table clicked 'New Disclosure' checkbox.");
+			}
+			Report.IsTrue((ingredientsTable.NewDisclosureCheckboxChecked(productname) == expected), $"Failure, in the displayed table failed to confirm 'New Disclosure' checkbox is {check_uncheck}ed.", $"Success, in the displayed table confirmed 'New Disclosure' checkbox is {check_uncheck}ed.");
+		}
 
+		[RegexStepDefinition(@"In the My Library - My Ingredients section - Under Bulk Product Management , From the Public Name dropdown for product (.*) - I select option: (.*)")]
+		public void BulkProductPublicNameSelectOption(string productname, string optionValue)
+		{
+			MyIngredientsPage ingredientsTable = new MyIngredientsPage();
+			Report.IsTrue(ingredientsTable.BulkProductPublicNameDropdownExists(productname), $"Failed, Pubic Name dropdown is not displayed for component {componentname}", $"Successfully displayed Public name dropdown for component {componentname} ");
+			Report.IsTrue(ingredientsTable.BulkProductPublicNameDropdownClick(productname), $"Failed to click Pubic Name dropdown for component {componentname}", $"Successfully clicked Public name dropdown for component {componentname} ");
+			Report.IsTrue(ingredientsTable.BulkProductPublicNameDropdownOptionExists(productname, optionValue), $"Failed, Pubic Name dropdown option {optionValue} is not displayed for component {componentname}", $"Successfully displayed Public name dropdown option {optionValue} for component {componentname} ");
+			Report.IsTrue(ingredientsTable.BulkProductPublicNameDropdownOptionClick(productname, optionValue), $"Failed to click option {optionValue} in Pubic Name dropdown for component {componentname}", $"Successfully clicked option {optionValue}in Public name dropdown for component {componentname} ");
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section - Under Bulk Product Management, Verify selected component: (.*) is displayed under the header")]
+		public void ValidateComponentNameunderHeader(string componentname)
+		{
+			MyIngredientsPage ingredientsTable = new MyIngredientsPage();
+			Report.IsTrue(ingredientsTable.GetBulkProductComponentName() == componentname, $"Failed to display selected componeny name under the header", $"Successfully displayd selected componeny name under the header ");
+		}
 
 		#endregion
 
