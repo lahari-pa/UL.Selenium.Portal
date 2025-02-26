@@ -548,7 +548,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		}
 
 		[RegexStepDefinition(@"In the My Library - My Ingredients section - Under Bulk Product Management, click 'Go Back' button")]
-		public void SetClickSave()
+		public void SetClickGoBack()
 		{
 			string button = "Go Back";
 			new Steps_Prototype().ClickButton(button);
