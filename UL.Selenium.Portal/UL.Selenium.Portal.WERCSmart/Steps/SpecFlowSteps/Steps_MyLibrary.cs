@@ -562,10 +562,45 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		}
 
 		[RegexStepDefinition(@"In the My Library - My Ingredients section, in the 'Remove Component' pop up click (Yes|No) button")]
-		public void ClickDeleteCloseInDeleteIngredientPopUp(string button)
+		public void ClickYesNoInRemoveComponentPopUp(string button)
 		{
 			string popupTitle = "Remove Component from My Ingredients?";
 			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(popupTitle, button);
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section , click 'Delete checked' button")]
+		public void SetClickDeleteChecked()
+		{
+			string button = "Delete checked";
+			new Steps_Prototype().ClickButton(button);
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section, Validate 'Remove (.*) Components from My Ingredients?' popup (should| should not) be displayed")]
+		public void ValidateDeleteIngredientPopup(string count, string condition)
+		{
+			string modalTitle = $"Remove {count} Components from My Ingredients?";
+			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeading(condition, modalTitle);
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section, in the 'Remove (.*) Components from My Ingredients' pop up click (Yes|No) button")]
+		public void ClickyesNoInRemoveIngredientPopUp(string button)
+		{
+			string popupTitle = $"Remove {count} Components from My Ingredients?";
+			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(popupTitle, button);
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section, (check|uncheck)  CAS Chemical name  checkbox for component name: (.*)")]
+		public void CASCheckUncheckButton(string check_uncheck, string componentname)
+		{
+			bool expected = check_uncheck == "check";
+			string checkboxLabel = "checked: isChecked";
+			MyIngredientsPage ingredientsTable = new MyIngredientsPage();
+			Report.IsTrue(ingredientsTable.TableCheckboxExists(componentname, checkboxLabel), $"Failure, in the displayed table '{checkboxLabel}' checkbox is not displayed.", $"Success, in the displayed table '{checkboxLabel}' checkbox is displayed.");
+			if (expected != ingredientsTable.TableCheckboxChecked(componentname, checkboxLabel))
+			{
+				Report.IsTrue(ingredientsTable.TableCheckboxClick(componentname, checkboxLabel), $"Failure, in the displayed table failed to click '{checkboxLabel}' checkbox.", $"Success, in the displayed table clicked '{checkboxLabel}' checkbox.");
+			}
+			Report.IsTrue((ingredientsTable.TableCheckboxChecked(componentname, checkboxLabel) == expected), $"Failure, in the displayed table failed to confirm '{checkboxLabel}' checkbox is {check_uncheck}ed.", $"Success, in the displayed table confirmed '{checkboxLabel}' checkbox is {check_uncheck}ed.");
 		}
 
 
