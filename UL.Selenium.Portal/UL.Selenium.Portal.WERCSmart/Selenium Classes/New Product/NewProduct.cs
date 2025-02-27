@@ -3645,13 +3645,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public IWebElement StandaloneCheckbox(string description)
 		{
 			IWebElement el = this.ContainerElement.FindElement(By.XPath($".//div[@class='checkbox' and (.//span[contains(text(),\"{description}\")])]/label/input | .//div[span[text() = \"{description}\"]]/input | //label[contains(@class, 'checkbox') and normalize-space(text()=\"{description}\")]//input[@type='checkbox']"), 2);
-			IWebElement el2 = this.ContainerElement.FindElement(By.XPath($".//input[@type='checkbox'][.//following-sibling::span[normalize-space(text()=\"{description}\")]]"));
-			IWebElement el3 = this.ContainerElement.FindElement(By.XPath($"..//input[@type='checkbox'][.//following-sibling::span[normalize-space(text()=\"{description}\")]]"));
 			if (el == null)
+			{
+				IWebElement el2 = this.ContainerElement.FindElement(By.XPath($".//input[@type='checkbox'][.//following-sibling::span[normalize-space(text()=\"{description}\")]]"));
 
 				if (el2 == null)
 				{
-					IWebElement el3 = this.ContainerElement.FindElement(By.XPath($@"..//input[@type='checkbox'][.//following-sibling::span[normalize-space(text()='{description}')]]"));
+					IWebElement el3 = this.ContainerElement.FindElement(By.XPath($"..//input[@type='checkbox'][.//following-sibling::span[normalize-space(text()=\"{description}\")]]"));
 
 					if (el3 == null)
 					{
