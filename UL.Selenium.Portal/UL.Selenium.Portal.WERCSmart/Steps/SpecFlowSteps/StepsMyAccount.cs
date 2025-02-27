@@ -13,7 +13,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 {
-	[Binding, Scope(Tag = "Product:WERCSmart_Page:MyAccount")]
+	[Binding, Scope(Tag = "MyAccount")]
 	class WERCSmart_MyAccount
 	{
 		[RegexStepDefinition(@"In the My Account section, click the 'Company Information' link")]

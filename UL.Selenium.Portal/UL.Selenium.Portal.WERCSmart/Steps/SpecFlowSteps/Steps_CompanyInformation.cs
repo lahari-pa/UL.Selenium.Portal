@@ -10,7 +10,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 {
-	[Binding, Scope(Tag = "Product:WERCSmart_Page:MyAccount:CompanyInformation")]
+	[Binding, Scope(Tag = "MyAccount:CompanyInformation")]
 
 	class Steps_CompanyInformation
 	{
