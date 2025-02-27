@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Extensions;
+using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
@@ -36,7 +37,19 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.PageHeader.Text;
 		}
 
+		public bool WizardTabsListExists()
+		{
+			Report.Info($"Attempting to confirm the Wizard Tab list exists.");
+			return !this.WizardTabsList.IsNullOrEmpty();
+		}
 
+		public List<string> WizardTabsListGet()
+		{
+			Report.Info($"Attempting to get Wizard Tab list.");
+			List<string> output = new List<string>();
+			this.WizardTabsList.ForEach(x => output.Add(x.Text));
+			return output;
+		}
 		#endregion
 	}
 }
