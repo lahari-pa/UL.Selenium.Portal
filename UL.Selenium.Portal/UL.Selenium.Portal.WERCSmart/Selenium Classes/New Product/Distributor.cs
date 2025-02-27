@@ -1,19 +1,11 @@
-﻿using System;
+﻿using OpenQA.Selenium;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using UL.Automation.ReqnrollHelpers.Classes;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using Reqnroll;
-using System.IO;
 using UL.Automation.WebDriver.Classes;
-using UL.Automation.WebDriver.BaseClasses;
-using System.Collections.ObjectModel;
-using UL.Selenium.Portal.WERCSmart.Classes;
+using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
@@ -22,7 +14,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		private IWebElement DistSearchInput => SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@class='table-search col-sm-4']//input[@id='inputGroup']"), 2);
 
-		public string SearchIdNameField {
+		public string SearchIdNameField
+		{
 			get
 			{
 				IWebElement el = this.DistSearchInput;
@@ -126,7 +119,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				if (info.Dpci.Length > 0)
 				{
 					IWebElement dpciField = container.FindElement(By.XPath(".//input[contains(@data-bind,'value.field')]"), 2);
-					
+
 					if (dpciField == null)
 					{
 						return false;
@@ -137,7 +130,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				if (info.Quantity.Length > 0)
 				{
 					IWebElement quantityField = container.FindElement(By.XPath(".//input[@placeholder='Quantity']"), 2);
-					
+
 					if (quantityField == null)
 					{
 						return false;
@@ -148,7 +141,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				if (info.PackageType.Length > 0)
 				{
 					IWebElement packageField = container.FindElement(By.XPath(".//select[contains(@data-bind,'Package Type')]"), 2);
-					
+
 					if (packageField == null)
 					{
 						return false;

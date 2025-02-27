@@ -1,11 +1,8 @@
-using UL.Automation.WebDriver.BaseClasses;
-using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using UL.Automation.WebDriver.BaseClasses;
 
 
 
@@ -31,7 +28,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			if (USEPAWasteHazard.Text != null)
 			{
 				this.CheckListEPAType = USEPAWasteHazard.Text;
-			} else
+			}
+			else
 			{
 				return;
 			}
@@ -39,7 +37,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			if (USEPAWasteNumber.Text != null)
 			{
 				this.CheckListEPACode = USEPAWasteNumber.Text;
-			} else
+			}
+			else
 			{
 				return;
 			}

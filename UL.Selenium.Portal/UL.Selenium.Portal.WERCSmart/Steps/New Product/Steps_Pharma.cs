@@ -1,27 +1,10 @@
-﻿using System;
+﻿using Reqnroll;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using System.Globalization;
-using Newtonsoft.Json.Converters;
-using System.Xml;
-using UL.Automation.Reporting;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.TReVor.Classes;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
-using UL.Automation.Utilities.Functions;
-using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.RetailerAbbreviations;
-using UL.Selenium.Portal.WERCSmart.Steps;
-using UL.Selenium.Portal.WERCSmart.Classes;
-using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
-using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type;
-using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
-using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Automation.Utilities.Functions;
+using UL.Automation.WebDriver.Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
@@ -51,7 +34,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		[RegexStepDefinition(@"I fill all empty fields in the Pharma Ingredients screen")]
 		public void GivenIFillAllEmptyFieldsInThePharmaIngredientsScreen()
-		{ 
+		{
 			Pharma pharmaObject = new Pharma();
 			Report.IsTrue(pharmaObject.CheckAndFillEmptyFieldsInPharmaIngredientsScreen(), "Failed to fill in all empty fields", "Successfully filled in all empty fields");
 		}

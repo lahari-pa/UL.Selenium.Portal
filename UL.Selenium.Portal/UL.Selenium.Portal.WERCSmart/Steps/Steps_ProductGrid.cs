@@ -1,17 +1,16 @@
+using Reqnroll;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.ReqnrollHelpers.Classes;
-using Reqnroll;
 using UL.Automation.TReVor.Classes;
+using UL.Automation.Utilities.Functions;
+using UL.Automation.WebDriver.Classes;
+using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using UL.Selenium.Portal.WERCSmart.Classes;
-using UL.Automation.Reporting.Classes;
-using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -24,7 +23,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep(Report.Details.StepIndex + $" - Checking that option {field} is present");
 			try
 			{
-				Report.Info($"Checking that option { field } is present");
+				Report.Info($"Checking that option {field} is present");
 				var selProdGrid = new ProductsGrid();
 
 				switch (field)
@@ -33,7 +32,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						Report.IsTrue(selProdGrid.MoreFiltersOptionPresent(), $"{field} option was not showing as expected!, {field} option was showing as expected!");
 						break;
 					case ("Product ID/Name"):
-						Report.IsTrue(selProdGrid.ProductIdNameFieldPresent(), $"{ field}  option was not showing as expected!", $"{field} option was showing as expected!");
+						Report.IsTrue(selProdGrid.ProductIdNameFieldPresent(), $"{field}  option was not showing as expected!", $"{field} option was showing as expected!");
 						break;
 					case ("Bulk Actions"):
 						Report.IsTrue(selProdGrid.BulkActionsOptionPresent(), $"{field} option was not showing as expected!", $"{field} option was showing as expected!");
@@ -2393,7 +2392,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisProductsGrid = new ProductsGrid();
 			string getDate = DateTime.Parse(thisProductsGrid.GetDateDiscontinuedByProductId(id)).ToString("MM/dd/yyyy");
 			string currentDate = DateTime.Now.ToString("MM/dd/yyyy");
-			Report.IsTrue(getDate==currentDate, "Failed to confirm Date Discontinued contains today's date", "Successfully confirmed Date Discontinued contains today's date");
+			Report.IsTrue(getDate == currentDate, "Failed to confirm Date Discontinued contains today's date", "Successfully confirmed Date Discontinued contains today's date");
 		}
 
 		[RegexStepDefinition(@"For product saved as: (.*) the status is: (.*)")]
@@ -2585,8 +2584,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InTheArchiveRetailersPopupSelectTheCheckboxNextToTheRetailer(string retailer)
 		{
 			var thisModalDialog = new ModalDialog();
-			Report.IsTrue(thisModalDialog.SelectRetailer(retailer), $"Failed to select:  { retailer}",
-				$"Successfully selected: { retailer }");
+			Report.IsTrue(thisModalDialog.SelectRetailer(retailer), $"Failed to select:  {retailer}",
+				$"Successfully selected: {retailer}");
 		}
 
 		[RegexStepDefinition(@"In the Archive Retailers popup click on: (.*)")]
@@ -3208,13 +3207,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(selProdGrid.ProductsCount() >= 1, "Failure, no entries were found", "Success, at least one entry was found, as expected!");
 		}
 
-			[RegexStepDefinition(@"In the Product ID, Ingredient ID, SKU filter field I search for: (.*)")]
+		[RegexStepDefinition(@"In the Product ID, Ingredient ID, SKU filter field I search for: (.*)")]
 		public void GivenInTheProductIDIngredientIDSKUFilterFieldISearchFor(string savedAs)
 		{
-			
+
 			try
 			{
-				
+
 				Report.Info("Searching for Product Saved as " + savedAs);
 
 				if (!Context.Contains(savedAs))
@@ -3261,7 +3260,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 					}
 				}
-			
+
 				var selProductGridMoreFilters = new MoreFilters();
 
 				selProductGridMoreFilters.ProductIDIngredientIDSKU = id;
@@ -3627,8 +3626,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var selMoreFilters = new MoreFilters();
 				string MessageShowing = selMoreFilters.ConfirmMessageForSingleRetailerRA();
 				Report.IsTrue(MessageShowing == message,
-					$"Tier information was showing: '{ MessageShowing }', but was expected to show: '{ message }'",
-					$"Tier information was showing: '{ MessageShowing }', as expected!");
+					$"Tier information was showing: '{MessageShowing}', but was expected to show: '{message}'",
+					$"Tier information was showing: '{MessageShowing}', as expected!");
 				Report.Screenshot();
 			}
 			catch (Exception ex)
@@ -3667,8 +3666,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InTheArchiveRetailersPopupDeSelectTheCheckboxNextToTheRetailer(string retailer)
 		{
 			var thisModalDialog = new ModalDialog();
-			Report.IsTrue(thisModalDialog.DeselectRetailer(retailer), $"Failed to select: { retailer }",
-				$"Successfully selected: { retailer }");
+			Report.IsTrue(thisModalDialog.DeselectRetailer(retailer), $"Failed to select: {retailer}",
+				$"Successfully selected: {retailer}");
 		}
 	}
 }

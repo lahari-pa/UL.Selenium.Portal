@@ -1,16 +1,16 @@
-using System.Collections.Generic;
-using System.Linq;
 using OpenQA.Selenium;
 using Reqnroll;
+using System.Collections.Generic;
+using System.Linq;
 using UL.Automation.Reporting;
+using UL.Automation.Reporting.Classes;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Selenium.Portal.RPS.Classes;
 using UL.Selenium.Portal.RPS.Selenium_Classes;
-using UL.Automation.Reporting.Classes;
-using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.RPS.Steps
@@ -396,7 +396,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.Info($"Attempting to save the list of widget titles as: '{savedAs}'.");
             List<WidgetPage.Widget> widgetList = new List<WidgetPage.Widget>();
             List<string> widgetTitles = new Home().WidgetTitles;
-            foreach(string widgetTitle in widgetTitles)
+            foreach (string widgetTitle in widgetTitles)
             {
                 WidgetPage.Widget widget = new Home.Widget(widgetTitle);
                 widgetList.Add(widget);
@@ -1028,7 +1028,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             ForWidgetISelectSection(widget.Title, sectionTitle);
         }
 
-            [RegexStepDefinition(@"I confirm graph content (is|is not) displayed for the widget: (.*)")]
+        [RegexStepDefinition(@"I confirm graph content (is|is not) displayed for the widget: (.*)")]
         public void GraphContentDisplayedForTitle(string isIsNot, string widgetTitle)
         {
             bool displayed = false;
@@ -1089,7 +1089,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             ProductContentDisplayedForTitle(isIsNot, widget.Title);
         }
 
-            [RegexStepDefinition(@"I wait for the all widgets to finish loading")]
+        [RegexStepDefinition(@"I wait for the all widgets to finish loading")]
         public void WaitForAllWidgets()
         {
             Report.IsTrue(new Home().WaitWidgetSpinnerFinish(), "The widgets did not finish loading", "The widgets have finished loading");
@@ -1273,7 +1273,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             ForWidgetClickProductsGridBackButtonAndConfrimGraphDisplayed(widget.Title);
         }
 
-            [RegexStepDefinition(@"In the widget (.*), I confirm I see a Contact Supplier link to the right of the product details for the Product with ID: (.*)")]
+        [RegexStepDefinition(@"In the widget (.*), I confirm I see a Contact Supplier link to the right of the product details for the Product with ID: (.*)")]
         public void ForWidgetIConfirmContactSupplierForProduct(string widget, string productID)
         {
             Report.IsTrue(new Home.Widget(widget).ContactSupplierTextFound(productID), "The text 'Contact Supplier' was not found", "The text 'Contact Supplier' was found");

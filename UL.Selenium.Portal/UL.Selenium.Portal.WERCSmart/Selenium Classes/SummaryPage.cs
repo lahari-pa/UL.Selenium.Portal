@@ -1,14 +1,13 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using UL.Automation.WebDriver.BaseClasses;
-using UL.Automation.WebDriver.Extensions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text.RegularExpressions;
 using UL.Automation.Reporting.Functions;
-using Reqnroll;
+using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -41,7 +40,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return false;
 		}
 
-		
+
 
 		public List<string> ListOfButtons()
 		{
@@ -327,7 +326,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 	}
 
-	class UpdateDataSummaryPage:BaseObject
+	class UpdateDataSummaryPage : BaseObject
 	{
 		public const string BasePath = "//body[contains(@class,'summary')]";
 

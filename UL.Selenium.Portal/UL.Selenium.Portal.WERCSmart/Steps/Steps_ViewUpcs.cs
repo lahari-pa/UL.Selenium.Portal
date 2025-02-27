@@ -1,20 +1,13 @@
-using System;
+using Reqnroll;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using UL.Automation.Reporting.Functions;
-using UL.Automation.ReqnrollHelpers.Classes;
-using OpenQA.Selenium;
-using Reqnroll;
-using Reqnroll.Assist;
 using UL.Automation.Reporting;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -140,7 +133,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.StartStep("I Confirm that I see the value I entered in Transportation Options for the Case UPC");
 				Report.IsTrue(matchingUpc.Transport == row["Transport"], $"The Transport column did not match expected value for the Case UPC: {thisUpc}! Expected: {row["Transport"]} but got: {matchingUpc.Transport}", $"The Transport column matched the expected value for the Case UPC: {thisUpc}");
 				Report.StartStep("I Confirm that the Retailer column shows the retailer you selected for the Case UPC");
-				Report.IsTrue(matchingUpc.Retailers.Contains(row["Retailer"]), "Retailers column did not contain retailer: " + row["Retailer"] + "!", "Retailers column contained retailer: "+ row["Retailer"]);
+				Report.IsTrue(matchingUpc.Retailers.Contains(row["Retailer"]), "Retailers column did not contain retailer: " + row["Retailer"] + "!", "Retailers column contained retailer: " + row["Retailer"]);
 			}
 		}
 
@@ -164,9 +157,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					continue;
 				}
 				Report.Success("The regular UPC Number was displayed");
-                Report.Screenshot();
-                Report.StartStep("I Confirm that the regular UPC row does not show the truck icon");
-                Report.IsTrue(!matchingUpc.TruckIcon, $"The truck icon was shown next to the regular UPC number: {thisUpc}!", $"The truck icon was not displayed by the regular UPC Number: {thisUpc}");
+				Report.Screenshot();
+				Report.StartStep("I Confirm that the regular UPC row does not show the truck icon");
+				Report.IsTrue(!matchingUpc.TruckIcon, $"The truck icon was shown next to the regular UPC number: {thisUpc}!", $"The truck icon was not displayed by the regular UPC Number: {thisUpc}");
 				Report.StartStep("I Confirm that the Associated column for the regular UPC is blank");
 				Report.IsTrue(matchingUpc.AssociatedUpc.IsNullOrEmpty(), "The Associated UPC column was not blank!", "The Associated UPC column was blank");
 				Report.StartStep("I Confirm that I see the value I entered in the Container Type column for the regular UPC");
@@ -260,10 +253,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 	}
 
-		
 
 
 
-	
+
+
 
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Reqnroll;
+﻿using Reqnroll;
 using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
@@ -98,9 +93,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			}
 			// table input --> |Section|
 			[RegexStepDefinition(@"In the Inventory Status, Prop 65 \(US\) Section, the following sections (should only|should|should not) be displayed:")]
-			public void CheckSectionsDisplayedInventoryStatusPage(string condition , Table sections)
+			public void CheckSectionsDisplayedInventoryStatusPage(string condition, Table sections)
 			{
-				
+
 				new Steps_Prototype().CheckDisplayedSections(condition, sections);
 			}
 			[RegexStepDefinition(@"In the Inventory Status, Prop 65 \(US\) Section, the section 'U.S. Toxic Substances Control Act \(TSCA\) status' (should|should not) display an error message: (.*)")]

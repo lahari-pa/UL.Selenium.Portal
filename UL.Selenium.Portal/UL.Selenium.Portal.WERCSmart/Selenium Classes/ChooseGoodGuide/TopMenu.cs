@@ -1,10 +1,9 @@
+using OpenQA.Selenium;
 using System;
 using System.Linq;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 {
@@ -25,7 +24,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 				try
 				{
 					IWebElement select = this.containerElement.FindElement(By.XPath(".//a[text() = '" + selectBoxText + "']"), 2);
-					
+
 					if (select == null)
 					{
 						return false;

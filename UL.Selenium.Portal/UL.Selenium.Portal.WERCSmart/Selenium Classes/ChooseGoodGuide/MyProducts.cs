@@ -1,11 +1,10 @@
+using OpenQA.Selenium;
 using System;
 using System.Linq;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 {
@@ -22,7 +21,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 				{
 					IWebElement searchBySelect = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(
 						"//section[@id='productGridSection']//label[contains(text(), 'Search By')]/following-sibling::select"), 2);
-					
+
 					if (searchBySelect == null)
 					{
 						return false;
@@ -66,7 +65,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 		public bool ClickFilter()
 		{
 			IWebElement el = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//button[@id='cmdFilterProducts']"), 2);
-			
+
 			if (el == null)
 			{
 				return false;
@@ -164,7 +163,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 				{
 					IWebElement invisibleLoading =
 						SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@id='load_tblProducts' and contains(@style,'none')]"), 2);
-					
+
 					if (invisibleLoading == null)
 					{
 						return;
@@ -196,7 +195,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 		public bool ClickDelete()
 		{
 			IWebElement el = this.containerElement.FindElement(By.XPath(".//button[(./span[contains(text(),'Delete')])]"), 2);
-			
+
 			if (el == null)
 			{
 				return false;
@@ -207,7 +206,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 		public bool ClickCancel()
 		{
 			IWebElement el = this.containerElement.FindElement(By.XPath(".//button[(./span[contains(text(),'Cancel')])]"), 2);
-			
+
 			if (el == null)
 			{
 				return false;

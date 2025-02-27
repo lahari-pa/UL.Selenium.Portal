@@ -1,17 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using UL.Automation.WebDriver.BaseClasses;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
-using System.Collections.ObjectModel;
-using UL.Selenium.Portal.WERCSmart.Classes;
 using OpenQA.Selenium.Support.UI;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Globalization;
+using System.Linq;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.WebDriver.BaseClasses;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
+using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -260,8 +260,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				SeleniumWebDriver.CurrentDriver.SwitchTo().DefaultContent();
 				IWebElement frame =
 				SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//iframe[contains(@src, 'powertoolsworkspaceDesignMode')]"));
-				WebDriverWait IFrameWait = new (SeleniumWebDriver.CurrentDriver,TimeSpan.FromSeconds(secondsToWait));
-				_= IFrameWait.Until(ExpectedConditions.FrameToBeAvailableAndSwitchToIt(By.XPath("//iframe[contains(@src, 'powertoolsworkspaceDesignMode')]")));
+				WebDriverWait IFrameWait = new(SeleniumWebDriver.CurrentDriver, TimeSpan.FromSeconds(secondsToWait));
+				_ = IFrameWait.Until(ExpectedConditions.FrameToBeAvailableAndSwitchToIt(By.XPath("//iframe[contains(@src, 'powertoolsworkspaceDesignMode')]")));
 				//SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
 				return base.WaitForContainerToBeVisible(secondsToWait);
 			}
@@ -350,7 +350,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public IWebElement VerifyComponent()
 		{
-			 return SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//tr[@id='componentGrid-grid0']"), 2);
+			return SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//tr[@id='componentGrid-grid0']"), 2);
 
 		}
 
@@ -393,13 +393,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			if (matchingMenuItem == null)
 			{
-				Report.Info($"Failed to find menu item: { menuItem }");
+				Report.Info($"Failed to find menu item: {menuItem}");
 				return false;
 			}
 
 			if (!matchingMenuItem.TryClick())
 			{
-				Report.Info($"Failed to click menu item: { menuItem }");
+				Report.Info($"Failed to click menu item: {menuItem}");
 			}
 
 			if (submenuItem.Length > 0)
@@ -409,14 +409,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				if (matchingSubMenuItem == null)
 				{
-					Report.Info($"Failed to find sub menu item: { submenuItem }");
+					Report.Info($"Failed to find sub menu item: {submenuItem}");
 					return false;
 				}
 
 
 				if (!matchingSubMenuItem.TryClick())
 				{
-					Report.Info($"Failed to click sub menu item: { submenuItem }");
+					Report.Info($"Failed to click sub menu item: {submenuItem}");
 				}
 			}
 
@@ -1359,7 +1359,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Alert Found, Trying to get the Text of the Alert");
 				string alertText = SeleniumBrowser.Alert.GetText();
 				int i = 2;
-				while(alertText.IsNullOrEmpty()&& i<11)
+				while (alertText.IsNullOrEmpty() && i < 11)
 				{
 					Report.Info($"No Text Was Found In the Alert, Trying again");
 					Report.Info($"Looking for alert text. Attempt: {i}");
@@ -1367,7 +1367,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					Delay.Seconds(2);
 					i++;
 				}
-				if(alertText.IsNullOrEmpty() && i==11)
+				if (alertText.IsNullOrEmpty() && i == 11)
 				{
 					Report.Info("The Alert Text was still found to be empty after 10 total attempts");
 				}
@@ -1478,7 +1478,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						matchingElement = this.GetCheckBoxEl(name);
 						var chckAtr = matchingElement.GetAttribute("checked");
 
-						if(chckAtr.IsNullOrEmpty())
+						if (chckAtr.IsNullOrEmpty())
 						{
 							matchingElement = this.GetCheckBoxEl(name);
 							matchingElement.Check(setChecked);
@@ -1511,9 +1511,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						}
 						else
 						{
-							if(chckAtr == "true")
+							if (chckAtr == "true")
 							{
-								
+
 								Report.Info($"element attribute was: {chckAtr} = indicates the box is checked");
 								return true;
 
@@ -1525,7 +1525,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 							}
 						}
-					}						
+					}
 					return true;
 				}
 				catch (Exception e)
@@ -2179,7 +2179,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			Report.Info($"successBreakout checking...");
-			if(successBreakout==false)
+			if (successBreakout == false)
 			{
 				Report.Screenshot();
 				Report.Info($"successBreakout was false. Either the windows did not load, or errors were thrown on every loop...");
@@ -2369,20 +2369,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 		}
-		
+
 
 		public bool ClickApply()
 		{
-			int i = 0;			
-			while(i<5)
+			int i = 0;
+			while (i < 5)
 			{
 				Report.Screenshot();
 				IWebElement applyButton = this.containerElement.FindElement(By.XPath(".//input[@id='Selectrecord1_cmdApply']"), 2);
 				bool applyButtonFound = applyButton.Displayed;
 				Report.Info($"applyButtonFound was {applyButtonFound}");
-				if(applyButton!=null)
+				if (applyButton != null)
 				{
-					if(applyButton.TryClick()==true)
+					if (applyButton.TryClick() == true)
 					{
 						Report.Success($"Successfully clicked the apply button");
 						Report.Screenshot();
@@ -2391,7 +2391,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						applyButtonFound = applyButton.Displayed;
 						Report.Info($"applyButtonFound was {applyButtonFound}");
 						int x = 0;
-						while(applyButtonFound==true && x <20)
+						while (applyButtonFound == true && x < 20)
 						{
 							Delay.Seconds(5);
 							applyButton = this.containerElement.FindElement(By.XPath(".//input[@id='Selectrecord1_cmdApply']"), 2);
@@ -2399,17 +2399,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							Report.Info($"applyButtonFound was {applyButtonFound}");
 							Report.Info($"Attempt: {x}");
 							Report.Screenshot();
-							x++; 
+							x++;
 						}
 
-						if(applyButtonFound == false)
+						if (applyButtonFound == false)
 						{
 							Report.Screenshot();
 							Report.Success($"The filter popup was closed or not found");
 							return true;
 						}
-						
-					
+
+
 					}
 					else
 					{
@@ -2973,7 +2973,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					Report.Screenshot();
 					Delay.Seconds(1);
 					Report.Info($"Trying to regrab checkbox el?");
-					checkbox = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);					
+					checkbox = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
 					int i = 0;
 					while (checkbox == null && i < 10)
 					{
@@ -3069,7 +3069,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info("Beginning Check...");
 			Report.Info($"Getting checkbox el");
 			IWebElement checkbox = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//input[@id='DocumentQueue_grdSR_ctl02_chkCheckAll']"), 2);
-			Report.Info($"Checking if el is null or not...");		
+			Report.Info($"Checking if el is null or not...");
 			if (checkbox != null)
 			{
 				Report.Info($"checkbox was not null.");

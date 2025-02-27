@@ -1,14 +1,14 @@
+using Reqnroll;
 using System.Collections.Generic;
 using System.Linq;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.Reporting.Functions;
-using UL.Automation.ReqnrollHelpers.Classes;
-using Reqnroll;
 using UL.Automation.Reporting;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -129,8 +129,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				return;
 			}
 			var ingredient = (MyIngredients.IngredientItem)Context.GetFromContext("My_Ingredient_" + savedAs);
-			Report.IsTrue(new MyIngredients().ClickRemove(ingredient),"Failed to click remove","Successfully clicked remove");
-			new MyIngredientsModal().WaitForContainerToBeVisible(30);			
+			Report.IsTrue(new MyIngredients().ClickRemove(ingredient), "Failed to click remove", "Successfully clicked remove");
+			new MyIngredientsModal().WaitForContainerToBeVisible(30);
 		}
 
 		[RegexStepDefinition(@"I confirm the component name in the delete product popup matches the ingredient saved as: (.*)")]
@@ -539,7 +539,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			//string panelTitle= new NewProduct().PanelTitle;
 			//Report.IsTrue(panelTitle == "Ingredients", "The Current page is not the Ingredients page", "The current page is the Ingredients page");
-			
+
 		}
 
 		[RegexStepDefinition(@"I ensure that there are enough Ingredients in the My Ingredients page to enable pagination")]
@@ -547,7 +547,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var myIngredients = new MyIngredients();
 			Report.Info("Getting the total number of pages in the My Ingredietns Tab");
-			int currentTotalPages= myIngredients.GetHighestPageNo();
+			int currentTotalPages = myIngredients.GetHighestPageNo();
 			Report.Info($"The total number of pages was: {currentTotalPages}");
 
 			if (currentTotalPages < 3)
@@ -561,7 +561,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					Report.Info("Adding a new Water Ingredient to  My Ingredients");
 					myIngredients.AddIngredientToMyIngredients("Water", "7732-18-5");
-				}				
+				}
 				Report.Info($"The total number of pages now is {myIngredients.GetHighestPageNo()}");
 			}
 			Report.Info("Checking if the current total number of pages is atleast 3");

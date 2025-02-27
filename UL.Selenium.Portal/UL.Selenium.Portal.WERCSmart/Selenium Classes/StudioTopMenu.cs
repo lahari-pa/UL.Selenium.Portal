@@ -1,10 +1,10 @@
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
+using System.Collections.ObjectModel;
 using System.Linq;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {

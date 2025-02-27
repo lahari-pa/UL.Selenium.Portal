@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using iText.Commons.Utils;
-using NPOI.SS.Formula.Functions;
-using Reqnroll;
+﻿using Reqnroll;
+using System;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
@@ -69,7 +63,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string section = "VOC content in g/L";
 			new Steps_Prototype().ThenIConfirmThatISeeTheFollowingCARBValue(section, value);
 		}
-			[RegexStepDefinition(@"In the Volatile Organic Compound Summary Section, confirm that I see the following 'VOC percent as sold' value: (.*)")]
+		[RegexStepDefinition(@"In the Volatile Organic Compound Summary Section, confirm that I see the following 'VOC percent as sold' value: (.*)")]
 		public void VOCPercentAsSold(string value)
 		{
 			string section = "VOC percent as sold";
@@ -160,5 +154,5 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);
 		}
 
-	}	
+	}
 }

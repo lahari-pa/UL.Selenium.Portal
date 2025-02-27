@@ -1,26 +1,17 @@
-using System;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Reqnroll;
 using System.Collections.Generic;
-using System.Collections.Specialized;
+using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Security;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using UL.Automation.Reporting.Functions;
-using UL.Automation.ReqnrollHelpers.Classes;
-using Reqnroll;
-
-
-using System.Globalization;
-using Newtonsoft.Json.Converters;
 using System.Xml;
 using UL.Automation.Reporting;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.TReVor.Classes;
+using UL.Automation.ReqnrollHelpers.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.API
 {

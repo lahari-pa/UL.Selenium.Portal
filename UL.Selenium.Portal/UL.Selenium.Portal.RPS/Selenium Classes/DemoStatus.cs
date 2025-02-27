@@ -6,37 +6,37 @@ using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.RPS.Selenium_Classes
 {
-	public class DemoStatus : SeleniumBaseObject
-	{
-		#region Page Objects
-		protected override By ContainerElementLocator => By.XPath("//body//div[@class='page']");
+    public class DemoStatus : SeleniumBaseObject
+    {
+        #region Page Objects
+        protected override By ContainerElementLocator => By.XPath("//body//div[@class='page']");
 
 
-		private IWebElement LoginInputArea => ContainerElement.FindElement(By.XPath(".//fieldset[//legend[text()='Account Information']]"), 2);
+        private IWebElement LoginInputArea => ContainerElement.FindElement(By.XPath(".//fieldset[//legend[text()='Account Information']]"), 2);
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
-		public bool WaitForLoginInputAreaToLoad()
-		{
-			int x = 0;
-			while (x < 30)
-			{
-				IWebElement el = this.LoginInputArea;
-				if (el != null)
-				{
-					Report.Info($"The Login Input area was loaded");
-					return true;
-				}
-				x++;
-				Delay.Seconds(1);
-			}
+        public bool WaitForLoginInputAreaToLoad()
+        {
+            int x = 0;
+            while (x < 30)
+            {
+                IWebElement el = this.LoginInputArea;
+                if (el != null)
+                {
+                    Report.Info($"The Login Input area was loaded");
+                    return true;
+                }
+                x++;
+                Delay.Seconds(1);
+            }
 
-			Report.Info($"The Login input area was not loaded after 30 seconds");
-			return false;
-		}
+            Report.Info($"The Login input area was not loaded after 30 seconds");
+            return false;
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

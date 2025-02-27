@@ -332,7 +332,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ForIngredientsClickAction(string name, string action)
 		{
-			
+
 			return this.actionbutton(name, action).TryClick();
 
 		}

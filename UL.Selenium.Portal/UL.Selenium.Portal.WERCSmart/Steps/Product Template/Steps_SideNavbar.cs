@@ -1,15 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using Reqnroll;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.ReqnrollHelpers.Classes;
-using Reqnroll;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
-using System.Collections.Generic;
-using UL.Automation.WebDriver.Classes;
-using TReVor.Core.Classes.Software;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.ProductTemplate;
-using TReVor.Core.Classes.Software.Vault;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.ProductTemplate;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.Product_Template
 {
@@ -21,7 +13,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.Product_Template
 		public void InSideNavbarClickLink(string linkTitle)
 		{
 			SideNavbar sideNavbar = new SideNavbar();
-			if(!Report.IsTrue(sideNavbar.NavLinkListExists(), "Failure, Side Navigation Bar does not exist.", "Success, Side Navigation Bar exists."))
+			if (!Report.IsTrue(sideNavbar.NavLinkListExists(), "Failure, Side Navigation Bar does not exist.", "Success, Side Navigation Bar exists."))
 			{
 				return;
 			}

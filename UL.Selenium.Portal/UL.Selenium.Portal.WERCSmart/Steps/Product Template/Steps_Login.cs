@@ -1,15 +1,8 @@
-﻿using System;
-using System.Linq;
-using UL.Automation.Reporting.Functions;
-using UL.Automation.ReqnrollHelpers.Classes;
-using Reqnroll;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
-using System.Collections.Generic;
-using UL.Automation.WebDriver.Classes;
-using TReVor.Core.Classes.Software;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.ProductTemplate;
+﻿using Reqnroll;
 using TReVor.Core.Classes.Software.Vault;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.ProductTemplate;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.Product_Template
 {
@@ -20,9 +13,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.Product_Template
 		public void ProductTemplateLoginEnterUsername(string username)
 		{
 			var ProductTemplateLogin = new ProductTemplateLogin();
-			if(Report.IsTrue(ProductTemplateLogin.UserNameInputExists(),$"Failure, username input does not exist.",$"Success, username input does exist."))
+			if (Report.IsTrue(ProductTemplateLogin.UserNameInputExists(), $"Failure, username input does not exist.", $"Success, username input does exist."))
 			{
-				Report.IsTrue(ProductTemplateLogin.UserNameInputEnterText(username),$"Failure, failed to enter '{username}' in username input.",$"Success, entered '{username}' in username input.");
+				Report.IsTrue(ProductTemplateLogin.UserNameInputEnterText(username), $"Failure, failed to enter '{username}' in username input.", $"Success, entered '{username}' in username input.");
 			}
 		}
 

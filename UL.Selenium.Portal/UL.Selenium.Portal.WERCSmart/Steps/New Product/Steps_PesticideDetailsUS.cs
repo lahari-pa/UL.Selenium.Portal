@@ -1,12 +1,11 @@
+using Reqnroll;
 using System.Collections.Generic;
 using System.Linq;
 using UL.Automation.Reporting.Functions;
-using Reqnroll;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using UL.Automation.WebDriver.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {

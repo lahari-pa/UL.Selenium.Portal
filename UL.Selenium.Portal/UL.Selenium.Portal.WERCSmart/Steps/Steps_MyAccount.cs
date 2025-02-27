@@ -1,23 +1,19 @@
+using Reqnroll;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Mailosaur;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.Utilities.Functions;
-using UL.Automation.Reporting.Functions;
-using UL.Automation.ReqnrollHelpers.Classes;
-using Reqnroll;
-using UL.Selenium.Portal.WERCSmart.Classes;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using System.Text.RegularExpressions;
 using TReVor.Api.Wrapper.Classes;
 using UL.Automation.Reporting;
-using UL.Automation.TReVor.Classes;
-using UL.Automation.Utilities;
-using System.Text.RegularExpressions;
-using TReVor.Integrations.Classes;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
-using static NUnit.Framework.Internal.OSPlatform;
+using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Automation.TReVor.Classes;
+using UL.Automation.Utilities.Functions;
 using UL.Automation.Utilities.Mailosaur.Classes;
+using UL.Automation.WebDriver.Classes;
+using UL.Selenium.Portal.WERCSmart.Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using Message = Mailosaur.Models.Message;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -55,7 +51,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenIShouldSeeUserNameInTheHeaderNextToTheUserIcon(string username)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - I should see username: " + username + " in the top right corner");
-		
+
 			try
 			{
 				if (username.ToLower().Contains("saved as"))
@@ -178,7 +174,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenInTheUserGridTheSavedUserNameHasBeenReplacedBy(string savedAs, string replacedBy)
 		{
 			Report.StartStep(ReportSettings.StepCounter + " - In the User Grid the saved user name (" + savedAs + ") has been replaced by: " + replacedBy);
-			if(replacedBy== "<RandomString>")
+			if (replacedBy == "<RandomString>")
 			{
 				string randomStringSaved = (string)Context.GetFromContext(replacedBy);
 				replacedBy = randomStringSaved;
@@ -201,7 +197,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				var matching = originalGrid.Where(y => newGrid.Any(z => z.Username == y.Username)).ToList();
 
-				
+
 
 				User inOriginalButNotNew = originalGrid.Where(y => !newGrid.Any(z => z.Username == y.Username)).ToList().FirstOrDefault();
 				User inNewButNotOriginal = newGrid.Where(y => !originalGrid.Any(z => z.Username == y.Username)).ToList().FirstOrDefault();
@@ -231,8 +227,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string username = selTopMenuBar.GetCurrentUser();
 			selMyAccount.EnterSearchTextAndClickFind(username);
 			Report.IsTrue(selMyAccount.ForUserClickAction(username, action),
-				$"Failed to click action: {action } for user: { username }",
-				$"Successfully clicked action: { action } for user:{ username }");
+				$"Failed to click action: {action} for user: {username}",
+				$"Successfully clicked action: {action} for user:{username}");
 			Delay.Seconds(1);
 			GeneralUtilities.Wait_for_load_finish();
 		}
@@ -301,7 +297,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					}
 					name = user.Username;
 				}
-				if(name=="<RandomString>")
+				if (name == "<RandomString>")
 				{
 					string newRandom = GeneralUtilities.GenerateRandomString(12);
 					name = newRandom;
@@ -427,7 +423,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 						Report.Info("User Name = " + userName);
 					}
-					if (userName == "Random") 
+					if (userName == "Random")
 					{
 						string randomstr = Context.ScenarioContext["CurrentEmail"].ToString().Replace(".kxxyxunf@mailosaur.io", "");
 						userName = "User_" + randomstr;
@@ -638,7 +634,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(new MyAccount().HeaderExists("Subscription"), $"Failed to confirm Subscription header exists", $"Successfully confirmed the Subscription header exists");
 			if (Report.IsTrue(new MyAccount().SubscriptionOptionsExists(), "Failed to find section Subscription in My Account page", "Successfully found section Subscription in My Account page"))
 			{
-				Report.IsTrue(new MyAccount().VerifySubscriptionOptions(table), $"Failed to verify all options in the Subscription section", $"Successfully verified all options in the Subscription section");	
+				Report.IsTrue(new MyAccount().VerifySubscriptionOptions(table), $"Failed to verify all options in the Subscription section", $"Successfully verified all options in the Subscription section");
 			}
 		}
 
@@ -657,8 +653,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var selMyAccount = new MyAccount();
 			GeneralUtilities.Wait_for_load_finish();
-			Report.IsTrue(selMyAccount.Accounts_Navigation(nav_option), $"Failed to Navigate to { nav_option}",
-				$"Successully Navigated to { nav_option}");
+			Report.IsTrue(selMyAccount.Accounts_Navigation(nav_option), $"Failed to Navigate to {nav_option}",
+				$"Successully Navigated to {nav_option}");
 		}
 
 		[RegexStepDefinition(@"I verify Subscription details on Subscription Information page match with saved as: (.*)")]
@@ -780,9 +776,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var orderHistory = new MyAccount_OrderHistory();
 
 			if (Report.IsTrue(orderHistory.InvoiceNumberExists(), "Failed to find Ivoice Number under Order Number column", "Successfully found Ivoice Number under Order Number column"))
-				{
+			{
 				string getInvoiceNumber = orderHistory.GetFirstInvoiceNumber();
-				if(getInvoiceNumber != null)
+				if (getInvoiceNumber != null)
 				{
 					Context.AddToContext(savedAs, getInvoiceNumber);
 					Report.Info($"Successfully saved Invoice Number {getInvoiceNumber}");
@@ -1076,13 +1072,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			foreach (TableRow thisRow in myTable.Rows)
 			{
 				string companyName = thisRow["Company Name"];
-				if(companyName.Contains("<RandomID>"))
+				if (companyName.Contains("<RandomID>"))
 				{
 					string currentUsedEmail = TestUsers.GetUserSavedAs(thisRow["Email Address"].TrimStart('<').TrimEnd('>')).Username;
 					string edited1 = currentUsedEmail.Replace("User_", "");
 					string userString = edited1.Replace(TestVariables.GetVariableSavedAs("Mailosaur Prefix"), "");
-					companyName= companyName.Replace("<RandomID>", userString);		
-					
+					companyName = companyName.Replace("<RandomID>", userString);
+
 				}
 
 				Report.Info("Company Name = '" + companyName + "'");
@@ -1132,7 +1128,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 
-		
+
 
 		[RegexStepDefinition(@"I click the 'How to Subscribe' link in My Account")]
 		public void ClickHowToSubscribeLinkInMyAccount()
@@ -1164,7 +1160,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Screenshot();
 					Report.Info("Saving YouTube window to context");
 					new GlobalSteps().SaveTheCurrentWindowAs("YouTube");
-					 if (selYoutube.VideoDisplayed())
+					if (selYoutube.VideoDisplayed())
 					{
 						string actualTitle = selYoutube.VideoTitle();
 						Report.IsTrue(actualTitle == videoTitle, "The video title did not match the expected text! Expected: " + videoTitle + " but found: " + actualTitle, "A video was displayed with the title: " + videoTitle + " as expected");
@@ -1367,7 +1363,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(mystwdinfo.StewardshipEdit_click(), "failed to click edit", "successfully clicked edit");
 			GeneralUtilities.Wait_for_load_finish();
 			Report.IsTrue(mystwdinfo.NoStewardshipCheckbox_click(), "failed to click checkbox", "successfully clicked checkbox");
-			new GlobalSteps().WaitForAModalDialogToOpen();		
+			new GlobalSteps().WaitForAModalDialogToOpen();
 
 
 			Report.IsTrue(modaldialog.Click_Yes(), "failed to click Yes", "successfully clicked Yes");
@@ -1497,17 +1493,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[RegexStepDefinition(@"I Create new users in the My Account page via the user Grid until there are atleast: (.*) pages present")]
 		public void ICreateXNewUsersInTheMyAccountPageViaTheUserGrid(int noPages)
 		{
-			
+
 			var myAccount = new MyAccount();
-			Report.Info($"There are currently a total of { myAccount.GetHighestPageNo()}");
-			if (myAccount.GetHighestPageNo()< noPages)
+			Report.Info($"There are currently a total of {myAccount.GetHighestPageNo()}");
+			if (myAccount.GetHighestPageNo() < noPages)
 			{
 				int i = 0;
 				int remainingPages = noPages - myAccount.GetHighestPageNo();
 				int limit = remainingPages * 10;
 				Report.Info($"Limiting the max number of new users that I will create to: {limit}");
 
-				while (myAccount.GetHighestPageNo()< noPages && i<limit)
+				while (myAccount.GetHighestPageNo() < noPages && i < limit)
 				{
 					new Steps_Shared().GivenICallSharedStepCreateNewUserViaUserGrid();
 					i++;
@@ -1522,8 +1518,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 
 				Report.Info($"The Highest Page Number is currently: {myAccount.GetHighestPageNo()}");
-				Report.IsTrue(myAccount.GetHighestPageNo() >= noPages, "The total number of pages was not atleast:"+noPages, "The total number of pages was atleast:" + noPages);
-				
+				Report.IsTrue(myAccount.GetHighestPageNo() >= noPages, "The total number of pages was not atleast:" + noPages, "The total number of pages was atleast:" + noPages);
+
 			}
 			else
 			{
@@ -1583,7 +1579,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenICheckThatAHeadingWithTheNameStewardshipNumbersExists(string headingName)
 		{
 			MyAccount MyAccountObject = new MyAccount();
-			Report.IsTrue(MyAccountObject.SearchForHeadingInCompanyInformationPageWithName(headingName), $"Heading with name: { headingName }, was not found", $"Heading with name: { headingName }, was found");
+			Report.IsTrue(MyAccountObject.SearchForHeadingInCompanyInformationPageWithName(headingName), $"Heading with name: {headingName}, was not found", $"Heading with name: {headingName}, was found");
 		}
 
 		[RegexStepDefinition(@"I check if there is a table in the Stewardship Numbers section")]
@@ -1646,21 +1642,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenICallSharedStepToCreateANewPassword(string accountSavedAs)
 		{
 			ForgottenPasswordQuestions FP = new ForgottenPasswordQuestions();
-			MyAccount MyAccountObject = new MyAccount();		
+			MyAccount MyAccountObject = new MyAccount();
 
 			TReVorTestUsers currentUser = TestUsers.GetUserSavedAs(accountSavedAs);
-			
+
 			string currentPassword = currentUser.Password;
-			
+
 			string pattern = @"Welcome(\d+)!";
 			Regex rg = new Regex(pattern);
 			Match match = rg.Match(currentPassword);
-			if(match.Success)
+			if (match.Success)
 			{
 				Report.Info("The Password found in TReVor matched the expected format");
 				string intStr = match.Groups[1].Value;
 				int passNumber = Convert.ToInt32(intStr);
-				if (passNumber<99)
+				if (passNumber < 99)
 				{
 					passNumber++;
 				}
@@ -1673,15 +1669,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			else
 			{
-				Report.Info("The password found in TReVor did not match the expected format, setting the new password to use the correct format.");				 
+				Report.Info("The password found in TReVor did not match the expected format, setting the new password to use the correct format.");
 				string newPassword = "Welcome1!";
 				Context.AddToContext("contextPassword", newPassword);
-				
-			}		
+
+			}
 			int i = 0;
 			bool acceptedPass = false;
 			//here is where we loop before clicking close check that the "too recent password" popup is not present, if it is, click close in that popup and try +1 to the number (if number =99 set it to 1)
-			while (i<10 && acceptedPass==false)
+			while (i < 10 && acceptedPass == false)
 			{
 				var contextPassword = (string)Context.GetFromContext("contextPassword");
 				FP.New_Password_Form(contextPassword, contextPassword);
@@ -1699,7 +1695,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					Report.Info("There was no popup present with the message 'This password was used too recently.'");
 					acceptedPass = true;
-					
+
 				}
 				else
 				{
@@ -1711,9 +1707,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					}
 					bool popupClosed = false;
 					int j = 0;
-					while (popupClosed == false && j<5)
+					while (popupClosed == false && j < 5)
 					{
-						if(!MyAccountObject.PasswordTooRecentPopupPresent())
+						if (!MyAccountObject.PasswordTooRecentPopupPresent())
 						{
 							popupClosed = true;
 							Report.Info("The Password Too Recent Popup was closed successfully");
@@ -1725,7 +1721,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						}
 						j++;
 					}
-					if(!popupClosed)
+					if (!popupClosed)
 					{
 						Report.Failure("The Password Too Recent Popup was still showing after 5 seconds");
 						return;
@@ -1734,20 +1730,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					var basePassword = (string)Context.GetFromContext("contextPassword");
 					string passwordNumberStr = basePassword.Replace("Welcome", "").TrimEnd("!");
 					int passwordNumberInt = Convert.ToInt32(passwordNumberStr);
-					if(passwordNumberInt==99)
+					if (passwordNumberInt == 99)
 					{
 						passwordNumberInt = 0;
 					}
-					int passwordNumberIncreased = passwordNumberInt+1;
-					string increasedPasswordFull= "Welcome" + passwordNumberIncreased.ToString() + "!";
+					int passwordNumberIncreased = passwordNumberInt + 1;
+					string increasedPasswordFull = "Welcome" + passwordNumberIncreased.ToString() + "!";
 					Context.AddToContext("contextPassword", increasedPasswordFull);
 					i++;
 
 
-				}			
-				
+				}
+
 			}
-			if(acceptedPass==false)
+			if (acceptedPass == false)
 			{
 				Report.Failure("The Password was still showing as Too recent even after increasing the value 10 times");
 				return;
@@ -1905,7 +1901,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 					var selMyUserForm = new UserDetails();
 					//Check Form Has Opened
-					Report.IsTrue(!selMyUserForm.Exists, "Failed to Open Add User Form", "Add User Form Open");					
+					Report.IsTrue(!selMyUserForm.Exists, "Failed to Open Add User Form", "Add User Form Open");
 					selMyUserForm.Add_User_Check(userName, title, role, phoneNo, emailAddress, confirmEmail, country);
 				}
 			}
@@ -1939,8 +1935,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				ForgottenPasswordQuestions FP = new ForgottenPasswordQuestions();
 				TReVorTestUsers currentUser = TestUsers.GetUserSavedAs(accountSavedAs);
 				string contextPassword = currentUser.Password;
-				Report.IsTrue(FP.Enter_New_Password(contextPassword), $"New Password with '{ contextPassword }' not entered");
-				Report.IsTrue(FP.Enter_Verify_Password(diffPassword), $"Confirm Password with '{ diffPassword }' entered");
+				Report.IsTrue(FP.Enter_New_Password(contextPassword), $"New Password with '{contextPassword}' not entered");
+				Report.IsTrue(FP.Enter_Verify_Password(diffPassword), $"Confirm Password with '{diffPassword}' entered");
 				MyAccountObject.ClickSaveInChangeUserPasswordWindow();
 				Delay.Seconds(2);
 			}
@@ -1982,8 +1978,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				TReVorTestUsers currentUser = TestUsers.GetUserSavedAs(accountSavedAs);
 
 				string contextPassword = currentUser.Password;
-				Report.IsTrue(FP.Enter_New_Password(contextPassword), $"New Password with '{ contextPassword }' not entered");
-				Report.IsTrue(FP.Enter_Verify_Password(contextPassword), $"Confirm Password with '{ contextPassword }' entered");
+				Report.IsTrue(FP.Enter_New_Password(contextPassword), $"New Password with '{contextPassword}' not entered");
+				Report.IsTrue(FP.Enter_Verify_Password(contextPassword), $"Confirm Password with '{contextPassword}' entered");
 				MyAccountObject.ClickSaveInChangeUserPasswordWindow();
 				Delay.Seconds(5);
 			}
@@ -2001,10 +1997,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				MyAccount MyAccountObject = new MyAccount();
 				if (MyAccountObject.GetErrorPopupText() != null)
-				{					
-				Report.IsTrue(MyAccountObject.GetErrorPopupText() == errMsg, "Expected error message not displayed", $"'{errMsg}' message displayed successfully");
-			}
-			else
+				{
+					Report.IsTrue(MyAccountObject.GetErrorPopupText() == errMsg, "Expected error message not displayed", $"'{errMsg}' message displayed successfully");
+				}
+				else
 				{
 					Report.Info("No error message displayed");
 				}
@@ -2018,12 +2014,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[RegexStepDefinition(@"I Confirm that I see the field : (.*)")]
 		public void ThenInTheOrderHistoryScreenISelect(string value)
 		{
-			Report.StartStep($" In the Order History screen I confirm { value }");
+			Report.StartStep($" In the Order History screen I confirm {value}");
 			try
 			{
 				var selMyAccount = new MyAccount_OrderHistory();
-				Report.IsTrue(selMyAccount.FieldExists(value), $"Failed to find { value}",
-					$"Successully found { value }");
+				Report.IsTrue(selMyAccount.FieldExists(value), $"Failed to find {value}",
+					$"Successully found {value}");
 			}
 			catch (Exception ex)
 			{
@@ -2035,7 +2031,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[RegexStepDefinition(@"I filter with order Number : (.*), (.*)")]
 		public void IFilterWithOrderNumber(string orderNum, string action)
 		{
-			Report.StartStep($" In the Order Number search text box enter { orderNum }");
+			Report.StartStep($" In the Order Number search text box enter {orderNum}");
 			try
 			{
 				var MyAccount = new MyAccount();
@@ -2114,14 +2110,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			foreach (string columnName in columnsNotFound)
 			{
-				Report.Info($"Column not found: { columnName}");
+				Report.Info($"Column not found: {columnName}");
 			}
 		}
 
 		[RegexStepDefinition(@"I filter Product Name (.*) with action: (.*)")]
 		public void IFilterWithWPSID(string wpsId, string action)
 		{
-			Report.StartStep($" In the WPSID search text box enter { wpsId }");
+			Report.StartStep($" In the WPSID search text box enter {wpsId}");
 			try
 			{
 				var MyAccount = new MyAccount();
@@ -2194,8 +2190,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			try
 			{
-			var selorderAccount = new MyAccount_OrderHistory();
-			selorderAccount.ApplyFilterBySearch(value);
+				var selorderAccount = new MyAccount_OrderHistory();
+				selorderAccount.ApplyFilterBySearch(value);
 			}
 			catch (Exception ex)
 			{

@@ -1,16 +1,15 @@
 using OpenQA.Selenium;
+using Reqnroll;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.ReqnrollHelpers.Classes;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
-using OpenQA.Selenium;
-using Reqnroll;
-using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
@@ -202,8 +201,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ForIngredientISelectPublicNameAs(string ingredient, string publicName)
 		{
 			string casIdTest = string.Concat("WPS", ingredient);
-			Report.IsTrue(new Ingredients().SelectIngredientPublicName(casIdTest, publicName), $"Failed to set public name for ingredient: { casIdTest } to: { publicName }", $"Successfully set public name for ingredient: {ingredient } to: { publicName }");
-	 	}
+			Report.IsTrue(new Ingredients().SelectIngredientPublicName(casIdTest, publicName), $"Failed to set public name for ingredient: {casIdTest} to: {publicName}", $"Successfully set public name for ingredient: {ingredient} to: {publicName}");
+		}
 
 		[RegexStepDefinition(@"I select the first Public Name dropdown option for ingredient: (.*)")]
 		public void IngredientSelectPublicName(string chemicalName)
@@ -374,32 +373,32 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				$"Ingredients error message {(expected ? "was" : "was not")} showing as expected");
 		}
 
-		
+
 
 
 		[RegexStepDefinition(@"I should not see the ingredient obsolete error message")]
 		public void CheckForObsoleteIngredient()
-		{		
+		{
 			var ingredients = new Ingredients();
 			var NP = new StepsNewProduct();
 
-			string obsoleteMessage = "The following formula items are not valid (Obsolete)"; 
+			string obsoleteMessage = "The following formula items are not valid (Obsolete)";
 			string displayedMessage = ingredients.GetIngredientErrorMessage();
 			string casNumber;
 
-			ingredients.WaitForContainerToBeVisible(); 
-						
-				if(displayedMessage != null)
+			ingredients.WaitForContainerToBeVisible();
+
+			if (displayedMessage != null)
+			{
+				Report.Screenshot();
+				Report.Info("An error message is displayed!");
+				Report.Info("Checking if the error message present contains an obsolete ingredient");
+
+				if (displayedMessage.Contains(obsoleteMessage))
 				{
-				Report.Screenshot(); 
-				    Report.Info("An error message is displayed!");
-					Report.Info("Checking if the error message present contains an obsolete ingredient");
 
-					if (displayedMessage.Contains(obsoleteMessage))
-					{
-
-					Report.Screenshot(); 
-					Report.Error($"Messaged displayed on the page contains the Obsolete Error Message: {obsoleteMessage}"); 
+					Report.Screenshot();
+					Report.Error($"Messaged displayed on the page contains the Obsolete Error Message: {obsoleteMessage}");
 
 					string[] splitMessage = displayedMessage.Split(':');
 					string extractedValue = splitMessage[splitMessage.Length - 1].Trim().TrimEnd(',');
@@ -407,38 +406,38 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 					casNumber = splitValue[0].Substring(1);
 
 
-					if (Report.IsTrue(ingredients.GetAvailableIngredientsCASNumber().Contains(casNumber), $"Expected Cas Number: {casNumber} cannot be found in the list of available ingredients" , $"Cas Number: {casNumber} was successfully found in the available ingredients list!"))
+					if (Report.IsTrue(ingredients.GetAvailableIngredientsCASNumber().Contains(casNumber), $"Expected Cas Number: {casNumber} cannot be found in the list of available ingredients", $"Cas Number: {casNumber} was successfully found in the available ingredients list!"))
+					{
+						Report.IsTrue(ingredients.ClickRemoveByCasNumber(casNumber), $"Failed to remove ingredient with the cas number: {casNumber}", $"Successfully removed ingredient with the cas number: {casNumber}");
+
+						new GlobalSteps().WaitForAModalDialogToOpen();
+
+						if (Report.IsTrue(new ModalDialog().Click_Yes(), "Failed to click yes", "Successfully clicked yes"))
 						{
-							Report.IsTrue(ingredients.ClickRemoveByCasNumber(casNumber), $"Failed to remove ingredient with the cas number: {casNumber}" , $"Successfully removed ingredient with the cas number: {casNumber}");
-
-							new GlobalSteps().WaitForAModalDialogToOpen();
-
-							if(Report.IsTrue(new ModalDialog().Click_Yes(), "Failed to click yes" , "Successfully clicked yes"))
-							{
 
 							Delay.Seconds(10);
 							Report.StartSubStep("In the Ingredients page I click Continue");
 							NP.GivenInTheNewProductPageIClickContinue("Ingredients");
 
-							}
-
 						}
-					}
-					else
-					{
 
-					Report.Screenshot(); 
+					}
+				}
+				else
+				{
+
+					Report.Screenshot();
 					Report.Success($"Cannot find the Obsolete Error Message! Message Displayed: {displayedMessage} | Expected Message: {obsoleteMessage} ");
 
-					}
+				}
 			}
 			else
 			{
 				Report.Screenshot();
-				Report.Success("Error message not present on the page!"); 
+				Report.Success("Error message not present on the page!");
 			}
-			
-			
+
+
 
 		}
 
@@ -1031,7 +1030,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var selectedOptionsStr = new List<string>();
 			foreach (TableRow row in table.Rows)
 			{
-				
+
 				if (Report.IsTrue(new Ingredients().ISelectFunctionalPurpose(ingredientName, row["Functional Purpose"], "ComponentName"), "Failed to Select The Functional Purpose:" + row["Functional Purpose"], "Successfully selected the Functional purpose" + row["Functional Purpose"]))
 				{
 					selectedOptionsStr.Add(row["Functional Purpose"]);
@@ -1098,7 +1097,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ThenInThePopupViewWithTheFollowingTitleProductContainsIngredientsTypicalOfAPesticideIClickTheConfirmButton(string popupTitle, string buttonTitle)
 		{
 			Ingredients ingredientsObject = new Ingredients();
-			Report.IsTrue(ingredientsObject.ClickTheFollowingButtonInThePopupView(popupTitle, buttonTitle), $"Failed to click the {buttonTitle} button", $"Successfully clicked the {buttonTitle } button");
+			Report.IsTrue(ingredientsObject.ClickTheFollowingButtonInThePopupView(popupTitle, buttonTitle), $"Failed to click the {buttonTitle} button", $"Successfully clicked the {buttonTitle} button");
 			//Delay.Seconds(5);
 			Delay.Seconds(1);
 		}
@@ -1138,7 +1137,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsTrue(ingredientsObject.CheckForTheFollowingTableColumnDataInPopupView(table), "Failed to find all the columns", "Successfully found all the columns");
 		}
 
-		
+
 		[RegexStepDefinition(@"I confirm the table in the popup view has the following column titles")]
 		public void ThenIConfirmIATableWithTheFollowingColumnTitles(Table table)
 		{
@@ -1189,12 +1188,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Ingredients ingredientsObject = new Ingredients();
 			Report.IsTrue(ingredientsObject.CloseCBDRegistrationGuidancePopupInIngredientsPage(), "Failed to close CBD Registration Guidance Popup", "Successfully closed CBD Registration Guidance Popup");
 		}
-	
+
 		[RegexStepDefinition(@"In the Ingredient Reference Number field I enter the following text: (.*)")]
 		public void IEnterTheGivenTextIntoTheIngredientReferenceNumbreField(string refValue)
 		{
 			Ingredients ingredientsObject = new Ingredients();
-			if(refValue.Contains("savedas"))
+			if (refValue.Contains("savedas"))
 			{
 				refValue = refValue.Replace("savedas", "");
 				refValue = (string)Context.GetFromContext(refValue);
@@ -1207,7 +1206,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void FieldInTheIngredientScreen(string field)
 		{
 			Ingredients ingredientsObject = new Ingredients();
-	
+
 			Report.IsTrue(ingredientsObject.IngredientsFieldAvailable(field), "Failed to Confirm the'" + field + "' field is available", "I Confirm the '" + field + "' field is available");
 		}
 
@@ -1254,7 +1253,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void GivenIConfirmThePartialProductNamWith3dots()
 		{
 			Ingredients ingredientsObject = new Ingredients();
-			Report.IsTrue(ingredientsObject.ProductNameWithThreeDots(), "Product name doesnt have (3-dots) ... at the end of the characters","Product name shows in 1 line only and shows (3-dots) ... at the end of the characters");
+			Report.IsTrue(ingredientsObject.ProductNameWithThreeDots(), "Product name doesnt have (3-dots) ... at the end of the characters", "Product name shows in 1 line only and shows (3-dots) ... at the end of the characters");
 		}
 
 		[RegexStepDefinition(@"I Confirm the Product Name is shown in full in the hover over pop up")]

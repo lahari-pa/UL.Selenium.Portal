@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UL.Automation.Reporting.Functions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Recipient_and_UPC_Details;
 
@@ -19,7 +15,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.GenerateIntentionallyBad
 			for (int i = 0; i < upcLength; i++)
 			{
 				var next = new Random().Next(10);
-				while(NextNumberIsNotRandom(next))
+				while (NextNumberIsNotRandom(next))
 				{
 					next = new Random().Next(10);
 				};

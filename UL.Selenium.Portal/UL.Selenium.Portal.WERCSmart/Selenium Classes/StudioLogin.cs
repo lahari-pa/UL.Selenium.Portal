@@ -1,9 +1,8 @@
+using OpenQA.Selenium;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using UL.Automation.ReqnrollHelpers.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -12,12 +11,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public const string BasePath = "//div[@id='divLogOn']";
 		protected override By ContainerElementLocator => By.XPath(BasePath);
 
-		public string Username {
+		public string Username
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtUsername']"), 2).Text;
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtUsername']"), 2).EnterText(value);
 		}
 
-		public string Password {
+		public string Password
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtPassword']"), 2).Text;
 			set
 			{
@@ -28,7 +29,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string Language {
+		public string Language
+		{
 			get => this.containerElement.FindElement(By.XPath(".//select[@id='ddlGUILanguage']"), 2)
 					.SelectedOption();
 			set

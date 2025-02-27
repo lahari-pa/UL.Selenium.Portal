@@ -1,13 +1,12 @@
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using UL.Automation.ReqnrollHelpers.Classes;
-using Reqnroll;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide;
 
@@ -136,7 +135,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					IList<IWebElement> results =
 						this.ContainerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
 					i = 0;
-					
+
 					while (results.FirstOrDefault().FindElement(By.XPath(".//span[@class='component-name']"), 2) ==
 						   null && i < 20)
 					{
@@ -237,7 +236,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 						string optionText;
 						foreach (IWebElement option in options)
 						{
-						 optionText = option.Text;
+							optionText = option.Text;
 							if (optionText.ToLower() == ingredient.PublicName.ToLower())
 							{
 								publicName.Select(optionText);
@@ -808,10 +807,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public List<string> GetAvailableIngredientsCASNumber()
 		{
-		
+
 			List<IWebElement> Ingredients = this.ContainerElement.FindElements(By.XPath(".//tr//td[@class='component-name']//small[contains(text(),'')]")).ToList();
 			return Ingredients.Select(x => x.GetValue()).ToList();
-		
+
 		}
 
 		public bool ClickRemoveByCasNumber(string number)
@@ -822,7 +821,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return el.TryClick();
 		}
 
-	
+
 		/// <summary>
 		/// Set the option 'Pubic name' for named ingredient. Enter overload for a specific public name, otherwise the first name is selected
 		/// </summary>
@@ -1115,7 +1114,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		}
 		public IList<IWebElement> CheckRetailerList()
 		{
-			IList < IWebElement >  retailer = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(".//div[@id='products-grid']//li[@class='aip']"));
+			IList<IWebElement> retailer = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath(".//div[@id='products-grid']//li[@class='aip']"));
 			return retailer;
 		}
 		public class Ingredient
@@ -1165,7 +1164,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			while (!resultFound && j < 10)
 			{
 				var homepage = new ChooseGoodGuide_Homepage();
-				homepage.WaitLoading(); 
+				homepage.WaitLoading();
 				resultFound = results.FirstOrDefault().FindElement(By.XPath(".//span[@class='text-muted']"), 2) != null;
 				Delay.Seconds(1);
 				results = this.ContainerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]"), 2);
@@ -1234,7 +1233,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		}
 
-		public bool ISetGenericName (string ingredientName, string ingredientType, string ingredientGenericName, string componentNameOrCASNumber)
+		public bool ISetGenericName(string ingredientName, string ingredientType, string ingredientGenericName, string componentNameOrCASNumber)
 		{
 			IWebElement wantedRow;
 			if (componentNameOrCASNumber == "ComponentName")
@@ -1505,7 +1504,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CheckForTheFollowingTableColumnDataInPopupView(Table table)
 		{
-			IList<string> casNum = this.ContainerElement.FindElements(By.XPath("//div[@class='modal-content']//table[@class='table table-hover']//td[1]"), 2).Select(x=>x.GetValue()).ToList();
+			IList<string> casNum = this.ContainerElement.FindElements(By.XPath("//div[@class='modal-content']//table[@class='table table-hover']//td[1]"), 2).Select(x => x.GetValue()).ToList();
 			IList<string> name = this.ContainerElement.FindElements(By.XPath("//div[@class='modal-content']//table[@class='table table-hover']//td[2]"), 2).Select(x => x.GetValue()).ToList();
 			IList<string> activeOrInert = this.ContainerElement.FindElements(By.XPath("//div[@class='modal-content']//table[@class='table table-hover']//td[3]"), 2).Select(x => x.GetValue()).ToList();
 
@@ -1567,7 +1566,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool ConfirmThereIsAPopupViewTitled(string popupTitle)
 		{
 			IWebElement title = this.ContainerElement.FindElement(By.XPath("//div[@class='modal-content']//h4[contains(text(), '" + popupTitle + "')]"), 2);
-			if(title.IsNullOrEmpty())
+			if (title.IsNullOrEmpty())
 			{
 				Report.Info($"The title element was found to be null or empty");
 				return false;
@@ -1662,7 +1661,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public int GetTotalErrorMessagesCountFromPopup()
 		{
 			List<IWebElement> errorEls = this.ContainerElement.FindElements(By.XPath($"//h4[text()='California Cleaning Right to Know']/../following-sibling::div//div[not(@style='display: none;') and (@class='alert alert-danger')]"), 2).ToList();
-			if(errorEls.IsNullOrEmpty())
+			if (errorEls.IsNullOrEmpty())
 			{
 				Report.Error($"The errorEls list was null or empty");
 				return 0;
@@ -1672,11 +1671,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		}
 
 
-		public bool CheckErrorMessagofTypeFromTableeAgainstPopupWithTitle(Table table,string errorType, string popupTitle)
+		public bool CheckErrorMessagofTypeFromTableeAgainstPopupWithTitle(Table table, string errorType, string popupTitle)
 		{
 
 			string errorTypeID = null;
-			
+
 			if (errorType == "Generic")
 			{
 				errorTypeID = "GenericInUse";
@@ -1717,10 +1716,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			{
 				Report.Info($"errorType was not one of the expected options, could not assign errorTypeID");
 				return false;
-			}			
+			}
 
 			IWebElement errorEl = this.ContainerElement.FindElement(By.XPath($"//h4[text()='California Cleaning Right to Know']/../following-sibling::div//div[@data-bind='visible: model.{errorTypeID}']"), 2);
-			if(errorEl.IsNullOrEmpty())
+			if (errorEl.IsNullOrEmpty())
 			{
 				Report.Info($"The error was found to not be displayed");
 				return false;
@@ -1730,7 +1729,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				Report.Info("correct error type found, going to text check");
 				string fullString = errorEl.Text;
 				var foundStringList = fullString.Split(new string[] { "\r\n" }, StringSplitOptions.None).ToList();
-				if(table.RowCount==foundStringList.Count())
+				if (table.RowCount == foundStringList.Count())
 				{
 					Report.Info($"The number of rows in the table containg the expected error matched the number of sections in the found error message");
 
@@ -1748,13 +1747,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 					string foundString = foundStringList[i];
 					Report.Info($"The found error section {i + 1} was: {foundString}");
 					Report.Info($"The expected error section {i + 1} was: {expectedString}");
-					if(expectedString==foundString)
+					if (expectedString == foundString)
 					{
-						Report.Info($"The found sections in postion {i+1} matched");
+						Report.Info($"The found sections in postion {i + 1} matched");
 					}
 					else
 					{
-						Report.Info($"The found sections in postion {i+1} did not match");
+						Report.Info($"The found sections in postion {i + 1} did not match");
 						allSectionsmatch = false;
 					}
 					i++;
@@ -1768,7 +1767,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return false;
 
 			}
-			
+
 		}
 
 		public bool CheckForErrorMessagesInPopupWithTitle(string popupTitle)
@@ -1820,7 +1819,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			return false;
 		}
-	
+
 		public bool ClickCloseButtonInFunctionalPurposeDropdownMenu()
 		{
 			IWebElement closeButton = this.ContainerElement.FindElement(By.XPath("//div[@class='select2-link2 select2-close']//button"), 2);
@@ -1956,7 +1955,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			IWebElement closeButton = this.ContainerElement.FindElement(By.XPath(@"//h4[text()='CBD Registration Guidance']/../..//div[@class='modal-footer']//button[@class='btn btn-default']"), 2);
 			return closeButton.TryClick();
 		}
-		
+
 		public bool CheckGenericNameFieldIsDisplayingForIngredient(string ingredient, string displayedOrNotDisplayed)
 		{
 			IWebElement genericNameField = this.ContainerElement.FindElement(By.XPath(@"//div[@class='chemical-name'][text()='" + ingredient + "']/../following-sibling::td//input[@data-bind='value: GenericName.field']"), 2);
@@ -1982,7 +1981,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool CheckIngredientTypeDropDownIsDisplayingForIngredient(string ingredient, string displayedOrNotDisplayed)
 		{
 
-			IList <IWebElement> thList = this.ContainerElement.FindElements(By.XPath(@"//div[@class='chemical-name'][text()='" + ingredient + "']/../../../preceding-sibling::thead//th"), 2);
+			IList<IWebElement> thList = this.ContainerElement.FindElements(By.XPath(@"//div[@class='chemical-name'][text()='" + ingredient + "']/../../../preceding-sibling::thead//th"), 2);
 			int ingredientIndex = -1;
 
 			foreach (IWebElement el in thList)
@@ -2001,7 +2000,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 			ingredientIndex += 1;
 
-			IList <IWebElement> ingredientTypeDropDownList = this.ContainerElement.FindElements(By.XPath(@"//div[@class='chemical-name'][text()='" + ingredient + "']/../../td[" + ingredientIndex + "]//select//option"), 2);
+			IList<IWebElement> ingredientTypeDropDownList = this.ContainerElement.FindElements(By.XPath(@"//div[@class='chemical-name'][text()='" + ingredient + "']/../../td[" + ingredientIndex + "]//select//option"), 2);
 
 			if (displayedOrNotDisplayed == "displayed")
 			{
@@ -2025,7 +2024,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			IWebElement field = this.ContainerElement.FindElement(By.XPath(@"//input[@data-bind='textInput: field.field, attr: { placeholder: placeholder }, enable: isReadonly() === false']"), 2);
 			return field.TryEnterText(text);
-		}	
+		}
 
 		public List<string> IngredientsFIFRAPopup()
 		{
@@ -2053,7 +2052,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			ingredients.Add("Hydrogen peroxide");
 			ingredients.Add("Copper");
 			ingredients.Add("Citric acid");
-			ingredients.Add("Nitrogen"); 
+			ingredients.Add("Nitrogen");
 
 
 
@@ -2127,7 +2126,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			try
 			{
-				IWebElement Value = this.ContainerElement.FindElement(By.XPath(".//p[contains(text(),'" + value + "')]"), 2);	
+				IWebElement Value = this.ContainerElement.FindElement(By.XPath(".//p[contains(text(),'" + value + "')]"), 2);
 				return Report.IsTrue(Value.Displayed, "Failure, no text displayed.", $"Success, '{Value.Text}' displayed.");
 			}
 			catch (Exception)
@@ -2135,7 +2134,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				return false;
 			}
 		}
-		
+
 		public bool TotalPercentage(string value)
 		{
 			try

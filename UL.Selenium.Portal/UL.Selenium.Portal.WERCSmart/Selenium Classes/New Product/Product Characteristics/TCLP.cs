@@ -1,10 +1,10 @@
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics
 {
@@ -14,11 +14,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 
 		private List<IWebElement> MetalContainers => this.MetalHeader.FindElements(By.XPath("../../following-sibling::div[not(@style='display: none;')]"), 2).ToList();
 
-		public bool ProductHasTclp {
+		public bool ProductHasTclp
+		{
 			get
 			{
 				IWebElement activeLabel = this.containerElement.FindElement(By.XPath(".//label[contains(text(),'TCLP')]/../following-sibling::div//label[contains(@class,'active')]"), 2);
-				
+
 				if (activeLabel == null)
 				{
 					return false;
@@ -54,7 +55,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 			}
 		}
 
-		public List<MetalPresence> Metals {
+		public List<MetalPresence> Metals
+		{
 			get
 			{
 				Report.Info("Getting list of Metal Presence information");
@@ -89,7 +91,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 					}
 
 					IWebElement inputLabel = metalLabel.FindElements(By.XPath("../..//input/../span"), 2)?.FirstOrDefault(x => x.Text == thisMetal.Presence);
-					
+
 					if (inputLabel == null)
 					{
 						return;

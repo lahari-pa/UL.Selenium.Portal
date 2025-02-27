@@ -1,18 +1,15 @@
+using Reqnroll;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.Utilities.Functions;
+using UL.Automation.Reporting;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.ReqnrollHelpers.Classes;
-using Reqnroll;
+using UL.Automation.WebDriver.Classes;
+using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using System.Text.RegularExpressions;
-using UL.Automation.Reporting;
-using UL.Automation.ReqnrollHelpers.Attributes;
-using UL.Selenium.Portal.WERCSmart.Classes;
-using UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -503,7 +500,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					"Failed to select the product with ID: " + id + "!",
 					"Successfully selected the product with ID: " + id);
 				Report.IsTrue(selForwardProductReg.CheckProductsRightPanel_CheckProductByID(id), "The Product was not showing in the right panel", "The product was showing in the rigt panel");
-				
+
 			}
 		}
 
@@ -626,7 +623,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ClickAddCaseUPCsButtonUnderSelectUPCsTab()
 		{
 			var selForwardProductReg = new ForwardProductRegistration();
-			Report.IsTrue(selForwardProductReg.ClickAddCaseUPC(),"Failed to click the Add UPC button!",	"Successfully clicked the Add UPC button");
+			Report.IsTrue(selForwardProductReg.ClickAddCaseUPC(), "Failed to click the Add UPC button!", "Successfully clicked the Add UPC button");
 		}
 
 		[RegexStepDefinition(@"I click the Add To No Retailer button under the Select UPCs tab")]
@@ -670,18 +667,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			var selForwardProdReg = new ForwardProductRegistration();
 
-			if (shouldOrShouldNot.ToLower() == "should") {
+			if (shouldOrShouldNot.ToLower() == "should")
+			{
 
 				Report.IsTrue(selForwardProdReg.SelectProducts_GetListOfIDs().Contains(id),
 					"ID: " + id + " is not showing as expected", "ID: " + id + " is showing as expected");
 
-			} else if(shouldOrShouldNot.ToLower() == "should not") {
+			}
+			else if (shouldOrShouldNot.ToLower() == "should not")
+			{
 
 				Report.IsTrue(!selForwardProdReg.SelectProducts_GetListOfIDs().Contains(id),
 					"ID: " + id + " is showing as expected", "ID: " + id + " is not showing as expected");
 
 			}
-	
+
 		}
 
 		[RegexStepDefinition(@"In the Foward Product Registration Screen I Select the product: (.*)")]
@@ -701,13 +701,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(selForwardProdReg.SelectProducts_ClickProductByID(id), "Failed to click product", "Successfully clicked product");
 			int i = 0;
 
-			while (i<5 && !selForwardProdReg.CheckProductsSelected_CheckProductSelectedByID(id))
+			while (i < 5 && !selForwardProdReg.CheckProductsSelected_CheckProductSelectedByID(id))
 			{
 				Delay.Seconds(2);
 				i++;
 			}
-			Report.IsTrue(selForwardProdReg.CheckProductsSelected_CheckProductSelectedByID(id),"ID: " + id + " has not be selected as expected", "ID: " + id + " has been selected as expected");
-			
+			Report.IsTrue(selForwardProdReg.CheckProductsSelected_CheckProductSelectedByID(id), "ID: " + id + " has not be selected as expected", "ID: " + id + " has been selected as expected");
+
 		}
 
 		[RegexStepDefinition(@"In the Forward Product Registration Screen I select a retailer under Other Retailers and save as (.*)")]

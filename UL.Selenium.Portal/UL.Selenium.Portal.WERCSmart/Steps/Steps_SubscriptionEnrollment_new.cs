@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.Utilities.Functions;
+﻿using Reqnroll;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.ReqnrollHelpers.Classes;
-using Reqnroll;
-using UL.Automation.Reporting;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -38,7 +31,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InConfirmHeadingDoesDoesNotExist(string headingText, string does_doesnot)
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
-			if(does_doesnot == "does")
+			if (does_doesnot == "does")
 			{
 				if (Report.IsTrue(subEnrollment.ColumnHeaderExists(), $"Failed to find the column header {headingText}", $"Successfully found the '{headingText}' heading"))
 				{
@@ -312,7 +305,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				if (Report.IsTrue(subEnrollment.EnrollmentPanelExists(sectionLabel, panelLabel), $"Failure, in '{sectionLabel}' section, '{panelLabel}' panel does not exist and should.", $"Success, in '{sectionLabel}' section, '{panelLabel}' panel does exist."))
 				{
-					if(Report.IsTrue(subEnrollment.EnrollmentPanelRadioExists(sectionLabel, panelLabel),$"Failure, in '{sectionLabel}' section '{panelLabel}' panel, the radio button does not exist.",$"Success, in '{sectionLabel}' section '{panelLabel}' panel, the radio button does exist."))
+					if (Report.IsTrue(subEnrollment.EnrollmentPanelRadioExists(sectionLabel, panelLabel), $"Failure, in '{sectionLabel}' section '{panelLabel}' panel, the radio button does not exist.", $"Success, in '{sectionLabel}' section '{panelLabel}' panel, the radio button does exist."))
 					{
 						Report.IsTrue(subEnrollment.EnrollmentPanelRadioIsSelected(sectionLabel, panelLabel) == expected, $"Failure, in '{sectionLabel}' section '{panelLabel}' panel, the radio button {(expected ? "is not" : "is")} selected.", $"Success, in '{sectionLabel}' section '{panelLabel}' panel, the radio button {is_isnot} selected.");
 					}
@@ -433,7 +426,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var subEnrollment = new SubscriptionEnrollment_new();
 			if (Report.IsTrue(subEnrollment.EnrollmentFooterExists(), $"Failure, enrollment footer does not exist.", $"Success, enrollment footer exists."))
 			{
-				if(Report.IsTrue(subEnrollment.EnrollmentFooterButtonExists(buttonLabel),$"Failure, in enrollment footer '{buttonLabel}' button does not exist.",$"Success, in enrollment footer '{buttonLabel}' button exists."))
+				if (Report.IsTrue(subEnrollment.EnrollmentFooterButtonExists(buttonLabel), $"Failure, in enrollment footer '{buttonLabel}' button does not exist.", $"Success, in enrollment footer '{buttonLabel}' button exists."))
 				{
 					Report.IsTrue(subEnrollment.EnrollmentFooterButtonClick(buttonLabel), $"Failure, in enrollment footer failed to click '{buttonLabel}' button.", $"Success, in enrollment footer clicked '{buttonLabel}' button.");
 				}
@@ -522,7 +515,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var subEnrollment = new SubscriptionEnrollment_new();
 			string does_doesnot = do_donot.Replace("do", "does");
-			foreach(TableRow selectorOptionRow in selectorOptionsTable.Rows)
+			foreach (TableRow selectorOptionRow in selectorOptionsTable.Rows)
 			{
 				this.InSectionPanelConfirmSelectorOptionDoesDoesNotExist(sectionLabel, panelLabel, selectorOptionRow[0], does_doesnot);
 			}
@@ -537,9 +530,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				if (Report.IsTrue(subEnrollment.EnrollmentPanelExists(sectionLabel, panelLabel), $"Failure, in '{sectionLabel}' section, '{panelLabel}' panel does not exist and should.", $"Success, in '{sectionLabel}' section, '{panelLabel}' panel does exist."))
 				{
 					bool expected = true;
-					if(Report.IsTrue(subEnrollment.EnrollmentPanelSelectorOptionExists(sectionLabel, panelLabel, optionLabel) == expected, $"Failure, '{sectionLabel}' section '{panelLabel}' panel '{optionLabel}' selector option {(expected ? "does not" : "does")} exist.", $"Success, '{sectionLabel}' section '{panelLabel}' panel '{optionLabel}' selector option does not exist."))
+					if (Report.IsTrue(subEnrollment.EnrollmentPanelSelectorOptionExists(sectionLabel, panelLabel, optionLabel) == expected, $"Failure, '{sectionLabel}' section '{panelLabel}' panel '{optionLabel}' selector option {(expected ? "does not" : "does")} exist.", $"Success, '{sectionLabel}' section '{panelLabel}' panel '{optionLabel}' selector option does not exist."))
 					{
-						if(Report.IsTrue(subEnrollment.EnrollmentPanelSelectorClick(sectionLabel, panelLabel),$"Failure, failed to click selector.",$"Success, clicked selector."))
+						if (Report.IsTrue(subEnrollment.EnrollmentPanelSelectorClick(sectionLabel, panelLabel), $"Failure, failed to click selector.", $"Success, clicked selector."))
 						{
 							Report.IsTrue(subEnrollment.EnrollmentPanelSelectorOptionClick(sectionLabel, panelLabel, optionLabel), $"Failure, failed to click '{optionLabel}' option.", $"Success, clicked '{optionLabel}' option.");
 						}

@@ -1,9 +1,5 @@
 ﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Extensions;
@@ -26,15 +22,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		private IWebElement AddRowButton => this.ContainerElement.FindElement(By.XPath(".//td[@class='col-xs-12']//button[@class='btn btn-primary']"), 2);
 		public bool SubFormatTypeDropDownExists()
 		{
-			Report.Info("Checking to see if the Sub Format Type dropdown exists"); 
+			Report.Info("Checking to see if the Sub Format Type dropdown exists");
 			return this.SubFormatTypeDD != null;
 		}
-		
-		 public bool SelectSubFormatType(string value)
-		{						
-				this.SubFormatTypeDD.Select(value);
-				Report.Info($"Checking if the selected value: {this.SubFormatTypeSelectedValue()} matches the expected value: {value}");
-				return this.SubFormatTypeSelectedValue() == value; 										
+
+		public bool SelectSubFormatType(string value)
+		{
+			this.SubFormatTypeDD.Select(value);
+			Report.Info($"Checking if the selected value: {this.SubFormatTypeSelectedValue()} matches the expected value: {value}");
+			return this.SubFormatTypeSelectedValue() == value;
 		}
 
 		public string SubFormatTypeSelectedValue()
@@ -46,7 +42,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool SubFormatTypeOptionExists(string value)
 		{
 			Report.Info($"Checking if the option: {value} exists in the drop down options");
-			return this.SubFormatTypeDD.FindElements(By.XPath("./option"), 2).Any(x=> string.Equals(x.Text , value));
+			return this.SubFormatTypeDD.FindElements(By.XPath("./option"), 2).Any(x => string.Equals(x.Text, value));
 
 		}
 
@@ -60,7 +56,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 
 			Report.Info("Attempting to enter text in the first Address textbox");
-			return this.Address1.TryEnterText(text); 	
+			return this.Address1.TryEnterText(text);
 		}
 
 		public bool Address2Exsits()
@@ -71,10 +67,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool EnterTextAddress2(string text)
 		{
-			
+
 			Report.Info("Attempting to enter text in the second Address textbox");
 			return this.Address2.TryEnterText(text);
-			
+
 		}
 
 		public bool PhoneExsits()
@@ -85,10 +81,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool EnterTextPhone(string text)
 		{
-		
+
 			Report.Info("Attempting to enter text in the Phone textbox");
 			return this.Phone.TryEnterText(text);
-			
+
 		}
 
 		public bool EmergencyPhoneExsits()
@@ -99,10 +95,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool EnterTextEmergencyPhone(string text)
 		{
-			
+
 			Report.Info("Attempting to enter text in the Emergency Phone textbox");
 			return this.EmergencyPhone.TryEnterText(text);
-		
+
 		}
 
 		public bool EmailExsits()
@@ -113,10 +109,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool EnterTextEmail(string text)
 		{
-			
+
 			Report.Info("Attempting to enter text in the Email textbox");
 			return this.Email.TryEnterText(text);
-			
+
 		}
 
 		public bool RemoveButtonExsits()
@@ -126,9 +122,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		}
 
 		public bool ClickRemoveButton()
-		{			
+		{
 			Report.Info("Attempting to click the Remove button");
-			return this.RemoveButton.TryClick();		
+			return this.RemoveButton.TryClick();
 		}
 
 		public bool AddRowButtonExsits()

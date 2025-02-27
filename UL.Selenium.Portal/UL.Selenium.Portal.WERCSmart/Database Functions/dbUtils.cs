@@ -1,6 +1,4 @@
 using System;
-using System.Configuration;
-using UL.Automation.WebDriver.Classes;
 using UL.Automation.TReVor.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes.Configuration;
 

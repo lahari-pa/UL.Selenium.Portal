@@ -1,106 +1,106 @@
-﻿using System.Collections.Generic;
-using Reqnroll;
-using UL.Automation.Reporting.Functions;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.ReqnrollHelpers.Classes;
-using UL.Selenium.Portal.RPS.Selenium_Classes;
+﻿using Reqnroll;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using UL.Selenium.Portal.WERCSmart.Classes;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Automation.WebDriver.Classes;
+using UL.Selenium.Portal.RPS.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Classes;
 using GeneralUtilities = UL.Selenium.Portal.RPS.Classes.GeneralUtilities;
 
 namespace UL.Selenium.Portal.RPS.Steps
 {
-	[Binding, Scope(Tag = "ProductLookUP")]
-	class Steps_ProductLookUP
-	{
-		[RegexStepDefinition(@"I confirm the Product Lookup tab has loaded")]
-		[RegexStepDefinition(@"I confirm the Product Lookup page refreshes")]
-		public void HomeTabLoaded()
-		{
-			Report.IsTrue(new TopBar().WaitForContainerToBeVisible(), "Top bar did not load!");
-			GeneralUtilities.WaitForLoadingToFinish();
-			new ProductLookUp().WaitProductsGridSpinnerFinish();
-			new Steps_Navigation().ConfirmActiveTab("Product Lookup");
-			Report.IsTrue(new ProductLookUp().WaitForContainerToBeVisible(), "Dashboard content did not load", "Dashboard content loaded");
-		}
+    [Binding, Scope(Tag = "ProductLookUP")]
+    class Steps_ProductLookUP
+    {
+        [RegexStepDefinition(@"I confirm the Product Lookup tab has loaded")]
+        [RegexStepDefinition(@"I confirm the Product Lookup page refreshes")]
+        public void HomeTabLoaded()
+        {
+            Report.IsTrue(new TopBar().WaitForContainerToBeVisible(), "Top bar did not load!");
+            GeneralUtilities.WaitForLoadingToFinish();
+            new ProductLookUp().WaitProductsGridSpinnerFinish();
+            new Steps_Navigation().ConfirmActiveTab("Product Lookup");
+            Report.IsTrue(new ProductLookUp().WaitForContainerToBeVisible(), "Dashboard content did not load", "Dashboard content loaded");
+        }
 
-		[RegexStepDefinition(@"I enter Product ID: (.*) into the Product Lookup search box")]
-		public void IEnterProductIDIntoProductLookup(string productID)
-		{
-			Report.Info($"Checking to see if Product ID contains 'ProductInformation'");
-			if (productID.Contains("ProductInformation"))
-			{
-				Report.Info($"The Product ID contained 'ProductInformation', trying to get the ID from context");
-				var savedInfo = (ProductData)Context.GetFromContext(productID);
-				productID = savedInfo.ProductNumber;
-			}
-			new ProductLookUp().EnterSearchBoxText(productID);
-			Report.IsTrue(new ProductLookUp().CheckSearchBoxContains(productID), "The Product Search Box did not contain the Product ID", "The Product Search Box contained the product ID");
+        [RegexStepDefinition(@"I enter Product ID: (.*) into the Product Lookup search box")]
+        public void IEnterProductIDIntoProductLookup(string productID)
+        {
+            Report.Info($"Checking to see if Product ID contains 'ProductInformation'");
+            if (productID.Contains("ProductInformation"))
+            {
+                Report.Info($"The Product ID contained 'ProductInformation', trying to get the ID from context");
+                var savedInfo = (ProductData)Context.GetFromContext(productID);
+                productID = savedInfo.ProductNumber;
+            }
+            new ProductLookUp().EnterSearchBoxText(productID);
+            Report.IsTrue(new ProductLookUp().CheckSearchBoxContains(productID), "The Product Search Box did not contain the Product ID", "The Product Search Box contained the product ID");
 
-		}
-		[RegexStepDefinition(@"I Check that only one Product Is present in the Products Grid with the ID: (.*)")]
-		public void CheckProductsGridOnly1ProductWithID(string productID)
-		{
+        }
+        [RegexStepDefinition(@"I Check that only one Product Is present in the Products Grid with the ID: (.*)")]
+        public void CheckProductsGridOnly1ProductWithID(string productID)
+        {
 
-			Report.IsTrue(new ProductLookUp().WaitProductsGridSpinnerFinish(), "The Spinner is still showing, the products grid has not loaded", "The products grid has loaded");
-			Report.Info($"Checking to see if Product ID contains 'ProductInformation'");
-			if (productID.Contains("ProductInformation"))
-			{
-				Report.Info($"The Product ID contained 'ProductInformation', trying to get the ID from context");
-				var savedInfo = (ProductData)Context.GetFromContext(productID);
-				productID = savedInfo.ProductNumber;
-			}
-			Report.Info($"Checking the number of products in the product grid");
-			Report.IsTrue(new ProductLookUp().ProductsCount() == 1, "There was not just one product in the Grid", "There was only one product found in the Grid");
-			Report.IsTrue(new ProductLookUp().FirstProductInGridID() == productID, "", "");
+            Report.IsTrue(new ProductLookUp().WaitProductsGridSpinnerFinish(), "The Spinner is still showing, the products grid has not loaded", "The products grid has loaded");
+            Report.Info($"Checking to see if Product ID contains 'ProductInformation'");
+            if (productID.Contains("ProductInformation"))
+            {
+                Report.Info($"The Product ID contained 'ProductInformation', trying to get the ID from context");
+                var savedInfo = (ProductData)Context.GetFromContext(productID);
+                productID = savedInfo.ProductNumber;
+            }
+            Report.Info($"Checking the number of products in the product grid");
+            Report.IsTrue(new ProductLookUp().ProductsCount() == 1, "There was not just one product in the Grid", "There was only one product found in the Grid");
+            Report.IsTrue(new ProductLookUp().FirstProductInGridID() == productID, "", "");
 
-		}
+        }
 
-		[RegexStepDefinition(@"I Click the Row actions: (.*) for the first product in the Products Grid")]
-		public void IClickRowActionForFirstProduct(string action)
-		{
-			Report.IsTrue(new ProductLookUp().ClickActionForFirstResultInGrid(action), "Failed to click the action for the first product", "Successfully clicked the action for the first product");
-		}
+        [RegexStepDefinition(@"I Click the Row actions: (.*) for the first product in the Products Grid")]
+        public void IClickRowActionForFirstProduct(string action)
+        {
+            Report.IsTrue(new ProductLookUp().ClickActionForFirstResultInGrid(action), "Failed to click the action for the first product", "Successfully clicked the action for the first product");
+        }
 
-		[RegexStepDefinition(@"I confirm that the Product Lookup page buttons to the right of the search box are as follows:")]
-		public void IConfirmThatThProductLookupPageButtonsAreAsFollows(Table table)
-		{
-			List<string> buttons = new List<string>();
-			foreach (TableRow thisRow in table.Rows)
-			{
-				buttons.Add(thisRow["Buttons"]);
-			}
-			foreach (var button in buttons)
-			{
-				Report.IsTrue(new ProductLookUp().CheckProductLookUpButtonsListContains(button), "The button was not found in the list of buttons", "The button was found");
-			}
+        [RegexStepDefinition(@"I confirm that the Product Lookup page buttons to the right of the search box are as follows:")]
+        public void IConfirmThatThProductLookupPageButtonsAreAsFollows(Table table)
+        {
+            List<string> buttons = new List<string>();
+            foreach (TableRow thisRow in table.Rows)
+            {
+                buttons.Add(thisRow["Buttons"]);
+            }
+            foreach (var button in buttons)
+            {
+                Report.IsTrue(new ProductLookUp().CheckProductLookUpButtonsListContains(button), "The button was not found in the list of buttons", "The button was found");
+            }
 
-		}
+        }
 
-		[RegexStepDefinition(@"In the product lookup page, I click the More Filters Button")]
-		public void GivenInTheProductLookupPageIClickTheMoreFiltersButton()
-		{
-			Report.IsTrue(new ProductLookUp().ClickMoreFiltersOptionButton(), "Failed to click the more filters button", "Successfully clicked the more filters button");
-		}
- 
-		[RegexStepDefinition(@"I confirm that the Lookup Page bread crumb area contains the label: (.*)")]
-		public void IConfirmThatTheProductLookupPageBreadCrumbAreaContainsLabel(string label)
-		{
+        [RegexStepDefinition(@"In the product lookup page, I click the More Filters Button")]
+        public void GivenInTheProductLookupPageIClickTheMoreFiltersButton()
+        {
+            Report.IsTrue(new ProductLookUp().ClickMoreFiltersOptionButton(), "Failed to click the more filters button", "Successfully clicked the more filters button");
+        }
 
-			Report.IsTrue(new ProductLookUp().ConfirmBreadCrumbAreaContainsLabel(label), "The Bread crumb area did not contain the label", "The bread crumb are contained the label");
-		}
+        [RegexStepDefinition(@"I confirm that the Lookup Page bread crumb area contains the label: (.*)")]
+        public void IConfirmThatTheProductLookupPageBreadCrumbAreaContainsLabel(string label)
+        {
 
- 
-		[RegexStepDefinition(@"In the product lookup Page, In the Products table I click the Reset Button")]
-		public void InTheProductLookupPageInProductsTableIClickReset()
-		{
-			Report.IsTrue(new ProductLookUp().ClickResetButton(), "Failed to click reset", "Successfully clicked the reset button");
-			this.HomeTabLoaded();
-		}
- 
+            Report.IsTrue(new ProductLookUp().ConfirmBreadCrumbAreaContainsLabel(label), "The Bread crumb area did not contain the label", "The bread crumb are contained the label");
+        }
+
+
+        [RegexStepDefinition(@"In the product lookup Page, In the Products table I click the Reset Button")]
+        public void InTheProductLookupPageInProductsTableIClickReset()
+        {
+            Report.IsTrue(new ProductLookUp().ClickResetButton(), "Failed to click reset", "Successfully clicked the reset button");
+            this.HomeTabLoaded();
+        }
+
         [RegexStepDefinition(@"In the product lookup page, I confirm for all products the Action column (does|does not) include option: (.*)")]
         public void InTheProductLookUpPageIConfirmForAllProductsActionsColumnDoesOrDoesNotContainGivenOption(string doesOrDoesNot, string value)
         {
@@ -213,13 +213,14 @@ namespace UL.Selenium.Portal.RPS.Steps
             if (isOrIsNot == "is")
             {
                 Report.IsTrue(new ProductLookUp.ColumnSelectorPopup().IConfirmTheColumnNameISelectedAndSavedAs_IsDisplayed(columnName), "Failed to confirm new column is displayed", "Successfully confirmed new column is displayed");
-            } else
+            }
+            else
             {
                 Report.IsTrue(new ProductLookUp.ColumnSelectorPopup().IConfirmTheColumnNameISelectedAndSavedAs_IsDisplayed(columnName) == false, "Failed to confirm new column is not displayed", "Successfully confirmed new column is not displayed");
 
             }
         }
-        
+
         [RegexStepDefinition(@"In the product lookup Page, In the Products table I click the Select Columns Button")]
         public void InTheProductLookupPageInProductsTableIClickSelectColumns()
         {
@@ -258,7 +259,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         {
 
             List<string> columnNamesList = new ProductLookUp.ColumnSelectorPopup().GetColumnsShownNameListInSelectorPopup();
-            
+
             if (columnNamesList.Count != 0)
             {
                 Report.Success("Successfully found list of column names in Column Selector Popup");
@@ -282,7 +283,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         {
             Report.IsTrue(new ProductLookUp().SelectColumnsButtonGraphicExists(), "Failed to find graohic on the Select Columns Button.", "Successfully found graphic on the Select Columns Button.");
         }
-        
+
         [RegexStepDefinition(@"I select the first option in the narrowed list in the Column Selector popup")]
         public void ThenISelectTheFirstOptionInTheNarrowedListInTheColumnSelectorPopup()
         {
@@ -371,7 +372,7 @@ namespace UL.Selenium.Portal.RPS.Steps
                 Report.IsTrue(new RecentActivities().CheckIfBreadcrumbAreaIsEmpty() == false, $"Failed to NOT locate the breadcrumbs area", "Successfully didn't locate the breadcrumbs area");
             }
         }
- 
+
         [RegexStepDefinition(@"In the Product Lookup Page, I save all the Results to context as: (.*)")]
         public void InTheProductLookUpPageInProductsTableISaveAllTheResultsToContextAs(string savedAs)
         {
@@ -381,7 +382,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
             foreach (var item in allFoundIds)
             {
-                var items = item.Substring(6,item.Length-7);
+                var items = item.Substring(6, item.Length - 7);
                 Report.Info($"Attempting to get and save the data for the result with ID:{items}");
                 ProductLookUp.ProductLookupData currentData = new ProductLookUp().GetProductLookupDataByID(items);
                 Report.Info("pasS7");
@@ -436,7 +437,7 @@ namespace UL.Selenium.Portal.RPS.Steps
                     currentRowArray = currentRowArray.Where(w => w != currentRowArray.Last()).ToArray();
                 }
 
-                
+
                 var productName = currentRowArray[0];
                 var upcNumbers = currentRowArray[1];
                 var productNumber = currentRowArray[2];
@@ -533,7 +534,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        
+
         [RegexStepDefinition(@"I Enter WPS ID : (.*) in Search field")]
         [RegexStepDefinition(@"I Enter Product ID : (.*) in Search field")]
         [RegexStepDefinition(@"I Enter Product Name : (.*) in Search field")]
@@ -557,11 +558,11 @@ namespace UL.Selenium.Portal.RPS.Steps
             }
         }
         [RegexStepDefinition(@"I confirm columns shown in the Column Selector Popup: (.*) match with columns shown in the Product Table: (.*)")]
-        
+
         public void IMatchTheColumnOrders(string productTable, string columnSelector)
         {
             List<string> ProductTableColumnNamesList = new ProductLookUp().GetColumnsShownNameListInProductTable();
-            List<string> ColumnSelectorColumnNamesList =  (List<string>)Context.GetFromContext(columnSelector);
+            List<string> ColumnSelectorColumnNamesList = (List<string>)Context.GetFromContext(columnSelector);
             bool ColumnsareTheSame = ColumnSelectorColumnNamesList.SequenceEqual(ProductTableColumnNamesList);
             Report.IsTrue(ColumnsareTheSame, "ProductTableColumnNames and ColumnSelectorColumnNames does not match", " Successfully ProductTableColumnNames and ColumnSelectorColumnNames matched");
         }
@@ -569,16 +570,16 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         public void IIuseMouseToSelectHamburgerIcon(string columnName)
         {
-            Report.IsTrue( new ProductLookUp.ColumnSelectorPopup().InTheColumnSelectorPopupISelectHamBurger(),"Failed to use mouse","Sucessfully used mouse");
+            Report.IsTrue(new ProductLookUp.ColumnSelectorPopup().InTheColumnSelectorPopupISelectHamBurger(), "Failed to use mouse", "Sucessfully used mouse");
         }
         [RegexStepDefinition(@"I use mouse to place the coluum: (.*) into a new position in the list")]
 
         public void IuseMouseToPlaceTheColumnInNewPosition(string columnName)
         {
-            
+
             Report.Info("Attempting to place the column in new position");
             new ProductLookUp.ColumnSelectorPopup().InTheColumnSelectorPopupPlaceTheColumnInNewPosition();
-            
+
         }
         [RegexStepDefinition(@"I confirm below the menu links banner I see the Product Lookup main page body")]
 
@@ -634,7 +635,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         {
             Report.IsTrue(new NavBar().InProductLookupIConfirmTheFollowingTrendsAreNotDisplayed(table), "Failed to find all three trends", "Successfully found all three trends");
         }
-      
+
 
         [RegexStepDefinition(@"I Check that the Product Lookup Products Table is showing")]
 
@@ -652,7 +653,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             string foundColorCode = new ProductLookUp().GetHeadingsRowBackgroundColor();
             Report.IsTrue(expectedColorString == foundColorCode, "The found color was not as expected. Actually found: " + foundColorCode, "The color found was as expected");
 
-        }      
+        }
 
         [RegexStepDefinition(@"In the Product Lookup page, I confirm that the main table shows data rows")]
 
@@ -707,7 +708,7 @@ namespace UL.Selenium.Portal.RPS.Steps
                 Report.Info($"The Product name contained 'ProductInformation', trying to get the Name from context");
                 var savedInfo = (ProductData)Context.GetFromContext(productName);
                 productName = savedInfo.ProductName;
-            }  
+            }
             Report.IsTrue(new ProductLookUp().GetSearchedProductInGridByName().Contains(productName), "Product Name searched for is not displayed", "Product Name searched for is displayed successfully");
 
         }
@@ -883,8 +884,8 @@ namespace UL.Selenium.Portal.RPS.Steps
         [RegexStepDefinition(@"I confirm below the column selector pop up header I see 3 panels: Applied Columns, Filter Categories, Filters")]
         public void InTheColumnSelectorPopUpIVerify3Panels()
         {
-            List <string> displayedPanels = new ProductLookUp.ColumnSelectorPopup().IConfirm3PanelsIsDisplayedInSelectorColumnPopup();
-            var expectedPanels = new List<string>() {"Applied Columns", "Filter Categories", "Filters" };
+            List<string> displayedPanels = new ProductLookUp.ColumnSelectorPopup().IConfirm3PanelsIsDisplayedInSelectorColumnPopup();
+            var expectedPanels = new List<string>() { "Applied Columns", "Filter Categories", "Filters" };
             Report.IsTrue(Enumerable.SequenceEqual(displayedPanels.OrderBy(e => e), expectedPanels.OrderBy(e => e)), " Failed to display the column selector popup header panels", "Successfully displayed the selector popup header panels");
 
 
@@ -958,7 +959,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         [RegexStepDefinition(@"In Save Report popup, I click Save button")]
         public void InTheSaveReportPopupIClickSaveButton()
         {
-            Report.IsTrue(new ProductLookUp.ReportPopup().InTheSaveReportPopupClickSaveButton(), $"Failed to click Save Button in Save Report Popup" , "Successfully clicked Save Button in Save Report Popup");
+            Report.IsTrue(new ProductLookUp.ReportPopup().InTheSaveReportPopupClickSaveButton(), $"Failed to click Save Button in Save Report Popup", "Successfully clicked Save Button in Save Report Popup");
         }
 
         [RegexStepDefinition(@"In the Product Lookup Page, The Report Popup is not showing")]

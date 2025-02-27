@@ -1,12 +1,10 @@
+using OpenQA.Selenium;
 using System;
 using System.Linq;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using System.Collections.Generic;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -70,12 +68,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		private IWebElement MascotAnswerError => this.FindElement(By.XPath(".//p[@id='mascotAnswer_error']//span"), 1);
 		private IWebElement PINAnswerError => this.FindElement(By.XPath(".//p[@id='password_error']//span"), 1);
 
-		private IWebElement ClickNextButton => this.FindElement(By.Id("carouselNext"),1);
+		private IWebElement ClickNextButton => this.FindElement(By.Id("carouselNext"), 1);
 
 		public IWebElement ClickSuccessButton => this.FindElement(By.XPath(@".//a[contains(@class, 'btn-success')]"), 1);
 
-		
-		public string CountryErrorValue {
+
+		public string CountryErrorValue
+		{
 			get
 			{
 				if (this.CountryError != null)
@@ -96,7 +95,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return we?.GetValue();
 		}
 
-		public string FirstNameErrorValue {
+		public string FirstNameErrorValue
+		{
 			get
 			{
 				if (this.FirstNameError != null)
@@ -110,7 +110,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string LastNameErrorValue {
+		public string LastNameErrorValue
+		{
 			get
 			{
 				if (this.LastNameError != null)
@@ -124,7 +125,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string PasswordErrorValue {
+		public string PasswordErrorValue
+		{
 			get
 			{
 				if (this.PasswordError != null)
@@ -137,7 +139,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 			}
 		}
-		public string ConfirmPasswordErrorValue {
+		public string ConfirmPasswordErrorValue
+		{
 			get
 			{
 				if (this.ConfirmPasswordError != null)
@@ -151,7 +154,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string Address1ErrorValue {
+		public string Address1ErrorValue
+		{
 			get
 			{
 				if (this.Address1Error != null)
@@ -165,7 +169,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string CityErrorValue {
+		public string CityErrorValue
+		{
 			get
 			{
 				if (this.CityError != null)
@@ -179,7 +184,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string StateErrorValue {
+		public string StateErrorValue
+		{
 			get
 			{
 				if (this.StateError != null)
@@ -193,7 +199,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string ZipErrorValue {
+		public string ZipErrorValue
+		{
 			get
 			{
 				if (this.ZipError != null)
@@ -207,7 +214,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string CompanyErrorValue {
+		public string CompanyErrorValue
+		{
 			get
 			{
 				if (this.CompanyNameError != null)
@@ -221,7 +229,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string CompanyPhoneErrorValue {
+		public string CompanyPhoneErrorValue
+		{
 			get
 			{
 				if (this.CompanyPhoneError != null)
@@ -235,7 +244,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string CountryCodeErrorValue {
+		public string CountryCodeErrorValue
+		{
 			get
 			{
 				if (this.CountryCodeError != null)
@@ -249,7 +259,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string EmergencyPhoneNumberErrorValue {
+		public string EmergencyPhoneNumberErrorValue
+		{
 			get
 			{
 				if (this.EmergencyPhoneError != null)
@@ -263,7 +274,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string SupplierTypeErrorValue {
+		public string SupplierTypeErrorValue
+		{
 			get
 			{
 				if (this.SupplierTypeError != null)
@@ -277,7 +289,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string CityBornErrorValue {
+		public string CityBornErrorValue
+		{
 			get
 			{
 				if (this.CityBornError != null)
@@ -291,7 +304,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string FirstCarModelErrorValue {
+		public string FirstCarModelErrorValue
+		{
 			get
 			{
 				if (this.FirstCarModelError != null)
@@ -305,7 +319,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string BestFriendErrorValue {
+		public string BestFriendErrorValue
+		{
 			get
 			{
 				if (this.BestFriendAnswerError != null)
@@ -319,7 +334,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string FirstJobErrorValue {
+		public string FirstJobErrorValue
+		{
 			get
 			{
 				if (this.FirstJobCityAnswerError != null)
@@ -333,7 +349,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string HighSchoolMascotErrorValue {
+		public string HighSchoolMascotErrorValue
+		{
 			get
 			{
 				if (this.MascotAnswerError != null)
@@ -347,7 +364,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string PINErrorValue {
+		public string PINErrorValue
+		{
 			get
 			{
 				if (this.PINAnswerError != null)
@@ -361,7 +379,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string Country {
+		public string Country
+		{
 			get
 			{
 				IWebElement countryDropDown = this.FindElement(By.XPath(".//select[@id='regCountry']"), 2);
@@ -381,8 +400,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			if (countryDropDown == null)
 			{ throw new Exception("Country drop down control could not be found!"); }
 
-			countryDropDown.Click();			
-			
+			countryDropDown.Click();
+
 			IWebElement selectElement = countryDropDown.FindElements(By.XPath(".//option"), 2).FirstOrDefault(x => x.Text == country);
 			if (selectElement == null)
 			{ throw new Exception("Country not present in container!"); }
@@ -390,7 +409,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			selectElement.Click();
 		}
 
-		public string FirstName {
+		public string FirstName
+		{
 			get => this.IFirstName.GetValue();
 			set
 			{
@@ -401,7 +421,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 
 
-		public string LastName {
+		public string LastName
+		{
 			get => this.ILastName.GetValue();
 			set
 			{
@@ -410,7 +431,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string Password {
+		public string Password
+		{
 			get => this.IPassword.GetValue();
 			set
 			{
@@ -419,7 +441,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string ConfirmPassword {
+		public string ConfirmPassword
+		{
 			get => this.IConfirmPassword.GetValue();
 			set
 			{
@@ -428,7 +451,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string Address1 {
+		public string Address1
+		{
 			get => this.IAddress1.GetValue();
 			set
 			{
@@ -437,7 +461,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string Address2 {
+		public string Address2
+		{
 			get => this.IAddress2.GetValue();
 			set
 			{
@@ -446,7 +471,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string City {
+		public string City
+		{
 			get => this.ICity.GetValue();
 			set
 			{
@@ -455,7 +481,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string State {
+		public string State
+		{
 			get => this.IState.GetValue();
 			set
 			{
@@ -464,7 +491,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string Zip {
+		public string Zip
+		{
 			get => this.IZip.GetValue();
 			set
 			{
@@ -473,7 +501,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string CompanyName {
+		public string CompanyName
+		{
 			get => this.ICompanyName.GetValue();
 			set
 			{
@@ -482,7 +511,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string CompanyPhone {
+		public string CompanyPhone
+		{
 			get => this.ICompanyPhone.GetValue();
 			set
 			{
@@ -491,7 +521,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string CountryCode {
+		public string CountryCode
+		{
 			get
 			{
 				IWebElement countryCode = this.FindElement(By.XPath(".//input[@id='txtCountryCode']"), 2);
@@ -505,7 +536,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string EmergencyPhoneNumber {
+		public string EmergencyPhoneNumber
+		{
 			get => this.IEmergencyPhone.GetValue();
 			set
 			{
@@ -611,7 +643,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{ el.EnterText(answer); }
 		}
 
-		public string Pin {
+		public string Pin
+		{
 			get => this.FindElement(By.XPath(".//input[@id='secQuestionPassword']"), 2).GetValue();
 			set => this.FindElement(By.XPath(".//input[@id='secQuestionPassword']"), 2).TryEnterTextAndTab(value);
 		}
@@ -619,11 +652,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickPinBox()
 		{
 			var el = this.FindElement(By.XPath(".//input[@id='secQuestionPassword']"));
-			if(el ==null)
+			if (el == null)
 			{
 				Report.Info($"el was null");
 				return false;
-					
+
 			}
 			return el.TryClick();
 		}

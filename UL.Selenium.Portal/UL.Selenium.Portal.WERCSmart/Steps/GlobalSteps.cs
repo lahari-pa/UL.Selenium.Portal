@@ -1,42 +1,35 @@
-using iText.Kernel.Pdf;
-using iText.Kernel.Pdf.Canvas.Parser;
-using iText.Kernel.Pdf.Canvas.Parser.Listener;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text.RegularExpressions;
-using System.Threading;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
-using UL.Automation.ReqnrollHelpers.Classes;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using Reqnroll;
 using Reqnroll.Assist;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text.RegularExpressions;
+using System.Threading;
+using TReVor.Api.Wrapper.Classes;
+using TReVor.Core.Classes.Software;
+using TReVor.Core.Classes.Software.Vault;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Automation.TReVor.Classes;
+using UL.Automation.Utilities.Functions;
+using UL.Automation.Utilities.Mailosaur.Classes;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 using UL.Selenium.Portal.WERCSmart.Classes;
+using UL.Selenium.Portal.WERCSmart.Extensions;
+using UL.Selenium.Portal.WERCSmart.Helpers;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using System.Collections.ObjectModel;
-using UL.Automation.Utilities.Functions;
-using TReVor.Api.Wrapper.Classes;
-using System.Diagnostics;
-using TReVor.Core.Classes.Software;
-using UL.Selenium.Portal.WERCSmart.Extensions;
 using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.RuleWriter;
-using UL.Automation.Utilities.Mailosaur.Classes;
-using UL.Automation.TReVor.Classes;
 using ReportDetails = UL.Automation.Reporting.Classes.ReportDetails;
-using Mailosaur;
-using TReVor.Core.Classes.Software.Vault;
-using UL.Automation.ReqnrollHelpers.Attributes;
-using UL.Automation.Utilities;
-using UL.Selenium.Portal.WERCSmart.Helpers;
-using UL.Selenium.Portal.WERCSmart.Classes.Configuration;
-using TReVor.Integrations.Classes.Configuration;
 
 [assembly: Apartment(ApartmentState.STA)]
 
@@ -204,7 +197,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			return user.UserName;
 		}
-	
+
 		public void LoginToAccount(string alias)
 		{
 
@@ -293,21 +286,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure("Login is failed.The username and/or password you entered does not match our records.");
 			}
 
-				/*if (modalDialog.WaitForContainerToBeVisible(4))
+			/*if (modalDialog.WaitForContainerToBeVisible(4))
+			{
+				modalDialog.Click_Closex();
+				Delay.Seconds(Delay.SpeedFactor * 1);
+
+				selHomepage = new Homepage();
+				if (selHomepage.WaitForContainerToBeVisible(15))
 				{
-					modalDialog.Click_Closex();
-					Delay.Seconds(Delay.SpeedFactor * 1);
+					Report.Success("Successfully logged in!");
+					GeneralUtilities.Wait_for_load_finish();
 
-					selHomepage = new Homepage();
-					if (selHomepage.WaitForContainerToBeVisible(15))
-					{
-						Report.Success("Successfully logged in!");
-						GeneralUtilities.Wait_for_load_finish();
+					return;
+				}
+			}*/
 
-						return;
-					}
-				}*/
-				
 
 			// JS - we already attempted in a loop 3 times- why are we repeating the code here?
 
@@ -339,7 +332,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void AttemptToLoginWithEmailAndPassword(string email, string password)
 		{
 			Report.Info("Beginning I login with email and password");
-			
+
 			if (!this.PerformBasicLogin(email, password))
 			{
 				return;
@@ -679,7 +672,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void NavigateToTheTReVorUrl(string trevorVar)
 		{
 			string url = TReVor.Integrations.Classes.TReVorSettings.VaultRecords.GetVariable(trevorVar).Value;
-			
+
 			Report.StartStep($"{Report.Details.StepIndex} - Navigate to URL: {url}");
 			try
 			{
@@ -968,7 +961,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[RegexStepDefinition(@"For product saved as: (.*) there (should|should not) be a new email for email Address (saved|saved in TReVor) as: (.*) from: (.*) with the title: (.*)")]
-		public void ThenForProductSavedAsThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle(string productSavedAs, string shouldOrNot, string inTReVor,string savedAs, string emailFrom, string title)
+		public void ThenForProductSavedAsThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitle(string productSavedAs, string shouldOrNot, string inTReVor, string savedAs, string emailFrom, string title)
 		{
 			Report.StartStep(Report.Details.StepIndex + " - Checking whether there is a new email for email Address: " + savedAs + " from " + emailFrom + " with title: " + title);
 			try
@@ -983,14 +976,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					CredentialVaultRecord TReVorUser = TReVor.Integrations.Classes.TReVorSettings.VaultRecords.GetCredential(savedAs);
 
-					if (Report.IsTrue(TReVorUser != null,$"Failure, TReVor user '{savedAs}'does not exist.",$"Success, TReVor user '{savedAs}' exists."))
+					if (Report.IsTrue(TReVorUser != null, $"Failure, TReVor user '{savedAs}'does not exist.", $"Success, TReVor user '{savedAs}' exists."))
 					{
 						email = TReVorUser.UserName;
 					}
 				}
 				else
 				{
-					
+
 					if (savedAs == "ForgotPW_SecQs")
 					{
 						var user = (WERCSmartUser)UL.Automation.ReqnrollHelpers.Classes.Context.GetFromContext(savedAs);
@@ -1027,7 +1020,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						if (title.Contains("<" + productSavedAs + ">"))
 						{
 							title = title.Replace("<" + productSavedAs + ">", id);
-						} else {
+						}
+						else
+						{
 							title = title.Replace(productSavedAs, id);
 						}
 
@@ -1111,9 +1106,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				{
 					bodyText = bodyText.Replace(productSavedAs, id);
 				}
-				
+
 				string bodyDecode = System.Net.WebUtility.HtmlDecode(emailBody);
-			
+
 				Report.Info("Expected email body text: " + bodyText);
 				Report.Info("Actual email body text: " + emailBody);
 
@@ -1384,7 +1379,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			Report.Failure("Failed to find the correct tab!");
 		}
-		
+
 		[RegexStepDefinition(@"I close the Data Summary Tab")]
 		public void CloseDataSummaryTab()
 		{
@@ -1393,7 +1388,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			SeleniumWebDriver.CurrentDriver.Close();
 			SeleniumWebDriver.CurrentDriver.SwitchTo().Window(mainHandle);
 		}
-		
+
 		[RegexStepDefinition(@"If a modal dialog opens I skip it")]
 		public void GivenIfAModalDialogOpensISkipIt()
 		{
@@ -1634,7 +1629,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				SeleniumWebDriver.CurrentDriver.SwitchTo().Window(windowTitle);
 			}
-			
+
 		}
 
 		[RegexStepDefinition(@"I confirm (.*) tab (does|does not) exist")]
@@ -1650,7 +1645,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.IsTrue(SeleniumWebDriver.CurrentDriver.CloseTabWithURL(tabURL), $"Failure, failed to close '{tabURL}' tab.", $"Success, closed '{tabURL}' tab.");
 		}
-		
+
 
 		[RegexStepDefinition(@"I switch to the tab with title: (.*)")]
 		public void SwitchToTabWithTitle(string title)
@@ -1690,7 +1685,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var modal = new ModalDialog();
 			var productDetails = (ProductInformation)Context.GetFromContext(savedAs);
 			string id = productDetails.Id;
-			string text = "Discontinuing your registration does not obsolete the registration. Discontinue means you are no longer maintaining the registration data or manufacturing this product. Retailers may have inventory of this product on hand and you may need the data for historical purposes. Discontinuing does not impact the ability to obsolete the registration, when time permits.\r\nAre you sure you want to Discontinue the product ?\r\nLight Bulbs - Germicidal Ultra Violet Bulb (" + id +")";
+			string text = "Discontinuing your registration does not obsolete the registration. Discontinue means you are no longer maintaining the registration data or manufacturing this product. Retailers may have inventory of this product on hand and you may need the data for historical purposes. Discontinuing does not impact the ability to obsolete the registration, when time permits.\r\nAre you sure you want to Discontinue the product ?\r\nLight Bulbs - Germicidal Ultra Violet Bulb (" + id + ")";
 			Report.IsTrue(modal.GetText() == text, $"Failed to find text '{text}' in modal window. Found text '{modal.GetText()}' instead.",
 				$"Successfully found text '{text}' in modal window.");
 		}
@@ -1701,7 +1696,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var modal = new ModalDialog();
 
-			Report.IsTrue(modal.GetText() == text, $"Failed to find text '{ text }' in modal window. Found text '" + modal.GetText() + "' instead.",
+			Report.IsTrue(modal.GetText() == text, $"Failed to find text '{text}' in modal window. Found text '" + modal.GetText() + "' instead.",
 				$"Successfully found text '{text}' in modal window.");
 		}
 
@@ -2198,7 +2193,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				System.IO.Directory.Delete(rootFolder, true);
 				Report.Success("Directory with name: " + directoryName + " was successfully deleted");
-			} else
+			}
+			else
 			{
 				Report.Failure("Directory with name: " + directoryName + " was not found");
 			}
@@ -2230,7 +2226,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Delay.Seconds(10);
 				Report.Info("Confirm a file is downloaded with name: " + file);
 				//string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
-				string downloadsFolder= AutomationSettings.DownloadsFolder;
+				string downloadsFolder = AutomationSettings.DownloadsFolder;
 
 				Report.Info("Downloads folder: " + downloadsFolder);
 				string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
@@ -2270,14 +2266,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				fileSavedAs = (string)Context.GetFromContext(fileSavedAs);
 			}
-			
+
 			string pdfText = WercsmartPdfHelpers.GetTextFromPdf(fileSavedAs);
 			Report.Info($"The Found PDF Text was: {pdfText}");
-			Report.IsTrue(pdfText!=null, "PDF does not contains text","PDF does contain text");		
+			Report.IsTrue(pdfText != null, "PDF does not contains text", "PDF does contain text");
 		}
 
 		[RegexStepDefinition(@"I Check that the pdf file saved as: (.*) contains the text: (.*)")]
-		public void CheckThatPDFFileSavedAsContainsX(string fileSavedAs,string searchText)
+		public void CheckThatPDFFileSavedAsContainsX(string fileSavedAs, string searchText)
 		{
 			Delay.Seconds(3);
 			Report.Screenshot();
@@ -2297,7 +2293,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void SaveTheCurrentWindowHandleToContextAs(string saveAs)
 		{
 			string currentHandle = SeleniumWebDriver.CurrentDriver.CurrentWindowHandle;
-			Context.AddToContext(saveAs, currentHandle);		
+			Context.AddToContext(saveAs, currentHandle);
 		}
 
 		[RegexStepDefinition(@"I switch to the window with handle saved as: (.*)")]
@@ -2311,16 +2307,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[RegexStepDefinition(@"I close All the current windows")]
 		public void CloseAllTheCurrentWindows()
 		{
-			
+
 			ReadOnlyCollection<string> allHandles = SeleniumWebDriver.CurrentDriver.WindowHandles;
-			foreach(var handle in allHandles)
+			foreach (var handle in allHandles)
 			{
 				SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle);
 				Delay.Seconds(1);
 				SeleniumWebDriver.CurrentDriver.Close();
 
 			}
-		
+
 		}
 
 
@@ -2332,17 +2328,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			ReadOnlyCollection<string> allHandles = SeleniumWebDriver.CurrentDriver.WindowHandles;
 			foreach (var handle in allHandles)
 			{
-				if(handle == mainHandle)
+				if (handle == mainHandle)
 				{
 					Report.Info($"Main Handle");
 					//do nothing
 				}
 				else
 				{
-					SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle);					
+					SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle);
 					SeleniumWebDriver.CurrentDriver.Close();
 				}
-				
+
 
 			}
 			SeleniumWebDriver.CurrentDriver.SwitchTo().Window(mainHandle);
@@ -2356,7 +2352,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (SeleniumWebDriver.CurrentDriver.IsAlertPresent())
 			{
 				string alertText = SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Text;
-				Report.IsTrue(message == alertText, $"Alert text does not match! Expected: '{ message}'. Actual: '{ alertText }'.",	"Successfully found text in alert!");
+				Report.IsTrue(message == alertText, $"Alert text does not match! Expected: '{message}'. Actual: '{alertText}'.", "Successfully found text in alert!");
 			}
 			else
 			{
@@ -2413,7 +2409,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (success)
 			{
 				Report.IsTrue(SNB.ClickSwitchTabs(tabName), $"Failed to switch to the tab {tabName}", $"Successfully switched to the tab {tabName}", true);
-				GeneralUtilities.SwitchToFrame($"<contains(@data-frameid,'{tabName}')>");			
+				GeneralUtilities.SwitchToFrame($"<contains(@data-frameid,'{tabName}')>");
 
 			}
 			else
@@ -2437,8 +2433,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(10);
 			//GeneralUtilities.SwitchToFrame($"<contains(@data-frameid,'Rule Writer')>");
 			Report.IsTrue(rw.FoundContainerEl(), "Failed, could not find the Rule Writer page.", "Successfully found the Rule Writer page.", true);
-			
-			
+
+
 		}
 
 		[RegexStepDefinition(@"the Rule Writer page should be loaded")]
@@ -2671,7 +2667,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 									//updating password +1 logic etc here (see other areas for examples)
 
 									Report.Info("Attempting to reset password");
-									string currentPassword = trevuser.Password;									
+									string currentPassword = trevuser.Password;
 									string newPassword = "";
 									// If the current password ends in a character, append with a 1 for the new password
 									if (!char.IsDigit(currentPassword.Last()))
@@ -2684,7 +2680,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 										string resulting = string.Join("", passwordChr.Select(x => char.IsDigit(x) ? x.ToString() : "|")).Split('|').LastOrDefault().Trim();
 										newPassword = currentPassword.TrimEnd(resulting.ToCharArray()) + (Convert.ToInt32(resulting) + 1);
 									}
-									
+
 									//var PassResetPopup = new ResetYourPasswordPopup();
 									//Report.IsTrue(PassResetPopup.EnterTextIntoInput("Current Password", currentPassword), "Failed to enter text into 'Current Password' field", "Successfully entered text into 'Current Password' Field");
 									Report.IsTrue(PassResetPopup.EnterTextIntoInput("New Password", newPassword), "Failed to enter text into 'New Password' field", "Successfully entered text into 'New Password' Field");
@@ -2693,7 +2689,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 									bool loginScreenFound = false;
 									int t = 0;
-									while(t<30&&loginScreenFound==false)
+									while (t < 30 && loginScreenFound == false)
 									{
 										loginScreenFound = !LS.IsNullOrEmpty();
 										Delay.Seconds(1);
@@ -2701,7 +2697,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 									}
 
 
-									if(loginScreenFound)
+									if (loginScreenFound)
 									{
 										Report.Success($"The login screen was loaded, password has been reset");
 										var trevAcc = TReVor.Integrations.Classes.TReVorSettings.GetCredential(user);
@@ -2737,7 +2733,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							Report.IsTrue(thisStudioDesktop.Wait_for_load(30), "Studio desktop is not showing as expected.",
 								"Studio desktop is showing as expected");
 
-							
+
 
 							this.ICheckForSHARuleForAccount(user);
 
@@ -2762,7 +2758,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 					if (Report.IsTrue(success && new LoginScreen().LoginAsUser(savedAs), "Failed to login to WERKSmart as user: " + savedAs, "Successfully logged into WERKSmart as user: " + savedAs))
 					{
-						
+
 
 
 						Report.StartSubStep("When I click to open the 'Management' menu and select 'Security Manager'");
@@ -2810,10 +2806,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 									Report.StartSubStep("Given I switch to the 'Edit' window");
 									this.GivenISwitchToTheWindow("Edit");
-										
+
 									Report.StartSubStep("Then I click the 'Change Password' button.");
 									new SecurityManager_AddUser().ClickChangePasswordBttn();
-								
+
 									Report.StartSubStep("Then the 'Reset your Password' window should load");
 									this.ThenTheWindowShouldLoad("Reset your Password", "should");
 
@@ -2869,14 +2865,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 									Report.StartSubStep($"Then I close the 'Edit' window");
 									this.ThenCloseTheSpecifiedWindow("Edit");
 
-									
+
 									continue;
 								}
 								else
 								{
 									//Case where the user doesnt exist						
 
-									
+
 									Report.StartSubStep("Then in the 'Users and Roles' window, I click the 'Add Row' button");
 									S_SM.ThenInTheWindowIClickTheAddEditDeleteButton("Users and Roles", "Add Row");
 
@@ -3010,7 +3006,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							var user = thing["username"];
 							//give username, from secuity manager, go in and check
 
-							if(this.ICheckForSHARuleForAccountOnly(user))
+							if (this.ICheckForSHARuleForAccountOnly(user))
 							{
 								Report.Info($"Found rule, not adding user to list...");
 							}
@@ -3037,7 +3033,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						Report.StartSubStep("When I click to open the 'My Wercs' menu and select 'Log Out'");
 						header.WhenIClickToOpenTheMenuAndSelect("My Wercs", "Log Out");
 
-						foreach(var ruleAcc in noRuleAccs )
+						foreach (var ruleAcc in noRuleAccs)
 						{
 							this.ICreateProcessingRulesForSingleSHAAccount(ruleAcc);
 						}
@@ -3060,21 +3056,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info($"Navigating to WS Landing page...");
 			new GlobalSteps().NavigateToLandingPage();
 
-			Report.StartStep($"Setting the current SHA User to feature context...");		
+			Report.StartStep($"Setting the current SHA User to feature context...");
 
 			string firstuser = table.Rows[0]["username"];
 
 			if (!Context.FeatureContext.ContainsKey("QASHAAccount"))
 			{
-			Report.Info($"key QASHAAccount did not exist...");
-			Context.FeatureContext.Add("QASHAAccount", firstuser);
+				Report.Info($"key QASHAAccount did not exist...");
+				Context.FeatureContext.Add("QASHAAccount", firstuser);
 			}
 			else
 			{
 				Report.Info($"key QASHAAccount did  exist, updating instead");
 				Context.FeatureContext["QASHAAccount"] = firstuser;
 
-			}			
+			}
 
 			Report.Info($"Finished setting the Feature SHA user");
 		}
@@ -3143,7 +3139,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.IsTrue(RW_RE.FindItem("Name", "BevB -"), "Failed to find the 'Name' BevB -'");
 
-			var baseRuleRow= RW_RE.GetRuleRowFromTable("Name", "BevB -");
+			var baseRuleRow = RW_RE.GetRuleRowFromTable("Name", "BevB -");
 
 			if (baseRuleRow.IsNullOrEmpty())
 			{
@@ -3153,7 +3149,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 			S_RW.WhenInRuleWriterIRightClickTheRulAndSelectNew("BevB -");
-				
+
 
 			Report.StartSubStep($"Given I switch to the 'New Rule' window");
 			this.GivenISwitchToTheWindow("New Rule");
@@ -3167,7 +3163,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(RW_NR.ClickCopySelectedRule(), "Failed to click the copy selected rule button", "Successfully clicked the Copy selected rule button");
 			Report.IsTrue(RW_NR.CopyRuleActive(), "Failed to activate the copy selected rule option", "Successfully activated the copy selected rule option");
 			Report.StartSubStep($"When in the 'New Rule' window, I enter the value '{exampleUser}- additional doc' into the Name text box");
-			Report.IsTrue(RW_NR.EnterNameText(exampleUser+"- additional doc"), "Failed to enter text", "Successfully entered text");
+			Report.IsTrue(RW_NR.EnterNameText(exampleUser + "- additional doc"), "Failed to enter text", "Successfully entered text");
 			Report.StartSubStep("When in the 'New Rule' window, I click the OK button");
 			Report.IsTrue(RW_NR.ClickOKButton(), "Failed to click OK", "Successfully clicked OK");
 
@@ -3179,9 +3175,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			RuleWriter_RuleView RW_RV = new RuleWriter_RuleView();
 
 			Report.StartSubStep($"In the Rule View popup I get the text found in the 'Will contain the results of' box");
-			string foundText= RW_RV.GetContainedResultsText();
+			string foundText = RW_RV.GetContainedResultsText();
 			Report.Info($"Found Text was {foundText}");
-			if(Report.IsTrue(foundText== "UD_RUNSQLD('[SP_CREATE_DOC_QUEUE] '@' ,'BEVB' ')","Found text was not as expected","The found text was as expected"))
+			if (Report.IsTrue(foundText == "UD_RUNSQLD('[SP_CREATE_DOC_QUEUE] '@' ,'BEVB' ')", "Found text was not as expected", "The found text was as expected"))
 			{
 				string newText = foundText.Replace("BEVB", exampleUser);
 				Report.IsTrue(RW_RV.ClearThenEnterTextIntoContainedResultsBox(newText), "Failed to enter text", "Enter Text was performed successfully");
@@ -3197,7 +3193,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				Report.StartSubStep("Given I close the 'Rules Editor' Window");
 				this.ThenCloseTheSpecifiedWindow("Rules Editor");
-				
+
 
 				Report.StartSubStep($"Given I switch to the 'UL Wercs Studio' window");
 				this.GivenISwitchToTheWindow("UL Wercs Studio");
@@ -3215,7 +3211,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 
 
-			
+
 
 
 
@@ -3241,9 +3237,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//navigate to SHA
 			ReportDetails.CurrentDetails.UseSubSteps = true;
 			var myStepsSha = new Steps_SHA();
-			
+
 			Report.Screenshot();
-			
+
 			Report.StartSubStep("Then the 'Rules Editor' window should load");
 			this.ThenTheWindowShouldLoad("Rules Editor", "should");
 
@@ -3326,7 +3322,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				this.GivenISwitchToTheWindow("UL Wercs Studio");
 
 				Report.StartSubStep("Then I switch to the 'Rule Writer' tab");
-				this.WhenISwitchToTheTab("Rule Writer");				
+				this.WhenISwitchToTheTab("Rule Writer");
 				return;
 			}
 			else
@@ -3503,7 +3499,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			//navigate to SHA
 			Report.UseSubSteps = true;
 			var myStepsSha = new Steps_SHA();
-			
+
 			//Report.IsTrue(LS.LoginAsUser(exampleUser), "Failed to enter login information for user: " + exampleUser, "Successfully entered login information for  user: " + exampleUser);
 
 
@@ -3544,7 +3540,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 			Report.StartSubStep($"Then in the 'Rule Editor' window, I Look for the Rule with Name: '{exampleUser}- additional doc' ");
-			if(RW_RE.FindItem("Name", exampleUser + "- additional doc"))
+			if (RW_RE.FindItem("Name", exampleUser + "- additional doc"))
 			{
 				Report.Info($"The rule was found.");
 
@@ -3563,12 +3559,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			else
 			{
 				Report.Info($"As the rule was not found, we need to create it.");
-				
+
 
 				this.ICreateProcessingRulesForSHAAccount(userAcc);
 			}
 
-			
+
 
 
 
@@ -3591,8 +3587,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var exampleUser = userAcc;
 
 			TReVorTestUsers trevuser = TestUsers.GetUserSavedAs(exampleUser);
-			bool credentialsFound = trevuser != null;		
-			var myStepsSha = new Steps_SHA();		
+			bool credentialsFound = trevuser != null;
+			var myStepsSha = new Steps_SHA();
 
 			Report.StartSubStep("Then the 'Rules Editor' window should load");
 			this.ThenTheWindowShouldLoad("Rules Editor", "should");
@@ -3671,9 +3667,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[RegexStepDefinition(@"I Get the (first|middle|last) 5 Digits of the UPC Number Saved as: (.*), and save them as: (.*)")]
-		public void Get5DigitsFromUPCAndSaveAs(string pattern, string upcSavedAs,string editedUpcSavedAs)
+		public void Get5DigitsFromUPCAndSaveAs(string pattern, string upcSavedAs, string editedUpcSavedAs)
 		{
-			if(!Context.Contains(upcSavedAs))
+			if (!Context.Contains(upcSavedAs))
 			{
 				Report.Failure($"There was not upc saved as: {upcSavedAs} in context");
 				return;
@@ -3694,7 +3690,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Failure($"The pattern must be 'first', 'middle' or 'last'");
 					return;
 
-				
+
 			}
 		}
 	}

@@ -1,10 +1,10 @@
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
+using System.Collections.Generic;
 using System.Linq;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using System.Collections.Generic;
 
 namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 {
@@ -12,7 +12,7 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 	{
 		public const string BasePath = "//section";
 
-		private IList <IWebElement> El => this.containerElement.FindElements(By.XPath(".//div[starts-with(@class,'grid-stack-item-content')]"), 2);
+		private IList<IWebElement> El => this.containerElement.FindElements(By.XPath(".//div[starts-with(@class,'grid-stack-item-content')]"), 2);
 
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }

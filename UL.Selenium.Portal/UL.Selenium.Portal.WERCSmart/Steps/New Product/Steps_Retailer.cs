@@ -1,12 +1,10 @@
+using Reqnroll;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using UL.Automation.WebDriver.Classes;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.ReqnrollHelpers.Classes;
-using Reqnroll;
-using UL.Automation.Reporting;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
@@ -47,7 +45,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				Report.IsTrue((!actualRetailers.All(expectedRetailers.Contains)), "The selected retailers did match those expected. The selected retailers were: " + string.Join(", ", actualRetailers) + " The expected retailers were: " + string.Join(", ", expectedRetailers
 
 					), " The selected retailers did not match as expected: " + string.Join(", ", expectedRetailers));
-			} else
+			}
+			else
 			{
 				Report.IsTrue(actualRetailers.All(expectedRetailers.Contains) && actualRetailers.Count == expectedRetailers.Count, "The selected retailers did not match those expected. The selected retailers were: " + string.Join(", ", actualRetailers) + " The expected retailers were: " + string.Join(", ", expectedRetailers), " The selected retailers matched as expected: " + string.Join(", ", actualRetailers));
 			}
@@ -163,7 +162,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			bool expected = doesDoesNot == "does";
 			Retailer rt = new Retailer();
-			Report.IsTrue(rt.RetailerPrivateLabelOptionExists(retailer, option) == expected,$"Failure, for {retailer} retailer, '{option}' private label {(expected?"does not":"does")} exist.",$"Success, {retailer} retailer {option} private label {doesDoesNot} exist.");
+			Report.IsTrue(rt.RetailerPrivateLabelOptionExists(retailer, option) == expected, $"Failure, for {retailer} retailer, '{option}' private label {(expected ? "does not" : "does")} exist.", $"Success, {retailer} retailer {option} private label {doesDoesNot} exist.");
 		}
 
 		[RegexStepDefinition(@"In the Retailers tab, for (.*) retailer, I select '(.*)' private label option")]
@@ -288,7 +287,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			SelectRetailers SelectRetailersObject = new SelectRetailers();
 			SelectRetailersObject.CheckIfRetailersInTableDisplayErrorMessage(table);
 		}
-		
+
 		[RegexStepDefinition(@"I confirm the following retailers are showing in the Retailer page")]
 		public void ThenIConfirmTheFollowingRetailersAreShowingInTheRetailerPage(Table table)
 		{
@@ -301,12 +300,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 
 			var listOfRetailers = new Retailer().SelectedRetailers();
-			if(listOfRetailers.Count()==0)
+			if (listOfRetailers.Count() == 0)
 			{
 				Report.Failure($"No Retailers were found selected for the product");
 				return;
 			}
-			foreach(var retailer in listOfRetailers)
+			foreach (var retailer in listOfRetailers)
 			{
 				this.ForRetailerIEnterPrivateLabelName(retailer, "This Private Label");
 			}

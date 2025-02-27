@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using Reqnroll;
+using System.Collections.Generic;
 using System.Linq;
-using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
-using UL.Automation.WebDriver.Extensions;
 using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.Utilities.Functions;
+using UL.Automation.WebDriver.Extensions;
 using UL.Selenium.Portal.RPS.Classes;
 using UL.Selenium.Portal.RPS.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
@@ -19,15 +19,15 @@ namespace UL.Selenium.Portal.RPS.Steps
         public void ConfirmItemSyncManualEntryScreenShownWithTitle(string title)
         {
             Report.IsTrue(new ItemSync().GetCurrentPageTitle() == "Add UPC", "The Page title was not as expected", "The page title was as expected");
-            Report.IsTrue(new ItemSync().UPCInputBoxPresent(),"The UPC input box was not present","The UPC input box was present");
+            Report.IsTrue(new ItemSync().UPCInputBoxPresent(), "The UPC input box was not present", "The UPC input box was present");
         }
 
         [RegexStepDefinition(@"I confirm the ItemSync Upload a File screen is shown")]
         public void ConfirmItemSyncUploadAFileScreenIsShown()
         {
             Report.IsTrue(new ItemSync().ContainsMainTextBox(), "The Main Text Box was not found", "The MainText box was found");
-            Report.IsTrue(new ItemSync().ContainsUploadBoxSection(), "The Upload Box was not found as an element", "The upload box was found  as an element"); 
-            Report.IsTrue(new ItemSync().UploadBoxSectionDisplayed(), "The Upload Box was not displayed", "The upload box was displayed"); 
+            Report.IsTrue(new ItemSync().ContainsUploadBoxSection(), "The Upload Box was not found as an element", "The upload box was found  as an element");
+            Report.IsTrue(new ItemSync().UploadBoxSectionDisplayed(), "The Upload Box was not displayed", "The upload box was displayed");
 
         }
 
@@ -93,7 +93,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         [RegexStepDefinition(@"In the ItemSync Upload a File screen, I click the File Upload area and open the File: (.*)")]
         public void UploadPDFFileSectionAndType(string fileName)
-        
+
         {
             Report.IsTrue(GeneralUtilities.DeleteFileFromDownloadsFolder(fileName), "", "");
             string path = "UL.Selenium.Portal.RPS.Dependencies.CSV." + fileName;
@@ -102,14 +102,14 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 
             //fileName = EmbeddedResources.ExtractToFile(destination, out string extractFile) ? extractFile : fileName;
-            Report.IsTrue(new ItemSync().UploadFileToUploadAFileArea(destination,fileName), "Failed to upload file: " + destination, "Successfully uploaded file: " + destination);
+            Report.IsTrue(new ItemSync().UploadFileToUploadAFileArea(destination, fileName), "Failed to upload file: " + destination, "Successfully uploaded file: " + destination);
 
         }
 
         [RegexStepDefinition(@"In the ItemSync Upload a File screen, I confirm below the user message area, I see a file icon")]
         public void InTheItemSyncUploadFileScreenIConfirmBelowUserMessageAreaISeeFileIcon()
 
-        {            
+        {
             Report.IsTrue(new ItemSync().FileIconDisplayed(), "Failed to find the file icon", "Successfully found the file icon");
 
         }
@@ -121,7 +121,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(new ItemSync().CheckUploadedFileName(fileName), "The Filename did not match", "The filename was a match!");
 
         }
-        
+
 
         [RegexStepDefinition(@"In the ItemSync Upload a File screen, I see the upload button")]
         public void InTheItemSyncUploadFileScreenIConfirmISeeUploadButton()
@@ -180,17 +180,17 @@ namespace UL.Selenium.Portal.RPS.Steps
         public void InTheItemSyncManualEntryScreenIClickTheADDButton()
         {
             Report.IsTrue(new ItemSync().ClickUPCInputAddButton(), "Failed to click the add button", "Successfully clicked the add button");
-            
+
         }
 
         [RegexStepDefinition(@"In the ItemSync Manual Entry screen, I enter: (.*) into the UPC entry field")]
         public void InTheItemSyncManualEntryScreenIEnterTextIntoTheUPCEntryField(string value)
         {
             Report.IsTrue(new ItemSync().UPCInputBoxEnterText(value), "Failed to enter text", "Successfully entered text");
-            
+
         }
 
-        
+
 
         [RegexStepDefinition(@"In the ItemSync Manual Entry screen, I confirm the message: (.*) is shown")]
         public void InTheItemSyncManualEntryScreenIConfirmTheMessageIsShown(string value)
@@ -220,7 +220,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         }
 
-        
+
 
 
         [RegexStepDefinition(@"In the ItemSync Manual Entry screen I confirm the UPC Grid contains the UPC: (.*)")]
@@ -228,14 +228,14 @@ namespace UL.Selenium.Portal.RPS.Steps
         {
 
             string value = savedAs;
-            
-            if(value.ToLower().Contains("saved as"))
+
+            if (value.ToLower().Contains("saved as"))
             {
-                value= value.Replace("saved as ", "");
+                value = value.Replace("saved as ", "");
                 Report.Info($"value: {value}");
                 value = (string)Context.GetFromContext(value);
             }
-                        
+
             Report.IsTrue(new ItemSync().CheckUPCFoundInGrid(value), "Failed to find UPC in grid", "Successfully found the UPC in the Grid");
 
         }
@@ -363,7 +363,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         [RegexStepDefinition(@"In the ItemSync Manual Entry screen, I confirm the Entry field and the ADD button are still shown at all times while scrolling the UPC grid")]
         public void InTheItemSyncManualEntryScreenIConfirmISeeEntryFieldAndAddButtonWhileScrolling()
-        {      
+        {
 
             var rows = new ItemSync().GetAllUPCTableRows();
             if (rows.IsNullOrEmpty())
@@ -371,16 +371,16 @@ namespace UL.Selenium.Portal.RPS.Steps
                 Report.Failure($"No rows were found in the UPC table");
                 return;
             }
-            foreach(var row in rows)
+            foreach (var row in rows)
             {
                 row.ScrollElementIntoView();
                 Report.IsTrue(row.VisibleInViewport(), "Failed to scroll the element into place", "Successfully scrolled the element into place");
                 Report.IsTrue(new ItemSync().UPCInputBoxPresent(), "The UPC input box was not present", "The UPC input box was present");
                 this.InTheItemSyncManualEntryScreenIConfirmISeeAnADDButton();
             }
-      
+
         }
-        
+
 
         [RegexStepDefinition(@"In the ItemSync Manual Entry screen, I confirm I see the error with the message (.*)")]
         public void InTheItemSyncManualEntryScreenIConfirmISeeTheUPCInputError(string value)
@@ -392,11 +392,11 @@ namespace UL.Selenium.Portal.RPS.Steps
         [RegexStepDefinition(@"In the ItemSync Manual Entry screen, I confirm I do not see the error with the message (.*)")]
         public void InTheItemSyncManualEntryScreenIConfirmIDoNotSeeTheUPCInputError(string value)
         {
-            Report.IsTrue(!new ItemSync().UPCInputErrorTextMatches(value), "Found error text","Did not Find the error text");
+            Report.IsTrue(!new ItemSync().UPCInputErrorTextMatches(value), "Found error text", "Did not Find the error text");
 
         }
 
-        
+
 
         [RegexStepDefinition(@"In the ItemSync Manual Entry screen, I Clear the text in the UPC field")]
         public void InTheItemSyncManualEntryScreenIClearTheTextInTheUPCField()
@@ -418,7 +418,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             var differences = expectedHeadings.Except(foundHeadings);
             Report.IsTrue(differences.IsNullOrEmpty() && expectedHeadings.Count() == foundHeadings.Count(), "The headings found were not as expected", "The headings found matched the expected headings");
         }
-    
+
 
         [RegexStepDefinition(@"I Confirm the Item Sync Results Page shows the title 'UPC Details'")]
         public void IConfirmTheItemSyncResultsPageShowsTheTitle()
@@ -426,7 +426,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(new ItemSync().GetCurrentPageTitle() == "UPC Details", "The Page title was not as expected", "The page title was as expected");
         }
 
-        
+
 
         [RegexStepDefinition(@"I Confirm the Item Sync Results Page shows the Buttons: in order")]
         public void IConfirmTheItemSyncResultsPageShowsTheButtonsInOrder(Table table)
@@ -449,7 +449,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         public void IConfirmTheItemSyncResultsPageShowsTheUPCResultsGrid()
         {
 
-           Report.IsTrue(new ItemSync().ConfirmUPCDetailsResultsTableShown(),"Failed to find the grid","The Results grid was found");
+            Report.IsTrue(new ItemSync().ConfirmUPCDetailsResultsTableShown(), "Failed to find the grid", "The Results grid was found");
 
         }
 
@@ -478,14 +478,14 @@ namespace UL.Selenium.Portal.RPS.Steps
             {
                 expectedIcons.Add(thisRow["Icons"]);
             }
-            foreach(var icon in expectedIcons)
+            foreach (var icon in expectedIcons)
             {
                 Report.Info($"Looking for hover over text for the button: {icon}");
                 Report.IsTrue(new ItemSync().ConfirmFooterNavigationIconHoverOver(icon), "The hover over text was not found for the button: " + icon, "Hover over text was as expected for button: " + icon);
             }
 
         }
-       
+
 
         [RegexStepDefinition(@"In the ItemSync Upload a File screen, I click the: (.*) Icon in the UPC Details Reults Table Footer.")]
         public void InItemSyncScreeenIConfirmFooterClickXIcon(string wantedIcon)
@@ -507,7 +507,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
             string foundItemsPerPage = new ItemSync().CurrentItemsPerPageOption();
 
-            Report.IsTrue(foundItemsPerPage==currentValue, "Failed to find the items per page drop down selector", "Sucessfully found the items per page drop down selector");
+            Report.IsTrue(foundItemsPerPage == currentValue, "Failed to find the items per page drop down selector", "Sucessfully found the items per page drop down selector");
         }
 
 
@@ -551,7 +551,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
             Report.Info($"The number of found rows was: {foundRows.Count()}");
 
-            Report.IsTrue(foundRows.Count().ToString()==value, "The number of rows was not a match","The number of rows was a match");
+            Report.IsTrue(foundRows.Count().ToString() == value, "The number of rows was not a match", "The number of rows was a match");
         }
 
         [RegexStepDefinition(@"In the ItemSync Upload a File screen, I confirm I see the grid count indicator")]

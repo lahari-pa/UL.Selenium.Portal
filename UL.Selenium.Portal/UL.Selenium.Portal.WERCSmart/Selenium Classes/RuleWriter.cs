@@ -5,10 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using UL.Automation.Reporting.Classes;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
@@ -31,7 +28,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			GeneralUtilities.SwitchToDefaultContent();
 			var el = this.ContainerElement;
 			//var thing = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//body[//div[@id='Widget1HEA' and contains(text(),'Rule Writer')]]"), 5);
-			if (el!=null)
+			if (el != null)
 			{
 				Report.Info($"The el was found as expected...");
 				return true;
@@ -100,10 +97,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickAllRulesButton()
 		{
 			//switch to iframe needed or? revert go back to parent needed?
-			
+
 			Report.Info("Switching to iFrame");
 			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("Widget2FRAME");
-			IWebElement el= SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(@"//input[@type='button' and @title='All Rules']"), 10);
+			IWebElement el = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(@"//input[@type='button' and @title='All Rules']"), 10);
 			if (el == null)
 			{
 				Report.Error($"Could not find a button with the name All Rules");
@@ -283,13 +280,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				foreach (var row in rows)
 				{
 					Match match = Regex.Match(row.Text.Trim(), ToMatch);
-					if(row.Text.Trim().Contains(userName))
+					if (row.Text.Trim().Contains(userName))
 					{
 						Report.Info($"Row was found...");
 						return true;
-					}			
+					}
 
-					
+
 				}
 				Report.Error($"Could not find the username {userName}");
 				return false;
@@ -368,22 +365,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			internal bool SelectGivenRuleType(string type)
 			{
-				
+
 				var ruleEls = this.RuleBoxElements;
 
 				IWebElement wantedRule = null;
 				bool wantedRuleFound = false;
 
-				foreach(var item in ruleEls)
+				foreach (var item in ruleEls)
 				{
-					if (item.Text!=null)
+					if (item.Text != null)
 					{
-						if(item.Text.Contains(type))
+						if (item.Text.Contains(type))
 						{
 							wantedRule = item;
 							wantedRuleFound = true;
 						}
-						
+
 					}
 				}
 
@@ -418,7 +415,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 					var checkedEl = checkedRule.FindElement(By.XPath($".//input[@checked='checked']"), 2);
 					return checkedEl != null;
-					
+
 				}
 				catch
 				{
@@ -426,14 +423,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					Report.Info($"");
 					return false;
 				}
-				
+
 			}
 
 
 			internal bool ClickCopySelectedRule()
 			{
 				var el = this.CopySelectedRuleButton;
-				if(el==null)
+				if (el == null)
 				{
 					Report.Info($"The el was null");
 					return false;
@@ -452,7 +449,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 				return el != null;
 			}
-			 internal bool EnterNameText(string value)
+			internal bool EnterNameText(string value)
 			{
 				var el = this.EnterNameBox;
 				if (el == null)
@@ -503,7 +500,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 
 				return el.Text;
-				
+
 			}
 
 			internal bool ClearThenEnterTextIntoContainedResultsBox(string value)
@@ -515,7 +512,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					return false;
 				}
 				el.ClearTextBox();
-				var foundText = this.WillContainResultBox.GetValue();				
+				var foundText = this.WillContainResultBox.GetValue();
 				if (foundText.IsNullOrEmpty())
 				{
 					return el.TryEnterText(value);
@@ -525,7 +522,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					Report.Info($"The text was not cleared succesfully, returning");
 					return false;
 				}
-				
+
 
 			}
 
@@ -544,13 +541,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			internal bool WaitForRulesEditorToBeGone()
 			{
 				var el = this.ContainerElement;
-				if(el.IsNullOrEmpty())
+				if (el.IsNullOrEmpty())
 				{
 					Report.Info($"The el was not found as expected...");
 					return true;
 				}
 				int x = 0;
-				while(el!=null & x<20)
+				while (el != null & x < 20)
 				{
 					el = this.ContainerElement;
 					Delay.Seconds(5);

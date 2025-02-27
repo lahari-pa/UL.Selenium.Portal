@@ -1,13 +1,12 @@
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.Generic;
 using System.Linq;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using UL.Automation.ReqnrollHelpers.Classes;
-using UL.Automation.Utilities.Functions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
@@ -76,7 +75,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			if (el.TagName == "select")
 			{
 				IWebElement optionToSelect = el.FindElement(By.XPath($".//option['{option}']"), 1);
-				if(Report.IsTrue(optionToSelect != null,$"Failure, option '{option}' does not exist.",$"Success, option '{option}' exists"))
+				if (Report.IsTrue(optionToSelect != null, $"Failure, option '{option}' does not exist.", $"Success, option '{option}' exists"))
 				{
 					el.Select(option);
 					return el.SelectedOption() == option;

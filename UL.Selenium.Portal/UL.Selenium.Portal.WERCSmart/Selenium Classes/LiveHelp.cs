@@ -1,10 +1,8 @@
-using System;
+using OpenQA.Selenium;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -43,7 +41,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool VerifyDescText(string expectedDesc)
 		{
 			IWebElement elem = this.containerElement.FindElement(By.XPath(".//p[contains(@class,'channel-desc')]"), 2);
-			if(elem == null)
+			if (elem == null)
 			{
 				Report.Info($"Description element was found to be null");
 				return false;

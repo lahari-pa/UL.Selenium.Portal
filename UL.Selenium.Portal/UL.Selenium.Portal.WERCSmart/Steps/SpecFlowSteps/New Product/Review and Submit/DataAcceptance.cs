@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NPOI.SS.Formula.Functions;
-using Reqnroll;
+﻿using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_and_Submit
 {
@@ -65,7 +57,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 				if (new PaymentMethods().Payment_Method_Exists("Credit Card"))
 				{
 					Report.Info("Credit card details is already added");
-					if(!new PaymentMethods().Credit_Card_Default())
+					if (!new PaymentMethods().Credit_Card_Default())
 					{
 						Report.IsTrue(new PaymentMethods().ClickMakeDeaultForPaymentMetod("Credit Card"), "Failed to make Credit Card as Default Payment Method",
 							"Successfully made Credit Card as Default Payment Method");
@@ -100,7 +92,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 						myPay.ThenIEnterCreditCardDetails(myCreditCardTable);
 						Report.IsTrue(new PaymentMethods().ClickSubmitButton(), "Failed to click Submit button", "Successfully clicked Submit button");
 						Report.StartSubStep("In the Payment Methods screen I click Continue");
-					}	
+					}
 				}
 			}
 			if (new PaymentMethods_Subscription_Billing().Purchase_Header_Correct())

@@ -1,17 +1,11 @@
-﻿using UL.Selenium.Portal.WERCSmart.Classes;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
-using System;
+﻿using OpenQA.Selenium.Interactions;
 using Reqnroll;
-using UL.Automation.Reporting;
 using UL.Automation.Reporting.Functions;
-using UL.Selenium.Portal.WERCSmart.Steps;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.Reporting.Classes;
-using TReVor.Api.Wrapper.Classes;
-using UL.Automation.TReVor.Classes;
-using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.RuleWriter;
-using OpenQA.Selenium.Interactions;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.WebDriver.Classes;
+using UL.Selenium.Portal.WERCSmart.Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.RuleWriter;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -67,7 +61,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var optionsList = thisContextMenu.GetAllOptions();
 				if (Report.IsTrue(optionsList.Contains("New"), "failed to find 'New' in context menu'", "Found 'New' in the context menu"))
 				{
-					if(Report.IsTrue(thisContextMenu.SelectOption("New"),"Failed to click option","Clicked option"))
+					if (Report.IsTrue(thisContextMenu.SelectOption("New"), "Failed to click option", "Clicked option"))
 					{
 						var globalSteps = new GlobalSteps();
 						globalSteps.ThenTheWindowShouldLoad("New Rule", "should");
