@@ -42,6 +42,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			new Steps_Prototype().ClickLinkElement(linkText);
 		}
 
+		#region  Packaging Type section
+
 		[RegexStepDefinition(@"In the My Library - My Packaging Type section, click the 'Clear' button")]
 		public void ClickTheClearButton()
 		{
@@ -89,12 +91,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		}
 
 
-		[RegexStepDefinition(@"In the My Library - My Packaging Type section, I filter by Product ID/Name for product: (.*)")]
+		[RegexStepDefinition(@"In the My Library - My Packaging Type section,Filter by Product ID/Name for product: (.*)")]
 		public void FilterProduct(string value)
 		{
 			string fieldname = "Product ID/ Name";
+			string tablename = "Library";
 			new MyLibraryPage().EnterText(fieldname, value);
-			Report.IsTrue(new MyLibraryPage().ClickSearch(),
+			Report.IsTrue(new MyLibraryPage().ClickSearch(tablename),
 				$"Failed to search for product: {value}",
 				$"Successfully searched for product: {value}");
 		}
@@ -209,7 +212,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 
 		}
 
-		[RegexStepDefinition(@"In the My Library - My Packaging Type section - Bill of Materials Section, In row: (.*) - I Enter My Packaging Materials value: (.*) and My Packaging Weight value:(.*)")]
+		[RegexStepDefinition(@"In the My Library - My Packaging Type section - Bill of Materials Section, In row: (.*) - Enter My Packaging Materials value: (.*) and My Packaging Weight value:(.*)")]
 		public void EnterValueInBillOfMaterials(string row, string packagingmaterialvalue, string weightvalue)
 		{
 			Report.StartStep($"Attempting to enter '{packagingmaterialvalue}' into My Packaging Materials input on row {row}.");
@@ -220,12 +223,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 
 		}
 
-		[RegexStepDefinition(@"In the My Library - My Brands section, I filter by Product Line for product: (.*)")]
+        #endregion
+
+		#region My Brands section
+
+		[RegexStepDefinition(@"In the My Library - My Brands section, Filter by Product Line for product: (.*)")]
 		public void FilterProductLine(string value)
 		{
 			string fieldname = "Product Line";
+			string tablename = "brand";
 			new MyLibraryPage().EnterText(fieldname, value);
-			Report.IsTrue(new MyLibraryPage().ClickSearchProductLine(),
+			Report.IsTrue(new MyLibraryPage().ClickSearch(tablename),
 				$"Failed to search for product: {value}",
 				$"Successfully searched for product: {value}");
 		}
@@ -330,7 +338,239 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 				$"The checkbox is {check}ed as expected");
 		}
 
+		[RegexStepDefinition(@"In the My Library - My Brands section, Under Active? it displays Yes/No")]
+		public void VerifyActiveDisplaysYesorNo()
+		{
+			Report.IsTrue(new MyLibraryPage().ActiveDisplaysYesOrNo(),
+				$"Failed to display Yes/No in Active column value?",
+				$"Successfully displayed Yes/No in Active column value?");
 
+
+		}
+
+
+		[RegexStepDefinition(@"In the My Library - My Brands section, 'Product Line/ Brand Name' value: (.*) (is|is not) updated ")]
+		public void VerifyProductLineValueUpdated(string value, string is_isnot)
+		{
+			if (is_isnot == "is")
+			{
+				Report.IsTrue(new MyLibraryPage().GetProductLineValue(value),
+				$"Failed to update Product Line/ Brand Name",
+				$"Successfully updated Product Line/ Brand Name");
+			}
+			else
+			{
+				Report.IsFalse(new MyLibraryPage().GetProductLineValue(value), " Product Line/ Brand Name is updated", " Product Line/ Brand Name is not updated");
+			}
+		}
+
+        #endregion
+
+
+		#region My Distributors section
+
+		[RegexStepDefinition(@"In the My Library - My Distributors section, click the 'Clear' button")]
+		public void ClickTheClearButtoninDistributorsSection()
+		{
+			string tableName = "distributor";
+			string linkText = "Clear";
+			this.ClickLinkElement(tableName, linkText);
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Distributors section, Verify table is displayed")]
+		public void VerifyDistributorsTableIsDisplayed()
+		{
+			string name = "distributor";
+			Report.IsTrue(new MyLibraryPage().ProductTableExists(name), $"{name} table is not displayed", $"Successfully {name} table is displayed");
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Distributors section, Search by Id or product name : (.*)")]
+		public void FilterByIdorName(string value)
+		{
+			string fieldname = "Search by ID or Name";
+			string tablename = "distributor";
+			new MyLibraryPage().EnterText(fieldname, value);
+			Report.IsTrue(new MyLibraryPage().ClickSearch(tablename),
+				$"Failed to search for product: {value}",
+				$"Successfully searched for product: {value}");
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Distributors section, Filter product by (All|Pending|Approved|Rejected)")]
+		public void FilterProductByPendingApprovedRejected(string filter)
+		{
+			string tableName = "distributor";
+			this.ClickLinkElement(tableName, filter);
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Distributors section, click action (Approve |Reject ) for product name: (.*)")]
+		public void ClickActionForDistributorsSection(string productname, string action)
+		{
+			Report.IsTrue(new MyLibraryPage().ForDistributorClickAction(productname, action),
+				$"Failed to click action:{action} for product: {productname}",
+				$"Successfully clicked action: {action} for product: {productname}");
+		}
+
+		#endregion
+
+
+		#region My Ingredients
+
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section, click the component search box")]
+		public void ClickComponentSearchBox()
+		{
+			MyIngredientsPage ingredientsTable = new MyIngredientsPage();
+			Report.IsTrue(ingredientsTable.ComponentSearchBoxExists(), $"Failure, component search box does not exist.", $"Success, component search box exists.");
+			Report.IsTrue(ingredientsTable.ComponentSearchBoxClick(), $"Failure, failed to click component search box.", $"Success, clicked component search box.");
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section, confirm component search box (is|is not) displayed")]
+		public void ComponentSearchBoxIsIsNotDisplayed(string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			SearchBoxPrototype searchBox = new SearchBoxPrototype();
+			Report.IsTrue(searchBox.WaitForContainerToBeVisible() == expected, $"Failure, component search box {(expected ? "is not" : "is")} displayed.", $"Success, component search box {is_isnot} displayed.");
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section, In the component search box, enter text: (.*)")]
+		public void ComponentSearchBoxEnterText(string searchText)
+		{
+			SearchBoxPrototype searchBox = new SearchBoxPrototype();
+			searchBox.SearchInputClick();
+			Report.IsTrue(searchBox.SearchInputEnterText(searchText), $"Failure, failed to enter text: '{searchText}'", $"Success, entered text: '{searchText}'");
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section, In the component search box, confirm search results list (is|is not) displayed")]
+		public void ComponentSearchBoxResultListIsIsnotDisplayed(string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			SearchBoxPrototype searchBox = new SearchBoxPrototype();
+			Report.IsTrue(searchBox.WaitForSearchResults(30), $"Failure, search did not finish.", $"Success, search finished.");
+			Report.IsTrue(searchBox.SearchResultsExists() == expected, $"Failure, search results list {(expected ? "is not" : "is")} displayed.", $"Success, search results list {is_isnot} displayed.");
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section, In the component search box, click result where (component name|CAS number) contains: (.*)")]
+		public void ComponentSearchBoxClickResultListOption(string searchType, string searchText)
+		{
+			SearchBoxPrototype searchBox = new SearchBoxPrototype();
+			switch (searchType)
+			{
+				case "component name":
+					Report.IsTrue(searchBox.SearchComponentExists(searchText), $"Failure, search result list does not contain component containing text: '{searchText}'.", $"Success, search result list does contain component containing text: '{searchText}'.");
+					Report.IsTrue(searchBox.SearchComponentGet(searchText).Click(), $"Failure, failed to click result component containing text: '{searchText}'.", $"Success, clicked result component containing text: '{searchText}'.");
+					break;
+				case "CAS number":
+					Report.IsTrue(searchBox.SearchCASNumberExists(searchText), $"Failure, search result list does not contain CAS number containing text: '{searchText}'.", $"Success, search result list does contain CAS number containing text: '{searchText}'.");
+					Report.IsTrue(searchBox.SearchCASNumberGet(searchText).Click(), $"Failure, failed to click result CAS number containing text: '{searchText}'.", $"Success, clicked result CAS number containing text: '{searchText}'.");
+					break;
+				default:
+					Report.Error("Error: Invalid Search Type");
+					break;
+			}
+
+
+		}
+
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section, Verify Products table is displayed")]
+		public void VerifyIngredientsTableIsDisplayed()
+		{
+			string name = "settings";
+			Report.IsTrue(new MyLibraryPage().ProductTableExists(name), $"{name} table is not displayed", $"Successfully {name} table is displayed");
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section, (check|uncheck) Trade Secret checkbox for component name: (.*)")]
+		public void TradeCentralCheckUncheckFooterButton(string check_uncheck, string componentname)
+		{
+			bool expected = check_uncheck == "check";
+			string checkboxLabel = "checked: isTradeSecret";
+			MyIngredientsPage ingredientsTable = new MyIngredientsPage();
+			Report.IsTrue(ingredientsTable.TableCheckboxExists(componentname, checkboxLabel), $"Failure, in the displayed table '{checkboxLabel}' checkbox is not displayed.", $"Success, in the displayed table '{checkboxLabel}' checkbox is displayed.");
+			if (expected != ingredientsTable.TableCheckboxChecked(componentname, checkboxLabel))
+			{
+				Report.IsTrue(ingredientsTable.TableCheckboxClick(componentname, checkboxLabel), $"Failure, in the displayed table failed to click '{checkboxLabel}' checkbox.", $"Success, in the displayed table clicked '{checkboxLabel}' checkbox.");
+			}
+			Report.IsTrue((ingredientsTable.TableCheckboxChecked(componentname, checkboxLabel) == expected), $"Failure, in the displayed table failed to confirm '{checkboxLabel}' checkbox is {check_uncheck}ed.", $"Success, in the displayed table confirmed '{checkboxLabel}' checkbox is {check_uncheck}ed.");
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section, (check|uncheck) Publicly Disclosed checkbox for component name: (.*)")]
+		public void PubliclyDisclosedCheckUncheckFooterButton(string check_uncheck, string componentname)
+		{
+			bool expected = check_uncheck == "check";
+			string checkboxLabel = "checked: isDisclosed";
+			MyIngredientsPage ingredientsTable = new MyIngredientsPage();
+			Report.IsTrue(ingredientsTable.TableCheckboxExists(componentname, checkboxLabel), $"Failure, in the displayed table '{checkboxLabel}' checkbox is not displayed.", $"Success, in the displayed table '{checkboxLabel}' checkbox is displayed.");
+			if (expected != ingredientsTable.TableCheckboxChecked(componentname, checkboxLabel))
+			{
+				Report.IsTrue(ingredientsTable.TableCheckboxClick(componentname, checkboxLabel), $"Failure, in the displayed table failed to click '{checkboxLabel}' checkbox.", $"Success, in the displayed table clicked '{checkboxLabel}' checkbox.");
+			}
+			Report.IsTrue((ingredientsTable.TableCheckboxChecked(componentname, checkboxLabel) == expected), $"Failure, in the displayed table failed to confirm '{checkboxLabel}' checkbox is {check_uncheck}ed.", $"Success, in the displayed table confirmed '{checkboxLabel}' checkbox is {check_uncheck}ed.");
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section, From the Public Name dropdown for component (.*) - I select option: (.*)")]
+		public void PublicNameSelectOption(string componentname, string optionValue)
+		{
+			MyIngredientsPage ingredientsTable = new MyIngredientsPage();
+			Report.IsTrue(ingredientsTable.PublicNameDropdownExists(componentname), $"Failed, Pubic Name dropdown is not displayed for component {componentname}", $"Successfully displayed Public name dropdown for component {componentname} ");
+			Report.IsTrue(ingredientsTable.PublicNameDropdownClick(componentname), $"Failed to click Pubic Name dropdown for component {componentname}", $"Successfully clicked Public name dropdown for component {componentname} ");
+			Report.IsTrue(ingredientsTable.PublicNameDropdownOptionExists(componentname, optionValue), $"Failed, Pubic Name dropdown option {optionValue} is not displayed for component {componentname}", $"Successfully displayed Public name dropdown option {optionValue} for component {componentname} ");
+			Report.IsTrue(ingredientsTable.PublicNameDropdownOptionClick(componentname, optionValue), $"Failed to click option {optionValue} in Pubic Name dropdown for component {componentname}", $"Successfully clicked option {optionValue}in Public name dropdown for component {componentname} ");
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section- Under Bulk Product Management , Verify Products table is displayed")]
+		public void VerifyBulkProductManagementTableIsDisplayed()
+		{
+			string name = "settings";
+			Report.IsTrue(new MyLibraryPage().ProductTableExists(name), $"Bulk Product Management table is not displayed", $"Successfully Bulk Product Management table is displayed");
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section, click action (Remove |Bulk Update ) for component name: (.*)")]
+		public void ClickActionForcomponent(string productname, string action)
+		{
+			Report.IsTrue(new MyIngredientsPage().ForIngredientsClickAction(productname, action),
+				$"Failed to click action:{action} for component: {productname}",
+				$"Successfully clicked action: {action} for component: {productname}");
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section - Under Bulk Product Management , In New Disclosure click (Select All |Deselect All )")]
+		public void ClickSelectAllOrDeselectAllInNewDiscolsure(string action)
+		{
+			Report.IsTrue(new MyIngredientsPage().ForBulkProductManagementClickSelectAllOrUnselectAll(action),
+				$"Failed to click action:{action}",
+				$"Successfully clicked action: {action}");
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section - Under Bulk Product Management, click 'Save' button")]
+		public void SetClickSave()
+		{
+			string button = "Save";
+			new Steps_Prototype().ClickButton(button);
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section - Under Bulk Product Management, click 'Go Back' button")]
+		public void SetClickGoBack()
+		{
+			string button = "Go Back";
+			new Steps_Prototype().ClickButton(button);
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section, Validate Remove Component popup (should| should not) be displayed")]
+		public void ValidateDeleteIngredientPopup(string condition)
+		{
+			string modalTitle = "Remove Component from My Ingredients?";
+			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeading(condition, modalTitle);
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section, in the 'Remove Component' pop up click (Yes|No) button")]
+		public void ClickDeleteCloseInDeleteIngredientPopUp(string button)
+		{
+			string popupTitle = "Remove Component from My Ingredients?";
+			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(popupTitle, button);
+		}
+
+
+
+		#endregion
 
 	}
 
