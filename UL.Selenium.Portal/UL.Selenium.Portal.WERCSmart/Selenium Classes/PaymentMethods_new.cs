@@ -21,18 +21,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		private IWebElement PageSubHeaderLabel => this.ContainerElement.FindElement(By.XPath($".//h2[@class='ws-panel-title']"), 1);
 
 		private string _paymentMethodButtonLabel;
-		private IWebElement PaymentMethodButton => this.ContainerElement.FindElement(By.XPath($".//a[contains(@class,'big-link')]//div[text()='{_paymentMethodButtonLabel}']"), 1);
+		private IWebElement PaymentMethodButton => this.ContainerElement.FindElement(By.XPath($".//a[contains(@class,'big-link')]//div[text()=\"{_paymentMethodButtonLabel}\"]"), 1);
 		private IWebElement DefaultMethod => this.ContainerElement.FindElement(By.XPath($".//div[@class='card payment-method' and div//span[text()='Default']]//h4"), 2);
-		private IWebElement AddNewMethodButton(string button) => this.ContainerElement.FindElement(By.XPath($".//div[h3[text()='Add a New Payment Method']]//button[normalize-space()='{button}']"), 2);
+		private IWebElement AddNewMethodButton(string button) => this.ContainerElement.FindElement(By.XPath($".//div[h3[text()='Add a New Payment Method']]//button[normalize-space()=\"{button}\"]"), 2);
 		private IWebElement AccountName() => this.ContainerElement.FindElement(By.XPath($".//div[contains(@data-bind, 'AccountName')]"), 2);
 		private IWebElement LastName() => this.ContainerElement.FindElement(By.XPath($".//div[contains(@data-bind, 'LastName')]"), 2);
 		private IWebElement FirstName() => this.ContainerElement.FindElement(By.XPath($".//div[contains(@data-bind, 'FirstName')]"), 2);
 		private IWebElement Email() => this.ContainerElement.FindElement(By.XPath($".//div[contains(@data-bind, 'Email')]"), 2);
-		private IWebElement Address1(string addressType) => this.ContainerElement.FindElement(By.XPath($".//div[h3[text()='{addressType}']]//div[contains(@data-bind, 'Address1')]"), 2);
-		private IWebElement Address2(string addressType) => this.ContainerElement.FindElement(By.XPath($".//div[h3[text()='{addressType}']]//div[contains(@data-bind, 'Address2')]"), 2);
-		private IWebElement CityStatePostal(string addressType) => this.ContainerElement.FindElement(By.XPath($".//div[h3[text()='{addressType}']]//div[contains(@data-bind, 'cityStatePostal')]"), 2);
-		private IWebElement Country(string addressType) => this.ContainerElement.FindElement(By.XPath($".//div[h3[text()='{addressType}']]//div[contains(@data-bind, 'Country')]"), 2);
-		private IWebElement Phone(string addressType) => this.ContainerElement.FindElement(By.XPath($".//div[h3[text()='{addressType}']]//div[contains(@data-bind, 'Phone')]"), 2);
+		private IWebElement Address1(string addressType) => this.ContainerElement.FindElement(By.XPath($".//div[h3[text()=\"{addressType}\"]]//div[contains(@data-bind, 'Address1')]"), 2);
+		private IWebElement Address2(string addressType) => this.ContainerElement.FindElement(By.XPath($".//div[h3[text()=\"{addressType}\"]]//div[contains(@data-bind, 'Address2')]"), 2);
+		private IWebElement CityStatePostal(string addressType) => this.ContainerElement.FindElement(By.XPath($".//div[h3[text()=\"{addressType}\"]]//div[contains(@data-bind, 'cityStatePostal')]"), 2);
+		private IWebElement Country(string addressType) => this.ContainerElement.FindElement(By.XPath($".//div[h3[text()=\"{addressType}\"]]//div[contains(@data-bind, 'Country')]"), 2);
+		private IWebElement Phone(string addressType) => this.ContainerElement.FindElement(By.XPath($".//div[h3[text()=\"{addressType}\"]]//div[contains(@data-bind, 'Phone')]"), 2);
 
 
 		#endregion
@@ -207,9 +207,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	{
 		#region Constants
 		private string _addressType;
-		protected override By ContainerElementLocator => By.XPath($"//div[h4[text()='{_addressType}']]");
-		IWebElement TextInput(string section) => this.ContainerElement.FindElement(By.XPath($".//div[label[text()='{section}']]//input"));
-		IWebElement SelectInput(string section) => this.ContainerElement.FindElement(By.XPath($".//div[label[text()='{section}']]//select"));
+		protected override By ContainerElementLocator => By.XPath($"//div[h4[text()=\"{_addressType}\"]]");
+		IWebElement TextInput(string section) => this.ContainerElement.FindElement(By.XPath($".//div[label[text()=\"{section}\"]]//input"));
+		IWebElement SelectInput(string section) => this.ContainerElement.FindElement(By.XPath($".//div[label[text()=\"{section}\"]]//select"));
 
 		#endregion
 
