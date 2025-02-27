@@ -620,10 +620,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		public void BulkProductPublicNameSelectOption(string productname, string optionValue)
 		{
 			MyIngredientsPage ingredientsTable = new MyIngredientsPage();
-			Report.IsTrue(ingredientsTable.BulkProductPublicNameDropdownExists(productname), $"Failed, Pubic Name dropdown is not displayed for component {componentname}", $"Successfully displayed Public name dropdown for component {componentname} ");
-			Report.IsTrue(ingredientsTable.BulkProductPublicNameDropdownClick(productname), $"Failed to click Pubic Name dropdown for component {componentname}", $"Successfully clicked Public name dropdown for component {componentname} ");
-			Report.IsTrue(ingredientsTable.BulkProductPublicNameDropdownOptionExists(productname, optionValue), $"Failed, Pubic Name dropdown option {optionValue} is not displayed for component {componentname}", $"Successfully displayed Public name dropdown option {optionValue} for component {componentname} ");
-			Report.IsTrue(ingredientsTable.BulkProductPublicNameDropdownOptionClick(productname, optionValue), $"Failed to click option {optionValue} in Pubic Name dropdown for component {componentname}", $"Successfully clicked option {optionValue}in Public name dropdown for component {componentname} ");
+			Report.IsTrue(ingredientsTable.BulkProductPublicNameDropdownExists(productname), $"Failed, Pubic Name dropdown is not displayed for component {productname}", $"Successfully displayed Public name dropdown for component {productname} ");
+			Report.IsTrue(ingredientsTable.BulkProductPublicNameDropdownClick(productname), $"Failed to click Pubic Name dropdown for component {productname}", $"Successfully clicked Public name dropdown for component {productname} ");
+			Report.IsTrue(ingredientsTable.BulkProductPublicNameDropdownOptionExists(productname, optionValue), $"Failed, Pubic Name dropdown option {optionValue} is not displayed for component {productname}", $"Successfully displayed Public name dropdown option {optionValue} for component {productname} ");
+			Report.IsTrue(ingredientsTable.BulkProductPublicNameDropdownOptionClick(productname, optionValue), $"Failed to click option {optionValue} in Pubic Name dropdown for component {productname}", $"Successfully clicked option {optionValue}in Public name dropdown for component {productname} ");
 		}
 
 		[RegexStepDefinition(@"In the My Library - My Ingredients section - Under Bulk Product Management, Verify selected component: (.*) is displayed under the header")]

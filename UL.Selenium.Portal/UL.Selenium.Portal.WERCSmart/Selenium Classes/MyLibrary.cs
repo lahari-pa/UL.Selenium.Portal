@@ -271,8 +271,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		IWebElement NewDisclosureCheckbox(string productname) => this.ContainerElement.FindElement(By.XPath($".//div[contains(@data-bind,'model')]//table//tr//td//span[contains(@data-bind,'product.Name')][contains(text(),'{productname}')]//ancestor::tr//td//input[contains(@data-bind,'newDisclosure')]"), 1);
 
 		private IWebElement BulkProductPublicNameDropdown(string productname) => this.ContainerElement.FindElement(By.XPath($".//div[contains(@data-bind,'model')]//table//tr//td//span[contains(@data-bind,'product.Name')][contains(text(),'{productname}')]//ancestor::tr//td//select[contains(@data-bind,'publicName')]"), 1);
-		private List<IWebElement> BulkProductPublicNameDropdownOptionsList(string productname) => this.BulkProductPublicNameDropdown(componentname).FindElements(By.XPath("//option"), 1).ToList();
-		private IWebElement BulkProductPublicNameDropdownOption(string productname, string dropdownOption) => this.BulkProductPublicNameDropdownOptionsList(componentname).Where(x => x.Text.Trim() == dropdownOption).FirstOrDefault();
+		private List<IWebElement> BulkProductPublicNameDropdownOptionsList(string productname) => this.BulkProductPublicNameDropdown(productname).FindElements(By.XPath("//option"), 1).ToList();
+		private IWebElement BulkProductPublicNameDropdownOption(string productname, string dropdownOption) => this.BulkProductPublicNameDropdownOptionsList(productname).Where(x => x.Text.Trim() == dropdownOption).FirstOrDefault();
 		IWebElement BulkProductComponentName => this.ContainerElement.FindElement(By.XPath($".//div[contains(@data-bind,'model')]/p//span[contains(@data-bind,'component.name')]"), 1);
 
 		#endregion
@@ -394,10 +394,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.BulkProductPublicNameDropdownOption(productname, dropdownOption).TryClick();
 		}
 
-		public bool GetBulkProductComponentName()
+		public string GetBulkProductComponentName()
 		{
 			Report.Info($"Attempting to get Component Name");
-			return this.BulkProductComponentName.Text();
+			return this.BulkProductComponentName.Text;
 		}
 
 
