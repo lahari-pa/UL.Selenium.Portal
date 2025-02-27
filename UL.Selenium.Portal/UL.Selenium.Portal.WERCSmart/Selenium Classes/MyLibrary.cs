@@ -400,7 +400,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.BulkProductComponentName.Text();
 		}
 
-		BulkProductComponentName
 
 		#endregion
 
