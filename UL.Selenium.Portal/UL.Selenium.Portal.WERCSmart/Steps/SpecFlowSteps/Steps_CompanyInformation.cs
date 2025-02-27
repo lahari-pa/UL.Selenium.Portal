@@ -90,7 +90,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		[RegexStepDefinition(@"In the Company Information section, in the '(Billing Address|Shipping Address|Canada Supplier Address)' for the (Address|Address 2|City|Zip|Country Code|Company Phone|Postal Code|State) enter text (.*)")]
 		public void EnterTextForCompanyInformationAddress(string section, string field, string value)
 		{
-			if (Report.IsTrue(new CompanyInformationSection(section).AddressInputFieldExists(field), $"Failed to find the '{field}' input field", $"Successfully found the 'the '{field}' input field."))
+			if (Report.IsTrue(new CompanyInformationSection(section).AddressInputFieldExists(field), $"Failed to find the '{field}' input field", $"Successfully found the '{field}' input field."))
 			{
 				Report.IsTrue(new CompanyInformationSection(section).AddressInputFieldEnterText(field, value), $"Failed to enter '{value}' in the '{field}' input field.", $"Successfully entered '{value}' in the '{field}' input field.");
 			}
@@ -99,7 +99,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		public void SelectStateOptionForCompanyAddress(string field, string value)
 		{
 			string section = "Company Name";
-			if (Report.IsTrue(new CompanyInformationSection(section).AddressSelectFieldExists(field), $"Failed to find the '{field}' select field", $"Successfully found the 'the '{field}' select field."))
+			if (Report.IsTrue(new CompanyInformationSection(section).AddressSelectFieldExists(field), $"Failed to find the '{field}' select field", $"Successfully found the '{field}' select field."))
 			{
 				Report.IsTrue(new CompanyInformationSection(section).AddressSelectFieldSelectOption(field, value), $"Failed to select '{value}' in the '{field}' field.", $"Successfully selected '{value}' in the '{field}' field.");
 			}
@@ -107,7 +107,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		[RegexStepDefinition(@"In the Company Information section, in the '(Billing Address|Shipping Address|Canada Supplier Address)' for the (Country|State|Province) select option (.*)")]
 		public void SelectOptionForCompanyInformationAddress(string section, string field, string value)
 		{
-			if (Report.IsTrue(new CompanyInformationSection(section).AddressSelectFieldExists(field), $"Failed to find the '{field}' select field", $"Successfully found the 'the '{field}' select field."))
+			if (Report.IsTrue(new CompanyInformationSection(section).AddressSelectFieldExists(field), $"Failed to find the '{field}' select field", $"Successfully found the '{field}' select field."))
 			{
 				Report.IsTrue(new CompanyInformationSection(section).AddressSelectFieldSelectOption(field, value), $"Failed to select '{value}' in the '{field}' field.", $"Successfully selected '{value}' in the '{field}' field.");
 			}
