@@ -1,16 +1,15 @@
+using Reqnroll;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.Reporting.Functions;
-using UL.Automation.ReqnrollHelpers.Classes;
-using Reqnroll;
 using UL.Automation.Reporting;
-using UL.Automation.TReVor.Classes;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
-using OpenQA.Selenium;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Automation.TReVor.Classes;
+using UL.Automation.WebDriver.Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -441,7 +440,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure(ex.Message);
 				throw;
 			}
-			
+
 		}
 
 		[RegexStepDefinition(@"I should see the following filter options below My Products")]
@@ -1008,19 +1007,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			List<string> prodIDs = selProductsGrid.AllIDsInGrid();
 			Report.Info("Saving a total of: " + prodIDs.Count + " to context saved as: " + savedAs);
 			Context.AddToContext(savedAs, prodIDs);
-			if (prodIDs.Count()==0)
+			if (prodIDs.Count() == 0)
 			{
-				Report.Failure("There was no products IDs found to be displayed");				
-				
+				Report.Failure("There was no products IDs found to be displayed");
+
 			}
-			
+
 		}
 
 		[RegexStepDefinition(@"If there are no Products in the status 'Sending to Retailers' I create one with SHA account: (.*)")]
 		public void IfNoProductsInSendingToRetailersCreateProduct(string shaAcc)
 		{
 			var selProductsGrid = new ProductsGrid();
-			List<string> prodIDs = selProductsGrid.AllIDsInGrid();			
+			List<string> prodIDs = selProductsGrid.AllIDsInGrid();
 			if (prodIDs.Count() == 0)
 			{
 				Report.Info("There was no products IDs found to be displayed");
@@ -1031,7 +1030,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				new GlobalSteps().ThenTheHomeScreenShouldLoad();
 				new StepsProductGrid().WhenIFilterTheProductsByNotYetSubmitted("Sending to Retailers");
 				var selProductsGrid2 = new ProductsGrid();
-				List<string> prodIDsbackup = selProductsGrid2.AllIDsInGrid();				
+				List<string> prodIDsbackup = selProductsGrid2.AllIDsInGrid();
 				if (prodIDsbackup.Count() == 0)
 				{
 					Report.Failure("There was still no product IDs found to be displayed");
@@ -1044,7 +1043,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			else
 			{
-				Report.Info($"Count was not 0... No need to create a product, moving on...");				
+				Report.Info($"Count was not 0... No need to create a product, moving on...");
 
 			}
 		}
@@ -1193,16 +1192,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void IfDataConsentRequestsModalIsShowingAddRequiredTiers()
 		{
 			Report.Info("I wait for the Data Consent Requests Modal to appear");
-			if(new ModalDialog().WaitForContainerToBeVisible(5))
+			if (new ModalDialog().WaitForContainerToBeVisible(5))
 			{
 				Report.Info("A modal was found checking the modal is the Data Consent Requests modal");
-				if(new ModalDialog().GetTitle().ToLower()=="data consent requests")
+				if (new ModalDialog().GetTitle().ToLower() == "data consent requests")
 				{
 					Report.Info("Attempting to click the button with text: 'GO TO MY RETAILERS");
 					new ModalDialog().ClickButton("GO TO MY RETAILERS");
 					Delay.Seconds(15);
 					new StepsRetailPartners().GivenIfISeeTheRetailPartnersPageISetAllDataConsentTiersToTrueForAllRetailersInTheTopSection();
-					
+
 				}
 				else
 				{

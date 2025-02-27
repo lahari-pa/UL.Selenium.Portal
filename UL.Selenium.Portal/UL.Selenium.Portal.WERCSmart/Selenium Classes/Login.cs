@@ -1,12 +1,11 @@
+using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using System;
 using System.Linq;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using UL.Automation.Reporting.Functions;
-using UL.Selenium.Portal.WERCSmart.Steps;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -99,7 +98,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.LoginButton?.Text;
 		}
 
-		public string EmailField {
+		public string EmailField
+		{
 			get => this.EmailInput?.Text;
 			set
 			{
@@ -108,7 +108,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string PasswordField {
+		public string PasswordField
+		{
 			get => this.PasswordInput?.Text;
 			set
 			{

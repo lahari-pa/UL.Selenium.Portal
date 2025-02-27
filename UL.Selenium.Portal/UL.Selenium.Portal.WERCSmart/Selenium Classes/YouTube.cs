@@ -1,7 +1,7 @@
-using UL.Automation.WebDriver.BaseClasses;
-using UL.Automation.WebDriver.Extensions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using UL.Automation.WebDriver.BaseClasses;
+using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {

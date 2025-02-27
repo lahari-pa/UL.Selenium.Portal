@@ -1,17 +1,16 @@
+using OpenQA.Selenium;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Automation.Utilities.Functions;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Utilities.Functions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using UL.Automation.ReqnrollHelpers.Classes;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using UL.Automation.WebDriver.Functions;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 {
@@ -54,7 +53,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 				}
 
 				return input.TryEnterText(productName);
-				
+
 			}
 
 			catch (Exception)
@@ -67,7 +66,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 		{
 			IWebElement select = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(
 				".//div[@class='form-group']//label[contains(text(),'Product Line/Brand')]/../..//select"), 2);
-			
+
 			if (select == null)
 			{
 				return false;
@@ -105,7 +104,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 			try
 			{
 				IWebElement el = this.containerElement.FindElement(By.XPath("//label[contains(text(),'Category')]/../../div[@class='form-group child']//select"), 2);
-				
+
 				if (el == null)
 				{
 					return false;
@@ -124,7 +123,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 		public bool SelectSubCategory(string subcategory)
 		{
 			IWebElement el = this.containerElement.FindElement(By.XPath("//label[contains(text(),'Category')]/../../div[contains(@class,'form-group offset')]//select"), 2);
-			
+
 			if (el == null)
 			{
 				return false;

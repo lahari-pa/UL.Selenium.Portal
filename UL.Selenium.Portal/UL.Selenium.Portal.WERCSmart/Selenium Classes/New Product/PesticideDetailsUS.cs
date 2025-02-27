@@ -1,8 +1,8 @@
+using OpenQA.Selenium;
 using System.Collections.Generic;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
@@ -68,7 +68,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 		}
 
-		public List<EPARegistration> EPARegistrationData {
+		public List<EPARegistration> EPARegistrationData
+		{
 			get
 			{
 				var rEpa = new List<EPARegistration>();

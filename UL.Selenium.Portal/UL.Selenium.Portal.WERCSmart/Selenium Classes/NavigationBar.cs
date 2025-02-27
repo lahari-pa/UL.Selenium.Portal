@@ -1,11 +1,9 @@
+using OpenQA.Selenium;
 using System.Collections.Generic;
 using System.Linq;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using UL.Automation.WebDriver.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -115,13 +113,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Icons found: " + string.Join(",", allIcons.ToList().Select(x => x.GetAttribute("title").Trim())));
 				return false;
 			}
-			Report.Info($"Icon has been found for: { destination}");
+			Report.Info($"Icon has been found for: {destination}");
 			IWebElement button = icon.FindElement(By.XPath(".."), 2);
 			if (button == null)
 			{
-				Report.Info($"Could not find button for: { destination }");
+				Report.Info($"Could not find button for: {destination}");
 			}
-			Report.Info($"Button has been found for: { destination }");
+			Report.Info($"Button has been found for: {destination}");
 			return button.TryClick();
 		}
 

@@ -1,15 +1,13 @@
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using System.Collections.ObjectModel;
-using Reqnroll;
-using UL.Automation.WebDriver.BaseClasses;
-using NPOI.SS.Formula.Functions;
-using OpenQA.Selenium.Support.UI;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {

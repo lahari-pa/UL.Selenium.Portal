@@ -1,11 +1,10 @@
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
-using UL.Automation.WebDriver.BaseClasses;
-using UL.Automation.WebDriver.Extensions;
 using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using Reqnroll;
+using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit
 {
@@ -54,7 +53,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit
 				bool correct = true;
 				IWebElement elQuestion;
 				IWebElement actualMessage;
-				
+
 				elQuestion = this.FindElement(By.XPath(string.Format("//label[contains(text(),\"{0}\")]", question)), 2);
 				actualMessage = elQuestion.FindElement(By.XPath("..//parent::div//parent::div//p//span"), 2);
 
@@ -64,7 +63,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit
 				}
 
 				string actualMessageStr = actualMessage.GetInnerText();
-				
+
 				expected = questions[question];
 
 				correct = expected.Trim() == actualMessageStr.Trim();
@@ -74,7 +73,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit
 					outMessage = outMessage + " :: " + question + " :: " + actualMessage;
 				}
 			}
-			
+
 			return (outMessage.Length < 1);
 		}
 
@@ -95,7 +94,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit
 			}
 			catch (Exception)
 			{
-				Report.Error("Error locating Web Element!"); 
+				Report.Error("Error locating Web Element!");
 				return false;
 			}
 

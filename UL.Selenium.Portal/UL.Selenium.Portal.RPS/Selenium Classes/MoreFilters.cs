@@ -1,20 +1,20 @@
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using OpenQA.Selenium;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
 using UL.Selenium.Portal.WERCSmart.Classes;
- 
+
 
 namespace UL.Selenium.Portal.RPS.Selenium_Classes
 {
     public class MoreFiltersPopup : SeleniumBaseObject
     {
         #region Page Objects
-        protected override By ContainerElementLocator => By.XPath ("//div[@class='modal-dialog modal-xl']");
+        protected override By ContainerElementLocator => By.XPath("//div[@class='modal-dialog modal-xl']");
 
         private IWebElement MoreFiltersOptionButton => this.ContainerElement.FindElement(By.XPath(".//div[@class='input-group']//button[@data-bind='click: filters']"), 2); //Updated PL
         public List<IWebElement> MoreFiltersOptionsElements() => ContainerElement.FindElements(By.XPath(".//a[@class='list-group-item']|.//p//strong[text()='Filter By']/../..//select//option"), 2).ToList();
@@ -68,7 +68,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
         public bool ClickFirstParameterOption()
         {
             var els = this.CurrentFilterParameters;
-            
+
             if (els == null)
             {
                 return false;
@@ -225,7 +225,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
             return wantedOptionEL.TryClick() && wantedOptionEL.Text == option;
         }
-        
+
         public bool ClickApplyFiltersButton()
         {
             return this.ApplyFilterButton.TryClick();
@@ -854,7 +854,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                     Report.Info($"The Filters Checkbox was still clickable");
                     return false;
                 }
-               
+
             }
             return true;
 

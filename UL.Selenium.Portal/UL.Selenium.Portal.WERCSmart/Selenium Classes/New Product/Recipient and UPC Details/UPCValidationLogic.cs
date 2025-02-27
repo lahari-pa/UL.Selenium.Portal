@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Recipient_and_UPC_Details
 {

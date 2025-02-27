@@ -1,11 +1,11 @@
-﻿using System;
-using Reqnroll;
+﻿using Reqnroll;
+using System;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Automation.TReVor.Classes;
 using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.RPS.Selenium_Classes;
-using UL.Automation.ReqnrollHelpers.Attributes;
-using UL.Automation.TReVor.Classes;
 
 namespace UL.Selenium.Portal.RPS.Steps
 {
@@ -83,7 +83,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         {
             Report.Info($"Attempting to confirm rows per page selector {does_doesnot} exist.");
             bool expected = does_doesnot == "does";
-            Report.IsTrue(!(new SuperTableFooter().RowsPerPageSelectorExists() ^ expected), $"Failure, rows per page selector {(expected ? "does not" : "does")} exist and {(expected?"should":"should not")}.", $"Success, rows per page selector {does_doesnot} exist, as expected.");
+            Report.IsTrue(!(new SuperTableFooter().RowsPerPageSelectorExists() ^ expected), $"Failure, rows per page selector {(expected ? "does not" : "does")} exist and {(expected ? "should" : "should not")}.", $"Success, rows per page selector {does_doesnot} exist, as expected.");
         }
 
         [RegexStepDefinition(@"In the table footer, I confirm the page navigation controls (do|do not) exist")]
@@ -94,9 +94,9 @@ namespace UL.Selenium.Portal.RPS.Steps
             var superTableFooter = new SuperTableFooter();
             string[] buttonLabels = { "First Page", "Previous Page", "Next Page", "Last Page" };
             bool result = true;
-            foreach(string buttonLabel in buttonLabels)
+            foreach (string buttonLabel in buttonLabels)
             {
-                result &= Report.IsTrue(!(superTableFooter.PagiatorButtonExists(buttonLabel) ^ expected), $"Failure, '{buttonLabel}' pagiator button {(expected ? "does not" : "does")} exist and {(expected?"should":"should not")}.", $"Success, '{buttonLabel}' pagiator button {(expected ? "does" : "does not")} exist, as expected.");
+                result &= Report.IsTrue(!(superTableFooter.PagiatorButtonExists(buttonLabel) ^ expected), $"Failure, '{buttonLabel}' pagiator button {(expected ? "does not" : "does")} exist and {(expected ? "should" : "should not")}.", $"Success, '{buttonLabel}' pagiator button {(expected ? "does" : "does not")} exist, as expected.");
             }
             Report.IsTrue(result, $"Failure, page navigation controls {(expected ? "do not" : "do")} exist and {(expected ? "should" : "should not")}.", $"Success, page navigation controls {do_donot} exist as expected.");
         }
@@ -217,7 +217,7 @@ namespace UL.Selenium.Portal.RPS.Steps
                 valueExpected = TestVariables.GetVariableSavedAs("WPSID");
             }
             Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' was unable to be parsed as a number.", "Success, option number correctly parsed.");
-            if(Report.IsTrue(gridTable.ProductInfoCellExists(rowNumber), $"Failure, table row #{rowNumber} does not exist.", $"Success, table row #{rowNumber} exists."))
+            if (Report.IsTrue(gridTable.ProductInfoCellExists(rowNumber), $"Failure, table row #{rowNumber} does not exist.", $"Success, table row #{rowNumber} exists."))
             {
                 string valueDisplayed;
                 switch (picLabel)

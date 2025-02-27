@@ -1,14 +1,6 @@
-﻿using NPOI.SS.Formula.Functions;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Reqnroll;
+﻿using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
-using static NPOI.HSSF.Util.HSSFColor;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {
@@ -41,7 +33,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 
 		[RegexStepDefinition(@"I enter the text of is this product specifically designed- marketed or labeled for infants- babies- or children field to: (Yes|No)")]
 		public void GivenEnterProductSpecificallyDesignedMarketedOrLabeledtValue(string value)
-			{ 
+		{
 			Report.Info($"I set the text of is this product specifically designed- marketed or labeled for infants- babies- or children field to: {value}");
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.SetTheSectionOptionTo("Is this product specifically designed- marketed or labeled for infants- babies- or children?", value);
@@ -57,7 +49,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 
 		[RegexStepDefinition(@"I enter the text of is this a topically used product which includes but is not limited to liquids- ointments- bath soaps/bombs- scrubs- masks- wipes- lotions- creams and gels field to: (Yes|No)")]
 		public void GivenEnterTopicallyUsedProductWhichIncludesButIsNotLimitedToValue(string value)
-		{ 
+		{
 			Report.Info($"I set the text of is this a topically used product which includes but is not limited to liquids- ointments- bath soaps/bombs- scrubs- masks- wipes- lotions- creams and gels field to: {value}");
 			var selNewProduct = new Steps_Prototype();
 			selNewProduct.SetTheSectionOptionTo("Is this a topically used product which includes but is not limited to liquids- ointments- bath soaps/bombs- scrubs- masks- wipes- lotions- creams and gels?", value);

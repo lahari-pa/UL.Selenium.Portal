@@ -21,10 +21,10 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
         public bool WaitForLoginInputAreaToLoad()
         {
             int x = 0;
-            while(x<30)
+            while (x < 30)
             {
                 IWebElement el = this.LoginInputArea;
-                if(el!=null)
+                if (el != null)
                 {
                     Report.Info($"The Login Input area was loaded");
                     return true;

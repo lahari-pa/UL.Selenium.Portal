@@ -1,7 +1,7 @@
-using UL.Automation.WebDriver.BaseClasses;
-using UL.Automation.WebDriver.Extensions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using UL.Automation.WebDriver.BaseClasses;
+using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -11,12 +11,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
 
-		public string Username {
+		public string Username
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='UserName']"), 2).Text;
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='UserName']"), 2).EnterText(value);
 		}
 
-		public string Password {
+		public string Password
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='Password']"), 2).Text;
 			set
 			{

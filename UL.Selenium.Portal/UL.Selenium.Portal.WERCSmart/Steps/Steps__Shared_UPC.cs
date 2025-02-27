@@ -1,28 +1,27 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
-using UL.Automation.ReqnrollHelpers.Classes;
 using Reqnroll;
 using Reqnroll.Assist;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text.RegularExpressions;
+using UL.Automation.Reporting;
+using UL.Automation.Reporting.Classes;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Automation.Utilities.Functions;
+using UL.Automation.Utilities.Helpers;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
+using UL.Automation.WebDriver.Functions;
+using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
-using System.Collections.ObjectModel;
 using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.UPC;
-using UL.Automation.Utilities.Functions;
-using System.Text.RegularExpressions;
-using System.Collections;
-using UL.Selenium.Portal.WERCSmart.Classes;
-using UL.Automation.Reporting;
-using UL.Automation.WebDriver.Functions;
-using UL.Automation.TReVor.Classes;
-using UL.Automation.Reporting.Classes;
-using UL.Automation.ReqnrollHelpers.Attributes;
-using UL.Automation.Utilities.Helpers;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -785,7 +784,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[RegexStepDefinition(@"I edit the testdoc.xlsx, and save its filepath as: (.*) and verify it contains the UPC data in the table saved as: (.*), \(Base Data Only: (true|false)\)")]
-		public void GivenICreateANewFileSavedAsAndVerifyUsingTheUPCsSavedAs(string fileSavedAs, string tableSavedAs,bool baseData, Table table)
+		public void GivenICreateANewFileSavedAsAndVerifyUsingTheUPCsSavedAs(string fileSavedAs, string tableSavedAs, bool baseData, Table table)
 		{
 			Context.AddToContext(tableSavedAs, table);
 			var upc = new UPC();
@@ -1560,12 +1559,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			List<string> deletedRetailersInitials = (List<string>)Context.GetFromContext(savedAs);
 			List<string> foundRetaiers = new NewProduct().GetListOfRemovedRetailersInPopup();
 			List<string> foundRetailersInitials = new List<string>();
-			foreach(var item in foundRetaiers)
+			foreach (var item in foundRetaiers)
 			{
 				foundRetailersInitials.Add(new RetailerAbbreviations().TryConvertToAbbreviation($"{item}"));
 
 			}
-			bool countsMatch =  foundRetailersInitials.Count() == deletedRetailersInitials.Count();
+			bool countsMatch = foundRetailersInitials.Count() == deletedRetailersInitials.Count();
 			var differences1 = foundRetailersInitials.Except(deletedRetailersInitials).ToList();
 			bool foundDifferences1 = differences1.Count() == 0;
 			var differences2 = deletedRetailersInitials.Except(foundRetailersInitials).ToList();
@@ -1714,7 +1713,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ICheckThatInTheUPCScreenUnderTransportationColumnCatagoryXisChecked(string option)
 		{
 			Report.Info($"Starting the check of the selected status of option: {option}");
-			bool status= new NewProduct().CheckTransportationCatagoryXIsChecked(option);
+			bool status = new NewProduct().CheckTransportationCatagoryXIsChecked(option);
 			Report.IsTrue(status, "The Catagory:" + option + " was not correctly selected", "The option:" + option + " was correctly selected");
 
 		}
@@ -1724,8 +1723,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ICheckThatInTheUPCScreenUnderTransportationColumnCatagoryXisCheckedForCatagoryY(string catagory, string option)
 		{
 			Report.Info($"Starting the check of the selected status of option: {option} for cataogry: {catagory}");
-			bool status = new NewProduct().CheckTransportationOptionXIsCheckedForCatagoryY(catagory,option);
-			Report.IsTrue(status, "The option:" + option + " was not correctly selected under the catagory: "+catagory, "The option:" + option + " was correctly selected  under the catagory: " + catagory);
+			bool status = new NewProduct().CheckTransportationOptionXIsCheckedForCatagoryY(catagory, option);
+			Report.IsTrue(status, "The option:" + option + " was not correctly selected under the catagory: " + catagory, "The option:" + option + " was correctly selected  under the catagory: " + catagory);
 
 		}
 
@@ -1782,8 +1781,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void IEnsureThatICanSelectOptionAtLevel(string option, string transLevel)
 		{
 			var NewProductClassObject = new NewProduct();
-			Report.IsTrue(NewProductClassObject.SelectUPCTransportationOptionAtLevel(option, transLevel), "Failed to Click " + option + " at " + transLevel + ".","Successfully click " + option + " at " + transLevel + ".");
-			Report.IsTrue(NewProductClassObject.CheckTransportationOption(option, transLevel), "Failed to find the correct Transportation option for " + option + ".","Successfully found correct Transportation option for " + option + ".");
+			Report.IsTrue(NewProductClassObject.SelectUPCTransportationOptionAtLevel(option, transLevel), "Failed to Click " + option + " at " + transLevel + ".", "Successfully click " + option + " at " + transLevel + ".");
+			Report.IsTrue(NewProductClassObject.CheckTransportationOption(option, transLevel), "Failed to find the correct Transportation option for " + option + ".", "Successfully found correct Transportation option for " + option + ".");
 
 		}
 
@@ -1805,7 +1804,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					ContainerType = containerType,
 					Size = size,
 					UpcNumber = upc_,
-					PackageType= packageType,
+					PackageType = packageType,
 					ItemNumber = itemNumber
 
 				};
@@ -1832,7 +1831,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.Info("Checking error message");
 			var selNewUpc = new UPC();
-			List<string> el = selNewUpc.UPCProductNameError();			
+			List<string> el = selNewUpc.UPCProductNameError();
 			Report.IsTrue(el.Contains(errMsg), "Error message not displayed", $"{errMsg} is displayed");
 		}
 
@@ -1849,7 +1848,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void IEraseProductName(string prodName)
 		{
 			var selNewUpc = new UPC();
-			selNewUpc.EnterProductName(prodName);			
+			selNewUpc.EnterProductName(prodName);
 		}
 	}
 }

@@ -1,15 +1,15 @@
-﻿using System;
+﻿using OpenQA.Selenium;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using OpenQA.Selenium;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.RPS.Selenium_Classes
 {
-    class PrintDialog: SeleniumBaseObject
+    class PrintDialog : SeleniumBaseObject
     {
         //Leaving for now due to issues with the print dialog stopping element clicking and element finding, complicated by the fact there are Shadow DOM elements.
         #region Page Objects
@@ -47,7 +47,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         public void PrintTest()
         {
-            IJavaScriptExecutor executor = ((IJavaScriptExecutor)SeleniumWebDriver.CurrentDriver);            
+            IJavaScriptExecutor executor = ((IJavaScriptExecutor)SeleniumWebDriver.CurrentDriver);
             executor.ExecuteScript("document.querySelector(\"print-preview-app\").shadowRoot.querySelector(\"print-preview-header\").shadowRoot.querySelector(\"paper-button.cancel-button\").click();");
         }
 

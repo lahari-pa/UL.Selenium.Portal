@@ -1,18 +1,17 @@
+using Reqnroll;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.Utilities.Functions;
-using UL.Automation.Reporting.Functions;
-using UL.Automation.ReqnrollHelpers.Classes;
-using Reqnroll;
 using UL.Automation.Reporting;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Automation.TReVor.Classes;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using UL.Automation.WebDriver.Extensions;
-using UL.Automation.TReVor.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -73,7 +72,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisApplyRulesPage = new ApplyRulesPage();
 			Report.IsTrue(thisApplyRulesPage.Wait_for_load(60), "Apply rules page has failed to load",
 				"Apply rules page has loaded");
-			
+
 		}
 
 		[RegexStepDefinition(@"In Power Designer Plus page in My Toolbar tab I click on document queue button")]
@@ -116,7 +115,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisCurrentDocument = new CurrentDocument();
 			Delay.Seconds(10);
 			Report.Info("Attempting to click checkbox");
-			Report.IsTrue(thisCurrentDocument.Wait_for_load(60), "Current document failed to load", "Current document loaded", showSuccessScreenshot:false);
+			Report.IsTrue(thisCurrentDocument.Wait_for_load(60), "Current document failed to load", "Current document loaded", showSuccessScreenshot: false);
 			Report.IsTrue(thisCurrentDocument.SetCheckBox(checkbox, true), "Failed to set checkbox: " + checkbox, "Set checkbox: " + checkbox, showSuccessScreenshot: false);
 			//Report.Screenshot();
 		}
@@ -136,7 +135,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(2);
 			var thisCurrentDocument = new CurrentDocument();
 			Report.Info("Get alert text");
-			string alertText= null;
+			string alertText = null;
 			try
 			{
 				alertText = thisCurrentDocument.GetAlertText("The following subformat(s) cannot be authorized because required data is missing.");
@@ -156,11 +155,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 			}
 
-			if(alertText == null)
+			if (alertText == null)
 			{
 				alertText = "";
 				Report.Failure("The alertText was Null. Setting to empty but Alert text was expected!");
-				
+
 			}
 
 			Report.Info("Alert is showing as: " + alertText);
@@ -203,7 +202,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		public void ISetUsageType(string usageType)
 		{
-			Report.IsTrue(new StudioPowerDesignerPlus().SetUsageType(usageType), $"Failed to set Usage Type:{usageType}", $"Successfully Usage type {usageType} is set");	
+			Report.IsTrue(new StudioPowerDesignerPlus().SetUsageType(usageType), $"Failed to set Usage Type:{usageType}", $"Successfully Usage type {usageType} is set");
 		}
 		public void IFilterDatacode(string datacode)
 		{
@@ -241,13 +240,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			foreach (TableRow thisRow in table.Rows)
 			{
 				var thisStudioPowerDesignerPlusDesignMode =
-					new StudioPowerDesignerPlusDesignMode();		
+					new StudioPowerDesignerPlusDesignMode();
 				GeneralUtilities.StudioWaitForSpinner(30);
 				thisStudioPowerDesignerPlusDesignMode.Wait_for_load(30);
 				thisStudioPowerDesignerPlusDesignMode.DoubleClickDataCode(thisRow["datacode"]);
 				Delay.Seconds(15);
 				var thisGraphicEditor = new GraphicEditor();
-				Report.IsTrue(thisGraphicEditor.Wait_for_load(120), "Graphic editor has not loaded","Graphic editor has loaded.");
+				Report.IsTrue(thisGraphicEditor.Wait_for_load(120), "Graphic editor has not loaded", "Graphic editor has loaded.");
 				string valueToSearchFor = "";
 
 				Report.Info("Attempting to set value: " + thisRow["value"] + " for graphic: " + thisRow["datacode"]);
@@ -649,7 +648,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisDocumentQueuePage = new DocumentQueuePage();
 			thisDocumentQueuePage.Wait_for_load();
 			Report.IsTrue(thisDocumentQueuePage.ClickProcessDocuments(), "Failed to click process documents",
-				"Clicked process documents",showSuccessScreenshot: false);
+				"Clicked process documents", showSuccessScreenshot: false);
 		}
 
 		[RegexStepDefinition(@"In document queue filter page I click on clone selected row")]
@@ -700,7 +699,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				return;
 			}
 
-			if(alertText.Contains(expectedAlertText))
+			if (alertText.Contains(expectedAlertText))
 			{
 				Report.Screenshot();
 				Report.Success($"Alert text is as expected. Expected: " + expectedAlertText + " but got: " + alertText);
@@ -708,7 +707,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			else
 			{
 				//Reporting error not failure as text match was failing but docs did get processed (regression blocker handle for QA int)
-				Report.Error($"Alert text is not showing as expected: " + expectedAlertText+"  - The Alert text that was found was: "+alertText);
+				Report.Error($"Alert text is not showing as expected: " + expectedAlertText + "  - The Alert text that was found was: " + alertText);
 				Report.Screenshot();
 				//Maybe add a check on the documents queue history (job queue) to see if docs did get sent for publishing?
 			}
@@ -860,7 +859,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				var thisStudioShaManager = new StudioSHAManager();
 				Report.IsTrue(thisStudioShaManager.SelectProductByID(idToSelect),
-					$"Failed to select item by id: '{ idToSelect }'", $"Selected item with id: '{ idToSelect}'");
+					$"Failed to select item by id: '{idToSelect}'", $"Selected item with id: '{idToSelect}'");
 			}
 			catch (Exception)
 			{
@@ -892,12 +891,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			foreach (TableRow tableRetailer in table.Rows)
 			{
 				string thisRetailer = tableRetailer["Retailer"];
-				if(thisRetailer=="<All>")
+				if (thisRetailer == "<All>")
 				{
-					var RetailersList=thisProcessProducts.GetAllRetailers();
-					foreach(var item in RetailersList)
+					var RetailersList = thisProcessProducts.GetAllRetailers();
+					foreach (var item in RetailersList)
 					{
-						Report.IsTrue(thisProcessProducts.SelectRetailer(item),	$"Failed to select retailer: '{item}'", $"Selected retailer:{ item }");
+						Report.IsTrue(thisProcessProducts.SelectRetailer(item), $"Failed to select retailer: '{item}'", $"Selected retailer:{item}");
 					}
 					return;
 				}
@@ -909,7 +908,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				}
 				Report.IsTrue(thisProcessProducts.SelectRetailer(thisRetailer),
 					$"Failed to select retailer: {thisRetailer}",
-					$"Selected retailer: { thisRetailer}");
+					$"Selected retailer: {thisRetailer}");
 			}
 		}
 
@@ -1133,9 +1132,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
 
-			if (click=="right"||!selStudioPowerDesignerPlus.IsSectionActive(section))
+			if (click == "right" || !selStudioPowerDesignerPlus.IsSectionActive(section))
 			{
-	
+
 				Report.IsTrue(selStudioPowerDesignerPlus.Wait_for_load(30), "Studio power designer is not open",
 								"Studio power designer is open");
 				Report.IsTrue(selStudioPowerDesignerPlus.ClickLeftMenuSection(section, click),
@@ -1145,7 +1144,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				return;
 			}
 			Report.Success("The Section was already active");
-			
+
 		}
 
 		[RegexStepDefinition(@"In Power Designer I double click on category: (.*)")]
@@ -1288,7 +1287,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 			Delay.Seconds(10);
-			
+
 			Report.IsTrue(thisPowerDesignerPlus.Wait_for_load(120), "Power designer plus has not loaded",
 				"Power designer plus has loaded");
 
@@ -1314,7 +1313,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selStepsStudio = new Steps_Studio();
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
 			Delay.Seconds(30);
-			selStudioPowerDesignerPlus.Wait_for_load(120);			
+			selStudioPowerDesignerPlus.Wait_for_load(120);
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
 			if (selStudioPowerDesignerPlus.DoesPDSectionExist("SECT2318"))
 			{
@@ -1499,16 +1498,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var selStudioPowerDesignerPlus = new StudioPowerDesignerPlusDesignMode();
 			Report.IsTrue(selStudioPowerDesignerPlus.Wait_for_load(30), "Studio power designer is not open",
 				"Studio power designer is open");
-			if(selStudioPowerDesignerPlus.IsSectionsTabOpen())
+			if (selStudioPowerDesignerPlus.IsSectionsTabOpen())
 			{
 				Report.Success("The sections tab was already Open");
 				return;
 			}
 			Report.IsTrue(selStudioPowerDesignerPlus.ClickSectionsTab(), "Failed to click on Sections Tab", "Succesfully clicked on the sections tab");
 			Delay.Seconds(10);
-			Report.IsTrue(selStudioPowerDesignerPlus.IsSectionsTabOpen(), "The sections tab was not opened", "The sections tab was opened");	
-								
-						
+			Report.IsTrue(selStudioPowerDesignerPlus.IsSectionsTabOpen(), "The sections tab was not opened", "The sections tab was opened");
+
+
 		}
 
 		[RegexStepDefinition(@"In PD+ I Fill the section WALMART QC RESPONCE FORM with junk data")]
@@ -1795,7 +1794,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				selStepsStudio.InPDIFillTheSectionWALMARTQCRESPONCEFORMWithJunkData();
 			}
 			selStepsStudio.InPowerDesignerIClickOnTheSectionsSideTab();
-			
+
 
 
 		}
@@ -1854,7 +1853,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(1);
 			selStudioPowerDesignerPlus.Wait_for_load(30);
 			valueEdit.ClickSaveButton();
-			Delay.Seconds(1);			
+			Delay.Seconds(1);
 			selStudioPowerDesignerPlus.Wait_for_load(30);
 
 			Report.StartStep("I Double Click on the section with name: Marine Pollutant Indicator for DOT Only (Y/N)");
@@ -2076,7 +2075,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Delay.Seconds(1);
 			selStudioPowerDesignerPlus.Wait_for_load(30);
 		}
-		
+
 		[RegexStepDefinition(@"I confirm data code with data:(.*) with value:(.*) added")]
 		public void GivenIConfirmDataCodeAdded(string data, string value)
 		{

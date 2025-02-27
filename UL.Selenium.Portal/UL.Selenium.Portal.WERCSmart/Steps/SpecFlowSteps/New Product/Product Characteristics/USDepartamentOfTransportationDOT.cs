@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Reqnroll;
+﻿using Reqnroll;
 using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
@@ -77,7 +72,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string section = "Product has a boiling point of <=35⁰C  and flash point of >60⁰C. Packing Group selected is not consistent with this data.  Verify the data and transportation packing group.  If problem persists, please contact Support.";
 			new Steps_Prototype().SetRadioOptionInSectionTo(section, option);
 		}
-		
+
 		[RegexStepDefinition(@"In the U.S. Department of Transportation \(DOT\) Classification Section, verify section: 'UN Number' contains value: (.*)")]
 		public void VerifyUNNumberIMDG(string value)
 		{
@@ -117,10 +112,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		}
 
 		[RegexStepDefinition(@"In the U.S. Department of Transportation \(DOT\) Classification Section, the section: 'UN Number' (should|should not) be showing error message: (.*)")]
-		public void CheckUNSectionsWithErrorMessages(string condition ,string message)
+		public void CheckUNSectionsWithErrorMessages(string condition, string message)
 		{
 			string section = "UN Number";
-			new Steps_Prototype().ErrorMessagesAreShowingForItem(section,condition,message);
+			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, condition, message);
 		}
 
 	}

@@ -1,15 +1,13 @@
 using iText.Kernel.Pdf.Canvas.Parser.Listener;
+using OpenQA.Selenium;
 using System.Collections.Generic;
-using System.IO;
+using System.Collections.ObjectModel;
 using System.Linq;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using UL.Automation.ReqnrollHelpers.Classes;
-using System.Collections.ObjectModel;
-using UL.Automation.Utilities;
 using UL.Selenium.Portal.WERCSmart.Helpers;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes

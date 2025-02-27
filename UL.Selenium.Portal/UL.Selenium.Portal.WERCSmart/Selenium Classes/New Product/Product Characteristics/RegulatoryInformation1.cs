@@ -2,17 +2,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 {
 	class RegulatoryInformation1 : NewProduct
 	{
-		public string TscaStatus {
+		public string TscaStatus
+		{
 			get => this.SelectedInputForLabel("TSCA");
 			set => this.SelectRadio("TSCA", value);
 		}
 
-		public string CEPAStatus {
+		public string CEPAStatus
+		{
 			get => this.SelectedInputForLabel("CEPA");
 			set => this.SelectRadio("CEPA", value);
 		}
 
-		public bool Prop65 {
+		public bool Prop65
+		{
 			get
 			{
 				string prop = this.CheckedInputForLabel("Prop 65") ?? this.CheckedInputForLabel("Proposition 65");

@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Reqnroll;
+﻿using Reqnroll;
+using System.Collections.Generic;
 using UL.Automation.Reporting;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
@@ -33,7 +33,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         public void ConfirmTheHelpAndSupportPopupContainsTheTextSearchArticlesInTheHeader()
         {
             Report.IsTrue(new HelpAndSupport().ConfirmSearchArticlesPresent(), "The Help & Support Popup header did not contain 'Search Articles'", "The Help & Support Popup header did contain 'Search Articles'");
-            
+
         }
 
 
@@ -219,26 +219,26 @@ namespace UL.Selenium.Portal.RPS.Steps
         [RegexStepDefinition(@"In the Help & Support Popup I Check that the mouse can drag the scroll bar up and down")]
         public void CheckMouseCanDragScrollBarInTheHelpAndSupportPopup()
         {
-           
+
             Report.Info("Attempting to drag the Scroll bar down in the Help & Support Popup");
             new HelpAndSupport().ClickAndDragScrollBarDown();
             Report.IsTrue(!new HelpAndSupport().CheckIfContactElVisisble(), "The Help & Support Popup did  show the Customer Contact Input Field on screen", "The Help & Support Popup did not show the Customer Contact Input Field on screen");
             Report.IsTrue(new HelpAndSupport().CheckIfPrioritytElVisisble(), "The Help & Support Popup did not show the Priority Input Field on screen", "The Help & Support Popup did show the Priority Input Field on screen");
-            
+
             Report.Info("Attempting to drag the Scroll bar up in the Help & Support Popup");
             new HelpAndSupport().ClickAndDragScrollBarUp();
             Report.IsTrue(new HelpAndSupport().CheckIfContactElVisisble(), "The Help & Support Popup did not show the Customer Contact Input Field on screen", "The Help & Support Popup did show the Customer Contact Input Field on screen");
             Report.IsTrue(!new HelpAndSupport().CheckIfPrioritytElVisisble(), "The Help & Support Popup did show the Priority Input Field on screen", "The Help & Support Popup did not show the Priority Input Field on screen");
 
 
-           
+
         }
 
         [RegexStepDefinition(@"In the Help & Support Popup I Click the search articles link")]
         public void InTheHelpAndSupportPopupIClickSearchArticlesLink()
         {
             Report.IsTrue(new HelpAndSupport().ClickSearchArticlesLink(), "Failed to click the link", "Succesfully clicked the link");
-            
+
         }
 
         [RegexStepDefinition(@"In the Help & Support Popup I Check that the side panel is open")]
@@ -291,12 +291,12 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.IsTrue(new HelpAndSupport().CloseSearchPresent(), "The Close search button was not found", "The close search button was found");
 
 
-          
+
         }
 
         [RegexStepDefinition(@"In the Help & Support Popup I Click the close search button")]
         public void InTheHelpAndSupportPopupIClickTheCloseSearchButton()
-        {            
+        {
             Report.IsTrue(new HelpAndSupport().ClickCloseSeearch(), "Failed to click the Close Search Button", "Successfully clicked Close Search Button");
         }
 
@@ -331,7 +331,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             Report.StartStep("I confirm there is an error displaying below the Subject field: This field is required.");
             Report.Screenshot();
 
-            
+
 
         }
 
@@ -346,9 +346,9 @@ namespace UL.Selenium.Portal.RPS.Steps
         [RegexStepDefinition(@"In the Help & Support Popup I confirm there is an error displaying below the customer contact field that reads: (.*)")]
         public void InTheHelpAndSupportPopupIConfirmThereIsAnErrorBelowTheCustomerContactField(string errorText)
         {
-           string foundText=  new HelpAndSupport().GetCustomerContactErrorText();
+            string foundText = new HelpAndSupport().GetCustomerContactErrorText();
             Report.Info($"The found error text was: {foundText}");
-           Report.IsTrue(foundText == errorText, "The error text found was not a match", "The error text found was a match");
+            Report.IsTrue(foundText == errorText, "The error text found was not a match", "The error text found was a match");
         }
 
         [RegexStepDefinition(@"In the Help & Support Popup I confirm there is an error displaying below the Subject field: (.*)")]
@@ -373,7 +373,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         {
 
             Report.IsTrue(new HelpAndSupport().GetHeader() == heading, "The Help & Support Popup does not contain Help & support heading", "The Help & Support Popup contain Help & support heading");
-            
+
         }
 
 

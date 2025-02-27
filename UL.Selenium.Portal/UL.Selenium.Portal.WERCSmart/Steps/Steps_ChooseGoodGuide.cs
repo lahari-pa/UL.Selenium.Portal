@@ -1,24 +1,21 @@
-using System;
-using System.Text.RegularExpressions;
 using Mailosaur;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.Utilities.Functions;
-using UL.Automation.Reporting.Functions;
-using UL.Automation.ReqnrollHelpers.Classes;
 using Reqnroll;
 using Reqnroll.Assist;
+using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using TReVor.Api.Wrapper.Classes;
+using UL.Automation.Reporting;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Automation.TReVor.Classes;
+using UL.Automation.Utilities.Mailosaur.Classes;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using System.Collections.Generic;
-using TReVor.Api.Wrapper.Classes;
-using UL.Automation.Reporting;
-using UL.Automation.ReqnrollHelpers.Attributes;
-using UL.Automation.TReVor.Classes;
-using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Utilities;
-using UL.Automation.Utilities.Mailosaur.Classes;
-using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {

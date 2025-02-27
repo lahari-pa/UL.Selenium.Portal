@@ -1,14 +1,12 @@
+using Reqnroll;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using UL.Automation.Reporting.Functions;
-using Reqnroll;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
-using UL.Automation.WebDriver.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
@@ -20,9 +18,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[RegexStepDefinition(@"For 'Indicate how battery is packaged' I select: (.*)")]
 		public void ForIndicateHowBatteryIsPackagedISelect(string option)
 		{
-			Report.IsTrue(this.ProductIncludesBattery.WaitForTab(NewProduct.Tab.ProductCharacteristics), "Product characteristics has not loaded","Product characteristics tab is loaded.");
+			Report.IsTrue(this.ProductIncludesBattery.WaitForTab(NewProduct.Tab.ProductCharacteristics), "Product characteristics has not loaded", "Product characteristics tab is loaded.");
 			this.ProductIncludesBattery.IndicateHowBatteryIsPackaged = option;
-			Report.IsTrue(this.ProductIncludesBattery.IndicateHowBatteryIsPackaged == option,"Failed to set battery packaged option: " + option,"Successfully set battery packaged option: " + option);
+			Report.IsTrue(this.ProductIncludesBattery.IndicateHowBatteryIsPackaged == option, "Failed to set battery packaged option: " + option, "Successfully set battery packaged option: " + option);
 		}
 
 		/// <summary>

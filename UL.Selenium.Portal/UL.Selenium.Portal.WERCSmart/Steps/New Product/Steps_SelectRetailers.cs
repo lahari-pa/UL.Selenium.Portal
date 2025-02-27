@@ -1,11 +1,11 @@
+using Reqnroll;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UL.Automation.WebDriver.Classes;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.ReqnrollHelpers.Classes;
-using Reqnroll;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
@@ -18,9 +18,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[RegexStepDefinition(@"the 'Select Retailers' window appears")]
 		public void GivenIShouldSeeTheSelectRetailersPopUp()
 		{
-			var selSelectRetailers = new SelectRetailers();	
+			var selSelectRetailers = new SelectRetailers();
 			new Retailer().ClickAddRetailers();
-			Delay.Seconds(1);			
+			Delay.Seconds(1);
 			Report.IsTrue(selSelectRetailers.WaitForContainerToBeVisible(20), "Select retailers page is not loaded", "Select retailers page is loaded.");
 
 		}
@@ -70,7 +70,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				{
 					Report.Failure($"Failed to click the 'Add Retailers Button'");
 				}
-			} else
+			}
+			else
 			{
 				Delay.Seconds(1);
 				retailers.Rows.Cast<TableRow>().ToList().ForEach(x => retailersToSelect.Add(x["Retailer"]));
@@ -81,7 +82,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			}
 			//
 
-			
+
 
 
 
@@ -120,10 +121,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		[RegexStepDefinition(@"In the 'Select Retailers' window I select the retailer: (.*)")]
 		public void SelectTheRetailer(string retailer)
 		{
-			var selectRetailers = new SelectRetailers();			
+			var selectRetailers = new SelectRetailers();
 			new Retailer().ClickAddRetailers();
 			Delay.Seconds(1);
-			
+
 			if (!selectRetailers.WaitForContainerToBeVisible(30))
 			{
 				throw new Exception("Select retailers popup is not showing as expected");
@@ -185,21 +186,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				}
 				if (should == "should only")
 				{
-					var itemList= expected.Rows.Select(x => x["Retailer"].ToList());
+					var itemList = expected.Rows.Select(x => x["Retailer"].ToList());
 					var stringList = new List<string>();
-					foreach(var item in itemList)
+					foreach (var item in itemList)
 					{
-						var intMax= item.Count();
+						var intMax = item.Count();
 						var emptystring = string.Empty;
-						for(int i=0; i<intMax;i++)
+						for (int i = 0; i < intMax; i++)
 						{
 							emptystring = emptystring + item.ElementAt(i);
 						}
 						stringList.Add(emptystring);
-											
-					}	
 
-					Report.IsTrue(checkedRetailers.Count == 0,"There were displayed Retailers not included in the expected list:: " + string.Join(", ", stringList),"As expected the only displayed Retailers were those in the list: " + string.Join(", ", stringList));
+					}
+
+					Report.IsTrue(checkedRetailers.Count == 0, "There were displayed Retailers not included in the expected list:: " + string.Join(", ", stringList), "As expected the only displayed Retailers were those in the list: " + string.Join(", ", stringList));
 				}
 			}
 
@@ -312,7 +313,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.IsFalse(selectRetailers.SelectRetailer(retailer), $"Successfully selected retailer: {retailer}", $"Failed to select retailer: {retailer}!");
 		}
 
-		
+
 		[RegexStepDefinition(@"I click the single retailer checkbox")]
 		public void ClickTheSingleRetailerCheckbox()
 		{
@@ -325,7 +326,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			var retailer = new Retailer();
 			bool expected = is_isnot == "is";
-			Report.IsTrue(retailer.CheckSingleRetailerCheckboxSelected() == expected, $"Failure, Single retailer checkbox {(expected?"is not":"is")} selected", $"Success, Single retailer checkbox {is_isnot} selected");
+			Report.IsTrue(retailer.CheckSingleRetailerCheckboxSelected() == expected, $"Failure, Single retailer checkbox {(expected ? "is not" : "is")} selected", $"Success, Single retailer checkbox {is_isnot} selected");
 
 		}
 		[RegexStepDefinition(@"I confirm if the Single Retailer Checkbox is (selected|not selected)")]

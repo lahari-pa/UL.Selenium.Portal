@@ -1,17 +1,15 @@
+using Mailosaur.Models;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Mailosaur.Models;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
-using UL.Automation.TReVor.Classes;
-using TReVor.Integrations.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -118,8 +116,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				//SeleniumBrowser.Navigate(myLink.Href);
 				SeleniumWebDriver.CurrentDriver.Navigate(myLink.Href);
 				return true;
-		}
-		Report.Info(myLink.Href + " Not Found");
+			}
+			Report.Info(myLink.Href + " Not Found");
 			return false;
 		}
 

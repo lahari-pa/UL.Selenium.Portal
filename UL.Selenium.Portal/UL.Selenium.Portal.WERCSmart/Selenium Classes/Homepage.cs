@@ -1,12 +1,11 @@
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -19,13 +18,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		IWebElement ProdName => this.ContainerElement.FindElement(By.XPath(@".//table[@class='table table-hover products-table']//p"), 2);
 		public bool ProdNameExists()
 		{
-			return this.ProdName!= null;
+			return this.ProdName != null;
 		}
 
 		public bool SubTestStep()
-        {
+		{
 			return true;
-        }
+		}
 
 		public bool QuickLinkButtonShowing(string button)
 		{
@@ -109,10 +108,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			IWebElement panelContainer = this.containerElement.FindElement(By.XPath(".//div[contains(@class,'status-panels')]//h3[contains(text(),'Alert')]/.."), 2);
 			IList<IWebElement> rows = panelContainer.FindElements(By.XPath(".//table//tr"), 2);
-			foreach(var item in rows)
+			foreach (var item in rows)
 			{
 				IWebElement AlertMessageBox = item.FindElement(By.XPath(".//td[3]"), 2);
-				if (AlertMessageBox.Text==alertMessage)
+				if (AlertMessageBox.Text == alertMessage)
 				{
 					string actualAlertID = item.FindElement(By.XPath(".//td[1]"), 2).Text;
 					return actualAlertID;
@@ -121,7 +120,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Failure("Alert with message: " + alertMessage + " could not be found");
 			return null;
 		}
-		
+
 
 		public bool ClickArrowNextToProductInformation(bool expand)
 		{

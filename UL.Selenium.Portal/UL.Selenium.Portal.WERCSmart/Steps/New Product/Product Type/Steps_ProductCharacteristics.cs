@@ -1,9 +1,7 @@
-using System;
+using Reqnroll;
 using System.Collections.Generic;
 using System.Linq;
-using UL.Automation.WebDriver.Classes;
 using UL.Automation.Reporting.Functions;
-using Reqnroll;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
@@ -59,7 +57,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 			Report.Info("Primary Physical States found: " + string.Join(", ", found));
 			foreach (string state in expected)
 			{
-				if (Report.IsTrue(found.Contains(state), $"Failed to find state: { state } in the list!", $"{ state } was successfully found!"))
+				if (Report.IsTrue(found.Contains(state), $"Failed to find state: {state} in the list!", $"{state} was successfully found!"))
 				{
 					found.Remove(state);
 				}
@@ -72,7 +70,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Type
 		[RegexStepDefinition(@"I set the Primary Physical State to be: (.*)")]
 		public void SetThePrimayPhysicalStateTo(string state)
 		{
-			Report.Info($"Selecting the radio input: { state}");
+			Report.Info($"Selecting the radio input: {state}");
 			this.ProductCharacteristics.PrimaryPhysicalState = state;
 			Report.IsTrue(new ProductCharacteristics().PrimaryPhysicalState == state, "Failed to set the primary physical state", "Successfully set the Primary Physical State");
 		}

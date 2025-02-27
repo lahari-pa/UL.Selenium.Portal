@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Reqnroll;
+﻿using Reqnroll;
+using System;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.ReqnrollHelpers.Classes;
-using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.ForwardProductRegistration;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_and_Submit
 {
@@ -42,9 +35,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 		[RegexStepDefinition(@"In the Summary Page, verify table data in column (.*) showing the value: (.*)")]
 		public void InTheSummarySectionCheckTableData(string column, string value)
 		{
-			if(value.ToLower().Contains("saved as"))
+			if (value.ToLower().Contains("saved as"))
 			{
-				value = Context.GetFromContext(value.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim()).ToString();		
+				value = Context.GetFromContext(value.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim()).ToString();
 			}
 			Report.IsTrue(new DataSummary().VerifyTableValueInSammeryPage(column, value), $"Failed to confirm there is value {value} in column {column}", $"Successfully confirmed there is value {value} in column {column}");
 		}

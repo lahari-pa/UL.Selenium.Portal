@@ -1,14 +1,10 @@
-﻿using System;
+﻿using Reqnroll;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media.Media3D;
-using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.ReqnrollHelpers.Classes;
-using UL.Automation.Utilities.Functions;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Functions;
 using UL.Selenium.Portal.RPS.Selenium_Classes;
@@ -447,17 +443,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			string button = "Ok";
 			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(title, button);
 		}
-		
+
 		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, for section: 'GTIN/UPC \(include check digit\)' enter the value: (.*)")]
 		public void EnterUPCGTIN(string option)
 		{
 
 			if (option.ToLower().Contains("saved as"))
 			{
-					string savedUPC = Context
-						.GetFromContext(option.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
-						.ToString();
-					option = savedUPC;		
+				string savedUPC = Context
+					.GetFromContext(option.Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
+					.ToString();
+				option = savedUPC;
 			}
 
 			string section = "GTIN/UPC (include check digit)";

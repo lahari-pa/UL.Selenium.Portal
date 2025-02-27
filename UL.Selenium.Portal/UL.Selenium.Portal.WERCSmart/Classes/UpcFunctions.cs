@@ -26,7 +26,7 @@ namespace UL.Selenium.Portal.WERCSmart.Classes
 		{
 			string prefix = string.Empty;
 			try
-				{
+			{
 				switch (retailer.ToLower())
 				{
 					case "cvs":
@@ -39,7 +39,7 @@ namespace UL.Selenium.Portal.WERCSmart.Classes
 						throw new Exception("UPC Prefix is empty. This will generate a completely random UPC which will not be prefixed.");
 				}
 			}
-			catch(Exception e)
+			catch (Exception e)
 			{
 				Report.Info(e.Message);
 			}
@@ -69,7 +69,7 @@ namespace UL.Selenium.Portal.WERCSmart.Classes
 
 		public string GenerateUPCStartingWith(string str, int len = 12)
 		{
-			var digits = this.GetRandomDigits( len - str.Length, str);
+			var digits = this.GetRandomDigits(len - str.Length, str);
 
 			while (UPCValidationLogic.IsUPCValid(digits) != true)
 			{

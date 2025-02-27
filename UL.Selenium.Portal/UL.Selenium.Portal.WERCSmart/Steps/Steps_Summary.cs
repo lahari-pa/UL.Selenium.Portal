@@ -1,14 +1,13 @@
+using Reqnroll;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.ReqnrollHelpers.Classes;
-using Reqnroll;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using UL.Automation.WebDriver.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -188,7 +187,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[RegexStepDefinition(@"I wait for the Summary Screen to Load")]
 		public void IWaitForTheSummaryScreenToLoad()
 		{
-			Report.IsTrue(new UpdateDataSummaryPage().WaitForSummaryPageToLoad(60),"The page did not load","The page loaded");
+			Report.IsTrue(new UpdateDataSummaryPage().WaitForSummaryPageToLoad(60), "The page did not load", "The page loaded");
 		}
 
 		[RegexStepDefinition(@"In the Summary screen, I click the Edit Product Button")]

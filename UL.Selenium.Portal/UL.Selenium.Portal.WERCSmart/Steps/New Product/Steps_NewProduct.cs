@@ -1,4 +1,5 @@
 using OpenQA.Selenium;
+using Reqnroll;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,23 +8,18 @@ using System.Text;
 using System.Text.RegularExpressions;
 using UL.Automation.Reporting;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Automation.Utilities.Functions;
+using UL.Automation.Utilities.Helpers;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.ReqnrollHelpers.Classes;
-using UL.Automation.TReVor.Classes;
-using UL.Automation.Utilities.Functions;
 using UL.Selenium.Portal.WERCSmart.Classes;
-using UL.Selenium.Portal.WERCSmart.Extensions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.GenerateIntentionallyBadData;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit;
-using UL.Automation.Utilities.Helpers;
-using Mailosaur;
-using Reqnroll;
-using UL.Automation.ReqnrollHelpers.Attributes;
-using UL.Automation.Utilities.Helpers;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
@@ -256,7 +252,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			if (NewProduct.WaitForContainerToBeVisible())
 			{
-				Report.IsTrue(NewProduct.WaitForSection(page),$"{ page } is not showing when it was expected to", $"{page } is showing as expected");
+				Report.IsTrue(NewProduct.WaitForSection(page), $"{page} is not showing when it was expected to", $"{page} is showing as expected");
 				return;
 			}
 			Report.Failure("New product page was not visible");
@@ -269,7 +265,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			if (NewProduct.WaitForContainerToBeVisible())
 			{
-				Report.IsTrue(NewProduct.WaitForSection(page,seconds), page + " is not showing when it was expected to", page + " is showing as expected");
+				Report.IsTrue(NewProduct.WaitForSection(page, seconds), page + " is not showing when it was expected to", page + " is showing as expected");
 				return;
 			}
 			Report.Failure("New product page was not visible");
@@ -1285,11 +1281,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				var value = Context.GetFromContext(option)?.ToString();
 				if (value == null)
 				{
-					throw new Exception($"Could not find item in context: { value } for checking field input is correct value!");
+					throw new Exception($"Could not find item in context: {value} for checking field input is correct value!");
 				}
 				Report.IsTrue(thisNewProduct.SetOptionInSection(section.Trim(), value.Trim()),
 					$"Failed to set the input to {value.Trim()} in section: {section.Trim()}",
-					$"Successfully set the input to {value.Trim()} in section: { section.Trim()}");
+					$"Successfully set the input to {value.Trim()} in section: {section.Trim()}");
 				Delay.Seconds(1);
 			}
 			else
@@ -1423,7 +1419,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			var myProduct = new NewProduct();
 			List<string> options = myProduct.GetAllOptionsForSection(section);
-			Report.IsTrue(myProduct.SetOptionInSection(section, options[0]), $"The option: { options[0] } could not be selected in section: { section }", $"The option: { options[0] } was selected in section: { section }");
+			Report.IsTrue(myProduct.SetOptionInSection(section, options[0]), $"The option: {options[0]} could not be selected in section: {section}", $"The option: {options[0]} was selected in section: {section}");
 		}
 
 
@@ -1435,11 +1431,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			{
 				Report.Info("Selecting the first option for section: " + section);
 				//var options = myProduct.GetDropDownOptionsForSection(section);
-				Report.IsTrue(myProduct.SetOptionInSection(section, option), $"The option: { option } could not be selected in section: { section }", $"The option: { option } was selected in section: { section}");
+				Report.IsTrue(myProduct.SetOptionInSection(section, option), $"The option: {option} could not be selected in section: {section}", $"The option: {option} was selected in section: {section}");
 			}
 			else
 			{
-				Report.Info($"The section: { section } was not showing so no option was selected");
+				Report.Info($"The section: {section} was not showing so no option was selected");
 			}
 		}
 
@@ -1472,7 +1468,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				$"Successfully set the input to {option} in section: {section}");
 		}
 
-			[RegexStepDefinition(@"I set the below options for field: (.*)")]
+		[RegexStepDefinition(@"I set the below options for field: (.*)")]
 		public void CheckAvailableOptionsInSection(string section, Table options)
 		{
 			foreach (TableRow row in options.Rows)
@@ -1483,7 +1479,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			Report.Screenshot();
 		}
 
-	
+
 
 		/// <summary>
 		/// 
@@ -1723,7 +1719,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		}
 
 		[RegexStepDefinition(@"I should Enter the following Voc percent for each state: (.*)")]
-		public void ThenIShouldEnterTheFollowingVocPercentForEachState(string value )
+		public void ThenIShouldEnterTheFollowingVocPercentForEachState(string value)
 		{
 			Report.Info("I Enter manually under the 'VOC VALUE' Column a value for each of the listed States");
 			var selNewProduct = new NewProduct();
@@ -1853,7 +1849,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ConfirmUPCSectionFieldsAvailable(string field)
 		{
 			var selNewProduct = new NewProduct();
-			Report.IsTrue(selNewProduct.UPCSectionFieldsAvailable(field), "Failed to Confirm the'" +field+"' field is available", "I Confirm the '" + field + "' field is available");
+			Report.IsTrue(selNewProduct.UPCSectionFieldsAvailable(field), "Failed to Confirm the'" + field + "' field is available", "I Confirm the '" + field + "' field is available");
 		}
 
 		[RegexStepDefinition(@"I confirm 'Quantity' is visible in the UPC header")]
@@ -2231,7 +2227,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var differences = new List<string>();
 			expected.Rows.Cast<TableRow>().ToList().ForEach(x => expectedOptions.Add(x["Option"]));
 			var expectedOptionsLower = expectedOptions.Select(x => x.ToLower()).ToList();
-			if(section == "Container Type")
+			if (section == "Container Type")
 			{
 				displayedOptions = new NewProduct().GetAllOptionsForContainerTypeField();
 			}
@@ -2429,13 +2425,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 
 		[RegexStepDefinition(@"If purchase details are showing click confirm order")]
 		public void GivenIfPurchaseDetailsAreShowingClickConfirmOrder()
-		{			
+		{
 			Report.UseSubSteps = true;
 			var MyStepsPaymentMethods = new Steps_PaymentMethods();
 			var mySub = new PaymentMethods_Subscription_Billing();
-			
+
 			if (mySub.Purchase_Header_Correct())
-			{			
+			{
 				if (mySub.ConfirmOrderButtonExists())
 				{
 					Report.IsTrue(mySub.Confirm_Order_click(), "Failed to Click Confirm Order Button", "Confirm Order Button Clicked");
@@ -2445,20 +2441,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 				}
 				else
 				{
-					Report.Info("Purchase details page is not showing"); 
+					Report.Info("Purchase details page is not showing");
 				}
 
 				Report.Info("Checking if thank you page is showing instead");
 
 				var pmtk = new PaymentMethods_Thank_You();
 				if (pmtk.WaitForContainerToExist())
-				{					
+				{
 					Report.StartSubStep("In the Thank You screen I confirm the following statement is shown");
 					MyStepsPaymentMethods.ThenInTheThankYouScreenIConfirmTheFollowingStatementIsShownX("Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.");
 				}
 				else
 				{
-					Report.Info("Thank you page is not showing");				
+					Report.Info("Thank you page is not showing");
 				}
 			}
 			else
@@ -2481,7 +2477,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 					MyStepsPaymentMethods.ThenIClickContinue();
 					Report.StartSubStep("In the Purchase Summary screen I click Confirm Order");
 					MyStepsPaymentMethods.ThenInThePurchaseSummaryScreenIClickConfirmOrder();
-					Report.StartSubStep("In the Thank You screen I check the Header is correct"); 
+					Report.StartSubStep("In the Thank You screen I check the Header is correct");
 					MyStepsPaymentMethods.ThenInTheThankYouScreenICheckTheHeaderIsCorrect();
 				}
 				else
@@ -3010,8 +3006,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		public void ICheckThatAllInputFieldsAreRed(string fieldName, string expectedColor)
 		{
 			if (Report.IsTrue(new NewProduct().InputFieldExists(fieldName), "Feiled to find Input field", "Successfully found the Input field"))
-			{ 
-			Report.IsTrue(new NewProduct().CheckInputFieldColor(expectedColor, fieldName), "The input field color was not as expected", "The input field color was as expected");
+			{
+				Report.IsTrue(new NewProduct().CheckInputFieldColor(expectedColor, fieldName), "The input field color was not as expected", "The input field color was as expected");
 			}
 		}
 
@@ -3404,7 +3400,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 		{
 			var newProductPage = new NewProduct();
 			Report.IsTrue(newProductPage.GetTransportationOption(option), "The transportation option " + option + " selected was not same", "The transportation option " + option + " selected was still same");
-			
+
 		}
 		[RegexStepDefinition(@"I Change the Transportation option from the dropdown to: (.*)")]
 		public void GivenInTheSupplierReportPageInTheSelectRetailerDropdownISelect(string option)
@@ -3618,34 +3614,34 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 	//{
 	//	public const string BasePath = "//div[@class='modal-content']//h4[@data-bind='text: title']/../..";
 
-		//	protected override By ContainerElementLocator => By.XPath(BasePath);
+	//	protected override By ContainerElementLocator => By.XPath(BasePath);
 
-		//	public bool ClickUPCWarningButton(string choice)
-		//	{
-		//		IWebElement modalWindow = this.containerElement.WaitUntilElementVisible(By.XPath(BasePath), 5);
-		//		IWebElement modalTitle = modalWindow.FindElement(By.XPath(".//h4[@class='modal-title']"), 10);
+	//	public bool ClickUPCWarningButton(string choice)
+	//	{
+	//		IWebElement modalWindow = this.containerElement.WaitUntilElementVisible(By.XPath(BasePath), 5);
+	//		IWebElement modalTitle = modalWindow.FindElement(By.XPath(".//h4[@class='modal-title']"), 10);
 
-		//		if (modalWindow is null || modalTitle is null)
-		//		{
-		//			Report.Failure("Could not locate UPC Warning modal window.");
-		//			return false;
-		//		}
+	//		if (modalWindow is null || modalTitle is null)
+	//		{
+	//			Report.Failure("Could not locate UPC Warning modal window.");
+	//			return false;
+	//		}
 
-		//		Report.IsTrue(modalTitle.Text == "UPCs Warning!", "Expected modal window title not found! Found: " + modalTitle.Text, "Modal window title '" + modalTitle.Text + "' located as expected.");
-		//		switch (choice)
-		//		{
-		//			case "ok":
-		//				IWebElement deleteBtn = modalWindow.FindElement(By.XPath("//button[contains(@data-bind,'clickedYes')]"), 2);
-		//				return deleteBtn.TryClick();
-		//			case "cancel":
-		//				IWebElement cancelBtn = modalWindow.FindElement(By.XPath("//h4[@data-bind='text: title']//..//..//div[@class='modal-footer']//button"), 2);
-		//				return cancelBtn.TryClick();
-		//		}
-		//		return false;
-		//	}
-		//}
+	//		Report.IsTrue(modalTitle.Text == "UPCs Warning!", "Expected modal window title not found! Found: " + modalTitle.Text, "Modal window title '" + modalTitle.Text + "' located as expected.");
+	//		switch (choice)
+	//		{
+	//			case "ok":
+	//				IWebElement deleteBtn = modalWindow.FindElement(By.XPath("//button[contains(@data-bind,'clickedYes')]"), 2);
+	//				return deleteBtn.TryClick();
+	//			case "cancel":
+	//				IWebElement cancelBtn = modalWindow.FindElement(By.XPath("//h4[@data-bind='text: title']//..//..//div[@class='modal-footer']//button"), 2);
+	//				return cancelBtn.TryClick();
+	//		}
+	//		return false;
+	//	}
+	//}
 
-	}
+}
 
 
 

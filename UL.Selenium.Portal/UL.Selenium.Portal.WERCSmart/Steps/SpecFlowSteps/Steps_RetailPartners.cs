@@ -1,24 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Reqnroll;
+﻿using Reqnroll;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.WebDriver.Extensions;
 using UL.Automation.ReqnrollHelpers.Attributes;
-using UL.Automation.Utilities.Functions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
-using UL.Automation.ReqnrollHelpers.Classes;
-using UL.Automation.Utilities.Helpers;
-using System.IO;
-using System.Drawing.Imaging;
-using System.Drawing;
-using System.Reflection;
-using UL.Automation.Utilities;
-using UL.Automation.ReqnrollHelpers.Attributes;
-using Mailosaur.Operations;
 
 
 
@@ -38,7 +21,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		public void ConfirmRetailerPageIsDisplayed(string page)
 		{
 			Report.IsTrue(new RetailPartnersDetails().HeaderShowing(page),
-				$"Retailer'{page }' was not showing!",
+				$"Retailer'{page}' was not showing!",
 				$"Retailer '{page}' was showing, as expected!");
 		}
 
@@ -125,8 +108,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		{
 			string heading = "most-recent";
 			var selRetailPartners = new RetailPartners();
-			
-			Report.IsTrue(new RetailPartners().RetailerDisplayedBelowHeading(heading,retailer), $"Retailer '{retailer}' is displayed under Most Recent Retailers ", $"Retailer '{retailer}' is displayed under Most Recent Retailers");
+
+			Report.IsTrue(new RetailPartners().RetailerDisplayedBelowHeading(heading, retailer), $"Retailer '{retailer}' is displayed under Most Recent Retailers ", $"Retailer '{retailer}' is displayed under Most Recent Retailers");
 		}
 
 		[RegexStepDefinition(@"In the Retail Partners page, confirm Retailer (.*) is displayed under All Retailers")]

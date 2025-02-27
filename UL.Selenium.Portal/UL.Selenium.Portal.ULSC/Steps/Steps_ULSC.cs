@@ -1,24 +1,22 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using Reqnroll;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text.RegularExpressions;
+using TReVor.Api.Wrapper.Classes;
+using UL.Automation.Reporting;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.ReqnrollHelpers.Classes;
-using Reqnroll;
+using UL.Automation.TReVor.Classes;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 using UL.Selenium.Portal.ULSC.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps;
-using System.Collections.ObjectModel;
-using TReVor.Api.Wrapper.Classes;
-using UL.Automation.TReVor.Classes;
-using UL.Automation.Reporting;
-using UL.Automation.ReqnrollHelpers.Attributes;
-using UL.Automation.ReqnrollHelpers.Classes;
 
 namespace UL.Selenium.Portal.ULSC.Steps
 {
@@ -29,7 +27,7 @@ namespace UL.Selenium.Portal.ULSC.Steps
 		[RegexStepDefinition(@"I should see the following option (.*)")]
 		public void ThenIShouldSeeTheFollowingOption(string option)
 		{
-			Report.StartStep(ReportSettings.StepCounter +  " - Checking that the option " + option + " is showing");
+			Report.StartStep(ReportSettings.StepCounter + " - Checking that the option " + option + " is showing");
 			try
 			{
 				var selUlSolutionCenter = new UlSolutionCenter();

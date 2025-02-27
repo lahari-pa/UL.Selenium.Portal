@@ -1,22 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Reflection;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.Utilities.Functions;
-using UL.Automation.Reporting.Functions;
-using UL.Automation.ReqnrollHelpers.Classes;
-using Reqnroll;
-using TReVor.Api.Wrapper.Classes;
-using UL.Automation.Reporting;
-using UL.Automation.TReVor.Classes;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using System.Collections.Specialized;
-using System.Security.Policy;
+﻿using Reqnroll;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.DistributorSteps.New_Product
 {
