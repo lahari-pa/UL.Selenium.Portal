@@ -1,18 +1,14 @@
 ﻿using OpenQA.Selenium;
-using System;
-using UL.Automation.Reporting.Functions;
-using UL.Automation.WebDriver.BaseClasses;
-using UL.Automation.WebDriver.Extensions;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.WebDriver.Classes;
-using System.Configuration;
-using System.Collections.Specialized;
 using TReVor.Api.Wrapper.Classes;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.TReVor.Classes;
+using UL.Automation.WebDriver.BaseClasses;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 using UL.Automation.WebDriver.Shared.Classes.Configuration;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
-{ 
+{
 	public class LoginScreen : SeleniumBaseObject
 	{
 		protected override By ContainerElementLocator => By.XPath(@".//table[@class='logon-container']");

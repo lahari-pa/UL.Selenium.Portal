@@ -1,15 +1,15 @@
+using Reqnroll;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using UL.Automation.Reporting.Functions;
-using UL.Automation.ReqnrollHelpers.Classes;
-using Reqnroll;
 using UL.Automation.Reporting;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using UL.Selenium.Portal.WERCSmart.Classes;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.WebDriver.Classes;
+using UL.Selenium.Portal.WERCSmart.Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 {
@@ -68,7 +68,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			string state = Context.GetFromContext("state").ToString();
 			string expirationDate = pesticideDetailsState.ExpirationDate(state);
 			string kellyExpirationDate = pesticideDetailsState.GetPesticideRegKellyExpirationDate(state);
-			
+
 			Report.IsTrue(expirationDate == kellyExpirationDate, "The Expiration Date does not match the value provided by Kelly", "The Expiration correctly matches the value provided by Kelly");
 		}
 
@@ -482,13 +482,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			var tomorrow = today.AddDays(1);
 			var tomorrowDay = tomorrow.Day;
 			var tomorrowMonth = tomorrow.Month;
-			if(tomorrowDay==31 && tomorrowMonth==8)
+			if (tomorrowDay == 31 && tomorrowMonth == 8)
 			{
 				tomorrow = today.AddDays(2);
 				tomorrowDay = tomorrow.Day;
 				tomorrowMonth = tomorrow.Month;
 			}
-			table.AddRow(state, tomorrowMonth.ToString(),tomorrowDay.ToString(), "no");
+			table.AddRow(state, tomorrowMonth.ToString(), tomorrowDay.ToString(), "no");
 
 			this.EnterEpaRegistrationDateCurrentYear(table);
 		}

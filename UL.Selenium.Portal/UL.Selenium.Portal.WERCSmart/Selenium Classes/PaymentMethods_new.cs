@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using UL.Automation.WebDriver.BaseClasses;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.WebDriver.Extensions;
+﻿using OpenQA.Selenium;
 using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using System.Collections.ObjectModel;
+using UL.Automation.WebDriver.BaseClasses;
+using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -15,7 +9,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	{
 		#region Constants
 		protected override By ContainerElementLocator => By.Id("paymentMethodsContainer");
-		private IWebElement PageHeader => this.ContainerElement.FindElement(By.XPath($".//div[@class='header-with-back']"),1);
+		private IWebElement PageHeader => this.ContainerElement.FindElement(By.XPath($".//div[@class='header-with-back']"), 1);
 		private IWebElement PageHeaderBackButton => this.PageHeader.FindElement(By.XPath($".//a[@class=''back-btn]"), 1);
 		private IWebElement PageHeaderLabel => this.PageHeader.FindElement(By.XPath($".//h2"), 1);
 		private IWebElement PageSubHeaderLabel => this.ContainerElement.FindElement(By.XPath($".//h2[@class='ws-panel-title']"), 1);

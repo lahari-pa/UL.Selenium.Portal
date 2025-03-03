@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using Reqnroll;
+using System.Collections.Generic;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Selenium.Portal.RPS.Selenium_Classes;
 
 namespace UL.Selenium.Portal.RPS.Steps
@@ -24,10 +24,10 @@ namespace UL.Selenium.Portal.RPS.Steps
             ProductData activeProductData = new ProductData();
             ProductData topTableData = new ProductInformation().GetProductTopData();
             Report.Info("Getting the Product Data Codes table data");
-            if(!new ProductInformation().ProductInformationSectionIsActive("Product Data Codes"))
+            if (!new ProductInformation().ProductInformationSectionIsActive("Product Data Codes"))
             {
                 new ProductInformation().ClickProductInformationSection("Product Data Codes");
-            }            
+            }
             ProductDataCodes currentProductDataCodes = new ProductInformation().GetProductDataCodes();
             Report.Info("Getting the Transportation table data");
             if (!new ProductInformation().ProductInformationSectionIsActive("Transportation Data"))
@@ -49,7 +49,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             BatteryData currentBatteryData = new ProductInformation().GetBatteryData();
 
             Report.Info("Attempting to Create a full product data set");
-           
+
 
             string prodID = topTableData.ProductName;
             int lengthindex = prodID.Length - 1;
@@ -90,7 +90,7 @@ namespace UL.Selenium.Portal.RPS.Steps
                     string previousProductName = (string)Context.GetFromContext("PreviousProductName");
                     int i = 0;
                     bool matching = true;
-                    while(matching==true&&i<6)
+                    while (matching == true && i < 6)
                     {
                         try
                         {
@@ -103,7 +103,7 @@ namespace UL.Selenium.Portal.RPS.Steps
                             ProductData prodTopInfo = new ProductInformation().GetProductTopData();
                             matching = prodTopInfo.ProductName == previousProductName;
                         }
-                    }                    
+                    }
 
                 }
                 else
@@ -111,17 +111,17 @@ namespace UL.Selenium.Portal.RPS.Steps
                     Report.Info("There was no previous product name saved to context");
                 }
 
-                
+
 
 
                 bool containsData = new ProductInformation().CheckTheCurrentProductContainsEnoughData();
 
 
-                if (containsData==true)
+                if (containsData == true)
                 {
                     this.ISaveTheProductInformationForCurrentProduct(productSavedAs);
                     var prodInfo = (ProductData)Context.GetFromContext(productSavedAs);
-                    if(number!=prodInfo.ProductNumber)
+                    if (number != prodInfo.ProductNumber)
                     {
                         Report.Failure("The Product Number found in the popup did not match the product number selected from the list of products");
                         return;
@@ -134,13 +134,13 @@ namespace UL.Selenium.Portal.RPS.Steps
                     Report.IsTrue(new ProductInformation().ClickCloseButton(), "Failed to Click Close", "Successfully Clicked Close");
                     Report.IsTrue(new ProductInformation().WaitUntilProductInformationPopupNotPresent(), "The Product Information popup was still present", "The Product Informaion popup was no longer present");
                 }
-                
+
             }
 
 
         }
 
-        
+
 
         [RegexStepDefinition(@"I Close the Product Information Popup")]
         public void ICloseProductInformationPopup()
@@ -204,7 +204,7 @@ namespace UL.Selenium.Portal.RPS.Steps
                 }
 
 
-               
+
 
                 bool containsData = new ProductInformation().CheckTheCurrentProductContainsEnoughData();
 
@@ -215,7 +215,7 @@ namespace UL.Selenium.Portal.RPS.Steps
                     Report.IsTrue(new ProductInformation().ClickProductInformationSection("Product Details"), "Failed to Click the section", "Successfully clicked the section");
                     Report.IsTrue(!new ProductInformation().ProductInformationSectionIsActive("Product Details"), "The section was expanded", "The section was not expanded");
                     Report.IsTrue(!new ProductInformation().SectionDataTablePresent("Product Details"), "The additional area is shown below the Product Data Codes heading was showing", "The additional area is shown below the Product Data Codes heading was not showing");
-                    return; 
+                    return;
 
 
 
@@ -238,7 +238,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         public void IWaitForTheProductInformationPopupToLoad()
         {
             Report.IsTrue(new ProductInformation().WaitForContainerToBeVisible(), "The product Information popup did not load", "The Product Information popup was loaded");
-         
+
         }
 
         [RegexStepDefinition(@"I wait for the Product Information Popup to dissapear")]
@@ -250,14 +250,14 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         [RegexStepDefinition(@"I wait for the Product Information Popup Table to load")]
         public void IWaitForTheProductInformationPopupTableToLoad()
-        {           
+        {
             Report.IsTrue(new ProductInformation().WaitForProductInformationToLoad(), "The Product Information Table did not Load", "The Product Information Table Loaded");
         }
 
         [RegexStepDefinition(@"In the Product Infromation Popup I call shared step 109167 if there is data, and 111879 if there is no data")]
         public void InTheProductInformationScreenICall109167or111879()
         {
-         
+
 
             new Steps_Shared().SharedStep109167();
 
@@ -266,7 +266,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
         [RegexStepDefinition(@"In the Product Infromation Popup I Click the 'x' Close icon")]
         public void InTheProductInformationPopupPopupIClickTheXCloseicon()
-        {            
+        {
             Report.IsTrue(new ProductInformation().ClickCrossCloseIcon(), "Failed to Click the 'x' Close icon", "Successfully clicked the 'x' Close icon");
 
         }

@@ -1,18 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using UL.Automation.WebDriver.BaseClasses;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.WebDriver.Extensions;
+﻿using OpenQA.Selenium;
 using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using System.Collections.ObjectModel;
-using UL.Selenium.Portal.WERCSmart.Classes;
-using System.Net.Mail;
-using System;
-using System.Globalization;
-using System.Text.RegularExpressions;
 using UL.Automation.Utilities.Mailosaur.Shared.Classes;
+using UL.Automation.WebDriver.BaseClasses;
+using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {

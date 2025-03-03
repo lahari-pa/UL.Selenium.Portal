@@ -1,9 +1,9 @@
-﻿using System;
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
@@ -351,7 +351,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         public string GetHeadingsRowBackgroundColor()
         {
-        IWebElement TablesHeadingRow = this.FindElement(By.XPath(".//div[@class = 'ui-jqgrid-hdiv ui-state-default ui-corner-top']//tr[@class='ui-jqgrid-labels']"), 2);
+            IWebElement TablesHeadingRow = this.FindElement(By.XPath(".//div[@class = 'ui-jqgrid-hdiv ui-state-default ui-corner-top']//tr[@class='ui-jqgrid-labels']"), 2);
             if (TablesHeadingRow == null)
             {
                 Report.Error("The Background El was null");
@@ -399,7 +399,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             var headings = this.NamedTableHeadings;
             List<string> headingStrings = new List<string>();
             foreach (var heading in headings)
-            {                
+            {
                 string currentHeading = heading.Text;
                 string currentHeadingTrimmed = currentHeading.Trim();
                 headingStrings.Add(currentHeadingTrimmed);
@@ -411,13 +411,13 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
             IList<IWebElement> ColumnsShown = this.containerElement.FindElements(By.XPath(".//th[@role='columnheader' and not(contains(@style,'display: none')) and not(@id='tblNewProducts_subgrid')]"), 2);
             List<string> columnsShownNames = new List<string>();
-            
-            
+
+
             foreach (IWebElement el in ColumnsShown)
             {
-           
+
                 columnsShownNames.Add(el.Text.Trim());
-                
+
             }
             columnsShownNames.RemoveAll(t => t == "Actions" || t == "Product Info");
             return columnsShownNames;
@@ -1615,7 +1615,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             return this.MoreFiltersOptionButton.TryClick();
         }
 
-        public bool ClickSaveReportOptionButton()  
+        public bool ClickSaveReportOptionButton()
         {
             IWebElement SaveReportOptionButton = this.FindElement(By.XPath(".//div[@class='col']//button[contains(@data-bind,'showSaveReport')]"), 2);
             return SaveReportOptionButton.TryClick();
@@ -1837,7 +1837,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                 string column = "PRODINFO";
                 IWebElement wantedColumn = item.FindElement(By.XPath($".//td[contains(@aria-describedby,'dataGrid_PRODINFO')]/span[2]')]"), 2);
                 var wantedColumnData = wantedColumn.GetTextContent();
-                wantedColumnData = wantedColumnData.Substring(6, wantedColumnData.Length-7);
+                wantedColumnData = wantedColumnData.Substring(6, wantedColumnData.Length - 7);
                 if (wantedColumnData == null)
                 {
                     Report.Error($"Did not find the element for Column: {column}");
@@ -1915,7 +1915,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
         public bool InTheProductLookUpSearchProduct(string text)
         {
             IWebElement searchField = this.FindElement(By.XPath("//input[contains(@data-bind,'textInput: searchText')]"), 2);
-             return searchField.TryEnterText(text);
+            return searchField.TryEnterText(text);
         }
         public bool MainPageBodyDisplayed()
         {
@@ -1943,7 +1943,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
         {
             IWebElement upcNumber = this.FindElement(By.XPath("//span[contains(text(), 'UPC')]"), 1);
             string number = upcNumber.Text;
-            number = number.Substring(4,8);
+            number = number.Substring(4, 8);
             return number;
         }
 
@@ -1978,7 +1978,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         }
 
-        
+
 
         #endregion
 
@@ -2080,7 +2080,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             {
                 IList<IWebElement> appliedColumnsPanel = this.ContainerElement.FindElements(By.XPath("//ul[@id='sortableColumnSelector']//li"), 2);
                 return appliedColumnsPanel.Count();
-                    
+
             }
 
             public bool ISelectCategoryFromFilterCategory(string category)
@@ -2141,7 +2141,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             public bool IConfirmTheColumnNameISelectedAndSavedAs_IsDisplayed(string columnName)
             {
 
-                IWebElement namedColumn = this.FindElement(By.XPath($".//div[@class='ui-jqgrid-hdiv ui-state-default ui-corner-top']//th[contains(normalize-space(),'{columnName}')]"),1);
+                IWebElement namedColumn = this.FindElement(By.XPath($".//div[@class='ui-jqgrid-hdiv ui-state-default ui-corner-top']//th[contains(normalize-space(),'{columnName}')]"), 1);
                 return namedColumn.NotNullAndDisplayed();
             }
 
@@ -2169,7 +2169,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
                 return columnsShownNames;
             }
-            
+
             public bool ConfirmColumnSelectorsPopupDisplaysAnXIcon()
             {
                 IWebElement XIcon = this.ContainerElement.FindElement(By.XPath(".//div[@class='modal-header']//span[text()='×']"), 2);
@@ -2242,7 +2242,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                         }
 
                     }
-                    
+
                     if (buttonFound == false)
                     {
                         return false;
@@ -2263,10 +2263,10 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                 return closeButton.TryClick();
             }
             public bool InTheColumnSelectorPopupISelectHamBurger()
-            {          
+            {
                 IWebElement columnSelectorHamBurger = this.ContainerElement.FindElement(By.XPath("//*[@id='sortableColumnSelector']/li[1]/div/span[1]"), 2);
                 return columnSelectorHamBurger.TryClick();
-            
+
             }
             public void InTheColumnSelectorPopupPlaceTheColumnInNewPosition()
             {
@@ -2274,7 +2274,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                 IWebElement secondColumn = this.ContainerElement.FindElement(By.XPath("//*[@id='sortableColumnSelector']/li[1]/div/span[1]"), 2);
                 Actions actions = new Actions(SeleniumWebDriver.CurrentDriver);
 
-          
+
                 actions.MoveToElement(firstColumn);
                 actions.ClickAndHold();
 
@@ -2296,7 +2296,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                 IWebElement headerTitle = this.FindElement(By.XPath(".//div[@class='modal fade show']//div[@class='modal-header']//h3[@data-bind='text: title']"), 2);
                 return headerTitle.Text.Trim() == popupTitle.Trim();
             }
- 
+
             public bool InTheReportPopupEnterName(string text)
             {
                 IWebElement nameField = this.FindElement(By.XPath(".//div[@class='modal fade show']//div[@class='modal-body']//div[contains(@class, 'col-sm-6')]//input[@id='reportName']"), 2);
@@ -2305,7 +2305,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
             public bool InTheSaveReportPopupClickSaveButton()
             {
-                IWebElement saveButton = this.FindElement(By.XPath(".//div[@class='modal fade show']//div[@class='modal-footer']//button[contains(@data-bind, 'submitReport')]"), 2); 
+                IWebElement saveButton = this.FindElement(By.XPath(".//div[@class='modal fade show']//div[@class='modal-footer']//button[contains(@data-bind, 'submitReport')]"), 2);
                 return saveButton.TryClick();
             }
 

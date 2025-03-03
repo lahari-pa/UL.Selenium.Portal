@@ -1,21 +1,18 @@
+using Mailosaur.Models;
+using NUnit.Framework;
+using Reqnroll;
 using System;
 using System.Linq;
-using Mailosaur;
-using Mailosaur.Models;
-using UL.Automation.WebDriver.Classes;
+using UL.Automation.Reporting;
+using UL.Automation.Reporting.Classes;
 using UL.Automation.Reporting.Functions;
-using NUnit.Framework;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.ReqnrollHelpers.Classes;
-using Reqnroll;
+using UL.Automation.Utilities.Mailosaur.Classes;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
-using System.Collections.Generic;
-using UL.Automation.Reporting;
-using UL.Automation.Utilities;
-using UL.Automation.Reporting.Classes;
-using UL.Automation.ReqnrollHelpers.Attributes;
-using UL.Automation.Utilities.Mailosaur.Classes;
-using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -261,7 +258,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var matchingEmail = (Mailosaur.Models.Message)Context.ScenarioContext["Matching"];
 				//var myLink = matchingEmail.Html.Links[0].Href;
 				var myLink = matchingEmail.Html.Links.ToList();
-		
+
 				foreach (Link link in myLink)
 				{
 					var myFp = new ForgottenPassword();

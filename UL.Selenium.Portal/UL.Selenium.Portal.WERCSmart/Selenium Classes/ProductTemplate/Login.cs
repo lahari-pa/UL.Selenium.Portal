@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using UL.Automation.WebDriver.BaseClasses;
+﻿using OpenQA.Selenium;
 using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
+using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Extensions;
 
 

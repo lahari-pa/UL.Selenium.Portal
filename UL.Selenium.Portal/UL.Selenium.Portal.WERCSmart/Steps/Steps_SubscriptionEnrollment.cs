@@ -1,14 +1,13 @@
+using Reqnroll;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.ReqnrollHelpers.Classes;
-using Reqnroll;
-using UL.Automation.Reporting;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Automation.Utilities.Functions;
+using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -106,7 +105,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					allPlans.FirstOrDefault(x => x.Plan_Type == thisRow["Plan Type"] && x.Plan_Name == thisRow["Plan Name"] && x.Plan_Sub == thisRow["Plan Subtext"] && x.Best_Value == (thisRow["Best Value"].ToLower() == "true") && x.Selected == (thisRow["Selected"].ToLower() == "true"));
 				*/
 				Plan MatchingPlan =
-					allPlans.FirstOrDefault(x => x.Plan_Type.Trim() == thisRow["Plan Type"].Trim() && x.Plan_Name.Trim() == thisRow["Plan Name"].Trim()  && x.Best_Value == (thisRow["Best Value"].ToLower().Trim() == "true") && x.Selected == (thisRow["Selected"].ToLower().Trim() == "true"));
+					allPlans.FirstOrDefault(x => x.Plan_Type.Trim() == thisRow["Plan Type"].Trim() && x.Plan_Name.Trim() == thisRow["Plan Name"].Trim() && x.Best_Value == (thisRow["Best Value"].ToLower().Trim() == "true") && x.Selected == (thisRow["Selected"].ToLower().Trim() == "true"));
 				Report.IsTrue(MatchingPlan != null, "No matching item has been found for plan name: " + thisRow["Plan Name"],
 					"Plan: " + thisRow["Plan Name"] + " has matched as expected.");
 			}

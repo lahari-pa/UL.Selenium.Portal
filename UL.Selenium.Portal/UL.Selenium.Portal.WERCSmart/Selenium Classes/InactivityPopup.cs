@@ -1,8 +1,8 @@
+using OpenQA.Selenium;
 using System;
 using System.Diagnostics;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Extensions;
-using OpenQA.Selenium;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {

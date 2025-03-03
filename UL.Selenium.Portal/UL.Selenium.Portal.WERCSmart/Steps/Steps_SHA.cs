@@ -1,28 +1,26 @@
+using OpenQA.Selenium;
+using Reqnroll;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using TReVor.Api.Wrapper.Classes;
+using TReVor.Core.Classes.Software;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Automation.TReVor.Classes;
+using UL.Automation.Utilities.Functions;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Utilities.Functions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using UL.Automation.ReqnrollHelpers.Classes;
-using Reqnroll;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using System.Collections.ObjectModel;
-using TReVor.Api.Wrapper.Classes;
-using System.IO;
-using UL.Automation.Reporting;
-using UL.Automation.TReVor.Classes;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.AdvancedReportsRules;
 using UL.Selenium.Portal.WERCSmart.Classes;
-using TReVor.Core.Classes.Software;
-using NUnit.Framework;
-using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Helpers;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.AdvancedReportsRules;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -307,7 +305,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						break;
 					case "TReVorUser":
 						SoftwareCredentialBasic TReVorUser = TReVor.Integrations.Classes.TReVorSettings.Credentials.GetCredential(value);
-						if(Report.IsTrue(TReVorUser != null,$"Failure, TReVor user '{value}' does not exist.",$"Success, TReVor user '{value}' exists."))
+						if (Report.IsTrue(TReVorUser != null, $"Failure, TReVor user '{value}' does not exist.", $"Success, TReVor user '{value}' exists."))
 						{
 							Report.IsTrue(thisProductSearch.EnterUser(TReVorUser.UserName),
 							"Failed to set user", "Successfully set user", false, false);
@@ -588,8 +586,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void GivenInTheSHAManagerGridWhenTheRightClickContextMenuIsOpenISelectOption(string option)
 		{
 			var thisContextMenu = new RightClickProductMenu();
-			Report.IsTrue(thisContextMenu.SelectOption(option), $"Failed to select option: {option }",
-				$"Selected option: { option }");
+			Report.IsTrue(thisContextMenu.SelectOption(option), $"Failed to select option: {option}",
+				$"Selected option: {option}");
 		}
 
 		[RegexStepDefinition(@"In the Product Recertification History popup I should see the following entry")]
@@ -1187,7 +1185,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (thisStudioSHAManagerProductRejectSubmission.RejectSubmissionDialogClickSaveOrCancel(button))
 			{
 				Report.Info("Successfully clicked the " + button + " button");
-			} else
+			}
+			else
 			{
 				Report.Info("Failed to click the " + button + " button");
 			}
@@ -1540,7 +1539,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.Info("Status has been set");
 			Report.Screenshot();
 			Report.Info("Pressing Enter Key");
-			Report.Screenshot();			
+			Report.Screenshot();
 
 			//This query is often very slow. Sometimes the results appear to have loaded but then several seconds later the
 			//spinner appears and the results change.
@@ -1598,29 +1597,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 			Report.Info($"Going into wait loop...");
-			while (correct==false && x<60)
+			while (correct == false && x < 60)
+			{
+				List<Product> topN = myStudioShaManager.GetTopXProducts(n);
+				List<Product> correctStatusItems = new List<Product>();
+				foreach (var item in topN)
 				{
-					List<Product> topN = myStudioShaManager.GetTopXProducts(n);
-					List<Product> correctStatusItems = new List<Product>();
-					foreach (var item in topN)
+					Report.Info($"Status found was: {item.Status}");
+					if (item.Status == status)
 					{
-						Report.Info($"Status found was: {item.Status}");
-						if (item.Status == status)
-						{
-							correctStatusItems.Add(item);
-						}
+						correctStatusItems.Add(item);
 					}
-					Report.Screenshot();
-					Report.Info($"n is {n}");
-					Report.Info($"Count found was: {correctStatusItems.Count()}");
-					if (correctStatusItems.Count() == topN.Count())
-					{
-						correct = true;
-						Report.Info($"{n} items with correct status were found");						
-					}		
-					Delay.Seconds(10);
-					x++;					
 				}
+				Report.Screenshot();
+				Report.Info($"n is {n}");
+				Report.Info($"Count found was: {correctStatusItems.Count()}");
+				if (correctStatusItems.Count() == topN.Count())
+				{
+					correct = true;
+					Report.Info($"{n} items with correct status were found");
+				}
+				Delay.Seconds(10);
+				x++;
+			}
 
 			Report.Info($"Going to final check...");
 
@@ -1660,7 +1659,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			Report.Info($"Going to check...");
 			Report.Screenshot();
-			Report.IsTrue(correct, "The status of the top "+n+" items was not " +status+".", "The status of the top "+n+" items was "+status+".");
+			Report.IsTrue(correct, "The status of the top " + n + " items was not " + status + ".", "The status of the top " + n + " items was " + status + ".");
 		}
 
 		[RegexStepDefinition(@"I verify the product saved as: (.*) displays in red with a red box around it")]
@@ -2181,7 +2180,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info($"Checking the UPC presence against the required condition: ({condition})");
 				if (condition == "see")
 				{
-					Report.IsTrue(displayedUpcs.UPCNumber==upc, "UPC: " + upc + " does not display",
+					Report.IsTrue(displayedUpcs.UPCNumber == upc, "UPC: " + upc + " does not display",
 						"UPC: " + upc + " displays as expected");
 				}
 
@@ -2239,7 +2238,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					return;
 				}
 
-				Report.Info($"The list of dispayed UPCs was: {string.Join(", ",displayedUpcs)}");
+				Report.Info($"The list of dispayed UPCs was: {string.Join(", ", displayedUpcs)}");
 
 				Report.Info($"Checking if the UPC needed is saved in context");
 
@@ -2260,7 +2259,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				if (condition == "not see")
 				{
-					Report.IsTrue(!displayedUpcs.Contains(upc), "UPC: " + upc + " was still found.","UPC: " + upc + " was not found");
+					Report.IsTrue(!displayedUpcs.Contains(upc), "UPC: " + upc + " was still found.", "UPC: " + upc + " was not found");
 				}
 			}
 			catch (Exception ex)
@@ -2323,11 +2322,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				Report.Info($"Checking that our upc is found in the table...");
 				var foundUPC = new SHAManagerProdcutUPC();
-				if(displayedUpcs.Any(x => x.UPCNumber.Contains(upc)))
+				if (displayedUpcs.Any(x => x.UPCNumber.Contains(upc)))
 				{
 					Report.Success($"The upc {upc} was  found in the table");
 
-					foreach(var item in displayedUpcs)
+					foreach (var item in displayedUpcs)
 					{
 						if (item.UPCNumber.Contains(upc))
 						{
@@ -2336,7 +2335,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 							break;
 						}
 					}
-					if(foundUPC.IsNullOrEmpty())
+					if (foundUPC.IsNullOrEmpty())
 					{
 						Report.Failure($"Not able to assign a value to 'foundUPC'");
 						return;
@@ -2348,14 +2347,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					{
 						var array = foundUPC.UPCNumber.ToArray();
 						char finalChar = array.Last();
-						Report.IsTrue(finalChar.ToString()=="*", "the case pack upc asterisk was not found", "The case pack upc asterisk was found");
+						Report.IsTrue(finalChar.ToString() == "*", "the case pack upc asterisk was not found", "The case pack upc asterisk was found");
 					}
 
 					if (condition == "not see")
 					{
 						var array = foundUPC.UPCNumber.ToArray();
 						char finalChar = array.Last();
-						Report.IsTrue(finalChar.ToString() != "*","The case pack upc asterisk was found", "the case pack upc asterisk was not found");
+						Report.IsTrue(finalChar.ToString() != "*", "The case pack upc asterisk was found", "the case pack upc asterisk was not found");
 					}
 
 				}
@@ -2365,7 +2364,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					return;
 				}
 
-				
+
 			}
 			catch (Exception ex)
 			{
@@ -2716,7 +2715,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[RegexStepDefinition(@"I (should|should not) see the '(.*)' popup")]
-		public void ThenIShouldSeeThePopup(string condition,  string header)
+		public void ThenIShouldSeeThePopup(string condition, string header)
 		{
 			var thisStudioSupplierManager = new StudioSupplierManager();
 			var thisStudioSHAManager = new StudioSHAManager();
@@ -2739,7 +2738,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string alertText = SeleniumWebDriver.CurrentDriver.SwitchTo().Alert().Text;
 			foreach (TableRow thisRow in table.Rows)
 			{
-				Report.IsTrue(alertText.Contains(thisRow["Error"]), $"Alert text does not contain error {thisRow["Error"]}", $"Alert text contain error { thisRow["Error"]}");
+				Report.IsTrue(alertText.Contains(thisRow["Error"]), $"Alert text does not contain error {thisRow["Error"]}", $"Alert text contain error {thisRow["Error"]}");
 			}
 
 		}
@@ -2763,12 +2762,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			if (searchTerm.Contains("saved as "))
 			{
 				searchTerm = searchTerm.Replace("saved as ", "");
-		    }
-		
+			}
+
 			if (Context.GetFromContext(searchTerm) != null)
 			{
 				searchTerm = Context.GetFromContext(searchTerm).ToString();
-			} 
+			}
 
 			var thisStudioSupplierManager = new StudioSupplierManager();
 
@@ -2876,7 +2875,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
 
-			if(Report.IsTrue(thisStudioAddNewSupplier.AcceptButtonExists(), "Failed to find Accept button", "Succesfully found Accept button"))
+			if (Report.IsTrue(thisStudioAddNewSupplier.AcceptButtonExists(), "Failed to find Accept button", "Succesfully found Accept button"))
 			{
 				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierClickAcceptButton(), "Failed to click Accept button", "Succesfully clicked Accept button");
 			}
@@ -2888,10 +2887,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
 			if (Report.IsTrue(thisStudioAddNewSupplier.CompanyNameInputExists(), "Failed to find Company Name input", "Succesfully found Company Name input"))
 			{
-			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterCompanyName(value), $"Failed to enter {value} in field Company Name",
-			$"Succesfully entered {value} in field Company Name");
+				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterCompanyName(value), $"Failed to enter {value} in field Company Name",
+				$"Succesfully entered {value} in field Company Name");
 			}
-			
+
 		}
 		[RegexStepDefinition(@"In Add New Supplier I enter Supplier Seller ID: (.*)")]
 		public void ThenInAddNewSupplierIEnterSupplierSellerID(string value)
@@ -2899,10 +2898,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
 			if (Report.IsTrue(thisStudioAddNewSupplier.SellerIdInputExists(), "Failed to find Seller ID input", "Succesfully found Seller ID input"))
 			{
-			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterSellerId(value), $"Failed to enter {value} in field Supplier Seller ID",
-			$"Succesfully entered {value} in field Supplier Seller ID");
+				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterSellerId(value), $"Failed to enter {value} in field Supplier Seller ID",
+				$"Succesfully entered {value} in field Supplier Seller ID");
 			}
-			
+
 		}
 		[RegexStepDefinition(@"In the Supplier Manager Popup I turn (on|off) toggle: (.*)")]
 		public void ThenInTheSupplierManagerPopupITurnOnToggleSingle_RetailSubscription(string condition, string toggleName)
@@ -2968,10 +2967,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
 			if (Report.IsTrue(thisStudioAddNewSupplier.CountryInputExists(), "Failed to find Country input", "Succesfully found Country input"))
 			{
-			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterCountry(value), $"Failed to enter {value} in field Country",
-			$"Succesfully entered {value} in field Country");
+				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterCountry(value), $"Failed to enter {value} in field Country",
+				$"Succesfully entered {value} in field Country");
 			}
-			
+
 		}
 
 		[RegexStepDefinition(@"I Add New Supplier I enter Country Code: (.*)")]
@@ -2980,9 +2979,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
 			if (Report.IsTrue(thisStudioAddNewSupplier.CountryCodeInputExists(), "Failed to find Country Code input", "Succesfully found Country Code input"))
 			{
-			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterCountryCode(value), $"Failed to enter {value} in field Country Code",
-			$"Succesfully entered {value} in field Country Code");
-			}	
+				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterCountryCode(value), $"Failed to enter {value} in field Country Code",
+				$"Succesfully entered {value} in field Country Code");
+			}
 		}
 
 		[RegexStepDefinition(@"In Add New Supplier I enter Supplier Phone: (.*)")]
@@ -2991,8 +2990,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
 			if (Report.IsTrue(thisStudioAddNewSupplier.SupplierPhoneInputExists(), "Failed to find Phone input", "Succesfully found Phone input"))
 			{
-			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterSupplierPhone(value), $"Failed to enter {value} in field Supplier Phone",
-			$"Succesfully entered {value} in field Supplier Phone");
+				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterSupplierPhone(value), $"Failed to enter {value} in field Supplier Phone",
+				$"Succesfully entered {value} in field Supplier Phone");
 			}
 		}
 
@@ -3002,8 +3001,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
 			if (Report.IsTrue(thisStudioAddNewSupplier.AddressInputExists(), "Failed to find Address input", "Succesfully found Address input"))
 			{
-			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterAddress(value), $"Failed to enter {value} in field Address",
-			$"Succesfully entered {value} in field Address");
+				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterAddress(value), $"Failed to enter {value} in field Address",
+				$"Succesfully entered {value} in field Address");
 			}
 		}
 
@@ -3013,10 +3012,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
 			if (Report.IsTrue(thisStudioAddNewSupplier.CityInputExists(), "Failed to find City input", "Succesfully found City input"))
 			{
-			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterCity(value), $"Failed to enter {value} in field City",
-			$"Succesfully entered {value} in field City");
+				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterCity(value), $"Failed to enter {value} in field City",
+				$"Succesfully entered {value} in field City");
 			}
-			
+
 		}
 
 		[RegexStepDefinition(@"In Add New Supplier I enter State: (.*)")]
@@ -3025,9 +3024,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var thisStudioAddNewSupplier = new StudioAddNewSupplier();
 			if (Report.IsTrue(thisStudioAddNewSupplier.StateInputExists(), "Failed to find State input", "Succesfully found State input"))
 			{
-			Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterState(value), $"Failed to enter {value} in field State",
-			$"Succesfully entered {value} in field State");
-			}		
+				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterState(value), $"Failed to enter {value} in field State",
+				$"Succesfully entered {value} in field State");
+			}
 		}
 
 		[RegexStepDefinition(@"In Add New Supplier I enter Postal Code: (.*)")]
@@ -3060,7 +3059,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterContactEmail(value), $"Failed to enter {value} in field Contact Email",
 			$"Succesfully entered {value} in field Contact Email");
-			}	
+			}
 		}
 
 		[RegexStepDefinition(@"I enter email address: (.*)")]
@@ -3095,7 +3094,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			{
 				Report.IsTrue(thisStudioAddNewSupplier.InAddNewSupplierEnterContactPhone(value), $"Failed to enter {value} in field Contact Phone",
 			$"Succesfully entered {value} in field Contact Phone");
-			}	
+			}
 		}
 
 		[RegexStepDefinition(@"In the Supplier Manager Popup I save the first search result Supplier Name as: (.*)")]
@@ -3116,7 +3115,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InSupplierManagerPopupIClickOnTheCloseButton()
 		{
 			var thisStudioSupplierManager = new StudioSupplierManager();
-			Report.IsTrue(thisStudioSupplierManager.CloseSupplierManager(), "Failed to click close button","Clicked close button");
+			Report.IsTrue(thisStudioSupplierManager.CloseSupplierManager(), "Failed to click close button", "Clicked close button");
 		}
 
 		[RegexStepDefinition(@"I save a product id which blue and has retailers as (.*)")]
@@ -3389,7 +3388,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			Report.Info("Adding UPC number: " + upcNumber + " to context as: " + savedAs);
 			Context.AddToContext(savedAs, upcNumber);
-		}				
+		}
 
 		[RegexStepDefinition(@"I switch to the Product List UPC Window")]
 		public void SwitchToProductListUpcWindow()
@@ -3471,7 +3470,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					Report.Info("Saved UPC to context");
 					break;
 				}
-			}Report.Info("testing0 " + savedAs);
+			}
+			Report.Info("testing0 " + savedAs);
 		}
 
 		[RegexStepDefinition(@"I find a UPC number for any product not belonging to Supplier: (.*) in the grid and save to context as: (.*)")]
@@ -4447,7 +4447,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Screenshot();
 			}
 		}
-	
+
 		[RegexStepDefinition(@"I verify the file saved as: (.*) against the specific requirements for Daily Report - WERCSmart Additional Reports Published")]
 		public void ThenIVerifyTheFileSavedAsAgainstTheSpecificRequirementsForDailyReport_WERCSmartAdditionalReportsPublished(string savedAs)
 		{
@@ -4874,7 +4874,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 		}
 
-		
+
 		[RegexStepDefinition(@"I save all clients for product saved as: (.*)")]
 		public void ThenISaveAllClientsForPrductsSavedAsTestCase(string savedAs)
 		{
@@ -4960,24 +4960,24 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.IsTrue(studioSupplierManagerObject.ClickSuppliersButton(), "Failed to click 'Suppliers' button", "Successfully clicked 'Suppliers' button");
 		}
 
-        [RegexStepDefinition(@"I check that all clients for product saved as: (.*) have data")]
-        public void ThenICheckThatAllClientsForProductSavedAsTestCaseHaveData(string savedAs)
-        {
-            StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
+		[RegexStepDefinition(@"I check that all clients for product saved as: (.*) have data")]
+		public void ThenICheckThatAllClientsForProductSavedAsTestCaseHaveData(string savedAs)
+		{
+			StudioSHAManager studioSHAManagerObject = new StudioSHAManager();
 
-            var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
-            string id = ProductDetails?.Id;
-            if (id == null)
-            {
-                throw new Exception("Could not find product saved to context as: " + savedAs);
-            }
+			var ProductDetails = (ProductInformation)Context.GetFromContext(savedAs);
+			string id = ProductDetails?.Id;
+			if (id == null)
+			{
+				throw new Exception("Could not find product saved to context as: " + savedAs);
+			}
 
-            var key = id + "'s Clients";
-            var clients = Context.GetFromContext(key).ToString();
-            string[] arr = clients.Split(new string[] { ", " }, StringSplitOptions.None);
-            studioSHAManagerObject.FindDataForClientsInUPCRetailerAndFeedPage(arr);
-        }
-		
+			var key = id + "'s Clients";
+			var clients = Context.GetFromContext(key).ToString();
+			string[] arr = clients.Split(new string[] { ", " }, StringSplitOptions.None);
+			studioSHAManagerObject.FindDataForClientsInUPCRetailerAndFeedPage(arr);
+		}
+
 		[RegexStepDefinition(@"In UPC Retailer and Feed I check that the following sections contain the corresponding titles:")]
 		public void ThenInUPCRetailerAndFeedICheckThatTheFollowingSectionsContainTheCorrespondingTitles(Table table)
 		{
@@ -5045,11 +5045,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			}
 			Report.Failure($"Was unable to navigate to the UPC Retailer and Feed Screen for a product containing at least 1 UPC");
-			return;					
-						
+			return;
+
 		}
 
-		
+
 
 		[RegexStepDefinition(@"In the UPC Retailer and Feed page, confirm that the Packing Type Name saved as: (.*) is displayed")]
 		public void ConfirmProductNameDisplayedOnUPCRetailerAndFeedPage(string savedAs)
@@ -5068,7 +5068,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			Report.StartStep("I click Search in the bottom menu list");
 			myStudioShaManager.ClickBottomMenuOption("Search");
-			Report.IsTrue(thisProductSearch.Wait_for_load(60), "Product search page has not loaded","Product search page has loaded as expected", false, false);
+			Report.IsTrue(thisProductSearch.Wait_for_load(60), "Product search page has not loaded", "Product search page has loaded as expected", false, false);
 			Report.Screenshot();
 			Report.Info("Going to click 'Cancel'");
 			Delay.Seconds(1);
@@ -5194,7 +5194,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			string headerText = myStudioShaManager.DocumentRequestHeader();
 			Report.IsTrue(headerText.Equals(header), "Failed to find header", "Succesfully found header");
 		}
-		
+
 		[RegexStepDefinition(@"I Confirm that productID: (.*) and name matches with the Product selected in the SHA Manager Product List")]
 		public void IConfirmProductID_ProductnameMatchProductListGrid(string productsavedAs)
 		{
@@ -5210,7 +5210,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				bool foundWindow = false;
 				foreach (string handle in allHandles)
 				{
-					Report.Info($"Checking handle: { handle }");
+					Report.Info($"Checking handle: {handle}");
 					SeleniumWebDriver.CurrentDriver.SwitchTo().Window(handle);
 					IWebElement ele = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@title='Product Data Review']//b"), 2);
 					if (ele != null)
@@ -5251,12 +5251,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			};
 			Report.Info("Get each column and verify asc, dec");
 			List<IWebElement> expectedValues = myStudioShaManager.GetFormulationCloumns();
-			
-				foreach (var column in expectedValues)
-				{
-					column.TryClick();
-					myStudioShaManager.AscDecCheck(columns[i++], "asc");
-			}			
+
+			foreach (var column in expectedValues)
+			{
+				column.TryClick();
+				myStudioShaManager.AscDecCheck(columns[i++], "asc");
+			}
 		}
 		[RegexStepDefinition(@"I call shared step add 3rd Party Component in Studio: (.*) (.*)")]
 		public void IcallSharedStepIAddThirdPartyComponent(string compName, string casIdsavedAs)
@@ -5266,11 +5266,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var product = (ProductInformation)Context.GetFromContext(casIdsavedAs);
 				string casId = product.Id;
 				string casIdTest = string.Concat("WPS", casId);
-				var thisStudioPowerDesignerPlusDesignMode =	new StudioPowerDesignerPlusDesignMode();
+				var thisStudioPowerDesignerPlusDesignMode = new StudioPowerDesignerPlusDesignMode();
 				Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90), "Power designer has not opened.",
 					"Power designer has opened");
 				thisStudioPowerDesignerPlusDesignMode.ClickMenuAndSubmenuOptions("Components", "Manage components");
-				
+
 				var thisPowerDesignerPlus = new StudioPowerDesignerPlus();
 				thisPowerDesignerPlus.Wait_for_load(60);
 				IWebElement frame = SeleniumWebDriver.CurrentDriver.FindElement(By.Id("modalDialogFrameFrm"), 10);
@@ -5278,7 +5278,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.IsTrue(thisStudioPowerDesignerPlusDesignMode.AddRowClick(), "Failed to click on AddRow icon", "Succesfully clicked on AddRow icon");
 				thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90);
 				thisPowerDesignerPlus.Wait_for_load(60);
-				IWebElement CreateComponentFrame = SeleniumWebDriver.CurrentDriver.WaitUntilElementVisible(By.Id("modalDialogFrameFrm"),30);
+				IWebElement CreateComponentFrame = SeleniumWebDriver.CurrentDriver.WaitUntilElementVisible(By.Id("modalDialogFrameFrm"), 30);
 				SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(CreateComponentFrame);
 				thisStudioPowerDesignerPlusDesignMode.AddComponent(casIdTest, compName, casId);
 				thisStudioPowerDesignerPlusDesignMode.Wait_for_load(90);
@@ -5295,6 +5295,6 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 	}
 
-	}
+}
 
 

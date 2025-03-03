@@ -1,9 +1,8 @@
-using UL.Automation.WebDriver.BaseClasses;
-using UL.Automation.WebDriver.Extensions;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using UL.Automation.WebDriver.Classes;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.WebDriver.BaseClasses;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 {
@@ -43,7 +42,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 				Delay.Seconds(Delay.SpeedFactor);
 				currentPaceProgress = this.GetPaceProgress();
 				timeoutCounter++;
-				Report.Info($"Waiting for loading bar. current pace progress: {currentPaceProgress} | seconds waited: {timeoutCounter}"); 
+				Report.Info($"Waiting for loading bar. current pace progress: {currentPaceProgress} | seconds waited: {timeoutCounter}");
 			}
 			if (timeoutCounter == 120)
 			{

@@ -1,17 +1,10 @@
-﻿using Mailosaur.Operations;
-using NPOI.SS.Formula.Functions;
-using Reqnroll;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Reqnroll;
 using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Type
 {
 	[Binding, Scope(Tag = "SPLInformation")]
-	 class SPLInformation
+	class SPLInformation
 	{
 		[RegexStepDefinition(@"In the SPL Information Section, verify section: 'Manufacturer' contains value: (.*)")]
 		public void VerifyManufacturer(string value)

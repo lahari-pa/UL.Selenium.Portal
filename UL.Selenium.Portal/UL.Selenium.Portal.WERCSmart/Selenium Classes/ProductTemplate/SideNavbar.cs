@@ -1,10 +1,8 @@
-﻿using System;
+﻿using OpenQA.Selenium;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
-using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
+using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Extensions;
 using UL.Selenium.Portal.WERCSmart.Classes;
 
@@ -33,13 +31,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ProductTemplate
 		public bool NavLinkItemExists(string linkTitle)
 		{
 			Report.Info($"Attempting to confirm Navigation List item '{linkTitle}' exists.");
-			return this.NavLinkList.Any(x=>string.Equals(x.Text, linkTitle));
+			return this.NavLinkList.Any(x => string.Equals(x.Text, linkTitle));
 		}
 
 		public bool NavLinkItemClick(string linkTitle)
 		{
 			Report.Info($"Attempting to click Navigation List item '{linkTitle}'.");
-			return this.NavLinkList.Where(x => string.Equals(x.Text, linkTitle)).FirstOrDefault()?.TryClick()??false;
+			return this.NavLinkList.Where(x => string.Equals(x.Text, linkTitle)).FirstOrDefault()?.TryClick() ?? false;
 		}
 		#endregion
 	}

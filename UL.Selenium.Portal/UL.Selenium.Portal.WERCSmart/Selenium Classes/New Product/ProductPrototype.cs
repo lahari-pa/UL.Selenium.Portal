@@ -1,32 +1,17 @@
-﻿using System;
+﻿using OpenQA.Selenium;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using UL.Automation.WebDriver.BaseClasses;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using UL.Automation.ReqnrollHelpers.Classes;
-using System.Collections.ObjectModel;
-using UL.Selenium.Portal.WERCSmart.Classes;
-using Reqnroll;
-using TReVor.Api.Wrapper.Classes;
-using UL.Automation.Reporting;
+using UL.Automation.WebDriver.BaseClasses;
+using UL.Automation.WebDriver.Extensions;
 using UL.Automation.WebDriver.Functions;
-using UL.Automation.TReVor.Classes;
-using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
-using OpenQA.Selenium.Support.UI;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Chrome;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
-using System.Drawing;
+using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
-	public class PanelPrototype:SeleniumBaseObject
+	public class PanelPrototype : SeleniumBaseObject
 	{
 		#region Page Objects
 		private string _label;
@@ -80,7 +65,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		}
 		#endregion
 	}
-	public class ProductPrototype: SeleniumBaseObject
+	public class ProductPrototype : SeleniumBaseObject
 	{
 		#region Page Objects
 		private string _label;
@@ -93,7 +78,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		#region Methods
 		public ProductPrototype(string label)
 		{
-			Report.Info($"Attempting to get '{label}' group.");;
+			Report.Info($"Attempting to get '{label}' group.");
+			;
 			_label = label;
 		}
 		#region Option Input Methods
@@ -122,7 +108,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool OptionSelect(string optionLabel)
 		{
 			bool isSelected = this.OptionSelected(optionLabel);
-			if(!isSelected)
+			if (!isSelected)
 			{
 				isSelected = this.OptionClick(optionLabel);
 			}
@@ -153,7 +139,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		private IWebElement TextInputGet()
 		{
 			Report.Info($"Attempting to get text input.");
-			return this.FindElement(By.XPath($".//input[@type='text']|.//textarea"),1);
+			return this.FindElement(By.XPath($".//input[@type='text']|.//textarea"), 1);
 		}
 
 		public bool TextInputExists()
@@ -212,7 +198,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		private IWebElement SearchInputSpanGet()
 		{
 			Report.Info($"Attempting to get search input span.");
-			return this.FindElement(By.XPath(".//span[contains(@class,'select2-container')]"),1);
+			return this.FindElement(By.XPath(".//span[contains(@class,'select2-container')]"), 1);
 		}
 
 		public bool SearchInputSpanExists()
@@ -269,11 +255,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		#endregion
 	}
 
-	public class SearchBoxPrototype:SeleniumBaseObject
+	public class SearchBoxPrototype : SeleniumBaseObject
 	{
 		#region Page Objects
 		protected override By ContainerElementLocator => By.XPath($"//span[contains(@class,'select2-container--open')][.//input[@type='search']]");
-		private IWebElement SearchInput => this.FindElement(By.XPath(".//input[@type='search']"),1);
+		private IWebElement SearchInput => this.FindElement(By.XPath(".//input[@type='search']"), 1);
 		List<SearchBoxResult> SearchResultList => this.ContainerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results')][@data-select2-id]"), 1).Select(x => new SearchBoxResult(x)).ToList();
 		private IWebElement SearchResultAlert(string alertText) => this.FindElement(By.XPath($".//li[@role='alert'][@text()='{alertText}']"), 1);
 		private IWebElement SearchResultLoading => this.FindElement(By.XPath(".//li[.//div[@class='loading']]"), 1);
@@ -314,7 +300,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			Report.Info($"Attempting to confirm search results exist.");
 			return !this.SearchResultList.IsNullOrEmpty();
 		}
-		
+
 		public bool SearchResultTextExists(string searchText)
 		{
 			Report.Info($"Attempting to confirm text: '{searchText}' search result exists.");

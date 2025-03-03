@@ -1,9 +1,4 @@
 ﻿using Reqnroll;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
@@ -171,7 +166,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			Report.IsTrue(new CompanyInfoStewardshipTableRow(province).EnterTableData(columnName, value), $"Failed to enter '{value}' in the '{columnName}' column for {province} province", $"Successfully entered '{value}' in the '{columnName}' column for {province} province");
 		}
 	}
-	
+
 }
 
-	
+

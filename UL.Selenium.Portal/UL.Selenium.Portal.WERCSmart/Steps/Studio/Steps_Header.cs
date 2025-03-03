@@ -1,8 +1,8 @@
-﻿using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+﻿using Reqnroll;
 using System;
-using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {

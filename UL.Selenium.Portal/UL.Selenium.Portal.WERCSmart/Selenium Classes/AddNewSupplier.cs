@@ -1,11 +1,11 @@
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UL.Automation.Utilities.Helpers;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using OpenQA.Selenium;
 using UL.Selenium.Portal.WERCSmart.Classes;
-using UL.Automation.Utilities.Helpers;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -42,7 +42,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			return (SupplierID.Enabled && SupplierID.Displayed);
-			
+
 		}
 
 		public bool SupplierIDErrorExists()
@@ -197,8 +197,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickNewSupplierInSupplyManager(string supplierName)
 		{
-		IWebElement NewSupplier = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//table[@id='listSupplierInfo']//td[contains(@title,'{supplierName}')]"), 2);
-		return NewSupplier.TryClick();
+			IWebElement NewSupplier = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//table[@id='listSupplierInfo']//td[contains(@title,'{supplierName}')]"), 2);
+			return NewSupplier.TryClick();
 		}
 
 		public List<string> AllTabs()
@@ -231,7 +231,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool EditButton()
 		{
 			IWebElement EditButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//button[@id='btnEdit']"));
-				return EditButton.TryClick();
+			return EditButton.TryClick();
 		}
 
 		public bool SaveButton()
@@ -248,14 +248,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ToggleButton(string toggleName)
 		{
-			IWebElement Toggle = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//td/label[contains(text(),'"+ toggleName + "')]/../following-sibling::td//span[@class='slider round']"), 2);	
+			IWebElement Toggle = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//td/label[contains(text(),'" + toggleName + "')]/../following-sibling::td//span[@class='slider round']"), 2);
 			return Toggle.TryClick();
 		}
 		public string IsToggleButtonEnabled(string toggleName)
 		{
-			IWebElement IsToggleEnabled = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//td/label[contains(text(),'" + toggleName + "')]/../following-sibling::td//span[@class='slider round']"),2);
+			IWebElement IsToggleEnabled = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//td/label[contains(text(),'" + toggleName + "')]/../following-sibling::td//span[@class='slider round']"), 2);
 			string color = IsToggleEnabled.GetCssValue("background-color");
-			return color.ToString();		
+			return color.ToString();
 		}
 	}
 }

@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Reqnroll;
+﻿using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_and_Submit
@@ -30,7 +24,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 		}
 
 		[RegexStepDefinition("In the Purchase Summary page message is displayed with text: (.*)")]
-		public void ThenInThePurchaseSummaryPageMessageIsDisplayedWithText( string text)
+		public void ThenInThePurchaseSummaryPageMessageIsDisplayedWithText(string text)
 		{
 			if (!new PaymentMethods_Thank_You().Thank_You_TextExists(text))
 			{
@@ -66,7 +60,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 			string alertText = "Prices and Payment\r\nPrices are quoted in U.S. Dollars and applicable sales tax will be reflected on your final invoice based on your billing location. Payment may be made by credit card, ACH transfer or such other methods as may introduced by UL. Payment is required when your order is submitted. The method of payment designated on the My Account area will be used. UL reserves the right to accept or refuse any payment made in any form. UL does not collect or process your payment details. Credit card providers may confirm your order. Payment processing delays may also delay processing of your order.";
 			new Steps_Prototype().AlertMessageDisplayed(condition, alertText);
 		}
-				
+
 		[RegexStepDefinition(@"In the Purchase Summary Page, the 'Save for Later' button (is|is not) displayed")]
 		public void CheckSaveForLaterButtonExists(string is_isnot)
 		{
@@ -102,7 +96,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 			var productDetails = (Selenium_Classes.New_Product.ProductInformation)Context.GetFromContext(savedAs);
 			string id = productDetails.Id;
 			productName = productName + $" ({id})";
-		
+
 			Report.IsTrue(new PurchaseSummary().GetProductName() == productName, $"Failed to confirm product's name '{productName}' is displayed", $"Successfully confirmed product's name '{productName}' is displayed");
 		}
 
@@ -112,7 +106,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 			string itemDescription = "Chemical assessment";
 			string retailer = "No Retailer/No UPC Product";
 			string amount = "$0.00";
-			if(Report.IsTrue(new PurchaseSummary().TableRowExists(itemDescription), $"Failed to confirm table row with Item Description {itemDescription} exists", $"Successfully confirmed row with Item Description {itemDescription} exists"))
+			if (Report.IsTrue(new PurchaseSummary().TableRowExists(itemDescription), $"Failed to confirm table row with Item Description {itemDescription} exists", $"Successfully confirmed row with Item Description {itemDescription} exists"))
 			{
 				Report.IsTrue(new PurchaseSummary().GetRetailerName(itemDescription) == retailer, $"Failed to confirm the displayed retailer for {itemDescription} is {retailer}", $"Successfully confirmed the displayed retailer for {itemDescription} is {retailer}");
 				Report.IsTrue(new PurchaseSummary().GetAmount(itemDescription).Equals(amount), $"Failed to confirm the amount for {itemDescription} is {amount}", $"Successfully confirmed the amount for {itemDescription} is {amount}");

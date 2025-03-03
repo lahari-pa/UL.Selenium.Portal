@@ -1,11 +1,10 @@
 using Reqnroll;
-using UL.Automation.WebDriver.Classes;
+using UL.Automation.Reporting;
 using UL.Automation.Reporting.Functions;
-using Reqnroll;
+using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Steps;
-using UL.Automation.Reporting;
-using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.ULSC.Steps
 {

@@ -1,19 +1,12 @@
-﻿using System;
+﻿using OpenQA.Selenium;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.WebDriver.Extensions;
 using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using UL.Automation.ReqnrollHelpers.Classes;
-using Reqnroll;
-using UL.Selenium.Portal.WERCSmart.Classes;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide;
 using UL.Automation.WebDriver.BaseClasses;
-using System.Windows.Forms;
-using NPOI.OpenXmlFormats.Dml;
-using System.Security.Cryptography.X509Certificates;
+using UL.Automation.WebDriver.Extensions;
+using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics
 {
@@ -33,8 +26,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		IWebElement CellSelect(string columnTitle) => this.RowColumnCell(columnTitle).FindElement(By.XPath(".//select[contains(@class, 'form-control')]"), 1);
 		IWebElement CellMultiSelect(string columnTitle) => this.RowColumnCell(columnTitle).FindElement(By.XPath(".//span[contains(@class,'select2-selection--multiple')]"), 1);
 		List<IWebElement> CellMultiSelectSelectedList(string columnTitle) => this.CellMultiSelect(columnTitle).FindElements(By.XPath(".//li[@title]"), 1).ToList();
-        IWebElement OptionDeleteIcon(string columnTitle, string option) => this.RowColumnCell(columnTitle).FindElement(By.XPath($".//li[text() = '{option}']//span"), 1);
-        List<IWebElement> CellSelectOptionList(string columnTitle) => this.CellSelect(columnTitle).FindElements(By.XPath(".//option"), 1).ToList();
+		IWebElement OptionDeleteIcon(string columnTitle, string option) => this.RowColumnCell(columnTitle).FindElement(By.XPath($".//li[text() = '{option}']//span"), 1);
+		List<IWebElement> CellSelectOptionList(string columnTitle) => this.CellSelect(columnTitle).FindElements(By.XPath(".//option"), 1).ToList();
 		#endregion
 
 		#region Methods
@@ -152,7 +145,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		public bool CellMultiSelectSelectedListItemExists(string columnTitle, string itemLabel)
 		{
 			Report.Info($"Attempting to confirm '{columnTitle}' column cell multi select item '{itemLabel}' exists.");
-			return this.CellMultiSelectSelectedList(columnTitle).Exists(x=>x.Text == itemLabel);
+			return this.CellMultiSelectSelectedList(columnTitle).Exists(x => x.Text == itemLabel);
 		}
 
 		public bool CellSelectExists(string columnTitle)
@@ -177,13 +170,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		{
 			Report.Info($"Attempting to select '{columnTitle}' column cell '{optionLabel}' select option.");
 			this.CellSelect(columnTitle).Select(optionLabel);
-			return string.Equals(this.CellSelect(columnTitle).GetValue(), optionLabel, StringComparison.InvariantCultureIgnoreCase);	
+			return string.Equals(this.CellSelect(columnTitle).GetValue(), optionLabel, StringComparison.InvariantCultureIgnoreCase);
 		}
 		public bool CellDeleteOptionSelected(string columnTitle, string optionLabel)
 		{
 			Report.Info($"Attempting to delete in '{columnTitle}' column cell selected option '{optionLabel}'.");
 			return this.OptionDeleteIcon(columnTitle, optionLabel).TryClick();
-			 
+
 		}
 
 		public string CellSelectValue(string columnTitle)
@@ -340,8 +333,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 	{
 		#region Page Objects
 		public string RemoveComponentText => this.ModalBody.FindElement(By.XPath(".//p[.//span[@class='glyphicon glyphicon-question-sign']]"), 1)?.Text.Trim();
-		public string RemoveChemicalName => this.ModalBody.FindElement(By.XPath(".//*[contains(@data-bind,'ChemicalName')]"),1)?.Text.Trim();
-		public string RemoveCASNumber => this.ModalBody.FindElement(By.XPath(".//*[contains(@data-bind,'CAS')]"),1)?.Text.Trim();
+		public string RemoveChemicalName => this.ModalBody.FindElement(By.XPath(".//*[contains(@data-bind,'ChemicalName')]"), 1)?.Text.Trim();
+		public string RemoveCASNumber => this.ModalBody.FindElement(By.XPath(".//*[contains(@data-bind,'CAS')]"), 1)?.Text.Trim();
 		#endregion
 	}
 
@@ -349,7 +342,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 	{
 		#region Page Objects
 		List<IWebElement> ColumnHeaderList => this.ModalBody.FindElements(By.XPath(".//th"), 1).ToList();
-		List<IWebElement> RowList => this.ModalBody.FindElements(By.XPath(".//tbody//tr"),1).ToList();
+		List<IWebElement> RowList => this.ModalBody.FindElements(By.XPath(".//tbody//tr"), 1).ToList();
 		#endregion
 		#region Methods
 		public bool ColumnHeaderExists(string columnName)
@@ -468,13 +461,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		public bool MultiSelectOptionExists(string optionLabel)
 		{
 			Report.Info($"Attempting to confrim multiselect option '{optionLabel}' exists.");
-			return this.MultiSelectOptions.Any(x=>x.Text == optionLabel);
+			return this.MultiSelectOptions.Any(x => x.Text == optionLabel);
 		}
 
 		public bool MultiSelectOptionClick(string optionLabel)
 		{
 			Report.Info($"Attempting to click multiselect option '{optionLabel}'.");
-			return this.MultiSelectOptions.Where(x=>x.Text==optionLabel).FirstOrDefault().TryClick();
+			return this.MultiSelectOptions.Where(x => x.Text == optionLabel).FirstOrDefault().TryClick();
 		}
 
 		public bool MultiSelectSelectedOptionExists(string optionLabel)

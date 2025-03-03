@@ -1,18 +1,15 @@
 
+using OpenQA.Selenium;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Automation.Utilities.Functions;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using Reqnroll;
-using UL.Automation.ReqnrollHelpers.Classes;
-using System;
-using UL.Automation.Utilities.Functions;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -723,7 +720,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool EnsureThatOptionIsListedAtLevel(string option, string level)
 		{
-			IWebElement elem = this.ContainerElement.FindElement(By.XPath($"//span[contains(text(), '{ option }')]/../div//span[contains(text(), '{ level }')]"), 2);
+			IWebElement elem = this.ContainerElement.FindElement(By.XPath($"//span[contains(text(), '{option}')]/../div//span[contains(text(), '{level}')]"), 2);
 			return elem != null;
 		}
 		public void ProductNameEnterText(string text)
@@ -741,7 +738,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			public string ID { get; set; }
 			public string Name { get; set; }
 			public string InternalID { get; set; }
-			public string SelectVendor {
+			public string SelectVendor
+			{
 				get
 				{
 					IWebElement row = this.containerElement.FindElement(By.XPath(".//tr[@id='" + this.InternalID + "']"), 2);
@@ -850,7 +848,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			protected override By ContainerElementLocator => By.XPath(BasePath);
 
-			public string UPCNumber {
+			public string UPCNumber
+			{
 				get
 				{
 					IWebElement input = this.containerElement.FindElement(
@@ -879,7 +878,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 			}
 
-			public string Size {
+			public string Size
+			{
 				get
 				{
 					IWebElement input = this.containerElement.FindElement(
@@ -908,7 +908,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 			}
 
-			public string Type {
+			public string Type
+			{
 				get
 				{
 					IWebElement input = this.containerElement.FindElement(By.XPath(".//select[contains(@data-bind,'options: row.control.types()')]"), 2);
@@ -937,7 +938,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 			}
 
-			public string Quantity {
+			public string Quantity
+			{
 				get
 				{
 					IWebElement input = this.containerElement.FindElement(
@@ -965,7 +967,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					}
 				}
 			}
-			public string IndividualUPCContainedInTheCasePack {
+			public string IndividualUPCContainedInTheCasePack
+			{
 				get
 				{
 					IWebElement input = this.containerElement.FindElement(By.XPath(".//select[contains(@data-bind,'options: row.control.notPackUpcs()')]"), 2);
@@ -994,7 +997,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 			}
 
-			public string TransportationOptions {
+			public string TransportationOptions
+			{
 				get
 				{
 					IWebElement input = this.ContainerElement.FindElement(By.XPath(".//select[contains(@data-bind,'options: row.control.transportOptions()')]"), 2);
@@ -1023,7 +1027,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 			}
 
-			public List<string> Retailer {
+			public List<string> Retailer
+			{
 				get
 				{
 					ReadOnlyCollection<IWebElement> inputs = this.containerElement.FindElements(By.XPath(

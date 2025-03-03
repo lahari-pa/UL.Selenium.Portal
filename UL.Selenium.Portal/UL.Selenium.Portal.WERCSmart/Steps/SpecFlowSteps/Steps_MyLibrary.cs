@@ -1,23 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Reqnroll;
+﻿using Reqnroll;
+using System;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.WebDriver.Classes;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.ReqnrollHelpers.Attributes;
-using UL.Automation.Utilities.Functions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
-using UL.Automation.ReqnrollHelpers.Classes;
-using UL.Automation.Utilities.Helpers;
-using System.IO;
-using System.Drawing.Imaging;
-using System.Drawing;
-using System.Reflection;
-using UL.Automation.Utilities;
-using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 
@@ -57,7 +43,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		{
 			string tableName = "myLibrary";
 			string linkText = "Add New";
-			this.ClickLinkElement(tableName,linkText);
+			this.ClickLinkElement(tableName, linkText);
 		}
 
 		[RegexStepDefinition(@"In the My Library - My Packaging Type section, Validate Delete Product popup (should| should not) be displayed")]
@@ -207,7 +193,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		public void EnterPPMValueForOption(string option, string value)
 		{
 			Report.StartStep($"Attempting to enter '{value}' into How much in PPM? text input.");
-			new MyLibraryPage().EnterValueforPPM(option,value);
+			new MyLibraryPage().EnterValueforPPM(option, value);
 
 
 		}
@@ -223,7 +209,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 
 		}
 
-        #endregion
+		#endregion
 
 		#region My Brands section
 
@@ -251,7 +237,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		{
 			string tableName = "brand";
 			string linkText = "Add New";
-			this.ClickLinkElement(tableName,linkText);
+			this.ClickLinkElement(tableName, linkText);
 		}
 
 		[RegexStepDefinition(@"In the My Library - My Brands section, Verify Products table is displayed")]
@@ -288,7 +274,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		{
 			string tableName = "brand";
 			string linkText = "Save";
-			this.ClickLinkElement(tableName,linkText);
+			this.ClickLinkElement(tableName, linkText);
 		}
 
 		[RegexStepDefinition(@"In the My Library - My Brands section, Under Actions click the 'Cancel' button")]
@@ -364,7 +350,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			}
 		}
 
-        #endregion
+		#endregion
 
 
 		#region My Distributors section

@@ -1,10 +1,7 @@
-using System;
+using Reqnroll;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UL.Automation.Reporting.Functions;
-using Reqnroll;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 
@@ -22,11 +19,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics
 			Report.Info("Expected page heading is: " + this._ecologoReadiness.PanelTitle);
 			Report.IsTrue(this._ecologoReadiness.IsActivePanel, "The Ecologo Readiness page did not load!", "The Ecologo Readiness page loaded");
 		}
-        
+
 		[RegexStepDefinition(@"I confirm the ECOLOGO Readiness Assessment question is displayed")]
 		public void ConfirmEcologoReadinessAssessmentQuestionDisplayed()
 		{
-            Report.Info("The ECOLOGO Readiness Assessment question has expected text: " + this._ecologoReadiness.EcologoReadinessAssesmentQuestion);
+			Report.Info("The ECOLOGO Readiness Assessment question has expected text: " + this._ecologoReadiness.EcologoReadinessAssesmentQuestion);
 			Report.IsTrue(this._ecologoReadiness.EcologoReadinessQuestionDisplayed, "The ECOLOGO Readiness question was not displayed!", "The ECOLOGO Readiness question was displayed");
 		}
 

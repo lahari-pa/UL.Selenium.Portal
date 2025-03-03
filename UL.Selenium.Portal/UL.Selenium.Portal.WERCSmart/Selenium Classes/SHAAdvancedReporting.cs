@@ -1,16 +1,11 @@
+using OpenQA.Selenium;
+using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using UL.Automation.ReqnrollHelpers.Classes;
-using System.Collections.ObjectModel;
-using System;
-using Reqnroll;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -190,7 +185,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				output = null;
 				return false;
 			}
-			
+
 			output = actualTitle.Text;
 			return output == title;
 		}
@@ -405,13 +400,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Could not find the input element!");
 				return false;
 			}
-			if(value=="NA")
+			if (value == "NA")
 			{
 				Report.Info("Exiting iFrame");
 				SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 				return true;
 			}
-			if(value== "Future")
+			if (value == "Future")
 			{
 				string endDatePreset = endDateField.GetValue();
 
@@ -429,7 +424,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				endDateField.TryClick();
 				endDateField.EnterText(newDate);
-				
+
 				Delay.Seconds(1);
 				Report.Screenshot();
 
@@ -485,7 +480,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			startDateField.EnterText(value);
 
 			//startDateField.JsEnterText(value);
-			
+
 			Delay.Seconds(1);
 			Report.Screenshot();
 			bool matching = false;
@@ -578,7 +573,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Switching to iFrame");
 			Delay.Seconds(2);
-			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");			
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("frmAdvancedReports");
 			IWebElement upcSizeField = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(@"//*[text()='UPC Size']/parent::td//following-sibling::td//input"), 2);
 			if (upcSizeField == null)
 			{
@@ -616,9 +611,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Could not find the input element!");
 				return false;
 			}
-			bool selected=containsAlcoholBox.TryClick();
+			bool selected = containsAlcoholBox.TryClick();
 			Delay.Seconds(1);
-			Report.Screenshot();			
+			Report.Screenshot();
 
 			Report.Info("Exiting iFrame");
 			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
@@ -666,7 +661,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				var selectedOption = recipientOption.SelectedOption();
 				Report.Info("Exiting iFrame");
 				SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
-				return selectedOption==value;
+				return selectedOption == value;
 			}
 
 
@@ -678,7 +673,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 	}
 
-	
+
 
 
 	class AdvancedReportingDateForm : SeleniumBaseObject

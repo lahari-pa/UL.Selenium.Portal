@@ -1,13 +1,13 @@
+using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using UL.Automation.WebDriver.BaseClasses;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
@@ -513,22 +513,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			Report.Info($"Attempt to verify row color highlighting indicates item is expiring in less then {days} for state {state}");
 			this.ContainerElement.ScrollToElement();
 			colorAttribute = this.ContainerElement.GetAttribute("class");
-				switch (days)
-				{
-					case "90":
-						if (colorAttribute == "rpds-rowcolor-1")
-						{
-							result = true;
-						}
-						break;
-					case "31":
-						if (colorAttribute == "rpds-rowcolor-2")
-						{
-							result = true;
-						}
-						break;
-				}	
-		return result;
+			switch (days)
+			{
+				case "90":
+					if (colorAttribute == "rpds-rowcolor-1")
+					{
+						result = true;
+					}
+					break;
+				case "31":
+					if (colorAttribute == "rpds-rowcolor-2")
+					{
+						result = true;
+					}
+					break;
+			}
+			return result;
 		}
 		public bool VerifyExpirationImportedMark()
 		{
@@ -547,7 +547,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		List<IWebElement> SelectAllRadioButtons => this.ContainerElement.FindElements(By.XPath("//td[div//span[text() = 'Select All']]//input")).ToList();
 
 		private IWebElement ActiveDay => this.ContainerElement.FindElement(By.XPath("//td[@class = 'active day']"));
-		
+
 		public bool ClickActiveDay()
 		{
 			return this.ActiveDay.TryClick();
@@ -562,7 +562,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				IWebElement State = row.FindElement(By.XPath($".//td//div"));
 				getState = State.Text;
 				bool statusIsSelected = new PesticideDetailsStateRegistrationRow(getState).SelectedStatusForState("Registered");
-				if ( !new PesticideDetailsStateRegistrationRow(getState).VerifyExpirationImportedMark())
+				if (!new PesticideDetailsStateRegistrationRow(getState).VerifyExpirationImportedMark())
 				{
 					if (!State.VisibleInViewport())
 					{
@@ -586,7 +586,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			foreach (IWebElement statusRadio in this.StatusRadioButtons)
 			{
 				getStatus = statusRadio.Text;
-				if(getStatus == status)
+				if (getStatus == status)
 				{
 					result = this.SelectAllRadioButtons[i].TryClick();
 					break;
@@ -602,7 +602,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			int x = element.Location.X;
 			int y = element.Location.Y;
-			(element.GetWebDriver() as IJavaScriptExecutor).ExecuteScript("scroll(arguments[0], arguments[1]);", x,y);
+			(element.GetWebDriver() as IJavaScriptExecutor).ExecuteScript("scroll(arguments[0], arguments[1]);", x, y);
 			Delay.Seconds(1.0);
 		}
 	}

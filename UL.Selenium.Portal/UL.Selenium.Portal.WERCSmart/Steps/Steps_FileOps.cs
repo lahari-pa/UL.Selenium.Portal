@@ -1,17 +1,11 @@
-using OpenQA.Selenium;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.ReqnrollHelpers.Classes;
-using UL.Automation.Reporting.Functions;
 using Reqnroll;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Automation.Utilities.Functions;
+using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using System.Collections.ObjectModel;
-using TReVor.Api.Wrapper.Classes;
-using System.IO;
-using UL.Automation.ReqnrollHelpers.Attributes;
-using UL.Automation.Utilities.Functions;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.AdvancedReportsRules;
-using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Reqnroll;
+﻿using Reqnroll;
 using UL.Automation.Reporting;
 using UL.Automation.Reporting.Functions;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps

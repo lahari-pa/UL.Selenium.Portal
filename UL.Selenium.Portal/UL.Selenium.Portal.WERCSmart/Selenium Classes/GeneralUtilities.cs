@@ -1,21 +1,19 @@
+using HtmlAgilityPack;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Globalization;
+using System.IO;
 using System.Linq;
-using HtmlAgilityPack;
+using System.Net;
+using System.Text;
+using System.Text.RegularExpressions;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Automation.Utilities.Functions;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using System.Text;
-using System.Linq;
-using UL.Automation.Utilities.Functions;
-using System.IO;
-using System.Text.RegularExpressions;
-using UL.Automation.ReqnrollHelpers.Classes;
-using System.Net;
-using System.Drawing;
-using Reqnroll;
-using System.Globalization;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -703,7 +701,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		private List<IWebElement> GetButtons(string value)
 		{
-			
+
 			var values = SeleniumWebDriver.CurrentDriver.FindElements(By.XPath($".//*[@value='{value}']|.//*[text()='{value}']"), 2).ToList();
 			return values;
 		}

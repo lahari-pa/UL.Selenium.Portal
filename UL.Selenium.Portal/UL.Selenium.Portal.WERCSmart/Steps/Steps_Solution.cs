@@ -1,17 +1,16 @@
-using System.Collections.Generic;
-using System.Linq;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.Reporting.Functions;
-using UL.Automation.ReqnrollHelpers.Classes;
 using Reqnroll;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
-using UL.Automation.Utilities.Functions;
-using UL.Automation.WebDriver.Extensions;
-using System;
+using System.Linq;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Automation.Utilities.Functions;
+using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -113,8 +112,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					urls = new[] { "https://www.ulprospector.com/en/eu", "https://www.ulprospector.com/en/na" };
 					break;
 				case "ULGHS":
-				    //urls = new[] { "https://msc.ul.com/en/products/ulghs" };
-				    urls = new[] { "https://www.ulghs.com/" };
+					//urls = new[] { "https://msc.ul.com/en/products/ulghs" };
+					urls = new[] { "https://www.ulghs.com/" };
 					break;
 				case "UL Secure Connect (ULSC)":
 					//urls = new[] { "https://msc.ul.com/en/products/wercs-studio/" };

@@ -1,27 +1,13 @@
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text.RegularExpressions;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Utilities.Functions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using UL.Automation.ReqnrollHelpers.Classes;
-using System.Collections.ObjectModel;
-using UL.Selenium.Portal.WERCSmart.Classes;
-using Reqnroll;
-using TReVor.Api.Wrapper.Classes;
-using UL.Automation.Reporting;
 using UL.Automation.WebDriver.Functions;
-using UL.Automation.TReVor.Classes;
-using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
-using OpenQA.Selenium.Support.UI;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Chrome;
-using System.Net.NetworkInformation;
 
 
 
@@ -134,7 +120,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				Report.Info($"Could not find checkbox");
 				return null;
-				
+
 			}
 			return el;
 		}
@@ -190,7 +176,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			IWebElement typeFieldTd = productsTable.FindElement(By.XPath(".//tbody/tr/td[./span[contains(text(),'" + name + "')]]"), 2);
 			IWebElement typeValue = typeFieldTd?.FindElement(By.XPath("..//td[4]/span[1]"), 2);
 			return typeValue.Text;
-		
+
 		}
 
 		public string GetResolvePageTitle()

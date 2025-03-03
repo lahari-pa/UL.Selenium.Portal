@@ -1,9 +1,4 @@
 ﻿using Reqnroll;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
@@ -45,7 +40,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		[RegexStepDefinition(@"In the Subscription Information section, verify the Status is (.*)")]
 		public void VerifySubscriptionInformationDataStatus(string value)
 		{
-			string field = "Status"; 
+			string field = "Status";
 			if (Report.IsTrue(new SubscriptionInformation().DataOptionExists(field), $"Failed to find the field '{field}'", $"Successfully found the field '{field}'."))
 			{
 				if (Report.IsTrue(new SubscriptionInformation().TextExists(), $"Failed to find the text on the page", $"Successfully found the text on the page"))

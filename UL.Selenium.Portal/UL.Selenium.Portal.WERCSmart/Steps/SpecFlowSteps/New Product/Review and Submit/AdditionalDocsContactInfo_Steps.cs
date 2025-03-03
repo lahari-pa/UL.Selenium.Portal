@@ -1,11 +1,4 @@
-﻿using NPOI.SS.Formula.Functions;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Reqnroll;
+﻿using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
@@ -27,7 +20,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 		public void EnterTextForAddress(string text)
 		{
 			string section = "Address";
-			new Steps_Prototype().SetTheSectionOptionTo(section, text); 
+			new Steps_Prototype().SetTheSectionOptionTo(section, text);
 		}
 
 		[RegexStepDefinition(@"In the Additional Documents -> Contact Information section, for section: 'Phone' enter text: (.*)")]
@@ -45,11 +38,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 		}
 
 		[RegexStepDefinition(@"In the Additional Documents Contact Information section, in the sub section: 'Please provide contact information required to display on SDS\(s\) per region.' set the option in the section: 'Sub Format type' to : (Mexico GHS SDS|OSHA GHS SDS|Brazil GHS SDS|China GHS SDS|" +
-		"Vietnam  GHS SDS|Eco Logo|European GHS SDS|Canada GHS SDS|Indonesia  GHS SDS|Japan GHS SDS|Korea GHS SDS|North American Combined GHS SDS|Product Development Regulatory Report|Singapore GHS SDS|TCLP Calculation|Transportation Classification|"+
+		"Vietnam  GHS SDS|Eco Logo|European GHS SDS|Canada GHS SDS|Indonesia  GHS SDS|Japan GHS SDS|Korea GHS SDS|North American Combined GHS SDS|Product Development Regulatory Report|Singapore GHS SDS|TCLP Calculation|Transportation Classification|" +
 		"Thailand GHS SDS|Taiwan GHS SDS|Australia GHS SDS|Assessment Summary Report|VOC Restriction|Malaysia GHS SDS)")]
 		public void EnterTextForSubFormatType(string option)
 		{
-			if(new AdditionalDocsContactInfo().SubFormatTypeDropDownExists())
+			if (new AdditionalDocsContactInfo().SubFormatTypeDropDownExists())
 			{
 				Report.Info($"The Sub Format Type dropdown exists! Checking if the option: {option} exists in the drop down!");
 
@@ -67,7 +60,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 		[RegexStepDefinition(@"In the Additional Documents  Contact Information section, in the sub section: 'Please provide contact information required to display on SDS\(s\) per region.' enter text for the first 'Address': (.*)")]
 		public void EnterTextForSubSectionAddress1(string text)
 		{
-			if(new AdditionalDocsContactInfo().Address1Exsits())
+			if (new AdditionalDocsContactInfo().Address1Exsits())
 			{
 				new AdditionalDocsContactInfo().EnterTextAddress1(text);
 			}
@@ -116,7 +109,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Review_an
 				new AdditionalDocsContactInfo().EnterTextEmail(text);
 			}
 			Report.Info("The email textbox does not exist");
-			return; 
+			return;
 		}
 
 

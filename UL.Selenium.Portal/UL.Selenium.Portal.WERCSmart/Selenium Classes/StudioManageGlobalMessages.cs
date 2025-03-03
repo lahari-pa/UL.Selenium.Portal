@@ -1,12 +1,11 @@
+using OpenQA.Selenium;
 using System;
+using System.Collections.ObjectModel;
 using System.Linq;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -94,7 +93,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool WaitForMessageTableToShow()
 		{
-			IWebElement messageTable= this.containerElement.WaitUntilElementVisible(By.XPath(".//table[@id='tblGlobalMessages']"), 30);
+			IWebElement messageTable = this.containerElement.WaitUntilElementVisible(By.XPath(".//table[@id='tblGlobalMessages']"), 30);
 			return messageTable != null;
 		}
 

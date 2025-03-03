@@ -1,15 +1,11 @@
-﻿using UL.Selenium.Portal.WERCSmart.Classes;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
-using System;
-using Reqnroll;
-using UL.Automation.Reporting;
-using UL.Automation.Reporting.Functions;
-using UL.Selenium.Portal.WERCSmart.Steps;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.Reporting.Classes;
+﻿using Reqnroll;
 using TReVor.Api.Wrapper.Classes;
+using UL.Automation.Reporting.Classes;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.TReVor.Classes;
+using UL.Automation.WebDriver.Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -58,9 +54,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			SecurityManager_SetAccessWindow SM_SAW = new SecurityManager_SetAccessWindow();
 			Report.IsTrue(SM_SAW.ClickToSetAccessLevel(), "Failed to click the Change Multiple button.", "Successfully clicked the Change Multiple button.", showSuccessScreenshot: false);
-		}	
+		}
 
-		
+
 
 		[RegexStepDefinition(@"I select screen '(.*)' under '(.*)'")]
 		public void ThenISelectScreenUnder(string item, string columnName)
@@ -103,7 +99,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			SecurityManager_Screens SM_S = new SecurityManager_Screens();
 			Report.IsTrue(SM_S.ClickEditBtn(), "Failed to click the edit button.", "Successfully clicked the edit button.");
 			GeneralUtilities.ExitIFrame();
-		}		
+		}
 
 		[RegexStepDefinition(@"I apply the following Screen security settings to '(.*)'")]
 		public void ThenIApplyTheFollowingSecuritySettings(string role, Table table)

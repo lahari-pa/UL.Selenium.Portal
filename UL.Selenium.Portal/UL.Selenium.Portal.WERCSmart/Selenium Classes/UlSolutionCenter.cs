@@ -1,9 +1,9 @@
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.Generic;
 using System.Linq;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Extensions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -75,7 +75,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			this.containerElement.FindElement(By.XPath(".//a[contains(@class,'btn btn-default pull-right') and @href='https://www.ulghs.com/']"), 2);
 		}
 
-		public List<UlSection> GetSections {
+		public List<UlSection> GetSections
+		{
 			get
 			{
 				var rList = new List<UlSection>();

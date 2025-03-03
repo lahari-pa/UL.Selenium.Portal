@@ -1,17 +1,15 @@
+using OpenQA.Selenium;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Mail;
+using System.Text.RegularExpressions;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using System.Collections.ObjectModel;
 using UL.Selenium.Portal.WERCSmart.Classes;
-using System.Net.Mail;
-using System;
-using System.Globalization;
-using System.Text.RegularExpressions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -88,7 +86,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool WaitForSuppliersToLoad()
 		{
 			IWebElement el = this.ContainerElement.FindElement(By.XPath(".//div[@class='loading ui-state-default ui-state-active' and @style='display: block;']"), 2);
-			if(el==null)
+			if (el == null)
 			{
 				Report.Success($"Loading... was not showing");
 				return true;
@@ -96,7 +94,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			int x = 0;
 			bool loaded = false;
-			while (x<12&&loaded==false)
+			while (x < 12 && loaded == false)
 			{
 				el = this.ContainerElement.FindElement(By.XPath(".//div[@class='loading ui-state-default ui-state-active' and @style='display: block;']"), 2);
 				loaded = el.IsNullOrEmpty();
@@ -152,7 +150,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool CheckSubscriptionColumnValues()
 		{
-			List<bool> result= new List<bool>();
+			List<bool> result = new List<bool>();
 			if (this.ColumnNames.Count > 0)
 			{
 				foreach (IWebElement element in this.ColumnNames)
@@ -168,11 +166,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						result.Add(false);
 					}
 				}
-			return result.All(x => x.Equals(true));
+				return result.All(x => x.Equals(true));
 			}
 			Report.Info("There is no suppliers with such search option");
 			return true;
-		}		
+		}
 		public List<string> GetSupplierIDs()
 		{
 			var suppliers = new List<string>();
@@ -289,7 +287,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ColunmTitleExists(string columnTitle)
 		{
 			Report.Info($"Attempt to find column title {columnTitle}");
-			return this.Column(columnTitle) != null;	
+			return this.Column(columnTitle) != null;
 		}
 		public bool CheckForSupplierManagerColumnValue(string columnTitle, string status)
 		{

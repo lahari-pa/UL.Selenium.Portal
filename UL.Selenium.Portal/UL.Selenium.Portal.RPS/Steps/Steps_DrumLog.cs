@@ -1,9 +1,9 @@
-﻿using System;
+﻿using OpenQA.Selenium;
+using Reqnroll;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using OpenQA.Selenium;
-using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.ReqnrollHelpers.Classes;
@@ -114,7 +114,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         [RegexStepDefinition(@"In the Drum Log page, I Verify page refreshes in the background with a a breadcrumb matching the item you selected shown: (.*)")]
         public void InTheDrumLogPageIVerifyItemsInBreadCrumbs(string itemName)
         {
-            Report.IsTrue(new DrumLog().ItemNameBreadCrumb()== itemName, "Failed to show breadcrumb matching the item you selected", "breadcrumb matching the item you selected is shown");
+            Report.IsTrue(new DrumLog().ItemNameBreadCrumb() == itemName, "Failed to show breadcrumb matching the item you selected", "breadcrumb matching the item you selected is shown");
         }
 
         [RegexStepDefinition(@"In the Drum Log page, I Verify page refreshes in the background with a new row called: (.*)")]
@@ -243,10 +243,10 @@ namespace UL.Selenium.Portal.RPS.Steps
             foreach (TableRow thisRow in table.Rows)
             {
                 expectedHeadings.Add(thisRow["Headings"]);
-   
-            } 
+
+            }
             List<string> foundHeadings = new DrumLog().GetColumnHeadingTitles();
- 
+
             Report.IsTrue(expectedHeadings.SequenceEqual(foundHeadings), "The headings found were not as expected", "The headings found matched the expected headings");
         }
 
@@ -895,7 +895,7 @@ namespace UL.Selenium.Portal.RPS.Steps
 
 
             var differences = foundOptions.Except(filtersExpected);
- 
+
             if (differences.Any())
             {
                 Report.Info($"Differences found: {string.Join(",", differences)}");
@@ -1048,7 +1048,7 @@ namespace UL.Selenium.Portal.RPS.Steps
                     var convertedDate = fileToDate.ToString("yyyy-MM-dd");
                     Report.IsTrue(wantedProduct.DateOpened == convertedDate, "The Date Opened did not match", "The Date Opened matched");
 
-                    Report.Info($"Saved Date Closed: {wantedProduct.DateClosed}");;
+                    Report.Info($"Saved Date Closed: {wantedProduct.DateClosed}"); ;
                     Report.Info($"File Date Closed: {dateClosed}");
                     var fileToDate1 = Convert.ToDateTime(dateClosed);
                     var convertedDate1 = fileToDate1.ToString("yyyy-MM-dd");

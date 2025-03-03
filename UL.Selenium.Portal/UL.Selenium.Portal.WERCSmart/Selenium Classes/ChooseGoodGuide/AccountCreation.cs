@@ -1,6 +1,5 @@
-using UL.Automation.WebDriver.Extensions;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
+using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 {
@@ -14,7 +13,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 		public bool ClickCreateCompanyAccount =>
 			this.containerElement.FindElement(By.XPath(".//a[text()='Create Company Account']"), 2).TryClick();
 
-		public string Email {
+		public string Email
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtEmail']"), 2)?.GetValue();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtEmail']"), 2)?.EnterText(value);
 		}
@@ -25,31 +25,37 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.ChooseGoodGuide
 		public new bool ClickCancel =>
 			this.containerElement.FindElement(By.XPath(".//input[@id='cmdCancel']"), 2).TryClick();
 
-		public string WhatCityWereYouBornIn {
+		public string WhatCityWereYouBornIn
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer1']"), 2).Text.Trim();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer1']"), 2).EnterText(value);
 		}
 
-		public string WhatWasTheModelOfYourFirstCar {
+		public string WhatWasTheModelOfYourFirstCar
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer2']"), 2).Text.Trim();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer2']"), 2).EnterText(value);
 		}
 
-		public string WhatIsYourFavouriteSport {
+		public string WhatIsYourFavouriteSport
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer3']"), 2).Text.Trim();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer3']"), 2).EnterText(value);
 		}
-		public string WhatIsYourFavouriteFoodOrDrink {
+		public string WhatIsYourFavouriteFoodOrDrink
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer4']"), 2).Text.Trim();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer4']"), 2).EnterText(value);
 		}
 
-		public string WhatIsYourFavouriteVacationDestination {
+		public string WhatIsYourFavouriteVacationDestination
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer5']"), 2).Text.Trim();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer5']"), 2).EnterText(value);
 		}
 
-		public string EnterSecurePassword {
+		public string EnterSecurePassword
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtPhonePassword']"), 2).Text.Trim();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtPhonePassword']"), 2).EnterText(value);
 		}

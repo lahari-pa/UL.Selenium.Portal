@@ -1,16 +1,9 @@
 ﻿using OpenQA.Selenium;
-using System;
 using System.Collections.Generic;
-using System.IO.Packaging;
 using System.Linq;
-using System.Printing;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Extensions;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -26,7 +19,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		private IWebElement Checkbox(string checkboxLabel) => this.FindElement(By.XPath($".//label[normalize-space() = '{checkboxLabel}']//input[@type='checkbox']"), 1);
 		private IWebElement LabeledDropdown(string dropdownLabel) => this.FindElement(By.XPath($"//div[contains(@class,'form-group')][.//label[@class='control-label'][normalize-space()='{dropdownLabel}']]//select"), 1);
 		private List<IWebElement> LabeledDropdownOptionsList(string dropdownLabel) => this.LabeledDropdown(dropdownLabel).FindElements(By.XPath("//option"), 1).ToList();
-		private IWebElement LabeledDropdownOption(string dropdownLabel, string dropdownOption) => this.LabeledDropdownOptionsList(dropdownLabel).Where(x=>x.Text.Trim() == dropdownOption).FirstOrDefault();
+		private IWebElement LabeledDropdownOption(string dropdownLabel, string dropdownOption) => this.LabeledDropdownOptionsList(dropdownLabel).Where(x => x.Text.Trim() == dropdownOption).FirstOrDefault();
 		#endregion
 
 		#region Methods
@@ -61,7 +54,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info($"Attempting to get the list of status filters.");
 			List<string> output = new List<string>();
-			this.StatusFilterList.ForEach(x=> output.Add(x.Text));
+			this.StatusFilterList.ForEach(x => output.Add(x.Text));
 			return output;
 		}
 		public bool StatusFilterExists(string statusFilterLabel)
@@ -127,7 +120,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool CheckboxChecked(string checkboxLabel)
 		{
 			Report.Info($"Attempting to confirm '{checkboxLabel}' checkbox is checked.");
-			return this.Checkbox(checkboxLabel).Checked();		}
+			return this.Checkbox(checkboxLabel).Checked();
+		}
 		#endregion
 
 		#region Labeled Dropdown Methods
@@ -229,7 +223,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	{
 		#region Class Objects
 		protected override By ContainerElementLocator => By.XPath("//table[not(@id)][@class='table table-hover products-table']");
-		private List<IWebElement> ColumnLabelsList => this.FindElements(By.XPath(".//th[text()]"),1).ToList();
+		private List<IWebElement> ColumnLabelsList => this.FindElements(By.XPath(".//th[text()]"), 1).ToList();
 		private IWebElement ColumnLabel(string columnLabel) => this.ColumnLabelsList.FirstOrDefault(x => x.Text == columnLabel);
 		private List<MyProductsTableRow> ProductTableRowsList => this.ContainerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: products']//tr"), 1).Select(x => new MyProductsTableRow(x)).ToList();
 		#endregion
@@ -272,13 +266,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public MyProductsTableRow ProductRowByNameGet(string productName)
 		{
 			Report.Info($"Attempting to get product row with '{productName}' product name.");
-			return this.ProductTableRowsList.FirstOrDefault(x=>x.ProductName == productName);
+			return this.ProductTableRowsList.FirstOrDefault(x => x.ProductName == productName);
 		}
 
 		public MyProductsTableRow ProductRowByIDGet(string productID)
 		{
 			Report.Info($"Attempting to get product row with '{productID}' product ID.");
-			return this.ProductTableRowsList.Where(x=>x.ProductID == productID).FirstOrDefault();
+			return this.ProductTableRowsList.Where(x => x.ProductID == productID).FirstOrDefault();
 		}
 		#endregion
 	}
@@ -290,8 +284,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		private IWebElement ItemsOnPageSelect => this.FindElement(By.XPath(".//select[contains(@data-bind,'ItemsOnPage')]"), 1);
 		private List<IWebElement> ItemsOnPageSelectOptionsList => this.ItemsOnPageSelect.FindElements(By.XPath(".//option"), 1).ToList();
 		private IWebElement ItemsOnPageSelectOption(string optionLabel) => this.ItemsOnPageSelectOptionsList.Where(x => x.Text.Trim() == optionLabel).FirstOrDefault();
-		private List<IWebElement> PaginationButtonsList => this.FindElements(By.XPath(".//ul[@id='pagingControl']//*[text()]"),1).ToList();
-		private IWebElement PaginationButton(string buttonLabel) => this.PaginationButtonsList.Where(x => x.Text == buttonLabel ).FirstOrDefault();
+		private List<IWebElement> PaginationButtonsList => this.FindElements(By.XPath(".//ul[@id='pagingControl']//*[text()]"), 1).ToList();
+		private IWebElement PaginationButton(string buttonLabel) => this.PaginationButtonsList.Where(x => x.Text == buttonLabel).FirstOrDefault();
 		#endregion
 
 		#region Class Methods
@@ -401,14 +395,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		private IWebElement ContainerElement { get; set; }
 		private IWebElement IDProductNameCell => this.ContainerElement.FindElement(By.XPath(".//td[.//small[@data-bind='text:ProductID']]"), 1);
 		public string ProductID => this.IDProductNameCell.FindElement(By.XPath(".//small[@data-bind='text:ProductID']"), 1)?.Text;
-		public string ProductName => this.IDProductNameCell.FindElement(By.XPath(".//p"),1)?.Text;
-		private IWebElement PrivateLabelTile => this.IDProductNameCell.FindElement(By.XPath(".//span[@title='Private Label']"),1);
-		public string DateCreated => this.ContainerElement.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"),1)?.Text;
+		public string ProductName => this.IDProductNameCell.FindElement(By.XPath(".//p"), 1)?.Text;
+		private IWebElement PrivateLabelTile => this.IDProductNameCell.FindElement(By.XPath(".//span[@title='Private Label']"), 1);
+		public string DateCreated => this.ContainerElement.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 1)?.Text;
 		public string DateRevised => this.ContainerElement.FindElement(By.XPath(".//td[@data-bind='text: DateRevised']"), 1)?.Text;
 		public string DateDiscontinued => this.ContainerElement.FindElement(By.XPath(".//td[@data-bind='text: DateDiscontinued']"), 1)?.Text;
-		private List<RecipientTile> RecipientsList => this.ContainerElement.FindElements(By.XPath(".//ul[@class='list-inline retailers']//li"),1).Select(x => new RecipientTile(x)).ToList();
+		private List<RecipientTile> RecipientsList => this.ContainerElement.FindElements(By.XPath(".//ul[@class='list-inline retailers']//li"), 1).Select(x => new RecipientTile(x)).ToList();
 		private IWebElement ActionsButton => this.ContainerElement.FindElement(By.XPath(".//button[@data-toggle='dropdown']"), 1);
-		private List<IWebElement> ActionsButtonOptionsList => this.ContainerElement.FindElements(By.XPath(".//ul[@class='dropdown-menu']//a[not(@style='display: none;')]"),1).ToList();
+		private List<IWebElement> ActionsButtonOptionsList => this.ContainerElement.FindElements(By.XPath(".//ul[@class='dropdown-menu']//a[not(@style='display: none;')]"), 1).ToList();
 		private IWebElement ActionsButtonOption(string optionLabel) => this.ActionsButtonOptionsList.Where(x => x.Equals(optionLabel)).FirstOrDefault();
 		#endregion
 
@@ -434,20 +428,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info($"Attempting to get '{this.ProductName}' list of reciepient retailers with '{status}' status.");
 			List<string> output = new List<string>();
-			this.RecipientsList.Where(x=>x.Status == status).ToList().ForEach(x => output.Add(x.Retailer));
+			this.RecipientsList.Where(x => x.Status == status).ToList().ForEach(x => output.Add(x.Retailer));
 			return output;
 		}
 
 		public bool RecipientExists(string label)
 		{
 			Report.Info($"Attempting to confirm '{label}' recipient tile exists.");
-			return this.RecipientsList.Any(x=>x.Label == label);
+			return this.RecipientsList.Any(x => x.Label == label);
 		}
 
 		public RecipientTile RecipientGet(string label)
 		{
 			Report.Info($"Attempting to get '{label}' recipient tile.");
-			return this.RecipientsList.Where(x=> x.Label == label).FirstOrDefault();
+			return this.RecipientsList.Where(x => x.Label == label).FirstOrDefault();
 		}
 
 		public bool ActionsButtonExists()

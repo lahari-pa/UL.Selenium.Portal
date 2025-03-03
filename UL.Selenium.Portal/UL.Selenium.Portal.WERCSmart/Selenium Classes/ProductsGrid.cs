@@ -1,19 +1,17 @@
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Automation.Utilities.Functions;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using System.Collections.ObjectModel;
-using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
-using UL.Selenium.Portal.WERCSmart.Steps;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using Reqnroll;
-using UL.Automation.Utilities.Functions;
+using UL.Selenium.Portal.WERCSmart.Steps;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -30,9 +28,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		private List<IWebElement> ProductRows => this.ProductTable?.FindElements(By.XPath(".//tbody/tr"), 1).ToList();
 
-		private IWebElement ProductsHeading => this.containerElement.FindElement(By.XPath("./h2[contains(@class,'title')]"), 1); 
+		private IWebElement ProductsHeading => this.containerElement.FindElement(By.XPath("./h2[contains(@class,'title')]"), 1);
 		private List<IWebElement> ProductTableHeadings => this.ProductTable.FindElements(By.XPath(".//th"), 2).ToList();
-		
+
 		#endregion
 		public string HeadingText => this.ProductsHeading?.Text;
 
@@ -1527,7 +1525,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			bool result = true;
 			IWebElement SingleRetailerLabel;
-			foreach(var product in this.ProductList)
+			foreach (var product in this.ProductList)
 			{
 				SingleRetailerLabel = this.ContainerElement.FindElement(By.XPath(".//small[text()[contains(.,'Single Retailer')]]"));
 				if (SingleRetailerLabel == null)
@@ -1589,13 +1587,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				productGrid.UpcNumber = value;
 				if (!Report.IsTrue(productGrid.UpcNumber == value, $"Value: {value} was not inputted into the UPC Number field correctly!", $"Value: {value} was correctly inputted into the UPC Number field", false, false))
 				{
-				// Return so that we don't start removing all elements in the datagrid!
+					// Return so that we don't start removing all elements in the datagrid!
 					return;
 				}
 
 				if (!Report.IsTrue(productGrid.ClickUpcNumberSearchButton(), "Failed to click the UPC Search button!", "Successfully clicked the UPC Search button!", false, false))
 				{
-				// Again, return just in case we don't have the correct results in the search grid!
+					// Again, return just in case we don't have the correct results in the search grid!
 					return;
 				}
 				GeneralUtilities.Wait_for_load_finish();
@@ -1927,7 +1925,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public List<string> GetDataOfAdditionalPrograms()
 		{
 			return this.Values.Select(x => x.Text).ToList();
-			
+
 		}
 
 		public class FilterInformation

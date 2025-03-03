@@ -12,8 +12,8 @@ namespace UL.Selenium.Portal.RPS.Steps
         [RegexStepDefinition(@"I confirm the Demo Viewer Page has loaded")]
         public void DemoViewerPageLoaded()
         {
-           
-            GeneralUtilities.WaitForLoadingToFinish();            
+
+            GeneralUtilities.WaitForLoadingToFinish();
             if (!new DemoViewer().WaitForLoginInputAreaToLoad())
             {
                 Report.Error("The login input fields did not load");
@@ -25,7 +25,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-    } 
+    }
 
 
 }

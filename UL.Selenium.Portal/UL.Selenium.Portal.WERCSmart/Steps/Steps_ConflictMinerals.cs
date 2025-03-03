@@ -1,15 +1,12 @@
+using Reqnroll;
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Mailosaur;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.Utilities.Functions;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.ReqnrollHelpers.Classes;
-using Reqnroll;
 using UL.Automation.ReqnrollHelpers.Attributes;
-using UL.Automation.Utilities;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.Utilities.Mailosaur.Classes;
+using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using Message = Mailosaur.Models.Message;

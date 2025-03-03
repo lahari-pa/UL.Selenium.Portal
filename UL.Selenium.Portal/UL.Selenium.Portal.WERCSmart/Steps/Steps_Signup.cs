@@ -1,22 +1,21 @@
 using Mailosaur;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.Reporting.Functions;
-using UL.Automation.ReqnrollHelpers.Classes;
+using Reqnroll;
+using Reqnroll.Assist;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Reqnroll;
-using Reqnroll.Assist;
 using UL.Automation.Reporting;
+using UL.Automation.Reporting.Classes;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.TReVor.Classes;
-using UL.Automation.Utilities;
+using UL.Automation.Utilities.Mailosaur.Classes;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
-using UL.Automation.Utilities.Mailosaur.Classes;
-using UL.Automation.Reporting.Classes;
-using UL.Automation.ReqnrollHelpers.Attributes;
-using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -574,7 +573,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 						sw.Close();
 					}
 				}
-				catch(Exception ex)
+				catch (Exception ex)
 				{
 					Report.Info(ex.Message);
 				}
@@ -678,7 +677,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				var thisNewUser = new NewUser();
 				Report.IsTrue(thisNewUser.Wait_for_load(), "New user form failed to load", "New user form is loaded as expected.");
 				Report.Screenshot();
-				
+
 				thisNewUser.Country = user.Country;
 				thisNewUser.FirstName = user.FirstName;
 				thisNewUser.LastName = user.LastName;
@@ -743,8 +742,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[RegexStepDefinition(@"In the new user form I click on Next")]
 		public void WhenInTheNewUserFormIClickOnNext()
 		{
-			Report.IsTrue(new NewUser().ClickNext(),"Failed to click next", "Succesfully clicked next");
-			
+			Report.IsTrue(new NewUser().ClickNext(), "Failed to click next", "Succesfully clicked next");
+
 		}
 
 		[RegexStepDefinition(@"In the new user form I click on Success")]
@@ -757,11 +756,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			}
 			Report.IsTrue(new NewUser().ClickSuccess(), "Failed to click Success", "Successfully clicked Success");
 			GeneralUtilities.Wait_for_load_finish();
-			if( new NewUser().ClickSuccessButton!=null)
+			if (new NewUser().ClickSuccessButton != null)
 			{
 				int i = 0;
 				bool buttonGone = false;
-				while (i < 5 && buttonGone==false)
+				while (i < 5 && buttonGone == false)
 				{
 					Report.IsTrue(new NewUser().ClickSuccess(), "Failed to click Success", "Successfully clicked Success");
 					GeneralUtilities.Wait_for_load_finish();
@@ -790,7 +789,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
-		
+
 		[RegexStepDefinition(@"If terms of use page appears I accept")]
 		public void GivenIfTermsOfUsePageAppearsIAccept()
 		{
@@ -816,7 +815,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			var selHomepage = new Homepage();
 			Report.Info($"Starting, wait for the homepage to appear");
-			if(selHomepage.WaitForContainerToBeVisible(30))
+			if (selHomepage.WaitForContainerToBeVisible(30))
 			{
 				Report.Info($"The homepage was showing");
 				return;
@@ -954,7 +953,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 
 		[RegexStepDefinition(@"there is a new email for user: (.*) from: (.*) with the title: (.*) and it should contain no attachments with the file name: (.*)")]
-		public void ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitleWithNoAttachments(string savedAs, string emailFrom, string title,string fileName)
+		public void ThenThereShouldBeANewEmailForEmamilWithSpecifiedFromAndTitleWithNoAttachments(string savedAs, string emailFrom, string title, string fileName)
 		{
 			Report.StartStep(ReportDetails.CurrentDetails.StepCounter + "- Checking whether there is a new email for user: " + savedAs + " from " + emailFrom + " with title: " + title);
 			string shouldOrNot = "should";

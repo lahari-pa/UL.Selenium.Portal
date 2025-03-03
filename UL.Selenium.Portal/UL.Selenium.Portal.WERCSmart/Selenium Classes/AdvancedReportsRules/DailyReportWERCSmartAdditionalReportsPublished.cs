@@ -1,9 +1,8 @@
-using UL.Automation.WebDriver.Classes;
+using System.Collections.Generic;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Classes;
-using System;
-using System.Collections.Generic;
 using UL.Automation.Utilities.Functions;
+using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.AdvancedReportsRules

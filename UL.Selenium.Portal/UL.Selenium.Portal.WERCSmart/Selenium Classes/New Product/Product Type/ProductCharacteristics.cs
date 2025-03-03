@@ -5,7 +5,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		/// <summary>
 		/// Relative Density text box
 		/// </summary>
-		public string SpecificGravity {
+		public string SpecificGravity
+		{
 			get => this.TextInputValueForLabel("Relative Density");
 			set => this.SetOptionInSection("Relative Density", value);
 		}
@@ -13,7 +14,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		/// <summary>
 		/// pH text box
 		/// </summary>
-		public string PH {
+		public string PH
+		{
 			get => this.TextInputValueForLabel("pH");
 			set => this.SetOptionInSection("pH", value);
 		}
@@ -21,7 +23,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		/// <summary>
 		/// Boiling Point (in Celsius) text box
 		/// </summary>
-		public string BoilingPoint {
+		public string BoilingPoint
+		{
 			get => this.TextInputValueForLabel("Boiling Point (in Celsius)");
 			set => this.SetOptionInSection("Boiling Point (in Celsius)", value);
 		}
@@ -29,17 +32,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		/// <summary>
 		/// Flash Point (in Celsius) text box
 		/// </summary>
-		public string FlashPoint {
+		public string FlashPoint
+		{
 			get => this.TextInputValueForLabel("Flash Point (in Celsius)");
 			set => this.SetOptionInSection("Flash Point (in Celsius)", value);
 		}
 
-		public string PrimaryPhysicalState {
+		public string PrimaryPhysicalState
+		{
 			get => this.SelectedInputForLabel("Primary Physical State");
 			set => this.SelectRadio("Primary Physical State", value);
 		}
 
-		public string BestWaterSolubilityDescription {
+		public string BestWaterSolubilityDescription
+		{
 			get => this.SelectedInputForLabel("Best Water Solubility");
 			set => this.SetOptionInSection("Best Water Solubility", value);
 
