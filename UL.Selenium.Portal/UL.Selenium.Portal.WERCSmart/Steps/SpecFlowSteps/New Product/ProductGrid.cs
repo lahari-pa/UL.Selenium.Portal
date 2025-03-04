@@ -12,7 +12,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		[RegexStepDefinition(@"In the Product Grid, delete the product saved as: (.*)")]
 		public void DeleteAProductFromTheProductGrid(string savedAs)
 		{
-			new ProductsGrid().DeleteAProduct(savedAs);
+			//new ProductsGrid().DeleteAProduct(savedAs);
+			new Steps_MyProductsPage().MyProductsPageDeleteProductSavedAs(savedAs);
 		}
 
 		[RegexStepDefinition(@"In the Product Grid, delete all products with UPC Number: (.*)")]

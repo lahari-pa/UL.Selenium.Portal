@@ -1,8 +1,11 @@
 ﻿using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 {
@@ -1122,6 +1125,70 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		#endregion
 		#endregion
 
+		#region Delete Products Modal
+		[RegexStepDefinition(@"Confirm Delete Product modal (is|is not) displayed")]
+		public void ConfirmDeleteProductModalIsIsNotDisplayed(string is_isnot)
+		{
+			string modalTitleExpected = "Delete Product";
+			Steps_ModalDialogPrototype modalDialogPrototype = new Steps_ModalDialogPrototype();
+			modalDialogPrototype.ConfirmModalIsIsNotDisplayed(modalTitleExpected, is_isnot);
+		}
+
+		[RegexStepDefinition(@"In the Delete Product modal, confirm '(.*)' product name (is|is not) displayed")]
+		public void DeleteProductModalConfirmProductNameIsIsNotDisplayed(string productNameExpected, string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			DeleteProductModal deleteProductModal = new DeleteProductModal();
+			string productNameDisplayed = deleteProductModal.DisplayedProductNameGet();
+			Report.IsTrue(expected == productNameDisplayed.Equals(productNameExpected), $"Failure, in the Delete Prodcut modal failed to confirm '{productNameExpected}' product name {is_isnot} displayed.", $"Success, in the Delete Product modal confiremd '{productNameExpected}' product name {is_isnot} displayed.");
+		}
+
+		[RegexStepDefinition(@"In the Delete Product modal, confirm '(.*)' product id (is|is not) displayed")]
+		public void DeleteProductModalConfirmProductIdIsIsNotDisplayed(string productIdExpected, string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			DeleteProductModal deleteProductModal = new DeleteProductModal();
+			string productIdDisplayed = deleteProductModal.DisplayedProductIdGet();
+			Report.IsTrue(expected == productIdDisplayed.Equals(productIdExpected), $"Failure, in the Delete Prodcut modal failed to confirm '{productIdExpected}' product id {is_isnot} displayed.", $"Success, in the Delete Product modal confiremd '{productIdExpected}' product id {is_isnot} displayed.");
+		}
+
+		[RegexStepDefinition(@"In the Delete Product modal, confirm 'DELETE' footer button (does|does not) exist")]
+		public void DeleteProductModalDeleteFooterButtonDoesDoesNotExist(string does_doesnot)
+		{
+			string buttonLabel = "Delete";
+			Steps_ModalDialogPrototype modalDialogPrototype = new Steps_ModalDialogPrototype();
+			modalDialogPrototype.DisplayedModalConfirmFooterButtonDoesDoesNotExist(buttonLabel, does_doesnot);
+
+		}
+
+		[RegexStepDefinition(@"In the Delete Product modal, confirm 'CANCEL' footer button (does|does not) exist")]
+		public void DeleteProductModalCancelFooterButtonDoesDoesNotExist(string does_doesnot)
+		{
+			string buttonLabel = "Cancel";
+			Steps_ModalDialogPrototype modalDialogPrototype = new Steps_ModalDialogPrototype();
+			modalDialogPrototype.DisplayedModalConfirmFooterButtonDoesDoesNotExist(buttonLabel, does_doesnot);
+
+		}
+
+		[RegexStepDefinition(@"In the Delete Product modal, click 'DELETE' footer button")]
+		public void DeleteProductModalClickDeleteFooterButton()
+		{
+			string buttonLabel = "Delete";
+			Steps_ModalDialogPrototype modalDialogPrototype = new Steps_ModalDialogPrototype();
+			modalDialogPrototype.DisplayedModalClickFooterButton(buttonLabel);
+
+		}
+
+		[RegexStepDefinition(@"In the Delete Product modal, click 'CANCEL' footer button")]
+		public void DeleteProductModalClickCancelFooterButton()
+		{
+			string buttonLabel = "Cancel";
+			Steps_ModalDialogPrototype modalDialogPrototype = new Steps_ModalDialogPrototype();
+			modalDialogPrototype.DisplayedModalClickFooterButton(buttonLabel);
+
+		}
+		#endregion
+
 		#region Bulk Actions Modal Steps
 		[RegexStepDefinition(@"Confirm Bulk Actions modal (does|does not) exists")]
 		public void MyProductsPageConfirmBulkActionsModalExists(string does_doesnot)
@@ -1221,5 +1288,44 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			}
 		}
 		#endregion
+
+		#region Shared Steps
+		[RegexStepDefinition(@"On the My Products page, delete the product saved as: (.*)")]
+		public void MyProductsPageDeleteProductSavedAs(string savedAs)
+		{
+			Report.UseSubSteps = true;
+			Report.Info("Attempting to get product from context");
+			if (!Context.Contains(savedAs))
+			{
+				Report.Failure($"Context did not contain the Product saved as: {savedAs}");
+			}
+			else
+			{
+				Report.Info("Found in Context");
+			}
+			var obj = Context.GetFromContext(savedAs);
+			Report.Info("Attempting to convert Product to type ProductInformation");
+			var Product = (ProductInformation)obj;
+
+			GlobalSteps globalSteps = new GlobalSteps();
+			globalSteps.ThenTheHomeScreenShouldLoad();
+			this.MyProductsPageProductIDNameTextSearchInputEnterText(Product.Name);
+			this.MyProductsPageClickProductIDNameTextSearchButtonExists();
+			this.MyProductsPageConfirmTableDoesDoesNotExist("does");
+			this.MyProductsPageConfirmTableColumnLabelsListDoesDoesNotExist("does");
+			Delay.Seconds(1);
+			this.MyProductTableConfirmProductNameRowDoesDoesNotExist(Product.Name, "does");
+			this.MyProductTableProductNameRowActionsButtonClick(Product.Name);
+			this.MyProductTableProductNameRowConfirmActionsButtonMenuIsIsNotDisplayed(Product.Name, "is");
+			this.MyProductTableProductNameRowConfirmActionsButtonOptionDoesDoesNotExists(Product.Name, "Delete", "does");
+			this.MyProductTableProductNameRowClicActionsButtonOption(Product.Name, "Delete");
+			this.ConfirmDeleteProductModalIsIsNotDisplayed("is");
+			this.DeleteProductModalConfirmProductNameIsIsNotDisplayed(Product.Name, "is");
+			this.DeleteProductModalClickDeleteFooterButton();
+			Delay.Seconds(1);
+			this.MyProductTableConfirmProductNameRowDoesDoesNotExist(Product.Name, "does not");
+			Report.UseSubSteps = false;
+		}
+		#endregion 
 	}
 }

@@ -266,6 +266,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public MyProductsTableRow ProductRowByNameGet(string productName)
 		{
 			Report.Info($"Attempting to get product row with '{productName}' product name.");
+			var test = this.ProductTableRowsList;
 			return this.ProductTableRowsList.FirstOrDefault(x => x.ProductName == productName);
 		}
 
@@ -395,7 +396,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		private IWebElement ContainerElement { get; set; }
 		private IWebElement IDProductNameCell => this.ContainerElement.FindElement(By.XPath(".//td[.//small[@data-bind='text:ProductID']]"), 1);
 		public string ProductID => this.IDProductNameCell.FindElement(By.XPath(".//small[@data-bind='text:ProductID']"), 1)?.Text;
-		public string ProductName => this.IDProductNameCell.FindElement(By.XPath(".//p"), 1)?.Text;
+		public string ProductName => this.IDProductNameCell.FindElement(By.XPath(".//p"), 1)?.Text.Trim();
 		private IWebElement PrivateLabelTile => this.IDProductNameCell.FindElement(By.XPath(".//span[@title='Private Label']"), 1);
 		public string DateCreated => this.ContainerElement.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 1)?.Text;
 		public string DateRevised => this.ContainerElement.FindElement(By.XPath(".//td[@data-bind='text: DateRevised']"), 1)?.Text;
@@ -403,7 +404,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		private List<RecipientTile> RecipientsList => this.ContainerElement.FindElements(By.XPath(".//ul[@class='list-inline retailers']//li"), 1).Select(x => new RecipientTile(x)).ToList();
 		private IWebElement ActionsButton => this.ContainerElement.FindElement(By.XPath(".//button[@data-toggle='dropdown']"), 1);
 		private List<IWebElement> ActionsButtonOptionsList => this.ContainerElement.FindElements(By.XPath(".//ul[@class='dropdown-menu']//a[not(@style='display: none;')]"), 1).ToList();
-		private IWebElement ActionsButtonOption(string optionLabel) => this.ActionsButtonOptionsList.Where(x => x.Equals(optionLabel)).FirstOrDefault();
+		private IWebElement ActionsButtonOption(string optionLabel) => this.ActionsButtonOptionsList.Where(x => x.Text.Trim().Equals(optionLabel)).FirstOrDefault();
 		#endregion
 
 		#region Class Methods
@@ -480,6 +481,35 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info($"Attempting to click '{this.ProductName}' action button menu '{optionLabel}' option.");
 			return this.ActionsButtonOption(optionLabel).TryClick();
+		}
+		#endregion
+	}
+
+	public class DeleteProductModal : ModalDialogPrototype
+	{
+		#region Class Objects
+		private string BodyWarningText => this.FindElement(By.XPath(".//div[@class='modal-body']//p[.//span[contains(@class,'glyphicon-question-sign')]]"), 1)?.Text;
+		private string DisplayedProductName => this.FindElement(By.XPath(".//strong[contains(@data-bind,'.Name')]"), 1)?.Text.Trim();
+		private string DisplayedProductId => this.FindElement(By.XPath(".//span[contains(@data-bind,'.ProductID')]"), 1)?.Text.Trim();
+		#endregion
+
+		#region Class Methods
+		public string BodyWarningTextGet()
+		{
+			Report.Info($"Attempting to get Delete Product modal warning text.");
+			return this.BodyWarningText;
+		}
+
+		public string DisplayedProductNameGet()
+		{
+			Report.Info($"Attempting to get Delete Product modal displayed product name.");
+			return this.DisplayedProductName;
+		}
+
+		public string DisplayedProductIdGet()
+		{
+			Report.Info($"Attempting to get Delete Product modal displayed product id.");
+			return this.DisplayedProductId;
 		}
 		#endregion
 	}
