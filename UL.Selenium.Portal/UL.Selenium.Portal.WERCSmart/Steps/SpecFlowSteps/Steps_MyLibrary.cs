@@ -724,8 +724,69 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			Report.IsTrue(new MyLibraryPage().ProductTableExists(name), $"{name} table is not displayed", $"Successfully {name} table is displayed");
 		}
 
-		#endregion
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, for 'Address 2' enter (.*)")]
+		public void EnterAddressinSDSPage(string value)
+		{
+			string section = "value: address";
+			if (Report.IsTrue(new SDSPage().TextFieldExists(section), $"Failed to find the 'Address' text input", $"Successfully found the 'Address' text input."));
+			{
+				Report.IsTrue(new SDSPage().EnterTextinField(section, value), $"Failed to enter '{value}' in the 'Address' input.", $"Successfully entered '{value}' in the 'Address' field.");
+			}
+		}
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, for 'Address 2' enter (.*)")]
+		public void EnterAddress2inSDSPage(string value)
+		{
+			string section = "value: address2";
+			if (Report.IsTrue(new SDSPage().TextFieldExists(section), $"Failed to find the 'Address 2' text input", $"Successfully found the 'Address 2' text input."));
+			{
+				Report.IsTrue(new SDSPage().EnterTextinField(section, value), $"Failed to enter '{value}' in the 'Address 2' input.", $"Successfully entered '{value}' in the 'Address 2' field.");
+			}
+		}
+
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, for 'Phone' enter (.*)")]
+		public void EnterPhoneinSDSPage(string value)
+		{
+			string section = "value: phone";
+			if (Report.IsTrue(new SDSPage().TextFieldExists(section), $"Failed to find the 'Phone' text input", $"Successfully found the 'Phone' text input."));
+			{
+				Report.IsTrue(new SDSPage().EnterTextinField(section, value), $"Failed to enter '{value}' in the 'Phone' input.", $"Successfully entered '{value}' in the 'Phone' field.");
+			}
+		}
+
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, for 'Emergency Phone' enter (.*)")]
+		public void EnterEmergencyinSDSPage(string value)
+		{
+			string section = "value: emergency";
+			if (Report.IsTrue(new SDSPage().TextFieldExists(section), $"Failed to find the 'Emergency Phone' text input", $"Successfully found the 'Emergency Phone' text input."));
+			{
+				Report.IsTrue(new SDSPage().EnterTextinField(section, value), $"Failed to enter '{value}' in the 'Emergency Phone' input.", $"Successfully entered '{value}' in the 'Emergency Phone' field.");
+			}
+		}
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, for 'Email' enter (.*)")]
+		public void EnterEmailinSDSPage(string value)
+		{
+			string section = "value: email";
+			if (Report.IsTrue(new SDSPage().TextFieldExists(section), $"Failed to find the 'Email' text input", $"Successfully found the 'Email' text input."));
+			{
+				Report.IsTrue(new SDSPage().EnterTextinField(section, value), $"Failed to enter '{value}' in the 'Email' input.", $"Successfully entered '{value}' in the 'Email' field.");
+			}
+		}
+
+
 
 	}
 
+
+
+
+
+	#endregion
+
 }
+
+

@@ -412,6 +412,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		#region Page Objects
 		protected override By ContainerElementLocator => By.XPath("//div[@class='body-content']");
 		IWebElement actionbutton(string name, string action) => this.FindElement(By.XPath($".//div[contains(@id,'sds')]//table//tr//td//span[contains(@data-bind,'name')][contains(text(),'{name}')]//ancestor::tr//td//a[text()='{name}']"), 2);
+		IWebElement FieldInputText(string fieldname) => this.ContainerElement.FindElement(By.XPath($"//input[@data-bind='{fieldname}']"), 2);
+
 		#endregion
 
 		#region Methods
@@ -422,6 +424,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
+		public bool EnterTextinField(string fieldname, string text)
+		{
+			this.FieldInputText(fieldname).ClearTextBox();
+			Report.Info("Enter the value in the field");
+			return this.FieldInputText(fieldname).TryEnterText(text);
+		}
+
+		public bool TextFieldExists(string fieldname)
+		{
+			return this.FieldInputText(fieldname).Displayed;
+		}
 
 
 		#endregion
