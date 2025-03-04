@@ -683,7 +683,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, click action (Edit |Delete) for Sub format type name: (.*)")]
 		public void ClickActionForSDS(string action, string productname)
 		{
-			Report.IsTrue(new MySDSPage().ForSDSClickAction(productname, action),
+			Report.IsTrue(new SDSPage().ForSDSClickAction(productname, action),
 				$"Failed to click action:{action} for component: {productname}",
 				$"Successfully clicked action: {action} for component: {productname}");
 		}
