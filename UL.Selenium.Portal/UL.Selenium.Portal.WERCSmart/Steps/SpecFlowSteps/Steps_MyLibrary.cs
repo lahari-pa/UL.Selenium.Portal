@@ -777,6 +777,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			}
 		}
 
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section , From the Sub Format type dropdown - I select option: (.*)")]
+		public void SubFormatDropdownSelectOption(string optionValue)
+		{
+			SDSPage sdsTable = new SDSPage();
+			Report.IsTrue(sdsTable.SubFormatTypeDropdownExists=(), $"Failed, Sub Format type dropdown is not displayed", $"Successfully displayed Sub Format type dropdown");
+			Report.IsTrue(sdsTable.SubFormatTypeDropdownClick(), $"Failed to click Sub Format type dropdown", $"Successfully clicked Sub Format type dropdown ");
+			Report.IsTrue(sdsTable.SubFormatTypeDropdownOptionExists(optionValue), $"Failed, Sub Format type dropdown option {optionValue} is not displayed", $"Successfully displayed Sub Format type dropdown option {optionValue}");
+			Report.IsTrue(sdsTable.SubFormatTypeDropdownOptionClick(optionValue), $"Failed to click option {optionValue} in Sub Format type dropdown", $"Successfully clicked option {optionValue} in Sub Format type dropdown");
+		}
+
 
 
 	}

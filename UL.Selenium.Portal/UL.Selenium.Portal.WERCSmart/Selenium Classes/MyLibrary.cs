@@ -413,6 +413,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		protected override By ContainerElementLocator => By.XPath("//div[@class='body-content']");
 		IWebElement actionbutton(string name, string action) => this.FindElement(By.XPath($".//div[contains(@id,'sds')]//table//tr//td//span[contains(@data-bind,'name')][contains(text(),'{name}')]//ancestor::tr//td//a[text()='{name}']"), 2);
 		IWebElement FieldInputText(string fieldname) => this.ContainerElement.FindElement(By.XPath($"//input[@data-bind='{fieldname}']"), 2);
+		private IWebElement SubFormatTypeDropdown => this.ContainerElement.FindElement(By.XPath($".//div[contains(@id,'sds')]//table//tr//td//select[contains(@data-bind,'subformat')]"), 1);
+		private List<IWebElement> SubFormatTypeDropdownOptionsList => this.SubFormatTypeDropdown.FindElements(By.XPath("//option"), 1).ToList();
+		private IWebElement SubFormatTypeDropdownOption(string dropdownOption) => this.SubFormatTypeDropdownOptionsList.Where(x => x.Text.Trim() == dropdownOption).FirstOrDefault();
 
 		#endregion
 
@@ -434,6 +437,32 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool TextFieldExists(string fieldname)
 		{
 			return this.FieldInputText(fieldname).Displayed;
+		}
+
+
+		public bool SubFormatTypeDropdownExists()
+		{
+			Report.Info($"Attempting to confirm Sub Format Type exists");
+			return this.SubFormatTypeDropdown != null;
+		}
+
+		public bool SubFormatTypeDropdownClick()
+		{
+			Report.Info($"Attempting to click Sub Format Type dropdown");
+			return this.SubFormatTypeDropdown.TryClick();
+		}
+
+
+		public bool SubFormatTypeDropdownOptionExists(string dropdownOption)
+		{
+			Report.Info($"Attempting to confirm Sub Format Type dropdown contains '{dropdownOption}' option.");
+			return this.SubFormatTypeDropdownOption(dropdownOption) != null;
+		}
+
+		public bool SubFormatTypeDropdownOptionClick(string dropdownOption)
+		{
+			Report.Info($"Attempting to click Sub Format Type dropdown '{dropdownOption}' option.");
+			return this.SubFormatTypeDropdownOption(dropdownOption).TryClick();
 		}
 
 
