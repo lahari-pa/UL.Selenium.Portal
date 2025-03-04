@@ -25,6 +25,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 @run_Flow28_AutoParts
+@MyProductsPage
 
 Feature: [64733] Flow 28 - Auto Parts
 
@@ -69,7 +70,8 @@ Scenario: [60673] Gasoline Container, Portable - RU001419
 	Given In the Retailer Section, click 'Add Retailers' button
 	Given In the Select Retailers window, select retailer: Harbor Freight Tools
 	Given In the Select Retailers window, click 'Done' button
-#	Given In the Retailer Section, for retailer: Harbor Freight Tools enter 'Indicate full name of product, as sold, via this retailer': Private Label Gasoline
+	# step does not exist on the screen, manual tc needs to be updated -- 2/26/25
+	#Given In the Retailer Section, for retailer: Harbor Freight Tools enter 'Indicate full name of product, as sold, via this retailer': Private Label Gasoline
 	Given in the Retailer page I click Continue
 
 	#Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60673, container type: Cardboard and size: 20
@@ -79,6 +81,7 @@ Scenario: [60673] Gasoline Container, Portable - RU001419
 	Given in the Universal Product Code (UPC) page I click Continue
 
 	Given I should see the Additional Documents to Provide Page
+	# step does not exist on the screen, manual tc needs to be updated -- 2/26/25
 	#Given In the Additional Documents to Provide, upload PDF document to Upload SDS (Optional) field
 	#Given In the Additional Documents to Provide, upload PDF document to Generic Private Label (all sides) field
 	Then in the Additional Documents to Provide page I click Continue
@@ -97,3 +100,5 @@ Scenario: [60673] Gasoline Container, Portable - RU001419
    # Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60673
    	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase60673
+	Then In the Product Grid, in 'Product ID/ Name' search input textbox, enter the product id savedas: TestCase60673
+	Then In the Product Grid, in 'Product ID/ Name' search input textbox, enter the product id savedas: (.*)

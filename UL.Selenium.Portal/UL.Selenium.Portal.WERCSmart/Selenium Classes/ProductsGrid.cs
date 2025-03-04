@@ -623,7 +623,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool DeleteFirstRow(string savedas)
 		{
 			IWebElement row = this.containerElement.FindElement(By.XPath(".//table[contains(@class,'products-table')]//tbody[@data-bind='foreach: products']"), 2);
-			IWebElement toggleButton = row.FindElement(By.XPath(".//div[@class='btn-group']//button[@class='btn btn-default ellipsis-button dropdown-toggle']"), 2); //.//table[@class='table table-hover products-table']//tbody[@data-bind='foreach: products']//button[@class='btn btn-default ellipsis-button dropdown-toggle']
+			IWebElement toggleButton = row.FindElement(By.XPath(".//div[@class='btn-group']//button[@class='btn btn-default ellipsis-button dropdown-toggle']"), 2); 
 			if (toggleButton.TryClick())
 			{
 				IWebElement deleteButton = row.FindElement(By.XPath("//ul[@class='dropdown-menu']//a[contains(text(),'Delete')]"), 2);
