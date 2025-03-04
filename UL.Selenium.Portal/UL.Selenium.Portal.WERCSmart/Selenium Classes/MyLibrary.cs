@@ -21,13 +21,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		protected override By ContainerElementLocator => By.XPath("//div[@class='body-content']");
 		IWebElement InputText(string text) => this.ContainerElement.FindElement(By.XPath($"//input[contains(@placeholder,'{text}')]"), 2);
 
-		IWebElement SearchButon(string idname) => this.ContainerElement.FindElement(By.XPath($"//div[contains(@id,'{idname}')]//div[@class='input-group']//span[contains(@data-bind,'Click')]"), 2);
+		IWebElement SearchButon(string idname) => this.ContainerElement.FindElement(By.XPath($"//div[contains(@id,'{idname}')]//div[@class='input-group']//span[contains(@data-bind,'click')]"), 2);
 
 		IWebElement Section(string name) => this.ContainerElement.FindElement(By.XPath($"//div[@class='panel-heading']//h3[text()='{name}']"), 2);
 
 		IWebElement Table(string idname) => this.ContainerElement.FindElement(By.XPath($"//div[contains(@id,'{idname}')]//table"), 2);
 
-		IWebElement LinkElement(string tablename, string linkText) => this.ContainerElement.FindElement(By.XPath($".//div[contains(@id,'{tablename}')]//a[text()='{linkText}'] | .//div[contains(@id,'{tablename}')]//a//span[text()='{linkText}']"), 2);
+		IWebElement LinkElement(string tablename, string linkText) => this.ContainerElement.FindElement(By.XPath($".//div[contains(@id,'{tablename}')]//a[text()='{linkText}'] | .//div[contains(@id,'{tablename}')]//a//span[text()='{linkText}'] | .//div[contains(@id,'{tablename}')]//button[text()='{linkText}']"), 2);
 		#endregion
 
 		#region Page Methods
@@ -399,6 +399,29 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info($"Attempting to get Component Name");
 			return this.BulkProductComponentName.Text;
 		}
+
+
+		#endregion
+
+	}
+
+
+	public class SDSPage : SeleniumBaseObject
+	{
+
+		#region Page Objects
+		protected override By ContainerElementLocator => By.XPath("//div[@class='body-content']");
+		IWebElement actionbutton(string name, string action) => this.FindElement(By.XPath($".//div[contains(@id,'sds')]//table//tr//td//span[contains(@data-bind,'name')][contains(text(),'{name}')]//ancestor::tr//td//a[text()='{name}']"), 2);
+		#endregion
+
+		#region Methods
+		public bool ForSDSClickAction(string name, string action)
+		{
+
+			return this.actionbutton(name, action).TryClick();
+
+		}
+
 
 
 		#endregion

@@ -635,6 +635,97 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 
 		#endregion
 
+		#region Contact Information per SDS
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, click the 'Add New' button")]
+		public void ClickSDSTheAddNewButton()
+		{
+			string tableName = "sdsRegion";
+			string linkText = "Add New";
+			this.ClickLinkElement(tableName, linkText);
+		}
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, click the 'Clear' button")]
+		public void ClickSDSTheClearButton()
+		{
+			string tableName = "sdsRegion";
+			string linkText = "Clear";
+			this.ClickLinkElement(tableName, linkText);
+		}
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, Filter by Sub Format Type for product: (.*)")]
+		public void InSDSFilterProduct(string value)
+		{
+			string fieldname = "Sub Format type";
+			string tablename = "sdsRegion";
+			new MyLibraryPage().EnterText(fieldname, value);
+			Report.IsTrue(new MyLibraryPage().ClickSearch(tablename),
+				$"Failed to search for product: {value}",
+				$"Successfully searched for product: {value}");
+		}
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, Under Actions click the 'Cancel' button")]
+		public void ClickTheCancelButtonInSDSSection()
+		{
+			string tableName = "sdsRegion";
+			string linkText = "Cancel";
+			this.ClickLinkElement(tableName, linkText);
+		}
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, Under Actions click the 'Save' button")]
+		public void ClickTheSaveButtonInSDSSection()
+		{
+			string tableName = "sdsRegion";
+			string linkText = "Save";
+			this.ClickLinkElement(tableName, linkText);
+		}
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, click action (Edit |Delete) for Sub format type name: (.*)")]
+		public void ClickActionForSDS(string action, string productname)
+		{
+			Report.IsTrue(new MySDSPage().ForSDSClickAction(productname, action),
+				$"Failed to click action:{action} for component: {productname}",
+				$"Successfully clicked action: {action} for component: {productname}");
+		}
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, Validate 'Remove Region ?' popup (should| should not) be displayed")]
+		public void ValidateRemoveRegionPopup(string condition)
+		{
+			string modalTitle = "Remove Region ?";
+			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeading(condition, modalTitle);
+		}
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, in the 'Remove Region ?' pop up click (Yes|No) button")]
+		public void ClickYesNoInRemoveRegionPopUp(string button)
+		{
+			string popupTitle = "Remove Region ?";
+			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(popupTitle, button);
+		}
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, Validate 'Are you sure you wish to cancel?' popup (should| should not) be displayed")]
+		public void ValidateWishToCancelPopup(string condition)
+		{
+			string modalTitle = "Are you sure you wish to cancel?";
+			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeading(condition, modalTitle);
+		}
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, in the 'Are you sure you wish to cancel?' pop up click (Yes|No) button")]
+		public void ClickYesNoInWishTocancelPopUp(string button)
+		{
+			string popupTitle = "Are you sure you wish to cancel?";
+			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(popupTitle, button);
+		}
+
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, Verify table is displayed")]
+		public void VerifySDSTableIsDisplayed()
+		{
+			string name = "sds";
+			Report.IsTrue(new MyLibraryPage().ProductTableExists(name), $"{name} table is not displayed", $"Successfully {name} table is displayed");
+		}
+
+		#endregion
+
 	}
 
 }
