@@ -1293,6 +1293,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		[RegexStepDefinition(@"On the My Products page, delete the product saved as: (.*)")]
 		public void MyProductsPageDeleteProductSavedAs(string savedAs)
 		{
+			Report.UseSubSteps = true;
 			Report.Info("Attempting to get product from context");
 			if (!Context.Contains(savedAs))
 			{
@@ -1323,6 +1324,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			this.DeleteProductModalClickDeleteFooterButton();
 			Delay.Seconds(1);
 			this.MyProductTableConfirmProductNameRowDoesDoesNotExist(Product.Name, "does not");
+			Report.UseSubSteps = false;
 		}
 		#endregion 
 	}
