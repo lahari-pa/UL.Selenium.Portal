@@ -573,8 +573,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				return;
 			}
 			Report.IsTrue(selNewProduct.CheckStandaloneCheckbox(description),
-				$"Failed to check the checkbox with description: '{description}'!",
-				$"Successfully checked the checkbox with description: '{description}'");
+				$"Failed to {check} the checkbox with description: '{description}'!",
+				$"Successfully {check}ed the checkbox with description: '{description}'");
 			Report.IsTrue(selNewProduct.StandaloneCheckbox(description).Checked() == toCheck,
 				$"The checkbox was not {check}ed after",
 				$"The checkbox is {check}ed as expected");
