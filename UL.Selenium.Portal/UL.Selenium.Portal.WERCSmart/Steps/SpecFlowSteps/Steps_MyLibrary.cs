@@ -548,16 +548,241 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		}
 
 		[RegexStepDefinition(@"In the My Library - My Ingredients section, in the 'Remove Component' pop up click (Yes|No) button")]
-		public void ClickDeleteCloseInDeleteIngredientPopUp(string button)
+		public void ClickYesNoInRemoveComponentPopUp(string button)
 		{
 			string popupTitle = "Remove Component from My Ingredients?";
 			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(popupTitle, button);
 		}
 
+		[RegexStepDefinition(@"In the My Library - My Ingredients section , click 'Delete checked' button")]
+		public void SetClickDeleteChecked()
+		{
+			string button = "Delete checked";
+			new Steps_Prototype().ClickButton(button);
+		}
 
+		[RegexStepDefinition(@"In the My Library - My Ingredients section, Validate 'Remove (.*) Components from My Ingredients?' popup (should| should not) be displayed")]
+		public void ValidateDeleteIngredientPopup(string count, string condition)
+		{
+			string modalTitle = $"Remove {count} Components from My Ingredients?";
+			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeading(condition, modalTitle);
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section, in the 'Remove (.*) Components from My Ingredients' pop up click (Yes|No) button")]
+		public void ClickyesNoInRemoveIngredientPopUp(string count, string button)
+		{
+			string popupTitle = $"Remove {count} Components from My Ingredients?";
+			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(popupTitle, button);
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section, (check|uncheck)  CAS Chemical name  checkbox for component name: (.*)")]
+		public void CASCheckUncheckButton(string check_uncheck, string componentname)
+		{
+			bool expected = check_uncheck == "check";
+			string checkboxLabel = "checked: isChecked";
+			MyIngredientsPage ingredientsTable = new MyIngredientsPage();
+			Report.IsTrue(ingredientsTable.TableCheckboxExists(componentname, checkboxLabel), $"Failure, in the displayed table '{checkboxLabel}' checkbox is not displayed.", $"Success, in the displayed table '{checkboxLabel}' checkbox is displayed.");
+			if (expected != ingredientsTable.TableCheckboxChecked(componentname, checkboxLabel))
+			{
+				Report.IsTrue(ingredientsTable.TableCheckboxClick(componentname, checkboxLabel), $"Failure, in the displayed table failed to click '{checkboxLabel}' checkbox.", $"Success, in the displayed table clicked '{checkboxLabel}' checkbox.");
+			}
+			Report.IsTrue((ingredientsTable.TableCheckboxChecked(componentname, checkboxLabel) == expected), $"Failure, in the displayed table failed to confirm '{checkboxLabel}' checkbox is {check_uncheck}ed.", $"Success, in the displayed table confirmed '{checkboxLabel}' checkbox is {check_uncheck}ed.");
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section - Under Bulk Product Management, (check|uncheck) New Disclosure checkbox for product name: (.*)")]
+		public void NewDisclosureCheckUncheckFooterButton(string check_uncheck, string productname)
+		{
+			bool expected = check_uncheck == "check";
+			MyIngredientsPage ingredientsTable = new MyIngredientsPage();
+			Report.IsTrue(ingredientsTable.NewDisclosureCheckboxExists(productname), $"Failure, in the displayed table ' New Disclosure' checkbox is not displayed.", $"Success, in the displayed table ' New Disclosure' checkbox is displayed.");
+			if (expected != ingredientsTable.NewDisclosureCheckboxChecked(productname))
+			{
+				Report.IsTrue(ingredientsTable.NewDisclosureCheckboxClick(productname), $"Failure, in the displayed table failed to click 'New Disclosure' checkbox.", $"Success, in the displayed table clicked 'New Disclosure' checkbox.");
+			}
+			Report.IsTrue((ingredientsTable.NewDisclosureCheckboxChecked(productname) == expected), $"Failure, in the displayed table failed to confirm 'New Disclosure' checkbox is {check_uncheck}ed.", $"Success, in the displayed table confirmed 'New Disclosure' checkbox is {check_uncheck}ed.");
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section - Under Bulk Product Management , From the Public Name dropdown for product (.*) - I select option: (.*)")]
+		public void BulkProductPublicNameSelectOption(string productname, string optionValue)
+		{
+			MyIngredientsPage ingredientsTable = new MyIngredientsPage();
+			Report.IsTrue(ingredientsTable.BulkProductPublicNameDropdownExists(productname), $"Failed, Pubic Name dropdown is not displayed for component {productname}", $"Successfully displayed Public name dropdown for component {productname} ");
+			Report.IsTrue(ingredientsTable.BulkProductPublicNameDropdownClick(productname), $"Failed to click Pubic Name dropdown for component {productname}", $"Successfully clicked Public name dropdown for component {productname} ");
+			Report.IsTrue(ingredientsTable.BulkProductPublicNameDropdownOptionExists(productname, optionValue), $"Failed, Pubic Name dropdown option {optionValue} is not displayed for component {productname}", $"Successfully displayed Public name dropdown option {optionValue} for component {productname} ");
+			Report.IsTrue(ingredientsTable.BulkProductPublicNameDropdownOptionClick(productname, optionValue), $"Failed to click option {optionValue} in Pubic Name dropdown for component {productname}", $"Successfully clicked option {optionValue}in Public name dropdown for component {productname} ");
+		}
+
+		[RegexStepDefinition(@"In the My Library - My Ingredients section - Under Bulk Product Management, Verify selected component: (.*) is displayed under the header")]
+		public void ValidateComponentNameunderHeader(string componentname)
+		{
+			MyIngredientsPage ingredientsTable = new MyIngredientsPage();
+			Report.IsTrue(ingredientsTable.GetBulkProductComponentName() == componentname, $"Failed to display selected componeny name under the header", $"Successfully displayd selected componeny name under the header ");
+		}
 
 		#endregion
 
+		#region Contact Information per SDS
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, click the 'Add New' button")]
+		public void ClickSDSTheAddNewButton()
+		{
+			string tableName = "sdsRegion";
+			string linkText = "Add New";
+			this.ClickLinkElement(tableName, linkText);
+		}
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, click the 'Clear' button")]
+		public void ClickSDSTheClearButton()
+		{
+			string tableName = "sdsRegion";
+			string linkText = "Clear";
+			this.ClickLinkElement(tableName, linkText);
+		}
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, Filter by Sub Format Type for product: (.*)")]
+		public void InSDSFilterProduct(string value)
+		{
+			string fieldname = "Sub Format type";
+			string tablename = "sdsRegion";
+			new MyLibraryPage().EnterText(fieldname, value);
+			Report.IsTrue(new MyLibraryPage().ClickSearch(tablename),
+				$"Failed to search for product: {value}",
+				$"Successfully searched for product: {value}");
+		}
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, Under Actions click the 'Cancel' button")]
+		public void ClickTheCancelButtonInSDSSection()
+		{
+			string tableName = "sdsRegion";
+			string linkText = "Cancel";
+			this.ClickLinkElement(tableName, linkText);
+		}
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, Under Actions click the 'Save' button")]
+		public void ClickTheSaveButtonInSDSSection()
+		{
+			string tableName = "sdsRegion";
+			string linkText = "Save";
+			this.ClickLinkElement(tableName, linkText);
+		}
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, click action (Edit |Delete) for Sub format type name: (.*)")]
+		public void ClickActionForSDS(string action, string productname)
+		{
+			Report.IsTrue(new SDSPage().ForSDSClickAction(productname, action),
+				$"Failed to click action:{action} for component: {productname}",
+				$"Successfully clicked action: {action} for component: {productname}");
+		}
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, Validate 'Remove Region ?' popup (should| should not) be displayed")]
+		public void ValidateRemoveRegionPopup(string condition)
+		{
+			string modalTitle = "Remove Region ?";
+			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeading(condition, modalTitle);
+		}
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, in the 'Remove Region ?' pop up click (Yes|No) button")]
+		public void ClickYesNoInRemoveRegionPopUp(string button)
+		{
+			string popupTitle = "Remove Region ?";
+			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(popupTitle, button);
+		}
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, Validate 'Are you sure you wish to cancel?' popup (should| should not) be displayed")]
+		public void ValidateWishToCancelPopup(string condition)
+		{
+			string modalTitle = "Are you sure you wish to cancel?";
+			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeading(condition, modalTitle);
+		}
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, in the 'Are you sure you wish to cancel?' pop up click (Yes|No) button")]
+		public void ClickYesNoInWishTocancelPopUp(string button)
+		{
+			string popupTitle = "Are you sure you wish to cancel?";
+			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(popupTitle, button);
+		}
+
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, Verify table is displayed")]
+		public void VerifySDSTableIsDisplayed()
+		{
+			string name = "sds";
+			Report.IsTrue(new MyLibraryPage().ProductTableExists(name), $"{name} table is not displayed", $"Successfully {name} table is displayed");
+		}
+
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, for 'Address 2' enter (.*)")]
+		public void EnterAddressinSDSPage(string value)
+		{
+			string section = "value: address";
+			if (Report.IsTrue(new SDSPage().TextFieldExists(section), $"Failed to find the 'Address' text input", $"Successfully found the 'Address' text input."));
+			{
+				Report.IsTrue(new SDSPage().EnterTextinField(section, value), $"Failed to enter '{value}' in the 'Address' input.", $"Successfully entered '{value}' in the 'Address' field.");
+			}
+		}
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, for 'Address 2' enter (.*)")]
+		public void EnterAddress2inSDSPage(string value)
+		{
+			string section = "value: address2";
+			if (Report.IsTrue(new SDSPage().TextFieldExists(section), $"Failed to find the 'Address 2' text input", $"Successfully found the 'Address 2' text input."));
+			{
+				Report.IsTrue(new SDSPage().EnterTextinField(section, value), $"Failed to enter '{value}' in the 'Address 2' input.", $"Successfully entered '{value}' in the 'Address 2' field.");
+			}
+		}
+
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, for 'Phone' enter (.*)")]
+		public void EnterPhoneinSDSPage(string value)
+		{
+			string section = "value: phone";
+			if (Report.IsTrue(new SDSPage().TextFieldExists(section), $"Failed to find the 'Phone' text input", $"Successfully found the 'Phone' text input."));
+			{
+				Report.IsTrue(new SDSPage().EnterTextinField(section, value), $"Failed to enter '{value}' in the 'Phone' input.", $"Successfully entered '{value}' in the 'Phone' field.");
+			}
+		}
+
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, for 'Emergency Phone' enter (.*)")]
+		public void EnterEmergencyinSDSPage(string value)
+		{
+			string section = "value: emergency";
+			if (Report.IsTrue(new SDSPage().TextFieldExists(section), $"Failed to find the 'Emergency Phone' text input", $"Successfully found the 'Emergency Phone' text input."));
+			{
+				Report.IsTrue(new SDSPage().EnterTextinField(section, value), $"Failed to enter '{value}' in the 'Emergency Phone' input.", $"Successfully entered '{value}' in the 'Emergency Phone' field.");
+			}
+		}
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section, for 'Email' enter (.*)")]
+		public void EnterEmailinSDSPage(string value)
+		{
+			string section = "value: email";
+			if (Report.IsTrue(new SDSPage().TextFieldExists(section), $"Failed to find the 'Email' text input", $"Successfully found the 'Email' text input."));
+			{
+				Report.IsTrue(new SDSPage().EnterTextinField(section, value), $"Failed to enter '{value}' in the 'Email' input.", $"Successfully entered '{value}' in the 'Email' field.");
+			}
+		}
+
+		[RegexStepDefinition(@"In the My Library - Contact Information per SDS(s) section , From the Sub Format type dropdown - I select option: (.*)")]
+		public void SubFormatDropdownSelectOption(string optionValue)
+		{
+			SDSPage sdsTable = new SDSPage();
+			Report.IsTrue(sdsTable.SubFormatTypeDropdownExists(), $"Failed, Sub Format type dropdown is not displayed", $"Successfully displayed Sub Format type dropdown");
+			Report.IsTrue(sdsTable.SubFormatTypeDropdownClick(), $"Failed to click Sub Format type dropdown", $"Successfully clicked Sub Format type dropdown ");
+			Report.IsTrue(sdsTable.SubFormatTypeDropdownOptionExists(optionValue), $"Failed, Sub Format type dropdown option {optionValue} is not displayed", $"Successfully displayed Sub Format type dropdown option {optionValue}");
+			Report.IsTrue(sdsTable.SubFormatTypeDropdownOptionClick(optionValue), $"Failed to click option {optionValue} in Sub Format type dropdown", $"Successfully clicked option {optionValue} in Sub Format type dropdown");
+		}
+
+
+
 	}
 
+
+
+
+
+	#endregion
+
 }
+
+
