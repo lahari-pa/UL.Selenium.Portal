@@ -25,6 +25,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 @run_Flow28_AutoParts
+@MyProductsPage
 
 Feature: [64733] Flow 28 - Auto Parts
 
@@ -51,17 +52,17 @@ Scenario: [60673] Gasoline Container, Portable - RU001419
 
 	#And I call Shared Step 69687 (Product Information - US, No(PL))
 	Given I should see the Product Information Page
-	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
-	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: Yes
-	Given In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
-	Given in the Product Information page I click Continue
+	And In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
+	And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page, I click Continue
 
 	Given I should see the Inventory Status, Prop 65 (US) Page
 	Given In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
     Given in the Inventory Status, Prop 65 (US) page I click Continue
 
 	Given I should see the Fuel Container Regulatory Details Page
-	Given I enter the text of Product is a Safety Can field to: Yes
+	Given In the Fuel Container Regulatory Details Section, set the option in section: 'Product is a Safety Can' to: Yes
 	Given in the Fuel Container Regulatory Details page I click Continue
 
 	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Harbor Freight Tools
@@ -69,7 +70,8 @@ Scenario: [60673] Gasoline Container, Portable - RU001419
 	Given In the Retailer Section, click 'Add Retailers' button
 	Given In the Select Retailers window, select retailer: Harbor Freight Tools
 	Given In the Select Retailers window, click 'Done' button
-	Given In the Retailer Section, for retailer: Harbor Freight Tools enter 'Indicate full name of product, as sold, via this retailer': Private Label Gasoline
+	# step does not exist on the screen, manual tc needs to be updated -- 2/26/25
+	#Given In the Retailer Section, for retailer: Harbor Freight Tools enter 'Indicate full name of product, as sold, via this retailer': Private Label Gasoline
 	Given in the Retailer page I click Continue
 
 	#Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC60673, container type: Cardboard and size: 20
@@ -79,8 +81,9 @@ Scenario: [60673] Gasoline Container, Portable - RU001419
 	Given in the Universal Product Code (UPC) page I click Continue
 
 	Given I should see the Additional Documents to Provide Page
-	Given In the Additional Documents to Provide, upload PDF document to Upload SDS (Optional) field
-	Given In the Additional Documents to Provide, upload PDF document to Generic Private Label (all sides) field
+	# step does not exist on the screen, manual tc needs to be updated -- 2/26/25
+	#Given In the Additional Documents to Provide, upload PDF document to Upload SDS (Optional) field
+	#Given In the Additional Documents to Provide, upload PDF document to Generic Private Label (all sides) field
 	Then in the Additional Documents to Provide page I click Continue
 
 	Given I should see the Optional Comments Page
@@ -97,3 +100,5 @@ Scenario: [60673] Gasoline Container, Portable - RU001419
    # Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60673
    	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase60673
+	Then In the Product Grid, in 'Product ID/ Name' search input textbox, enter the product id savedas: TestCase60673
+	Then In the Product Grid, in 'Product ID/ Name' search input textbox, enter the product id savedas: (.*)
