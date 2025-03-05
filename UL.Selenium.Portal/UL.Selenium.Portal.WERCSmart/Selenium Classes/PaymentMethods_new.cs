@@ -6,8 +6,6 @@ using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
 using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -200,6 +198,45 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info($"Attempting to get the Phone.");
 			return this.Phone(addressType).Text;
+		}
+		public bool SelectOptionInSectionJs(string section, string value)
+		{
+			//bool result = false;
+			//SelectElement Selector;
+			IWebElement Selector;
+			try
+			{
+				//Selector = new SelectElement(SeleniumWebDriver.CurrentDriver.FindElement(By.Id("input-achBankAccountType"), 2));
+				Selector =  SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//div[label[contains(text(),\"{section}\")]]//select"), 2);
+
+			}
+			catch(Exception nullEx)
+			{
+				Report.Info(nullEx.Message);
+				return false;
+			}
+			try
+			{
+				IJavaScriptExecutor js = (IJavaScriptExecutor)SeleniumWebDriver.CurrentDriver;
+				string script = @"arguments[0].value = arguments[1];";
+				try
+				{
+					js.ExecuteScript(script, Selector, value);
+					return true;
+				}
+				catch
+				{
+					return false;
+				}
+				//Selector.SelectByValue(value);
+				//return true;
+			}
+			catch (Exception exception)
+			{
+				Report.Info(exception.Message);
+				return false;
+			}
+
 		}
 		#endregion
 	}
