@@ -38,13 +38,13 @@ Given I log in with the account saved in TReVor as: ProductAccount
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I click the Add Product icon in the Navigation Pane
 Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
-Given in the New Product page I click Continue
+Given in the New Product page, I click Continue
 
 #Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
-Given I should see the The Product Page
+Given I should be on the The Product Page
 And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Bleach_#139387
 Given In the Product Section, set the option in section: 'Type of Product (select)' to: Bleach
-Given in the The Product page I click Continue
+Given in the The Product page, I click Continue
 
 Then I save the product information as: TestCase139531
 
@@ -61,7 +61,7 @@ Given In the Product Information Section, set the option in section: 'Product is
 Given in the Product Information page, I click Continue
 
 #Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-Given I should see the Physical and Chemical Properties Page
+Given I should be on the Physical and Chemical Properties Page
 Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
 Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Bonded, fibrous glass web
 Given In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
@@ -69,19 +69,19 @@ Given In the Physical and Chemical Properties Section, set the option in section
 Given in the Physical and Chemical Properties page, I click Continue
 
 #Given In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details
-Given I should see the California Cleaning Product Disclosure Page
+Given I should be on the California Cleaning Product Disclosure Page
 Given In the California Cleaning Product Disclosure Section, set the radio option in section: 'Who is publicly identified on the product label as responsible for the product?': to: Manufacturer
 Given In the California Cleaning Product Disclosure Section, set the option in section: 'Who is the Final Domestic Distributor (if any) of the product?' to: Company Name
 Given In the California Cleaning Product Disclosure Section, set the option in section: 'Is your identity, as the Manufacturer of this product, Confidential Business Information (CBI)?' to: Yes
 Given In the California Cleaning Product Disclosure Section, set the option in section: 'Company's Toll-Free Phone Number' to: 11111111111
 Given In the California Cleaning Product Disclosure Section, set the option in section: 'Company Web Address' to: http://TestWebsitePlaceholderName.com
 Given In the California Cleaning Product Disclosure Section, set the option in section: 'Select the product's GTIN Brick Code' to: [10000424] Laundry Detergents
-Given in the California Cleaning Product Disclosure page I click Continue
+Given in the California Cleaning Product Disclosure page, I click Continue
 
 #Given I add the following CA Cleaning ingredients:  
 #		| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName | GenericName | IngredientType | FunctionalPurpose             | Clean | Certified |
 #		| Water         | 100      | false               | true        | AQUA       | AQUA        | Choose...      | Abrasive, Absorbent, Adhesive | true  | true      |
-Given I should see the Ingredients Page
+Given I should be on the Ingredients Page
 Then In the Ingredients section, add component with component name: Water
 Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
 Then In the Ingredients Table row with component name: Water, in Trade Secret? column set checkbox to checked
@@ -89,9 +89,9 @@ Then In the Ingredients Table row with component name: Water, in Generic Name co
 Given in the Ingredients page I click Continue
 Then The alert message should displayed with text: Your product registration qualifies for the California SB 258 Cleaning Right-to-Know regulation based on the type of product being registered, as well as chemicals included with the registration. Ingredients require Functional Purpose or Ingredient Type selections for one or more listed ingredients.
 Then In the Ingredients Table row with component name: Water, in Ingredient Type column select option Fragrance
-Given in the Ingredients page I click Continue
+Given in the Ingredients page, I click Continue
 
-And I should see the Inventory Status, Prop 65 (US) Page
+And I should be on the Inventory Status, Prop 65 (US) Page
 
 #Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139531
 Then I navigate to the Home Page
@@ -297,7 +297,7 @@ Then The home screen should load
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I click the Add Product icon in the Navigation Pane
 Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
-Given in the New Product page I click Continue
+Given in the New Product page, I click Continue
 
 #Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
 Given I should see the The Product Page
@@ -308,7 +308,7 @@ Given in the The Product page I click Continue
 Then I save the product information as: TestCase139388
 
 #Given In the Product Information Screen I answer the questions as follows - US only - No to GHS - No to shipped supplier - Yes to CA Cleaning - No to Private Label - No to Sold to retailer)
-Given I should see the Product Information Page
+Given I should be on the Product Information Page
 Given In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
 Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations' to: United States
 Given In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
@@ -319,7 +319,7 @@ Given In the Product Information Section, set the option in section: 'Product is
 Then in the Product Information page, I click Continue
 
 #Given I call Shared Step 57501 (Physical and Chemical Properties - More than one state - select Solid - State&Subcat - Mixed&Water -random - Continue - HP)
-Given I should see the Physical and Chemical Properties Page
+Given I should be on the Physical and Chemical Properties Page
 Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
 Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Bonded, fibrous glass web
 Given In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
@@ -327,7 +327,7 @@ Given In the Physical and Chemical Properties Section, set the option in section
 Then in the Physical and Chemical Properties page, I click Continue
 
 #Given In the Claifornia Cleaning Product Disclosure I choose 'Manufacturer' and select 'No' for CBI, then enter Placeholder Details
-Given I should see the California Cleaning Product Disclosure Page
+Given I should be on the California Cleaning Product Disclosure Page
 Given In the California Cleaning Product Disclosure Section, set the radio option in section: 'Who is publicly identified on the product label as responsible for the product?': to: Manufacturer
 Given In the California Cleaning Product Disclosure Section, set the option in section: 'Who is the Final Domestic Distributor (if any) of the product?' to: Company Name
 Given In the California Cleaning Product Disclosure Section, set the option in section: 'Is your identity, as the Manufacturer of this product, Confidential Business Information (CBI)?' to: Yes
@@ -336,7 +336,7 @@ Given In the California Cleaning Product Disclosure Section, set the option in s
 Given In the California Cleaning Product Disclosure Section, set the option in section: 'Select the product's GTIN Brick Code' to: [10000424] Laundry Detergents
 Then in the California Cleaning Product Disclosure page, I click Continue
 
-Given I should see the Ingredients Page
+Given I should be on the Ingredients Page
 Then In the Ingredients section, add component with component name: Water
 Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
 Then In the Ingredients Table row with component name: Water, in Ingredient Type column select option Fragrance
