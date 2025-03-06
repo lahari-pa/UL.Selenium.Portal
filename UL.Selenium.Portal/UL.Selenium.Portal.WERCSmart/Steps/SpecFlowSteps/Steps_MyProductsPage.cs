@@ -204,7 +204,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		}
 
 		//[RegexStepDefinition(@"On the My Products page, click (.*) text search button")]
-		public void MyProductsPageClickTextSearchButtonExists(string textSearchLabel)
+		public void MyProductsPageClickTextSearchButton(string textSearchLabel)
 		{
 			TextSearch textSearch = new TextSearch(textSearchLabel);
 			if (Report.IsTrue(textSearch != null, $"Failure, failed to confirm '{textSearchLabel}' text search does exist.", $"Success, confirmed '{textSearchLabel}' text search does exist."))
@@ -336,10 +336,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		}
 
 		[RegexStepDefinition(@"On the My Products page, click Product ID/Name text search button")]
-		public void MyProductsPageClickProductIDNameTextSearchButtonExists()
+		public void MyProductsPageClickProductIDNameTextSearchButton()
 		{
 			string textSearchLabel = "Product ID/ Name";
-			this.MyProductsPageClickTextSearchButtonExists(textSearchLabel);
+			this.MyProductsPageClickTextSearchButton(textSearchLabel);
 		}
 		#endregion
 		#region UPC Number Text Search Steps
@@ -382,7 +382,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		public void MyProductsPageClickUPCNumberTextSearchButtonExists()
 		{
 			string textSearchLabel = "UPC Number";
-			this.MyProductsPageClickTextSearchButtonExists(textSearchLabel);
+			this.MyProductsPageClickTextSearchButton(textSearchLabel);
 		}
 		#endregion
 		#region Show Archived Retailers Checkbox
@@ -784,7 +784,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		public void MyProductsPageClickProductIDIngredientIDSKUTextSearchButtonExists()
 		{
 			string textSearchLabel = "Product ID, Ingredient ID, SKU";
-			this.MyProductsPageClickTextSearchButtonExists(textSearchLabel);
+			this.MyProductsPageClickTextSearchButton(textSearchLabel);
 		}
 		#endregion
 
@@ -936,7 +936,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		}
 
 		[RegexStepDefinition(@"On the My Products page in the My Products table row with '(.*)' as Product ID, click Actions button")]
-		public void MyProductTableProductIDRowClickActionsButton(string productID)
+		public void MyProductTableProductIDRowActionsButtonClick(string productID)
 		{
 			MyProductsTable myProductsTable = new MyProductsTable();
 			if (Report.IsTrue(!myProductsTable.ProductRowByIDGet(productID).IsNullOrEmpty(), $"Failure, failed to confirm row with '{productID}' as Product ID does exist.", $"Success, confirmed row with '{productID}' as Product ID does exist."))
@@ -1308,22 +1308,36 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			var Product = (ProductInformation)obj;
 
 			GlobalSteps globalSteps = new GlobalSteps();
+			Report.StartSubStep("Then The home screen should load");
 			globalSteps.ThenTheHomeScreenShouldLoad();
+			Report.StartSubStep("Then On the My Products page, in Product ID/ Name text search input, enter text: Product.Name");
 			this.MyProductsPageProductIDNameTextSearchInputEnterText(Product.Name);
-			this.MyProductsPageClickProductIDNameTextSearchButtonExists();
+			Report.StartSubStep("On the My Products page, click Product ID/Name text search button");
+			this.MyProductsPageClickProductIDNameTextSearchButton();
+			Report.StartSubStep("Then On the My Products page, confirm the My Products table does exist");
 			this.MyProductsPageConfirmTableDoesDoesNotExist("does");
+			Report.StartSubStep("Then On the My Products page, confirm the My Products table column labels list does exist");
 			this.MyProductsPageConfirmTableColumnLabelsListDoesDoesNotExist("does");
 			Delay.Seconds(1);
-			this.MyProductTableConfirmProductNameRowDoesDoesNotExist(Product.Name, "does");
-			this.MyProductTableProductNameRowActionsButtonClick(Product.Name);
-			this.MyProductTableProductNameRowConfirmActionsButtonMenuIsIsNotDisplayed(Product.Name, "is");
-			this.MyProductTableProductNameRowConfirmActionsButtonOptionDoesDoesNotExists(Product.Name, "Delete", "does");
-			this.MyProductTableProductNameRowClicActionsButtonOption(Product.Name, "Delete");
+			Report.StartSubStep("Then On the My Products page in the My Products table, confirm row with Product.Id as Product ID does exist");
+			this.MyProductTableConfirmProductIDRowDoesDoesNotExist(Product.Id, "does");
+			Report.StartSubStep("Then On the My Products page in the My Products table row with Product.Id as Product ID, click Actions button");
+			this.MyProductTableProductIDRowActionsButtonClick(Product.Id);
+			Report.StartSubStep("Then On the My Products page in the My Products table row with Product.Id as Product ID, confirm Actions button menu is displayed");
+			this.MyProductTableProductIDRowConfirmActionsButtonMenuIsIsNotDisplayed(Product.Id, "is");
+			Report.StartSubStep("Then On the My Products page in the My Products table row with Product.Id as Product ID, confirm Actions button 'Delete' option does exist");
+			this.MyProductTableProductIDRowConfirmActionsButtonOptionDoesDoesNotExists(Product.Id, "Delete", "does");
+			Report.StartSubStep("Then On the My Products page in the My Products table row with Product.Id as Product ID, click Actions button 'Delete' option");
+			this.MyProductTableProductIDRowClicActionsButtonOption(Product.Id, "Delete");
+			Report.StartSubStep("Then Confirm Delete Product modal is displayed");
 			this.ConfirmDeleteProductModalIsIsNotDisplayed("is");
+			Report.StartSubStep("Then In the Delete Product modal, confirm 'Alcoholic Beverages - Wine_#60694' product name is displayed");
 			this.DeleteProductModalConfirmProductNameIsIsNotDisplayed(Product.Name, "is");
+			Report.StartSubStep("Then In the Delete Product modal, click 'DELETE' footer button");
 			this.DeleteProductModalClickDeleteFooterButton();
 			Delay.Seconds(1);
-			this.MyProductTableConfirmProductNameRowDoesDoesNotExist(Product.Name, "does not");
+			Report.StartSubStep("Then On the My Products page in the My Products table, confirm row with Product.Id as Product ID does not exist");
+			this.MyProductTableConfirmProductIDRowDoesDoesNotExist(Product.Id, "does not");
 			Report.UseSubSteps = false;
 		}
 		#endregion 

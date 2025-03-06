@@ -114,22 +114,6 @@ Scenario: [60694] Alcoholic Beverages - Wine - RU001418 - (More than 24% but Les
 #	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60694
    	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase60694
-	#Then The home screen should load
-	#Then On the My Products page, in Product ID/ Name text search input, enter text: Alcoholic Beverages - Wine_#60694
-	#Then On the My Products page, click Product ID/Name text search button
-	#Then On the My Products page, confirm the My Products table does exist
-	#Then On the My Products page, confirm the My Products table column labels list does exist
-	#Then I wait for 2 seconds
-	#Then On the My Products page in the My Products table, confirm row with 'Alcoholic Beverages - Wine_#60694' as Product Name does exist
-	#Then On the My Products page in the My Products table row with 'Alcoholic Beverages - Wine_#60694' as Product Name, click Actions button
-	#Then On the My Products page in the My Products table row with 'Alcoholic Beverages - Wine_#60694' as Product Name, confirm Actions button menu is displayed
-	#Then On the My Products page in the My Products table row with 'Alcoholic Beverages - Wine_#60694' as Product Name, confirm Actions button 'Delete' option does exist
-	#Then On the My Products page in the My Products table row with 'Alcoholic Beverages - Wine_#60694' as Product Name, click Actions button 'Delete' option
-	#Then Confirm Delete Product modal is displayed
-	#Then In the Delete Product modal, confirm 'Alcoholic Beverages - Wine_#60694' product name is displayed
-	#Then In the Delete Product modal, click 'DELETE' footer button
-	#Then I wait for 2 seconds
-	#Then On the My Products page in the My Products table, confirm row with 'Alcoholic Beverages - Wine_#60694' as Product Name does not exist
 
 @ignore
 #Removed from regression 2024/03
