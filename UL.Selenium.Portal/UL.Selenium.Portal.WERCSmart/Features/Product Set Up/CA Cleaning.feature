@@ -291,8 +291,7 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 @TestCase:139388
 Scenario: [139388] CA Cleaning - Public Disclosure or Trade Secret Issue
 
-Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-Then The home screen should load
+Given I log in with the account saved in TReVor as: ProductAccount
 
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Given I click the Add Product icon in the Navigation Pane
