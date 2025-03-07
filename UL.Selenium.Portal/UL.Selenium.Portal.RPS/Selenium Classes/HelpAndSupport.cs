@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using System.Collections.Generic;
+using System.Linq;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
@@ -16,7 +16,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
     {
         #region Page Objects
         protected override By ContainerElementLocator => By.XPath("//div[@class='freshwidget-container responsive']//div[@class='freshwidget-dialog']");
-        
+
         private IWebElement PopupHeader => ContainerElement.FindElement(By.XPath($""), 2);
 
         private IWebElement xIconEl => ContainerElement.FindElement(By.Id("freshwidget-close"), 3);
@@ -27,13 +27,13 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         public string GetHelpAndSupportPopupTitle()
         {
-           
-            Report.Info("Switching to iFrame");      
+
+            Report.Info("Switching to iFrame");
             IWebElement frame = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//iframe[@title='Feedback Form']"));
             SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
             // IWebElement HeaderElement = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//div[@class='modal-header-bg']//h3[@class='ellipsis lead pull-left form-title']"), 2);
             IWebElement HeaderElement = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//div[@class='modal-header feedback-header modal-body-change']"), 2);
-            if (HeaderElement==null)
+            if (HeaderElement == null)
             {
                 Report.Info("The header element was not found");
                 SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
@@ -55,7 +55,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
         {
 
             Report.Info("Switching to iFrame");
-            IWebElement frame = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//iframe[@title='Feedback Form']"),2);
+            IWebElement frame = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//iframe[@title='Feedback Form']"), 2);
             SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
             IWebElement HeaderElement = SeleniumWebDriver.CurrentDriver.WaitUntilElementVisible(By.Id("fd_feedback_widget"), 30);
 
@@ -92,7 +92,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             }
             string elText = searchPanelEl.Text;
             SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
-            return elText=="Search Articles";
+            return elText == "Search Articles";
         }
 
         public bool ConfirmSearchIconPresent()
@@ -122,13 +122,13 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                 Report.Info("The search Icon element was not found");
                 SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
                 return false;
-            }            
+            }
             SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
             return true;
         }
 
         public bool ConfirmCustomerContactEntryFieldPresent()
-         {
+        {
 
             Report.Info("Switching to iFrame");
             IWebElement frame = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//iframe[@title='Feedback Form']"));
@@ -147,7 +147,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                 Report.Info("The Customer Contact Input element was not found");
                 SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
                 return false;
-            }           
+            }
             SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
             return true;
         }
@@ -252,7 +252,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             }
             SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
             return true;
-            
+
         }
 
         public bool ConfirmNeedAnIngredientInputPresent()
@@ -278,7 +278,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             }
             SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
             return true;
-            
+
         }
 
         public bool ConfirmNeedAnIngredientTextPresent()
@@ -336,11 +336,11 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                     return false;
                 }
             }
-            Report.Info("Scrolling to the bottom of the popup, then checking if the customer contact element is no longer visible");    
+            Report.Info("Scrolling to the bottom of the popup, then checking if the customer contact element is no longer visible");
             customerContactEl.SendKeys(Keys.PageDown);
             Delay.Seconds(3);
             bool endvis = customerContactEl.VisibleInViewport();
-            if(endvis)
+            if (endvis)
             {
                 Report.Info($"The customer contact input field was still visible");
                 SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
@@ -419,7 +419,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                 Report.Info("The Open Priority Drop menu element was not found");
                 SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
                 return false;
-            }            
+            }
             SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
             ContainerElement.TryClick();
             Delay.Seconds(3);
@@ -481,7 +481,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         public bool ConfirmPriorityLabelContainsOption(string expectedOption)
         {
-                       
+
             Report.Info("Switching to iFrame");
             IWebElement frame = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//iframe[@title='Feedback Form']"));
             SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
@@ -496,7 +496,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             IWebElement priorityFieldLabel = mainContentEl.FindElement(By.XPath("//div[@class='select2-container dropdown']"), 2);
             if (priorityFieldLabel == null)
             {
-                                
+
                 Report.Info("The Priority Field dropdown element was not found");
                 SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
                 return false;
@@ -511,25 +511,25 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             }
 
             IWebElement foundOptionEl = proityFoundOptions.First(x => x.Text == expectedOption);
-            bool wasFound= !foundOptionEl.IsNullOrEmpty();
+            bool wasFound = !foundOptionEl.IsNullOrEmpty();
             SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
             return wasFound;
-            
+
         }
 
         public bool CaptchaContainsIAmNotARobot()
         {
             Report.Info("Switching to iFrame");
-            IWebElement frame = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//iframe[@title='Feedback Form']"),2);
+            IWebElement frame = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//iframe[@title='Feedback Form']"), 2);
             SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
 
             IWebElement secondFrame = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//div[@id='captcha_wrap']//iframe"), 2);
             SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(secondFrame);
 
-            IWebElement thirdFrame = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//div[@id='recaptcha']//iframe"),2);           
+            IWebElement thirdFrame = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//div[@id='recaptcha']//iframe"), 2);
             /////div[@class='g-recaptcha ']//div//iframe
-            SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(thirdFrame);      
-            
+            SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(thirdFrame);
+
 
             //IWebElement mainContentEl = SeleniumWebDriver.CurrentDriver.FindElement(By.Id("fd_feedback_widget"), 2);
             //if (mainContentEl == null)
@@ -593,11 +593,11 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
         {
             IWebElement el = this.xIconEl;
             return el != null;
-          
+
         }
 
         public void ClickXIcon()
-        {                     
+        {
             this.xIconEl.JsClick();
         }
 
@@ -632,7 +632,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             }
             SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
             return true;
-          
+
 
         }
 
@@ -701,7 +701,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                 SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
                 return;
             }
-           
+
 
             Actions actions = new Actions(SeleniumWebDriver.CurrentDriver);
             Delay.Seconds(2);
@@ -722,18 +722,18 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                 actions.ClickAndHold();
                 actions.Perform();
 
-                Actions actions2 = new Actions(SeleniumWebDriver.CurrentDriver);                
-                actions2.MoveByOffset(0, i);                
+                Actions actions2 = new Actions(SeleniumWebDriver.CurrentDriver);
+                actions2.MoveByOffset(0, i);
                 actions2.Perform();
-                i= i + 20;
+                i = i + 20;
                 Report.Screenshot();
                 Delay.Seconds(2);
                 actions.Release();
                 actions.Perform();
                 Delay.Seconds(2);
 
-            }     
-            
+            }
+
             Report.Info("Finished attempting to drag the scroll bar down");
             SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 
@@ -818,11 +818,11 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             }
 
             IWebElement customerContactEl = mainContentEl.FindElement(By.Id("helpdesk_ticket_subject"), 2);
-            bool startVis = customerContactEl.VisibleInViewport();           
+            bool startVis = customerContactEl.VisibleInViewport();
             SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
-            return startVis;         
+            return startVis;
 
-           
+
 
         }
 
@@ -892,7 +892,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                 Report.Info("The side panel element was not found");
                 SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
                 return false;
-            }           
+            }
             SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
             return true;
         }
@@ -917,7 +917,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                 Report.Info("The side panel search input element was not found");
                 SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
                 return false;
-            }                    
+            }
             string foundText = sidePanelSearchInputEl.GetAttribute("placeholder");
             SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
             return foundText == expected;
@@ -945,7 +945,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                 return false;
             }
             string foundText = sidePanelMainBodyEl.Text;
-            foundText= foundText.Replace("\r\n"," ");
+            foundText = foundText.Replace("\r\n", " ");
             SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
             return foundText == expected;
         }
@@ -998,14 +998,14 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             }
             Actions actions = new Actions(SeleniumWebDriver.CurrentDriver);
             Delay.Seconds(2);
-            actions.MoveToElement(sidePanelMainBodyLinkEl);                  
-           
+            actions.MoveToElement(sidePanelMainBodyLinkEl);
+
             actions.Perform();
             Report.Info($"MANUAL CHECK SEE SCREENSHOT FOR LINE UNDER THE LINK TEXT");
             Report.Screenshot();
 
             string foundText = sidePanelMainBodyLinkEl.GetAttribute("href");
-            
+
             SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
             return !foundText.IsNullOrEmpty();
         }

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Reqnroll;
+﻿using Reqnroll;
 using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Type
 {
-	[Binding, Scope (Tag = "LiquidCoreProduct")]
+	[Binding, Scope(Tag = "LiquidCoreProduct")]
 	class LiquidCoreProduct
 	{
 		[RegexStepDefinition(@"In the Liquid Core Product Section, set the option in section: 'Is there a free liquid in the Product's container that is 10ml or greater\?' to: (Yes|No)")]

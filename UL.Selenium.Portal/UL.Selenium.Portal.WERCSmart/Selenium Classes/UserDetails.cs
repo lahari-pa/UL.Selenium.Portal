@@ -1,11 +1,11 @@
-using System.Linq;
-using UL.Automation.WebDriver.BaseClasses;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
+using System.Linq;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.WebDriver.BaseClasses;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -40,7 +40,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 
 
-		public string Name {
+		public string Name
+		{
 			get => this._sName.GetValue();
 			set
 			{
@@ -49,7 +50,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string Title {
+		public string Title
+		{
 			get => this._sTitle.GetValue();
 			set
 			{
@@ -58,7 +60,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string UserRole {
+		public string UserRole
+		{
 			get
 			{
 				//var test = containerElement.FindElement(By.XPath(".//label[contains(text(),'User Role')]"));
@@ -77,7 +80,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string PhoneNumber {
+		public string PhoneNumber
+		{
 			get => this._sPhoneNumber.GetValue();
 			set
 			{
@@ -86,7 +90,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string EmailAddress {
+		public string EmailAddress
+		{
 			get => this._sEmailAddress.GetValue();
 			set
 			{
@@ -95,7 +100,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string ConfirmEmailAddress {
+		public string ConfirmEmailAddress
+		{
 			get => this.containerElement.FindElement(By.Id("txtConfirm"), 2).GetValue();
 			set
 			{
@@ -104,7 +110,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string Country {
+		public string Country
+		{
 			get
 			{
 				//var el = this.containerElement.FindElement(By.XPath(".//label[contains(text(),'Country')]/following-sibling::select"), 2);
@@ -119,7 +126,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string CountryCode {
+		public string CountryCode
+		{
 			get
 			{
 				this.containerElement = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(BasePath));
@@ -128,12 +136,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
-		public bool SendNotifications {
+		public bool SendNotifications
+		{
 			get => this._bNotificatinos.Selected;
 			set => this._bNotificatinos.Click();
 		}
 
-		public bool Purview {
+		public bool Purview
+		{
 			get => this._bPurview.Selected;
 			set => this._bPurview.Click();
 		}

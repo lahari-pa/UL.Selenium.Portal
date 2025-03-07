@@ -1,12 +1,12 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using Reqnroll;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
-using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.ReqnrollHelpers.Classes;

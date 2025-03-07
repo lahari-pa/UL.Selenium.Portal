@@ -1,12 +1,9 @@
 ﻿using OpenQA.Selenium;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
 
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
@@ -145,7 +142,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			if (new CompanyInfoStewardshipTable().ColumnExists(columnName))
 			{
 				int columnIndex = new CompanyInfoStewardshipTable().GetColumnIndex(columnName);
-				IWebElement Cell = this.ContainerElement.FindElement(By.XPath($".//td[{columnIndex+1}]/p[contains(@data-bind, 'text')]"));
+				IWebElement Cell = this.ContainerElement.FindElement(By.XPath($".//td[{columnIndex + 1}]/p[contains(@data-bind, 'text')]"));
 				return Cell.Text.Contains(value);
 			}
 			else
@@ -160,7 +157,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			if (new CompanyInfoStewardshipTable().ColumnExists(columnName))
 			{
 				int columnIndex = new CompanyInfoStewardshipTable().GetColumnIndex(columnName);
-				IWebElement Cell = this.ContainerElement.FindElement(By.XPath($".//td[{columnIndex+1}]//input"));
+				IWebElement Cell = this.ContainerElement.FindElement(By.XPath($".//td[{columnIndex + 1}]//input"));
 				IWebElement OutsideClick = this.ContainerElement.FindElement(By.XPath($"//body"));
 				result = Cell.TryEnterText(value);
 				OutsideClick.Click();

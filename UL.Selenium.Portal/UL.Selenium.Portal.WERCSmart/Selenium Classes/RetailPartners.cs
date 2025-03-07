@@ -1,16 +1,14 @@
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Automation.Utilities.Functions;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using Reqnroll;
-using UL.Automation.ReqnrollHelpers.Classes;
-using UL.Automation.Utilities.Functions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
@@ -78,7 +76,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return allPartners.FirstOrDefault(x => x.Text.ToLower().Contains(retailer.ToLower())).FindElement(By.XPath("../.."), 2).TryClick();
 			}
 			// Retailer not found!
-			Report.Failure($"No matching retailer for: '{ retailer }' was found!");
+			Report.Failure($"No matching retailer for: '{retailer}' was found!");
 			return false;
 		}
 
@@ -414,7 +412,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return messages.Select(x => x.Text.Trim()).ToList();
 		}
 
-		
+
 
 		public string GetSelectedRetailer()
 		{
@@ -614,8 +612,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public List<string> ExpectedCVSDataTiers()
 		{
-			return new List<string> {"Tier 1: Regulatory Support", "Tier 2.1: Restricted Substances List (RCL) Screening and Aggregate Chemical Usage Reports", "Tier 2.2: Chemical Identity of Publicly Disclosed Ingredient Lists and Transparency", "Tier 3: Supplemental Reports", "Tier 4.1: Publicly Disclose Supplemental Reports"};
-					
+			return new List<string> { "Tier 1: Regulatory Support", "Tier 2.1: Restricted Substances List (RCL) Screening and Aggregate Chemical Usage Reports", "Tier 2.2: Chemical Identity of Publicly Disclosed Ingredient Lists and Transparency", "Tier 3: Supplemental Reports", "Tier 4.1: Publicly Disclose Supplemental Reports" };
+
 		}
 
 		public string GetTooltipMessage()

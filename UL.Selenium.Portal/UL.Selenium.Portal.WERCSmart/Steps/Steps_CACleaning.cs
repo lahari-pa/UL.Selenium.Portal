@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Reqnroll;
+﻿using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.ReqnrollHelpers.Classes;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -25,7 +18,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		[RegexStepDefinition(@"I confirm I see the error message with text: and of type: (.*) in the popup with the following title: (.*)")]
-		public void ThenIConfirmISeeTheErrorOfTypeXandItMatchesTextFoundInTableForPopupWithGivenTitle(string errorType,string popupTitle,Table table)
+		public void ThenIConfirmISeeTheErrorOfTypeXandItMatchesTextFoundInTableForPopupWithGivenTitle(string errorType, string popupTitle, Table table)
 		{
 			var newProductIngredients = new Ingredients();
 			Report.IsTrue(newProductIngredients.CheckErrorMessagofTypeFromTableeAgainstPopupWithTitle(table, errorType, popupTitle), "Failed to find matching error message in popup with title " + popupTitle, "Successfully found matching error message in popup with title " + popupTitle);

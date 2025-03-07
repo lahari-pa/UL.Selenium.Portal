@@ -1,15 +1,5 @@
-﻿using NPOI.SS.Formula.Atp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.UI;
-using Reqnroll;
-using UL.Automation.Reporting.Functions;
+﻿using Reqnroll;
 using UL.Automation.ReqnrollHelpers.Attributes;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
-using static NPOI.HSSF.Util.HSSFColor;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 {
@@ -85,7 +75,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			var selNewProduct = new Steps_Prototype();
 			string section = "VOC Exemption Letter";
 			string pdfFile = "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf";
-			selNewProduct.UploadPDFFile(section,pdfFile);
+			selNewProduct.UploadPDFFile(section, pdfFile);
 		}
 
 		[RegexStepDefinition(@"In the Additional Documents to Provide, upload PDF document to Upload Full Product Label \(required\) field")]
@@ -205,6 +195,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		public void GRASectionShouldNotDisplayError(string shouldShouldNot, string pipeDelimitedErrorMessages)
 		{
 			string section = "Generally Recognized as Safe (GRAS)";
+			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, shouldShouldNot, pipeDelimitedErrorMessages);
+		}
+		[RegexStepDefinition(@"In the Additional Documents to Provide, for section 'OSHA-compliant Safety Data Sheet \(Optional\)' error message (should|should not) display: (.*)")]
+		public void OSHACompliantSectionShouldNotDisplayError(string shouldShouldNot, string pipeDelimitedErrorMessages)
+		{
+			string section = "OSHA-compliant Safety Data Sheet (Optional)";
 			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, shouldShouldNot, pipeDelimitedErrorMessages);
 		}
 		[RegexStepDefinition(@"In the Additional Documents to Provide Section, for section (Product Label|IFRA Certificate \(Perfumery Products\)|TCLP Test Results \(Optional\)|STLC/TTLC Results for California \(Optional\)|Toxicology or Eco-Tox Testing Data \(Optional\)) I click button 'Browse'")]

@@ -1,18 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using UL.Automation.WebDriver.BaseClasses;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
-using UL.Automation.ReqnrollHelpers.Classes;
-using Reqnroll;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text.RegularExpressions;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Automation.WebDriver.BaseClasses;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -48,7 +47,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						Report.Info($"The selection element was null");
 						return false;
 					}
-				}	
+				}
 			}
 			Report.Info($"The correct panel could not be found");
 			return false;
@@ -166,7 +165,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool Select_Enhanced_Articles(string enArticles)
 		{
-			Report.Info("Selecting Number of Enhanced Articles: " + enArticles);		
+			Report.Info("Selecting Number of Enhanced Articles: " + enArticles);
 
 			List<IWebElement> listofMenus = this.containerElement.FindElements(By.XPath(string.Format($"//div[@class='col-sm-4']//label[@class='subs subs--radio'][contains(text(),'{0}')]", enArticles)), 2).ToList();
 			foreach (var menu in listofMenus)
@@ -457,7 +456,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				newPlan.Plan_Name = allLabel;
 				//ReadOnlyCollection<IWebElement> spans = subscription.FindElements(By.XPath(".//div[contains(@class, 'heading')]//span"));
 				ReadOnlyCollection<IWebElement> spans = subscription.FindElements(By.XPath(".//div[contains(@class, 'heading')]//li"));
-				if (subscription.FindElement(By.XPath(".//div[contains(@class,'best')]"),1) != null)
+				if (subscription.FindElement(By.XPath(".//div[contains(@class,'best')]"), 1) != null)
 				{
 					newPlan.Best_Value = true;
 					newPlan.Plan_Sub = ""; //subscription.FindElement(By.XPath(".//div[contains(@class, 'heading')]//span[2]"), 2).Text.Trim();
@@ -519,7 +518,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				//string backGroundColour = subsIndicator.GetCssValue("background-color");
 				//if (backGroundColour.Contains("255, 255, 255"))
-				if(subsIndicator.GetCssValue("box-shadow") !=null && subsIndicator.GetCssValue("box-shadow")=="none")
+				if (subsIndicator.GetCssValue("box-shadow") != null && subsIndicator.GetCssValue("box-shadow") == "none")
 				{
 					newPlan.Selected = false;
 				}
@@ -539,7 +538,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 				*/
 
-				if(subscription.GetAttribute("data-bind").Contains("Support"))
+				if (subscription.GetAttribute("data-bind").Contains("Support"))
 				{
 					newPlan.Plan_Type = "Support";
 				}
@@ -628,42 +627,42 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool Select_Range(string articles, string enArticles, string formProds)
 		{
-				Report.Info("Beginning Select_Range");
+			Report.Info("Beginning Select_Range");
 
-				if (!this.Exists)
-				{
-					Report.Info("Not on Subscription Enrollment Page");
-					Report.Screenshot();
-					return false;
-				}
-				Delay.Seconds(0.5 * Delay.SpeedFactor);
-				if (!this.Select_Articles(articles))
-				{
-					Report.Info("Failed to Select Correct Number of Articles: " + articles);
-					Report.Screenshot();
-					return false;
-				}
-				Delay.Seconds(0.5 * Delay.SpeedFactor);
-				Report.Info("Number of Articles Selected");
-				if (!this.Select_Enhanced_Articles(enArticles))
-				{
-					Report.Info("Failed to Select Correct Number of Enhanced Articles: " + enArticles);
-					Report.Screenshot();
-					return false;
-				}
-				Delay.Seconds(0.5 * Delay.SpeedFactor);
-				Report.Info("Number of Enhanced Articles Selected");
-				if (!this.Select_Formulated_Products(formProds))
-				{
-					Report.Info("Failed to Select Correct Number of Formulated Products: " + formProds);
-					Report.Screenshot();
-					return false;
-				}
-				Report.Info("Number of Formulated Products Selected");
-				Delay.Seconds(0.5 * Delay.SpeedFactor);
-				Report.Success("Range of Products, Articles and Enhanced Articles Selected");
-			
-			
+			if (!this.Exists)
+			{
+				Report.Info("Not on Subscription Enrollment Page");
+				Report.Screenshot();
+				return false;
+			}
+			Delay.Seconds(0.5 * Delay.SpeedFactor);
+			if (!this.Select_Articles(articles))
+			{
+				Report.Info("Failed to Select Correct Number of Articles: " + articles);
+				Report.Screenshot();
+				return false;
+			}
+			Delay.Seconds(0.5 * Delay.SpeedFactor);
+			Report.Info("Number of Articles Selected");
+			if (!this.Select_Enhanced_Articles(enArticles))
+			{
+				Report.Info("Failed to Select Correct Number of Enhanced Articles: " + enArticles);
+				Report.Screenshot();
+				return false;
+			}
+			Delay.Seconds(0.5 * Delay.SpeedFactor);
+			Report.Info("Number of Enhanced Articles Selected");
+			if (!this.Select_Formulated_Products(formProds))
+			{
+				Report.Info("Failed to Select Correct Number of Formulated Products: " + formProds);
+				Report.Screenshot();
+				return false;
+			}
+			Report.Info("Number of Formulated Products Selected");
+			Delay.Seconds(0.5 * Delay.SpeedFactor);
+			Report.Success("Range of Products, Articles and Enhanced Articles Selected");
+
+
 			return true;
 		}
 
@@ -688,7 +687,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 					if (featureStandard == feature_plan)
 					{
-						Report.Success("Feature Plan Found");	
+						Report.Success("Feature Plan Found");
 						return feature;
 					}
 				}
@@ -742,7 +741,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public IWebElement _selectGold;
 		public bool Gold_click()
 		{
-			Report.Info("Attempting to Select Gold Support Services Plan");			
+			Report.Info("Attempting to Select Gold Support Services Plan");
 			List<IWebElement> listofMenus = this.containerElement.FindElements(By.XPath($"//div[@class='col-md-12']//label"), 2).ToList();
 			foreach (var menu in listofMenus)
 			{

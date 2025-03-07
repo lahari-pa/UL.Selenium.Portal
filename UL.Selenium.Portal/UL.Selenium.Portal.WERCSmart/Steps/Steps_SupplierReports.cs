@@ -1,18 +1,17 @@
+using Reqnroll;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using UL.Automation.WebDriver.Classes;
 using UL.Automation.Reporting.Functions;
-using UL.Automation.ReqnrollHelpers.Classes;
-using UL.Automation.Utilities.Functions;
-using Reqnroll;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
-using System.Collections.Generic;
-using UL.Automation.TReVor.Classes;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using UL.Selenium.Portal.WERCSmart.Classes;
-using System.IO;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Automation.TReVor.Classes;
+using UL.Automation.Utilities.Functions;
+using UL.Automation.WebDriver.Classes;
+using UL.Selenium.Portal.WERCSmart.Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {

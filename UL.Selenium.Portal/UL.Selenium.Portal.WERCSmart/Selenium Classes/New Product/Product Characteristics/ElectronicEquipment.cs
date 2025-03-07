@@ -2,7 +2,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 {
 	class ElectronicEquipment : NewProduct
 	{
-		public bool HasLcdOrPlasmaDisplay {
+		public bool HasLcdOrPlasmaDisplay
+		{
 			get => this.CheckedInputForLabel("Plasma Display") == "Yes";
 			set
 			{
@@ -11,7 +12,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 			}
 		}
 
-		public bool ContainsCircuitBoard {
+		public bool ContainsCircuitBoard
+		{
 			get => this.CheckedInputForLabel("Circuit Board") == "Yes";
 			set
 			{

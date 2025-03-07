@@ -21,13 +21,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		protected override By ContainerElementLocator => By.XPath("//div[@class='body-content']");
 		IWebElement InputText(string text) => this.ContainerElement.FindElement(By.XPath($"//input[contains(@placeholder,'{text}')]"), 2);
 
-		IWebElement SearchButon(string idname) => this.ContainerElement.FindElement(By.XPath($"//div[contains(@id,'{idname}')]//div[@class='input-group']//span[contains(@data-bind,'Click')]"), 2);
+		IWebElement SearchButon(string idname) => this.ContainerElement.FindElement(By.XPath($"//div[contains(@id,'{idname}')]//div[@class='input-group']//span[contains(@data-bind,'click')]"), 2);
 
 		IWebElement Section(string name) => this.ContainerElement.FindElement(By.XPath($"//div[@class='panel-heading']//h3[text()='{name}']"), 2);
 
 		IWebElement Table(string idname) => this.ContainerElement.FindElement(By.XPath($"//div[contains(@id,'{idname}')]//table"), 2);
 
-		IWebElement LinkElement(string tablename, string linkText) => this.ContainerElement.FindElement(By.XPath($".//div[contains(@id,'{tablename}')]//a[text()='{linkText}'] | .//div[contains(@id,'{tablename}')]//a//span[text()='{linkText}']"), 2);
+		IWebElement LinkElement(string tablename, string linkText) => this.ContainerElement.FindElement(By.XPath($".//div[contains(@id,'{tablename}')]//a[text()='{linkText}'] | .//div[contains(@id,'{tablename}')]//a//span[text()='{linkText}'] | .//div[contains(@id,'{tablename}')]//button[text()='{linkText}']"), 2);
 		#endregion
 
 		#region Page Methods
@@ -268,6 +268,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		private IWebElement PublicNameDropdownOption(string componentname, string dropdownOption) => this.PublicNameDropdownOptionsList(componentname).Where(x => x.Text.Trim() == dropdownOption).FirstOrDefault();
 		IWebElement actionbutton(string name, string action) => this.FindElement(By.XPath($".//div[contains(@id,'settings')]//table//tr//td//span[contains(@data-bind,'component.name')][contains(text(),'{name}')]//ancestor::tr//td//button[@title='{action}']"), 2);
 		IWebElement disclosurebutton(string action) => this.FindElement(By.XPath($".//div[contains(@data-bind,'model')]//table//tr//th//p//a[text()='{action}']"), 2);
+		IWebElement NewDisclosureCheckbox(string productname) => this.ContainerElement.FindElement(By.XPath($".//div[contains(@data-bind,'model')]//table//tr//td//span[contains(@data-bind,'product.Name')][contains(text(),'{productname}')]//ancestor::tr//td//input[contains(@data-bind,'newDisclosure')]"), 1);
+
+		private IWebElement BulkProductPublicNameDropdown(string productname) => this.ContainerElement.FindElement(By.XPath($".//div[contains(@data-bind,'model')]//table//tr//td//span[contains(@data-bind,'product.Name')][contains(text(),'{productname}')]//ancestor::tr//td//select[contains(@data-bind,'publicName')]"), 1);
+		private List<IWebElement> BulkProductPublicNameDropdownOptionsList(string productname) => this.BulkProductPublicNameDropdown(productname).FindElements(By.XPath("//option"), 1).ToList();
+		private IWebElement BulkProductPublicNameDropdownOption(string productname, string dropdownOption) => this.BulkProductPublicNameDropdownOptionsList(productname).Where(x => x.Text.Trim() == dropdownOption).FirstOrDefault();
+		IWebElement BulkProductComponentName => this.ContainerElement.FindElement(By.XPath($".//div[contains(@data-bind,'model')]/p//span[contains(@data-bind,'component.name')]"), 1);
+
 		#endregion
 
 		#region Methods
@@ -332,7 +339,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ForIngredientsClickAction(string name, string action)
 		{
-			
+
 			return this.actionbutton(name, action).TryClick();
 
 		}
@@ -343,6 +350,121 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.disclosurebutton(action).TryClick();
 
 		}
+
+		public bool NewDisclosureCheckboxExists(string productname)
+		{
+			Report.Info($"Attempting to confrim ' New Disclosure'  checkbox for '{productname}' exists.");
+			return this.NewDisclosureCheckbox(productname) != null;
+		}
+
+		public bool NewDisclosureCheckboxClick(string productname)
+		{
+			Report.Info($"Attempting to click ' New Disclosure' checkboxfor '{productname}'.");
+			return this.NewDisclosureCheckbox(productname).TryClick();
+		}
+
+		public bool NewDisclosureCheckboxChecked(string productname)
+		{
+			Report.Info($"Attempting to confrim ' New Disclosure' checkbox for '{productname}' is checked.");
+			return this.NewDisclosureCheckbox(productname).Checked();
+		}
+
+		public bool BulkProductPublicNameDropdownExists(string productname)
+		{
+			Report.Info($"Attempting to confirm Public Name dropdown exists for {productname}.");
+			return this.BulkProductPublicNameDropdown(productname) != null;
+		}
+
+		public bool BulkProductPublicNameDropdownClick(string productname)
+		{
+			Report.Info($"Attempting to click Public Name dropdown for {productname}.");
+			return this.BulkProductPublicNameDropdown(productname).TryClick();
+		}
+
+
+		public bool BulkProductPublicNameDropdownOptionExists(string productname, string dropdownOption)
+		{
+			Report.Info($"Attempting to confirm Public Name dropdown contains '{dropdownOption}' option.");
+			return this.BulkProductPublicNameDropdownOption(productname, dropdownOption) != null;
+		}
+
+		public bool BulkProductPublicNameDropdownOptionClick(string productname, string dropdownOption)
+		{
+			Report.Info($"Attempting to click Public Name dropdown '{dropdownOption}' option.");
+			return this.BulkProductPublicNameDropdownOption(productname, dropdownOption).TryClick();
+		}
+
+		public string GetBulkProductComponentName()
+		{
+			Report.Info($"Attempting to get Component Name");
+			return this.BulkProductComponentName.Text;
+		}
+
+
+		#endregion
+
+	}
+
+
+	public class SDSPage : SeleniumBaseObject
+	{
+
+		#region Page Objects
+		protected override By ContainerElementLocator => By.XPath("//div[@class='body-content']");
+		IWebElement actionbutton(string name, string action) => this.FindElement(By.XPath($".//div[contains(@id,'sds')]//table//tr//td//span[contains(@data-bind,'name')][contains(text(),'{name}')]//ancestor::tr//td//a[text()='{name}']"), 2);
+		IWebElement FieldInputText(string fieldname) => this.ContainerElement.FindElement(By.XPath($"//input[@data-bind='{fieldname}']"), 2);
+		private IWebElement SubFormatTypeDropdown => this.ContainerElement.FindElement(By.XPath($".//div[contains(@id,'sds')]//table//tr//td//select[contains(@data-bind,'subformat')]"), 1);
+		private List<IWebElement> SubFormatTypeDropdownOptionsList => this.SubFormatTypeDropdown.FindElements(By.XPath("//option"), 1).ToList();
+		private IWebElement SubFormatTypeDropdownOption(string dropdownOption) => this.SubFormatTypeDropdownOptionsList.Where(x => x.Text.Trim() == dropdownOption).FirstOrDefault();
+
+		#endregion
+
+		#region Methods
+		public bool ForSDSClickAction(string name, string action)
+		{
+
+			return this.actionbutton(name, action).TryClick();
+
+		}
+
+		public bool EnterTextinField(string fieldname, string text)
+		{
+			this.FieldInputText(fieldname).ClearTextBox();
+			Report.Info("Enter the value in the field");
+			return this.FieldInputText(fieldname).TryEnterText(text);
+		}
+
+		public bool TextFieldExists(string fieldname)
+		{
+			return this.FieldInputText(fieldname).Displayed;
+		}
+
+
+		public bool SubFormatTypeDropdownExists()
+		{
+			Report.Info($"Attempting to confirm Sub Format Type exists");
+			return this.SubFormatTypeDropdown != null;
+		}
+
+		public bool SubFormatTypeDropdownClick()
+		{
+			Report.Info($"Attempting to click Sub Format Type dropdown");
+			return this.SubFormatTypeDropdown.TryClick();
+		}
+
+
+		public bool SubFormatTypeDropdownOptionExists(string dropdownOption)
+		{
+			Report.Info($"Attempting to confirm Sub Format Type dropdown contains '{dropdownOption}' option.");
+			return this.SubFormatTypeDropdownOption(dropdownOption) != null;
+		}
+
+		public bool SubFormatTypeDropdownOptionClick(string dropdownOption)
+		{
+			Report.Info($"Attempting to click Sub Format Type dropdown '{dropdownOption}' option.");
+			return this.SubFormatTypeDropdownOption(dropdownOption).TryClick();
+		}
+
 
 		#endregion
 

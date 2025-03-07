@@ -1,9 +1,4 @@
 ﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UL.Automation.WebDriver.BaseClasses;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
@@ -20,7 +15,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ProductBillingTableExists()
 		{
-			return this.ProductBillingTable != null;	
+			return this.ProductBillingTable != null;
 		}
 
 		public bool ProductBillingTableIsDisplayed()

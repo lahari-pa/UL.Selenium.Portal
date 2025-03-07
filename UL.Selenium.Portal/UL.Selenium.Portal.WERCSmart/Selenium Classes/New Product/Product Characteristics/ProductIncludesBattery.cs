@@ -1,12 +1,12 @@
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
 using Context = UL.Automation.ReqnrollHelpers.Classes.Context;
-using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics
 {
@@ -14,7 +14,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 	{
 		IWebElement BatteriesTable => this.ContainerElement.FindElement(By.XPath(".//table"), 2);
 
-		public string IndicateHowBatteryIsPackaged {
+		public string IndicateHowBatteryIsPackaged
+		{
 			get
 			{
 				IWebElement lbl = this.containerElement.FindElements(By.XPath(".//label"), 2)
@@ -79,7 +80,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		/// get = returns a list of Battery objects corresponding to the batteries displayed in the table
 		///
 		/// </summary>
-		public List<Battery> Batteries {
+		public List<Battery> Batteries
+		{
 			get
 			{
 				var listOfBatteries = new List<Battery>();
@@ -189,7 +191,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 			IWebElement optionField = this.BatteryRows.FirstOrDefault()?.FindElement(By.XPath($".//td[{optionIndex.ToString()}]//select"), 2);
 			optionField.Select(value);
 			string batteryType = optionField.SelectedOption();
-			return batteryType == value;	
+			return batteryType == value;
 		}
 		public bool EnterInputBatteriesOption(string batteryOption, string value)
 		{
@@ -206,9 +208,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 			int optionIndex = th.FirstOrDefault(x => x.Value.Contains(batteryOption)).Key;
 			IWebElement manufacturer = this.BatteryRows.FirstOrDefault()?.FindElement(By.XPath($".//td[{optionIndex.ToString()}]"), 2);
 			if (manufacturer == null || !manufacturer.TryClick())
-				{
-					throw new Exception("Failed to click Manufacturer element");
-				}
+			{
+				throw new Exception("Failed to click Manufacturer element");
+			}
 			if (new SearchBoxPrototype().SearchInputExists() == false)
 			{
 				throw new Exception("Enter manufacturer text instructions did not appear.");
@@ -229,7 +231,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		public void DeleteEmptyBatteryRows()
 		{
 			IWebElement thisTable = this.containerElement.FindElement(By.XPath(".//table"), 2);
-			
+
 			if (thisTable == null)
 			{
 				return;

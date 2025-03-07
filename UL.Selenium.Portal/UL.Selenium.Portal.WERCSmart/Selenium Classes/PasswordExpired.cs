@@ -1,7 +1,6 @@
+using OpenQA.Selenium;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Extensions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -19,17 +18,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.FindElement(By.XPath(".//div[@class='item active']/h4"), 2)?.Text;
 		}
 
-		public string OriginalPassword {
+		public string OriginalPassword
+		{
 			get => this.FindElement(By.XPath(".//input[@name='loginPassword']"), 2)?.Text;
 			set => this.FindElement(By.XPath(".//input[@name='loginPassword']"), 2).EnterText(value);
 		}
 
-		public string NewPassword {
+		public string NewPassword
+		{
 			get => this.FindElement(By.XPath(".//input[@id='newPassword']"), 2)?.Text;
 			set => this.FindElement(By.XPath(".//input[@id='newPassword']"), 2).EnterText(value);
 		}
 
-		public string VerifyPassword {
+		public string VerifyPassword
+		{
 			get => this.FindElement(By.XPath(".//input[@id='verifyPassword']"), 2)?.Text;
 			set => this.FindElement(By.XPath(".//input[@id='verifyPassword']"), 2).EnterText(value);
 		}

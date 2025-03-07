@@ -1,11 +1,10 @@
+using OpenQA.Selenium;
 using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using System.Collections.ObjectModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -15,18 +14,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		protected override By ContainerElementLocator => By.XPath(BasePath);
 
-		public string VerificationCode {
+		public string VerificationCode
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='VerificationCode']"), 2).GetValue().Trim();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='VerificationCode']"), 2).EnterText(value);
 		}
 
 
-		public string EmailAddress {
+		public string EmailAddress
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='UserName']"), 2).GetValue().Trim();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='UserName']"), 2).EnterText(value);
 		}
 
-		public string Password {
+		public string Password
+		{
 			set
 			{
 
@@ -59,101 +61,121 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 
-		public string NewEmail {
+		public string NewEmail
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtEmail']"), 2).Text.Trim();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtEmail']"), 2).EnterText(value);
 		}
 
-		public string CompanyName {
+		public string CompanyName
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtCompanyName']"), 2).Text.Trim();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtCompanyName']"), 2).EnterText(value);
 		}
 
-		public string Address1 {
+		public string Address1
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtAddress1']"), 2).Text.Trim();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtAddress1']"), 2).EnterText(value);
 		}
 
-		public string Address2 {
+		public string Address2
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtAddress2']"), 2).Text.Trim();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtAddress2']"), 2).EnterText(value);
 		}
 
-		public string Address3 {
+		public string Address3
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtAddress3']"), 2).Text.Trim();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtAddress3']"), 2).EnterText(value);
 		}
-		public string City {
+		public string City
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtCity']"), 2).Text.Trim();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtCity']"), 2).EnterText(value);
 		}
-		public string State {
+		public string State
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtState']"), 2).Text.Trim();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtState']"), 2).EnterText(value);
 		}
 
-		public string PostalCode {
+		public string PostalCode
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtPostalCode']"), 2).Text.Trim();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtPostalCode']"), 2).EnterText(value);
 		}
 
 
 
-		public string Contact {
+		public string Contact
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtContactName']"), 2).Text.Trim();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtContactName']"), 2).EnterText(value);
 		}
 
 		public string ContactEmail => this.containerElement.FindElement(By.XPath(".//input[@id='txtContactEmail']"), 2).GetValue().Trim();
 
-		public string ContactPhoneNumber {
+		public string ContactPhoneNumber
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtContactPhone']"), 2).Text.Trim();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtContactPhone']"), 2).EnterText(value);
 		}
 
-		public string ContactAdditionalEmails {
+		public string ContactAdditionalEmails
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtAdditionalEmail']"), 2).Text.Trim();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtAdditionalEmail']"), 2).EnterText(value);
 		}
 
-		public string ContactPassword {
+		public string ContactPassword
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtPassword']"), 2).Text.Trim();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtPassword']"), 2).EnterText(value);
 		}
 
-		public string ContactReEnterPassword {
+		public string ContactReEnterPassword
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtRePassword']"), 2).Text.Trim();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtRePassword']"), 2).EnterText(value);
 		}
 
-		public string ContactCity {
+		public string ContactCity
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer1']"), 2).Text.Trim();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer1']"), 2).EnterText(value);
 		}
 
-		public string ContactModel {
+		public string ContactModel
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer2']"), 2).Text.Trim();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer2']"), 2).EnterText(value);
 		}
-		public string ContactSport {
+		public string ContactSport
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer3']"), 2).Text.Trim();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer3']"), 2).EnterText(value);
 		}
-		public string ContactFood {
+		public string ContactFood
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer4']"), 2).Text.Trim();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer4']"), 2).EnterText(value);
 		}
-		public string ContactVacation {
+		public string ContactVacation
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer5']"), 2).Text.Trim();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtAnswer5']"), 2).EnterText(value);
 		}
 
-		public string ContactIdentityPassword {
+		public string ContactIdentityPassword
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtPhonePassword']"), 2).Text.Trim();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtPhonePassword']"), 2).EnterText(value);
 		}
 
-		public string Country {
+		public string Country
+		{
 			get
 			{
 				IWebElement countrySelect = this.containerElement.FindElement(By.XPath(".//select[@id='Countries']"), 2);
@@ -166,22 +188,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 
-		public string PhoneNumber {
+		public string PhoneNumber
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtPhone']"), 2).Text.Trim();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtPhone']"), 2).EnterText(value);
 		}
 
-		public string EmergencyPhoneNumber {
+		public string EmergencyPhoneNumber
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtEmergencyPhone']"), 2).Text.Trim();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtEmergencyPhone']"), 2).EnterText(value);
 		}
 
-		public string Fax {
+		public string Fax
+		{
 			get => this.containerElement.FindElement(By.XPath(".//input[@id='txtFax']"), 2).Text.Trim();
 			set => this.containerElement.FindElement(By.XPath(".//input[@id='txtFax']"), 2).EnterText(value);
 		}
 
-		public bool AcceptTermsOfUse {
+		public bool AcceptTermsOfUse
+		{
 			get => this.containerElement.FindElement(By.XPath(".//*[@id='Accepted']"), 2).Checked();
 			set
 			{

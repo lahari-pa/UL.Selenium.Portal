@@ -1,13 +1,7 @@
-﻿using NPOI.SS.Formula.Functions;
+﻿using Reqnroll;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
-using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
@@ -56,7 +50,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 					{
 						this.EnterBatterySelectInformation($"{thisRow["Battery Type"]}", "Battery Type");
 					}
-					if(table.ContainsColumn("Grams Lithium"))
+					if (table.ContainsColumn("Grams Lithium"))
 					{
 						this.EnterBatterySelectInformation($"{thisRow["Grams Lithium"]}", "Grams Lithium");
 					}

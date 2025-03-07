@@ -1,24 +1,23 @@
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UL.Automation.WebDriver.Extensions;
-using OpenQA.Selenium;
 using System.Collections.ObjectModel;
+using System.Linq;
+using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 {
 	class AdditionalProductInformation : NewProduct
 	{
-		public List<string> ProductsMayBeSold {
+		public List<string> ProductsMayBeSold
+		{
 			get
 			{
 				var countries = new List<string>();
-				ReadOnlyCollection<IWebElement> listOfCountries = this.containerElement.FindElements(By.XPath(".//label"), 2) 
+				ReadOnlyCollection<IWebElement> listOfCountries = this.containerElement.FindElements(By.XPath(".//label"), 2)
 						?.FirstOrDefault(x => x.Text.Contains("Select countries the product may be sold in"))
 						?.FindElements(By.XPath("../..//input"));
-				
+
 				if (listOfCountries == null)
 				{
 					return null;
@@ -46,7 +45,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 					}
 
 					IWebElement countryInput = thisLabel.FindElement(By.XPath(".//../input"), 2);
-					
+
 					if (countryInput == null)
 					{
 						return;
@@ -61,7 +60,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 		}
 
 
-		public bool ProductClassifiedUnderOSHA {
+		public bool ProductClassifiedUnderOSHA
+		{
 			get
 			{
 				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
@@ -100,7 +100,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 			}
 		}
 
-		public bool ProductShippedDirectly {
+		public bool ProductShippedDirectly
+		{
 			get
 			{
 				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
@@ -139,7 +140,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 			}
 		}
 
-		public bool RetailersPrivateLabelOrBrand {
+		public bool RetailersPrivateLabelOrBrand
+		{
 			get
 			{
 				IWebElement selectOption = this.ContainerElement.FindElements(By.XPath(".//label"), 2)
@@ -180,7 +182,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 			}
 		}
 
-		public bool SolelyForRetailersUse {
+		public bool SolelyForRetailersUse
+		{
 			get
 			{
 				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)
@@ -221,7 +224,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Type
 			}
 		}
 
-		public bool IsCaliforniaCleaning {
+		public bool IsCaliforniaCleaning
+		{
 			get
 			{
 				IWebElement selectOption = this.containerElement.FindElements(By.XPath(".//label"), 2)

@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.Reporting.Functions;
 using Reqnroll;
+using System;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Product_Characteristics

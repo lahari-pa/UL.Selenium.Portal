@@ -1,12 +1,5 @@
-using UL.Automation.WebDriver.BaseClasses;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Reqnroll;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product.Review_and_Submit

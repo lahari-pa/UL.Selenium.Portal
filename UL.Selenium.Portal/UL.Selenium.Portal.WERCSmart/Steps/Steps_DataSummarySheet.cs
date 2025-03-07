@@ -1,13 +1,13 @@
+using Reqnroll;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.ReqnrollHelpers.Classes;
-using Reqnroll;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using System.Text.RegularExpressions;
-using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -359,7 +359,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[RegexStepDefinition(@"I confirm that the Prouct UPC Table shows in the UPC Number column the value of PART NUMBER for the UPC with Name: (.*)")]
 		public void IConfirmThatTheDataSummarySectionShowsValueSavedAs(string value)
 		{
-			var dataSummarySheet = new DataSummary();			
+			var dataSummarySheet = new DataSummary();
 			string upc = "PART NUMBER";
 			string header = "UPC Name";
 			string section = $"Provide the product's UPC(s), including container type and size (ounces)";

@@ -1,18 +1,18 @@
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.Generic;
 using System.Linq;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
 
 namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 {
 	class Dashboard : BaseObject
 	{
-		public const string BasePath = "//section";	
+		public const string BasePath = "//section";
 
-		private IWebElement MessageCenterRemoveEl (IWebElement el) => el.FindElement(By.XPath(".//a[@id='ulscn-message-center-remove']"), 2);
+		private IWebElement MessageCenterRemoveEl(IWebElement el) => el.FindElement(By.XPath(".//a[@id='ulscn-message-center-remove']"), 2);
 
 		[FindsBy(How = How.XPath, Using = BasePath)]
 		protected override IWebElement containerElement { get; set; }
@@ -131,7 +131,7 @@ namespace UL.Selenium.Portal.ULSC.Selenium_Classes
 				return null;
 			}
 			IList<IWebElement> gEls = container.FindElements(By.XPath(".//div[starts-with(@id,'highcharts')]//*[name()='svg']/*[name()='g']"), 2);
-			
+
 			if (gEls == null)
 			{
 				return null;

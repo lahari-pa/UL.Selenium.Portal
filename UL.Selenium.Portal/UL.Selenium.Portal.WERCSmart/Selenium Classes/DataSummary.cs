@@ -1,19 +1,15 @@
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using System.Collections.ObjectModel;
-using Reqnroll;
-using UL.Automation.ReqnrollHelpers.Classes;
-using UL.Automation.Utilities.Functions;
-using System.Drawing;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -119,12 +115,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Cannot find table data");
 				status = false;
 			}
-			string[,] tableData = new string[2,9];
+			string[,] tableData = new string[2, 9];
 			int i = 0;
 			foreach (IWebElement elem in headersElems)
 			{
-				tableData[0,i] = elem.Text;
-				i ++;
+				tableData[0, i] = elem.Text;
+				i++;
 			}
 			if (tableData == null)
 			{
@@ -134,8 +130,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			i = 0;
 			foreach (IWebElement elem in rowData)
 			{
-				tableData[1,i] = elem.Text;
-				i ++;
+				tableData[1, i] = elem.Text;
+				i++;
 			}
 			if (tableData == null)
 			{
@@ -146,7 +142,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			{
 				for (i = 0; i < headersElems.Count; i++)
 				{
-					if (tableData[0,i] == tableHeader)
+					if (tableData[0, i] == tableHeader)
 					{
 						Report.Info($"Found column header {tableHeader} in table");
 						status = tableData[1, i].Contains(tableValue);
@@ -157,7 +153,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return status;
 		}
 
-		public bool VerifyDocumentsTableValueInSammeryPage(string sectionName,string tableHeader, string tableValue)
+		public bool VerifyDocumentsTableValueInSammeryPage(string sectionName, string tableHeader, string tableValue)
 		{
 			IWebElement table = this.ContainerElement.FindElement(By.XPath($".//div[h4[text() = 'Supplier Uploaded']]//table[@class='table'][thead//tr//*[text()='{tableHeader}']]"), 2);
 			bool status = false;
@@ -218,7 +214,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool ConfirmHeaders(ICollection<string> headers)
 		{
-			
+
 
 			IWebElement table = this.FindElement(By.XPath(@"//div[@class='summary-question-container-bottom']/table[@class='table'][thead//th/div[text()='UPC Number']]"), 2);
 			table.ScrollElementIntoView();
@@ -296,7 +292,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							.GetFromContext(row["Associated UPC"].Replace("saved as", "", StringComparison.InvariantCultureIgnoreCase).Trim())
 							.ToString();
 						row["Associated UPC"] = savedUPC;
-						associatedUPCValue = savedUPC; 
+						associatedUPCValue = savedUPC;
 					}
 					catch (Exception e)
 					{
@@ -309,21 +305,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					found = true;
 					string[] rowValues = row.Values.ToArray();
-					
-					for ( int i = 0 ; i < rowValues.Length; i++)
+
+					for (int i = 0; i < rowValues.Length; i++)
 					{
 
 						IWebElement tableEle;
-						string caseUPCValue = ""; 
+						string caseUPCValue = "";
 						switch (i)
 						{
 							case 0:
-								 tableEle = caseUPCRow.FindElement(By.XPath($".//div[contains(text(),'{caseUPCNumber}')]"));
-								 caseUPCValue = tableEle.Text.Trim(); 
+								tableEle = caseUPCRow.FindElement(By.XPath($".//div[contains(text(),'{caseUPCNumber}')]"));
+								caseUPCValue = tableEle.Text.Trim();
 								break;
 
 							case 1:
-								tableEle=caseUPCRow.FindElement(By.XPath($".//div[contains(text(),'{associatedUPCValue}')]"));
+								tableEle = caseUPCRow.FindElement(By.XPath($".//div[contains(text(),'{associatedUPCValue}')]"));
 								caseUPCValue = tableEle.Text.Trim();
 								break;
 
@@ -365,7 +361,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						}
 						else
 						{
-							
+
 							Report.Info($"Values do not match: '{rowValues[i]}' and '{caseUPCValue}' .");
 							return false;
 						}
@@ -402,7 +398,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			string upcNumber = upcValues != null ? upcValues[0].Text : "";
 
 			bool found = false;
-			int rowIndex = 0; 
+			int rowIndex = 0;
 			foreach (TableRow row in rows)
 			{
 				if (row["UPC Number"].ToLower().Contains("saved as"))
@@ -482,7 +478,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 								break;
 
 							default:
-								Report.Error($"index value: {i} does not match any defined cases for index value 0-6"); 
+								Report.Error($"index value: {i} does not match any defined cases for index value 0-6");
 								break;
 						}
 
@@ -512,7 +508,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ConfirmUPCInformation(string section, string header, string value, string upc)
 		{
-			
+
 			IWebElement table = this.containerElement.FindElement(By.XPath(@"//div[@class='summary-question-container-bottom']/table[@class='table'][thead//th/div[text()='UPC Number']]"), 2);
 			table.ScrollElementIntoView();
 
@@ -525,16 +521,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					IWebElement upcRow = table.FindElement(By.XPath(@"//tr//div[contains(text(), """ + upc + @""")]/../.."), 2);
 					IList<IWebElement> upcValues = upcRow.FindElements(By.TagName("div"), 2).ToList();
-					List<string> getUpcValues=upcValues.Select(x => x.GetValue()).ToList(); 
-				
+					List<string> getUpcValues = upcValues.Select(x => x.GetValue()).ToList();
+
 					if (getUpcValues.Contains(value) && getUpcValues.Contains(upc))
 					{
 						return true;
 					}
 
-					break; 
+					break;
 
-				}				
+				}
 			}
 			return false;
 

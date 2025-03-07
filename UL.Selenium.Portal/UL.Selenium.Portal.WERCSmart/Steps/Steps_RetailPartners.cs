@@ -1,24 +1,22 @@
+using Reqnroll;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text.RegularExpressions;
-using UL.Automation.WebDriver.Classes;
+using UL.Automation.Reporting;
 using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.ReqnrollHelpers.Classes;
-using Reqnroll;
+using UL.Automation.Utilities.Functions;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
+using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using System.Collections.ObjectModel;
-using UL.Selenium.Portal.WERCSmart.Steps;
-using UL.Automation.Reporting;
-using UL.Automation.Utilities.Functions;
-using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
-using NPOI.SS.Formula.Functions;
-using System.IO.Compression;
-using UL.Automation.ReqnrollHelpers.Attributes;
-using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -106,8 +104,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 			List<string> subHeadingsShowing = selRetailPartners.SubHeadingsShowing();
 			Report.IsTrue(subHeadingsShowing.Contains(subheading.Trim()) == expected,
-				$"Subheading ({expected} ? was not : was) showing as expected! Expected: '{ subheading }', but found: '" + string.Join("', '", subHeadingsShowing) + "'!",
-				$"Subheading ({ expected} ? was : was not) showing: '{ subheading }', as expected!");
+				$"Subheading ({expected} ? was not : was) showing as expected! Expected: '{subheading}', but found: '" + string.Join("', '", subHeadingsShowing) + "'!",
+				$"Subheading ({expected} ? was : was not) showing: '{subheading}', as expected!");
 			Report.Screenshot();
 
 		}
@@ -118,7 +116,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			Report.StartStep(Report.Details.StepIndex + $" - Checking that the heading '{heading}' is showing");
 			try
 			{
-				Report.Info($"Checking that the heading '{ heading }' is showing");
+				Report.Info($"Checking that the heading '{heading}' is showing");
 				var selRetailPartners = new RetailPartners();
 
 				if (!selRetailPartners.WaitForContainerToBeVisible(10))
@@ -130,7 +128,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				string headingShowing = selRetailPartners.HeaderShowing();
 				Report.IsTrue(headingShowing.Trim() == heading.Trim(),
 					$"Header was not showing as expected! Expected: '{heading}', but found: '{headingShowing}'!",
-					$"Header was showing: '{ heading }', as expected!");
+					$"Header was showing: '{heading}', as expected!");
 				Report.Screenshot();
 			}
 			catch (Exception ex)
@@ -299,7 +297,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[RegexStepDefinition(@"I confirm that: (.*) is showing under the Data Consent Tiers heading")]
 		public void ThenConfirmYouSeeUnderTheDataConsentTiersHeading(string tierInformation)
 		{
-			Report.StartStep(Report.Details.StepIndex + $" - Confirming that '{ tierInformation }' is showing under the Data Consent Tiers heading");
+			Report.StartStep(Report.Details.StepIndex + $" - Confirming that '{tierInformation}' is showing under the Data Consent Tiers heading");
 			try
 			{
 				Report.Info("Confirming that '" + tierInformation + "' is showing under the Data Consent Tiers heading");
@@ -313,8 +311,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				string tierInfoShowing = selRetailDetails.GetTierInformation();
 				Report.IsTrue(tierInfoShowing == tierInformation,
-					$"Tier information was showing: '{ tierInfoShowing }', but was expected to show: '{ tierInformation }'",
-					$"Tier information was showing: '{ tierInformation }', as expected!");
+					$"Tier information was showing: '{tierInfoShowing}', but was expected to show: '{tierInformation}'",
+					$"Tier information was showing: '{tierInformation}', as expected!");
 				Report.Screenshot();
 			}
 			catch (Exception ex)
@@ -373,15 +371,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Info("Switching to new window");
 
 				Delay.Seconds(10);
-				
+
 				Context.AddToContext("MainWindowHandle", SeleniumWebDriver.CurrentDriver.CurrentWindowHandle);
-			
+
 				ReadOnlyCollection<string> windowHandles = SeleniumWebDriver.CurrentDriver.WindowHandles;
-			
+
 				string newTab = windowHandles.FirstOrDefault(x => x != SeleniumWebDriver.CurrentDriver.CurrentWindowHandle);
-			
+
 				SeleniumWebDriver.CurrentDriver.SwitchTo().Window(newTab);
-		
+
 				Report.Success("Window switched successfully!");
 				Report.Screenshot();
 			}
@@ -760,7 +758,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 					{
 						Report.Info($"The tier {row["Tier"]} was showing");
 					}
-						
+
 				}
 
 
@@ -1835,7 +1833,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void InWhatAreDataUsageTiersModalIClickLink(string linkText)
 		{
 			var dtd = new DataTierDetails();
-			if(Report.IsTrue(dtd.ActiveTabLinkExists(linkText),$"Failure, '{linkText}' link does not exist.",$"Success, '{linkText}' link exists."))
+			if (Report.IsTrue(dtd.ActiveTabLinkExists(linkText), $"Failure, '{linkText}' link does not exist.", $"Success, '{linkText}' link exists."))
 			{
 				Report.IsTrue(dtd.ActiveTabLinkClick(linkText), $"Failure, failed to click '{linkText}' link.", $"Success, clicked '{linkText}' link.");
 			}
@@ -1844,10 +1842,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[RegexStepDefinition(@"I confirm Terms Use page loads in new tab")]
 		public void ConfirmTermsUsePageLoadsInNewWindow()
 		{
-			if (Report.IsTrue(SeleniumWebDriver.CurrentDriver.GetTabURLs().Contains($"{SeleniumWebDriver.BaseTestUrl}MyAccount/User/TermsUse"),$"Failure, Terms Use tab does not exist.",$"Success, Terms Use tab exists."))
+			if (Report.IsTrue(SeleniumWebDriver.CurrentDriver.GetTabURLs().Contains($"{SeleniumWebDriver.BaseTestUrl}MyAccount/User/TermsUse"), $"Failure, Terms Use tab does not exist.", $"Success, Terms Use tab exists."))
 			{
-				Report.IsTrue(SeleniumWebDriver.CurrentDriver.SwitchToTabWithURL($"{SeleniumWebDriver.BaseTestUrl}MyAccount/User/TermsUse"),"Failure, failied to switch to Terms Use tab.","Success, switched to Terms Use tab.");
-				Report.IsTrue(SeleniumWebDriver.CurrentDriver.FindElement(OpenQA.Selenium.By.XPath(".//h2[text()='WERCSmart® Terms of Use (effective October 1, 2020)']"), 1) != null,"Failure, Terms Use page fialed to load.","Success, Terms Use page loaded.");
+				Report.IsTrue(SeleniumWebDriver.CurrentDriver.SwitchToTabWithURL($"{SeleniumWebDriver.BaseTestUrl}MyAccount/User/TermsUse"), "Failure, failied to switch to Terms Use tab.", "Success, switched to Terms Use tab.");
+				Report.IsTrue(SeleniumWebDriver.CurrentDriver.FindElement(OpenQA.Selenium.By.XPath(".//h2[text()='WERCSmart® Terms of Use (effective October 1, 2020)']"), 1) != null, "Failure, Terms Use page fialed to load.", "Success, Terms Use page loaded.");
 			}
 		}
 
@@ -1863,7 +1861,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[RegexStepDefinition(@"On the Terms Use page, I click on the '(.*)' link")]
 		public void OnTermsUsePageIClickOnLink(string linkLabel)
 		{
-			if(Report.IsTrue(SeleniumWebDriver.CurrentDriver.GetActiveTabURL() == $"{SeleniumWebDriver.BaseTestUrl}MyAccount/User/TermsUse","Failure, not on Terms Use tab.","Success, on Terms Use tab."))
+			if (Report.IsTrue(SeleniumWebDriver.CurrentDriver.GetActiveTabURL() == $"{SeleniumWebDriver.BaseTestUrl}MyAccount/User/TermsUse", "Failure, not on Terms Use tab.", "Success, on Terms Use tab."))
 			{
 				Report.IsTrue(SeleniumWebDriver.CurrentDriver.FindElement(OpenQA.Selenium.By.XPath($"//a[starts-with(text(),'{linkLabel}')]"), 1) != null, $"Failure, '{linkLabel}' link does not exist.", $"Success, '{linkLabel}' link exists.");
 				Report.IsTrue(SeleniumWebDriver.CurrentDriver.FindElement(OpenQA.Selenium.By.XPath($"//a[starts-with(text(),'{linkLabel}')]"), 1).TryClick(), $"Failure, faild to click '{linkLabel}' link.", $"Success, clicked '{linkLabel}' link.");
@@ -2193,7 +2191,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			this.GivenIClickOnCloseInTheReportDownloadDialog();
 		}
 
-		
+
 		[RegexStepDefinition(@"I confirm that the excel file saved as: (.*) contains the WPSID saved as: (.*) and has a 'Y' in the columns:")]
 		public void ThenIConfirmThatTheExcelFileSavedAsContainsWPSIDAndYInColumns(string fileSavedAs, string wpsidSavedAs, Table table)
 		{
@@ -2700,7 +2698,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 
 				string tooltipMessageShowing = selRetailDetails.GetTooltipMessage();
 				Report.IsTrue(tooltipMessageShowing == tooltipMessage,
-					$"Tier information was showing: {tooltipMessageShowing}., but was expected to show: {tooltipMessage }.",
+					$"Tier information was showing: {tooltipMessageShowing}., but was expected to show: {tooltipMessage}.",
 					$"Tier information was showing: {tooltipMessage}, as expected!");
 				Report.Screenshot();
 			}
@@ -2715,7 +2713,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenIVerifyDownloadedFileRA_Report_DataUsageTier___XlsxSavedAsFileContainsData(string sheetName, string file, string savedAs, Table table)
 		{
 			var retailPartnersDetails = new RetailPartnersDetails();
-			Report.IsTrue(retailPartnersDetails.VerifyExcelFile(sheetName, file, savedAs, table), "Failed to validate excel File", "Successfully validated excel File");	
+			Report.IsTrue(retailPartnersDetails.VerifyExcelFile(sheetName, file, savedAs, table), "Failed to validate excel File", "Successfully validated excel File");
 
 		}
 

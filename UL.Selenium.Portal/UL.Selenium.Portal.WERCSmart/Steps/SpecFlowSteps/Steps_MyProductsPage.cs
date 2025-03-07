@@ -1,27 +1,11 @@
-﻿using NPOI.SS.Formula.Functions;
-using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.Linq;
-using System.Text.RegularExpressions;
-using Reqnroll;
-using TReVor.Api.Wrapper.Classes;
-using TReVor.Integrations.Classes.Configuration;
-using UL.Automation.Reporting;
-using UL.Automation.Reporting.Classes;
+﻿using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.ReqnrollHelpers.Classes;
-using UL.Automation.TReVor.Classes;
-using UL.Automation.Utilities.Functions;
 using UL.Automation.WebDriver.Classes;
-using UL.Automation.WebDriver.Extensions;
 using UL.Selenium.Portal.WERCSmart.Classes;
-using UL.Selenium.Portal.WERCSmart.Database_Functions;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
-using Microsoft.VisualBasic;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 {
@@ -42,7 +26,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		public void MyProductsPageClickButton(string buttonLabel)
 		{
 			MyProductsPage myProductsPage = new MyProductsPage();
-			if(Report.IsTrue(myProductsPage.LabeledButtonExists(buttonLabel), $"Failure, failed to confirm '{buttonLabel}' button does exist.", $"Success, confirmed '{buttonLabel}' button does exist."))
+			if (Report.IsTrue(myProductsPage.LabeledButtonExists(buttonLabel), $"Failure, failed to confirm '{buttonLabel}' button does exist.", $"Success, confirmed '{buttonLabel}' button does exist."))
 			{
 				Report.IsTrue(myProductsPage.LabeledButtonClick(buttonLabel), $"Failure, failed to click '{buttonLabel}' button.", $"Success, clicked '{buttonLabel}' button.");
 			}
@@ -86,7 +70,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			MyProductsPage myProductsPage = new MyProductsPage();
 			if (Report.IsTrue(myProductsPage.CheckboxExists(checkboxLabel), $"Failure, failed to confirm '{checkboxLabel}' checkbox does exist.", $"Success, confirmed '{checkboxLabel}' checkbox does exist."))
 			{
-				if(expected != myProductsPage.CheckboxChecked(checkboxLabel))
+				if (expected != myProductsPage.CheckboxChecked(checkboxLabel))
 				{
 					Report.IsTrue(myProductsPage.CheckboxClick(checkboxLabel), $"Failure, failed to click '{checkboxLabel}' checkbox.", $"Success, clicked '{checkboxLabel}' checkbox.");
 				}
@@ -132,7 +116,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			MyProductsPage myProductsPage = new MyProductsPage();
 			if (Report.IsTrue(myProductsPage.LabeledDropdownExists(dropdownLabel), $"Failure, failed to confirm '{dropdownLabel}' dropdown does exist.", $"Success, confirmed '{dropdownLabel}' dropdown does exist."))
 			{
-				Report.IsTrue(expected == myProductsPage.LabeledDropdownOptionExists(dropdownLabel, optionLabel),$"Failure, failed to confirm '{dropdownLabel}' dropdown '{optionLabel}' {does_doesnot} exist.",$"Success, confirmed '{dropdownLabel}' dropdown '{optionLabel}' option {does_doesnot} exist.");
+				Report.IsTrue(expected == myProductsPage.LabeledDropdownOptionExists(dropdownLabel, optionLabel), $"Failure, failed to confirm '{dropdownLabel}' dropdown '{optionLabel}' {does_doesnot} exist.", $"Success, confirmed '{dropdownLabel}' dropdown '{optionLabel}' option {does_doesnot} exist.");
 			}
 		}
 
@@ -161,9 +145,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		{
 			bool expected = does_doesnot == "does";
 			TextSearch textSearch = new TextSearch(textSearchLabel);
-			if(Report.IsTrue(textSearch != null, $"Failure, failed to confirm '{textSearchLabel}' text search does exist.", $"Success, confirmed '{textSearchLabel}' text search does exist."))
+			if (Report.IsTrue(textSearch != null, $"Failure, failed to confirm '{textSearchLabel}' text search does exist.", $"Success, confirmed '{textSearchLabel}' text search does exist."))
 			{
-				Report.IsTrue(expected == textSearch.TextInputExists(),$"Failure, failed to confirm '{textSearchLabel}' text search input {does_doesnot} exist.",$"Success, confirmed '{textSearchLabel}' text search input {does_doesnot} exist.");
+				Report.IsTrue(expected == textSearch.TextInputExists(), $"Failure, failed to confirm '{textSearchLabel}' text search input {does_doesnot} exist.", $"Success, confirmed '{textSearchLabel}' text search input {does_doesnot} exist.");
 			}
 		}
 
@@ -173,7 +157,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			TextSearch textSearch = new TextSearch(textSearchLabel);
 			if (Report.IsTrue(textSearch != null, $"Failure, failed to confirm '{textSearchLabel}' text search does exist.", $"Success, confirmed '{textSearchLabel}' text search does exist."))
 			{
-				if(Report.IsTrue(textSearch.TextInputExists(), $"Failure, failed to confirm '{textSearchLabel}' text search input does exist.", $"Success, confirmed '{textSearchLabel}' text search input does exist."))
+				if (Report.IsTrue(textSearch.TextInputExists(), $"Failure, failed to confirm '{textSearchLabel}' text search input does exist.", $"Success, confirmed '{textSearchLabel}' text search input does exist."))
 				{
 					Report.IsTrue(textSearch.TextInputClick(), $"Failure, failed to click '{textSearchLabel}' text search input.", $"Success, clicked '{textSearchLabel}' text search input.");
 				}
@@ -203,7 +187,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 				if (Report.IsTrue(textSearch.TextInputExists(), $"Failure, failed to confirm '{textSearchLabel}' text search input does exist.", $"Success, confirmed '{textSearchLabel}' text search input does exist."))
 				{
 					string inputText = textSearch.TextInputTextGet();
-					Report.IsTrue(expected == inputText.Equals(expectedText), $"Failure, in '{textSearchLabel}' text search input {does_doesnot} have value '{expectedText}'{(!expected?".":$" but '{inputText}'.")}", $"Success, in '{textSearchLabel}' text search input {does_doesnot} have value '{expectedText}'{(expected ? "." : $" but '{inputText}'.")}");
+					Report.IsTrue(expected == inputText.Equals(expectedText), $"Failure, in '{textSearchLabel}' text search input {does_doesnot} have value '{expectedText}'{(!expected ? "." : $" but '{inputText}'.")}", $"Success, in '{textSearchLabel}' text search input {does_doesnot} have value '{expectedText}'{(expected ? "." : $" but '{inputText}'.")}");
 				}
 			}
 		}
@@ -220,7 +204,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		}
 
 		//[RegexStepDefinition(@"On the My Products page, click (.*) text search button")]
-		public void MyProductsPageClickTextSearchButtonExists(string textSearchLabel)
+		public void MyProductsPageClickTextSearchButton(string textSearchLabel)
 		{
 			TextSearch textSearch = new TextSearch(textSearchLabel);
 			if (Report.IsTrue(textSearch != null, $"Failure, failed to confirm '{textSearchLabel}' text search does exist.", $"Success, confirmed '{textSearchLabel}' text search does exist."))
@@ -317,7 +301,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		#endregion
 		#region Product ID/Name Text Search Steps
 		[RegexStepDefinition(@"On the My Products page, confirm Product ID/ Name text search (does|does not) exists")]
-		public void MyProductsPageConfirmProductIDNameTextSearchExists( string does_doesnot)
+		public void MyProductsPageConfirmProductIDNameTextSearchExists(string does_doesnot)
 		{
 			string textSearchLabel = "Product ID/ Name";
 			this.MyProductsPageConfirmTextSearchExists(textSearchLabel, does_doesnot);
@@ -352,10 +336,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		}
 
 		[RegexStepDefinition(@"On the My Products page, click Product ID/Name text search button")]
-		public void MyProductsPageClickProductIDNameTextSearchButtonExists()
+		public void MyProductsPageClickProductIDNameTextSearchButton()
 		{
 			string textSearchLabel = "Product ID/ Name";
-			this.MyProductsPageClickTextSearchButtonExists(textSearchLabel);
+			this.MyProductsPageClickTextSearchButton(textSearchLabel);
 		}
 		#endregion
 		#region UPC Number Text Search Steps
@@ -398,7 +382,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		public void MyProductsPageClickUPCNumberTextSearchButtonExists()
 		{
 			string textSearchLabel = "UPC Number";
-			this.MyProductsPageClickTextSearchButtonExists(textSearchLabel);
+			this.MyProductsPageClickTextSearchButton(textSearchLabel);
 		}
 		#endregion
 		#region Show Archived Retailers Checkbox
@@ -800,7 +784,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		public void MyProductsPageClickProductIDIngredientIDSKUTextSearchButtonExists()
 		{
 			string textSearchLabel = "Product ID, Ingredient ID, SKU";
-			this.MyProductsPageClickTextSearchButtonExists(textSearchLabel);
+			this.MyProductsPageClickTextSearchButton(textSearchLabel);
 		}
 		#endregion
 
@@ -867,7 +851,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		{
 			bool expected = does_doesnot == "does";
 			MyProductsTable myProductsTable = new MyProductsTable();
-			if(Report.IsTrue(!myProductsTable.ProductRowByNameGet(productName).IsNullOrEmpty(), $"Failure, failed to confirm row with '{productName}' as Product Name does exist.", $"Success, confirmed row with '{productName}' as Product Name does exist."))
+			if (Report.IsTrue(!myProductsTable.ProductRowByNameGet(productName).IsNullOrEmpty(), $"Failure, failed to confirm row with '{productName}' as Product Name does exist.", $"Success, confirmed row with '{productName}' as Product Name does exist."))
 			{
 				string valueDisplayed = "";
 				switch (columnLabel)
@@ -944,7 +928,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			MyProductsTable myProductsTable = new MyProductsTable();
 			if (Report.IsTrue(!myProductsTable.ProductRowByNameGet(productName).IsNullOrEmpty(), $"Failure, failed to confirm row with '{productName}' as Product Name does exist.", $"Success, confirmed row with '{productName}' as Product Name does exist."))
 			{
-				if(Report.IsTrue(myProductsTable.ProductRowByNameGet(productName).ActionsButtonExists(), $"Failure, failed to confirm row with '{productName}' as Product Name Action button does exist.", $"Success, confirmed row with '{productName}' as Product Name Action button does exist."))
+				if (Report.IsTrue(myProductsTable.ProductRowByNameGet(productName).ActionsButtonExists(), $"Failure, failed to confirm row with '{productName}' as Product Name Action button does exist.", $"Success, confirmed row with '{productName}' as Product Name Action button does exist."))
 				{
 					Report.IsTrue(myProductsTable.ProductRowByNameGet(productName).ActionsButtonClick(), $"Failure, failed to click row with '{productName}' as Product Name Action button.", $"Success, clicked row with '{productName}' as Product Name Action button.");
 				}
@@ -952,12 +936,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		}
 
 		[RegexStepDefinition(@"On the My Products page in the My Products table row with '(.*)' as Product ID, click Actions button")]
-		public void MyProductTableProductIDRowClickActionsButton(string productID)
+		public void MyProductTableProductIDRowActionsButtonClick(string productID)
 		{
 			MyProductsTable myProductsTable = new MyProductsTable();
 			if (Report.IsTrue(!myProductsTable.ProductRowByIDGet(productID).IsNullOrEmpty(), $"Failure, failed to confirm row with '{productID}' as Product ID does exist.", $"Success, confirmed row with '{productID}' as Product ID does exist."))
 			{
-				if(Report.IsTrue(myProductsTable.ProductRowByIDGet(productID).ActionsButtonExists(), $"Failure, failed to confirm row with '{productID}' as Product ID Action button does exist.", $"Success, confirmed row with '{productID}' as Product ID Action button does exist."))
+				if (Report.IsTrue(myProductsTable.ProductRowByIDGet(productID).ActionsButtonExists(), $"Failure, failed to confirm row with '{productID}' as Product ID Action button does exist.", $"Success, confirmed row with '{productID}' as Product ID Action button does exist."))
 				{
 					Report.IsTrue(myProductsTable.ProductRowByIDGet(productID).ActionsButtonClick(), $"Failure, failed to click row with '{productID}' as Product ID Action button.", $"Success, clicked row with '{productID}' as Product ID Action button.");
 				}
@@ -1054,14 +1038,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		{
 			bool expected = does_doesnot == "does";
 			MyProductsTableFooter myProductsTableFooter = new MyProductsTableFooter();
-			Report.IsTrue(expected == myProductsTableFooter.ItemsOnPageSelectExists(),$"Failure, failed to confirm Items On Page dropdown {does_doesnot} exist.",$"Success, confirmed Items On Page dropdown {does_doesnot} exist.");
+			Report.IsTrue(expected == myProductsTableFooter.ItemsOnPageSelectExists(), $"Failure, failed to confirm Items On Page dropdown {does_doesnot} exist.", $"Success, confirmed Items On Page dropdown {does_doesnot} exist.");
 		}
 
 		[RegexStepDefinition(@"On the My Products page, click Items On Page dropdown")]
 		public void MyProductsPageClickItemsOnPageDropdown()
 		{
 			MyProductsTableFooter myProductsTableFooter = new MyProductsTableFooter();
-			if(Report.IsTrue(myProductsTableFooter.ItemsOnPageSelectExists(), $"Failure, failed to confirm Items On Page dropdown does exist.", $"Success, confirmed Items On Page dropdown does exist."))
+			if (Report.IsTrue(myProductsTableFooter.ItemsOnPageSelectExists(), $"Failure, failed to confirm Items On Page dropdown does exist.", $"Success, confirmed Items On Page dropdown does exist."))
 			{
 				Report.IsTrue(myProductsTableFooter.ItemsOnPageSelectClick(), $"Failure, failed to click Items On Page dropdown.", $"Success, clicked Items On Page dropdown.");
 			}
@@ -1079,7 +1063,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		public void MyProductPageClickItemsOnPageDropdownOption(string optionLabel)
 		{
 			MyProductsTableFooter myProductsTableFooter = new MyProductsTableFooter();
-			if(Report.IsTrue(myProductsTableFooter.ItemsOnPageSelectOptionExists(optionLabel), $"Failure, failed to confirm Items On Page dropdown {optionLabel} option does exist.", $"Success, confirmed Items On Page {optionLabel} option does exist."))
+			if (Report.IsTrue(myProductsTableFooter.ItemsOnPageSelectOptionExists(optionLabel), $"Failure, failed to confirm Items On Page dropdown {optionLabel} option does exist.", $"Success, confirmed Items On Page {optionLabel} option does exist."))
 			{
 				Report.IsTrue(myProductsTableFooter.ItemsOnPageSelectOptionClick(optionLabel), $"Failure, failed to click Items On Page dropdown {optionLabel} option.", $"Success, clicked Items On Page dropdown {optionLabel} option.");
 			}
@@ -1099,7 +1083,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		#endregion
 
 		#region Pagiation Button Steps
-		[RegexStepDefinition(@"On the My Products page, confirm (Prev|…|Next|\d+) Pagination button (does|does not) exist")]
+		[RegexStepDefinition(@"On the My Products page, confirm (Prev|…|Next) Pagination button (does|does not) exist")]
 		public void MyProductsPageConfirmPagiationButtonDoesDoesNotExist(string buttonLabel, string does_doesnot)
 		{
 			bool expected = does_doesnot == "does";
@@ -1107,7 +1091,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			Report.IsTrue(expected == myProductTableFooter.PaginationButtonExists(buttonLabel), $"Failure, failed to confirm {buttonLabel} pagination button {does_doesnot} exist.", $"Success, confirmed {buttonLabel} pagination button {does_doesnot} exist.");
 		}
 
-		[RegexStepDefinition(@"On the My Products page, click (Prev|…|Next|\d+) Pagination button")]
+		[RegexStepDefinition(@"On the My Products page, click (Prev|…|Next) Pagination button")]
 		public void MyProductsPageClickPagiationButton(string buttonLabel)
 		{
 			MyProductsTableFooter myProductTableFooter = new MyProductsTableFooter();
@@ -1117,7 +1101,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			}
 		}
 
-		[RegexStepDefinition(@"On the My Products page, confirm (Prev|…|Next|\d+) Pagination button (is|is not) disabled")]
+		[RegexStepDefinition(@"On the My Products page, confirm (Prev|…|Next) Pagination button (is|is not) disabled")]
 		public void MyProductsPageConfirmPagiationButtonIsIsNotDisabled(string buttonLabel, string is_isnot)
 		{
 			bool expected = is_isnot == "is";
@@ -1128,17 +1112,81 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			}
 		}
 
-		[RegexStepDefinition(@"On the My Products page, confirm (Prev|…|Next|\d+) Pagination button (is|is not) currently selected")]
+		[RegexStepDefinition(@"On the My Products page, confirm (Prev|…|Next) Pagination button (is|is not) currently selected")]
 		public void MyProductsPageConfirmPagiationButtonIsIsNotSelected(string buttonLabel, string is_isnot)
 		{
 			bool expected = is_isnot == "is";
 			MyProductsTableFooter myProductTableFooter = new MyProductsTableFooter();
-			if(Report.IsTrue(myProductTableFooter.PaginationButtonExists(buttonLabel), $"Failure, failed to confirm {buttonLabel} pagination button does exist.", $"Success, confirmed {buttonLabel} pagination button does exist."))
+			if (Report.IsTrue(myProductTableFooter.PaginationButtonExists(buttonLabel), $"Failure, failed to confirm {buttonLabel} pagination button does exist.", $"Success, confirmed {buttonLabel} pagination button does exist."))
 			{
 				Report.IsTrue(expected == myProductTableFooter.PaginationButtonCurrent(buttonLabel), $"Failure, failed to confirm {buttonLabel} pagination button {is_isnot} currently selected.", $"Success, confirmed {buttonLabel} pagination button {is_isnot} currently selected.");
 			}
 		}
 		#endregion
+		#endregion
+
+		#region Delete Products Modal
+		[RegexStepDefinition(@"Confirm Delete Product modal (is|is not) displayed")]
+		public void ConfirmDeleteProductModalIsIsNotDisplayed(string is_isnot)
+		{
+			string modalTitleExpected = "Delete Product";
+			Steps_ModalDialogPrototype modalDialogPrototype = new Steps_ModalDialogPrototype();
+			modalDialogPrototype.ConfirmModalIsIsNotDisplayed(modalTitleExpected, is_isnot);
+		}
+
+		[RegexStepDefinition(@"In the Delete Product modal, confirm '(.*)' product name (is|is not) displayed")]
+		public void DeleteProductModalConfirmProductNameIsIsNotDisplayed(string productNameExpected, string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			DeleteProductModal deleteProductModal = new DeleteProductModal();
+			string productNameDisplayed = deleteProductModal.DisplayedProductNameGet();
+			Report.IsTrue(expected == productNameDisplayed.Equals(productNameExpected), $"Failure, in the Delete Prodcut modal failed to confirm '{productNameExpected}' product name {is_isnot} displayed.", $"Success, in the Delete Product modal confiremd '{productNameExpected}' product name {is_isnot} displayed.");
+		}
+
+		[RegexStepDefinition(@"In the Delete Product modal, confirm '(.*)' product id (is|is not) displayed")]
+		public void DeleteProductModalConfirmProductIdIsIsNotDisplayed(string productIdExpected, string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			DeleteProductModal deleteProductModal = new DeleteProductModal();
+			string productIdDisplayed = deleteProductModal.DisplayedProductIdGet();
+			Report.IsTrue(expected == productIdDisplayed.Equals(productIdExpected), $"Failure, in the Delete Prodcut modal failed to confirm '{productIdExpected}' product id {is_isnot} displayed.", $"Success, in the Delete Product modal confiremd '{productIdExpected}' product id {is_isnot} displayed.");
+		}
+
+		[RegexStepDefinition(@"In the Delete Product modal, confirm 'DELETE' footer button (does|does not) exist")]
+		public void DeleteProductModalDeleteFooterButtonDoesDoesNotExist(string does_doesnot)
+		{
+			string buttonLabel = "Delete";
+			Steps_ModalDialogPrototype modalDialogPrototype = new Steps_ModalDialogPrototype();
+			modalDialogPrototype.DisplayedModalConfirmFooterButtonDoesDoesNotExist(buttonLabel, does_doesnot);
+
+		}
+
+		[RegexStepDefinition(@"In the Delete Product modal, confirm 'CANCEL' footer button (does|does not) exist")]
+		public void DeleteProductModalCancelFooterButtonDoesDoesNotExist(string does_doesnot)
+		{
+			string buttonLabel = "Cancel";
+			Steps_ModalDialogPrototype modalDialogPrototype = new Steps_ModalDialogPrototype();
+			modalDialogPrototype.DisplayedModalConfirmFooterButtonDoesDoesNotExist(buttonLabel, does_doesnot);
+
+		}
+
+		[RegexStepDefinition(@"In the Delete Product modal, click 'DELETE' footer button")]
+		public void DeleteProductModalClickDeleteFooterButton()
+		{
+			string buttonLabel = "Delete";
+			Steps_ModalDialogPrototype modalDialogPrototype = new Steps_ModalDialogPrototype();
+			modalDialogPrototype.DisplayedModalClickFooterButton(buttonLabel);
+
+		}
+
+		[RegexStepDefinition(@"In the Delete Product modal, click 'CANCEL' footer button")]
+		public void DeleteProductModalClickCancelFooterButton()
+		{
+			string buttonLabel = "Cancel";
+			Steps_ModalDialogPrototype modalDialogPrototype = new Steps_ModalDialogPrototype();
+			modalDialogPrototype.DisplayedModalClickFooterButton(buttonLabel);
+
+		}
 		#endregion
 
 		#region Bulk Actions Modal Steps
@@ -1162,7 +1210,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		public void BulkActionsModalClickCloseButton()
 		{
 			BulkActionsModal bulkActionsModal = new BulkActionsModal();
-			if(Report.IsTrue(bulkActionsModal.CloseButtonExists(), $"Failure, failed to confirm Bulk Actions modal close button does exist.", $"Success, confirmed Bulk Actions modal close button does exists."))
+			if (Report.IsTrue(bulkActionsModal.CloseButtonExists(), $"Failure, failed to confirm Bulk Actions modal close button does exist.", $"Success, confirmed Bulk Actions modal close button does exists."))
 			{
 				Report.IsTrue(bulkActionsModal.CloseButtonClick(), $"Failure, failed to click Bulk Actions modal close button.", $"Success, clicked Bulk Actions modal clased button.");
 			}
@@ -1240,5 +1288,58 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			}
 		}
 		#endregion
+
+		#region Shared Steps
+		[RegexStepDefinition(@"On the My Products page, delete the product saved as: (.*)")]
+		public void MyProductsPageDeleteProductSavedAs(string savedAs)
+		{
+			Report.UseSubSteps = true;
+			Report.Info("Attempting to get product from context");
+			if (!Context.Contains(savedAs))
+			{
+				Report.Failure($"Context did not contain the Product saved as: {savedAs}");
+			}
+			else
+			{
+				Report.Info("Found in Context");
+			}
+			var obj = Context.GetFromContext(savedAs);
+			Report.Info("Attempting to convert Product to type ProductInformation");
+			var Product = (ProductInformation)obj;
+
+			GlobalSteps globalSteps = new GlobalSteps();
+			Report.StartSubStep("Then The home screen should load");
+			globalSteps.ThenTheHomeScreenShouldLoad();
+			Report.StartSubStep("Then On the My Products page, in Product ID/ Name text search input, enter text: Product.Name");
+			this.MyProductsPageProductIDNameTextSearchInputEnterText(Product.Name);
+			Report.StartSubStep("On the My Products page, click Product ID/Name text search button");
+			this.MyProductsPageClickProductIDNameTextSearchButton();
+			Report.StartSubStep("Then On the My Products page, confirm the My Products table does exist");
+			this.MyProductsPageConfirmTableDoesDoesNotExist("does");
+			Report.StartSubStep("Then On the My Products page, confirm the My Products table column labels list does exist");
+			this.MyProductsPageConfirmTableColumnLabelsListDoesDoesNotExist("does");
+			Delay.Seconds(1);
+			Report.StartSubStep("Then On the My Products page in the My Products table, confirm row with Product.Id as Product ID does exist");
+			this.MyProductTableConfirmProductIDRowDoesDoesNotExist(Product.Id, "does");
+			Report.StartSubStep("Then On the My Products page in the My Products table row with Product.Id as Product ID, click Actions button");
+			this.MyProductTableProductIDRowActionsButtonClick(Product.Id);
+			Report.StartSubStep("Then On the My Products page in the My Products table row with Product.Id as Product ID, confirm Actions button menu is displayed");
+			this.MyProductTableProductIDRowConfirmActionsButtonMenuIsIsNotDisplayed(Product.Id, "is");
+			Report.StartSubStep("Then On the My Products page in the My Products table row with Product.Id as Product ID, confirm Actions button 'Delete' option does exist");
+			this.MyProductTableProductIDRowConfirmActionsButtonOptionDoesDoesNotExists(Product.Id, "Delete", "does");
+			Report.StartSubStep("Then On the My Products page in the My Products table row with Product.Id as Product ID, click Actions button 'Delete' option");
+			this.MyProductTableProductIDRowClicActionsButtonOption(Product.Id, "Delete");
+			Report.StartSubStep("Then Confirm Delete Product modal is displayed");
+			this.ConfirmDeleteProductModalIsIsNotDisplayed("is");
+			Report.StartSubStep("Then In the Delete Product modal, confirm 'Alcoholic Beverages - Wine_#60694' product name is displayed");
+			this.DeleteProductModalConfirmProductNameIsIsNotDisplayed(Product.Name, "is");
+			Report.StartSubStep("Then In the Delete Product modal, click 'DELETE' footer button");
+			this.DeleteProductModalClickDeleteFooterButton();
+			Delay.Seconds(1);
+			Report.StartSubStep("Then On the My Products page in the My Products table, confirm row with Product.Id as Product ID does not exist");
+			this.MyProductTableConfirmProductIDRowDoesDoesNotExist(Product.Id, "does not");
+			Report.UseSubSteps = false;
+		}
+		#endregion 
 	}
 }

@@ -1,14 +1,10 @@
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using UL.Automation.Interfaces;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Extensions;
-using OpenQA.Selenium;
-using UL.Automation.Reporting.Functions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -34,7 +30,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			foreach (IWebElement row in this.UpcRows)
 			{
 				var thisUpc = new ProductUpc();
-				for (int i=0; i< this.HeadingTitles.Count(); i++)
+				for (int i = 0; i < this.HeadingTitles.Count(); i++)
 				{
 					var heading = this.HeadingTitles[i];
 					var colEl = row.FindElement(By.XPath($".//td[position()={i + 1}]/div"), 2);
@@ -82,7 +78,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool DoesUPCHeadingsContain(string headingName)
 		{
-			
+
 			var newList = this.HeadingTitles;
 			if (newList.Contains(headingName))
 			{
@@ -90,11 +86,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			else
 			{
-				Report.Info("Did not find the Heading name: "+headingName+". Heading names found are as follows: "+ string.Join(",", newList));
+				Report.Info("Did not find the Heading name: " + headingName + ". Heading names found are as follows: " + string.Join(",", newList));
 				return false;
 			}
 
-						
+
 		}
 
 		public IWebElement LoadingSpinner()

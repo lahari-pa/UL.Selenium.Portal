@@ -1,15 +1,15 @@
-﻿using UL.Automation.Interfaces;
+﻿using Reqnroll;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System;
-using Reqnroll;
 using TReVor.Core.Classes.Software;
 using TReVor.Integrations.Classes;
+using UL.Automation.Interfaces;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.WebDriver.Classes;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Automation.WebDriver.Extensions;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -136,7 +136,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		}
 
 		// ===== HELPER METHODS ===== //
-		
+
 		private void UpdatePasswordForUser(string alias)
 		{
 			Report.StartStep($"I update the password for user: {alias}");
@@ -169,7 +169,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Report.Failure("Failed to find a variable called 'TestUrl'!");
 				return;
 			}
-			
+
 			if (!this.LoginToAccount(user))
 			{
 				Report.Failure("Failed to login to account!");
@@ -251,7 +251,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				SeleniumWebDriver.CurrentDriver.Navigate().GoToUrl(baseTestUrl);
 				return;
 			}
-			
+
 			string alert = this.RetailPartners.WarningMessage();
 
 			if (alert != null && alert.Contains("The recipients listed below have additional Data Consent requests"))

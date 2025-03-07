@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Reqnroll;
-using RestSharp;
+﻿using Reqnroll;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.WebDriver.Classes;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Type
 {
 	[Binding, Scope(Tag = "PhysicalAndChemicalProp")]
-	 class PhysicalAndChemicalProp
+	class PhysicalAndChemicalProp
 	{
 
 		[RegexStepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: (Product is packaged in a gas cylinder \(e.g., whip cream\)|Liquid|Solid|Gas|Aerosol)")]
@@ -48,7 +41,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_T
 		public void EnterTextForRelativeDensity(string text)
 		{
 			string section = "Relative Density";
-			new Steps_Prototype().SetTheSectionOptionTo(section,text);
+			new Steps_Prototype().SetTheSectionOptionTo(section, text);
 		}
 
 		[RegexStepDefinition(@"In the Physical and Chemical Properties Section, set the option in section: 'Relative Density' to: (g/ml \(grams per milliliter\)|lb./gal. \(pounds per gallon\))")]

@@ -1,10 +1,4 @@
-﻿using Org.BouncyCastle.Asn1.Esf;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Reqnroll;
+﻿using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 
@@ -42,12 +36,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		public void SetOptionForRestrictSearchableAccess(string option)
 		{
 			string section = "Do you want to restrict searchable access to your registered formula?";
-			if(option == "Restrict")
+			if (option == "Restrict")
 			{
 				option = " - Customers should contact my organization for an access code";
 				new Steps_Prototype().SetTheSectionOptionTo(section, option);
 			}
-			if(option == "Do Not Restrict")
+			if (option == "Do Not Restrict")
 			{
 				option = " – Formula is searchable in WERCSmart and does not require an access code";
 				new Steps_Prototype().SetTheSectionOptionTo(section, option);

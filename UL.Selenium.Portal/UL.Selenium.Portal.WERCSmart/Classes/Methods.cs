@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace UL.Selenium.Portal.WERCSmart.Classes
 {
 	public static class Methods
@@ -15,9 +9,9 @@ namespace UL.Selenium.Portal.WERCSmart.Classes
 				return true;
 			}
 
-			if(compObj.GetType() == typeof(string))
+			if (compObj.GetType() == typeof(string))
 			{
-				return string.IsNullOrEmpty((string) compObj);
+				return string.IsNullOrEmpty((string)compObj);
 			}
 
 			return compObj == null;

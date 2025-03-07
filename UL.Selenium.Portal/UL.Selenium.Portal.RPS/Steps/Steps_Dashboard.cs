@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Reqnroll;
+using System.Collections.Generic;
 using System.Linq;
-using Reqnroll;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.ReqnrollHelpers.Classes;
@@ -50,8 +50,8 @@ namespace UL.Selenium.Portal.RPS.Steps
         [RegexStepDefinition(@"I Check that for widget (.*) the supplier list (is|is not) showing")]
         public void CheckThatSupplierListIsShowing(string widgetTitle, string showStatus)
         {
-            bool showing = true;            
-            if(showStatus == "is not")
+            bool showing = true;
+            if (showStatus == "is not")
             {
                 showing = false;
             }
@@ -85,7 +85,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             }
             List<string> foundHeadings;
             Delay.Seconds(1);
-            if(listType == "Supplier")
+            if (listType == "Supplier")
             {
                 foundHeadings = new Home.Widget(widgetTitle).GetSupplierListColumnHeadings();
             }
@@ -93,7 +93,7 @@ namespace UL.Selenium.Portal.RPS.Steps
             {
                 foundHeadings = new Home.Widget(widgetTitle).GetProductListColumnHeadings();
             }
-            
+
             var differences = headers.Except(foundHeadings);
             Report.IsTrue(differences.IsNullOrEmpty(), "The headings found did not fully match the expected headings for the suppliers list", "The headings found matched the expected headings for the suppliers list");
         }
@@ -129,18 +129,18 @@ namespace UL.Selenium.Portal.RPS.Steps
             {
                 headers.Add(thisRow["Widget"]);
             }
-            
+
 
             int i = 0;
-            foreach(var header in headers)
+            foreach (var header in headers)
             {
                 string foundCoordinate = new Home.Widget(header).GetWidgetXandYCoordinate();
                 Report.Info($"The expected coordinate was: {expectedCoordinates[0]}");
                 Report.Info($"The found corrdinate was: {foundCoordinate}");
-                Report.IsTrue(foundCoordinate==expectedCoordinates[i],"The found coordinate did not match the expected coordinate for the widget with title: "+header, "The found coordinate matched the expected coordinate for the widget with title: " + header);
+                Report.IsTrue(foundCoordinate == expectedCoordinates[i], "The found coordinate did not match the expected coordinate for the widget with title: " + header, "The found coordinate matched the expected coordinate for the widget with title: " + header);
                 i++;
             }
-           
+
 
         }
 
@@ -148,7 +148,7 @@ namespace UL.Selenium.Portal.RPS.Steps
         public void ConfirmDashBoardWidgetsInSavedOrder(string savedAs)
         {
             List<WidgetPage.Widget> widgetList = new List<WidgetPage.Widget>();
-            if(Context.Contains(savedAs))
+            if (Context.Contains(savedAs))
             {
                 widgetList = (List<WidgetPage.Widget>)Context.GetFromContext(savedAs);
             }
@@ -175,10 +175,10 @@ namespace UL.Selenium.Portal.RPS.Steps
             ConfirmDashBoardWidgetsInSavedOrder("WidgetList");
         }
 
-            [RegexStepDefinition(@"I use double arrow to resize widget: (.*)")]
+        [RegexStepDefinition(@"I use double arrow to resize widget: (.*)")]
         public void IUseDoubleArrowToResizeWidget(string widget)
         {
-            Report.IsTrue(new Home.Widget(widget).DragWidgetSizeDown(),$"Failure, failed to resize {widget} widget.",$"Success, resized {widget} widget");
+            Report.IsTrue(new Home.Widget(widget).DragWidgetSizeDown(), $"Failure, failed to resize {widget} widget.", $"Success, resized {widget} widget");
         }
 
         [RegexStepDefinition(@"I use double arrow to resize the saved widget")]
@@ -210,9 +210,9 @@ namespace UL.Selenium.Portal.RPS.Steps
         }
 
 
-        
 
-        
+
+
 
     }
 }

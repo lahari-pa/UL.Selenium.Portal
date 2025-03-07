@@ -1,6 +1,6 @@
+using OpenQA.Selenium;
 using System.Collections.Generic;
 using System.Linq;
-using OpenQA.Selenium;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Extensions;
@@ -488,11 +488,11 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         public bool InProductLookupConfirmTableHasRows()
         {
-           IList<IWebElement> tableRows = this.FindElements(By.XPath($"//div[@id='gbox_dataGrid']//table[@class='ui-jqgrid-btable ui-common-table'][@aria-labelledby='gbox_dataGrid']//tbody//tr"), 2).ToList();
-           return tableRows.Count > 0;
+            IList<IWebElement> tableRows = this.FindElements(By.XPath($"//div[@id='gbox_dataGrid']//table[@class='ui-jqgrid-btable ui-common-table'][@aria-labelledby='gbox_dataGrid']//tbody//tr"), 2).ToList();
+            return tableRows.Count > 0;
         }
 
-            public bool InProductLookupConfirmTableRowsBelowTrends()
+        public bool InProductLookupConfirmTableRowsBelowTrends()
         {
             IWebElement tableRows = this.FindElement(By.XPath($"//div[@class='stats-cards card-deck mt-2']/../../following-sibling::div"), 2);
             return tableRows != null;
@@ -550,40 +550,40 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
     }
 
     class NavBarTools : SeleniumBaseObject
-	{
-		#region Page Objects
-		protected override By ContainerElementLocator => By.Id("navbar-tools");
+    {
+        #region Page Objects
+        protected override By ContainerElementLocator => By.Id("navbar-tools");
 
-		private IWebElement Gauge => FindElement(By.Id("dropdownMenu1"), 1);
+        private IWebElement Gauge => FindElement(By.Id("dropdownMenu1"), 1);
 
-		private IWebElement DropDownContainer => FindElement(By.XPath(".//*[@id='widget-ul' or @class='dropdown-menu show']"), 1);
+        private IWebElement DropDownContainer => FindElement(By.XPath(".//*[@id='widget-ul' or @class='dropdown-menu show']"), 1);
 
-		private IWebElement ResetDashboard => DropDownContainer.FindElement(By.Id("dashboard-reset"), 1);
+        private IWebElement ResetDashboard => DropDownContainer.FindElement(By.Id("dashboard-reset"), 1);
 
         private IWebElement StoreViewer => DropDownContainer.FindElement(By.XPath("//a[contains(@href,'/WV/Store?')]"), 1);
         private IWebElement RefreshWidgets => DropDownContainer.FindElement(By.Id("dashboard-refresh"), 1);
 
-		private List<IWebElement> VisibleDropDownOptions => DropDownContainer.FindElements(By.XPath(".//a[@class='dropdown-item' or not(parent::node()[@style='display: none;'])]"), 2).ToList();
+        private List<IWebElement> VisibleDropDownOptions => DropDownContainer.FindElements(By.XPath(".//a[@class='dropdown-item' or not(parent::node()[@style='display: none;'])]"), 2).ToList();
 
 
 
-		private IWebElement WidgetTitleOption => DropDownContainer.FindElement(By.Id(""), 1);
+        private IWebElement WidgetTitleOption => DropDownContainer.FindElement(By.Id(""), 1);
 
-		private List<IWebElement> AllDropDownOptions => this.DropDownContainer.FindElements(By.XPath(".//a"), 1).ToList();
+        private List<IWebElement> AllDropDownOptions => this.DropDownContainer.FindElements(By.XPath(".//a"), 1).ToList();
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
-		public bool ClickGauge() => this.Gauge.TryClick();
+        public bool ClickGauge() => this.Gauge.TryClick();
 
-		public bool GaugeDisplayed() => this.Gauge.NotNullAndDisplayed();
+        public bool GaugeDisplayed() => this.Gauge.NotNullAndDisplayed();
 
-		public string ResetDashboardText() => this.ResetDashboard?.Text;
+        public string ResetDashboardText() => this.ResetDashboard?.Text;
 
-		public string RefreshWidgetsText() => this.RefreshWidgets?.Text;
+        public string RefreshWidgetsText() => this.RefreshWidgets?.Text;
 
-		public bool ResetDashboardDisplayed() => this.ResetDashboard.NotNullAndDisplayed();
+        public bool ResetDashboardDisplayed() => this.ResetDashboard.NotNullAndDisplayed();
 
         public string StoreViewerText() => this.StoreViewer?.Text;
 
@@ -591,37 +591,37 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         public bool RefreshWidgetDisplayed() => this.ResetDashboard.NotNullAndDisplayed();
 
-		public bool ClickResetDashboard() => this.ResetDashboard.TryClick();
+        public bool ClickResetDashboard() => this.ResetDashboard.TryClick();
 
-		public bool ClickRefreshWidgets() => this.RefreshWidgets.TryClick();
+        public bool ClickRefreshWidgets() => this.RefreshWidgets.TryClick();
 
-		public bool DropDownContainerDisplayed() => this.DropDownContainer.NotNullAndDisplayed();
+        public bool DropDownContainerDisplayed() => this.DropDownContainer.NotNullAndDisplayed();
 
-		public bool DropDownOptionsAvailable() => this.AllDropDownOptions.Any();
+        public bool DropDownOptionsAvailable() => this.AllDropDownOptions.Any();
 
-		public bool SelectDropDownOption(string option)
-		{
-			List<IWebElement> allOptions = this.VisibleDropDownOptions;
-			IWebElement wantedElement = allOptions.First(x => x.Text == option);
-			return wantedElement.TryClick();
+        public bool SelectDropDownOption(string option)
+        {
+            List<IWebElement> allOptions = this.VisibleDropDownOptions;
+            IWebElement wantedElement = allOptions.First(x => x.Text == option);
+            return wantedElement.TryClick();
 
-		}
-
-
-		public List<string> GetListOfDropDownOptions()
-		{
-
-			List<IWebElement> allOptions = this.VisibleDropDownOptions;
-			List<string> optionsAsText = new List<string>();
-			foreach (var option in allOptions)
-			{
-				optionsAsText.Add(option.Text);
-			}
-			return optionsAsText;
-		}
+        }
 
 
+        public List<string> GetListOfDropDownOptions()
+        {
 
-		#endregion
-	}
+            List<IWebElement> allOptions = this.VisibleDropDownOptions;
+            List<string> optionsAsText = new List<string>();
+            foreach (var option in allOptions)
+            {
+                optionsAsText.Add(option.Text);
+            }
+            return optionsAsText;
+        }
+
+
+
+        #endregion
+    }
 }

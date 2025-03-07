@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using OpenQA.Selenium;
+using System.Collections.Generic;
 using System.Linq;
-using OpenQA.Selenium;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
@@ -33,7 +33,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
         public bool IClickAnywhere() => this.BodyEl.TryClick();
         public bool IAmOnTheMainRPSPage() => this.MainRPSPageTitle != null;
         public bool HomePageIsDisplayedInRPS() => this.HomeLink != null;
-        
+
         public bool WaitUntilHomeXGraphsDisplayed(int graphNumber = 4, int waitForSeconds = 30)
         {
 

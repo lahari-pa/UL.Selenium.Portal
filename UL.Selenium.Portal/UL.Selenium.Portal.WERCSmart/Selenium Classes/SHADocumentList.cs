@@ -1,18 +1,13 @@
+using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using System.Collections.Generic;
-using System.IO;
+using System.Collections.ObjectModel;
 using System.Linq;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.PageObjects;
-using UL.Automation.ReqnrollHelpers.Classes;
-using System.Collections.ObjectModel;
-using System;
-using System.Net;
-using UL.Selenium.Portal.WERCSmart.Helpers;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -50,7 +45,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			ReadOnlyCollection<IWebElement> ListOfFilenameTDs = this.containerElement.FindElements(By.XPath(".//table[@id='listdocuments']/tbody/tr[not(@class='jqgfirstrow')]/td[1]"));
 			IWebElement matchingTD = ListOfFilenameTDs.FirstOrDefault(x => x.GetValue().Contains(pdfName));
-			
+
 
 			if (matchingTD != null)
 			{

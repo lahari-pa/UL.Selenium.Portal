@@ -30,6 +30,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InternationalMarineClassification
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
+@MyProductsPage
 
 Feature: Flow 29 - Beverage
 
@@ -47,7 +48,7 @@ Scenario: [60694] Alcoholic Beverages - Wine - RU001418 - (More than 24% but Les
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wine
-	Then In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Alcoholic Beverages - Wine
+	Then In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Alcoholic Beverages - Wine_#60694
 	Then In the Product Section, set the option in section: 'Type of Product (select)' to: Alcoholic Beverages - Wine
 	Then in the The Product page, I click Continue
 	Then I save the product information as: TestCase60694
@@ -55,6 +56,7 @@ Scenario: [60694] Alcoholic Beverages - Wine - RU001418 - (More than 24% but Les
 	Then I should be on the Product Information Page
 	Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page, I click Continue
 	#Given I call Shared Step 92950 (Physical and Chemical Properties - Physical Property - Liquid - For Wine Less than <70% Alcohol)
 	Then I should be on the Physical and Chemical Properties Page
@@ -111,7 +113,8 @@ Scenario: [60694] Alcoholic Beverages - Wine - RU001418 - (More than 24% but Les
 	Then I should be on the Retailer Page
 #	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60694
    	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase60694	
+	Then In the Product Grid, delete the product saved as: TestCase60694
+
 @ignore
 #Removed from regression 2024/03
 #Retailers section needs to be confirmed!

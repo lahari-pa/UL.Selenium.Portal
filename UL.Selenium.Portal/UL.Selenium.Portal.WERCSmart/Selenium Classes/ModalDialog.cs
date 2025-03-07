@@ -1,13 +1,12 @@
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using UL.Automation.WebDriver.BaseClasses;
-using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
+using System.Linq;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -131,7 +130,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool ClickTheButtonInThePopupView(string popupTitle, string buttonTitle)
 		{
-			IWebElement button = this.ContainerElement.FindElement(By.XPath($".//div[@class='modal-content']//h4[text()='{popupTitle}']/../following-sibling::div[@class='modal-footer']//button[text()='{buttonTitle}'] | .//div[@class='modal-content']//h3[text()='{popupTitle}']/../following-sibling::div[@class='modal-footer']//button[text()='{buttonTitle}'] | .//div[@class='modal-content']//h3[text()='{popupTitle}']/../following-sibling::div[@class='modal-footer']//a[text()='{buttonTitle}']"), 2);
+			IWebElement button = this.ContainerElement.FindElement(By.XPath($".//div[@class='modal-content']//h4[text()='{popupTitle}']/../following-sibling::div[@class='modal-footer']//button[text()='{buttonTitle}'] | .//div[@class='modal-content']//h3[contains(text(),'{popupTitle}')]/../following-sibling::div[@class='modal-footer']//button[text()='{buttonTitle}'] | .//div[@class='modal-content']//h3[text()='{popupTitle}']/../following-sibling::div[@class='modal-footer']//a[text()='{buttonTitle}']"), 2);
 			return button.TryClick();
 		}
 
@@ -172,7 +171,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			if (matchingRetailer == null)
 			{
-				Report.Info($"Could not find matching retailer. Retailers found were: { this.GetRetailers()}");
+				Report.Info($"Could not find matching retailer. Retailers found were: {this.GetRetailers()}");
 				return false;
 			}
 			else
@@ -252,7 +251,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			if (matchingRetailer == null)
 			{
-				Report.Info($"Could not find matching retailer. Retailers found were: { this.GetRetailers()}");
+				Report.Info($"Could not find matching retailer. Retailers found were: {this.GetRetailers()}");
 				return false;
 			}
 			else

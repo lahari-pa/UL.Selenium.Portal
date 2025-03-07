@@ -1,21 +1,17 @@
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text.RegularExpressions;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Automation.Utilities.Mailosaur.Classes;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
-using System.Collections.ObjectModel;
-using Reqnroll;
-using UL.Automation.Utilities;
-using UL.Automation.Utilities.Mailosaur.Classes;
 using static UL.Selenium.Portal.WERCSmart.Selenium_Classes.RetailerAbbreviations;
-using System.Windows;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -104,7 +100,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				getOption = element.Text.Split(':');
 				getSubscriptionOptions.Add(getOption[0]);
 			}
-			if(getSubscriptionOptions == null)
+			if (getSubscriptionOptions == null)
 			{
 				Report.Info("Failed to get Subscription options in My Account page");
 			}
@@ -117,11 +113,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool SaveSubscriptionDetails(string savedAs)
 		{
 			List<string> getSubscriptionDetails = new List<string>();
-			foreach(var element in this.SubscriptionDetails)
+			foreach (var element in this.SubscriptionDetails)
 			{
 				getSubscriptionDetails.Add(element.Text);
 			}
-			if(getSubscriptionDetails == null)
+			if (getSubscriptionDetails == null)
 			{
 				Report.Info("Failed to get Subscription details in My Account page");
 				return false;
@@ -279,7 +275,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			var listOfUsers = listOfUsersRows.Select(x => x.FindElement(By.XPath(".//td[1]/span"), 2).Text).ToList();
 			if (!listOfUsers.Contains(username))
 			{
-				Report.Error($"Username:{ username } does not show in the list. The full list is: "+
+				Report.Error($"Username:{username} does not show in the list. The full list is: " +
 											  string.Join(",", listOfUsers));
 				return false;
 			}
@@ -301,10 +297,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			var actionLink = (IWebElement)dropDownMenu?.FindElements(By.XPath("./li"), 2).FirstOrDefault(x => x.Text == action);
 			if (!actionLink.TryClick())
 			{
-				Report.Error($"Failed to click action: { action }");
+				Report.Error($"Failed to click action: {action}");
 				return false;
 			}
-			Report.Info($"Clicked action: { action }");
+			Report.Info($"Clicked action: {action}");
 			return true;
 		}
 
@@ -485,7 +481,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			while (pageNo < 10)
 			{
-				Delay.Seconds(10* Delay.SpeedFactor);
+				Delay.Seconds(10 * Delay.SpeedFactor);
 
 				IWebElement myPageNumber = this.ContainerElement.FindElements(By.XPath(".//ul[@id='pagingControl']/li/span[@class='current']"), 10).FirstOrDefault();
 
@@ -498,7 +494,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					Report.Info($"Looking for username...");
 					IWebElement nameEl = userRow.FindElement(By.XPath(".//td[1]"), 2);
-					if(nameEl.IsNullOrEmpty())
+					if (nameEl.IsNullOrEmpty())
 					{
 						Report.Info($"nameEl was null or empty.");
 						return false;
@@ -547,7 +543,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					myFirstPageNo.TryClick();
 				}
-			}					
+			}
 
 			int pageNo = 1;
 
@@ -583,12 +579,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						Report.Info("Row Found");
 
 						IWebElement selEl = userRow.FindElement(By.XPath(".//button"), 2);
-						if(selEl.IsNullOrEmpty())
+						if (selEl.IsNullOrEmpty())
 						{
 							Report.Info($"selEl was null or empty");
 							return false;
 
-						}	
+						}
 						Report.Info($"Attempting to click the element");
 						bool userSelected = selEl.TryClick();
 						if (userSelected)
@@ -658,7 +654,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			bool navigated;
 			if (myNav == null)
 			{
-				Report.Info($"Failed to Find Navigation Option: { nav_option }");
+				Report.Info($"Failed to Find Navigation Option: {nav_option}");
 				Report.Screenshot();
 				return false;
 			}
@@ -688,7 +684,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					navigated = myLibrary.Exists;
 					break;
 				default:
-					Report.Info($"The specified navigation option: { nav_option } was not valid");
+					Report.Info($"The specified navigation option: {nav_option} was not valid");
 					return false;
 			}
 			return navigated;
@@ -957,14 +953,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 				else
 				{
-					Report.Info($"Failed to click the element on try: {i+1}");
+					Report.Info($"Failed to click the element on try: {i + 1}");
 					i++;
 				}
 			}
 			return success;
-			
 
-			
+
+
 		}
 
 		public int GetPage(string position)
@@ -1065,7 +1061,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 						inputEl = this.UserGridNavPageInput();
 						if (inputEl == null)
 						{
-							return; 
+							return;
 						}
 						Report.Info("Entering page number: " + pageNumber);
 						//inputEl.EnterText(pageNumber);
@@ -1103,7 +1099,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 
 		}
-	
+
 
 		public string CurrentPageUserGridNavPageInput()
 		{
@@ -1163,7 +1159,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				StewardshipList.Add(row["Stewardship"]);
 
-			    issueDateFilled = false;
+				issueDateFilled = false;
 				expireDateFilled = false;
 
 				if (row["Issue Date"] == "Today")
@@ -1240,7 +1236,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickSaveButtonForStewardshipNumbers()
 		{
 			//Data entry in automation causes the datepickers to stay open, Automation does not click save if date pickers are open, so first need to click off the date pickers to close them. Clicking the container in this case fixes the issue.
-			this.ContainerElement.Click();			
+			this.ContainerElement.Click();
 			IWebElement SaveButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//div[@data-bind='with: stewardshipNumberModel']//a[@class='btn btn-xs btn-success pull-right marLeft-5']"), 2);
 			return SaveButton.TryClick();
 		}
@@ -1263,7 +1259,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					ExpireDateList.Add(input);
 				}
 				else
-				{					
+				{
 					ExpireDateList.Add(row["Expire Date"]);
 				}
 			}
@@ -1272,7 +1268,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			int textboxesPerRow = 3;
 			for (int i = 0; i < TableData.Count() - 1; i += textboxesPerRow)
 			{
-				Report.Info($"Expected data was: {TableData[i].Text}, {TableData[i+1].Text}, {TableData[i+2].Text}");
+				Report.Info($"Expected data was: {TableData[i].Text}, {TableData[i + 1].Text}, {TableData[i + 2].Text}");
 				Report.Info($"Found data was: {StewardshipList[k]}, {IssueDateList[k]}, {ExpireDateList[k]}");
 				if (!((TableData[i].Text == StewardshipList[k]) &&
 					(TableData[i + 1].Text == IssueDateList[k]) &&
@@ -1869,7 +1865,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Screenshot();
 				return false;
 			}
-			
+
 			return CanSuppEdit.TryClick();
 		}
 
@@ -2086,13 +2082,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool SectionExists(string section, Table table)
 		{
 			List<string> GetProductTypes = new List<string>();
-			
-			foreach(var element in this.ProductTypes(section))
+
+			foreach (var element in this.ProductTypes(section))
 			{
 				string[] line = element.Text.Split('\r');
 				GetProductTypes.Add(line[0]);
 			}
-			if(GetProductTypes == null)
+			if (GetProductTypes == null)
 			{
 				Report.Info($"Failed to get product types in section {section}");
 				return false;
@@ -2111,7 +2107,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool CheckOptionExistsInSection(string option, string section)
 		{
-			List<string> GetProductTypes = new List<string> ();
+			List<string> GetProductTypes = new List<string>();
 			foreach (var element in this.ProductTypes(section))
 			{
 				string[] line = element.Text.Split('\r');
@@ -2165,7 +2161,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool VerifyProductsCount(string productType, string section, string savedAs)
 		{
 			List<string[]> GetSavedProductTypes = new List<string[]>();
-			List<string[]> GetProductTypes = new List<string[]> {this.ProductTypesSectionName(section).Text.Split(' ')};
+			List<string[]> GetProductTypes = new List<string[]> { this.ProductTypesSectionName(section).Text.Split(' ') };
 			GetSavedProductTypes = (List<string[]>)Context.GetFromContext(savedAs);
 			foreach (var element in this.ProductTypes(section))
 			{
@@ -2207,7 +2203,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 							}
 						}
 					}
-				}	
+				}
 			}
 			return result;
 		}
@@ -2224,7 +2220,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				form_no == "0" ? "" : form_no + " Formulated",
 				art_no == "0" ? "" : art_no + " Articles",
 				en_art_no == "0" ? "" : en_art_no + " Enhanced Articles"
-			};		
+			};
 
 			string newString = "";
 			/*
@@ -2240,7 +2236,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				}
 			}
 			*/
-			foreach(string e in Expected)
+			foreach (string e in Expected)
 			{
 				if (e != "")
 				{
@@ -2256,7 +2252,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 
 			string ExpectedText = newString;
-			
+
 
 
 			Report.Info("Expected string: " + ExpectedText);
@@ -2330,7 +2326,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ConfirmThatInTheMiddleOfThePageYouSeeTheUpgradeButton()
 		{
 			Report.Info("Beginning ConfirmThatInTheMiddleOfThePageYouSeeTheUpgradeButton");
-			if(this._btnUpgrade == null)
+			if (this._btnUpgrade == null)
 			{
 				Report.Info("Upgrade Button was not Found!");
 				return false;
@@ -2343,7 +2339,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info("Attempting to Click UPGRADE Button");
 			Delay.Seconds(2 * Delay.SpeedFactor);
-			return this._btnUpgrade.TryClick();			
+			return this._btnUpgrade.TryClick();
 		}
 
 		public bool Click_Upgrade_Button()
@@ -2425,7 +2421,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			set
 			{
 				this._description.EnterText(value);
-				Report.Success($"Entered description: { value }");
+				Report.Success($"Entered description: {value}");
 			}
 		}
 		public bool Order_History_Select(string history_type)
@@ -2568,7 +2564,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//button[contains(text(), 'Filter')]"), 2).TryClick();
 		}
-		}
+	}
 	public class MyAccount_MyLibrary : BaseObject
 	{
 		[FindsBy(How = How.Id, Using = "myLibraryContainer")]
@@ -2777,7 +2773,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool ClickEdit(int row, string brandName)
 		{
 			return this.containerElement.FindElement(By.XPath(".//tbody[@data-bind='foreach: productLines']/tr[" + row + "][.//span[text()='" + brandName + "']]//a[contains(@data-bind,'click: edit')]"), 2).TryClick();
-						
+
 		}
 		public List<string> SavedBrands()
 		{
@@ -2858,7 +2854,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			var homepage = new ChooseGoodGuide.ChooseGoodGuide_Homepage();
 			homepage.WaitLoading();
 			IList<IWebElement> resultsName = this.containerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results__option')]//span[@class='component-name']"), 2);
-			
+
 			if (resultsName.Count == 0 && GeneralUtilities.Wait_for_load_finish())
 			{
 				Report.Info("Unable to locate any search results with chemical name!");
@@ -3004,7 +3000,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.containerElement.FindElement(By.XPath(".//tbody/tr[" + ingredient.Row + "]//input[@data-bind='checked: isChecked']"), 2).TryClick();
 		}
 
-		public bool AddIngredientToMyIngredients(string ingredientName,string cas)
+		public bool AddIngredientToMyIngredients(string ingredientName, string cas)
 		{
 			this.EnterTextSearch(ingredientName);
 			return this.ClickSearchResult(ingredientName, cas);

@@ -1,17 +1,15 @@
+using Reqnroll;
 using System;
 using System.Collections.Generic;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.Reporting.Functions;
-using UL.Automation.ReqnrollHelpers.Classes;
-using Reqnroll;
-using TReVor.Api.Wrapper.Classes;
+using TReVor.Core.Classes.Software;
 using UL.Automation.Reporting;
-using UL.Automation.TReVor.Classes;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
-using TReVor.Core.Classes.Software;
-using UL.Automation.ReqnrollHelpers.Attributes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
 {
@@ -986,7 +984,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		[RegexStepDefinition(@"In the Purchase Summary screen I click Remove for product (.*)")]
 		public void InThePurchaseSummaryScreenIClickRemove(string product)
 		{
-	
+
 			var newProduct = new NewProduct();
 
 			if (product.ToLower().Contains("saved as"))
@@ -1141,13 +1139,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				Delay.Seconds(5 * Delay.SpeedFactor);
 
 				Report.Info("Making sure that the Contact information edited successfully");
-				Report.IsTrue(myInfo.Confirm_Country_AddressAppear(action_menu, country), $"{ action_menu} country Incorrect", $"Confirmed editing {action_menu} country");
-				Report.IsTrue(myInfo.Confirm_addressOne_AddressAppear(action_menu, address1), $"{ action_menu} address one Incorrect", $"Confirmed editing {action_menu} one");
-				Report.IsTrue(myInfo.Confirm_addressTwo_AddressAppear(action_menu, address2), $"{ action_menu} address two Incorrect", $"Confirmed editing {action_menu} two");
-				Report.IsTrue(myInfo.Confirm_City_AddressAppear(action_menu, city), $"{ action_menu} city Incorrect", $"Confirmed editing {action_menu} city");
-				Report.IsTrue(myInfo.Confirm_State_AddressAppear(action_menu, state), $"{ action_menu} state Incorrect", $"Confirmed editing {action_menu} state");
-				Report.IsTrue(myInfo.Confirm_Zip_Code_AddressAppear(action_menu, zip), $"{ action_menu} zip code Incorrect", $"Confirmed editing {action_menu} zip code");
-				Report.IsTrue(myInfo.Confirm_PhoneNo_AddressAppear(action_menu, phone), $"{ action_menu} phone number Incorrect", $"Confirmed editing {action_menu} phone number");				
+				Report.IsTrue(myInfo.Confirm_Country_AddressAppear(action_menu, country), $"{action_menu} country Incorrect", $"Confirmed editing {action_menu} country");
+				Report.IsTrue(myInfo.Confirm_addressOne_AddressAppear(action_menu, address1), $"{action_menu} address one Incorrect", $"Confirmed editing {action_menu} one");
+				Report.IsTrue(myInfo.Confirm_addressTwo_AddressAppear(action_menu, address2), $"{action_menu} address two Incorrect", $"Confirmed editing {action_menu} two");
+				Report.IsTrue(myInfo.Confirm_City_AddressAppear(action_menu, city), $"{action_menu} city Incorrect", $"Confirmed editing {action_menu} city");
+				Report.IsTrue(myInfo.Confirm_State_AddressAppear(action_menu, state), $"{action_menu} state Incorrect", $"Confirmed editing {action_menu} state");
+				Report.IsTrue(myInfo.Confirm_Zip_Code_AddressAppear(action_menu, zip), $"{action_menu} zip code Incorrect", $"Confirmed editing {action_menu} zip code");
+				Report.IsTrue(myInfo.Confirm_PhoneNo_AddressAppear(action_menu, phone), $"{action_menu} phone number Incorrect", $"Confirmed editing {action_menu} phone number");
 			}
 			catch (Exception ex)
 			{
@@ -1155,7 +1153,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 				throw;
 			}
 		}
-		
+
 		[RegexStepDefinition(@"In the Purchase Summary screen I Confirm that for Billing Frequency I see following: yearly: (.*), quarterly: (.*), monthly: (.*) options")]
 		public void ThenIConfirmTheBillingFrequencyRadioButtons(string yearly, string quarterly, string monthly)
 		{

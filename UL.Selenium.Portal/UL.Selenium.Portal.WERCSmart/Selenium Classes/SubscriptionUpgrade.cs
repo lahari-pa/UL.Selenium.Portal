@@ -1,10 +1,9 @@
+using OpenQA.Selenium;
 using System;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.WebDriver.Extensions;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Classes;
-using OpenQA.Selenium;
-using Reqnroll;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {

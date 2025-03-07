@@ -1,16 +1,13 @@
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using System.Collections.ObjectModel;
-using OpenQA.Selenium.Internal;
-using OpenQA.Selenium.Support.UI;
-using System.Windows;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -18,7 +15,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	{
 		protected override By ContainerElementLocator => By.Id("paymentMethodsContainer");
 		private IWebElement _btnBackArrow = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(".//i[@class='fa fa-arrow-left']"), 2);
-		
+
 		public bool Payment_Header_Correct()
 		{
 			Report.Info("Beginning Header_Correct");
@@ -659,7 +656,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		//Wire Transfer Warning
 		//[FindsBy(How = How.Id, Using = "wireTransferWarning-new")]
-		private IWebElement Transfer_warning => this.FindElement(By.Id("wireTransferWarning-new"),1);
+		private IWebElement Transfer_warning => this.FindElement(By.Id("wireTransferWarning-new"), 1);
 
 		public bool Wire_Transfer_Warning(string warning)
 		{
@@ -687,7 +684,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		//Continue Button
 		//[FindsBy(How = How.Id, Using = "continueButton")]
-		private IWebElement BtnContinue => this.FindElement(By.Id("continueButton"),1);
+		private IWebElement BtnContinue => this.FindElement(By.Id("continueButton"), 1);
 
 		public bool Continue_click()
 		{
@@ -732,7 +729,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		//Formulated Products
 		//[FindsBy(How = How.XPath, Using = ".//div[@class='col-sm-2 address-panel']")]
-		private IWebElement Tbl_addresses => this.FindElement(By.Id(".//div[@class='col-sm-2 address-panel']"),1);
+		private IWebElement Tbl_addresses => this.FindElement(By.Id(".//div[@class='col-sm-2 address-panel']"), 1);
 
 		public List<string> Get_Contact_Info()
 		{
@@ -783,11 +780,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info($"Last Name Correct: {last_name}");
 			if (!myInfo.Contains(email_address))
 			{
-				Report.Info($"Email Address Incorrect: { email_address}");
+				Report.Info($"Email Address Incorrect: {email_address}");
 				Report.Screenshot();
 				return false;
 			}
-			Report.Info($"Email Address Correct: { email_address}");
+			Report.Info($"Email Address Correct: {email_address}");
 
 			Report.Info("Contact Information Correct");
 			return true;
@@ -832,21 +829,21 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			if (!myInfo.Contains(address_one))
 			{
-				Report.Info($"Address One Incorrect: { address_one}");
+				Report.Info($"Address One Incorrect: {address_one}");
 				Report.Screenshot();
 				return false;
 			}
-			Report.Info($"Address One Correct: { address_one}");
+			Report.Info($"Address One Correct: {address_one}");
 			if (!myInfo.Contains(address_two))
 			{
 				Report.Info($"Address Two Incorrect: {address_two}");
 				Report.Screenshot();
 				return false;
 			}
-			Report.Info($"Address Two Correct: { address_two}");
+			Report.Info($"Address Two Correct: {address_two}");
 			if (!myInfo.Contains(city_state_zip))
 			{
-				Report.Info($"City Incorrect: { city_state_zip}");
+				Report.Info($"City Incorrect: {city_state_zip}");
 				Report.Screenshot();
 				return false;
 			}
@@ -871,14 +868,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Screenshot();
 				return false;
 			}
-			Report.Info($"Country Correct: { country}");
+			Report.Info($"Country Correct: {country}");
 			if (!myInfo.Contains(phone_no))
 			{
-				Report.Info($"Phone Number Incorrect: { phone_no}");
+				Report.Info($"Phone Number Incorrect: {phone_no}");
 				Report.Screenshot();
 				return false;
 			}
-			Report.Info($"Phone Number Correct: { phone_no}");
+			Report.Info($"Phone Number Correct: {phone_no}");
 
 			Report.Info("Billing Address is Correct");
 			Report.Screenshot();
@@ -887,11 +884,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		//Change Button
 		//[FindsBy(How = How.XPath, Using = ".//div/a[text()='Change']")]
-		private IWebElement BtnChange => this.ContainerElement.FindElement(By.XPath(".//a[text()='Change']"),1);
+		private IWebElement BtnChange => this.ContainerElement.FindElement(By.XPath(".//a[text()='Change']"), 1);
 
 		public bool Change_click()
 		{
-			if(this.BtnChange == null)
+			if (this.BtnChange == null)
 			{
 				Report.Info("Could not find Change button");
 				return false;
@@ -927,15 +924,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			return SeleniumWebDriver.CurrentDriver.WaitUntilElementVisible(By.XPath(".//div[@class='header-with-back']//a/i"), 2).TryClick() && GeneralUtilities.Wait_for_load_finish();
 		}
-		
+
 		public bool Continue_back_arrow()
 		{
 			Report.Info("Attempting to Click Back Arrow");
-			return this._btnBackArrow.TryClick();			
+			return this._btnBackArrow.TryClick();
 		}
 	}
 
-class ContactInformation_Edit_Address : SeleniumBaseObject
+	class ContactInformation_Edit_Address : SeleniumBaseObject
 	{
 		protected override By ContainerElementLocator => By.Id("companyInfoContainer");
 
@@ -979,7 +976,7 @@ class ContactInformation_Edit_Address : SeleniumBaseObject
 					IWebElement myAdd1 = this._section_bill.FindElements(By.XPath($"//div[contains(@data-bind,'{action}')]//input[contains(@data-bind, 'address1')]"), 10).FirstOrDefault();
 					if (myAdd1 != null)
 					{
-						Report.Info($"Editing Address Line 1: { address1}");
+						Report.Info($"Editing Address Line 1: {address1}");
 						myAdd1.EnterText(address1);
 					}
 					else
@@ -1005,13 +1002,13 @@ class ContactInformation_Edit_Address : SeleniumBaseObject
 					IWebElement myAdd2 = this._section_bill.FindElements(By.XPath($"//div[contains(@data-bind,'{action}')]//input[contains(@data-bind, 'address2')]"), 10).FirstOrDefault();
 					if (myAdd2 != null)
 					{
-						Report.Info($"Editing Address Line 2: { address2}");
+						Report.Info($"Editing Address Line 2: {address2}");
 						myAdd2.EnterText(address2);
 					}
 					else
-					{ 
-					Report.Info("Failed to Find Address Line 2 Text Box");
-					Report.Screenshot();
+					{
+						Report.Info("Failed to Find Address Line 2 Text Box");
+						Report.Screenshot();
 					}
 				}
 			}
@@ -1028,10 +1025,10 @@ class ContactInformation_Edit_Address : SeleniumBaseObject
 			{
 				if (city != "")
 				{
-					IWebElement myCity = this._section_bill.FindElements(By.XPath($"//div[contains(@data-bind,'{ action }')]//input[contains(@data-bind, 'city')]"), 10).FirstOrDefault();
+					IWebElement myCity = this._section_bill.FindElements(By.XPath($"//div[contains(@data-bind,'{action}')]//input[contains(@data-bind, 'city')]"), 10).FirstOrDefault();
 					if (myCity != null)
 					{
-						Report.Info($"Editing City: { city}");
+						Report.Info($"Editing City: {city}");
 						myCity.EnterText(city);
 					}
 					else
@@ -1059,12 +1056,12 @@ class ContactInformation_Edit_Address : SeleniumBaseObject
 
 					if (inputTextbox != null)
 					{
-						Report.Info($"Editing State: { state}");
+						Report.Info($"Editing State: {state}");
 						inputTextbox.EnterText(state);
 					}
 					else if (selectDropdown != null)
 					{
-						Report.Info($"Editing State: { state}");
+						Report.Info($"Editing State: {state}");
 						selectDropdown.Select(state);
 					}
 					else
@@ -1072,7 +1069,7 @@ class ContactInformation_Edit_Address : SeleniumBaseObject
 						Report.Info("Failed to Find State Text Box");
 						Report.Screenshot();
 					}
-				}				
+				}
 			}
 			catch (Exception ex)
 			{
@@ -1134,7 +1131,7 @@ class ContactInformation_Edit_Address : SeleniumBaseObject
 			}
 		}
 
-		
+
 
 		public List<string> Get_Contact_Address(string action_menu)
 		{
@@ -1214,7 +1211,7 @@ class ContactInformation_Edit_Address : SeleniumBaseObject
 		}
 	}
 
-class PaymentMethods_Edit_Address : SeleniumBaseObject
+	class PaymentMethods_Edit_Address : SeleniumBaseObject
 	{
 		protected override By ContainerElementLocator => By.Id("editAddressDetails");
 
@@ -1259,7 +1256,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 
 		//Primary Account Contact Section
 		//[FindsBy(How = How.XPath, Using = ".//div/h4[text()='Primary Account Contact']/..")]
-		private IWebElement Section_pac => this.FindElement(By.Id(".//div/h4[text()='Primary Account Contact']/.."),1);
+		private IWebElement Section_pac => this.FindElement(By.Id(".//div/h4[text()='Primary Account Contact']/.."), 1);
 
 		public bool Edit_Primary_Account_Contact(string firstName = "", string lastName = "", string email = "")
 		{
@@ -1316,7 +1313,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 
 		//Edit Account Name
 		//[FindsBy(How = How.XPath, Using = ".//div/h4[text()='Primary Account Contact']/..")]
-		private IWebElement Section_acc => this.FindElement(By.Id(".//div/h4[text()='Primary Account Contact']/.."),1);
+		private IWebElement Section_acc => this.FindElement(By.Id(".//div/h4[text()='Primary Account Contact']/.."), 1);
 
 		public bool Edit_Account_Name(string accountName = "")
 		{
@@ -1340,16 +1337,16 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 				}
 				Report.Info("Editing Account Name: " + accountName);
 				myCompany.EnterText(accountName);
-				
+
 
 			}
-			
+
 			Delay.Seconds(1 * Delay.SpeedFactor);
 			Report.Success("Account Name Edited");
 			Report.Screenshot();
 			return true;
 		}
-		
+
 		public string GetCompanyName()
 		{
 
@@ -1362,7 +1359,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 			Report.StartStep("Change the Name of the company and Confirm the Contact Information is updated with the New Company Name");
 			Report.IsTrue(this.Edit_Account_Name(companyName),
 						"Failed to change Name of the company", "Name of the company changed Successfully");
-			
+
 			Report.IsTrue(this.Save_click(), "Failed to Click Save Button", "Save Button Clicked");
 			Delay.Seconds(4 * Delay.SpeedFactor);
 			Report.Screenshot();
@@ -1378,7 +1375,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 		{
 			var elFound = this.containerElement.WaitUntilElementInvisible(By.Id("editAddressDetails"), 45);
 			return elFound;
-			
+
 		}
 
 
@@ -1386,7 +1383,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 
 		//Billing Address Section
 		//[FindsBy(How = How.XPath, Using = ".//div/h4[text()='Billing Address']/..")]
-		private IWebElement Section_bill => this.FindElement(By.XPath(".//div/h4[text()='Billing Address']/.."),1);
+		private IWebElement Section_bill => this.FindElement(By.XPath(".//div/h4[text()='Billing Address']/.."), 1);
 
 		public bool EditState(string state)
 		{
@@ -1622,7 +1619,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 				}
 				Report.Info("Editing State: " + state);
 				myState.Select(state);
-			}		
+			}
 			if (zip != "")
 			{
 				IWebElement myZip = this.Section_bill.FindElements(By.XPath(".//input[@name='zip']"), 10).FirstOrDefault();
@@ -1665,11 +1662,11 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 			return true;
 		}
 
-		
+
 
 		//Shipping Address is the same as billing address
 		//[FindsBy(How = How.XPath, Using = ".//div[@class='checkbox']/label/input")]
-		private IWebElement Chk_same => this.FindElement(By.Id(".//div[@class='checkbox']/label/input"),1);
+		private IWebElement Chk_same => this.FindElement(By.Id(".//div[@class='checkbox']/label/input"), 1);
 
 		public bool Shipp_Same_As_Bill_Check(bool bEnable)
 		{
@@ -1680,7 +1677,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 
 		//Cancel Button
 		//[FindsBy(How = How.XPath, Using = ".//button[@class='btn btn-danger']")]
-		private IWebElement BtnCancel => this.FindElement(By.Id(".//button[@class='btn btn-danger']"),1);
+		private IWebElement BtnCancel => this.FindElement(By.Id(".//button[@class='btn btn-danger']"), 1);
 
 		public bool Cancel_click()
 		{
@@ -1691,7 +1688,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 
 		//Save Button
 		//[FindsBy(How = How.Id, Using = "SaveAddress")]
-		private IWebElement BtnSave => this.FindElement(By.Id("SaveAddress"),1);
+		private IWebElement BtnSave => this.FindElement(By.Id("SaveAddress"), 1);
 
 		public bool Save_click()
 		{
@@ -1705,7 +1702,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 
 		//Shipping Address Section
 		//[FindsBy(How = How.XPath, Using = ".//div/h4[text()='Shipping Address']/..")]
-		private IWebElement Section_ship => this.FindElement(By.Id(".//div/h4[text()='Shipping Address']/.."),1);
+		private IWebElement Section_ship => this.FindElement(By.Id(".//div/h4[text()='Shipping Address']/.."), 1);
 
 		public bool Shipping_Headers_Check(List<string> myList)
 		{
@@ -2054,7 +2051,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 
 		//Confirm Order Button
 		//[FindsBy(How = How.Id, Using = "ConfirmOrder")]
-		public IWebElement Btn_confirm => this.FindElement(By.Id("ConfirmOrder"),1);
+		public IWebElement Btn_confirm => this.FindElement(By.Id("ConfirmOrder"), 1);
 
 		public bool Confirm_Order_click()
 		{
@@ -2123,13 +2120,14 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 				string data = this.OptionsGetText();
 				Report.IsTrue(data.Contains(yearly), $"Failed to find {yearly} option instead {yearly} {quarterly} {monthly} is displayed", $"Expected option {yearly} displayed ");
 				Report.IsTrue(data.Contains(quarterly), $"Failed to find {quarterly} option instead {yearly} {quarterly} {monthly} is displayed", $"Expected option {quarterly} displayed");
-				Report.IsTrue(data.Contains(monthly), $"Failed to find {monthly} option instead {yearly} {quarterly} {monthly} is displayed", $"Expected option {monthly} displayed");				
+				Report.IsTrue(data.Contains(monthly), $"Failed to find {monthly} option instead {yearly} {quarterly} {monthly} is displayed", $"Expected option {monthly} displayed");
 			}
 		}
 
-		public string OptionsGetText() {
+		public string OptionsGetText()
+		{
 			return this._optionGetText.Text;
-			}
+		}
 
 		public bool Billing_frequency_YearlyLabel()
 		{
@@ -2177,7 +2175,7 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 
 		public string Thank_You_Text()
 		{
-			var actualText = this.ContainerElement.FindElement(By.XPath(".//p[not(@class)]"),15).Text;
+			var actualText = this.ContainerElement.FindElement(By.XPath(".//p[not(@class)]"), 15).Text;
 			return actualText;
 
 		}
@@ -2219,7 +2217,8 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 		*/
 		protected override By ContainerElementLocator => By.XPath("//div[@class='main']");
 
-		public string EmailField {
+		public string EmailField
+		{
 			get => this.containerElement.FindElement(By.Id("email"), 2).Text;
 			set => this.containerElement.FindElement(By.Id("email"), 2).EnterText(value);
 		}
@@ -2241,7 +2240,8 @@ class PaymentMethods_Edit_Address : SeleniumBaseObject
 			}
 		}
 
-		public string PasswordField {
+		public string PasswordField
+		{
 			get => this.containerElement.FindElement(By.Id("password"), 2).Text;
 			set
 			{

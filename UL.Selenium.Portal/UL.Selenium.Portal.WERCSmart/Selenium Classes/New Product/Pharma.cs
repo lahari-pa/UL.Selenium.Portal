@@ -1,14 +1,6 @@
-﻿using System;
+﻿using OpenQA.Selenium;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using UL.Automation.ReqnrollHelpers.Classes;
-using Reqnroll;
-using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 {
@@ -56,7 +48,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return el.TryEnterText(number);
 
 		}
-		
+
 		public bool CheckAndFillEmptyFieldsInPharmaIngredientsScreen()
 		{
 			IList<IWebElement> allFieldsOnPage = this.containerElement.FindElements(By.XPath("//span[contains(text(),'For all components entered percentage should be greater than 0. Formulation must total or exceed 100%.')]/../preceding-sibling::input"), 2);
@@ -64,7 +56,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			foreach (IWebElement field in allFieldsOnPage)
 			{
 				bool enteredText = false;
-				
+
 				enteredText = field.TryEnterText("1");
 
 				if (!enteredText)
@@ -78,15 +70,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CheckAndFillEmptyFieldsInSPLInformationScreen()
 		{
-	
+
 			IList<IWebElement> allFieldsOnPage = this.containerElement.FindElements(By.XPath("//span[contains(text(),'This is a required field')]/../preceding-sibling::input"), 2);
-	
+
 			foreach (IWebElement field in allFieldsOnPage)
 			{
 				bool enteredText = false;
 
 				enteredText = field.TryEnterText("Test");
-					
+
 				if (!enteredText)
 				{
 					return false;

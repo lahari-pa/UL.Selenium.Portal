@@ -1,16 +1,12 @@
+using OpenQA.Selenium;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using System.Collections.ObjectModel;
-using UL.Automation.Reporting.Functions;
-using System;
-using Reqnroll;
-using NPOI.SS.UserModel;
-using UL.Automation.ReqnrollHelpers.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -41,7 +37,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 
 		public string GetSubheadingText()
-		{ 
+		{
 
 			IWebElement el = this.containerElement.FindElement(By.XPath("//div[@class='product-header']//p"), 2);
 
@@ -192,7 +188,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			var tableEl = this.containerElement.FindElement(By.XPath("//div[@id='ReportHistoryTable']//table"), 15);
 			return tableEl != null;
-			
+
 		}
 
 		public bool ReportHistoryTableRowsPresent()
@@ -208,10 +204,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			var tableEl = this.containerElement.FindElement(By.XPath("//div[@id='ReportHistoryTable']//table"), 15);
 			var firstRow = tableEl.FindElement(By.XPath("//tr"), 2);
-			if(firstRow==null)
+			if (firstRow == null)
 			{
 				Report.Info($"The first row element was null");
-					return null;
+				return null;
 			}
 			var nameEl = firstRow.FindElement(By.XPath("//td[@data-bind='text:ReportName']"), 2);
 			return nameEl.Text;
@@ -273,7 +269,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 			var actionsEl = firstRow.FindElement(By.XPath($"//td[.//button]"), 2);
 			var wantedButtonEl = actionsEl.FindElement(By.XPath($"//button[text()='{buttonName}']"), 2);
-			if(wantedButtonEl==null)
+			if (wantedButtonEl == null)
 			{
 				Report.Info($"The wanted button element was not found");
 				return false;
@@ -302,7 +298,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				default:
 					Report.Error(" variable must be either 'ascending' or 'descending'!");
 					return false;
-					
+
 			}
 
 			var tableHeaderEl = this.containerElement.FindElement(By.XPath("//div[@id='ReportHistoryTable']//table//thead"), 15);
@@ -333,7 +329,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				int x = 0;
 				directionTitleEl = tableHeaderEl.FindElement(By.XPath($"//span[@id='{column}{wantedID}']"), 15);
 				bool correctDirection = directionTitleEl.GetAttribute("style") != "display: none;";
-				while (x < 5 && correctDirection==false)
+				while (x < 5 && correctDirection == false)
 				{
 					wantedTitleMasterEl.TryClick();
 					correctDirection = directionTitleEl.GetAttribute("style") != "display: none;";
@@ -351,7 +347,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					//Delay.Seconds(8);
 					x++;
 				}
-				
+
 			}
 
 			directionTitleEl = tableHeaderEl.FindElement(By.XPath($"//span[@id='{column}{wantedID}']"), 15);
@@ -505,14 +501,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool CheckReportDataForMostRecentFile(string reportName, string type, string requestedBy)
 		{
 			Delay.Seconds(10);
-	
+
 			IList<IWebElement> rowList = this.ContainerElement.FindElements(By.XPath("//div[@class='pull-right col-xs-9']//tbody//tr"), 2);
-			
+
 			for (int i = 1; i < rowList.Count; i++)
 			{
-				
+
 				IList<IWebElement> rowInfo = this.ContainerElement.FindElements(By.XPath("//div[@class='pull-right col-xs-9']//tbody//tr[" + i + "]//td[@data-bind='text:DateRequested']/..//td"), 2);
-			
+
 				string reportNameStr = rowInfo[0].Text;
 
 				string reportTypeStr = rowInfo[2].Text;
@@ -521,7 +517,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 				string reportRequestedByStr = rowInfo[4].Text;
 
-			
+
 				string datePart = DateTime.Now.ToString("M/d/yyyy");
 
 				var columnValueSecondHalf = dateRequestedStr.Remove(0, dateRequestedStr.IndexOf(' ') + 1);
@@ -580,7 +576,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					return false;
 
 				}
-		
+
 			}
 
 			return false;
@@ -625,7 +621,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool EnterTextIntoWPSIDTextFieldInMyReportsPage(string text)
 		{
 			IWebElement searchbarEl = this.ContainerElement.FindElement(By.XPath("//span[@class='select2-selection__rendered']"), 2);
-	
+
 			bool searchBarElClicked = false;
 			bool textFieldElEntered = false;
 

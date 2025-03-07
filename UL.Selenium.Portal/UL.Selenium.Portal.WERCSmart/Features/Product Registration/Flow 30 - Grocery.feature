@@ -182,10 +182,12 @@ Scenario: [60724] Condiments, Sauces - RU001454
 
 @TestCase:60723
 Scenario: [60723] Jelly, Jam or Preserves - RU001456
+
 	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I log in with the account saved in TReVor as: ProductAccount
+	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 	Then The home screen should load
+
 	#Test Setup - Generating + Saving UPC Number and ensuring no duplicates exist
 	Given I generate a random UPC number and save as: UPC60723
 	Given I delete all products with UPC Number: saved as UPC60723
@@ -197,28 +199,23 @@ Scenario: [60723] Jelly, Jam or Preserves - RU001456
 
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Condiments, Sauces
 	Given I should see the The Product Page
-	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Condiments, Sauces_#60723
-	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Condiments, Sauces
+	Given In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Jelly, Jam or Preserves_#60723
+	Given In the Product Section, set the option in section: 'Type of Product (select)' to: Jelly, Jam or Preserves
 	Given in the The Product page I click Continue
+
 	Then I save the product information as: TestCase60723
 
 	#And I call Shared Step 69687 (Product Information - US, No(PL))
     Given I should see the Product Information Page
 	Given In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
 	Given In the Product Information Section, set the option in section: 'Select the product's Country of Origin' to: United States of America
-	Given In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
-	Given in the Product Information page I click Continue
+	And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page, I click Continue
 
 	#Given I call Shared Step 60747 (Select Primary Physical Property - Liquid - With Ingredients)
-	Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
-	Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
-	Given In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 20
-	Given In the Physical and Chemical Properties Section, for section: 'pH' enter text: 7
-	Given In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' select the checkbox option: 'I do not have exact Boiling Point data available to me'
-	Given In the Physical and Chemical Properties Section, set the option in section: 'Boiling Point (in Celsius)' to: Not tested/Unknown
-	Given In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' select the checkbox option: 'I do not have exact Flash Point data available to me'
-	Given In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: >=23C and <38C
-	Given In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Closed cup method
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
+	Given In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Select all potential allergens included in this product' to: Dairy
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Product is manufactured in a facility that processes, or contains' to: Dairy or products containing dairy or milk
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Product is verified and sold as' to: None of the Above
@@ -246,12 +243,12 @@ Scenario: [60723] Jelly, Jam or Preserves - RU001456
 	Given in the Universal Product Code (UPC) page I click Continue
 
 	Given I should see the Regulatory Documents to Provide Page
+	And in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
 	Given In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
 	Given in the Regulatory Documents to Provide page I click Continue
 
 	Given I should see the Additional Documents to Provide Page
-	Given In the Additional Documents to Provide, upload PDF document to Upload SDS (Optional) field
-	Given In the Additional Documents to Provide, upload PDF document to Flash Point Testing Report field
 	Then in the Additional Documents to Provide page I click Continue
 
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
@@ -259,17 +256,10 @@ Scenario: [60723] Jelly, Jam or Preserves - RU001456
 	Given In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: Comment Text
 	Then in the Optional Comments page I click Continue
 
-	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Condiments, Sauces
-    Given I should see the Data Acceptance Page
-	Given I click the Summary button in the Data Acceptance window
-	Given I switch to the Data Summary page
-	Given Type of Product (select) should be showing the following option: Condiments, Sauces
-	Given I close the Data Summary Tab
-    Given I should see the Data Acceptance Page
-
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60723
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase60723
+
 @ignore
 @tfs_design
 @TestCase:60722

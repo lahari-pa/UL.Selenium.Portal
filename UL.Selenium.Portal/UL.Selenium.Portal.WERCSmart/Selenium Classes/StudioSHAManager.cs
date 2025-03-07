@@ -1,30 +1,26 @@
+using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
+using UL.Automation.Reporting.Functions;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
-using UL.Automation.Utilities.Functions;
-using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using UL.Automation.ReqnrollHelpers.Classes;
-using System.Collections.ObjectModel;
-using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Classes;
-using Gherkin.Ast;
-using Reqnroll;
-using OpenQA.Selenium.Interactions;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps;
-using OpenQA.Selenium.Support.UI;
-using NPOI.XWPF.UserModel;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	public class StudioSHAManager : SeleniumBaseObject
 	{
-	
+
 		protected override By ContainerElementLocator => By.XPath("//div[@id='main']");
 
 		public bool Wait_for_load(int secondsToWait = 30)
@@ -1321,7 +1317,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			if (matchingOption == null)
 			{
-				Report.Info($"No matching menu option found: '{ option }'. Available options: " +
+				Report.Info($"No matching menu option found: '{option}'. Available options: " +
 							string.Join(",", listOfOptions));
 				return false;
 			}
@@ -2004,7 +2000,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 					{
 						Report.Info(client + " had no data");
 						return false;
-					} else
+					}
+					else
 					{
 						Report.Info(client + " had data");
 					}
@@ -2062,7 +2059,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool AscDecCheck(string formColumn, string ascendingOrDescending)
 		{
 			IWebElement notificationSortDateHeader = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(
-						$"//table//th[@id='{formColumn}']//span[@class='s-ico']/span[not(contains(@class, 'disabled'))]"),2);
+						$"//table//th[@id='{formColumn}']//span[@class='s-ico']/span[not(contains(@class, 'disabled'))]"), 2);
 			string currentSort = notificationSortDateHeader.GetAttribute("sort");
 
 			if (ascendingOrDescending == "asc")
@@ -2096,7 +2093,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 	}
 
-		class StudioSHAManagerProductSearch : SeleniumBaseObject
+	class StudioSHAManagerProductSearch : SeleniumBaseObject
 	{
 		protected override By ContainerElementLocator => By.XPath("//div[contains(@class,'ui-dialog ui-widget') and not ( contains(@style, 'display: none'))]");
 
@@ -2118,7 +2115,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			try
 			{
-				var el = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//div[contains(@class,'ui-dialog ui-widget') and not ( contains(@style, 'display: none'))]"),5);
+				var el = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//div[contains(@class,'ui-dialog ui-widget') and not ( contains(@style, 'display: none'))]"), 5);
 				if (el.IsNullOrEmpty())
 				{
 					Report.Info($"The el was null");
@@ -3107,7 +3104,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 	}
 
-		class StudioSHAManagerProductUPC : BaseObject
+	class StudioSHAManagerProductUPC : BaseObject
 	{
 		public const string BasePath = "//h3[contains(text(),'SHA Manager Product UPC')]";
 
@@ -3240,7 +3237,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			SeleniumWebDriver.CurrentDriver.SwitchTo().DefaultContent();
 			IWebElement frame =
 			SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//div[@id='Widget1']//iframe"));
-			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);			
+			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame(frame);
 			this.containerElement = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath(BasePath));
 			return base.Wait_for_load(30);
 			;
@@ -3578,126 +3575,126 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 	}
 
-		class StudioSHAManagerUPCRetailerAndFeedPage : SeleniumBaseObject
+	class StudioSHAManagerUPCRetailerAndFeedPage : SeleniumBaseObject
+	{
+		protected override By ContainerElementLocator => By.XPath("//body");
+
+		public string GetProductTypeNameDisplayedInUPCRetailerAndFeedPage()
 		{
-			protected override By ContainerElementLocator => By.XPath("//body");
-
-			public string GetProductTypeNameDisplayedInUPCRetailerAndFeedPage()
+			IWebElement productName = this.ContainerElement.FindElement(By.XPath(@"//div[@class='main']//h1[contains(text(), 'WERCSmart Product ID')]"));
+			string productNameDisplayed = "";
+			if (productName == null)
 			{
-				IWebElement productName = this.ContainerElement.FindElement(By.XPath(@"//div[@class='main']//h1[contains(text(), 'WERCSmart Product ID')]"));
-				string productNameDisplayed = "";
-				if (productName == null)
-				{
-					Report.Info("Element was null");
-				}
-				else
-				{
-					productNameDisplayed = productName.GetElementText();
-				}
-
-				int dashIndex = productNameDisplayed.LastIndexOf('-');
-				if (dashIndex >= 0)
-				{
-					return productNameDisplayed.Substring(dashIndex + 1).Trim();
-				}
-				else
-				{
-					Report.Info($"Product name did not contain a '-' symbol, product name displayed: {productNameDisplayed}");
-					return string.Empty;
-				}
-
+				Report.Info("Element was null");
+			}
+			else
+			{
+				productNameDisplayed = productName.GetElementText();
 			}
 
-			public bool SelectFirstUPCInUPCRetailerAndFeed()
+			int dashIndex = productNameDisplayed.LastIndexOf('-');
+			if (dashIndex >= 0)
 			{
-				IWebElement firstUPC = this.ContainerElement.FindElement(By.XPath(@"//tbody//td//a[1]"), 2);
-
-				if (firstUPC == null)
-				{
-					Report.Info("El was null");
-					return false;
-				}
-
-				return firstUPC.TryClick();
+				return productNameDisplayed.Substring(dashIndex + 1).Trim();
+			}
+			else
+			{
+				Report.Info($"Product name did not contain a '-' symbol, product name displayed: {productNameDisplayed}");
+				return string.Empty;
 			}
 
-			public bool SelectRetailerInUPCDetailsPoupInUPCRetailerAndFeed(string retailer)
-			{
-				IWebElement retailerEl = this.ContainerElement.FindElement(By.XPath(@"//div[@class='upcDialog']//option[text()='" + retailer + "']"), 2);
-
-				if (retailerEl == null)
-				{
-					Report.Info("El was null");
-					return false;
-				}
-
-				return retailerEl.TryClick();
-			}
-
-			public List<string> InUPCDetailsPoupInUPCRetailerAndFeedISeeTheFollowingPropertiesAndValues(Table table)
-			{
-
-				IWebElement bodyEl = this.ContainerElement.WaitUntilElementVisible(By.XPath("//table[@class='upcDetails']//tbody//tr//td"), 180);
-				if (bodyEl.IsNullOrEmpty())
-				{
-					Report.Info($"body el was not found in the popup or did not load in time.");
-					Report.Screenshot();
-					return null;
-				}
-
-				IList<IWebElement> columnOneList = this.ContainerElement.FindElements(By.XPath(@"//table[@class='upcDetails']//tbody//tr//td[1]"), 2);
-				List<string> itemsNotFound = new List<string>();
-
-				bool propertyFound = false;
-				bool valueFound = false;
-
-				foreach (TableRow row in table.Rows)
-				{
-					propertyFound = false;
-					valueFound = false;
-
-					foreach (IWebElement el in columnOneList)
-					{
-						if (el.Text == row["Property"])
-						{
-							propertyFound = true;
-						}
-
-						if ((row["Value"] == "Any Data" && Regex.Replace(el.Text, @"\s+", "").Length > 0) || el.Text == row["Value"])
-						{
-							valueFound = true;
-						}
-						if (valueFound && propertyFound)
-						{
-							break;
-						}
-					}
-					if (!propertyFound)
-					{
-						Report.Info("The following property was not found:" + row["Property"]);
-						itemsNotFound.Add("Property Not Found: " + row["Property"]);
-					}
-					if (!valueFound)
-					{
-						Report.Info("The following value was not found:" + row["Value"]);
-						itemsNotFound.Add("Value Not Found: " + row["Value"]);
-					}
-				}
-
-				return itemsNotFound;
-			}
-
-			public bool CloseUPCDetailsPoupInUPCRetailerAndFeed()
-			{
-				IWebElement closeButton = this.ContainerElement.FindElement(By.XPath(@"//span[text()='UPC Details']/../..//div[@class='ui-dialog-buttonpane ui-widget-content ui-helper-clearfix']//button//span[text()='Close']"), 2);
-
-				if (closeButton == null)
-				{
-					Report.Info("El was null");
-					return false;
-				}
-
-				return closeButton.TryClick();
-			}
 		}
+
+		public bool SelectFirstUPCInUPCRetailerAndFeed()
+		{
+			IWebElement firstUPC = this.ContainerElement.FindElement(By.XPath(@"//tbody//td//a[1]"), 2);
+
+			if (firstUPC == null)
+			{
+				Report.Info("El was null");
+				return false;
+			}
+
+			return firstUPC.TryClick();
 		}
+
+		public bool SelectRetailerInUPCDetailsPoupInUPCRetailerAndFeed(string retailer)
+		{
+			IWebElement retailerEl = this.ContainerElement.FindElement(By.XPath(@"//div[@class='upcDialog']//option[text()='" + retailer + "']"), 2);
+
+			if (retailerEl == null)
+			{
+				Report.Info("El was null");
+				return false;
+			}
+
+			return retailerEl.TryClick();
+		}
+
+		public List<string> InUPCDetailsPoupInUPCRetailerAndFeedISeeTheFollowingPropertiesAndValues(Table table)
+		{
+
+			IWebElement bodyEl = this.ContainerElement.WaitUntilElementVisible(By.XPath("//table[@class='upcDetails']//tbody//tr//td"), 180);
+			if (bodyEl.IsNullOrEmpty())
+			{
+				Report.Info($"body el was not found in the popup or did not load in time.");
+				Report.Screenshot();
+				return null;
+			}
+
+			IList<IWebElement> columnOneList = this.ContainerElement.FindElements(By.XPath(@"//table[@class='upcDetails']//tbody//tr//td[1]"), 2);
+			List<string> itemsNotFound = new List<string>();
+
+			bool propertyFound = false;
+			bool valueFound = false;
+
+			foreach (TableRow row in table.Rows)
+			{
+				propertyFound = false;
+				valueFound = false;
+
+				foreach (IWebElement el in columnOneList)
+				{
+					if (el.Text == row["Property"])
+					{
+						propertyFound = true;
+					}
+
+					if ((row["Value"] == "Any Data" && Regex.Replace(el.Text, @"\s+", "").Length > 0) || el.Text == row["Value"])
+					{
+						valueFound = true;
+					}
+					if (valueFound && propertyFound)
+					{
+						break;
+					}
+				}
+				if (!propertyFound)
+				{
+					Report.Info("The following property was not found:" + row["Property"]);
+					itemsNotFound.Add("Property Not Found: " + row["Property"]);
+				}
+				if (!valueFound)
+				{
+					Report.Info("The following value was not found:" + row["Value"]);
+					itemsNotFound.Add("Value Not Found: " + row["Value"]);
+				}
+			}
+
+			return itemsNotFound;
+		}
+
+		public bool CloseUPCDetailsPoupInUPCRetailerAndFeed()
+		{
+			IWebElement closeButton = this.ContainerElement.FindElement(By.XPath(@"//span[text()='UPC Details']/../..//div[@class='ui-dialog-buttonpane ui-widget-content ui-helper-clearfix']//button//span[text()='Close']"), 2);
+
+			if (closeButton == null)
+			{
+				Report.Info("El was null");
+				return false;
+			}
+
+			return closeButton.TryClick();
+		}
+	}
+}

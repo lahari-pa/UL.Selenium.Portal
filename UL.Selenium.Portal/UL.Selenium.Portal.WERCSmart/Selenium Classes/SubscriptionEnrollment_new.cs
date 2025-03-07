@@ -1,19 +1,9 @@
-﻿using System;
+﻿using OpenQA.Selenium;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
-using UL.Automation.WebDriver.BaseClasses;
-using UL.Automation.WebDriver.Classes;
-using UL.Automation.WebDriver.Extensions;
 using UL.Automation.Reporting.Functions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.PageObjects;
-using OpenQA.Selenium.Support.UI;
-using UL.Automation.ReqnrollHelpers.Classes;
-using Reqnroll;
-using System.Collections.ObjectModel;
-using Org.BouncyCastle.Bcpg.OpenPgp;
+using UL.Automation.WebDriver.BaseClasses;
+using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -21,7 +11,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	{
 		#region Constants
 		protected override By ContainerElementLocator => By.Id("enrollment");
-		private IWebElement EnrollmentPageHeader => this.ContainerElement.FindElement(By.XPath($".//h2"),1);
+		private IWebElement EnrollmentPageHeader => this.ContainerElement.FindElement(By.XPath($".//h2"), 1);
 		private List<IWebElement> EnrollmentAlertMessages => this.ContainerElement.FindElements(By.XPath($".//div[@class ='alert alert-warning' and not(starts-with(@style,'display: none'))]/p"), 1).ToList();
 		private IWebElement ColumnHeader => this.ContainerElement.FindElement(By.XPath(".//div[@class='col-md-3']//strong"), 2);
 		private IWebElement PanelHeader(string panelName) => this.ContainerElement.FindElement(By.XPath($".//label[contains(text(), '{panelName}')]"), 2);
@@ -49,7 +39,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		private IWebElement EnrollmentPanelBodyListItemInfoButton => this.EnrollmentPanelBodyListItem.FindElement(By.XPath($".//a[@data-toggle]"), 1);
 		private IWebElement EnrollmentPanelBodyListItemInfoTextArea => this.EnrollmentPanelBodyListItem.FindElement(By.XPath($".//div[contains(@class,'info-bubble')]"), 1);
 		private string _linkLabel;
-		private IWebElement EnrollmentPanelBodyListItemInfoTextAreaLink => this.EnrollmentPanelBodyListItemInfoTextArea.FindElement(By.XPath($".//a[text()='{_linkLabel}']"),1);
+		private IWebElement EnrollmentPanelBodyListItemInfoTextAreaLink => this.EnrollmentPanelBodyListItemInfoTextArea.FindElement(By.XPath($".//a[text()='{_linkLabel}']"), 1);
 		private IWebElement EnrollmentPanelSelector => this.EnrollmentPanel.FindElement(By.XPath(".//select"), 1);
 		private string _optionLabel;
 		private IWebElement EnrollmentPanelSelectorOption => this.EnrollmentPanelSelector.FindElement(By.XPath($".//option[text()='{_optionLabel}']"), 1);
@@ -113,7 +103,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool EnrollmentHeadingExists(string headerName)
 		{
 			string getText = this.ColumnHeader.Text;
-			return getText==headerName;
+			return getText == headerName;
 		}
 		public bool ColumnHeaderExists()
 		{
@@ -155,7 +145,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool VerifySingleRetailerSelectedOption(string selectedOption)
 		{
 			string getOption = this.SingleRetailerSelect.GetValue();
-			return getOption== selectedOption;
+			return getOption == selectedOption;
 		}
 
 		public bool SingleRetailerRadioIconExists()
@@ -297,7 +287,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			_sectionLabel = sectionLabel;
 			_panelLabel = panelLabel;
 			_panelListText = panelListText;
-			return this.EnrollmentPanelBodyListItemInfoTextArea.GetTextContent().Replace("\n", "").Replace("\t","").Replace("\r", " ");
+			return this.EnrollmentPanelBodyListItemInfoTextArea.GetTextContent().Replace("\n", "").Replace("\t", "").Replace("\r", " ");
 		}
 
 		public bool EnrollmentPanelBodyListItemInfoTextAreaLinkExists(string sectionLabel, string panelLabel, string panelListText, string linkLabel)
@@ -361,7 +351,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			_optionLabel = optionLabel;
 			return this.EnrollmentPanelSelectorOption.TryClick();
 		}
-		
+
 		public bool EnrollmentPanelRadioExists(string sectionLabel, string panelLabel)
 		{
 			Report.Info($"Attempting to confirm '{panelLabel}' panel radio button exists.");
@@ -470,7 +460,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		#region Constants
 		protected override By ContainerElementLocator => By.Id("showAgencyServiceAgreement");
 		string _modalTitle;
-		private IWebElement ModalTitle => this.ContainerElement.FindElement(By.XPath($".//div[@class='modal-header']//h3[text()='{_modalTitle}']"),1);
+		private IWebElement ModalTitle => this.ContainerElement.FindElement(By.XPath($".//div[@class='modal-header']//h3[text()='{_modalTitle}']"), 1);
 		private IWebElement ModalHeaderCloseButton => this.ContainerElement.FindElement(By.XPath($".//div[@class='modal-header']//button[@class='close']"), 1);
 		private IWebElement ModalBody => this.ContainerElement.FindElement(By.XPath($".//div[@class='modal-body']"), 1);
 		private string _buttonLabel;

@@ -1,9 +1,9 @@
-﻿using System;
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
@@ -39,7 +39,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
         private IWebElement SearchBox => FindElement(By.XPath(".//input[@name='search']"), 2);
 
         public List<IWebElement> ProductLookUpButtons => ContainerElement.FindElements(By.XPath(".//div[@class='col']//button[contains(@id,'btn')]"), 2).ToList();
-       
+
         private IWebElement TableHeadingRow => ContainerElement.FindElement(By.XPath(".//div[@id='gbox_tblDrumLog']//div[@class='ui-jqgrid-hdiv']//tr[@class='ui-jqgrid-labels']"), 2);
 
         private List<IWebElement> NamedTableHeadings => this.TableHeadingRow.FindElements(By.XPath(".//th[@role='columnheader' and not(contains(@style,'display: none')) and not(@id='tblDrumLog_subgrid')]"), 2).ToList();
@@ -47,9 +47,9 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
         private List<IWebElement> AllTableHeadings => this.TableHeadingRow.FindElements(By.XPath(".//th[@role='columnheader' and not(contains(@style,'display: none'))]"), 2).ToList();
 
         private List<IWebElement> RowSubHeadings(IWebElement row) => row.FindElements(By.XPath(".//preceding-sibling::div[@class='ui-jqgrid-hdiv']//th[@role='columnheader' and not(contains(@style,'display: none'))]"), 2).ToList();
-       
+
         private IWebElement ProductTable => ContainerElement.FindElement(By.XPath(".//table[@id='tblDrumLog']"), 1);
-        
+
         private List<IWebElement> ProductRows => this.ProductTable?.FindElements(By.XPath(".//tbody//tr[not (@id='1') and not(@class='ui-jqgrid-labels') and not (@class='jqgfirstrow') and not(contains(@class,'expanded'))]"), 1).ToList();
 
         private IWebElement ProductsTableFooter => ContainerElement.FindElement(By.XPath(".//div[@id='tblDrumLogPager']"), 2);
@@ -166,7 +166,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
             return result;
         }
-    
+
 
         public bool ConfirmBreadCrumbAreaContainsLabel(string label)
         {
@@ -189,10 +189,10 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         public bool ClickViewDataForFirstResultInGrid()
         {
-           
+
             try
             {
-               
+
                 IWebElement button = this.OnlyexpandedProductRows.FirstOrDefault()?.FindElement(By.XPath($".//tr//td//a[text()='View Data']"), 1);
                 return button.TryClick();
             }
@@ -355,7 +355,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             Actions action = new Actions(SeleniumWebDriver.CurrentDriver);
             try
             {
-                
+
                 action.ClickAndHold(resizeIcon).MoveByOffset(-30, 0).Release().Build().Perform();
             }
             catch
@@ -550,19 +550,19 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                 else
                 {
                     Report.Info($"The text was found for row: {i}");
-                    char[] delimiterChars = {' '};
+                    char[] delimiterChars = { ' ' };
                     string[] splitText = textFound.Split(delimiterChars);
                     string part1 = splitText[0];
                     string part2 = splitText[1];
                     string part3 = splitText[2]; ;
-                    for(int y=3; y<splitText.Count();y++)
+                    for (int y = 3; y < splitText.Count(); y++)
                     {
-                        part3 = part3+ " " + splitText[y];
+                        part3 = part3 + " " + splitText[y];
                     }
 
                     string[] part1format = { "yyyy-MM-dd" };
                     bool part1Passing = true;
-                    if (!DateTime.TryParseExact(part1, part1format, System.Globalization.CultureInfo.InvariantCulture,DateTimeStyles.None, out DateTime dt))
+                    if (!DateTime.TryParseExact(part1, part1format, System.Globalization.CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dt))
                     {
                         Report.Info($"The first part of the drum name was not a date in the format yyyy-MM-dd");
                         part1Passing = false;
@@ -574,7 +574,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                     }
 
                     bool part2Passing = GeneralUtilities.IsDateTime(part2);
-                    if(part2Passing)
+                    if (part2Passing)
                     {
                         Report.Info($"The second part of the drum name was a valid time");
                     }
@@ -593,7 +593,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                         Report.Info($"The 3rd part of the drum name did not contain text");
                     }
 
-                    if(part1Passing && part2Passing && part3Passing)
+                    if (part1Passing && part2Passing && part3Passing)
                     {
 
                     }
@@ -639,7 +639,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
         {
             var footerEl = this.ProductsTableFooter;
             return footerEl != null;
-        
+
         }
 
         public bool SelectOptionFromItemsPerPageSelector(string option)
@@ -687,7 +687,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         }
 
-      
+
 
         public List<IWebElement> GetProductRows()
         {
@@ -702,7 +702,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         public bool ExpandGivenRow(IWebElement row)
         {
-            
+
             IWebElement expandButton = row.FindElement(By.XPath($".//td[contains(@aria-describedby,'tblDrumLog_subgrid')]"), 2);
             expandButton.ScrollElementIntoView();
             if (!expandButton.TryClick())
@@ -780,12 +780,12 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         public IWebElement GetFirstExpandedDrumRow()
         {
-            List<IWebElement> rows = this.OnlyexpandedProductRows; 
+            List<IWebElement> rows = this.OnlyexpandedProductRows;
             if (rows.IsNullOrEmpty())
-            { 
+            {
                 Report.Error($"Did not find any product rows");
                 return null;
-            } 
+            }
             return rows.First();
         }
 
@@ -818,7 +818,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             {
                 Report.Error($"Did not find any product rows");
                 return null;
-            }            
+            }
             int i = 1;
             foreach (var item in rows)
             {
@@ -880,12 +880,12 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             }
             string expandedAttribute = expandButton.GetAttribute("class");
             return expandedAttribute == "ui-sgcollapsed sgcollapsed";
-        
+
         }
 
         public bool CollapseGivenRow(IWebElement row)
-        {          
-           
+        {
+
             IWebElement expandButton = row.FindElement(By.XPath($".//td[contains(@aria-describedby,'tblDrumLog_subgrid')]"), 2);
             if (!expandButton.TryClick())
             {
@@ -914,31 +914,31 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
         }
 
         public bool DrumNameNotRepeated()
-        {            
+        {
             int x = 1;
             int lastPageNumber = Int32.Parse(this.GetLastPossiblePageNumber());
-            List<string> drumNamesFound = new List<string>(); 
-            bool noRepeatedName = true; 
+            List<string> drumNamesFound = new List<string>();
+            bool noRepeatedName = true;
 
             while (x < lastPageNumber + 1)
             {
                 var productRows = this.ProductRows;
                 foreach (var row in productRows)
-                {                    
+                {
                     IWebElement wantedColumn = row.FindElement(By.XPath($".//td[@aria-describedby='tblDrumLog_Drum Name']"), 2);
                     IWebElement storeNameColumn = row.FindElement(By.XPath($".//td[@aria-describedby='tblDrumLog_Store Name']"), 2);
                     IWebElement drumtypeColumn = row.FindElement(By.XPath($".//td[@aria-describedby='tblDrumLog_Drum Type']"), 2);
                     string textFound = wantedColumn.Text + storeNameColumn.Text + drumtypeColumn.Text;
- 
-                    if ( drumNamesFound.Contains(textFound) )
+
+                    if (drumNamesFound.Contains(textFound))
                     {
                         noRepeatedName = false;
                         Report.Info($"The Drum Name: {textFound} was already in the list");
                     }
                     else
                     {
-                        drumNamesFound.Add(textFound); 
- 
+                        drumNamesFound.Add(textFound);
+
                     }
                 }
                 if (this.GetCurrentPageNumber() == this.GetLastPossiblePageNumber())
@@ -947,11 +947,11 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                 }
 
                 this.ClickNextPageButton();
-                this.WaitDrumLogWidgetSpinnerFinish();              
+                this.WaitDrumLogWidgetSpinnerFinish();
 
 
             }
-            return noRepeatedName; 
+            return noRepeatedName;
 
         }
 
@@ -959,11 +959,11 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
         {
             //Looking for at least one Date Removed
             List<IWebElement> wantedColumn = row.FindElements(By.XPath($".//td[contains(@aria-describedby,'t_Date Removed')]"), 2).ToList();
-            List<string> foundDates = new List<string>();            
+            List<string> foundDates = new List<string>();
             foreach (var item in wantedColumn)
             {
-                
-                if(item.Text.IsNullOrEmpty()|| item.Text == " ")
+
+                if (item.Text.IsNullOrEmpty() || item.Text == " ")
                 {
                     //do nothing
                 }
@@ -977,7 +977,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
             return false;
         }
-        
+
 
 
         public bool CheckDateRemovedFormat(IWebElement row)
@@ -998,26 +998,26 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                     foundDates.Add(item.Text);
 
                 }
-              
+
             }
 
             bool correctFormat = true;
-            foreach(var date in foundDates)
+            foreach (var date in foundDates)
             {
-               string[] expectedFormat = { "yyyy-mm-dd" };
-               if(DateTime.TryParseExact(date, expectedFormat, System.Globalization.CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dt))
-               {
+                string[] expectedFormat = { "yyyy-mm-dd" };
+                if (DateTime.TryParseExact(date, expectedFormat, System.Globalization.CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dt))
+                {
                     Report.Info($"The Date Found: {date} was in the expected format");
-               }
-               else
-               {
+                }
+                else
+                {
                     correctFormat = false;
                     Report.Info($"The Date Found: {date} was not in the expected format");
-               }
+                }
 
             }
-            return correctFormat;      
-                      
+            return correctFormat;
+
 
         }
 
@@ -1027,10 +1027,10 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             List<IWebElement> wantedColumn = row.FindElements(By.XPath($".//td[contains(@aria-describedby,'t_Date In Drum')]"), 2).ToList();
             List<string> foundDates = new List<string>();
             foreach (var item in wantedColumn)
-            {               
-               Report.Info($"Date found was: {item.Text}");
-               foundDates.Add(item.Text);
-                
+            {
+                Report.Info($"Date found was: {item.Text}");
+                foundDates.Add(item.Text);
+
 
             }
 
@@ -1057,7 +1057,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
         public IWebElement GetExpandedRowFromMainRow(IWebElement row)
         {
             IWebElement expandedRow = row.FindElement(By.XPath($".//following::tr[contains(@id,'expandedContent')][1]"), 2);
-            if(expandedRow==null)
+            if (expandedRow == null)
             {
                 return null;
             }
@@ -1118,7 +1118,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
         {
             return this.LastPageButton.TryClick();
         }
-       
+
         public bool ClickPreviousPageButton()
         {
             return this.PreviousPageButton.TryClick();
@@ -1205,7 +1205,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         public string GetColumValueByDrumname(string column, string DrumLog)
         {
-            
+
             if (column == "Product Name")
             {
                 column = column.Replace(" ", "");
@@ -1222,7 +1222,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             {
                 Report.Error($"Did not find any product rows");
                 return null;
-            }            
+            }
             int i = 1;
             foreach (var item in rows)
             {
@@ -1247,13 +1247,13 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
         {
             return this.GetExpandedRowFromMainRow(this.GetRowByDrumName(drumName));
         }
-       
+
 
         public string GetExpandedRowValueFromGivenRowAndColumn(IWebElement row, string column)
         {
             IWebElement wantedColumn = row.FindElement(By.XPath($".//td[contains(@aria-describedby,'{column}')]"), 2);
-           
-            if(wantedColumn==null)
+
+            if (wantedColumn == null)
             {
                 Report.Info("The column was null");
                 return null;
@@ -1288,7 +1288,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                     {
                         return row;
                     }
-                    
+
                 }
 
                 if (this.GetCurrentPageNumber() == this.GetLastPossiblePageNumber())
@@ -1319,7 +1319,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             currentDrumData.DateClosed = this.GetColumValueByDrumname("Date Closed", DrumName);
             currentDrumData.DateHauled = this.GetColumValueByDrumname("Date Hauled", DrumName);
 
-            
+
             var mainRow = this.GetRowByDrumName(DrumName);
             this.ExpandGivenRow(mainRow);
             this.WaitDrumLogWidgetSpinnerFinish();
@@ -1330,11 +1330,11 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
             List<DrumLogExpandedData> expandedData = new List<DrumLogExpandedData>();
 
-            foreach(var row in expandedRows)
+            foreach (var row in expandedRows)
             {
 
-              var currentExpanded = this.GetDrumLogExpandedDataByDrumName(row);
-              expandedData.Add(currentExpanded);
+                var currentExpanded = this.GetDrumLogExpandedDataByDrumName(row);
+                expandedData.Add(currentExpanded);
             }
 
             currentDrumData.ExpandedData = expandedData;
@@ -1358,7 +1358,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
         {
             DrumLogExpandedData expandedDrumData = new DrumLogExpandedData();
 
-            expandedDrumData.ScanDate = this.GetExpandedRowValueFromGivenRowAndColumn(row,"Scan Date");
+            expandedDrumData.ScanDate = this.GetExpandedRowValueFromGivenRowAndColumn(row, "Scan Date");
             expandedDrumData.DateInDrum = this.GetExpandedRowValueFromGivenRowAndColumn(row, "Date In Drum");
             expandedDrumData.DateRemoved = this.GetExpandedRowValueFromGivenRowAndColumn(row, "Date Removed");
             expandedDrumData.FoundNotFound = this.GetExpandedRowValueFromGivenRowAndColumn(row, "Found/Not Found");
@@ -1400,7 +1400,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             public string DrumStatus { get; set; }
 
             public string StoreName { get; set; }
-         
+
             public string RegionName { get; set; }
             public string Location { get; set; }
 
@@ -1413,7 +1413,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             //need a sub class which will be the expanded data (seperate method that grabs that data)
 
             public List<DrumLogExpandedData> ExpandedData { get; set; }
-            
+
 
 
             //checking equals for the expanded data may need a rework (foreach in expanded check each property) (do inside the if()?)
@@ -1473,8 +1473,8 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
             public List<IWebElement> AllFilterElements => ContainerElement.FindElements(By.XPath($".//div[@class='form-group' and .//label]"), 2).ToList();
             private IWebElement GivenLabelElementInput(string labelText) => ContainerElement.FindElement(By.XPath($".//div[@class='form-group' and .//label[text()='{labelText}']]//div"), 2);
-            
-            
+
+
 
             #endregion
 
@@ -1486,7 +1486,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
             public bool FilterFieldVisibleOnScreen(string filterLabel)
             {
-                IWebElement el = this.GivenLabelElementInput(filterLabel);            
+                IWebElement el = this.GivenLabelElementInput(filterLabel);
                 return el.VisibleInViewport();
             }
 
@@ -1523,39 +1523,39 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
             public bool SelectDropDownOptionForSection(string option, string section)
             {
                 IWebElement el = this.GivenLabelElementInput(section);
-                if(section=="Store Name")
+                if (section == "Store Name")
                 {
                     //Click the field first to open menu
                     el.TryClick();
-                    IWebElement dropDownEl = ContainerElement.FindElement(By.XPath($"//span[@class='select2-dropdown select2-dropdown--below']"),10);
+                    IWebElement dropDownEl = ContainerElement.FindElement(By.XPath($"//span[@class='select2-dropdown select2-dropdown--below']"), 10);
                     List<IWebElement> dropDownOptions = dropDownEl.FindElements(By.XPath(".//li"), 2).ToList();
-                    if (dropDownOptions.Count()==1)
+                    if (dropDownOptions.Count() == 1)
                     {
                         Report.Info("The list was empty");
                         int x = 0;
-                        while(x<5)
+                        while (x < 5)
                         {
                             x++;
                             Delay.Seconds(5);
                             dropDownOptions = dropDownEl.FindElements(By.XPath(".//li"), 2).ToList();
-                            if(dropDownOptions.Count() !=1)
+                            if (dropDownOptions.Count() != 1)
                             {
                                 Report.Info($"options found");
                                 break;
                             }
                         }
-                        
-                    }    
+
+                    }
                     var searchOptionEL = dropDownOptions.First(x => x.Text == option);
                     searchOptionEL.TryClick();
                     List<IWebElement> selectedOptionsEl = el.FindElements(By.XPath($"//li[@class='select2-selection__choice']"), 2).ToList();
 
                     List<string> selectedOptionsStrings = new List<string>();
-                    foreach(var thing in selectedOptionsEl)
+                    foreach (var thing in selectedOptionsEl)
                     {
-                        selectedOptionsStrings.Add(thing.Text.Replace("×",""));
+                        selectedOptionsStrings.Add(thing.Text.Replace("×", ""));
                     }
-                    return selectedOptionsStrings.Contains(option);                      
+                    return selectedOptionsStrings.Contains(option);
 
                 }
                 List<IWebElement> optionsElsFound = el.FindElements(By.XPath(".//select//option[position()>1]"), 2).ToList();
@@ -1588,11 +1588,11 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
             public bool TopStoreNameFilterOptionVisible()
             {
-                
-                List<IWebElement> dropDownOptions = this.FindElements(By.XPath($"//ul[@class='select2-results__options']//li"), 2).ToList();                
+
+                List<IWebElement> dropDownOptions = this.FindElements(By.XPath($"//ul[@class='select2-results__options']//li"), 2).ToList();
                 if (dropDownOptions.Count() == 0)
                 {
-                    IWebElement el = this.GivenLabelElementInput("Store Name");            
+                    IWebElement el = this.GivenLabelElementInput("Store Name");
                     el.TryClick();
                     IWebElement dropDownEl = ContainerElement.FindElement(By.XPath($"//span[@class='select2-dropdown select2-dropdown--below']"), 10);
                     dropDownOptions = dropDownEl.FindElements(By.XPath(".//li"), 2).ToList();
@@ -1614,7 +1614,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
                     }
                 }
-                var firstEl= dropDownOptions.First();
+                var firstEl = dropDownOptions.First();
                 bool visible = firstEl.VisibleInViewport();
                 return visible;
             }
@@ -1692,7 +1692,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
             }
 
-            public bool OpenStoreNameDropDown()         
+            public bool OpenStoreNameDropDown()
             {
 
                 List<IWebElement> dropDownOptions = this.FindElements(By.XPath($"//ul[@class='select2-results__options']//li"), 2).ToList();
@@ -1726,20 +1726,20 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
                     }
                 }
                 return false;
-                
+
             }
 
             public bool CloseStoreNameDropDown()
             {
 
                 IWebElement dropDownEl = ContainerElement.FindElement(By.XPath($"//span[@class='select2-dropdown select2-dropdown--below']"), 4);
-                if (dropDownEl!=null)
+                if (dropDownEl != null)
                 {
                     IWebElement el = this.GivenLabelElementInput("Store Name");
                     this.ContainerElement.TryClick();
                     Delay.Seconds(4);
                     dropDownEl = ContainerElement.FindElement(By.XPath($"//span[@class='select2-dropdown select2-dropdown--below']"), 4);
-                    if (dropDownEl==null)
+                    if (dropDownEl == null)
                     {
                         return true;
                     }
@@ -1827,7 +1827,7 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 
         }
 
-       
+
     }
 
 
