@@ -6,6 +6,9 @@ using UL.Automation.Reporting.Functions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.ObjectModel;
+using UL.Automation.WebDriver.Classes;
+using System;
+
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
