@@ -31,7 +31,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		private IWebElement CityStatePostal(string addressType) => this.ContainerElement.FindElement(By.XPath($".//div[h3[text()=\"{addressType}\"]]//div[contains(@data-bind, 'cityStatePostal')]"), 2);
 		private IWebElement Country(string addressType) => this.ContainerElement.FindElement(By.XPath($".//div[h3[text()=\"{addressType}\"]]//div[contains(@data-bind, 'Country')]"), 2);
 		private IWebElement Phone(string addressType) => this.ContainerElement.FindElement(By.XPath($".//div[h3[text()=\"{addressType}\"]]//div[contains(@data-bind, 'Phone')]"), 2);
-
+		private IWebElement RoutingNumberHoverIcon => SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//a[contains(@onfocus, \"vvDes_achBankABACode\")]"), 2);
+		private IWebElement RoutingNumberHoverImg => SeleniumWebDriver.CurrentDriver.FindElement(By.Id("vvDes_achBankABACode"), 2);
+		private IWebElement AccountNumberHoverIcon => SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//a[img[@id='vvImage_achBankAccountNumber']]"), 2);
+		private IWebElement AccountNumberHoverImg => SeleniumWebDriver.CurrentDriver.FindElement(By.Id("vvDes_achBankAccountNumber"), 2);
+		private IWebElement CVVHoverIcon => SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//a[img[@alt = 'cvv']]"), 2);
+		private IWebElement CVVHoverImg => SeleniumWebDriver.CurrentDriver.FindElement(By.Id("vvDes"), 2);
 
 		#endregion
 
@@ -201,16 +206,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool SelectOptionInSectionJs(string section, string value)
 		{
-			//bool result = false;
-			//SelectElement Selector;
 			IWebElement Selector;
 			try
 			{
-				//Selector = new SelectElement(SeleniumWebDriver.CurrentDriver.FindElement(By.Id("input-achBankAccountType"), 2));
-				Selector =  SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//div[label[contains(text(),\"{section}\")]]//select"), 2);
-
+				Selector = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//div[label[contains(text(),\"{section}\")]]//select"), 2);
 			}
-			catch(Exception nullEx)
+			catch (Exception nullEx)
 			{
 				Report.Info(nullEx.Message);
 				return false;
@@ -228,8 +229,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				{
 					return false;
 				}
-				//Selector.SelectByValue(value);
-				//return true;
 			}
 			catch (Exception exception)
 			{
@@ -239,6 +238,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		}
 		#endregion
+
 	}
 	class EditAddress : SeleniumBaseObject
 	{
@@ -280,4 +280,146 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		#endregion
 
 	}
+
+	class PaymentMethodsIframe : SeleniumBaseObject
+	{
+		#region Constants
+		protected override By ContainerElementLocator => By.XPath("//body");
+		private IWebElement RoutingNumberHoverIcon => this.FindElement(By.CssSelector(".ach-cvv#vvImage_achBankABACode"), 2);
+		private IWebElement RoutingNumberHoverImg => this.FindElement(By.Id("vvDes_achBankABACode"), 2);
+		private IWebElement AccountNumberHoverIcon => this.FindElement(By.Id("vvImage_achBankAccountNumber"), 2);
+		private IWebElement AccountNumberHoverImg => this.FindElement(By.Id("vvDes_achBankAccountNumber"), 2);
+		private IWebElement CVVHoverIcon => this.FindElement(By.XPath(".//img[@class='image-cvv']"), 2);
+		private IWebElement CVVHoverImg => this.FindElement(By.Id("vvDes"), 2);
+
+		#endregion
+
+		#region Methods
+		public bool RoutingNumberHoverIconExists()
+		{
+			Report.Info($"Attempting to confirm the Routing Number Hover Icon exists.");
+			return this.RoutingNumberHoverIcon != null;
+		}
+		public bool RoutingNumberHoverImgExists()
+		{
+			Report.Info($"Attempting to confirm the Routing Number Hover Image exists.");
+			return this.RoutingNumberHoverImg != null;
+		}
+		public bool AccountNumberHoverIconExists()
+		{
+			Report.Info($"Attempting to confirm the Account Number Hover Icon exists.");
+			return this.AccountNumberHoverIcon != null;
+		}
+		public bool AccountNumberHoverImgExists()
+		{
+			Report.Info($"Attempting to confirm the Account Number Hover Image exists.");
+			return this.AccountNumberHoverImg != null;
+		}
+		public bool CVVHoverIconExists()
+		{
+			Report.Info($"Attempting to confirm the CVV Hover Icon exists.");
+			return this.CVVHoverIcon != null;
+		}
+		public bool CVVHoverImgExists()
+		{
+			Report.Info($"Attempting to confirm the CVV Hover Image exists.");
+			return this.CVVHoverImg != null;
+		}
+		public bool AccountNumberHoverIconHover()
+		{
+			if (this.AccountNumberHoverIcon != null)
+			{
+				Report.Info($"Attempting to hover the Account Number Hover Icon.");
+				IJavaScriptExecutor js = (IJavaScriptExecutor)SeleniumWebDriver.CurrentDriver;
+				string script = @"arguments[0].dispatchEvent(new MouseEvent('mouseover', {'bubbles' : true}));";
+				try
+				{
+					js.ExecuteScript(script, this.AccountNumberHoverIcon);
+					return true;
+				}
+				catch (Exception Ex)
+				{
+					Report.Info(Ex.Message);
+					return false;
+				}
+			}
+			else
+			{
+				Report.Info("Selector cannot be found");
+				return false;
+			}
+		}
+		public bool RoutingNumberHoverIconHover()
+		{
+			if (this.RoutingNumberHoverIcon != null)
+			{
+				Report.Info($"Attempting to hover the Routing Number Hover Icon.");
+				IJavaScriptExecutor js = (IJavaScriptExecutor)SeleniumWebDriver.CurrentDriver;
+				string script = @"arguments[0].dispatchEvent(new MouseEvent('mouseover', {'bubbles' : true}));";
+			try
+			{
+				js.ExecuteScript(script, this.RoutingNumberHoverIcon);
+				return true;
+			}
+			catch(Exception Ex)
+			{
+				Report.Info(Ex.Message);
+				return false;
+			}
+			}
+			else
+			{
+				Report.Info("Selector cannot be found");
+				return false;
+			}
+		}
+	
+		public bool CVVHoverIconHover()
+		{
+			
+			if (this.CVVHoverIcon != null)
+			{
+				Report.Info($"Attempting to hover the CVV Hover Icon.");
+				IJavaScriptExecutor js = (IJavaScriptExecutor)SeleniumWebDriver.CurrentDriver;
+				string script = @"arguments[0].dispatchEvent(new MouseEvent('mouseover', {'bubbles' : true}));";
+				try
+				{
+					js.ExecuteScript(script, this.CVVHoverIcon);
+					return true;
+				}
+				catch (Exception Ex)
+				{
+					Report.Info(Ex.Message);
+					return false;
+				}
+			}
+			else
+			{
+				Report.Info("Selector cannot be found");
+				return false;
+			}
+			
+		}
+		public bool CVVHoverImageIsDisplayed()
+		{
+			bool result = false;
+			result = this.CVVHoverImg.Displayed;
+			return result;
+		}
+		public bool RoutingNumberHoverImgIsDisplayed()
+		{
+			bool result = false;
+			result = this.RoutingNumberHoverImg.Displayed;
+			return result;
+		}
+		public bool AccountNumberHoverImgIsDisplayed()
+		{
+			bool result = false;
+			result = this.AccountNumberHoverImg.Displayed;
+			return result;
+		}
+		#endregion
+
+	}
+
 }

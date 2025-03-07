@@ -240,6 +240,63 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			Report.IsTrue(new PaymentMethods().ClickSubmitButton(), "Failed to click Submit button", "Successfully clicked Submit button");
 
 		}
+		[RegexStepDefinition(@"In the Payment Methods section, in the 'Add ACH Account' for the 'ABA/Routing Number' hover image is displayed")]
+		public void RoutingNumberHoverImageIsDisplayed()
+		{
+			Report.Info("Switching to iFrame");
+			WebDriverWait iFrameWait = new(SeleniumWebDriver.CurrentDriver, TimeSpan.FromSeconds(120));
+			_ = iFrameWait.Until(ExpectedConditions.FrameToBeAvailableAndSwitchToIt(By.Id("z_hppm_iframe")));
+			if (Report.IsTrue(new PaymentMethodsIframe().RoutingNumberHoverIconExists(), $"Failed to find the Routing Number hover icon", $"Successfully found the Routing Number hover icon"))
+			{
+				if(Report.IsTrue(new PaymentMethodsIframe().RoutingNumberHoverIconHover(), $"Failed to hover the Routing Number hover icon", $"Successfully hovered the Routing Number hover icon"))
+				{
+					if(Report.IsTrue(new PaymentMethodsIframe().RoutingNumberHoverImgExists(), $"Failed to find the Routing Number hover image", $"Successfully found the Routing Number hover image"))
+					{
+						Report.IsTrue(new PaymentMethodsIframe().RoutingNumberHoverImgIsDisplayed(), $"Failed to confirm the Routing Number hover image is displayed", $"Successfully confirmed the Routing Number hover image is displayed");
+					}
+				}
+			}
+			Report.Info("Exiting iFrame");
+			SeleniumWebDriver.CurrentDriver.SwitchTo().DefaultContent();
+		}
+		[RegexStepDefinition(@"In the Payment Methods section, in the 'Add ACH Account' for the 'Bank Account Number' hover image is displayed")]
+		public void AccountNumberHoverImageIsDisplayed()
+		{
+			Report.Info("Switching to iFrame");
+			WebDriverWait iFrameWait = new(SeleniumWebDriver.CurrentDriver, TimeSpan.FromSeconds(120));
+			_ = iFrameWait.Until(ExpectedConditions.FrameToBeAvailableAndSwitchToIt(By.Id("z_hppm_iframe")));
+			if (Report.IsTrue(new PaymentMethodsIframe().AccountNumberHoverIconExists(), $"Failed to find the Account Number hover icon", $"Successfully found the Account Number hover icon"))
+			{
+				if (Report.IsTrue(new PaymentMethodsIframe().AccountNumberHoverIconHover(), $"Failed to hover the Account Number hover icon", $"Successfully hovered the Account Number hover icon"))
+				{
+					if (Report.IsTrue(new PaymentMethodsIframe().AccountNumberHoverImgExists(), $"Failed to find the Account Number hover image", $"Successfully found the Account Number hover image"))
+					{
+						Report.IsTrue(new PaymentMethodsIframe().AccountNumberHoverImgIsDisplayed(), $"Failed to confirm the Account Number hover image is displayed", $"Successfully confirmed the Account Number hover image is displayed");
+					}
+				}
+			}
+			Report.Info("Exiting iFrame");
+			SeleniumWebDriver.CurrentDriver.SwitchTo().DefaultContent();
+		}
+		[RegexStepDefinition(@"In the Payment Methods section, in the 'Add ACH Account' for the 'CVV' hover image is displayed")]
+		public void CVVNumberHoverImageIsDisplayed()
+		{
+			Report.Info("Switching to iFrame");
+			WebDriverWait iFrameWait = new(SeleniumWebDriver.CurrentDriver, TimeSpan.FromSeconds(120));
+			_ = iFrameWait.Until(ExpectedConditions.FrameToBeAvailableAndSwitchToIt(By.Id("z_hppm_iframe")));
+			if (Report.IsTrue(new PaymentMethodsIframe().CVVHoverIconExists(), $"Failed to find the CVV hover icon", $"Successfully found the CVV hover icon"))
+			{
+				if (Report.IsTrue(new PaymentMethodsIframe().CVVHoverIconHover(), $"Failed to hover the ACVV hover icon", $"Successfully hovered the CVV hover icon"))
+				{
+					if (Report.IsTrue(new PaymentMethodsIframe().CVVHoverImgExists(), $"Failed to find the CVV hover image", $"Successfully found the CVV hover image"))
+					{
+						Report.IsTrue(new PaymentMethodsIframe().CVVHoverImageIsDisplayed(), $"Failed to confirm the CVV hover image is displayed", $"Successfully confirmed the CVV hover image is displayed");
+					}
+				}
+			}
+			Report.Info("Exiting iFrame");
+			SeleniumWebDriver.CurrentDriver.SwitchTo().DefaultContent();
+		}
 	}
 	
 }
