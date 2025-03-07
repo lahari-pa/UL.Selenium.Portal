@@ -1,4 +1,6 @@
 ﻿using NPOI.POIFS.Properties;
+using OpenQA.Selenium.Support.UI;
+using OpenQA.Selenium;
 using Reqnroll;
 using System;
 using System.Collections.Generic;
@@ -7,7 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 {
@@ -175,11 +179,123 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			string checkbox = "Shipping Address is the same as billing address";
 			new Steps_Prototype().ICheckTheCheckboxWithDescription(check_uncheck, checkbox);
 		}
-		[RegexStepDefinition(@"In the Payment Methods section, in the 'Edit Address' modal click the button (Cancel|Save)")]
+		[RegexStepDefinition(@"In the Payment Methods section, in the 'Edit Address' modal click the (Cancel|Save) button")]
 		public void EditAddressClickButton(string button)
 		{
 			string modalTitle = "Edit Address";
 			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(modalTitle, button);
+		}
+		[RegexStepDefinition(@"In the Payment Methods section, in the 'Add Credit Card' modal window, set (Month|Year|Card Number|CVV|Cardholder Name|Postal Code) to (.*)")]
+		public void AddCreditCardInformation(string section, string option)
+		{
+			if (section == "Month" | section == "Year")
+			{
+				Report.Info("Switching to iFrame");
+				WebDriverWait iFrameWait = new(SeleniumWebDriver.CurrentDriver, TimeSpan.FromSeconds(120));
+				_ = iFrameWait.Until(ExpectedConditions.FrameToBeAvailableAndSwitchToIt(By.Id("z_hppm_iframe")));
+				Report.IsTrue(new PaymentMethods_new().SelectOptionInSectionJs(section, option), $"Failed to select option {option} for section {section}", $"Successfully selected option {option} for section {section}");
+				Report.Info("Exiting iFrame");
+				SeleniumWebDriver.CurrentDriver.SwitchTo().DefaultContent();
+			}
+			else
+			{
+				Report.Info("Switching to iFrame");
+				WebDriverWait iFrameWait = new(SeleniumWebDriver.CurrentDriver, TimeSpan.FromSeconds(120));
+				_ = iFrameWait.Until(ExpectedConditions.FrameToBeAvailableAndSwitchToIt(By.Id("z_hppm_iframe")));
+				new Steps_Prototype().SetTheSectionOptionTo(section, option);
+				Report.Info("Exiting iFrame");
+				SeleniumWebDriver.CurrentDriver.SwitchTo().DefaultContent();
+			}
+		}
+		[RegexStepDefinition(@"In the Payment Methods section, in the 'Add ACH Account' modal window, set (ABA\/Routing Number|Bank Account Number|Account Type|Bank Name|Account Holder Name) to (.*)")]
+		public void AddACHAccountInformation(string section, string option)
+		{
+			if (section == "Account Type")
+			{
+				Report.Info("Switching to iFrame");
+				WebDriverWait iFrameWait = new(SeleniumWebDriver.CurrentDriver, TimeSpan.FromSeconds(120));
+				_ = iFrameWait.Until(ExpectedConditions.FrameToBeAvailableAndSwitchToIt(By.Id("z_hppm_iframe")));
+				Report.IsTrue(new PaymentMethods_new().SelectOptionInSectionJs(section, option), $"Failed to select option {option} for section {section}" , $"Successfully selected option {option} for section {section}");
+				Report.Info("Exiting iFrame");
+				SeleniumWebDriver.CurrentDriver.SwitchTo().DefaultContent();
+			}
+			else
+			{
+				Report.Info("Switching to iFrame");
+				WebDriverWait iFrameWait = new(SeleniumWebDriver.CurrentDriver, TimeSpan.FromSeconds(120));
+				_ = iFrameWait.Until(ExpectedConditions.FrameToBeAvailableAndSwitchToIt(By.Id("z_hppm_iframe")));
+				new Steps_Prototype().SetTheSectionOptionTo(section, option);
+				Report.Info("Exiting iFrame");
+				SeleniumWebDriver.CurrentDriver.SwitchTo().DefaultContent();
+			}
+		}
+		[RegexStepDefinition(@"In the Payment Methods section, in the '(Add Credit Card|Add ACH Account)' modal click the (Save|Close) button")]
+		public void AddCreditCardClickButton(string modalTitle, string button)
+		{
+			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(modalTitle, button);
+		}
+		[RegexStepDefinition(@"In the Payment Methods section, in the modal window click the Submit button")]
+		public void AddCreditCardClickSubmitButton()
+		{
+			Report.IsTrue(new PaymentMethods().ClickSubmitButton(), "Failed to click Submit button", "Successfully clicked Submit button");
+
+		}
+		[RegexStepDefinition(@"In the Payment Methods section, in the 'Add ACH Account' for the 'ABA/Routing Number' hover image is displayed")]
+		public void RoutingNumberHoverImageIsDisplayed()
+		{
+			Report.Info("Switching to iFrame");
+			WebDriverWait iFrameWait = new(SeleniumWebDriver.CurrentDriver, TimeSpan.FromSeconds(120));
+			_ = iFrameWait.Until(ExpectedConditions.FrameToBeAvailableAndSwitchToIt(By.Id("z_hppm_iframe")));
+			if (Report.IsTrue(new PaymentMethodsIframe().RoutingNumberHoverIconExists(), $"Failed to find the Routing Number hover icon", $"Successfully found the Routing Number hover icon"))
+			{
+				if(Report.IsTrue(new PaymentMethodsIframe().RoutingNumberHoverIconHover(), $"Failed to hover the Routing Number hover icon", $"Successfully hovered the Routing Number hover icon"))
+				{
+					if(Report.IsTrue(new PaymentMethodsIframe().RoutingNumberHoverImgExists(), $"Failed to find the Routing Number hover image", $"Successfully found the Routing Number hover image"))
+					{
+						Report.IsTrue(new PaymentMethodsIframe().RoutingNumberHoverImgIsDisplayed(), $"Failed to confirm the Routing Number hover image is displayed", $"Successfully confirmed the Routing Number hover image is displayed");
+					}
+				}
+			}
+			Report.Info("Exiting iFrame");
+			SeleniumWebDriver.CurrentDriver.SwitchTo().DefaultContent();
+		}
+		[RegexStepDefinition(@"In the Payment Methods section, in the 'Add ACH Account' for the 'Bank Account Number' hover image is displayed")]
+		public void AccountNumberHoverImageIsDisplayed()
+		{
+			Report.Info("Switching to iFrame");
+			WebDriverWait iFrameWait = new(SeleniumWebDriver.CurrentDriver, TimeSpan.FromSeconds(120));
+			_ = iFrameWait.Until(ExpectedConditions.FrameToBeAvailableAndSwitchToIt(By.Id("z_hppm_iframe")));
+			if (Report.IsTrue(new PaymentMethodsIframe().AccountNumberHoverIconExists(), $"Failed to find the Account Number hover icon", $"Successfully found the Account Number hover icon"))
+			{
+				if (Report.IsTrue(new PaymentMethodsIframe().AccountNumberHoverIconHover(), $"Failed to hover the Account Number hover icon", $"Successfully hovered the Account Number hover icon"))
+				{
+					if (Report.IsTrue(new PaymentMethodsIframe().AccountNumberHoverImgExists(), $"Failed to find the Account Number hover image", $"Successfully found the Account Number hover image"))
+					{
+						Report.IsTrue(new PaymentMethodsIframe().AccountNumberHoverImgIsDisplayed(), $"Failed to confirm the Account Number hover image is displayed", $"Successfully confirmed the Account Number hover image is displayed");
+					}
+				}
+			}
+			Report.Info("Exiting iFrame");
+			SeleniumWebDriver.CurrentDriver.SwitchTo().DefaultContent();
+		}
+		[RegexStepDefinition(@"In the Payment Methods section, in the 'Add ACH Account' for the 'CVV' hover image is displayed")]
+		public void CVVNumberHoverImageIsDisplayed()
+		{
+			Report.Info("Switching to iFrame");
+			WebDriverWait iFrameWait = new(SeleniumWebDriver.CurrentDriver, TimeSpan.FromSeconds(120));
+			_ = iFrameWait.Until(ExpectedConditions.FrameToBeAvailableAndSwitchToIt(By.Id("z_hppm_iframe")));
+			if (Report.IsTrue(new PaymentMethodsIframe().CVVHoverIconExists(), $"Failed to find the CVV hover icon", $"Successfully found the CVV hover icon"))
+			{
+				if (Report.IsTrue(new PaymentMethodsIframe().CVVHoverIconHover(), $"Failed to hover the ACVV hover icon", $"Successfully hovered the CVV hover icon"))
+				{
+					if (Report.IsTrue(new PaymentMethodsIframe().CVVHoverImgExists(), $"Failed to find the CVV hover image", $"Successfully found the CVV hover image"))
+					{
+						Report.IsTrue(new PaymentMethodsIframe().CVVHoverImageIsDisplayed(), $"Failed to confirm the CVV hover image is displayed", $"Successfully confirmed the CVV hover image is displayed");
+					}
+				}
+			}
+			Report.Info("Exiting iFrame");
+			SeleniumWebDriver.CurrentDriver.SwitchTo().DefaultContent();
 		}
 	}
 	
