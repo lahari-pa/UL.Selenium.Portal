@@ -1,5 +1,6 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -383,19 +384,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickSubmitButton()
 		{
+			bool result = false;
 			Report.Info("Switching to iFrame");
-			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("z_hppm_iframe");
-			IWebElement SubmitButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//a[text()=' submit']"), 2);
-			if (SubmitButton == null)
+			WebDriverWait iFrameWait = new(SeleniumWebDriver.CurrentDriver, TimeSpan.FromSeconds(120));
+			_ = iFrameWait.Until(ExpectedConditions.FrameToBeAvailableAndSwitchToIt(By.Id("z_hppm_iframe")));
+			IWebElement SubmitButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//a[contains(text(), 'submit')]"), 2);
+			if(SubmitButton == null)
 			{
 				Report.Info("Could not find 'Submit' button");
 				Report.Info("Exiting iFrame");
 				SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 				return false;
 			}
-			bool result = SubmitButton.TryClick();
+			IJavaScriptExecutor js = (IJavaScriptExecutor)SeleniumWebDriver.CurrentDriver;
+			js.ExecuteScript("window.buttonClicked = false;");
+			js.ExecuteScript("arguments[0].addEventListener('click',function() { window.buttonClicked = true; });", SubmitButton);
+			js.ExecuteScript("arguments[0].click();", SubmitButton);
+			System.Threading.Thread.Sleep(500);
+			result = (bool)js.ExecuteScript("return window.buttonClicked;");
 			Report.Info("Exiting iFrame");
-			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.ExitIFrame();
 			return result;
 		}
 		public bool Enter_Credit_Card_Details(string card_type, string card_no, string exp_month, string exp_year, string cvv, string cardh_name, string postal_code)
