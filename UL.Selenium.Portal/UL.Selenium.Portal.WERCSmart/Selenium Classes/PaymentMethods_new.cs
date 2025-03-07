@@ -34,12 +34,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		private IWebElement CityStatePostal(string addressType) => this.ContainerElement.FindElement(By.XPath($".//div[h3[text()=\"{addressType}\"]]//div[contains(@data-bind, 'cityStatePostal')]"), 2);
 		private IWebElement Country(string addressType) => this.ContainerElement.FindElement(By.XPath($".//div[h3[text()=\"{addressType}\"]]//div[contains(@data-bind, 'Country')]"), 2);
 		private IWebElement Phone(string addressType) => this.ContainerElement.FindElement(By.XPath($".//div[h3[text()=\"{addressType}\"]]//div[contains(@data-bind, 'Phone')]"), 2);
-		private IWebElement RoutingNumberHoverIcon => SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//a[contains(@onfocus, \"vvDes_achBankABACode\")]"), 2);
-		private IWebElement RoutingNumberHoverImg => SeleniumWebDriver.CurrentDriver.FindElement(By.Id("vvDes_achBankABACode"), 2);
-		private IWebElement AccountNumberHoverIcon => SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//a[img[@id='vvImage_achBankAccountNumber']]"), 2);
-		private IWebElement AccountNumberHoverImg => SeleniumWebDriver.CurrentDriver.FindElement(By.Id("vvDes_achBankAccountNumber"), 2);
-		private IWebElement CVVHoverIcon => SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//a[img[@alt = 'cvv']]"), 2);
-		private IWebElement CVVHoverImg => SeleniumWebDriver.CurrentDriver.FindElement(By.Id("vvDes"), 2);
+		
 
 		#endregion
 
