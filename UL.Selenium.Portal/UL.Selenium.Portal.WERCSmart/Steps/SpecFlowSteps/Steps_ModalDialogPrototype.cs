@@ -43,10 +43,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		{
 			bool expected = is_isnot == "is";
 			ModalDialogPrototype modalDialogPrototype = new ModalDialogPrototype();
-			if(Report.IsTrue(expected == !modalDialogPrototype.IsNullOrEmpty(), $"Failure, failed to confirm modal {is_isnot} displayed.", $"Success, confirmed modal {is_isnot} displayed."))
+
+			if (modalDialogPrototype.IsModalDisplayed() == expected)
 			{
-				string modalTitleDisplayed = modalDialogPrototype.TitleGet();
-				Report.IsTrue(expected == modalTitleDisplayed.Equals(modalTitleExpected), $"Failure, failed to confirm displayed modal title '{modalTitleDisplayed}' {is_isnot} '{modalTitleExpected}'.", $"Success, confirmed displayed modal title '{modalTitleDisplayed}' {is_isnot} '{modalTitleExpected}'.");
+				Report.Success($"Success, confirmed modal {is_isnot} displayed.");
+
+				if (modalDialogPrototype.ModalTitleExists()) 
+				{
+					string modalTitleDisplayed = modalDialogPrototype.TitleGet();
+					Report.IsTrue(expected == modalTitleDisplayed.Equals(modalTitleExpected), $"Failure, failed to confirm displayed modal title '{modalTitleDisplayed}' {is_isnot} '{modalTitleExpected}'.", $"Success, confirmed displayed modal title '{modalTitleDisplayed}' {is_isnot} '{modalTitleExpected}'.");
+				}
+			}
+			else
+			{
+				Report.IsTrue(false, $"Failure, failed to confirm modal {is_isnot} displayed.", $"Success, confirmed modal {is_isnot} displayed.");
 			}
 		}
 
