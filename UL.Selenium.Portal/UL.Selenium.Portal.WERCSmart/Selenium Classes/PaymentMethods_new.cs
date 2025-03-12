@@ -34,11 +34,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		private IWebElement CityStatePostal(string addressType) => this.ContainerElement.FindElement(By.XPath($".//div[h3[text()=\"{addressType}\"]]//div[contains(@data-bind, 'cityStatePostal')]"), 2);
 		private IWebElement Country(string addressType) => this.ContainerElement.FindElement(By.XPath($".//div[h3[text()=\"{addressType}\"]]//div[contains(@data-bind, 'Country')]"), 2);
 		private IWebElement Phone(string addressType) => this.ContainerElement.FindElement(By.XPath($".//div[h3[text()=\"{addressType}\"]]//div[contains(@data-bind, 'Phone')]"), 2);
-		
+		private IWebElement FirstDefaultMethod => this.ContainerElement.FindElement(By.XPath($".//div[@class='col-sm-4'][1]//span[text()='Default']"), 2);
+		private IWebElement DeleteButton(string paymentMethod) => this.ContainerElement.FindElement(By.XPath($".//div[@class='col-sm-4'][1]//span[text()='Default']"), 2);
 
 		#endregion
 
 		#region Methods
+		public bool DefaultMethodIsFirst()
+		{
+			Report.Info($"Attempting to confirm the default payment method is first in the row");
+			return this.FirstDefaultMethod != null;
+		}
 		public bool PageHeaderLabelExists()
 		{
 			Report.Info($"Attempting to confirm the page header label exists.");
