@@ -523,22 +523,29 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
+
 	Given I generate a random UPC number and save as: UPC216709
-	Given I delete all products with UPC Number: saved as UPC216709
+	Given In the Product Grid, delete all products with UPC Number: saved as UPC216709
+
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
+
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alcoholic Beverages - Wine
 	Then In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Alcoholic Beverages - Wine
 	Then In the Product Section, set the option in section: 'Type of Product (select)' to: Alcoholic Beverages - Wine
 	Then in the The Product page, I click Continue
+
 	Then I save the product information as: TestCase216709
+
 	#Then I call Shared Step 216821 - Product Information - Product Information - Applicable Only to Alcoholic Beverages - Wine (RU001418)
 	Then I should be on the Product Information Page
 	Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page, I click Continue
+
 	#Then I call Shared Step 216822 (Physical and Chemical Properties - Applicable Only to Alcoholic Beverages - Wine (RU001418))
 	Then I should be on the Physical and Chemical Properties Page
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
@@ -549,11 +556,13 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: 34
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Closed cup method
 	Then in the Physical and Chemical Properties page, I click Continue
+
 	#Then I call Shared Step 57503 (Inventory Status, Prop 65 (US) - TSCA(Any Option) - Prop 65 (NO) - Continue - Happy Path)
 	Then I should be on the Inventory Status, Prop 65 (US) Page
 	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
 	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+
 	#Then I call Shared Step 216838 (Beverage Regulatory Details - Applicable Only to Alcoholic Beverages - Wine (RU001418)):
 	#| BPA | Percent of Alcohol |
 	#| No  | 8.3                |
@@ -562,23 +571,27 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then The Percent of Alcohol in the Product (numeric entry only) question is displayed
 	Then I enter the text of Percent of Alcohol in the Product (numeric entry only) field to: 7.3
 	Then in the Beverage Regulatory Details page, I click Continue
+
 	#Then I call Shared Step 216860 (Transportation Details 1 - Applicable Only to Alcoholic Beverages - Wine (RU001418))
 	Then I should be on the Transportation Details 1 Page
 	Then In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: No, due to an exemption or exception
 	Then In the Transportation Details 1 page the 'Please select DOT Exceptions if applicable?' question is displayed
 	Then In the Transportation Details 1 Section, set the option in section: 'Please select DOT Exceptions if applicable?': to: 173.150(d)(1) - Exemption for alcoholic beverages (wine and distilled spirits), <=24% alcohol by volume, is contained in an inner packaging of 5L or less
 	Then in the Transportation Details 1 page, I click Continue
+
 	#Then I call Shared Step 216861 (Transportation Details 2 > Applicable Only to Alcoholic Beverages - Wine (RU001418))
 	Then I should be on the Transportation Details 2 Page
 	Then The International Shipping when DOT Exemption taken? question is displayed
 	Then In the Transportation Details 2 Section, set the option in section: 'International Shipping when DOT Exemption taken?': to: I do not ship internationally and I do not know the classification
 	Then in the Transportation Details 2 page, I click Continue
+
 	#Then I call Shared Step 216862 (Retailer - Add Retailer - Applicable Only to Alcoholic Beverages - Wine (RU001418): Walgreens
 	Then I should be on the Retailer Page
 	Then In the Retailer Section, click 'Add Retailers' button
 	Then In the Select Retailers window, select retailer: Walgreens
 	Then In the Select Retailers window, click 'Done' button
 	Then in the Retailer page, I click Continue
+
 	#Then I call Shared Step 216863 (UPC Screen - Verify that the Updated Container Types Applicable to Alcoholic Beverages - Wine) Enter UPC: saved as UPC216709, container type: Plastic Liner/Corrugate and size: 12.8
 	Then I should be on the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
@@ -594,4 +607,7 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, verify retailer 'WG' is present under the 'Destination Retailers' column
 	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page, I click Continue
 	Then I should be on the Additional Documents to Provide Page
-	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase216709
+
+	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase216709
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase216709
