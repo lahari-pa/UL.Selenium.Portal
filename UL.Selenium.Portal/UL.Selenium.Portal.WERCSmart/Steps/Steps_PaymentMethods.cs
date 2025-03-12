@@ -901,7 +901,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenThePayPalPageShouldLoad()
 		{
 			var MyPP = new PaymentMethods_PayPal();
-			Report.IsTrue(MyPP.Wait_for_load(60), "PayPal page is not showing",
+			Report.IsTrue(MyPP.WaitForContainerToBeVisible(60), "PayPal page is not showing",
 				"PayPal page is showing.");
 		}
 
