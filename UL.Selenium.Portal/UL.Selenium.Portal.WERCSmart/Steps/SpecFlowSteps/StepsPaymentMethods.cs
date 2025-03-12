@@ -45,7 +45,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		public void VerifyAddNewMethodIsDisplayed(string button, string is_isnot)
 		{
 			bool expected = is_isnot == "is";
-			if (Report.IsTrue(new PaymentMethods_new().AddNewMethodButtonExists(button)==expected, $"Failed to confirm the '{button}' button {(expected ? "is not" : "is")} found.", $"Successfully confirmed the '{button}' button {is_isnot} found."))
+			if (Report.IsTrue(new PaymentMethods_new().AddNewMethodButtonExists(button) == expected, $"Failed to confirm the '{button}' button {(expected ? "is not" : "is")} found.", $"Successfully confirmed the '{button}' button {is_isnot} found."))
 			{
 				Report.IsTrue(new PaymentMethods_new().AddNewMethodButtonDisplayed(button) == expected, $"Failed to confirm the '{button}' button {(expected ? "is not" : "is")} displayed.", $"Successfully confirmed the '{button}' button {is_isnot} displayed.");
 			}
@@ -158,7 +158,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
 		[RegexStepDefinition(@"In the Payment Methods section, in the (Billing Address|Shipping Address) of 'Edit Address' modal, for (Address Line 1|Address Line 2|City|Zip|Phone) enter (.*)")]
-		public void EnterOptionForyAddressTextInput(string addressType,string section, string value)
+		public void EnterOptionForyAddressTextInput(string addressType, string section, string value)
 		{
 			if (Report.IsTrue(new EditAddress(addressType).TextInputExists(section), $"Failed to find the '{section}' text input", $"Successfully found the '{section}' text input."))
 			{
@@ -215,7 +215,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 				Report.Info("Switching to iFrame");
 				WebDriverWait iFrameWait = new(SeleniumWebDriver.CurrentDriver, TimeSpan.FromSeconds(120));
 				_ = iFrameWait.Until(ExpectedConditions.FrameToBeAvailableAndSwitchToIt(By.Id("z_hppm_iframe")));
-				Report.IsTrue(new PaymentMethods_new().SelectOptionInSectionJs(section, option), $"Failed to select option {option} for section {section}" , $"Successfully selected option {option} for section {section}");
+				Report.IsTrue(new PaymentMethods_new().SelectOptionInSectionJs(section, option), $"Failed to select option {option} for section {section}", $"Successfully selected option {option} for section {section}");
 				Report.Info("Exiting iFrame");
 				SeleniumWebDriver.CurrentDriver.SwitchTo().DefaultContent();
 			}
@@ -248,9 +248,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			_ = iFrameWait.Until(ExpectedConditions.FrameToBeAvailableAndSwitchToIt(By.Id("z_hppm_iframe")));
 			if (Report.IsTrue(new PaymentMethodsIframe().RoutingNumberHoverIconExists(), $"Failed to find the Routing Number hover icon", $"Successfully found the Routing Number hover icon"))
 			{
-				if(Report.IsTrue(new PaymentMethodsIframe().RoutingNumberHoverIconHover(), $"Failed to hover the Routing Number hover icon", $"Successfully hovered the Routing Number hover icon"))
+				if (Report.IsTrue(new PaymentMethodsIframe().RoutingNumberHoverIconHover(), $"Failed to hover the Routing Number hover icon", $"Successfully hovered the Routing Number hover icon"))
 				{
-					if(Report.IsTrue(new PaymentMethodsIframe().RoutingNumberHoverImgExists(), $"Failed to find the Routing Number hover image", $"Successfully found the Routing Number hover image"))
+					if (Report.IsTrue(new PaymentMethodsIframe().RoutingNumberHoverImgExists(), $"Failed to find the Routing Number hover image", $"Successfully found the Routing Number hover image"))
 					{
 						Report.IsTrue(new PaymentMethodsIframe().RoutingNumberHoverImgIsDisplayed(), $"Failed to confirm the Routing Number hover image is displayed", $"Successfully confirmed the Routing Number hover image is displayed");
 					}
@@ -297,6 +297,61 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			Report.Info("Exiting iFrame");
 			SeleniumWebDriver.CurrentDriver.SwitchTo().DefaultContent();
 		}
+		[RegexStepDefinition(@"In the Payment Methods section, verify user is redirected to PayPal sandbox")]
+		public void UserIsRedirectedToThePayPal()
+		{
+			Report.IsTrue(new PaymentMethods_PayPal().WaitForContainerToBeVisible(60), "PayPal page is not loaded",
+				"PayPal page is loaded.");
+		}
+
+		[RegexStepDefinition(@"In the Payment Methods section, in the PayPal page, enter user email: (.*)")]
+		public void InThePayPalEnterEmail(string email)
+		{
+			if (Report.IsTrue(new PaymentMethods_PayPal().EmailExists(), $"Failed to confirm the email input exist", $"Successfully confirmed the email input exist"))
+			{
+				Report.IsTrue(new PaymentMethods_PayPal().EmailEnterText(email), $"Failed to enter the email", $"Successfully entered the email");
+
+			}
+		}
+		[RegexStepDefinition(@"In the Payment Methods section, in the PayPal page, enter user password: (.*)")]
+		public void InThePayPalEnterPassword(string password)
+		{
+			if (Report.IsTrue(new PaymentMethods_PayPal().PasswordExists(), $"Failed to confirm the password input exist.", $"Successfully confirmed the password input exist."))
+			{
+				Report.IsTrue(new PaymentMethods_PayPal().PasswordEnterText(password), $"Failed to enter the password", $"Successfully entered the password.");
+
+			}
+		}
+
+		[RegexStepDefinition(@"In the Payment Methods section, in the PayPal page, click the Next button")]
+		public void InThePayPalClickNext()
+		{
+			if (Report.IsTrue(new PaymentMethods_PayPal().NextButtonExists(), $"Failed to confirm the Next button exist.", $"Successfully confirmed the Next button exist."))
+			{
+				Report.IsTrue(new PaymentMethods_PayPal().NextButtonClick(), $"Failed to click the Next button", $"Successfully clicked the Next button.");
+
+			}
+		}
+		[RegexStepDefinition(@"In the Payment Methods section, in the PayPal page, click the Login button")]
+		public void InThePayPalClickLogin()
+		{
+			if (Report.IsTrue(new PaymentMethods_PayPal().LoginButtonExists(), $"Failed to confirm the Login button exist.", $"Successfully confirmed the Login button exist."))
+			{
+				Report.IsTrue(new PaymentMethods_PayPal().LoginButtonClick(), $"Failed to click the Login button", $"Successfully clicked the Login button.");
+
+			}
+		}
+		[RegexStepDefinition(@"In the Payment Methods section, the (Credit Card|Wire Transfer|ACH) method (is|is not) in the row of payment options")]
+		public void PaymentMethodExists(string paymentMethod, string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			Report.IsTrue(new PaymentMethods().Payment_Method_Exists(paymentMethod) == expected, $"Failed to confirm the {paymentMethod} {(expected ? "is not" : "is")} in the row of payment options", $"Successfully confirmed the {paymentMethod} {is_isnot} in the row of payment options");
+		}
+
+		[RegexStepDefinition(@"In the Payment Methods section, verify the default payment methods shows first")]
+		public void TheDefaultPaymentMethodShowsFirst()
+		{
+			Report.IsTrue(new PaymentMethods_new().DefaultMethodIsFirst(), "Failed to confirm the default payment methods shows first", $"Successfully confirmed the default payment methods shows first");
+		}
 	}
-	
 }
