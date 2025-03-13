@@ -25,6 +25,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info($"Attempting to get modal title.");
 			return this.Title;
 		}
+		public bool ModalTitleExists()
+		{
+			Report.Info($"Attempting to confirm modal title exists.");
+			return this.Title != null;
+		}
 
 		public bool HeaderCloseButtonExists()
 		{
@@ -48,6 +53,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info($"Attempting to click modal footer \"{buttonLabel}\" button.");
 			return this.FooterButton(buttonLabel).TryClick();
+		}
+		public bool IsModalDisplayed()
+		{
+			Report.Info($"Attempting to confirm if the modal is displayed.");
+			var modalElement = this.FindElement(this.ContainerElementLocator, 1);
+			if (modalElement != null)
+			{
+				return modalElement.Displayed;
+			}
+			else
+			{
+				Report.Info("Modal Element is not found.");
+				return false;
+			}
 		}
 		#endregion
 	}

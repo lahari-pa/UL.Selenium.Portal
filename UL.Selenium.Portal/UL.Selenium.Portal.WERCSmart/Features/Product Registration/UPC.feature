@@ -1287,7 +1287,7 @@ Scenario: [115330] WERCSmart Portal - UPC - Verify the DPCI Field is NO Longer R
 		| %UPC#115330_4% | MyChalk4 | 4        | 32   |               | 00DD04          | 2004            | 1114            | I0004           |          | 100000004 | 123-1234,123-1233 |
 		| %UPC#115330_5% | MyChalk5 | 5        | 32   |               | 00EE05          | 2005            | 1115            | J0005           |          | 100000005 | 123-1234,123-1234 |
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, click 'Upload File' button and upload file saved as: Bulktest115330
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm 'Add Multiple' modal window should be displayed
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm 'Add Multiple' modal window is displayed
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal check All UPCs checkbox
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal confirm all UPCs are selected
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal select Packaging Type: Plastic Container
@@ -1296,7 +1296,7 @@ Scenario: [115330] WERCSmart Portal - UPC - Verify the DPCI Field is NO Longer R
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal check retailer: Target
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' verify Retailer column is populated with: TG
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal click 'Finish' button
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm 'Add Multiple' modal window should not be displayed
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm 'Add Multiple' modal window is not displayed
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm the values on the new product screen are the same as the UPC Upload document saved in the Table called: UPCTable115330
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, verify retailer 'TG' is present under the 'Destination Retailers' column
 	Then There are not any error messages displayed

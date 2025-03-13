@@ -204,7 +204,7 @@ Scenario: [82536] Soap (Bar, Liquid) for Body (RU000211) - GTIN/UPC - Verify Dup
 		| %RandomUPC2% | MySoap2 | 3        | 32   | 3.44               | 00CC03          | 2003            | 1113            | H0003           | 111-22-0003 | 100000003 | 123-1234,123-1232 |                         |            |                  |                  |            |              |            |          |                              |
 		| %RandomUPC3% | MySoap3 | 5        | 32   | 5.66               | 00EE05          | 2005            | 1115            | J0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |                         |            |                  |                  |            |              |            |          |                              |	
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, click 'Upload File' button and upload file saved as: Bulktest82536
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm 'Add Multiple' modal window should be displayed
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm 'Add Multiple' modal window is displayed
 	Then I confirm that Add Multiple UPC popup appears and the values are the same as the UPC Upload document saved in the Table called: UPCTable82536
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal check All UPCs checkbox
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal confirm all UPCs are selected
@@ -213,7 +213,7 @@ Scenario: [82536] Soap (Bar, Liquid) for Body (RU000211) - GTIN/UPC - Verify Dup
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal confirm all UPCs are selected
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal check retailer: Target
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal click 'Finish' button
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm 'Add Multiple' modal window should not be displayed
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm 'Add Multiple' modal window is not displayed
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, error message should be displayed with text: 'You have added UPCs to the registration that are already in use within your WERCSmart account. Duplicate UPCs are not permitted, as they may provide conflicting Assessment information to your retailer recipients. Please remove the instances of duplicate UPC(s) from the necessary registration data.'
 	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
 	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
@@ -286,16 +286,22 @@ Scenario: [82536] Soap (Bar, Liquid) for Body (RU000211) - GTIN/UPC - Verify Dup
 
 @TestCase:88879
 Scenario: [88879] Input fields and labels for Retailers HD and TG have been Updated
+
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-		Then I click the Add Product icon in the Navigation Pane
+	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Then In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk_#88879
+	Then In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
+	Then in the The Product page, I click Continue
+
 	Then I save the product information as: TestCase88879
+
 	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I should see the Product Information Page
 	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
@@ -320,11 +326,13 @@ Scenario: [88879] Input fields and labels for Retailers HD and TG have been Upda
 	Then In the Ingredients section, add component with component name: Calcium Carbonate
 	Then In the Ingredients Table row with component name: Calcium Carbonate, in Percent column text input enter: 100
 	Then in the Ingredients page I click Continue
+
 	#And I call Shared Step 152747 Inventory Status, Prop 65 (US) - Applicable Only to CHALK (RU000711) - General Shared-Step
 	Given I should see the Inventory Status, Prop 65 (US) Page
 	Given In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is exempt from TSCA chemical Inventory listing requirements.
 	Given In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Given in the Inventory Status, Prop 65 (US) page I click Continue
+
 	#And I call Shared Step 226326 (Retailer - Add Retailer(s):  THE HOME DEPOT - (General Shared-Step))
 	Given I should see the Retailer Page
 	Given In the Retailer Section, click 'Add Retailers' button
@@ -338,6 +346,7 @@ Scenario: [88879] Input fields and labels for Retailers HD and TG have been Upda
 	Then I generate a random UPC number and save as: UPC#88879_5
 	Then I generate a random UPC number and save as: UPC#88879_6
 	Then I generate a random UPC number and save as: UPC#88879_7
+
 	#Shared Step 252564 GTIN / UPC - Verify OMSID is NO Longer Required When a UPC File is Uploaded for THE HOME DEPOT
 	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, click 'sample file' link to download file
@@ -350,7 +359,7 @@ Scenario: [88879] Input fields and labels for Retailers HD and TG have been Upda
 		| %UPC#88879_4% | MyChalk4 | 4        | 32   | 4.55               | 00DD04          | 2004            | 1114            | I0004           | 111-22-0004 |			| 123-1234,123-1233 |
 		| %UPC#88879_5% | MyChalk5 | 5        | 32   | 5.66               | 00EE05          | 2005            | 1115            | J0005           | 111-22-0005 |			| 123-1234,123-1234 |
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, click 'Upload File' button and upload file saved as: Bulktest88879
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm 'Add Multiple' modal window should be displayed
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm 'Add Multiple' modal window is displayed
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal check All UPCs checkbox
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal confirm all UPCs are selected
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal select Packaging Type: Plastic Container
@@ -358,12 +367,16 @@ Scenario: [88879] Input fields and labels for Retailers HD and TG have been Upda
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal confirm all UPCs are selected
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal check retailer: The Home Depot
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, at 'Add Multiple' modal click 'Finish' button
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm 'Add Multiple' modal window should not be displayed
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm 'Add Multiple' modal window is not displayed
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, confirm the values on the new product screen are the same as the UPC Upload document saved in the Table called: UPCTable88879
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, verify retailer 'HD' is present under the 'Destination Retailers' column
 	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+
 	Given I should see the Regulatory Documents to Provide Page
-	Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase88879
+
+	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase88879
+	Then I navigate to the Home Page
+	Then In the Product Grid, delete the product saved as: TestCase88879
 
 #Removed from regression 2024/06
 @ignore

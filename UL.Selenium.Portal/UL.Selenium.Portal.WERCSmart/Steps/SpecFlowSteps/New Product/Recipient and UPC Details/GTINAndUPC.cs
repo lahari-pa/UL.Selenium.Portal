@@ -224,11 +224,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 
 		}
 
-		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, confirm 'Add Multiple' modal window (should|should not) be displayed")]
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, confirm 'Add Multiple' modal window (is|is not) displayed")]
 		public void ThenInTheU_S_DepartmentOfTransportationDOTClassificationSectionAddMultipleIsDisplayed(string condition)
 		{
 			string modalTitle = "Add Multiple";
-			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeading(condition, modalTitle);
+			new Steps_ModalDialogPrototype().ConfirmModalIsIsNotDisplayed(modalTitle, condition);
 		}
 		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section, at 'Add Multiple' modal (check|uncheck) All UPCs checkbox")]
 		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionAtModalCheckAllUPCsCheckbox(string check_uncheck)

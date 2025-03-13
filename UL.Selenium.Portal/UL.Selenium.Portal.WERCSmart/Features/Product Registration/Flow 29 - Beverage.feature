@@ -259,6 +259,8 @@ Given I call Shared Step 42214 (Delete a Product from the Product grid) to delet
 # Created by Saikiran Chittampally
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Flow 29
+# Removed from regression active bug ticket created - 03/10/2025
+@ignore
 @TestCase:105007
 Scenario: [105007] Wine - RU001418 - Not Regulated Less than <=24% Alcohol
 
@@ -276,7 +278,7 @@ Scenario: [105007] Wine - RU001418 - Not Regulated Less than <=24% Alcohol
 	Then in the New Product page, I click Continue
 
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wine
-	Then In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Alcoholic Beverages - Wine
+	Then In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Alcoholic Beverages - Wine_#105007
 	Then In the Product Section, set the option in section: 'Type of Product (select)' to: Alcoholic Beverages - Wine
 	Then in the The Product page, I click Continue
 

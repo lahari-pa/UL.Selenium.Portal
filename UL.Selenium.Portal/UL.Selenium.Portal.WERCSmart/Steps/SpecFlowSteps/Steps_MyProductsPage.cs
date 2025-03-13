@@ -1318,7 +1318,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			this.MyProductsPageConfirmTableDoesDoesNotExist("does");
 			Report.StartSubStep("Then On the My Products page, confirm the My Products table column labels list does exist");
 			this.MyProductsPageConfirmTableColumnLabelsListDoesDoesNotExist("does");
-			Delay.Seconds(1);
+			Delay.Seconds(5);
 			Report.StartSubStep("Then On the My Products page in the My Products table, confirm row with Product.Id as Product ID does exist");
 			this.MyProductTableConfirmProductIDRowDoesDoesNotExist(Product.Id, "does");
 			Report.StartSubStep("Then On the My Products page in the My Products table row with Product.Id as Product ID, click Actions button");
@@ -1335,7 +1335,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			this.DeleteProductModalConfirmProductNameIsIsNotDisplayed(Product.Name, "is");
 			Report.StartSubStep("Then In the Delete Product modal, click 'DELETE' footer button");
 			this.DeleteProductModalClickDeleteFooterButton();
-			Delay.Seconds(1);
+			Delay.Seconds(5);
 			Report.StartSubStep("Then On the My Products page in the My Products table, confirm row with Product.Id as Product ID does not exist");
 			this.MyProductTableConfirmProductIDRowDoesDoesNotExist(Product.Id, "does not");
 			Report.UseSubSteps = false;
