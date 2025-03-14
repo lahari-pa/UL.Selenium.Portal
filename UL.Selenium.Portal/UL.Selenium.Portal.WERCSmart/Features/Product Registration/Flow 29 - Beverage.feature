@@ -399,6 +399,7 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Alcoholic Beverages - Spirits_#92943
 	Then In the Product Section, set the option in section: 'Type of Product (select)' to: Alcoholic Beverages - Spirits
 	Then in the The Product page, I click Continue
+
 	Then I save the product information as: TestCase92943
 
 	#Given I call Shared Step 90477 - Product Information - US, (NO) Retailer's PL
@@ -406,6 +407,7 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then I should be on the Product Information Page
 	Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page, I click Continue
 
 	#Then I call Shared Step 92979 (Physical and Chemical Properties - Physical Property - Liquid - For Spirits (RU001434) (Greater than 70% Alcohol))
@@ -444,6 +446,7 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then I should be on the U.S. Department of Transportation (DOT) Classification Page
 	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN3065
 	Then In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Alcoholic beverages
+	#Then In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Environmentally Hazardous Substance, liquid, n.o.s
 	Then In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
 	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: II
 	Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
