@@ -23,6 +23,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		IWebElement Table => this.ContainerElement.FindElement(By.XPath("//div[contains(@class,'ws-panel')]//table"), 2);
 
 		IWebElement ActionButton(string name, string action) => this.FindElement(By.XPath($".//div[contains(@class,'ws-panel')]//table//tr//td//span[contains(@data-bind,'OrderNumber')][text()='{name}']//ancestor::tr//td//a[text()='{action}']"), 2);
+
+		IWebElement InputText(string text) => this.ContainerElement.FindElement(By.XPath($"//input[contains(@placeholder,'{text}')]"), 2);
+
 		#endregion
 
 		#region Page Methods
@@ -38,6 +41,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 			return this.ActionButton(name, action).TryClick();
 
+		}
+
+		public void EnterText(string fieldname, string text)
+		{
+			this.InputText(fieldname).TryClick();
+			this.InputText(fieldname).ClearTextBox();
+			Report.Info("Enter the value for search");
+			this.InputText(fieldname).EnterText(text);
 		}
 
 
