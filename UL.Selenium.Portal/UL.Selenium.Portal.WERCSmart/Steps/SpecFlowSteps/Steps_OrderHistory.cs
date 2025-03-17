@@ -93,7 +93,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 
 		}
 
-		[RegexStepDefinition(@"In the Order History sectionn , From the Filter By dropdown - I select option: (All|Payment Pending|Payment Failed|Payment Received|Completed|Cancelled)")]
+		[RegexStepDefinition(@"In the Order History sectionn, From the Filter By dropdown - I select option: (All|Payment Pending|Payment Failed|Payment Received|Completed|Cancelled)")]
 		public void FilterByDropdownSelectOption(string optionValue)
 		{
 			OrderHistoryPage orderHistoryPage = new OrderHistoryPage();
@@ -101,6 +101,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			Report.IsTrue(orderHistoryPage.FilterByDropdownClick(), $"Failed to click Sub Format type dropdown", $"Successfully clicked Sub Format type dropdown ");
 			Report.IsTrue(orderHistoryPage.FilterByDropdownOptionExists(optionValue), $"Failed, Sub Format type dropdown option {optionValue} is not displayed", $"Successfully displayed Sub Format type dropdown option {optionValue}");
 			Report.IsTrue(orderHistoryPage.FilterByDropdownOptionClick(optionValue), $"Failed to click option {optionValue} in Sub Format type dropdown", $"Successfully clicked option {optionValue} in Sub Format type dropdown");
+		}
+
+
+		[RegexStepDefinition(@"In the Order History section, currently on page number: (.*)")]
+		public void OrderIsActiveOnPageNumber(string expectedPage)
+		{
+			var order = new OrderHistoryPage();
+			string activePage = order.OrderActivePage();
+			Report.IsTrue(activePage == expectedPage,
+				"The Order History is not on the expected page: " + expectedPage + ". It is on page: " + activePage,
+				"The Order History is on the expected page: " + expectedPage);
+		}
+
+		[RegexStepDefinition(@"In the Order History sectionn, Click (next|previous|...)")]
+		public void ClickNextPrev(string navOption)
+		{
+			Report.IsTrue(new OrderHistoryPage().OrderGridNavigation(navOption),
+				"Failed to navigate in the user grid with action: " + navOption,
+				"Successfully navigated in the user grid with action: " + navOption);
 		}
 
 

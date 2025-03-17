@@ -91,8 +91,73 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.FilterByDropdownOption(dropdownOption).TryClick();
 		}
 
+		public string OrderActivePage()
+		{
+			IWebElement userGrid = this.ContainerElement.FindElement(By.XPath(".//div[@class='panel-footer clearfix']"), 2);
+			if (userGrid == null)
+			{
+				return null;
+			}
+			IWebElement pageEl = userGrid.FindElement(By.XPath(".//li[@class='active']/span"), 2);
+			if (pageEl == null)
+			{
+				return null;
+			}
+			pageEl.ScrollElementIntoView();
+			return userGrid.FindElement(By.XPath(".//li[@class='active']/span"), 2).Text;
+		}
+
+		public bool OrderGridNavigation(string navOption)
+		{
+			bool success = false;
+			int i = 0;
+			while (success == false && i < 5)
+			{
+				Report.Info("Navigating in the order grid with action - " + navOption);
+				IWebElement userGrid = this.ContainerElement.FindElement(By.XPath(".//div[@class='panel-footer clearfix']"), 2);
+				if (userGrid == null)
+				{
+					Report.Info("Could not locate the order grid");
+					return false;
+				}
+				IWebElement navEl = null;
+				switch (navOption)
+				{
+					case "next":
+						navEl = userGrid.FindElement(By.XPath(".//a[@class='page-link next']|//a[text()='Next']"), 2);
+						break;
+					case "previous":
+						navEl = userGrid.FindElement(By.XPath(".//a[@class='page-link prev']|//a[text()='Prev']"), 2);
+						break;
+					case "...":
+						navEl = userGrid.FindElement(By.XPath(".//span[@class='ellipse clickable' and parent::li]|//span[text()='...' and parent::li]"), 2);
+						break;
+					default:
+						Report.Info("An invalid navigation option was provided. Must either be 'next' or 'previous'");
+						return false;
+				}
+				if (navEl == null)
+				{
+					Report.Info("Could not locate the navigation button element");
+					return false;
+				}
+				navEl.ScrollElementIntoView();
+				if (navEl.TryClick())
+				{
+					Report.Info("Successfully clicked the found element");
+					success = true;
+				}
+				else
+				{
+					Report.Info($"Failed to click the element on try: {i + 1}");
+					i++;
+				}
+			}
+			return success;
 
 
+
+		}
 
 
 
