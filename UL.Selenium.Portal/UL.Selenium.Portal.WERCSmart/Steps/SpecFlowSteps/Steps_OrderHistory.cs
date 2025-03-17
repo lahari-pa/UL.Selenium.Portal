@@ -84,6 +84,26 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeading(condition, modalTitle);
 		}
 
+
+		[RegexStepDefinition(@"In the Order History section, Verify 'View Details' is displayed")]
+		public void VerifyViewDetailsIsDisplayed()
+		{
+
+			Report.IsTrue(new OrderHistoryPage().ViewDetailsIsDisplayed(), "View Details is not displayed", "Successfully View Details is displayed");
+
+		}
+
+		[RegexStepDefinition(@"In the Order History sectionn , From the Filter By dropdown - I select option: (All|Payment Pending|Payment Failed|Payment Received|Completed|Cancelled)")]
+		public void FilterByDropdownSelectOption(string optionValue)
+		{
+			OrderHistoryPage orderHistoryPage = new OrderHistoryPage();
+			Report.IsTrue(orderHistoryPage.FilterByDropdownExists(), $"Failed, Sub Format type dropdown is not displayed", $"Successfully displayed Sub Format type dropdown");
+			Report.IsTrue(orderHistoryPage.FilterByDropdownClick(), $"Failed to click Sub Format type dropdown", $"Successfully clicked Sub Format type dropdown ");
+			Report.IsTrue(orderHistoryPage.FilterByDropdownOptionExists(optionValue), $"Failed, Sub Format type dropdown option {optionValue} is not displayed", $"Successfully displayed Sub Format type dropdown option {optionValue}");
+			Report.IsTrue(orderHistoryPage.FilterByDropdownOptionClick(optionValue), $"Failed to click option {optionValue} in Sub Format type dropdown", $"Successfully clicked option {optionValue} in Sub Format type dropdown");
+		}
+
+
 	}
 
 
