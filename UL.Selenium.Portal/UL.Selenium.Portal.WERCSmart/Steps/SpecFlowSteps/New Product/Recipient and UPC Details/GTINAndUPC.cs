@@ -434,7 +434,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 		{
 			string title = "Warning!";
 			string text = "You are about to delete 2 UPC's.\r\nDo you want to proceed?";
-			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeadingAndText(condition, title, text);
+			new Steps_ModalDialogPrototype().ConfirmModalTitleandModalText(condition, title, text);
 		}
 		[RegexStepDefinition("In the Global Trade Item Number \\(GTIN\\) / Universal Product Code \\(UPC\\) Section, in Warning modal window click 'Ok' button")]
 		public void ThenInTheGlobalTradeItemNumberGTINUniversalProductCodeUPCSectionInWarningModalWindowClickButton()
