@@ -113,7 +113,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			int i = 0;
 			while (success == false && i < 5)
 			{
-				Report.Info("Navigating in the order grid with action - " + navOption);
+				Report.Info($"Navigating in the order grid with action -  { navOption}");
 				IWebElement userGrid = this.ContainerElement.FindElement(By.XPath(".//div[@class='panel-footer clearfix']"), 2);
 				if (userGrid == null)
 				{

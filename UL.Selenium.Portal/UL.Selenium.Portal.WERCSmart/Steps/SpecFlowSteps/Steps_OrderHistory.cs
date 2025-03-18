@@ -110,16 +110,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			var order = new OrderHistoryPage();
 			string activePage = order.OrderActivePage();
 			Report.IsTrue(activePage == expectedPage,
-				"The Order History is not on the expected page: " + expectedPage + ". It is on page: " + activePage,
-				"The Order History is on the expected page: " + expectedPage);
+				$"The Order History is not on the expected page:  {expectedPage}. It is on page: {activePage}",
+				$"The Order History is on the expected page:  {expectedPage}");
 		}
 
 		[RegexStepDefinition(@"In the Order History sectionn, Click (next|previous|...)")]
 		public void ClickNextPrev(string navOption)
 		{
 			Report.IsTrue(new OrderHistoryPage().OrderGridNavigation(navOption),
-				"Failed to navigate in the user grid with action: " + navOption,
-				"Successfully navigated in the user grid with action: " + navOption);
+				$"Failed to navigate in the user grid with action: {navOption}",
+				$"Successfully navigated in the user grid with action:{navOption}");
 		}
 
 
