@@ -1,5 +1,6 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -383,19 +384,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickSubmitButton()
 		{
+			bool result = false;
 			Report.Info("Switching to iFrame");
-			SeleniumWebDriver.CurrentDriver.SwitchTo().Frame("z_hppm_iframe");
-			IWebElement SubmitButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//a[text()=' submit']"), 2);
-			if (SubmitButton == null)
+			WebDriverWait iFrameWait = new(SeleniumWebDriver.CurrentDriver, TimeSpan.FromSeconds(120));
+			_ = iFrameWait.Until(ExpectedConditions.FrameToBeAvailableAndSwitchToIt(By.Id("z_hppm_iframe")));
+			IWebElement SubmitButton = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//a[contains(text(), 'submit')]"), 2);
+			if(SubmitButton == null)
 			{
 				Report.Info("Could not find 'Submit' button");
 				Report.Info("Exiting iFrame");
 				SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
 				return false;
 			}
-			bool result = SubmitButton.TryClick();
+			IJavaScriptExecutor js = (IJavaScriptExecutor)SeleniumWebDriver.CurrentDriver;
+			js.ExecuteScript("window.buttonClicked = false;");
+			js.ExecuteScript("arguments[0].addEventListener('click',function() { window.buttonClicked = true; });", SubmitButton);
+			js.ExecuteScript("arguments[0].click();", SubmitButton);
+			System.Threading.Thread.Sleep(500);
+			result = (bool)js.ExecuteScript("return window.buttonClicked;");
 			Report.Info("Exiting iFrame");
-			SeleniumWebDriver.CurrentDriver.SwitchTo().ParentFrame();
+			SeleniumWebDriver.CurrentDriver.ExitIFrame();
 			return result;
 		}
 		public bool Enter_Credit_Card_Details(string card_type, string card_no, string exp_month, string exp_year, string cvv, string cardh_name, string postal_code)
@@ -2202,25 +2210,63 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 	class PaymentMethods_PayPal : SeleniumBaseObject
 	{
-		/*
-		public const string BasePath = "//div[@class='main']";
-		[FindsBy(How = How.XPath, Using = BasePath)]
-
-		protected override IWebElement containerElement { get; set; }
-		*/
 		protected override By ContainerElementLocator => By.XPath("//div[@class='main']");
+		IWebElement Email => this.ContainerElement.FindElement(By.Id("email"), 2);
+		IWebElement Password => this.ContainerElement.FindElement(By.Id("password"), 2);
+		IWebElement NextButton => this.ContainerElement.FindElement(By.Id("btnNext"), 2);
+		IWebElement LoginButton => this.ContainerElement.FindElement(By.Id("btnLogin"), 2);
 
+		public bool EmailExists()
+		{
+			Report.Info($"Attempting to confirm the email input exists.");
+			return this.Email != null;
+		}
+		public bool EmailEnterText(string email)
+		{
+			Report.Info($"Attempting to enter the email.");
+			return this.Email.TryEnterText(email);
+		}
+		public bool PasswordExists()
+		{
+			Report.Info($"Attempting to confirm the password input exists.");
+			return this.Password != null;
+		}
+		public bool PasswordEnterText(string password)
+		{
+			Report.Info($"Attempting to enter the password.");
+			return this.Password.TryEnterText(password);
+		}
+		public bool NextButtonExists()
+		{
+			Report.Info($"Attempting to confirm the Next button exists.");
+			return this.NextButton != null;
+		}
+		public bool NextButtonClick()
+		{
+			Report.Info($"Attempting to click the Next button.");
+			return this.NextButton.TryClick();
+		}
+		public bool LoginButtonExists()
+		{
+			Report.Info($"Attempting to confirm the Login button exists.");
+			return this.LoginButton != null;
+		}
+		public bool LoginButtonClick()
+		{
+			Report.Info($"Attempting to click the Login button.");
+			return this.LoginButton.TryClick();
+		}
 		public string EmailField
 		{
-			get => this.containerElement.FindElement(By.Id("email"), 2).Text;
-			set => this.containerElement.FindElement(By.Id("email"), 2).EnterText(value);
+			get => this.ContainerElement.FindElement(By.Id("email"), 2).Text;
+			set => this.ContainerElement.FindElement(By.Id("email"), 2).EnterText(value);
 		}
 
 
 		public void Click_Next()
 		{
 			IWebElement nextButton =
-				this.containerElement.FindElement(By.Id("btnNext"), 2);
+				this.ContainerElement.FindElement(By.Id("btnNext"), 2);
 
 			if (nextButton != null)
 			{
@@ -2235,10 +2281,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public string PasswordField
 		{
-			get => this.containerElement.FindElement(By.Id("password"), 2).Text;
+			get => this.ContainerElement.FindElement(By.Id("password"), 2).Text;
 			set
 			{
-				IWebElement pw = this.containerElement.FindElement(By.Id("password"), 2);
+				IWebElement pw = this.ContainerElement.FindElement(By.Id("password"), 2);
 				pw.EnterText(value);
 				pw.SendKeys(Keys.Tab);
 
@@ -2248,7 +2294,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public void Click_Login()
 		{
 			IWebElement loginButton =
-				this.containerElement.FindElement(By.Id("btnLogin"), 2);
+				this.ContainerElement.FindElement(By.Id("btnLogin"), 2);
 
 			if (loginButton != null)
 			{
