@@ -56,7 +56,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			else if (condition == "should not")
 			{
 				bool isModalDisplayed = modalDialogPrototype.IsModalDisplayed();
-				Report.IsTrue(isModalDisplayed == false, "Failed: The modal is visible, but it is not expected!", "Success: The modal is not visible as expected!");
+				Report.IsTrue(isModalDisplayed == false, $"Failed: The '{expectedModalTitle}' modal is visible, but it is not expected!", $"Success: The '{expectedModalTitle}' modal is not visible as expected!");
 			}
 		}
 
