@@ -2,8 +2,10 @@ using OpenQA.Selenium;
 using System;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Classes;
+using UL.Automation.WebDriver.BaseClasses;
 using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
@@ -373,6 +375,65 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info("Incorrect Cost Text: " + costText);
 			return false;
 		}
+
+	}
+	class SubscriptionEnrolmentUpgradeSection : SeleniumBaseObject
+	{
+		#region Page Objects
+		private string _sectionName;
+		protected override By ContainerElementLocator => By.XPath($"//div[@class = 'col-sm-4' and div//*[normalize-space(text()) = '{_sectionName}']]");
+		IWebElement SelectElement => this.FindElement(By.XPath(".//select"), 2);
+		IWebElement InputRadioElement => this.FindElement(By.XPath(".//input[@type='radio']"), 2);
+		IWebElement InputRadioLabel => this.FindElement(By.XPath(".//label[@class='subs subs--radio']"), 2);
+
+
+		#endregion
+
+		#region Methods
+		public SubscriptionEnrolmentUpgradeSection(string sectionName)
+		{
+			Report.Info($"Attempt to get '{sectionName}' section");
+			_sectionName = sectionName;
+		}
+		public bool SelectElementExists()
+		{
+			Report.Info($"Attempt to get select element");
+			return this.SelectElement != null;
+		}
+		public bool SelectOption(string option)
+		{
+			Report.Info($"Attempt to select option {option}");	
+			this.SelectElement.Select(option);
+			return this.SelectElement.SelectedOption() == option;
+		}
+		public string SelectedOption()
+		{
+			Report.Info($"Attempt to get selected option");
+			return this.SelectElement.SelectedOption();
+		}
+		public bool RadioLabelExists()
+		{
+			Report.Info($"Attempt to get radio element label");
+			return this.InputRadioLabel != null;
+		}
+		public bool SelectRadioOption()
+		{
+			Report.Info($"Attempt to select radio option");
+			return this.InputRadioLabel.JsClick();	
+		}
+		public bool RadioInputExists()
+		{
+			Report.Info($"Attempt to get radio input element");
+			return this.InputRadioElement != null;
+		}
+
+		public bool InputRadioIsChecked()
+		{
+			Report.Info($"Attempt to verify radio element is checked");
+			return this.InputRadioElement.Checked();
+		}
+
+		#endregion
 
 	}
 }
