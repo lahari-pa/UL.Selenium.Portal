@@ -113,7 +113,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		{
 			string title = "×\r\nAdd New User";
 			string text = "Thank You\r\nThe user has been provided an invitation via email. User must respond to the invitation to finalize the addition to the account.";
-			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeadingAndText(condition, title, text);
+			new Steps_ModalDialogPrototype().ConfirmModalTitleandModalText(condition, title, text);
 		}
 		[RegexStepDefinition(@"In the My Account section, in the 'Add New User' modal window for section '(First Name:|Last Name:|Title:|Company Role:|Email Address:|Confirm Email:|Company Phone:|Extension:|Mobile Phone:|WERCSmart Role:|Country:)' enter value: (.*)")]
 		public void TheInAddNewUserModalEnterValue(string section, string value)

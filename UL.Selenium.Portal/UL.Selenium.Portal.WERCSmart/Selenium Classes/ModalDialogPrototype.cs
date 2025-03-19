@@ -17,6 +17,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		private string Title => this.FindElement(By.ClassName("modal-title"), 1)?.Text;
 		private IWebElement HeaderCloseButton => this.FindElement(By.XPath(".//div[@class='modal-header']//button[@class='close']"), 1);
 		private IWebElement FooterButton(string buttonLabel) => this.FindElement(By.XPath($".//div[@class='modal-footer']//*[text()=\"{buttonLabel}\"]"), 1);
+		private string ModalBody => this.FindElement(By.XPath($".//div[@class='modal-body']"), 1)?.Text;
+
 		#endregion
 
 		#region Class Methods
@@ -67,6 +69,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				Report.Info("Modal Element is not found.");
 				return false;
 			}
+		}
+		public string GetModalBodyText()
+		{
+			Report.Info($"Attempting to get the text in the modal body.");
+			return this.ModalBody;
 		}
 		#endregion
 	}

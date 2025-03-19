@@ -145,7 +145,8 @@ And Product is a Retailer's Private Label or Brand should be showing the error m
 And Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale) should be showing the error messages: This is a required field.
 Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85489
 
-
+#Removed from regression 03/19/25
+@ignore
 @TestCase:133161
 Scenario: [133161] Product Information Screen - Fertilizer - N, P, or K question
 	Given I log in with the account saved in TReVor as: ProductAccount
