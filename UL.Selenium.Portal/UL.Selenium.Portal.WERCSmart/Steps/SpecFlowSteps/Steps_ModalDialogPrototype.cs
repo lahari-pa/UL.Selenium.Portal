@@ -36,6 +36,29 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 				Report.IsTrue(modalDialogPrototype.HeaderCloseButtonClick(), $"Failure, in the displayed modal failed to click the header close button.", $"Success, in the displayed modal clicked the header close button.");
 			}
 		}
+		[RegexStepDefinition(@"Confirm that the Modal (should|should not) be displayed with the Modal Title: (.*) and the Modal Text: (.*)")]
+		public void ConfirmModalTitleandModalText(string condition, string expectedModalTitle, string expectedModalText)
+		{
+			ModalDialogPrototype modalDialogPrototype = new ModalDialogPrototype();
+			if (condition == "should")
+			{
+				if (Report.IsTrue(modalDialogPrototype.IsModalDisplayed(), "Failed: The modal was not displayed on the screen!", "Success: The modal was displayed on the screen!"))
+				{
+					string actualTitle = modalDialogPrototype.TitleGet();
+					string actualText = modalDialogPrototype.GetModalBodyText();
+
+					if (Report.IsTrue(actualTitle == expectedModalTitle, $"Failed: Title is '{actualTitle}', but it should be: '{expectedModalTitle}'", $"Success: Title is showing as expected: {expectedModalTitle}"))
+					{
+						Report.IsTrue(actualText == expectedModalText, $"Failed: The {actualTitle} popup modal did not display the correct message! Expected: '{expectedModalText}' but found: '{actualText}'", $"Success: The {actualTitle} popup modal displayed the correct message as expected: '{expectedModalText}'");
+					}
+				}
+			}
+			else if (condition == "should not")
+			{
+				bool isModalDisplayed = modalDialogPrototype.IsModalDisplayed();
+				Report.IsTrue(isModalDisplayed == false, $"Failed: The '{expectedModalTitle}' modal is visible, but it is not expected!", $"Success: The '{expectedModalTitle}' modal is not visible as expected!");
+			}
+		}
 
 		#region Step Prototypes
 		//[RegexStepDefinition(@"Confirm '(.*)' modal (is|is not) displayed")]
