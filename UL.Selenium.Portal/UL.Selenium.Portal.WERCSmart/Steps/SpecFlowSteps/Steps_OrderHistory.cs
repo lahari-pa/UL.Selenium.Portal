@@ -113,14 +113,47 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 				$"The Order History is not on the expected page:  {expectedPage}. It is on page: {activePage}",
 				$"The Order History is on the expected page:  {expectedPage}");
 		}
-
-		[RegexStepDefinition(@"In the Order History sectionn, Click (next|previous|...)")]
-		public void ClickNextPrev(string navOption)
+		#region Pagiation Button Steps
+		[RegexStepDefinition(@"In the Order History section, confirm (Prev|…|Next) Pagination button (does|does not) exist")]
+		public void OrderHistoryPageConfirmPagiationButtonDoesDoesNotExist(string buttonLabel, string does_doesnot)
 		{
-			Report.IsTrue(new OrderHistoryPage().OrderGridNavigation(navOption),
-				$"Failed to navigate in the user grid with action: {navOption}",
-				$"Successfully navigated in the user grid with action:{navOption}");
+			bool expected = does_doesnot == "does";
+			MyProductsTableFooter myProductTableFooter = new MyProductsTableFooter();
+			Report.IsTrue(expected == myProductTableFooter.PaginationButtonExists(buttonLabel), $"Failure, failed to confirm {buttonLabel} pagination button {does_doesnot} exist.", $"Success, confirmed {buttonLabel} pagination button {does_doesnot} exist.");
 		}
+
+		[RegexStepDefinition(@"In the Order History section, click (Prev|…|Next) Pagination button")]
+		public void OrderHistoryPageClickPagiationButton(string buttonLabel)
+		{
+			MyProductsTableFooter myProductTableFooter = new MyProductsTableFooter();
+			if (Report.IsTrue(myProductTableFooter.PaginationButtonExists(buttonLabel), $"Failure, failed to confirm {buttonLabel} pagination button does exist.", $"Success, confirmed {buttonLabel} pagination button does exist."))
+			{
+				Report.IsTrue(myProductTableFooter.PaginationButtonClick(buttonLabel), $"Failure, failed to click {buttonLabel} pagination button.", $"Success, click {buttonLabel} pagination button currently selected.");
+			}
+		}
+
+		[RegexStepDefinition(@"In the Order History section, confirm (Prev|…|Next) Pagination button (is|is not) disabled")]
+		public void OrderHistoryPageConfirmPagiationButtonIsIsNotDisabled(string buttonLabel, string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			MyProductsTableFooter myProductTableFooter = new MyProductsTableFooter();
+			if (Report.IsTrue(myProductTableFooter.PaginationButtonExists(buttonLabel), $"Failure, failed to confirm {buttonLabel} pagination button does exist.", $"Success, confirmed {buttonLabel} pagination button does exist."))
+			{
+				Report.IsTrue(expected == myProductTableFooter.PaginationButtonDisabled(buttonLabel), $"Failure, failed to confirm {buttonLabel} pagination button {is_isnot} disabled.", $"Success, confirmed {buttonLabel} pagination button {is_isnot} disabled.");
+			}
+		}
+
+		[RegexStepDefinition(@"In the Order History section, confirm (Prev|…|Next) Pagination button (is|is not) currently selected")]
+		public void OrderHistoryConfirmPagiationButtonIsIsNotSelected(string buttonLabel, string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			MyProductsTableFooter myProductTableFooter = new MyProductsTableFooter();
+			if (Report.IsTrue(myProductTableFooter.PaginationButtonExists(buttonLabel), $"Failure, failed to confirm {buttonLabel} pagination button does exist.", $"Success, confirmed {buttonLabel} pagination button does exist."))
+			{
+				Report.IsTrue(expected == myProductTableFooter.PaginationButtonCurrent(buttonLabel), $"Failure, failed to confirm {buttonLabel} pagination button {is_isnot} currently selected.", $"Success, confirmed {buttonLabel} pagination button {is_isnot} currently selected.");
+			}
+		}
+		#endregion
 
 
 	}
