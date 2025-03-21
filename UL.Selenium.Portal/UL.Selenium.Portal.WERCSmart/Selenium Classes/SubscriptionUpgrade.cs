@@ -381,7 +381,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	{
 		#region Page Objects
 		private string _sectionName;
-		protected override By ContainerElementLocator => By.XPath($"//div[@class = 'col-sm-4' and div//*[normalize-space(text()) = '{_sectionName}']]");
+		protected override By ContainerElementLocator => By.XPath($"//div[(@class = 'col-md-3' or @class = 'col-sm-4') and div//*[normalize-space(text()) = '{_sectionName}']]");
 		IWebElement SelectElement => this.FindElement(By.XPath(".//select"), 2);
 		IWebElement InputRadioElement => this.FindElement(By.XPath(".//input[@type='radio']"), 2);
 		IWebElement InputRadioLabel => this.FindElement(By.XPath(".//label[@class='subs subs--radio']"), 2);
@@ -402,7 +402,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		}
 		public bool SelectOption(string option)
 		{
-			Report.Info($"Attempt to select option {option}");	
+			Report.Info($"Attempt to select option {option}");
 			this.SelectElement.Select(option);
 			return this.SelectElement.SelectedOption() == option;
 		}
@@ -419,7 +419,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool SelectRadioOption()
 		{
 			Report.Info($"Attempt to select radio option");
-			return this.InputRadioLabel.JsClick();	
+			return this.InputRadioLabel.JsClick();
 		}
 		public bool RadioInputExists()
 		{
@@ -435,5 +435,43 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		#endregion
 
+	}
+	class SubscriptionEnrolmentModalTableRow : SeleniumBaseObject
+	{
+		#region Page Objects
+		private string _rowCategory;
+		protected override By ContainerElementLocator => By.XPath($"//table//tr[td[normalize-space() = '{_rowCategory}']] | //table//tr[td//strong[text() = '{_rowCategory}']]");
+		IWebElement RowDescription => this.FindElement(By.XPath(".//td[contains(@data-bind, 'Description') or contains(@data-bind, 'ServicePlanName')]"));
+		IWebElement RowPrice => this.FindElement(By.XPath(".//span[contains(@data-bind, 'Price')] | .//strong[contains(@data-bind, 'AnnualCost')]"));
+
+		#endregion
+
+		#region Methods
+		public SubscriptionEnrolmentModalTableRow(string rowCategory)
+		{
+			Report.Info($"Attempt to get table row for '{rowCategory}' option");
+			_rowCategory = rowCategory;
+		}
+		public bool RowDescriptionExists()
+		{
+			Report.Info($"Attempt to find row description");
+			return this.RowDescription != null;
+		}
+		public string GetRowDescription()
+		{
+			Report.Info($"Attempt to get row description");
+			return this.RowDescription.Text;
+		}
+		public bool RowPriceExists()
+		{
+			Report.Info($"Attempt to find row description");
+			return this.RowPrice != null;
+		}
+		public string GetRowPrice()
+		{
+			Report.Info($"Attempt to get row price");
+			return this.RowPrice.Text;
+		}
+		#endregion
 	}
 }
