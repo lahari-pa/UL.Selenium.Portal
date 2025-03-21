@@ -51,7 +51,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		{
 			string title = "Delete Product";
 			string text = "Are you sure you want to remove this item?";
-			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeadingAndText(condition, title, text);
+			new Steps_ModalDialogPrototype().ConfirmModalTitleandModalText(condition, title, text);
 		}
 
 		[RegexStepDefinition(@"In the My Library - My Packaging Type section, in the 'Delete Product' pop up click (Delete|Close) button")]
