@@ -46,6 +46,8 @@ Scenario: [31352] Product Information - navigation
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase31352
 
+#Removed from regression 03/19/25
+@ignore
 @TestCase:133161
 Scenario: [133161] Product Information Screen - Fertilizer - N, P, or K question
 	Given I log in with the account saved in TReVor as: ProductAccount
