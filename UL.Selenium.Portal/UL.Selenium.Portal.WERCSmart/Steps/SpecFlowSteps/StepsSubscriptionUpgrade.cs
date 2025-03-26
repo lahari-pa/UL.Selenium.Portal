@@ -14,7 +14,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 	[Binding, Scope(Tag = "MyAccount:SubscriptionUpgrade")]
 	class StepsSubscriptionUpgrade
 	{
-		[RegexStepDefinition(@"In the Subscription Upgrade section, for (Articles|Enhanced Articles|Formulated Products), select (.*)")]
+		[RegexStepDefinition(@"In the Subscription Upgrade section, for (Articles|Enhanced Articles|Formulated Products|Formulated, Enhanced & Articles), select (.*)")]
 		public void InTheSubscriptionPageSelectOptionForSection(string subscriptionSection, string subscriptionValue)
 		{
 			if (Report.IsTrue(new SubscriptionEnrolmentUpgradeSection(subscriptionSection).SelectElementExists(), $"Failed to find the select element for section '{subscriptionSection}'", $"Successfully found the select element for section '{subscriptionSection}'"))
@@ -22,7 +22,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 				Report.IsTrue(new SubscriptionEnrolmentUpgradeSection(subscriptionSection).SelectOption(subscriptionValue), $"Failed to select the option '{subscriptionValue}' for section '{subscriptionSection}'.", $"Successfully selected the option '{subscriptionValue}' for section '{subscriptionSection}'.");
 			}
 		}
-		[RegexStepDefinition(@"In the Subscription Upgrade section, for (Articles|Enhanced Articles|Formulated Products), confirm selected option (is|is not) (.*)")]
+		[RegexStepDefinition(@"In the Subscription Upgrade section, for (Articles|Enhanced Articles|Formulated Products|Formulated, Enhanced & Articles), confirm selected option (is|is not) (.*)")]
 		public void InTheSubscriptionPageConfirmSelectedOptionForSection(string subscriptionSection, string is_isnot, string subscriptionValue)
 		{
 			bool expected = is_isnot == "is";
@@ -31,7 +31,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 				Report.IsTrue(new SubscriptionEnrolmentUpgradeSection(subscriptionSection).SelectedOption() == subscriptionValue == expected, $"Failed to confirm the selected option {is_isnot} '{subscriptionValue}' for section '{subscriptionSection}'.", $"Successfully confirmed the selected option {is_isnot} '{subscriptionValue}' for section '{subscriptionSection}'.");
 			}
 		}
-		[RegexStepDefinition(@"In the Subscription Upgrade section, select a subscription plan (Limited|Standard|Premium)")]
+		[RegexStepDefinition(@"In the Subscription Upgrade section, select a subscription plan (Limited|Standard|Premium|Single Retailer)")]
 		public void InTheSubscriptionPageSelectSubscriptionPlan(string subscriptionPlan)
 		{
 			if (Report.IsTrue(new SubscriptionEnrolmentUpgradeSection(subscriptionPlan).RadioLabelExists(), $"Failed to find the radio element label for section '{subscriptionPlan}'", $"Successfully found the radio element label for section '{subscriptionPlan}'"))
@@ -46,7 +46,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 				}
 			}
 		}
-		[RegexStepDefinition(@"In the Subscription Upgrade section, verify the selected subscription plan (is|is not) (Limited|Standard|Premium)")]
+		[RegexStepDefinition(@"In the Subscription Upgrade section, verify the selected subscription plan (is|is not) (Limited|Standard|Premium|Single Retailer)")]
 		public void InTheSubscriptionPageSelectedSubscriptionPlan(string is_isnot, string subscriptionPlan)
 		{
 			bool expected = is_isnot == "is";
@@ -116,6 +116,50 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		{
 			Steps_ModalDialogPrototype modalDialogPrototype = new Steps_ModalDialogPrototype();
 			modalDialogPrototype.DisplayedModalClickHeaderCloseButton();
+		}
+		[RegexStepDefinition(@"In the Subscription Upgrade modal, verify for the '(Articles|Enhanced Articles|Formulated|Support Services Plan|Single Retailer)' option the selected value is: (.*)")]
+		public void InTheSubscriptionModalCheckValue(string option, string value)
+		{
+			if (Report.IsTrue(new SubscriptionEnrolmentModalTableRow(option) != null, $"Failed to find the row with chosen option '{option}'", $"Successfully found the row with chosen option '{option}'"))
+			{
+				if (Report.IsTrue(new SubscriptionEnrolmentModalTableRow(option).RowDescriptionExists(), $"Failed to find the selected count for row '{option}'", $"Successfully found the selected count for row '{option}'"))
+				{
+					Report.IsTrue(new SubscriptionEnrolmentModalTableRow(option).GetRowDescription() == value, $"Failed to confirm the selected count for '{option}' is {value}.", $"Successfully confirmed the selected count for '{option}' is {value}.");
+
+				}
+			}
+		}
+		[RegexStepDefinition(@"In the Subscription Upgrade modal, verify for the '(Articles|Enhanced Articles|Formulated)' option the displayed price is: (.*)")]
+		public void InTheSubscriptionModalCheckPriceValue(string option, string value)
+		{
+			if (Report.IsTrue(new SubscriptionEnrolmentModalTableRow(option) != null, $"Failed to find the row with chosen option '{option}'", $"Successfully found the row with chosen option '{option}'"))
+			{
+				if (Report.IsTrue(new SubscriptionEnrolmentModalTableRow(option).RowPriceExists(), $"Failed to find the displayed price for row '{option}'", $"Successfully found the displayed price for row '{option}'"))
+				{
+					Report.IsTrue(new SubscriptionEnrolmentModalTableRow(option).GetRowPrice() == value, $"Failed to confirm the displayed price for '{option}' is {value}.", $"Successfully confirmed the displayed price for '{option}' is {value}.");
+
+				}
+			}
+		}
+		[RegexStepDefinition(@"In the Subscription Upgrade modal, verify the displayed 'Total' price is: (.*)")]
+		public void InTheSubscriptionModalCheckPriceValue(string value)
+		{
+			string option = "Total";
+
+			if (Report.IsTrue(new SubscriptionEnrolmentModalTableRow(option) != null, $"Failed to find the row with Total price", $"Successfully found the row with Total price"))
+			{
+				if (Report.IsTrue(new SubscriptionEnrolmentModalTableRow(option).RowPriceExists(), $"Failed to find the displayed Total price", $"Successfully found the displayed Total price"))
+				{
+					Report.IsTrue(new SubscriptionEnrolmentModalTableRow(option).GetRowPrice() == value, $"Failed to confirm the displayed Total price for is {value}.", $"Successfully confirmed the displayed Total price is {value}.");
+
+				}
+			}
+		}
+		[RegexStepDefinition(@"The Subscription Upgrade section should load")]
+		public void InTheSubscriptionSectionShouldLoad()
+		{
+			Report.IsTrue(new SubscriptionEnrollment_new().WaitForContainerToBeVisible(), "Subscription Upgrade page is not showing",
+			"Subscription Upgrade page is showing.");
 		}
 	}
 }

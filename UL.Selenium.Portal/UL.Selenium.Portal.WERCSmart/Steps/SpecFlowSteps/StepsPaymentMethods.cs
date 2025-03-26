@@ -18,6 +18,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 	[Binding, Scope(Tag = "MyAccount:PaymentMethods")]
 	class StepsPaymentMethods
 	{
+		[RegexStepDefinition(@"The Payment Methods section should load")]
+		public void InPaymentMethodsSectionShouldLoad()
+		{
+			Report.IsTrue(new PaymentMethods_new().WaitForContainerToBeVisible(), "The Payment Methods page is not showing",
+		"The Payment Methods page is showing.");
+		}
 		[RegexStepDefinition(@"In the Payment Methods section, text 'Select your default payment method' (is|is not) displayed")]
 		public void SelectYourDefaultPaymentMethodIsDisplayed(string is_isnot)
 		{

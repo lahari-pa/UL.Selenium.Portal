@@ -347,4 +347,5 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		}
 		#endregion
 	}
+
 }

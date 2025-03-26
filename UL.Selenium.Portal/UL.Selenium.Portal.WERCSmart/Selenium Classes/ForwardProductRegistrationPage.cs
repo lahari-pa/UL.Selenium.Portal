@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using Org.BouncyCastle.Tls.Crypto;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
@@ -12,7 +13,7 @@ using UL.Selenium.Portal.WERCSmart.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
-	class ForwardProductRegistrationPage : SeleniumBaseObject
+	public class ForwardProductRegistrationPage : SeleniumBaseObject
 	{
 		#region Class Objects
 		#region General Objects
@@ -38,6 +39,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		private IWebElement SelectRetailerActionLink(string linkLabel) => this.SelectRetailerActionLinksList.FirstOrDefault(x => x.Text.Equals(linkLabel, System.StringComparison.Ordinal));
 		private List<SelectableRetailer> SelectableRetailersList => [.. this.ContainerElement.FindElements(By.XPath(".//label[.//input[@type='checkbox']]"), 1).Select(x => new SelectableRetailer(x))];
 		public SelectableRetailer SelectableRetailerLabeled(string label) => this.SelectableRetailersList.FirstOrDefault(x => x.Label.Equals(label, System.StringComparison.Ordinal));
+		#endregion
+		#region Select Products and UPCs
+		private IWebElement SelectProductsTable => this.ContainerElement.FindElement(By.XPath(".//table[@class='table']"), 1);
+		private List<string> SelectProductsTableColumnLabelsList => [.. this.SelectProductsTable.FindElements(By.XPath(".//th"), 1).Select(x => x.Text.Trim())];
+		private List<SelectProductsProductRow> SelectProductsProductRowsList => [.. this.SelectProductsTable.FindElements(By.XPath(".//tr[contains(@data-bind,'click')]"), 1).Select(x => new SelectProductsProductRow(x))];
+		public SelectProductsProductRow SelectProductsProductRowByProductName(string productName) => this.SelectProductsProductRowsList.FirstOrDefault(x => x.ProductName.Equals(productName, System.StringComparison.Ordinal));
+		public SelectProductsProductRow SelectProductsProductRowByWPSID(string wpsid) => this.SelectProductsProductRowsList.FirstOrDefault(x => x.WPSID.Equals(wpsid, System.StringComparison.Ordinal));
+		private IWebElement SelectUPCsTable => this.ContainerElement.FindElement(By.XPath(".//table[@class='table table-hover']"), 1);
+		private List<string> SelectUPCsTableColumnLabelList => [.. this.SelectUPCsTable.FindElements(By.XPath(".//th[not(.//input[@class='checkbox'])]"), 1).Select(x => x.Text.Trim())];
+		private IWebElement SelectUPCsTableSelectAllCheckbox => this.SelectUPCsTable.FindElement(By.XPath(".//input[contains(@data-bind,'checkAll')]"), 1);
+
 		#endregion
 		#endregion
 
@@ -216,6 +228,65 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info($"Attempting to confirm '{retailerLabel}' selectable retailer exists.");
 			return this.SelectableRetailerLabeled(retailerLabel) != null;
 		}
+		#region Select Products and UPCs Methods
+		#region Select Products Table Methods
+		public bool SelectProductsProductRowsListExists()
+		{
+			Report.Info($"Attempting to confirm Select Products Product Rows list exists.");
+			return !this.SelectProductsProductRowsList.IsNullOrEmpty();
+		}
+
+		public bool SelectProductsProductRowByProductNameExists(string productName)
+		{
+			Report.Info($"Attempting to confirm product row with '{productName}' product name exists.");
+			return this.SelectProductsProductRowByProductName(productName) != null;
+		}
+
+		public bool SelectProductsProductRowByProductNameClick(string productName)
+		{
+			Report.Info($"Attempting to click product row with '{productName}' product name.");
+			return this.SelectProductsProductRowByProductName(productName).Click();
+		}
+
+		public bool SelectProductsProductRowByWPSIDExists(string wpsid)
+		{
+			Report.Info($"Attempting to confirm product row with '{wpsid}' wpsid exists.");
+			return this.SelectProductsProductRowByWPSID(wpsid) != null;
+		}
+
+		public bool SelectProductsProductRowByWPSIDClick(string wpsid)
+		{
+			Report.Info($"Attempting to click product row with '{wpsid}' wpsid.");
+			return this.SelectProductsProductRowByWPSID(wpsid).Click();
+		}
+		#endregion
+
+		#region Select UPCs Table Methods
+		public bool SelectUPCsTableDisplayed()
+		{
+			Report.Info($"Attempting to confirm Select UPCs Table is displayed.");
+			return this.SelectUPCsTable.Displayed;
+		}
+
+		public bool SelectUPCsTableSelectAllCheckboxExists()
+		{
+			Report.Info($"Attempting to confirm Select UPCs Table Select All checkbox exists.");
+			return this.SelectUPCsTableSelectAllCheckbox != null;
+		}
+
+		public bool SelectUPCsTableSelectAllCheckboxClick()
+		{
+			Report.Info($"Attempting to click Select UPCs Table Select All checkbox.");
+			return this.SelectUPCsTableSelectAllCheckbox.TryClick();
+		}
+
+		public bool SelectUPCsTableSelectAllCheckboxChecked()
+		{
+			Report.Info($"Attempting to confirm Select UPCs Table Select All checkbox is checked.");
+			return this.SelectUPCsTableSelectAllCheckbox.Checked();
+		}
+		#endregion
+		#endregion
 	}
 
 	public class ProductUpcSearchResult(IWebElement containerElement)
@@ -337,6 +408,121 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info($"Attempting to confirm '{this.Label}' Selectable Retailer is in Recent Section.");
 			return this.ContainerElement.FindElement(By.XPath("./ancestor-or-self::div[@class='most-recent']"), 1) != null;
+		}
+		#endregion
+	}
+
+	public class SelectProductsRetailerRow(IWebElement containerElement)
+	{
+		#region Class Objects
+		private IWebElement ContainerElement { get; set; } = containerElement;
+		public string Retailer => this.ContainerElement.FindElement(By.XPath(".//span[contains(@data-bind,'identifier')]"), 1)?.GetAttribute("title");
+		public string RetailerLabel => this.ContainerElement.FindElement(By.XPath(".//span[contains(@data-bind,'identifier')]"), 1)?.Text;
+		public string PrivateLabel => this.ContainerElement.FindElement(By.XPath(".//div[contains(@data-bind,'PrivateLabel')]//p"), 1)?.Text;
+		public string SelectVendor => this.ContainerElement.FindElement(By.XPath(".//div[contains(@data-bind,'vendor')]//p"),1)?.Text; //This may need to be updated for vendor values
+		private IWebElement RemoveButton => this.ContainerElement.FindElement(By.XPath(".//a[@title='Remove']"), 1);
+		#endregion
+
+		#region Class Methods
+		public bool RemoveButtonExists()
+		{
+			Report.Info($"Attempting to confirm '{this.Retailer}' retailer row remove button exists.");
+			return this.RemoveButton != null;
+		}
+
+		public bool RemoveButtonDisplayed()
+		{
+			Report.Info($"Attempting to confirm '{this.Retailer}' retailer row remove button is displayed.");
+			return this.RemoveButton.Displayed;
+		}
+
+		public bool RemoveButtonClick()
+		{
+			Report.Info($"Attempting to click '{this.Retailer}' retailer row remove button.");
+			return this.RemoveButton.TryClick();
+		}
+		#endregion
+	}
+
+	public class SelectProductsProductRow(IWebElement containerElement)
+	{
+		#region Class Objects
+		private IWebElement ContainerElement { get; set; } = containerElement;
+		public string WPSID => this.ContainerElement.FindElement(By.XPath(".//label[contains(@data-bind,'wpsid')]"), 1)?.Text;
+		public string ProductName => this.ContainerElement.FindElement(By.XPath(".//p[contains(@data-bind,'product.name')]"), 1)?.Text;
+		private List<SelectProductsRetailerRow> SelectProductsRetailerRowsList => [.. this.ContainerElement.FindElements(By.XPath(".//div[contains(@class,'fwd-retailer-row')]"), 1).Select(x => new SelectProductsRetailerRow(x))];
+		public SelectProductsRetailerRow SelectProductsRetailerRowByRetailer(string retailer) => this.SelectProductsRetailerRowsList.FirstOrDefault(x => x.Retailer.Equals(retailer, System.StringComparison.Ordinal));
+		public SelectProductsRetailerRow SelectProductsRetailerRowByRetailerLabel(string retailerLabel) => this.SelectProductsRetailerRowsList.FirstOrDefault(x => x.RetailerLabel.Equals(retailerLabel, System.StringComparison.Ordinal));
+		private IWebElement ActionsLink(string linkLabel) => this.ContainerElement.FindElement(By.XPath($".//a[text() ='{linkLabel}']"), 1);
+		#endregion
+
+		#region Class Methods
+		public bool Click()
+		{
+			Report.Info($"Attempting to click '{this.ProductName}' Product Row.");
+			return this.ContainerElement.TryClick();
+		}
+
+		public bool SelectProductsRetailerRowsListExists()
+		{
+			Report.Info($"Attempting to confirm '{this.ProductName}' Product Row Retailer Rows list exists.");
+			return !this.SelectProductsRetailerRowsList.IsNullOrEmpty();
+		}
+
+		public List<string> SelectProductsRetailerRowsListGetRetailers()
+		{
+			Report.Info($"Attempting get '{this.ProductName}' Product Row Retailers List.");
+			List<string> retailers = [.. this.SelectProductsRetailerRowsList.Select(x => x.Retailer)];
+			return retailers;
+		}
+
+		public List<string> SelectProductsRetailerRowsListGetRetailerLabels()
+		{
+			Report.Info($"Attempting get '{this.ProductName}' Product Row Retailer Labels List.");
+			List<string> retailerLabels = [.. this.SelectProductsRetailerRowsList.Select(x => x.RetailerLabel)];
+			return retailerLabels;
+		}
+
+		public bool ActionsLinkExists(string linkLabel)
+		{
+			Report.Info($"Attempting to confirm '{this.ProductName}' Product Row '{linkLabel}' Actions Link exists.");
+			return this.ActionsLink(linkLabel) != null;
+		}
+
+		public bool ActionsLinkClick(string linkLabel)
+		{
+			Report.Info($"Attempting to click '{this.ProductName}' Product Row '{linkLabel}' Actions Link.");
+			return this.ActionsLink(linkLabel).TryClick();
+		}
+		#endregion
+	}
+
+	public class SelectUPCsUPCRow(IWebElement containerElement)
+	{
+		#region Class Objects
+		private IWebElement ContainerElement { get; set; } = containerElement;
+		public string ProductName => this.ContainerElement.FindElement(By.XPath(".//span[contains(@data-bind,'name.field')]"), 1)?.Text.Trim();
+		public string UPC => this.ContainerElement.FindElement(By.XPath(".//span[contains(@data-bind,'upcNumber.field')]"), 1)?.Text.Trim();
+		public string ContainerType => this.ContainerElement.FindElement(By.XPath(".//span[contains(@data-bind,'typeToString()')]"), 1)?.Text.Trim();
+		public string Size => this.ContainerElement.FindElement(By.XPath(".//span[contains(@data-bind,'size.field')]"), 1)?.Text.Trim();
+		public string InternalSKU => this.ContainerElement.FindElement(By.XPath(".//span[contains(@data-bind,'packListingToString()')]"), 1)?.Text.Trim();
+		public List<string> CertificationsList => [.. this.ContainerElement.FindElements(By.XPath(".//div[@data-bind='with: upc']//div[text()]"), 1).Select(x => x?.Text)];
+		public string Transportation => this.ContainerElement.FindElement(By.XPath(".//span[@data-bind='text: TextLine']"), 1)?.Text;
+		public List<string> DestinationRetailersList => [.. this.ContainerElement.FindElements(By.XPath(".//span[contains(@data-bind,'text: identifier')]"), 1).Select(x => x?.Text)];
+		private IWebElement ActionsLink(string linkLabel) => this.ContainerElement.FindElement(By.XPath($"//a[text()='{linkLabel}']"), 1);
+		#endregion
+
+		#region Class Methods
+		public bool ActionsLinkExists(string linkLabel)
+		{
+			Report.Info($"Attempting to confirm '{this.ProductName}' UPC row '{linkLabel}' Actions link exists.");
+			return this.ActionsLink(linkLabel) != null;
+		}
+
+		public bool ActionsLinkClick(string linkLabel)
+		{
+			Report.Info($"Attempting to click '{this.ProductName}' UPC row '{linkLabel}' Actions link.");
+			return this.ActionsLink(linkLabel).TryClick();
 		}
 		#endregion
 	}
