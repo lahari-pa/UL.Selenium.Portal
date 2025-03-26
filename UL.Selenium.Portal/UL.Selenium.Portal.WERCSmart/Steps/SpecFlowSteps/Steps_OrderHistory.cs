@@ -185,7 +185,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 					Delay.Seconds(1);
 					count++;
 				}
-				Report.Failure("Unable to find file: '" + file + "' in the download directory after 120 seconds");
+				Report.Failure($"Unable to find file: '{file}' in the download directory after 120 seconds");
 				Report.Info("Closing the Report Download popup");
 				Report.IsTrue(selReportDownload.ClickClose(),
 					"Failed to close the Report Download popup",
