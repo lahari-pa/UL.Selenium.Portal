@@ -257,4 +257,60 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 	}
+	class MyProductTableRow : SeleniumBaseObject
+	{
+		public string _productId;
+
+		protected override By ContainerElementLocator => By.XPath($"//div[h3[text() = 'My Products']]//tr[td[text()='{_productId}']]");
+		IWebElement ProductName => this.ContainerElement.FindElement(By.XPath(".//td[contains(@data-bind, 'Name')]"));
+
+		public MyProductTableRow(string productId)
+		{
+			_productId = productId;
+		}
+		public bool MyProductTableRowExists()
+		{
+			return this.ContainerElement != null;
+		}
+		public bool ProductNameExists()
+		{
+			Report.Info($"Attempt to find Product Name");
+			return this.ProductName != null;
+		}
+		public string GetProductName()
+		{
+			Report.Info($"Attempt to get Product Name");
+			return this.ProductName.Text;
+		}
+
+	}
+	class DocumentsTableRow : SeleniumBaseObject
+	{
+		public string _subFormat;
+		public string _language;
+
+		protected override By ContainerElementLocator => By.XPath($"//div[h3[contains(text(), 'Documents')]]//tr[td[text()='{_subFormat}'] and td[text()='{_language}']]");
+		IWebElement ViewLink => this.ContainerElement.FindElement(By.XPath(".//a[text()='View']"));
+
+		public DocumentsTableRow(string subFormat, string language)
+		{
+			_subFormat = subFormat;
+			_language = language;
+		}
+		public bool DocumentsTableRowExists()
+		{
+			return this.ContainerElement != null;
+		}
+		public bool ViewLinkExists()
+		{
+			Report.Info($"Attempt to find the 'View' link");
+			return this.ViewLink != null;
+		}
+		public bool ViewLinkClick()
+		{
+			Report.Info($"Attempt to click the 'View' link");
+			return this.ViewLink.TryClick();
+		}
+
+	}
 }

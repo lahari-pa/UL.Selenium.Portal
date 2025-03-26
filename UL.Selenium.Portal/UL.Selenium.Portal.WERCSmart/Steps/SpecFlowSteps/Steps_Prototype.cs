@@ -480,11 +480,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			var newProductpage = new NewProduct();
 			if (condition == "should")
 			{
-				Report.IsTrue(newProductpage.TableExists(tableName), $"Failed to confirm '{tableName}' table exists", $"Successsfully confirmed '{tableName}' table exists");
+				Report.IsTrue(newProductpage.TableExists(tableName), $"Failed to confirm '{tableName}' table exists", $"Successfully confirmed '{tableName}' table exists");
 			}
 			else
 			{
-				Report.IsFalse(newProductpage.TableExists(tableName), $"Failed to confirm '{tableName}' table does not exist", $"Successsfully confirmed '{tableName}' table does not exist");
+				Report.IsFalse(newProductpage.TableExists(tableName), $"Failed to confirm '{tableName}' table does not exist", $"Successfully confirmed '{tableName}' table does not exist");
 			}
 		}
 		[RegexStepDefinition(@"I should see the following Voc percent for each state:")]
