@@ -2808,6 +2808,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			Report.Screenshot();
 			return el.Displayed;
 		}
+		public bool CheckButtonExistsInSectionandLabel(string section, string label, string button)
+		{
+			string path = $".//div[contains(@class, 'form-group has-success') and .//label[text()=\"{section}\"]]//span[contains(text(), \"{label}\")]//..//div[@class='ws-dropzone-container']//a[@data-bind[contains(.,\"{button}\")]]";
+			IWebElement el = this.ContainerElement.FindElement(By.XPath(path), 2);
+			Report.Info($"Checking button {button} exists for section: {section}");
+			Report.Screenshot();
+			return el.Displayed;
+		}
 		public bool ClickButton(string section, string button)
 		{
 			string path = $".//span[contains(text(),\"{section}\")]//..//a[@data-bind[contains(.,\"{button}\")]] | .//span[contains(text(),\"{section}\")]//..//a[contains(text(), \"{button}\")]";
@@ -2821,10 +2829,23 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			}
 			return el.TryClick();
 		}
-
+		public bool ClickButtonForSectionandLabel(string section,string label, string button)
+		{
+			string path = $".//div[contains(@class, 'form-group has-success') and .//label[text()=\"{section}\"]]//span[contains(text(), \"{label}\")]//..//div[@class='ws-dropzone-container']//a[@data-bind[contains(.,\"{button}\")]]";
+			IWebElement el = this.ContainerElement.FindElement(By.XPath(path), 2);
+			Report.Info($"Clicking {button} for document type: {section}");
+			Report.Screenshot();
+			if (el == null)
+			{
+				Report.Error($"The {button} button was not found!! - Looking for xpath: {path}");
+				return false;
+			}
+			return el.TryClick();
+		}
 		public bool UploadFileForSection(string section, string pdfFilePath)
 		{
 			string path = $"//span[contains(text(),\"{section}\")]//..//div[@class='ws-dropzone-container invalid']//a";
+
 			IWebElement el = this.ContainerElement.FindElement(By.XPath(path), 2);
 			Report.Info("Clicking Browse for document type: " + section);
 			Report.Screenshot();
@@ -2875,7 +2896,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		}
 
 		//Use this when there are multiple instances of the label type on the documents page. EG. Product label (Generic Private Label and Volatile Organic Compounds)
-		public bool UploadFileForSectionAndType(string label, string section, string pdfFilePath)
+		public bool UploadFileForSectionAndType(string section, string label, string pdfFilePath)
 		{
 			//var el = ContainerElement.FindElement(
 			//By.XPath(

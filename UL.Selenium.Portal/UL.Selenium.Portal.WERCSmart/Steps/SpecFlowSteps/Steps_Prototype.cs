@@ -343,12 +343,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			pdfFile = EmbeddedResourceHelpers.ExtractToFile(pdfFile, out string extractFile) ? extractFile : pdfFile;
 			Report.IsTrue(new NewProduct().UploadFileForSection(section, pdfFile), $"Failed to upload PDF file: {pdfFile} for section {section}", $"Successfully uploaded PDF file: {pdfFile} for {section}");
 		}
+		[RegexStepDefinition(@"I click the browse button for document upload section: (.*) and for sub label: (.*) and upload PDF: (.*)")]
+		public void UploadPDFFileSectionAndLabel(string section, string label, string pdfFile)
+		{
+			pdfFile = EmbeddedResourceHelpers.ExtractToFile(pdfFile, out string extractFile) ? extractFile : pdfFile;
+			Report.IsTrue(new NewProduct().UploadFileForSectionAndType(section, label, pdfFile), $"Failed to upload PDF file: {pdfFile}", $"Successfully uploaded PDF file: {pdfFile}");
+
+		}
 		//[RegexStepDefinition(@"I click the button (.*) for section: (.*)")]
 		public void ClickButtonForSection(string section, string button)
 		{
 			Report.IsTrue(new NewProduct().ClickButton(section, button), $"Failed to click button {button} for section {section}", $"Successfully clicked {button} for {section}");
 		}
-
+		public void ClickButtonForSectionandLabel(string section,string label, string button)
+		{
+			Report.IsTrue(new NewProduct().ClickButtonForSectionandLabel(section,label, button), $"Failed to click button {button} for section {section}", $"Successfully clicked {button} for {section}");
+		}
 		//[RegexStepDefinition(@"I check the button (.*) (should|should not) exists for section: (.*)")]
 		public void CheckButtonExistsForSection(string section, string condition, string button)
 		{
@@ -359,6 +369,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 			else
 			{
 				Report.IsFalse(new NewProduct().CheckButtonExistsInSection(section, button), $"Failed to confirm button {button} does not exist for section {section}", $"Successfully confirmed {button} does not exist for {section}");
+			}
+		}
+		public void CheckButtonExistsForSectionandLabel(string section, string label, string condition, string button)
+		{
+			if (condition == "should")
+			{
+				Report.IsTrue(new NewProduct().CheckButtonExistsInSectionandLabel(section,label, button), $"Failed to confirm button {button} exists for section {section}", $"Successfully confirmed {button} exists for {section}");
+			}
+			else
+			{
+				Report.IsFalse(new NewProduct().CheckButtonExistsInSectionandLabel(section, label, button), $"Failed to confirm button {button} does not exist for section {section}", $"Successfully confirmed {button} does not exist for {section}");
 			}
 		}
 		[RegexStepDefinition(@"In the popup with the following title: (.*) I click the (.*) button")]

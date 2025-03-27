@@ -1310,8 +1310,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			GlobalSteps globalSteps = new GlobalSteps();
 			Report.StartSubStep("Then The home screen should load");
 			globalSteps.ThenTheHomeScreenShouldLoad();
-			Report.StartSubStep("Then On the My Products page, in Product ID/ Name text search input, enter text: Product.Name");
-			this.MyProductsPageProductIDNameTextSearchInputEnterText(Product.Name);
+			Report.StartSubStep("Then On the My Products page, in Product ID/ Name text search input, enter text: Product.Id");
+			this.MyProductsPageProductIDNameTextSearchInputEnterText(Product.Id);
 			Report.StartSubStep("On the My Products page, click Product ID/Name text search button");
 			this.MyProductsPageClickProductIDNameTextSearchButton();
 			Report.StartSubStep("Then On the My Products page, confirm the My Products table does exist");

@@ -11,7 +11,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		[RegexStepDefinition(@"In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: (Drug Facts Panel|Supplement Facts Panel|Nutrition Facts Panel|None of the Above)")]
 		public void SelectProductLabel(string option)
 		{
-			new StepsNewProduct().GivenInTheRegulatoryInforamtionTabISelectProductLableAs(option);
+			string section = "Refer to your product's labeling to determine if any of the following are included in the label.  Indicate all appropriate items that are displayed on the label."; 
+			new Steps_Prototype().SetTheSectionOptionTo(section,option);
 		}
 
 		[RegexStepDefinition(@"In the Product Labeling Section, the following link: (OTC Drug Facts Label \(may include Active Ingredient\)|Nutritional and Supplement Labels|Dietary Supplements Label) (should|should not) be displayed")]
