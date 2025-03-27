@@ -248,48 +248,6 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 		| Sears/K-Mart        |
 		| Wal-Mart/SAM'S CLUB |
 
-#Removed from regression 2024/03
-@ignore
-@TestCase:96708
-Scenario: [96708] Beverage RU - No Walmart
-	Given I generate a random UPC number and save as: UPC96708
-	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	Given I log in with the account saved in TReVor as: ProductAccount
-	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	# And I Enter "Juice and Juice Drinks" in Type of Product smart search field
-	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Juice and Juice Drinks
-	Then I save the product information as: TestCase96708
-	# I Record the entry you select for Water Solubility
-	#: WAS NOT USED
-	Given I call Shared Step 69687 (Product Information - US, No(PL))
-	#And I call Shared Step 70675 (Physical and Chemical Properties - Liquid Only - With Water Solubility - Enter all data - Continue)
-	Given I should see the Physical and Chemical Properties Page
-	Then In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
-	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
-	Then In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 1.0
-	Then In the Physical and Chemical Properties Section, for section: 'pH' enter text: 10.2
-	Then In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: 120
-	Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: 55
-	Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Closed cup method
-	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
-	Then in the Physical and Chemical Properties page, I click Continue
-
-	# I think this was the step that was needed.
-	#And I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-	Given I should see the Inventory Status, Prop 65 (US) Page
-	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
-	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
-	Then in the Inventory Status, Prop 65 (US) page I click Continue
-
-	And I call Shared Step 49818 (Beverage Regulatory Details)
-	# I Confirm on the Select Retailer popup that Walmart is not available.
-	# I Close popup
-	Given I click 'Add Retailers' in the Retailers page
-	Then I check that Walmart and all of its affiliates are not available
-	Then I navigate to the home page
-	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase96708
-	# Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase96708
-
 @TestCase:136057
 Scenario: [136057] Select Retailers - Removing Retailer(s) Selected
 	#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)

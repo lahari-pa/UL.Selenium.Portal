@@ -48,7 +48,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		{
 			string modalTitle = "×\r\nAre you sure you wish to cancel?";
 			string text = "If you cancel, any changes will be lost. Continue?";
-			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeadingAndText(condition, modalTitle, text);
+			new Steps_ModalDialogPrototype().ConfirmModalTitleandModalText(condition, modalTitle, text);
 		}
 		[RegexStepDefinition(@"In the Company Information section, in the 'Are you sure you wish to cancel\?' modal click the button (Yes|No)")]
 		public void TheInUserDetailsModalClickButton(string button)
@@ -147,7 +147,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		{
 			string modalTitle = "×\r\nClear Stewardship Data?";
 			string text = "You have indicated that you have no stewardship numbers. Any information previously entered in the stewardship table will be cleared. Is this correct? Do you wish to proceed?";
-			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeadingAndText(condition, modalTitle, text);
+			new Steps_ModalDialogPrototype().ConfirmModalTitleandModalText(condition, modalTitle, text);
 		}
 		[RegexStepDefinition(@"In the Company Information section, in the 'Clear Stewardship Data\?' modal click the button (Yes|No)")]
 		public void ClearStewardshipDataModalClickButton(string button)

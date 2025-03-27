@@ -259,26 +259,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		{
 			string title = "Warning";
 			string text = "The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of the product in Pinellas County, Florida (Restricted). This is informational only and does not restrict your registration to the Retailer.";
-			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeadingAndText(condition, title, text);
+			new Steps_ModalDialogPrototype().ConfirmModalTitleandModalText(condition, title, text);
 		}
 		[RegexStepDefinition(@"In the Product Information Section, a warning pop-up (should|should not) be displayed with text: 'The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed \(June 1 through September 30\). This is informational only and will not restrict your registration to the Retailer.'")]
 		public void WarningPopupSlowReleaseIsDisplayedInProductInformation(string condition)
 		{
 			string title = "Warning";
 			string text = "The ratio of Slow-Release Agent to Nitrogen will prohibit sale and use of this product during Pinellas County regional watershed (June 1 through September 30). This is informational only and will not restrict your registration to the Retailer.";
-			new Steps_Prototype().ThenIConfirmThePopUpShowsTheHeadingAndText(condition, title, text);
+			new Steps_ModalDialogPrototype().ConfirmModalTitleandModalText(condition, title, text);
 		}
 		[RegexStepDefinition("In the Product Information Section, in the Warning modal window click the 'Ok' button")]
 		public void ThenInTheProductInfoSectionInWarningModalWindowClickButton()
 		{
-			string title = "Warning";
 			string button = "Ok";
-			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(title, button);
+			new Steps_ModalDialogPrototype().DisplayedModalClickFooterButton(button);
 		}
 		[RegexStepDefinition("In the Product Information Section, in the Warning modal window click the 'X' button")]
 		public void ThenInTheProductInfoSectionInWarningModalWindowClickButtonX()
 		{
-			Report.IsTrue(new ModalDialog().Click_Closex(), "Failed to click close button", "Clicked close button");
+			new Steps_ModalDialogPrototype().DisplayedModalClickHeaderCloseButton();
 		}
 		[RegexStepDefinition(@"In the Product Information Section, enter the value in section: 'Enter NDC #': (.*)")]
 		public void EnterNDCNumber(string option)

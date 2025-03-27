@@ -283,10 +283,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		#region Class Objects
 		protected override By ContainerElementLocator => By.XPath("//div[contains(@class,'panel-footer')]");
 		private IWebElement ItemsOnPageSelect => this.FindElement(By.XPath(".//select[contains(@data-bind,'ItemsOnPage')]"), 1);
-		private List<IWebElement> ItemsOnPageSelectOptionsList => this.ItemsOnPageSelect.FindElements(By.XPath(".//option"), 1).ToList();
-		private IWebElement ItemsOnPageSelectOption(string optionLabel) => this.ItemsOnPageSelectOptionsList.Where(x => x.Text.Trim() == optionLabel).FirstOrDefault();
-		private List<IWebElement> PaginationButtonsList => this.FindElements(By.XPath(".//ul[@id='pagingControl']//*[text()]"), 1).ToList();
-		private IWebElement PaginationButton(string buttonLabel) => this.PaginationButtonsList.Where(x => x.Text == buttonLabel).FirstOrDefault();
+		private List<IWebElement> ItemsOnPageSelectOptionsList => [..this.ItemsOnPageSelect.FindElements(By.XPath(".//option"), 1)];
+		private IWebElement ItemsOnPageSelectOption(string optionLabel) => this.ItemsOnPageSelectOptionsList.FirstOrDefault(x => x.Text.Trim().Equals(optionLabel, System.StringComparison.Ordinal));
+		private List<IWebElement> PaginationButtonsList => [..this.FindElements(By.XPath(".//ul[@id='pagingControl']//*[text()]"), 1)];
+		private IWebElement PaginationButton(string buttonLabel) => this.PaginationButtonsList.FirstOrDefault(x => x.Text.Trim().Equals(buttonLabel, System.StringComparison.Ordinal));
 		#endregion
 
 		#region Class Methods
