@@ -8,7 +8,7 @@ using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 {
 	[Binding, Scope(Tag = "ModalDialogPrototype")]
-	internal class Steps_ModalDialogPrototype
+	public class Steps_ModalDialogPrototype
 	{
 		[RegexStepDefinition(@"Confirm modal (is|is not) displayed")]
 		public void ConfirmModalIsIsNotDisplayed(string is_isnot)
