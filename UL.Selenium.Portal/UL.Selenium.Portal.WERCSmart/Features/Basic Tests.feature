@@ -7,6 +7,7 @@
 @wercsmart
 @ProductGrid
 @run_DevelopmentBasicTests
+@MyProductsPage
 
 Feature: Basic Tests
 
@@ -25,8 +26,14 @@ Given I collapse the Navigation Menu
 
 Then the Navigation Menu should be collapsed
 
-And there should be products available in the Products Grid
+And On the My Products page, confirm the My Products table does exist
 
-Given I search for the first product in the table
+And On the My Products page, uncheck the Show Archived Retailers checkbox
 
-Then I should see the product returned in the search results
+And On the My Products page, confirm the Show Archived Retailers checkbox is not checked
+
+Given On the My Products page, in Product ID/ Name text search input, enter text: Bleach
+
+Then On the My Products page, click Product ID/Name text search button
+
+Then On the My Products page in the My Products table, confirm row with 'Bleach' as Product Name does exist
