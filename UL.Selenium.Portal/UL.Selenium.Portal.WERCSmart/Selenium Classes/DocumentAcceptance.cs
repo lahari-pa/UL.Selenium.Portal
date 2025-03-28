@@ -14,17 +14,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class DocumentAcceptance : SeleniumBaseObject
 	{
-
 		protected override By ContainerElementLocator => By.XPath("//div[@id='documentAcceptanceContainer']");
+		private List<MyProductTableRow> MyProductsTableRows => this.FindElements(By.XPath(".//div[h3[text() = 'My Products']]//tbody//tr"), 1).Select(x => new MyProductTableRow(x)).ToList();
+		public MyProductTableRow MyProductsTableRowSearchById(string productId) => this.MyProductsTableRows.FirstOrDefault(x => x.WPSID.Equals(productId, System.StringComparison.Ordinal));
+		private List<DocumentsTableRow> DocumentsTableRows => this.FindElements(By.XPath(".//div[h3[contains(text(), 'Documents')]]//tbody//tr"), 1).Select(x => new DocumentsTableRow(x)).ToList();
+		public DocumentsTableRow DocumentsTableRowSearchBySubFormatAndLanguage(string subFormat, string language) => this.DocumentsTableRows.FirstOrDefault(x => x.SubFormat.Equals(subFormat, System.StringComparison.Ordinal) && x.Language.Equals(language, System.StringComparison.Ordinal));
+		public bool MyProductsTableRowSearchByIdExists(string productId)
+		{
+			Report.Info($"Attempting to confirm the row with Id {productId} exists");
+			return this.MyProductsTableRowSearchById(productId) != null;
+		}
+		public bool DocumentsTableRowSearchBySubFormatAndLanguageExists(string subFormat, string language)
+		{
+			Report.Info($"Attempting to confirm the row with the subformat '{subFormat}' and the language '{language}' exists");
+			return this.DocumentsTableRowSearchBySubFormatAndLanguage(subFormat, language) != null;
+		}
 
-		public bool ClickApproveSDS()
-		{
-			return false;
-		}
-		public bool ClickEditSDS()
-		{
-			return false;
-		}
 		public bool ProductGridNavigation(string navOption)
 		{
 			IWebElement navEl;
@@ -256,5 +261,62 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 				return false;
 			}
 		}
+	}
+
+	public class MyProductTableRow(IWebElement containerElement)
+	{
+		#region Class Objects
+		private IWebElement ContainerElement { get; set; } = containerElement;
+		public string WPSID => this.ContainerElement.FindElement(By.XPath(".//td[contains(@data-bind, 'ProductID')]"), 1)?.Text;
+		private IWebElement ProductName => this.ContainerElement.FindElement(By.XPath(".//td[contains(@data-bind, 'Name')]"));
+		#endregion
+
+		#region Methods
+
+		public bool MyProductTableRowExists()
+		{
+			return this.ContainerElement != null;
+		}
+		public bool ProductNameExists()
+		{
+			Report.Info($"Attempt to find Product Name");
+			return this.ProductName != null;
+		}
+		public string GetProductName()
+		{
+			Report.Info($"Attempt to get Product Name");
+			return this.ProductName.Text;
+		}
+		#endregion
+
+	}
+	public class DocumentsTableRow(IWebElement containerElement)
+	{
+		#region Class Objects
+		private IWebElement ContainerElement { get; set; } = containerElement;
+		public string SubFormat => this.ContainerElement.FindElement(By.XPath(".//td[contains(@data-bind, 'Subformat')]"), 1)?.Text;
+		public string Language => this.ContainerElement.FindElement(By.XPath(".//td[contains(@data-bind, 'Language')]"), 1)?.Text;
+		private IWebElement ViewLink => this.ContainerElement.FindElement(By.XPath(".//a[text()='View']"));
+		#endregion
+
+		#region Methods
+
+		public bool DocumentsTableRowExists()
+		{
+			return this.ContainerElement != null;
+		}
+		public bool ViewLinkExists()
+		{
+			Report.Info($"Attempt to find the 'View' link");
+			return this.ViewLink != null;
+		}
+		public bool ViewLinkClick()
+		{
+			Report.Info($"Attempt to click the 'View' link");
+			return this.ViewLink.TryClick();
+		}
+		#endregion
+
+
 	}
 }

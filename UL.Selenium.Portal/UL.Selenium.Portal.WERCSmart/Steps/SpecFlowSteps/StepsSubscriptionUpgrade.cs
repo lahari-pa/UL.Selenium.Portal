@@ -28,7 +28,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			bool expected = is_isnot == "is";
 			if (Report.IsTrue(new SubscriptionEnrolmentUpgradeSection(subscriptionSection).SelectElementExists(), $"Failed to find the select element for section '{subscriptionSection}'", $"Successfully found the select element for section '{subscriptionSection}'"))
 			{
-				Report.IsTrue(new SubscriptionEnrolmentUpgradeSection(subscriptionSection).SelectedOption() == subscriptionValue == expected, $"Failed to confirm the selected option {(expected ? "is not" : "is")} '{subscriptionValue}' for section '{subscriptionSection}'.", $"Successfully confirmed the selected option {is_isnot} '{subscriptionValue}' for section '{subscriptionSection}'.");
+				Report.IsTrue(new SubscriptionEnrolmentUpgradeSection(subscriptionSection).SelectedOption() == subscriptionValue == expected, $"Failed to confirm the selected option {is_isnot} '{subscriptionValue}' for section '{subscriptionSection}'.", $"Successfully confirmed the selected option {is_isnot} '{subscriptionValue}' for section '{subscriptionSection}'.");
 			}
 		}
 		[RegexStepDefinition(@"In the Subscription Upgrade section, select a subscription plan (Limited|Standard|Premium|Single Retailer)")]
@@ -52,7 +52,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			bool expected = is_isnot == "is";
 			if (Report.IsTrue(new SubscriptionEnrolmentUpgradeSection(subscriptionPlan).RadioInputExists(), $"Failed to find the radio element input for section '{subscriptionPlan}'", $"Successfully found the radio element input for section '{subscriptionPlan}'"))
 			{
-				Report.IsTrue(new SubscriptionEnrolmentUpgradeSection(subscriptionPlan).InputRadioIsChecked() == expected, $"Failed to confirm the selected subscription plan {(expected ? "is not" : "is")} '{subscriptionPlan}'.", $"Successfully confirmed the selected subscription plan {is_isnot} '{subscriptionPlan}'.");
+				Report.IsTrue(new SubscriptionEnrolmentUpgradeSection(subscriptionPlan).InputRadioIsChecked() == expected, $"Failed to confirm the selected subscription plan {is_isnot} '{subscriptionPlan}'.", $"Successfully confirmed the selected subscription plan {is_isnot} '{subscriptionPlan}'.");
 
 			}
 		}
@@ -77,7 +77,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			bool expected = is_isnot == "is";
 			if (Report.IsTrue(new SubscriptionEnrolmentUpgradeSection(subscriptionPlan).RadioInputExists(), $"Failed to find the radio element input for section '{subscriptionPlan}'", $"Successfully found the radio element input for section '{subscriptionPlan}'"))
 			{
-				Report.IsTrue(new SubscriptionEnrolmentUpgradeSection(subscriptionPlan).InputRadioIsChecked() == expected, $"Failed to confirm the selected Agent Support Service Plan {(expected ? "is not" : "is")} '{subscriptionPlan}'.", $"Successfully confirmed the selected Agent Support Service Plan {is_isnot} '{subscriptionPlan}'.");
+				Report.IsTrue(new SubscriptionEnrolmentUpgradeSection(subscriptionPlan).InputRadioIsChecked() == expected, $"Failed to confirm the selected Agent Support Service Plan {is_isnot} '{subscriptionPlan}'.", $"Successfully confirmed the selected sAgent Support Service Plan {is_isnot} '{subscriptionPlan}'.");
 
 			}
 		}
