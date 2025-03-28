@@ -478,7 +478,7 @@ Scenario: [63321] Product Ingredients contains a third party component that requ
 	Then In the Ingredients section, add component with component name: Water
 	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 50
 	Then in the Ingredients page I click Continue
-	Then In the Ingredients section, I confirm the popup should be displayed with the following title: x Warning and text: Your product contains a 3rd-Party Formula that may need Data Tier Consent, or if Consent has been accepted by the Formulator, has no ingredients that are indicated to be Public. A notification has been provided to the Formulator to revisit their registration and resubmit if necessary. You may continue with your registration. Should the 3rd-Party Formula be revised, your registration will be updated accordingly and revised scoring will occur. No action is required from you.
+	Then In the Ingredients section, I confirm the popup should be displayed with the following title: Warning and text: Your product contains a 3rd-Party Formula that may need Data Tier Consent, or if Consent has been accepted by the Formulator, has no ingredients that are indicated to be Public. A notification has been provided to the Formulator to revisit their registration and resubmit if necessary. You may continue with your registration. Should the 3rd-Party Formula be revised, your registration will be updated accordingly and revised scoring will occur. No action is required from you.
 	Then In displayed modal, click Ok footer button
 	And I should see the Inventory Status, Prop 65 (US) Page
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63321
@@ -845,7 +845,7 @@ Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulat
 	Then In the Ingredients Table row with component name: Stearic Acid, in Select All column confirm checkbox is checked
 	Then In the Ingredients Table row with component name: Coconut oil, methyl ester, glycerol-free, in Select All column confirm checkbox is checked
 	Then In the Ingredients Table, click the 'Delete' button
-	Then In the Ingredients section, I confirm the popup should be displayed with the following title:× Remove selected components? and text: Are you sure you want to remove all selected components?
+	Then In the Ingredients section, I confirm the popup should be displayed with the following title: Remove selected components? and text: Are you sure you want to remove all selected components?
 	Then In displayed modal, click Yes footer button
 	Then In the Ingredients Section ingredients table, confirm row with component name: Water is not displayed
 	Then In the Ingredients Section ingredients table, confirm row with component name: Shea Butter is not displayed
