@@ -31,7 +31,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			string text = "Select your default payment method";
 			if (Report.IsTrue(new PaymentMethods_new().PageSubHeaderLabelExists(), $"Failed to find the sub-header", $"Successfully found the sub-header"))
 			{
-				Report.IsTrue(new PaymentMethods_new().PageSubHeaderLabelGet() == text == expected, $"Failed to confirm the sub-header {(expected ? "is not" : "is")} displayed with text '{text}'", $"Successfully confirmed the sub-header {is_isnot} displayed with text '{text}'");
+				Report.IsTrue(new PaymentMethods_new().PageSubHeaderLabelGet() == text == expected, $"Failed to confirm the sub-header {is_isnot} displayed with text '{text}'", $"Successfully confirmed the sub-header {is_isnot} displayed with text '{text}'");
 			}
 		}
 		[RegexStepDefinition(@"In the Payment Methods section, the warning message (should|should not) be displayed with text (.*)")]
@@ -51,9 +51,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		public void VerifyAddNewMethodIsDisplayed(string button, string is_isnot)
 		{
 			bool expected = is_isnot == "is";
-			if (Report.IsTrue(new PaymentMethods_new().AddNewMethodButtonExists(button) == expected, $"Failed to confirm the '{button}' button {(expected ? "is not" : "is")} found.", $"Successfully confirmed the '{button}' button {is_isnot} found."))
+			if (Report.IsTrue(new PaymentMethods_new().AddNewMethodButtonExists(button) == expected, $"Failed to confirm the '{button}' button {is_isnot} found.", $"Successfully confirmed the '{button}' button {is_isnot} found."))
 			{
-				Report.IsTrue(new PaymentMethods_new().AddNewMethodButtonDisplayed(button) == expected, $"Failed to confirm the '{button}' button {(expected ? "is not" : "is")} displayed.", $"Successfully confirmed the '{button}' button {is_isnot} displayed.");
+				Report.IsTrue(new PaymentMethods_new().AddNewMethodButtonDisplayed(button) == expected, $"Failed to confirm the '{button}' button {is_isnot} displayed.", $"Successfully confirmed the '{button}' button {is_isnot} displayed.");
 			}
 		}
 		[RegexStepDefinition(@"In the Payment Methods section, click the (Credit Card|ACH|PayPal) button under 'Add a New Payment Method' section")]
@@ -351,7 +351,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		public void PaymentMethodExists(string paymentMethod, string is_isnot)
 		{
 			bool expected = is_isnot == "is";
-			Report.IsTrue(new PaymentMethods().Payment_Method_Exists(paymentMethod) == expected, $"Failed to confirm the {paymentMethod} {(expected ? "is not" : "is")} in the row of payment options", $"Successfully confirmed the {paymentMethod} {is_isnot} in the row of payment options");
+			Report.IsTrue(new PaymentMethods().Payment_Method_Exists(paymentMethod) == expected, $"Failed to confirm the {paymentMethod} {is_isnot} in the row of payment options", $"Successfully confirmed the {paymentMethod} {is_isnot} in the row of payment options");
 		}
 
 		[RegexStepDefinition(@"In the Payment Methods section, verify the default payment methods shows first")]
