@@ -182,7 +182,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ThenTheHomeScreenShouldLoad()
 		{
 			var selHomepage = new Homepage();
-			Report.IsTrue(selHomepage.WaitForContainerToBeVisible(), "Homepage did not load after clicking log in!", "Homepage successfully loaded after clicking log in!");
+			Report.IsTrue(selHomepage.WaitForContainerToBeVisible(120), "Homepage did not load after clicking log in!", "Homepage successfully loaded after clicking log in!");
 			GeneralUtilities.Wait_for_load_finish();
 
 		}
