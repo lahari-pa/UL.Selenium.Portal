@@ -42,14 +42,18 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		#endregion
 		#region Select Products and UPCs
 		private IWebElement SelectProductsTable => this.ContainerElement.FindElement(By.XPath(".//table[@class='table']"), 1);
-		private List<string> SelectProductsTableColumnLabelsList => [.. this.SelectProductsTable.FindElements(By.XPath(".//th"), 1).Select(x => x.Text.Trim())];
+		public List<string> SelectProductsTableColumnLabelsList => [.. this.SelectProductsTable.FindElements(By.XPath(".//th"), 1).Select(x => x.Text.Trim())];
 		private List<SelectProductsProductRow> SelectProductsProductRowsList => [.. this.SelectProductsTable.FindElements(By.XPath(".//tr[contains(@data-bind,'click')]"), 1).Select(x => new SelectProductsProductRow(x))];
 		public SelectProductsProductRow SelectProductsProductRowByProductName(string productName) => this.SelectProductsProductRowsList.FirstOrDefault(x => x.ProductName.Equals(productName, System.StringComparison.Ordinal));
 		public SelectProductsProductRow SelectProductsProductRowByWPSID(string wpsid) => this.SelectProductsProductRowsList.FirstOrDefault(x => x.WPSID.Equals(wpsid, System.StringComparison.Ordinal));
 		private IWebElement SelectUPCsTable => this.ContainerElement.FindElement(By.XPath(".//table[@class='table table-hover']"), 1);
-		private List<string> SelectUPCsTableColumnLabelList => [.. this.SelectUPCsTable.FindElements(By.XPath(".//th[not(.//input[@class='checkbox'])]"), 1).Select(x => x.Text.Trim())];
+		public List<string> SelectUPCsTableColumnLabelList => [.. this.SelectUPCsTable.FindElements(By.XPath(".//th[not(.//input[@class='checkbox'])]"), 1).Select(x => x.Text.Trim())];
 		private IWebElement SelectUPCsTableSelectAllCheckbox => this.SelectUPCsTable.FindElement(By.XPath(".//input[contains(@data-bind,'checkAll')]"), 1);
-
+		private List<SelectUPCsUPCRow> SelectUPCsTableUPCRowsList => [.. this.SelectUPCsTable.FindElements(By.XPath(".//tbody//tr"), 1).Select(x => new SelectUPCsUPCRow(x))];
+		public SelectUPCsUPCRow SelectUPCsTableUPCRowByUPC(string upc) => this.SelectUPCsTableUPCRowsList.FirstOrDefault(x => x.UPC.Equals(upc, System.StringComparison.Ordinal));
+		public SelectUPCsUPCRow SelectUPCsTableUPCRowByProductName(string productName) => this.SelectUPCsTableUPCRowsList.FirstOrDefault(x => x.ProductName.Equals(productName, System.StringComparison.Ordinal));
+		private List<IWebElement> SelectUPCsButtonsList => [.. this.FindElements(By.XPath(".//div[@class ='marTop-10']//button"), 1)];
+		private IWebElement SelectUPCsButton(string buttonLabel) => this.SelectUPCsButtonsList.FirstOrDefault(x => x.Text.Trim().Equals(buttonLabel, System.StringComparison.Ordinal));
 		#endregion
 		#endregion
 
@@ -285,6 +289,44 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info($"Attempting to confirm Select UPCs Table Select All checkbox is checked.");
 			return this.SelectUPCsTableSelectAllCheckbox.Checked();
 		}
+
+		public bool SelectUPCsUPCRowByUPCExists(string upc)
+		{
+			Report.Info($"Attempting to confirm UPC Row with '{upc}' UPC exists.");
+			return this.SelectUPCsTableUPCRowByUPC(upc) != null;
+		}
+
+		public bool SelectUPCsUPCRowByProductNameExists(string productName)
+		{
+			Report.Info($"Attempting to confirm UPC Row with '{productName}' Product Name exists.");
+			return this.SelectUPCsTableUPCRowByProductName(productName) != null;
+		}
+		#endregion
+
+		#region Select UPC Buttons Methods
+		public List<string> SelectUPCsButtonsListGetLabelsList()
+		{
+			Report.Info($"Attempting to get Select UPCs Button Labels list.");
+			return [.. this.SelectUPCsButtonsList.Where(x => x.Displayed).Select(x => x.Text?.Trim())];
+		}
+
+		public bool SelectUPCsButtonExists(string buttonLabel)
+		{
+			Report.Info($"Attempting to confirm '{buttonLabel}' Select UPCs button exists.");
+			return this.SelectUPCsButton(buttonLabel) != null;
+		}
+
+		public bool SelectUPCsButtonDisplayed(string buttonLabel)
+		{
+			Report.Info($"Attempting to confirm '{buttonLabel}' Select UPCs button is diplayed.");
+			return this.SelectUPCsButton(buttonLabel).Displayed;
+		}
+
+		public bool SelectUPCsButtonClick(string buttonLabel)
+		{
+			Report.Info($"Attempting to click '{buttonLabel}' Select UPCs button.");
+			return this.SelectUPCsButton(buttonLabel).TryClick();
+		}
 		#endregion
 		#endregion
 	}
@@ -509,7 +551,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public List<string> CertificationsList => [.. this.ContainerElement.FindElements(By.XPath(".//div[@data-bind='with: upc']//div[text()]"), 1).Select(x => x?.Text)];
 		public string Transportation => this.ContainerElement.FindElement(By.XPath(".//span[@data-bind='text: TextLine']"), 1)?.Text;
 		public List<string> DestinationRetailersList => [.. this.ContainerElement.FindElements(By.XPath(".//span[contains(@data-bind,'text: identifier')]"), 1).Select(x => x?.Text)];
-		private IWebElement ActionsLink(string linkLabel) => this.ContainerElement.FindElement(By.XPath($"//a[text()='{linkLabel}']"), 1);
+		private IWebElement Checkbox => this.ContainerElement.FindElement(By.XPath(".//input[@type='checkbox']"), 1);
+		private IWebElement ActionsLink(string linkLabel) => this.ContainerElement.FindElement(By.XPath($".//a[text()='{linkLabel}']"), 1);
 		#endregion
 
 		#region Class Methods
@@ -524,6 +567,35 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info($"Attempting to click '{this.ProductName}' UPC row '{linkLabel}' Actions link.");
 			return this.ActionsLink(linkLabel).TryClick();
 		}
+
+		public bool CheckboxExists()
+		{
+			Report.Info($"Attempting to confirm '{this.ProductName}' UPC row checkbox exists.");
+			return this.Checkbox != null;
+		}
+
+		public bool CheckboxClick()
+		{
+			Report.Info($"Attempting to click '{this.ProductName}' UPC row checkbox.");
+			return this.Checkbox.TryClick();
+		}
+
+		public bool CheckboxChecked()
+		{
+			Report.Info($"Attempting to confirm '{this.ProductName}' UPC row checkbox is clicked.");
+			return this.Checkbox.Checked();
+		}
+		#endregion
+	}
+
+	public class AddUPCProductModal : ModalDialogPrototype
+	{
+		#region Class Objects
+
+		#endregion
+
+		#region Class Methods
+
 		#endregion
 	}
 }
