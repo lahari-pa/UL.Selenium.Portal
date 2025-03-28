@@ -1,7 +1,12 @@
 ﻿using Reqnroll;
+using System.Linq;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using System;
+using System.IO;
+using UL.Automation.ReqnrollHelpers.Classes;
 
 
 
@@ -155,7 +160,38 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		}
 		#endregion
 
-
+		[RegexStepDefinition(@"I confirm that a file is downloaded with file name: (.*) then close the Report Download popup. I save the file as (.*)")]
+		public void ReportPdfIsDownloaded(string file, string savedAs)
+		{
+			var selReportDownload = new ReportDownload();
+			if (selReportDownload.Wait_for_load())
+			{
+				int count = 0;
+				Report.Info("Confirm file is downloaded with name: " + file);
+				string downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+				while (count < 120)
+				{
+					string[] dir = Directory.GetFiles(downloadsFolder, "*" + file.Replace("<Date>", "*"), SearchOption.AllDirectories);
+					if (dir.Any())
+					{
+						Report.Success("File with name: " + dir.FirstOrDefault() + " was found in the download directory");
+						Report.Info("Closing the Report Download popup");
+						Report.IsTrue(selReportDownload.ClickClose(),
+							"Failed to close the Report Download popup",
+							"Successfully closed the Report Download popup");
+						Context.AddToContext(savedAs, dir.FirstOrDefault());
+						return;
+					}
+					Delay.Seconds(1);
+					count++;
+				}
+				Report.Failure($"Unable to find file: '{file}' in the download directory after 120 seconds");
+				Report.Info("Closing the Report Download popup");
+				Report.IsTrue(selReportDownload.ClickClose(),
+					"Failed to close the Report Download popup",
+					"Successfully closed the Report Download popup");
+			}
+		}
 	}
 
 
