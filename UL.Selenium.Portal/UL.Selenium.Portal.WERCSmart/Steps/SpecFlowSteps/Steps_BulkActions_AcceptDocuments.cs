@@ -54,7 +54,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			var obj = Context.GetFromContext(savedAs);
 			Report.Info("Attempting to convert Product to type ProductInformation");
 			var Product = (ProductInformation)obj;
-			string modalTitle = "Edit SDS (" + Product.Id + ")";
+			string modalTitle = $"Edit SDS ( {Product.Id} )";
 			Steps_ModalDialogPrototype modalDialogPrototype = new Steps_ModalDialogPrototype();
 			modalDialogPrototype.ConfirmModalIsIsNotDisplayed(modalTitle, is_isnot);
 		}
@@ -86,13 +86,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			var obj = Context.GetFromContext(savedAs);
 			Report.Info("Attempting to convert Product to type ProductInformation");
 			var Product = (ProductInformation)obj;
-			if (Report.IsTrue(new MyProductTableRow(Product.Id).MyProductTableRowExists() == expected, $"Failed to confirm row with product id {Product.Id} {is_isnot} displayed", $"Successfully confirmed row with product id {Product.Id} {is_isnot} displayed"))
+			if (Report.IsTrue(new DocumentAcceptance().MyProductsTableRowSearchByIdExists(Product.Id) == expected, $"Failed to confirm row with product id '{Product.Id}' {is_isnot} displayed", $"Successfully confirmed row with product id '{Product.Id}' {is_isnot} displayed"))
 			{
 				if (is_isnot == "is")
 				{
-					if (Report.IsTrue(new MyProductTableRow(Product.Id).ProductNameExists(), $"Failed to confirm the product name exists in the row", $"Successfully confirmed the product name exists in the row"))
+					if (Report.IsTrue(new DocumentAcceptance().MyProductsTableRowSearchById(Product.Id).ProductNameExists(), $"Failed to confirm the product name exists in the row", $"Successfully confirmed the product name exists in the row"))
 					{
-						Report.IsTrue(new MyProductTableRow(Product.Id).GetProductName() == Product.Name, $"Failed to confirm the displayed product name is {Product.Name}", $"Successfully confirmed the displayed product name is {Product.Name}");
+						Report.IsTrue(new DocumentAcceptance().MyProductsTableRowSearchById(Product.Id).GetProductName() == Product.Name, $"Failed to confirm the displayed product name is ''{Product.Name}'", $"Successfully confirmed the displayed product name is '{Product.Name}");
 					}
 				}
 			}
@@ -100,11 +100,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		[RegexStepDefinition(@"In the Document Acceptance section, in the 'Documents' table, click the 'View' link for document with Subformat: (.*) and Language: (.*)")]
 		public void DocumentsTableClickTheView(string subFormat, string language)
 		{
-			if (Report.IsTrue(new DocumentsTableRow(subFormat, language).DocumentsTableRowExists(), $"Failed to confirm row with the subformat '{subFormat}' and the language '{language}' is displayed", $"Successfully confirmed row with the subformat '{subFormat}' and the language '{language}' is displayed"))
+			if (Report.IsTrue(new DocumentAcceptance().DocumentsTableRowSearchBySubFormatAndLanguageExists(subFormat, language), $"Failed to confirm row with the subformat '{subFormat}' and the language '{language}' is displayed", $"Successfully confirmed row with the subformat '{subFormat}' and the language '{language}' is displayed"))
 			{
-				if (Report.IsTrue(new DocumentsTableRow(subFormat, language).ViewLinkExists(), $"Failed to confirm the 'View' link exists", $"Successfully confirmed the 'View' link exists"))
+				if (Report.IsTrue(new DocumentAcceptance().DocumentsTableRowSearchBySubFormatAndLanguage(subFormat, language).ViewLinkExists(), $"Failed to confirm the 'View' link exists", $"Successfully confirmed the 'View' link exists"))
 				{
-					Report.IsTrue(new DocumentsTableRow(subFormat, language).ViewLinkClick(), $"Failed to click the 'View' link", $"Successfully clicked the 'View' link");
+					Report.IsTrue(new DocumentAcceptance().DocumentsTableRowSearchBySubFormatAndLanguage(subFormat, language).ViewLinkClick(), $"Failed to click the 'View' link", $"Successfully clicked the 'View' link");
 				}
 			}
 		}

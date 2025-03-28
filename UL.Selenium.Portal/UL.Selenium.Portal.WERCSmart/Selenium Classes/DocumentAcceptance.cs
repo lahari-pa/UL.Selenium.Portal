@@ -14,17 +14,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 {
 	class DocumentAcceptance : SeleniumBaseObject
 	{
-
 		protected override By ContainerElementLocator => By.XPath("//div[@id='documentAcceptanceContainer']");
+		private List<MyProductTableRow> MyProductsTableRows => this.FindElements(By.XPath(".//div[h3[text() = 'My Products']]//tbody//tr"), 1).Select(x => new MyProductTableRow(x)).ToList();
+		public MyProductTableRow MyProductsTableRowSearchById(string productId) => this.MyProductsTableRows.FirstOrDefault(x => x.WPSID.Equals(productId, System.StringComparison.Ordinal));
+		private List<DocumentsTableRow> DocumentsTableRows => this.FindElements(By.XPath(".//div[h3[contains(text(), 'Documents')]]//tbody//tr"), 1).Select(x => new DocumentsTableRow(x)).ToList();
+		public DocumentsTableRow DocumentsTableRowSearchBySubFormatAndLanguage(string subFormat, string language) => this.DocumentsTableRows.FirstOrDefault(x => x.SubFormat.Equals(subFormat, System.StringComparison.Ordinal) && x.Language.Equals(language, System.StringComparison.Ordinal));
+		public bool MyProductsTableRowSearchByIdExists(string productId)
+		{
+			Report.Info($"Attempting to confirm the row with Id {productId} exists");
+			return this.MyProductsTableRowSearchById(productId) != null;
+		}
+		public bool DocumentsTableRowSearchBySubFormatAndLanguageExists(string subFormat, string language)
+		{
+			Report.Info($"Attempting to confirm the row with the subformat '{subFormat}' and the language '{language}' exists");
+			return this.DocumentsTableRowSearchBySubFormatAndLanguage(subFormat, language) != null;
+		}
 
-		public bool ClickApproveSDS()
-		{
-			return false;
-		}
-		public bool ClickEditSDS()
-		{
-			return false;
-		}
 		public bool ProductGridNavigation(string navOption)
 		{
 			IWebElement navEl;
@@ -257,17 +262,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			}
 		}
 	}
-	class MyProductTableRow : SeleniumBaseObject
+
+	public class MyProductTableRow(IWebElement containerElement)
 	{
-		public string _productId;
+		#region Class Objects
+		private IWebElement ContainerElement { get; set; } = containerElement;
+		public string WPSID => this.ContainerElement.FindElement(By.XPath(".//td[contains(@data-bind, 'ProductID')]"), 1)?.Text;
+		private IWebElement ProductName => this.ContainerElement.FindElement(By.XPath(".//td[contains(@data-bind, 'Name')]"));
+		#endregion
 
-		protected override By ContainerElementLocator => By.XPath($"//div[h3[text() = 'My Products']]//tr[td[text()='{_productId}']]");
-		IWebElement ProductName => this.ContainerElement.FindElement(By.XPath(".//td[contains(@data-bind, 'Name')]"));
+		#region Methods
 
-		public MyProductTableRow(string productId)
-		{
-			_productId = productId;
-		}
 		public bool MyProductTableRowExists()
 		{
 			return this.ContainerElement != null;
@@ -282,21 +287,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info($"Attempt to get Product Name");
 			return this.ProductName.Text;
 		}
+		#endregion
 
 	}
-	class DocumentsTableRow : SeleniumBaseObject
+	public class DocumentsTableRow(IWebElement containerElement)
 	{
-		public string _subFormat;
-		public string _language;
+		#region Class Objects
+		private IWebElement ContainerElement { get; set; } = containerElement;
+		public string SubFormat => this.ContainerElement.FindElement(By.XPath(".//td[contains(@data-bind, 'Subformat')]"), 1)?.Text;
+		public string Language => this.ContainerElement.FindElement(By.XPath(".//td[contains(@data-bind, 'Language')]"), 1)?.Text;
+		private IWebElement ViewLink => this.ContainerElement.FindElement(By.XPath(".//a[text()='View']"));
+		#endregion
 
-		protected override By ContainerElementLocator => By.XPath($"//div[h3[contains(text(), 'Documents')]]//tr[td[text()='{_subFormat}'] and td[text()='{_language}']]");
-		IWebElement ViewLink => this.ContainerElement.FindElement(By.XPath(".//a[text()='View']"));
+		#region Methods
 
-		public DocumentsTableRow(string subFormat, string language)
-		{
-			_subFormat = subFormat;
-			_language = language;
-		}
 		public bool DocumentsTableRowExists()
 		{
 			return this.ContainerElement != null;
@@ -311,6 +315,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			Report.Info($"Attempt to click the 'View' link");
 			return this.ViewLink.TryClick();
 		}
+		#endregion
+
 
 	}
 }
