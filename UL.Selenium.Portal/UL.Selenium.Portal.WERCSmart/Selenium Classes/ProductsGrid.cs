@@ -24,7 +24,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		private IWebElement GridNavigationInput() => this.containerElement.FindElement(By.XPath(".//input[@type='number']"), 2);
 
-		private IWebElement ProductTable => this.containerElement.FindElement(By.XPath(".//table[contains(@class, 'products-table')][tbody]"), 1);
+		private IWebElement ProductTable => this.containerElement.FindElement(By.XPath(".//table[contains(@class, 'products-table')][tbody[@data-bind='foreach: products']]"), 1);
 
 		private List<IWebElement> ProductRows => this.ProductTable?.FindElements(By.XPath(".//tbody/tr"), 1).ToList();
 

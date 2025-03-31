@@ -1104,8 +1104,8 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 	Then In the Ingredients Section confirm error is displayed with text: Formulation must total or exceed 100%.
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
-	Then I search for the product saved as: TestCase95487
-	When I click Row Actions for the most recent product returned
+	And I filter for the product saved as: TestCase95487
+	And I click Row Actions for the first product returned
 	Then I click on the Row Action: Edit
 	#Then the Product Editor page should be loaded
 	Then I should see the Ingredients Page
