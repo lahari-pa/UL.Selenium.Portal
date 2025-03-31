@@ -73,6 +73,8 @@ Scenario: [56206] Sign Out
 	And I click on Sign Out
 	And the landing page should load
 
+#Removed from regression 2025/03
+@ignore
 @TestCase:56281
 Scenario: [56281] Product Information - Alerts - click More
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

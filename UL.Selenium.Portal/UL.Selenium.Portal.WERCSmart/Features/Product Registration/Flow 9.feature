@@ -192,7 +192,7 @@ Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 	Then In the Ingredients section, verify Total Percent displays value: 300
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58098
 	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase58098
+	Then I delete the product: TestCase58098
 	
 	@TestCase:58078
 	Scenario: [58078] Energy or Nutritional Bars - RU000618

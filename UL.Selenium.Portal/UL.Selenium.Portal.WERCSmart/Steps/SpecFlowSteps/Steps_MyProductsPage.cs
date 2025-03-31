@@ -833,6 +833,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		[RegexStepDefinition(@"On the My Products page in the My Products table, confirm row with '(.*)' as Product Name (does|does not) exist")]
 		public void MyProductTableConfirmProductNameRowDoesDoesNotExist(string productName, string does_doesnot)
 		{
+			GlobalSteps globalSteps = new GlobalSteps();
+			Report.StartSubStep("Then The home screen should load");
+			globalSteps.ThenTheHomeScreenShouldLoad();
 			bool expected = does_doesnot == "does";
 			MyProductsTable myProductsTable = new MyProductsTable();
 			Report.IsTrue(expected == !myProductsTable.ProductRowByNameGet(productName).IsNullOrEmpty(), $"Failure, failed to confirm row with '{productName}' as Product Name {does_doesnot} exist.", $"Success, confirmed row with '{productName}' as Product Name {does_doesnot} exist.");

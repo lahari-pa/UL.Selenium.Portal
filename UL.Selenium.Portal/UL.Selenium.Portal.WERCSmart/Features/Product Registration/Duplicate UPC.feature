@@ -285,7 +285,7 @@ Scenario: [82536] Soap (Bar, Liquid) for Body (RU000211) - GTIN/UPC - Verify Dup
 	#And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase82536
 
 @TestCase:88879
-Scenario: [88879] Input fields and labels for Retailers HD and TG have been Updated
+Scenario: [88879] WERCSmart Portal - UPC - Verify the OMSID Field is NO Longer Required for THE HOME DEPOT
 
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount

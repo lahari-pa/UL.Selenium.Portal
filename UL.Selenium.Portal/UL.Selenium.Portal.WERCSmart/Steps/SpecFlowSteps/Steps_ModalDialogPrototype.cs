@@ -5,10 +5,11 @@ using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 
+
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 {
 	[Binding, Scope(Tag = "ModalDialogPrototype")]
-	internal class Steps_ModalDialogPrototype
+	public class Steps_ModalDialogPrototype
 	{
 		[RegexStepDefinition(@"Confirm modal (is|is not) displayed")]
 		public void ConfirmModalIsIsNotDisplayed(string is_isnot)
@@ -70,10 +71,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 
 			if (Report.IsTrue(modalDisplayed == expected, $"Failed: expected that the modal {is_isnot} displayed, but it does not match with the actual results. Modal Displayed is: {modalDisplayed}.", $"Successfully confirmed that the modal {is_isnot} displayed."))
 			{
-				if (Report.IsTrue(modalDialogPrototype.ModalTitleExists(), "Failed to confirm that the Modal Title exists on the page!", "Successfully confirmed that the Modal Title exists on the page!")) 
+				if (is_isnot == "is")
 				{
-					string modalTitleDisplayed = modalDialogPrototype.TitleGet();
-					Report.IsTrue(expected == modalTitleDisplayed.Equals(modalTitleExpected), $"Failure, failed to confirm displayed modal title '{modalTitleDisplayed}' {is_isnot} '{modalTitleExpected}'.", $"Success, confirmed displayed modal title '{modalTitleDisplayed}' {is_isnot} '{modalTitleExpected}'.");
+					if (Report.IsTrue(modalDialogPrototype.ModalTitleExists(), "Failed to confirm that the Modal Title exists on the page!", "Successfully confirmed that the Modal Title exists on the page!"))
+					{
+						string modalTitleDisplayed = modalDialogPrototype.TitleGet();
+						Report.IsTrue(expected == modalTitleDisplayed.Equals(modalTitleExpected), $"Failure, failed to confirm displayed modal title '{modalTitleDisplayed}' {is_isnot} '{modalTitleExpected}'.", $"Success, confirmed displayed modal title '{modalTitleDisplayed}' {is_isnot} '{modalTitleExpected}'.");
+					}
 				}
 			}
 		}
