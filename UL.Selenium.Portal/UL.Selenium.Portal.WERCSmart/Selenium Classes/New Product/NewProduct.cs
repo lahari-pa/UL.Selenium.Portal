@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows.Controls;
 using TReVor.Api.Wrapper.Classes;
 using UL.Automation.Reporting;
 using UL.Automation.Reporting.Functions;
@@ -30,6 +31,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		IWebElement Table(string tableName) => this.ContainerElement.FindElement(By.XPath($"//div[div[text() = '{tableName}']]/following-sibling::table"), 2);
 		IWebElement TextOnThePage(string text) => this.ContainerElement.FindElement(By.XPath($"//div//*[contains(text(), \"{text}\")] | //div//b[contains(text(), \"{text}\")]"), 2);
 		IWebElement ButtonSave(string button) => this.ContainerElement.FindElement(By.XPath($".//div[@id='collapse1']//a[text() = '{button}']"), 2);
+		IWebElement UploadFileButton(string section, string label, string button) => this.ContainerElement.FindElement(By.XPath($".//div[contains(@class, 'form-group has-success') and .//label[text()=\"{section}\"]]//span[contains(text(), \"{label}\")]//..//div[@class='ws-dropzone-container']//a[@data-bind[contains(.,\"{button}\")]]"), 2);
+		IWebElement UploadFileBySectionOnlyButton(string section, string button) => this.ContainerElement.FindElement(By.XPath($".//span[contains(text(),\"{section}\")]//..//a[@data-bind[contains(.,\"{button}\")]] | .//span[contains(text(),\"{section}\")]//..//a[contains(text(), \"{button}\")]"), 2);
 
 		public bool TextExistsOnThePage(string text)
 		{
@@ -67,6 +70,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool TableExists(string tableName)
 		{
 			return this.Table(tableName).Displayed;
+		}
+		public bool UploadFileButtonExists(string section, string label, string button)
+		{
+			return this.UploadFileButton(section, label, button) != null;
 		}
 
 		#region web elements
@@ -2802,19 +2809,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool CheckButtonExistsInSection(string section, string button)
 		{
-			string path = $".//span[contains(text(),\"{section}\")]//..//a[@data-bind[contains(.,\"{button}\")]] | .//span[contains(text(),\"{section}\")]//..//a[contains(text(), \"{button}\")]";
-			IWebElement el = this.ContainerElement.FindElement(By.XPath(path), 2);
 			Report.Info($"Checking button {button} exists for section: {section}");
 			Report.Screenshot();
-			return el.Displayed;
+			return this.UploadFileBySectionOnlyButton(section, button).Displayed;
 		}
 		public bool CheckButtonExistsInSectionandLabel(string section, string label, string button)
 		{
-			string path = $".//div[contains(@class, 'form-group has-success') and .//label[text()=\"{section}\"]]//span[contains(text(), \"{label}\")]//..//div[@class='ws-dropzone-container']//a[@data-bind[contains(.,\"{button}\")]]";
-			IWebElement el = this.ContainerElement.FindElement(By.XPath(path), 2);
 			Report.Info($"Checking button {button} exists for section: {section}");
 			Report.Screenshot();
-			return el.Displayed;
+			return this.UploadFileButton(section, label, button).Displayed;
 		}
 		public bool ClickButton(string section, string button)
 		{
@@ -2831,16 +2834,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		}
 		public bool ClickButtonForSectionandLabel(string section,string label, string button)
 		{
-			string path = $".//div[contains(@class, 'form-group has-success') and .//label[text()=\"{section}\"]]//span[contains(text(), \"{label}\")]//..//div[@class='ws-dropzone-container']//a[@data-bind[contains(.,\"{button}\")]]";
-			IWebElement el = this.ContainerElement.FindElement(By.XPath(path), 2);
 			Report.Info($"Clicking {button} for document type: {section}");
 			Report.Screenshot();
-			if (el == null)
+			if (!this.UploadFileButtonExists(section, label, button))
 			{
-				Report.Error($"The {button} button was not found!! - Looking for xpath: {path}");
+				Report.Error($"The {button} button was not found!!");
 				return false;
 			}
-			return el.TryClick();
+			return this.UploadFileButton(section, label, button).TryClick();
 		}
 		public bool UploadFileForSection(string section, string pdfFilePath)
 		{
