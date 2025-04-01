@@ -785,9 +785,6 @@ Scenario: [87835] View UPCs shows Case UPC Data
 	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
 	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page I click Continue
-	Then I should be on the Transportation Details 1 Page
-	Then In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
-	Then in the Transportation Details 1 page, I click Continue
     #Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
     #| Retailer  |
     #| Walgreens |
@@ -862,9 +859,6 @@ Scenario: [87633] Universal Product Code (UPC) Step - Add Casepack - Size (Weigh
 	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
 	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page I click Continue
-	Then I should be on the Transportation Details 1 Page
-	Then In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
-	Then in the Transportation Details 1 page, I click Continue
     #Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
     #| Retailer  |
     #| Walgreens |
