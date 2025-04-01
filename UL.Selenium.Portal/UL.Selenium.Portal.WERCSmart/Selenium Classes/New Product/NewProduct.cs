@@ -73,6 +73,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		}
 		public bool UploadFileButtonExists(string section, string label, string button)
 		{
+			Report.Info($"Attempting to confirm that the '{button}' button exists on the page.");
 			return this.UploadFileButton(section, label, button) != null;
 		}
 
