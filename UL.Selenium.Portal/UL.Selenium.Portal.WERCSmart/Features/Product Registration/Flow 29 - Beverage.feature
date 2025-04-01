@@ -232,7 +232,7 @@ Scenario: [105007] Wine - RU001418 - Not Regulated Less than <=24% Alcohol
 	Then The Purchase Summary Page is displayed
 	Then In the Purchase Summary Page, click the 'Home' button
 	Then The home screen should load
-	Then I search for the product saved as: TestCase105007
+	Then I filter for the product saved as: TestCase105007
 	Then I confirm that the label: 'PL' is displayed next to the Product Name for the top result in the grid
 
 	
