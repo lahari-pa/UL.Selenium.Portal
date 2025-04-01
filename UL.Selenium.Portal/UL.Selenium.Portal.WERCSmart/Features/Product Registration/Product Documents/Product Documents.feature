@@ -91,6 +91,11 @@ Scenario: [59322] Upload document - VOC exemption letter & VOC product label
 	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
 
+	#PRODUCT LABELING - TEST CASE NEEDS TO BE UPDATED TO INCLUDE THIS PAGE -- 03/26/25
+	Given I should see the Product Labeling Page
+	Then In the Product Labeling Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above
+	Then in the Product Labeling page I click Continue
+
 	#And I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 	And I should see the Transportation Details 1 Page
 	And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: No, due to an exemption or exception
