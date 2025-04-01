@@ -2836,11 +2836,6 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		{
 			Report.Info($"Clicking {button} for document type: {section}");
 			Report.Screenshot();
-			if (!this.UploadFileButtonExists(section, label, button))
-			{
-				Report.Error($"The {button} button was not found!!");
-				return false;
-			}
 			return this.UploadFileButton(section, label, button).TryClick();
 		}
 		public bool UploadFileForSection(string section, string pdfFilePath)

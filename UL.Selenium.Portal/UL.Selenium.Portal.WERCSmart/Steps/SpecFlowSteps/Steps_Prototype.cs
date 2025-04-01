@@ -355,9 +355,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			Report.IsTrue(new NewProduct().ClickButton(section, button), $"Failed to click button {button} for section {section}", $"Successfully clicked {button} for {section}");
 		}
-		public void ClickButtonForSectionandLabel(string section,string label, string button)
+		public void ClickButtonForSectionandLabel(string section, string label, string button)
 		{
-			Report.IsTrue(new NewProduct().ClickButtonForSectionandLabel(section,label, button), $"Failed to click button {button} for section {section}", $"Successfully clicked {button} for {section}");
+			if (Report.IsTrue(new NewProduct().UploadFileButtonExists(section, label, button), $"Failed: the '{button}' button does not exist on the page!", $"Success: the '{button}' button exists on the page!"))
+			{
+				Report.IsTrue(new NewProduct().ClickButtonForSectionandLabel(section, label, button), $"Failed to click the '{button}' button for section '{section}'", $"Successfully clicked the '{button}' button for '{section}'");
+			}
 		}
 		//[RegexStepDefinition(@"I check the button (.*) (should|should not) exists for section: (.*)")]
 		public void CheckButtonExistsForSection(string section, string condition, string button)
