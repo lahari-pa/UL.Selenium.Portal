@@ -1377,7 +1377,7 @@ Scenario: [57988] Anti-Static Product - Non-Aerosol (RU000667) 4-L
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Anti-Static Product - Non-Aerosol
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57988
 	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase57988
+	Then I delete the product: TestCase57988
 
 @TestCase:57990
 Scenario: [57990] Footwear or Leather Care Product - Solid (RU000745)
