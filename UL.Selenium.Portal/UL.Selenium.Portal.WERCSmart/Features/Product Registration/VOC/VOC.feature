@@ -139,7 +139,7 @@ Scenario: [74626] VOC - Show state collection when state table has a value
 		
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74626
 	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase74626
+	Then I delete the product: TestCase74626
 
 @TestCase:56475
 Scenario: [56475] VOC checks for Fabric Softener - single Use dryer product (RU000808)

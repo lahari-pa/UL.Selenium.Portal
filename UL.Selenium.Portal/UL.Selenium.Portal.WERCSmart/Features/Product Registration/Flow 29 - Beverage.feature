@@ -484,4 +484,4 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 
 	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase216709
 	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase216709
+	Then I delete the product: TestCase216709
