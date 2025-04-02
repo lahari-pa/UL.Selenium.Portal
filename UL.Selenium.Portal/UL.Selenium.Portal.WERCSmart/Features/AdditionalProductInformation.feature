@@ -44,7 +44,7 @@ Scenario: [31352] Product Information - navigation
 	Then In the Product Information Section, confirm the question: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' is displayed
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase31352
 	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase31352
+	Then I delete the product: TestCase31352
 
 #Removed from regression 03/19/25
 @ignore

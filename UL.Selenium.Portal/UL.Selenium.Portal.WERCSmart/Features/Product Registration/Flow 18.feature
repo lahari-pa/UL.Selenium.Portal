@@ -342,7 +342,7 @@ Scenario: [208099] Fabric Softener - Single-Use Dryer Product Only (RU000808)
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase208099
 	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase208099
+	Then I delete the product: TestCase208099
 
 # Created by Saikiran Chittampally
 @TestCase:207582
