@@ -13,6 +13,7 @@
 @run_VOCFlow19
 @Ingredients
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
 @PhysicalAndChemicalProp
@@ -95,8 +96,8 @@ Scenario: [62708] VOC - Flow 19 - Dilution - Limits checking - Sold = 1 Used = 2
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
-
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Floor Wax Stripper (Light or Medium Build-Up)
+
 	Then I save the product information as: TestCase62708
 	#Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I should see the Product Information Page
@@ -165,15 +166,18 @@ Scenario: [62708] VOC - Flow 19 - Dilution - Limits checking - Sold = 1 Used = 2
 	Then In the Product Grid, delete the product saved as: TestCase62708
 
 @TestCase:56478
-Scenario: [56478] VOC - CARB and OTC for Flow 19 products - Concentrate/dilution = No to Dilution checking warning message shown
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+Scenario: [56478] VOC - CARB and OTC - Concentrate/dilution = No to Dilution checking warning message shown
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
-#	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
-
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Floor Wax Stripper (Light or Medium Build-Up)
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Floor Wax Stripper (Light or Medium Build-Up)
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Floor Wax Stripper (Light or Medium Build-Up)_#56478
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Floor Wax Stripper (Light or Medium Build-Up)
+	Then in the The Product page, I click Continue
 	Then I save the product information as: TestCase56478
 	#Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I should see the Product Information Page
@@ -200,18 +204,15 @@ Scenario: [56478] VOC - CARB and OTC for Flow 19 products - Concentrate/dilution
 	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
 	| component name | Sodium hydroxide       | 100     |                     |               |             |
 	Then in the Ingredients page I click Continue
-
 	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should be on the Inventory Status, Prop 65 (US) Page
 	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
 	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
-
-#	Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
+	#Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Then I should be on the Transportation Details 1 Page
 	And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
 	Then in the Transportation Details 1 page, I click Continue
-
 	Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
 	Then the VOC concentration question shows a yes and a no button
 	Given in the VOC page I click Continue
