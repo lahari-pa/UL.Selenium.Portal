@@ -61,6 +61,7 @@ Scenario: [209162] WERCSmart Portal Test Flow for Type of Product:  Light Bulb -
 	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
 	Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page I click Continue
 	#234312 Inventory Status, Prop 65 (US) - Applicable Only to Light Bulbs - Germicidal Ultra Violet (RU000962)
 	Given I should see the Inventory Status, Prop 65 (US) Page
@@ -103,10 +104,13 @@ Scenario: [209162] WERCSmart Portal Test Flow for Type of Product:  Light Bulb -
 	Then In the Additional Documents to Provide, after clicking 'View' button I confirm pdf file is downloaded
 	Then in the Additional Documents to Provide page I click Continue
 	Then I close All the current windows except the Main Window
+
+	# ---test case needs to be updated, steps don't exist with this flow -- 04/01/25
 	#And I call Shared Step 214559 (Optional Reports and Documents Available for Purchase - No Document Purchase is Required - Click Continue (General Shared-Step))
-	Given I should see the Optional Reports and Documents Available for Purchase Page
-	Then The statement: • Additional documents are not subject to standard two day turnaround. is displayed
-	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	#Given I should see the Optional Reports and Documents Available for Purchase Page
+	#Then The statement: • Additional documents are not subject to standard two day turnaround. is displayed
+	#Given in the Optional Reports and Documents Available for Purchase page I click Continue
+
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: User added Comments Text 58078. !"£$%^&*() 1234567890 (Provide any additional comments or information about the product that you want the Assessment Team to know.)
 	Given I should see the Optional Comments Page
 	Then In the Optional Comments Section, section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' is available

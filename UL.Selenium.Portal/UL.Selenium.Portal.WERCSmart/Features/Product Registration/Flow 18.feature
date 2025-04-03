@@ -37,7 +37,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOC_OzoneTransportCommission
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOC_Summary
 @GTINAndUPC
-
+@RegulatoryInformation3
 Feature: Flow 18
 
 @tfsdesign
@@ -342,14 +342,13 @@ Scenario: [208099] Fabric Softener - Single-Use Dryer Product Only (RU000808)
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase208099
 	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase208099
+	Then I delete the product: TestCase208099
 
 # Created by Saikiran Chittampally
 @TestCase:207582
 Scenario: [207582] Personal Fragrance product (more than 20% fragrance) - Liquid (RU000756) - New Flow Testing
-	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-#	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-
+	#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC207582
 	Given I delete all products with UPC Number: saved as UPC207582
 
@@ -364,6 +363,7 @@ Scenario: [207582] Personal Fragrance product (more than 20% fragrance) - Liquid
 	Then in the The Product page, I click Continue
 
 	Then I save the product information as: TestCase207582
+
 	#Given I call Shared Step 57798 (Product Information- Pesticide, Canada Only - No to everything else, Continue)
 	Then I should see the Product Information Page
 	Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to not select: United States
@@ -403,6 +403,11 @@ Scenario: [207582] Personal Fragrance product (more than 20% fragrance) - Liquid
 	Given I should see the Inventory Status, Prop 65 (US) Page
 	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'Canadian Environmental Protection Act (CEPA) status' to: Compliant with Domestic Substances List (DSL)
 	Then in the Inventory Status, Prop 65 (US) page I click Continue
+
+	#PRODUCT LABELING - TEST CASE NEEDS TO BE UPDATED TO INCLUDE THIS PAGE -- 03/26/25
+	Given I should see the Product Labeling Page
+	Then In the Product Labeling Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above
+	Then in the Product Labeling page I click Continue
 
 	#Given I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
 	Then I should be on the Transportation Details 1 Page

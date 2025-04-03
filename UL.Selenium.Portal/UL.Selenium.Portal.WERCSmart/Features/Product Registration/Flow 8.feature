@@ -541,7 +541,7 @@ Scenario: [58104] Fabric Dye - Liquid or Solid - 8-L
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58104
 	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase58104
+	Then I delete the product: TestCase58104
 
 @TestCase:58210
 Scenario: [58210] Antibiotic, Liquid or Cream, Non-Aerosol - 8-L
@@ -941,7 +941,7 @@ Scenario: [57088] Engine (motor) oil for Auto or Boat - 8L
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57088
 	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase57088
+	Then I delete the product: TestCase57088
 
 @TestCase:57709
 Scenario: [57709] Training aid repellant (RU000326) - 8LS -8L

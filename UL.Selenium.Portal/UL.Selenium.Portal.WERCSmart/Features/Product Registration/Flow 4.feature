@@ -35,6 +35,7 @@
 @RetailPartners
 @run_Flow4
 @UPC
+@NewProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:USDepartamentOfTransportationDOT
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
@@ -1132,6 +1133,7 @@ Scenario: [57983] Lubricant, Multi-Purpose, Not for Personal Use (RU000674) 4L
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57983
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase57983
+
 @OnlyInStaging
 @TestCase:57985
 Scenario: [57985] Footwear or Leather Care Product - Aerosol (RU000744) - Testing New Flow Update
@@ -1162,11 +1164,6 @@ Scenario: [57985] Footwear or Leather Care Product - Aerosol (RU000744) - Testin
 	And In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	And In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	And in the Product Information page I click Continue
-
-	#Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-	Given I should see the Regulatory Documents to Provide Page
-	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
-	Then in the Regulatory Documents to Provide page I click Continue
 
     # ====== Then I call Shared Step 213391(Physical and Chemical Properties (Applicable Only to Flow 6-A Type of Products) - Primary Physical State (AEROSOL ONLY) / Secondary Physical State (ANY)): ====== #
 	# ====== 	| Section                    | do not have exact data | Value                                                                                                 | ====== #
@@ -1229,6 +1226,8 @@ Scenario: [57985] Footwear or Leather Care Product - Aerosol (RU000744) - Testin
 	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule': to: 15
 	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?': to: Yes
 	Given I click continue
+
+
 	Then I confirm that I see the following CARB value: 75
 	Then I confirm that I see the following OTC Model Rule value: 15
 	And I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
@@ -1377,7 +1376,7 @@ Scenario: [57988] Anti-Static Product - Non-Aerosol (RU000667) 4-L
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Anti-Static Product - Non-Aerosol
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57988
 	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase57988
+	Then I delete the product: TestCase57988
 
 @TestCase:57990
 Scenario: [57990] Footwear or Leather Care Product - Solid (RU000745)

@@ -29,11 +29,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			selNewProduct.UploadPDFFile("Flash Point Document", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
-		[RegexStepDefinition(@"In the Additional Documents to Provide, upload PDF document to Upload SDS \(Optional\) field")]
+		[RegexStepDefinition(@"In the Additional Documents to Provide, upload PDF document to 'OSHA-compliant Safety Data Sheet \(Optional\)' field")]
 		public void UploadPDFDocumentToOSHACompliantSafetyDataSheetOptionalValue()
 		{
 			var selNewProduct = new Steps_Prototype();
-			selNewProduct.UploadPDFFile("OSHA SDS", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
+			string section = "OSHA-compliant Safety Data Sheet (Optional)";
+			selNewProduct.UploadPDFFileSectionAndLabel(section,"", "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf");
 		}
 
 		[RegexStepDefinition(@"In the Additional Documents to Provide, upload PDF document to International Fragrance Association \(IFRA\) field")]
@@ -65,9 +66,10 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 		public void UploadPDFDocumentToVolatileOrganicCompoundsRequired()
 		{
 			var selNewProduct = new Steps_Prototype();
-			string section = "Product Label";
+			string label = "Product Label";
+			string section = "Volatile Organic Compounds";
 			string pdfFile = "UL.Selenium.Portal.WERCSmart.Dependencies.PDF.testdoc.pdf";
-			selNewProduct.UploadPDFFile(section, pdfFile);
+			selNewProduct.UploadPDFFileSectionAndLabel(section,label, pdfFile);
 		}
 		[RegexStepDefinition(@"In the Additional Documents to Provide, upload PDF document for section: Volatile Organic Compounds - VOC Exemption Letter")]
 		public void UploadPDFDocumentToVOCExemptionLetter()
@@ -118,17 +120,41 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string button = "view";
 			new Steps_Prototype().CheckButtonExistsForSection(section, condition, button);
 		}
+		[RegexStepDefinition(@"In the Additional Documents to Provide, for section 'OSHA-compliant Safety Data Sheet \(Optional\)' the button 'View' (should|should not) exists")]
+		public void InTheAdditionalDocumentsToProviveCheckButtonViewForSectionandLabel(string condition)
+		{
+			string section = "OSHA-compliant Safety Data Sheet (Optional)";
+			string label = "";
+			string button = "view";
+			new Steps_Prototype().CheckButtonExistsForSectionandLabel(section, label, condition, button);
+		} 
 		[RegexStepDefinition(@"In the Additional Documents to Provide, for section (.*) button Remove (should|should not) exists")]
 		public void InTheAdditionalDocumentsToProvideCheckButtonRemoveForSection(string section, string condition)
 		{
 			string button = "remove";
 			new Steps_Prototype().CheckButtonExistsForSection(section, condition, button);
 		}
+		[RegexStepDefinition(@"In the Additional Documents to Provide, for section 'OSHA-compliant Safety Data Sheet \(Optional\)' the button 'Remove' (should|should not) exists")]
+		public void InTheAdditionalDocumentsToProvideCheckButtonRemoveForSectionandLabel(string condition)
+		{
+			string section = "OSHA-compliant Safety Data Sheet (Optional)";
+			string label = "";
+			string button = "remove";
+			new Steps_Prototype().CheckButtonExistsForSectionandLabel(section, label, condition, button);
+		}
 		[RegexStepDefinition(@"In the Additional Documents to Provide, for section (.*) I click button 'View'")]
 		public void InTheAdditionalDocumentsToProvideClickViewButtonForSection(string section)
 		{
 			string button = "view";
 			new Steps_Prototype().ClickButtonForSection(section, button);
+		}
+		[RegexStepDefinition(@"In the Additional Documents to Provide, for the section 'OSHA-compliant Safety Data Sheet \(Optional\)', I click the 'View' button")]
+		public void InTheAdditionalDocumentsToProvideClickViewButtonForSectionandLabel()
+		{
+			string section = "OSHA-compliant Safety Data Sheet (Optional)";
+			string label = "";
+			string button = "view";
+			new Steps_Prototype().ClickButtonForSectionandLabel(section,label, button);
 		}
 		[RegexStepDefinition(@"In the Additional Documents to Provide, after clicking 'View' button I confirm pdf file is downloaded")]
 		public void InTheAdditionalDocumentsToProvideAfterClickingViewPdfIsDownloaded()
@@ -138,39 +164,51 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			new Steps_Prototype().ConfirmFileAppearsInDownloadsFolder(file, savedAs);
 		}
 		[RegexStepDefinition(@"In the Additional Documents to Provide, section 'OSHA-compliant Safety Data Sheet \(Optional\)' (is|is not) displayed")]
-		public void ThenInTheAdditionalDocumentsToProvideSectionOSHAIsDisplayed(string condition)
+		public void OSHACompliantIsDisplayed(string condition)
 		{
 			string section = "OSHA-compliant Safety Data Sheet (Optional)";
 			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, condition);
 		}
 		[RegexStepDefinition(@"In the Additional Documents to Provide, section 'Safety Data Sheet \(Optional\)' (is|is not) displayed")]
-		public void ThenInTheAdditionalDocumentsToProvideSectionSafetyDataSheetIsDisplayed(string condition)
+		public void SafetyDataSheetIsDisplayed(string condition)
 		{
 			string section = "Safety Data Sheet (Optional)";
 			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, condition);
 		}
 		[RegexStepDefinition(@"In the Additional Documents to Provide, section 'Flash Point Testing Report' (is|is not) displayed")]
-		public void ThenInTheAdditionalDocumentsToProvideSectionFlashPointIsDisplayed(string condition)
+		public void FlashPointTestingReportIsDisplayed(string condition)
 		{
 			string section = "Flash Point Testing Report";
 			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, condition);
 		}
 		[RegexStepDefinition(@"In the Additional Documents to Provide, section 'Toxicity Characteristic Leaching Procedure \(TCLP\)' (is|is not) displayed")]
-		public void ThenInTheAdditionalDocumentsToProvideSectionTCLPIsIsNotDisplayed(string condition)
+		public void TCLPIsIsNotDisplayed(string condition)
 		{
 			string section = "Toxicity Characteristic Leaching Procedure (TCLP)";
 			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, condition);
 		}
 		[RegexStepDefinition(@"In the Additional Documents to Provide, section 'Provide Full Product Label \(required\)' (is|is not) displayed")]
-		public void ThenInTheAdditionalDocumentsToProvideSectionFullLabelDisplayed(string condition)
+		public void ProvideFullProductLabelDisplayed(string condition)
 		{
 			string section = "Provide Full Product Label (required)";
 			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, condition);
 		}
 		[RegexStepDefinition(@"In the Additional Documents to Provide, section 'Upload SDS \(Optional\)' (is|is not) displayed")]
-		public void ThenInTheAdditionalDocumentsToProvideSectionUploadSDSIsIsNotDisplayed(string condition)
+		public void UploadSDSIsIsNotDisplayed(string condition)
 		{
 			string section = "Upload SDS (Optional)";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, condition);
+		}
+		[RegexStepDefinition(@"In the Additional Documents to Provide, section 'Generic Private Label \(all sides\)' (is|is not) displayed")]
+		public void GenericPrivateLabelIsIsNotDisplayed(string condition)
+		{
+			string section = "Generic Private Label (all sides)";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, condition);
+		}
+		[RegexStepDefinition(@"In the Additional Documents to Provide, section 'Transportation Exemption Letter or Special Permit' (is|is not) displayed")]
+		public void TransportationExemptionLetterorSpecialPermitIsIsNotDisplayed(string condition)
+		{
+			string section = "Transportation Exemption Letter or Special Permit";
 			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, condition);
 		}
 		[RegexStepDefinition(@"In the Additional Documents to Provide, section 'Provide Full Product Label \(required\)' error message (should|should not) display: (.*)")]

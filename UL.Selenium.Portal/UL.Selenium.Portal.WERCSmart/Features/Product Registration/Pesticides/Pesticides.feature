@@ -801,4 +801,4 @@ Scenario: [132756] Canadian Province Pesticide Options
 	Then in the Pesticide Details - Canada page I click Continue
 	Then I should see the Transportation Details 1 Page
 	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase132756
+	Then I delete the product: TestCase132756

@@ -139,7 +139,7 @@ Scenario: [74626] VOC - Show state collection when state table has a value
 		
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74626
 	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase74626
+	Then I delete the product: TestCase74626
 
 @TestCase:56475
 Scenario: [56475] VOC checks for Fabric Softener - single Use dryer product (RU000808)
@@ -505,7 +505,7 @@ Scenario: [56481] VOC checks for Oven Cleaner - pump sprays (RU000798) - CARB an
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56481
 	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase56481
+	Then I delete the product: TestCase56481
 
 @TestCase:56483
 Scenario: [56483] VOC - Antiperspirant and Deodorant checks
@@ -985,4 +985,4 @@ Scenario: [73503] VOC - ACP Plan = Yes and CARB Value Above Limit for RU - VOC R
 
 	#And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase73503
 	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase73503
+	Then I delete the product: TestCase73503

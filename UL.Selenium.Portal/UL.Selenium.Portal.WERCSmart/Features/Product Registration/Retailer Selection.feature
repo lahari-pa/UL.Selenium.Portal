@@ -325,7 +325,7 @@ Scenario: [136057] Select Retailers - Removing Retailer(s) Selected
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, verify retailer 'FD' is not present under the 'Destination Retailers' column
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase1234
 	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase136057
+	Then I delete the product: TestCase136057
 
 @TestCase:133311
 Scenario: [133311] Retailer Private Label List Appear in Alphabetical Order
