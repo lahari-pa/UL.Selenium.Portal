@@ -11,7 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UL.Selenium.Portal.WERCSmar
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{491387EC-405B-4158-9575-1FA54477E179}"
 	ProjectSection(SolutionItems) = preProject
-		NuGet.Config = NuGet.Config
 		..\.azuredevops\pull_request_template\branches\QA.md = ..\.azuredevops\pull_request_template\branches\QA.md
 	EndProjectSection
 EndProject

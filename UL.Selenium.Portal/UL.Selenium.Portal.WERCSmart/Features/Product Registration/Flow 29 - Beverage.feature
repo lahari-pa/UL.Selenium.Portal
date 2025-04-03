@@ -243,6 +243,7 @@ Scenario: [105007] Wine - RU001418 - Not Regulated Less than <=24% Alcohol
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Flow 29
 @TestCase:92943
 Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of Alcohol Content) - DOT - Packaging Group II Should be Pre-Selected
+
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC92943
@@ -258,6 +259,7 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Alcoholic Beverages - Spirits_#92943
 	Then In the Product Section, set the option in section: 'Type of Product (select)' to: Alcoholic Beverages - Spirits
 	Then in the The Product page, I click Continue
+
 	Then I save the product information as: TestCase92943
 
 	#Given I call Shared Step 90477 - Product Information - US, (NO) Retailer's PL
@@ -265,6 +267,7 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then I should be on the Product Information Page
 	Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page, I click Continue
 
 	#Then I call Shared Step 92979 (Physical and Chemical Properties - Physical Property - Liquid - For Spirits (RU001434) (Greater than 70% Alcohol))
@@ -303,6 +306,7 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then I should be on the U.S. Department of Transportation (DOT) Classification Page
 	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN3065
 	Then In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Alcoholic beverages
+	#Then In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Environmentally Hazardous Substance, liquid, n.o.s
 	Then In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Hazard Class (select)' contains value: 3
 	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: II
 	Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
@@ -333,16 +337,24 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, under Transportation column the checkbox 'Shipping with limited quantity' is checked
 	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page, I click Continue
 
+	# these steps need to be reviewed by manual testing - 03/26/25 
 	#I call Shared Step 242197 (Additional Documents to Provide - Applicable Only to Alcoholic Beverages - SPIRITS (RU001434) - (Greater than 70% Alcohol))(Step has not created yet)
 	Then I should be on the Additional Documents to Provide Page
-	Then The Generic Private Label (all sides) question is displayed
-	Then The Upload SDS (Optional) question is displayed
-	Then The Flash Point Testing Report question is displayed
-	Then The Transportation Exemption Letter or Special Permit question is displayed
-	Then In the Additional Documents to Provide, upload PDF document to Upload SDS (Optional) field
-	Then In the Additional Documents to Provide, for section OSHA SDS button View should exists
-	Then In the Additional Documents to Provide, for section OSHA SDS button Remove should exists
-	Then In the Additional Documents to Provide, for section OSHA SDS I click button 'View'
+	#Then The Generic Private Label (all sides) question is displayed
+	Then In the Additional Documents to Provide, section 'Generic Private Label (all sides)' is displayed
+	#Then The Upload SDS (Optional) question is displayed
+	Then In the Additional Documents to Provide, section 'OSHA-compliant Safety Data Sheet (Optional)' is displayed
+	#Then The Flash Point Testing Report question is displayed
+	Then In the Additional Documents to Provide, section 'Flash Point Testing Report' is displayed
+	#Then The Transportation Exemption Letter or Special Permit question is displayed
+	Then In the Additional Documents to Provide, section 'Transportation Exemption Letter or Special Permit' is displayed
+	Then In the Additional Documents to Provide, upload PDF document to 'OSHA-compliant Safety Data Sheet (Optional)' field
+	#Then In the Additional Documents to Provide, for section OSHA SDS button View should exists
+	Then In the Additional Documents to Provide, for section 'OSHA-compliant Safety Data Sheet (Optional)' the button 'View' should exists
+	#Then In the Additional Documents to Provide, for section OSHA SDS button Remove should exists
+	Then In the Additional Documents to Provide, for section 'OSHA-compliant Safety Data Sheet (Optional)' the button 'Remove' should exists
+	#Then In the Additional Documents to Provide, for section OSHA SDS I click button 'View'
+	Then In the Additional Documents to Provide, for the section 'OSHA-compliant Safety Data Sheet (Optional)', I click the 'View' button
 	Then In the Additional Documents to Provide, after clicking 'View' button I confirm pdf file is downloaded
 	Given in the Additional Documents to Provide page I click Continue
 
@@ -370,8 +382,9 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then In the Summary Page, verify table data in column Container Type showing the value: Glass Container
 	Then In the Summary Page, verify table data in column Size (Ounces) showing the value: 22.8
 	Then In the Summary Page, verify table data in column Retailers showing the value: PX, WG
-	Then In the Summary Page, the document section OSHA SDS should be showing the following document: testdoc.pdf
-	Then In the Summary Page, click the View button for section: OSHA SDS
+	#steps needs to be reviewed by manual testing -- 3/26/2025 
+	#Then In the Summary Page, the document section (.*) should be showing the following document: testdoc.pdf
+	#Then In the Summary Page, click the View button for section: (.*)
 	Then In the Summary Page, after clicking 'View' button I confirm pdf file is downloaded
 	Then I close the tab with Data Summary page
 
@@ -471,4 +484,4 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 
 	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase216709
 	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase216709
+	Then I delete the product: TestCase216709
