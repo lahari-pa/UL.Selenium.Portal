@@ -86,7 +86,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		}
 		#endregion
 
-		#region Select Products Steps
+		#region Select Products Tab Steps
 		#region Search by WPS ID or Product Name Steps
 		[RegexStepDefinition(@"In the Select Products Tab, confirm 'Search by WPSID or Product Name' Text Input (does|does not) exist")]
 		public void SelectProductsTabConfirmTextInputExists(string does_doesnot)
@@ -212,7 +212,111 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			ForwardProductRegistrationPage forwardProductRegistration = new ForwardProductRegistrationPage();
 			Report.IsTrue(expected == forwardProductRegistration.SelectedProductsListExists(), $"Failure, failed to confirm selected products list {does_doesnot} exist.", $"Success, confirmed selected products list {does_doesnot} exist.");
 		}
+
+		[RegexStepDefinition(@"In the Select Products Tab, confirm Selected Product with (.*) Product Name (does|does not) exist")]
+		public void SelectProductsTabConfirmSelectedProductProductNameExists(string productName, string does_doesnot)
+		{
+			bool expected = does_doesnot == "does";
+			ForwardProductRegistrationPage forwardProductRegistration = new ForwardProductRegistrationPage();
+			if(Report.IsTrue(forwardProductRegistration.SelectedProductsListExists(), $"Failure, failed to confirm selected products list does exist.", $"Success, confirmed selected products list does exist."))
+			{
+				Report.IsTrue(expected == forwardProductRegistration.SelectedProductByProductNameExists(productName), $"Failure, failed to confirm selected product with '{productName}' product name {does_doesnot} exist.", $"Success, confirmed selected product with '{productName}' product name {does_doesnot} exist.");
+			}
+		}
+
+		[RegexStepDefinition(@"In the Select Products Tab, click Selected Product with (.*) Product Name checkbox")]
+		public void SelectProductsTabClickSelectedProductProductNameCheckbox(string productName)
+		{
+			ForwardProductRegistrationPage forwardProductRegistration = new ForwardProductRegistrationPage();
+			if (Report.IsTrue(forwardProductRegistration.SelectedProductsListExists(), $"Failure, failed to confirm selected products list does exist.", $"Success, confirmed selected products list does exist."))
+			{
+				if(Report.IsTrue(forwardProductRegistration.SelectedProductByProductNameExists(productName), $"Failure, failed to confirm selected product with '{productName}' product name does exist.", $"Success, confirmed selected product with '{productName}' product name does exist."))
+				{
+					Report.IsTrue(forwardProductRegistration.SelectedProductByProductName(productName).CheckboxClick(), $"Failure, failed to click selected product with '{productName}' product name checkbox.", $"Success, clicked selected product with '{productName}' product name checkbox.");
+				}
+			}
+		}
+
+		[RegexStepDefinition(@"In the Select Products Tab, confirm Selected Product with (.*) Product Name checkbox (is|is not) checked")]
+		public void SelectProductsTabConfirmSelectedProductProductNameCheckboxChecked(string productName, string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			ForwardProductRegistrationPage forwardProductRegistration = new ForwardProductRegistrationPage();
+			if (Report.IsTrue(forwardProductRegistration.SelectedProductsListExists(), $"Failure, failed to confirm selected products list does exist.", $"Success, confirmed selected products list does exist."))
+			{
+				if (Report.IsTrue(forwardProductRegistration.SelectedProductByProductNameExists(productName), $"Failure, failed to confirm selected product with '{productName}' product name does exist.", $"Success, confirmed selected product with '{productName}' product name does exist."))
+				{
+					Report.IsTrue(expected == forwardProductRegistration.SelectedProductByProductName(productName).CheckboxChecked(), $"Failure, failed to confirm selected product with '{productName}' product name checkbox {is_isnot} checked.", $"Success, confirmed selected product with '{productName}' product name checkbox {is_isnot} checked.");
+				}
+			}
+		}
+
+		[RegexStepDefinition(@"In the Select Products Tab, confirm Selected Product with (.*) WPSID (does|does not) exist")]
+		public void SelectProductsTabConfirmSelectedProductWPSIDExists(string wpsid, string does_doesnot)
+		{
+			bool expected = does_doesnot == "does";
+			ForwardProductRegistrationPage forwardProductRegistration = new ForwardProductRegistrationPage();
+			if (Report.IsTrue(forwardProductRegistration.SelectedProductsListExists(), $"Failure, failed to confirm selected products list does exist.", $"Success, confirmed selected products list does exist."))
+			{
+				Report.IsTrue(expected == forwardProductRegistration.SelectedProductByWPSIDExists(wpsid), $"Failure, failed to confirm selected product with '{wpsid}' WPSID {does_doesnot} exist.", $"Success, confirmed selected product with '{wpsid}' WPSID {does_doesnot} exist.");
+			}
+		}
+
+		[RegexStepDefinition(@"In the Select Products Tab, click Selected Product with (.*) WPSID checkbox")]
+		public void SelectProductsTabClickSelectedProductWPSIDCheckbox(string wpsid)
+		{
+			ForwardProductRegistrationPage forwardProductRegistration = new ForwardProductRegistrationPage();
+			if (Report.IsTrue(forwardProductRegistration.SelectedProductsListExists(), $"Failure, failed to confirm selected products list does exist.", $"Success, confirmed selected products list does exist."))
+			{
+				if (Report.IsTrue(forwardProductRegistration.SelectedProductByWPSIDExists(wpsid), $"Failure, failed to confirm selected product with '{wpsid}' WPSID does exist.", $"Success, confirmed selected product with '{wpsid}' WPSID does exist."))
+				{
+					Report.IsTrue(forwardProductRegistration.SelectedProductByWPSID(wpsid).CheckboxClick(), $"Failure, failed to click selected product with '{wpsid}' WPSID checkbox.", $"Success, clicked selected product with '{wpsid}' WPSID checkbox.");
+				}
+			}
+		}
+
+		[RegexStepDefinition(@"In the Select Products Tab, confirm Selected Product with (.*) WPSID checkbox (is|is not) checked")]
+		public void SelectProductsTabConfirmSelectedProductWPSIDCheckboxChecked(string wpsid, string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			ForwardProductRegistrationPage forwardProductRegistration = new ForwardProductRegistrationPage();
+			if (Report.IsTrue(forwardProductRegistration.SelectedProductsListExists(), $"Failure, failed to confirm selected products list does exist.", $"Success, confirmed selected products list does exist."))
+			{
+				if (Report.IsTrue(forwardProductRegistration.SelectedProductByWPSIDExists(wpsid), $"Failure, failed to confirm selected product with '{wpsid}' WPSID does exist.", $"Success, confirmed selected product with '{wpsid}' WPSID does exist."))
+				{
+					Report.IsTrue(forwardProductRegistration.SelectedProductByWPSID(wpsid).CheckboxChecked(), $"Failure, failed to confirm selected product with '{wpsid}' WPSID checkbox {is_isnot} checked.", $"Success, confirmed selected product with '{wpsid}' WPSID checkbox {is_isnot} checked.");
+				}
+			}
+		}
+
+		[RegexStepDefinition(@"In Select Products Tab, confirm Remove Selected Products button (does|does not) exist")]
+		public void SelectProductsTabConfirmRemoveSelectedProductsButtonExists(string does_doesnot)
+		{
+			bool expected = does_doesnot == "does";
+			ForwardProductRegistrationPage forwardProductRegistration = new ForwardProductRegistrationPage();
+			Report.IsTrue(forwardProductRegistration.RemoveCheckedProductsButtonDisplayed(), $"Failure, failed to confirm Remove Selected Products button {does_doesnot} exist.", $"Success, confirmed Remove Selected Products button {does_doesnot} exist.");
+		}
+
+		[RegexStepDefinition(@"In Select Products Tab, click Remove Selected Products button")]
+		public void SelectProductsTabClickRemoveSelectedProductsButton()
+		{
+			ForwardProductRegistrationPage forwardProductRegistration = new ForwardProductRegistrationPage();
+			if (Report.IsTrue(forwardProductRegistration.RemoveCheckedProductsButtonDisplayed(), $"Failure, failed to confirm Remove Selected Products button does exist.", $"Success, confirmed Remove Selected Products button does exist."))
+			{
+				Report.IsTrue(forwardProductRegistration.RemoveCheckedProductsButtonClick(), $"Failure, failed to click remove selected products button.", $"Success, clicked remove selected products button.");
+			}
+		}
 		#endregion
+		#endregion
+
+		#region Select Retailers Tab Steps
+		[RegexStepDefinition(@"In the Select Retailers Tab, confirm the Select Retailer Action Links list (does|does not) exist")]
+		public void SelectRetailersTabConfirmSelectRetailerActionLinksListExists(string does_doesnot)
+		{
+			bool expected = does_doesnot == "does";
+			ForwardProductRegistrationPage forwardProductRegistration = new ForwardProductRegistrationPage();
+			Report.IsTrue(expected == forwardProductRegistration.SelectRetailerActionLinksListExists(), $"Failure, failed to confirm Select Retailer Action Links list {does_doesnot} exist.", $"Success, confirmed Select Retailer Action Link list {does_doesnot} exist.");
+		}
 		#endregion
 	}
 }
