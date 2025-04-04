@@ -133,6 +133,116 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 				Report.IsTrue(expected == myProductTableFooter.PaginationButtonCurrent(buttonLabel), $"Failure, failed to confirm {buttonLabel} pagination button {is_isnot} currently selected.", $"Success, confirmed {buttonLabel} pagination button {is_isnot} currently selected.");
 			}
 		}
+		[RegexStepDefinition(@"In the Internal Information Revisions section, in the Products table, confirm row with product Id (.*) (does|does not) exists")]
+		public void ProductsTableRowWithIdExists(string productId, string does_doesnot)
+		{
+			bool expected = does_doesnot == "does";
+			Report.IsTrue(new InternalInformationRevisions().InternalInfoRevisionsProductsTableRowSearchById(productId).InternalInfoRevisionsProductsTableRowExists() == expected, $"Failure, failed to confirm row with '{productId}' as Product ID {does_doesnot} exist.", $"Success, confirmed row with '{productId}' as Product ID {does_doesnot} exist.");
+		}
+
+		[RegexStepDefinition(@"In the Internal Information Revisions section, in the Products table, confirm in the row with product Id (.*) the Name is: (.*)")]
+		public void ProductsTableRowWithIdCheckName(string productId, string productName)
+		{
+			if(Report.IsTrue(new InternalInformationRevisions().InternalInfoRevisionsProductsTableRowSearchById(productId).InternalInfoRevisionsProductsTableRowExists(), $"Failure, failed to confirm row with '{productId}' as Product ID exist.", $"Success, confirmed row with '{productId}' as Product ID exist."))
+			{
+				Report.IsTrue(new InternalInformationRevisions().InternalInfoRevisionsProductsTableRowSearchById(productId).ProductName == productName, $"Failure, failed to confirm for the row with '{productId}' as Product ID, the Name is: {productName}", $"Success, confirmed for the row with '{productId}' as Product ID, the Name is: {productName}");
+
+			}
+		}
+
+		[RegexStepDefinition(@"In the Internal Information Revisions section, in the Products table, click the (Edit|Save|Cancel) action for the row with product Id (.*)")]
+		public void ProductsTableRowWithIdClickAction(string actionLink, string productId)
+		{
+			if (Report.IsTrue(new InternalInformationRevisions().InternalInfoRevisionsProductsTableRowSearchById(productId).InternalInfoRevisionsProductsTableRowExists(), $"Failure, failed to confirm row with '{productId}' as Product ID exist.", $"Success, confirmed row with '{productId}' as Product ID exist."))
+			{
+				if (Report.IsTrue(new InternalInformationRevisions().InternalInfoRevisionsProductsTableRowSearchById(productId).ActionLinkExists(actionLink), $"Failure, failed to find the '{actionLink}' action for row with Id {productId}", $"Success, found the '{actionLink}' action for row with Id {productId}"))
+				{
+					Report.IsTrue(new InternalInformationRevisions().InternalInfoRevisionsProductsTableRowSearchById(productId).ActionLinkClick(actionLink), $"Failure, failed to click the '{actionLink}' action for row with Id {productId}", $"Success, clicked the '{actionLink}' action for row with Id {productId}");
+				}
+			}
+		}
+		[RegexStepDefinition(@"In the Internal Information Revisions section, in the Products table, the (Edit|Save|Cancel) action (is|is not) displayed for the row with product Id (.*)")]
+		public void ProductsTableRowWithIdActionIsDisplayed(string actionLink, string is_isnot, string productId)
+		{
+			bool expected = is_isnot == "is";
+			if (Report.IsTrue(new InternalInformationRevisions().InternalInfoRevisionsProductsTableRowSearchById(productId).InternalInfoRevisionsProductsTableRowExists(), $"Failure, failed to confirm row with '{productId}' as Product ID exist.", $"Success, confirmed row with '{productId}' as Product ID exist."))
+			{
+				Report.IsTrue(new InternalInformationRevisions().InternalInfoRevisionsProductsTableRowSearchById(productId).ActionLinkExists(actionLink) == expected, $"Failure, failed to confirm the '{actionLink}' action {is_isnot} displayed for row with Id {productId}", $"Success, confirmed the '{actionLink}' action {is_isnot} for row with Id {productId}");	
+			}
+		}
+		[RegexStepDefinition(@"In the Internal Information Revisions section, in the Products table, enter the Ingredient Identifier: (.*) for the row with product Id (.*)")]
+		public void TableRowWithIdEnterIngredientIdintidier(string ingredientIdentifier, string productId)
+		{
+			if (Report.IsTrue(new InternalInformationRevisions().InternalInfoRevisionsProductsTableRowSearchById(productId).InternalInfoRevisionsProductsTableRowExists(), $"Failure, failed to confirm row with '{productId}' as Product ID exist.", $"Success, confirmed row with '{productId}' as Product ID exist."))
+			{
+				if (Report.IsTrue(new InternalInformationRevisions().InternalInfoRevisionsProductsTableRowSearchById(productId).IngredientIdentifierInputExists(), $"Failure, failed to find the Ingredient Identifier input for row with Id {productId}", $"Success, found the Ingredient Identifier input for row with Id {productId}"))
+				{
+					Report.IsTrue(new InternalInformationRevisions().InternalInfoRevisionsProductsTableRowSearchById(productId).IngredientIdentifierInputEnterText(ingredientIdentifier), $"Failure, failed to enter text into the Ingredient Identifier input for row with Id {productId}", $"Success, entered text into the Ingredient Identifier input for row with Id {productId}");
+				}
+			}
+		}
+		[RegexStepDefinition(@"In the Internal Information Revisions section, in the Products table, the Ingredient Identifier input (is|is not) displayed for the row with product Id (.*)")]
+		public void TableRowWithIdIngredientIdintidierIsDisplayed(string is_isnot, string productId)
+		{
+			bool expected = is_isnot == "is";
+			if (Report.IsTrue(new InternalInformationRevisions().InternalInfoRevisionsProductsTableRowSearchById(productId).InternalInfoRevisionsProductsTableRowExists(), $"Failure, failed to confirm row with '{productId}' as Product ID exist.", $"Success, confirmed row with '{productId}' as Product ID exist."))
+			{
+				Report.IsTrue(new InternalInformationRevisions().InternalInfoRevisionsProductsTableRowSearchById(productId).IngredientIdentifierInputExists() == expected, $"Failure, failed to confirm the Ingredient Identifier input {is_isnot} displayed for row with Id {productId}", $"Success, confirmed the Ingredient Identifier input {is_isnot} displayed for row with Id {productId}");
+			}
+		}
+		[RegexStepDefinition(@"In the Internal Information Revisions section, in the Products table, enter the Product Identifier: (.*) for the row with product Id (.*)")]
+		public void ProductsTableRowWithIdEnterProductIdentifier(string productIdentifier, string productId)
+		{
+			if (Report.IsTrue(new InternalInformationRevisions().InternalInfoRevisionsProductsTableRowSearchById(productId).InternalInfoRevisionsProductsTableRowExists(), $"Failure, failed to confirm row with '{productId}' as Product ID exist.", $"Success, confirmed row with '{productId}' as Product ID exist."))
+			{
+				if (Report.IsTrue(new InternalInformationRevisions().InternalInfoRevisionsProductsTableRowSearchById(productId).ProductIdentifierInputExists(), $"Failure, failed to find the Product Identifier input for row with Id {productId}", $"Success, found the Product Identifier input for row with Id {productId}"))
+				{
+					Report.IsTrue(new InternalInformationRevisions().InternalInfoRevisionsProductsTableRowSearchById(productId).ProductIdentifierInputEnterText(productIdentifier), $"Failure, failed to enter text into the Product Identifier input for row with Id {productId}", $"Success, entered text into the Product Identifier input for row with Id {productId}");
+				}
+			}
+		}
+		[RegexStepDefinition(@"In the Internal Information Revisions section, in the Products table, the Product Identifier input (is|is not) displayed for the row with product Id (.*)")]
+		public void ProductsTableRowWithIdProductIdentifierIsDisplayed(string is_isnot, string productId)
+		{
+			bool expected = is_isnot == "is";
+			if (Report.IsTrue(new InternalInformationRevisions().InternalInfoRevisionsProductsTableRowSearchById(productId).InternalInfoRevisionsProductsTableRowExists(), $"Failure, failed to confirm row with '{productId}' as Product ID exist.", $"Success, confirmed row with '{productId}' as Product ID exist."))
+			{
+				Report.IsTrue(new InternalInformationRevisions().InternalInfoRevisionsProductsTableRowSearchById(productId).ProductIdentifierInputExists() == expected, $"Failure, failed to confirm the Product Identifier {is_isnot} displayed for row with Id {productId}", $"Success, confirmed the Product Identifier {is_isnot} displayed for row with Id {productId}");
+			}
+		}
+		[RegexStepDefinition(@"In the Internal Information Revisions section, in the Products table, select the Brand Name: (.*) for the row with product Id (.*)")]
+		public void ProductsTableRowWithIdEnterBrandName(string brandName, string productId)
+		{
+			if (Report.IsTrue(new InternalInformationRevisions().InternalInfoRevisionsProductsTableRowSearchById(productId).InternalInfoRevisionsProductsTableRowExists(), $"Failure, failed to confirm row with '{productId}' as Product ID exist.", $"Success, confirmed row with '{productId}' as Product ID exist."))
+			{
+				if (Report.IsTrue(new InternalInformationRevisions().InternalInfoRevisionsProductsTableRowSearchById(productId).BrandSelectExists(), $"Failure, failed to find the Brand Name for row with Id {productId}", $"Success, found the Brand Name for row with Id {productId}"))
+				{
+					Report.IsTrue(new InternalInformationRevisions().InternalInfoRevisionsProductsTableRowSearchById(productId).BrandSelectOption(brandName), $"Failure, failed to select Brand Name for row with Id {productId}", $"Success, selected Brand Name for row with Id {productId}");
+				}
+			}
+		}
+		[RegexStepDefinition(@"In the Internal Information Revisions section, in the Products table, the Brand Name input (is|is not) displayed for the row with product Id (.*)")]
+		public void ProductsTableRowWithIdBrandNameIsDisplayed(string is_isnot, string productId)
+		{
+			bool expected = is_isnot == "is";
+			if (Report.IsTrue(new InternalInformationRevisions().InternalInfoRevisionsProductsTableRowSearchById(productId).InternalInfoRevisionsProductsTableRowExists(), $"Failure, failed to confirm row with '{productId}' as Product ID exist.", $"Success, confirmed row with '{productId}' as Product ID exist."))
+			{
+				Report.IsTrue(new InternalInformationRevisions().InternalInfoRevisionsProductsTableRowSearchById(productId).BrandSelectExists() == expected, $"Failure, failed to find the Brand Name for row with Id {productId}", $"Success, found the Brand Name for row with Id {productId}");
+			}
+		}
+		[RegexStepDefinition(@"In the Internal Information Revisions section, the 'Are you sure you wish to cancel\?' modal (should|should not) be displayed with text: 'If you cancel, any changes will be lost. Continue\?'")]
+		public void ProductsTableCancelPopupIsDisplayed(string condition)
+		{
+			string title = "Are you sure you wish to cancel?";
+			string text = "If you cancel, any changes will be lost. Continue?";
+			new Steps_ModalDialogPrototype().ConfirmModalTitleandModalText(condition, title, text);
+		}
+		[RegexStepDefinition(@"In the Internal Information Revisions section, in the 'Are you sure you wish to cancel\?' modal click the (YES|NO) button")]
+		public void ProductsTableCancelPopupClickButton(string button)
+		{
+			Steps_ModalDialogPrototype modalDialogPrototype = new Steps_ModalDialogPrototype();
+			modalDialogPrototype.DisplayedModalClickFooterButton(button);
+		}
 		#endregion
 		#endregion
 
