@@ -148,11 +148,6 @@ Scenario: [87640] UPC - Case Pack Only Present in product
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
 	Then In the Data Acceptance Section, click 'Accept' button
 	Given If purchase details are showing click confirm order
-	#Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto30 and Open SHA manager)
-	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87640)
-	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87640 and its status is: Submitted
-	#Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87640
-	#And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87640
 	
 	
 @TestCase:87650
@@ -391,35 +386,6 @@ Scenario: [87676] UPC - Case Pack can be removed from new product
 	Then I should be on the Optional Comments Page
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
 	Then in the Optional Comments page, I click Continue
-	#Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto30 and Open SHA manager)
-	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87676)
-	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase87676 and its status is: New
-	#Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87676
-	#And In the list of UPCs I should see case pack indicatior for UPC: saved as UPC87676
-	#And I close the window that opened
-	#Given I navigate to the landing page
-	#Given I log in with the account saved in TReVor as: ProductAccount
-	#And I search for the product saved as: TestCase87676
-	#And I click Row Actions for the first product returned
-	#Then I click on the Row Action: Edit
-	#Given In the New Product page I click tab: Recipient and UPC Details
-	#Given I click the page heading: Universal Product Code (UPC)
-	#And I delete UPC: saved as UPC87676
-	#Then In the list of UPCs I should not see UPC: saved as UPC87676
-	#Given I enter information for Enter Universal Product Code (UPC) - UPC-Container Type - Size Only for UPC: for UPC: saved as UPC876761, container type: Plastic Container and size: 25 - do not click continue
-	#And I click the 'Add Casepack' button
-	##And I switch to tab: UL Wercs Studio
-	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87676)
-	#Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto30 and Open SHA manager)
-	#Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase87676)
-	#Given I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase87676
-	#Then In the SHA list of UPCs I should not see UPC: saved as UPC87676
-	#And In the list of UPCs I should not see case pack indicatior for UPC: saved as UPC876761
-	#Given I navigate to the landing page
-	#Given I log in with the account saved in TReVor as: ProductAccount
-	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87676
-	#Then I navigate to the Home Page
-	#Then In the Product Grid, delete the product saved as: TestCase87676
 
 
 

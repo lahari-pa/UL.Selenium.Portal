@@ -631,15 +631,7 @@ Scenario: [56502] Pesticide Data - United States - EPA Exempt
 	Then In the Purchase Summary page message is displayed with text: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 	Then In the Purchase Summary Page, click the 'Home' button
 	Then The home screen should load
-	#Then I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	#And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto17 and Open SHA manager)
-	#And I Use the shared step below to search for your product - you may have to wait a few minutes for the product to show in submitted (the Zuora process)
-	#And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase56502)
-	#Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase56502 and its status is: Submitted
-	#And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase56502)
-	#And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase56502)
-	#Then In Power Designer I left click on section: [SECT0127] State Pesticide Information
-	#Then In Power Designer, confirm no data is displayed in section 'SECT0127 State Pesticide Information'
+
 
 @TestCase:132756
 Scenario: [132756] Canadian Province Pesticide Options
