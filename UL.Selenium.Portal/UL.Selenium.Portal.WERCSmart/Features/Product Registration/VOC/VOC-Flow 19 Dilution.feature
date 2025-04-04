@@ -18,6 +18,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
 @PhysicalAndChemicalProp
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOC_OzoneTransportCommission
 
 Feature: VOC - Flow 19 Dilution - validation of limits (Suite ID: 64747)
 
@@ -202,7 +203,7 @@ Scenario: [56478] VOC - CARB and OTC - Concentrate/dilution = No to Dilution che
 	Given I should see the Ingredients Page
 	Then In the Ingredients section, add the following ingredients:
 	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-	| component name | Sodium hydroxide       | 100     |                     |               |             |
+	| component name | Water       | 100     |                     |               |             |
 	Then in the Ingredients page I click Continue
 	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should be on the Inventory Status, Prop 65 (US) Page
@@ -211,15 +212,24 @@ Scenario: [56478] VOC - CARB and OTC - Concentrate/dilution = No to Dilution che
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
 	#Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Then I should be on the Transportation Details 1 Page
+	Then in the Transportation Details 1 page, I click Continue
+	Then In the Transportation Details 1 Section, the error 'This is a required field' is displayed for section 'Product is Regulated for Transport'
 	And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
 	Then in the Transportation Details 1 page, I click Continue
-	Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
-	Then the VOC concentration question shows a yes and a no button
-	Given in the VOC page I click Continue
-	Then For the VOC concentration question field I should see the following error: This is a required field.
-	Given I set the Product label specifies a dilution ratio which results in a final VOC concentration for the product during use field to: No
-	Then For the VOC page I should see the following error: Please be sure you have selected the correct product type. For further questions, please contact Support.
-	Given in the VOC page I click Continue
-#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56478
+	#Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
+	Then I should be on the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
+	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.': to: No
+	Then in the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) page, I click Continue
+	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?': to: Yes
+	Then In the VOC - Ozone Transport Commission Section the 'Product label specifies a dilution ratio which results in a final VOC concentration for the product during use' question is displayed
+	Then In the VOC - Ozone Transport Commission Section, for section 'Product label specifies a dilution ratio which results in a final VOC concentration for the product during use' confirm that the following options should be displayed:
+	| Option |
+	| Yes    |
+	| No     |
+	Given in the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) page I click Continue
+	Then In the VOC - Ozone Transport Commission Section, 'Product label specifies a dilution ratio which results in a final VOC concentration for the product during use' should be showing the error message: This is a required field.
+	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Product label specifies a dilution ratio which results in a final VOC concentration for the product during use': to: No
+	Then In the VOC - Ozone Transport Commission section, I confirm text 'Please be sure you have selected the correct product type. For further questions, please contact Support.' should be displayed
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56478
 	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase56478
+	Then I delete the product: TestCase56478
