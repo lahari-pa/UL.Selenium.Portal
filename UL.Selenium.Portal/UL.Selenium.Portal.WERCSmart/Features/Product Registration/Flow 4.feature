@@ -1227,20 +1227,18 @@ Scenario: [57985] Footwear or Leather Care Product - Aerosol (RU000744) - Testin
 	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?': to: Yes
 	Given I click continue
 
+	Given I should see the Volatile Organic Compound Summary Page
+	Then In the Volatile Organic Compound Summary Section, confirm that I see todays 'VOC Analysis Date'
+	And In the Volatile Organic Compound Summary Section, confirm 'VOC content as weight percentage of total formula, minus exempt compounds, for each of the following states.' table should exists
+	And In the Volatile Organic Compound Summary Section, for the table 'VOC content as weight percentage of total formula, minus exempt compounds, for each of the following states.' confirm the following values displays in the table:
+		| State                | Regulation            | VOC Value | State VOC Threshold | Message                          |
+		| New York             | State Allowable Limit | 15        | 75                  | Does not exceed the State Limits |
 
-	Then I confirm that I see the following CARB value: 75
-	Then I confirm that I see the following OTC Model Rule value: 15
-	And I confirm statement: Based on the type of product shows the text: Based on the type of product, this must comply with the most restrictive VOC limit.
-	Then I should see data for States in the 'VOC Content as weight percentage of total formula' table
-	And I should see the following Voc percent for each state:
-		| State           | Regulation            | VOC Value | State VOC Threshold | Message                          |
-		| New York        | State Allowable Limit | 15        | 75                  | Does not exceed the State Limits |
-	Then I should see the following Voc Limits present:
-	| Use									     | VOC Compliance Limit | Regulation           |
-	| Footwear or Leather Care Product - Aerosol | 75                   | OTC Model rule limit |
-	| Footwear or Leather Care Product - Aerosol | 75                   | CARB limit           |
-	And The VOC Summary page contains the statement with the text: Does not exceed the limits specified in the California Consumer Products Regulation
-	And The VOC Summary page contains the statement with the text: Does not exceed the limits specified by the Ozone Transport Commission
+	Then In the Volatile Organic Compound Summary Section, confirm that I see the following 'CARB' value: 75
+	Then In the Volatile Organic Compound Summary Section, confirm that I see the following 'OTC Model Rule' value: 15
+	And In the Volatile Organic Compound Summary Section, the statement 'Based on the type of product, this must comply with the most restrictive VOC limit.' is displayed
+	And In the Volatile Organic Compound Summary Section, the statement 'Does not exceed the limits specified in the California Consumer Products Regulation' is displayed
+	And In the Volatile Organic Compound Summary Section, the statement 'Does not exceed the limits specified by the Ozone Transport Commission' is displayed
 
 	Then I call Shared Step 57801 (Confirm VOC Summary step shown and VOC analysis date is shown - Happy Path)
 	Given In the Volatile Organic Compound Summary Section, for 'Your acknowledgement of this registration includes that your product..' set 'Yes, I Acknowledge'
@@ -1251,27 +1249,19 @@ Scenario: [57985] Footwear or Leather Care Product - Aerosol (RU000744) - Testin
 
 	#Given I call Shared Step 60567 (Upload Product Label only)
 	Given I should see the Regulatory Documents to Provide Page
-	Given in the Regulatory Documents to Provide page I click Continue
-	Then In the Regulatory Documents to Provide Section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)' error message should display: Document is required: Product Label
-	Then In the Regulatory Documents to Provide Section, upload file in section: 'Upload Full Product Label (required) (For private label products please upload a generic label that is not retailer-specific.)'
-	Given in the Regulatory Documents to Provide page I click Continue
-
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Yes, I certify that I have an OSHA-compliant SDS for this product and would like to upload it.
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'OSHA SDS'
+	Then In the Regulatory Documents to Provide Section, for section OSHA SDS button View should exists
+	Then In the Regulatory Documents to Provide Section, for section OSHA SDS button Remove should exists
+	Then in the Regulatory Documents to Provide page I click Continue
+	Given I should see the Additional Documents to Provide Page
+	And In the Additional Documents to Provide, upload PDF document for section: Volatile Organic Compounds - Product Label
+	And in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-
-	Given In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
-	Given In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
-	Given In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
-	Given In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
-	Given In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor' to: Orange
-	Given In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor Threshold' to: No data available
-	Given In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Product's Dispensing Method' select option: Aerosol
-	Given In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Partition Coefficient' enter text: 41.3005
-	Then in the Safety Data Sheet Authoring - Additional Data (Optional) page I click Continue
-
 	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comments Text
-    And I should see the Optional Comments Page
-    And I enter the following into the comments field: Comments Text
-    Then in the Optional Comments page I click Continue
+	Given I should see the Optional Comments Page
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
+	Then in the Optional Comments page I click Continue
 
 	# ====== Given I call Shared Step 221015 (Summary Tab - Product's Data Verification When Request to Author is NOT Selected in the Regulatory Documents to Provide Page (Applies Only to Footwear or Leather Care Product Aerosol (RU000744)) ====== #
 	# ====== | Section                                    | Value                                                                                                                                                                                | ====== #
@@ -1299,7 +1289,10 @@ Scenario: [57985] Footwear or Leather Care Product - Aerosol (RU000744) - Testin
 
 #	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57985
 	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase57985
+	Then I delete the product: TestCase57985
+
+
+
 @TestCase:57988
 Scenario: [57988] Anti-Static Product - Non-Aerosol (RU000667) 4-L
 	Given I log in with the account saved in TReVor as: ProductAccount
