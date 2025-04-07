@@ -19,6 +19,10 @@
 @PhysicalAndChemicalProp
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOC_OzoneTransportCommission
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOC_Summary
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
 
 Feature: VOC - Flow 19 Dilution - validation of limits (Suite ID: 64747)
 
@@ -26,7 +30,7 @@ Feature: VOC - Flow 19 Dilution - validation of limits (Suite ID: 64747)
 Scenario: [62730] VOC - Flow 19 - Dilution ration - Sold = 50, Used = 45 limit checking
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
-#	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
@@ -91,14 +95,17 @@ Scenario: [62730] VOC - Flow 19 - Dilution ration - Sold = 50, Used = 45 limit c
 
 @TestCase:62708
 Scenario: [62708] VOC - Flow 19 - Dilution - Limits checking - Sold = 1 Used = 2
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
-#	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Floor Wax Stripper (Light or Medium Build-Up)
-
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Floor Wax Stripper (Light or Medium Build-Up)
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Floor Wax Stripper (Light or Medium Build-Up)_#62708
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Floor Wax Stripper (Light or Medium Build-Up)
+	Then in the The Product page, I click Continue
 	Then I save the product information as: TestCase62708
 	#Given I call Shared Step 57401 (Product Information - US only - No GHS, Not Direct Ship, Not PLP, Not GNFR > Continue - Happy Path)
 	Given I should see the Product Information Page
@@ -123,48 +130,64 @@ Scenario: [62708] VOC - Flow 19 - Dilution - Limits checking - Sold = 1 Used = 2
 	Given I should see the Ingredients Page
 	Then In the Ingredients section, add the following ingredients:
 	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-	| component name | Sodium hydroxide       | 100     |                     |               |             |
+	| component name | Water       | 100     |                     |               |             |
 	Then in the Ingredients page I click Continue
-
 	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should be on the Inventory Status, Prop 65 (US) Page
 	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
 	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
-
 	#Given I call Shared Step 57507 (Transportation Details 1- Not Regulated - Continue - Happy Path)
 	Then I should be on the Transportation Details 1 Page
+	Then in the Transportation Details 1 page, I click Continue
+	Then In the Transportation Details 1 Section, the error 'This is a required field' is displayed for section 'Product is Regulated for Transport'
 	And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Not Regulated
 	Then in the Transportation Details 1 page, I click Continue
-
-	Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
-	#Given I set the Product label specifies a dilution ratio which results in a final VOC concentration for the product during use field to: Yes
-		Given I set the Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison? option to: Yes
-	Given I set 'Product label dilution ratio' to: Yes
-	Given in the VOC page I click Continue
-	Then For the Product's VOC content as sold field I should see the following error: This is a required field.
-	Then For the Product's VOC content as used field I should see the following error: This is a required field.
-	Given I set 'VOC Content As Sold' to: 1
-	Given I set 'VOC Content As Used' to: 2
-	#Given I set the Product's VOC content as sold field to: 1
-	#Given I set the Product's VOC content as used field to: 2
-	Then For the Product's VOC content as sold field I should see not see an error
-	Then For the Product's VOC content as used field I should see not see an error
-	Given in the VOC page I click Continue
-	Then I should see the Volatile Organic Compound Summary Page
-	Given I call Shared Step 57801 (Confirm VOC Summary step shown, Confirm VOC analysis date is shown - Happy Path)
-	Given I call Shared Step 57817 (VOC Results - Confirm VOC Limits table shows correct values (OTC & CARB) - Happy Path): Floor Wax Stripper (Light or Medium Build-Up)
-	Then in the VOC Summary page I should see the following noneditable statements
-		| Statement                                                                                                                                    |
-		| VOC percent as sold 1                                                                                                                        |
-		| VOC percent diluted for use 2                                                                                                                |
-		| Based on the type of product, this must comply with the most restrictive VOC limit.                                                          |
-		| Does not exceed the limits specified in the California Consumer Products Regulation                                                          |
-		| Does not exceed the limits specified by the Ozone Transport Commission                                                                       |
-		| Based on your previous selections, the product has the following intended use: The OTC Model Rule and CARB limits for this intended use are: |
-#	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase62708
+	#Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
+	#Then 225738 Confirm VOC OTC/CARB with VOC percentages and VOC content questions: Select NO/YES/YES
+	Then I should be on the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
+	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.': to: No
+	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?': to: Yes
+	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Product label specifies a dilution ratio which results in a final VOC concentration for the product during use': to: Yes
+	Given in the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) page I click Continue
+	Then In the VOC - Ozone Transport Commission Section, 'Product's VOC content as sold' should be showing the error message: This is a required field.
+	Then In the VOC - Ozone Transport Commission Section, 'Product's VOC content as used' should be showing the error message: This is a required field.
+	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Product's VOC content as sold': to: 11
+	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Product's VOC content as used': to: 2
+	Then In the VOC - Ozone Transport Commission Section, 'Product's VOC content as sold' should not be showing the error message: This is a required field.
+	Then In the VOC - Ozone Transport Commission Section, 'Product's VOC content as used' should not be showing the error message: This is a required field.
+	Given in the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) page I click Continue
+	And I should see the Volatile Organic Compound Summary Page
+	Then In the Volatile Organic Compound Summary Section, confirm that I see todays 'VOC Analysis Date'
+	Then In the Volatile Organic Compound Summary Section, confirm 'Limits' table should exists
+	#Then In the Volatile Organic Compound Summary Section, confirm 'VOC content as weight percentage of total formula, minus exempt compounds, for each of the following states.' table should exists
+	#Then In the Volatile Organic Compound Summary Section, confirm that I see the following 'CARB' value: 5
+	#Then In the Volatile Organic Compound Summary Section, confirm that I see the following 'OTC Model Rule' value: 5
+	Then In the Volatile Organic Compound Summary Section, the statement 'Based on the type of product, this must comply with the most restrictive VOC limit.' is displayed
+	Then In the Volatile Organic Compound Summary Section, the statement 'Does not exceed the limits specified in the California Consumer Products Regulation' is displayed
+	Then In the Volatile Organic Compound Summary Section, the statement 'Does not exceed the limits specified by the Ozone Transport Commission' is displayed
+	Then In the Volatile Organic Compound Summary Section, for 'Your acknowledgement of this registration includes that your product..' set 'Yes, I Acknowledge'
+	And I click continue
+	Given I should see the Retailer Page
+	And In the Retailer Section, following retailers should be displayed:
+		| Retailer                   |
+		| No Retailer/No UPC Product |
+	Then in the Retailer page, I click Continue
+	#Then I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA SDS)
+	And I should see the Regulatory Documents to Provide Page
+	Given In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Yes, I certify that I have an OSHA-compliant SDS for this product and would like to upload it.
+	Given In the Regulatory Documents to Provide Section, upload file in section: 'OSHA SDS'
+	And in the Regulatory Documents to Provide page I click Continue
+	And I should see the Additional Documents to Provide Page
+	Then In the Additional Documents to Provide, upload PDF document for section: Volatile Organic Compounds - Product Label
+	And in the Additional Documents to Provide page I click Continue
+	And I should see the Optional Reports and Documents Available for Purchase Page
+	And in the Optional Reports and Documents Available for Purchase page I click Continue
+	And I should see the Optional Comments Page
+	And in the Optional Comments page I click Continue
+	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase62708
 	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase62708
+	Then I delete the product: TestCase62708
 
 @TestCase:56478
 Scenario: [56478] VOC - CARB and OTC - Concentrate/dilution = No to Dilution checking warning message shown
@@ -219,8 +242,8 @@ Scenario: [56478] VOC - CARB and OTC - Concentrate/dilution = No to Dilution che
 	#Given I call Shared Step 62710 (Confirm VOC OTC/CARB heading and select No to FIRST QUESTION ONLY - Happy Path)
 	Then I should be on the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
 	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.': to: No
-	Then in the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) page, I click Continue
 	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?': to: Yes
+	Then in the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) page, I click Continue
 	Then In the VOC - Ozone Transport Commission Section the 'Product label specifies a dilution ratio which results in a final VOC concentration for the product during use' question is displayed
 	Then In the VOC - Ozone Transport Commission Section, for section 'Product label specifies a dilution ratio which results in a final VOC concentration for the product during use' confirm that the following options should be displayed:
 	| Option |

@@ -161,5 +161,17 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string section = "Product label specifies a dilution ratio which results in a final VOC concentration for the product during use";
 			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
 		}
+		[RegexStepDefinition(@"In the VOC - Ozone Transport Commission Section, 'Product's VOC content as sold' (should|should not) be showing the error message: (.*)")]
+		public void VOCContentAsSoldSectionDisplayingErrorMessage(string condition, string alertText)
+		{
+			string section = "Product's VOC content as sold";
+			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, condition, alertText);
+		}
+		[RegexStepDefinition(@"In the VOC - Ozone Transport Commission Section, 'Product's VOC content as used' (should|should not) be showing the error message: (.*)")]
+		public void VOCContentAsUsedSectionDisplayingErrorMessage(string condition, string alertText)
+		{
+			string section = "Product's VOC content as used";
+			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, condition, alertText);
+		}
 	}
 }
