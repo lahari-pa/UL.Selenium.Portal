@@ -573,20 +573,11 @@ Scenario: [56502] Pesticide Data - United States - EPA Exempt
 	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
 	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
-	#Given I call Shared Step 57713 Regulatory Information 3 - Drug Facts Panel - None of the above - Continue - Happy Path
-	Given I should see the Regulatory Information 3 Page
-	Then In the Regulatory Information 3 Section, the statement 'Based on the product's recommended use and formulation, this is a possible pharmaceutical waste for California.  Please complete the additional question below to ensure proper classification of this product for the retailer(s).' is displayed
-	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' displayed options are:
-	| Option                 |
-	| Drug Facts Panel       |
-	| Supplement Facts Panel |
-	| Nutrition Facts Panel  |
-	| None of the Above      |
-	Then In the Regulatory Information 3 Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above 
-	Then In the Regulatory Information 3 Section, the following link: Nutritional and Supplement Labels should be displayed
-	Then In the Regulatory Information 3 Section, the following link: Dietary Supplements Label should be displayed
-	Then In the Regulatory Information 3 Section, the following link: OTC Drug Facts Label (may include Active Ingredient) should be displayed
-	Then in the Regulatory Information 3 page I click Continue
+
+	Given I should see the Product Labeling Page
+	Then In the Product Labeling Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above
+	Then in the Product Labeling page, I click Continue
+
 	Then I should see the Pesticide Details - U.S. Page
 	Then In the Pesticide Details - U.S. Section, for section: 'Product has an Environmental Protection Agency (EPA) Registration Number' get default option's background color and save it as: defaultColor
 	Then in the Pesticide Details - U.S. page I click Continue
@@ -640,15 +631,7 @@ Scenario: [56502] Pesticide Data - United States - EPA Exempt
 	Then In the Purchase Summary page message is displayed with text: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 	Then In the Purchase Summary Page, click the 'Home' button
 	Then The home screen should load
-	Then I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	#And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto17 and Open SHA manager)
-	#And I Use the shared step below to search for your product - you may have to wait a few minutes for the product to show in submitted (the Zuora process)
-	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase56502)
-	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase56502 and its status is: Assigned
-	#And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase56502)
-	And I call Shared Step 68969 (WPS Studio - Open PD+, edit existing with specific product > Click Continue for product saved as: TestCase56502)
-	Then In Power Designer I left click on section: [SECT0127] State Pesticide Information
-	Then In Power Designer, confirm no data is displayed in section 'SECT0127 State Pesticide Information'
+
 
 @TestCase:132756
 Scenario: [132756] Canadian Province Pesticide Options
