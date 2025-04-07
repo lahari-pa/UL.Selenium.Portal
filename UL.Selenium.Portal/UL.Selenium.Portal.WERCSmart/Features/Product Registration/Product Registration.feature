@@ -54,17 +54,6 @@ Scenario: [130389] Demo Scenario
 #Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
 #Then The home screen should load
 
-#Removed from regression 2024/04
-@ignore
-@ScenarioId:486
-Scenario: Create a new product
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given If I see the retail partners page I set all data consent tiers to true for all retailers in the top section
-	Then The home screen should load
-	Then I click the Register New Product icon in the Navigation Pane
-	And I should see the header New Product
-	Given I click the Register New Product icon in the Navigation Pane
-	When I click continue
 
 @ignore
 @TestCase:63705
