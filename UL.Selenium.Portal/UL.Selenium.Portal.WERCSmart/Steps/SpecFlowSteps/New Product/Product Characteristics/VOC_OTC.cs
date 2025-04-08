@@ -1,5 +1,6 @@
 ﻿using Reqnroll;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {
@@ -172,6 +173,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			string section = "Product's VOC content as used";
 			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, condition, alertText);
+		}
+		[RegexStepDefinition(@"In the VOC - Ozone Transport Commission Section, the following statements are not editable:")]
+		public void VOCNotEditableStatements(Table table)
+		{
+			new StepsNewProduct().ThenInTheVOCSummaryPageIShouldSeeTheFollowingNoneditableStatements(table);
+
 		}
 	}
 }
