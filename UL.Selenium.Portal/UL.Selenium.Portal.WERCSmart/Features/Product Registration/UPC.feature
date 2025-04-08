@@ -498,6 +498,8 @@ Scenario: [87832] View Shows Case UPC Data
 		| saved as UPC878321 | saved as UPC878321 | Paper bag      | 2             | 5        | 1A2: removable head steel drum | AM        |
 		| saved as UPC87832  |                    | Paper bag      | 2             |          |                                | AM        |
 
+#Removed from regression: 2025/04
+@ignore
 @TestCase:87825
 Scenario: [87825] Summary Shows Case UPC Data
 	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

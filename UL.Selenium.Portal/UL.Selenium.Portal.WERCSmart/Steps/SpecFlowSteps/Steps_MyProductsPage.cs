@@ -1158,7 +1158,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		[RegexStepDefinition(@"In the Delete Product modal, confirm 'DELETE' footer button (does|does not) exist")]
 		public void DeleteProductModalDeleteFooterButtonDoesDoesNotExist(string does_doesnot)
 		{
-			string buttonLabel = "Delete";
+			string buttonLabel = "DELETE";
 			Steps_ModalDialogPrototype modalDialogPrototype = new Steps_ModalDialogPrototype();
 			modalDialogPrototype.DisplayedModalConfirmFooterButtonDoesDoesNotExist(buttonLabel, does_doesnot);
 
@@ -1167,7 +1167,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		[RegexStepDefinition(@"In the Delete Product modal, confirm 'CANCEL' footer button (does|does not) exist")]
 		public void DeleteProductModalCancelFooterButtonDoesDoesNotExist(string does_doesnot)
 		{
-			string buttonLabel = "Cancel";
+			string buttonLabel = "CANCEL";
 			Steps_ModalDialogPrototype modalDialogPrototype = new Steps_ModalDialogPrototype();
 			modalDialogPrototype.DisplayedModalConfirmFooterButtonDoesDoesNotExist(buttonLabel, does_doesnot);
 
@@ -1176,7 +1176,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		[RegexStepDefinition(@"In the Delete Product modal, click 'DELETE' footer button")]
 		public void DeleteProductModalClickDeleteFooterButton()
 		{
-			string buttonLabel = "Delete";
+			string buttonLabel = "DELETE";
 			Steps_ModalDialogPrototype modalDialogPrototype = new Steps_ModalDialogPrototype();
 			modalDialogPrototype.DisplayedModalClickFooterButton(buttonLabel);
 
@@ -1185,7 +1185,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		[RegexStepDefinition(@"In the Delete Product modal, click 'CANCEL' footer button")]
 		public void DeleteProductModalClickCancelFooterButton()
 		{
-			string buttonLabel = "Cancel";
+			string buttonLabel = "CANCEL";
 			Steps_ModalDialogPrototype modalDialogPrototype = new Steps_ModalDialogPrototype();
 			modalDialogPrototype.DisplayedModalClickFooterButton(buttonLabel);
 

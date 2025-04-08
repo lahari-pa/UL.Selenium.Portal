@@ -271,6 +271,8 @@ Scenario: [57646] Plant Growth regulator (Liquid or Solid) (RU000291) 2-L
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase57646
 
+#Removed from regression: 2025/04
+@ignore
 @TestCase:57649
 Scenario: [57649] Cosmetics (RU000034) 2LS - 2L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account

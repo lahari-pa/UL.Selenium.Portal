@@ -59,17 +59,6 @@ Scenario: [63514] Add and Deactivate a New User from the User Grid
 	Then I Wait for a modal popup to appear
 	And I Click approve in dialog
 
-#Removed from regression 2024/04
-@ignore
-@TestCase:64874
-Scenario: [64874] Division Area - no divisions set up
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Visual Account
-	And I navigate to My Account
-	And I click on the option Division Accounts
-	And I should not see the Division Accounts grid
-	And In the My Account page I navigate to the Company Information page
-	Then In the Company Information screen I should see 0 Division Accounts
-
 @TestCase:65887
 Scenario: [65887] Pagination
 	#CLF 25/6/2019 Changed login account to one that has enough products to page through
