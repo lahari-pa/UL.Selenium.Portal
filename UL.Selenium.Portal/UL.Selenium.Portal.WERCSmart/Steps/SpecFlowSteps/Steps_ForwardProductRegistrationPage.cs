@@ -1,4 +1,5 @@
 ﻿using Reqnroll;
+using System.IO.Packaging;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.ReqnrollHelpers.Classes;
@@ -310,12 +311,130 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		#endregion
 
 		#region Select Retailers Tab Steps
-		[RegexStepDefinition(@"In the Select Retailers Tab, confirm the Select Retailer Action Links list (does|does not) exist")]
+		[RegexStepDefinition(@"In the Select Retailers Tab, confirm Select Retailer Action Links list (does|does not) exist")]
 		public void SelectRetailersTabConfirmSelectRetailerActionLinksListExists(string does_doesnot)
 		{
 			bool expected = does_doesnot == "does";
 			ForwardProductRegistrationPage forwardProductRegistration = new ForwardProductRegistrationPage();
 			Report.IsTrue(expected == forwardProductRegistration.SelectRetailerActionLinksListExists(), $"Failure, failed to confirm Select Retailer Action Links list {does_doesnot} exist.", $"Success, confirmed Select Retailer Action Link list {does_doesnot} exist.");
+		}
+
+		[RegexStepDefinition(@"In the Select Retailers Tab, confirm (Select all|Show list view|Show logo tile view) Select Retailer Action Link (does|does not) exist")]
+		public void SelectRetailersTabConfirmSelectRetailerActionLinkExists(string linkLabel, string does_doesnot)
+		{
+			bool expected = does_doesnot == "does";
+			ForwardProductRegistrationPage forwardProductRegistration = new ForwardProductRegistrationPage();
+			if(Report.IsTrue(forwardProductRegistration.SelectRetailerActionLinksListExists(), $"Failure, failed to confirm Select Retailer Action Links list does exist.", $"Success, confirmed Select Retailer Action Link list does exist."))
+			{
+				Report.IsTrue(expected == forwardProductRegistration.SelectRetailerActionLinkExists(linkLabel), $"Failure, failed to confirm '{linkLabel}' select retailer action link {does_doesnot} exist.", $"Success, confirmed '{linkLabel}' select retailer action link {does_doesnot} exist.");
+			}
+		}
+
+		[RegexStepDefinition(@"In the Select Retailers Tab, click (Select all|Show list view|Show logo tile view) Select Retailer Action Link")]
+		public void SelectRetailersTabClickSelectRetailerActionLink(string linkLabel)
+		{
+			ForwardProductRegistrationPage forwardProductRegistration = new ForwardProductRegistrationPage();
+			if (Report.IsTrue(forwardProductRegistration.SelectRetailerActionLinksListExists(), $"Failure, failed to confirm Select Retailer Action Links list does exist.", $"Success, confirmed Select Retailer Action Link list does exist."))
+			{
+				if(Report.IsTrue(forwardProductRegistration.SelectRetailerActionLinkExists(linkLabel), $"Failure, failed to confirm '{linkLabel}' select retailer action link does exist.", $"Success, confirmed '{linkLabel}' select retailer action link does exist."))
+				{
+					Report.IsTrue(forwardProductRegistration.SelectRetailerActionLinkClick(linkLabel), $"Failure, failed to click '{linkLabel}' select retailer action link.", $"Success, clicked '{linkLabel}' select retailer action link.");
+				}
+			}
+		}
+
+		[RegexStepDefinition(@"In the Select Retailers Tab, confirm Selectable Retailers list (does|does not) exist")]
+		public void SelectRetailersTabConfirmSelectableRetailersListExists(string does_doesnot)
+		{
+			bool expected = does_doesnot == "does";
+			ForwardProductRegistrationPage forwardProductRegistration = new ForwardProductRegistrationPage();
+			Report.IsTrue(expected == forwardProductRegistration.SelectableRetailersListExists(), $"Failure, failed to confirm selectable retailers list {does_doesnot} exist.", $"Success, confirmed selectable retailers list {does_doesnot} exist.");
+		}
+
+		[RegexStepDefinition(@"In the Select Retailers Tab, confirm (.*) Selectable Retailer (does|does not) exist")]
+		public void SelectRetailersTabConfirmSelectableRetailerExists(string retailerLabel, string does_doesnot)
+		{
+			bool expected = does_doesnot == "does";
+			ForwardProductRegistrationPage forwardProductRegistration = new ForwardProductRegistrationPage();
+			if(Report.IsTrue(forwardProductRegistration.SelectableRetailersListExists(), $"Failure, failed to confirm selectable retailers list does exist.", $"Success, confirmed selectable retailers list does exist."))
+			{
+				Report.IsTrue(expected == forwardProductRegistration.SelectableRetailerExists(retailerLabel), $"Failure, failed to confirm '{retailerLabel}' selectable retailer {does_doesnot} exist.", $"Success, confirmed '{retailerLabel}' selectable retailer {does_doesnot} exist.");
+			}
+		}
+
+		[RegexStepDefinition(@"In the Select Retailers Tab, click (.*) Selectable Retailer Checkbox")]
+		public void SelectRetailersTabClickSelectableRetailerCheckbox(string retailerLabel)
+		{
+			ForwardProductRegistrationPage forwardProductRegistration = new ForwardProductRegistrationPage();
+			if (Report.IsTrue(forwardProductRegistration.SelectableRetailersListExists(), $"Failure, failed to confirm selectable retailers list does exist.", $"Success, confirmed selectable retailers list does exist."))
+			{
+				if(Report.IsTrue(forwardProductRegistration.SelectableRetailerExists(retailerLabel), $"Failure, failed to confirm '{retailerLabel}' selectable retailer does exist.", $"Success, confirmed '{retailerLabel}' selectable retailer does exist."))
+				{
+					Report.IsTrue(forwardProductRegistration.SelectableRetailer(retailerLabel).CheckboxClick(), $"Failure, failed to click '{retailerLabel}' selectable retailer checkbox.", $"Success, clicked '{retailerLabel}' selectable retailer checkbox.");
+				}
+			}
+		}
+
+		[RegexStepDefinition(@"In the Select Retailers Tab, confirm (.*) Selectable Retailer Checkbox (is|is not) checked")]
+		public void SelectRetailersTabConfirmSelectableRetailerCheckboxChecked(string retailerLabel, string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			ForwardProductRegistrationPage forwardProductRegistration = new ForwardProductRegistrationPage();
+			if (Report.IsTrue(forwardProductRegistration.SelectableRetailersListExists(), $"Failure, failed to confirm selectable retailers list does exist.", $"Success, confirmed selectable retailers list does exist."))
+			{
+				if (Report.IsTrue(forwardProductRegistration.SelectableRetailerExists(retailerLabel), $"Failure, failed to confirm '{retailerLabel}' selectable retailer does exist.", $"Success, confirmed '{retailerLabel}' selectable retailer does exist."))
+				{
+					Report.IsTrue(expected == forwardProductRegistration.SelectableRetailer(retailerLabel).CheckboxChecked(), $"Failure, failed to confirm '{retailerLabel}' selectable retailer checkbox {is_isnot} checked.", $"Success, confirmed '{retailerLabel}' selectable retailer checkbox {is_isnot} checked.");
+				}
+			}
+		}
+
+		[RegexStepDefinition(@"In the Select Retailers Tab, confirm (.*) Selectable Retailer (is|is not) in the 'You most recently did buisness with...' section")]
+		public void SelectRetailersTabConfirmSelectableRetailerIsRecent(string retailerLabel, string is_isnot)
+		{
+			bool expected = is_isnot == "is";
+			ForwardProductRegistrationPage forwardProductRegistration = new ForwardProductRegistrationPage();
+			if (Report.IsTrue(forwardProductRegistration.SelectableRetailersListExists(), $"Failure, failed to confirm selectable retailers list does exist.", $"Success, confirmed selectable retailers list does exist."))
+			{
+				if (Report.IsTrue(forwardProductRegistration.SelectableRetailerExists(retailerLabel), $"Failure, failed to confirm '{retailerLabel}' selectable retailer does exist.", $"Success, confirmed '{retailerLabel}' selectable retailer does exist."))
+				{
+					Report.IsTrue(expected == forwardProductRegistration.SelectableRetailer(retailerLabel).IsRecent(), $"Failure, failed to confirm '{retailerLabel}' selectable retailer {is_isnot} in the 'You most recently did business with...' section.", $"Success, confirmed '{retailerLabel}' selectable retailer {is_isnot} in the 'You most recently did business with...' section.");
+				}
+			}
+		}
+		#endregion
+
+		#region Select UPCs Tab Steps
+		[RegexStepDefinition(@"In the Select UPCs Tab, confirm Select Products Table Product Rows list (does|does not) exist")]
+		public void SelctUPCsTabConfirmSelectProductsTableProductRowsListExists(string does_doesnot)
+		{
+			bool expected = does_doesnot == "does";
+			ForwardProductRegistrationPage forwardProductRegistration = new ForwardProductRegistrationPage();
+			Report.IsTrue(expected == forwardProductRegistration.SelectProductsProductRowsListExists(), $"Failure, failed to confirm Select Products Table Product Rows list {does_doesnot} exist.", $"Success, confirmed Select Products Table Product Rows list {does_doesnot} exist.");
+		}
+
+		[RegexStepDefinition(@"In the Select UPCs Tab, confirm Select Products Table Product Row with (.*) Product Name (does|does not) exist")]
+		public void SelectUPCsTabConfirmSelectProductsTableProductRowWithProductNameExists(string productName, string does_doesnot)
+		{
+			bool expected = does_doesnot == "does";
+			ForwardProductRegistrationPage forwardProductRegistration = new ForwardProductRegistrationPage();
+			if(Report.IsTrue(forwardProductRegistration.SelectProductsProductRowsListExists(), $"Failure, failed to confirm Select Products Table Product Rows list does exist.", $"Success, confirmed Select Products Table Product Rows list does exist."))
+			{
+				Report.IsTrue(expected == forwardProductRegistration.SelectProductsProductRowByProductNameExists(productName), $"Failure, failed to confirm Select Products Table Product Row with '{productName}' Product Name {does_doesnot} exist.", $"Success, confirmed Select Products Table Product Row with '{productName}' Product Name {does_doesnot} exist.");
+			}
+		}
+
+		[RegexStepDefinition(@"In the Select UPCs Tab, click Select Products Table Product Row with (.*) Product Name")]
+		public void SelectUPCsTabClickSelectProductsTableProductRowWithProductName(string productName)
+		{
+			ForwardProductRegistrationPage forwardProductRegistration = new ForwardProductRegistrationPage();
+			if (Report.IsTrue(forwardProductRegistration.SelectProductsProductRowsListExists(), $"Failure, failed to confirm Select Products Table Product Rows list does exist.", $"Success, confirmed Select Products Table Product Rows list does exist."))
+			{
+				if(Report.IsTrue(forwardProductRegistration.SelectProductsProductRowByProductNameExists(productName), $"Failure, failed to confirm Select Products Table Product Row with '{productName}' Product Name does exist.", $"Success, confirmed Select Products Table Product Row with '{productName}' Product Name does exist."))
+				{
+					Report.IsTrue(forwardProductRegistration.SelectProductsProductRowByProductName(productName).Click(), $"Failure, failed to click Select Products Table Product Row with '{productName}' Product Name.", $"Success, clicked Select Products Table Product Row with '{productName}' Product Name.");
+				}
+			}
 		}
 		#endregion
 	}

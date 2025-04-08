@@ -25,68 +25,6 @@ Background:
 		| username    | FirstName | LastName   | Role         | EmailAddress                |
         | SHAQAAuto9  | QA        | Automation | QA Reviewers | qasha.kxxyxunf@mailosaur.io |
 
-#Removed from regression 2024/04
-@ignore
-@73949
-@TestCase:73949
-Scenario: [73949] Kit - Document merge - US only
-	Given I create a Walmart product for a Kit and Force it to completed using Test Case 75335 using SHA Acc: SHAQAAuto9 (SOLD set to US only with Walmart as retailer) and save as: 73949_KitProduct1
-	Given I navigate to the landing page
-	Given I create a Walmart product for a Kit and Force it to completed using Test Case 75335 using SHA Acc: SHAQAAuto9 (SOLD set to US only with Walmart as retailer) and save as: 73949_KitProduct2
-	Given I navigate to the landing page	
-	Given I generate a random UPC number and save as: UPC73949
-	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	Given I log in with the account saved in TReVor as: ProductAccount
-	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	#And I In the shared step below use any of the kit product types - these areCosmetic Products in a kit (RU000777)Hair Care kit (RU000723)Hair Color Kit (RU000724)Emergency Road kit (RU000718)Automotive Care Products (RU000124)Personal Care kit (RU001034)
-	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Hair Color Kit
-	Then I save the product information as: TestCase73949
-	And I call Shared Step 60648 (Product Information - US, No (Direct Ship), No (PL), No (GNFR))
-	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	And I call Shared Step 31427 (Create the Kit - Adding two products: product 1: 73949_KitProduct1 and product 2: 73949_KitProduct2)
-	And I call Shared Step 57506 (Transportation Details 1 - Regulated for Transport(No) - Exemption(Random) - Continue - Happy Path)
-	And I call Shared Step 62536 (Transportation Details 2 > I do not ship internationally > Continue - Happy Path)
-	And I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
-	And I should see the Additional Documents to Provide Page
-	And I click continue
-	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: test
-	Given I should see the Optional Comments Page
-	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
-	Then in the Optional Comments page I click Continue
-
-	#And I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	Given I should see the Data Acceptance Page
-	Then In the Data Acceptance Section, check 'Agreed' checkbox
-	Then In the Data Acceptance Section, click 'Accept' button
-
-	And If purchase details are showing click confirm order
-	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
-	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase73949)
-	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase73949 and its status is: Submitted
-	And I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase73949)
-	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
-	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase73949)
-	And In the SHA manager grid I see the WPS ID I have saved as product: TestCase73949 and its status is: Assigned
-	And I call Shared Step 49743 - SHA Manager - Select Product - Actions - Document Management for saved as: TestCase73949
-	And I Confirm you see the Document List pop up
-
-	Then I Delete the file with name: GetDocument.pdf from the downloads folder
-	And In the Document List popup I Confirm the Filename column shows an entry for xxxxxxx.pdf - where xxxxxxx is the product id of product saved as: TestCase73949
-	And In the Document List popup I Double click on the filename for product saved as: TestCase73949
-
-	Then I confirm that a file is produced called GetDocument.pdf and save as savedas73949PDF
-	Then I Check that the file saved as: savedas73949PDF contains the text 'NGHS / English' twice as well as the product codes saved as: 73949_KitProduct1 and 73949_KitProduct2
-	Then I delete the file saved as savedas73949PDF
-	And I Click Cancel on the Document List window pop up
-
-	# And confirm you see NGHS documents in EN for both the input productsNote:
-	# each document in the PDF will show NGHS / English and the Product Code(s) will show the product ID for the input product
-	#CLF 21/03/2019 Commenting out below because I cannot get the pdf document
-
-	#Then I should see a new tabbed document with the pdf containing product code saved as: TestCase73949 and NGHS / English twice
-	#Then I should see a new tabbed document whose URL contains DocumentID
-	#Then I Delete the file with name: TempPDF.pdf from the downloads folder
-
 #And I close the window that opened
 #And I Click Cancel on the Document List window pop up
 # Assigned to Barrett, Beverly

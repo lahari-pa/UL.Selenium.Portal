@@ -34,7 +34,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		private List<IWebElement> SelectRetailerActionLinksList => [..this.ContainerElement.FindElements(By.XPath(".//a[@class='small-link']"), 1)];
 		private IWebElement SelectRetailerActionLink(string linkLabel) => this.SelectRetailerActionLinksList.FirstOrDefault(x => x.Text.Equals(linkLabel, System.StringComparison.Ordinal));
 		private List<SelectableRetailer> SelectableRetailersList => [.. this.ContainerElement.FindElements(By.XPath(".//label[.//input[@type='checkbox']]"), 1).Select(x => new SelectableRetailer(x))];
-		public SelectableRetailer SelectableRetailerLabeled(string label) => this.SelectableRetailersList.FirstOrDefault(x => x.Label.Equals(label, System.StringComparison.Ordinal));
+		public SelectableRetailer SelectableRetailer(string label) => this.SelectableRetailersList.FirstOrDefault(x => x.Label.Equals(label, System.StringComparison.Ordinal));
 		#endregion
 		#region Select UPCs Objects
 		private IWebElement SelectProductsTable => this.ContainerElement.FindElement(By.XPath(".//table[@class='table']"), 1);
@@ -205,7 +205,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool SelectableRetailerExists(string retailerLabel)
 		{
 			Report.Info($"Attempting to confirm '{retailerLabel}' selectable retailer exists.");
-			return this.SelectableRetailerLabeled(retailerLabel) != null;
+			return this.SelectableRetailer(retailerLabel) != null;
 		}
 		#endregion
 		#region Labeled Button Methods
@@ -235,22 +235,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 			return this.SelectProductsProductRowByProductName(productName) != null;
 		}
 
-		public bool SelectProductsProductRowByProductNameClick(string productName)
-		{
-			Report.Info($"Attempting to click product row with '{productName}' product name.");
-			return this.SelectProductsProductRowByProductName(productName).Click();
-		}
-
 		public bool SelectProductsProductRowByWPSIDExists(string wpsid)
 		{
 			Report.Info($"Attempting to confirm product row with '{wpsid}' wpsid exists.");
 			return this.SelectProductsProductRowByWPSID(wpsid) != null;
-		}
-
-		public bool SelectProductsProductRowByWPSIDClick(string wpsid)
-		{
-			Report.Info($"Attempting to click product row with '{wpsid}' wpsid.");
-			return this.SelectProductsProductRowByWPSID(wpsid).Click();
 		}
 		#endregion
 
@@ -530,6 +518,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public SelectProductsRetailerRow SelectProductsRetailerRowByRetailer(string retailer) => this.SelectProductsRetailerRowsList.FirstOrDefault(x => x.Retailer.Equals(retailer, System.StringComparison.Ordinal));
 		public SelectProductsRetailerRow SelectProductsRetailerRowByRetailerLabel(string retailerLabel) => this.SelectProductsRetailerRowsList.FirstOrDefault(x => x.RetailerLabel.Equals(retailerLabel, System.StringComparison.Ordinal));
 		private IWebElement ActionsLink(string linkLabel) => this.ContainerElement.FindElement(By.XPath($".//a[text() ='{linkLabel}']"), 1);
+		public bool Active => this.ContainerElement.GetAttribute("class").Contains("active");
 		#endregion
 
 		#region Class Methods

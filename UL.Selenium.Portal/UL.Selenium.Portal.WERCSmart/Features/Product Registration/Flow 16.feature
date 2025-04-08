@@ -831,6 +831,8 @@ Scenario: [59282] Zinc Air - RU001205
 	Then I navigate to the Home Page
 	Then In the Product Grid, delete the product saved as: TestCase59282
 
+#Removed from regression: 2025/04
+@ignore
 @TestCase:97470
 Scenario: [97470] Stand alone Lead Acid Battery
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
