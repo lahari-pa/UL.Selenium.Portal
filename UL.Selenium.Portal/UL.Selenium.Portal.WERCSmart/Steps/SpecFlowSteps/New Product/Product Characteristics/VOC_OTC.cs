@@ -1,5 +1,6 @@
 ﻿using Reqnroll;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {
@@ -141,6 +142,43 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			string section = "Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?";
 			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, condition, alertText);
+		}
+		[RegexStepDefinition(@"In the VOC - Ozone Transport Commission Section, 'Product label specifies a dilution ratio which results in a final VOC concentration for the product during use' (should|should not) be showing the error message: (.*)")]
+		public void VOCProductLabelSectionDisplayingErrorMessage(string condition, string alertText)
+		{
+			string section = "Product label specifies a dilution ratio which results in a final VOC concentration for the product during use";
+			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, condition, alertText);
+		}
+		[RegexStepDefinition(@"In the VOC - Ozone Transport Commission Section, for section 'Product label specifies a dilution ratio which results in a final VOC concentration for the product during use' confirm that the following options (should|should not) be displayed:")]
+		public void ConfirmProductLabelOptions(string condition, Table options)
+		{
+			string section = "Product label specifies a dilution ratio which results in a final VOC concentration for the product during use";
+			string exclusive = "displayed";
+			new Steps_Prototype().CheckOptionsInSection(condition, exclusive, section, options);
+		}
+		[RegexStepDefinition(@"In the VOC - Ozone Transport Commission Section the 'Product label specifies a dilution ratio which results in a final VOC concentration for the product during use' question (is|is not) displayed")]
+		public void ThenProductLabelSpecifiesQuestionIsDisplayed(string is_isnot)
+		{
+			string section = "Product label specifies a dilution ratio which results in a final VOC concentration for the product during use";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
+		[RegexStepDefinition(@"In the VOC - Ozone Transport Commission Section, 'Product's VOC content as sold' (should|should not) be showing the error message: (.*)")]
+		public void VOCContentAsSoldSectionDisplayingErrorMessage(string condition, string alertText)
+		{
+			string section = "Product's VOC content as sold";
+			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, condition, alertText);
+		}
+		[RegexStepDefinition(@"In the VOC - Ozone Transport Commission Section, 'Product's VOC content as used' (should|should not) be showing the error message: (.*)")]
+		public void VOCContentAsUsedSectionDisplayingErrorMessage(string condition, string alertText)
+		{
+			string section = "Product's VOC content as used";
+			new Steps_Prototype().ErrorMessagesAreShowingForItem(section, condition, alertText);
+		}
+		[RegexStepDefinition(@"In the VOC - Ozone Transport Commission Section, the following statements are not editable:")]
+		public void VOCNotEditableStatements(Table table)
+		{
+			new StepsNewProduct().ThenInTheVOCSummaryPageIShouldSeeTheFollowingNoneditableStatements(table);
+
 		}
 	}
 }
