@@ -735,9 +735,9 @@ Scenario: [87835] View UPCs shows Case UPC Data
 	And I click Row Actions for the first product returned
 	Then I click on the Row Action: View UPCs
 	And I switch to the tab with title: View UPCs
-	And I verify the Case UPC data is correct in the View UPCs window:
-	    | UPC Number   | Container Type    | Size Ounces | Retailer | Quantity | Transport                      |
-		| %UPC87835-2% | Paper bag         | 2           | TG       | 5        | 1A2: removable head steel drum |
+	And I verify the Case UPC data is correct in the View UPCs window: 
+	    | UPC Number   | Container Type    | Size Ounces | Retailer | Associated UPC  | Quantity | Transport                      |
+		| %UPC87835-2% | Paper bag         | 2           | TG       |                 | 5        | 1A2: removable head steel drum |
 
 	And I verify the Regular UPC data is correct in the View UPCs window:
 	    | UPC Number | Container Type | Size Ounces  | Retailer |
