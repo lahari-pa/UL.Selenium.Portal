@@ -688,7 +688,7 @@ Scenario: [87835] View UPCs shows Case UPC Data
 	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC87835 enter Size: 12 and enter Container Type: Plastic bag
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, verify retailer 'WG' is present under the 'Destination Retailers' column
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, verify retailer 'TG' is present under the 'Destination Retailers' column
 
 	#And I call Shared Step 87829 (UPC - Add Casepack - All Data > Continue) for UPC: saved as UPC87835-2, container type: Plastic Container and size: 1 and Quantity: 1 and Individual Upc Case Pack saved As: UPC87835 and Transportation option: 4A: steel box
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the 'Add Casepack' button
@@ -734,17 +734,15 @@ Scenario: [87835] View UPCs shows Case UPC Data
 	Then I filter for the product saved as: TestCase87835
 	And I click Row Actions for the first product returned
 	Then I click on the Row Action: View UPCs
-
-
 	And I switch to the tab with title: View UPCs
 	And I verify the Case UPC data is correct in the View UPCs window:
-		| UPC Number   | Container Type    | Size Ounces | Retailer | Associated UPC | Quantity | Transport     |
-		| %UPC87835-2% | Plastic Container | 2           | AM       | %UPC87835%     | 1        | 4A: steel box |
-	And I verify the Regular UPC data is correct in the View UPCs window:
-		| UPC Number | Container Type | Size Ounces | Retailer |
-		| %UPC87835% | Paper bag      | 12           | AM       |
-	And I close the window that opened
+	    | UPC Number   | Container Type    | Size Ounces | Retailer | Quantity | Transport                      |
+		| %UPC87835-2% | Paper bag         | 2           | TG       | 5        | 1A2: removable head steel drum |
 
+	And I verify the Regular UPC data is correct in the View UPCs window:
+	    | UPC Number | Container Type | Size Ounces  | Retailer |
+		| %UPC87835% | Plastic bag    | 12           | TG       |
+	And I close the window that opened
 
 	#And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase87835
 	Then I delete the product: TestCase87835
@@ -906,11 +904,14 @@ Scenario: [87718] Universal Product Code (UPC) Step - Collapsed View of Case UPC
 Given I log in with the account saved in TReVor as: ProductAccount
 
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
-	Then in the New Product page, I click Continue
+Then I click the Add Product icon in the Navigation Pane
+Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+Then in the New Product page, I click Continue
 
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble solution
+#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble solution
+
+
+
 Given I generate a random UPC number and save as: UPC87718
 Then I save the product information as: TestCase87718
 And I should see the Product Information Page
