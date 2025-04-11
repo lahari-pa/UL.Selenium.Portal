@@ -1,5 +1,6 @@
 ﻿using Reqnroll;
 using System.Windows;
+using TReVor.Integrations.Classes.Configuration;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.ReqnrollHelpers.Classes;
@@ -7,6 +8,8 @@ using UL.Automation.WebDriver.Classes;
 using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using System;
+using TReVor.Integrations.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 {
@@ -1363,7 +1366,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		public void TermsOfUsesPageOpensInNewTab()
 		{
 			string condition = "should";
-			string url = "https://intwseast-wercsmart.wercsmart.com/MyAccount/User/TermsUse";
+			string GetBranchName() => TReVorSettings.BranchInfo?.BranchName ?? TReVorConfig.CurrentSettings?.TReVorSettings?.SoftwareBranch;
+			string url = (GetBranchName() == "Staging") ? "https://stgwseast-wercsmart.wercsmart.com/MyAccount/User/TermsUse" : "https://intwseast-wercsmart.wercsmart.com/MyAccount/User/TermsUse";
 			new Steps_Prototype().NewTabShouldExists(condition, url);
 		}
 		[RegexStepDefinition(@"On the Terms of Use page, click the 'PDF \(version 5\)' link")]
@@ -1388,13 +1392,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		[RegexStepDefinition(@"On the My Products page, close the 'Terms of Use' page")]
 		public void TermsOfUsesPageCloseTab()
 		{
-			string url = "https://intwseast-wercsmart.wercsmart.com/MyAccount/User/TermsUse";
+			string GetBranchName() => TReVorSettings.BranchInfo?.BranchName ?? TReVorConfig.CurrentSettings?.TReVorSettings?.SoftwareBranch;
+			string url = (GetBranchName() == "Staging") ? "https://stgwseast-wercsmart.wercsmart.com/MyAccount/User/TermsUse" : "https://intwseast-wercsmart.wercsmart.com/MyAccount/User/TermsUse";
 			new Steps_Prototype().CloseTabWithUrl(url);
 		}
 		[RegexStepDefinition(@"On the My Products page, switch to the 'Terms of Use' tab")]
 		public void TermsOfUsesPageSwitchToTab()
 		{
-			string url = "https://intwseast-wercsmart.wercsmart.com/MyAccount/User/TermsUse";
+			string GetBranchName() => TReVorSettings.BranchInfo?.BranchName ?? TReVorConfig.CurrentSettings?.TReVorSettings?.SoftwareBranch;
+			string url = (GetBranchName() == "Staging") ? "https://stgwseast-wercsmart.wercsmart.com/MyAccount/User/TermsUse" : "https://intwseast-wercsmart.wercsmart.com/MyAccount/User/TermsUse";
 			new Steps_Prototype().ConfirmNewTabOpenWithUrl(url);
 		}
 		#endregion
