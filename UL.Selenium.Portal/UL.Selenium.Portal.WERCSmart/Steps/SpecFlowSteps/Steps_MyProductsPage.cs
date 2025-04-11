@@ -1,4 +1,5 @@
 ﻿using Reqnroll;
+using System.Windows;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Automation.ReqnrollHelpers.Classes;
@@ -1343,6 +1344,62 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			this.MyProductTableConfirmProductIDRowDoesDoesNotExist(Product.Id, "does not");
 			Report.UseSubSteps = false;
 		}
-		#endregion 
+		#endregion
+
+		#region Page Footer Steps
+		[RegexStepDefinition(@"On the My Products page, confirm the 'Terms of Use' link (should|should not) be displayed")]
+		public void ClickLinkTermsofUsesIsDisplayed(string condition)
+		{
+			string linkText = "Terms of Use";
+			new Steps_Prototype().LinkElementExists(condition, linkText);
+		}
+		[RegexStepDefinition(@"On the My Products page, click the 'Terms of Use' link")]
+		public void ClickLinkTermsofUses()
+		{
+			string linkText = "Terms of Use";
+			new Steps_Prototype().ClickLinkElement(linkText);
+		}
+		[RegexStepDefinition(@"On the My Products page, confirm the 'Terms of Use' page opens in a new tab")]
+		public void TermsOfUsesPageOpensInNewTab()
+		{
+			string condition = "should";
+			string url = "https://intwseast-wercsmart.wercsmart.com/MyAccount/User/TermsUse";
+			new Steps_Prototype().NewTabShouldExists(condition, url);
+		}
+		[RegexStepDefinition(@"On the Terms of Use page, click the 'PDF \(version 5\)' link")]
+		public void ClickLinkPDF5()
+		{
+			string linkText = "PDF (version 5) ";
+			new Steps_Prototype().ClickLinkElement(linkText);
+		}
+		[RegexStepDefinition(@"On the Terms of Use page, confirm the 'Terms of Use History' section (is|is not) displayed")]
+		public void TermsOfUseHistorySectionIsDisplayed(string is_isnot)
+		{
+			string text = "Terms of Use History";
+			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);
+		}
+		[RegexStepDefinition(@"On the Terms of Use page, confirm the 'PDF \(version 5\)' file is downloaded")]
+		public void TermsOfUseHistoryFileIsDownloaded()
+		{
+			string file = "July2020TermsofUseVersion5.pdf";
+			string savedAs = "TermsOfUseFile";
+			new Steps_Prototype().ConfirmFileAppearsInDownloadsFolder(file, savedAs);
+		}
+		[RegexStepDefinition(@"On the My Products page, close the 'Terms of Use' page")]
+		public void TermsOfUsesPageCloseTab()
+		{
+			string url = "https://intwseast-wercsmart.wercsmart.com/MyAccount/User/TermsUse";
+			new Steps_Prototype().CloseTabWithUrl(url);
+		}
+		[RegexStepDefinition(@"On the My Products page, switch to the 'Terms of Use' tab")]
+		public void TermsOfUsesPageSwitchToTab()
+		{
+			string url = "https://intwseast-wercsmart.wercsmart.com/MyAccount/User/TermsUse";
+			new Steps_Prototype().ConfirmNewTabOpenWithUrl(url);
+		}
+		#endregion
+
+
+
 	}
 }
