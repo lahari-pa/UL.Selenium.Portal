@@ -31,6 +31,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 @MyProductsPage
+@HeaderNavbar
 
 Feature: Flow 29 - Beverage
 

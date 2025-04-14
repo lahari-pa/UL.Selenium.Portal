@@ -70,7 +70,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			}
 		}
 
-		[RegexStepDefinition(@"In the Side Menu, confirm Icon Link with (My Products|Add Product|Alerts|Retail Partners|Product Suite|My Reports|Shopping Cart|Webinar|Support|Chat) title (does|does not) have Alerts badge")]
+		[RegexStepDefinition(@"In the Side Menu, confirm Icon Link with (My Products|Add Product|Alerts|Retail Partners|Product Suite|My Reports|Shopping Cart|Webinar|Support|Chat) title (does|does not) have counter badge")]
 		public void SideMenuConfirmIconLinkWithTitleAlertsExist(string titleLabel, string does_doesnot)
 		{
 			bool expected = does_doesnot == "does";
@@ -79,13 +79,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			{
 				if(Report.IsTrue(sideMenu.IconLinkByTitleExists(titleLabel), $"Failure, failed to confirm Icon Link with '{titleLabel}' title does exist.", $"Success, confirmed Icon Link with '{titleLabel}' title does exist."))
 				{
-					Report.IsTrue(expected == sideMenu.IconLinkByTitle(titleLabel).AlertsExist(), $"Failure, failed to confirm Icon Link with '{titleLabel}' title {does_doesnot} have Alerts badge.", $"Success, confirmed Icon Link with '{titleLabel}' title {does_doesnot} have Alerts badge.");
+					Report.IsTrue(expected == sideMenu.IconLinkByTitle(titleLabel).CounterBadgeExists(), $"Failure, failed to confirm Icon Link with '{titleLabel}' title {does_doesnot} have counter badge.", $"Success, confirmed Icon Link with '{titleLabel}' title {does_doesnot} have counter badge.");
 				}
 			}
 		}
 
-		[RegexStepDefinition(@"In the Side Menu, confirm Icon Link with (My Products|Add Product|Alerts|Retail Partners|Product Suite|My Reports|Shopping Cart|Webinar|Support|Chat) title Alerts badge (does|does not) display (.*) alerts")]
-		public void SideMenuConfirmIconLinkWithTitleAlertsDisplaysAlerts(string titleLabel, string does_doesnot, string nAlerts)
+		[RegexStepDefinition(@"In the Side Menu, confirm Icon Link with (My Products|Add Product|Alerts|Retail Partners|Product Suite|My Reports|Shopping Cart|Webinar|Support|Chat) title counter badge (does|does not) display value (.*)")]
+		public void SideMenuConfirmIconLinkWithTitleAlertsDisplaysAlerts(string titleLabel, string does_doesnot, string counterBadgeText)
 		{
 			bool expected = does_doesnot == "does";
 			SideMenu sideMenu = new SideMenu();
@@ -93,9 +93,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			{
 				if (Report.IsTrue(sideMenu.IconLinkByTitleExists(titleLabel), $"Failure, failed to confirm Icon Link with '{titleLabel}' title does exist.", $"Success, confirmed Icon Link with '{titleLabel}' title does exist."))
 				{
-					if(Report.IsTrue(sideMenu.IconLinkByTitle(titleLabel).AlertsExist(), $"Failure, failed to confirm Icon Link with '{titleLabel}' title does have Alerts badge.", $"Success, confirmed Icon Link with '{titleLabel}' title does have Alerts badge."))
+					if(Report.IsTrue(sideMenu.IconLinkByTitle(titleLabel).CounterBadgeExists(), $"Failure, failed to confirm Icon Link with '{titleLabel}' title does have counter badge.", $"Success, confirmed Icon Link with '{titleLabel}' title does have counter badge."))
 					{
-						Report.IsTrue(expected == sideMenu.IconLinkByTitle(titleLabel).AlertsCount().Equals(nAlerts, StringComparison.Ordinal), $"Failure, failed to confirm Icon Link with '{titleLabel}' title Alerts badge {does_doesnot} display {nAlerts} alerts.", $"Success, confirmed Icon Link with '{titleLabel}' title Alerts badge {does_doesnot} display {nAlerts} alerts.");
+						Report.IsTrue(expected == sideMenu.IconLinkByTitle(titleLabel).CounterBadgeText().Equals(counterBadgeText, StringComparison.Ordinal), $"Failure, failed to confirm Icon Link with '{titleLabel}' title counter badge {does_doesnot} display value {counterBadgeText}.", $"Success, confirmed Icon Link with '{titleLabel}' title Alerts badge {does_doesnot} display value {counterBadgeText}.");
 					}
 				}
 			}
@@ -135,7 +135,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			}
 		}
 
-		[RegexStepDefinition(@"In the Side Menu, confirm Labeled Link with (My Products|Add Product|Alerts|Retail Partners|Product Suite|My Reports|Shopping Cart|Webinar|Support|Chat) title (does|does not) have Alerts badge")]
+		[RegexStepDefinition(@"In the Side Menu, confirm Labeled Link with (My Products|Add Product|Alerts|Retail Partners|Product Suite|My Reports|Shopping Cart|Webinar|Support|Chat) title (does|does not) have counter badge")]
 		public void SideMenuConfirmLabeledLinkWithTitleAlertsExist(string titleLabel, string does_doesnot)
 		{
 			bool expected = does_doesnot == "does";
@@ -144,13 +144,13 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			{
 				if (Report.IsTrue(sideMenu.LabeledLinkByTitleExists(titleLabel), $"Failure, failed to confirm Labeled Link with '{titleLabel}' title does exist.", $"Success, confirmed Labeled Link with '{titleLabel}' title does exist."))
 				{
-					Report.IsTrue(expected == sideMenu.LabeledLinkByTitle(titleLabel).AlertsExist(), $"Failure, failed to confirm Labeled Link with '{titleLabel}' title {does_doesnot} have Alerts badge.", $"Success, confirmed Labeled Link with '{titleLabel}' title {does_doesnot} have Alerts badge.");
+					Report.IsTrue(expected == sideMenu.LabeledLinkByTitle(titleLabel).CounterBadgeExists(), $"Failure, failed to confirm Labeled Link with '{titleLabel}' title {does_doesnot} have counter badge.", $"Success, confirmed Labeled Link with '{titleLabel}' title {does_doesnot} have counter badge.");
 				}
 			}
 		}
 
-		[RegexStepDefinition(@"In the Side Menu, confirm Labeled Link with (My Products|Add Product|Alerts|Retail Partners|Product Suite|My Reports|Shopping Cart|Webinar|Support|Chat) title Alerts badge (does|does not) display (.*) alerts")]
-		public void SideMenuConfirmLabeledLinkWithTitleAlertsDisplaysAlerts(string titleLabel, string does_doesnot, string nAlerts)
+		[RegexStepDefinition(@"In the Side Menu, confirm Labeled Link with (My Products|Add Product|Alerts|Retail Partners|Product Suite|My Reports|Shopping Cart|Webinar|Support|Chat) title counter badge (does|does not) display value (.*)")]
+		public void SideMenuConfirmLabeledLinkWithTitleAlertsDisplaysAlerts(string titleLabel, string does_doesnot, string counterBadgeText)
 		{
 			bool expected = does_doesnot == "does";
 			SideMenu sideMenu = new SideMenu();
@@ -158,9 +158,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			{
 				if (Report.IsTrue(sideMenu.IconLinkByTitleExists(titleLabel), $"Failure, failed to confirm Labeled Link with '{titleLabel}' title does exist.", $"Success, confirmed Labeled Link with '{titleLabel}' title does exist."))
 				{
-					if (Report.IsTrue(sideMenu.LabeledLinkByTitle(titleLabel).AlertsExist(), $"Failure, failed to confirm Labeled Link with '{titleLabel}' title does have Alerts badge.", $"Success, confirmed Labeled Link with '{titleLabel}' title does have Alerts badge."))
+					if (Report.IsTrue(sideMenu.LabeledLinkByTitle(titleLabel).CounterBadgeExists(), $"Failure, failed to confirm Labeled Link with '{titleLabel}' title does have counter badge.", $"Success, confirmed Labeled Link with '{titleLabel}' title does have counter badge."))
 					{
-						Report.IsTrue(expected == sideMenu.LabeledLinkByTitle(titleLabel).AlertsCount().Equals(nAlerts, StringComparison.Ordinal), $"Failure, failed to confirm Labeled Link with '{titleLabel}' title Alerts badge {does_doesnot} display {nAlerts} alerts.", $"Success, confirmed Labeled Link with '{titleLabel}' title Alerts badge {does_doesnot} display {nAlerts} alerts.");
+						Report.IsTrue(expected == sideMenu.LabeledLinkByTitle(titleLabel).CounterBadgeText().Equals(counterBadgeText, StringComparison.Ordinal), $"Failure, failed to confirm Labeled Link with '{titleLabel}' title counter badge {does_doesnot} display value {counterBadgeText}.", $"Success, confirmed Labeled Link with '{titleLabel}' title counter badge {does_doesnot} display value {counterBadgeText}.");
 					}
 				}
 			}

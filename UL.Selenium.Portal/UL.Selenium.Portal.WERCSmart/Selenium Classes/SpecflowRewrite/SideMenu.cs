@@ -83,9 +83,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.SpecflowRewrite
 	class IconLink(IWebElement containerElement)
 	{
 		#region Class Objects
-		private IWebElement ContainerElement = containerElement;
+		private IWebElement ContainerElement { get; set; } = containerElement;
 		public string Title => this.ContainerElement.FindElement(By.XPath(".//span[@class='sr-only']"), 1)?.Text.Trim();
-		private string AlertsCountString => this.ContainerElement.FindElement(By.XPath(".//i[contains(@class,'sidemenu-icon')]"), 1)?.GetAttribute("data-content").Trim();
+		private IWebElement CounterBadge => this.ContainerElement.FindElement(By.XPath(".//i[contains(@class,'sidemenu-icon')]"), 1);
 		#endregion
 
 		#region Class Methods
@@ -95,16 +95,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.SpecflowRewrite
 			return this.ContainerElement.TryClick();
 		}
 
-		public bool AlertsExist()
+		public bool CounterBadgeExists()
 		{
-			Report.Info($"Attempting to confirm '{this.Title}' Icon link alerts exist.");
-			return !this.AlertsCountString.IsNullOrEmpty();
+			Report.Info($"Attempting to confirm '{this.Title}' Icon link counter badge exist.");
+			return this.CounterBadge != null;
 		}
 
-		public string AlertsCount()
+		public string CounterBadgeText()
 		{
-			Report.Info($"Attempting to get '{this.Title}' Icon link alerts count.");
-			return this.AlertsCountString;
+			Report.Info($"Attempting to get '{this.Title}' Icon link counter badge text.");
+			return this.CounterBadge?.Text;
 		}
 		#endregion
 	}
@@ -112,9 +112,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.SpecflowRewrite
 	class LabeledLink(IWebElement containerElement)
 	{
 		#region Class Objects
-		private IWebElement ContainerElement = containerElement;
+		private IWebElement ContainerElement { get; set; } = containerElement;
 		public string Title => this.ContainerElement.Text.Trim();
-		public string AlertsCountString => this.ContainerElement.FindElement(By.XPath(".//span[@class='badge']"), 1)?.Text.Trim();
+		public IWebElement CounterBadge => this.ContainerElement.FindElement(By.XPath(".//span[@class='badge']"), 1);
 		#endregion
 
 		#region Class Methods
@@ -124,16 +124,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.SpecflowRewrite
 			return this.ContainerElement.TryClick();
 		}
 
-		public bool AlertsExist()
+		public bool CounterBadgeExists()
 		{
-			Report.Info($"Attempting to confirm '{this.Title}' Labeled link alerts exist.");
-			return !this.AlertsCountString.IsNullOrEmpty();
+			Report.Info($"Attempting to confirm '{this.Title}' Labeled link counter badge exist.");
+			return this.CounterBadge != null;
 		}
 
-		public string AlertsCount()
+		public string CounterBadgeText()
 		{
-			Report.Info($"Attempting to get '{this.Title}' Labeled link alerts count.");
-			return this.AlertsCountString;
+			Report.Info($"Attempting to get '{this.Title}' Labeled link counter badge text.");
+			return this.CounterBadge?.Text;
 		}
 		#endregion
 	}
