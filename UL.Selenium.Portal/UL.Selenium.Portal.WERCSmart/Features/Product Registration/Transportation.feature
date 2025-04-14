@@ -963,7 +963,8 @@ And I click alias subsection option TDGCP and confirm data as:
 | Data           |
 | 1 |
 
-
+#Removed from regression: 2025/04
+@ignore
 @TestCase:126286
 Scenario: [126286] Transportation Details DOT - UN1057 Prompts the 'For the Lighter, Provide the DOT Approval Number' Field
 
