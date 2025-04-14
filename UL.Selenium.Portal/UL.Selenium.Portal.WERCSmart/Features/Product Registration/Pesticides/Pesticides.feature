@@ -530,6 +530,8 @@ Scenario: [56577] Pesticide Data - EPA data - Is Kelly Data is updated when user
 # Test case can be found at the following paths:
 # NetProjects10\WERCSmart UX Reboot\WERCSmart\Product Registration\Pesticides
 # NetProjects10\WercsSmart Portal\WERCSmart\Product Registration\Pesticides
+#Removed from regression: 2025/04
+@ignore
 @TestCase:56502
 Scenario: [56502] Pesticide Data - United States - EPA Exempt
 	#And I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)

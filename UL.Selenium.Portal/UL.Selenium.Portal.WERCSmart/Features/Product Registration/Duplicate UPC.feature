@@ -442,6 +442,8 @@ Scenario: [91735] Duplicate UPC is not permitted within WERCSmart system - Forwa
 	And In the UPC modal window I click Save
 	Then I check that the alert displayed contains text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review.
 
+#Removed from regression: 2025/04
+@ignore
 @TestCase:91798
 Scenario: [91798] Duplicate UPC is not permitted within WERCSmart system - New Product registration - Case UPC
 	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
