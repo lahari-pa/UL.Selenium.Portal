@@ -135,6 +135,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string text = "Based on your previous selections, the product is an architectural coating with the following intended use. The SCAQMD VOC compliant limits for this intended use are:";
 			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);
 		}
+		[RegexStepDefinition(@"In the Volatile Organic Compound Summary Section, the statement 'Based on your previous selections, the product has the following intended use: The OTC Model Rule and CARB limits for this intended use are:' (is|is not) displayed")]
+		public void StatementBasedOnYourPreviousSelectionsTheOTCModelRuleAndCARB(string is_isnot)
+		{
+			string text = "Based on your previous selections, the product has the following intended use: The OTC Model Rule and CARB limits for this intended use are:";
+			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);
+		}
 		[RegexStepDefinition(@"In the Volatile Organic Compound Summary Section, the statement 'Does not exceed the limits specified by the California Air District\(s\)' (is|is not) displayed")]
 		public void StatementDoesNotExceedTheLimitsCaliforniaAirDistrict(string is_isnot)
 		{

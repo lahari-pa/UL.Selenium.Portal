@@ -1,5 +1,6 @@
 ﻿using Reqnroll;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.New_Product;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
@@ -46,6 +47,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string section = "Other DOT Exception";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
+		[RegexStepDefinition(@"In the Transportation Details 1 page the 'Other DOT Exception' question (is|is not) displayed")]
+		public void ThenInTheTransportationDetailsPageOtherDOTExceptionsIfApplicableQuestionIsDisplayed(string is_isnot)
+		{
+			string section = "Other DOT Exception";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
 		[RegexStepDefinition(@"In the Transportation Details 1 Section, verify in 'Product is Regulated for Transport' section (is|is not) option: (.*)")]
 		public void ThenInTheTransportationDetailsSectionVerifyInSectionIsOptionYes(string is_isnot, string option)
 		{
@@ -83,6 +90,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string section = "Product is Regulated for Transport";
 			string error = "This is a required field";
 			new Steps_ProductPrototype().InSectionErrorMessageIsIsNotDisplayed(section, error, is_isnot);
+		}
+		[RegexStepDefinition(@"In the Transportation Details 1 page the 'Provide Special Permit numbers \(if applicable\)' question (is|is not) displayed")]
+		public void ThenInTheTransportationDetailsPageProvideSpecialPermitNumbersQuestionIsDisplayed(string is_isnot)
+		{
+			string section = "Provide Special Permit numbers (if applicable)";
+			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
 		}
 
 
