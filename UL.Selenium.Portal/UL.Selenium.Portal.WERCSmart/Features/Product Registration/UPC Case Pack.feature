@@ -640,7 +640,12 @@ Scenario: [87835] View UPCs shows Case UPC Data
 	Given I click the Add Product icon in the Navigation Pane
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Given in the New Product page I click Continue
-	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	#And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk_#80720
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
+	Then in the The Product page, I click Continue
+	Then I save the product information as: TestCase87835
 	#And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I should see the Product Information Page
 	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
@@ -662,47 +667,85 @@ Scenario: [87835] View UPCs shows Case UPC Data
 
 	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Sodium Hydroxide
 	Given I should see the Ingredients Page
-	Then In the Ingredients section, add the following ingredients:
-	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-	| component name | Sodium hydroxide       | 100     |                     |               |             |
+	Then In the Ingredients section, add component with component name: Water
+	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
 	Then in the Ingredients page I click Continue
 
-	And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
-		| Retailer |
-		| Amazon   |
-	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87835, container type: Paper bag and size: 2 do not click continue
-	And I call Shared Step 87829 (UPC - Add Casepack - All Data > Continue) for UPC: saved as UPC87835-2, container type: Plastic Container and size: 1 and Quantity: 1 and Individual Upc Case Pack saved As: UPC87835 and Transportation option: 4A: steel box
+	#And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
+	Given In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Given In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Given in the Inventory Status, Prop 65 (US) page I click Continue
+
+	#Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+	Given I should see the Retailer Page
+	Given In the Retailer Section, click 'Add Retailers' button
+	Given In the Select Retailers window, select retailer: Target
+	Given In the Select Retailers window, click 'Done' button
+	Given in the Retailer page I click Continue
+
+
+	#Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC87835, container type: Paper bag and size: 2 do not click continue
+	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC87835 enter Size: 12 and enter Container Type: Plastic bag
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, verify retailer 'TG' is present under the 'Destination Retailers' column
+
+	#And I call Shared Step 87829 (UPC - Add Casepack - All Data > Continue) for UPC: saved as UPC87835-2, container type: Plastic Container and size: 1 and Quantity: 1 and Individual Upc Case Pack saved As: UPC87835 and Transportation option: 4A: steel box
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the 'Add Casepack' button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'GTIN/UPC (include check digit)' enter the value: saved as UPC87835-2
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Size (Fluid Ounces)' enter the value: 2
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Container Type' select the value: Paper bag
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Quantity of Units within the Case' enter the value: 5
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Transportation Options' enter the value: 1A2: removable head steel drum
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+
+
 	#And I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
 	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
 	Then in the Regulatory Documents to Provide page I click Continue
 
 	And I should see the Additional Documents to Provide Page
-	And I click continue
+	Given in the Additional Documents to Provide page I click Continue
 	And I should see the Optional Reports and Documents Available for Purchase Page
-	And I click continue
-	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
-		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
-		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
+
+
+	#And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+	#	| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+	#	| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature' enter text: 800
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 99
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 60
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Clear
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor' to: Odorless
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor Threshold' to: No data available
+	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Partition Coefficient' enter text: 10
+	Then in the Safety Data Sheet Authoring - Additional Data (Optional) page, I click Continue	Given in the Optional Comments page I click Continue
+
 	#And I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test Comment
 	Given I should see the Optional Comments Page
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
 	Then in the Optional Comments page I click Continue
 
 	And I navigate to the home page
-	And I search for the product saved as: TestCase87835
+	Then I filter for the product saved as: TestCase87835
 	And I click Row Actions for the first product returned
-	And I click on the Row Action: View UPCs
+	Then I click on the Row Action: View UPCs
 	And I switch to the tab with title: View UPCs
-	And I verify the Case UPC data is correct in the View UPCs window:
-		| UPC Number   | Container Type    | Size Ounces | Retailer | Associated UPC | Quantity | Transport     |
-		| %UPC87835-2% | Plastic Container | 1           | AM       | %UPC87835%     | 1        | 4A: steel box |
+	And I verify the Case UPC data is correct in the View UPCs window: 
+	    | UPC Number   | Container Type    | Size Ounces | Retailer | Associated UPC  | Quantity | Transport                      |
+		| %UPC87835-2% | Paper bag         | 2           | TG       |                 | 5        | 1A2: removable head steel drum |
+
 	And I verify the Regular UPC data is correct in the View UPCs window:
-		| UPC Number | Container Type | Size Ounces | Retailer |
-		| %UPC87835% | Paper bag      | 2           | AM       |
+	    | UPC Number | Container Type | Size Ounces  | Retailer |
+		| %UPC87835% | Plastic bag    | 12           | TG       |
 	And I close the window that opened
-	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase87835
+
+	#And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase87835
+	Then I delete the product: TestCase87835
 
 
 @TestCase:87631
@@ -861,11 +904,14 @@ Scenario: [87718] Universal Product Code (UPC) Step - Collapsed View of Case UPC
 Given I log in with the account saved in TReVor as: ProductAccount
 
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
-	Then in the New Product page, I click Continue
+Then I click the Add Product icon in the Navigation Pane
+Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+Then in the New Product page, I click Continue
 
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble solution
+#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bubble solution
+
+
+
 Given I generate a random UPC number and save as: UPC87718
 Then I save the product information as: TestCase87718
 And I should see the Product Information Page
