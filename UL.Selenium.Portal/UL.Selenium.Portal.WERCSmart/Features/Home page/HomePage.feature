@@ -21,6 +21,7 @@
 @ProductSetUp
 @CreateProducts
 @Homepage
+@MyProductsPage
 Feature: Home Page
 
 Background:
@@ -113,11 +114,17 @@ Scenario: [64854] Navigation Settings
 
 @TestCase:67299
 Scenario: [67299] Terms of Use - footer
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
+	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
-	Given I click the Terms of Use link in the footer
-	Given I confirm the WERCSmart Terms of Use page opened in a new tab and navigate to it
-	And I close the window that opened
+	Then On the My Products page, confirm the 'Terms of Use' link should be displayed
+	Then On the My Products page, click the 'Terms of Use' link
+	Then On the My Products page, confirm the 'Terms of Use' page opens in a new tab
+	Then On the My Products page, switch to the 'Terms of Use' tab
+	Then On the Terms of Use page, confirm the 'Terms of Use History' section is displayed
+	Then On the Terms of Use page, click the 'PDF (version 5)' link
+	Then On the Terms of Use page, confirm the 'PDF (version 5)' file is downloaded
+	Then On the My Products page, close the 'Terms of Use' page
+
 
 @singlerun
 @TestCase:65886
