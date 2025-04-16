@@ -12,14 +12,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		#region Page Objects
 		protected override By ContainerElementLocator => By.XPath("//div[@id='products-grid'][.//*[@class='ws-panel-title'][text()='My Products']]");
 		private IWebElement PageInfoIcon => this.FindElement(By.XPath("//i[contains(@class,'fa-question-circle')]"), 1);
-		private List<IWebElement> StatusFilterList => this.FindElements(By.XPath("//ul[contains(@class, 'status-filters')]//a"), 1).ToList();
-		private IWebElement StatusFilter(string statusFilterLabel) => this.StatusFilterList.Where(x => string.Equals(x.Text, statusFilterLabel)).FirstOrDefault();
-		private IWebElement LabeledButton(string buttonLabel) => this.FindElement(By.XPath($"//a[normalize-space()='{buttonLabel}']"), 1);
-		private IWebElement MoreFiltersPanel => this.FindElement(By.Id("more-filters-panel"), 1);
-		private IWebElement Checkbox(string checkboxLabel) => this.FindElement(By.XPath($".//label[normalize-space() = '{checkboxLabel}']//input[@type='checkbox']"), 1);
-		private IWebElement LabeledDropdown(string dropdownLabel) => this.FindElement(By.XPath($"//div[contains(@class,'form-group')][.//label[@class='control-label'][normalize-space()='{dropdownLabel}']]//select"), 1);
+		private IWebElement MainPanel => this.FindElement(By.XPath(".//div[@class='panel panel-default']"), 1);
+		private List<IWebElement> StatusFilterList => this.MainPanel.FindElements(By.XPath("//ul[contains(@class, 'status-filters')]//a"), 1).ToList();
+		private IWebElement StatusFilter(string statusFilterLabel) => this.StatusFilterList.FirstOrDefault(x => string.Equals(x.Text, statusFilterLabel));
+		private IWebElement LabeledButton(string buttonLabel) => this.MainPanel.FindElement(By.XPath($"//a[normalize-space()='{buttonLabel}']"), 1);
+		private IWebElement MoreFiltersPanel => this.MainPanel.FindElement(By.Id("more-filters-panel"), 1);
+		private IWebElement Checkbox(string checkboxLabel) => this.MainPanel.FindElement(By.XPath($".//label[normalize-space() = '{checkboxLabel}']//input[@type='checkbox']"), 1);
+		private IWebElement LabeledDropdown(string dropdownLabel) => this.MainPanel.FindElement(By.XPath($"//div[contains(@class,'form-group')][.//label[@class='control-label'][normalize-space()='{dropdownLabel}']]//select"), 1);
 		private List<IWebElement> LabeledDropdownOptionsList(string dropdownLabel) => this.LabeledDropdown(dropdownLabel).FindElements(By.XPath("//option"), 1).ToList();
-		private IWebElement LabeledDropdownOption(string dropdownLabel, string dropdownOption) => this.LabeledDropdownOptionsList(dropdownLabel).Where(x => x.Text.Trim() == dropdownOption).FirstOrDefault();
+		private IWebElement LabeledDropdownOption(string dropdownLabel, string dropdownOption) => this.LabeledDropdownOptionsList(dropdownLabel).FirstOrDefault(x => x.Text.Trim() == dropdownOption);
 		#endregion
 
 		#region Methods
@@ -219,13 +220,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		#endregion
 	}
 
-	internal class MyProductsTable : SeleniumBaseObject
+	class MyProductsTable : SeleniumBaseObject
 	{
 		#region Class Objects
-		protected override By ContainerElementLocator => By.XPath("//table[not(@id)][@class='table table-hover products-table']");
+		protected override By ContainerElementLocator => By.XPath("//div[@class='panel panel-default']//table[not(@id)][@class='table table-hover products-table']");
 		private List<IWebElement> ColumnLabelsList => this.FindElements(By.XPath(".//th[text()]"), 1).ToList();
 		private IWebElement ColumnLabel(string columnLabel) => this.ColumnLabelsList.FirstOrDefault(x => x.Text == columnLabel);
 		private List<MyProductsTableRow> ProductTableRowsList => this.ContainerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: products']//tr"), 1).Select(x => new MyProductsTableRow(x)).ToList();
+		//public PagiationFooter MyProductsTableFooter => new(this.ContainerElement.FindElement(By.XPath(".//div[contains(@class,'panel-footer')]"), 1));
 		#endregion
 
 		#region Class Methods
@@ -278,14 +280,15 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		#endregion
 	}
 
-	internal class MyProductsTableFooter : SeleniumBaseObject
+	internal class MyProductsTableFooter : SeleniumBaseObject//(IWebElement containerElement) //: SeleniumBaseObject
 	{
 		#region Class Objects
-		protected override By ContainerElementLocator => By.XPath("//div[contains(@class,'panel-footer')]");
-		private IWebElement ItemsOnPageSelect => this.FindElement(By.XPath(".//select[contains(@data-bind,'ItemsOnPage')]"), 1);
+		protected override By ContainerElementLocator => By.XPath("//div[@class='panel panel-default']//div[contains(@class,'panel-footer')]");
+		//private IWebElement ContainerElement { get; set; } = containerElement;
+		private IWebElement ItemsOnPageSelect => this.ContainerElement.FindElement(By.XPath(".//select[contains(@data-bind,'ItemsOnPage')]"), 1);
 		private List<IWebElement> ItemsOnPageSelectOptionsList => [..this.ItemsOnPageSelect.FindElements(By.XPath(".//option"), 1)];
 		private IWebElement ItemsOnPageSelectOption(string optionLabel) => this.ItemsOnPageSelectOptionsList.FirstOrDefault(x => x.Text.Trim().Equals(optionLabel, System.StringComparison.Ordinal));
-		private List<IWebElement> PaginationButtonsList => [..this.FindElements(By.XPath(".//ul[@id='pagingControl']//*[text()]"), 1)];
+		private List<IWebElement> PaginationButtonsList => [.. this.ContainerElement.FindElements(By.XPath(".//ul[@id='pagingControl']//*[text()]"), 1)];
 		private IWebElement PaginationButton(string buttonLabel) => this.PaginationButtonsList.FirstOrDefault(x => x.Text.Trim().Equals(buttonLabel, System.StringComparison.Ordinal));
 		#endregion
 
@@ -348,7 +351,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public bool PaginationButtonClick(string buttonLabel)
 		{
 			Report.Info($"Attempting to click '{buttonLabel}' pagination button.");
-			return this.PaginationButton(buttonLabel).TryClick();
+			return this.PaginationButton(buttonLabel).JsClick();
 		}
 
 		public bool PaginationButtonDisabled(string buttonLabel)
