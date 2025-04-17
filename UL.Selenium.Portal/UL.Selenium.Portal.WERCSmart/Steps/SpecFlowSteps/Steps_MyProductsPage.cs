@@ -1090,17 +1090,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		#endregion
 
 		#region Pagiation Button Steps
-		[RegexStepDefinition(@"On the My Products page, confirm (Prev|…|Next) Pagination button (does|does not) exist")]
+		[RegexStepDefinition(@"On the My Products page, confirm (Prev|...|Next) Pagination button (does|does not) exist")]
 		public void MyProductsPageConfirmPagiationButtonDoesDoesNotExist(string buttonLabel, string does_doesnot)
 		{
 			bool expected = does_doesnot == "does";
+			buttonLabel = buttonLabel.Replace("...", "…");
 			MyProductsTableFooter myProductTableFooter = new MyProductsTableFooter();
 			Report.IsTrue(expected == myProductTableFooter.PaginationButtonExists(buttonLabel), $"Failure, failed to confirm {buttonLabel} pagination button {does_doesnot} exist.", $"Success, confirmed {buttonLabel} pagination button {does_doesnot} exist.");
 		}
 
-		[RegexStepDefinition(@"On the My Products page, click (Prev|…|Next) Pagination button")]
+		[RegexStepDefinition(@"On the My Products page, click (Prev|...|Next) Pagination button")]
 		public void MyProductsPageClickPagiationButton(string buttonLabel)
 		{
+			buttonLabel = buttonLabel.Replace("...", "…");
 			MyProductsTableFooter myProductTableFooter = new MyProductsTableFooter();
 			if (Report.IsTrue(myProductTableFooter.PaginationButtonExists(buttonLabel), $"Failure, failed to confirm {buttonLabel} pagination button does exist.", $"Success, confirmed {buttonLabel} pagination button does exist."))
 			{
@@ -1108,10 +1110,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			}
 		}
 
-		[RegexStepDefinition(@"On the My Products page, confirm (Prev|…|Next) Pagination button (is|is not) disabled")]
+		[RegexStepDefinition(@"On the My Products page, confirm (Prev|...|Next) Pagination button (is|is not) disabled")]
 		public void MyProductsPageConfirmPagiationButtonIsIsNotDisabled(string buttonLabel, string is_isnot)
 		{
 			bool expected = is_isnot == "is";
+			buttonLabel = buttonLabel.Replace("...", "…");
 			MyProductsTableFooter myProductTableFooter = new MyProductsTableFooter();
 			if (Report.IsTrue(myProductTableFooter.PaginationButtonExists(buttonLabel), $"Failure, failed to confirm {buttonLabel} pagination button does exist.", $"Success, confirmed {buttonLabel} pagination button does exist."))
 			{
@@ -1119,10 +1122,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			}
 		}
 
-		[RegexStepDefinition(@"On the My Products page, confirm (Prev|…|Next) Pagination button (is|is not) currently selected")]
+		[RegexStepDefinition(@"On the My Products page, confirm (Prev|...|Next) Pagination button (is|is not) currently selected")]
 		public void MyProductsPageConfirmPagiationButtonIsIsNotSelected(string buttonLabel, string is_isnot)
 		{
 			bool expected = is_isnot == "is";
+			buttonLabel = buttonLabel.Replace("...", "…");
 			MyProductsTableFooter myProductTableFooter = new MyProductsTableFooter();
 			if (Report.IsTrue(myProductTableFooter.PaginationButtonExists(buttonLabel), $"Failure, failed to confirm {buttonLabel} pagination button does exist.", $"Success, confirmed {buttonLabel} pagination button does exist."))
 			{
