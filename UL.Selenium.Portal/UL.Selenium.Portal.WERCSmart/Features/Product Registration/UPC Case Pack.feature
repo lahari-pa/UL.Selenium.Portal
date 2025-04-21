@@ -1007,8 +1007,14 @@ Scenario: [112487] Case Pack UPC: Transportation Option Selected Stays the Same 
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk_#80720
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
+	Then in the The Product page, I click Continue
 	Given I save the product information as: TestCase112487
+
+
 	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I should see the Product Information Page
 	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
@@ -1030,10 +1036,10 @@ Scenario: [112487] Case Pack UPC: Transportation Option Selected Stays the Same 
 
 	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	Given I should see the Ingredients Page
-	Then In the Ingredients section, add the following ingredients:
-	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-	| component name | Water       | 100     |                     |               |             |
+	Then In the Ingredients section, add component with component name: Water
+	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
 	Then in the Ingredients page I click Continue
+
 
 	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should be on the Inventory Status, Prop 65 (US) Page
@@ -1041,13 +1047,24 @@ Scenario: [112487] Case Pack UPC: Transportation Option Selected Stays the Same 
 	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
 
-	Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
-			| Retailer  |
-			| Walgreens |
-	Given I click the 'Add Casepack' button
-	Given I add the following into the UPC case fields
-		| UPC Number          | Container Type		  | Size | Quantity | Individual Upc Case Pack | Transportation Option |
-		| saved as UPC112487  | Plastic Container     | 6    | 4        |                          | 4A: steel box         |
+	#Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
+	Given I should see the Retailer Page
+	Given In the Retailer Section, click 'Add Retailers' button
+	Given In the Select Retailers window, select retailer: Target
+	Given In the Select Retailers window, click 'Done' button
+	Given in the Retailer page I click Continue
+
+	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the 'Add Casepack' button
+
+	#Given I add the following into the UPC case fields
+		#| UPC Number          | Container Type		  | Size | Quantity | Individual Upc Case Pack | Transportation Option |
+		#| saved as UPC112487  | Plastic Container     | 6    | 4        |                          | 4A: steel box         |
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'GTIN/UPC (include check digit)' enter the value: saved as UPC112487
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Size (Fluid Ounces)' enter the value: 6
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Container Type' select the value: Plastic Container
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Quantity of Units within the Case' enter the value: 4
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Transportation Options' enter the value: 4A: steel box
 	Given I click on the arrow next to the UPC data
 	Given I confirm that the transportation option: 4A: steel box that was selected is still the same
 	Given I click continue
@@ -1057,8 +1074,11 @@ Scenario: [112487] Case Pack UPC: Transportation Option Selected Stays the Same 
 	Given I click on the arrow next to the UPC data
 	Given I confirm that the transportation option: 4B: aluminum box that was selected is still the same
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase112487
-		Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase112487
+	Then I navigate to the Home Page
+	Then I delete the product: TestCase112487
+
+
+
 		# Created by Saikiran Chittampally
 	@TestCase:163564
 Scenario: [163564] SHA Automation - Create a Chalk Product and Submit thru Completed Status
