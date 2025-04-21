@@ -1,9 +1,12 @@
-﻿using Reqnroll;
+﻿using OpenQA.Selenium;
+using Reqnroll;
 using System;
 using TReVor.Integrations.Classes;
 using TReVor.Integrations.Classes.Configuration;
 using UL.Automation.Helpers;
 using UL.Automation.Interfaces;
+using UL.Automation.WebDriver.Classes;
+using UL.Automation.WebDriver.Extensions;
 
 namespace UL.Selenium.Portal.WERCSmart.SpecFlow
 {
@@ -32,6 +35,13 @@ namespace UL.Selenium.Portal.WERCSmart.SpecFlow
 			{
 				container.SkipTestCase("Not applicable for this environment.");
 			}
+		}
+
+		[BeforeStep(Order = 5)]
+		public static void WaitForLoadingBarToDisappear()
+		{
+			IWebElement PortalLoadingBar = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath("//div[contains(@class,'pace-active')]"), 1);
+			PortalLoadingBar.WaitUntilElementInvisible(30);
 		}
 	}
 }

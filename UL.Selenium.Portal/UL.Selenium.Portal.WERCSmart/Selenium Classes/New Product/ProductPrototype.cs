@@ -310,6 +310,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		public bool SearchComponentExists(string searchText)
 		{
 			Report.Info($"Attempting to confirm component name: '{searchText}' search result exists.");
+			bool test = this.FindElement(By.XPath("//div[contains(@class,'pace-active')]"), 1).WaitUntilElementInvisible();
 			return this.SearchResultList.Any(x => x.ComponentName.Contains(searchText, StringComparison.InvariantCultureIgnoreCase));
 		}
 
