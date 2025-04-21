@@ -1,5 +1,6 @@
 ﻿using Reqnroll;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.WebDriver.Classes;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {
@@ -11,6 +12,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			string section = "UN Number";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
+			Delay.Seconds(1);
 		}
 		[RegexStepDefinition(@"In the U.S. Department of Transportation \(DOT\) Classification Section, set the option in section: 'Proper Shipping Name': to: (.*)")]
 		public void SetProperShippingNameIMDG(string option)
