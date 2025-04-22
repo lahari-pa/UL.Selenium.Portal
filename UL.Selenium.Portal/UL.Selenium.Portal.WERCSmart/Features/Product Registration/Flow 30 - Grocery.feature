@@ -103,7 +103,7 @@ Scenario: [60724] Condiments, Sauces - RU001454
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Condiments, Sauces
@@ -194,7 +194,7 @@ Scenario: [60723] Jelly, Jam or Preserves - RU001456
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
     Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Condiments, Sauces

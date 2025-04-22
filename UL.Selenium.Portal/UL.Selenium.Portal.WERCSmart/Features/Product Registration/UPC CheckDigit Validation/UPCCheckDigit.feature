@@ -119,7 +119,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	Then the WERCSmart homepage should load
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57561a (The Product - Enter Product Name: Battery Powered Equipment or ToolBattery Powered Equipment or ToolBattery Powered Equipment or ToolBattery Powered Equipment or ToolBattery Powered Equipment or ToolBattery Powered Equipment or ToolBattery Powered Equipment or Tool and select Type of Product): Battery Powered Equipment or Tool 

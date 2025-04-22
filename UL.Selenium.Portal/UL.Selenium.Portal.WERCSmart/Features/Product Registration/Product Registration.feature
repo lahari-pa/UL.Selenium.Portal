@@ -44,7 +44,7 @@ Scenario: [130389] Demo Scenario
 	Given I log in with the account saved in TReVor as: ProductAccount
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 	Then I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save product Product to context as TestCase
@@ -141,7 +141,7 @@ Scenario: [63724] Add New product - Single Battery Product
 	Given I generate a random UPC number and save as: UPC63724
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nickel Metal Hydride (NiMH) Battery
 	Then I save the product information as: TestCase63724
@@ -279,7 +279,7 @@ Scenario: [65392] Ecologo Readiness - Question wording and validation of respons
 	Then The home screen should load
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Floor Wax Stripper (Light or Medium Build-Up)
 	Then I save the product information as: TestCase65392
@@ -771,7 +771,7 @@ Scenario: [127767] Register a Cleaning Supplies - Bleach Product Type for a veri
 	Then I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 	Given I generate a random UPC number and save as: UPC804879551225
 	Then I call Shared Step 57561a (The Product - Enter Product Name: Cleaning Supplies Product for BBB and select Type of Product): Bleach
@@ -828,7 +828,7 @@ Scenario: [128144] Login Behavior for Products NOT in Scope for Bed Bath and Bey
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 	Given I call Shared Step 57561a (The Product - Enter Product Name: Product NOT in Scope for BBB and select Type of Product): Pet Shampoo
 	Given I generate a random UPC number and save as: UPC128144
@@ -897,7 +897,7 @@ Scenario: [128140] Data Tier Expansion for BBB - Products in Scope Report - Nutr
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 	Given I call Shared Step 57561a (The Product - Enter Product Name: Nutritional (Solid) Supplement Product for BBB and select Type of Product): Nutritional Supplement - Solid
 	Given I generate a random UPC number and save as: UPC128140
@@ -1049,7 +1049,7 @@ Scenario: [50863] WERCSmart Portal Verification on Required Selections for the "
 
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
 	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lip Balm

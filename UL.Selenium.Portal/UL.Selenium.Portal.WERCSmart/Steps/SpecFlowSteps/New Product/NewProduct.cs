@@ -7,7 +7,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 	[Binding, Scope(Tag = "Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct")]
 	class WERCSmart_Distributor_NewProducts_ProductType_NewProduct
 	{
-		[RegexStepDefinition(@"In the New Product Section, set the radio option in section: 'Select the type of product to create': to: '(Create Formulated Registration using SDS Import|Create Formulated Registration |Create an Article Registration |Create a Registration by Copying an Existing Registration)'")]
+		[RegexStepDefinition(@"In the New Product Section, set the radio option in section: 'Select the type of product to create': to: '(Create Formulated Registration using SDS Import|Create Formulated Registration|Create an Article Registration|Create a Registration by Copying an Existing Registration)'")]
 		public void SelectProductTypeToCreate(string option)
 		{
 			string section = "Select the type of product to create:";

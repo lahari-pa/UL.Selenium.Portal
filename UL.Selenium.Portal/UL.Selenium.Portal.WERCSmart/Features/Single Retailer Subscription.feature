@@ -304,7 +304,7 @@ Scenario: [181949] Single Retailer Checkbox and Hover message
 Given I log in with the account saved in TReVor as: SingleRetailerAccount
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
@@ -353,7 +353,7 @@ Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Alkaline Battery
@@ -390,7 +390,7 @@ Given I log in with the account saved in TReVor as: SingleRetailerAccount
 Then The home screen should load
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk

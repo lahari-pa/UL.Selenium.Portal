@@ -43,7 +43,7 @@ Scenario: [146792] US Only, BCP - PLP = No, Authoring requested, Contains test B
 Given I Login into WERCSmart Portal - WebViewers Account
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
 Given I generate a random UPC number and save as: UPC146792
@@ -148,7 +148,7 @@ Scenario: [120814] WERCSmart product - Submitted to SHA, Status = Submitted
 Given I Login into WERCSmart Portal - WebViewers Account
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
 Given I call Shared Step 57561b (The Product - Enter Product Name: TC 120814 - For RPS - Submitted status and select Type of Product): Chalk and add a Random Identifier
@@ -222,7 +222,7 @@ Scenario: [144967] US Only, PLP = No, GenDoc = 1, Doc Accepted = Yes
 	Given I log in with the account saved in TReVor as: ProductAccount
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I click the Add Product icon in the Navigation Pane
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 	Given I generate a random UPC number and save as: UPC144967
 	#In 57561b enter the name for final product run to be "Test Case 144697 - US Only, PLP No, Gendoc 1, Doc Accepted Yes"
@@ -326,7 +326,7 @@ Scenario: [144975] US Only, PLP = No, GenDoc = 1, Doc Accepted = No (User reject
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 Given I generate a random UPC number and save as: UPC144975
 #In 57561b enter the name for final product run to be "Test Case 144975 - US Only, PLP No, GenDoc 1, DocAccept - User uploads own SDS"
@@ -441,7 +441,7 @@ Scenario: [144979] US Only, PLP = No, GenDoc = 0, User uploads own SDS on submis
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
 Given I generate a random UPC number and save as: UPC144979
@@ -531,7 +531,7 @@ Scenario: [144981] US Only, PLP = Yes, PLP Upload allowed = Yes, GenDoc = 1, Ali
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue 
 Given I generate a random UPC number and save as: UPC144981
 #In 57561b enter the name for final product run to be "For WVs TC 144981 - US Only, PLP Yes, PLP Upload allowed Yes, GenDoc 1, Alias published Yes"
@@ -617,7 +617,7 @@ Scenario: [144984] US Only, PLP = Yes, PLP Upload allowed = Yes, GenDoc = 1, Ali
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 Given I generate a random UPC number and save as: UPC144984
 #In 57561b enter the name for final product run to be "For WVs TC 144984 - US Only, PLP Yes, PLP Upload allowed Yes, GenDoc 1, Alias published No"
@@ -703,7 +703,7 @@ Scenario: [144992] US Only, PLP = Yes, PLP Upload allowed = Yes, GenDoc = 0, Pro
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 Given I generate a random UPC number and save as: UPC144992
 #In 57561b enter the name for final product run to be "For WVs TC 144992 - US Only, PLP Yes, PLP Upload allowed Yes, GenDoc 0, User Uploads own SDS on submission"
@@ -778,7 +778,7 @@ Scenario: [145074] US Only, Label Only Product - Label Uploaded - process to Com
 Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
 Given I generate a random UPC number and save as: UPC145074
@@ -913,7 +913,7 @@ Scenario: [120815] WERCSmart product - Submitted to SHA, Status = Assigned
 Given I Login into WERCSmart Portal - WebViewers Account
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 Then I call Shared Step 57561b (The Product - Enter Product Name: TC 120815 - for RPS - Assigned Status and select Type of Product): Chalk and add a Random Identifier
 Given I generate a random UPC number and save as: UPC120815
@@ -1031,7 +1031,7 @@ Scenario: [145793] Canada Only, PLP = Yes, PLP Upload allowed = Yes, GenDocCA = 
 Given I login into the WERCSmart Portal - WebViewers Account
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
 # In the shared step below select Chalk as your product type. If running this test case for the first time in an environment after a database refresh and the product name is not present in the database please use the product name:  For WVs Test case 145793 - Canada Only, PLP Yes, PLP Upload allowed Yes, Gen
@@ -1098,7 +1098,7 @@ Scenario: [120811] WERCSmart product - Submitted to SHA, rejected, Status = New
 Given I Login into WERCSmart Portal - WebViewers Account
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 Then I call Shared Step 57561b (The Product - Enter Product Name: TC 120811 - For RPS - Submitted to SHA and rejected, Status is New and select Type of Product): Chalk and add a Random Identifier
 Given I generate a random UPC number and save as: UPC120811
@@ -1254,7 +1254,7 @@ Scenario: [145743] Canada Only, PLP = Yes, PLP Upload allowed = Yes, GenDocCA = 
 Given I login into the WERCSmart Portal - WebViewers Account
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 # In the shared step below select Chalk as your product type. If running this test case for the first time in an environment after a database refresh and the product name is not present in the database please use the product name: For WVs Test case 145743 - Canada Only, PLP Yes, PLP Upload allowed Yes, GenDocCA 1, Alias published Yes
 Given I call Shared Step 57561b (The Product - Enter Product Name: TC 145743 - For RPS - Submitted status and select Type of Product): Chalk and add a Random Identifier
@@ -1329,7 +1329,7 @@ Scenario: [145783] Canada Only, PLP = Yes, PLP Upload allowed = Yes, GenDocCA = 
 Given I login into the WERCSmart Portal - WebViewers Account
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 # In the shared step below select Chalk as your product type. If running this test case for the first time in an environment after a database refresh and the product name is not present in the database please use the product name: For WVs TC 145783 - Canada Only, PLP Yes, PLP Upload allowed Yes, GenDocCA 1, Alias published No
 Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
@@ -1399,7 +1399,7 @@ Scenario: [120816] WERCSmart product - Submitted to SHA, Status = Accepted
 Given I Login into WERCSmart Portal - WebViewers Account
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 Then I call Shared Step 57561b (The Product - Enter Product Name: TC 120816 - for RPS - Status Accepted and select Type of Product): Chalk and add a Random Identifier
 Given I generate a random UPC number and save as: UPC120816
@@ -1475,7 +1475,7 @@ Scenario: [120817] WERCSmart product - Submitted to SHA, Status = Completed
 Given I Login into WERCSmart Portal - WebViewers Account
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 Then I call Shared Step 57561b (The Product - Enter Product Name: TC 210817 - For RPS - Completed Status and select Type of Product): Chalk and add a Random Identifier
 Given I generate a random UPC number and save as: UPC120815
@@ -1555,7 +1555,7 @@ Scenario: [120848] WERCSmart product - Submitted to SHA, Status = Suspended (Saf
 	Given I Login into WERCSmart Portal - WebViewers Account
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 Then I call Shared Step 57561b (The Product - Enter Product Name: TC 120848 - For RPS - Suspended Status - Formula - Document Issue and select Type of Product): Chalk and add a Random Identifier
 	Then I save the product information as: TestCase120848
@@ -1662,7 +1662,7 @@ Scenario: [120820] WERCSmart product - Submitted to SHA, Status = Cancelled
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 Given I generate a random UPC number and save as: UPC120820
 Then I save the product information as: TestCase120820
@@ -1740,7 +1740,7 @@ Scenario: [126691] WERCSmart product - Pesticide - processed from New to Suspend
 Given I Login into WERCSmart Portal - WebViewers Account
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 Then I call Shared Step 57561b (The Product - Enter Product Name: TC 126691 - For RPS - Status is Suspended-Pesticide and select Type of Product): Chalk and add a Random Identifier
 	Then I save the product information as: TestCase126691
@@ -1816,7 +1816,7 @@ Scenario: [121986] WERCSmart product - Fails CVS Audit (Palm oil) from New thru 
 Given I Login into WERCSmart Portal - WebViewers Account
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 Then I call Shared Step 57561b (The Product - Enter Product Name: TC 121986 - for RPS - Fails CVS Audit Palm oil and select Type of Product): Chalk and add a Random Identifier
 	Then I save the product information as: TestCase121986
