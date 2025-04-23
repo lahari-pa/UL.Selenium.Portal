@@ -436,7 +436,7 @@ Scenario: [65940] Transportation - Copy information from my U.S. Department of T
     Then I save the product information as: TestCase65940
 	#And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Then I should be on the Product Information Page
-	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
 	Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
 	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
@@ -463,9 +463,9 @@ Scenario: [65940] Transportation - Copy information from my U.S. Department of T
     #| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
     #| component name | Chlorine       | 100     |                     |               |             |
 	Then In the Ingredients Section, click the component search box
-	Then In the component search box, enter text: Chlorine
-	Then In the component search box, click result where component name contains: Chlorine
-    Then In the Ingredients Table row with component name: Chlorine, in Percent column text input enter: 100
+	Then In the component search box, enter text: Water
+	Then In the component search box, click result where component name contains: Water
+    Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
     Then in the Ingredients page, I click Continue
     #And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should be on the Inventory Status, Prop 65 (US) Page
@@ -484,8 +484,8 @@ Scenario: [65940] Transportation - Copy information from my U.S. Department of T
     And I should be on the U.S. Department of Transportation (DOT) Classification Page
 	#And I click continue
     #And I call Shared Step 65705 (Transportation - DOT UN step - Enter UN1950, select Aerosols,  2.1, None, add technical name, Click Continue)
-	 And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1970
-	 And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Aerosols
+	 And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
+	 And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
 	 And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Technical Name (if applicable)': to: Technical Test Name
      And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
 	 And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Packing Group (select)' contains value: None
@@ -495,7 +495,7 @@ Scenario: [65940] Transportation - Copy information from my U.S. Department of T
     #And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
 	And In the International Marine (IMDG) Classification Section, I check checkbox 'Copy information from my U.S. Department of Transportation data'
     #And UN Number should be showing the value: UN1950
-    And In the International Marine (IMDG) Classification Section, verify section: 'UN Number' contains value: UN1970
+    And In the International Marine (IMDG) Classification Section, verify section: 'UN Number' contains value: UN1950
     #And Proper Shipping Name should be showing the value: Aerosols
 	And In the International Marine (IMDG) Classification Section, verify section: 'Proper Shipping Name' contains value: Aerosols
    #And Hazard Class (select) should be showing the value: 2
@@ -510,7 +510,7 @@ Scenario: [65940] Transportation - Copy information from my U.S. Department of T
    #| None   |
 
    #And I call Shared Step 65939 (Go To Transport DOT Step - Enter UN1966, Confirm data - NO CONTINUE)
-    And I click the page heading: Transportation Details 1
+    And I click the page heading: U.S. Department of Transportation (DOT) Classification
     Then I should be on the U.S. Department of Transportation (DOT) Classification Page
     And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1966
     And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Hydrogen, refrigerated liquid
