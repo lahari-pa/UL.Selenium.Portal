@@ -559,7 +559,7 @@ Scenario: [65944] Transportation - Copy information from my U.S. Department of T
     Then I save the product information as: TestCase65944
 	#And I call Shared Step 74340 (Product Information - Pesticide= Not considered, SOLD=US, everything else = No - Continue)
 	Then I should be on the Product Information Page
-	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
 	Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
 
 	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
@@ -573,7 +573,6 @@ Scenario: [65944] Transportation - Copy information from my U.S. Department of T
     #| Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
     #| Liquid                 | Liquid                   | 2                | 2  | 2                          | 66                       | Closed cup method               | Dispersible                                  |
 	And I should be on the Physical and Chemical Properties Page
-
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Liquid
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
 	Then In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 1
@@ -589,9 +588,9 @@ Scenario: [65944] Transportation - Copy information from my U.S. Department of T
     #| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
     #| component name | Chlorine       | 100     |                     |               |             |
 	Then In the Ingredients Section, click the component search box
-	Then In the component search box, enter text: Chlorine
-	Then In the component search box, click result where component name contains: Chlorine
-    Then In the Ingredients Table row with component name: Chlorine, in Percent column text input enter: 100
+	Then In the component search box, enter text: Water
+	Then In the component search box, click result where component name contains: Water
+    Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
     Then in the Ingredients page, I click Continue
     #And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Given I should be on the Inventory Status, Prop 65 (US) Page
@@ -614,7 +613,7 @@ Scenario: [65944] Transportation - Copy information from my U.S. Department of T
     And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1975
 
     #And Proper Shipping Name should be showing the value: Nitric oxide and dinitrogen tetroxide mixtures
-    And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Nitric oxide and dinitrogen tetroxide  mixtures
+    And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Nitric oxide and dinitrogen tetroxide mixtures
 
     #And The following options should be displayed exclusively for section: Proper Shipping Name
     #| Option                                         |
@@ -669,7 +668,7 @@ Scenario: [65944] Transportation - Copy information from my U.S. Department of T
     #| None   |
 
     #And I call Shared Step 65939 (Go To Transport DOT Step - Enter UN1966, Confirm data - NO CONTINUE)
-    And I click the page heading: Transportation Details 1
+    And I click the page heading: U.S. Department of Transportation (DOT) Classification
     Then I should be on the U.S. Department of Transportation (DOT) Classification Page
     And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1966
     And In the U.S. Department of Transportation (DOT) Classification Section, verify section: 'Proper Shipping Name' contains value: Hydrogen, refrigerated liquid
