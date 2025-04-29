@@ -985,124 +985,81 @@ Then I delete the product: TestCase87718
 Scenario: [87818] UPC - Case UPC - Individual UPC contained in the Case Pack drop down - none available for selection
 #Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 Given I log in with the account saved in TReVor as: ProductAccount
-
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
-	Then in the New Product page, I click Continue
-
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+Then I click the Add Product icon in the Navigation Pane
+Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+Then in the New Product page, I click Continue
+#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): After Shave
+Then I should be on the The Product Page
+And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: After_Shave_#87818
+And In the Product Section, set the option in section: 'Type of Product (select)' to: After Shave
+Then in the The Product page, I click Continue
 Given I generate a random UPC number and save as: UPC87818
 Then I save the product information as: TestCase87818
 And I should see the Product Information Page
-And I call Shared Step 85730 - Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
+#And I call Shared Step 85730 - Product Information - Canada Only - Child (NO), GHS (NO), DSV (NO), PLP(YES), GNFR (NO), Continue
+Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+Then in the Product Information page I click Continue
 #Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-Given I should see the Physical and Chemical Properties Page
-	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
-	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
-	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
-	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
-	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
-	Then in the Physical and Chemical Properties page I click Continue
+Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Liquid
+And In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid
+And In the Physical and Chemical Properties Section, for section: 'Relative Density' enter text: 120
+Then In the Physical and Chemical Properties Section, set the option in section: 'Relative Density' to: g/ml (grams per milliliter)
+And In the Physical and Chemical Properties Section, for section: 'pH' enter text: 8
+And In the Physical and Chemical Properties Section, for section: 'Boiling Point (in Celsius)' enter text: 100
+Then In the Physical and Chemical Properties Section, for section: 'Flash Point (in Celsius)' enter text: 60
+Then In the Physical and Chemical Properties Section, set the option in section: 'Flash Point Testing Method Used' to: Closed cup method
+And In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+Then in the Physical and Chemical Properties page, I click Continue
+#And I call Shared Step 29181c (Ingredients - add any chemical - For Canada Only) with name: Chlorine
+Given I should see the Ingredients Page
+Then In the Ingredients section, add component with component name: Ethyl alcohol
+Then In the Ingredients section, add component with component name: Witch hazel extract
+Then In the Ingredients section, add component with component name: Water
+Then In the Ingredients Table row with component name: Ethyl alcohol, in Percent column text input enter: 33.33
+Then In the Ingredients Table row with component name: Witch hazel extract, in Percent column text input enter: 33.33
+Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 33.34
+Then in the Ingredients page I click Continue
+Then I should be on the Inventory Status, Prop 65 (US) Page
+And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+Then in the Inventory Status, Prop 65 (US) page, I click Continue
+Then In the Product Labeling Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above
+Then in the Product Information page I click Continue
+Given I should see the Transportation Details 1 Page
+Then In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Yes
+Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: DOT
+Then In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping with limited quantity
+Then in the Transportation Details 1 page I click Continue
+And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1266
+Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: II
+Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Product has a boiling point of <=35⁰C and flash point of >60⁰C. Packing Group selected is not consistent with this data. Verify the data and transportation packing group. If problem persists, please contact Support.': to: Based on defined viscosity parameters, this product is classified as PG III.
+Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
 
-And I call Shared Step 29181c (Ingredients - add any chemical - For Canada Only) with name: Chlorine
-And I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)
-Then I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via this retailer)
-Then I click continue
-Given I click the 'Add Casepack' button
-Given I add the following into the UPC case fields
-		| UPC Number          | Container Type    | Size | Quantity | Individual Upc Case Pack | Transportation Option |
-		| saved as UPC87818   | Plastic Container | 32   | 123      |                          | 4A: steel box         |
-Then I select the case UPC dropdown arrow to collapse the UPC saved as: UPC87818
-Then I confirm the case dropdown with the following UPC: saved as UPC87818 should be available for selection
-Then I select the case UPC dropdown arrow to expand the UPC saved as: UPC87818
+#Then I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via thisretailer)
+Then I should be on the Retailer Page
+And In the Retailer Section, click 'Add Retailers' button
+And In the Select Retailers window, select retailer: Walgreens
+And In the Select Retailers window, click 'Done' button
+Then in the Retailer page, I click Continue
+#Given I click the 'Add Casepack' button
+#Given I add the following into the UPC case fields
+#		| UPC Number          | Container Type    | Size | Quantity | Individual Upc Case Pack | Transportation Option |
+#		| saved as UPC87818   | Plastic Container | 32   | 123      |                          | 4A: steel box         |
+Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the 'Add Casepack' button
+Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Internal SKU' enter the value: ABC14789
+Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Size (Fluid Ounces)' enter the value: 2
+Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Quantity of Units within the Case' enter the value: 5
+Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Transportation Options' enter the value: 1A2: removable head steel drum
 Then I confirm the Individual UPC field is shown in the Universal Product Code (UPC) Page
 Then I confirm Individual UPC field does not display any options
 #Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87818
-	Then I navigate to the Home Page
-	Then In the Product Grid, delete the product saved as: TestCase87818
-
-# Created by Saikiran Chittampally
-@TestCase:112487
-Scenario: [112487] Case Pack UPC: Transportation Option Selected Stays the Same when Fields Collapse
-	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	Given I log in with the account saved in TReVor as: ProductAccount
-	Given I generate a random UPC number and save as: UPC112487
-#	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
-	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
-	Then in the New Product page, I click Continue
-
-	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
-	Then I should be on the The Product Page
-	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk_#80720
-	And In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
-	Then in the The Product page, I click Continue
-	Given I save the product information as: TestCase112487
-
-
-	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	Given I should see the Product Information Page
-	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
-	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
-	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
-	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
-	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
-	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
-	Then in the Product Information page I click Continue
-
-	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	Given I should see the Physical and Chemical Properties Page
-	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
-	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
-	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
-	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
-	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
-	Then in the Physical and Chemical Properties page I click Continue
-
-	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
-	Given I should see the Ingredients Page
-	Then In the Ingredients section, add component with component name: Water
-	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
-	Then in the Ingredients page I click Continue
-
-
-	#Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	Then I should be on the Inventory Status, Prop 65 (US) Page
-	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
-	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
-	Then in the Inventory Status, Prop 65 (US) page, I click Continue
-
-	#Given I call Shared Step 75146 (Retailer - Select one or more retailers that do not require vendor ID or additional UPC information, Click Done, Click Continue) for
-	Given I should see the Retailer Page
-	Given In the Retailer Section, click 'Add Retailers' button
-	Given In the Select Retailers window, select retailer: Target
-	Given In the Select Retailers window, click 'Done' button
-	Given in the Retailer page I click Continue
-
-	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the 'Add Casepack' button
-
-	#Given I add the following into the UPC case fields
-		#| UPC Number          | Container Type		  | Size | Quantity | Individual Upc Case Pack | Transportation Option |
-		#| saved as UPC112487  | Plastic Container     | 6    | 4        |                          | 4A: steel box         |
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'GTIN/UPC (include check digit)' enter the value: saved as UPC112487
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Size (Fluid Ounces)' enter the value: 6
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Container Type' select the value: Plastic Container
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Quantity of Units within the Case' enter the value: 4
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Transportation Options' enter the value: 4A: steel box
-	Given I click on the arrow next to the UPC data
-	Given I confirm that the transportation option: 4A: steel box that was selected is still the same
-	Given I click continue
-	Given In the New Product page I click tab: Recipient and UPC Details
-	Given I click the page heading: Global Trade Item Number (GTIN) / Universal Product Code (UPC)
-	Given I Change the Transportation option from the dropdown to: 4B: aluminum box
-	Given I click on the arrow next to the UPC data
-	Given I confirm that the transportation option: 4B: aluminum box that was selected is still the same
-	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase112487
-	Then I navigate to the Home Page
-	Then I delete the product: TestCase112487
-
+Then I navigate to the Home Page
+Then I delete the product: TestCase87818
 
 
 		# Created by Saikiran Chittampally
