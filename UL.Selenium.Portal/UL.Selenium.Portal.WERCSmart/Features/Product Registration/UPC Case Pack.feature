@@ -987,7 +987,7 @@ Scenario: [87818] UPC - Case UPC - Individual UPC contained in the Case Pack dro
 Given I log in with the account saved in TReVor as: ProductAccount
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 Then I click the Add Product icon in the Navigation Pane
-Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration '
+Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 Then in the New Product page, I click Continue
 #Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): After Shave
 Then I should be on the The Product Page
@@ -1038,6 +1038,12 @@ And In the U.S. Department of Transportation (DOT) Classification Section, set t
 Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: II
 Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Product has a boiling point of <=35⁰C and flash point of >60⁰C. Packing Group selected is not consistent with this data. Verify the data and transportation packing group. If problem persists, please contact Support.': to: Based on defined viscosity parameters, this product is classified as PG III.
 Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
+Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.': to: No
+Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB': to: 5
+Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule': to: 5
+Then in the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) page, I click Continue	
+Then In the Volatile Organic Compound Summary Section, for 'Your acknowledgement of this registration includes that your product..' set 'Yes, I Acknowledge'
+Then in the Volatile Organic Compound Summary page, I click Continue	
 
 #Then I call Shared Step  (Select Retailers Canadian Tire and enter additional requirements field - Indicate full name of product, as sold via thisretailer)
 Then I should be on the Retailer Page
