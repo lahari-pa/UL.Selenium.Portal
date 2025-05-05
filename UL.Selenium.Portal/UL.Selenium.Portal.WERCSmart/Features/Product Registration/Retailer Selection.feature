@@ -559,10 +559,10 @@ Scenario: [181979] Single Retailer Checkbox Checks
 
 	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	Given I should see the Ingredients Page
-	Then In the Ingredients section, add the following ingredients:
-	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-	| component name | Water       | 100     |                     |               |             |
+	Then In the Ingredients section, add component with component name: Water
+	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
 	Then in the Ingredients page I click Continue
+
 
 #	Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 	Then I should be on the Inventory Status, Prop 65 (US) Page
@@ -571,11 +571,11 @@ Scenario: [181979] Single Retailer Checkbox Checks
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
 
 	Then I should see the Retailer Page
-	Then I confirm the checkbox Registration is for a Single Retail Recipient (No Retailer +1) and will use Single-Retail Subscription program is present for stand alone batteries in Retailer page
-	Then I confirm the following retailers are showing in the Retailer page
-		| Retailer					 |
-		| No Retailer/No UPC Product |
-	Given I click 'Add Retailers' in the Retailers page
+	Then I confirm if the single retailer checkbox is displayed on the retailer page
+	And In the Retailer Section is selected retailer: No Retailer/No UPC Product
+	And In the Retailer Section, click 'Add Retailers' button
+
+
 	Then the 'Select Retailers' window appears
 	Given I Confirm that on the top right corner the Select All option is NOT available
 	Then In the 'Select Retailers' window I select the retailer: Amazon
@@ -645,11 +645,11 @@ Given I should see the Physical and Chemical Properties Page
 	Then in the Physical and Chemical Properties page I click Continue
 
 #Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
-Given I should see the Ingredients Page
-	Then In the Ingredients section, add the following ingredients:
-	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-	| component name | Water       | 100     |                     |               |             |
+	Given I should see the Ingredients Page
+	Then In the Ingredients section, add component with component name:  Water
+	Then In the Ingredients Table row with component name:  Water, in Percent column text input enter: 100
 	Then in the Ingredients page I click Continue
+
 
 
 #Given I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
