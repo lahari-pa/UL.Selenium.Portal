@@ -1369,6 +1369,9 @@ Scenario: [119633] Case Pack UPC: UPC Becomes Archived, Case UPC Becomes Archive
 	Then In the SHA UPC list I should see the case pack asterisk for the UPC: saved as UPC1196331
 	And I close the current window and switch to the main window in Studio
 
+
+
+
 	@TestCase:217540
 Scenario: [217540]	Registration: Canada only/Canada and US/US only: UPC Level Data
 	Given I log in with the account saved in TReVor as: ProductAccount
@@ -1392,11 +1395,7 @@ Scenario: [217540]	Registration: Canada only/Canada and US/US only: UPC Level Da
 	When In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	When In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
 	Then in the Product Information page, I click Continue	
-	#Given I call Shared Step 69389 (Regulatory Documents to Provide - Canada only - Confirm questions - Request author, add label and todays date - Continue)
-	Then I should see the Regulatory Documents to Provide Page	
-	Given I click the browse button for document type: Label in both French and English and for control label: Product Label in English and French-Canadian and upload a PDF
-	When In the Regulatory Documents to Provide Section, set the radio option in section: 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: I don't need a WHMIS Compliant SDS
-	Then in the Regulatory Documents to Provide page, I click Continue	
+
 	
 	#And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Then I should see the Physical and Chemical Properties Page
@@ -1405,26 +1404,43 @@ Scenario: [217540]	Registration: Canada only/Canada and US/US only: UPC Level Da
 	Given In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
 	Given In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Then in the Physical and Chemical Properties page, I click Continue
+
+
 	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: water
+	Given I should see the Ingredients Page
 	Then In the Ingredients section, add the following ingredients:
 		| SearchType     | SearchText | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
 		| component name | Water      |  100    | false                | false        | Water    |
-	Then in the Ingredients page, I click Continue
+	Then in the Ingredients page I click Continue
+
 	#Given I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)	
 	Then I should see the Inventory Status, Prop 65 (US) Page
 	Given In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'Canadian Environmental Protection Act (CEPA) status' to: Compliant with Domestic Substances List (DSL)
 	Given In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is exempt from TSCA chemical Inventory listing requirements.
 	Given In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
-	Then in the Inventory Status, Prop 65 (US) page, I click Continue	
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+	
 	#Given I call shared step 72414 (Retailer - Canada Only > Select Canadian Tire > Continue - Happy Path)
-	Then I should see the Retailer Page
-	Given I select the following retailers in the Select Retailers popup list view:
-		| Retailer       |
-		| Canadian Tire |
-	Then I click Done in the Select Retailers popup
+	Then I should be on the Retailer Page
+	And In the Retailer Section, click 'Add Retailers' button
+	Then In the Retailer Section is selected retailer: No Retailer/No UPC Product
+	And In the Select Retailers window, click 'Done' button
 	Then in the Retailer page, I click Continue
-	Given I enter information for Enter Universal Product Code (UPC) - UPC-Container Type - Size Only for UPC: for UPC: saved as UPC217540, container type: Plastic Container and size: 2 - do not click continue
-	Then I click continue
+
+	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC217540 enter Size: 12 and enter Container Type: Plastic bag
+
+    Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the 'Add Casepack' button
+    Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'GTIN/UPC (include check digit)' enter the value: saved as UPC87676
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Size (Fluid Ounces)' enter the value: 2
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Container Type' select the value: Aerosol Can - Metal
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Quantity of Units within the Case' enter the value: 5
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Transportation Options' enter the value: 1A2: removable head steel drum
+	Given in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
+
+
+
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 	Given in the Optional Comments page I click Continue

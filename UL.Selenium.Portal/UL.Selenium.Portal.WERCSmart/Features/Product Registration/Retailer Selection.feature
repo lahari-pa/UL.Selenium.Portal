@@ -361,8 +361,9 @@ Scenario: [133311] Retailer Private Label List Appear in Alphabetical Order
 	#	| CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
 	#	|           | calcium       | 100     |                     |            |             |
 	Given I should see the Ingredients Page
-	Then In the Ingredients section, add component with component name: Water
-	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     |                     |               |             |
 	Then in the Ingredients page I click Continue
 	#Given I call Shared Step 132370 (Waste Classification Data - TSCA (Random) - Prop 65 (No) - Continue - Happy Path)
 	Given I should see the Inventory Status, Prop 65 (US) Page
@@ -559,8 +560,10 @@ Scenario: [181979] Single Retailer Checkbox Checks
 
 	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	Given I should see the Ingredients Page
-	Then In the Ingredients section, add component with component name: Water
-	Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     |                     |               |             |
+
 	Then in the Ingredients page I click Continue
 
 
@@ -646,8 +649,9 @@ Given I should see the Physical and Chemical Properties Page
 
 #Given I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 	Given I should see the Ingredients Page
-	Then In the Ingredients section, add component with component name:  Water
-	Then In the Ingredients Table row with component name:  Water, in Percent column text input enter: 100
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| component name | Water       | 100     |                     |               |             |
 	Then in the Ingredients page I click Continue
 
 
@@ -759,11 +763,10 @@ Then in the Physical and Chemical Properties page I click Continue
 
 #Then I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
 Given I should see the Ingredients Page
-#Then In the Ingredients section, add the following ingredients:
-#| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-#| component name | Water       | 100     |                     |               |             |
-Then In the Ingredients section, add component with component name: Water
-Then In the Ingredients Table row with component name: Water, in Percent column text input enter: 100	
+Then In the Ingredients section, add the following ingredients:
+| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+| component name | Water       | 100     |                     |               |             |
+
 Then in the Ingredients page I click Continue
 #Then I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
 Then I should be on the Inventory Status, Prop 65 (US) Page
