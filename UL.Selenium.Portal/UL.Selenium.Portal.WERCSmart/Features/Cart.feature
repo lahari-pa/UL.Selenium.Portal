@@ -18,6 +18,8 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+@SideMenu
+
 Feature: Cart
 
 #Background:
@@ -35,7 +37,7 @@ Scenario: [63323] Remove single product from cart
 	Given I log in with the account saved in TReVor as: CartNoProducts
        Then The home screen should load
        #Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	   Then I click the Add Product icon in the Navigation Pane
+	   Then In the Side Menu, click Labeled Link with Add Product title
 		Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 		Then in the New Product page, I click Continue
 

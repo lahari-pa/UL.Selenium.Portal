@@ -35,6 +35,9 @@
 @AdditionalDocsContactInfo
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails2
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:BatteryStateOfCharge
+@SideMenu
+
 Feature: Flow 16
 
 @TestCase:59273
@@ -45,7 +48,7 @@ Scenario: [59273] Alkaline Battery - RU000344
 	Then In the Product Grid, delete all products with UPC Number: saved as UPC59273
 
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -137,7 +140,7 @@ Scenario: [59274] Battery Containing Mercury - RU000729
 	Given I generate a random UPC number and save as: UPC59274
 	Given I delete all products with UPC Number: saved as UPC59274
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -231,7 +234,7 @@ Scenario: [59276] Lead Acid Battery - No Acid Included - RU001225
 	Then In the Product Grid, delete all products with UPC Number: saved as UPC59276
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -351,7 +354,7 @@ Scenario: [59278] Nickel Metal Hydride (NiMH) Battery - RU000373
 	Then In the Product Grid, delete all products with UPC Number: saved as UPC59278
 
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -471,7 +474,7 @@ Scenario: [59280] Silver Battery - RU000698
 	Then In the Product Grid, delete all products with UPC Number: saved as UPC59280
 
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -592,7 +595,7 @@ Scenario: [59281] Water-Charged Cell - RU001543
 	Then In the Product Grid, delete all products with UPC Number: saved as UPC59281
 
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -719,7 +722,7 @@ Scenario: [59282] Zinc Air - RU001205
 	Then In the Product Grid, delete all products with UPC Number: saved as UPC59282
 
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -838,7 +841,7 @@ Scenario: [97470] Stand alone Lead Acid Battery
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -953,7 +956,7 @@ Scenario: [110324] Nickel Metal Hydride (NiMH) Battery (RU000373) - Verify that 
 	Then In the Product Grid, delete all products with UPC Number: saved as UPC110324
 
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -1051,7 +1054,7 @@ Scenario:[122366] Battery Containing Product (BCP) (Transportation override at U
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I generate a random UPC number and save as: UPC122366
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -1129,26 +1132,65 @@ Scenario:[122366] Battery Containing Product (BCP) (Transportation override at U
 	Then The Purchase Summary Page is displayed
 	Then In the Purchase Summary Page, click the 'Home' button
 
-	@TestCase:220789
-
-	Scenario: [220789] Carbon Zinc Battery - RU000727
-	
+@TestCase:220789
+Scenario: [220789] Carbon Zinc Battery - RU000727
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC220789
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Carbon Zinc Battery
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Carbon Zinc Battery
+	 Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Carbon Zinc Battery_#220789
+    And In the Product Section, set the option in section: 'Type of Product (select)' to: Carbon Zinc Battery
+    Then in the The Product page, I click Continue
 	Then I save the product information as: TestCase220789
-	Then I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
-	Then I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
-	Then I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-		| ComponentName | Percent  | PublicallyDisclosed | TradeSecret | PublicName |
-		| Water         | 100      | false               | false       |            |
-	Then I call Shared Step 145355 Formulation > Batteries - Select Granted - Continue
-	Then I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+
+	#Then I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+	Then I should be on the Product Information Page
+	Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
+	Then In the Product Information Section, set the option in section: 'Select one option below' to: Battery is not packaged for Retail Sale
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page, I click Continue
+
+	#Then I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
+	And I should be on the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then in the Physical and Chemical Properties page, I click Continue
+
+	#Then I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	#	| ComponentName | Percent  | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Water         | 100      | false               | false       |            |
+	Given I should be on the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+	| SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+	| CAS number | 1333-86-4   | 7       |                     |               |             |
+	| CAS number | 12125-02-9  | 10      |                     |               |             |
+	| CAS number | 1313-13-9   | 31      |                     |               |             |
+	| CAS number | 7440-66-6   | 42      |                     |               |             |
+	| CAS number | 7646-85-7   | 10      |                     |               |             |
+	| CAS number | 65997-19-5  | 28      |                     |               |             |
+	Then in the Ingredients page, I click Continue
+
+	#Then I call Shared Step 145355 Formulation > Batteries - Select Granted - Continue
+	Given I should be on the Formulation > Batteries Page
+	Then In the Formulation > Batteries Section, set the radio option in section: 'Consent to Tier 2.1, 2.2, 4.2 Data Uses': to: Granted
+	Then in the Formulation > Batteries page, I click Continue
+
+	#Then I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
+	Given I should be on the Inventory Status, Prop 65 (US) Page
+	Then  In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+
+	Given I should be on the Battery Characteristics Page
+	Then In the Battery Characteristics Section, set the option in section: 'Type of Battery' to: Battery
+	Then in the Battery Characteristics page, I click Continue
+
 	Then I call Shared Step 150905 (Retailer - NR selected by default)
 	Then I call Shared Step 145129 Regulatory Documents to Provide - Upload AIS and CCCR
 	Then in the Additional Documents to Provide page I click Continue
@@ -1158,7 +1200,6 @@ Scenario:[122366] Battery Containing Product (BCP) (Transportation override at U
 	Given I should see the Data Acceptance Page
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
 	Then In the Data Acceptance Section, click 'Accept' button
-
 	Then I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase220789)
 	Then I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase220789)
@@ -1168,8 +1209,8 @@ Scenario:[122366] Battery Containing Product (BCP) (Transportation override at U
 	Then I call Sared Step 214627 Power Designer Plus - PUBLISH Product (Applicable Only to Battery Products ): TestCase220789
 	Then I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase220789)
 	Then I call Shared Step 214632(Power Designer Plus - MTR/BATT - Update BATACT (Active Battery Indicator) to Finish Processing Battery (Alone) Products):
-	| ProductId      | BatteryType    |
-	| TestCase220789 | Carbon zinc    |
+		| ProductId      | BatteryType    |
+		| TestCase220789 | Carbon zinc    |
 	Then I switch to the 'SHA' tab
 	Then I call Shared Step 49841 (SHA - Search for exact WPS ID in Completed Status for saved as: TestCase220789)
 	Then In SHA Manager I confirm product Id color is blue for product saved as: TestCase220789
@@ -1181,18 +1222,28 @@ Scenario:[122366] Battery Containing Product (BCP) (Transportation override at U
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC220191
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Nickel-Cadmium Battery
 	Then I save the product information as: TestCase220191
-	Then I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+	#Then I call Shared Step 102767 (Product Information (Battery flow - not Lithium) - OSHA (No), DSV (No), PLP (No), GNFR (No))
+	Then I should be on the Product Information Page
+	Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
+	Then In the Product Information Section, set the option in section: 'Select one option below' to: Battery is not packaged for Retail Sale
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page, I click Continue
+
 	Then I call Shared Step 59927 (Primary Physical State > Solid only available – Without Water Solubility question)
 	Then I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| ComponentName | Percent  | PublicallyDisclosed | TradeSecret | PublicName |
 		| Water         | 100      | false               | false       |            |
-	Then I call Shared Step 145355 Formulation > Batteries - Select Granted - Continue
+	#Then I call Shared Step 145355 Formulation > Batteries - Select Granted - Continue
+	Given I should be on the Formulation > Batteries Page
+	Then In the Formulation > Batteries Section, set the radio option in section: 'Consent to Tier 2.1, 2.2, 4.2 Data Uses': to: Granted
+	Then in the Formulation > Batteries page, I click Continue
+
 	Then I call Shared Step 57637 (Regulatory Information 1 - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	Then I call Shared Step 150905 (Retailer - NR selected by default)
 	Then I call Shared Step 145129 Regulatory Documents to Provide - Upload AIS and CCCR

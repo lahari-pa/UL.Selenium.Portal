@@ -15,6 +15,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @AdditionalDocsContactInfo
+@SideMenu
 
 Feature: Batteries
 
@@ -29,7 +30,7 @@ Scenario: [97488] Stand alone Lithium Battery vehicle
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Lithium battery vehicle
@@ -89,7 +90,7 @@ Scenario: [97488] Stand alone Lithium Battery vehicle
 Scenario: [97495] Stand alone Nickel-Cadmium Battery
 	Given I log in with the account saved in TReVor as: ProductAccount	
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 	Then I should see the The Product Page	
@@ -176,7 +177,7 @@ Scenario: [97495] Stand alone Nickel-Cadmium Battery
 Scenario: [97494] Stand alone Nickel Metal Hydride Battery
 	Given I log in with the account saved in TReVor as: ProductAccount	
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 	#And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Nickel Metal Hydride (NiMH) Battery

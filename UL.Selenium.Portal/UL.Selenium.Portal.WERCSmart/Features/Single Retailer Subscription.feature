@@ -31,8 +31,10 @@
 @StepsPrototype
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:NewProduct
 @SafetyDataSheetAuthoring
-
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Formulated_Batteries
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
+@SideMenu
+
 Feature: Single Retailer Subscription
 
 @TestCase:200502
@@ -303,7 +305,7 @@ Scenario: [181949] Single Retailer Checkbox and Hover message
 
 Given I log in with the account saved in TReVor as: SingleRetailerAccount
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -352,7 +354,7 @@ Scenario: [182705] Single Retailer Checkbox - Not Visible in Battery Flow
 Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Then The home screen should load
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -376,7 +378,11 @@ Then I save the product information as: TestCase182705
 Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 | ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 | Water      | 100     | false               | false       |            |
-Given I call Shared Step 145355 Formulation > Batteries - Select Granted - Continue
+#Given I call Shared Step 145355 Formulation > Batteries - Select Granted - Continue
+Given I should be on the Formulation > Batteries Page
+	Then In the Formulation > Batteries Section, set the radio option in section: 'Consent to Tier 2.1, 2.2, 4.2 Data Uses': to: Granted
+	Then in the Formulation > Batteries page, I click Continue
+
 Given I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
 Then I should see the Retailer Page
 Given I confirm the checkbox Registration is for a Single Retail Recipient (No Retailer +1) and will use Single-Retail Subscription program is not present for stand alone batteries in Retailer page 
@@ -389,7 +395,7 @@ Scenario: [182824] Single Retailer - UPC Screen and Retailer Screen Checks
 Given I log in with the account saved in TReVor as: SingleRetailerAccount
 Then The home screen should load
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 

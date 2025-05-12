@@ -28,6 +28,7 @@
 @StepsPrototype
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 @SafetyDataSheetAuthoring
+@SideMenu
 
 Feature: Flow 24 - Deodorant
 
@@ -39,7 +40,7 @@ Scenario: [60617] Deodorant - Non-Aerosol - RU000760(Liquid)
 	Given I generate a random UPC number and save as: UPC60617
 	Given I delete all products with UPC Number: saved as UPC60617
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -217,7 +218,7 @@ Scenario: [159880] Antiperspirant for Women (Non-Aerosol) RU001256
 Given I log in with the account saved in TReVor as: ProductAccount
 
     #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-    Given I click the Add Product icon in the Navigation Pane
+    Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 

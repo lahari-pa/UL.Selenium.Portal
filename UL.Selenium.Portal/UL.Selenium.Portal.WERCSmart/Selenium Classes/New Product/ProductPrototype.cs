@@ -230,29 +230,40 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		#endregion
 	}
 
-	public class SearchBoxResult
+	public class SearchBoxResult(IWebElement containerElement)
 	{
 		#region Page Objects
-		private IWebElement ContainerElement { get; set; }
+		private IWebElement ContainerElement { get; set; } = containerElement;
 		public string ResultText => this.ContainerElement?.Text;
+		public bool Highlighted => this.ContainerElement.GetAttribute("class").Contains("-highlighted");
+		#endregion
+		#region Methods
+		public bool Click()
+		{
+			Report.Info($"Attempting to click '{this.ResultText}' search result.");
+			return this.ContainerElement.TryClick();
+		}
+		#endregion
+	}
+
+	public class ChemicalSearchBoxResult(IWebElement containerElement) : SearchBoxResult(containerElement)
+	{
+		#region Class Objects
+		private IWebElement ContainerElement { get; set; } = containerElement;
 		public string ComponentName => this.ContainerElement.FindElement(By.XPath(".//span[@class='component-name']"), 1)?.Text;
 		public string CASNumber => this.ContainerElement.FindElement(By.XPath(".//span[@class='text-muted']"), 1)?.Text;
 		public List<string> SynonymList => this.ContainerElement.FindElements(By.XPath(".//li"), 1).Select(x => x?.Text).ToList();
-		public bool Highlighted => this.ContainerElement.GetAttribute("class").Contains("-highlighted");
 		public string DisplayName => this.ComponentName.IsNullOrEmpty() ? this.ResultText : this.ComponentName;
 		#endregion
-		#region Methods
-		public SearchBoxResult(IWebElement searchBoxComponent)
-		{
-			this.ContainerElement = searchBoxComponent;
-		}
 
-		public bool Click()
+		#region Class Methods
+		public new bool Click()
 		{
 			Report.Info($"Attempting to click '{this.DisplayName}' search result.");
 			return this.ContainerElement.TryClick();
 		}
 		#endregion
+
 	}
 
 	public class SearchBoxPrototype : SeleniumBaseObject
@@ -260,7 +271,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		#region Page Objects
 		protected override By ContainerElementLocator => By.XPath($"//span[contains(@class,'select2-container--open')][.//input[@type='search']]");
 		private IWebElement SearchInput => this.FindElement(By.XPath(".//input[@type='search']"), 1);
-		List<SearchBoxResult> SearchResultList => this.ContainerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results')][@data-select2-id]"), 1).Select(x => new SearchBoxResult(x)).ToList();
+		private List<SearchBoxResult> SearchResultList => [.. this.ContainerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results')][@data-select2-id]"), 1).Select(x => new SearchBoxResult(x))];
 		private IWebElement SearchResultAlert(string alertText) => this.FindElement(By.XPath($".//li[@role='alert'][@text()='{alertText}']"), 1);
 		private IWebElement SearchResultLoading => this.FindElement(By.XPath(".//li[.//div[@class='loading']]"), 1);
 		#endregion
@@ -271,9 +282,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			Report.Info($"Attempting to confirm search input box exists.");
 			return this.SearchInput != null;
 		}
-		public bool ClearSearchTextBox()
+		public bool SearchTextBoxClear()
 		{
-			Report.Info($"Attempting to confirm search input box exists.");
+			Report.Info($"Attempting to confirm clear input box.");
 			return this.SearchInput.ClearTextBox();
 		}
 
@@ -307,6 +318,31 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return this.SearchResultList.Any(x => x.ResultText.Contains(searchText, StringComparison.InvariantCultureIgnoreCase));
 		}
 
+		public SearchBoxResult SearchResultTextGet(string searchText)
+		{
+			Report.Info($"Attempting to get text: '{searchText}' search result.");
+			return this.SearchResultList.FirstOrDefault(x => x.ResultText.Equals(Regex.Replace(searchText, @"\s+", " "), StringComparison.OrdinalIgnoreCase));
+		}
+		public SearchBoxResult SearchResultTextGetContains(string searchText)
+		{
+			Report.Info($"Attempting to get text: '{searchText}' search result.");
+			return this.SearchResultList.FirstOrDefault(x => x.ResultText.Contains(searchText, StringComparison.InvariantCultureIgnoreCase));
+		}
+
+		public bool WaitForSearchResults(int waitTime = 30)
+		{
+			return this.SearchResultLoading.WaitForElementToBecomeStale(waitTime);
+		}
+		#endregion
+	}
+
+	public class ChemicalSearchBox : SearchBoxPrototype
+	{
+		#region Class Objects
+		private List<ChemicalSearchBoxResult> SearchResultList => [.. this.ContainerElement.FindElements(By.XPath(".//li[contains(@class,'select2-results')][@data-select2-id]"), 1).Select(x => new ChemicalSearchBoxResult(x))];
+		#endregion
+
+		#region Class Methods
 		public bool SearchComponentExists(string searchText)
 		{
 			Report.Info($"Attempting to confirm component name: '{searchText}' search result exists.");
@@ -320,31 +356,16 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return this.SearchResultList.Any(x => x.CASNumber.Contains(searchText, StringComparison.InvariantCultureIgnoreCase));
 		}
 
-		public SearchBoxResult SearchResultTextGet(string searchText)
-		{
-			Report.Info($"Attempting to get text: '{searchText}' search result.");
-			return this.SearchResultList.Where(x => x.ResultText.Equals(Regex.Replace(searchText, @"\s+", " "), StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
-		}
-		public SearchBoxResult SearchResultTextGetContains(string searchText)
-		{
-			Report.Info($"Attempting to get text: '{searchText}' search result.");
-			return this.SearchResultList.Where(x => x.ResultText.Contains(searchText, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
-		}
 		public SearchBoxResult SearchComponentGet(string searchText)
 		{
 			Report.Info($"Attempting to get component name: '{searchText}' search result.");
-			return this.SearchResultList.Where(x => x.ComponentName.Equals(searchText, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+			return this.SearchResultList.FirstOrDefault(x => x.ComponentName.Equals(searchText, StringComparison.OrdinalIgnoreCase));
 		}
 
 		public SearchBoxResult SearchCASNumberGet(string searchText)
 		{
 			Report.Info($"Attempting to get CAS number: '{searchText}' search result.");
-			return this.SearchResultList.Where(x => x.CASNumber.Equals(searchText, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
-		}
-
-		public bool WaitForSearchResults(int waitTime = 30)
-		{
-			return this.SearchResultLoading.WaitForElementToBecomeStale(waitTime);
+			return this.SearchResultList.FirstOrDefault(x => x.CASNumber.Equals(searchText, StringComparison.OrdinalIgnoreCase));
 		}
 		#endregion
 	}

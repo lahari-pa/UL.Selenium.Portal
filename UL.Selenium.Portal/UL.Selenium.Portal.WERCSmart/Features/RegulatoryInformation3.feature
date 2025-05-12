@@ -19,6 +19,7 @@
 @PhysicalAndChemicalProp
 @Ingredients
 @RegulatoryInformation3
+@SideMenu
 
 Feature: Regulatory Information 3
 
@@ -27,7 +28,7 @@ Scenario: [88644] Regulatory Information 3 - validation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 

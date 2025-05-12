@@ -40,6 +40,8 @@
 @GTINAndUPC
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:PesticideDetailsUS
+@SideMenu
+
 Feature: Flow 2
 
 @TestCase:57439
@@ -50,7 +52,7 @@ Given I generate a random UPC number and save as: UPC57439
 Then In the Product Grid, delete all products with UPC Number: saved as UPC57439
 
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I click the Add Product icon in the Navigation Pane
+Given In the Side Menu, click Labeled Link with Add Product title
 Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 Given in the New Product page I click Continue
 
@@ -183,7 +185,7 @@ Scenario: [57646] Plant Growth regulator (Liquid or Solid) (RU000291) 2-L
 	Given I generate a random UPC number and save as: UPC57646
 	Given I delete all products with UPC Number: saved as UPC57646
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -278,7 +280,7 @@ Scenario: [57649] Cosmetics (RU000034) 2LS - 2L
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -373,7 +375,7 @@ Scenario: [57731] Aquarium maintenance chemicals (RU000327) - 2LS - 2S
 	Given I generate a random UPC number and save as: UPC57731
 	Given I delete all products with UPC Number: saved as UPC57731
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -489,7 +491,7 @@ Scenario: [71274] Flea or Tick Repellent (L) - RU000323
 	Given I log in with the account saved in TReVor as: ProductAccount
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Create a New Registration
 	Given in the New Product page, I click Continue
 
@@ -639,7 +641,7 @@ Scenario: [57647] Insecticide-Flying Bug-Moth Proofing Product containing <98% P
 	Given I generate a random UPC number and save as: UPC57647
 	Given I delete all products with UPC Number: saved as UPC57647
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -746,7 +748,7 @@ Scenario: [63666] New Product - Food/ Nutritional Drug Fact Panel Questions
 	Given I generate a random UPC number and save as: UPC63666
 	Given I delete all products with UPC Number: saved as UPC63666
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -817,7 +819,7 @@ Scenario: [217787] Container Types - Primary Physical State Liquid - Dishwashing
 	Then The home screen should load
 	Given I generate a random UPC number and save as: UPC217787
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 

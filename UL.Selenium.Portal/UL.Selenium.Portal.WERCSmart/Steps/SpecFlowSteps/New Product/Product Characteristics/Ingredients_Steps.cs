@@ -82,7 +82,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		[RegexStepDefinition(@"In the component search box, click result where (component name|CAS number) contains: (.*)")]
 		public void ComponentSearchBoxClickResultListOption(string searchType, string searchText)
 		{
-			SearchBoxPrototype searchBox = new SearchBoxPrototype();
+			ChemicalSearchBox searchBox = new ChemicalSearchBox();
 			switch (searchType)
 			{
 				case "component name":

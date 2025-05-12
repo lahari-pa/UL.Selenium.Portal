@@ -39,6 +39,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:USDepartamentOfTransportationDOT
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
+@SideMenu
 
 Feature: Flow 4
 
@@ -48,7 +49,7 @@ Scenario: [57950] Conditioner - Leave In (RU001272) 4-L
 	Then The home screen should load
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-    Given I click the Add Product icon in the Navigation Pane
+    Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 
@@ -399,7 +400,7 @@ Scenario: [57927] Floor Wax - Wood (RU000790) 4LS - 4S
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -624,7 +625,7 @@ Scenario: [57952] Hair Styling Gel- (RU000749) 4LS - 4S
 	Then The home screen should load
 
     #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-    Given I click the Add Product icon in the Navigation Pane
+    Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 
@@ -761,7 +762,7 @@ Scenario: [57958] Adhesive - Aerosol Web Spray (RU000909) - 4A
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -904,7 +905,7 @@ Scenario: [57982] Bonding agent (RU000023) - 4All - 4G
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-    Given I click the Add Product icon in the Navigation Pane
+    Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 	#And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bonding agent 
@@ -1064,7 +1065,7 @@ Scenario: [57983] Lubricant, Multi-Purpose, Not for Personal Use (RU000674) 4L
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -1141,7 +1142,7 @@ Scenario: [57985] Footwear or Leather Care Product - Aerosol (RU000744) - Testin
 	Then The home screen should load
 
 	 # ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
-    Given I click the Add Product icon in the Navigation Pane
+    Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 
@@ -1298,7 +1299,7 @@ Scenario: [57988] Anti-Static Product - Non-Aerosol (RU000667) 4-L
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -1377,7 +1378,7 @@ Scenario: [57990] Footwear or Leather Care Product - Solid (RU000745)
 	Then The home screen should load
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-    Given I click the Add Product icon in the Navigation Pane
+    Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 
@@ -1507,7 +1508,7 @@ Scenario: [57991] Glue sticks for glue guns- (RU000300) - 4S
 	Then The home screen should load
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-    Given I click the Add Product icon in the Navigation Pane
+    Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 

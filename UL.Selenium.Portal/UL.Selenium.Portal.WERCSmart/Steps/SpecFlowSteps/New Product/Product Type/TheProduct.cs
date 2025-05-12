@@ -57,7 +57,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		public void ClearTextForTypeOfProduct()
 		{
 			SearchBoxPrototype pp = new SearchBoxPrototype();
-			Report.IsTrue(pp.ClearSearchTextBox(), "Failed to clear the search box!", "Successfully cleared the search box!");
+			Report.IsTrue(pp.SearchTextBoxClear(), "Failed to clear the search box!", "Successfully cleared the search box!");
 		}
 
 		[RegexStepDefinition(@"In the Product Section, for section 'Type of Product \(select\)' confirm no results are returned")]

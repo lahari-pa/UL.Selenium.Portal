@@ -27,13 +27,16 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @Steps_ProductPrototype
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Formulated_Batteries
+@SideMenu
+
 Feature: New Product
 
 @TestCase:82750
 Scenario: [82750] Copy from an Existing Registration validation
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: Copy from an Existing Registration
 	Then in the New Product page, I click Continue
 	Then In the New Product Section, confirm for section: 'Please select the source product' error is displayed: This is a required field.
@@ -43,7 +46,7 @@ Scenario: [82750] Copy from an Existing Registration validation
 Scenario: [87295] 3rd party Ingredients - Informational Message
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -194,7 +197,11 @@ Scenario: [145400] Battery Containing Mercury - RU000729 - Uploaded Documents
 	Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
 		| CASNumber | ComponentName | Percent | PublicallyDisclosed | PublicName | TradeSecret |
 		|           | mercury       | 100     |                     |            |             |
-	Given I call Shared Step 145355 Formulation > Batteries - Select Granted - Continue
+	#Given I call Shared Step 145355 Formulation > Batteries - Select Granted - Continue
+	Given I should be on the Formulation > Batteries Page
+	Then In the Formulation > Batteries Section, set the radio option in section: 'Consent to Tier 2.1, 2.2, 4.2 Data Uses': to: Granted
+	Then in the Formulation > Batteries page, I click Continue
+
 	Given I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
 	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	Given I should see the Retailer Page
@@ -299,7 +306,7 @@ Scenario: [128694] DSV Option Available for Electronic - Peripherals - RU001162
 	Then The home screen should load
 
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -327,7 +334,7 @@ Scenario: [128721] DSV Option Available for Appliance - Hot Water Tank (Standard
 	Then The home screen should load
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 	 
@@ -356,7 +363,7 @@ Scenario: [128703] DSV Option Available for Auto Parts - Engine Parts and Compon
 	Then The home screen should load
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -383,7 +390,7 @@ Scenario: [136058] The Product - Industrial Category not available for Selection
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -416,7 +423,7 @@ Scenario: [136058] The Product - Industrial Category not available for Selection
 Scenario: [159942] Tire, Off-Road - Pneumatic & Tires Not Intended for Road Use RU001423
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 

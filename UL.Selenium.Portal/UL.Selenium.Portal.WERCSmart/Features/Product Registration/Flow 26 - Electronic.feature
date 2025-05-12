@@ -36,6 +36,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:BatteryStateOfCharge
+@SideMenu
 
 Feature: [64732] Flow 26 - Electronic
 
@@ -53,7 +54,7 @@ Scenario: [60671] Computer (Combination of Monitor & Desktop) - RU001177
 	#Given I generate a random UPC number and save as: UPC60671
 	#Given I delete all products with UPC Number: saved as UPC60671
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 

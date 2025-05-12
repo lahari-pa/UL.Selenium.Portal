@@ -32,9 +32,9 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 @MyProductsPage
 @HeaderNavbar
+@SideMenu
 
 Feature: Flow 29 - Beverage
-
 
 @TReVorId:11622
 @TestCase:60694
@@ -45,7 +45,7 @@ Scenario: [60694] Alcoholic Beverages - Wine - RU001418 - (More than 24% but Les
 	Given I delete all products with UPC Number: saved as UPC60694
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	#I call Shared Step 234546 (WERCSmart Portal - Create a New Registration - Enter Product Name and Select Type of Product )(Step has not created yet)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Wine
@@ -132,7 +132,7 @@ Scenario: [105007] Wine - RU001418 - Not Regulated Less than <=24% Alcohol
 	Given I delete all products with UPC Number: saved as UPC105007
 
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then I should be on the New Product Page
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
@@ -252,7 +252,7 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	#I call Shared Step 242067 (WERCSmart Portal - Create a New Registration - Enter Product Name and Select Type of Product "Alcoholic Beverages - SPIRITS"  (RU001434))(Step has not created yet)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -403,7 +403,7 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Given In the Product Grid, delete all products with UPC Number: saved as UPC216709
 
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 

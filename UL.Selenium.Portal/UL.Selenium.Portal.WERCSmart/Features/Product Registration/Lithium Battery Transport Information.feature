@@ -20,6 +20,8 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:ProductIncludesBattery
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ElectronicEquipment
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:LithiumBatteryTransportation
+@SideMenu
+
 Feature: Lithium Battery Transport Information
 
 @TestCase:65523
@@ -30,7 +32,7 @@ Scenario: [65523] BCP - Contains Lithium Primary packaged with the product - Lit
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 

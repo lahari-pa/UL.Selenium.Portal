@@ -34,6 +34,8 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
 @GTINAndUPC
 @run_Flow30_Grocery
+@SideMenu
+
 Feature: [64735] Flow 30 - Grocery
 
 @ignore
@@ -102,7 +104,7 @@ Scenario: [60724] Condiments, Sauces - RU001454
 	Given I delete all products with UPC Number: saved as UPC60724
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 
@@ -193,7 +195,7 @@ Scenario: [60723] Jelly, Jam or Preserves - RU001456
 	Given I delete all products with UPC Number: saved as UPC60723
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-    Given I click the Add Product icon in the Navigation Pane
+    Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 
