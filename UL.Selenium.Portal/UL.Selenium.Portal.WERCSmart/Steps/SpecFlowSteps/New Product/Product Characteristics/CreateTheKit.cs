@@ -14,7 +14,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		public void SelectProductCreateTheKit(string product)
 		{
 			CreateTheKit createTheKit = new CreateTheKit();
-			SearchBoxPrototype searchBoxPrototype = new SearchBoxPrototype();
+			ChemicalSearchBox searchBoxPrototype = new ChemicalSearchBox();
 			if (Report.IsTrue(createTheKit.SearchInputExists(), $"Failed to find the search input in the 'Create the Kit' page", "Successfully found the search input in the 'Create the Kit' page"))
 			{
 				Report.IsTrue(createTheKit.SearchInputClick(), $"Failed to click in search input", "Successfully clicked in search input");

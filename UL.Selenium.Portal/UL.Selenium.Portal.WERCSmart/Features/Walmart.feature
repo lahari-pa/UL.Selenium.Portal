@@ -24,6 +24,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 @StepsPrototype
 @SafetyDataSheetAuthoring
+@SideMenu
 
 Feature: Walmart
 
@@ -40,12 +41,12 @@ Scenario: [73917] Walmart Affiliates When Registering Data for the First Time
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 	#Test case calls shared 31053 but this is identical
 	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Candle and/or Wax
@@ -118,7 +119,7 @@ Scenario: [74133] Walmart Product Type Electronics
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	#Test case calls shared 31053 but this is identical
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -155,7 +156,7 @@ Scenario: [74017] Walmart Affiliates when Adding a UPC
 	Given I generate a random UPC number and save as: UPC74017
 	Given I delete all products with UPC Number: saved as UPC74017
 	# ====== Given I call Shared Step 57408 (Create a New Registration via Register New Product icon) ====== #
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
@@ -215,7 +216,7 @@ Scenario: [73919] Walmart Affiliates when Direct Ship Vendor is set to YES
 	Given I generate a random UPC number and save as: UPC73919
 	Given I delete all products with UPC Number: saved as UPC73919
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
@@ -296,7 +297,7 @@ Scenario: [63684] Walmart Private label product
 	Given I generate a random UPC number and save as: UPC63684
 	Given I delete all products with UPC Number: saved as UPC63684
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Pet shampoo
@@ -368,7 +369,7 @@ Scenario: [63684] Walmart Private label product
 Scenario: [96705] Light Bulbs - No Walmart
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Light Bulbs - Light Emitting Diodes (LED)

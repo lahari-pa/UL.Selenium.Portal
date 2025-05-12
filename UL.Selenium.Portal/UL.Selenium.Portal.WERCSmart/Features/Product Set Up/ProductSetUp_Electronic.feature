@@ -22,7 +22,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ElectronicEquipment
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:OptionalComments
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
-
+@SideMenu
 @Steps_ProductPrototype
 
 Feature: ProductSetUp_Electronic
@@ -39,7 +39,7 @@ Scenario: [84109] Create Electronic - process to Completed (Answering machine, n
 	Given I log in with the account saved in TReVor as: ProductAccount
 	#And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And the WERCSmart homepage should load
-	And I click the Add Product icon in the Navigation Pane
+	And In the Side Menu, click Labeled Link with Add Product title
 	And I should see the New Product Page
 	And In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	And in the New Product page I click Continue

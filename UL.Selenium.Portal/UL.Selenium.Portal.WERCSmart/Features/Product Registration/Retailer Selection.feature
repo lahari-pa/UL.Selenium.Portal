@@ -26,7 +26,7 @@
 @RegulatoryInformation3
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @GTINAndUPC
-
+@SideMenu
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ElectronicEquipment
 
@@ -38,7 +38,7 @@ Scenario: [78933] Select Retailers - Show List View
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
@@ -97,7 +97,7 @@ Scenario: [78936] Select Retailers - Show Logo Tile View
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
@@ -148,7 +148,7 @@ Scenario: [78937] Select Retailers - Select All
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
@@ -197,7 +197,7 @@ Scenario: [85276] Select Retailers - Errors highlighted
 #Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
@@ -253,7 +253,7 @@ Scenario: [136057] Select Retailers - Removing Retailer(s) Selected
 	#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I log in with the account saved in TReVor as: ProductAccount
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): chalk
@@ -332,7 +332,7 @@ Scenario: [133311] Retailer Private Label List Appear in Alphabetical Order
 	#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I log in with the account saved in TReVor as: ProductAccount
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): chalk
@@ -387,7 +387,7 @@ Scenario: [125130] Canadian Tire Available for Selection for Articles
 	#Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	Given I log in with the account saved in TReVor as: ProductAccount
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Candy, Chewing Gum
@@ -422,7 +422,7 @@ Scenario: [128920] Electronics - Dollar Tree/Family Dollar Retailers Available f
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Stereo Equipment / Radio, Not Portable, No Battery Included
@@ -480,7 +480,7 @@ Scenario: [128769] Battery Product - Dollar Tree/ Family Dollar Retailers Availa
 	Given I generate a random UPC number and save as: UPC59273
 	Given I delete all products with UPC Number: saved as UPC59273
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -534,7 +534,7 @@ Scenario: [181979] Single Retailer Checkbox Checks
 
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
@@ -622,7 +622,7 @@ Scenario: [183582] Behaviors and Restrictions on Duplicate UPCs
 Given I log in with the account saved in TReVor as: SingleRetailerAccount
 Then The home screen should load
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
@@ -678,7 +678,7 @@ Given I should see the Data Acceptance Page
 
 Given In the Thank You screen I click Home
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
@@ -729,7 +729,7 @@ Scenario: [184381] My Retail Partners: Data Tier Consent - Hover Messaging
 #Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 Given I log in with the account saved in TReVor as: ProductAccount
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I click the Add Product icon in the Navigation Pane
+Given In the Side Menu, click Labeled Link with Add Product title
 Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 Given in the New Product page I click Continue
 
@@ -812,7 +812,7 @@ Scenario: [184567] My Products - Single Retailer: Indicator and Hover Message / 
 Given I log in with the account saved in TReVor as: SingleRetailerAccount
 Then The home screen should load
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I click the Add Product icon in the Navigation Pane
+Given In the Side Menu, click Labeled Link with Add Product title
 Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 Given in the New Product page I click Continue
 Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk

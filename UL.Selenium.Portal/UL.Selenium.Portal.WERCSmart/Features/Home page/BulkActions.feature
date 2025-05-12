@@ -33,7 +33,7 @@
 @StepsPrototype
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @RegulatoryInformation3
-
+@SideMenu
 
 
 Feature: BulkActions
@@ -71,7 +71,7 @@ Scenario:[88826] Delete Products > Product Not yet submitted
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk

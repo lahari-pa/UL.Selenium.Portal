@@ -31,6 +31,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InternationalAirTransportClassification
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InternationalMarineClassification
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:CanadaTransportationOfDangerousGoodsClassification
+@SideMenu
 
 Feature: Transportation
 
@@ -42,7 +43,7 @@ Scenario: [65702] Transportation - Confirm Copy information from my U.S. Departm
 	 Given I log in with the account saved in TReVor as: ProductAccount
 	 Then The home screen should load
 	 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	 Then I click the Add Product icon in the Navigation Pane
+	 Then In the Side Menu, click Labeled Link with Add Product title
 	 Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	 Then in the New Product page, I click Continue
 	 #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
@@ -129,7 +130,7 @@ Scenario: [65703] Transportation - Transportation - Confirm Copy information fro
     Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
     #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-    Then I click the Add Product icon in the Navigation Pane
+    Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
     #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
@@ -217,7 +218,7 @@ Scenario: [65706] Transportation - Confirm Copy information from my U.S. Departm
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 	#And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
@@ -300,7 +301,7 @@ Scenario: [65754] Transportation - Copy information from my U.S. Department of T
 	 Given I log in with the account saved in TReVor as: ProductAccount
 	 Then The home screen should load
 	 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	 Then I click the Add Product icon in the Navigation Pane
+	 Then In the Side Menu, click Labeled Link with Add Product title
 	 Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	 Then in the New Product page, I click Continue
 	 #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
@@ -424,7 +425,7 @@ Scenario: [65940] Transportation - Copy information from my U.S. Department of T
     Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
     #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-    Then I click the Add Product icon in the Navigation Pane
+    Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
     #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
@@ -547,7 +548,7 @@ Scenario: [65944] Transportation - Copy information from my U.S. Department of T
     Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
     #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-    Then I click the Add Product icon in the Navigation Pane
+    Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
     #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach
@@ -561,13 +562,11 @@ Scenario: [65944] Transportation - Copy information from my U.S. Department of T
 	Then I should be on the Product Information Page
 	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is not a pesticide and does not make or imply a pesticidal claim on the labeling or in the product description (ex. kills, sterilizes, disinfects, sanitizes, antimicrobial)
 	Then In the Product Information Section, set the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' to select: United States
-
 	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
 	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
 	Then In the Product Information Section, set the option in section: 'Cleaning products must comply with California's Cleaning Product Right to Know Act. I would like to provide the additional information needed for this program during registration.' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
 	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
-
 	Then in the Product Information page, I click Continue
     #And I call Shared Step 74760 (Physical and Chemical Properties - Select Liquid as primary physical state and enter all required data)
     #| Primary Physical State | Secondary Physical State | Relative Density | pH | Boiling Point (in Celsius) | Flash Point (in Celsius) | Flash Point Testing Method Used | Select the best Water Solubility description |
@@ -697,7 +696,7 @@ Scenario: [65947] Transportation - Copy information from DOT for all modes - con
 #Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 Given I log in with the account saved in TReVor as: ProductAccount
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
@@ -962,7 +961,7 @@ Scenario: [126286] Transportation Details DOT - UN1057 Prompts the 'For the Ligh
     Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
     #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-    Then I click the Add Product icon in the Navigation Pane
+    Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
     #And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Bleach

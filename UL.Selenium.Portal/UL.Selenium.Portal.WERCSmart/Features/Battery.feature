@@ -9,6 +9,8 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 @StepsPrototype
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Formulated_Batteries
+@SideMenu
 
 Feature: Battery
 
@@ -30,7 +32,11 @@ Scenario: [127575] Battery Registration - Regulatory Documents - Needs "I don't 
 		|           | Potassium hydroxide | 20.5    | false               |            | false       |
 		|           | Zinc chloride       | 9.5     | false               |            | false       |
 		|           | Aqua                | 70      | false               |            | false       |
-	Given I call Shared Step 145355 Formulation > Batteries - Select Granted - Continue
+	#Given I call Shared Step 145355 Formulation > Batteries - Select Granted - Continue
+	Given I should be on the Formulation > Batteries Page
+	Then In the Formulation > Batteries Section, set the radio option in section: 'Consent to Tier 2.1, 2.2, 4.2 Data Uses': to: Granted
+	Then in the Formulation > Batteries page, I click Continue
+
 	Given I call Shared Step 132375 (Waste Classification Data - TSCA & CEPA shown, No to PROP 65 - Continue - Happy Path)
 	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
 	Given I should see the Retailer Page

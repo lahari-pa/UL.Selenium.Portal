@@ -25,6 +25,8 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:CaliforniaCleaningProductDisclosure
 @Ingredients
 @ModalDialogPrototype
+@SideMenu
+
 Feature:  California Cleaning Scenarios
 
 
@@ -36,7 +38,7 @@ Scenario: [139531] CA Cleaning - Ingredient Type Missing
 Given I log in with the account saved in TReVor as: ProductAccount
 
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I click the Add Product icon in the Navigation Pane
+Given In the Side Menu, click Labeled Link with Add Product title
 Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 Given in the New Product page, I click Continue
 
@@ -105,7 +107,7 @@ Scenario: [139534] CA Cleaning - Fragrance Component and Functional Purpose MisM
 Given I log in with the account saved in TReVor as: ProductAccount
 
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I click the Add Product icon in the Navigation Pane
+Given In the Side Menu, click Labeled Link with Add Product title
 Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 Given in the New Product page I click Continue
 
@@ -169,7 +171,7 @@ Scenario: [139385] CA Cleaning - Generic Ingredient Used
 Given I log in with the account saved in TReVor as: ProductAccount
 
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I click the Add Product icon in the Navigation Pane
+Given In the Side Menu, click Labeled Link with Add Product title
 Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 Given in the New Product page I click Continue
 
@@ -230,7 +232,7 @@ Scenario: [139387] CA Cleaning - 100% Formula Total (Minimum)
 	Given I log in with the account saved in TReVor as: ProductAccount
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 
@@ -294,7 +296,7 @@ Scenario: [139388] CA Cleaning - Public Disclosure or Trade Secret Issue
 Given I log in with the account saved in TReVor as: ProductAccount
 
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I click the Add Product icon in the Navigation Pane
+Given In the Side Menu, click Labeled Link with Add Product title
 Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 Given in the New Product page, I click Continue
 
@@ -361,7 +363,7 @@ Scenario: [139205] CA Cleaning - Ingredient Validation Upon Continue or Save
 Given I log in with the account saved in TReVor as: ProductAccount
 
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I click the Add Product icon in the Navigation Pane
+Given In the Side Menu, click Labeled Link with Add Product title
 Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 Given in the New Product page I click Continue
 
@@ -442,7 +444,7 @@ Scenario: [139193] CA Cleaning - Initial Message to Registrant for Ingredients
 
 Given I log in with the account saved in TReVor as: ProductAccount
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I click the Add Product icon in the Navigation Pane
+Given In the Side Menu, click Labeled Link with Add Product title
 Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 Given in the New Product page I click Continue
 #Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Bleach
@@ -491,7 +493,7 @@ Scenario: [139445] CA Cleaning - Ingredients Screen - Validation for INTENTIONAL
 Given I log in with the account saved in TReVor as: ProductAccount
 
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I click the Add Product icon in the Navigation Pane
+Given In the Side Menu, click Labeled Link with Add Product title
 Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 Given in the New Product page I click Continue
 
@@ -559,7 +561,7 @@ Scenario: [158172] CA Cleaning - Ingredients Screen - Trade Secret Validation -
 
 Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-Given I click the Add Product icon in the Navigation Pane
+Given In the Side Menu, click Labeled Link with Add Product title
 Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 Given in the New Product page I click Continue
 And I save the product information as: TestCase158172

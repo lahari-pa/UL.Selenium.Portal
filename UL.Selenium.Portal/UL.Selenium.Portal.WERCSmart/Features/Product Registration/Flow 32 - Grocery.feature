@@ -27,6 +27,7 @@
 @RegulatoryInformation3
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
+@SideMenu
 
 Feature: [64739] Flow 32 - Grocery
 
@@ -47,7 +48,7 @@ Scenario: [60774] Food Item Dispensed by Compressed Gas - Dairy Topping - RU0012
 	Given I delete all products with UPC Number: saved as UPC60774
 
     #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-    Given I click the Add Product icon in the Navigation Pane
+    Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 
@@ -187,7 +188,7 @@ Scenario: [60775] Cooking oil - Non-Aerosol - RU000942
 	Given I delete all products with UPC Number: saved as UPC60775
 
     #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-    Given I click the Add Product icon in the Navigation Pane
+    Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 

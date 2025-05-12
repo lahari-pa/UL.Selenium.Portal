@@ -43,6 +43,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
+@SideMenu
 
 Feature: Duplicate UPC
 
@@ -67,7 +68,7 @@ Scenario: [91076] Duplicate UPC is not permitted within account - New Product re
 	Given I log in with the account saved in TReVor as: ProductAccount
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 
@@ -130,7 +131,7 @@ Scenario: [82536] Soap (Bar, Liquid) for Body (RU000211) - GTIN/UPC - Verify Dup
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Soap (Bar, Liquid) for Body
@@ -291,7 +292,7 @@ Scenario: [88879] WERCSmart Portal - UPC - Verify the OMSID Field is NO Longer R
 	Given I log in with the account saved in TReVor as: ProductAccount
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -453,7 +454,7 @@ Scenario: [91798] Duplicate UPC is not permitted within WERCSmart system - New P
 	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Given I log in with the account saved in TReVor as: ProductAccount
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -542,7 +543,7 @@ Scenario: [91741] Duplicate UPC is not permitted within account - New Product re
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 
@@ -610,7 +611,7 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
@@ -691,7 +692,7 @@ Scenario: [91157] Duplicate UPC is not permitted within account - Forward Produc
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then I generate a random UPC number and save as: UPC91157
 	#Given I call Shared Step 57408(252966) (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 	#And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
@@ -807,7 +808,7 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 

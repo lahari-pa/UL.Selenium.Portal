@@ -24,6 +24,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOCForCaliforniaAirDistrictAndCanada
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOC_Summary"
+@SideMenu
 
 Feature: Flow 7
 
@@ -34,7 +35,7 @@ Scenario: [57863] Flow 7 - ABS Welding (RU000868)
 	Given I generate a random UPC number and save as: UPC57863
 	Given I delete all products with UPC Number: saved as UPC57863
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -122,7 +123,7 @@ Scenario: [57905] Flow 7 - Automotive Coating - SCAQMD Any other coating type (R
 	Given I generate a random UPC number and save as: UPC57905
 	Given I delete all products with UPC Number: saved as UPC57905
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -217,7 +218,7 @@ Scenario: [63623] Flow 7 - Grout (RU001548) - has its own SCAQMD limit
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then The home screen should load
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 

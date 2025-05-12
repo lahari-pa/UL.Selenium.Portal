@@ -30,6 +30,7 @@
 @GTINAndUPC
 @Ingredients
 @run_Flow31_Seasonings
+@SideMenu
 
 Feature: [64739] Flow 31 - Seasonings
 
@@ -44,7 +45,7 @@ Scenario: [60737] Seasonings, Spices or Flavoring for Food - Salts (Solid)- RU00
 	Given I generate a unique UPC number and save as: UPC60737
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-    Given I click the Add Product icon in the Navigation Pane
+    Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 
@@ -158,7 +159,7 @@ Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU0
 	Given I delete all products with UPC Number: saved as UPC60738
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 

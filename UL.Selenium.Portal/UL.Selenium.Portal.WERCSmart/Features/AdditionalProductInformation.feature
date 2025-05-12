@@ -18,6 +18,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:RegulatoryDocumentsToProvide
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
+@SideMenu
 
 Feature: Product Information
 
@@ -27,7 +28,7 @@ Scenario: [31352] Product Information - navigation
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Deodorant - Non-aerosol
@@ -52,7 +53,7 @@ Scenario: [31352] Product Information - navigation
 Scenario: [133161] Product Information Screen - Fertilizer - N, P, or K question
 	Given I log in with the account saved in TReVor as: ProductAccount
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
@@ -105,10 +106,10 @@ Scenario: [133161] Product Information Screen - Fertilizer - N, P, or K question
 Scenario: [211384] Product Information Screen - General Validation for N, P, K, and Slow Release Agent Questions
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	And the Product Editor page should be loaded
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Plant Food
@@ -162,7 +163,7 @@ Scenario: [217076] Product Information Screen - Error Messages for NPK and Slow 
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then the WERCSmart homepage should load
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
@@ -210,10 +211,10 @@ Scenario: [217076] Product Information Screen - Error Messages for NPK and Slow 
 Scenario: [213920] Product Information Screen - Warning Message >= 50% for NPK Product Types
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	And the Product Editor page should be loaded
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Fertilizer
@@ -253,10 +254,10 @@ Scenario: [213920] Product Information Screen - Warning Message >= 50% for NPK P
 Scenario: [213919] Product Information Screen - Warning Message < 50% for NPK Product Types
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then The home screen should load
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	And the Product Editor page should be loaded
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Soil Conditioner (no VOC or Pesticide)

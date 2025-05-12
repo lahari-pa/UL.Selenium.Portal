@@ -27,6 +27,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:RewiewAndSubmit_Section:OptionalComments
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:DataAcceptance
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
+@SideMenu
 
 Feature: Flow 12A
 
@@ -42,7 +43,7 @@ Scenario: [98077] 3rd Party Exclusive Use Option
 	Then In the Product Grid, delete all products with UPC Number: saved as UPC98077
 
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -123,7 +124,7 @@ Scenario: [119476] Mixture, Blend, Formulation, Solution Verifying Formula Name 
 	Then In the Product Grid, delete all products with UPC Number: saved as UPC119476
 
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 

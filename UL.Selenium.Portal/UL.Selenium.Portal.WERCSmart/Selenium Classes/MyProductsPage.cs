@@ -224,9 +224,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 	{
 		#region Class Objects
 		protected override By ContainerElementLocator => By.XPath("//div[@class='panel panel-default']//table[not(@id)][@class='table table-hover products-table']");
-		private List<IWebElement> ColumnLabelsList => this.FindElements(By.XPath(".//th[text()]"), 1).ToList();
-		private IWebElement ColumnLabel(string columnLabel) => this.ColumnLabelsList.FirstOrDefault(x => x.Text == columnLabel);
-		private List<MyProductsTableRow> ProductTableRowsList => this.ContainerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: products']//tr"), 1).Select(x => new MyProductsTableRow(x)).ToList();
+		private List<IWebElement> ColumnLabelsList => [.. this.FindElements(By.XPath(".//th[text()]"), 1)];
+		private IWebElement ColumnLabel(string columnLabel) => this.ColumnLabelsList.FirstOrDefault(x => x.Text.Trim() == columnLabel);
+		private List<MyProductsTableRow> ProductTableRowsList => [.. this.ContainerElement.FindElements(By.XPath(".//tbody[@data-bind='foreach: products']//tr"), 1).Select(x => new MyProductsTableRow(x))];
 		//public PagiationFooter MyProductsTableFooter => new(this.ContainerElement.FindElement(By.XPath(".//div[contains(@class,'panel-footer')]"), 1));
 		#endregion
 
@@ -275,7 +275,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public MyProductsTableRow ProductRowByIDGet(string productID)
 		{
 			Report.Info($"Attempting to get product row with '{productID}' product ID.");
-			return this.ProductTableRowsList.Where(x => x.ProductID == productID).FirstOrDefault();
+			return this.ProductTableRowsList.FirstOrDefault(x => x.ProductID == productID);
 		}
 		#endregion
 	}
@@ -337,9 +337,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public List<string> PaginationButtonsListGet()
 		{
 			Report.Info($"Attempting to get the list of pagination buttons.");
-			List<string> output = new List<string>();
-			this.PaginationButtonsList.ForEach(x => output.Add(x.Text.Trim()));
-			return output;
+			return [.. this.PaginationButtonsList.Select(x => x.Text.Trim())];
 		}
 
 		public bool PaginationButtonExists(string buttonLabel)
@@ -393,10 +391,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		#endregion
 	}
 
-	public class MyProductsTableRow
+	public class MyProductsTableRow(IWebElement containerElement)
 	{
 		#region Class Object
-		private IWebElement ContainerElement { get; set; }
+		private IWebElement ContainerElement { get; set; } = containerElement;
 		private IWebElement IDProductNameCell => this.ContainerElement.FindElement(By.XPath(".//td[.//small[@data-bind='text:ProductID']]"), 1);
 		public string ProductID => this.IDProductNameCell.FindElement(By.XPath(".//small[@data-bind='text:ProductID']"), 1)?.Text;
 		public string ProductName => this.IDProductNameCell.FindElement(By.XPath(".//p"), 1)?.Text.Trim();
@@ -404,17 +402,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public string DateCreated => this.ContainerElement.FindElement(By.XPath(".//td[@data-bind='text: DateCreated']"), 1)?.Text;
 		public string DateRevised => this.ContainerElement.FindElement(By.XPath(".//td[@data-bind='text: DateRevised']"), 1)?.Text;
 		public string DateDiscontinued => this.ContainerElement.FindElement(By.XPath(".//td[@data-bind='text: DateDiscontinued']"), 1)?.Text;
-		private List<RecipientTile> RecipientsList => this.ContainerElement.FindElements(By.XPath(".//ul[@class='list-inline retailers']//li"), 1).Select(x => new RecipientTile(x)).ToList();
+		private List<RecipientTile> RecipientsList => [.. this.ContainerElement.FindElements(By.XPath(".//ul[@class='list-inline retailers']//li"), 1).Select(x => new RecipientTile(x))];
 		private IWebElement ActionsButton => this.ContainerElement.FindElement(By.XPath(".//button[@data-toggle='dropdown']"), 1);
-		private List<IWebElement> ActionsButtonOptionsList => this.ContainerElement.FindElements(By.XPath(".//ul[@class='dropdown-menu']//a[not(@style='display: none;')]"), 1).ToList();
-		private IWebElement ActionsButtonOption(string optionLabel) => this.ActionsButtonOptionsList.Where(x => x.Text.Trim().Equals(optionLabel)).FirstOrDefault();
-		#endregion
+		private List<IWebElement> ActionsButtonOptionsList => [.. this.ContainerElement.FindElements(By.XPath(".//ul[@class='dropdown-menu']//a[not(@style='display: none;')]"), 1)];
+		private IWebElement ActionsButtonOption(string optionLabel) => this.ActionsButtonOptionsList.FirstOrDefault(x => x.Text.Trim().Equals(optionLabel));
 
+		#endregion
 		#region Class Methods
-		public MyProductsTableRow(IWebElement myProductTableRowComponent)
-		{
-			this.ContainerElement = myProductTableRowComponent;
-		}
 		public bool PrivateLabelExists()
 		{
 			Report.Info($"Attempting to confirm '{this.ProductName}' has a private label tile.");
@@ -445,7 +439,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		public RecipientTile RecipientGet(string label)
 		{
 			Report.Info($"Attempting to get '{label}' recipient tile.");
-			return this.RecipientsList.Where(x => x.Label == label).FirstOrDefault();
+			return this.RecipientsList.FirstOrDefault(x => x.Label == label);
 		}
 
 		public bool ActionsButtonExists()

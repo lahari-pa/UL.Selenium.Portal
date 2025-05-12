@@ -26,6 +26,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 @run_Flow28_AutoParts
 @MyProductsPage
+@SideMenu
 
 Feature: [64733] Flow 28 - Auto Parts
 
@@ -39,7 +40,7 @@ Scenario: [60673] Gasoline Container, Portable - RU001419
 	Given I delete all products with UPC Number: saved as UPC60673
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 

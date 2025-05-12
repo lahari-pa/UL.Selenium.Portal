@@ -36,6 +36,7 @@
 @StepsPrototype
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
 @SafetyDataSheetAuthoring
+@SideMenu
 
 Feature: Flow 22
 
@@ -48,7 +49,7 @@ Scenario: [60544] Weld-Through Primer - Aerosol - RU001050
 	Given I generate a random UPC number and save as: UPC60544
 	Given I delete all products with UPC Number: saved as UPC60544
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-		Then I click the Add Product icon in the Navigation Pane
+		Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -133,7 +134,7 @@ Scenario: [60545] Photograph Coating - Aerosol - RU001067
 	Given I generate a random UPC number and save as: UPC60545
 	Given I delete all products with UPC Number: saved as UPC60545
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -213,7 +214,7 @@ Scenario: [60547] Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol 
 	Given I delete all products with UPC Number: saved as UPC60547
 
 # ====== Following the steps from 'Shared Step' 57408 ====== #
-	Given I click the Add Product icon in the Navigation Pane
+	Given In the Side Menu, click Labeled Link with Add Product title
 	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Given in the New Product page I click Continue
 

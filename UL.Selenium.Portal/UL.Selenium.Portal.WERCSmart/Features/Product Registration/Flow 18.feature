@@ -38,6 +38,8 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOC_Summary
 @GTINAndUPC
 @RegulatoryInformation3
+@SideMenu
+
 Feature: Flow 18
 
 @tfsdesign
@@ -48,7 +50,7 @@ Scenario: [60116] Anti-Static Product - Aerosol - RU000656
 	Given I generate a random UPC number and save as: UPC60116
 	Given I delete all products with UPC Number: saved as UPC60116
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -237,7 +239,7 @@ Scenario: [60116] Anti-Static Product - Aerosol - RU000656
 Scenario: [208099] Fabric Softener - Single-Use Dryer Product Only (RU000808)
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -352,7 +354,7 @@ Scenario: [207582] Personal Fragrance product (more than 20% fragrance) - Liquid
 	Given I generate a random UPC number and save as: UPC207582
 	Given I delete all products with UPC Number: saved as UPC207582
 
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
@@ -502,7 +504,7 @@ Scenario: [207582] Personal Fragrance product (more than 20% fragrance) - Liquid
 Scenario: [207584] Personal Fragrance product (20% or less fragrance) - Liquid - Canada Only (RU000755) - New Flow Testing
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 #	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Then I click the Add Product icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
