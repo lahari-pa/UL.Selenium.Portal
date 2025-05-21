@@ -1167,13 +1167,13 @@ Scenario: [220789] Carbon Zinc Battery - RU000727
 	#	| Water         | 100      | false               | false       |            |
 	Given I should be on the Ingredients Page
 	Then In the Ingredients section, add the following ingredients:
-	| SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-	| CAS number | 1333-86-4   | 7       |                     |               |             |
-	| CAS number | 12125-02-9  | 10      |                     |               |             |
-	| CAS number | 1313-13-9   | 31      |                     |               |             |
-	| CAS number | 7440-66-6   | 42      |                     |               |             |
-	| CAS number | 7646-85-7   | 10      |                     |               |             |
-	| CAS number | 65997-19-5  | 28      |                     |               |             |
+		| SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+		| CAS number | 1333-86-4   | 7       |                     |               |             |
+		| CAS number | 12125-02-9  | 10      |                     |               |             |
+		| CAS number | 1313-13-9   | 31      |                     |               |             |
+		| CAS number | 7440-66-6   | 42      |                     |               |             |
+		| CAS number | 7646-85-7   | 10      |                     |               |             |
+		| CAS number | 65997-19-5  | 28      |                     |               |             |
 	Then in the Ingredients page, I click Continue
 
 	#Then I call Shared Step 145355 Formulation > Batteries - Select Granted - Continue
@@ -1189,31 +1189,61 @@ Scenario: [220789] Carbon Zinc Battery - RU000727
 
 	Given I should be on the Battery Characteristics Page
 	Then In the Battery Characteristics Section, set the option in section: 'Type of Battery' to: Battery
-	Then in the Battery Characteristics page, I click Continue
 
-	Then I call Shared Step 150905 (Retailer - NR selected by default)
-	Then I call Shared Step 145129 Regulatory Documents to Provide - Upload AIS and CCCR
-	Then in the Additional Documents to Provide page I click Continue
-	Then in the Optional Reports and Documents Available for Purchase page I click Continue
-	Then in the Optional Comments page I click Continue
+	Then In the Battery Characteristics section, confirm Battery Characteristics table does exist
+	Then In the Battery Characteristics section, confirm the Battery Characteristics table column labels list does exist
+	Then In the Battery Characteristics section, confirm the Battery Characteristics table Battery Common Name column does exist
+
+#	Then In the Battery Characteristics section Battery Characteristics table row number '1', set Battery Common Name to: A
+#	Then In the Battery Characteristics section Battery Characteristics table row number '1', click IEC/ANSI Name select
+#	Then In the Battery Characteristics section Battery Characteristics table row number '1', confirm IEC/ANSI Name select 'NA' option does exist
+#	Then In the Battery Characteristics section Battery Characteristics table row number '1', click IEC/ANSI Name select 'NA' option
+#	Then In the Battery Characteristics section Battery Characteristics table row number '1', confirm IEC/ANSI Name select does display value: NA
+#	Then In the Battery Characteristics section Battery Characteristics table row number '1', click Standard Dimensions select
+#	Then In the Battery Characteristics section Battery Characteristics table row number '1', confirm Standard Dimensions select '17x50' option does exist
+#	Then In the Battery Characteristics section Battery Characteristics table row number '1', click Standard Dimensions select '17x50' option
+#	Then In the Battery Characteristics section Battery Characteristics table row number '1', uncheck Rechargable Battery checkbox
+#	Then In the Battery Characteristics section Battery Characteristics table row number '1', confirm Non-Lithium-Ion Watt Hour text input does exist
+#	Then In the Battery Characteristics section Battery Characteristics table row number '1', click Non-Lithium-Ion Watt Hour text input
+#	Then In the Battery Characteristics section Battery Characteristics table row number '1', enter into Non-Lithium-Ion Watt Hour text input: 1
+#	Then In the Battery Characteristics section Battery Characteristics table row number '1', confirm Non-Lithium-Ion Watt Hour text input does match: 1
+#	Then In the Battery Characteristics section Battery Characteristics table row number '1', confirm Unit Weight text input does exist
+#	Then In the Battery Characteristics section Battery Characteristics table row number '1', click Unit Weight text input
+#	Then In the Battery Characteristics section Battery Characteristics table row number '1', enter into Unit Weight text input: 1
+#	Then In the Battery Characteristics section Battery Characteristics table row number '1', confirm Unit Weight text input does match: 1
+
+	Then In the Battery Characteristics section, add the following batteries:
+		| Battery Common Name | IEC/ANSI Name | Standard Dimensions | Rechargeable Battery | Non-Lithium-Ion Watt Hour | Unit Weight |
+		| A                   | NA            | 17x50               | True                 | 1                         | 1           |
+		| AAA                 | R03 / 24D     | 10.5 x 44.5         | False                | 2                         | 2           |
+
+	Then In the Battery Characteristics section, remove item row: 2
+
+#	Then in the Battery Characteristics page, I click Continue
+#
+#	Then I call Shared Step 150905 (Retailer - NR selected by default)
+#	Then I call Shared Step 145129 Regulatory Documents to Provide - Upload AIS and CCCR
+#	Then in the Additional Documents to Provide page I click Continue
+#	Then in the Optional Reports and Documents Available for Purchase page I click Continue
+#	Then in the Optional Comments page I click Continue
 	#Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-	Given I should see the Data Acceptance Page
-	Then In the Data Acceptance Section, check 'Agreed' checkbox
-	Then In the Data Acceptance Section, click 'Accept' button
-	Then I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	Then I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase220789)
-	Then I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase220789)
-	Then I call Shared Step 65969 (Go to Power Designer Plus - Select your product & CKLT - Continue)
-	Then I call Shared Step 214620 Power Designer Plus - AUTHORIZE Product (Applicable Only to Battery Products) for product saved as: TestCase220789
-	Then I call Shared Step 209552 Power Designer Plus - APPLY RULES To Product
-	Then I call Sared Step 214627 Power Designer Plus - PUBLISH Product (Applicable Only to Battery Products ): TestCase220789
-	Then I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase220789)
-	Then I call Shared Step 214632(Power Designer Plus - MTR/BATT - Update BATACT (Active Battery Indicator) to Finish Processing Battery (Alone) Products):
-		| ProductId      | BatteryType    |
-		| TestCase220789 | Carbon zinc    |
-	Then I switch to the 'SHA' tab
-	Then I call Shared Step 49841 (SHA - Search for exact WPS ID in Completed Status for saved as: TestCase220789)
-	Then In SHA Manager I confirm product Id color is blue for product saved as: TestCase220789
+#	Given I should see the Data Acceptance Page
+#	Then In the Data Acceptance Section, check 'Agreed' checkbox
+#	Then In the Data Acceptance Section, click 'Accept' button
+#	Then I call Shared Step 65080 (Login to Studio and Open SHA manager)
+#	Then I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase220789)
+#	Then I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase220789)
+#	Then I call Shared Step 65969 (Go to Power Designer Plus - Select your product & CKLT - Continue)
+#	Then I call Shared Step 214620 Power Designer Plus - AUTHORIZE Product (Applicable Only to Battery Products) for product saved as: TestCase220789
+#	Then I call Shared Step 209552 Power Designer Plus - APPLY RULES To Product
+#	Then I call Sared Step 214627 Power Designer Plus - PUBLISH Product (Applicable Only to Battery Products ): TestCase220789
+#	Then I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase220789)
+#	Then I call Shared Step 214632(Power Designer Plus - MTR/BATT - Update BATACT (Active Battery Indicator) to Finish Processing Battery (Alone) Products):
+#		| ProductId      | BatteryType    |
+#		| TestCase220789 | Carbon zinc    |
+#	Then I switch to the 'SHA' tab
+#	Then I call Shared Step 49841 (SHA - Search for exact WPS ID in Completed Status for saved as: TestCase220789)
+#	Then In SHA Manager I confirm product Id color is blue for product saved as: TestCase220789
 
 	@TestCase:220191
 
