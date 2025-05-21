@@ -10,6 +10,7 @@
 @RetailPartners
 @MessageCenter
 @MyAccount
+@NewProduct
 @LandingPage
 @DocumentAcceptance
 @DeleteActiveProducts
@@ -22,6 +23,8 @@
 @SupplierReports
 @ProductSetUp
 @UPC
+@Steps_MyProductsPage
+@MyProductsPage
 @ViewUpcs
 @UPC
 @StepsPrototype
@@ -413,13 +416,14 @@ Scenario: [114944] View/Summary - Ingredients table contains details (Functional
 
 @TestCase:119578
 Scenario:[119578] My Products - More Filters - For Discontinued Registrations
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Then The home screen should load
-	And I should see an option for More Filters
-	Given I click More Filters in the products grid
-	Then I click the 'Show Only Discontinued Products' checkbox in the 'My Products' grid
+	Given I log in with the account saved in TReVor as: ProductAccount
+    Then The home screen should load
+	And On the My Products page, confirm More Filters button does exists
+	Given On the My Products page, click More Filters button.
+	Then On the My Products page, confirm Show Only Discontinued Products checkbox does exists
+	Then On the My Products page, click the Show Only Discontinued Products checkbox
 	Then I confirm that only discontinued products appear in the 'My Products' grid
-	Then I click the 'Show Only Discontinued Products' checkbox in the 'My Products' grid
+	Then On the My Products page, uncheck the Show Only Discontinued Products checkbox
 	Then I confirm that all products appear in the 'My Products' grid
 
 @TestCase:125144
