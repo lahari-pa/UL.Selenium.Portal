@@ -1019,5 +1019,5 @@ Then in page U.S. Department of Transportation (DOT) Classification I should see
 And I click the page heading: U.S. Department of Transportation (DOT) Classification
 And For the lighter, provide the DOT Approval Number (LAA) should be showing the value: 123
 #Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase126286
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase126286

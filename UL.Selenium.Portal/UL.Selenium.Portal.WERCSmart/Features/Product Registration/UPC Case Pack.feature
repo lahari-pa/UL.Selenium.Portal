@@ -819,7 +819,7 @@ Scenario: [87835] View UPCs shows Case UPC Data
 	Given in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
 	Then I check if the Regulatory Documents page is shown
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87631
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase87631
 
 
@@ -894,7 +894,7 @@ Scenario: [87633] Universal Product Code (UPC) Step - Add Casepack - Size (Weigh
 	Given in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
 	Then I check if the Regulatory Documents page is shown
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87628
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase87633
 
 
@@ -977,7 +977,7 @@ Then I select the case UPC dropdown arrow to expand the UPC saved as: UPC87718
 Then I confirm the Size field is below the Container field
 Then I confirm the Quantity field is below the Size field
 #Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87718
-Then I navigate to the Home Page
+Then In the Side Menu, click Labeled Link with My Products title
 Then I delete the product: TestCase87718
 
 
@@ -1065,7 +1065,7 @@ Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Secti
 Then I confirm the Individual UPC field is shown in the Universal Product Code (UPC) Page
 Then I confirm Individual UPC field does not display any options
 #Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87818
-Then I navigate to the Home Page
+Then In the Side Menu, click Labeled Link with My Products title
 Then I delete the product: TestCase87818
 
 

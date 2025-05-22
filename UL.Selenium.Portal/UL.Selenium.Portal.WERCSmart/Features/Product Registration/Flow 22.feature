@@ -122,7 +122,7 @@ Scenario: [60544] Weld-Through Primer - Aerosol - RU001050
 
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Weld-Through Primer - Aerosol
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60544
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase60544
 
 
@@ -203,7 +203,7 @@ Scenario: [60545] Photograph Coating - Aerosol - RU001067
 
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Photograph Coating - Aerosol
 #	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60545
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase60545
 
 @TestCase:60547
@@ -332,5 +332,5 @@ Scenario: [60547] Corrosion Resistant Brass, Bronze or Copper Coating - Aerosol 
     Given I should see the Data Acceptance Page
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60547
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase60547

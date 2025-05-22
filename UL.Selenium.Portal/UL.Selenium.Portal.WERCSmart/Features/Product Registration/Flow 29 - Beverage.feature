@@ -113,7 +113,7 @@ Scenario: [60694] Alcoholic Beverages - Wine - RU001418 - (More than 24% but Les
 	Then in the International Marine (IMDG) Classification page, I click Continue
 	Then I should be on the Retailer Page
 #	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60694
-   	Then I navigate to the Home Page
+   	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase60694
 
 # Created by Saikiran Chittampally
@@ -390,7 +390,7 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then I close the tab with Data Summary page
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase92943
- 	Then I navigate to the Home Page
+ 	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase92943
 
 	@TestCase:216709
@@ -484,5 +484,5 @@ Scenario: [92943] Alcoholic Beverages - Spirits - RU001434 - (Greater > 70% of A
 	Then I should be on the Additional Documents to Provide Page
 
 	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase216709
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase216709

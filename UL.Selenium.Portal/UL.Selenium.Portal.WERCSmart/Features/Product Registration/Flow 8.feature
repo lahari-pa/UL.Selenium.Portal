@@ -108,7 +108,7 @@ Scenario: [57295] Absorbent solid - Automotive(RU000939) - 8-S
 
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Absorbent Solid
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57295
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase57295
 
 @TestCase:57332
@@ -174,7 +174,7 @@ Scenario: [57332] Automotive Accessories containing Gel (Seat Cushions, etc) - 8
 
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Automotive Accessories containing Gel (Seat Cushions, etc.)
 #	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57332
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase57332
 
 @TestCase:58187
@@ -240,7 +240,7 @@ Scenario: [58187] Matches (RU000317) - 8-S
 
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Matches
 #	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58187
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase58187
 #check RU number and name
 
@@ -307,7 +307,7 @@ Scenario: [58293] Engines for Model Rockets(RU000338) - 8-S
 
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Engines for Model Rockets
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58293
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase58293
 @TestCase:58297
 Scenario: [58297] Fireworks (RU000330) - 8-S
@@ -377,7 +377,7 @@ Scenario: [58297] Fireworks (RU000330) - 8-S
 
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Fireworks
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58297
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase58297
 #duplicate-
 #Scenario: [57088] Engine (motor) oil for Auto or Boat
@@ -541,7 +541,7 @@ Scenario: [58104] Fabric Dye - Liquid or Solid - 8-L
 	Then I should be on the Data Acceptance Page
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58104
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase58104
 
 @TestCase:58210
@@ -624,7 +624,7 @@ Scenario: [58210] Antibiotic, Liquid or Cream, Non-Aerosol - 8-L
 
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Antibiotic, Liquid or Cream, Non-Aerosol
 #	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58210
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase58210
 
 @TestCase:58285
@@ -688,7 +688,7 @@ Scenario: [58285] Toothpaste - Whitening (RU001359) - 8-L
 
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Toothpaste - Whitening
 #	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58285
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase58285
 
 @TestCase:58401
@@ -757,7 +757,7 @@ Scenario: [58401] Correction Fluid(RU000201) - 8L
 
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Correction fluid
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58401
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase58401
 @TestCase:57339
 Scenario: [57339] Craft Kits containing Glues and Paints - Crafts - 8-All - 8L
@@ -826,7 +826,7 @@ Scenario: [57339] Craft Kits containing Glues and Paints - Crafts - 8-All - 8L
 
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Craft kits containing paints and glues
 #	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57339
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase57339
 
 @TestCase:57088
@@ -941,7 +941,7 @@ Scenario: [57088] Engine (motor) oil for Auto or Boat - 8L
 	Then I should see the Data Acceptance Page
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57088
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase57088
 
 @TestCase:57709

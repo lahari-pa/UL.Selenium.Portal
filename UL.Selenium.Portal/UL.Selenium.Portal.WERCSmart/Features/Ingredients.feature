@@ -120,7 +120,7 @@ Scenario: [71985] Sorting Cas Number/ Chemical Name Ingredient page
 		| Clothianidin |
 		| RED 4        |
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71985
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase71985
 
 @TestCase:71987
@@ -179,7 +179,7 @@ Scenario: [71987] Sorting Percent on Ingredient page
 		| Clothianidin |
 		| RED 4        |
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71987
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase71987
 
 @TestCase:65469
@@ -227,7 +227,7 @@ Scenario: [65469] Ingredients - Select Publicly Disclosed check box - un-check P
 	Then in the Ingredients page I click Continue	
 	And I should see the Inventory Status, Prop 65 (US) Page
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65469
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase65469
 
 @TestCase:65470
@@ -278,7 +278,7 @@ Scenario: [65470] Ingredients - Select Trade Secret check box - Un-check Trade S
 	Then in the Ingredients page I click Continue	
 	And I should see the Inventory Status, Prop 65 (US) Page
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65470
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase65470
 
 
@@ -327,7 +327,7 @@ Scenario: [65459] Ingredients - Select Trade Secret check box - Publicly Disclos
 	Then in the Ingredients page I click Continue
 	And I should see the Inventory Status, Prop 65 (US) Page
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65459
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase65459
 
 @TestCase:65451
@@ -380,7 +380,7 @@ Scenario: [65451] Ingredients - Select Publicly Disclosed check box - Public Nam
 	Then in the Ingredients page I click Continue
 	And I should see the Inventory Status, Prop 65 (US) Page
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65451
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase65451
 
 @TestCase:65448
@@ -432,7 +432,7 @@ Scenario: [65448] Ingredients - Publicly Disclosed, Trade secret and Public Name
 	Then in the Ingredients page I click Continue
 	And I should see the Inventory Status, Prop 65 (US) Page
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65448
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase65448
 
 @TestCase:63321
@@ -484,7 +484,7 @@ Scenario: [63321] Product Ingredients contains a third party component that requ
 	Then In displayed modal, click Ok footer button
 	And I should see the Inventory Status, Prop 65 (US) Page
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63321
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase63321
 
 @TestCase:71291
@@ -536,7 +536,7 @@ Scenario: [71291] Product Ingredients contains a third party component that requ
 	Then in the Neonicotinoid Warning page I click Continue
 	And I should see the Inventory Status, Prop 65 (US) Page
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase71291
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase71291
 
 @TestCase:74142
@@ -578,7 +578,7 @@ Scenario: [74142] Pop up that Informs the regulations the components are associa
 	Then In the Ingredients section confirm a list of regulations associated with the component is displayed in the modal window
 	Then In displayed modal, click Close footer button
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74142
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase74142
 
 @TestCase:69796
@@ -626,7 +626,7 @@ Scenario: [69796] Aerosol Warning Message on Ingredient page
 	Given in the Ingredients page I click Continue
 	Then I should see the Inventory Status, Prop 65 (US) Page
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase69796
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase69796
 
 @TestCase:80728
@@ -676,7 +676,7 @@ Scenario: [80728] Ingredients - Transparency Ratio - FRAGRANCE component - inclu
 	And I verify the Transparency Score displays 0%
 	Given I navigate to the home page
 	#And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase80728
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase80728
 @TestCase:80720
 Scenario: [80720] Ingredients - Transparency Ratio - FLAVOR component - included in Denominator, not included in Numerator
@@ -726,7 +726,7 @@ Scenario: [80720] Ingredients - Transparency Ratio - FLAVOR component - included
 	And I verify the Transparency Score displays 0%
 	Given I navigate to the home page
 	#And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase80720
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase80720
 
 
@@ -779,7 +779,7 @@ Scenario: [87301] Ingredients - Selecting a Public Label Name Automatically Init
 	Then In the Ingredients Table row with component name: Chlorine, in Public Name column is disabled
 	Then In the Ingredients Table row with component name: Chlorine, in Publicly Disclosed column confirm checkbox is disabled
 	#And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase87301
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase87301
 
 # Assigned to Paulina Mata
@@ -1118,7 +1118,7 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 	Then In the Ingredients Table row with component name: Calcium carbonate, in Trade Secret? column set checkbox to checked
 	When in the Ingredients page I click Continue
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase95487
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase95487
 
 
@@ -1185,7 +1185,7 @@ Scenario: [133335] Formulation Screen FIFRA and LOLI Validation Message
 	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
 	Given I click the Home navigation icon
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase133335
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase133335
 
 # Created by Saikiran Chittampally

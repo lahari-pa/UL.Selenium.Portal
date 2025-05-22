@@ -376,7 +376,7 @@ Scenario: [88879] WERCSmart Portal - UPC - Verify the OMSID Field is NO Longer R
 	Given I should see the Regulatory Documents to Provide Page
 
 	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase88879
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase88879
 
 #Removed from regression 2024/06
@@ -502,7 +502,7 @@ Scenario: [91798] Duplicate UPC is not permitted within WERCSmart system - New P
 	Given I click continue
 	Then I should see the following error text displayed in the UPC screen: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review.
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase91798
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase91798
 
 #Removed from regression 2024/06

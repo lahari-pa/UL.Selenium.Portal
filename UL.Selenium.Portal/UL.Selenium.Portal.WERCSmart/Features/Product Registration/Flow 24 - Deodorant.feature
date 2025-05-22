@@ -293,5 +293,5 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	Given In the VOC - Ozone Transport Commission Section, set the option in section: 'MVOC (medium volatile organic compound) content as weight percentage of the total formulation': to: 12.34
 
 #Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestProduct
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestProduct

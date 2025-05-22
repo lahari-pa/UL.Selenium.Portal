@@ -9,6 +9,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 	[Binding, Scope(Tag = "SideMenu")]
 	internal class Steps_SideMenu
 	{
+		// 2025/05: Sections are commented out due to a change. Waiting to see if change is temperary prior to deleting steps
+		/*
 		#region Hamburger Icon Steps
 		[RegexStepDefinition(@"In the Side Menu, confirm Hamburger Icon (does|does not) exist")]
 		public void SideMenuConfirmHamburgerIconExists(string does_doesnot)
@@ -101,7 +103,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			}
 		}
 		#endregion
-
+		*/
 		#region Labeled Links List Steps
 		[RegexStepDefinition(@"In the Side Menu, confirm Labeled Links list (does|does not) exist")]
 		public void SideMenuConfirmLabeledLinksListExists(string does_doesnot)
@@ -165,6 +167,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 				}
 			}
 		}
+		#endregion
+
+		#region Shared Steps
 		#endregion
 	}
 }

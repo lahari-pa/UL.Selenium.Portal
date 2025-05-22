@@ -130,7 +130,7 @@ Scenario: [59273] Alkaline Battery - RU000344
 
 	Then in the Additional Documents to Provide page, I click Continue
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59273
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase59273
 
 @TestCase:59274
@@ -223,7 +223,7 @@ Scenario: [59274] Battery Containing Mercury - RU000729
 
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Battery Containing Mercury
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59274
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase59274
 
 @TestCase:59276
@@ -343,7 +343,7 @@ Scenario: [59276] Lead Acid Battery - No Acid Included - RU001225
 	Then I should be on the Data Acceptance Page
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59276
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase59276
 
 @TestCase:59278
@@ -463,7 +463,7 @@ Scenario: [59278] Nickel Metal Hydride (NiMH) Battery - RU000373
 	Then I should be on the Data Acceptance Page
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59278
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase59278
 
 @TestCase:59280
@@ -584,7 +584,7 @@ Scenario: [59280] Silver Battery - RU000698
 	Then I should be on the Data Acceptance Page
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59280
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase59280
 
 @TestCase:59281
@@ -711,7 +711,7 @@ Scenario: [59281] Water-Charged Cell - RU001543
 	Then I should be on the Data Acceptance Page
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59281
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase59281
 
 @TestCase:59282
@@ -831,7 +831,7 @@ Scenario: [59282] Zinc Air - RU001205
 	Then I should be on the Data Acceptance Page
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59282
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase59282
 
 #Removed from regression: 2025/04
@@ -945,7 +945,7 @@ Scenario: [97470] Stand alone Lead Acid Battery
 	Then I should be on the Data Acceptance Page
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase97470
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase97470
 	
 @TestCase:110324
@@ -1044,7 +1044,7 @@ Scenario: [110324] Nickel Metal Hydride (NiMH) Battery (RU000373) - Verify that 
 	Then in the Additional Documents to Provide page, I click Continue
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase110324
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase110324
 
 #Removed from regression: 2024/09
@@ -1189,42 +1189,48 @@ Scenario: [220789] Carbon Zinc Battery - RU000727
 
 	Given I should be on the Battery Characteristics Page
 	Then In the Battery Characteristics Section, set the option in section: 'Type of Battery' to: Battery
-
 	Then In the Battery Characteristics section, add the following batteries:
 		| Battery Common Name | IEC/ANSI Name | Standard Dimensions | Rechargeable Battery | Non-Lithium-Ion Watt Hour | Unit Weight |
 		| 1022-CZ             |               |                     |                      | 120                       | 0.81        |
+	Then in the Battery Characteristics page, I click Continue
 
-
-#	Then in the Battery Characteristics page, I click Continue
-#
-#	Then I call Shared Step 150905 (Retailer - NR selected by default)
 #	Then I call Shared Step 145129 Regulatory Documents to Provide - Upload AIS and CCCR
-#	Then in the Additional Documents to Provide page I click Continue
-#	Then in the Optional Reports and Documents Available for Purchase page I click Continue
-#	Then in the Optional Comments page I click Continue
-	#Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
-#	Given I should see the Data Acceptance Page
-#	Then In the Data Acceptance Section, check 'Agreed' checkbox
-#	Then In the Data Acceptance Section, click 'Accept' button
-#	Then I call Shared Step 65080 (Login to Studio and Open SHA manager)
-#	Then I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase220789)
-#	Then I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase220789)
-#	Then I call Shared Step 65969 (Go to Power Designer Plus - Select your product & CKLT - Continue)
-#	Then I call Shared Step 214620 Power Designer Plus - AUTHORIZE Product (Applicable Only to Battery Products) for product saved as: TestCase220789
-#	Then I call Shared Step 209552 Power Designer Plus - APPLY RULES To Product
-#	Then I call Sared Step 214627 Power Designer Plus - PUBLISH Product (Applicable Only to Battery Products ): TestCase220789
-#	Then I call Shared Step 55663 (WPS Studio - Go to Job Queue - wait for Publish Multiple to complete for product saved as: TestCase220789)
-#	Then I call Shared Step 214632(Power Designer Plus - MTR/BATT - Update BATACT (Active Battery Indicator) to Finish Processing Battery (Alone) Products):
-#		| ProductId      | BatteryType    |
-#		| TestCase220789 | Carbon zinc    |
-#	Then I switch to the 'SHA' tab
-#	Then I call Shared Step 49841 (SHA - Search for exact WPS ID in Completed Status for saved as: TestCase220789)
-#	Then In SHA Manager I confirm product Id color is blue for product saved as: TestCase220789
+	Given I should be on the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'I have an Article Information Sheet (AIS), Technical Data Sheet (TDS), Battery Data Sheet (BDS) to provide.'
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS. When providing an SDS it must be both U.S. and Canada formats.' to: I don't need an OSHA-Compliant Safety Data Sheet (SDS) document for this product.
+	Then in the Regulatory Documents to Provide page, I click Continue
 
-	@TestCase:220191
+	Given I should be on the Additional Documents to Provide Page
+	Then in the Additional Documents to Provide page I click Continue
 
-	Scenario: [220191] Nickel-Cadmium Battery - RU000346
-	
+	Given I should be on the Optional Reports and Documents Available for Purchase Page
+	Then in the Optional Reports and Documents Available for Purchase page I click Continue
+
+	Given I should be on the Optional Comments Page
+	Then in the Optional Comments page I click Continue
+
+	Given I should be on the Data Acceptance Page
+	Then In the Data Acceptance Section, click 'Summary' button
+	Then I switch to the tab with Data Summary page
+	Then In the Summary Page, the 'Type of Product' section should be showing the following value: Carbon Zinc Battery
+	Then In the Summary Page, the 'Select one option below' section should be showing the following value: Battery is not packaged for Retail Sale
+	Then In the Summary Page, the 'Consent to Tier 2.1, 2.2, 4.2 Data Uses' section should be showing the following value: Accept
+	Then In the Summary Page, the 'Type of Battery' section should be showing the following value: Battery
+	Then In the Summary Page, verify table data in column Battery Common Name showing the value: 1022-CZ
+	Then In the Summary Page, verify table data in column IEC/ANSI Name showing the value: R03
+	Then In the Summary Page, verify table data in column Standard Dimensions showing the value: 50 mm x 26.2 mm
+	Then In the Summary Page, verify table data in column Rechargeable Battery showing the value: 0
+	Then In the Summary Page, verify table data in column Non-Lithium-Ion Watt Hour showing the value: 120
+	Then In the Summary Page, verify table data in column Unit Weight (grams) showing the value: 0.81
+	Then In the Summary Page, the 'Batteries are considered Articles under Global Harmonized Standards. A Safety Data Sheet (SDS) is not required, but may be provided instead of an AIS.  When providing an SDS it must be both U.S. and Canada formats.' section should be showing the following value: I don't need an OSHA-Compliant Safety Data Sheet (SDS) document for this product.
+	Then I close the tab with Data Summary page
+	Given I should be on the Data Acceptance Page
+
+	Then In the Side Menu, click Labeled Link with My Products title
+	Then In the Product Grid, delete the product saved as: TestCase220789
+
+@TestCase:220191
+Scenario: [220191] Nickel-Cadmium Battery - RU000346	
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Given I generate a random UPC number and save as: UPC220191
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))

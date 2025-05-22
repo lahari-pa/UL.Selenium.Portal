@@ -188,7 +188,7 @@ Scenario: [78937] Select Retailers - Select All
 	Given I click Done in the Select Retailers popup
 	Then the selected retailers on the Retailer page should match the retailer list saved as AllSelectRetailers78937
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78937
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase78937
 
 @ignore
@@ -324,7 +324,7 @@ Scenario: [136057] Select Retailers - Removing Retailer(s) Selected
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, verify retailer 'CV' is not present under the 'Destination Retailers' column
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, verify retailer 'FD' is not present under the 'Destination Retailers' column
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase1234
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase136057
 
 @TestCase:133311
@@ -378,7 +378,7 @@ Scenario: [133311] Retailer Private Label List Appear in Alphabetical Order
 	Then In the Retailer Section, for retailer: Wal-Mart/SAM'S CLUB select 'Select Vendor' option: any
 	Then In the Retailer Section, for retailer: Wal-Mart/SAM'S CLUB select 'Indicate full name of product, as sold, via this retailer' option: Equate
 	Then in the Retailer page I click Continue
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase133311
 	
 
@@ -413,7 +413,7 @@ Scenario: [125130] Canadian Tire Available for Selection for Articles
 	Then In the Select Retailers window, click 'Done' button
 	Then in the Retailer page I click Continue
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase125130
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase125130
 
 @TestCase:128920
@@ -469,7 +469,7 @@ Scenario: [128920] Electronics - Dollar Tree/Family Dollar Retailers Available f
 	Then In the Select Retailers window, click 'Done' button
 	Then in the Retailer page I click Continue
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128920
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase128920
 
 @TestCase:128769
@@ -525,7 +525,7 @@ Scenario: [128769] Battery Product - Dollar Tree/ Family Dollar Retailers Availa
 		| Family Dollar                                            |
 		| No Retailer/No UPC Product							   |
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59273
-		Then I navigate to the Home Page
+		Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase59273
 
 # Created by Saikiran Chittampally
@@ -612,7 +612,7 @@ Scenario: [181979] Single Retailer Checkbox Checks
 	Given I confirm when I select the retailer: Staples the retailers cannot be selected, checkboxes appear grayed out with red crossed out circle
 	Given I click Done in the Select Retailers popup
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase181979
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase181979
 
 	

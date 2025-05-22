@@ -733,7 +733,7 @@ Scenario: [122123] Sustainability Screen - Descriptions, Icons and Indicators
 	Then in the Optional Comments page I click Continue
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59280
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase122261
 
 @ignore
@@ -1126,6 +1126,6 @@ Scenario: [50863] WERCSmart Portal Verification on Required Selections for the "
 	Then in the Product Labeling page, I click Continue
 
 #	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase50863
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase50863
 

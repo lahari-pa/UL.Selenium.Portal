@@ -143,7 +143,7 @@ Scenario: [127870] Pharma - Tablet or Capsule Count Field is Available for Solid
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC127870 enter Size: 1 and enter Container Type: Plastic Container
 	Given in the Universal Product Code (UPC) page I click Continue
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127870
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase127870
 
 @TestCase:127970
@@ -361,7 +361,7 @@ Scenario: [127847] Pharma - Tablet or Capsule Count Field is Available for Solid
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC127847 enter Size: 1 and enter Container Type: Plastic Container
 	Given in the Universal Product Code (UPC) page I click Continue
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127847
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase127847	
 
 @TestCase:127854
@@ -417,7 +417,7 @@ Scenario: [127854] Pharma - Tablet or Capsule Count Field is Available for Solid
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC127854 enter Size: 1 and enter Container Type: Plastic Container
 	Given in the Universal Product Code (UPC) page I click Continue
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127854
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase127854	
 
 
@@ -475,7 +475,7 @@ Scenario: [127791] Pharma - Retailer Default
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, verify retailer 'WM' is present under the 'Destination Retailers' column
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase127791
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase127791
 
 

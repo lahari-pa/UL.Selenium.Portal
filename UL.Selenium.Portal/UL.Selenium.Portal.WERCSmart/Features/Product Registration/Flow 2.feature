@@ -175,7 +175,7 @@ And I close the tab with Data Summary page
 Then I should be on the Data Acceptance Page
 
 #Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57439
-Then I navigate to the Home Page
+Then In the Side Menu, click Labeled Link with My Products title
 Then In the Product Grid, delete the product saved as: TestCase57439
 
 @TestCase:57646
@@ -270,7 +270,7 @@ Scenario: [57646] Plant Growth regulator (Liquid or Solid) (RU000291) 2-L
 
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Plant Growth regulator (Liquid or Solid)
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57646
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase57646
 
 #Removed from regression: 2025/04
@@ -365,7 +365,7 @@ Scenario: [57649] Cosmetics (RU000034) 2LS - 2L
 
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Cosmetics
 #	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57649
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase57649
 
 @TestCase:57731
@@ -478,7 +478,7 @@ Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredi
 
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Aquarium maintenance chemicals
 #	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57731
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase57731
 
 # Created by Aaron Caton
@@ -733,7 +733,7 @@ Scenario: [57647] Insecticide-Flying Bug-Moth Proofing Product containing <98% P
 	#Given I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Insecticide-Flying Bug-Moth Proofing Product containing >98% Para-Dichlorobenzene
 #	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57647
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase57647
 
 
@@ -807,7 +807,7 @@ Scenario: [63666] New Product - Food/ Nutritional Drug Fact Panel Questions
 
 	Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63666
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase63666
 
 	#Executed in Staging Environment
@@ -929,5 +929,5 @@ Scenario: [217787] Container Types - Primary Physical State Liquid - Dishwashing
 	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page, I click Continue
 
 #	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase217787
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase217787

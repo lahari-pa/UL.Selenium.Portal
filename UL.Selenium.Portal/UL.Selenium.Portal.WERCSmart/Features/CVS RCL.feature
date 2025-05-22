@@ -144,7 +144,7 @@ Scenario: [74208] CVS merchandising category and verification
 	Given I click continue
 	Then What is the CVS merchandising category for this product? should be showing the error messages: This is a required field.
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74208
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase74208
 
 # Removed from regression: 2024/08
@@ -207,7 +207,7 @@ Given I click continue
 	Given I click continue
 	Then Is this product specifically designed, marketed or labeled for infants, babies, or children? should be showing the error messages: This is a required field.
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74253
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase74253
 @ignore
 @TestCase:74254
@@ -332,7 +332,7 @@ Scenario: [74255] CVS microbeads product and verification
 	Given I click continue
 	Then Product contains microbeads should be showing the error messages: This is a required field.
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74255
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase74255
 
 # Removed from regression: 2024/08
@@ -406,7 +406,7 @@ Scenario: [74256] CVS Refer to your Product Label and verification
 	Given I click continue
 	#Then Refer to your Product Label. Select the options that appear on the label. should be showing the error messages: This is a required field.
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74256
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase74256
 
 # Removed from regression: 2024/08
@@ -472,7 +472,7 @@ Scenario: [74257] CVS product intended to be rinsed off after use and verificati
 	Given I click continue
 	Then Is this product intended to be rinsed off after use? should be showing the error messages: This is a required field.
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74257
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase74257
 
 # Removed from regression: 2024/08
@@ -540,7 +540,7 @@ Scenario: [74259] CVS product intended to be ingested and verification
 	Given I click continue
 	Then Is this product intended to be ingested? should be showing the error messages: This is a required field.
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74259
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase74259
 
 # Removed from regression: 2024/08
@@ -609,7 +609,7 @@ Scenario: [74260] CVS Is this product a personal care sanitizer and verification
 	Given I click continue
 	Then Is this product a personal care sanitizer, wash, or cleanser (e.g., Hand, Body, Facial)? should be showing the error messages: This is a required field.
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74260
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase74260
 
 # Removed from regression: 2024/08
@@ -718,7 +718,7 @@ Scenario: [74188] CVS Store Brand Associations and verification
 	Given I click continue
 	Then What is the CVS Store Brand associated to this product? should be showing the error messages: This is a required field.
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74188
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase74188
 
 @ignore
@@ -857,7 +857,7 @@ Scenario: [74261] CVS Brand Registration section and validation
 	Then I should see an error message: This is a required field.
 	Then The alert message is displayed with text: Contact your CVS Product Development Manager with any questions.
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74261
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase74261
 
 # Removed from regression: 2024/08
@@ -926,5 +926,5 @@ Scenario: [74278] CVS Brand Registration section and Data Tier validation
 	Then I click on the Row Action: Edit
 	Then I should see the CVS Page
 	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74278
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase74278

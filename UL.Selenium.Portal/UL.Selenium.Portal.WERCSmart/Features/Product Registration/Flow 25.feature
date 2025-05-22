@@ -87,5 +87,5 @@ Given I should see the Optional Comments Page
 Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Engine Parts and Components with Battery Included
 
 #Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60642
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase60642

@@ -119,7 +119,7 @@ Scenario: [62730] VOC -Dilution ration - Sold = 50, Used = 45 limit checking
 	And I should see the Optional Comments Page
 	And in the Optional Comments page I click Continue
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase62730
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase62730
 
 @TestCase:62708
@@ -213,7 +213,7 @@ Scenario: [62708] VOC - Flow 19 - Dilution - Limits checking - Sold = 1 Used = 2
 	And I should see the Optional Comments Page
 	And in the Optional Comments page I click Continue
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase62708
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase62708
 
 @TestCase:56478
@@ -281,5 +281,5 @@ Scenario: [56478] VOC - CARB and OTC - Concentrate/dilution = No to Dilution che
 	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Product label specifies a dilution ratio which results in a final VOC concentration for the product during use': to: No
 	Then In the VOC - Ozone Transport Commission section, I confirm text 'Please be sure you have selected the correct product type. For further questions, please contact Support.' should be displayed
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56478
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase56478
