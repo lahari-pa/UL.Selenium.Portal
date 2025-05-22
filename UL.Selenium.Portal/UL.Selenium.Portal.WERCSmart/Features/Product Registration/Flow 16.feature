@@ -1190,34 +1190,10 @@ Scenario: [220789] Carbon Zinc Battery - RU000727
 	Given I should be on the Battery Characteristics Page
 	Then In the Battery Characteristics Section, set the option in section: 'Type of Battery' to: Battery
 
-	Then In the Battery Characteristics section, confirm Battery Characteristics table does exist
-	Then In the Battery Characteristics section, confirm the Battery Characteristics table column labels list does exist
-	Then In the Battery Characteristics section, confirm the Battery Characteristics table Battery Common Name column does exist
-
-#	Then In the Battery Characteristics section Battery Characteristics table row number '1', set Battery Common Name to: A
-#	Then In the Battery Characteristics section Battery Characteristics table row number '1', click IEC/ANSI Name select
-#	Then In the Battery Characteristics section Battery Characteristics table row number '1', confirm IEC/ANSI Name select 'NA' option does exist
-#	Then In the Battery Characteristics section Battery Characteristics table row number '1', click IEC/ANSI Name select 'NA' option
-#	Then In the Battery Characteristics section Battery Characteristics table row number '1', confirm IEC/ANSI Name select does display value: NA
-#	Then In the Battery Characteristics section Battery Characteristics table row number '1', click Standard Dimensions select
-#	Then In the Battery Characteristics section Battery Characteristics table row number '1', confirm Standard Dimensions select '17x50' option does exist
-#	Then In the Battery Characteristics section Battery Characteristics table row number '1', click Standard Dimensions select '17x50' option
-#	Then In the Battery Characteristics section Battery Characteristics table row number '1', uncheck Rechargable Battery checkbox
-#	Then In the Battery Characteristics section Battery Characteristics table row number '1', confirm Non-Lithium-Ion Watt Hour text input does exist
-#	Then In the Battery Characteristics section Battery Characteristics table row number '1', click Non-Lithium-Ion Watt Hour text input
-#	Then In the Battery Characteristics section Battery Characteristics table row number '1', enter into Non-Lithium-Ion Watt Hour text input: 1
-#	Then In the Battery Characteristics section Battery Characteristics table row number '1', confirm Non-Lithium-Ion Watt Hour text input does match: 1
-#	Then In the Battery Characteristics section Battery Characteristics table row number '1', confirm Unit Weight text input does exist
-#	Then In the Battery Characteristics section Battery Characteristics table row number '1', click Unit Weight text input
-#	Then In the Battery Characteristics section Battery Characteristics table row number '1', enter into Unit Weight text input: 1
-#	Then In the Battery Characteristics section Battery Characteristics table row number '1', confirm Unit Weight text input does match: 1
-
 	Then In the Battery Characteristics section, add the following batteries:
 		| Battery Common Name | IEC/ANSI Name | Standard Dimensions | Rechargeable Battery | Non-Lithium-Ion Watt Hour | Unit Weight |
-		| A                   | NA            | 17x50               | True                 | 1                         | 1           |
-		| AAA                 | R03 / 24D     | 10.5 x 44.5         | False                | 2                         | 2           |
+		| 1022-CZ             |               |                     |                      | 120                       | 0.81        |
 
-	Then In the Battery Characteristics section, remove item row: 2
 
 #	Then in the Battery Characteristics page, I click Continue
 #

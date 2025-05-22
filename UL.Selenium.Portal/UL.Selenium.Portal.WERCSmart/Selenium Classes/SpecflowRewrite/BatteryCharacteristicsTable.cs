@@ -16,8 +16,8 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.SpecflowRewrite
 		public string Title => this.FindElement(By.XPath(".//div[@data-bind='text: description']"), 1)?.Text.Trim();
 		private List<IWebElement> ColumnLabelsList => [.. this.FindElements(By.XPath(".//th[text()]"), 1)];
 		private IWebElement ColumnLabel(string columnLabel) => this.ColumnLabelsList.FirstOrDefault(x => x.Text.Trim() == columnLabel);
-		private List<BatteryCharacteristicsTableRow> BatteryCharacteristicsTableRowsList => [.. this.ContainerElement.FindElements(By.XPath(".//tbody//tr"), 1).Select(x => new BatteryCharacteristicsTableRow(x))];
-		public BatteryCharacteristicsTableRow BatteryCharacteristicsTableRowByNumber(int rowNumber) => this.BatteryCharacteristicsTableRowsList.ElementAt(rowNumber - 1);
+		private List<BatteryCharacteristicsTableRow> RowsList => [.. this.ContainerElement.FindElements(By.XPath(".//tbody//tr"), 1).Select(x => new BatteryCharacteristicsTableRow(x))];
+		public BatteryCharacteristicsTableRow RowByNumber(int rowNumber) => this.RowsList.ElementAt(rowNumber - 1);
 		private List<IWebElement> ErrorAlertsList => [.. this.FindElements(By.XPath(".//div[@class = 'alert alert-danger']//span[@data-bind]"), 1)];
 		private List<IWebElement> WarningAlertsList => [.. this.FindElements(By.XPath(".//div[@class = 'alert alert-warning']//span[@data-bind]"), 1)];
 		private IWebElement AddAnotherBatteryButton => this.FindElement(By.XPath(".//button[normalize-space()='Add Another Battery']"), 1);
@@ -45,22 +45,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.SpecflowRewrite
 		#endregion
 
 		#region Battery Characteristics Table Rows Methods
-		public bool BatteryCharacteristicsTableRowsListExists()
+		public bool RowsListExists()
 		{
 			Report.Info($"Attemptig to confirm battery characteristics table rows list exists.");
-			return !this.BatteryCharacteristicsTableRowsList.IsNullOrEmpty();
+			return !this.RowsList.IsNullOrEmpty();
 		}
 
-		public int BatteryCharacteristicsTableRowsListCount()
+		public int RowsListCount()
 		{
 			Report.Info($"Attempting to get battery characteristcs table rows list count.");
-			return this.BatteryCharacteristicsTableRowsList.Count;
+			return this.RowsList.Count;
 		}
 
-		public bool BatteryCharacteristcsTableRowByNumberExists(int rowNumber)
+		public bool RowByNumberExists(int rowNumber)
 		{
 			Report.Info($"Attempting to confirm battery characteristics table row with '{rowNumber}' row number exists.");
-			return rowNumber > 0 && rowNumber <= this.BatteryCharacteristicsTableRowsList.Count;
+			return rowNumber > 0 && rowNumber <= this.RowsList.Count;
 		}
 		#endregion
 

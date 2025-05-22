@@ -1,4 +1,5 @@
-﻿using NPOI.HSSF.Record.Chart;
+﻿using MathNet.Numerics.Financial;
+using NPOI.HSSF.Record.Chart;
 using NPOI.SS.Formula.Functions;
 using Reqnroll;
 using System.Collections.Generic;
@@ -45,10 +46,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			bool expected = does_doesnot == "does";
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
-			if(Report.IsTrue(batteryCharacteristicsTable.ColumnLabelsListExists(), $"Failure, failed to confirm the Battery Characteristics Table column labels list does exist.", $"Success, confirmed Battery Characteristcs Table column labels list does exist."))
+			if(!Report.IsTrue(batteryCharacteristicsTable.ColumnLabelsListExists(), $"Failure, failed to confirm the Battery Characteristics Table column labels list does exist.", $"Success, confirmed Battery Characteristcs Table column labels list does exist."))
 			{
-				Report.IsTrue(batteryCharacteristicsTable.ColumnLabelExists(columnLabel), $"Failure, failed to confirm '{columnLabel}' column {does_doesnot} exist.", $"Success, confirmed '{columnLabel}' column {does_doesnot} exist.");
+				return;
 			}
+			Report.IsTrue(batteryCharacteristicsTable.ColumnLabelExists(columnLabel), $"Failure, failed to confirm '{columnLabel}' column {does_doesnot} exist.", $"Success, confirmed '{columnLabel}' column {does_doesnot} exist.");
 		}
 		#endregion
 
@@ -59,10 +61,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			bool expected = does_doesnot == "does";
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				Report.IsTrue(expected == (batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListCount() == rowNumber), $"Failure, failed to confirm Battery Characteristics table {does_doesnot} have {rowNumber} {row_rows}.", $"Success, confirmed Battery Characteristics table {does_doesnot} have {rowNumber} {row_rows}.");
+				return;
 			}
+			Report.IsTrue(expected == (batteryCharacteristicsTable.RowsListCount() == rowNumber), $"Failure, failed to confirm Battery Characteristics table {does_doesnot} have {rowNumber} {row_rows}.", $"Success, confirmed Battery Characteristics table {does_doesnot} have {rowNumber} {row_rows}.");
 		}
 
 		[RegexStepDefinition(@"In the Battery Characteristics section, confirm Battery Characteristics table row number '(.*)' (does|does not) exist")]
@@ -71,10 +74,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			bool expected = does_doesnot == "does";
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				Report.IsTrue(expected == batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' {does_doesnot} exist.", $"Success, confirmed row '{rowNumber}' {does_doesnot} exist.");
+				return;
 			}
+			Report.IsTrue(expected == batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' {does_doesnot} exist.", $"Success, confirmed row '{rowNumber}' {does_doesnot} exist.");
 		}
 
 		#region Battery Common Name Steps
@@ -83,16 +87,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				if(Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
-				{
-					if(Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).BatteryCommonNameComboboxExists(), $"Failure, failed to confirm row '{rowNumber}' Battery Common Name combobox does exist.", $"Success, confirmed row '{rowNumber}' Battery Common Name combobox does exist."))
-					{
-						Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).BatteryCommonNameComboboxClick(), $"Failure, failed to click row '{rowNumber}' Battery Common Name combobox.", $"Success, clicked row '{rowNumber}' Battery Common Name combobox.");
-					}
-				}
+				return;
 			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).BatteryCommonNameComboboxExists(), $"Failure, failed to confirm row '{rowNumber}' Battery Common Name combobox does exist.", $"Success, confirmed row '{rowNumber}' Battery Common Name combobox does exist."))
+			{
+				return;
+			}
+			Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).BatteryCommonNameComboboxClick(), $"Failure, failed to click row '{rowNumber}' Battery Common Name combobox.", $"Success, clicked row '{rowNumber}' Battery Common Name combobox.");
 		}
 
 		[RegexStepDefinition(@"In the Battery Characteristics section Battery Characteristics table row number '(.*)', click Battery Common Name searchbox text input")]
@@ -101,16 +108,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
 			SearchBoxPrototype searchBoxPrototype = new SearchBoxPrototype();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
-				{
-					if (Report.IsTrue(searchBoxPrototype.WaitForContainerToBeVisible(), $"Failure, failed to confirm search box does exist.", $"Success, confirmed search box does exist."))
-					{
-						Report.IsTrue(searchBoxPrototype.SearchInputClick(), $"Failure, failed to click search box search input.", $"Success, clicked search box search input");
-					}
-				}
+				return;
 			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(searchBoxPrototype.WaitForContainerToBeVisible(), $"Failure, failed to confirm search box does exist.", $"Success, confirmed search box does exist."))
+			{
+				return;
+			}
+			Report.IsTrue(searchBoxPrototype.SearchInputClick(), $"Failure, failed to click search box search input.", $"Success, clicked search box search input");
 		}
 
 		[RegexStepDefinition(@"In the Battery Characteristics section Battery Characteristics table row number '(.*)', enter into Battery Common Name searchbox text input: (.*)")]
@@ -119,16 +129,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
 			SearchBoxPrototype searchBoxPrototype = new SearchBoxPrototype();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
-				{
-					if (Report.IsTrue(searchBoxPrototype.WaitForContainerToBeVisible(), $"Failure, failed to confirm search box does exist.", $"Success, confirmed search box does exist."))
-					{
-						Report.IsTrue(searchBoxPrototype.SearchInputEnterText(searchInput), $"Failure, failed to enter into search box search input: '{searchInput}'.", $"Success, entered into search box search input: '{searchInput}'");
-					}
-				}
+				return;
 			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(searchBoxPrototype.WaitForContainerToBeVisible(), $"Failure, failed to confirm search box does exist.", $"Success, confirmed search box does exist."))
+			{
+				return;
+			}
+			Report.IsTrue(searchBoxPrototype.SearchInputEnterText(searchInput), $"Failure, failed to enter into search box search input: '{searchInput}'.", $"Success, entered into search box search input: '{searchInput}'");
 		}
 
 		[RegexStepDefinition(@"In the Battery Characteristics section Battery Characteristics table row number '(.*)', confirm Battery Common Name searchbox results (does|does not) contain: (.*)")]
@@ -138,16 +151,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
 			SearchBoxPrototype searchBoxPrototype = new SearchBoxPrototype();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
-				{
-					if (Report.IsTrue(searchBoxPrototype.WaitForContainerToBeVisible(), $"Failure, failed to confirm search box does exist.", $"Success, confirmed search box does exist."))
-					{
-						Report.IsTrue(expected == searchBoxPrototype.SearchResultTextExists(searchInput), $"Failure, failed to confrim search box search results {does_doesnot} contain: '{searchInput}'.", $"Success, confirmed search box search results {does_doesnot} contain: '{searchInput}'");
-					}
-				}
+				return;
 			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(searchBoxPrototype.WaitForContainerToBeVisible(), $"Failure, failed to confirm search box does exist.", $"Success, confirmed search box does exist."))
+			{
+				return;
+			}
+			Report.IsTrue(expected == searchBoxPrototype.SearchResultTextExists(searchInput), $"Failure, failed to confrim search box search results {does_doesnot} contain: '{searchInput}'.", $"Success, confirmed search box search results {does_doesnot} contain: '{searchInput}'");
 		}
 
 		[RegexStepDefinition(@"In the Battery Characteristics section Battery Characteristics table row number '(.*)', click Battery Common Name searchbox result: (.*)")]
@@ -156,19 +172,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
 			SearchBoxPrototype searchBoxPrototype = new SearchBoxPrototype();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
-				{
-					if (Report.IsTrue(searchBoxPrototype.WaitForContainerToBeVisible(), $"Failure, failed to confirm search box does exist.", $"Success, confirmed search box does exist."))
-					{
-						if (Report.IsTrue(searchBoxPrototype.SearchResultTextExists(searchInput), $"Failure, failed to confrim search box search results does contain: '{searchInput}'.", $"Success, confirmed search box search results does contain: '{searchInput}'"))
-						{
-							Report.IsTrue(searchBoxPrototype.SearchResultTextGet(searchInput).Click(), $"Failure, failed to click search box search result '{searchInput}'.", $"Success, clicked search box search result '{searchInput}'.");
-						}
-					}
-				}
+				return;
 			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(searchBoxPrototype.WaitForContainerToBeVisible(), $"Failure, failed to confirm search box does exist.", $"Success, confirmed search box does exist."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(searchBoxPrototype.SearchResultTextExists(searchInput), $"Failure, failed to confrim search box search results does contain: '{searchInput}'.", $"Success, confirmed search box search results does contain: '{searchInput}'"))
+			{
+				return;
+			}
+			Report.IsTrue(searchBoxPrototype.SearchResultTextGet(searchInput).Click(), $"Failure, failed to click search box search result '{searchInput}'.", $"Success, clicked search box search result '{searchInput}'.");
 		}
 
 		[RegexStepDefinition(@"In the Battery Characteristics section Battery Characteristics table row number '(.*)', confirm Battery Common Name searchbox text input (does|does not) display: (.*)")]
@@ -178,14 +198,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
 			SearchBoxPrototype searchBoxPrototype = new SearchBoxPrototype();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
-				{
-					string searchboxValue = batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).BatteryCommonNameComboboxGetValue();
-					Report.IsTrue(expected == searchboxValue.Equals(searchInput, System.StringComparison.Ordinal), $"Failure, failed to confirm search box value '{searchboxValue}' {does_doesnot} match expected value '{searchInput}'.", $"Success, confirmed searchbox value '{searchboxValue}' {does_doesnot} match expected value '{searchInput}'.");
-				}
+				return;
 			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
+			{
+				return;
+			}
+			string searchboxValue = batteryCharacteristicsTable.RowByNumber(rowNumber).BatteryCommonNameComboboxGetValue();
+			Report.IsTrue(expected == searchboxValue.Equals(searchInput, System.StringComparison.Ordinal), $"Failure, failed to confirm search box value '{searchboxValue}' {does_doesnot} match expected value '{searchInput}'.", $"Success, confirmed searchbox value '{searchboxValue}' {does_doesnot} match expected value '{searchInput}'.");
 		}
 
 		#region Shared Step
@@ -218,16 +240,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
-				{
-					if(Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).IECANSINameSelectExists(), $"Failure, failed to confirm row '{rowNumber}' IEC/ANSI Name select does exist.", $"Success, confirmed row '{rowNumber}' IEC/ANSI Name select does exist."))
-					{
-						Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).IECANSINameSelectClick(), $"Failure, failed to click row '{rowNumber}' IEC/ANSI Name select.", $"Success, clicked row '{rowNumber}' IEC/ANSI Name select.");
-					}
-				}
+				return;
 			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).IECANSINameSelectExists(), $"Failure, failed to confirm row '{rowNumber}' IEC/ANSI Name select does exist.", $"Success, confirmed row '{rowNumber}' IEC/ANSI Name select does exist."))
+			{
+				return;
+			}
+			Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).IECANSINameSelectClick(), $"Failure, failed to click row '{rowNumber}' IEC/ANSI Name select.", $"Success, clicked row '{rowNumber}' IEC/ANSI Name select.");
 		}
 
 		[RegexStepDefinition(@"In the Battery Characteristics section Battery Characteristics table row number '(.*)', confirm IEC/ANSI Name select '(.*)' option (does|does not) exist")]
@@ -236,16 +261,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			bool expected = does_doesnot == "does";
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
-				{
-					if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).IECANSINameSelectExists(), $"Failure, failed to confirm row '{rowNumber}' IEC/ANSI Name select does exist.", $"Success, confirmed row '{rowNumber}' IEC/ANSI Name select does exist."))
-					{
-						Report.IsTrue(expected == batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).IECANSINameSelectOptionExists(optionLabel), $"Failure, failed to confirm row '{rowNumber}' IEC/ANSI Name select '{optionLabel}' option {does_doesnot} exist.", $"Success, confirmed row '{rowNumber}' IEC/ANSI Name select '{optionLabel}' option {does_doesnot} exist.");
-					}
-				}
+				return;
 			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).IECANSINameSelectExists(), $"Failure, failed to confirm row '{rowNumber}' IEC/ANSI Name select does exist.", $"Success, confirmed row '{rowNumber}' IEC/ANSI Name select does exist."))
+			{
+				return;
+			}
+			Report.IsTrue(expected == batteryCharacteristicsTable.RowByNumber(rowNumber).IECANSINameSelectOptionExists(optionLabel), $"Failure, failed to confirm row '{rowNumber}' IEC/ANSI Name select '{optionLabel}' option {does_doesnot} exist.", $"Success, confirmed row '{rowNumber}' IEC/ANSI Name select '{optionLabel}' option {does_doesnot} exist.");
 		}
 
 		[RegexStepDefinition(@"In the Battery Characteristics section Battery Characteristics table row number '(.*)', click IEC/ANSI Name select '(.*)' option")]
@@ -253,19 +281,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
-				{
-					if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).IECANSINameSelectExists(), $"Failure, failed to confirm row '{rowNumber}' IEC/ANSI Name select does exist.", $"Success, confirmed row '{rowNumber}' IEC/ANSI Name select does exist."))
-					{
-						if(Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).IECANSINameSelectOptionExists(optionLabel), $"Failure, failed to confirm row '{rowNumber}' IEC/ANSI Name select '{optionLabel}' option does exist.", $"Success, confirmed row '{rowNumber}' IEC/ANSI Name select '{optionLabel}' option does exist."))
-						{
-							Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).IECANSINameSelectOptionClick(optionLabel), $"Failure, failed to click row '{rowNumber}' IEC/ANSI Name select '{optionLabel}' option.", $"Success, clicked row '{rowNumber}' IEC/ANSI Name selet '{optionLabel}' option.");
-						}
-					}
-				}
+				return;
 			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).IECANSINameSelectExists(), $"Failure, failed to confirm row '{rowNumber}' IEC/ANSI Name select does exist.", $"Success, confirmed row '{rowNumber}' IEC/ANSI Name select does exist."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).IECANSINameSelectOptionExists(optionLabel), $"Failure, failed to confirm row '{rowNumber}' IEC/ANSI Name select '{optionLabel}' option does exist.", $"Success, confirmed row '{rowNumber}' IEC/ANSI Name select '{optionLabel}' option does exist."))
+			{
+				return;
+			}
+			Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).IECANSINameSelectOptionClick(optionLabel), $"Failure, failed to click row '{rowNumber}' IEC/ANSI Name select '{optionLabel}' option.", $"Success, clicked row '{rowNumber}' IEC/ANSI Name selet '{optionLabel}' option.");
 		}
 
 		[RegexStepDefinition(@"In the Battery Characteristics section Battery Characteristics table row number '(.*)', confirm IEC/ANSI Name select (does|does not) display value: (.*)")]
@@ -274,17 +306,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			bool expected = does_doesnot == "does";
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
-				{
-					if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).IECANSINameSelectExists(), $"Failure, failed to confirm row '{rowNumber}' IEC/ANSI Name select does exist.", $"Success, confirmed row '{rowNumber}' IEC/ANSI Name select does exist."))
-					{
-						string displayedValue = batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).IECANSINameSelectGetValue();
-						Report.IsTrue(expected == expectedValue.Equals(displayedValue), $"Failure, failed to confirm row '{rowNumber}' IEC/ANSI Name select displayed value '{displayedValue}' {does_doesnot} match expected value '{expectedValue}'.", $"Success, confirmed row '{rowNumber}' IEC/ANSI Name select displayed value '{displayedValue}' {does_doesnot} match expected value '{expectedValue}'.");
-					}
-				}
+				return;
 			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).IECANSINameSelectExists(), $"Failure, failed to confirm row '{rowNumber}' IEC/ANSI Name select does exist.", $"Success, confirmed row '{rowNumber}' IEC/ANSI Name select does exist."))
+			{
+				return;
+			}
+			string displayedValue = batteryCharacteristicsTable.RowByNumber(rowNumber).IECANSINameSelectGetValue();
+			Report.IsTrue(expected == expectedValue.Equals(displayedValue), $"Failure, failed to confirm row '{rowNumber}' IEC/ANSI Name select displayed value '{displayedValue}' {does_doesnot} match expected value '{expectedValue}'.", $"Success, confirmed row '{rowNumber}' IEC/ANSI Name select displayed value '{displayedValue}' {does_doesnot} match expected value '{expectedValue}'.");
 		}
 		#endregion
 
@@ -294,16 +329,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
-				{
-					if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).StandardDimensionsSelectExists(), $"Failure, failed to confirm row '{rowNumber}' Standard Dimensions select does exist.", $"Success, confirmed row '{rowNumber}' Standard Dimensions select does exist."))
-					{
-						Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).StandardDimensionsSelectClick(), $"Failure, failed to click row '{rowNumber}' Standard Dimensions select.", $"Success, clicked row '{rowNumber}' Standard Dimensions select.");
-					}
-				}
+				return;
 			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).StandardDimensionsSelectExists(), $"Failure, failed to confirm row '{rowNumber}' Standard Dimensions select does exist.", $"Success, confirmed row '{rowNumber}' Standard Dimensions select does exist."))
+			{
+				return;
+			}
+			Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).StandardDimensionsSelectClick(), $"Failure, failed to click row '{rowNumber}' Standard Dimensions select.", $"Success, clicked row '{rowNumber}' Standard Dimensions select.");
 		}
 
 		[RegexStepDefinition(@"In the Battery Characteristics section Battery Characteristics table row number '(.*)', confirm Standard Dimensions select '(.*)' option (does|does not) exist")]
@@ -312,16 +350,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			bool expected = does_doesnot == "does";
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
-				{
-					if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).StandardDimensionsSelectExists(), $"Failure, failed to confirm row '{rowNumber}' Standard Dimensions select does exist.", $"Success, confirmed row '{rowNumber}' Standard Dimensions select does exist."))
-					{
-						Report.IsTrue(expected == batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).StandardDimensionsSelectOptionExists(optionLabel), $"Failure, failed to confirm row '{rowNumber}' Standard Dimensions select '{optionLabel}' option {does_doesnot} exist.", $"Success, confirmed row '{rowNumber}' Standard Dimensions select '{optionLabel}' option {does_doesnot} exist.");
-					}
-				}
+				return;
 			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).StandardDimensionsSelectExists(), $"Failure, failed to confirm row '{rowNumber}' Standard Dimensions select does exist.", $"Success, confirmed row '{rowNumber}' Standard Dimensions select does exist."))
+			{
+				return;
+			}
+			Report.IsTrue(expected == batteryCharacteristicsTable.RowByNumber(rowNumber).StandardDimensionsSelectOptionExists(optionLabel), $"Failure, failed to confirm row '{rowNumber}' Standard Dimensions select '{optionLabel}' option {does_doesnot} exist.", $"Success, confirmed row '{rowNumber}' Standard Dimensions select '{optionLabel}' option {does_doesnot} exist.");
 		}
 
 		[RegexStepDefinition(@"In the Battery Characteristics section Battery Characteristics table row number '(.*)', click Standard Dimensions select '(.*)' option")]
@@ -329,19 +370,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
-				{
-					if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).StandardDimensionsSelectExists(), $"Failure, failed to confirm row '{rowNumber}' Standard Dimensions select does exist.", $"Success, confirmed row '{rowNumber}' Standard Dimensions select does exist."))
-					{
-						if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).StandardDimensionsSelectOptionExists(optionLabel), $"Failure, failed to confirm row '{rowNumber}' Standard Dimensions select '{optionLabel}' option does exist.", $"Success, confirmed row '{rowNumber}' Standard Dimensions select '{optionLabel}' option does exist."))
-						{
-							Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).StandardDimensionsSelectOptionClick(optionLabel), $"Failure, failed to click row '{rowNumber}' Standard Dimensions select '{optionLabel}' option.", $"Success, clicked row '{rowNumber}' Standard Dimensions selet '{optionLabel}' option.");
-						}
-					}
-				}
+				return;
 			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).StandardDimensionsSelectExists(), $"Failure, failed to confirm row '{rowNumber}' Standard Dimensions select does exist.", $"Success, confirmed row '{rowNumber}' Standard Dimensions select does exist."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).StandardDimensionsSelectOptionExists(optionLabel), $"Failure, failed to confirm row '{rowNumber}' Standard Dimensions select '{optionLabel}' option does exist.", $"Success, confirmed row '{rowNumber}' Standard Dimensions select '{optionLabel}' option does exist."))
+			{
+				return;
+			}
+			Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).StandardDimensionsSelectOptionClick(optionLabel), $"Failure, failed to click row '{rowNumber}' Standard Dimensions select '{optionLabel}' option.", $"Success, clicked row '{rowNumber}' Standard Dimensions selet '{optionLabel}' option.");
 		}
 
 		[RegexStepDefinition(@"In the Battery Characteristics section Battery Characteristics table row number '(.*)', confirm Standard Dimensions select (does|does not) display value: (.*)")]
@@ -350,17 +395,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			bool expected = does_doesnot == "does";
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
-				{
-					if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).StandardDimensionsSelectExists(), $"Failure, failed to confirm row '{rowNumber}' Standard Dimensions select does exist.", $"Success, confirmed row '{rowNumber}' Standard Dimensions select does exist."))
-					{
-						string displayedValue = batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).StandardDimensionsSelectGetValue();
-						Report.IsTrue(expected == expectedValue.Equals(displayedValue), $"Failure, failed to confirm row '{rowNumber}' Standard Dimensions select displayed value '{displayedValue}' {does_doesnot} match expected value '{expectedValue}'.", $"Success, confirmed row '{rowNumber}' Standard Dimensions select displayed value '{displayedValue}' {does_doesnot} match expected value '{expectedValue}'.");
-					}
-				}
+				return;
 			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).StandardDimensionsSelectExists(), $"Failure, failed to confirm row '{rowNumber}' Standard Dimensions select does exist.", $"Success, confirmed row '{rowNumber}' Standard Dimensions select does exist."))
+			{
+				return;
+			}
+			string displayedValue = batteryCharacteristicsTable.RowByNumber(rowNumber).StandardDimensionsSelectGetValue();
+			Report.IsTrue(expected == expectedValue.Equals(displayedValue), $"Failure, failed to confirm row '{rowNumber}' Standard Dimensions select displayed value '{displayedValue}' {does_doesnot} match expected value '{expectedValue}'.", $"Success, confirmed row '{rowNumber}' Standard Dimensions select displayed value '{displayedValue}' {does_doesnot} match expected value '{expectedValue}'.");
 		}
 		#endregion
 
@@ -371,13 +419,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			bool expected = does_doesnot == "does";
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
-				{
-					Report.IsTrue(expected == batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).RechargebleBatteryCheckboxExists(), $"Failure, failed to confirm row '{rowNumber}' Rechargable Battery checkbox {does_doesnot} exist.", $"Success, confirmed row '{rowNumber}' Rechargable Battery checkbox {does_doesnot} exist.");
-				}
+				return;
 			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
+			{
+				return;
+			}
+			Report.IsTrue(expected == batteryCharacteristicsTable.RowByNumber(rowNumber).RechargebleBatteryCheckboxExists(), $"Failure, failed to confirm row '{rowNumber}' Rechargable Battery checkbox {does_doesnot} exist.", $"Success, confirmed row '{rowNumber}' Rechargable Battery checkbox {does_doesnot} exist.");
 		}
 
 		[RegexStepDefinition(@"In the Battery Characteristics section Battery Characteristics table row number '(.*)', click Rechargable Battery checkbox")]
@@ -385,16 +435,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
-				{
-					if(Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).RechargebleBatteryCheckboxExists(), $"Failure, failed to confirm row '{rowNumber}' Rechargable Battery checkbox does exist.", $"Success, confirmed row '{rowNumber}' Rechargable Battery checkbox does exist."))
-					{
-						Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).RechargebleBatteryCheckboxClick(), $"Failure, failed to click row '{rowNumber}' Rechargable Battery checkbox.", $"Success, clicked row '{rowNumber}' Rechargable Battery checkbox.");
-					}
-				}
+				return;
 			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).RechargebleBatteryCheckboxExists(), $"Failure, failed to confirm row '{rowNumber}' Rechargable Battery checkbox does exist.", $"Success, confirmed row '{rowNumber}' Rechargable Battery checkbox does exist."))
+			{
+				return;
+			}
+			Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).RechargebleBatteryCheckboxClick(), $"Failure, failed to click row '{rowNumber}' Rechargable Battery checkbox.", $"Success, clicked row '{rowNumber}' Rechargable Battery checkbox.");
 		}
 
 		[RegexStepDefinition(@"In the Battery Characteristics section Battery Characteristics table row number '(.*)', confirm Rechargable Battery checkbox (is|is not) checked")]
@@ -403,16 +456,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			bool expected = is_isnot == "is";
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
-				{
-					if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).RechargebleBatteryCheckboxExists(), $"Failure, failed to confirm row '{rowNumber}' Rechargable Battery checkbox does exist.", $"Success, confirmed row '{rowNumber}' Rechargable Battery checkbox does exist."))
-					{
-						Report.IsTrue(expected == batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).RechargebleBatteryCheckboxChecked(), $"Failure, failed to confirm row '{rowNumber}' Rechargable Battery checkbox {is_isnot} checked.", $"Success, confirmed row '{rowNumber}' Rechargable Battery checkbox {is_isnot} checked.");
-					}
-				}
+				return;
 			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).RechargebleBatteryCheckboxExists(), $"Failure, failed to confirm row '{rowNumber}' Rechargable Battery checkbox does exist.", $"Success, confirmed row '{rowNumber}' Rechargable Battery checkbox does exist."))
+			{
+				return;
+			}
+			Report.IsTrue(expected == batteryCharacteristicsTable.RowByNumber(rowNumber).RechargebleBatteryCheckboxChecked(), $"Failure, failed to confirm row '{rowNumber}' Rechargable Battery checkbox {is_isnot} checked.", $"Success, confirmed row '{rowNumber}' Rechargable Battery checkbox {is_isnot} checked.");
 		}
 
 		[RegexStepDefinition(@"In the Battery Characteristics section Battery Characteristics table row number '(.*)', (check|uncheck) Rechargable Battery checkbox")]
@@ -421,20 +477,23 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			bool expected = check_uncheck == "check";
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
-				{
-					if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).RechargebleBatteryCheckboxExists(), $"Failure, failed to confirm row '{rowNumber}' Rechargable Battery checkbox does exist.", $"Success, confirmed row '{rowNumber}' Rechargable Battery checkbox does exist."))
-					{
-						if(expected != batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).RechargebleBatteryCheckboxChecked())
-						{
-							Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).RechargebleBatteryCheckboxClick(), $"Failure, failed to click row '{rowNumber}' Rechargable Battery checkbox.", $"Success, clicked row '{rowNumber}' Rechargable Battery checkbox.");
-						}
-						Report.IsTrue(expected == batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).RechargebleBatteryCheckboxChecked(), $"Failure, failed to confirm row '{rowNumber}' Rechargable Battery checkbox is {check_uncheck}ed.", $"Success, confirmed row '{rowNumber}' Rechargable Battery checkbox is {check_uncheck}ed.");
-					}
-				}
+				return;
 			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).RechargebleBatteryCheckboxExists(), $"Failure, failed to confirm row '{rowNumber}' Rechargable Battery checkbox does exist.", $"Success, confirmed row '{rowNumber}' Rechargable Battery checkbox does exist."))
+			{
+				return;
+			}
+			if (expected != batteryCharacteristicsTable.RowByNumber(rowNumber).RechargebleBatteryCheckboxChecked())
+			{
+				Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).RechargebleBatteryCheckboxClick(), $"Failure, failed to click row '{rowNumber}' Rechargable Battery checkbox.", $"Success, clicked row '{rowNumber}' Rechargable Battery checkbox.");
+			}
+			Report.IsTrue(expected == batteryCharacteristicsTable.RowByNumber(rowNumber).RechargebleBatteryCheckboxChecked(), $"Failure, failed to confirm row '{rowNumber}' Rechargable Battery checkbox is {check_uncheck}ed.", $"Success, confirmed row '{rowNumber}' Rechargable Battery checkbox is {check_uncheck}ed.");
 		}
 		#endregion
 
@@ -445,13 +504,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			bool expected = does_doesnot == "does";
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
-				{
-					Report.IsTrue(expected == batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).NonLithiumIonWattHourTextInputExists(), $"Failure, failed to confirm row '{rowNumber}' Non-Lithium-Ion Watt Hour text input {does_doesnot} exist.", $"Success, confirmed row '{rowNumber}' Non-Lithium-Ion Watt Hour text input {does_doesnot} exist.");
-				}
+				return;
 			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
+			{
+				return;
+			}
+			Report.IsTrue(expected == batteryCharacteristicsTable.RowByNumber(rowNumber).NonLithiumIonWattHourTextInputExists(), $"Failure, failed to confirm row '{rowNumber}' Non-Lithium-Ion Watt Hour text input {does_doesnot} exist.", $"Success, confirmed row '{rowNumber}' Non-Lithium-Ion Watt Hour text input {does_doesnot} exist.");
 		}
 
 		[RegexStepDefinition(@"In the Battery Characteristics section Battery Characteristics table row number '(.*)', click Non-Lithium-Ion Watt Hour text input")]
@@ -459,16 +520,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
-				{
-					if(Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).NonLithiumIonWattHourTextInputExists(), $"Failure, failed to confirm row '{rowNumber}' Non-Lithium-Ion Watt Hour text input does exist.", $"Success, confirmed row '{rowNumber}' Non-Lithium-Ion Watt Hour text input does exist."))
-					{
-						Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).NonLithiumIonWattHourTextInputClick(), $"Failure, failed to click row '{rowNumber}' Non-Lithium-Ion Watt Hour text input.", $"Success, clicked row '{rowNumber}' Non-Lithium-Ion Watt Hour text input.");
-					}
-				}
+				return;
 			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).NonLithiumIonWattHourTextInputExists(), $"Failure, failed to confirm row '{rowNumber}' Non-Lithium-Ion Watt Hour text input does exist.", $"Success, confirmed row '{rowNumber}' Non-Lithium-Ion Watt Hour text input does exist."))
+			{
+				return;
+			}
+			Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).NonLithiumIonWattHourTextInputClick(), $"Failure, failed to click row '{rowNumber}' Non-Lithium-Ion Watt Hour text input.", $"Success, clicked row '{rowNumber}' Non-Lithium-Ion Watt Hour text input.");
 		}
 
 		[RegexStepDefinition(@"In the Battery Characteristics section Battery Characteristics table row number '(.*)', clear Non-Lithium-Ion Watt Hour text input")]
@@ -476,16 +540,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
-				{
-					if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).NonLithiumIonWattHourTextInputExists(), $"Failure, failed to confirm row '{rowNumber}' Non-Lithium-Ion Watt Hour text input does exist.", $"Success, confirmed row '{rowNumber}' Non-Lithium-Ion Watt Hour text input does exist."))
-					{
-						Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).NonLithiumIonWattHourTextInputClear(), $"Failure, failed to clear row '{rowNumber}' Non-Lithium-Ion Watt Hour text input.", $"Success, clear row '{rowNumber}' Non-Lithium-Ion Watt Hour text input.");
-					}
-				}
+				return;
 			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).NonLithiumIonWattHourTextInputExists(), $"Failure, failed to confirm row '{rowNumber}' Non-Lithium-Ion Watt Hour text input does exist.", $"Success, confirmed row '{rowNumber}' Non-Lithium-Ion Watt Hour text input does exist."))
+			{
+				return;
+			}
+			Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).NonLithiumIonWattHourTextInputClear(), $"Failure, failed to clear row '{rowNumber}' Non-Lithium-Ion Watt Hour text input.", $"Success, clear row '{rowNumber}' Non-Lithium-Ion Watt Hour text input.");
 		}
 
 		[RegexStepDefinition(@"In the Battery Characteristics section Battery Characteristics table row number '(.*)', enter into Non-Lithium-Ion Watt Hour text input: (.*)")]
@@ -493,16 +560,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
-				{
-					if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).NonLithiumIonWattHourTextInputExists(), $"Failure, failed to confirm row '{rowNumber}' Non-Lithium-Ion Watt Hour text input does exist.", $"Success, confirmed row '{rowNumber}' Non-Lithium-Ion Watt Hour text input does exist."))
-					{
-						Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).NonLithiumIonWattHourTextInputEnterText(textInput), $"Failure, failed to enter into row '{rowNumber}' Non-Lithium-Ion Watt Hour text input: '{textInput}'.", $"Success, entered into row '{rowNumber}' Non-Lithium-Ion Watt Hour text input: '{textInput}'.");
-					}
-				}
+				return;
 			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).NonLithiumIonWattHourTextInputExists(), $"Failure, failed to confirm row '{rowNumber}' Non-Lithium-Ion Watt Hour text input does exist.", $"Success, confirmed row '{rowNumber}' Non-Lithium-Ion Watt Hour text input does exist."))
+			{
+				return;
+			}
+			Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).NonLithiumIonWattHourTextInputEnterText(textInput), $"Failure, failed to enter into row '{rowNumber}' Non-Lithium-Ion Watt Hour text input: '{textInput}'.", $"Success, entered into row '{rowNumber}' Non-Lithium-Ion Watt Hour text input: '{textInput}'.");
 		}
 
 		[RegexStepDefinition(@"In the Battery Characteristics section Battery Characteristics table row number '(.*)', confirm Non-Lithium-Ion Watt Hour text input (does|does not) match: (.*)")]
@@ -511,17 +581,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			bool expected = does_doesnot == "does";
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
-				{
-					if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).NonLithiumIonWattHourTextInputExists(), $"Failure, failed to confirm row '{rowNumber}' Non-Lithium-Ion Watt Hour text input does exist.", $"Success, confirmed row '{rowNumber}' Non-Lithium-Ion Watt Hour text input does exist."))
-					{
-						string displayedText = batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).NonLithiumIonWattHourTextInputGetValue();
-						Report.IsTrue(expected == displayedText.Equals(expectedText), $"Failure, failed to confirm row '{rowNumber}' Non-Lithium-Ion Watt Hour displayed text: '{displayedText}' {does_doesnot} match expected text: '{expectedText}'.", $"Success, confirmed row '{rowNumber}' Non-Lithium-Ion Watt Hour displayed text: '{displayedText}' {does_doesnot} match expected text: '{expectedText}'.");
-					}
-				}
+				return;
 			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
+			{
+				return;
+			}
+			if (Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).NonLithiumIonWattHourTextInputExists(), $"Failure, failed to confirm row '{rowNumber}' Non-Lithium-Ion Watt Hour text input does exist.", $"Success, confirmed row '{rowNumber}' Non-Lithium-Ion Watt Hour text input does exist."))
+			{
+				return;
+			}
+			string displayedText = batteryCharacteristicsTable.RowByNumber(rowNumber).NonLithiumIonWattHourTextInputGetValue();
+			Report.IsTrue(expected == displayedText.Equals(expectedText), $"Failure, failed to confirm row '{rowNumber}' Non-Lithium-Ion Watt Hour displayed text: '{displayedText}' {does_doesnot} match expected text: '{expectedText}'.", $"Success, confirmed row '{rowNumber}' Non-Lithium-Ion Watt Hour displayed text: '{displayedText}' {does_doesnot} match expected text: '{expectedText}'.");
 		}
 		#endregion
 
@@ -532,13 +605,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			bool expected = does_doesnot == "does";
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
-				{
-					Report.IsTrue(expected == batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).UnitWeightTextInputExists(), $"Failure, failed to confirm row '{rowNumber}' Unit Weight text input {does_doesnot} exist.", $"Success, confirmed row '{rowNumber}' Unit Weight text input {does_doesnot} exist.");
-				}
+				return;
 			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
+			{
+				return;
+			}
+			Report.IsTrue(expected == batteryCharacteristicsTable.RowByNumber(rowNumber).UnitWeightTextInputExists(), $"Failure, failed to confirm row '{rowNumber}' Unit Weight text input {does_doesnot} exist.", $"Success, confirmed row '{rowNumber}' Unit Weight text input {does_doesnot} exist.");
 		}
 
 		[RegexStepDefinition(@"In the Battery Characteristics section Battery Characteristics table row number '(.*)', click Unit Weight text input")]
@@ -546,16 +621,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
-				{
-					if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).UnitWeightTextInputExists(), $"Failure, failed to confirm row '{rowNumber}' Unit Weight text input does exist.", $"Success, confirmed row '{rowNumber}' Unit Weight text input does exist."))
-					{
-						Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).UnitWeightTextInputClick(), $"Failure, failed to click row '{rowNumber}' Unit Weight text input.", $"Success, clicked row '{rowNumber}' Unit Weight text input.");
-					}
-				}
+				return;
 			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).UnitWeightTextInputExists(), $"Failure, failed to confirm row '{rowNumber}' Unit Weight text input does exist.", $"Success, confirmed row '{rowNumber}' Unit Weight text input does exist."))
+			{
+				return;
+			}
+			Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).UnitWeightTextInputClick(), $"Failure, failed to click row '{rowNumber}' Unit Weight text input.", $"Success, clicked row '{rowNumber}' Unit Weight text input.");
 		}
 
 		[RegexStepDefinition(@"In the Battery Characteristics section Battery Characteristics table row number '(.*)', clear Unit Weight text input")]
@@ -563,16 +641,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
-				{
-					if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).UnitWeightTextInputExists(), $"Failure, failed to confirm row '{rowNumber}' Unit Weight text input does exist.", $"Success, confirmed row '{rowNumber}' Unit Weight text input does exist."))
-					{
-						Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).UnitWeightTextInputClear(), $"Failure, failed to clear row '{rowNumber}' Unit Weight text input.", $"Success, clear row '{rowNumber}' Unit Weight text input.");
-					}
-				}
+				return;
 			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).UnitWeightTextInputExists(), $"Failure, failed to confirm row '{rowNumber}' Unit Weight text input does exist.", $"Success, confirmed row '{rowNumber}' Unit Weight text input does exist."))
+			{
+				return;
+			}
+			Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).UnitWeightTextInputClear(), $"Failure, failed to clear row '{rowNumber}' Unit Weight text input.", $"Success, clear row '{rowNumber}' Unit Weight text input.");
 		}
 
 		[RegexStepDefinition(@"In the Battery Characteristics section Battery Characteristics table row number '(.*)', enter into Unit Weight text input: (.*)")]
@@ -580,16 +661,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
-				{
-					if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).UnitWeightTextInputExists(), $"Failure, failed to confirm row '{rowNumber}' Unit Weight text input does exist.", $"Success, confirmed row '{rowNumber}' Unit Weight text input does exist."))
-					{
-						Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).UnitWeightTextInputEnterText(textInput), $"Failure, failed to enter into row '{rowNumber}' Unit Weight text input: '{textInput}'.", $"Success, entered into row '{rowNumber}' Unit Weight text input: '{textInput}'.");
-					}
-				}
+				return;
 			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).UnitWeightTextInputExists(), $"Failure, failed to confirm row '{rowNumber}' Unit Weight text input does exist.", $"Success, confirmed row '{rowNumber}' Unit Weight text input does exist."))
+			{
+				return;
+			}
+			Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).UnitWeightTextInputEnterText(textInput), $"Failure, failed to enter into row '{rowNumber}' Unit Weight text input: '{textInput}'.", $"Success, entered into row '{rowNumber}' Unit Weight text input: '{textInput}'.");
 		}
 
 		[RegexStepDefinition(@"In the Battery Characteristics section Battery Characteristics table row number '(.*)', confirm Unit Weight text input (does|does not) match: (.*)")]
@@ -598,17 +682,20 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			bool expected = does_doesnot == "does";
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
-				{
-					if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).UnitWeightTextInputExists(), $"Failure, failed to confirm row '{rowNumber}' Unit Weight text input does exist.", $"Success, confirmed row '{rowNumber}' Unit Weight text input does exist."))
-					{
-						string displayedText = batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).UnitWeightTextInputGetValue();
-						Report.IsTrue(expected == displayedText.Equals(expectedText), $"Failure, failed to confirm row '{rowNumber}' Unit Weight displayed text: '{displayedText}' {does_doesnot} match expected text: '{expectedText}'.", $"Success, confirmed row '{rowNumber}' Unit Weight displayed text: '{displayedText}' {does_doesnot} match expected text: '{expectedText}'.");
-					}
-				}
+				return;
 			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).UnitWeightTextInputExists(), $"Failure, failed to confirm row '{rowNumber}' Unit Weight text input does exist.", $"Success, confirmed row '{rowNumber}' Unit Weight text input does exist."))
+			{
+				return;
+			}
+			string displayedText = batteryCharacteristicsTable.RowByNumber(rowNumber).UnitWeightTextInputGetValue();
+			Report.IsTrue(expected == displayedText.Equals(expectedText), $"Failure, failed to confirm row '{rowNumber}' Unit Weight displayed text: '{displayedText}' {does_doesnot} match expected text: '{expectedText}'.", $"Success, confirmed row '{rowNumber}' Unit Weight displayed text: '{displayedText}' {does_doesnot} match expected text: '{expectedText}'.");
 		}
 		#endregion
 
@@ -619,13 +706,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			bool expected = does_doesnot == "does";
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
-				{
-					Report.IsTrue(expected == batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).RemoveButtonExists(), $"Failure, failed to confirm row '{rowNumber}' Remove button {does_doesnot} exist.", $"Success, confirmed row '{rowNumber}' Remove button {does_doesnot} exist.");
-				}
+				return;
 			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
+			{
+				return;
+			}
+			Report.IsTrue(expected == batteryCharacteristicsTable.RowByNumber(rowNumber).RemoveButtonExists(), $"Failure, failed to confirm row '{rowNumber}' Remove button {does_doesnot} exist.", $"Success, confirmed row '{rowNumber}' Remove button {does_doesnot} exist.");
 		}
 
 		[RegexStepDefinition(@"In the Battery Characteristics section Battery Characteristics table row number '(.*)', click Remove button")]
@@ -633,16 +722,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
-			if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowsListExists(), $"Failure, failed to confirm Battery Characteristics table rows list does exist.", $"Success, confirmed Battery Characteristics table rows list does exist."))
 			{
-				if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristcsTableRowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
-				{
-					if (Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).RemoveButtonExists(), $"Failure, failed to confirm row '{rowNumber}' Remove button does exist.", $"Success, confirmed row '{rowNumber}' Remove button does exist."))
-					{
-						Report.IsTrue(batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(rowNumber).RemoveButtonClick(), $"Failure, failed to click row '{rowNumber}' Remove button.", $"Success, clicked row '{rowNumber}' Remove button.");
-					}
-				}
+				return;
 			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumberExists(rowNumber), $"Failure, failed to confirm row '{rowNumber}' does exist.", $"Success, confirmed row '{rowNumber}' does exist."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).RemoveButtonExists(), $"Failure, failed to confirm row '{rowNumber}' Remove button does exist.", $"Success, confirmed row '{rowNumber}' Remove button does exist."))
+			{
+				return;
+			}
+			Report.IsTrue(batteryCharacteristicsTable.RowByNumber(rowNumber).RemoveButtonClick(), $"Failure, failed to click row '{rowNumber}' Remove button.", $"Success, clicked row '{rowNumber}' Remove button.");
 		}
 		#endregion
 
@@ -661,10 +753,11 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		public void BatteryCharacteristicsSectionClickAddAnotherBatteryButton()
 		{
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
-			if(Report.IsTrue(batteryCharacteristicsTable.AddAnotherBatteryButtonExists(), $"Failure, failed to confirm Add Another Battery button does exist.", $"Success, confirmed Add Another Battery button does exist."))
+			if(!Report.IsTrue(batteryCharacteristicsTable.AddAnotherBatteryButtonExists(), $"Failure, failed to confirm Add Another Battery button does exist.", $"Success, confirmed Add Another Battery button does exist."))
 			{
-				Report.IsTrue(batteryCharacteristicsTable.AddAnotherBatteryButtonClick(), $"Failure, failed to click Add Another Battery button.", $"Success, clicked Add Another Battery button.");
+				return;
 			}
+			Report.IsTrue(batteryCharacteristicsTable.AddAnotherBatteryButtonClick(), $"Failure, failed to click Add Another Battery button.", $"Success, clicked Add Another Battery button.");
 		}
 		#endregion
 
@@ -684,17 +777,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 					Report.Error($"Error: Input Table does not contain '{requiredColumn}'.");
 				}
 			});
-			if (batteryCharacteristicsTable.BatteryCharacteristicsTableRowByNumber(1).BatteryCommonNameComboboxGetValue().IsNullOrEmpty())
+
+			if (!batteryCharacteristicsTable.RowByNumber(1).BatteryCommonNameComboboxGetValue().IsNullOrEmpty())
 			{
 				Report.StartSubStep($"Then In the Battery Characteristics section, click Add Another Battery button");
 				this.BatteryCharacteristicsSectionClickAddAnotherBatteryButton();
 			}
-			int i = batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListCount();
+			int i = batteryCharacteristicsTable.RowsListCount();
 			foreach (TableRow inputRow in inputTable.Rows)
 			{
 				Report.StartSubStep($"In the Battery Characteristics section Battery Characteristics table row number '1', set Battery Common Name to: {inputRow["Battery Common Name"]}");
 				this.BatteryCharacteristicsSectionTableSetRowBatteryCommonName("1", inputRow["Battery Common Name"]);
-				if (inputTable.ContainsColumn("IEC/ANSI Name") && inputRow["IEC/ANSI Name"] != null)
+				if (inputTable.ContainsColumn("IEC/ANSI Name") && !inputRow["IEC/ANSI Name"].IsNullOrEmpty())
 				{
 					Report.StartSubStep($"In the Battery Characteristics section Battery Characteristics table row number '1', click IEC/ANSI Name select");
 					this.BatteryCharacteristicsSectionTableRowClickIECANSINameSelect("1");
@@ -705,7 +799,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 					Report.StartSubStep($"In the Battery Characteristics section Battery Characteristics table row number '1', confirm IEC/ANSI Name select does display value: {inputRow["IEC/ANSI Name"]}");
 					this.BatteryCharacteristicsSectionTableRowConfirmIECANSINameSelectDisplaysValue("1", "does", inputRow["IEC/ANSI Name"]);
 				}
-				if (inputTable.ContainsColumn("Standard Dimensions") && inputRow["Standard Dimensions"] != null)
+				if (inputTable.ContainsColumn("Standard Dimensions") && !inputRow["Standard Dimensions"].IsNullOrEmpty())
 				{
 					Report.StartSubStep($"In the Battery Characteristics section Battery Characteristics table row number '1', click Standard Dimensions select");
 					this.BatteryCharacteristicsSectionTableRowClickStandardDimensionsSelect("1");
@@ -717,14 +811,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 					this.BatteryCharacteristicsSectionTableRowConfirmStandardDimensionsSelectDisplaysValue("1", "does", inputRow["Standard Dimensions"]);
 				}
 
-				if (inputTable.ContainsColumn("Rechargeable Battery") && inputRow["Rechargeable Battery"] != null)
+				if (inputTable.ContainsColumn("Rechargeable Battery") && !inputRow["Rechargeable Battery"].IsNullOrEmpty())
 				{
 					bool expected = inputRow["Rechargeable Battery"].Equals("True", System.StringComparison.OrdinalIgnoreCase);
 					Report.StartSubStep($"In the Battery Characteristics section Battery Characteristics table row number '1', {(expected ? "check" : "uncheck")} Rechargable Battery checkbox");
 					this.BatteryCharacteristicsSectionTableRowCheckUncheckRechargableBatteryCheckbox("1", expected ? "check" : "uncheck");
 				}
 
-				if (inputTable.ContainsColumn("Non-Lithium-Ion Watt Hour") && inputRow["Non-Lithium-Ion Watt Hour"] != null)
+				if (inputTable.ContainsColumn("Non-Lithium-Ion Watt Hour") && !inputRow["Non-Lithium-Ion Watt Hour"].IsNullOrEmpty())
 				{
 					Report.StartSubStep($"In the Battery Characteristics section Battery Characteristics table row number '1', confirm Non-Lithium-Ion Watt Hour text input does exist");
 					this.BatteryCharacteristicsSectionTableRowConfirmNonLithiumIonWattHourTextInputExists("1", "does");
@@ -736,7 +830,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 					this.BatteryCharacteristicsSectionTableRowConfirmNonLithiumIonWattHourTextInputMatches("1", "does", inputRow["Non-Lithium-Ion Watt Hour"]);
 				}
 
-				if (inputTable.ContainsColumn("Unit Weight") && inputRow["Unit Weight"] != null)
+				if (inputTable.ContainsColumn("Unit Weight") && !inputRow["Unit Weight"].IsNullOrEmpty())
 				{
 					Report.StartSubStep($"In the Battery Characteristics section Battery Characteristics table row number '1', confirm Unit Weight text input does exist");
 					this.BatteryCharacteristicsSectionTableRowConfirmUnitWeightTextInputExists("1", "does");
@@ -767,7 +861,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			BatteryCharacteristicsTable batteryCharacteristicsTable = new BatteryCharacteristicsTable();
 			Ingredients_Steps ingredients_Steps = new Ingredients_Steps();
 			Report.IsTrue(int.TryParse(rowNumberString, out int rowNumber), $"Failure, '{rowNumberString}' is not a valid number.", $"Success, entered valid number '{rowNumber}'.");
-			int rowCount = batteryCharacteristicsTable.BatteryCharacteristicsTableRowsListCount();
+			int rowCount = batteryCharacteristicsTable.RowsListCount();
 			if (Report.IsTrue(rowNumber <= rowCount, $"Failure, row '{rowNumber}' does not exist in Battery Characteristics table (Max row:{rowCount}).", $"Success, row '{rowNumber}' does exist in Battery Characteristics table."))
 			{
 				Report.StartSubStep($"In the Battery Characteristics section Battery Characteristics table row number '{rowNumber}', confirm Remove button does exist");
