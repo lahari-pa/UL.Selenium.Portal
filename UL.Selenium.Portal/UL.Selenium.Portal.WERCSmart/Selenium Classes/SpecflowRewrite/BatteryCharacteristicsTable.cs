@@ -16,10 +16,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.SpecflowRewrite
 		public string Title => this.FindElement(By.XPath(".//div[@data-bind='text: description']"), 1)?.Text.Trim();
 		private List<IWebElement> ColumnLabelsList => [.. this.FindElements(By.XPath(".//th[text()]"), 1)];
 		private IWebElement ColumnLabel(string columnLabel) => this.ColumnLabelsList.FirstOrDefault(x => x.Text.Trim() == columnLabel);
-		private List<BatteryCharacteristicsTableRow> BatteryCharacteristicsTableRowsList => [.. this.ContainerElement.FindElements(By.XPath(".//tbody//tr"), 1).Select(x => new BatteryCharacteristicsTableRow(x))];
-		public BatteryCharacteristicsTableRow BatteryCharacteristicsTableRowByNumber(int rowNumber) => this.BatteryCharacteristicsTableRowsList.ElementAt(rowNumber - 1);
+		private List<BatteryCharacteristicsTableRow> RowsList => [.. this.ContainerElement.FindElements(By.XPath(".//tbody//tr"), 1).Select(x => new BatteryCharacteristicsTableRow(x))];
+		public BatteryCharacteristicsTableRow RowByNumber(int rowNumber) => this.RowsList.ElementAt(rowNumber - 1);
 		private List<IWebElement> ErrorAlertsList => [.. this.FindElements(By.XPath(".//div[@class = 'alert alert-danger']//span[@data-bind]"), 1)];
 		private List<IWebElement> WarningAlertsList => [.. this.FindElements(By.XPath(".//div[@class = 'alert alert-warning']//span[@data-bind]"), 1)];
+		private IWebElement AddAnotherBatteryButton => this.FindElement(By.XPath(".//button[normalize-space()='Add Another Battery']"), 1);
 		#endregion
 
 		#region Class Methods
@@ -44,16 +45,22 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.SpecflowRewrite
 		#endregion
 
 		#region Battery Characteristics Table Rows Methods
-		public bool BatteryCharacteristicsTableRowsListExists()
+		public bool RowsListExists()
 		{
 			Report.Info($"Attemptig to confirm battery characteristics table rows list exists.");
-			return !this.BatteryCharacteristicsTableRowsList.IsNullOrEmpty();
+			return !this.RowsList.IsNullOrEmpty();
 		}
 
-		public bool BatteryCharacteristcsTableRowByNumberExists(int rowNumber)
+		public int RowsListCount()
+		{
+			Report.Info($"Attempting to get battery characteristcs table rows list count.");
+			return this.RowsList.Count;
+		}
+
+		public bool RowByNumberExists(int rowNumber)
 		{
 			Report.Info($"Attempting to confirm battery characteristics table row with '{rowNumber}' row number exists.");
-			return rowNumber > 0 && rowNumber <= this.BatteryCharacteristicsTableRowsList.Count;
+			return rowNumber > 0 && rowNumber <= this.RowsList.Count;
 		}
 		#endregion
 
@@ -70,6 +77,20 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.SpecflowRewrite
 		{
 			Report.Info($"Attempting to confirm warning alerts list exists.");
 			return !this.WarningAlertsList.IsNullOrEmpty();
+		}
+		#endregion
+
+		#region Add Another Battery Button Methods
+		public bool AddAnotherBatteryButtonExists()
+		{
+			Report.Info($"Attempting to confirm Add Another Battery button exists.");
+			return this.AddAnotherBatteryButton != null;
+		}
+
+		public bool AddAnotherBatteryButtonClick()
+		{
+			Report.Info($"Attempting to click Add Another Battery button.");
+			return this.AddAnotherBatteryButton.TryClick();
 		}
 		#endregion
 		#endregion
@@ -89,7 +110,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.SpecflowRewrite
 		private IWebElement RechargebleBatteryCheckbox => this.ContainerElement.FindElement(By.XPath(".//td[@datacode='RECHARGE']//input[@type='checkbox']"), 1);
 		private IWebElement NonLithiumIonWattHourTextInput => this.ContainerElement.FindElement(By.XPath(".//td[@datacode='BATTWH']//input[@type='text']"), 1);
 		private IWebElement UnitWeightTextInput => this.ContainerElement.FindElement(By.XPath(".//td[@datacode='BATTWGHT']//input[@type='text']"), 1);
-		private IWebElement DeleteRowButton => this.ContainerElement.FindElement(By.XPath(".//a[@aria-label = 'Delete row']"), 1);
+		private IWebElement RemoveButton => this.ContainerElement.FindElement(By.XPath(".//a[@aria-label = 'Delete row']"), 1);
 		#endregion
 
 		#region Class Methods
@@ -279,17 +300,17 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.SpecflowRewrite
 		}
 		#endregion
 
-		#region Delete Row Button Methods
-		public bool DeleteRowButtonExists()
+		#region Remove Button Methods
+		public bool RemoveButtonExists()
 		{
 			Report.Info($"Attempting to confirm delete row button exists.");
-			return this.DeleteRowButton != null;
+			return this.RemoveButton != null;
 		}
 
-		public bool DeleteRowButtonClick()
+		public bool RemoveButtonClick()
 		{
 			Report.Info($"Attempting to click delete row button.");
-			return this.DeleteRowButton.TryClick();
+			return this.RemoveButton.TryClick();
 		}
 		#endregion
 		#endregion
