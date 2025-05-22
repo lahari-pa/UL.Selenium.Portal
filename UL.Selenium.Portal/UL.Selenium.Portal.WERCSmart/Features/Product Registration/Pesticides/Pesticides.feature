@@ -787,5 +787,5 @@ Scenario: [132756] Canadian Province Pesticide Options
 	Then In the Pesticide Details - Canada Section, set option for Province: 'Yukon Territory': to: None
 	Then in the Pesticide Details - Canada page I click Continue
 	Then I should see the Transportation Details 1 Page
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase132756

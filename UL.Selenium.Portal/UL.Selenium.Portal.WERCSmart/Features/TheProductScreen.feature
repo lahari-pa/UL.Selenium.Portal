@@ -40,10 +40,10 @@
 	Then I Confirm the Product name shows on 1 line only and shows (3-dots) ... at the end of the characters
 	Then I Confirm the Product Name is shown in full in the hover over pop up
 	Then I Confirm the WPS ID for the Product is shown at the end of the Product Name in brackets (parenthesis)
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then I search for the product saved as: TestCase83844
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase83844
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase83844
 	#Then I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Then I click the Add Product icon in the Navigation Pane
@@ -59,10 +59,10 @@
 	Then I Confirm the Product name shows on 1 line only and shows (3-dots) ... at the end of the characters
 	Then I Confirm the Product Name is shown in full in the hover over pop up
 	Then I Confirm the WPS ID for the Product is shown at the end of the Product Name in brackets (parenthesis)
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then I search for the product saved as: TestCase83844
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase83844
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase83844
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Then I click the Add Product icon in the Navigation Pane
@@ -82,5 +82,5 @@
 	Then I save the product information as: TestCase83844
 	Then I should see the Product Information Page
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase83844
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase83844

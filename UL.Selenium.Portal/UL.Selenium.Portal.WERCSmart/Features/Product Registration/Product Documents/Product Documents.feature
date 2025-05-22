@@ -151,7 +151,7 @@ Scenario: [59322] Upload document - VOC exemption letter & VOC product label
 	#And In the Purchase Summary page message is displayed with text: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 
 	#And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59322
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase59322
 
 	
@@ -261,7 +261,7 @@ Scenario: [59320] Upload Document - IFRA certificate
 	Then I should be on the Data Acceptance Page
 
 	#And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59320
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase59320
 
 @TestCase:59321
@@ -353,5 +353,5 @@ Scenario: [59321] Upload Document - GRAS certificate
 	#And In the Purchase Summary page message is displayed with text: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
 
 	#And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase59321
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase59321

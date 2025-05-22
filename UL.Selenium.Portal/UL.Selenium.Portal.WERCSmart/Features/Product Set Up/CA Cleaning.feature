@@ -96,7 +96,7 @@ Given in the Ingredients page, I click Continue
 And I should be on the Inventory Status, Prop 65 (US) Page
 
 #Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139531
-Then I navigate to the Home Page
+Then In the Side Menu, click Labeled Link with My Products title
 Then In the Product Grid, delete the product saved as: TestCase139531
 
 #@ignore
@@ -351,7 +351,7 @@ Then in the Ingredients page, I click Continue
 And I should see the Inventory Status, Prop 65 (US) Page
 
 #Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139388
-Then I navigate to the Home Page
+Then In the Side Menu, click Labeled Link with My Products title
 Then In the Product Grid, delete the product saved as: TestCase139388
 
 

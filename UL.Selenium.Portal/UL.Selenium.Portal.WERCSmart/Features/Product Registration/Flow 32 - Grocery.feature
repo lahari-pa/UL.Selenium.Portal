@@ -171,7 +171,7 @@ Scenario: [60774] Food Item Dispensed by Compressed Gas - Dairy Topping - RU0012
 	Given I should see the Data Acceptance Page
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60774
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase60774
 
 @TestCase:60775
@@ -317,5 +317,5 @@ Scenario: [60775] Cooking oil - Non-Aerosol - RU000942
 	Given I should see the Data Acceptance Page
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60775
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase60775

@@ -113,7 +113,7 @@ Scenario: [65523] BCP - Contains Lithium Primary packaged with the product - Lit
 	| None of the above/Not intended for shipment in Canada                                        |
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase65523
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase65523
 
 

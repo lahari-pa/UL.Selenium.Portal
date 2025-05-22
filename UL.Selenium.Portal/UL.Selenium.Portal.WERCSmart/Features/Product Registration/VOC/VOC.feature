@@ -139,7 +139,7 @@ Scenario: [74626] VOC - Show state collection when state table has a value
 		| Vermont              | State Allowable Limit | 0         | 45                  | Does not exceed the State Limits |
 		
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase74626
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase74626
 
 @TestCase:56475
@@ -251,7 +251,7 @@ Scenario: [56475] VOC checks for Fabric Softener - single Use dryer product (RU0
 
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Fabric Softener - Single Use Dryer Product Only
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56475
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase56475
 @TestCase:56477
 Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
@@ -505,7 +505,7 @@ Scenario: [56481] VOC checks for Oven Cleaner - pump sprays (RU000798) - CARB an
 	Then in the Optional Comments page I click Continue
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56481
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase56481
 
 @TestCase:56483
@@ -879,7 +879,7 @@ Scenario: [56476] VOC checks for Personal Fragrance product
 
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Personal Fragrance Product (more than 20% fragrance) - Liquid
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase56476
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase56476
 	
 
@@ -985,5 +985,5 @@ Scenario: [73503] VOC - ACP Plan = Yes and CARB Value Above Limit for RU - VOC R
 	And In the Volatile Organic Compound Summary Section, the statement 'Exceeds the limits specified in the California Consumer Products Regulation' is displayed
 
 	#And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase73503
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase73503
