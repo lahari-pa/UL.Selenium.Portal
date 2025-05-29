@@ -1283,12 +1283,9 @@ Scenario: [158853] Ingredient Identifier
 	Given I switch to the tab with Data Summary page
 	Given In the Summary Page, the 'Ingredient Reference Number (Optional)' section should be showing the following value: test 123 @#
 	Given I close the tab with Data Summary page
-	#Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given I should see the Data Acceptance Page
-	Then In the Data Acceptance Section, check 'Agreed' checkbox
-	Then In the Data Acceptance Section, click 'Accept' button
 	Then In the Side Menu, click Labeled Link with My Products title
-	Then the WERCSmart homepage should load
+	Then In the Product Grid, delete the product saved as: TestCase158853
 
 	
 
