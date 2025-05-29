@@ -820,6 +820,7 @@ Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulat
 	#Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 	#	| Water         | 50      | false               | false       |            |
+	Given I should see the Ingredients Page
 	Then In the Ingredients section, add component with component name: Water
 	Then In the Ingredients section, add component with component name: Shea Butter
 	Then In the Ingredients section, add component with component name: Hydrogenated Olive Oil
@@ -854,8 +855,9 @@ Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulat
 	Then In the Ingredients Section ingredients table, confirm row with component name: Hydrogenated Olive Oil is not displayed
 	Then In the Ingredients Section ingredients table, confirm row with component name: Stearic Acid is not displayed
 	Then In the Ingredients Section ingredients table, confirm row with component name: Coconut oil, methyl ester, glycerol-free is not displayed
-	And I navigate to the home page
-	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase84528
+
+	Then In the Side Menu, click Labeled Link with My Products title
+	Then In the Product Grid, delete the product saved as: TestCase84528
 
 @TestCase:80800
 Scenario: [80800] Ingredients - Transparency Ratio - Regular component
