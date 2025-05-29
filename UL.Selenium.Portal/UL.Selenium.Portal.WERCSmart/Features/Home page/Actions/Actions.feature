@@ -53,7 +53,7 @@ Scenario: [73424] View UPCs - Product with UPCs
 	Then the WERCSmart homepage should load
 	# search for product with name 'Product73424' in submitted status?
 	And I create a product and save as: TestCase73424 and name as: Product73424
-	Then I navigate to the home page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Given I search for the product saved as: TestCase73424
 	And I click Row Actions for the first product returned
 	And I click on the Row Action: View UPCs
@@ -85,7 +85,7 @@ Scenario: [63663] Obsoleting/Deleting a Product (not submitted status)
 	And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
 	And I set the Select the best Water Solubility description to be: Dispersible
 	And in the New Product page I click Continue
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase63663
 
 #actions/delete
@@ -206,7 +206,7 @@ Scenario: [56214] My Products grid Actions - Submit navigation
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
 	Then in the Optional Comments page I click Continue
 
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	And I filter the products by: Not Yet Submitted
 	And I search for the product saved as: TestCase56214
 	When I click Row Actions for the most recent product returned
@@ -238,7 +238,7 @@ Scenario: [56219] My Products grid Actions - Documents navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then the WERCSmart homepage should load
 	Then I create a product with sds upload and name as: product1 then take to data acceptance and save as: TC56219
-	Then I navigate to the home page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Given I search for the product saved as: TC56219
 	When I click Row Actions for the most recent product returned
 	Then I click on the Row Action: Documents
@@ -460,7 +460,7 @@ Scenario: [125144] Actions - 3rd Party Access Code Window
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
 	Then In the Data Acceptance Section, click 'Accept' button
 
-	Given I click the Home navigation icon
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I search for the product saved as: TestCase125144
 	When I click Row Actions for the most recent product returned
 	Then I click on the Row Action: Access Code

@@ -153,7 +153,7 @@ Scenario: [75410] Product from Completed status to Recertification
 	Then In the Data Acceptance page I select Agreed
 	And In the Data Acceptance page I click on the Accept button
 	Given If purchase details are showing click confirm order
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	And I search for the product saved as: TestCase75410
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase75410 and its status is: Assigned
@@ -253,6 +253,6 @@ Scenario: [84507] Recertification > Process recertification > Process multiple p
 	Then In the Data Acceptance Section, click 'Accept' button
 
 	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment.
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase100969)

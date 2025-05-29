@@ -164,7 +164,7 @@ Scenario: [84511] Electronic Product from Completed status to Recertification
 	And I click the page heading: Data Acceptance
 	And In the Data Acceptance page I click on the Accept button
 	Given If purchase details are showing click confirm order
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	And I search for the product saved as: TestCase84511
 	Given For product saved as: TestCase84511 the status is: Assessment in Progress
 	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto22 and Open SHA manager)

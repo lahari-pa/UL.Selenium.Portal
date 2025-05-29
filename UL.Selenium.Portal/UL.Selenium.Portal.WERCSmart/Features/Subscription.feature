@@ -951,7 +951,7 @@ Scenario: [63224] Upgrade subscription through data entry
 	Then In the Purchase Summary screen I click Confirm Order
 	Then In the Thank You screen I click Home
 	Given I create a product with RU - Chalk and take to submitted and save as: TestCase63224Product1
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'

@@ -374,7 +374,7 @@ Scenario: [56477] VOC checks for Charcoal lighter material (RU000743)
 	And in the New Product page I click Continue
 	# Data Acceptance Page and clean up
 	And I should see the Data Acceptance Page
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase56477
 
 @TestCase:56481
@@ -636,7 +636,7 @@ Scenario: [56483] VOC - Antiperspirant and Deodorant checks
 	And in the New Product page I click Continue
 	# Data Acceptance Page and clean up
 	And I should see the Data Acceptance Page
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase56483
 
 @TestCase:56484
@@ -762,7 +762,7 @@ Scenario: [56484] VOC - Aero checks
 	And in the New Product page I click Continue
 	# Data Acceptance Page and clean up
 	And I should see the Data Acceptance Page
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase56484
 
 @TestCase:56476

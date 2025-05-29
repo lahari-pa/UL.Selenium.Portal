@@ -333,5 +333,5 @@ Scenario: [73041] Cereals - RU001448 - Retailers associated Walgreens
 		| Retailer                   |	
 		| Walgreens                  |
 	Given I click Done in the Select Retailers popup
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase73041

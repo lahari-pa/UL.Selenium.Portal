@@ -179,7 +179,7 @@ And I should be on the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
 And I close the window that opened
-And I navigate to the home page
+And In the Side Menu, click Labeled Link with My Products title
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase74337
 
 # Assigned to Beverly Barrett
@@ -323,7 +323,7 @@ And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
 And I close the window that opened
-And I navigate to the home page
+And In the Side Menu, click Labeled Link with My Products title
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase74349
 
 
@@ -450,7 +450,7 @@ And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
 And I close the window that opened
-And I navigate to the home page
+And In the Side Menu, click Labeled Link with My Products title
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase74357
 
 # Assigned to Beverly Barrett
@@ -596,7 +596,7 @@ And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
 And I close the window that opened
-And I navigate to the home page
+And In the Side Menu, click Labeled Link with My Products title
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase74346
 
 # Assigned to Beverly Barrett
@@ -743,7 +743,7 @@ And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
 And I close the window that opened
-And I navigate to the home page
+And In the Side Menu, click Labeled Link with My Products title
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase74364
 
 # Assigned to Beverly Barrett
@@ -890,7 +890,7 @@ And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
 And I close the window that opened
-And I navigate to the home page
+And In the Side Menu, click Labeled Link with My Products title
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase74365
 
 # Assigned to Beverly Barrett
@@ -1016,7 +1016,7 @@ And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
 And I close the window that opened
-And I navigate to the home page
+And In the Side Menu, click Labeled Link with My Products title
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase74366
 
 # Assigned to Beverly Barrett
@@ -1159,7 +1159,7 @@ And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
 And I close the window that opened
-And I navigate to the home page
+And In the Side Menu, click Labeled Link with My Products title
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase74368
 
 # Assigned to Beverly Barrett
@@ -1297,7 +1297,7 @@ And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
 And I close the window that opened
-And I navigate to the home page
+And In the Side Menu, click Labeled Link with My Products title
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase74372
 
 # Assigned to Beverly Barrett
@@ -1433,7 +1433,7 @@ And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
 And I close the window that opened
-And I navigate to the home page
+And In the Side Menu, click Labeled Link with My Products title
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase74374
 
 # Assigned to Beverly Barrett
@@ -1572,7 +1572,7 @@ And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
 And I close the window that opened
-And I navigate to the home page
+And In the Side Menu, click Labeled Link with My Products title
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase74376
 
 # Assigned to Beverly Barrett
@@ -1711,7 +1711,7 @@ And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
 And I close the window that opened
-And I navigate to the home page
+And In the Side Menu, click Labeled Link with My Products title
 Given I search for the product saved as: TestCase74379
 When I click Row Actions for the most recent product returned
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase74379
@@ -1849,7 +1849,7 @@ And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
 And I close the window that opened
-And I navigate to the home page
+And In the Side Menu, click Labeled Link with My Products title
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase74380
 
 # Assigned to Beverly Barrett
@@ -1983,5 +1983,5 @@ And I should see the Data Acceptance Page
 Given I click the Summary button in the Data Acceptance window
 Then I switch to the Data Summary page
 And I close the window that opened
-And I navigate to the home page
+And In the Side Menu, click Labeled Link with My Products title
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase74382

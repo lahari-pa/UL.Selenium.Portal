@@ -624,7 +624,7 @@ Scenario: [74188] CVS Store Brand Associations and verification
 		| 2.1  | On    |
 		| 2.2  | On    |
 	Given if the save button is visible, I save changes and close the popup dialog
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I save the UPC number 050428290231 as: UPC74188
 	Given I delete all products with UPC Number: saved as UPC74188
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -732,7 +732,7 @@ Scenario: [74207] Product Development Manager (PDM) and verification
 		| 2.1  | On    |
 		| 2.2  | On    |
 	Given if the save button is visible, I save changes and close the popup dialog
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	#Given I save the UPC number 050428290231 as: UPC74207
 	#Given I delete all products with UPC Number: saved as UPC74207
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -799,7 +799,7 @@ Scenario: [74261] CVS Brand Registration section and validation
 		| 2.1  | On    |
 		| 2.2  | On    |
 	Given if the save button is visible, I save changes and close the popup dialog
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	#Given I save the UPC number 050428075661 as: UPC74261
 	#Given I delete all products with UPC Number: saved as UPC74261
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
@@ -909,7 +909,7 @@ Scenario: [74278] CVS Brand Registration section and Data Tier validation
 	# In the Shared step below enter a UPC which starts with the numbers 050428
 	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: CVS, container type: Plastic Container and size: 10
 	Then I save the product information as: TestCase74278
-	Then I navigate to the home page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then I search for the product: Lip Balm
 	Then I click Row Actions for the first product returned
 	Then I click on the Row Action: Edit
@@ -920,7 +920,7 @@ Scenario: [74278] CVS Brand Registration section and Data Tier validation
 		| 2.1  | On    |
 		| 2.2  | On    |
 	Given if the save button is visible, I save changes and close the popup dialog
-	Then I navigate to the home page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then I search for the product: Lip Balm
 	Then I click Row Actions for the first product returned
 	Then I click on the Row Action: Edit

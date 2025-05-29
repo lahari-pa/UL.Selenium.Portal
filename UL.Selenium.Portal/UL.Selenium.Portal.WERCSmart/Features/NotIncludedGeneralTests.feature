@@ -167,7 +167,7 @@ Scenario: [NOTINCLUDEDGENERALTEST] Forwarding - Edit existing Case UPC -ID searc
 	Given in the New Product page I click Continue
 	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
 	Then I save the product information as: TestCase87685
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Then I filter the products by: Accepted by Retailers
 	And I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
 	And I should see the subheading 3: Select Products & UPCs on the Forward Product Registration window
@@ -232,7 +232,7 @@ Scenario: [NOTINCLUDEDGENERALTEST] Dupe UPC tool, Creating product with one dupe
 	Given I click 'Select all' under Destination Retailers in the UPC page
 	Given I click continue
 	And I should see a list style form error with text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. UPCs:
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 
 
 
@@ -957,7 +957,7 @@ Given I click the Summary button in the Data Acceptance window
 Given I switch to the Data Summary page
 Then I confirm that the Prouct UPC Table shows in the UPC Number column the value of PART NUMBER for the UPC with Name: Chalk
 Given I close the Data Summary tab
-And I navigate to the home page
+And In the Side Menu, click Labeled Link with My Products title
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase105352
 
 
@@ -1203,7 +1203,7 @@ Scenario: [IngredientsTableCheck] Non Cleaning Product Ingredients Check
 	Given I click the Summary button in the Data Acceptance window
 	Then I switch to the Data Summary page
 	And I close the window that opened
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 
 
 
@@ -1330,7 +1330,7 @@ Scenario: [IngredientsTableCheck] Non Cleaning Ingredients Table navigate back
 		| Chlorine                | 100     | No                  | Yes           | Choose...              |
 		| Formaldehyde            | 100     | No                  | No            | Choose...              |
 		| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 
 @AssignedDebug
 Scenario: [AssignedToAcceptedTest] NotAcceptedDebugScenario
@@ -2149,7 +2149,7 @@ Given I log in with the account saved in TReVor as: ProductAccount
 	And I click the page heading: Data Acceptance
 	And In the Data Acceptance page I click on the Accept button
 	Given If purchase details are showing click confirm order
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	And I search for the product saved as: TestCase84511
 	Given For product saved as: TestCase84511 the status is: Assessment in Progress
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)

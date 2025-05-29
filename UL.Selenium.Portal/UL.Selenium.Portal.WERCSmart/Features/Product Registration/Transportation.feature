@@ -118,7 +118,7 @@ Scenario: [65702] Transportation - Confirm Copy information from my U.S. Departm
 	 #And I check the checkbox with description: Copy information from my U.S. Department of Transportation data
 	 And In the International Air Transport (IATA) Classification Section, I check checkbox 'Copy information from my U.S. Department of Transportation data'
 	 Then in the International Air Transport (IATA) Classification page, I click Continue
-	 And I navigate to the home page
+	 And In the Side Menu, click Labeled Link with My Products title
 	 #And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65702
 	 Then In the Product Grid, delete the product saved as: TestCase65702
 
@@ -205,7 +205,7 @@ Scenario: [65703] Transportation - Transportation - Confirm Copy information fro
 	#And Proper Shipping Name should be showing the error messages: This is a required field.
 	#And Hazard Class (select) should be showing the error messages: This is a required field.
 	#And Packing Group (select) should be showing the error messages: This is a required field.
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
    #And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65703
     Then In the Product Grid, delete the product saved as: TestCase65703
 
@@ -288,7 +288,7 @@ Scenario: [65706] Transportation - Confirm Copy information from my U.S. Departm
 	And In the Canada - Transportation of Dangerous Goods (TDG) Classification Section, I check checkbox 'Copy information from my U.S. Department of Transportation data'
 	#And I click continue
 	And in the Canada - Transportation of Dangerous Goods (TDG) Classification page, I click Continue
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	#And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65706
 	Then In the Product Grid, delete the product saved as: TestCase65706
 
@@ -411,7 +411,7 @@ Scenario: [65754] Transportation - Copy information from my U.S. Department of T
 	And In the International Air Transport (IATA) Classification Section, verify section: 'Hazard Class (select)' contains value: 2.1
 	#And Packing Group should be showing the value: None
 	And In the International Air Transport (IATA) Classification Section, verify section: 'Packing Group (select)' contains value: None
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	#And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65754
 	Then In the Product Grid, delete the product saved as: TestCase65754
 
@@ -534,7 +534,7 @@ Scenario: [65940] Transportation - Copy information from my U.S. Department of T
    And In the International Marine (IMDG) Classification Section, verify section: 'Hazard Class (select)' contains value: 2.1
    #And Packing Group should be showing the value: None
    And In the International Marine (IMDG) Classification Section, verify section: 'Packing Group (select)' contains value: None
-   And I navigate to the home page
+   And In the Side Menu, click Labeled Link with My Products title
    #And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65940
    Then In the Product Grid, delete the product saved as: TestCase65940
 	
@@ -683,7 +683,7 @@ Scenario: [65944] Transportation - Copy information from my U.S. Department of T
     And In the Canada - Transportation of Dangerous Goods (TDG) Classification Section, verify section: 'Hazard Class (select)' contains value: 2.1
     And In the Canada - Transportation of Dangerous Goods (TDG) Classification Section, verify section: 'Packing Group (select)' contains value: None
 
-    And I navigate to the home page
+    And In the Side Menu, click Labeled Link with My Products title
     #And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase65944
 	Then In the Product Grid, delete the product saved as: TestCase65944
 

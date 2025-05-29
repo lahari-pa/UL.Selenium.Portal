@@ -119,7 +119,7 @@ Scenario:[88826] Delete Products > Product Not yet submitted
 
 	Then in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I click Bulk Actions in the Products Grid
 	And I click Delete Products in the Bulk Actions window
 	And I should see the header: Delete Active Products on the Delete Active Product window
@@ -133,5 +133,5 @@ Scenario:[88826] Delete Products > Product Not yet submitted
 	Then In the Delete Active Products page I search for WPS ID saved as: TestCase88826
 	Then In the Delete Active Products page I click the Filter button
 	Then I make sure product saved as: TestCase88826 should missing from the product list
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Then I confirm the follow product doesn't exist in the product grid: TestCase88826
