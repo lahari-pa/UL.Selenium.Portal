@@ -3,6 +3,7 @@ using System;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.SpecflowRewrite;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_Characteristics
 {
@@ -160,5 +161,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			new Steps_Prototype().ConfirmTextIsIsNotDisplayed(text, is_isnot);
 		}
 
+		#region Display Table Steps
+		[RegexStepDefinition(@"In the Volatile Organic Compound Summary Section, confirm '(.*)' display table (does|does not) exist")]
+		public void VolatileOrganicCompoundSummarySectionConfirmDisplayTableExists(string tableLabel, string does_doesnot)
+		{
+			bool expected = does_doesnot == "does";
+			DisplayTable displayTable = new DisplayTable();
+			//Report.IsTrue();
+		}
+		#endregion
 	}
 }
