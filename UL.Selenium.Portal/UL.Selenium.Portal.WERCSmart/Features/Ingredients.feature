@@ -1184,7 +1184,6 @@ Scenario: [133335] Formulation Screen FIFRA and LOLI Validation Message
 	And I click continue
 	Then I confirm there is a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
 	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
-	Given I click the Home navigation icon
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase133335
 	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase133335

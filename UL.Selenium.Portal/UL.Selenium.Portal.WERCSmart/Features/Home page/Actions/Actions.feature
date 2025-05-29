@@ -460,7 +460,7 @@ Scenario: [125144] Actions - 3rd Party Access Code Window
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
 	Then In the Data Acceptance Section, click 'Accept' button
 
-	Given I click the Home navigation icon
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I search for the product saved as: TestCase125144
 	When I click Row Actions for the most recent product returned
 	Then I click on the Row Action: Access Code
