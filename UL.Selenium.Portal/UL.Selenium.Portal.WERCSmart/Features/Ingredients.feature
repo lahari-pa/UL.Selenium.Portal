@@ -674,10 +674,10 @@ Scenario: [80728] Ingredients - Transparency Ratio - FRAGRANCE component - inclu
 	And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger
 	Then I click the Publicly Disclosed checkbox for ingredient saved as: shared79436
 	And I verify the Transparency Score displays 0%
-	Given I navigate to the home page
 	#And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase80728
 	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase80728
+
 @TestCase:80720
 Scenario: [80720] Ingredients - Transparency Ratio - FLAVOR component - included in Denominator, not included in Numerator
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
