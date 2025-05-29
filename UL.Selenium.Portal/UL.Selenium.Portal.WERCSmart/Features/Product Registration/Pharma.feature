@@ -86,7 +86,7 @@ Scenario: [128085] Pharma - Prescription Pharmaceutical - Aerosol Product
 
 	And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 	Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 
 
 @TestCase:127870
@@ -219,7 +219,7 @@ Scenario: [127970] Pharma - Regulatory Documents to Provide and Additional Docum
 	Then In the Data Acceptance Section, click 'Accept' button
 	Then The Purchase Summary Page is displayed
 	Then In the Purchase Summary page message is displayed with text: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 
 @TestCase:128018
 Scenario: [128018] Pharma - Forwarding Not Allowed
@@ -292,11 +292,11 @@ Scenario: [128018] Pharma - Forwarding Not Allowed
 	Then In the Data Acceptance Section, click 'Accept' button
 	Then The Purchase Summary Page is displayed
 	Then In the Purchase Summary page message is displayed with text: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	Given I call Shared Step 75130 - Bulk Actions - Select Forward Product Registration
 	And I enter the text: saved as TestCase128018 in the 'Search by WPS ID or Product Name' field
 	And In the Foward Product Registration Screen I should not see product: saved as TestCase128018
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 
 
 
@@ -817,6 +817,6 @@ Then In the Data Acceptance Section, check 'Agreed' checkbox
 Then In the Data Acceptance Section, click 'Accept' button
 And In the Purchase Summary screen I confirm the Purchase Summary header is displayed
 Then In the Thank You screen I confirm the following statement is shown: Thank you for registering your product on WERCSmart for assessment. The retailers may receive your assessment in approximately two (2) business days, if no delays in processing the assessment, and should no data issues arise.
-And I navigate to the home page
+And In the Side Menu, click Labeled Link with My Products title
 And I filter for the product saved as: TestCase128134
 Given I Confirm the product retailers appear in orange - Assessment in Progress status

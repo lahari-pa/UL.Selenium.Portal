@@ -85,7 +85,7 @@ Scenario: [122305] UPC Transportation options are present if product-level optio
 	Given I ensure that I cannot select IATA at Shipping with consumer commodity
 	Given I ensure that the IMDG checkbox is not present in the UPC Transportation column
 	Given I ensure that the TDG checkbox is not present in the UPC Transportation column
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase122305
 
 @ignore
@@ -163,7 +163,7 @@ Scenario: [122382] UPC Transportation - UPC Reset Popup
 
 	Given I ensure that IMDG is listed as Shipping with limited quantity
 	Given I ensure that TDG is listed as Shipping with limited quantity
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase122382
 
 
@@ -240,7 +240,7 @@ Scenario: [122428] UPC Transportation - Forwarding
 
 	Given If purchase details are showing click confirm order
 	Given I wait for 5 seconds
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase122428)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase122428 and its status is: Submitted
@@ -325,7 +325,7 @@ Scenario: [122940] UPC Transporation - Data Entry - Exceptions
 	Given I click continue
 	Given I call Shared Step 87647 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC122940, container type: Plastic Container and size: 2 do not click continue
 	Given I ensure that I can only select one exception in the UPC Transportation column
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase122940
 
 @ignore
@@ -393,7 +393,7 @@ Scenario: [122971] UPC Transportation - Data Entry - Upgrading to Fully Regulate
 	Given In the Summary screen UPC table, I ensure that DOT is listed as Shipping fully regulated
 	Given In the Summary screen UPC table, I ensure that IATA is listed as Shipping fully regulated
 	Given I close the window that opened
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase122971
 
 @ignore
@@ -453,7 +453,7 @@ Scenario: [122984] UPC Transportation - Forwarding - iRules - Edit UPC
 	Then In the Data Acceptance Section, click 'Accept' button
 
 	Given If purchase details are showing click confirm order
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase122984)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase122984 and its status is: Submitted
@@ -535,7 +535,7 @@ Scenario: [123125] UPC Transportation - Forwarding - iRules - Add UPC
 	Then In the Data Acceptance Section, click 'Accept' button
 
 	Given If purchase details are showing click confirm order
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase123125)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase123125 and its status is: Submitted

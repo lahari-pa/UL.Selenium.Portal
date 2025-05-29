@@ -885,7 +885,7 @@ Scenario: [80800] Ingredients - Transparency Ratio - Regular component
 	And I edit the first component to show No for Publicly disclosed
 	And I verify the Transparency Score displays 0%
 	And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase80800
 
 @TestCase:109230
@@ -1028,7 +1028,7 @@ Scenario: [109230] Ingredients - Verify that the Added CAS / Component(s) and Se
 	#	| Chlorine                | 100     | No                  | Yes           | Choose...              |
 	#	| Formaldehyde            | 100     | No                  | No            | Choose...              |
 	#	| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
-	#And I navigate to the home page
+	#And In the Side Menu, click Labeled Link with My Products title
 
 @TestCase:110368
 Scenario: [110368] Ingredients- Filtered Ingredient Appears on Top of Filter Option
@@ -1288,7 +1288,7 @@ Scenario: [158853] Ingredient Identifier
 	Given I should see the Data Acceptance Page
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
 	Then In the Data Acceptance Section, click 'Accept' button
-	Then I navigate to the home page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then the WERCSmart homepage should load
 
 	
@@ -1395,7 +1395,7 @@ Scenario: [209549] Ingredient Table - Sum of Ingredients: Decimal Place Maximum 
 	Then In the Data Acceptance Section, click 'Accept' button
 	Given The Purchase Summary Page is displayed
 	Then In the Purchase Summary Page, click the 'Home' button
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase209549)
 	Given I call Shared Step (SHA > Select Product > Review) for product saved as: TestCase209549

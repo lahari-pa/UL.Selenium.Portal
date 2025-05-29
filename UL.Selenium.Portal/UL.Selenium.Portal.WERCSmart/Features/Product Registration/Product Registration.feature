@@ -131,7 +131,7 @@ Scenario: [63705] New Product - BCP
 		| Lithium Ion | saved as     | 4                | 4             | battery1 |
 		| Alkaline    | saved as     | 6                | 6             | battery2 |
 	Then I close the Data Summary tab
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase63705
 
 @ignore
@@ -274,7 +274,7 @@ Scenario: [65441] Delete a UPC from the UPC Grid
 	And I delete UPC: saved as UPC65441
 	Then In the list of UPCs I should not see UPC: saved as UPC65441
 	#delete product
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase65441
 
 @ignore
@@ -335,7 +335,7 @@ Scenario: [65392] Ecologo Readiness - Question wording and validation of respons
 	Given I set ECOLOGO Readiness Assessment to: Not at this time
 	Then I click continue
 	Given I call Shared Step 29206 (Retailer - Select No Retailer - Click Done - Click Continue - Happy Path)
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase65392
 
 
@@ -473,7 +473,7 @@ Scenario: [67661] Verify Canada SDS on the Optional Reports and Documents Availa
 		| Document Name  | Language      |
 		| Canada GHS SDS | English (U.S) |
 	# Delete the prodiuct created to cleanup
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase67661
 
 @jacob
@@ -551,7 +551,7 @@ Scenario: [105352] Product Comments screen Max input length
 		| Lithium Ion | saved as     | 4                | 4             | battery1 |
 		| Alkaline    | saved as     | 6                | 6             | battery2 |
 	Then I close the Data Summary Tab
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase105352
 
 @ignore
@@ -895,7 +895,7 @@ Scenario: [128144] Login Behavior for Products NOT in Scope for Bed Bath and Bey
 	Then I confirm the excel file saved as: PRODUCTS NOT IN SCOPE REPORT FOR BBB does not contain the following data: Product NOT in Scope for BBB
 	Given I delete the excel file saved as PRODUCTS NOT IN SCOPE REPORT FOR BBB
 	Given I click on close in the Report Download dialog
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 
 @ignore
 @TestCase:128140

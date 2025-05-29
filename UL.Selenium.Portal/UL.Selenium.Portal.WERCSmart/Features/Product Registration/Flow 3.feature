@@ -123,7 +123,7 @@ Scenario: [74992] RU Baby/Infant/Adult Care/Cleansing Wipes
 	Then I switch to the Data Summary page
 	And Type of Product should be showing the following option: Baby/infant/Adult Care/Cleansing Wipes
 	Then I switch to Data Acceptance page
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase74992
 
 @ignore
@@ -223,5 +223,5 @@ Scenario: [75081] RU Wipes, Cleaning (With Chemical) RU000725 - Flow 3-VOCOTC
 	Then I switch to the Data Summary page
 	And Type of Product should be showing the following option: Wipes, Cleaning (with Chemical)
 	Then I switch to Data Acceptance page
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase75081

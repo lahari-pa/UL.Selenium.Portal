@@ -731,7 +731,7 @@ Scenario: [87835] View UPCs shows Case UPC Data
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
 	Then in the Optional Comments page I click Continue
 
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	Then I filter for the product saved as: TestCase87835
 	And I click Row Actions for the first product returned
 	Then I click on the Row Action: View UPCs
@@ -1142,7 +1142,7 @@ Scenario: [163564] SHA Automation - Create a Chalk Product and Submit thru Compl
 	Then In the Data Acceptance Section, click 'Accept' button
 
 	And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase163564)
 	Given I call Shared Step 55662 (WPS Studio - Job Queue - wait for ImportProcessRules job to complete for product saved as: TestCase163564)
@@ -1247,7 +1247,7 @@ Scenario: [209159] UPC Assessment Details - Edit UPC updates - the Added column 
 	Then In the Data Acceptance Section, click 'Accept' button
 
 	Given If purchase details are showing click confirm order
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase209159)
@@ -1337,7 +1337,7 @@ Scenario: [119633] Case Pack UPC: UPC Becomes Archived, Case UPC Becomes Archive
 	Then In the Data Acceptance Section, click 'Accept' button
 
 	And In the Purchase Summary screen if Product Billing is displayed I click Confirm Order
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase119633)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Assigned Status for saved as: TestCase119633)
@@ -1362,7 +1362,7 @@ Scenario: [119633] Case Pack UPC: UPC Becomes Archived, Case UPC Becomes Archive
 	Then In the Data Acceptance Section, click 'Accept' button
 
 	Given If purchase details are showing click confirm order
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase119633 and its status is: Accepted
 	Then I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: TestCase119633
@@ -1471,7 +1471,7 @@ Scenario: [217540]	Registration: Canada only/Canada and US/US only: UPC Level Da
 	Then In the Data Acceptance Section, click 'Accept' button
 
 	And If purchase details are showing click confirm order
-	And I navigate to the home page	
+	And In the Side Menu, click Labeled Link with My Products title	
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given In the Side Menu, click Labeled Link with Add Product title
@@ -1548,7 +1548,7 @@ Scenario: [217540]	Registration: Canada only/Canada and US/US only: UPC Level Da
 	Then In the Data Acceptance Section, click 'Accept' button
 
 	Given If purchase details are showing click confirm order
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 
 	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given In the Side Menu, click Labeled Link with Add Product title
@@ -1628,5 +1628,5 @@ Scenario: [217540]	Registration: Canada only/Canada and US/US only: UPC Level Da
 	Then In the Data Acceptance Section, click 'Accept' button
 
 	And If purchase details are showing click confirm order
-	And I navigate to the home page	
+	And In the Side Menu, click Labeled Link with My Products title	
 

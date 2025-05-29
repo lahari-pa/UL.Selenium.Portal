@@ -720,7 +720,7 @@ Given I call Shared Step 75146 (Retailer - Select one or more retailers that do 
 Given I call Shared Step 57960a (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only - Do Not Click Continue) for UPC: saved as UPC183582, container type: Plastic Container and size: 12
 Then in the Universal Product Code (UPC) page I click Continue
 And I should see a list style form error with text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. UPCs:
-And I navigate to the home page
+And In the Side Menu, click Labeled Link with My Products title
 And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase183582
 
 # Created by Saikiran Chittampally
@@ -801,7 +801,7 @@ And I click the Retail Partners icon in the Navigation Pane
 Then I should see the following heading Retail Partners
 Then I select the retailer: Rite Aid
 And I confirm that: Rite Aid requests suppliers of Cleaning, Health & Beauty, OTC (Over-the-Counter), Nutritional Supplements, Artists Supplies, Stationery, Toys and Miscellaneous products to grant Tier 2.1, 2.2, 3 and 4.1 consent. is showing under the Data Consent Tiers heading
-And I navigate to the home page
+And In the Side Menu, click Labeled Link with My Products title
 Then The home screen should load
 
 

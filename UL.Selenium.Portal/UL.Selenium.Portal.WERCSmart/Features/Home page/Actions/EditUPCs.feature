@@ -59,7 +59,7 @@ Scenario: [64530] Process UPC Update
 	Then I click on the Row Action: Edit UPCs
 	And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	And I confirm that retailer "CV" is present under the 'Destination Retailers' column in the UPC table
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	And I search for the product saved as: ProductSetup64530
 	And I click Row Actions for the first product returned
 	Then I click on the Row Action: Process UPC Update
@@ -69,7 +69,7 @@ Scenario: [64530] Process UPC Update
 	Then In the Data Acceptance page I select Agreed
 	And In the Data Acceptance page I click on the Accept button
 	And the Purchase Summary should load
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto1 and Open SHA manager)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: ProductSetup64530 and its status is: Recertification
 	And I call Shared Step 75309 (SHA > Select Product > UPC Retailer and Feed) for product saved as: ProductSetup64530
@@ -87,7 +87,7 @@ Scenario: [64531] Remove UPC Update - Cancel
 	Then I click on the Row Action: Edit UPCs
 	And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	And I confirm that retailer "CV" is present under the 'Destination Retailers' column in the UPC table
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto1 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: ProductSetup64531)
 	And In the SHA manager grid I see the WPS ID I have saved as product: ProductSetup64531 and its font is red indicating a recertification
@@ -127,7 +127,7 @@ Scenario: [64532] Remove UPC Update - Remove
 	Then I click on the Row Action: Edit UPCs
 	And I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
 	And I confirm that retailer "CV" is present under the 'Destination Retailers' column in the UPC table
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto1 and Open SHA manager)
 	And I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: ProductSetup64532)
 	And In the SHA manager grid I see the WPS ID I have saved as product: ProductSetup64532 and its font is red indicating a recertification
