@@ -37,6 +37,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
 @SideMenu
+@SafetyDataSheetAuthoring
 
 Feature: Actions
 
