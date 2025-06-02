@@ -134,7 +134,7 @@ Given I call Shared Step 73956 (Go to Summary and verify data) with product type
 
 #Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78731
 
-Then I navigate to the Home Page
+Then In the Side Menu, click Labeled Link with My Products title
 Then In the Product Grid, delete the product saved as: TestCase78731
 @ignore
 @TestCase:57711
@@ -358,7 +358,7 @@ Scenario: [57647] Insecticide-Flying Bug-Moth Proofing Product containing <98% P
 
 	And I call Shared Step 73956 (Go to Summary and verify data) with product type: Insecticide-Flying Bug-Moth Proofing Product containing >98% Para-Dichlorobenzene
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87914
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase87914
 
 # Created by Saikiran Chittampally
@@ -482,5 +482,5 @@ Scenario: [57986] Footwear or Leather Care Product - All other forms - (RU000746
 	Given I close the tab with Data Summary page
     Given I should see the Data Acceptance Page
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase57986
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase57986

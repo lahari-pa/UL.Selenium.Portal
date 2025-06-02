@@ -143,7 +143,7 @@ Scenario: [58072] Baby/Infant/Adult Care/Cleansing Wipes - RU000248
 
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Baby/infant/Adult Care/Cleansing Wipes
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58072
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase58072
 @newproductstepstest
 @TestCase:58098
@@ -192,7 +192,7 @@ Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 	Then In the Ingredients section, verify Transparency displays value: 33.33%
 	Then In the Ingredients section, verify Total Percent displays value: 300
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58098
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase58098
 	
 	@TestCase:58078
@@ -296,7 +296,7 @@ Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 	Given In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Energy or Nutritional Bars
 	Given I close the tab with Data Summary page
     Given I should see the Data Acceptance Page
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase58078
 
 @TestCase:58079
@@ -391,7 +391,7 @@ Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
 	Given In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Energy or Nutritional Powder/Mix
 	Given I close the tab with Data Summary page
     Given I should see the Data Acceptance Page
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase58079
 
 @TestCase:58073
@@ -476,7 +476,7 @@ Scenario: [58073] Footwear - Gel Insert - RU000854
 
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Footwear - Gel Insert
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58073
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase58073
 
 @TestCase:63325
@@ -556,7 +556,7 @@ Scenario: [63325] Herbal or Dietary Supplements - RU000712 Flow 9-LS (checking S
 	Then in the Additional Documents to Provide  page I click Continue
 	Then I should see the Optional Reports and Documents Available for Purchase Page
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63325
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase63325
 
 @TestCase:58091
@@ -670,7 +670,7 @@ Scenario: [58091] Latex Gloves - RU000151
     Given I should see the Data Acceptance Page
 
 	#Replace shared 42214
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase58091
 
 @TestCase:58075
@@ -755,7 +755,7 @@ Scenario: [58075] Nutritional Supplement for Infants - Liquid - RU001365
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
 	Then in the Optional Comments page I click Continue
 
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase58075
 
 @TestCase:58089
@@ -831,7 +831,7 @@ Scenario: [58089] Nutritional Supplements for Domesticated Animals - RU001239
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
 	Then in the Optional Comments page I click Continue
 
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase58089
 
 @TestCase:58097
@@ -872,7 +872,7 @@ Scenario: [58097] Ingredient Search in Registration
 	Then In the component search box, enter text: 7732-18-5
 	Then In the component search box, confirm search results list is displayed
 	Then In the component search box, click result where CAS number contains: 7732-18-5
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase58097
 
 @tfs_design
@@ -1121,7 +1121,7 @@ Scenario: [58604] Condom - RU000937
 
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Condom with or without Spermicide
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58604
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase58604	
 
 # Created by Saikiran Chittampally

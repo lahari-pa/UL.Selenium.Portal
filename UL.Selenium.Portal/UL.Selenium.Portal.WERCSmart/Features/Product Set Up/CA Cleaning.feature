@@ -96,7 +96,7 @@ Given in the Ingredients page, I click Continue
 And I should be on the Inventory Status, Prop 65 (US) Page
 
 #Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139531
-Then I navigate to the Home Page
+Then In the Side Menu, click Labeled Link with My Products title
 Then In the Product Grid, delete the product saved as: TestCase139531
 
 #@ignore
@@ -351,7 +351,7 @@ Then in the Ingredients page, I click Continue
 And I should see the Inventory Status, Prop 65 (US) Page
 
 #Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase139388
-Then I navigate to the Home Page
+Then In the Side Menu, click Labeled Link with My Products title
 Then In the Product Grid, delete the product saved as: TestCase139388
 
 
@@ -433,7 +433,7 @@ Then I should see an error message: Ingredients require Functional Purpose or In
 	#Then I confirm that the number of errors found in the Ingredients Popup matches the expectation of: 4
 	#Then I click the close button for the CA Cleaning Ingredients Popup
 	#And The ingredients error message should be showing: Please fix all errors related to California Cleaning Right to Know before proceeding.
-	Given I click the Home navigation icon
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase139205
 
 
@@ -590,5 +590,5 @@ Given for ingredient: D-Glucopyranose, oligomeric, decyl octyl glycosides the In
 Then I confirm the following Functional Purpose is displayed: Non-Functional Ingredient
 Given I click continue
 Given I should see the Waste Classification Data Page
-Given I click the Home navigation icon
+Given In the Side Menu, click Labeled Link with My Products title
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase158172

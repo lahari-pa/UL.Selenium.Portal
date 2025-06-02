@@ -110,7 +110,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
     Then in page Pesticide Details - State Registration page I should see error: State MA: Valid date is June 30 no more than one calendar year out at any given time.
 	And I call Shared Step 55845 (EPA expiration date - enter current year - June 30th) for state: MA
 	Then in page Pesticide Details - State Registration Details I should see no errors
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62778
 
 @TestCase:26827
@@ -210,7 +210,7 @@ Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role
 	Given I should see the Data Acceptance Page
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
 	Then In the Data Acceptance Section, click 'Accept' button
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase26827)
 	Then I call Shared Step 134404 (SHA > Select Product > UPC Assessment Details) for product saved as: TestCase26827

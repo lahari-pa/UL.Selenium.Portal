@@ -112,7 +112,7 @@ Scenario: [73920] Walmart Affiliates when Viewing My Retail Partners
 		| Moosejaw    | WM-MJ |
 		| Shoes.com   | WM-SC |
 	Given I click each Wal-mart affiliate retailer and should be taken to the Wal-mart/SAM'S CLUB view
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 
 @TestCase:74133
 Scenario: [74133] Walmart Product Type Electronics
@@ -359,7 +359,7 @@ Scenario: [63684] Walmart Private label product
 	Then in the Optional Comments page I click Continue
 
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Pet shampoo
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I search for the product saved as: TestCase63684
 	Then I confirm that the label: 'PL' is displayed next to the Product Name for the top result in the grid
 	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63684

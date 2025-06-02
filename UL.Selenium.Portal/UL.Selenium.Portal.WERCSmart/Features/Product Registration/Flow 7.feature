@@ -113,7 +113,7 @@ Scenario: [57863] Flow 7 - ABS Welding (RU000868)
 	Then in the Optional Comments page I click Continue
 
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: ABS Welding
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57863
 
 @TestCase:57905
@@ -210,7 +210,7 @@ Scenario: [57905] Flow 7 - Automotive Coating - SCAQMD Any other coating type (R
 	Then in the Optional Comments page I click Continue
 
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Automotive Coating - SCAQMD Any Other Coating Type
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase57905
 
 @TestCase:63623
@@ -287,5 +287,5 @@ Scenario: [63623] Flow 7 - Grout (RU001548) - has its own SCAQMD limit
 	Given I should see the Volatile Organic Compound Summary Page
 	Then in the VOC Limits table, the VOC Compliance Limit column should contain the value: 65
 
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase63623

@@ -93,7 +93,7 @@ Scenario: [60018] Lithium Ion Battery - RU000345
 
 	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lithium Ion Battery
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60018
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase60018
 @TestCase:104222
 Scenario: [104222] Lithium Battery UN38.3 Regulatory Documents to Provide
@@ -154,7 +154,7 @@ Scenario: [104222] Lithium Battery UN38.3 Regulatory Documents to Provide
 	Given I click continue
 	Given I should see the Additional Documents to Provide Page
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase104222
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase104222
 
 @TestCase:104227
@@ -222,5 +222,5 @@ Scenario: [104227] Lithium Battery UN38.3 Summary Page
 	#Given I close the window that opened
 	And I switch to Data Acceptance page
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase104227
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase104227

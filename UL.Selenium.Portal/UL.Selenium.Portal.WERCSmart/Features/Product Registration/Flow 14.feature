@@ -166,7 +166,7 @@ Scenario: [58736] Sanitizer Wipes for Use on Domesticated Animals (Solid)- RU001
 	Then in the Optional Comments page I click Continue
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58736
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase58736
 
 @TestCase:58738
@@ -329,5 +329,5 @@ Scenario: [58738] Sanitizer Wipes for Use on Domesticated Animals (Liquid)- RU00
 	Then in the Optional Comments page I click Continue
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58738
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase58738

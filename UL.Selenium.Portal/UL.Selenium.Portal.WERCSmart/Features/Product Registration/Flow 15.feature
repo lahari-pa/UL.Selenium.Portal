@@ -106,7 +106,7 @@ Scenario: [58760] Light Bulbs - Light Emitting Diodes (LED) - RU000948
 	Given In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Light Bulbs - Light Emitting Diodes (LED)
 	Given I close the tab with Data Summary page
 
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase58760
 
 @TestCase:58759
@@ -198,7 +198,7 @@ Scenario: [58759] Servers, Small-Scale - RU001183
 	Given I close the tab with Data Summary page
 	Given I should see the Data Acceptance Page
 
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58759
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase58759

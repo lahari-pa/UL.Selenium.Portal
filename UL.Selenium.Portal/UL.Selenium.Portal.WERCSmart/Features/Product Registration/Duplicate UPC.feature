@@ -121,7 +121,7 @@ Scenario: [91076] Duplicate UPC is not permitted within account - New Product re
 	Given In the Select Retailers window, click 'Done' button
 	Given in the Retailer page I click Continue
 
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91076
 
 @singlerun
@@ -376,7 +376,7 @@ Scenario: [88879] WERCSmart Portal - UPC - Verify the OMSID Field is NO Longer R
 	Given I should see the Regulatory Documents to Provide Page
 
 	#Then I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase88879
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase88879
 
 #Removed from regression 2024/06
@@ -502,7 +502,7 @@ Scenario: [91798] Duplicate UPC is not permitted within WERCSmart system - New P
 	Given I click continue
 	Then I should see the following error text displayed in the UPC screen: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review.
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase91798
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase91798
 
 #Removed from regression 2024/06
@@ -601,7 +601,7 @@ Scenario: [91741] Duplicate UPC is not permitted within account - New Product re
 	Given I click 'Select all' under Destination Retailers in the UPC page
 	Given I click continue
 	And I should see a list style form error with text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. UPCs:
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91741
 
 #Removed from regression 2024/06
@@ -683,7 +683,7 @@ Scenario: [91100] Duplicate UPC is not permitted within account - New Product re
 	Then In the Add Multiple dialog box I click Finish
 	Given I click continue
 	Then I should see a list style form error with text: Please fix UPC errors
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91100
 
 @TestCase:91157
@@ -795,7 +795,7 @@ Scenario: [91157] Duplicate UPC is not permitted within account - Forward Produc
 	Then In The Add UPC modal verify for UPC Number error message 'This UPC Number is duplicated' is displayed
 	Then In The Add UPC modal verify for Retailers error message 'This UPC Number is duplicated' is displayed
 	Then In the UPC modal window I click Cancel
-	Then I navigate to the home page
+	Then In the Side Menu, click Labeled Link with My Products title
 	#Then I click the Home navigation icon and accept the alert popup
 	Then The home screen should load
 
@@ -866,7 +866,7 @@ Scenario: [91077] Duplicate UPC is not permitted within WERCSmart system - New P
 	Given I click 'Select all' under Destination Retailers in the UPC page
 	Given I click continue
 	And I should see a list style form error with text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. UPCs:
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91077
 
 

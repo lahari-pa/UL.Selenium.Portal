@@ -99,7 +99,7 @@ Scenario: [60673] Gasoline Container, Portable - RU001419
 	Given I should see the Data Acceptance Page
 
    # Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60673
-   	Then I navigate to the Home Page
+   	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase60673
 	Then In the Product Grid, in 'Product ID/ Name' search input textbox, enter the product id savedas: TestCase60673
 	Then In the Product Grid, in 'Product ID/ Name' search input textbox, enter the product id savedas: (.*)

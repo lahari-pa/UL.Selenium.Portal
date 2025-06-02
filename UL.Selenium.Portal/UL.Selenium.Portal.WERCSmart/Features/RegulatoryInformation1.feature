@@ -75,7 +75,7 @@ Scenario: [85693] Regulatory Information 1 - validation
 	Then In the Inventory Status, Prop 65 (US) Section, the section 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' should display an error message: This is a required field.
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85693
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase85693
 
 @TestCase:85695
@@ -141,7 +141,7 @@ Scenario: [85695] California Proposition 65 - select Yes - navigation
 	Then In the Inventory Status, Prop 65 (US) Section, close the tab with the url link: https://oehha.ca.gov/proposition-65/crnr/notice-adoption-article-6-clear-and-reasonable-warnings
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase85695
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase85695
 
 

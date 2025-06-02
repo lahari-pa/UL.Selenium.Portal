@@ -245,5 +245,5 @@ Scenario: [60738] Seasonings, Spices or Flavoring for Food - Salts (Liquid)- RU0
     Given I should see the Data Acceptance Page
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60738
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase60738

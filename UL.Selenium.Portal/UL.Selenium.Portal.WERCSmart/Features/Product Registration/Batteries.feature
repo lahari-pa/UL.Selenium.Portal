@@ -79,7 +79,7 @@ Scenario: [97488] Stand alone Lithium Battery vehicle
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
 	Then In the Data Acceptance Section, click 'Accept' button
 
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase97488
 
 # Assigned to Amanda Coutant
@@ -166,7 +166,7 @@ Scenario: [97495] Stand alone Nickel-Cadmium Battery
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
 	Then In the Data Acceptance Section, click 'Accept' button
 
-	And I navigate to the home page	
+	And In the Side Menu, click Labeled Link with My Products title	
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase97495
 
 # Assigned to Amanda Coutant
@@ -250,5 +250,5 @@ Scenario: [97494] Stand alone Nickel Metal Hydride Battery
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
 	Then In the Data Acceptance Section, click 'Accept' button
 
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase97494

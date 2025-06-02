@@ -10,7 +10,6 @@
 @RetailPartners
 @MessageCenter
 @MyAccount
-@SafetyDataSheetAuthoring
 @LandingPage
 @DocumentAcceptance
 @DeleteActiveProducts
@@ -23,6 +22,8 @@
 @SupplierReports
 @ProductSetUp
 @UPC
+@Steps_MyProductsPage
+@MyProductsPage
 @ViewUpcs
 @UPC
 @StepsPrototype
@@ -51,7 +52,7 @@ Scenario: [73424] View UPCs - Product with UPCs
 	Then the WERCSmart homepage should load
 	# search for product with name 'Product73424' in submitted status?
 	And I create a product and save as: TestCase73424 and name as: Product73424
-	Then I navigate to the home page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Given I search for the product saved as: TestCase73424
 	And I click Row Actions for the first product returned
 	And I click on the Row Action: View UPCs
@@ -83,7 +84,7 @@ Scenario: [63663] Obsoleting/Deleting a Product (not submitted status)
 	And I set the When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5? option to: No
 	And I set the Select the best Water Solubility description to be: Dispersible
 	And in the New Product page I click Continue
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase63663
 
 #actions/delete
@@ -253,7 +254,7 @@ Scenario: [56219] My Products grid Actions - Documents navigation
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
 	Then the WERCSmart homepage should load
 	Then I create a product with sds upload and name as: product1 then take to data acceptance and save as: TC56219
-	Then I navigate to the home page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Given I search for the product saved as: TC56219
 	When I click Row Actions for the most recent product returned
 	Then I click on the Row Action: Documents
@@ -431,13 +432,14 @@ Scenario: [114944] View/Summary - Ingredients table contains details (Functional
 
 @TestCase:119578
 Scenario:[119578] My Products - More Filters - For Discontinued Registrations
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Then The home screen should load
-	And I should see an option for More Filters
-	Given I click More Filters in the products grid
-	Then I click the 'Show Only Discontinued Products' checkbox in the 'My Products' grid
+	Given I log in with the account saved in TReVor as: ProductAccount
+    Then The home screen should load
+	And On the My Products page, confirm More Filters button does exists
+	Given On the My Products page, click More Filters button.
+	Then On the My Products page, confirm Show Only Discontinued Products checkbox does exists
+	Then On the My Products page, click the Show Only Discontinued Products checkbox
 	Then I confirm that only discontinued products appear in the 'My Products' grid
-	Then I click the 'Show Only Discontinued Products' checkbox in the 'My Products' grid
+	Then On the My Products page, uncheck the Show Only Discontinued Products checkbox
 	Then I confirm that all products appear in the 'My Products' grid
 
 @TestCase:125144
@@ -474,7 +476,7 @@ Scenario: [125144] Actions - 3rd Party Access Code Window
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
 	Then In the Data Acceptance Section, click 'Accept' button
 
-	Given I click the Home navigation icon
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I search for the product saved as: TestCase125144
 	When I click Row Actions for the most recent product returned
 	Then I click on the Row Action: Access Code

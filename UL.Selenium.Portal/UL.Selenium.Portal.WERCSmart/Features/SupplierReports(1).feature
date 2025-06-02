@@ -83,7 +83,7 @@ Scenario: [68421] Active UPCs for Products Report
 	Then I save the first product in the excel spreadsheet saved as: 68421 as TestCase68421
 	Then I save the value with the header Individual UPC on the first product in the excel spreadsheet saved as: 68421 as TestCase68421UPCs
 	Then I save the value with the header Case UPC on the first product in the excel spreadsheet saved as: 68421 as TestCase68421CaseUPCs
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I search for the product saved as: TestCase68421
 	And I confirm that the product returned has the same name as the product saved as: TestCase68421
 	Given I click Row Actions for the first product returned
@@ -137,7 +137,7 @@ Scenario: [68422] Battery-containing products report
 	#Then I save the value with the header WPSID on the first product in the excel spreadsheet saved as: 68422 as TestCase68422Id
 	#Then I save the value with the header Product Name on the first product in the excel spreadsheet saved as: 68422 as TestCase68422Name
 	#Given I save the product with name: TestCase68422Name and id: TestCase68422Id as: TestCase68422
-	#Given I navigate to the home page
+	#Given In the Side Menu, click Labeled Link with My Products title
 	#Given I search for the product saved as: TestCase68422
 	#And I confirm that the product returned has the same name as the product saved as: TestCase68422
 	#And I delete the Supplier Report file saved as 68422
@@ -165,7 +165,7 @@ Scenario: [68423] Formulated vs Articles Report
 	Then I save the value with the header WPSID on the first product in the excel spreadsheet saved as: 68423 as TestCase68423Id
 	Then I save the value with the header Product Name on the first product in the excel spreadsheet saved as: 68423 as TestCase68423Name
 	Given I save the product with name: TestCase68423Name and id: TestCase68423Id as: TestCase68423
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I search for the product saved as: TestCase68423
 	And I confirm that the product returned has the same name as the product saved as: TestCase68423
 	And I delete the Supplier Report file saved as 68423
@@ -212,7 +212,7 @@ Scenario: [73082] UPC Report for All Products with Retailer
 	Then I save the value with the header Ounces on the first product in the excel spreadsheet saved as: 73082 as TestCase73082Ounces
 	Then I save the value with the header Container Type on the first product in the excel spreadsheet saved as: 73082 as TestCase73082Container
 	Then I save the value with the header Status on the first product in the excel spreadsheet saved as: 73082 as TestCase73082Status
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I search for the product saved as: TestCase73082
 	And I confirm that the product returned has the same name as the product saved as: TestCase73082
 	Then If the product is Private Label, I ensure that product saved as: TestCase73082 shows as Private Label: TestCase73082PrivateLabel
@@ -291,7 +291,7 @@ Scenario: [108254] UPC Report for All Products with Retailer - Create new produc
 
 	Given If purchase details are showing click confirm order
 	#Create an article product - lightbulb
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I generate a random UPC number and save as: UPC108254Lightbulb
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Light Bulbs - Incandescent Bulbs
@@ -324,7 +324,7 @@ Scenario: [108254] UPC Report for All Products with Retailer - Create new produc
 
 	Given If purchase details are showing click confirm order
 	#Create an enhanced article product - Lithium BCP (Camera w/ Battery)
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I generate a random UPC number and save as: UPC108254BCP
 	Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Camera w/Battery
@@ -364,7 +364,7 @@ Scenario: [108254] UPC Report for All Products with Retailer - Create new produc
 
 	Given If purchase details are showing click confirm order
 	#Begin steps to get report and verify data
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I click the My Reports icon in the QuickLinks Pane
 	Given Under the Supplier Reports menu I choose: UPCs and Registrations (Retailer Specific)
 	Then In the Supplier Reports screen the current sub-page should be: UPCs and Registrations (Retailer Specific)
@@ -557,7 +557,7 @@ Scenario: [75391] Sustainability Survey Eligibility – Health & Beauty
 	Then I save the value with the header Last Submission Date on the first product in the excel spreadsheet saved as: 75391 as TestCase75391Date
 	Then I save the value with the header Current Subscription Level on the first product in the excel spreadsheet saved as: 75391 as TestCase75391Subscription
 	Then I save the value with the header Current Data Tier Consent for the Selected Retailer on the first product in the excel spreadsheet saved as: 75391 as TestCase75391DataTier
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I search for the product saved as: TestCase75391
 	And I confirm that the product returned has the same name as the product saved as: TestCase75391
 	And I confirm that the product returned has the retailer: TG

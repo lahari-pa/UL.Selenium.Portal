@@ -120,7 +120,7 @@ Scenario: [87584] Physical State = Solid, UPC step - Size shows as Size (Weight 
 		| Option                       |
 		| Size (Fluid Ounces)          |
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87584
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase87584
 @TestCase:87587
 Scenario: [87587] Physical State = Liquid, UPC step - Size shows as Size (Fluid Ounces)
@@ -179,7 +179,7 @@ Scenario: [87587] Physical State = Liquid, UPC step - Size shows as Size (Fluid 
 		| Option               |
 		| Size (Weight Ounces) |
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87587
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase87587
 @TestCase:87588
 Scenario: [87588] Physical State = Aerosol, UPC step - Size shows as Size (Fluid Ounces)
@@ -252,7 +252,7 @@ Scenario: [87588] Physical State = Aerosol, UPC step - Size shows as Size (Fluid
 		| Option               |
 		| Size (Weight Ounces) |
 #	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87588
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase87588
 @TestCase:87593
 Scenario: [87593] Physical State = GAS, UPC step - Size shows as Size (Fluid Ounces)
@@ -310,7 +310,7 @@ Scenario: [87593] Physical State = GAS, UPC step - Size shows as Size (Fluid Oun
 		| Option               |
 		| Size (Weight Ounces) |
 #	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87593
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase87593
 	
 @TestCase:87597
@@ -353,7 +353,7 @@ Scenario: [87597] Create Electronic - UPC Step - Size shows as Size (Weight Ounc
 		| Option               |
 		| Size (Fluid Ounces)  |
 #	Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87597
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase87597
 
 @TestCase:87832
@@ -489,7 +489,7 @@ Scenario: [87832] View Shows Case UPC Data
 	Given I should see the Data Acceptance Page
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
 	Then In the Data Acceptance Section, click 'Accept' button
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	And I filter for the product saved as: TestCase87832
 	And I click Row Actions for the first product returned
 	And I click on the Row Action: View
@@ -646,7 +646,7 @@ Scenario: [87825] Summary Shows Case UPC Data
 		| saved as UPC87825  |                    | Aerosol Can - Metal | 2             |          |                                | AM        |
 	And I close the tab with Data Summary page
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87825
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase87825
 
 @TestCase:95988
@@ -758,7 +758,7 @@ Scenario: [95988] Mass Upload UPCs Floating
 	#And I confirm that Add Multiple UPC popup disappears and the values on the new product screen are the same as the UPC Upload document saved in the Table called: UPCTable95988
 	#Then I Confirm that the Add/Upload UPC Buttons remain stay visible when scrolling up and down the page
 	#Then I click Continue and should not see an error message
-	#And I navigate to the home page
+	#And In the Side Menu, click Labeled Link with My Products title
 	#And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase95988
 
 @TestCase:109516
@@ -994,9 +994,9 @@ Scenario: [101023] UPC Step - Add Part Number
 	And In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Chalk
 	Then In the Summary Page, verify table data in column UPC Number showing the value: PART NUMBER
 	And I close the tab with Data Summary page
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	#And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase101023
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase102023
 
 @TestCase:87628
@@ -1080,7 +1080,7 @@ Scenario: [87628] Universal Product Code (UPC) Step - Add Casepack - Case UPC fi
 	Given in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
 	Then I check if the Regulatory Documents page is shown
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87628
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase87628
 
 @TestCase:87598
@@ -1154,7 +1154,7 @@ Scenario: [87598]- Universal Product Code (UPC) Step - Add Casepack - fields req
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, the error: 'This is a required field.' is not displayed for the section: 'Individual UPC contained in the Case Pack'
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, the error: 'This is a required field.' is displayed for the section: 'Transportation Options'
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87598
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase87598
 
 # Removed from regression: 2024/08
@@ -1387,7 +1387,7 @@ Scenario: [156789] UPC Screen - Internal SKU field - Check field parameters and 
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, click 'Save' button
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, section: 'Internal SKU' should display error message: Only 8 to 12 letters and/or numbers allowed
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase156789
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase156789
 
 # Removed from regression: 2024/08

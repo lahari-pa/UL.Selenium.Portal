@@ -122,7 +122,7 @@ Scenario: [63323] Remove single product from cart
        Then I confirm that I see the following text in the modal window popup: There are no items in the shopping cart.
        Then If a modal dialog opens I close it
        #Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase63323
-	   Then I navigate to the Home Page
+	   Then In the Side Menu, click Labeled Link with My Products title
        Then In the Product Grid, delete the product saved as: TestCase63323
 
 @ignore

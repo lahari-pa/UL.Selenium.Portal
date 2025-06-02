@@ -74,4 +74,4 @@ Then I click the Retail Partners icon in the Navigation Pane
 		| 1    |
 	Given I click the back arrow on the Retail Partners Details page
 	Then I should see the Retail Partners page
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title

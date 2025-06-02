@@ -178,7 +178,7 @@ Scenario: [60724] Condiments, Sauces - RU001454
 	Then in the Optional Comments page I click Continue
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60724
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase60724
 
 
@@ -258,7 +258,7 @@ Scenario: [60723] Jelly, Jam or Preserves - RU001456
 	Then in the Optional Comments page I click Continue
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase60723
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase60723
 
 @ignore
@@ -333,5 +333,5 @@ Scenario: [73041] Cereals - RU001448 - Retailers associated Walgreens
 		| Retailer                   |	
 		| Walgreens                  |
 	Given I click Done in the Select Retailers popup
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase73041

@@ -76,7 +76,7 @@ Scenario: [62775] Pesticides - Validation of Which one best describes your produ
 	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
 	Given in the Product Information page I click Continue
 	Then In the Product Information Section, the section: 'Which best describes your product, including when FIFRA 25(b) Exempt' should not be showing error message: This is a required field.
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62775
 
 @TestCase:62852
@@ -164,7 +164,7 @@ Scenario: [62852] Pesticide - Product Label is required
 	Then In the Additional Documents to Provide, upload PDF document to Provide Full Product Label (required) field
 	Given in the Additional Documents to Provide page I click Continue
 	Then I should see the Optional Reports and Documents Available for Purchase Page
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62852
 
 @TestCase:56547
@@ -235,7 +235,7 @@ Scenario: [56547] Pesiticde Data - EPA registration - Active Ingredient informat
 	Given I click the page heading: Pesticide Details - U.S.
 	Then I should see the Pesticide Details - U.S. Page
 	Given I confirm data for EPA Registration: 73605-2 is complete
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56547
 
 @TestCase:62778
@@ -311,7 +311,7 @@ Scenario: [62778] Pesticide Details - U.S. - Validation of Product has an Enviro
 	Then In the Pesticide Details - U.S. Section, confirm the EPA Pesticide Registration table is not displayed
 	Then In the Pesticide Details - U.S. Section, confirm the question: 'Select the applicable exemption' is displayed
 	Then In the Pesticide Details - U.S. Section, confirm for section: 'Product has an Environmental Protection Agency (EPA) Registration Number' error is not displayed: This is a required field.
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62778
 
 @TestCase:62780
@@ -400,7 +400,7 @@ Scenario: [62780] Pesticide Details - U.S. - Validation of EPA Registration Numb
 	Given I click continue
 	Then I should see the Pesticide Details - State Registration Details Page
 	And I check the State Pesticide Registration Number field matches the text: 123456789
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase62780
 
 @TestCase:56577
@@ -524,7 +524,7 @@ Scenario: [56577] Pesticide Data - EPA data - Is Kelly Data is updated when user
 	And I should see the Transportation Details 1 Page
 	Then I click the page heading: Pesticide Details - State Registration Details
 	Then I confirm the 'Is Kelly Data' field for State: AZ is not checked
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase56577
 
 # Assigned to Barrett, Beverly
@@ -787,5 +787,5 @@ Scenario: [132756] Canadian Province Pesticide Options
 	Then In the Pesticide Details - Canada Section, set option for Province: 'Yukon Territory': to: None
 	Then in the Pesticide Details - Canada page I click Continue
 	Then I should see the Transportation Details 1 Page
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase132756

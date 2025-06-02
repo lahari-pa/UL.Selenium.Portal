@@ -103,7 +103,7 @@ Scenario: [160937] SHA Manager - Search - Product Search - SEARCH PATTERN - Prim
 
 	Given If purchase details are showing click confirm order
 
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then I Get the first 5 Digits of the UPC Number Saved as: UPC160937A, and save them as: UPCFirst5Digits
 	Then I Get the middle 5 Digits of the UPC Number Saved as: UPC160937A, and save them as: UPCMiddle5Digits
@@ -184,7 +184,7 @@ Scenario: [160937] SHA Manager - Search - Product Search - SEARCH PATTERN - Prim
 	Then In the Data Acceptance Section, click 'Accept' button
 
 	Given If purchase details are showing click confirm order
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Then I Get the first 5 Digits of the UPC Number Saved as: UPC160940, and save them as: UPCFirst5Digits
 	Then I Get the middle 5 Digits of the UPC Number Saved as: UPC160940, and save them as: UPCMiddle5Digits

@@ -82,7 +82,7 @@ Scenario: [87295] 3rd party Ingredients - Informational Message
 	Given I click continue
 	Then a Warning popup dialog should appear with the message: Your product contains a 3rd-Party Formula that may need Data Tier Consent, or if Consent has been accepted by the Formulator, has no ingredients that are indicated to be Public. A notification has been provided to the Formulator to revisit their registration and resubmit if necessary. You may continue with your registration. Should the 3rd-Party Formula be revised, your registration will be updated accordingly and revised scoring will occur. No action is required from you.
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase87295
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase87295
 @ignore
 @TestCase:74944
@@ -324,7 +324,7 @@ Scenario: [128694] DSV Option Available for Electronic - Peripherals - RU001162
 	| No	 |
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128694
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase128694
 
 @TestCase:128721
@@ -353,7 +353,7 @@ Scenario: [128721] DSV Option Available for Appliance - Hot Water Tank (Standard
 	| No	 |
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128721
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase128721
 
 @TestCase:128703
@@ -382,7 +382,7 @@ Scenario: [128703] DSV Option Available for Auto Parts - Engine Parts and Compon
 	| No	 |
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase128703
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase128703
 
 @TestCase:136058
@@ -453,5 +453,5 @@ Scenario: [159942] Tire, Off-Road - Pneumatic & Tires Not Intended for Road Use 
 	Given I Select a height from the drop down list
 	Given I click continue
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase159942
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase159942

@@ -109,7 +109,7 @@ Scenario: [98077] 3rd Party Exclusive Use Option
 	Then I should be on the Data Acceptance Page
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase98077
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase98077
 	
 # Created by Saikiran Chittampally
@@ -204,6 +204,6 @@ Scenario: [119476] Mixture, Blend, Formulation, Solution Verifying Formula Name 
 	Then I should be on the Data Acceptance Page
 
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase119476
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase119476
 

@@ -131,5 +131,5 @@ Scenario: [58430] Mixture, Blend, Formulation, Solution - RU000722
 	Then I should be on the Data Acceptance Page
 
 	#And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase58430
-	Then I navigate to the Home Page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase58430
