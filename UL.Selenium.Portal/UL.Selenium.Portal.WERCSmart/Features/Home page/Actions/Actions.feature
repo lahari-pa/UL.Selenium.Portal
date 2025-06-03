@@ -38,6 +38,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
 @SideMenu
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 
 Feature: Actions
 
@@ -93,16 +94,28 @@ Scenario: [63663] Obsoleting/Deleting a Product (not submitted status)
 Scenario: [56216] My Products grid Actions - Delete Navigation
 	Given I log in with the account saved in TReVor as: ProductAccount
 	Then the WERCSmart homepage should load
-	Then In the Side Menu, click Labeled Link with Add Product title
-	And the Product Editor page should be loaded
 	#Given I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
 	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
-	Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Soap (Bar, Liquid) for Body
+	#Given I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Soap (Bar, Liquid) for Body
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
+	Then in the The Product page, I click Continue
 	Then I save the product information as: TestCase56216
-	Given I call Shared Step 217669 (Product Information - Pesticide(NO), Sold(US), Child(YES), OSHA(NO), DSV(NO), PL(NO), GNFR(NO))
+
+	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
 
 #	Given I call Shared Step 213796 (Physical and Chemical Properties - Applicable Only to Lip Balm (RU000246))
 	Then I should be on the Physical and Chemical Properties Page
@@ -116,7 +129,7 @@ Scenario: [56216] My Products grid Actions - Delete Navigation
 	And In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: No data available
 	Then in the Physical and Chemical Properties page, I click Continue
 
-	Then I click the My Products icon in the Navigation Pane
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then the WERCSmart homepage should load
 	Given I search for the product saved as: TestCase56216
 	When I click Row Actions for the most recent product returned
