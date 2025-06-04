@@ -10,11 +10,11 @@
 @RetailPartners
 @MessageCenter
 @MyAccount
-@NewProduct
 @LandingPage
 @DocumentAcceptance
 @DeleteActiveProducts
 @Solutions
+@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @ReviewDocuments
 @SHA
 @SummaryPage
@@ -38,7 +38,6 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:InventoryStatusProp65
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:TransportationDetails1
 @SideMenu
-@Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 
 Feature: Actions
 
@@ -159,10 +158,14 @@ Scenario: [56212] My Products grid Actions - Edit Navigation
 #actions/submit
 @TestCase:56214
 Scenario: [56214] My Products grid Actions - Submit navigation
-	Given I generate a random UPC number and save as: UPC56214
-	And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	#And I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
+	Given I log in with the account saved in TReVor as: ProductAccount
+	#And I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then In the Side Menu, click Labeled Link with Add Product title
+    Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
+    Then in the New Product page, I click Continue
 	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
+	Given I generate a random UPC number and save as: UPC56214
 	Then I save the product information as: TestCase56214
 	#And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
 	Given I should see the Product Information Page
@@ -211,9 +214,21 @@ Scenario: [56214] My Products grid Actions - Submit navigation
 
 	Given in the Additional Documents to Provide page I click Continue
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
-	And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
-		| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
-		| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+	#And I call Shared Step 57884 (Safety Data Sheet Authoring - Additional Data (Optional) step - add any random data for all fields - Happy path) and enter the following:
+		#| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor     | Odor Threshold    | Partition Coefficient |
+		#| Mask                          | 300                      | 1.005                   | 20        | Black      | Odorless | No data available | 10                    |
+		Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
+   And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Mask
+   And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature' enter text: 300
+   And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 1.005
+   And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 20
+   And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Black
+   And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor' to: Odorless
+   And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor Threshold' to: No data available
+   And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Partition Coefficient' enter text: 10
+   Then in the Safety Data Sheet Authoring - Additional Data (Optional) page, I click Continue
+
+
 	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Test
 	Given I should see the Optional Comments Page
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
@@ -229,6 +244,7 @@ Scenario: [56214] My Products grid Actions - Submit navigation
 	Given I should see the Data Acceptance Page
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
 	Then In the Data Acceptance Section, click 'Accept' button
+
 
 
 #actions/view
