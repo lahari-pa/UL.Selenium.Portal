@@ -35,6 +35,7 @@
 @RegulatoryInformation3
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 @SideMenu
+@Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:USDepartamentOfTransportationDOT
 
 Feature: Flow 8
 
@@ -177,6 +178,7 @@ Scenario: [57332] Automotive Accessories containing Gel (Seat Cushions, etc) - 8
 	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase57332
 
+@ignore
 @TestCase:58187
 Scenario: [58187] Matches (RU000317) - 8-S
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -243,6 +245,136 @@ Scenario: [58187] Matches (RU000317) - 8-S
 	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase58187
 #check RU number and name
+
+Scenario: [258459] WERCSmart Portal - Flow Test for Matches (RU000317)
+	Given I log in with the account saved in TReVor as: ProductAccount
+	Then The home screen should load
+	Given I generate a random UPC number and save as: UPC258459
+	Then In the Product Grid, delete all products with UPC Number: saved as UPC258459
+
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then In the Side Menu, click Labeled Link with Add Product title
+	Then I should be on the New Product Page
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
+	Then in the New Product page, I click Continue
+
+	#Given I call Shared Step 258464 (WERCSmart Portal - Create New Registration - Enter Product Name and Select Type of Product "Matches" (RU000317)
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Matches_#258459
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Matches
+	Then in the The Product page, I click Continue
+	Then I save the product information as: TestCase258459
+
+	#Given I call Shared Step 238556 (Product Information - US, NO (OSHA), NO (Product shipped), NO (PL), NO (GNFR) MKT)
+	Then I should be on the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is not checked for: Canada
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page, I click Continue
+
+	#Given I call Shared Step 26897 (Physical and Chemical Properties - Primary Physical State - Solid Only Available)
+	Then I should be on the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
+	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
+	Then in the Physical and Chemical Properties page, I click Continue
+
+	Then I should be on the Ingredients Page
+	And In the Ingredients section, add the following ingredients:
+		| SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+		| CAS number | 12627-52-0  | 25      |                     |               |             |
+		| CAS number | 63705-05-5  | 25      |                     |               |             |
+		| CAS number | 3811-04-9   | 25      |                     |               |             |
+		| CAS number | 65997-17-3  | 25      |                     |               |             |
+	Then in the Ingredients page, I click Continue
+
+	#Given I call Shared Step 258527 (Inventory Status, Prop 65 (US) - Applicable Only to Matches (RU000317))
+	Then I should be on the Inventory Status, Prop 65 (US) Page
+	And In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is exempt from TSCA chemical Inventory listing requirements.
+	And In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No 
+	Then in the Inventory Status, Prop 65 (US) page, I click Continue
+
+	#Given I call Shared Step 224541 (Transportation Details 1 - Yes - DOT - Shipping fully regulated)
+	Given I should see the Transportation Details 1 Page
+	Then In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Yes
+	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: DOT
+	Then In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping fully regulated
+	Then in the Transportation Details 1 page I click Continue
+
+	#Given I call Shared Step 258529 (U. S. Department of Transportation (DOT) Classification - Applicable Only to Matches (RU000317))
+	Given I should see the U.S. Department of Transportation (DOT) Classification Page
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1944
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Matches, safety
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 4.1
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: III
+	Then in the U.S. Department of Transportation (DOT) Classification page I click Continue
+
+	#Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Walgreens
+	Then I should be on the Retailer Page
+	And In the Retailer Section, click 'Add Retailers' button
+	And In the Select Retailers window, select retailer: Walgreens
+	And In the Select Retailers window, click 'Done' button
+	Then in the Retailer page, I click Continue
+
+	#Given I call Shared Step 258547 (GTIN / UPC - Add UPC Number - Applicable Only to Type of Product: Matches (RU000317) 
+	Then I should be on the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	And In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	And In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC258459 enter Size: 8 and enter Container Type: Plastic Container
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page, I click Continue
+
+	#Given I call Shared Step 78080 (Regulatory Documents to Provide - Upload OSHA-Compliant SDS (General Shared-Step))
+	Then I should be on the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Yes, I certify that I have an OSHA-compliant SDS for this product and would like to upload it.
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'OSHA SDS'
+	Then in the Regulatory Documents to Provide page, I click Continue
+
+	#Given I call Shared Step 214558 (Additional Documents to Provide - Click CONTINUE - NO Upload is Required (General Shared-Step #2))
+	Then I should be on the Additional Documents to Provide Page
+	Then in the Additional Documents to Provide page, I click Continue
+
+	#Given I call Shared Step 214559 (Optional Reports and Documents Available for Purchase Page - Click CONTINUE - (No Document Purchase Required) - (General Shared-Step #2))
+	Then I should be on the Optional Reports and Documents Available for Purchase Page
+	Then in the Optional Reports and Documents Available for Purchase page, I click Continue
+
+	#Given I call Shared Step 218039 (Optional Comments - Click CONTINUE (General Shared-Step))
+	Then I should be on the Optional Comments Page
+	Then in the Optional Comments page, I click Continue
+
+	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Lead Acid Battery - No Acid Included
+	Then I should be on the Data Acceptance Page
+	And In the Data Acceptance Section, click 'Summary' button
+
+	And I switch to the tab with Data Summary page
+	And In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Matches
+	And In the Summary Page, the 'Primary Physical State' section should be showing the following value: Solid
+	And In the Summary Page, the 'Secondary Physical State' section should be showing the following value: Solid
+	And In the Summary Page, the 'Product is Regulated for Transport' section should be showing the following value: Yes
+	And In the Summary Page, the 'Select all modes of transport that you've classified the product for' section should be showing the following value: DOT
+	And In the Summary Page, the 'UN Number' section should be showing the following value: UN1944
+	And In the Summary Page, the 'Proper Shipping Name' section should be showing the following value: Matches, safety
+	And In the Summary Page, the 'Hazard Class (select)' section should be showing the following value: 4.1
+	And In the Summary Page, the 'Packing Group (select)' section should be showing the following value: III
+
+	And In the Summary Page, verify table data in column UPC Number showing the value: saved as UPC258459
+	And In the Summary Page, verify table data in column UPC Name showing the value: Matches_#258459
+	And In the Summary Page, verify table data in column UPC Transportation showing the value: DOT
+	And In the Summary Page, verify table data in column Container Type showing the value: Plastic Container
+	And In the Summary Page, verify table data in column Size (Ounces) showing the value: 8
+	And In the Summary Page, verify table data in column Retailers showing the value: WG
+	And In the Summary Page, the Product Document section Supplier Uploaded should be showing the following document: testdoc.pdf
+
+	And I close the tab with Data Summary page
+	Then I should be on the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
+	Given The Purchase Summary Page is displayed
+	Then In the Purchase Summary Page, click the 'Home' button
+	Then The home screen should load
 
 @TestCase:58293
 Scenario: [58293] Engines for Model Rockets(RU000338) - 8-S

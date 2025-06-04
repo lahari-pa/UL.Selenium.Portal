@@ -33,45 +33,71 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
 @SideMenu
+@GTINAndUPC
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
 
 Feature: Flow 6
 
 @TestCase:78731
 Scenario: [78731] Insecticide - Crawling Bug - Aerosol (RU001005) - 6A
-
 #Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-Given I log in with the account saved in TReVor as: ProductAccount
-
-Then The home screen should load
-
-Given I generate a random UPC number and save as: UPC78731
-
-Given I delete all products with UPC Number: saved as UPC78731
+	Given I log in with the account saved in TReVor as: ProductAccount
+	Then The home screen should load
+	Given I generate a random UPC number and save as: UPC78731
+	Given I delete all products with UPC Number: saved as UPC78731
 
 #Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
 	Then In the Side Menu, click Labeled Link with Add Product title
 	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	Then in the New Product page, I click Continue
 
-Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide - Crawling Bug - Aerosol
+	#Given I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Insecticide - Crawling Bug - Aerosol
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Insecticide - Crawling Bug - Aerosol_#78731
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Insecticide - Crawling Bug - Aerosol
+	Then in the The Product page, I click Continue
+	Then I save the product information as: TestCase78731
 
-Then I save the product information as: TestCase78731
+	#Given I call Shared Step 57502 (Product Information - Preventing, Destroying, Repelling, Mitigating Pests, US only, NO to everything else - Continue - Happy Path)
+	Then I should be on the Product Information Page
+	Then In the Product Information Section, set the option in section: 'Which best describes your product, including when FIFRA 25(b) Exempt' to: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is not checked for: Canada
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page, I click Continue
 
-Given I call Shared Step 57502 (Product Information - Preventing, Destroying, Repelling, Mitigating Pests, US only, NO to everything else - Continue - Happy Path)
+	#Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
+	Then I should be on the Physical and Chemical Properties Page
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Primary Physical State' to: Aerosol
+	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Liquid spray
+	Then In the Physical and Chemical Properties Section, for section: 'pH' select the checkbox option: 'I do not have exact pH data available to me'
+	Then In the Physical and Chemical Properties Section, set the option in section: 'pH' to: Not tested/Unknown
+	Then In the Physical and Chemical Properties Section, set the option in section: 'When the product has a flammable propellant, or contains ingredients with a flash point below 60⁰C then' to: This product is not classified as D001 or D003 Hazardous Waste under RCRA
+	Then in the Physical and Chemical Properties page, I click Continue
 
-Given I call Shared Step 57111 (Enter Product Data for Physical State - Aerosol only)
-
-Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
-| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
-| Propane       | 100     | false               | false       |            |
+	#Given I call Shared Step 57570 (Enter Ingredients) and add the following ingredients:
+	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
+	#	| Propane       | 100     | false               | false       |            |
+	Then I should be on the Ingredients Page
+	Then In the Ingredients section, add the following ingredients:
+		| SearchType | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+		| CAS number | 106-24-1    | 5       |                     |               |             |
+		| CAS number | 8007-02-1   | 5       |                     |               |             |
+		| CAS number | 8042-47-5   | 5       |                     |               |             |
+		| CAS number | 124-38-9    | 85      |                     |               |             |
+	Then in the Ingredients page, I click Continue
 
 #Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
-Given I should see the Inventory Status, Prop 65 (US) Page
-	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Given I should see the Inventory Status, Prop 65 (US) Page
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is exempt from TSCA chemical Inventory listing requirements.
 	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page I click Continue
 
 #Given I call Shared Step 57589 (Enter Pesticide Data - United States (without EPA number))Given I should see the Pesticide Details - U.S. Page
+	Given I should see the Pesticide Details - U.S. Page
 	Then In the Pesticide Details - U.S. Section, in 'Product has an Environmental Protection Agency (EPA) Registration Number' enter No
 	Then In the Pesticide Details - U.S. Section, in 'Product has a State Registration' enter No
 	Then In the Pesticide Details - U.S. Section, in 'Select the applicable exemption' enter Food Based Pesticides - Exempt from EPA Registration
@@ -79,63 +105,135 @@ Given I should see the Inventory Status, Prop 65 (US) Page
 
 
 #Given I call Shared Step 57727 (Transportation Details 1 - Yes option - Select DOT, Limited Quantity - Continue - Happy Path)
-Given I should see the Transportation Details 1 Page
+	Given I should see the Transportation Details 1 Page
 	Then In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Yes
 	Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: DOT
 	Then In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping with limited quantity
 	Then in the Transportation Details 1 page I click Continue
 
-Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
+	#Given I call Shared Step 57728 (U.S. Department of Transportation (DOT) Classification - Enter UN1950 (Aerosol) - Select data - Continue - Happy Path)
+	Given I should see the U.S. Department of Transportation (DOT) Classification Page
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.2
+	Then In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
+	Then in the U.S. Department of Transportation (DOT) Classification page I click Continue
 
-Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)
-| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |
-| No                                       | 2                     | 2                          | Yes            |
+	#Given I call Shared Step 57923 (Volatile Organic Compound (VOC) Step - enter OTC and CARB - Yes for state values)
+	#	| Product granted Alternative Control Plan | Amount of VOC by CARB | Amount of VOC by OTC Model | VOC for states |
+	#	| No                                       | 2                     | 2                          | Yes            |
+	Given I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
+	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.': to: No
+	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB': to: 0
+	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule': to: 0.5
+	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?': to: Yes
+	Given in the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) page I click Continue
 
-Given in the Volatile Organic Compound Summary page I click Continue
+	Given I should see the Volatile Organic Compound Summary Page
+	Then In the Volatile Organic Compound Summary Section, confirm that I see todays 'VOC Analysis Date'
+	Then In the Volatile Organic Compound Summary Section, confirm 'Limits' display table does exist
+	Then In the Volatile Organic Compound Summary Section 'Limits' display table, confirm 'Use' column does exist
+	Then In the Volatile Organic Compound Summary Section 'Limits' display table, confirm each row in 'Use' column does display: Insecticide - Crawling Bug - Aerosol
+	Then In the Volatile Organic Compound Summary Section 'Limits' display table, confirm each row in 'VOC Compliance Limit' column does display: 15
+
+	Then In the Volatile Organic Compound Summary Section 'Limits' display table, confirm it matches the following table:
+		| Use                                  | VOC Compliance Limit | Regulation           |
+		| Insecticide - Crawling Bug - Aerosol | 15                   | OTC Model rule limit |
+		| Insecticide - Crawling Bug - Aerosol | 15                   | CARB limit           |
+
+	Then In the Volatile Organic Compound Summary Section, confirm 'VOC content as weight percentage of total formula, minus exempt compounds, for each of the following states.' display table does exist
+	Then In the Volatile Organic Compound Summary Section 'VOC content as weight percentage of total formula, minus exempt compounds, for each of the following states.' display table, confirm 'State or Region' column does exist
+
+	Then In the Volatile Organic Compound Summary Section 'VOC content as weight percentage of total formula, minus exempt compounds, for each of the following states.' display table, confirm it contains all rows in the following table:
+		| State or Region      | Regulation            | VOC Value | VOC Threshold | Message                          |
+		| Colorado             | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| Connecticut          | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| District of Columbia | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| Delaware             | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| Illinois             | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| Indiana              | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| Massachusetts        | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| Maryland             | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| Maine                | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| Michigan             | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| New Hampshire        | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| New Jersey           | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| New York             | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| Ohio                 | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| Pennsylvania         | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| Rhode Island         | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| Utah                 | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| Virginia             | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| Vermont              | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+
+	Then In the Volatile Organic Compound Summary Section, confirm that I see the following 'CARB' value: 0
+	Then In the Volatile Organic Compound Summary Section, confirm that I see the following 'OTC Model Rule' value: 0.5
+	Then In the Volatile Organic Compound Summary Section, the statement 'Does not exceed the limits specified in the California Consumer Products Regulation' is displayed
+	Then In the Volatile Organic Compound Summary Section, the statement 'Does not exceed the limits specified by the Ozone Transport Commission' is displayed
+	Then In the Volatile Organic Compound Summary Section, for 'Your acknowledgement of this registration includes that your product..' set 'Yes, I Acknowledge'
+	Given in the Volatile Organic Compound Summary page I click Continue
 
 #	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	Then I should be on the Retailer Page
 	And In the Retailer Section, click 'Add Retailers' button
-	And In the Select Retailers window, select retailer: Amazon
+	And In the Select Retailers window, select retailer: Walgreens
 	And In the Select Retailers window, click 'Done' button
 	Then in the Retailer page, I click Continue
 
-Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC78731, container type: Aerosol Can and size: 1
+	#Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC78731, container type: Aerosol Can and size: 1
+	Then I should be on the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC78731 enter Size: 12 and enter Container Type: Aerosol Can - Metal
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page, I click Continue
 
 #Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
-Given I should see the Regulatory Documents to Provide Page
-	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Yes, I certify that I have an OSHA-compliant SDS for this product and would like to upload it.
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'OSHA SDS'
 	Then in the Regulatory Documents to Provide page I click Continue
 
-Given I call shared step 65961 (Additional Documents to Provide - Upload Full Product Label - Continue.
+	#Given I call shared step 65961 (Additional Documents to Provide - Upload Full Product Label - Continue.
+	Given I should see the Additional Documents to Provide Page
+	Given in the Additional Documents to Provide page I click Continue
+	Then In the Additional Documents to Provide, section 'Provide Full Product Label (required)' error message should display: Document is required: Please upload a PDF of the product label (full label)
+	Then In the Additional Documents to Provide, upload PDF document to Provide Full Product Label (required) field
+	Given in the Additional Documents to Provide page I click Continue
 
-Given in the Optional Reports and Documents Available for Purchase page I click Continue
+	Given I should see the Optional Reports and Documents Available for Purchase Page
+	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
-#Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-#| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
-#| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
-	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 501.827328
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor' to: Orange
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor Threshold' to: No data available
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Partition Coefficient' enter text: 41.3005
-	Then in the Safety Data Sheet Authoring - Additional Data (Optional) page, I click Continue
 
-#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
-Given I should see the Optional Comments Page
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
+	Given I should see the Optional Comments Page
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
 	Then in the Optional Comments page I click Continue
 
-Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Insecticide - Crawling Bug - Aerosol
+	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Insecticide - Crawling Bug - Aerosol
+	Then I should be on the Data Acceptance Page
+	And In the Data Acceptance Section, click 'Summary' button
 
-#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78731
+	And I switch to the tab with Data Summary page
+	And In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Insecticide - Crawling Bug - Aerosol
+	And In the Summary Page, the 'FIFRA 25(b) Exempt' section should be showing the following value: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+	And In the Summary Page, the 'Primary Physical State' section should be showing the following value: Aerosol
+	And In the Summary Page, the 'Product is Regulated for Transport' section should be showing the following value: Yes
+	And In the Summary Page, the 'Select all modes of transport that you've classified the product for' section should be showing the following value: DOT
+	And In the Summary Page, the 'U.S. Toxic Substances Control Act (TSCA) status' section should be showing the following value: This product is exempt from TSCA chemical Inventory listing requirements.
 
-Then In the Side Menu, click Labeled Link with My Products title
-Then In the Product Grid, delete the product saved as: TestCase78731
+	And In the Summary Page, verify table data in column Container Type showing the value: Aerosol Can - Metal
+	And In the Summary Page, verify table data in column Size (Ounces) showing the value: 12
+	And In the Summary Page, verify table data in column Retailers showing the value: WG
+
+	And In the Summary Page, the Product Document section Supplier Uploaded should be showing the following document: testdoc.pdf
+	And I close the tab with Data Summary page
+	Then I should be on the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
+	Given The Purchase Summary Page is displayed
+	Then In the Purchase Summary Page, click the 'Home' button
+	Then The home screen should load
+
 @ignore
 @TestCase:57711
 Scenario: [57711] Antifungal - Aerosol (RU000050) - 6A
