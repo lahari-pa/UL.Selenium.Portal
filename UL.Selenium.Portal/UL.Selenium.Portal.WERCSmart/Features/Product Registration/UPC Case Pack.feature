@@ -1410,15 +1410,13 @@ Scenario: [217540]	Registration: Canada only/Canada and US/US only: UPC Level Da
 	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: water
 	Given I should see the Ingredients Page
 	Then In the Ingredients section, add the following ingredients:
-		| SearchType     | SearchText | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+		| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
 		| component name | Water      |  100    | false                | false        | Water    |
 	Then in the Ingredients page I click Continue
 
 	#Given I call Shared Step 57911 (Regulatory Information 1 - CEPA only shown - Continue - Happy Path)	
 	Then I should see the Inventory Status, Prop 65 (US) Page
 	Given In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'Canadian Environmental Protection Act (CEPA) status' to: Compliant with Domestic Substances List (DSL)
-	Given In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is exempt from TSCA chemical Inventory listing requirements.
-	Given In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page, I click Continue
 	
 	#Given I call shared step 72414 (Retailer - Canada Only > Select Canadian Tire > Continue - Happy Path)
@@ -1428,18 +1426,10 @@ Scenario: [217540]	Registration: Canada only/Canada and US/US only: UPC Level Da
 	And In the Select Retailers window, click 'Done' button
 	Then in the Retailer page, I click Continue
 
-	Given I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC217540 enter Size: 12 and enter Container Type: Plastic bag
-
-    Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the 'Add Casepack' button
-    Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'GTIN/UPC (include check digit)' enter the value: saved as UPC87676
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Size (Fluid Ounces)' enter the value: 2
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Container Type' select the value: Aerosol Can - Metal
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Quantity of Units within the Case' enter the value: 5
-	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Transportation Options' enter the value: 1A2: removable head steel drum
-	Given in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page I click Continue
-
+	Given I should see the Regulatory Documents to Provide Page
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'WHMIS-compliant Safety Data Sheet, English and French-Canadian' to: I need a WHMIS-Compliant bilingual Safety Data Sheet (SDS) authored for this product.
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'Label in both French and English'
+	Then in the Regulatory Documents to Provide page I click Continue
 
 
 	Given in the Additional Documents to Provide page I click Continue
@@ -1505,7 +1495,7 @@ Scenario: [217540]	Registration: Canada only/Canada and US/US only: UPC Level Da
 	Then in the Physical and Chemical Properties page, I click Continue
 	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: water
 	Then In the Ingredients section, add the following ingredients:
-		| SearchType     | SearchText | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+		| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
 		| component name | Water      |  100    | false                | false        | Water    |
 	Then in the Ingredients page, I click Continue
 	#Given I call Shared Step 104290 (Enter Regulatory Information - TSCA Not Prop 65)
@@ -1584,7 +1574,7 @@ Scenario: [217540]	Registration: Canada only/Canada and US/US only: UPC Level Da
 	Then in the Physical and Chemical Properties page, I click Continue
 	#Given I call Shared Step 29181 (Ingredients - add any chemical) with name: water
 	Then In the Ingredients section, add the following ingredients:
-		| SearchType     | SearchText | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+		| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
 		| component name | Water      |  100    | false                | false        | Water    |
 	Then in the Ingredients page, I click Continue
 	#Given I call Shared Step 104276 (Enter Regulatory Information - TSCA, CEPA, Not Prop 65)
