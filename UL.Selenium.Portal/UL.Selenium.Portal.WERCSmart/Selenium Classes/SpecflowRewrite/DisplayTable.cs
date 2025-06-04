@@ -13,15 +13,26 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.SpecflowRewrite
 	public class DisplayTable : SeleniumBaseObject
 	{
 		#region Class Objects
-		protected override By ContainerElementLocator => By.XPath("//div[contains(@class,'panel-table')]");
+		private string BasePath = "//div[contains(@class,'panel-table')]";
+		protected override By ContainerElementLocator => By.XPath(BasePath);
 		public string Title => this.FindElement(By.XPath(".//div[@data-bind='text: description']"), 1)?.Text.Trim();
 		private List<IWebElement> ColumnLabelsList => [.. this.FindElements(By.XPath(".//th[text()]"), 1)];
 		private IWebElement ColumnLabel(string columnLabel) => this.ColumnLabelsList.FirstOrDefault(x => x.Text.Trim().Equals(columnLabel, System.StringComparison.Ordinal));
-		private List<DisplayTableRow> RowsList => [.. this.FindElements(By.XPath(".//tbody//tr")).Select(x => new DisplayTableRow(x, this.ColumnLabelsList))];
+		public List<DisplayTableRow> RowsList => [.. this.FindElements(By.XPath(".//tbody//tr")).Select(x => new DisplayTableRow(x, this.ColumnLabelsList))];
 		public DisplayTableRow RowByColumnValue(string columnLabel, string value) => this.RowsList.FirstOrDefault(x => x.TableCell(columnLabel).Text.Equals(value, System.StringComparison.Ordinal));
 		#endregion
 
 		#region Class Methods
+		#region Constructors
+		public DisplayTable(string title = "")
+		{
+			if (!title.IsNullOrEmpty())
+			{
+				BasePath = $"{BasePath}[.//div[@data-bind='text: description'][text()='{title}']]";
+			}
+		}
+		#endregion
+
 		#region Column Labels Methods
 		public bool ColumnLabelsListExists()
 		{
@@ -33,6 +44,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.SpecflowRewrite
 		{
 			Report.Info($"Attempting to get Column Labels list count.");
 			return this.ColumnLabelsList.Count;
+		}
+
+		public List<string> ColumnLabelsStringList()
+		{
+			Report.Info($"Attrmpting to get list of Column Labels.");
+			return this.ColumnLabelsList.Select(x => x.Text).ToList();
 		}
 
 		public bool ColumnLabelExists(string columnLabel)
@@ -74,7 +91,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.SpecflowRewrite
 	{
 		#region Class Objects
 		private IWebElement ContainerElement;
-		private Dictionary<string, IWebElement> ColumnLabelsDictionary = [];
+		public Dictionary<string, IWebElement> ColumnLabelsDictionary = [];
 		private List<IWebElement> TableCellList => [.. ContainerElement.FindElements(By.XPath(".//td"))];
 		public IWebElement TableCell(string columnLabel) => ColumnLabelsDictionary[columnLabel];
 		#endregion

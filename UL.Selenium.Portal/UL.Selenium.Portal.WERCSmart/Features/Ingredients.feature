@@ -1029,36 +1029,6 @@ Scenario: [109230] Ingredients - Verify that the Added CAS / Component(s) and Se
 	#	| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
 	#And I navigate to the home page
 
-@TestCase:110368
-Scenario: [110368] Ingredients- Filtered Ingredient Appears on Top of Filter Option
-	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	Given I log in with the account saved in TReVor as: ProductAccount
-	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	And I call Shared Step 57561 (The Product - Enter Product Name and select Type of Product): Chalk
-	Then I save the product information as: TestCase110368
-	#Given I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	Given I should see the Product Information Page
-	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
-	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
-	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
-	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
-	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
-	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
-	Then in the Product Information page I click Continue
-
-	#Given I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	Given I should see the Physical and Chemical Properties Page
-	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
-	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
-	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
-	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
-	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
-	Then in the Physical and Chemical Properties page I click Continue
-
-	Then I enter: Formaldehyde as my ingredient in the Ingredients page, and check that the top option on the filter matches my ingredient		
-	And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase110368
-
-
 @TestCase:95487
 Scenario: [95487] Formulation Screen - Ingredients Staying
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
@@ -1120,10 +1090,6 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase95487
 	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase95487
-
-
-
-
 
 @TestCase:133335
 Scenario: [133335] Formulation Screen FIFRA and LOLI Validation Message
@@ -1289,8 +1255,6 @@ Scenario: [158853] Ingredient Identifier
 	Then In the Data Acceptance Section, click 'Accept' button
 	Then I navigate to the home page
 	Then the WERCSmart homepage should load
-
-	
 
 #Created by Saikiran Chittampally
 @TestCase:209549

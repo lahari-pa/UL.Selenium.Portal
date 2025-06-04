@@ -33,6 +33,8 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:ProductInformation
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
 @SideMenu
+@GTINAndUPC
+@Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:PurchaseSummary
 
 Feature: Flow 6
 
@@ -90,7 +92,7 @@ Scenario: [78731] Insecticide - Crawling Bug - Aerosol (RU001005) - 6A
 
 #Given I call Shared Step 57571 (Enter Regulatory Information - Not Prop 65)
 	Given I should see the Inventory Status, Prop 65 (US) Page
-	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is exempt from TSCA chemical Inventory listing requirements.
 	Then In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
 	Then in the Inventory Status, Prop 65 (US) page I click Continue
 
@@ -129,52 +131,108 @@ Scenario: [78731] Insecticide - Crawling Bug - Aerosol (RU001005) - 6A
 
 	Given I should see the Volatile Organic Compound Summary Page
 	Then In the Volatile Organic Compound Summary Section, confirm that I see todays 'VOC Analysis Date'
+	Then In the Volatile Organic Compound Summary Section, confirm 'Limits' display table does exist
+	Then In the Volatile Organic Compound Summary Section 'Limits' display table, confirm 'Use' column does exist
+	Then In the Volatile Organic Compound Summary Section 'Limits' display table, confirm each row in 'Use' column does display: Insecticide - Crawling Bug - Aerosol
+	Then In the Volatile Organic Compound Summary Section 'Limits' display table, confirm each row in 'VOC Compliance Limit' column does display: 15
 
+	Then In the Volatile Organic Compound Summary Section 'Limits' display table, confirm it matches the following table:
+		| Use                                  | VOC Compliance Limit | Regulation           |
+		| Insecticide - Crawling Bug - Aerosol | 15                   | OTC Model rule limit |
+		| Insecticide - Crawling Bug - Aerosol | 15                   | CARB limit           |
+
+	Then In the Volatile Organic Compound Summary Section, confirm 'VOC content as weight percentage of total formula, minus exempt compounds, for each of the following states.' display table does exist
+	Then In the Volatile Organic Compound Summary Section 'VOC content as weight percentage of total formula, minus exempt compounds, for each of the following states.' display table, confirm 'State or Region' column does exist
+
+	Then In the Volatile Organic Compound Summary Section 'VOC content as weight percentage of total formula, minus exempt compounds, for each of the following states.' display table, confirm it contains all rows in the following table:
+		| State or Region      | Regulation            | VOC Value | VOC Threshold | Message                          |
+		| Colorado             | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| Connecticut          | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| District of Columbia | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| Delaware             | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| Illinois             | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| Indiana              | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| Massachusetts        | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| Maryland             | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| Maine                | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| Michigan             | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| New Hampshire        | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| New Jersey           | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| New York             | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| Ohio                 | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| Pennsylvania         | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| Rhode Island         | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| Utah                 | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| Virginia             | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+		| Vermont              | State Allowable Limit | 0.5       | 15            | Does not exceed the State Limits |
+
+	Then In the Volatile Organic Compound Summary Section, confirm that I see the following 'CARB' value: 0
+	Then In the Volatile Organic Compound Summary Section, confirm that I see the following 'OTC Model Rule' value: 0.5
+	Then In the Volatile Organic Compound Summary Section, the statement 'Does not exceed the limits specified in the California Consumer Products Regulation' is displayed
+	Then In the Volatile Organic Compound Summary Section, the statement 'Does not exceed the limits specified by the Ozone Transport Commission' is displayed
+	Then In the Volatile Organic Compound Summary Section, for 'Your acknowledgement of this registration includes that your product..' set 'Yes, I Acknowledge'
 	Given in the Volatile Organic Compound Summary page I click Continue
 
 #	Given I call Shared Step 57510 (Retailer Association - Select A Retailer - Continue - Happy Path) and select the retailer: Amazon
 	Then I should be on the Retailer Page
 	And In the Retailer Section, click 'Add Retailers' button
-	And In the Select Retailers window, select retailer: Amazon
+	And In the Select Retailers window, select retailer: Walgreens
 	And In the Select Retailers window, click 'Done' button
 	Then in the Retailer page, I click Continue
 
-	Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC78731, container type: Aerosol Can and size: 1
+	#Then I call Shared Step 57960 (Enter Universal Product Code (UPC) - UPC-Container Type - Size Only) for UPC: saved as UPC78731, container type: Aerosol Can and size: 1
+	Then I should be on the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC78731 enter Size: 12 and enter Container Type: Aerosol Can - Metal
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page, I click Continue
 
 #Given I call Shared Step 57881 (Regulatory Documents to Provide - US only - request authoring - Happy Path)
 	Given I should see the Regulatory Documents to Provide Page
-	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Request to author
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Yes, I certify that I have an OSHA-compliant SDS for this product and would like to upload it.
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'OSHA SDS'
 	Then in the Regulatory Documents to Provide page I click Continue
 
-	Given I call shared step 65961 (Additional Documents to Provide - Upload Full Product Label - Continue.
+	#Given I call shared step 65961 (Additional Documents to Provide - Upload Full Product Label - Continue.
+	Given I should see the Additional Documents to Provide Page
+	Given in the Additional Documents to Provide page I click Continue
+	Then In the Additional Documents to Provide, section 'Provide Full Product Label (required)' error message should display: Document is required: Please upload a PDF of the product label (full label)
+	Then In the Additional Documents to Provide, upload PDF document to Provide Full Product Label (required) field
+	Given in the Additional Documents to Provide page I click Continue
 
+	Given I should see the Optional Reports and Documents Available for Purchase Page
 	Given in the Optional Reports and Documents Available for Purchase page I click Continue
 
-#Given I call Shared Step 59663 (Safety Data Sheet Authoring - Additional Data (Optional))
-#| Personal Protection Equipment | Autoignition Temperature | Minimum Ignition Energy | Viscosity | Appearance | Odor   | Odor Threshold    | Product's Dispensing Method | Partition Coefficient |
-#| Gloves                        | 501.827328               | 10.00001                | 10.28     | Brown      | Orange | No data available | Aerosol                     | 41.3005               |
-	Then I should be on the Safety Data Sheet Authoring - Additional Data (Optional) Page
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Personal Protection Equipment Recommended (select)' to: Gloves
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Autoignition Temperature (°C)' enter text: 501.827328
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Minimum Ignition Energy (mJ)' enter text: 10.00001
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Viscosity' enter text: 10.28
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Brown
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor' to: Orange
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor Threshold' to: No data available
-	And In the Safety Data Sheet Authoring - Additional Data (Optional), for the section: 'Partition Coefficient' enter text: 41.3005
-	Then in the Safety Data Sheet Authoring - Additional Data (Optional) page, I click Continue
 
-#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
+	#Given I call Shared Step 57883 (Optional Comments - Happy Path) and enter the comment: Comment Text
 	Given I should see the Optional Comments Page
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
 	Then in the Optional Comments page I click Continue
 
-	Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Insecticide - Crawling Bug - Aerosol
+	#Given I call Shared Step 73956 (Go to Summary and verify data) with product type: Insecticide - Crawling Bug - Aerosol
+	Then I should be on the Data Acceptance Page
+	And In the Data Acceptance Section, click 'Summary' button
 
-	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase78731
+	And I switch to the tab with Data Summary page
+	And In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Insecticide - Crawling Bug - Aerosol
+	And In the Summary Page, the 'FIFRA 25(b) Exempt' section should be showing the following value: Product is intended for preventing, destroying, repelling, or mitigating pests (including insects, rodents, mold, virus, bacteria, and other micro-organisms)
+	And In the Summary Page, the 'Primary Physical State' section should be showing the following value: Aerosol
+	And In the Summary Page, the 'Product is Regulated for Transport' section should be showing the following value: Yes
+	And In the Summary Page, the 'Select all modes of transport that you've classified the product for' section should be showing the following value: DOT
+	And In the Summary Page, the 'U.S. Toxic Substances Control Act (TSCA) status' section should be showing the following value: This product is exempt from TSCA chemical Inventory listing requirements.
 
-	Then In the Side Menu, click Labeled Link with My Products title
-	Then In the Product Grid, delete the product saved as: TestCase78731
+	And In the Summary Page, verify table data in column Container Type showing the value: Aerosol Can - Metal
+	And In the Summary Page, verify table data in column Size (Ounces) showing the value: 12
+	And In the Summary Page, verify table data in column Retailers showing the value: WG
+
+	And In the Summary Page, the Product Document section Supplier Uploaded should be showing the following document: testdoc.pdf
+	And I close the tab with Data Summary page
+	Then I should be on the Data Acceptance Page
+	Then In the Data Acceptance Section, check 'Agreed' checkbox
+	Then In the Data Acceptance Section, click 'Accept' button
+
+	Given The Purchase Summary Page is displayed
+	Then In the Purchase Summary Page, click the 'Home' button
+	Then The home screen should load
 
 @ignore
 @TestCase:57711

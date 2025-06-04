@@ -1,7 +1,14 @@
-﻿using Reqnroll;
+﻿using NPOI.SS.UserModel.Charts;
+using OpenQA.Selenium.Support.UI;
+using Reqnroll;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Documents;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.WebDriver.Classes;
+using UL.Selenium.Portal.WERCSmart.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.SpecflowRewrite;
 
@@ -166,9 +173,141 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		public void VolatileOrganicCompoundSummarySectionConfirmDisplayTableExists(string tableLabel, string does_doesnot)
 		{
 			bool expected = does_doesnot == "does";
-			DisplayTable displayTable = new DisplayTable();
-			//Report.IsTrue();
+			DisplayTable displayTable = new DisplayTable(tableLabel);
+			Report.IsTrue(expected == !displayTable.IsNullOrEmpty(),$"Failure, failed to confirm '{tableLabel}' display table {does_doesnot} exist.", $"Success, confirmed '{tableLabel}' display table {does_doesnot} exist.");
 		}
+
+		[RegexStepDefinition(@"In the Volatile Organic Compound Summary Section '(.*)' display table, confirm '(.*)' column (does|does not) exist")]
+		public void VolatileOrganicCompoundSummarySectionDisplayTableColumnExists(string tableLabel, string columnLabel, string does_doesnot)
+		{
+			bool expected = does_doesnot == "does";
+			DisplayTable displayTable = new DisplayTable(tableLabel);
+			if(!Report.IsTrue(!displayTable.IsNullOrEmpty(), $"Failure, failed to confirm '{tableLabel}' display table does exist.", $"Success, confirmed '{tableLabel}' display table does exist."))
+			{
+				return;
+			}
+			Report.IsTrue(displayTable.ColumnLabelExists(columnLabel), $"Failure, failed to confirm '{tableLabel}' display table '{columnLabel}' column {does_doesnot} exist.", $"Success, confirmed '{tableLabel}' display table '{columnLabel}' column {does_doesnot} exist.");
+		}
+
+		[RegexStepDefinition(@"In the Volatile Organic Compound Summary Section '(.*)' display table '(.*)' column, confirm row with text '(.*)' (does|does not) exist")]
+		public void VolatileOrganicCompoundSummarySectionDisplayTableConfirmColumnContainsRowText(string tableLabel, string columnLabel, string expectedText, string does_doesnot)
+		{
+			bool expected = does_doesnot == "does";
+			DisplayTable displayTable = new DisplayTable(tableLabel);
+			if (!Report.IsTrue(!displayTable.IsNullOrEmpty(), $"Failure, failed to confirm '{tableLabel}' display table does exist.", $"Success, confirmed '{tableLabel}' display table does exist."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(displayTable.ColumnLabelExists(columnLabel), $"Failure, failed to confirm '{tableLabel}' display table '{columnLabel}' column does exist.", $"Success, confirmed '{tableLabel}' display table '{columnLabel}' column does exist."))
+			{
+				return;
+			}
+			Report.IsTrue(expected == displayTable.RowByColumnValueExists(columnLabel, expectedText), $"Failure, failed confirm '{tableLabel}' display table '{columnLabel}' column '{expectedText}' row {does_doesnot} exist.", $"Success, confirmed '{tableLabel}' display table '{columnLabel}' column '{expectedText}' row {does_doesnot} exist.");
+		}
+
+		[RegexStepDefinition(@"In the Volatile Organic Compound Summary Section '(.*)' display table '(.*)' column row with text '(.*)', confirm '(.*)' column (does|does not) have text: (.*)")]
+		public void VolatileOrganicCopoundSummarySectionDisplayTableColumnRowContainsColumnText(string tableLabel, string columnLabel1, string rowText1, string columnLabel2, string does_doesnot, string expectedText)
+		{
+			bool expected = does_doesnot == "does";
+			DisplayTable displayTable = new DisplayTable(tableLabel);
+			if (!Report.IsTrue(!displayTable.IsNullOrEmpty(), $"Failure, failed to confirm '{tableLabel}' display table does exist.", $"Success, confirmed '{tableLabel}' display table does exist."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(displayTable.ColumnLabelExists(columnLabel1), $"Failure, failed to confirm '{tableLabel}' display table '{columnLabel1}' column does exist.", $"Success, confirmed '{tableLabel}' display table '{columnLabel1}' column does exist."))
+			{
+				return;
+			}
+			if(!Report.IsTrue(displayTable.RowByColumnValueExists(columnLabel1, rowText1), $"Failure, failed confirm '{tableLabel}' display table '{columnLabel1}' column '{rowText1}' row does exist.", $"Success, confirmed '{tableLabel}' display table '{columnLabel1}' column '{rowText1}' row does exist."))
+			{
+				return;
+			}
+			Report.IsTrue(expected == displayTable.RowByColumnValue(columnLabel1, rowText1).TableCell(columnLabel2).Text.Equals(expectedText, StringComparison.Ordinal), $"Failure, failed to confirm '{tableLabel}' display table '{columnLabel1}' column '{rowText1}' row '{columnLabel2}' column {does_doesnot} have text: '{expectedText}'.", $"Success, confirmed '{tableLabel}' display table '{columnLabel1}' column '{rowText1}' row '{columnLabel2}' column {does_doesnot} have text: '{expectedText}'.");
+		}
+
+		[RegexStepDefinition(@"In the Volatile Organic Compound Summary Section '(.*)' display table, confirm each row in '(.*)' column (does|does not) display: (.*)")]
+		public void VolatileOrganicCompoundSummarySectionDisplayTableColumnRowsEachDisplay(string tableLabel, string columnLabel, string does_doesnot, string expectedText)
+		{
+			bool expected = does_doesnot == "does";
+			DisplayTable displayTable = new DisplayTable(tableLabel);
+			if (!Report.IsTrue(!displayTable.IsNullOrEmpty(), $"Failure, failed to confirm '{tableLabel}' display table does exist.", $"Success, confirmed '{tableLabel}' display table does exist."))
+			{
+				return;
+			}
+			if(!Report.IsTrue(displayTable.ColumnLabelExists(columnLabel), $"Failure, failed to confirm '{tableLabel}' display table '{columnLabel}' column does exist.", $"Success, confirmed '{tableLabel}' display table '{columnLabel}' column does exist."))
+			{
+				return;
+			}
+			bool output = true;
+			int iRow = 1;
+			foreach (DisplayTableRow displayTableRow in displayTable.RowsList)
+			{
+				string displayedText = displayTableRow.TableCell(columnLabel).Text;
+				output &= Report.IsTrue(expected == displayedText.Equals(expectedText, StringComparison.Ordinal), $"Failure, failed to confirm displayed value: '{displayedText}' {does_doesnot} match expected value: '{expectedText}'.", $"Success, confirmed displayed value: '{displayedText}' {does_doesnot} match expected value: '{expectedText}'.");
+				iRow++;
+			}
+			Report.IsTrue(output, $"Failure, failed to confirm all '{columnLabel}' column rows {(expected ? "do" : "do not")} match expected text: '{expectedText}'.", $"Success, confirmed all '{columnLabel}' column rows {(expected ? "do" : "do not")} match expected text: '{expectedText}'.");
+		}
+
+		[RegexStepDefinition(@"In the Volatile Organic Compound Summary Section '(.*)' display table, confirm it contains all rows in the following table:")]
+		public void VolatileOrganicCompoundSummarySectionDisplayTableDoesContainFollowingTable(string tableLabel, Table inputTable)
+		{
+			Report.UseSubSteps = true;
+			DisplayTable displayTable = new DisplayTable(tableLabel);
+			List<string> displayTableHeaderList = displayTable.ColumnLabelsStringList();
+			List<string> inputTableHeaderList = [.. inputTable.Header];
+			if (!Report.IsTrue(displayTableHeaderList.SequenceEqual(inputTableHeaderList), $"Failure, failed to confirm '{tableLabel}' display table column labels match input table header labels.", $"Success, confirmed '{tableLabel}' display table column labels match input table header labels."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(displayTable.RowsListCount() == inputTable.RowCount, $"Failure, '{tableLabel}' display table row count does not match input table row count.", $"Success, '{tableLabel}' display table row count does match input table row count."))
+			{
+				return;
+			}
+			int iRow = 0;
+			bool output = true;
+			foreach (DataTableRow inputTableRow in inputTable.Rows)
+			{
+				if (!displayTable.RowsList.Any(x => x.ColumnLabelsDictionary.Select(b => b.Value.Text).ToList().SequenceEqual(inputTableRow.Select(a => a.Value).ToList())))
+				{
+					Report.Error($"Failure, input table row #{iRow} is not contained in display table.");
+					output = false;
+				}
+				iRow++;
+			}
+			Report.IsTrue(output, $"Failure, failed to confirm '{tableLabel}' display table contains all rows in the input table.", $"Success, confirmed '{tableLabel}' display table contains all rows in the input table.");
+		}
+
+		[RegexStepDefinition(@"In the Volatile Organic Compound Summary Section '(.*)' display table, confirm it matches the following table:")]
+		public void VolatileOrganicCompoundSummarySectionDisplayTableMatchesFollowingTable(string tableLabel, Table inputTable)
+		{
+			Report.UseSubSteps = true;
+			DisplayTable displayTable = new DisplayTable(tableLabel);
+			List<string> displayTableHeaderList = displayTable.ColumnLabelsStringList();
+			List<string> inputTableHeaderList = [.. inputTable.Header];
+			if (!Report.IsTrue(displayTableHeaderList.SequenceEqual(inputTableHeaderList), $"Failure, failed to confirm '{tableLabel}' display table column labels match input table header labels.", $"Success, confirmed '{tableLabel}' display table column labels match input table header labels."))
+			{
+				return;
+			}
+			if (!Report.IsTrue(displayTable.RowsListCount() == inputTable.RowCount, $"Failure, '{tableLabel}' display table row count does not match input table row count.", $"Success, '{tableLabel}' display table row count does match input table row count."))
+			{
+				return;
+			}
+			bool output = true;
+			for (int iRow = 0; iRow < inputTable.RowCount; iRow++)
+			{
+				if (!displayTable.RowsList.Any(x => x.ColumnLabelsDictionary.Select(b => b.Value.Text).ToList().SequenceEqual(inputTable.Rows[iRow].Select(a => a.Value).ToList())))
+				{
+					Report.Error($"Failure, input table row #{iRow} does not match display table row #{iRow}.");
+					output = false;
+				}
+			}
+			Report.IsTrue(output, $"Failure, failed to confirm '{tableLabel}' display table matches the input table.", $"Success, confirmed '{tableLabel}' display table matches the input table.");
+		}
+		#endregion
+
+		#region Shared Steps
+
 		#endregion
 	}
 }
