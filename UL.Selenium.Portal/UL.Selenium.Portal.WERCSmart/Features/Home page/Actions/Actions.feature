@@ -16,6 +16,7 @@
 @Solutions
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:TheProduct
 @ReviewDocuments
+@SafetyDataSheetAuthoring
 @SHA
 @SummaryPage
 @CreateProducts
