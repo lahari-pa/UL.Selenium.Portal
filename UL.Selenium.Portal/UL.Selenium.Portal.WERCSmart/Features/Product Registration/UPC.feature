@@ -489,7 +489,7 @@ Scenario: [87832] View Shows Case UPC Data
 	Given I should see the Data Acceptance Page
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
 	Then In the Data Acceptance Section, click 'Accept' button
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	And I filter for the product saved as: TestCase87832
 	And I click Row Actions for the first product returned
 	And I click on the Row Action: View
@@ -758,7 +758,7 @@ Scenario: [95988] Mass Upload UPCs Floating
 	#And I confirm that Add Multiple UPC popup disappears and the values on the new product screen are the same as the UPC Upload document saved in the Table called: UPCTable95988
 	#Then I Confirm that the Add/Upload UPC Buttons remain stay visible when scrolling up and down the page
 	#Then I click Continue and should not see an error message
-	#And I navigate to the home page
+	#And In the Side Menu, click Labeled Link with My Products title
 	#And I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase95988
 
 @TestCase:109516
@@ -994,7 +994,7 @@ Scenario: [101023] UPC Step - Add Part Number
 	And In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Chalk
 	Then In the Summary Page, verify table data in column UPC Number showing the value: PART NUMBER
 	And I close the tab with Data Summary page
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	#And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase101023
 	Then In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase102023

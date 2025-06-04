@@ -674,10 +674,10 @@ Scenario: [80728] Ingredients - Transparency Ratio - FRAGRANCE component - inclu
 	And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger
 	Then I click the Publicly Disclosed checkbox for ingredient saved as: shared79436
 	And I verify the Transparency Score displays 0%
-	Given I navigate to the home page
 	#And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase80728
 	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase80728
+
 @TestCase:80720
 Scenario: [80720] Ingredients - Transparency Ratio - FLAVOR component - included in Denominator, not included in Numerator
 	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
@@ -724,7 +724,6 @@ Scenario: [80720] Ingredients - Transparency Ratio - FLAVOR component - included
 	And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger
 	Given I click the Publicly Disclosed checkbox for ingredient saved as: shared79431
 	And I verify the Transparency Score displays 0%
-	Given I navigate to the home page
 	#And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase80720
 	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase80720
@@ -820,6 +819,7 @@ Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulat
 	#Given I call Shared Step 65447 Ingredients - Add any chemical - DO Not click Continue
 	#	| ComponentName | Percent | PublicallyDisclosed | TradeSecret | PublicName |
 	#	| Water         | 50      | false               | false       |            |
+	Given I should see the Ingredients Page
 	Then In the Ingredients section, add component with component name: Water
 	Then In the Ingredients section, add component with component name: Shea Butter
 	Then In the Ingredients section, add component with component name: Hydrogenated Olive Oil
@@ -854,8 +854,9 @@ Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulat
 	Then In the Ingredients Section ingredients table, confirm row with component name: Hydrogenated Olive Oil is not displayed
 	Then In the Ingredients Section ingredients table, confirm row with component name: Stearic Acid is not displayed
 	Then In the Ingredients Section ingredients table, confirm row with component name: Coconut oil, methyl ester, glycerol-free is not displayed
-	And I navigate to the home page
-	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase84528
+
+	Then In the Side Menu, click Labeled Link with My Products title
+	Then In the Product Grid, delete the product saved as: TestCase84528
 
 @TestCase:80800
 Scenario: [80800] Ingredients - Transparency Ratio - Regular component
@@ -884,7 +885,7 @@ Scenario: [80800] Ingredients - Transparency Ratio - Regular component
 	And I edit the first component to show No for Publicly disclosed
 	And I verify the Transparency Score displays 0%
 	And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase80800
 
 @TestCase:109230
@@ -1027,7 +1028,7 @@ Scenario: [109230] Ingredients - Verify that the Added CAS / Component(s) and Se
 	#	| Chlorine                | 100     | No                  | Yes           | Choose...              |
 	#	| Formaldehyde            | 100     | No                  | No            | Choose...              |
 	#	| Sodium                  | 100     | Yes                 | No            | Undisclosed Ingredient |
-	#And I navigate to the home page
+	#And In the Side Menu, click Labeled Link with My Products title
 
 @TestCase:95487
 Scenario: [95487] Formulation Screen - Ingredients Staying
@@ -1149,7 +1150,6 @@ Scenario: [133335] Formulation Screen FIFRA and LOLI Validation Message
 	And I click continue
 	Then I confirm there is a popup view titled: Product Contains Ingredients Typical of a Pesticide in the Ingredients page
 	Then In the popup view with the following title: Product Contains Ingredients Typical of a Pesticide I click the Confirm button
-	Given I click the Home navigation icon
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase133335
 	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase133335
@@ -1249,12 +1249,9 @@ Scenario: [158853] Ingredient Identifier
 	Given I switch to the tab with Data Summary page
 	Given In the Summary Page, the 'Ingredient Reference Number (Optional)' section should be showing the following value: test 123 @#
 	Given I close the tab with Data Summary page
-	#Then I call Shared Step 57885 (Data Acceptance - Click Accept - Happy Path)
 	Given I should see the Data Acceptance Page
-	Then In the Data Acceptance Section, check 'Agreed' checkbox
-	Then In the Data Acceptance Section, click 'Accept' button
-	Then I navigate to the home page
-	Then the WERCSmart homepage should load
+	Then In the Side Menu, click Labeled Link with My Products title
+	Then In the Product Grid, delete the product saved as: TestCase158853
 
 #Created by Saikiran Chittampally
 @TestCase:209549
@@ -1358,7 +1355,7 @@ Scenario: [209549] Ingredient Table - Sum of Ingredients: Decimal Place Maximum 
 	Then In the Data Acceptance Section, click 'Accept' button
 	Given The Purchase Summary Page is displayed
 	Then In the Purchase Summary Page, click the 'Home' button
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase209549)
 	Given I call Shared Step (SHA > Select Product > Review) for product saved as: TestCase209549
@@ -1496,7 +1493,7 @@ Scenario: [207581] Oven Cleaner - Pump Spray - (RU000798) - New Flow Testing
 	Given in the Regulatory Documents to Provide page I click Continue
 	Then I should see the Additional Documents to Provide Page
 	Given in the Additional Documents to Provide page I click Continue
-	Then In the Additional Documents to Provide: 'Provide Full Product Label (required)' error message should display: Document is required: Please upload a PDF of the product label (full label).
+	Then In the Additional Documents to Provide, section 'Provide Full Product Label (required)' error message should display: Document is required: Please upload a PDF of the product label (full label).
 	Then In the Additional Documents to Provide, upload PDF document to Provide Full Product Label (required) field
 	Given in the Additional Documents to Provide page I click Continue
 	Then I should see the Optional Reports and Documents Available for Purchase Page

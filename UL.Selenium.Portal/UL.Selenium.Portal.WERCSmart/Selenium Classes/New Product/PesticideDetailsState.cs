@@ -562,17 +562,10 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 				IWebElement State = row.FindElement(By.XPath($".//td//div"));
 				getState = State.Text;
 				bool statusIsSelected = new PesticideDetailsStateRegistrationRow(getState).SelectedStatusForState("Registered");
-				if (!new PesticideDetailsStateRegistrationRow(getState).VerifyExpirationImportedMark())
+				if (!new PesticideDetailsStateRegistrationRow(getState).EnterStatus(status))
 				{
-					if (!State.VisibleInViewport())
-					{
-						State.ScrollToElement();
-					}
-					if (!new PesticideDetailsStateRegistrationRow(getState).EnterStatus(status))
-					{
-						Report.Failure($"Failed to selest status {status} for state {getState}");
-						result = false;
-					}
+					Report.Failure($"Failed to selest status {status} for state {getState}");
+					result = false;
 				}
 			}
 			return result;

@@ -99,5 +99,5 @@ Scenario: [142371] Battery - Data Consents
 	Given A Summary page should open in a new browser tab
 	Given I confirm the Consent to Tier 2.1, 2.2, 4.2 Data shows the answer: Accept
 	Given I close the browser tab with the Summary page
-	Given I click the Home navigation icon
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: ThisProduct

@@ -433,7 +433,7 @@ Then I should see an error message: Ingredients require Functional Purpose or In
 	#Then I confirm that the number of errors found in the Ingredients Popup matches the expectation of: 4
 	#Then I click the close button for the CA Cleaning Ingredients Popup
 	#And The ingredients error message should be showing: Please fix all errors related to California Cleaning Right to Know before proceeding.
-	Given I click the Home navigation icon
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase139205
 
 
@@ -590,5 +590,5 @@ Given for ingredient: D-Glucopyranose, oligomeric, decyl octyl glycosides the In
 Then I confirm the following Functional Purpose is displayed: Non-Functional Ingredient
 Given I click continue
 Given I should see the Waste Classification Data Page
-Given I click the Home navigation icon
+Given In the Side Menu, click Labeled Link with My Products title
 Given I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase158172

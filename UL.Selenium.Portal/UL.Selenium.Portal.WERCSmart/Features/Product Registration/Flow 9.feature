@@ -296,7 +296,7 @@ Scenario: [58098] Ingredient Table - Selecting Publicly Disclosed/Label Name
 	Given In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Energy or Nutritional Bars
 	Given I close the tab with Data Summary page
     Given I should see the Data Acceptance Page
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase58078
 
 @TestCase:58079
@@ -391,7 +391,7 @@ Scenario: [58079] Energy or Nutritional Powder/Mix - RU000706
 	Given In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Energy or Nutritional Powder/Mix
 	Given I close the tab with Data Summary page
     Given I should see the Data Acceptance Page
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase58079
 
 @TestCase:58073
@@ -755,7 +755,7 @@ Scenario: [58075] Nutritional Supplement for Infants - Liquid - RU001365
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
 	Then in the Optional Comments page I click Continue
 
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase58075
 
 @TestCase:58089
@@ -831,7 +831,7 @@ Scenario: [58089] Nutritional Supplements for Domesticated Animals - RU001239
 	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: test
 	Then in the Optional Comments page I click Continue
 
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase58089
 
 @TestCase:58097
@@ -872,7 +872,7 @@ Scenario: [58097] Ingredient Search in Registration
 	Then In the component search box, enter text: 7732-18-5
 	Then In the component search box, confirm search results list is displayed
 	Then In the component search box, click result where CAS number contains: 7732-18-5
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase58097
 
 @tfs_design

@@ -144,7 +144,7 @@ Scenario: [70539] Add an Ingredient (Basic) and remove
 	Given I click: YES in the 'Remove Component from My Ingredients' pop up
 	Then I confirm My Ingredient saved as: water70539 in My Library has been removed from the grid
 	# delete TestCase70539
-	Then I navigate to the home page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase70539
 
 @TestCase:70556
@@ -180,7 +180,7 @@ Scenario: [70556] Add an Ingredient (Trade secret) and remove
 	Then I confirm the component name in the delete product popup matches the ingredient saved as: water70556
 	Given I click: YES in the 'Remove Component from My Ingredients' pop up
 	Then I confirm My Ingredient saved as: water70556 in My Library has been removed from the grid
-	Then I navigate to the home page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase70556
 
 @TestCase:70567
@@ -222,7 +222,7 @@ Scenario: [70567] Add an Ingredient (Publicly Disclosed) and remove
 	Then I confirm the component name in the delete product popup matches the ingredient saved as: formaldehyde70567
 	Given I click: YES in the 'Remove Component from My Ingredients' pop up
 	Then I confirm My Ingredient saved as: formaldehyde70567 in My Library has been removed from the grid
-	Then I navigate to the home page
+	Then In the Side Menu, click Labeled Link with My Products title
 	Then I delete the product: TestCase70567
 
 @TestCase:73329
@@ -261,7 +261,7 @@ Scenario: [73329] Edit Ingredient
 		| 9     | N                        | Y                  | =                  |
 		| 10    | Y                        | N                  | +                  |
 	And I click Save in the My Ingredients tab
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Then The home screen should load
 	Given I click on My Account
 	Given In the My Account page I navigate to the My Library page
@@ -281,7 +281,7 @@ Scenario: [73329] Edit Ingredient
 		| 9     | N                        | Y                  | =                  |
 		| 10    | Y                        | N                  | =                  |
 	And I click Save in the My Ingredients tab
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Then The home screen should load
 	Given I click on My Account
 	Given In the My Account page I navigate to the My Library page
@@ -336,7 +336,7 @@ Scenario: [73328] Pagination functionality
 	Given I click page number: 3 in the My Ingredients grid navigation
 	Then I confirm the current active page number in the My Ingredients grid is: 3
 	And I confirm the ingredients for page 3 saved as: My Library Ingredients Pagination are displayed
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 
 @TestCase:73326
 Scenario: [73326] Searching an Ingredient
@@ -349,7 +349,7 @@ Scenario: [73326] Searching an Ingredient
 	Then I confirm that the smart search results contain a chemical with CAS: 50-00-0 and Name: Formaldehyde
 	Given I enter the text: Formald into the My Ingredients search field
 	Then I confirm that the smart search results contain a chemical with CAS: 50-00-0 and Name: Formaldehyde
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 
 @TestCase:70516
 Scenario: [70516] Add and Remove Packaging Type

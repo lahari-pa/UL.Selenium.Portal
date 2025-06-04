@@ -205,7 +205,7 @@ Given I should see the Data Acceptance Page
 	Then In the Data Acceptance Section, click 'Accept' button
 
 Given If purchase details are showing click confirm order
-Given I navigate to the home page
+Given In the Side Menu, click Labeled Link with My Products title
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase120814)
 Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120814 and its status is: Submitted
@@ -969,7 +969,7 @@ Given I should see the Data Acceptance Page
 	Then In the Data Acceptance Section, click 'Accept' button
 
 Given If purchase details are showing click confirm order
-Given I navigate to the home page
+Given In the Side Menu, click Labeled Link with My Products title
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase120815)
 Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase120815)
@@ -1455,7 +1455,7 @@ Given I should see the Data Acceptance Page
 	Then In the Data Acceptance Section, click 'Accept' button
 
 Given If purchase details are showing click confirm order
-Given I navigate to the home page
+Given In the Side Menu, click Labeled Link with My Products title
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase120816)
 Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase120816)
@@ -1531,7 +1531,7 @@ Given I should see the Data Acceptance Page
 	Then In the Data Acceptance Section, click 'Accept' button
 
 Given If purchase details are showing click confirm order
-Given I navigate to the home page
+Given In the Side Menu, click Labeled Link with My Products title
 Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 Given I call Shared Step 49841 (SHA - Search for exact WPS ID in Submitted Status for saved as: TestCase120817)
 Given I call Shared Step 40657 (SHA Manager - Submitted - Select product > process product data for product saved as: TestCase120817)
@@ -1609,7 +1609,7 @@ Then I call Shared Step 57561b (The Product - Enter Product Name: TC 120848 - Fo
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
 	Then In the Data Acceptance Section, click 'Accept' button
 
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase120848)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase120848 and its status is: Submitted
@@ -1794,7 +1794,7 @@ Then I call Shared Step 57561b (The Product - Enter Product Name: TC 126691 - Fo
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
 	Then In the Data Acceptance Section, click 'Accept' button
 
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase126691)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase126691 and its status is: Submitted
@@ -1871,7 +1871,7 @@ Then I call Shared Step 57561b (The Product - Enter Product Name: TC 121986 - fo
 	Then In the Data Acceptance Section, check 'Agreed' checkbox
 	Then In the Data Acceptance Section, click 'Accept' button
 
-	Given I navigate to the home page
+	Given In the Side Menu, click Labeled Link with My Products title
 	Given I call Shared Step 65080 (Login to Studio and Open SHA manager)
 	Given I call Shared Step 49841 (SHA - Search for exact WPS ID in All Status for saved as: TestCase121986)
 	Given In the SHA manager grid I see the WPS ID I have saved as product: TestCase121986 and its status is: Submitted

@@ -217,6 +217,6 @@ Scenario: [63521] Kit Product - One or more inputs is regulated for transport - 
 		| Product is Regulated for Transport | Not Regulated | False         |
 	And In the Data Summary page I confirm that I do not see any errors
 	And I close the Data Summary tab
-	And I navigate to the home page
+	And In the Side Menu, click Labeled Link with My Products title
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase63521
 
