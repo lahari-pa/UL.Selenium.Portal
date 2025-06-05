@@ -1117,6 +1117,8 @@ Scenario: [95487] Formulation Screen - Ingredients Staying
 	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase95487
 
+#2025/06 Test case is being rewritten
+@ignore
 @TestCase:133335
 Scenario: [133335] Formulation Screen FIFRA and LOLI Validation Message
 	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
