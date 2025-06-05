@@ -379,70 +379,6 @@ Scenario: [88879] WERCSmart Portal - UPC - Verify the OMSID Field is NO Longer R
 	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase88879
 
-#Removed from regression 2024/06
-@ignore
-@TestCase:91801
-Scenario: [91801] Duplicate UPC is not permitted within WERCSmart system - Forward Product registration - Case UPC
-	Given I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto7 and Open SHA manager)
-	Then I click the following option in the bottom menu: Search
-	Then I save the username for TReVor test user: ProductAccount to context as: AccountUsername
-	And In SHA Manager ProductSearch page I run search:
-		| Search Term | Search Value                  |
-		| Status      | Completed                     |
-		| Supplier    | QA_Automation_ProductsAccount |
-		| User        | saved as AccountUsername      |
-	Then I save a UPC number for any product in the grid to context as: ExistingUPC
-	Given I navigate to the landing page
-	Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
-	Then I filter the products by: Accepted by Retailers
-	And I save the ProductID of the first Product in the grid no in recertification as: testProduct91157
-	Given I click Bulk Actions in the Products Grid
-	Given I click Forward Product Registration in the Bulk Actions window
-	Then I should see the header: Forward Product Registration on the Forward Product Registration window
-	And I confirm the active Forward Product Registration tab is: Select Products
-	Then I select the product with ID saved as: testProduct91157 under the Select Products tab
-	And I select the product with ID saved as: testProduct91157 under the right hand panel of the Select Products tab
-	Given I click continue on the Forward Product Registration page
-	#Then In the Forward Product Registration Screen I select the first retailer under Other Retailers
-	Given in the Select Retailers tab under Forward Product Registration I select the retailer: Walgreens
-	And I click continue on the Forward Product Registration page
-	Given I select the first product under the Select UPCs tab
-	Given I click the Add Casepack button under the Select UPCs tab
-	Then I wait for the Add Casepack popup to appear
-	And In the Add Casepack modal window I enter the following information:
-		| UPC Number           | Type      | Size (Weight Ounces) | Quantity | Transportation Options | Retailer |
-		| saved as ExistingUPC | Cardboard | 32                   | 32       | 4A: steel box          | WG       |
-	And In the Case UPC modal window I click Save
-	Then I check that the alert displayed contains text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review.
-	
-#Removed from regression 2024/06
-@ignore
-@TestCase:91735
-Scenario: [91735] Duplicate UPC is not permitted within WERCSmart system - Forward Product registration - single UPC
-	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I log in with the account saved in TReVor as: ProductAccount
-	Given I create a product with name: Chalk1 and UPC: UPC91801_1 and take to completed using Test Case 75335and SHA account: SHAQAAuto7 with no login step and save as: TestCase91801_Product1
-
-	Given I navigate to the landing page
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Premium Subscription Account
-	Given I create a product with name: Chalk2 and UPC: UPC91801_2 and take to completed using Test Case 75335 with no login step and save as: TestCase91801_Product2
-	Given I navigate to the landing page
-	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I log in with the account saved in TReVor as: ProductAccount
-	Given I click Bulk Actions in the Products Grid
-	Given I click Forward Product Registration in the Bulk Actions window
-	Given I select the product saved as: TestCase91801_Product1 under the Select Products tab
-	Given I click continue on the Forward Product Registration page
-	Given in the Select Retailers tab under Forward Product Registration I select the retailer: Walgreens
-	Given I click continue on the Forward Product Registration page
-	Given I select the first product under the Select UPCs tab
-	Given I click the Add UPC button under the Select UPCs tab
-	And In the Add UPC modal window I enter the following information:
-		| UPC Number          | Type      | Size (Ounces) | Retailer |
-		| saved as UPC91801_2 | Cardboard | 32            | WG       |
-	And In the UPC modal window I click Save
-	Then I check that the alert displayed contains text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review.
-
 #Removed from regression: 2025/04
 @ignore
 @TestCase:91798
@@ -504,35 +440,6 @@ Scenario: [91798] Duplicate UPC is not permitted within WERCSmart system - New P
 	#Given I call Shared Step 42214 (Delete a Product from the Product grid) to delete product: TestCase91798
 	Then In the Side Menu, click Labeled Link with My Products title
 	Then In the Product Grid, delete the product saved as: TestCase91798
-
-#Removed from regression 2024/06
-@ignore
-@TestCase:91800
-Scenario: [91800] Duplicate UPC is not permitted within account - Forward Product registration - Case UPC
-	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I log in with the account saved in TReVor as: ProductAccount
-	Given I create a product with name: Chalk1 and UPC: UPC91800_1 and take to completed using Test Case 75335and SHA account: SHAQAAuto7 with no login step and save as: TestCase91800_Product1
-	Given I navigate to the landing page
-	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I log in with the account saved in TReVor as: ProductAccount
-	Given I create a product with name: Chalk2 and UPC: UPC91800_2 and take to completed using Test Case 75335and SHA account: SHAQAAuto7 with no login step and save as: TestCase91800_Product2
-	Given I navigate to the landing page
-	#Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Given I log in with the account saved in TReVor as: ProductAccount
-	Given I click Bulk Actions in the Products Grid
-	Given I click Forward Product Registration in the Bulk Actions window
-	Given I select the product saved as: TestCase91800_Product1 under the Select Products tab
-	Given I click continue on the Forward Product Registration page
-	Given in the Select Retailers tab under Forward Product Registration I select the retailer: Walgreens
-	Given I click continue on the Forward Product Registration page
-	Given I select the first product under the Select UPCs tab
-	Given I click the Add Casepack button under the Select UPCs tab
-	Then I wait for the Add Casepack popup to appear
-	And In the Add Casepack modal window I enter the following information:
-		| UPC Number          | Type      | Size (Weight Ounces) | Quantity | Transportation Options | Retailer |
-		| saved as UPC91800_2 | Cardboard | 32                   | 32       | 4A: steel box          | WG       |
-	And In the Case UPC modal window I click Save
-	Then I check that the alert displayed contains text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review.
 
 #Removed from regression: 2024/09
 @ignore
@@ -603,88 +510,6 @@ Scenario: [91741] Duplicate UPC is not permitted within account - New Product re
 	And I should see a list style form error with text: There are UPCs that already exists within the WERCSmart database. Please review the UPCs associated within your account, or request to forward a manufacturer's UPCs by creating a new registration as a request from a Distributor. For UPCs that exist within your WERCSmart account, you may use the Report feature to generate a report for your review. UPCs:
 	And In the Side Menu, click Labeled Link with My Products title
 	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91741
-
-#Removed from regression 2024/06
-@ignore
-@TestCase:91100
-Scenario: [91100] Duplicate UPC is not permitted within account - New Product registration - Bulk Upload
-	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	Given I log in with the account saved in TReVor as: ProductAccount
-	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
-	Given In the Side Menu, click Labeled Link with Add Product title
-	Given In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
-	Given in the New Product page I click Continue
-	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
-	Then I save the product information as: TestCase91100
-	#And I call Shared Step 59680 (Product Information - US only, No Child, No GHS, No Direct Ship, No PLP, No GNFR - Continue - Happy Path)
-	Given I should see the Product Information Page
-	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
-	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
-	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
-	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
-	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
-	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
-	Then in the Product Information page I click Continue
-
-	#And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
-	Given I should see the Physical and Chemical Properties Page
-	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
-	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' confirm option is selected: Solid
-	Then In the Physical and Chemical Properties Section, set the option in section: 'Secondary Physical State' to: Solid
-	Then In the Physical and Chemical Properties Section, for question: 'When mixed with an equal amount of water, will this produce a solution with a pH <= 2 or a pH >= 12.5?' set the option to: No
-	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
-	Then in the Physical and Chemical Properties page I click Continue
-
-	#And I call Shared Step 29181 (Ingredients - add any chemical) with name: Water
-	Given I should see the Ingredients Page
-	Then In the Ingredients section, add the following ingredients:
-	| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
-	| component name | Water       | 100     |                     |               |             |
-	Then in the Ingredients page I click Continue
-
-
-	#And I call Shared Step 57503 (Regulatory Information 1- TSCA(Random) - Prop 65(No) - Continue - Happy Path)
-	Given I should see the Inventory Status, Prop 65 (US) Page
-	Given In the Inventory Status, Prop 65 (US) Section, set the radio option in section: 'U.S. Toxic Substances Control Act (TSCA) status' to: This product is subject to and complies with TSCA chemical Inventory listing requirements.
-	Given In the Inventory Status, Prop 65 (US) Section, set the option in section: 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)?' to: No
-	Given in the Inventory Status, Prop 65 (US) page I click Continue
-
-	And I call Shared Step 75146 (Retailer - Select One or More Retailers that DO NOT REQUIRE Vendor ID or Additional UPC Information, Click Done, Click Continue)
-	And I click Sample File link and verify the Upload UPC form and save it as test91100
-		| UPC           | Name   | Quantity | Size | Internal SKU | US: Part Number | US: Item Number | GP: Part Number | SP: Part Number | TG: DPCI    | HD: OMSID | CT: Item Number   | Green Good Housekeeping | Green Seal | EPA Safer Choice | Cradle to Cradle | UL Ecologo | EWG Verified | Green Tick | Madesafe | NSF Sustainability Certified |
-		| 823973000000  | Saco 1 | 1        | 100  | KS955AR      | 11AB45          | 1001            | 1111            | A0001           | 111-22-0001 | 100000001 | 123-1234,123-1230 | Yes                     |            |                  |                  |            | Yes          |            |          | Yes                          |
-		| 0037600724210 | Saco 2 | 2        | 101  |              | 12AB56          | 1002            | 2222            | B0002           | 111-22-0002 | 100000002 | 123-1234,123-1231 |                         | Yes        |                  |                  |            |              | Yes        |          |                              |
-		| 978959000000  | Saco 3 | 3        | 102  |              | 12AC67          | 1003            | 3333            | C0003           | 111-22-0003 | 100000003 | 123-1234,123-1232 |                         |            | Yes              |                  |            |              |            |          |                              |
-		| 688267000000  | Saco 4 | 4        | 103  | KS956AG      | 12AD89          | 1004            | 4444            | D0004           | 111-22-0004 | 100000004 | 123-1234,123-1233 |                         |            |                  | Yes              |            |              |            | Yes      |                              |
-		| 854911000000  | Saco 5 | 5        | 104  | KS957AT      | 12AF00          | 1005            | 5555            | E0005           | 111-22-0005 | 100000005 | 123-1234,123-1234 |                         |            |                  |                  | Yes        |              |            |          |                              |
-	#And I call Shared Step 65080b (Login to Studio as user saved as: SHAQAAuto9 and Open SHA manager)
-	And I call Shared Step 65080 (Login to Studio and Open SHA manager)
-	Given I click the following option in the bottom menu: Search
-	Given I save the username for TReVor test user: ProductAccount to context as: AccountUsername
-	Given In SHA Manager ProductSearch page I run search:
-		| Search Term | Search Value |
-		| Status      | Completed    |
-	And I find the UPC number for: 5 products in the grid and save them to context starting with: ExistingUPC
-	Then I add the UPC numbers saved to context starting with: ExistingUPC to the UPC bulk upload spreadsheet: test91100
-	Given I navigate to the landing page
-	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
-	Given I log in with the account saved in TReVor as: ProductAccount
-	Given I search for the product saved as: TestCase91100
-	Given I edit the first product in results
-	And In the New Product page I click tab: Recipient and UPC Details
-	And I click the page heading: Global Trade Item Number (GTIN) / Universal Product Code (UPC)
-	Then I should see the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
-	And I click the 'Upload File' button and upload the file saved as: test91100
-	Then I confirm that the Add Multiple UPC window opens
-	Then In the Add Multiple dialog box I select all UPCs
-	Then In the Add Multiple dialog box I select the packaging type: <first>
-	Given In the Add Multiple dialog box I click Next
-	And In the Add Multiple dialog box I select all Retailers
-	Then In the Add Multiple dialog box I click Finish
-	Given I click continue
-	Then I should see a list style form error with text: Please fix UPC errors
-	And In the Side Menu, click Labeled Link with My Products title
-	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase91100
 
 @TestCase:91157
 Scenario: [91157] Duplicate UPC is not permitted within account - Forward Product registration - single UPC
