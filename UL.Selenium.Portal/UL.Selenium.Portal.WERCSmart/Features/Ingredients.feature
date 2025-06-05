@@ -862,10 +862,29 @@ Scenario: [84528] Ingredients - Allow to delete multiple ingredients in formulat
 Scenario: [80800] Ingredients - Transparency Ratio - Regular component
 	#Given I call Shared Step 67823 (Login to WERCSmart - Products Automation Account)
 	Given I log in with the account saved in TReVor as: ProductAccount
-	And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
-	And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+
+	#And I call Shared Step 57753 (Create a New Registration via Register New Product (expanded menu))
+	Then In the Side Menu, click Labeled Link with Add Product title
+	Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
+	Then in the New Product page, I click Continue
+
+	#And I call Shared Step 57500 (The Product- Enter name, select product type - Continue - Happy Path): Chalk
+	Then I should be on the The Product Page
+	And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: Chalk_#80800
+	And In the Product Section, set the option in section: 'Type of Product (select)' to: Chalk
+	Then in the The Product page, I click Continue
+
 	Then I save the product information as: TestCase80800
-	And I call Shared Step 85284 - Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue
+	#And I call Shared Step 85284 - Product Information - US & Canada, Child (No), OSHA (No), DSV (No), PLP (YES), GNFR (No), Continue
+	Given I should see the Product Information Page
+	Then In the Product Information Section, confirm the option in section: 'Retailers will be selling my product at their store locations in (select either or both)' is checked for: United States
+	Then In the Product Information Section, set the option in section: 'Product is marketed for use by, or on, a child (US is 12 and under; Canada is 14 and under)' to: No
+	Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	Then in the Product Information page I click Continue
+
 	#And I call Shared Step 26897 (Physical and Chemical Properties - Solid only available - continue)
 	Given I should see the Physical and Chemical Properties Page
 	Then In the Physical and Chemical Properties Section, the section: 'Primary Physical State' should be showing the option: Solid
@@ -875,18 +894,24 @@ Scenario: [80800] Ingredients - Transparency Ratio - Regular component
 	Then In the Physical and Chemical Properties Section, set the option in section: 'Select the best Water Solubility description' to: Soluble in water
 	Then in the Physical and Chemical Properties page I click Continue
 
-	And I verify the Transparency Score displays 0%
+	Given I should see the Ingredients Page
+	And In the Ingredients section, verify Transparency displays value: 0%
 	And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger
-	And call Shared Step 80090 - Ingredients - Add non-generic chemical, set to publicly Disclosed, select public name and save ingredient as: TestCase80800Component
-		| CASNumber | ComponentName | Percentage | Publicly Disclosed | Public Name |
-		| 108-95-2  | Phenol        | 57         | Yes                | Phenol      |
-	And I verify the Transparency Score displays 100%
+
+	#And call Shared Step 80090 - Ingredients - Add non-generic chemical, set to publicly Disclosed, select public name and save ingredient as: TestCase80800Component
+	#	| CASNumber | ComponentName | Percentage | Publicly Disclosed | Public Name |
+	#	| 108-95-2  | Phenol        | 57         | Yes                | Phenol      |
+	Then In the Ingredients section, add the following ingredients:
+		| SearchType     | SearchValue | Percent | Publicly Disclosed? | Trade Secret? | Public Name |
+		| component name | Water       | 100     | True                |               | Water       |
+
+	And In the Ingredients section, verify Transparency displays value: 100%
 	And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a success
 	And I edit the first component to show No for Publicly disclosed
-	And I verify the Transparency Score displays 0%
+	And In the Ingredients section, verify Transparency displays value: 0%
 	And In the Ingredients page I confirm the Publicly Disclosed Transparency score is flagged as a danger
-	And In the Side Menu, click Labeled Link with My Products title
-	And I call Shared Step 43758 (Product Grid- Filter for Product- Select Product - Delete) for product: TestCase80800
+	Then In the Side Menu, click Labeled Link with My Products title
+	Then In the Product Grid, delete the product saved as: TestCase80800
 
 @TestCase:109230
 Scenario: [109230] Ingredients - Verify that the Added CAS / Component(s) and Selected Disclosure(s) Display Accurately in the Summary Tab

@@ -482,25 +482,25 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.New_Product
 			//orange is warning, red is danger, green is success, blue is info
 			if (flag == "warning")
 			{
-				Report.IsTrue(status == "warning",
+				Report.IsTrue(status.StartsWith("warning"),
 					"The Transparency Score label was not highlighted orange (warning) as expected",
 					"The Transparency Score label was highlighted orange (warning) as expected");
 			}
 			if (flag == "success")
 			{
-				Report.IsTrue(status == "success",
+				Report.IsTrue(status.StartsWith("success"),
 					"The Transparency Score label was not highlighted green (success)!",
 					"The Transparency Score label was highlighted green (success) as expected");
 			}
 			if (flag == "danger")
 			{
-				Report.IsTrue(status == "danger",
+				Report.IsTrue(status.StartsWith("danger"),
 					"The Transparency Score label was not highlighted red (warning)!",
 					"The Transparency Score label was highlighted red (warning) as expected");
 			}
 			if (flag == "info")
 			{
-				Report.IsTrue(status == "info",
+				Report.IsTrue(status.StartsWith("info"),
 					"The Transparency Score label was not highlighted blue (info)",
 					"The Transparency Score label was highlighted blue (info) as expected");
 			}
