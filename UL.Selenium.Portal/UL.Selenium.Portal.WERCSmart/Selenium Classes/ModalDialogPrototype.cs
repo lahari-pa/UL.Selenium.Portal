@@ -61,7 +61,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 		{
 			Report.Info($"Attempting to confirm if the modal is displayed.");
 			IWebElement modalElement = this.FindElement(this.ContainerElementLocator, 1);
-			if (modalElement != null)
+			if (modalElement.WaitUntilElementVisible(60))
 			{
 				return modalElement.Displayed;
 			}
