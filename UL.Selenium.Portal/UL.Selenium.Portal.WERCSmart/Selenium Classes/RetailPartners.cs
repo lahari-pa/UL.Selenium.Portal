@@ -201,7 +201,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool HeaderShowing(string header, bool exact = true)
 		{
-			IList<IWebElement> headers = this.FindElements(By.XPath("//div[@id='mainBody']//h2"), 2);
+			IList<IWebElement> headers = this.FindElements(By.XPath("//div[@id='mainBody']//h3"), 2);
 			return headers.Any(x => x.Text.Contains(header));
 		}
 

@@ -124,7 +124,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			}
 		}
 
-		[RegexStepDefinition(@"In the Side Menu, click Labeled Link with (My Products|Add Product|Alerts|Retail Partners|Product Suite|My Reports|Shopping Cart|Webinar|Support|Chat) title")]
+		[RegexStepDefinition(@"In the Side Menu, click Labeled Link with (My Products|Add Product|Alerts|Retailers|Product Suite|My Reports|Shopping Cart|Webinar|Support|Chat) title")]
 		public void SideMenuClickLabeledLinkWithTitle(string titleLabel)
 		{
 			SideMenu sideMenu = new SideMenu();
