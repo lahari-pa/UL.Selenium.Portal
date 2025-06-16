@@ -197,12 +197,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		IWebElement DataConsentTierToggle(string name) => this.FindElement(By.XPath($"//tr[td//div[contains(text(), '{name}')]]//following-sibling::td//input"), 2);
 		IWebElement DataConsentTierToggleSpan(string name) => this.FindElement(By.XPath($"//tr[td//div[contains(text(), '{name}')]]//following-sibling::td//span"), 2);
+		IList<IWebElement> headers => this.FindElements(By.XPath("//div[@id='mainBody']//h3"), 2);
 		protected override By ContainerElementLocator => By.XPath(BasePath);
 
 		public bool HeaderShowing(string header, bool exact = true)
 		{
-			IList<IWebElement> headers = this.FindElements(By.XPath("//div[@id='mainBody']//h2"), 2);
-			return headers.Any(x => x.Text.Contains(header));
+			return this.headers.Any(x => x.Text.Contains(header));
 		}
 
 		public bool DataConsentTierToggleExists(string tiername)

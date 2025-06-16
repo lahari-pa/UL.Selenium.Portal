@@ -1,7 +1,9 @@
 ﻿using Reqnroll;
+using System;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
 
 
@@ -11,9 +13,21 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 	class Steps_RetailPartners
 	{
 		[RegexStepDefinition(@"In the Retail Partners page, click the (.*) retailer link")]
-		public void ClickTheRetailerLink(string retailerText)
+		public void ClickTheRetailerLink(string retailer)
 		{
-			new Steps_Prototype().ClickLinkElement(retailerText);
+			GeneralUtilities.Wait_for_load_finish();
+			var selRetailPartners = new RetailPartners();
+
+			if (!selRetailPartners.WaitForContainerToBeVisible(30))
+			{
+				throw new Exception("Page failed to load!");
+			}
+
+			Report.IsTrue(selRetailPartners.ClickRetailer(retailer),
+				$"Failed to click retailer {retailer} !",
+				$"Retailer {retailer} was selected successfully!");
+			GeneralUtilities.Wait_for_load_finish();
+			Report.Screenshot();
 		}
 
 
@@ -121,6 +135,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			Report.IsTrue(new RetailPartners().RetailerDisplayedBelowHeading(heading, retailer), $"Retailer '{retailer}' is displayed under All Retailers ", $"Retailer  '{retailer}' is displayed under All Retailers ");
 		}
 
+
+		[RegexStepDefinition(@"In the Retail Partners page, I confirm that there is a section labeled: (.*)")]
+		public void ConfirmSectionShowing(string header)
+		{
+			Report.IsTrue(new RetailPartnersDetails().HeaderShowing(header),
+				$"Header {header} was not showing on page!",
+				$"Header {header} was showing, as expected!");
+		}
+
+		[RegexStepDefinition(@"In the Retail Partners page, Retail partner details should be showing text: (.*)")]
+		public void RetailPatnersDetailShouldBeShowing(string text)
+		{
+			string showing = new RetailPartnersDetails().GetDCDescription().Trim();
+			text = text.Trim();
+			Report.IsTrue(showing == text, $"Text was not showing: {text}, Instead found: {showing}", $"Text was showing: {text}  as expected!");
+		}
 
 
 
