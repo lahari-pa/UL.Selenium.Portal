@@ -140,15 +140,15 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		public void ConfirmSectionShowing(string header)
 		{
 			Report.IsTrue(new RetailPartnersDetails().HeaderShowing(header),
-				"Header '" + header + "' was not showing on page!",
-				"Header '" + header + "' was showing, as expected!");
+				$"Header {header} was not showing on page!",
+				$"Header {header} was showing, as expected!");
 		}
 
 		[RegexStepDefinition(@"In the Retail Partners page, Retail partner details should be showing text: (.*)")]
 		public void RetailPatnersDetailShouldBeShowing(string text)
 		{
 			string showing = new RetailPartnersDetails().GetDCDescription();
-			Report.IsTrue(showing == text.Trim(), $"Text was not showing: {text}.Trim(), Instead found: {showing}", $"Text was showing: {text}.Trim()  as expected!");
+			Report.IsTrue(showing == text.Trim(), $"Text was not showing: {text.Trim()}, Instead found: {showing.Trim()}", $"Text was showing: {text.Trim()}  as expected!");
 		}
 
 
