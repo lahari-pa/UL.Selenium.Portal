@@ -147,8 +147,9 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		[RegexStepDefinition(@"In the Retail Partners page, Retail partner details should be showing text: (.*)")]
 		public void RetailPatnersDetailShouldBeShowing(string text)
 		{
-			string showing = new RetailPartnersDetails().GetDCDescription();
-			Report.IsTrue(showing == text.Trim(), $"Text was not showing: {text.Trim()}, Instead found: {showing.Trim()}", $"Text was showing: {text.Trim()}  as expected!");
+			string showing = new RetailPartnersDetails().GetDCDescription().Trim();
+			text = text.Trim();
+			Report.IsTrue(showing == text, $"Text was not showing: {text}, Instead found: {showing}", $"Text was showing: {text}  as expected!");
 		}
 
 
