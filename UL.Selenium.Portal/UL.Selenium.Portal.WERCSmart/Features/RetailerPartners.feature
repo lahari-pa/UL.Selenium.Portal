@@ -25,14 +25,14 @@ Scenario: [56903] Retailer Detail Page - Retailer does not require Supplier ID o
 
 @TestCase:56907
 Scenario: [56907] Retailer Detail Page - Retailer does require Supplier ID but does not require Data Consent Tiers
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Then The home screen should load
-	Then I click the Retail Partners icon in the Navigation Pane
+	Given I log in with the account saved in TReVor as: ProductAccount
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then In the Side Menu, click Labeled Link with Retailers title
 	Then I should see the following heading Retail Partners
-	When I select the retailer: Sears
+	Then In the Retail Partners page, click the Sears retailer link
 	Then I should see the Retailer Detail page
 	Then I should see the retailer heading: Sears/K-Mart
-	Then I check that in the Supplier ID table the following columns are showing:
+	Then In the Retail Partners Details page, Verify Supplier ID table display following columns:
 		| Column name           |
 		| Supplier ID           |
 		| Company or Brand Name |
@@ -41,7 +41,6 @@ Scenario: [56907] Retailer Detail Page - Retailer does require Supplier ID but d
 		| Actions               |
 	And Retail partner details should be showing text: Sears/K-Mart requires suppliers of products to grant Tier 1 at this time.
 	And I confirm that there is a section labeled: Data Consent Tiers
-	Given I call Shared Step 56967 (Confirm Retailer & You information is shown correctly) for retailer: Sears/K-Mart
 
 #Removed from regression: 2024/09
 @ignore
