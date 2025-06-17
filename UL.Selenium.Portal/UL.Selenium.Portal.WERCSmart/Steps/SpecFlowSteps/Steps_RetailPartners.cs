@@ -1,5 +1,6 @@
 ﻿using Reqnroll;
 using System;
+using System.Linq;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
@@ -117,6 +118,8 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 		}
 
 
+
+
 		[RegexStepDefinition(@"In the Retail Partners page, confirm Retailer (.*) is displayed under Most Recent Retailers")]
 		public void RetailerDisplayedUnderMostRecentRetailers(string retailer)
 		{
@@ -150,6 +153,31 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			string showing = new RetailPartnersDetails().GetDCDescription().Trim();
 			text = text.Trim();
 			Report.IsTrue(showing == text, $"Text was not showing: {text}, Instead found: {showing}", $"Text was showing: {text}  as expected!");
+		}
+
+		[RegexStepDefinition(@"In the Retail Partners Details page, Verify Supplier ID table display following columns:")]
+		public void ThenICheckThatInTheSupplierIDTableDisplaysTheFollowingColumnsAreShowing(Table supplierIDTable)
+		{
+			var SupplierIDHeaders = new RetailPartnersDetails().GetSupplierIDTableHeaders().OrderBy(x => x).ToList();
+
+			var ExpectedSupplierIDHeaders = supplierIDTable.Rows.Select(row => row["Column name"].Trim()).OrderBy(x => x).ToList();
+
+			bool passed = true;
+
+			foreach (string thisHeader in ExpectedSupplierIDHeaders)
+			{
+				if (!SupplierIDHeaders.Contains(thisHeader))
+				{
+					passed = false;
+					Report.Error($"{thisHeader} was not found.");
+
+				}
+			}
+
+			Report.IsTrue(passed,
+				$"Expected supplier column names: {string.Join(",", ExpectedSupplierIDHeaders)} and actual column names:  {string.Join(",", SupplierIDHeaders)} do not match",
+				$"Expected and actual Supplier ID table column names match as expected");
+
 		}
 
 
