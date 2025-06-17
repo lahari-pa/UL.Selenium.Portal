@@ -40,6 +40,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 				$"Retailer '{page}' was showing, as expected!");
 		}
 
+		[RegexStepDefinition(@"In the Retail Partners Details page, 'What are the Data Usage Tiers' link (should|should not) be displayed")]
+		public void WhataretheDataUsageTiersButtonDisplayed(string condition)
+		{
+			string buttonText = "What are the Data Usage Tiers?";
+			new Steps_Prototype().LinkElementExists(condition,buttonText);
+		}
+
+		[RegexStepDefinition(@"In the Retail Partners Details page, 'Products in Scope' link (should|should not) be displayed")]
+		public void ProductsinScopeButtonIsDisplayed(string condition)
+		{
+			string buttonText = "Products in Scope";
+			new Steps_Prototype().LinkElementExists(condition, buttonText);
+		}
+
+
+
 		[RegexStepDefinition(@"In the Retail Partners Details page, click 'What are the Data Usage Tiers?' button")]
 		public void ClickWhataretheDataUsageTiersButton()
 		{

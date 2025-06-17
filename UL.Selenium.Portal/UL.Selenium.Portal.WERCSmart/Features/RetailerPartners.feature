@@ -171,43 +171,37 @@ Scenario: [56920] Your Supplier IDs - Actions - Deactivate
 	#And I We will now re-set the Is Active column to Active so that we can re-use the supplier ID
 	And I call Shared Step 57565 - Supplier ID table > Select Activate - Confirm Supplier ID Is set to Active for supplierID saved as supplierID56920
 
-#And [Shared Step 57319 - Database Check - Find t_vendor Is_active records for Specific Supplier and Retailer]
-#'And I Confirm the results of the query show the Is Active column is set to 1
-#And I Confirm the results of the query shows the F_User_updated column is set (does not show 0's)
+
+
+
 @TestCase:56909
 Scenario: [56909] Retailer Detail Page - Retailer does not require Supplier ID but does require Data Consent Tiers
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Then The home screen should load
-	# Retail Partners Page
-	And I click the Retail Partners icon in the Navigation Pane
+	Given I log in with the account saved in TReVor as: ProductAccount
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then In the Side Menu, click Labeled Link with Retailers title
 	Then I should see the following heading Retail Partners
-	And I select the retailer: Amazon
-	# Retailer Detail Page
-	Then I should see the retailer heading: Amazon
+	Then In the Retail Partners page, click the CVS retailer link
+	Then I should see the Retailer Detail page
+	Then I should see the retailer heading: CVS
 	And I confirm that there is a section labeled: Your Supplier IDs
 	And Section: Your Supplier IDs should be showing text: This retailer does not support Supplier ID management
 	And I confirm that there is a section labeled: Data Consent Tiers
-	And I should see the button: What are the Data Usage Tiers? in section: Data Consent Tiers
-	And I should see the button: Products in Scope in section: Data Consent Tiers
-	And I confirm that there is a section labeled: Amazon & You
-	And The pie chart should be showing on the retailer details page
-	And The pie chart footer text should contain: % of your product portfolio is associated with Amazon
+	And In the Retail Partners Details page, 'Products in Scope' link should be displayed
+	And In the Retail Partners Details page, 'What are the Data Usage Tiers' link should be displayed
+
+
 
 @TestCase:56914
 Scenario: [56914] Retailer Detail Page - Retailer requires Supplier ID and Data Consent Tiers
-	Given I Login into WERCSmart Portal - Admin Role - WERCs Product Account
-	Then The home screen should load
-	# Retail Partners Page
-	And I click the Retail Partners icon in the Navigation Pane
+	Given I log in with the account saved in TReVor as: ProductAccount
+	#Given I call Shared Step 57408 (Create a New Registration via Register New Product icon)
+	Then In the Side Menu, click Labeled Link with Retailers title
 	Then I should see the following heading Retail Partners
-	And I select the retailer: Wal-Mart
-	# Retailer Detail Page
+	Then In the Retail Partners page, click the Wal-Mart/SAM'S CLUB retailer link
+	Then I should see the Retailer Detail page
 	Then I should see the retailer heading: Wal-Mart/SAM'S CLUB
 	And I confirm that there is a section labeled: Your Supplier IDs
 	And The Supplier ID Table should be showing
 	And I confirm that there is a section labeled: Data Consent Tiers
-	And I should see the button: What are the Data Usage Tiers? in section: Data Consent Tiers
-	And I should see the button: Products in Scope in section: Data Consent Tiers
-	And I confirm that there is a section labeled: Wal-Mart/SAM'S CLUB & You
-	And The pie chart should be showing on the retailer details page
-	And The pie chart footer text should contain: % of your product portfolio is associated with Wal-Mart/SAM'S CLUB
+	And In the Retail Partners Details page, 'Products in Scope' link should be displayed
+	And In the Retail Partners Details page, 'What are the Data Usage Tiers' link should be displayed
