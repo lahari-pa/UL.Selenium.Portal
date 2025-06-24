@@ -1,8 +1,10 @@
 ﻿using Reqnroll;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Automation.ReqnrollHelpers.Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes;
 using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 
@@ -39,6 +41,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 				$"Retailer'{page}' was not showing!",
 				$"Retailer '{page}' was showing, as expected!");
 		}
+
+		[RegexStepDefinition(@"In the Retail Partners Details page, 'What are the Data Usage Tiers' link (should|should not) be displayed")]
+		public void WhataretheDataUsageTiersButtonDisplayed(string condition)
+		{
+			string buttonText = "What are the Data Usage Tiers?";
+			new Steps_Prototype().LinkElementExists(condition,buttonText);
+		}
+
+		[RegexStepDefinition(@"In the Retail Partners Details page, 'Products in Scope' link (should|should not) be displayed")]
+		public void ProductsinScopeButtonIsDisplayed(string condition)
+		{
+			string buttonText = "Products in Scope";
+			new Steps_Prototype().LinkElementExists(condition, buttonText);
+		}
+
+
 
 		[RegexStepDefinition(@"In the Retail Partners Details page, click 'What are the Data Usage Tiers?' button")]
 		public void ClickWhataretheDataUsageTiersButton()
@@ -177,6 +195,37 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			Report.IsTrue(passed,
 				$"Expected supplier column names: {string.Join(",", ExpectedSupplierIDHeaders)} and actual column names:  {string.Join(",", SupplierIDHeaders)} do not match",
 				$"Expected and actual Supplier ID table column names match as expected");
+
+		}
+
+
+		[RegexStepDefinition(@"In the  Retail Partners Details page,Click action and (Activate|Deactivate) for Supplier Id saved as: (.*)")]
+		public void ClickActivateOrDeactiavte(string activatedeactivate, string id)
+		{
+			var thisRPD = new RetailPartnersDetails();
+			string SupplierId = Context.GetFromContext(id).ToString();
+			Report.IsTrue(thisRPD.ClickActionBySupplierID(SupplierId, activatedeactivate), $"Failed to click Deactivate for Supplier id:{SupplierId}", $"Clicked deactivate for Supplier id:{SupplierId} ");
+
+		}
+
+
+		[RegexStepDefinition(@"In the  Retail Partners Details page, I Confirm the Is Active column for SupplierID saved as (.*) (shows|does not show) a green check mark")]
+		public void IConfirmTheIsActiveColumnForSupplierIDSavedAsSupplierIDShowsAGreenCheckMark(string savedAs, string showsDoesNotShow)
+		{
+			List<Supplier> allSuppliers = new RetailPartnersDetails().GetAllSuppliers();
+			string SupplierId = Context.GetFromContext(savedAs).ToString();
+			if (showsDoesNotShow == "shows")
+			{
+				Report.IsTrue(allSuppliers.FirstOrDefault(x => x.SupplierID == SupplierId).IsActive,
+					$"SupplierID:{SupplierId} is not showing as active",
+					$"SupplierID: {SupplierId }is showing as active");
+			}
+			else
+			{
+				Report.IsTrue(!allSuppliers.FirstOrDefault(x => x.SupplierID == SupplierId).IsActive,
+					$"SupplierID:{SupplierId} is showing as active",
+					$"SupplierID:{SupplierId} is not showing as active");
+			}
 
 		}
 
