@@ -160,6 +160,7 @@ Scenario: [283496] WERCSmart Portal - Flow Test for Hair Styling Product - Mouss
 	Then In the Summary Page, the 'Packing Group (select)' section should be showing the following value: III
 	Then In the Summary Page, the 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB' section should be showing the following value: 1
 	Then In the Summary Page, the 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule' section should be showing the following value: 1
+	Then In the Summary Page, click the View button for section: Product Label
 	Then In the Summary Page, after clicking 'View' button I confirm pdf file is downloaded
 	Given I close the tab with Data Summary page
 	Then In the Side Menu, click Labeled Link with My Products title
