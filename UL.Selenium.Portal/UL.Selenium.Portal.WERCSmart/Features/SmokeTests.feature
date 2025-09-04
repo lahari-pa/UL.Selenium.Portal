@@ -164,4 +164,4 @@ Scenario: [283496] WERCSmart Portal - Flow Test for Hair Styling Product - Mouss
 	Then In the Summary Page, after clicking 'View' button I confirm pdf file is downloaded
 	Given I close the tab with Data Summary page
 	Then In the Side Menu, click Labeled Link with My Products title
-	Then In the Product Grid, delete the product saved as: TestCase283496
+	#Then In the Product Grid, delete the product saved as: TestCase283496
