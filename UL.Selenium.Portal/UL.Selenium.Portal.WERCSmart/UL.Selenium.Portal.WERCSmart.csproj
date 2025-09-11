@@ -11,6 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ReqnrollObsoleteCodeBehindFiles Remove="Features\Transportation.feature.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
 
     <!-- ===== UL.AUTOMATION PACKAGE(S) ===== -->
     
@@ -74,5 +78,18 @@
 
   <ItemGroup>
     <Folder Include="Features\Product Registration\NewFolder\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Features\SmokeTests.feature.cs">
+      <DependentUpon>SmokeTests.feature</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ReqnrollFeatureFiles Update="Features\SmokeTests.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </ReqnrollFeatureFiles>
   </ItemGroup>
 </Project>
