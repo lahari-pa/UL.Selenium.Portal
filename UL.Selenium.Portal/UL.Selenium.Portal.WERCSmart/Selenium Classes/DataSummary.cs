@@ -587,7 +587,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes
 
 		public bool ClickViewForDocument(string section)
 		{
-			IWebElement button = this.FindElement(By.XPath($"(.//div[@class='form-group has-success']//span[contains(text(), '{section}')]/../div/a[contains(text(),'View')])[2]"), 2);
+			IWebElement button = this.FindElement(By.XPath($"(.//div[@class='form-group has-success']//span[contains(text(), 'Product')]/parent::div//span[contains(text(),'test')]/following-sibling::a[contains(text(),'View')]"), 2);
 			if (button == null)
 			{
 				Report.Info($"Could not find View button for section: {section}");
