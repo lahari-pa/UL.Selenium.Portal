@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using UL.Automation.Reporting.Functions;
 using UL.Automation.WebDriver.BaseClasses;
+using UL.Automation.WebDriver.Classes;
 using UL.Automation.WebDriver.Extensions;
 using UL.Automation.WebDriver.Functions;
 using UL.Selenium.Portal.WERCSmart.Classes;
@@ -69,12 +70,11 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 	{
 		#region Page Objects
 		private string _label;
-		protected override By ContainerElementLocator => By.XPath($@"//div[contains(@class,'form-group')]");
+		protected override By ContainerElementLocator => By.XPath($@"//div[contains(@class,'form-group')][.//label[@class='control-label'][text()=""{_label}""]]");
 		private IWebElement Option(string optionLabel) => this.FindElement(By.XPath($".//div[@class='radio' or @class='checkbox' or @class='btn-group'][.//*[normalize-space()='{optionLabel}']]//input[@type='radio' or @type='checkbox']"), 1);
 		private IWebElement OptionLabel(string optionLabel) => this.FindElement(By.XPath($".//div[@class='radio' or @class='checkbox' or @class='btn-group'][.//*[text()='{optionLabel}']]//label"), 1);
 		private IWebElement InfoIcon => this.FindElement(By.XPath(".//i"));
-		private IWebElement FieldErrorMessage(string label, string errormessage) => this.FindElement(By.XPath($"//label[contains(text(),'{label}')]/../parent::div[contains(@class,'form-group')]//span[contains(text(), '{errormessage}')]"), 1);
-
+		
 		#endregion
 
 		#region Methods
@@ -197,8 +197,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 
 		public bool ErrorMessageForField(string label, string errormessage)
 		{
+			IWebElement FieldErrorMessage = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//label[contains(text(),'{label}')]/../parent::div[contains(@class,'form-group')]//span[contains(text(), '{errormessage}')]"), 2);
 			Report.Info($"Attempting to confirm '{errormessage}' error message exists.");
-			return this.FieldErrorMessage(label, errormessage).Displayed;
+			return FieldErrorMessage.Displayed;
 		}
 
 
