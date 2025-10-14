@@ -69,10 +69,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 	{
 		#region Page Objects
 		private string _label;
-		protected override By ContainerElementLocator => By.XPath($@"//div[contains(@class,'form-group')][.//label[@class='control-label'][text()=""{_label}""]]");
+		protected override By ContainerElementLocator => By.XPath($@"//div[contains(@class,'form-group')]");
 		private IWebElement Option(string optionLabel) => this.FindElement(By.XPath($".//div[@class='radio' or @class='checkbox' or @class='btn-group'][.//*[normalize-space()='{optionLabel}']]//input[@type='radio' or @type='checkbox']"), 1);
 		private IWebElement OptionLabel(string optionLabel) => this.FindElement(By.XPath($".//div[@class='radio' or @class='checkbox' or @class='btn-group'][.//*[text()='{optionLabel}']]//label"), 1);
 		private IWebElement InfoIcon => this.FindElement(By.XPath(".//i"));
+		private IWebElement FieldErrorMessage(string label, string errormessage) => this.FindElement(By.XPath($"//label[contains(text(),'{label}')]/../parent::div[contains(@class,'form-group')]//span[contains(text(), '{errormessage}')]"), 1);
+
 		#endregion
 
 		#region Methods
@@ -192,6 +194,14 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			Report.Info($"Attempting to confirm '{errorMessage}' error message exists.");
 			return this.ErrorMessageGet(errorMessage) != null;
 		}
+
+		public bool ErrorMessageForField(string label, string errormessage)
+		{
+			Report.Info($"Attempting to confirm '{errormessage}' error message exists.");
+			return this.FieldErrorMessage(label, errormessage).Displayed;
+		}
+
+
 		#endregion
 
 		#region Search Input Methods

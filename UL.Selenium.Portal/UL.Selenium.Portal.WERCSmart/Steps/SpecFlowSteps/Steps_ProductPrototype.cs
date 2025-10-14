@@ -206,5 +206,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 				//Report.IsTrue(!panelPrototype.PanelExpandButtonExists(), $"Failure, failed to expand '{panelLabel}' panel.", $"Success, expanded '{panelLabel}' panel.");
 			}
 		}
+
+		[RegexStepDefinition(@"In the (.*) section, for field '(.*)' error message '(.*)' (is|is not) displayed")]
+		public void InSectionForfieldErrorMessageIsIsNotDisplayed(string section, string field, string errorMessage, string is_isnot)
+		{
+			ProductPrototype productPrototype = new ProductPrototype(section);
+			bool expected = is_isnot == "is";
+			Report.IsTrue(productPrototype.ErrorMessageForField(field, errorMessage) == expected, $"Failure, '{errorMessage}' error message {(expected ? "is not" : "is")} displayed.", $"Success, '{errorMessage}' error message {is_isnot} displayed.");
+		}
+
 	}
 }

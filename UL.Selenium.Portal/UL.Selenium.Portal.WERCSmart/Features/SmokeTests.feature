@@ -35,6 +35,7 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:VOC_Summary
 @Product:WERCSmart_Page:NewProducts_Tab:ProductCharacteristics_Section:Retailer
 @SideMenu
+@Steps_ProductPrototype
 @RegulatoryInformation3
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
@@ -165,3 +166,39 @@ Scenario: [283496] WERCSmart Portal - Flow Test for Hair Styling Product - Mouss
 	Given I close the tab with Data Summary page
 	Then In the Side Menu, click Labeled Link with My Products title
 	#Then In the Product Grid, delete the product saved as: TestCase283496
+
+
+@TestCase:287238
+Scenario: [287238] WERCSmart Portal - Flow Test for Hair Styling Product - Mousse (Aerosol) (RU000669) - Includes Negative Steps
+	 #Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
+	 Given I log in with the account saved in TReVor as: ProductAccount
+	 Then The home screen should load
+	 #WERCSmart Portal - Create New Registration - Negative Steps - Enter Product Name and Select Type of Product: Hair Styling Product - Mousse (Aerosol) (RU000669)
+	 Then In the Side Menu, click Labeled Link with Add Product title
+	 Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
+	 Then in the New Product page, I click Continue
+	 Then I should be on the The Product Page
+	 Then in the The Product page, I click Continue
+	 And In the Product section, for field 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' error message 'This is a required field.' is displayed
+	 And In the Product Section, set the option in section: 'Product Name as it appears on the Packaging Label, Container or Safety Data Sheet (SDS)' to: ProductTest
+	 Then in the The Product page, I click Continue
+	 Then In the Product section, for field 'Type of Product' error message 'This is a required field.' is displayed
+	 And In the Product Section, set the option in section: 'Type of Product (select)' to: Hair Styling Product - Mousse (Liquid)
+	 Then in the The Product page, I click Continue
+     Given I generate a random UPC number and save as: UPC283496
+	 Then I save the product information as: TestCase283496
+	 # Shared Steps 287277: Product Information - Negative Steps - Applicable only to Product Type: Hair Styling Product - Mousse (Aerosol) (RU000669)
+	 Then I should be on the Product Information Page
+	 Then in the Product Information page, I click Continue
+	 Then In the Product Information section, for field 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' error message 'This is a required field.' is displayed
+	 Then In the Product Information Section, set the option in section: 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' to: No
+	 Then in the Product Information page, I click Continue
+	 Then In the Product Information section, for field 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' error message 'This is a required field.' is displayed
+	 Then In the Product Information Section, set the option in section: 'Product is shipped directly by supplier to the consumer. Retailer sells online and does not ship, or otherwise distribute, the product to the consumer. Retailer may accept product for returns.' to: No
+	 Then in the Product Information page, I click Continue
+	 Then In the Product Information section, for field 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product.' error message 'This is a required field.' is displayed
+	 Then In the Product Information Section, set the option in section: 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' to: No
+	 Then in the Product Information page, I click Continue
+	 Then In the Product Information section, for field 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' error message 'This is a required field.' is displayed
+	 Then In the Product Information Section, set the option in section: 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' to: No
+	 Then in the Product Information page, I click Continue
