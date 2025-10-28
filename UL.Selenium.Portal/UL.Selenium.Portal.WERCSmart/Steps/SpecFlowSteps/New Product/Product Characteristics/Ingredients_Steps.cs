@@ -45,8 +45,18 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 			string section = "Ingredient Reference Number (Optional)";
 			new Steps_Prototype().SetTheSectionOptionTo(section, option);
 		}
-		#region Add Ingredient
-		[RegexStepDefinition(@"In the Ingredients Section, click the component search box")]
+
+		[RegexStepDefinition(@"In the Ingredients Section, for field '(.*)' error message '(.*)' (is|is not) displayed")]
+		public void InSectionForfieldErrorMessageIsIsNotDisplayed(string field, string errorMessage, string is_isnot)
+		{
+			IngredientsTable ingredientsTable = new IngredientsTable();
+			bool expected = is_isnot == "is";
+			Report.IsTrue(ingredientsTable.IngredientsErrorMessageExists(errorMessage) == expected, $"Failure, '{errorMessage}' error message {(expected ? "is not" : "is")} displayed.", $"Success, '{errorMessage}' error message {is_isnot} displayed.");
+		}
+
+
+	 #region Add Ingredient
+	[RegexStepDefinition(@"In the Ingredients Section, click the component search box")]
 		public void ClickComponentSearchBox()
 		{
 			IngredientsTable ingredientsTable = new IngredientsTable();
@@ -688,6 +698,7 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Product_C
 		{
 			new Steps_ModalDialogPrototype().ConfirmModalTitleandModalText(condition, popupTitle, text);
 		}
+
 		#endregion
 
 		#region Other Steps

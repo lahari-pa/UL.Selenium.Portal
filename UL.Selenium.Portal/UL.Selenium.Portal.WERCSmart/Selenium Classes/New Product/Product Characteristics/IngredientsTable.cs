@@ -370,6 +370,9 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		string TransparencyPercent => this.ContainerElement.FindElement(By.XPath(".//td[@id='transparency-score']//span"), 1)?.Text;
 		IWebElement ErrorArea => this.ContainerElement.FindElement(By.XPath(".//p[@class='form-error']"), 1);
 		public List<IngredientsTableRow> IngredientRowList => this.ContainerElement.FindElements(By.XPath(".//tr[.//div[@class='chemical-name']]"), 1).Select(x => new IngredientsTableRow(x)).ToList();
+
+		private IWebElement FieldErrorMessage(string errormessage) => this.FindElement(By.XPath($"//p[contains(@class,'form-error')]//span[contains(text(), '{errormessage}')]"), 1);
+
 		#endregion
 
 		#region Methods
@@ -389,6 +392,12 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Char
 		{
 			Report.Info("Attempting to confirm transparency percent text exists.");
 			return !this.TransparencyPercent.IsNullOrEmpty();
+		}
+
+		public bool IngredientsErrorMessageExists(string errormessage)
+		{
+			Report.Info($"Attempting to confirm '{errormessage}' error message exists.");
+			return this.FieldErrorMessage(errormessage).Displayed;
 		}
 
 		#region Component Search Box
