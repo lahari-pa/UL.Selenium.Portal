@@ -1,5 +1,7 @@
 ﻿using Reqnroll;
+using UL.Automation.Reporting.Functions;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product.Product_Characteristics;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 {
@@ -126,6 +128,16 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			{
 				new Steps_Prototype().ConfirmNewTabOpenWithUrl(linkUrl);
 			}
+
+			[RegexStepDefinition(@"In the Inventory Status, Prop 65 \(US\) Section, for field '(.*)' error message '(.*)' (is|is not) displayed")]
+			public void InSectionForfieldErrorMessageIsIsNotDisplayed(string field, string errorMessage, string is_isnot)
+			{
+				InventoryStatusProp65 inventorystatus = new InventoryStatusProp65();
+				bool expected = is_isnot == "is";
+				Report.IsTrue(inventorystatus.InventoryErrorMessageExists(errorMessage) == expected, $"Failure, '{errorMessage}' error message {(expected ? "is not" : "is")} displayed.", $"Success, '{errorMessage}' error message {is_isnot} displayed.");
+			}
+
 		}
+
 	}
 }
