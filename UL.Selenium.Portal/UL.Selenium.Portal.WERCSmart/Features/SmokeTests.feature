@@ -168,13 +168,14 @@ Scenario: [283496] WERCSmart Portal - Flow Test for Hair Styling Product - Mouss
 	#Then In the Product Grid, delete the product saved as: TestCase283496
 
 
+
+
 @TestCase:287238
 Scenario: [287238] WERCSmart Portal - Flow Test for Hair Styling Product - Mousse (Aerosol) (RU000669) - Includes Negative Steps
 	 #Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	 Given I log in with the account saved in TReVor as: ProductAccount
 	 Then The home screen should load
-
-	 #WERCSmart Portal - Create New Registration - Negative Steps - Enter Product Name and Select Type of Product: Hair Styling Product - Mousse (Aerosol) (RU000669)
+	 	 #WERCSmart Portal - Create New Registration - Negative Steps - Enter Product Name and Select Type of Product: Hair Styling Product - Mousse (Aerosol) (RU000669)
 	 Then In the Side Menu, click Labeled Link with Add Product title
 	 Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	 Then in the New Product page, I click Continue
@@ -275,5 +276,87 @@ Scenario: [287238] WERCSmart Portal - Flow Test for Hair Styling Product - Mouss
 	 Then In the Inventory Status section, for field 'If the product carries a custom warning, please provide the exact text that is being used' error message 'This is a required field.' is displayed
 	 Then In the Inventory Status, Prop 65 (US) Section, enter value in 'If the product carries a custom warning, please provide the exact text that is being used:' section: Custom warning exact text
      Then in the Inventory Status, Prop 65 (US) page, I click Continue
+	 # 287472 Shared Steps 287472: Product Labeling - Negative Steps - Applicable Only to Type of Product: Hair Styling Product - Mousse (Aerosol) (RU000669)
+	 Given I should see the Product Labeling Page
+	 Then In the Product Labeling Section, in section: 'Refer to your Product Label.  From the options, select those that appear on the Label.' click the checkbox option: None of the Above
+	 Given I click continue
+	 #283506 Transportation Details 1 - Applicable Only to Type of Product: Hair Styling Product - Mousse (Liquid) (RU003202)
+	 And I should be on the Transportation Details 1 Page
+	 And In the Transportation Details 1 Section, set the option in section: 'Product is Regulated for Transport': to: Yes
+	 Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: DOT
+	 Then In the Transportation Details 1 Section, set the option for DOT mode of transport to: Shipping fully regulated
+	 Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: IMDG
+	 Then In the Transportation Details 1 Section, set the option for IMDG mode of transport to: Shipping fully regulated
+	 Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: IATA
+	 Then In the Transportation Details 1 Section, set the option for IATA mode of transport to: Shipping fully regulated
+	 Then In the Transportation Details 1 Section, set the option in section: 'Select all modes of transport that you've classified the product for': to: TDG
+	 Then In the Transportation Details 1 Section, set the option for TDG mode of transport to: Shipping fully regulated
+	 Then In the Transportation Details 1 Section, set the option in section: 'Provide Special Permit numbers (if applicable)': to: 1234567890
+	 Then in the Transportation Details 1 page, I click Continue
+	 And I should be on the U.S. Department of Transportation (DOT) Classification Page
+	 #287479 Shared Steps 287479: U.S. Department of Transportation (DOT) Classification - Negative Steps - Applicable only to Type of Product: Hair Styling Product - Mousse (Aerosol) (RU000669)
+	 Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
+	 Then In the U.S. Department of Transportation (DOT) Classification section, for field 'UN Number' error message 'This is a required field.' is displayed
+	 And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'UN Number': to: UN1950
+	 Then In the U.S. Department of Transportation (DOT) Classification section, for field 'Proper Shipping Name' error message 'This is a required field.' is displayed
+	 And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols
+	 Then In the U.S. Department of Transportation (DOT) Classification section, for field 'Hazard Class' error message 'This is a required field.' is displayed
+	 And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Hazard Class': to: 2.1
+	 And In the U.S. Department of Transportation (DOT) Classification Section, set the option in section: 'Packing Group': to: None
+	 Then in the U.S. Department of Transportation (DOT) Classification page, I click Continue
+	 #287706 Shared Steps 287706: International Air Transport (IATA) Classification - Negative Steps - Applicable only to Type of Product: Hair Styling Product - Mousse (Aerosol) (RU000669)
+	 Given I should see the International Air Transport (IATA) Classification Page
+	 Then in the International Air Transport (IATA) Classification page I click Continue
+	 Then In the International Air Transport (IATA) Classification section, for field 'UN Number' error message 'This is a required field.' is displayed
+	Then In the International Air Transport (IATA) Classification section, for field 'Hazard Class (select)' error message 'This is a required field.' is displayed
+	Then In the International Air Transport (IATA) Classification section, for field 'Packing Group' error message 'This is a required field.' is displayed
+	Then In the International Air Transport (IATA) Classification section, for field 'Proper Shipping Name' error message 'This is a required field.' is displayed
+	Then In the International Air Transport (IATA) Classification Section, I check checkbox 'Copy information from my U.S. Department of Transportation data'
+    Then In the International Air Transport (IATA) Classification Section, verify section: 'UN Number' contains value: UN1950
+	Then In the International Air Transport (IATA) Classification Section, verify section: 'Hazard Class (select)' contains value: 2.1
+	Then In the International Air Transport (IATA) Classification Section, verify section: 'Packing Group (select)' contains value: None
+	Then In the International Air Transport (IATA) Classification section, for field 'Proper Shipping Name' error message 'This is a required field.' is displayed
+	Then In the International Air Transport (IATA) Classification Section, set the option in section: 'Proper Shipping Name': to: Aerosols, flammable
+	Then in the International Air Transport (IATA) Classification page I click Continue
+	Given I should see the International Marine (IMDG) Classification Page
+	Then in the International Marine (IMDG) Classification page I click Continue
+	Then In the International Marine (IMDG) Classification section, for field 'UN Number' error message 'This is a required field.' is displayed
+	Then In the International Marine (IMDG) Classification section, for field 'Hazard Class (select)' error message 'This is a required field.' is displayed
+	Then In the International Marine (IMDG) Classification section, for field 'Packing Group' error message 'This is a required field.' is displayed
+	Then In the International Marine (IMDG) Classification section, for field 'Proper Shipping Name' error message 'This is a required field.' is displayed
+	Then In the International Marine (IMDG) Classification Section, I check checkbox 'Copy information from my U.S. Department of Transportation data'
+	Then In the International Marine (IMDG) Classification Section, verify section: 'UN Number' contains value: UN1950
+	Then In the International Marine (IMDG) Classification Section, verify section: 'Proper Shipping Name' contains value: Aerosols
+	Then In the International Marine (IMDG) Classification Section, verify section: 'Hazard Class (select)' contains value: 2
+	Then In the International Marine (IMDG) Classification Section, verify section: 'Packing Group (select)' contains value: None
+	Then in the International Marine (IMDG) Classification page I click Continue
+	#287708 Shared Steps 287708: Canada - Transportation of Dangerous Goods (TDG) Classification - Negative Steps - Applicable only to Type of Product: Hair Styling Product - Mousse (Aerosol) (RU000669)
+	And I should be on the Canada - Transportation of Dangerous Goods (TDG) Classification Page
+	Then in the Canada - Transportation of Dangerous Goods (TDG) Classification page I click Continue
+	Then In the Canada - Transportation of Dangerous Goods (TDG) Classification section, for field 'UN Number' error message 'This is a required field.' is displayed
+	Then In the Canada - Transportation of Dangerous Goods (TDG) Classification section, for field 'Hazard Class (select)' error message 'This is a required field.' is displayed
+	Then In the Canada - Transportation of Dangerous Goods (TDG) Classification section, for field 'Packing Group' error message 'This is a required field.' is displayed
+	Then In the Canada - Transportation of Dangerous Goods (TDG) Classification section, for field 'Proper Shipping Name' error message 'This is a required field.' is displayed
+	Then In the Canada - Transportation of Dangerous Goods (TDG) Classification Section, I check checkbox 'Copy information from my U.S. Department of Transportation data'
+	Then In the Canada - Transportation of Dangerous Goods (TDG) Classification Section, verify section: 'UN Number' contains value: UN1950
+	Then In the Canada - Transportation of Dangerous Goods (TDG) Classification Section, verify section: 'Proper Shipping Name' contains value: Aerosols
+	Then In the Canada - Transportation of Dangerous Goods (TDG) Classification Section, verify section: 'Hazard Class (select)' contains value: 2.1
+	Then In the Canada - Transportation of Dangerous Goods (TDG) Classification Section, verify section: 'Packing Group (select)' contains value: None
+	Then in the Canada - Transportation of Dangerous Goods (TDG) Classification page I click Continue
+
+	#287608 Shared Steps 287608: Volatile Organic Compounds (VOC) - Negative Steps - Applicable only to Type of Product: Hair Styling Product - Mousse (Aerosol) (RU000669)
+	Given I should see the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) Page
+	Then in the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) page I click Continue
+	Then In the Volatile Organic Compounds (VOC) section, for field 'Product has been granted' error message 'This is a required field.' is displayed
+	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Product has been granted an Alternative Control Plan, or is exempt as an Innovative Product or other variant under the applicable regulations.': to: Yes
+	Then In the Volatile Organic Compounds (VOC) section, for field 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB' error message 'This is a required field.' is displayed
+	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB': to: 2
+	Then In the Volatile Organic Compounds (VOC) section, for field 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule' error message 'This is a required field.' is displayed
+	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule': to: 3
+	Then In the Volatile Organic Compounds (VOC) section, for field 'Would you like to use the VOC percentages entered for all areas' error message 'This is a required field.' is displayed
+	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?': to: Yes
+	Then in the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) page I click Continue
+
+
 
 
