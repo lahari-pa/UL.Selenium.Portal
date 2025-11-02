@@ -39,7 +39,7 @@
 @RegulatoryInformation3
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
-
+@GTINAndUPC
 Feature: Smoke Tests
 
 
@@ -175,7 +175,7 @@ Scenario: [287238] WERCSmart Portal - Flow Test for Hair Styling Product - Mouss
 	 #Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	 Given I log in with the account saved in TReVor as: ProductAccount
 	 Then The home screen should load
-	 	 #WERCSmart Portal - Create New Registration - Negative Steps - Enter Product Name and Select Type of Product: Hair Styling Product - Mousse (Aerosol) (RU000669)
+	  	 #WERCSmart Portal - Create New Registration - Negative Steps - Enter Product Name and Select Type of Product: Hair Styling Product - Mousse (Aerosol) (RU000669)
 	 Then In the Side Menu, click Labeled Link with Add Product title
 	 Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	 Then in the New Product page, I click Continue
@@ -187,7 +187,7 @@ Scenario: [287238] WERCSmart Portal - Flow Test for Hair Styling Product - Mouss
 	 Then In the Product section, for field 'Type of Product' error message 'This is a required field.' is displayed
 	 And In the Product Section, set the option in section: 'Type of Product (select)' to: Hair Styling Product - Mousse (Liquid)
 	 Then in the The Product page, I click Continue
-     Given I generate a random UPC number and save as: UPC283496
+         Given I generate a random UPC number and save as: UPC283496
 	 Then I save the product information as: TestCase283496
 	 # Shared Steps 287277: Product Information - Negative Steps - Applicable only to Product Type: Hair Styling Product - Mousse (Aerosol) (RU000669)
 	 Then I should be on the Product Information Page
@@ -357,6 +357,17 @@ Scenario: [287238] WERCSmart Portal - Flow Test for Hair Styling Product - Mouss
 	Then In the VOC - Ozone Transport Commission Section, set the option in section: 'Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison?': to: Yes
 	Then in the Volatile Organic Compounds (VOC) - Ozone Transport Commission (OTC) and/or California Air Resources Board (CARB) page I click Continue
 
+		#287238 Test Case 287238: WERCSmart Portal - Flow Test for Hair Styling Product - Mousse (Aerosol) (RU000669) - Includes Negative Steps - Do Not Update or Delete
+	Given I should see the Volatile Organic Compound Summary Page
+	Then in the Volatile Organic Compound Summary page I click Continue
+	Then In the Volatile Organic Compound Summary section, for field 'Your acknowledgement of this registration' error message 'This is a required field.' is displayed
+	Then In the Volatile Organic Compound Summary Section, for 'Your acknowledgement of this registration includes that your product..' set 'Yes, I Acknowledge'
+	Then in the Volatile Organic Compound Summary page I click Continue
 
 
-
+	#287613 Shared Steps 287613: Retailer - Add Retailer Dollar General and Family Dollar - Negative Step Testing - Applicable Only to Type of Product: Hair Styling Product - Mousse (Aerosol) (RU000669)
+	Then I should be on the Retailer Page
+	And In the Retailer Section, click 'Add Retailers' button
+	And In the Select Retailers window, select retailer: Dollar General
+	And In the Select Retailers window, click 'Done' button
+	Then in the Retailer page, I click Continue

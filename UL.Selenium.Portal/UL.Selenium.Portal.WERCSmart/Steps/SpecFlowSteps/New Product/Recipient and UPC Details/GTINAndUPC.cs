@@ -586,5 +586,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 						$"Successfully deleted retailer {retailer}");
 		}
 
+		[RegexStepDefinition("In the Global Trade Item Number Section, error message (is|is not) displayed: '(.*)'")]
+		public void ErrorMessageIsDisplayed(string is_isnot, string errorMessage)
+		{
+			GTIN gtinPage = new GTIN();
+			bool expected = is_isnot == "is";
+			Report.IsTrue(gtinPage.ErrorMessageExists(errorMessage) == expected, $"Failure, '{errorMessage}' error message {(expected ? "is not" : "is")} displayed.", $"Success, '{errorMessage}' error message {is_isnot} displayed.");
+		}
 	}
 }

@@ -74,4 +74,17 @@ namespace UL.Selenium.Portal.RPS.Selenium_Classes
 			return result;
 		}
 	}
+
+	class GTIN : SeleniumBaseObject
+	{
+		protected override By ContainerElementLocator => By.XPath($"//div[@class = 'form-group']");
+		IWebElement ErrorIcon => this.ContainerElement.FindElement(By.XPath("//ul[@class = 'form-error']//li"));
+
+
+		public bool ErrorMessageExists(string errormessage)
+		{
+			Report.Info("Attempt to confirm Error Icon exists");
+			return this.ErrorIcon.Text == errormessage;
+		}
+	}
 }
