@@ -382,7 +382,7 @@ Scenario: [287238] WERCSmart Portal - Flow Test for Hair Styling Product - Mouss
 	Then In the Global Trade Item Number Section, error message is displayed: 'Add at least one UPC.'
 	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
 	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page, I click Continue
-	Then In the Global Trade Item Number section, for field 'GTIN/UPC' error message 'This is a required field.' is displayed
+	Then In the Global Trade Item Number section, for field 'GTIN' error message 'This is a required field.' is displayed
 	Then In the Global Trade Item Number section, for field 'Container Type' error message 'This is a required field.' is displayed
 	Then In the Global Trade Item Number section, for field 'Size' error message 'This is a required field.' is displayed
 
