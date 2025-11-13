@@ -202,6 +202,13 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 			return FieldErrorMessage.Displayed;
 		}
 
+		public bool ClickEditPencil(string section)
+		{
+			IWebElement EditPencilSection = SeleniumWebDriver.CurrentDriver.FindElement(By.XPath($"//div[contains(@class,\"inactive\")]//a//h3[contains(text(),'{section}')]"), 2);
+			Report.Info($"Attempting to click edit pencil '{section}'");
+			return EditPencilSection.TryClick();
+		}
+
 
 		#endregion
 

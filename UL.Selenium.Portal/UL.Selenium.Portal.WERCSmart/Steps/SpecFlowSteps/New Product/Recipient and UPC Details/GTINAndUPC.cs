@@ -593,5 +593,22 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product.Recipient
 			bool expected = is_isnot == "is";
 			Report.IsTrue(gtinPage.ErrorMessageExists(errorMessage) == expected, $"Failure, '{errorMessage}' error message {(expected ? "is not" : "is")} displayed.", $"Success, '{errorMessage}' error message {is_isnot} displayed.");
 		}
+
+
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section section, for '(.*)'  field, error message '(.*)' (is|is not) displayed")]
+		public void InSectionForfieldErrorMessageIsIsNotDisplayed(string field, string errorMessage, string is_isnot)
+		{
+			GTIN gtinPage = new GTIN();
+			bool expected = is_isnot == "is";
+			Report.IsTrue(gtinPage.ErrorMessageForField(field, errorMessage) == expected, $"Failure, '{errorMessage}' error message {(expected ? "is not" : "is")} displayed.", $"Success, '{errorMessage}' error message {is_isnot} displayed.");
+		}
+
+		[RegexStepDefinition(@"In the Global Trade Item Number \(GTIN\) / Universal Product Code \(UPC\) Section section, for 'Container Type' error message '(.*)' (is|is not) displayed")]
+		public void InSectionForContainerTypeErrorMessageIsIsNotDisplayed(string errorMessage, string is_isnot)
+		{
+			GTIN gtinPage = new GTIN();
+			bool expected = is_isnot == "is";
+			Report.IsTrue(gtinPage.ErrorMessageForContainerType(errorMessage) == expected, $"Failure, '{errorMessage}' error message {(expected ? "is not" : "is")} displayed.", $"Success, '{errorMessage}' error message {is_isnot} displayed.");
+		}
 	}
 }

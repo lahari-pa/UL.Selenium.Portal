@@ -2822,7 +2822,7 @@ namespace UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product
 		}
 		public bool ClickButton(string section, string button)
 		{
-			string path = $".//span[contains(text(),\"{section}\")]//..//a[@data-bind[contains(.,\"{button}\")]] | .//span[contains(text(),\"{section}\")]//..//a[contains(text(), \"{button}\")]";
+			string path = $".//span[contains(text(),\"{section}\")]//..//a[@data-bind[contains(.,\"{button}\")]] | .//span[contains(text(),\"{section}\")]//..//a[contains(text(), \"{button}\")] | //body//h3[contains(text(),'{section}')]//ancestor::div[contains(@data-bind,'isActive')]//a[text()='Save']";
 			IWebElement el = this.ContainerElement.FindElement(By.XPath(path), 2);
 			Report.Info($"Clicking {button} for document type: {section}");
 			Report.Screenshot();

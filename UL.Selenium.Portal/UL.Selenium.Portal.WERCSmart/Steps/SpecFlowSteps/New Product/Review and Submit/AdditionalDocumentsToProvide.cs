@@ -253,5 +253,19 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps.New_Product
 			string button = "Browse";
 			new Steps_Prototype().CheckButtonExistsForSection(section, condition, button);
 		}
+
+		[RegexStepDefinition(@"In the Additional Documents to Provide Section, for section (.*) I click button 'Remove'")]
+		public void ClickRemoveButton(string section)
+		{
+			string button = "remove";
+			new Steps_Prototype().ClickButtonForSection(section, button);
+		}
+
+		[RegexStepDefinition(@"In the Additional Documents to Provide Section, in the 'Remove Document' pop up click (Yes|No) button")]
+		public void ClickButtonInRemoveDocumentPopUp(string button)
+		{
+			string popupTitle = "Remove Document?";
+			new Steps_Prototype().ThenInThePopupViewWithTheFollowingTitleIClickTheButton(popupTitle, button);
+		}
 	}
 }

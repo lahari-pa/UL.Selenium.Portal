@@ -40,6 +40,9 @@
 @Product:WERCSmart_Page:NewProducts_Tab:ReviewAndSubmit_Section:Summary
 @Product:WERCSmart_Page:NewProducts_Tab:ProductType_Section:AdditionalDocumentsToProvide
 @GTINAndUPC
+@AdditionalDocsContactInfo
+@SafetyDataSheetAuthoring
+@Product:WERCSmart_Account:Distributor_Page:NewProducts_Tab:ReciewAndSubmit_Section:OptionalReportsAndDocumentsAvailableForPurchase
 Feature: Smoke Tests
 
 
@@ -175,7 +178,7 @@ Scenario: [287238] WERCSmart Portal - Flow Test for Hair Styling Product - Mouss
 	 #Given I call Shared Step 23195 (Login into WERCSmart Portal - Administrator Role)
 	 Given I log in with the account saved in TReVor as: ProductAccount
 	 Then The home screen should load
-	  	 #WERCSmart Portal - Create New Registration - Negative Steps - Enter Product Name and Select Type of Product: Hair Styling Product - Mousse (Aerosol) (RU000669)
+     	 #WERCSmart Portal - Create New Registration - Negative Steps - Enter Product Name and Select Type of Product: Hair Styling Product - Mousse (Aerosol) (RU000669)
 	 Then In the Side Menu, click Labeled Link with Add Product title
 	 Then In the New Product Section, set the radio option in section: 'Select the type of product to create': to: 'Create Formulated Registration'
 	 Then in the New Product page, I click Continue
@@ -371,3 +374,161 @@ Scenario: [287238] WERCSmart Portal - Flow Test for Hair Styling Product - Mouss
 	And In the Select Retailers window, select retailer: Dollar General
 	And In the Select Retailers window, click 'Done' button
 	Then in the Retailer page, I click Continue
+
+
+
+	Then I should be on the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Page
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page, I click Continue
+	Then In the Global Trade Item Number Section, error message is displayed: 'Add at least one UPC.'
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, I click the Add UPC Button
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page, I click Continue
+	Then In the Global Trade Item Number section, for field 'GTIN/UPC' error message 'This is a required field.' is displayed
+	Then In the Global Trade Item Number section, for field 'Container Type' error message 'This is a required field.' is displayed
+	Then In the Global Trade Item Number section, for field 'Size' error message 'This is a required field.' is displayed
+
+
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, for section: 'Provide the product's UPC(s)- including container type and size (ounces)' enter UPC Number: saved as UPC283496 enter Size: 16 and enter Container Type: Aerosol Can - Metal
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, under Transportation column the checkbox 'DOT' is checked
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, under Transportation column the checkbox 'IMDG' is checked
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, under Transportation column the checkbox 'IATA' is checked
+	Then In the Global Trade Item Number (GTIN) / Universal Product Code (UPC) Section, verify retailer 'HD' is present under the 'Destination Retailers' column
+	Then in the Global Trade Item Number (GTIN) / Universal Product Code (UPC) page, I click Continue
+
+# 287621 Regulatory Documents to Provide - Negative Steps - Applicable Only to Type of Product: Hair Styling Product - Mousse (Aerosol) (RU000669)
+Given I should see the Regulatory Documents to Provide Page
+	Then in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide section, for field 'OSHA' error message 'Select at least one of the options' is displayed
+	Then In the Regulatory Documents to Provide Section, set the radio option in section: 'OSHA-compliant Safety Data Sheet, English' to: Yes, I certify that I have an OSHA-compliant SDS for this product and would like to upload it.
+	Then in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide section, for field 'Upload SDS' error message 'Document is required' is displayed
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'OSHA SDS'
+	Then In the Regulatory Documents to Provide Section, for section OSHA SDS button Remove should exists
+	Then In the Regulatory Documents to Provide Section, for section OSHA SDS button View should exists
+	Then In the Regulatory Documents to Provide Section, for section OSHA SDS I click button 'Remove'
+	Then In the Regulatory Documents to Provide Section, in the 'Remove Document' pop up click Yes button
+	Then in the Regulatory Documents to Provide page I click Continue
+	Then In the Regulatory Documents to Provide Section, upload file in section: 'OSHA SDS'
+	Then In the Regulatory Documents to Provide Section, for section OSHA SDS button Remove should exists
+	Then In the Regulatory Documents to Provide Section, for section OSHA SDS button View should exists
+	Then In the Regulatory Documents to Provide Section, for section OSHA SDS I click button 'View'
+	Then In the Regulatory Documents to Provide Section, after clicking 'View' button I confirm pdf file is downloaded
+	Then in the Regulatory Documents to Provide page I click Continue
+
+	
+
+	# 287624 Shared Steps 287624: Additional Documents to Provide - Negative Steps - Applicable Only to Type of Product: Hair Styling Product - Mousse (Aerosol) (RU000669)
+	Given I should see the Additional Documents to Provide Page
+	Then in the Additional Documents to Provide page I click Continue
+	Then In the Additional Documents to Provide, section 'Volatile Organic Compounds' error message should display: Document is required: Product Label
+	Then In the Additional Documents to Provide, section 'Volatile Organic Compounds' error message should display: Document is required: VOC Exemption Letter
+	Then In the Additional Documents to Provide, upload PDF document for section: Volatile Organic Compounds - VOC Exemption Letter
+	Then In the Additional Documents to Provide, for section VOC Exemption Letter button View should exists
+	Then In the Additional Documents to Provide, for section VOC Exemption Letter button Remove should exists
+	Then In the Additional Documents to Provide Section, for section VOC Exemption Letter I click button 'Remove'
+	Then In the Additional Documents to Provide Section, in the 'Remove Document' pop up click Yes button
+	Then In the Additional Documents to Provide, upload PDF document for section: Volatile Organic Compounds - VOC Exemption Letter
+	Then In the Additional Documents to Provide, for section VOC Exemption Letter button View should exists
+	Then In the Additional Documents to Provide, for section VOC Exemption Letter button Remove should exists
+	Then In the Additional Documents to Provide, upload PDF document for section: Volatile Organic Compounds - Product Label
+	Then in the Additional Documents to Provide page I click Continue
+
+
+
+# Shared Steps 287628: Optional Reports and Documents Available for Purchase - Negative Steps - Applicable Only to Type of Product: Hair Styling Product - Mousse (Aerosol) (RU000669)
+	Given I should see the Optional Reports and Documents Available for Purchase Page
+	Then in the Optional Reports and Documents Available for Purchase page I click Continue
+	Then In the Optional Comments page, click edit pencil for Optional Reports and Documents Available for Purchase section
+	Then In the Optional Reports and Documents Available for Purchase Section, set the option in section: North American Combined GHS SDS to: English (U.S)
+	Then In the Optional Reports and Documents Available for Purchase Section, set the option in section: North American Combined GHS SDS to: French-Canadian
+	Then In the Optional Reports and Documents Available for Purchase Section, set the option in section: North American Combined GHS SDS to: Spanish
+	Then In the Optional Reports and Documents Available for Purchase Section, in section: North American Combined GHS SDS the total price should be $600.00
+	Then in the Optional Reports and Documents Available for Purchase page I click Continue
+
+
+
+	# 287633 Shared Steps 287633: Safety Data Sheet Authoring - Additional Data (Optional) - Negative Steps - Applicable Only to Type of Product: Hair Styling Product - Mousse (Aerosol) (RU000669)
+	Given I should see the Additional Documents -> Contact Information Page
+	Then in the Additional Documents -> Contact Information page I click Continue
+	Then In the Additional Documents -> Contact Information section, for field 'Manufacturer Name' error message 'This is a required field.' is displayed
+	Then In the Additional Documents -> Contact Information section, for field 'Address' error message 'This is a required field.' is displayed
+	Then In the Additional Documents -> Contact Information section, for field 'Phone' error message 'This is a required field.' is displayed
+	Then In the Additional Documents -> Contact Information section, for field 'Emergency Phone' error message 'This is a required field.' is displayed
+	Then In the Additional Documents -> Contact Information section, for section: 'Manufacturer Name' enter text: custom name
+	Then In the Additional Documents -> Contact Information section, for section: 'Address' enter text: 1 Main street
+	Then In the Additional Documents -> Contact Information section, for section: 'Phone' enter text: 555-555-0123
+	Then In the Additional Documents -> Contact Information section, for section: 'Emergency Phone' enter text: 555-555-4567
+	Then in the Additional Documents -> Contact Information page I click Continue
+
+
+	# Shared Steps 287633: Safety Data Sheet Authoring - Additional Data (Optional) - Negative Steps - Applicable Only to Type of Product: Hair Styling Product - Mousse (Aerosol) (RU000669)
+	Given I should see the Safety Data Sheet Authoring - Additional Data (Optional) Page
+	Then in the Safety Data Sheet Authoring - Additional Data (Optional) page I click Continue
+	Then In the Safety Data Sheet Authoring - Additional Data section, for field 'Appearance' error message 'This is a required field.' is displayed
+	Then In the Safety Data Sheet Authoring - Additional Data section, for field 'Odor' error message 'This is a required field.' is displayed
+	Then In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Appearance' to: Red
+	Then In the Safety Data Sheet Authoring - Additional Data (Optional), set the option in section: 'Odor' to: Strawberry
+	Then in the Safety Data Sheet Authoring - Additional Data (Optional) page I click Continue
+
+	# Shared Steps 287636: Optional Comments - For Negative Step Testing - Applicable Only to Type of Product: Hair Styling Product - Mousse (Aerosol) (RU000669)
+	Given I should see the Optional Comments Page
+	Then in the Optional Comments page I click Continue
+	Given I should see the Data Acceptance Page
+	Then In the Data Acceptance page, click edit pencil for Optional Comments section
+	Then In the Optional Comments Section, set the option in section: 'Provide any additional comments or information about the product that you want the Assessment Team to know.' to: These are optional comments.
+	Then In the Optional Comments Section, click 'Save' button
+
+
+
+	#Shared Steps 287637: Data Acceptance - Summary - For Negative Step Testing - Applicable Only to Type of Product: Hair Styling Product - Mousse (Aerosol) (RU000669)
+	And I should see the Data Acceptance Page
+    Given I click the Summary button in the Data Acceptance window
+	Then I switch to the Data Summary page
+	Given In the Summary Page, the 'Type of Product (select)' section should be showing the following value: Hair Styling Product - Mousse (Liquid)
+	Then In the Summary Page, the 'Retailers will be selling my product at their store locations in (select either or both)' section should be showing the following value: United States
+	Then In the Summary Page, the 'Product has been classified using OSHA (US) Globally Harmonized Standards (GHS) under 29 CFR 1910.1200 and/or CCOHS WHMIS Standards (Canada)' section should be showing the following value: No
+	Then In the Summary Page, the 'Product is shipped directly by supplier to the consumer' section should be showing the following value: No
+	Then In the Summary Page, the 'Product is sold as a Retailer's Own Brand (Private Label, Store Brand) product' section should be showing the following value: No
+	Then In the Summary Page, the 'Product is sold to the Retailer solely for the Retailer's use and is not sold to the Consumer (Goods Not for Resale)' section should be showing the following value: No
+
+
+	Then In the Summary Page, the 'Primary Physical State' section should be showing the following value: Liquid
+	Then In the Summary Page, the 'Secondary Physical State' section should be showing the following value: Liquid
+	Then In the Summary Page, the 'Relative Density' section should be showing the following value: 2
+	Then In the Summary Page, the 'pH' section should be showing the following value: 13.1
+	Then In the Summary Page, the 'Boiling Point (in Celsius)' section should be showing the following value: 100
+	Then In the Summary Page, the 'Flash Point (in Celsius)' section should be showing the following value: 65
+	Then In the Summary Page, the 'Flash Point Testing Method Used' section should be showing the following value: The flash point value provided is per a Closed Cup test method
+	Then In the Summary Page, the 'Select the best Water Solubility description' section should be showing the following value: Soluble in water
+	Then In the Summary page, I confirm the Ingredients table matches the following:
+	| CAS Number/ChemicalName               | Percent | Publicly Disclosed? | Trade Secret? | INCI Name  |
+	| Butane                                | 10      | No                  | No            |            |
+	| Water                                 | 50      | Yes                 | No		    |Water       |
+	| Hydrogenated jojoba oil               | 40	  | No                  |Yes            |Trade Secret   |
+	Then In the Summary Page, the 'UN Number' section should be showing the following value: UN1950
+	Then In the Summary Page, the 'Proper Shipping Name' section should be showing the following value: Aerosols
+	Then In the Summary Page, the 'Hazard Class (select)' section should be showing the following value: 2.1
+	Then In the Summary Page, the 'Packing Group (select)' section should be showing the following value: None
+	Then In the Summary Page, the 'U.S. Toxic Substances Control Act (TSCA) status' section should be showing the following value: This product is subject to and complies with TSCA chemical Inventory listing requirements.
+	Then In the Summary Page, the 'Does the product carry an exposure warning required by the California Safe Drinking Water and Toxic Enforcement Act of 1986 (commonly known as California Proposition 65)' section should be showing the following value: A chemical or chemicals in the product, or chemicals formed during the use of the product
+	Then In the Summary Page, the 'Is the need to warn triggered by' section should be showing the following value: None
+	Then In the Summary Page, the 'Product is Regulated for Transport' section should be showing the following value: Yes
+	Then In the Summary Page, the 'Copy information from my U.S. Department of Transportation data' section should be showing the following value: Copy information from my U.S. Department of Transportation data
+	Then In the Summary Page, the 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the CARB' section should be showing the following value: 2
+	Then In the Summary Page, the 'Amount of VOC content as weight percentage of the total formula, excluding exempt compounds as defined by the OTC Model Rule' section should be showing the following value: 3
+	Then In the Summary Page, the 'Would you like to use the VOC percentages entered for all areas (e.g. country, state, local) for comparison' section should be showing the following value: Yes
+	Then In the Summary Page, the 'Manufacturer Name' section should be showing the following value: custom name
+	Then In the Summary Page, the 'Address' section should be showing the following value: 1 Main street
+	Then In the Summary Page, the 'Phone' section should be showing the following value: 555-555-0123
+	Then In the Summary Page, the 'Emergency Phone' section should be showing the following value: 555-555-4567
+	Then In the Summary Page, the 'Appearance' section should be showing the following value: Red
+	Then In the Summary Page, the 'Odor' section should be showing the following value: Strawberry
+	Then In the Summary Page, the 'Provide any additional comments or information about the product that you want the Assessment Team to know.' section should be showing the following value: These are optional comments.
+	Then In the Summary Page, click the View button for section: Product Label
+	Then In the Summary Page, after clicking 'View' button I confirm pdf file is downloaded
+	Then In the Summary Page, click the View button for section: VOC Exemption Letter
+	Then In the Summary Page, after clicking 'View' button I confirm pdf file is downloaded
+	Given I close the tab with Data Summary page
+	Then In the Side Menu, click Labeled Link with My Products title
+	#Then In the Product Grid, delete the product saved as: TestCase283496
+
+

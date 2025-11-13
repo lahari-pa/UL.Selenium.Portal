@@ -1,5 +1,6 @@
 ﻿using Reqnroll;
 using UL.Automation.ReqnrollHelpers.Attributes;
+using UL.Selenium.Portal.WERCSmart.Selenium_Classes.New_Product;
 using UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps;
 
 namespace UL.Selenium.Portal.WERCSmart.Steps
@@ -18,6 +19,14 @@ namespace UL.Selenium.Portal.WERCSmart.Steps
 		{
 			string section = "Provide any additional comments or information about the product that you want the Assessment Team to know.";
 			new Steps_ProductPrototype().ThenInThePageIShouldOrShouldNotSeeQuestion(section, is_isnot);
+		}
+
+		[RegexStepDefinition(@"In the Optional Comments Section, click 'Save' button")]
+		public void ThenInTheOptionalCommentsSectionClickButtonSave()
+		{
+			string section = "Optional Comments";
+			string button = "Save";
+			new NewProduct().ClickButton(section,button);
 		}
 	}
 }

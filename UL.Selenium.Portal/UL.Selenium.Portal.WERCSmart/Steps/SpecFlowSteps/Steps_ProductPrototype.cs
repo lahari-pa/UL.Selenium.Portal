@@ -215,5 +215,12 @@ namespace UL.Selenium.Portal.WERCSmart.Steps.SpecFlowSteps
 			Report.IsTrue(productPrototype.ErrorMessageForField(field, errorMessage) == expected, $"Failure, '{errorMessage}' error message {(expected ? "is not" : "is")} displayed.", $"Success, '{errorMessage}' error message {is_isnot} displayed.");
 		}
 
+		[RegexStepDefinition(@"In the (.*) page, click edit pencil for (.*) section")]
+		public void ClickEditPencilForSection(string page, string section)
+		{
+			ProductPrototype productPrototype = new ProductPrototype(section);
+			Report.IsTrue(productPrototype.ClickEditPencil(section), $"Failure, failed to click '{section}'", $"Success, clicked '{section}'");
+		}
+
 	}
 }
